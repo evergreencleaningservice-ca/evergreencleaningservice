@@ -1,0 +1,428 @@
+---
+/**
+ * The floating "Lead Net" video widget — the panel that sits in the bottom
+ * right corner of the original: a black control bar over a portrait video,
+ * with a caption and a green call-to-action across the foot of the picture,
+ * and a "Powered by Lead Net" strip beneath it.
+ *
+ * WHERE THIS CAME FROM. The widget is not in the record. It was added to the
+ * live site after the April 2025 archive capture — no snapshot of it exists,
+ * and the live origin is blocked to this network at the firewall (SiteGround
+ * returns its IP-reputation captcha, not the page), so its script could not be
+ * read. The chrome and behaviour below are built from a screenshot of the
+ * working widget; everything marked INFERRED could not be measured and is a
+ * judgement about how these widgets normally behave.
+ *
+ *   Taken from the screenshot: the layout, the control set and their order,
+ *   the caption and button wording, the icon-above-label button, the footer.
+ *   INFERRED: the entrance delay, that the clip plays once rather than looping,
+ *   and that a dismissal is remembered for the rest of the session.
+ *
+ * THE VIDEO ITSELF IS THE CLIENT'S. It is a recording of a real person, so it
+ * is not something to approximate or stand in for. Drop the file at
+ * `public/video/lead-net.mp4` (and a first-frame `lead-net.jpg` beside it) and
+ * it is used with no change here. `public/video/lead-net.webm` currently holds
+ * a placeholder that says as much on screen. With neither file present the
+ * component renders nothing at all, rather than putting an empty black box in
+ * the corner of every page.
+ */
+import { existsSync } from 'node:fs';
+import path from 'node:path';
+
+interface Props {
+  /** Public paths to try, in order. The first one present is used. */
+  sources?: string[];
+  /** Public path to a poster frame. */
+  poster?: string;
+  ctaHref?: string;
+  ctaLabel?: string;
+  caption?: string;
+  /** Milliseconds before the panel slides in. INFERRED. */
+  delay?: number;
+}
+
+const {
+  sources = ['/video/lead-net.mp4', '/video/lead-net.webm'],
+  poster = '/video/lead-net.jpg',
+  ctaHref = '/request-a-quote/',
+  ctaLabel = 'Request a Free Quote',
+  caption = 'Request below',
+  delay = 3000,
+} = Astro.props;
+
+// `import.meta.url` points into the build output at this point, not the
+// source tree, so the public folder is resolved from the project root.
+const publicDir = path.join(process.cwd(), 'public');
+const inPublic = (p: string) => existsSync(path.join(publicDir, p));
+const src = sources.find(inPublic);
+const hasPoster = inPublic(poster);
+---
+
+{
+  src && (
+    <aside
+      class="leadnet"
+      data-delay={delay}
+      aria-label="Video message from Evergreen Office Cleaning"
+      hidden
+    >
+      <div class="leadnet-bar">
+        <button class="leadnet-ctrl" type="button" data-act="playpause" aria-pressed="false">
+          <span class="screen-reader-text leadnet-ctrl-label">Pause video</span>
+          <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M8 5h3v14H8zm5 0h3v14h-3z" />
+          </svg>
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M8 5.5v13l11-6.5z" />
+          </svg>
+        </button>
+
+        <button class="leadnet-ctrl" type="button" data-act="restart">
+          <span class="screen-reader-text">Start the video again</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"
+            />
+          </svg>
+        </button>
+
+        <button class="leadnet-ctrl" type="button" data-act="mute" aria-pressed="true">
+          <span class="screen-reader-text leadnet-ctrl-label">Turn the sound on</span>
+          <svg class="i-unmuted" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M4 9v6h4l5 4V5L8 9z" />
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"
+            />
+          </svg>
+          <svg class="i-muted" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M4 9v6h4l5 4V5L8 9z" />
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              d="m16.5 9.5 5 5m0-5-5 5"
+            />
+          </svg>
+        </button>
+
+        <button class="leadnet-ctrl leadnet-close" type="button" data-act="close">
+          <span class="screen-reader-text">Close the video</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              d="m7 7 10 10M17 7 7 17"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="leadnet-stage">
+        <video
+          class="leadnet-video"
+          src={src}
+          poster={hasPoster ? poster : undefined}
+          muted
+          playsinline
+          preload="metadata"
+        />
+
+        <div class="leadnet-overlay">
+          <p class="leadnet-caption">{caption}</p>
+          <a class="leadnet-cta" href={ctaHref}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect
+                x="3.5"
+                y="4.5"
+                width="17"
+                height="15"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+              />
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                d="M3.5 9.5h17M8 13.5h8M8 16h5"
+              />
+            </svg>
+            <span>{ctaLabel}</span>
+          </a>
+        </div>
+      </div>
+
+      <p class="leadnet-by">Powered by Lead Net</p>
+    </aside>
+  )
+}
+
+<style>
+  .leadnet {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 900;
+    width: min(320px, calc(100vw - 32px));
+    background: #000;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    /* The panel slides up into the corner once it is asked to show itself. */
+    transform: translateY(16px);
+    opacity: 0;
+    transition:
+      transform 0.35s ease-out,
+      opacity 0.35s ease-out;
+  }
+
+  .leadnet[hidden] {
+    display: none;
+  }
+
+  .leadnet.is-in {
+    transform: none;
+    opacity: 1;
+  }
+
+  /* --- control bar --- */
+  .leadnet-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: #000;
+  }
+
+  .leadnet-ctrl {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #4a4a4a;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .leadnet-ctrl:hover {
+    background: #5f5f5f;
+  }
+
+  .leadnet-ctrl:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  .leadnet-ctrl svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* The close button sits at the far end of the bar. */
+  .leadnet-close {
+    margin-left: auto;
+    background: #5a5a5a;
+  }
+
+  /* Each toggle carries both icons; the script picks which one shows. */
+  .leadnet-ctrl .i-play,
+  .leadnet-ctrl .i-muted {
+    display: none;
+  }
+
+  .leadnet-ctrl.is-paused .i-pause,
+  .leadnet-ctrl.is-unmuted .i-unmuted {
+    display: none;
+  }
+
+  .leadnet-ctrl.is-paused .i-play,
+  .leadnet-ctrl.is-unmuted .i-muted {
+    display: block;
+  }
+
+  /* --- video --- */
+  .leadnet-stage {
+    position: relative;
+    line-height: 0;
+  }
+
+  .leadnet-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #000;
+  }
+
+  .leadnet-overlay {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 0 16px 14px;
+    line-height: normal;
+    /* so the caption stays readable over a light frame of the clip */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+  }
+
+  .leadnet-caption {
+    margin: 0 0 8px;
+    text-align: center;
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .leadnet-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 12px 10px;
+    border-radius: 4px;
+    background: var(--brand);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .leadnet-cta:hover,
+  .leadnet-cta:focus-visible {
+    background: var(--brand-hover, #3f7523);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .leadnet-cta svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* --- attribution strip --- */
+  .leadnet-by {
+    margin: 0;
+    padding: 8px 12px;
+    background: #fff;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink-heading);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .leadnet {
+      transition: none;
+    }
+  }
+
+  /* The panel covers a good part of a phone screen, so it keeps clear of the
+     very bottom where a browser puts its own bar. */
+  @media (max-width: 480px) {
+    .leadnet {
+      right: 12px;
+      bottom: 12px;
+    }
+  }
+</style>
+
+<script>
+  const panel = document.querySelector<HTMLElement>('.leadnet');
+
+  if (panel) {
+    const video = panel.querySelector<HTMLVideoElement>('.leadnet-video')!;
+    const btn = (act: string) => panel.querySelector<HTMLButtonElement>(`[data-act="${act}"]`)!;
+    const playPause = btn('playpause');
+    const mute = btn('mute');
+    const DISMISSED = 'leadnet-dismissed';
+
+    const label = (b: HTMLElement, text: string) => {
+      const el = b.querySelector('.leadnet-ctrl-label');
+      if (el) el.textContent = text;
+    };
+
+    // A dismissal lasts the rest of the session — the widget does not reappear
+    // on the next page. INFERRED: no record of the original's own memory.
+    let dismissed = false;
+    try {
+      dismissed = sessionStorage.getItem(DISMISSED) === '1';
+    } catch {
+      /* private browsing — treat as not dismissed */
+    }
+
+    if (!dismissed) {
+      const show = () => {
+        panel.hidden = false;
+        // one frame, so the transition has a starting state to move from
+        requestAnimationFrame(() => panel.classList.add('is-in'));
+        // Muted autoplay is the only kind a browser allows unprompted. If it
+        // is refused anyway, the panel shows the poster with a play button
+        // rather than sitting there looking broken.
+        video.play().catch(() => setPaused(true));
+      };
+
+      const delay = Number(panel.dataset.delay ?? 0);
+      window.setTimeout(show, Number.isFinite(delay) ? delay : 0);
+    }
+
+    const setPaused = (paused: boolean) => {
+      playPause.classList.toggle('is-paused', paused);
+      playPause.setAttribute('aria-pressed', String(paused));
+      label(playPause, paused ? 'Play video' : 'Pause video');
+    };
+
+    playPause.addEventListener('click', () => {
+      if (video.paused) video.play().catch(() => {});
+      else video.pause();
+    });
+
+    btn('restart').addEventListener('click', () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+
+    mute.addEventListener('click', () => {
+      video.muted = !video.muted;
+      mute.classList.toggle('is-unmuted', !video.muted);
+      mute.setAttribute('aria-pressed', String(video.muted));
+      label(mute, video.muted ? 'Turn the sound on' : 'Turn the sound off');
+    });
+
+    btn('close').addEventListener('click', () => {
+      video.pause();
+      panel.classList.remove('is-in');
+      panel.hidden = true;
+      try {
+        sessionStorage.setItem(DISMISSED, '1');
+      } catch {
+        /* nothing to remember it with; it will show again next page */
+      }
+    });
+
+    video.addEventListener('play', () => setPaused(false));
+    video.addEventListener('pause', () => setPaused(true));
+    // The clip plays once and then offers itself again, rather than looping.
+    video.addEventListener('ended', () => setPaused(true));
+  }
+</script>

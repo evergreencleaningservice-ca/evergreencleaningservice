@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import LeadVideo from '../components/LeadVideo.astro';
 import { site } from '../data/site';
 import '../styles/global.css';
 
@@ -82,6 +83,11 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
       <slot />
     </main>
     <Footer />
+
+    {/* The original loads this site-wide, as a third-party script. It renders
+        nothing until the client's clip is in public/video/ — see the note in
+        the component. */}
+    <LeadVideo />
 
     <script>
       // Stands in for WOW.js: reveal each `.wow` block as it scrolls into view.

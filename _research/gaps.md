@@ -68,7 +68,31 @@ The parity check flags six on the homepage: two inactive hero slides and four
 inactive rotating words. These are the resting state of the hero slideshow and
 the rotating headline, not entrance animations that failed to fire.
 
-## 8. Images the archive never captured
+## 8. The Lead Net video widget
+
+The floating video panel in the bottom right corner is **built, working and
+site-wide**, but two things about it could not be taken from the record:
+
+**Its source could not be read.** The widget was added to the live site after
+the April 2025 archive capture — there is no snapshot of it, and the live origin
+refuses this network at the firewall (SiteGround answers with its IP-reputation
+captcha instead of the page; confirmed again while building this). So the panel
+is reconstructed from a screenshot of it working.
+
+| Taken from the screenshot | Inferred |
+|---|---|
+| Panel size and corner, control bar, the three controls and their order, the close button | The 3s delay before it slides in |
+| The "Request below" caption and the "Request a Free Quote" button, icon above label | That the clip plays once rather than looping |
+| The "Powered by Lead Net" strip | That a dismissal is remembered for the rest of the session |
+
+**The clip itself is the client's.** It is a recording of a real person, so it is
+not something to approximate. `public/video/lead-net.webm` currently holds a
+placeholder that says so on screen. Dropping the real file in as
+`public/video/lead-net.mp4` replaces it with no code change — the component
+prefers the MP4 and falls back to whatever is present. With neither file there,
+the widget renders nothing at all rather than showing an empty black box.
+
+## 9. Images the archive never captured
 
 Roughly seventy images referenced by the original were never stored by the
 Wayback crawler. Where a sibling size-variant of the same asset survived, the
