@@ -31,22 +31,20 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
   type="article"
   publishedTime={pubDate.toISOString()}
 >
-  <div class="page-header">
-    <div class="container">
-      <h1 class="entry-title">{title}</h1>
-      <p class="post-date">
-        <time datetime={isoDate}>{dateLabel}</time>
-      </p>
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">{site.name}</a> &gt; <a href="/category/blog/">Blog</a> &gt;
-        <span>{title}</span>
-      </nav>
-    </div>
-  </div>
-
   <div class="section-padding">
     <div class="container post-container content-grid">
       <div class="post-main">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <a href="/blog/">News</a> &gt;
+        <a href="/category/blog/">Blog</a> &gt; <span aria-current="page">{title}</span>
+      </nav>
+
+      <header class="entry-header">
+        <h1 class="entry-title">{title}</h1>
+        <p class="post-date">
+          <time datetime={isoDate}>{dateLabel}</time>
+        </p>
+      </header>
       {
         image && (
           <div class="post-featured">
@@ -82,9 +80,6 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
         )
       }
 
-      <p class="post-back">
-        <a class="btn btn-primary" href="/category/blog/">Back to the blog</a>
-      </p>
       </div>
 
       <Sidebar />
@@ -93,9 +88,17 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
 </BaseLayout>
 
 <style>
-  .page-header .entry-title {
-    max-width: 900px;
-    margin: 0 auto;
+  .entry-header .entry-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    line-height: 1.2;
+    font-weight: 600;
+    color: var(--ink-heading);
+    margin: 0 0 0.5rem;
+  }
+
+  .breadcrumbs {
+    margin-bottom: 14px;
   }
 
   .post-main {
