@@ -9,7 +9,7 @@ const isCurrent = (href?: string) =>
 <header class="site-header" id="site-header">
   <div class="container header-inner">
     <a class="site-logo" href="/">
-      <img src={site.logo} alt="Evergreen Cleaning Service Toronto logo" width="360" height="100" />
+      <img src={site.logo} alt="Evergreen Cleaning Service Toronto logo" width="884" height="265" />
       <span class="screen-reader-text">{site.name}</span>
     </a>
 
@@ -64,29 +64,31 @@ const isCurrent = (href?: string) =>
     top: 0;
     width: 100%;
     background: #fff;
+    line-height: 75px;
     z-index: 1000;
     box-shadow: var(--shadow-header);
   }
 
   .header-inner {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
   }
 
   .site-logo img {
-    height: 72px;
+    display: block;
+    height: 100px;
     width: auto;
-    padding: 8px 0;
   }
 
   .menu-toggle {
     display: none;
     background: none;
     border: 0;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 75px;
+    margin-left: auto;
     position: relative;
     cursor: pointer;
     padding: 0;
@@ -96,30 +98,28 @@ const isCurrent = (href?: string) =>
   .menu-toggle-bar::before,
   .menu-toggle-bar::after {
     position: absolute;
-    left: 8px;
+    right: 0;
     width: 24px;
-    height: 2px;
+    height: 3px;
     background: var(--brand);
     content: '';
     transition: transform 0.2s ease;
   }
 
   .menu-toggle-bar {
-    top: 19px;
+    top: 50%;
+    margin-top: -2px;
   }
   .menu-toggle-bar::before {
-    top: -7px;
-    left: 0;
+    top: -8px;
   }
   .menu-toggle-bar::after {
-    top: 7px;
-    left: 0;
+    top: 8px;
   }
 
   .onepress-menu {
     display: flex;
     align-items: center;
-    gap: 4px;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -133,14 +133,21 @@ const isCurrent = (href?: string) =>
   .submenu-toggle {
     display: block;
     font-family: var(--font-heading);
-    font-size: 0.86rem;
+    font-size: 13px;
     font-weight: 600;
     color: var(--brand);
-    padding: 26px 10px;
+    padding: 0 17px;
+    line-height: 75px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
     background: none;
     border: 0;
     cursor: pointer;
-    line-height: 1.3;
+  }
+
+  .onepress-menu > li:last-child > a {
+    padding-right: 0;
   }
 
   .onepress-menu > li > a:hover,
