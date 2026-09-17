@@ -11,7 +11,7 @@ That’s why some of the most successful companies in the world put extra effort
 
 ![allergies in the office](/images/Spacious.jpg)
 
-This is one of the primary reasons why businesses use [janitorial services](/services). These services help control allergies by ensuring that no allergens are present in the workplace. There are many common allergens that a professional janitorial service will eliminate.
+This is one of the primary reasons why businesses use [janitorial services](/services/). These services help control allergies by ensuring that no allergens are present in the workplace. There are many common allergens that a professional janitorial service will eliminate.
 
 The first stage of ensuring that your workplace is free of these allergens is asking the workforce whether they have any allergies. This will give you an idea of the allergens that need to be eliminated. Ideally, it will be easy to identify people in your workforce with unusual allergies. All this information will come in handy when briefing the janitorial service provider on your needs and requirements.
 
@@ -29,7 +29,7 @@ Making the employees feel safe is a primary responsibility of any business owner
 
 Carpets are another source of allergens, mostly because the fabrics are great at trapping them. When the allergens are disturbed, usually by walking on the carpet, they disperse, and when they come into contact with an allergic person, their performance in the workplace is hampered. That’s why it is important to ensure that your office carpets are always clean and free of allergens.
 
-There are numerous people or services that can help with carpet cleaning, but allergens removal calls for professionals. Getting rid of allergens from carpets is a tricky endeavor that calls for specific cleaning methods and products. As such, it is important to hire [professional carpet cleaners](/services/commercial-cleaning).
+There are numerous people or services that can help with carpet cleaning, but allergens removal calls for professionals. Getting rid of allergens from carpets is a tricky endeavor that calls for specific cleaning methods and products. As such, it is important to hire [professional carpet cleaners](/services/commercial-cleaning/).
 
 Carpets are certainly the most apparent allergy sources due to their ability to trap allergens. The fabrics provide adequate shelter and food for allergens to survive for long. Carpets ideally call for thorough cleaning in order to ensure that the workplace is clean and appealing but also protect the staff. By hiring professional carpet cleaners, you make a huge step in boosting the efficiency and productivity of the workforce.
 

@@ -2,14 +2,12 @@
 title: "Commercial Cleaning and Air Quality"
 description: "Air quality in your office not at its best? Read on to discover how cleaning alone can improve the air quality in your commercial space."
 pubDate: 2020-08-31
-image: "/images/air-quality-1.jpg"
 ---
 
 ## Commercial Cleaning and Air Quality
 
 Your office, warehouse, or store is prone to suffering from poor air quality. Apart from foul smells and allergens, there are many other contaminants that can lead to poor air quality, each of which can significantly affect your business, customers, employees, and yourself. Fortunately, with proper cleaning techniques, you can improve the air quality of your commercial space and keep the negative effects at bay. The following are some important elements of poor air quality that you need to look out for and how to effectively deal with them.
 
-![stinky air in the office](/images/stinky-air-in-the-office.jpg)
 
 ### Elements of Poor Air Quality
 
@@ -27,7 +25,6 @@ _**Humidity**_: In case you always get a general feeling of heaviness in your wo
 
 _**Dirt and debris**_: Dirt and debris in certain workplaces, more specifically the industrial sector, can spread through the air posing health risks to people.  But you can avoid this risk through professional cleaning services.
 
-![clean office air](/images/clean-office-air.jpg)
 
 ### How to Clean Up Your Air Quality
 
@@ -35,7 +32,7 @@ There are several ways to improve air quality. Many of these handle multiple for
 
 #### Regular surface cleaning
 
-Substances on your surfaces often find their way into the air. Thus, cleaning bathrooms, kitchens, offices, desks, kitchen, and other surfaces will help to improve your air quality. Through professional cleaning services, particularly those that consider the type of surface and debris to be cleaned when selecting the [cleaning product](/green-clean-products), you will be able to fight off germs, smells, and mold.
+Substances on your surfaces often find their way into the air. Thus, cleaning bathrooms, kitchens, offices, desks, kitchen, and other surfaces will help to improve your air quality. Through professional cleaning services, particularly those that consider the type of surface and debris to be cleaned when selecting the [cleaning product](/green-clean-products/), you will be able to fight off germs, smells, and mold.
 
 #### Vacuum with HEPA filters
 
@@ -53,6 +50,6 @@ If you fail to properly clean your HVAC system, you will end up sending dust and
 
 While you can boost your air quality on your own, professionals will complete it much faster and do a much better and thorough job. We have the know-how and proper tools to effectively handle air quality issues, including dust, mold, germs, and debris. Leave the dusting, vacuuming, cleaning, and other niche cleaning tasks to us.
 
-[Contact us](/contact-us) at [Evergreen Commercial Cleaning & Janitorial](/about-us) to schedule a professional cleaning session for your property and improve your air quality.
+[Contact us](/contact-us/) at [Evergreen Commercial Cleaning & Janitorial](/about-us/) to schedule a professional cleaning session for your property and improve your air quality.
 
 ![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)

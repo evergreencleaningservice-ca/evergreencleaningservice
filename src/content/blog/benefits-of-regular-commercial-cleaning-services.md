@@ -2,7 +2,7 @@
 title: "Benefits of Regular Commercial Cleaning Services"
 description: "Think regular commercial cleaning isn't that important to your business? Think again! Let's talk benefits of regular professional cleaning services."
 pubDate: 2022-08-31
-image: "/images/office-plants.jpg"
+image: "/images/office-plants-300x150.jpg"
 ---
 
 ## Retain Your Cutting Edge and Remain Competitive
@@ -51,6 +51,6 @@ If you want your employees to look forward to their workday, they should arrive 
 
 Keeping a clean workplace involves picking up papers, keeping rooms free of clutter, cleaning bathrooms daily, and addressing the minutiae of other details that keep a work environment clean and operative.
 
-_**If you are interested in the types of benefits listed here, don’t delay! [Contact us](/contact-us) and make arrangements with [Evergreen Cleaning](/services) for regular cleaning services for your commercial location.**_
+_**If you are interested in the types of benefits listed here, don’t delay! [Contact us](/contact-us/) and make arrangements with [Evergreen Cleaning](/services/) for regular cleaning services for your commercial location.**_
 
 ![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

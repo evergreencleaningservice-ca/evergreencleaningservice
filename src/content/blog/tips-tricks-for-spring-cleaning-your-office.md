@@ -33,6 +33,6 @@ There are many office workers who will toss things into drawers so they are kept
 
 It might not be an excessive workload that is stressing you out. It might be all of the clutter. You can establish a rule where you get rid of something every time you introduce something new. For example, when a new book is added to your bookshelf, also remove one. The same is true with the coffee mug you have on your desk. When you can become disciplined about the ‘one in, one out’ concept it can help to restore order to your work area.
 
-For all of your commercial cleaning needs in the GTA, [contact us](/contact-us) at [Evergreen Commercial Cleaning & Janitorial](/services)
+For all of your commercial cleaning needs in the GTA, [contact us](/contact-us/) at [Evergreen Commercial Cleaning & Janitorial](/services/)
 
 ![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

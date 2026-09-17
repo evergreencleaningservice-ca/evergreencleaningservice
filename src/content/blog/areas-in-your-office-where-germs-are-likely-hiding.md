@@ -63,6 +63,6 @@ Even though this seems like a lot, all you need is a professional cleaning servi
 
 Be sure to talk to your commercial cleaning company to set up a suitable cleaning schedule. This will ensure that your office is as germ free as possible and a healthy place for everyone.
 
-For all of your commercial cleaning needs in the GTA, [contacts us](/contact-us) today at [Evergreen Cleaning & Janitorial](/services).
+For all of your commercial cleaning needs in the GTA, [contacts us](/contact-us/) today at [Evergreen Cleaning & Janitorial](/services/).
 
 ![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

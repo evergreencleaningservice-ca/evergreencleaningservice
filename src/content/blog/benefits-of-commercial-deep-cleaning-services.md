@@ -9,11 +9,11 @@ image: "/images/cleaning-team.jpg"
 
 Studies show that having a healthy environment is crucial to not only the health and well-being of your employees but also their motivation and ultimately, productivity. A superficial tidy might seem acceptable here and there, but that’s not enough to achieve a degree of cleanliness that ascertains optimum operation. Ultimately, dust will gather, bacteria will multiply, and your workplace will become a demotivating space for your employees and unappealing for your clients and partners. In addition, you can only put off certain deep cleaning tasks for so long. Whether your premises is a warehouse, retail space, or office complex, commercial cleaning services are essential. If you are still on the fence or hesitant, here are some great benefits of hiring commercial cleaners.
 
-![cleaning a counter](/images/cleaning-a-counter.jpg)
+![cleaning a counter](/images/cleaning-a-counter-300x150.jpg)
 
 ### First Impressions are Important
 
-No matter the industry, having a pristine space to welcome both clients and partners is vital for first impressions. This is especially the case following the [COVID 19 pandemic](/covid-19-commercial-cleaning-expectations-examined). When you walk into business premises, you want to feel comfortable, safe, and welcomed. Also, cleanliness and organization show that you are serious with your operations and can be trusted. Availing of regular deep cleaning services goes a long way to make sure potential or returning clients feel a sense of security and know that they can rely on your business.
+No matter the industry, having a pristine space to welcome both clients and partners is vital for first impressions. This is especially the case following the [COVID 19 pandemic](/covid-19-commercial-cleaning-expectations-examined/). When you walk into business premises, you want to feel comfortable, safe, and welcomed. Also, cleanliness and organization show that you are serious with your operations and can be trusted. Availing of regular deep cleaning services goes a long way to make sure potential or returning clients feel a sense of security and know that they can rely on your business.
 
 ### Motivate Your Employees
 
@@ -49,6 +49,6 @@ Post-construction cleaning
 
 ### We Implement a Systematic Approach
 
-Our team knows just what should be cleaned and how to go about the process. We work in an efficient and effective manner so that you can focus on the primary aspects of your business. So, do not hesitate to seek our services today! [Contact us](/contact-us) to schedule your cleaning!
+Our team knows just what should be cleaned and how to go about the process. We work in an efficient and effective manner so that you can focus on the primary aspects of your business. So, do not hesitate to seek our services today! [Contact us](/contact-us/) to schedule your cleaning!
 
 ![logo](/images/cropped-evergreen-cleaning-torotno-site-logo-banner.jpg)

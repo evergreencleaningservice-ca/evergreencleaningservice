@@ -2,7 +2,7 @@
 title: "Robotic Vs. Manual Cleaning: Which Will Ultimately Succeed?"
 description: "Concerned about AI taking over the cleaning industry? Here we examine robotic versus manual cleaning in the commercial cleaning industry."
 pubDate: 2023-01-31
-image: "/images/AI-in-cleaning1.jpg"
+image: "/images/AI-in-cleaning1-300x150.jpg"
 ---
 
 ## AI in Commercial Cleaning
@@ -65,6 +65,6 @@ Having said that, humans are still necessary in order to actually interpret the 
 
 As innovative as robots and AI technology are, they will never replace the need for human cleaning employees. Leveraging some form of technology for cleaning can help make the business run smoother and more efficiently, but humans will always remain a necessity. In truth, the two can work together to create a consumer experience that allows a business plenty of growth for the future.
 
-Do you have commercial cleaning needs that require special attention? At [Evergreen](/about-us), we can work with you every step of the way to create a cleaning program that fits your needs and is sure to surpass your expectations. We ensure all of our clients are satisfied, will you join them and discover what it means to have a clean commercial space? [Contact us](/contact-us) today!
+Do you have commercial cleaning needs that require special attention? At [Evergreen](/about-us/), we can work with you every step of the way to create a cleaning program that fits your needs and is sure to surpass your expectations. We ensure all of our clients are satisfied, will you join them and discover what it means to have a clean commercial space? [Contact us](/contact-us/) today!
 
 ![company logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

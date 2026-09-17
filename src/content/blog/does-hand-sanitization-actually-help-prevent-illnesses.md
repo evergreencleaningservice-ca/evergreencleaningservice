@@ -2,7 +2,6 @@
 title: "Does Hand Sanitization Actually Help to Prevent Illnesses?"
 description: "Ever wondered if hand sanitizer is really a good substitute for hand washing? Read here for hand sanitizer basics."
 pubDate: 2021-01-31
-image: "/images/hand-sanitizer.jpg"
 ---
 
 ## Hand Sanitizer and Illnesses
@@ -13,7 +12,7 @@ Is hand sanitization a confusing subject for you? Do you question whether hand s
 
 The following is everything important that you need to know regarding hand sanitizers.
 
-![hand sanitizing woman](/images/hand-sanitizing-woman.jpg)
+![hand sanitizing woman](/images/hand-sanitizing-woman-300x150.jpg)
 
 ### What You Need to Know About Hand Sanitizers
 
@@ -25,14 +24,13 @@ When discussing the effectiveness of hand sanitization, there are a number of â€
 
 The truth is that all of the surfaces surrounding us are covered with germs and bacteria. As has been proven by experts, most viruses and bacteria are harmless. However, to protect yourself against harmful ones, cautionary measures need to be taken by washing our hands throughout the day or after we use anything that the public can access, like washrooms, transportation, and others. It is especially important t do this during the flu season and the winter.
 
-![hand sanitizer in a store](/images/hand-sanitizer-in-a-store.jpg)
 
 ### In Commercial Settings Is Hand Sanitization Sufficient?
 
-Unfortunately, hand sanitization is not sufficient in commercial settings. That is because those areas have high traffic, and the only solution is thorough and regular cleaning. Therefore, commercial entities require professional cleaning services. [Evergreen Cleaning](/about-us) has a team that is prepared and trained to use the most up to date and effective cleaning solutions. We are a professional office cleaning solution for the Greater Toronto Area (GTA).
+Unfortunately, hand sanitization is not sufficient in commercial settings. That is because those areas have high traffic, and the only solution is thorough and regular cleaning. Therefore, commercial entities require professional cleaning services. [Evergreen Cleaning](/about-us/) has a team that is prepared and trained to use the most up to date and effective cleaning solutions. We are a professional office cleaning solution for the Greater Toronto Area (GTA).
 
 When you use our service, you will not need to worry about how effective hand sanitizers are since everything gets cleaned at the source.Â  Our highly trained professionals will focus on everything. This includes keyboards, telephones, and even touchscreens when requested. All of your high traffic areas are given priority, including such areas as waiting areas, public washrooms, and employee kitchens, among others. The key to good health is good hygiene.
 
-[Contact us](/contact-us) today so we can help you with all of your commercial and janitorial cleaning requirements.
+[Contact us](/contact-us/) today so we can help you with all of your commercial and janitorial cleaning requirements.
 
 ![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)

@@ -2,7 +2,7 @@
 title: "5 Tips for Maintaining Clean Office Air"
 description: "How good is the air quality in your office space? Here we discuss some tips to assist in keeping the air fresh and comfortable."
 pubDate: 2022-05-25
-image: "/images/microfibre-cloths.jpg"
+image: "/images/microfibre-cloths-300x150.jpg"
 ---
 
 ## Workplace Air Quality is Important
@@ -11,7 +11,7 @@ If you find yourself sneezing first thing when you walk into your office, automa
 
 Therefore, the million-dollar question is how can you keep your office air clean? Well, here are a few tips collected from experts that will surely help you maintain clean air within your office.
 
-![cleaning a counter](/images/cleaning-a-counter.jpg)
+![cleaning a counter](/images/cleaning-a-counter-300x150.jpg)
 
 ### Consider Using Microfiber Cloths
 
@@ -25,18 +25,18 @@ An office is constantly collecting dust from the surrounding areas. As such, you
 
 ### Eco-Friendly Cleaning Products
 
-Evergreen Cleaning recommends using [eco-friendly products](/green-clean-products). These products do not cause harm to people or the environment. The benefit of using eco-friendly products is to ensure that no-toxic residue is left, which can affect the air quality.
+Evergreen Cleaning recommends using [eco-friendly products](/green-clean-products/). These products do not cause harm to people or the environment. The benefit of using eco-friendly products is to ensure that no-toxic residue is left, which can affect the air quality.
 
 ### Air Purifiers
 
 It is a known fact that air purifiers are a great addition to improving the air quality within an office. That is because these units use both a HEPA filter and fan to capture and remove airborne pollutants. For this reason, having an air purifier in your office is a great way to maintain the air quality.
 
-![microfibre dusting cloths](/images/microfibre-cloths.jpg)
+![microfibre dusting cloths](/images/microfibre-cloths-300x150.jpg)
 
 ### Vacuum
 
 Did you know that regular vacuums can release the dust collected back into the air? This is possible if the filter is compromised or has a poor-quality filter. This is why it is wise to use filter backpack vacuums that come with four filters. These vacuums are efficient at collecting dust particles.
 
-In conclusion, these are but a few ways to improve and maintain the quality of air in an office. Nevertheless, hiring a professional office cleaning company like us at [Evergreen Cleaning](/about-us) is the best way to ensure the air quality of your office is at its utmost standard. If you are looking for the best commercial cleaning services, [contact us](/contact-us) today. At Evergreen Cleaning, we value our clients and offer services tailored to our client’s needs.
+In conclusion, these are but a few ways to improve and maintain the quality of air in an office. Nevertheless, hiring a professional office cleaning company like us at [Evergreen Cleaning](/about-us/) is the best way to ensure the air quality of your office is at its utmost standard. If you are looking for the best commercial cleaning services, [contact us](/contact-us/) today. At Evergreen Cleaning, we value our clients and offer services tailored to our client’s needs.
 
 ![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

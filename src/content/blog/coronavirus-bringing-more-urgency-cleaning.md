@@ -11,9 +11,8 @@ While COVID-19 is well known by now to spread primarily through droplets, there 
 
 ### A lot of people are going a step further and taking even more precautions due to the severity of the spreading of the virus.
 
-![medical office](/images/medical-office-reception-area.jpg)
 
-A lot of [professional cleaning services](/about-us) are being requested to provide deep cleaning services to both commercial and residential properties. This is a process that involves thoroughly cleaning everything from the corners to the crevices of a room to ensure the virus is killed off if present.
+A lot of [professional cleaning services](/about-us/) are being requested to provide deep cleaning services to both commercial and residential properties. This is a process that involves thoroughly cleaning everything from the corners to the crevices of a room to ensure the virus is killed off if present.
 
 Compared to the normal standard cleaning procedures, a deep clean is much more aggressive. It can mean hunting down dust mites hiding under the furniture and appliances, getting rid of built-up mineral deposits on the shower heads and faucets, and even scrubbing the internals of the oven and cleaning the floor underneath rarely moved rugs. It can be a very time-consuming task as it can add around an extra hour per room. Even when there is no life-threatening virus present, it is still recommended to pay for a professional deep cleaning every year.
 

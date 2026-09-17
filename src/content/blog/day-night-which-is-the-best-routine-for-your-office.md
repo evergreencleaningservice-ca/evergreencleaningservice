@@ -9,7 +9,6 @@ image: "/images/cleaning-team.jpg"
 
 Building managers or operators know that office cleaning may influence the people who are working there during office hours. So some will choose nightly office cleaning. However, which choice is best?
 
-![janitorial cleaning cart](/images/janitorial-cart.jpg)
 
 ### Benefits of Day Office Cleaning
 
@@ -45,4 +44,4 @@ Cleaning teams will have all of the necessary protection needed for all situatio
 
 ### Call Evergreen Commercial Cleaning Today!
 
-Whether you are searching for night or day office cleaning in Toronto, a tailored cleaning plan can be created by [Evergreen Commercial Cleaning Service](/about-us) that works the best for your business. We provide high-quality cleaning services with our training regimes, technology, and our cleaning equipment. We have the necessary experience to clean all sizes of commercial buildings. Our past work has provided us with the reputation of being one of Toronto’s top office cleaning companies. [Contact us](/contact-us) today about all of your office cleaning requirements.
+Whether you are searching for night or day office cleaning in Toronto, a tailored cleaning plan can be created by [Evergreen Commercial Cleaning Service](/about-us/) that works the best for your business. We provide high-quality cleaning services with our training regimes, technology, and our cleaning equipment. We have the necessary experience to clean all sizes of commercial buildings. Our past work has provided us with the reputation of being one of Toronto’s top office cleaning companies. [Contact us](/contact-us/) today about all of your office cleaning requirements.

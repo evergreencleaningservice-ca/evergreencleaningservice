@@ -1,7 +1,6 @@
 ---
 title: "Disinfection Cleaning"
 description: "Evergreen Cleaning Service provides various specialized disinfection cleaning services you may be looking for your business."
-image: "/images/disinfection-cleaning-tech-e1616794679911.jpg"
 ---
 
 ## Are You Concerned About Covid-19 In Your Office
@@ -41,11 +40,11 @@ We can work with you to provide your employees and yourself with a cleaner and s
   
 Prevention is the best way to avoid Covid-19 from spreading. You can either use a one-off disinfecting service while your workers are at home working or you can have it done regularly if your workers are back in the office.
 
-[Learn more about office cleaning and janitorial services](/services/office-cleaning)
+[Learn more about office cleaning and janitorial services](/services/office-cleaning/)
 
 **_We can even clean your office while your customers are inside your business. All you have to do is let us know when you want us to to come in to clean your office and we’ll work with you._**
 
-[Request Quote](/request-a-quote)
+[Request Quote](/request-a-quote/)
 
 Or …
 

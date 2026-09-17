@@ -2,7 +2,7 @@
 title: "Office Cleaning in the Fall?"
 description: "Office cleaning in the fall? Here we discuss how a fall deep office clean is just as important as the traditional spring clean."
 pubDate: 2022-09-30
-image: "/images/cleaning-a-counter.jpg"
+image: "/images/cleaning-a-counter-300x150.jpg"
 ---
 
 ## Autumn Office Cleaning Should Be Prioritized
@@ -33,8 +33,8 @@ During the summer, you’re likely spending a lot of time outdoors. This, along 
 
 As the weather takes a turn for the worse, you will notice that pests become much more frequent. After all, food sources begin to disappear. This means that you are likely to experience an influx of unwanted pests like spiders. Dusting becomes increasingly important during these months. This is especially true as it relates to crumbs in the office kitchen and more.
 
-When you require your autumn cleaning, you can count on Evergreen Cleaning to deliver. [Evergreen Cleaning](/about-us) is one of Toronto’s best and longest-servicing office cleaning company. They have been serving clients within the region for more than 20 years.
+When you require your autumn cleaning, you can count on Evergreen Cleaning to deliver. [Evergreen Cleaning](/about-us/) is one of Toronto’s best and longest-servicing office cleaning company. They have been serving clients within the region for more than 20 years.
 
-[Contact us](/contact-us) today to book your fall deep office clean!
+[Contact us](/contact-us/) today to book your fall deep office clean!
 
 ![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

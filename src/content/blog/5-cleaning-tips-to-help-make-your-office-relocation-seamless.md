@@ -2,7 +2,7 @@
 title: "5 Cleaning Tips to Help Make Your Office Relocation Seamless"
 description: "Relocating your offices turning into a nightmare? Here we discuss a few ideas to make moving the office as painless as possible."
 pubDate: 2022-06-29
-image: "/images/were-moving-scaled.jpg"
+image: "/images/were-moving-300x150.jpg"
 ---
 
 ## Make Your Office Relocation Seamless
@@ -13,7 +13,6 @@ Moving office can be daunting when you consider the different processes to cover
 
 Here we discuss a few steps to help reduce stress and ensure you stay organized, thus saving time and energy.
 
-![moving the office](/images/moving-the-office.jpg)
 
 ### Pack Up Everything Before Cleaning
 
@@ -29,7 +28,6 @@ If the logistics allow, it is best to relocate your office furniture, equipment,
 
 The dedicated area allows you to keep things organized, streamlining the process to ensure your business operations experience fewer disruptions as the moving date draws closer. The designated spot for your office items also presents an opportunity to inventory, coordinate logistics, and evaluate other elements as you sort and pack.
 
-![moving the office](/images/moving-the-office-3.jpg)
 
 ### Clean From Top to Bottom
 
@@ -51,12 +49,11 @@ Start with the kitchen, then finish with the bathroom. Sweep and wipe all the su
 
 As for the bathroom, scrub the sinks and toilets, dust and wipe the cabinets, and mop the floor. Ensure you remove the water spots, scum, and smudges on the walls. Also, remember to clean the mirrors to leave them glistening.
 
-![moving the office](/images/moving-the-office-2.jpg)
 
 ### Final Thoughts
 
 You can handle the cleaning when moving out of your current commercial space or opt to hire professionals to handle the job. Hiring professional cleaners is the best option, especially if time is an issue. You will have a team of cleaning specialists taking care of the job for you to focus on settling in and resuming business operations.
 
-At [Evergreen Cleaning](/about-us), we are the [pros to call](/testimonials) when you need your commercial spaces spruced up when moving in or out. We are here to help make the relocation process as seamless as possible. [Contact us](/contact-us) today for a free quote and to know more about our services.
+At [Evergreen Cleaning](/about-us/), we are the [pros to call](/testimonials/) when you need your commercial spaces spruced up when moving in or out. We are here to help make the relocation process as seamless as possible. [Contact us](/contact-us/) today for a free quote and to know more about our services.
 
 ![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

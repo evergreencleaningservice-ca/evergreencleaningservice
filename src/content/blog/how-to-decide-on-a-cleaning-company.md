@@ -7,7 +7,7 @@ image: "/images/business-owner.jpg"
 
 ## Tips For Deciding On The Best Cleaning Service
 
-You can’t run a successful business without having the proper cleaning strategy in place. And for the most part, companies are going to look at [professional cleaning services](/services) as rather than hiring an in-house janitor. This is because a professional cleaning service won’t have a problem coming in after your staff has left, making it much easier to clean the entire space.
+You can’t run a successful business without having the proper cleaning strategy in place. And for the most part, companies are going to look at [professional cleaning services](/services/) as rather than hiring an in-house janitor. This is because a professional cleaning service won’t have a problem coming in after your staff has left, making it much easier to clean the entire space.
 
 ![Business owner contemplating which cleaning company to hire](/images/business-owner.jpg)
 

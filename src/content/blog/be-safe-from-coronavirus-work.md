@@ -11,7 +11,6 @@ As COVID-19 continues to spread across the globe, it is more important than ever
 
 The new Coronavirus is a very highly contagious respiratory illness that is currently spreading at a rapid rate across the world. Many scientists have estimated that it is nearly two times as infectious as the seasonal flu. This alone has caused significant panic to set in and it has even led to panic-buying with toilet paper practically flying off the shelves at retailers across Canada. The viruses’ symptoms aren’t always present or noticeable. In fact, symptoms can be something as simple as a mild cough. However, for those that are older or with pre-existing health conditions, COVID-19 has proven to be very dangerous and it can even lead to death.
 
-![safety at work](/images/safety-at-work.jpg)
 
 ## How Is It Spreading?
 
@@ -31,7 +30,6 @@ This can help to keep you from spreading germs and viral droplets. A good way to
 
 This is especially true if you have a fever. If you aren’t convinced your work can continue without you, try to discuss a work-at-home situation with your employer.
 
-![handwashing](/images/handwashing.jpg)
 
 ## Some extra steps you can take to help contain this outbreak
 

@@ -2,7 +2,6 @@
 title: "Cleaning Check List for Dental Clinics"
 description: "Patients expect a neat and safe environment. So, you should definitely not make any compromises when it comes to your dental office's cleanliness."
 pubDate: 2020-04-29
-image: "/images/dental-office-1.jpg"
 ---
 
 Successful dental offices must look presentable and professional. The premises need to be organized, clean, and completely spotless. Your patients need to feel confident when they walk into your clinic without having to worry about any hygiene issues. Patients expect a neat and safe environment. So, you should definitely not make any compromises when it comes to your dental office’s cleanliness.
@@ -15,7 +14,6 @@ To offer a good first impression for your patients, you should clean the exterio
 
 There are a number of different areas that need special attention. First of all, your clinic sign should be professional looking and clean. Also, make sure that there is no garbage or debris on your premises. Finally, wipe away any fingerprints that you notice.
 
-![dental office reception](/images/dental-office-reception.jpg)
 
 ### Clean Your Reception Area
 
@@ -37,7 +35,6 @@ Not all patients need to use your dental clinic’s restroom’s but those who d
 
 You should also keep the windows and mirrors clean and disinfect the doorknobs. You should stock your restrooms with quality paper and soap products, so your patients do not ever run out of these supplies.
 
-![dental office break room](/images/dental-office-break-room.jpg)
 
 ### Clean Your Employee Breakroom
 
@@ -53,7 +50,7 @@ All of your hardwood, ceramic or tile floors need to be swept, mopped, and also 
 
 Hopefully, this cleaning checklist will help you keep your dental clinic neat and clean for your patients and staff.
 
-_**If you are searching for a [commercial cleaning service](/about-us) in the GTA to handle these tasks for you don’t hesitate to [contact us](/contact-us) at Evergreen Cleaning.**_ 
+_**If you are searching for a [commercial cleaning service](/about-us/) in the GTA to handle these tasks for you don’t hesitate to [contact us](/contact-us/) at Evergreen Cleaning.**_ 
 
 _**We would love to help!**_
 

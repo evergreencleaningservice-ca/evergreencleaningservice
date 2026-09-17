@@ -17,7 +17,7 @@ These same facilities must also place their faith in customers following health 
 
 ### Cleaning Expectations and the Pandemic
 
-As restrictions change and people return to their new normal, high expectations for a clean commercial environment will still remain in place. [Janitorial companies](/services) have needed to communicate more than ever before to ensure that their clients are satisfied and feel the highest level of cleanliness possible when entering their commercial properties. The post pandemic expectations are hardly surprising, but they include the following:
+As restrictions change and people return to their new normal, high expectations for a clean commercial environment will still remain in place. [Janitorial companies](/services/) have needed to communicate more than ever before to ensure that their clients are satisfied and feel the highest level of cleanliness possible when entering their commercial properties. The post pandemic expectations are hardly surprising, but they include the following:
 
 \*Higher expectations of cleanliness for commonly touched surfaces.
 
@@ -43,4 +43,4 @@ Our newly made improvements will demonstrate our commitment to a healthier world
 
 To ensure that you hone a healthier indoor environment, make sure to leave out small disinfecting stations for your customers. Make it easy for everyone to get access to antibacterial hand wipes and disinfecting wipes to keep high-touch zones clean.
 
-Ready to beat those germs? [Contact us today](/contact-us) to schedule your no hassle quote!
+Ready to beat those germs? [Contact us today](/contact-us/) to schedule your no hassle quote!

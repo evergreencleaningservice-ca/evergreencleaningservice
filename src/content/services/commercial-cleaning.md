@@ -37,14 +37,14 @@ Commercial Cleaning
 -   Stripping / Waxing of Hard Surfaces
 -   Commercial Carpet Cleaning
 -   Post-Construction Cleanup
--   [General Office Cleaning](/services/office-cleaning)
+-   [General Office Cleaning](/services/office-cleaning/)
 -   Data Room and Raised Floor Specialty Cleaning
 -   Interior Window Cleaning
--   [High Level and Industrial Cleaning](/services/industrial-cleaning)
+-   [High Level and Industrial Cleaning](/services/industrial-cleaning/)
 
 ### Ready to make a change? Contact us and lets do it together.
 
-[Request Quote](/request-a-quote)
+[Request Quote](/request-a-quote/)
 
 ### Or simply …
 

@@ -2,7 +2,6 @@
 title: "How to Properly Dust an Office Building"
 description: "Dust taking over at the office? Let us give you some tips from the experts who know how to take back your workspace."
 pubDate: 2020-10-31
-image: "/images/duster.jpg"
 ---
 
 Dusting is one of those tasks that never seems to be completed. Once you have gone over the entire area, it seems you could sometimes begin again. The best way to approach the task of dusting is with a better understanding of the nature of the problem. This will allow you to properly train your staff in the fine art dust collection and removal.
@@ -15,7 +14,6 @@ Dust is composed of very tiny particles most of which can only be seen through a
 
 The most common constituents of dust include pollen, dirt, soil, soot, hair, fabric fibres, microscopic decaying insects, plant materials and dead skin cells, called dander.
 
-![dust on a desk](/images/dust-on-a-desk.jpg)
 
 #### Dusting an office building is so important!
 
@@ -79,6 +77,6 @@ Make sure you dust any other places where you think that dust could possibly acc
 
 Proper dusting is important not only to keeping your employees healthy and inspired but making a good impression with your valued clients. Paying attention to your surroundings will help improve every aspect of your business and boost brand image.
 
-For all of your commercial cleaning needs, [contact](/contact-us) the team at [Evergreen Commercial Cleaning & Janitorial](/about-us) and we’ll be happy to get rid of your dust!
+For all of your commercial cleaning needs, [contact](/contact-us/) the team at [Evergreen Commercial Cleaning & Janitorial](/about-us/) and we’ll be happy to get rid of your dust!
 
 ![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)

@@ -6,11 +6,10 @@ image: "/images/floodedoffice_1.jpg"
 
 We recognize that your need for emergency cleaning services may occur without notice or warning. With our 20-plus years of commercial cleaning service experience, Evergreen Cleaning Service is prepared to deal with the unexpected and restore your space to its ideal clean and full functionality.
 
-![emergency office cleaning](/images/floodedoffice_1-1024x742.jpg)
+![emergency office cleaning](/images/floodedoffice_1.jpg)
 
 Have you experienced flooding or water damage? Need to cleanup a rented space following a special event? Preparing a space for new tenants? Dealing with damage resulting from fire or smoke? Confronted with an unpleasant odour or stain? Our experienced and highly trained cleaning services workers always arrive fully equipped with the tools and materials necessary to handle any situation encountered. Our professionals are able to assess your situation quickly, and apply our expertise to minimize downtime and ease your concerns.
 
-![flooded downtown Toronto office space](/images/flooded-office-in-Toronto.jpg)
 
 Evergreen Cleaning Service is not only prepared to handle your emergency janitorial services necessities, we are prepared to respond to your call quickly!
 
@@ -57,13 +56,12 @@ Evergreen Cleaning Service is not only prepared to handle your emergency janitor
 
 Aurora
 
-![Toronto GTA Commercial Cleaning Territory](/images/Toronto-GTA-Commercial-Cleaning-Territory.png)
 
 Whether you require janitorial services to offer a good morning to your office staff for a productive day, as an invitation to browse comfortably to prospective retail customers, as a welcome home and value-added to condo residents, or to reinforce your image as someone to do business with, talk to us about how we can make your office Evergreen Clean!
 
 ### Got a mess you need cleaned up fast? Big or small We do them all …
 
-[Request Quote](/request-a-quote)
+[Request Quote](/request-a-quote/)
 
 ### Or Simply Call …
 

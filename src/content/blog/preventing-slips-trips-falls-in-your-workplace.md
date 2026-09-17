@@ -2,7 +2,6 @@
 title: "Preventing Slips, Trips, and Falls in Your Workplace"
 description: "Are slips, trips or falls common in your workplace? Here we highlight information on preventing slips and falls in your place of work."
 pubDate: 2021-03-31
-image: "/images/slips-1024x958.jpg"
 ---
 
 ## Preventing Slips, Trips, and Falls in Your Workplace
@@ -29,7 +28,7 @@ In most cases, slip and trip accidents happen due to the loss of grip between th
 
 ### Preventing Slip, Trip, and Fall
 
-The best way to deal with a challenge is to eliminate that which causes the problem. Ensuring proper arrangement and [seeking janitorial services](/services/commercial-cleaning) can be a good starting point in preventing slip, trip, and fall accidents.  
+The best way to deal with a challenge is to eliminate that which causes the problem. Ensuring proper arrangement and [seeking janitorial services](/services/commercial-cleaning/) can be a good starting point in preventing slip, trip, and fall accidents.  
 Below are some detailed courses of action that will help you put an end to slips, trips, and falls at your workplace.
 
 ### Proper Warnings and Signs

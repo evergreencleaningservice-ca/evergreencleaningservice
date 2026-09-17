@@ -2,7 +2,6 @@
 title: "Office Layout Tips to Make Cleaning Easier And Faster"
 description: "Ever considered if your office layout impacts cleaning it? Here are a few things to consider, especially if you are looking at layout plans."
 pubDate: 2023-02-07
-image: "/images/office-layout-3.jpg"
 ---
 
 ## Tips for A Smart Office Layout
@@ -13,7 +12,6 @@ Sometimes, achieving a harmonious balance between functionality and aesthetics i
 
 If you’re looking to improve your workplace design to make it easier to clean while still ensuring it’s aesthetically pleasing, the following are some great tips for your office layout.
 
-![office](/images/office-layout-2.jpg)
 
 ### Go for an Open Floor Plan
 
@@ -35,13 +33,12 @@ One of the hardest parts of cleaning a commercial office is moving around heavy 
 
 You also don’t have to worry about dirt and dust accumulating underneath all the furniture. It keeps you from having to worry about tipping the furniture and falling over while cleaning is underway since the individual pieces can be moved completely out of the way. It will also make it a lot easier to move things around and reorganize them when the time comes. With time, you may feel like the look is getting stale, and you may want to spruce up the space by moving things around from time to time.
 
-![office](/images/office-layout.jpg)
 
 ### Remove Carpets
 
 Carpets bring several benefits to your office space. They not only provide reliable soundproofing but also protect the floors from damage too. The problem with carpets is that they also come with many drawbacks, which makes them something to avoid in some spaces. The downsides might simply not be worth it. They tend to get extremely dirty very quickly, especially in high-traffic office spaces. Some carpets will also require specialized care when it comes to cleaning. As such, it’s wise to avoid them entirely.
 
-Getting rid of carpeting will simplify office cleaning tasks substantially. [Carpets require a lot of maintenance](/5-easy-ways-to-keep-your-commercial-floor-clean) and typically don’t do well with wear and tear. There are many alternatives you could choose from, including vinyl and laminate. Hardwood is considerably easier to maintain compared to carpets.
+Getting rid of carpeting will simplify office cleaning tasks substantially. [Carpets require a lot of maintenance](/5-easy-ways-to-keep-your-commercial-floor-clean/) and typically don’t do well with wear and tear. There are many alternatives you could choose from, including vinyl and laminate. Hardwood is considerably easier to maintain compared to carpets.
 
 ### Get Things Out of Sight
 
@@ -53,6 +50,6 @@ You have to invest in high-quality storage solutions for this to happen. You ide
 
 Changing the office layout might make the office a lot easier to keep clean and maintain. Use the tips outlined above and you could change the layout of your office to make the cleaning tasks a lot easier. It also helps to improve the productivity of your employees across the board.
 
-_**If you’re looking for a reliable commercial cleaning service in the GTA, [get in touch](/contact-us) with [Evergreen Cleaning](/about-us) today!**_
+_**If you’re looking for a reliable commercial cleaning service in the GTA, [get in touch](/contact-us/) with [Evergreen Cleaning](/about-us/) today!**_
 
 ![company logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

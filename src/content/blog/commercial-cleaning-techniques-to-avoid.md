@@ -2,7 +2,7 @@
 title: "Commercial Cleaning Techniques To Avoid"
 description: "When it comes to cleaning many think more is a good thing and while this can be true, in some aspects more can do greater harm than good. Let us show you which techniques to avoid"
 pubDate: 2022-11-30
-image: "/images/cleaning-products-2.jpg"
+image: "/images/cleaning-products-2-300x150.jpg"
 ---
 
 ## Some techniques that do more harm than help…
@@ -37,7 +37,7 @@ If you have anything silver, you’ve likely delved into random ideas on cleanin
 
 While using toothpaste on your silver is going to work, it’s also overly abrasive. Because of this, you could end up scratching the metal. Toothpaste is designed for brushing your teeth. Your teeth and enamel are stronger than silver. Silver is much more delicate, and you could end up irreparably damaging it. Stick to using toothpaste to clean your teeth. If you must, you can use it to clean silver that’s not too valuable for you.
 
-![cleaning a counter](/images/cleaning-a-counter.jpg)
+![cleaning a counter](/images/cleaning-a-counter-300x150.jpg)
 
 ### Clean Everything with Vinegar
 
@@ -59,6 +59,6 @@ To get a better effect, you’ll want to clean the wooden surfaces with regular 
 
 ![cleaning products](/images/cleaning-products-1.jpg)
 
-The cleanliness of your home or office can impact the quality of life of everyone that uses it. Cleaning is a serious task. It can dictate the overall health and wellness of all occupants. Don’t go for the first cleaning method you hear on the internet or from word of mouth. Stick to using tried and true cleaning methods from professionals. It’s always a good idea to hand the reigns off to [professional cleaners](/contact-us) that know what they are doing.
+The cleanliness of your home or office can impact the quality of life of everyone that uses it. Cleaning is a serious task. It can dictate the overall health and wellness of all occupants. Don’t go for the first cleaning method you hear on the internet or from word of mouth. Stick to using tried and true cleaning methods from professionals. It’s always a good idea to hand the reigns off to [professional cleaners](/contact-us/) that know what they are doing.
 
 ![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

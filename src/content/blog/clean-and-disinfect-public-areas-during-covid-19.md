@@ -43,7 +43,7 @@ Along with your regular cleaning, any surfaces that are touched with hands often
 
 You should also clean shared areas like bathrooms and kitchens more frequently.
 
-For all of your commercial cleaning needs, [contact Evergreen Cleaning today](/contact-us)!
+For all of your commercial cleaning needs, [contact Evergreen Cleaning today](/contact-us/)!
 
 #### All of us can help to prevent the spread of COVID-19.
 

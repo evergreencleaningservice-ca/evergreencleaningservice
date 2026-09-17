@@ -33,6 +33,6 @@ Consider asking your employees to be putting their fresh food at the back of the
 
 If you are concerned about the state of your office refrigerator, it is time to call in the professionals.
 
-At [Evergreen Cleaning](/about-us), we offer quality janitorial services, and we are prepared to take care of all your commercial cleaning needs. [Contact us](/contact-us) today!
+At [Evergreen Cleaning](/about-us/), we offer quality janitorial services, and we are prepared to take care of all your commercial cleaning needs. [Contact us](/contact-us/) today!
 
 ![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
