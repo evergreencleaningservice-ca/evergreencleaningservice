@@ -5,9 +5,10 @@
  *
  * The theme generates this at runtime (class `c-bully`), so the archive holds
  * only its stylesheet, not its markup. Every value below is taken from those
- * rules: fixed at right 0 and vertically centred, 9x9px bullets with a 2px
- * border, a filled bullet that slides between them, and a tooltip at right 26px
- * on rgba(0,0,0,.7).
+ * rules: fixed at right 28px and vertically centred, 12x12px dots with a 2px
+ * border, a filled marker that slides between them, and a tooltip at right 26px
+ * on rgba(0,0,0,.7). Below 940px the theme drops to right 0 and 9x9px dots —
+ * those narrow-screen values are in the media query, not the base rules.
  *
  * The original covers the hero plus every section carrying a `.section-title`
  * — nine dots. The CTA band has no section title and gets none.
@@ -56,7 +57,7 @@ const darkSections = ['hero'];
   .c-bully {
     position: fixed;
     top: 50%;
-    right: 0;
+    right: 28px;
     font-size: 12px;
     transform: translate(0, -50%);
     z-index: 600;
@@ -77,7 +78,7 @@ const darkSections = ['hero'];
 
   .c-bully__bullet {
     display: block;
-    padding: 8px 3px;
+    padding: 8px;
     cursor: pointer;
     position: relative;
     color: inherit;
@@ -89,8 +90,8 @@ const darkSections = ['hero'];
   .c-bully__bullet::after {
     content: '';
     display: block;
-    width: 9px;
-    height: 9px;
+    width: 12px;
+    height: 12px;
     border: 2px solid;
     border-radius: 50%;
     will-change: transform;
@@ -188,14 +189,31 @@ const darkSections = ['hero'];
 
   .c-bully__bullet--active::before {
     content: '';
-    width: 9px;
-    height: 9px;
+    width: 12px;
+    height: 12px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: currentColor;
     border-radius: 50%;
+  }
+
+  /* The theme's own narrow-screen overrides, at its 940px breakpoint. */
+  @media screen and (max-width: 940px) {
+    .c-bully {
+      right: 0;
+    }
+
+    .c-bully__bullet {
+      padding: 8px 3px;
+    }
+
+    .c-bully__bullet::after,
+    .c-bully__bullet--active::before {
+      width: 9px;
+      height: 9px;
+    }
   }
 
   @media (max-width: 767px) {
