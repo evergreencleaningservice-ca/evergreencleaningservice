@@ -40,7 +40,11 @@ const words = [
       <span class="hero-rotator">
         {
           words.map((word, i) => (
-            <span class:list={['hero-word', i === 0 && 'is-active']}>{word}</span>
+            <span class:list={['hero-word', i === 0 && 'is-active']}>
+              {word}
+              {/* Keeps the words apart for screen readers, which read all five. */}
+              {i < words.length - 1 && <span class="screen-reader-text">, </span>}
+            </span>
           ))
         }
       </span>
