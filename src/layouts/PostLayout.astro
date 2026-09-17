@@ -46,6 +46,7 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
 
   <div class="section-padding">
     <div class="container post-container content-grid">
+      <div class="post-main">
       {
         image && (
           <div class="post-featured">
@@ -84,6 +85,8 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
       <p class="post-back">
         <a class="btn btn-primary" href="/category/blog/">Back to the blog</a>
       </p>
+      </div>
+
       <Sidebar />
     </div>
   </div>
@@ -93,6 +96,10 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
   .page-header .entry-title {
     max-width: 900px;
     margin: 0 auto;
+  }
+
+  .post-main {
+    min-width: 0;
   }
 
   .post-date {
