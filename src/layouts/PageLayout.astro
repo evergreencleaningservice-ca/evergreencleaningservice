@@ -1,0 +1,93 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  /**
+   * Pre-rendered body HTML for this page, i.e. `entry.rendered.html` from the
+   * matching `pages` collection entry. Passing it instead of rendering
+   * `<Content />` into the slot lets the layout clean up the WordPress-era
+   * markup in one place (see `normalizeBody`); the three pages that used to be
+   * a WPForms embed pass an already-sliced string. Anything in the default slot
+   * is rendered after it, so a page can add its own markup — a real form, say —
+   * below the copy that came from the archive.
+   */
+  contentHtml?: string;
+}
+
+const { title, description, image, contentHtml } = Astro.props;
+
+/**
+ * The page bodies are Markdown generated from the archived WordPress HTML, so
+ * their links and images still carry WordPress habits. Five fixes, applied
+ * before the HTML reaches the page:
+ *
+ *  1. `/wp-content/uploads/<year>/<month>/<file>` is the old media path; this
+ *     build serves the same files from `/images/<file>`.
+ *  2. `astro.config.mjs` sets `trailingSlash: 'always'`, so an internal page
+ *     link written without its trailing slash would 404 rather than resolve.
+ *  3. The archive writes `tel://` — the `//` turns the number into a URL
+ *     authority, which some dialers refuse.
+ *  4. Empty anchors (`[](/)` survives in the Markdown) are links with no
+ *     accessible name, so assistive tech announces a link that leads nowhere.
+ *  5. Every image in a page body sits below the page header, so they can all be
+ *     lazy-loaded.
+ */
+function normalizeBody(html: string): string {
+  return html
+    .replace(/(href|src)="\/wp-content\/uploads\/[^"]*?\/([^"/]+)"/g, '$1="/images/$2"')
+    .replace(/href="(\/[^"?#]*)"/g, (whole, path: string) =>
+      path.endsWith('/') || /\.[a-z0-9]{2,5}$/i.test(path) ? whole : `href="${path}/"`,
+    )
+    .replace(/href="tel:\/\//g, 'href="tel:')
+    .replace(/<a\b[^>]*>\s*<\/a>/g, '')
+    .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" ');
+}
+
+const body = contentHtml ? normalizeBody(contentHtml) : null;
+---
+
+<BaseLayout
+  title={`${title} - ${site.legalName}`}
+  description={description || undefined}
+  image={image}
+>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="entry-title">{title}</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <span aria-current="page">{title}</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+      <article class="entry-content">
+        {body && <Fragment set:html={body} />}
+        <slot />
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Keep prose to a comfortable measure; the original theme arrived at roughly
+     the same width by running these pages alongside a sidebar. */
+  .entry-content {
+    max-width: 860px;
+  }
+
+  .page-header .entry-title {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .breadcrumbs a:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+</style>

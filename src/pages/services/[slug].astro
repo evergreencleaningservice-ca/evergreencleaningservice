@@ -1,0 +1,51 @@
+---
+import type { InferGetStaticPropsType } from 'astro';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+
+  return services.map((service) => ({
+    params: { slug: service.id },
+    props: { service },
+  }));
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { service } = Astro.props as Props;
+const { title, description, image } = service.data;
+const { Content } = await render(service);
+---
+
+<BaseLayout title={`${title} - ${site.legalName}`} description={description} image={image}>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="entry-title">{title}</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <a href="/services/">Services</a> &gt; <span>{title}</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container service-container">
+      <article class="entry-content">
+        <Content />
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header .entry-title {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .service-container {
+    max-width: 860px;
+  }
+</style>
