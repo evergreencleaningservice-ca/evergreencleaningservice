@@ -33,7 +33,10 @@ const { title, description, image, contentHtml } = Astro.props;
  *     authority, which some dialers refuse.
  *  4. Empty anchors (`[](/)` survives in the Markdown) are links with no
  *     accessible name, so assistive tech announces a link that leads nowhere.
- *  5. Every image in a page body sits below the page header, so they can all be
+ *  5. Dropping one of those anchors can leave the paragraph that held it empty
+ *     — on green-clean-products it left three — and an empty paragraph still
+ *     renders its margins, so it shows up as an unexplained gap in the copy.
+ *  6. Every image in a page body sits below the page header, so they can all be
  *     lazy-loaded.
  */
 function normalizeBody(html: string): string {
@@ -44,6 +47,7 @@ function normalizeBody(html: string): string {
     )
     .replace(/href="tel:\/\//g, 'href="tel:')
     .replace(/<a\b[^>]*>\s*<\/a>/g, '')
+    .replace(/<p[^>]*>\s*<\/p>/g, '')
     .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" ');
 }
 

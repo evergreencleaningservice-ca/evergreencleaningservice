@@ -10,7 +10,7 @@
     "build:preview": "astro build && node scripts/noindex.mjs",
     "preview": "astro preview",
     "check": "astro check",
-    "deploy:preview": "npm run build:preview && wrangler deploy",
+    "deploy:preview": "npm run build:preview && wrangler deploy && node scripts/purge.mjs",
     "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {

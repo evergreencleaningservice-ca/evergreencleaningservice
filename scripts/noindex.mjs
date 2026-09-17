@@ -22,9 +22,15 @@ if (!fs.existsSync(dist)) {
 }
 
 // Cloudflare Workers static assets reads _headers from the asset directory.
+//
+// The 10xconnections.com zone caches HTML at the edge, so without the
+// Cache-Control below a deploy keeps serving the previous build until the
+// cache is purged. `no-cache` means "revalidate before serving", not "don't
+// store", so ETags still do the heavy lifting — the right trade for a preview
+// that gets redeployed far more often than it gets read.
 fs.writeFileSync(
   path.join(dist, '_headers'),
-  ['/*', '  X-Robots-Tag: noindex, nofollow', ''].join('\n')
+  ['/*', '  X-Robots-Tag: noindex, nofollow', '  Cache-Control: no-cache', ''].join('\n')
 );
 
 fs.writeFileSync(
