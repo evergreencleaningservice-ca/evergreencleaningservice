@@ -33,6 +33,8 @@ const items = [
 const darkSections = ['hero'];
 ---
 
+<noscript><style>.c-bully__bullet { opacity: 1; }</style></noscript>
+
 <nav class="c-bully c-bully-hide-on-mobile" aria-label="Sections on this page" data-dark={darkSections.join(',')}>
   <span class="c-bully__bullet--active" aria-hidden="true"></span>
   <ul>
@@ -50,6 +52,7 @@ const darkSections = ['hero'];
 </nav>
 
 <style>
+  /* Sizes and timings below are the theme's own c-bully rules, verbatim. */
   .c-bully {
     position: fixed;
     top: 50%;
@@ -78,6 +81,9 @@ const darkSections = ['hero'];
     cursor: pointer;
     position: relative;
     color: inherit;
+    /* The bullets are invisible until they pop in. Without scripting they
+       never would, so the no-js fallback below reveals them. */
+    opacity: 0;
   }
 
   .c-bully__bullet::after {
@@ -88,6 +94,44 @@ const darkSections = ['hero'];
     border: 2px solid;
     border-radius: 50%;
     will-change: transform;
+  }
+
+  .c-bully__bullet--pop {
+    animation:
+      bully-pop 0.6s cubic-bezier(0.485, 1.63, 0.43, 2) forwards,
+      fade-in 0.2s 0.2s ease-out forwards;
+  }
+
+  .c-bully__bullet--squash {
+    opacity: 1;
+    animation: bully-squash 0.2s ease-out forwards;
+  }
+
+  @keyframes bully-pop {
+    50% {
+      transform: scale(0.7);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes bully-squash {
+    50% {
+      transform: scale(0.6, 1.8);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   .c-bully__bullet:hover,
@@ -125,16 +169,21 @@ const darkSections = ['hero'];
     transform: scale(1);
   }
 
-  /* The filled marker is one element that slides between the bullets. */
+  /* A zero-size anchor point; the filled dot is centred on it, so the script
+     only has to move the point to the centre of the active bullet. */
   .c-bully__bullet--active {
     position: absolute;
     top: 0;
-    left: 3px;
-    width: 9px;
-    height: 9px;
-    margin-top: 8px;
+    left: 0;
+    width: 0;
+    height: 0;
     transition: top 0.2s ease-out;
     pointer-events: none;
+    opacity: 0;
+  }
+
+  .c-bully__bullet--active.is-ready {
+    opacity: 1;
   }
 
   .c-bully__bullet--active::before {
@@ -156,6 +205,15 @@ const darkSections = ['hero'];
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .c-bully__bullet {
+      opacity: 1;
+    }
+
+    .c-bully__bullet--pop,
+    .c-bully__bullet--squash {
+      animation: none;
+    }
+
     .c-bully__bullet--active {
       transition: none;
     }
@@ -168,22 +226,53 @@ const darkSections = ['hero'];
     const marker = nav.querySelector<HTMLElement>('.c-bully__bullet--active');
     const links = [...nav.querySelectorAll<HTMLAnchorElement>('.c-bully__bullet')];
     const dark = new Set((nav.dataset.dark ?? '').split(',').filter(Boolean));
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const sections = links
       .map((a) => ({ link: a, el: document.getElementById(a.dataset.target ?? '') }))
       .filter((s): s is { link: HTMLAnchorElement; el: HTMLElement } => !!s.el);
 
+    // The bullets pop in on load, as the theme's own animation does.
+    if (reduced) {
+      for (const { link } of sections) link.style.opacity = '1';
+    } else {
+      for (const { link } of sections) link.classList.add('c-bully__bullet--pop');
+    }
+
     let current = '';
+    let squashTimer: number | undefined;
+
+    const place = (link: HTMLElement) => {
+      if (!marker) return;
+      // centre of the target bullet, so the dot lands exactly on it
+      marker.style.top = `${link.offsetTop + link.offsetHeight / 2}px`;
+      marker.style.left = `${link.offsetLeft + link.offsetWidth / 2}px`;
+      marker.classList.add('is-ready');
+    };
 
     const setActive = (id: string) => {
       if (id === current) return;
+      const moving = current !== '';
       current = id;
       const hit = sections.find((s) => s.el.id === id);
       if (!hit || !marker) return;
-      marker.style.top = `${hit.link.offsetTop}px`;
+
+      place(hit.link);
       nav.classList.toggle('is-inversed', dark.has(id));
       for (const s of sections) {
         s.link.setAttribute('aria-current', s.el.id === id ? 'true' : 'false');
+      }
+
+      // the marker squashes as it travels between bullets
+      if (moving && !reduced) {
+        marker.classList.remove('c-bully__bullet--squash');
+        void marker.offsetWidth; // restart the animation
+        marker.classList.add('c-bully__bullet--squash');
+        window.clearTimeout(squashTimer);
+        squashTimer = window.setTimeout(
+          () => marker.classList.remove('c-bully__bullet--squash'),
+          200
+        );
       }
     };
 
@@ -213,7 +302,11 @@ const darkSections = ['hero'];
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', () => {
+      const hit = sections.find((s) => s.el.id === current);
+      if (hit) place(hit.link);
+      onScroll();
+    });
     pick();
   }
 </script>
