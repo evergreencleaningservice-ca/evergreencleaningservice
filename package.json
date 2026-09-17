@@ -7,12 +7,18 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:preview": "astro build && node scripts/noindex.mjs",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "deploy:preview": "npm run build:preview && wrangler deploy",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.3.3"
+  },
+  "devDependencies": {
+    "wrangler": "^4.134.0"
   }
 }

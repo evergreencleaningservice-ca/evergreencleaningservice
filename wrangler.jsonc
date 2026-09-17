@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "evergreencleaningservice",
+  "compatibility_date": "2026-09-17",
+
+  // Astro builds a fully static site, so this Worker has no script of its own:
+  // it just serves ./dist from Cloudflare's asset storage.
+  "assets": {
+    "directory": "./dist",
+    // Unknown paths render the site's own 404 page rather than a bare Cloudflare one.
+    "not_found_handling": "404-page"
+  }
+}

@@ -12,7 +12,8 @@ npm install     # once
 npm run dev     # dev server at http://localhost:4321
 npm run build   # static build into dist/
 npm run preview # serve the built output
-npm run check   # astro check (types + content schema)
+npm run check   # astro check (types + content schema) — prompts to install
+                # @astrojs/check + typescript on first run; they are not dependencies
 ```
 
 Node 20+ is required (Astro 7). There is no database, no API keys and no `.env`.
@@ -46,12 +47,16 @@ src/
 | `/blog/`, `/blog/page/N/` | paginated news list |
 | `/category/blog/`, `/category/blog/page/N/` | the same list at the original category URL (this is what the nav links to) |
 | `/services/` and `/services/<slug>/` | the `services` collection |
-| `/about-us/`, `/privacy/`, `/green-clean-products/`, `/cleaning-demo-gallery/` | one `.astro` file each, pulling a `pages` collection entry |
+| `/about-us/`, `/privacy/`, `/green-clean-products/`, `/cleaning-demo-gallery/`, `/contact-us/`, `/request-a-quote/`, `/testimonials/` | one `.astro` file each, pulling a `pages` collection entry |
 | `/404.html` | `src/pages/404.astro` (noindex) |
 | `/rss.xml`, `/sitemap-index.xml` | generated at build time |
 
-`astro.config.mjs` also keeps redirects from the 2019-era service URLs
-(`/office-cleaning/` etc.) to their current `/services/...` equivalents.
+`astro.config.mjs` also keeps redirects for old WordPress addresses that no longer have a page:
+the 2019-era service URLs (`/office-cleaning/` etc.) go to their current `/services/...`
+equivalents, and the tag and author archives (`/tag/<slug>/`, including their `/page/N/`
+variants, and `/author/webmaster/`) go to `/category/blog/`, since this port has no tag or
+author taxonomy. A static build emits each of these as a small meta-refresh page; they are
+kept out of the sitemap.
 
 ## How content is organised
 
@@ -83,11 +88,12 @@ This port is not a complete reproduction of the live site. Outstanding items:
    (`www.evergreencleaningservice.ca`) blocks automated access at the firewall, so every page
    here was recovered from the Wayback Machine. The captures are not all from the same date:
    the homepage, `/about-us/`, `/contact-us/` and the news archive come from **8 April 2025**;
-   most blog posts from 2024 captures; the older service pages
-   (`/office-cleaning/`, `/commercial-cleaning/`, `/industrial-cleaning/`, `/emergency-service/`)
-   only exist as **October 2019** captures. Anything the client changed on the live site after
-   its page's capture date is not reflected here and should be checked against the real site
-   before launch.
+   most blog posts from 2024 captures; the current `/services/…` pages from **2024** captures
+   (except `/services/office-cleaning/`, captured **October 2025**); and the older service
+   URLs (`/office-cleaning/`, `/commercial-cleaning/`, `/industrial-cleaning/`,
+   `/emergency-service/`) only exist as **October 2019** captures. Anything the client
+   changed on the live site after its page's capture date is not reflected here and should be
+   checked against the real site before launch.
 
 2. **The forms are markup only.** The contact / quote form in
    `src/components/home/Contact.astro` has `action="#"` and no backend. A submission goes
@@ -99,10 +105,22 @@ This port is not a complete reproduction of the live site. Outstanding items:
    summary the homepage showed for it — including the excerpt's trailing ellipsis. The real
    body copy has to come from the client.
 
-4. **49 images could not be recovered.** The archive fetch returned 104 files and failed on 73
-   (including size variants). Content still references the missing filenames, so those `<img>`
-   tags will 404 until the originals are supplied by the client or replacements are chosen.
-   Regenerate the list at any time with:
+4. **Images the live site shows are missing here, or are only available small.** The pages
+   referenced 177 image files; the archive fetch returned 104 and failed on 73. Nothing is
+   broken — every `/images/…` reference in `src/` resolves to a file in `public/images/` (88
+   files) — but it only resolves because the references were adjusted:
+
+   - **7 assets survived only as a 300 × 150 thumbnail** (`AI-in-cleaning1`,
+     `cleaning-a-counter`, `cleaning-products-2`, `hand-sanitizing-woman`, `microfibre-cloths`,
+     `office-plants`, `were-moving`), and the 16 references to them now point at that
+     thumbnail. Eight blog posts use one as their featured image, which `PostLayout` renders
+     at 1200 × 600, so it looks soft. (`floodedoffice_1` was also remapped, but to the
+     full-size original, so it loses nothing.)
+   - **41 files could not be recovered at all**, and their references were removed. Those
+     pages simply show no image where the live site shows one.
+
+   Both sets need the originals from the client. Check that nothing is broken (no output =
+   every reference resolves):
 
    ```bash
    comm -23 \
@@ -111,25 +129,24 @@ This port is not a complete reproduction of the live site. Outstanding items:
    ```
 
    <details>
-   <summary>Missing at time of writing</summary>
+   <summary>The 41 files the archive could not supply</summary>
 
-   `AI-in-cleaning1.jpg`, `ECOLOGO-150x150.jpg`, `ProSeriesGreen-Logo-150x150.png`,
+   `ECOLOGO-150x150.jpg`, `ProSeriesGreen-Logo-150x150.png`,
    `Toronto-GTA-Commercial-Cleaning-Territory.png`, `air-quality-1.jpg`,
    `armstrong-logo-300x89.jpg`, `classroom.jpg`, `clean-office-air.jpg`,
-   `cleaning-a-counter.jpg`, `cleaning-products-2.jpg`, `covid-19-elbow-bump.jpg`,
-   `covid19-office.jpg`, `dental-office-1.jpg`, `dental-office-break-room.jpg`,
-   `dental-office-reception.jpg`, `disinfection-cleaning-tech-e1616794679911.jpg`,
-   `dust-on-a-desk.jpg`, `duster.jpg`, `flooded-office-in-Toronto.jpg`,
-   `floodedoffice_1-1024x742.jpg`, `green_clean_products_LARGE-1.jpg`,
-   `hand-sanitizer-in-a-store.jpg`, `hand-sanitizer.jpg`, `hand-sanitizing-woman.jpg`,
-   `handwashing.jpg`, `iStock-532149911-scaled.jpg`, `industial-cleaning-demo-Toronto-1.jpg`,
+   `covid-19-elbow-bump.jpg`, `covid19-office.jpg`, `dental-office-1.jpg`,
+   `dental-office-break-room.jpg`, `dental-office-reception.jpg`,
+   `disinfection-cleaning-tech-e1616794679911.jpg`, `dust-on-a-desk.jpg`, `duster.jpg`,
+   `flooded-office-in-Toronto.jpg`, `green_clean_products_LARGE-1.jpg`,
+   `hand-sanitizer-in-a-store.jpg`, `hand-sanitizer.jpg`, `handwashing.jpg`,
+   `iStock-532149911-scaled.jpg`, `industial-cleaning-demo-Toronto-1.jpg`,
    `janitorial-cart.jpg`, `lobby_1-e1597778322357-1024x546.jpg`,
-   `medical-office-reception-area.jpg`, `microfibre-cloths.jpg`, `moving-the-office.jpg`,
-   `moving-the-office-2.jpg`, `moving-the-office-3.jpg`, `office-building-exterior.jpg`,
-   `office-cleaners.jpg`, `office-layout.jpg`, `office-layout-2.jpg`, `office-layout-3.jpg`,
-   `office-plant-3.jpg`, `office-plants.jpg`, `office-plants-2.jpg`, `post-covid-19-office.jpg`,
-   `safety-at-work.jpg`, `school-cafeteria.jpg`, `slips-1024x958.jpg`,
-   `stinky-air-in-the-office.jpg`, `were-moving-scaled.jpg`, `woman-wiping-down-her-desk.jpg`
+   `medical-office-reception-area.jpg`, `moving-the-office.jpg`, `moving-the-office-2.jpg`,
+   `moving-the-office-3.jpg`, `office-building-exterior.jpg`, `office-cleaners.jpg`,
+   `office-layout.jpg`, `office-layout-2.jpg`, `office-layout-3.jpg`, `office-plant-3.jpg`,
+   `office-plants-2.jpg`, `post-covid-19-office.jpg`, `safety-at-work.jpg`,
+   `school-cafeteria.jpg`, `slips-1024x958.jpg`, `stinky-air-in-the-office.jpg`,
+   `woman-wiping-down-her-desk.jpg`
 
    </details>
 

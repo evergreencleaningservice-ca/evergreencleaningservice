@@ -1,7 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
-import { site, serviceAreas } from '../data/site';
+import { site } from '../data/site';
 
 const entry = await getEntry('pages', 'contact-us');
 if (!entry) throw new Error('Missing content entry: pages/contact-us');
@@ -11,9 +11,12 @@ if (!entry) throw new Error('Missing content entry: pages/contact-us');
  * that `src/data/site.ts` already owns, or the old WPForms embed flattened into
  * prose — the form title, every field label and the whole 250-entry country
  * dropdown. So keep the archived heading and postal address, and take it from
- * there: phone, email and service areas come from site.ts, and the form is
- * rebuilt below as real HTML. That slicing is why this page reads
- * `entry.rendered.html` directly instead of rendering `<Content />`.
+ * there: phone and email come from site.ts, and the form is rebuilt below as
+ * real HTML. That slicing is why this page reads `entry.rendered.html` directly
+ * instead of rendering `<Content />`.
+ *
+ * The archived page carries Address, Phone and Email and nothing else — no
+ * service-area list — so none is added here; the footer already lists them.
  */
 const rawBody = entry.rendered?.html ?? '';
 const phoneHeadingAt = rawBody.indexOf('>Phone:<');
@@ -49,9 +52,6 @@ const addressHtml = rawBody.slice(0, cutAt);
 
   <h4>Email:</h4>
   <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
-
-  <h4>Service areas:</h4>
-  <p>{serviceAreas}</p>
 
   <section class="form-section" aria-labelledby="contact-form-heading">
     <h2 id="contact-form-heading">General Contact Form</h2>
