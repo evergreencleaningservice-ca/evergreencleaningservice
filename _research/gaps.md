@@ -18,17 +18,17 @@ original.
 
 ## 2. Comments
 
-Posts in the original carry a WordPress comment form — *Leave a Reply*, Comment,
-Name, Email, Website, and the "save my name…" checkbox.
+**Ported.** The comment form is present on every post with the original's field
+set — Comment, Name, Email, Website and the "save my name…" checkbox — and the
+original's own wording and submit label.
 
-**Not ported.** A static build has nowhere to post them and nowhere to read
-existing ones from, so the honest options were a form that silently fails or no
-form. Shipping markup that looks like a working comment form and quietly drops
-what people write is worse than not having one.
+None of the archived posts carried an actual comment thread: all 38 have the
+area and an empty list. If threads were posted after the 2023 capture they live
+in the client's WordPress database and would need importing.
 
-Reinstating comments means choosing a backend (a hosted comment service, or the
-same database the forms will eventually use). That is a decision for the client,
-not something to default into.
+The form does not submit yet. A comment needs somewhere to be stored, read back
+from and moderated before it appears, so it waits on the same backend decision
+as the contact and quote forms.
 
 ## 3. `tel:` scheme
 

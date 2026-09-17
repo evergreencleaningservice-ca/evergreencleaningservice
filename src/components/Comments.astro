@@ -1,0 +1,169 @@
+---
+/**
+ * The post comment form, matching the original's field set.
+ *
+ * None of the archived posts carried an actual comment thread — every one has
+ * the area and an empty list — so this is the form only. If threads existed on
+ * the live site after the 2023 capture, they are in the client's WordPress
+ * database and would need importing.
+ *
+ * TODO: the submit endpoint still needs wiring. The original posted to
+ * WordPress's wp-comments-post.php, which a static build has no equivalent for.
+ * A comment needs somewhere to be stored, read back from, and moderated before
+ * it appears — so this needs a backend decision (the same database the forms
+ * will use, or a hosted comment service) before it can accept anything. The
+ * note in the markup says so rather than silently dropping what people write.
+ */
+---
+
+<div id="comments" class="comments-area">
+  <h3 id="reply-title" class="comment-reply-title">Leave a Reply</h3>
+
+  <form class="comment-form" method="post" action="#" aria-labelledby="reply-title">
+    <p class="comment-notes">
+      Your email address will not be published. Required fields are marked
+      <span class="req" aria-hidden="true">*</span>
+    </p>
+
+    <p class="form-note" role="note">
+      This form is not connected yet, so a comment will not reach us or appear on
+      the page.
+    </p>
+
+    <div class="field">
+      <label for="comment">Comment <span class="req" aria-hidden="true">*</span></label>
+      <textarea id="comment" name="comment" rows="6" required></textarea>
+    </div>
+
+    <div class="row row-2">
+      <div class="field">
+        <label for="comment-author">Name <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="comment-author" name="author" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label for="comment-email">Email <span class="req" aria-hidden="true">*</span></label>
+        <input
+          type="email"
+          id="comment-email"
+          name="email"
+          inputmode="email"
+          autocomplete="email"
+          spellcheck="false"
+          required
+        />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="comment-url">Website</label>
+      <input type="url" id="comment-url" name="url" autocomplete="url" spellcheck="false" />
+    </div>
+
+    <div class="field field-consent">
+      <input type="checkbox" id="comment-cookies" name="wp-comment-cookies-consent" value="yes" />
+      <label for="comment-cookies">
+        Save my name, email, and website in this browser for the next time I comment.
+      </label>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Post Comment</button>
+  </form>
+</div>
+
+<style>
+  .comments-area {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .comment-reply-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    line-height: 1.1;
+    font-weight: 600;
+    color: var(--ink-heading);
+    margin: 0 0 10px;
+  }
+
+  .comment-notes,
+  .form-note {
+    font-size: 14px;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+
+  .req {
+    color: var(--brand-dark);
+    font-weight: 700;
+  }
+
+  .field {
+    margin-bottom: 14px;
+  }
+
+  .field label {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-heading);
+    margin-bottom: 4px;
+  }
+
+  .row {
+    display: grid;
+    gap: 0 14px;
+  }
+
+  @media (min-width: 560px) {
+    .row-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  input[type='text'],
+  input[type='email'],
+  input[type='url'],
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    font: inherit;
+    font-size: 15px;
+    color: inherit;
+    background: #fff;
+    padding: 9px 11px;
+    border: 1px solid #cdd2d7;
+    border-radius: var(--radius);
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .field-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+  }
+
+  .field-consent input {
+    width: auto;
+    flex: none;
+    margin-top: 3px;
+  }
+
+  .field-consent label {
+    margin: 0;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--ink);
+  }
+</style>
