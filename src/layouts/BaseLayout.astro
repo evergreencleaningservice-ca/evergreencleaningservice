@@ -68,6 +68,12 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
     />
 
     <slot name="head" />
+
+    {/* Blocks that never get observed must not stay hidden. is:inline keeps
+        Astro from scoping this to the layout, where it would match nothing. */}
+    <noscript>
+      <style is:inline>.wow { visibility: visible !important; }</style>
+    </noscript>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -76,5 +82,30 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
       <slot />
     </main>
     <Footer />
+
+    <script>
+      // Stands in for WOW.js: reveal each `.wow` block as it scrolls into view.
+      const blocks = document.querySelectorAll<HTMLElement>('.wow');
+      const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (still || !('IntersectionObserver' in window)) {
+        for (const el of blocks) el.style.visibility = 'visible';
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              const el = entry.target as HTMLElement;
+              el.style.visibility = 'visible';
+              el.classList.add('animated');
+              io.unobserve(el);
+            }
+          },
+          // the theme fires a little before the block is fully on screen
+          { rootMargin: '0px 0px -10% 0px', threshold: 0 }
+        );
+        for (const el of blocks) io.observe(el);
+      }
+    </script>
   </body>
 </html>

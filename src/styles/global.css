@@ -496,3 +496,47 @@ img {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- scroll-in animation ---------- */
+
+/*
+ * The original uses WOW.js with animate.css: content blocks carry `wow
+ * slideInUp`, start hidden, and are given `animated` when they scroll into
+ * view. The classes and timings here are the theme's own; the trigger is an
+ * IntersectionObserver in BaseLayout rather than the library.
+ *
+ * Anything still hidden is a block whose animation never fired, so both the
+ * reduced-motion query and the noscript fallback reveal them outright.
+ */
+.wow {
+  visibility: hidden;
+}
+
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.slideInUp {
+  animation-name: slideInUp;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wow {
+    visibility: visible;
+  }
+
+  .animated {
+    animation: none;
+  }
+}

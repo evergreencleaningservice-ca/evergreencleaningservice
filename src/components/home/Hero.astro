@@ -95,28 +95,46 @@ const words = [
     background: rgba(0, 0, 0, 0.3);
   }
 
+  /* The original sets 12% top and bottom padding on the inner container. */
   .hero-inner {
     position: relative;
     text-align: center;
-    padding-top: clamp(72px, 12vw, 170px);
-    padding-bottom: clamp(72px, 12vw, 170px);
+    padding-top: 12%;
+    padding-bottom: 12%;
   }
 
+  /* Measured from the original: 75px / 800 / uppercase, with the tracking
+     stepping down alongside the size at each breakpoint. */
   .hero-title {
+    font-family: var(--font-heading);
     color: #fff;
-    font-size: clamp(1.9rem, 6vw, 3.4rem);
-    font-weight: 700;
-    line-height: 1.15;
-    margin: 0 0 18px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+    font-size: 75px;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin: 0 0 0.9375rem;
+  }
+
+  @media (max-width: 991px) {
+    .hero-title {
+      font-size: 60px;
+      letter-spacing: 3px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-title {
+      font-size: 35px;
+      letter-spacing: 2px;
+    }
   }
 
   /* Every word sits in the same grid cell, so the heading keeps a stable
      width and the inactive words simply fade out behind the active one. */
   .hero-rotator {
-    display: inline-grid;
+    display: grid;
     max-width: 100%;
-    vertical-align: bottom;
   }
 
   .hero-word {
@@ -129,12 +147,22 @@ const words = [
     opacity: 1;
   }
 
+  /* The original's sub-line is 22px italic at weight 700. */
   .hero-sub {
-    font-size: clamp(1rem, 2.4vw, 1.3rem);
-    font-weight: 600;
-    max-width: 42ch;
-    margin: 0 auto 32px;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    line-height: 1.7;
+    color: #fff;
+    max-width: none;
+    margin: 0 auto 1.25rem;
+  }
+
+  @media (max-width: 767px) {
+    .hero-sub {
+      font-size: 18px;
+    }
   }
 
   .hero-actions {
