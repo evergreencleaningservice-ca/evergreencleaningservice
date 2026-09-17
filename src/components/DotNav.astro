@@ -1,0 +1,219 @@
+---
+/**
+ * The one-page section navigation — the column of dots down the right edge,
+ * each with a tooltip naming its section.
+ *
+ * The theme generates this at runtime (class `c-bully`), so the archive holds
+ * only its stylesheet, not its markup. Every value below is taken from those
+ * rules: fixed at right 0 and vertically centred, 9x9px bullets with a 2px
+ * border, a filled bullet that slides between them, and a tooltip at right 26px
+ * on rgba(0,0,0,.7).
+ *
+ * The original covers the hero plus every section carrying a `.section-title`
+ * — nine dots. The CTA band has no section title and gets none.
+ *
+ * Two deliberate improvements on the original, both accessibility rather than
+ * design: the bullets are real links, so the nav is keyboard-operable and the
+ * section names are readable by a screen reader; and the tooltip shows on focus
+ * as well as hover, so a keyboard user sees the same labels a mouse user does.
+ */
+const items = [
+  { id: 'hero', label: 'Home' },
+  { id: 'features', label: '3 Easy Steps' },
+  { id: 'services', label: 'Our Commercial Cleaning Services' },
+  { id: 'reviews', label: 'Google Reviews' },
+  { id: 'about', label: 'Toronto Commercial Cleaning & Janitorial' },
+  { id: 'gallery', label: 'Clean Spaces' },
+  { id: 'testimonials', label: 'Testimonials' },
+  { id: 'news', label: 'Latest News' },
+  { id: 'contact', label: 'Get in touch' },
+];
+
+/** Sections with a dark background — the nav inverts to white over these. */
+const darkSections = ['hero'];
+---
+
+<nav class="c-bully c-bully-hide-on-mobile" aria-label="Sections on this page" data-dark={darkSections.join(',')}>
+  <span class="c-bully__bullet--active" aria-hidden="true"></span>
+  <ul>
+    {
+      items.map((item) => (
+        <li>
+          <a class="c-bully__bullet" href={`#${item.id}`} data-target={item.id}>
+            <span class="c-bully__title">{item.label}</span>
+            <span class="screen-reader-text">{item.label}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .c-bully {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    font-size: 12px;
+    transform: translate(0, -50%);
+    z-index: 600;
+    color: #333;
+    text-transform: uppercase;
+  }
+
+  .c-bully.is-inversed {
+    color: #fff;
+  }
+
+  .c-bully ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .c-bully__bullet {
+    display: block;
+    padding: 8px 3px;
+    cursor: pointer;
+    position: relative;
+    color: inherit;
+  }
+
+  .c-bully__bullet::after {
+    content: '';
+    display: block;
+    width: 9px;
+    height: 9px;
+    border: 2px solid;
+    border-radius: 50%;
+    will-change: transform;
+  }
+
+  .c-bully__bullet:hover,
+  .c-bully__bullet:focus-visible {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .c-bully__bullet:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .c-bully__title {
+    position: absolute;
+    right: 26px;
+    top: 1px;
+    left: auto;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1px 10px;
+    border-radius: 2px;
+    transition: all 0.2s ease-out;
+    display: block;
+    opacity: 0;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.8);
+    transform: scale(0.6);
+    pointer-events: none;
+  }
+
+  .c-bully__bullet:hover .c-bully__title,
+  .c-bully__bullet:focus-visible .c-bully__title {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* The filled marker is one element that slides between the bullets. */
+  .c-bully__bullet--active {
+    position: absolute;
+    top: 0;
+    left: 3px;
+    width: 9px;
+    height: 9px;
+    margin-top: 8px;
+    transition: top 0.2s ease-out;
+    pointer-events: none;
+  }
+
+  .c-bully__bullet--active::before {
+    content: '';
+    width: 9px;
+    height: 9px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: currentColor;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 767px) {
+    .c-bully-hide-on-mobile {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .c-bully__bullet--active {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('.c-bully');
+  if (nav) {
+    const marker = nav.querySelector<HTMLElement>('.c-bully__bullet--active');
+    const links = [...nav.querySelectorAll<HTMLAnchorElement>('.c-bully__bullet')];
+    const dark = new Set((nav.dataset.dark ?? '').split(',').filter(Boolean));
+
+    const sections = links
+      .map((a) => ({ link: a, el: document.getElementById(a.dataset.target ?? '') }))
+      .filter((s): s is { link: HTMLAnchorElement; el: HTMLElement } => !!s.el);
+
+    let current = '';
+
+    const setActive = (id: string) => {
+      if (id === current) return;
+      current = id;
+      const hit = sections.find((s) => s.el.id === id);
+      if (!hit || !marker) return;
+      marker.style.top = `${hit.link.offsetTop}px`;
+      nav.classList.toggle('is-inversed', dark.has(id));
+      for (const s of sections) {
+        s.link.setAttribute('aria-current', s.el.id === id ? 'true' : 'false');
+      }
+    };
+
+    // Whichever section covers the middle of the viewport is the current one.
+    const pick = () => {
+      const mid = window.innerHeight / 2;
+      let best = sections[0];
+      for (const s of sections) {
+        const r = s.el.getBoundingClientRect();
+        if (r.top <= mid && r.bottom >= mid) {
+          best = s;
+          break;
+        }
+        if (r.top <= mid) best = s;
+      }
+      if (best) setActive(best.el.id);
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        pick();
+        ticking = false;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    pick();
+  }
+</script>
