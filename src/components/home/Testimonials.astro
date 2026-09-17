@@ -1,0 +1,120 @@
+---
+const testimonials = [
+  {
+    title: 'Highly Recommend',
+    quote:
+      'Evergreen Cleaning Services have been taking care of the cleaning in our spa for the last 3 years. They do a great job especially on the floors, spa chairs and tables. I highly recommend!',
+    name: 'Brenda Carmichael',
+    role: 'Toronto Spa Business Owner',
+    image: '/images/woman-e1575589655377.jpg',
+  },
+  {
+    title: 'They Have It Covered',
+    quote:
+      'We’ve been contracting Evergreen Cleaning Service for the last 5 years and we’re not interested switching any time soon. There staff are professional and dependable. This is one area I don’t need to be concerned with – they have it covered!',
+    name: 'Allen Robinson',
+    role: 'Founder & CEO',
+    image: '/images/team4-e1616789976355.jpg',
+  },
+  {
+    title: 'Fantastic To Work With',
+    quote:
+      'Fantastic company to work with and they always try to accommodate when we have unexpected emergency clean up job we need done.',
+    name: 'Paul Lockheart',
+    role: 'Toronto Business Owner',
+    image: '/images/team5-e1616790026507.jpg',
+  },
+];
+---
+
+<section class="section-padding" id="testimonials" aria-labelledby="testimonials-title">
+  <div class="container">
+    <div class="section-title-area">
+      <p class="section-subtitle">Evergreen Office Cleaning</p>
+      <h2 class="section-title" id="testimonials-title">Testimonials</h2>
+    </div>
+
+    <div class="grid grid-3">
+      {
+        testimonials.map((item) => (
+          <figure class="testimonial">
+            <div class="testimonial-author">
+              <img
+                src={item.image}
+                alt={`${item.name}, ${item.role}`}
+                width="96"
+                height="96"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <span class="testimonial-name">{item.name}</span>
+                <span class="testimonial-role">{item.role}</span>
+              </figcaption>
+            </div>
+            <h3 class="testimonial-title">{item.title}</h3>
+            <blockquote>
+              <p>{item.quote}</p>
+            </blockquote>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial {
+    margin: 0;
+    background: var(--surface-alt);
+    border-radius: var(--radius);
+    padding: 28px 26px 30px;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .testimonial-author img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: none;
+  }
+
+  .testimonial-author figcaption {
+    display: flex;
+    flex-direction: column;
+    font-style: normal;
+  }
+
+  .testimonial-name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--ink-heading);
+  }
+
+  .testimonial-role {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+
+  .testimonial-title {
+    font-size: 1.15rem;
+    margin-bottom: 0.6em;
+  }
+
+  .testimonial blockquote {
+    margin: 0;
+    padding-left: 16px;
+    border-left: 3px solid var(--brand);
+  }
+
+  .testimonial blockquote p {
+    margin: 0;
+  }
+</style>

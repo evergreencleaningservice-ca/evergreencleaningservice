@@ -1,0 +1,238 @@
+---
+/** The 16 services the original listed as a <br>-separated block of <strong>s. */
+const servicesOffered = [
+  'Office Cleaning',
+  'Carpet Cleaning',
+  'Retail Cleaning',
+  'Restaurant Cleaning',
+  'Window Cleaning',
+  'Industrial Cleaning',
+  'Medical Building Cleaning',
+  'Condominium Cleaning',
+  'Institutional Cleaning',
+  'Dealership Cleaning',
+  'Post Construction Cleaning',
+  'Hotel Cleaning',
+  'Food Plant Cleaning',
+  'Power Washing',
+  'High Dusting',
+  'Strip & Waxing',
+];
+
+const offers = [
+  {
+    title: 'Flexible Scheduling',
+    body: 'Evergreen Office Cleaning is flexible to work after hours and during the weekends in order to reduce disruption to your employees and clients. We can work around your schedule. Our teams are well-trained and efficient.',
+  },
+  {
+    title: 'Proactive Maintenance Programs',
+    body: 'Evergreen Office Cleaning will work to extend the life of your assets. We provide top of the line commercial cleaning services at a reasonable rate. We have state of the art cleaning equipment and implement the latest techniques and solutions to ensure you not only have the best results but also save money. After every visit, you, the staff and visitors will certainly appreciate the superior clean environment.',
+  },
+  {
+    title: 'Dedicated Account Executive',
+    body: 'Commercial cleaning is no small task, and so, it’s important for a cleaning company to have a representative ready to respond with prompt service. By working with us, you will be assigned a dedicated account manager that attends to your concerns in a prompt and professional manner.',
+  },
+];
+---
+
+<section class="section-padding" id="about" aria-labelledby="about-title">
+  <div class="container">
+    <div class="section-title-area">
+      <p class="section-subtitle">Evergreen Office Cleaning</p>
+      <h2 class="section-title" id="about-title">Toronto Commercial Cleaning &amp; Janitorial</h2>
+    </div>
+
+    <div class="about-body">
+      <h3>Toronto Office Cleaning Services</h3>
+      <h3 class="about-lead-heading">Our clients tell the story.</h3>
+      <p>
+        Year after year they keep coming back to us for all their office cleaning, janitorial, and
+        commercial cleaning services.
+      </p>
+      <p>
+        Why? Because we&#8217;re simply the best. Best in quality, best is services and we show up.
+        That&#8217;s not us bragging, that&#8217;s what they tell us.
+      </p>
+      <p>
+        If you have lived in a residential building, worked in an office building or visited a retail
+        complex in Toronto in the morning, chances are you have come across commercial cleaners hard
+        at work. A clean and organized building gives a good first impression, shows that the owners
+        care about the safety of anyone who visits and, also portrays professionalism.
+      </p>
+
+      <h3>Services We Offer</h3>
+      <ul class="service-list">
+        {servicesOffered.map((service) => <li>{service}</li>)}
+      </ul>
+
+      <p>
+        <strong>Janitorial</strong> and <strong>commercial cleaning</strong> companies are common not
+        just in Toronto but all over the world and play a vital role in how businesses run. From the local
+        grocery store to global corporations, Evergreen Office Cleaning Service helps to make it possible
+        for businesses to do what they do on a daily basis without having to worry about cleanliness.
+      </p>
+      <p>
+        Our commercial cleaning services include an array of various tasks, depending on the contract
+        we have with our clients. Some of the most common services include cleaning floors, carpets,
+        bathrooms, windows, staff kitchens, conference rooms, reception areas, office cubicles and
+        warehouses. We also sanitize specific areas, empty trash cans ad make sure there’s an
+        acceptable level of cleanliness on the premises.
+      </p>
+
+      <img
+        class="about-figure"
+        src="/images/toronto-downtown-skyline.jpg"
+        alt="Toronto commercial cleaning services - downtown skyline"
+        width="565"
+        height="377"
+        loading="lazy"
+        decoding="async"
+      />
+
+      <p>
+        Most of the facilities or properties that call us for our wide range of cleaning services are
+        usually the most populated area’s of our city. In Canada, Ontario takes the first spot with
+        the number of commercial cleaning firms, with Quebec a close second. Property managers and
+        business owners can depend on Evergreen Office Cleaning when outsource their cleaning duties,
+        which explains why we’re growing so fast.
+      </p>
+      <p>
+        When looking for a commercial cleaner, it is imperative to pick one that understands the
+        importance of having clean and safe premises.
+      </p>
+    </div>
+
+    <h3 class="offers-title">Evergreen Commercial Cleaning &amp; Janitorial offers:</h3>
+    <div class="grid grid-3 offers">
+      {
+        offers.map((offer) => (
+          <div class="offer">
+            <h4>{offer.title}</h4>
+            <p>{offer.body}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <p class="text-center about-cta">
+      <a class="btn btn-primary btn-lg" href="/request-a-quote/">Get a Free Quote</a>
+    </p>
+
+    <div class="about-body">
+      <h3>We are Evergreen Office Cleaning</h3>
+      <h4>
+        Professional, affordable, and reliable office cleaning, janitorial and commercial cleaning
+        services.
+      </h4>
+      <h5>We&#8217;ve been cleaning Toronto and GTA since 1989.</h5>
+      <p>
+        Whether you need <a href="/services/office-cleaning/">office cleaning</a>, commercial cleaning
+        services, or <a href="/services/industrial-cleaning/">industrial cleaning</a>, our 20-plus years
+        of expertise can help your business make a a bold statement and that first impression.
+      </p>
+      <p>
+        Give your customers, employees, and visitors the opportunity to enjoy the same pride in your
+        space that you feel. Take advantage of our free estimate and consultation to introduce you to
+        the Evergreen Cleaning way of completing your vision for your commercial, industrial, or
+        office environment.
+      </p>
+      <p>
+        For over 20 years we&#8217;ve been delivering that professional cleaning services to a
+        multitude of businesses in the Toronto and GTA area. From professional firms and private
+        offices, health, dental and medial clinics, retail outlets, to industrial building and
+        warehouses. We can handle any mess you throw at us, and if you&#8217;re ever have an
+        emergency and need something cleaned in a pinch, we can get it done.
+      </p>
+    </div>
+
+    <p class="text-center about-cta">
+      <a class="btn btn-primary btn-lg" href="/request-a-quote/">Request a Free Quote</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .about-body {
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .about-body h3,
+  .about-body h4,
+  .about-body h5 {
+    margin-top: 1.6em;
+  }
+
+  .about-body > h3:first-child {
+    margin-top: 0;
+  }
+
+  .about-lead-heading {
+    color: var(--brand);
+  }
+
+  .service-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px 24px;
+    list-style: none;
+    margin: 0 0 1.6em;
+    padding: 0;
+    text-align: left;
+  }
+
+  .service-list li {
+    position: relative;
+    padding-left: 24px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--ink-heading);
+  }
+
+  .service-list li::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0.62em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--brand);
+  }
+
+  .about-figure {
+    width: 100%;
+    max-width: 565px;
+    height: auto;
+    margin: 2em auto;
+    border-radius: var(--radius);
+  }
+
+  .offers-title {
+    text-align: center;
+    margin-top: 2.2em;
+  }
+
+  .offers {
+    margin-bottom: 1.6em;
+  }
+
+  .offer {
+    background: var(--surface-alt);
+    border-radius: var(--radius);
+    padding: 26px 24px;
+  }
+
+  .offer h4 {
+    color: var(--brand-dark);
+  }
+
+  .offer p {
+    margin: 0;
+  }
+
+  .about-cta {
+    margin: 0 0 2.4em;
+  }
+</style>

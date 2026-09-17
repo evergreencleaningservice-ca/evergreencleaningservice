@@ -1,0 +1,217 @@
+---
+import { site, serviceAreas } from '../../data/site';
+---
+
+<section class="section-padding section-alt" id="contact" aria-labelledby="contact-title">
+  <div class="container">
+    <div class="section-title-area">
+      <p class="section-subtitle">We&#039;d love to hear from you ...</p>
+      <h2 class="section-title" id="contact-title">Get in touch</h2>
+    </div>
+
+    <div class="grid grid-2 contact-grid">
+      <div>
+        {/*
+          TODO: this form has no endpoint yet. action="#" is a placeholder —
+          wire it to a form handler (or a serverless POST route) and replace the
+          visible notice below once submissions are actually delivered.
+        */}
+        <form class="contact-form" method="post" action="#" novalidate={false}>
+          <p class="form-note" role="note">
+            This form is not connected to a mailbox yet, so a submission will not reach us. Please
+            call <a href={site.phoneHref}>{site.phone}</a> or email
+            <a href={`mailto:${site.email}`}>{site.email}</a> in the meantime.
+          </p>
+
+          <div class="field">
+            <label for="contact-name">Name <span aria-hidden="true">*</span></label>
+            <input
+              type="text"
+              id="contact-name"
+              name="name"
+              autocomplete="name"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="field">
+            <label for="contact-business">Business name <span aria-hidden="true">*</span></label>
+            <input
+              type="text"
+              id="contact-business"
+              name="business"
+              autocomplete="organization"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="field">
+            <label for="contact-email">Email <span aria-hidden="true">*</span></label>
+            <input
+              type="email"
+              id="contact-email"
+              name="email"
+              autocomplete="email"
+              spellcheck="false"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="field">
+            <label for="contact-phone">Phone <span aria-hidden="true">*</span></label>
+            <input
+              type="tel"
+              id="contact-phone"
+              name="phone"
+              autocomplete="tel"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="field">
+            <label for="contact-message"
+              >Comment or Message <span aria-hidden="true">*</span></label
+            >
+            <textarea id="contact-message" name="message" rows="5" required aria-required="true"
+            ></textarea>
+          </div>
+
+          <p class="form-required-note"><span aria-hidden="true">*</span> Required field.</p>
+
+          <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+        </form>
+      </div>
+
+      <div class="contact-info">
+        <h3>WE ARE ACCEPTING NEW CLEANING CLIENTS.</h3>
+        <p>
+          If you&#8217;re looking for janitorial, office cleaning, or any commercial cleaning
+          services in the Toronto GTA area, we&#8217;d love to hear from you.
+        </p>
+
+        <h3>Service Locations:</h3>
+        <p>{serviceAreas}</p>
+
+        <div class="address-box">
+          <h3>{site.name}</h3>
+          <address>
+            243 Queen St W.<br />
+            Toronto<br />
+            Ontario M5V 1Z4<br />
+            Canada
+          </address>
+          <p class="contact-line">
+            <a href={site.phoneHref}>+1 {site.phone}</a>
+          </p>
+          <p class="contact-line">
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-grid {
+    align-items: start;
+  }
+
+  .contact-form {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 26px 24px 30px;
+  }
+
+  .form-note {
+    background: #fff8e6;
+    border-left: 4px solid #d9a400;
+    padding: 12px 14px;
+    font-size: 0.9rem;
+    margin: 0 0 22px;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--ink-heading);
+    margin-bottom: 6px;
+  }
+
+  .field label span {
+    color: #c0392b;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--ink);
+    padding: 10px 12px;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: #fff;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .field input:focus-visible,
+  .field textarea:focus-visible {
+    outline: 3px solid var(--brand);
+    outline-offset: 1px;
+    border-color: var(--brand);
+  }
+
+  .form-required-note {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .form-required-note span {
+    color: #c0392b;
+  }
+
+  .contact-info h3 {
+    font-size: 1.15rem;
+    margin-top: 1.4em;
+  }
+
+  .contact-info > h3:first-child {
+    margin-top: 0;
+  }
+
+  .address-box {
+    margin-top: 1.6em;
+    padding: 22px 24px;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+
+  .address-box h3 {
+    margin-top: 0;
+  }
+
+  .address-box address {
+    font-style: normal;
+    margin-bottom: 0.8em;
+  }
+
+  .contact-line {
+    margin: 0 0 4px;
+  }
+</style>

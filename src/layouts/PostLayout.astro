@@ -1,0 +1,175 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import { site } from '../data/site';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  /** The next post forward in time, if there is one. */
+  newer?: CollectionEntry<'blog'>;
+  /** The next post back in time, if there is one. */
+  older?: CollectionEntry<'blog'>;
+}
+
+const { post, newer, older } = Astro.props;
+const { title, description, pubDate, image } = post.data;
+
+const isoDate = pubDate.toISOString().slice(0, 10);
+const dateLabel = new Intl.DateTimeFormat('en-CA', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+}).format(pubDate);
+---
+
+<BaseLayout
+  title={`${title} - ${site.legalName}`}
+  description={description}
+  image={image}
+  type="article"
+  publishedTime={pubDate.toISOString()}
+>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="entry-title">{title}</h1>
+      <p class="post-date">
+        <time datetime={isoDate}>{dateLabel}</time>
+      </p>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <a href="/category/blog/">Blog</a> &gt;
+        <span>{title}</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container post-container">
+      {
+        image && (
+          <div class="post-featured">
+            <img src={image} alt="" width="1200" height="600" decoding="async" />
+          </div>
+        )
+      }
+
+      <article class="entry-content">
+        <slot />
+      </article>
+
+      {
+        (newer || older) && (
+          <nav class="post-nav" aria-label="More posts">
+            <div class="post-nav-item post-nav-prev">
+              {older && (
+                <a href={`/${older.id}/`}>
+                  <span class="post-nav-label">Previous post</span>
+                  <span class="post-nav-title">{older.data.title}</span>
+                </a>
+              )}
+            </div>
+            <div class="post-nav-item post-nav-next">
+              {newer && (
+                <a href={`/${newer.id}/`}>
+                  <span class="post-nav-label">Next post</span>
+                  <span class="post-nav-title">{newer.data.title}</span>
+                </a>
+              )}
+            </div>
+          </nav>
+        )
+      }
+
+      <p class="post-back">
+        <a class="btn btn-primary" href="/category/blog/">Back to the blog</a>
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header .entry-title {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .post-date {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin: 12px 0 0;
+  }
+
+  .post-container {
+    max-width: 860px;
+  }
+
+  .post-featured {
+    margin-bottom: 36px;
+  }
+
+  .post-featured img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    background: var(--surface-alt);
+  }
+
+  .post-nav {
+    display: grid;
+    gap: 16px;
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (min-width: 600px) {
+    .post-nav {
+      grid-template-columns: 1fr 1fr;
+    }
+    .post-nav-next {
+      text-align: right;
+    }
+  }
+
+  .post-nav-item a {
+    display: block;
+  }
+
+  .post-nav-label {
+    display: block;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+
+  .post-nav-title {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  .post-nav-item a:hover .post-nav-title,
+  .post-nav-item a:focus-visible .post-nav-title {
+    color: var(--brand-dark);
+  }
+
+  .post-nav-item a:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+  }
+
+  .post-back {
+    margin: 40px 0 0;
+    text-align: center;
+  }
+</style>
