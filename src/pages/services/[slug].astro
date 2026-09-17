@@ -2,6 +2,7 @@
 import type { InferGetStaticPropsType } from 'astro';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar.astro';
 import { site } from '../../data/site';
 import { normalizeBody } from '../../lib/normalize-body';
 
@@ -35,10 +36,11 @@ const body = service.rendered?.html ? normalizeBody(service.rendered.html) : nul
   </div>
 
   <div class="section-padding">
-    <div class="container service-container">
+    <div class="container service-container content-grid">
       <article class="entry-content">
         {body ? <Fragment set:html={body} /> : <Content />}
       </article>
+      <Sidebar />
     </div>
   </div>
 </BaseLayout>
@@ -49,7 +51,18 @@ const body = service.rendered?.html ? normalizeBody(service.rendered.html) : nul
     margin: 0 auto;
   }
 
+  .content-grid {
+    display: grid;
+    gap: 40px;
+  }
+
+  @media (min-width: 992px) {
+    .content-grid {
+      grid-template-columns: minmax(0, 7.9fr) minmax(0, 2.9fr);
+      gap: 30px;
+    }
+  }
+
   .service-container {
-    max-width: 860px;
   }
 </style>

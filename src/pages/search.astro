@@ -1,0 +1,143 @@
+---
+/**
+ * The original's search widget posted to WordPress's `?s=` handler, which a
+ * static build has no equivalent for. This is the replacement: the post index
+ * is emitted into the page at build time and filtered in the browser, so search
+ * keeps working with no backend.
+ */
+import { getCollection } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .map((p) => ({
+    slug: p.id,
+    title: p.data.title,
+    description: p.data.description ?? '',
+    // a trimmed body gives the index something to match on without shipping
+    // every post in full
+    text: p.body?.replace(/[#*_>`[\]()]/g, ' ').replace(/\s+/g, ' ').slice(0, 1200) ?? '',
+  }));
+---
+
+<PageLayout title="Search" description="Search the Evergreen Office Cleaning news archive.">
+  <form class="search-page-form" role="search" method="get" action="/search/">
+    <label for="q">Search for:</label>
+    <input type="search" id="q" name="q" autocomplete="off" />
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+
+  <p id="search-status" role="status" aria-live="polite"></p>
+  <ul id="search-results" class="search-results"></ul>
+
+  <noscript>
+    <p>Search needs JavaScript. You can browse everything in the <a href="/blog/">news archive</a>.</p>
+  </noscript>
+
+  <script type="application/json" id="search-index" set:html={JSON.stringify(posts)} />
+</PageLayout>
+
+<style>
+  .search-page-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-end;
+    margin-bottom: 30px;
+  }
+
+  .search-page-form label {
+    width: 100%;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--ink-heading);
+  }
+
+  .search-page-form input {
+    flex: 1 1 260px;
+    min-width: 0;
+    font: inherit;
+    font-size: 15px;
+    padding: 10px 12px;
+    border: 1px solid #cdd2d7;
+    border-radius: var(--radius);
+  }
+
+  .search-page-form input:focus-visible,
+  .search-page-form button:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .search-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .search-results li {
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .search-results a {
+    font-family: var(--font-heading);
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+
+  .search-results p {
+    margin: 4px 0 0;
+    font-size: 15px;
+  }
+</style>
+
+<script>
+  const raw = document.getElementById('search-index')?.textContent ?? '[]';
+  const index = JSON.parse(raw) as Array<{
+    slug: string;
+    title: string;
+    description: string;
+    text: string;
+  }>;
+
+  const input = document.getElementById('q') as HTMLInputElement | null;
+  const list = document.getElementById('search-results');
+  const status = document.getElementById('search-status');
+
+  function run(term: string) {
+    if (!list || !status) return;
+    const q = term.trim().toLowerCase();
+    list.innerHTML = '';
+    if (!q) {
+      status.textContent = '';
+      return;
+    }
+    const hits = index.filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.text.toLowerCase().includes(q)
+    );
+    status.textContent = hits.length
+      ? `${hits.length} result${hits.length === 1 ? '' : 's'} for “${term.trim()}”`
+      : `Nothing found for “${term.trim()}”.`;
+    for (const hit of hits) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `/${hit.slug}/`;
+      a.textContent = hit.title;
+      const p = document.createElement('p');
+      p.textContent = hit.description;
+      li.append(a, p);
+      list.append(li);
+    }
+  }
+
+  const initial = new URLSearchParams(location.search).get('q') ?? '';
+  if (input) {
+    input.value = initial;
+    input.addEventListener('input', () => run(input.value));
+  }
+  run(initial);
+</script>

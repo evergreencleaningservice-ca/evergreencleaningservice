@@ -1,44 +1,46 @@
 ---
-import { footerAreas, site, social } from '../data/site';
+/**
+ * The site footer, matching the original's two widget columns.
+ *
+ * The original is a Google review button on the left and the service-area menu
+ * on the right, then a single copyright line. Contact details and social links
+ * are NOT in the footer — they live in the homepage contact section, which is
+ * where the original puts them.
+ *
+ * The service-area entries are a WordPress nav menu whose items all point at
+ * "#", i.e. they are labels rather than links. They are rendered as plain list
+ * items here: a link that goes nowhere is worse for a keyboard or screen-reader
+ * user than text that never claimed to be one.
+ */
+import { footerAreas, site } from '../data/site';
 
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-col">
-      <h2 class="footer-heading">Service Areas</h2>
+<footer class="site-footer" id="colophon">
+  <div class="container footer-widgets">
+    <div class="footer-col footer-col-review">
+      <a href="https://g.page/r/CW9cqxQ9_IfYEBM/review" rel="noopener noreferrer" target="_blank">
+        <img
+          src="/images/Google-Review-Link.png"
+          alt="Leave Evergreen Office Cleaning a Google review"
+          width="247"
+          height="122"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    </div>
+
+    <div class="footer-col footer-col-areas">
+      <h2 class="screen-reader-text">Service areas</h2>
       <ul class="footer-areas">
         {footerAreas.map((area) => <li>{area}</li>)}
       </ul>
     </div>
-
-    <div class="footer-col">
-      <h2 class="footer-heading">{site.name}</h2>
-      <p class="footer-contact">
-        <a href={site.phoneHref}>{site.phone}</a><br />
-        <a href={`mailto:${site.email}`}>{site.email}</a>
-      </p>
-      <a class="btn btn-primary" href="/request-a-quote/">Request a Quote</a>
-    </div>
-
-    <div class="footer-col">
-      <h2 class="footer-heading">Follow us on Social Media</h2>
-      <ul class="footer-social">
-        {
-          social.map((item) => (
-            <li>
-              <a href={item.href} rel="noopener noreferrer" target="_blank">
-                {item.name}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
   </div>
 
-  <div class="footer-bottom">
+  <div class="site-info">
     <div class="container">
       <p>
         Copyright &copy; {year} {site.name} ~ <a href="/privacy/">Privacy Policy</a>
@@ -49,41 +51,42 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer {
-    background: var(--surface-dark);
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 0.9rem;
+    background: var(--footer-bg);
+    color: var(--footer-ink);
+    font-size: 14px;
   }
 
-  .footer-inner {
+  .footer-widgets {
     display: grid;
-    gap: 36px;
-    padding: 60px 16px 40px;
+    gap: 30px;
+    padding-top: 4.375rem;
+    padding-bottom: 2.1875rem;
+    align-items: center;
   }
 
   @media (min-width: 768px) {
-    .footer-inner {
-      grid-template-columns: repeat(3, 1fr);
+    .footer-widgets {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .footer-heading {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #fff;
-    margin: 0 0 16px;
+  .footer-col-review img {
+    margin: 0 auto;
+    width: 247px;
+    height: auto;
+    max-width: 100%;
   }
 
-  .footer-areas,
-  .footer-social {
+  .footer-areas {
     list-style: none;
     margin: 0;
     padding: 0;
+    text-align: center;
   }
 
-  .footer-areas li,
-  .footer-social li {
+  .footer-areas li {
     margin-bottom: 7px;
+    line-height: 1.6;
   }
 
   .site-footer a {
@@ -94,18 +97,18 @@ const year = new Date().getFullYear();
     color: #fff;
   }
 
-  .footer-contact {
-    margin-bottom: 18px;
+  .site-footer a:focus-visible {
+    outline: 2px solid var(--brand-hover);
+    outline-offset: 2px;
   }
 
-  .footer-bottom {
+  .site-info {
     border-top: 1px solid rgba(255, 255, 255, 0.12);
     padding: 18px 0;
     text-align: center;
-    font-size: 0.82rem;
   }
 
-  .footer-bottom p {
+  .site-info p {
     margin: 0;
   }
 </style>

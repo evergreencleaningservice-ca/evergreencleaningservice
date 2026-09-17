@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
 import { site } from '../data/site';
 
 interface Props {
@@ -44,7 +45,7 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
   </div>
 
   <div class="section-padding">
-    <div class="container post-container">
+    <div class="container post-container content-grid">
       {
         image && (
           <div class="post-featured">
@@ -83,6 +84,7 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
       <p class="post-back">
         <a class="btn btn-primary" href="/category/blog/">Back to the blog</a>
       </p>
+      <Sidebar />
     </div>
   </div>
 </BaseLayout>
@@ -103,8 +105,19 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
     margin: 12px 0 0;
   }
 
+  .content-grid {
+    display: grid;
+    gap: 40px;
+  }
+
+  @media (min-width: 992px) {
+    .content-grid {
+      grid-template-columns: minmax(0, 7.9fr) minmax(0, 2.9fr);
+      gap: 30px;
+    }
+  }
+
   .post-container {
-    max-width: 860px;
   }
 
   .post-featured {

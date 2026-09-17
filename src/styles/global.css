@@ -134,6 +134,7 @@ img {
 /* Stepped container, matching the theme's Bootstrap grid. */
 .container {
   width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   padding-left: var(--gutter);
   padding-right: var(--gutter);
@@ -141,22 +142,22 @@ img {
 
 @media (min-width: 576px) {
   .container {
-    max-width: 540px;
+    width: 540px;
   }
 }
 @media (min-width: 768px) {
   .container {
-    max-width: 720px;
+    width: 720px;
   }
 }
 @media (min-width: 992px) {
   .container {
-    max-width: 960px;
+    width: 960px;
   }
 }
 @media (min-width: 1200px) {
   .container {
-    max-width: 1140px;
+    width: 1140px;
   }
 }
 
@@ -309,9 +310,23 @@ img {
 
 /* The original sizes this band as a percentage of viewport width. */
 .page-header {
-  background: var(--surface-alt);
+  position: relative;
+  background: #f8f9f9;
   text-align: center;
   padding: 3% 0;
+}
+
+/* The original tints the band with a full-opacity overlay rather than setting
+   the colour directly; the visible result is --surface-alt either way. */
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--surface-alt);
+}
+
+.page-header > * {
+  position: relative;
 }
 
 .page-header .entry-title {
@@ -344,6 +359,7 @@ img {
   font-size: 0.875rem;
   line-height: 1.7;
   color: var(--ink);
+  margin-bottom: 30px;
 }
 
 .entry-content > *:first-child {
@@ -364,11 +380,7 @@ img {
 .entry-content h2 {
   font-size: 2rem;
   line-height: 1.2;
-  margin: 1.6em 0 0.9375rem;
-}
-
-.entry-content h2:first-child {
-  margin-top: 0;
+  margin: 0 0 0.9375rem;
 }
 
 @media (max-width: 767px) {
@@ -380,13 +392,13 @@ img {
 .entry-content h3 {
   font-size: 1.25rem;
   line-height: 1.1;
-  margin: 1.6em 0 0.9375rem;
+  margin: 0 0 0.9375rem;
 }
 
 .entry-content h4 {
   font-size: 1.0625rem;
   line-height: 1.1;
-  margin: 1.6em 0 0.9375rem;
+  margin: 0 0 0.9375rem;
 }
 
 .entry-content ul,

@@ -1,0 +1,180 @@
+---
+/**
+ * The inner-page sidebar, matching the original's <aside id="secondary">.
+ *
+ * Four widgets, in the original's order: search, Recent Posts, a Request Quote
+ * form, and the tag cloud. It appears on every inner page, service page and
+ * post — but not the homepage, which the original renders full width.
+ */
+import { getCollection } from 'astro:content';
+import QuoteForm from './QuoteForm.astro';
+import { tags } from '../data/tags';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
+---
+
+<aside id="secondary" class="sidebar" aria-label="Sidebar">
+  <section class="widget widget-search" aria-label="Search">
+    <form class="search-form" role="search" action="/search/" method="get">
+      <label class="screen-reader-text" for="sidebar-search">Search for:</label>
+      <input
+        type="search"
+        id="sidebar-search"
+        name="q"
+        placeholder="Search for:"
+        autocomplete="off"
+      />
+      <button type="submit">
+        <span class="screen-reader-text">Search</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            d="M10.5 3a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15zm10.5 18-5.2-5.2"
+          ></path>
+        </svg>
+      </button>
+    </form>
+  </section>
+
+  <section class="widget widget-recent">
+    <h2 class="widget-title">Recent Posts</h2>
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/${post.id}/`}>{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="widget widget-quote">
+    <h2 class="widget-title">Request Quote</h2>
+    <QuoteForm variant="sidebar" id="sidebar-quote" />
+  </section>
+
+  <section class="widget widget-tags">
+    <h2 class="widget-title">Tags</h2>
+    <div class="tag-cloud">
+      {
+        tags.map((tag) => (
+          <a href={tag.href} style={`font-size:${tag.size}`}>
+            {tag.name}
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</aside>
+
+<style>
+  .sidebar {
+    min-width: 0;
+  }
+
+  .widget {
+    margin-bottom: 40px;
+  }
+
+  .widget:last-child {
+    margin-bottom: 0;
+  }
+
+  .widget-title {
+    font-family: var(--font-heading);
+    font-size: 1.0625rem;
+    line-height: 1.1;
+    font-weight: 600;
+    color: var(--ink-heading);
+    margin: 0 0 15px;
+  }
+
+  /* search */
+  .search-form {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .search-form input {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: 0;
+    padding: 9px 12px;
+    font: inherit;
+    font-size: 15px;
+    color: inherit;
+  }
+
+  .search-form button {
+    flex: none;
+    border: 0;
+    background: var(--brand);
+    color: #fff;
+    padding: 0 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-form button:hover {
+    background: var(--brand-dark);
+  }
+
+  .search-form input:focus-visible,
+  .search-form button:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: -2px;
+  }
+
+  /* recent posts */
+  .widget-recent ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .widget-recent li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .widget-recent li:last-child {
+    border-bottom: 0;
+  }
+
+  .widget-recent a {
+    color: var(--ink);
+  }
+
+  .widget-recent a:hover {
+    color: var(--brand);
+  }
+
+  /* quote form */
+
+  /* tag cloud */
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    align-items: baseline;
+  }
+
+  .tag-cloud a {
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .tag-cloud a:hover {
+    color: var(--brand);
+  }
+</style>

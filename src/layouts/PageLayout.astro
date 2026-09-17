@@ -1,11 +1,16 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
 import { site } from '../data/site';
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
+  /**
+   * Inner pages carry the original's sidebar; set false for a full-width page.
+   */
+  sidebar?: boolean;
   /**
    * Pre-rendered body HTML for this page, i.e. `entry.rendered.html` from the
    * matching `pages` collection entry. Passing it instead of rendering
@@ -18,7 +23,7 @@ interface Props {
   contentHtml?: string;
 }
 
-const { title, description, image, contentHtml } = Astro.props;
+const { title, description, image, contentHtml, sidebar = true } = Astro.props;
 
 /**
  * The page bodies are Markdown generated from the archived WordPress HTML, so
@@ -69,19 +74,36 @@ const body = contentHtml ? normalizeBody(contentHtml) : null;
   </div>
 
   <div class="section-padding">
-    <div class="container">
+    <div class={`container content-grid${sidebar ? '' : ' is-full'}`}>
       <article class="entry-content">
         {body && <Fragment set:html={body} />}
         <slot />
       </article>
+      {sidebar && <Sidebar />}
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  /* Keep prose to a comfortable measure; the original theme arrived at roughly
-     the same width by running these pages alongside a sidebar. */
-  .entry-content {
+  /* The original runs these pages as col-md-8 + sidebar, which puts the content
+     column at 790px on a 1140px container. */
+  .content-grid {
+    display: grid;
+    gap: 40px;
+  }
+
+  @media (min-width: 992px) {
+    .content-grid {
+      grid-template-columns: minmax(0, 7.9fr) minmax(0, 2.9fr);
+      gap: 30px;
+    }
+  }
+
+  .content-grid.is-full {
+    display: block;
+  }
+
+  .content-grid.is-full .entry-content {
     max-width: 860px;
   }
 
