@@ -1,41 +1,74 @@
 ---
 /**
- * The site footer, matching the original's two widget columns.
+ * The site footer — three bands, as the original has it:
  *
- * The original is a Google review button on the left and the service-area menu
- * on the right, then a single copyright line. Contact details and social links
- * are NOT in the footer — they live in the homepage contact section, which is
- * where the original puts them.
+ *   .footer-widgets   white, the Google review button beside the service areas
+ *   .footer-connect   dark, "Follow us on Social Media" over the social icons
+ *   .site-info        #222, the copyright line
  *
- * The service-area entries are a WordPress nav menu whose items all point at
- * "#", i.e. they are labels rather than links. They are rendered as plain list
- * items here: a link that goes nowhere is worse for a keyboard or screen-reader
- * user than text that never claimed to be one.
+ * An earlier pass of this port collapsed all three into one dark band and moved
+ * the social links into the homepage contact section. That was wrong on both
+ * counts: the widgets band is white, and the social links belong here.
+ *
+ * The original draws the icons with Font Awesome. They are inline SVG here so
+ * the site does not load an icon webfont for three glyphs; sizes and spacing
+ * match the measured original (~24px glyph, margin 0 13px).
  */
-import { footerAreas, site } from '../data/site';
+import { footerAreas, site, social } from '../data/site';
 
 const year = new Date().getFullYear();
+
+const icons: Record<string, string> = {
+  Twitter:
+    'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z',
+  Facebook:
+    'M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.45 2.9h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94z',
+  LinkedIn:
+    'M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13M7.12 20.45H3.56V9h3.56zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0',
+};
 ---
 
 <footer class="site-footer" id="colophon">
-  <div class="container footer-widgets">
-    <div class="footer-col footer-col-review">
-      <a href="https://g.page/r/CW9cqxQ9_IfYEBM/review" rel="noopener noreferrer" target="_blank">
-        <img
-          src="/images/Google-Review-Link.png"
-          alt="Leave Evergreen Office Cleaning a Google review"
-          width="247"
-          height="122"
-          loading="lazy"
-          decoding="async"
-        />
-      </a>
-    </div>
+  <div class="footer-widgets" id="footer-widgets">
+    <div class="container footer-widgets-grid">
+      <div class="footer-col footer-col-review">
+        <a href="https://g.page/r/CW9cqxQ9_IfYEBM/review" rel="noopener noreferrer" target="_blank">
+          <img
+            src="/images/Google-Review-Link.png"
+            alt="Leave Evergreen Office Cleaning a Google review"
+            width="247"
+            height="122"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+      </div>
 
-    <div class="footer-col footer-col-areas">
-      <h2 class="screen-reader-text">Service areas</h2>
-      <ul class="footer-areas">
-        {footerAreas.map((area) => <li>{area}</li>)}
+      <div class="footer-col footer-col-areas">
+        <h2 class="screen-reader-text">Service areas</h2>
+        <ul class="footer-areas">
+          {footerAreas.map((area) => <li>{area}</li>)}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-connect">
+    <div class="container">
+      <h5 class="footer-connect-title">Follow us on Social Media</h5>
+      <ul class="footer-social">
+        {
+          social.map((item) => (
+            <li>
+              <a href={item.href} title={item.name} rel="noopener noreferrer" target="_blank">
+                <span class="screen-reader-text">{item.name}</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="currentColor" d={icons[item.name]} />
+                </svg>
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </div>
@@ -56,16 +89,21 @@ const year = new Date().getFullYear();
     font-size: 14px;
   }
 
+  /* --- widgets band: white --- */
   .footer-widgets {
-    display: grid;
-    gap: 30px;
+    background: var(--surface);
     padding-top: 4.375rem;
     padding-bottom: 2.1875rem;
+  }
+
+  .footer-widgets-grid {
+    display: grid;
+    gap: 30px;
     align-items: center;
   }
 
   @media (min-width: 768px) {
-    .footer-widgets {
+    .footer-widgets-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
@@ -81,12 +119,79 @@ const year = new Date().getFullYear();
     list-style: none;
     margin: 0;
     padding: 0;
-    text-align: center;
+    color: var(--ink);
   }
 
   .footer-areas li {
     margin-bottom: 7px;
     line-height: 1.6;
+  }
+
+  @media (max-width: 767px) {
+    .footer-areas {
+      text-align: center;
+    }
+  }
+
+  /* --- connect band: the footer's own dark background --- */
+  .footer-connect {
+    padding: 5rem 0;
+    text-align: center;
+  }
+
+  .footer-connect-title {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 22px;
+  }
+
+  .footer-social {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-social li {
+    margin: 0 13px;
+  }
+
+  .site-footer .footer-social a {
+    display: block;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .footer-social svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .site-footer .footer-social a:hover {
+    color: var(--brand-hover);
+  }
+
+  .footer-social a:focus-visible {
+    outline: 2px solid var(--brand-hover);
+    outline-offset: 4px;
+  }
+
+  /* --- copyright band --- */
+  .site-info {
+    background: var(--surface-dark);
+    padding: 2.1875rem 0;
+    text-align: center;
+  }
+
+  .site-info p {
+    margin: 0;
   }
 
   .site-footer a {
@@ -97,18 +202,9 @@ const year = new Date().getFullYear();
     color: #fff;
   }
 
-  .site-footer a:focus-visible {
-    outline: 2px solid var(--brand-hover);
+  .footer-widgets a:focus-visible,
+  .site-info a:focus-visible {
+    outline: 2px solid var(--brand);
     outline-offset: 2px;
-  }
-
-  .site-info {
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 18px 0;
-    text-align: center;
-  }
-
-  .site-info p {
-    margin: 0;
   }
 </style>

@@ -1,6 +1,6 @@
 ---
 import QuoteForm from '../QuoteForm.astro';
-import { site, serviceAreas, social } from '../../data/site';
+import { site, serviceAreas } from '../../data/site';
 ---
 
 <section class="section-padding section-alt" id="contact" aria-labelledby="contact-title">
@@ -40,19 +40,6 @@ import { site, serviceAreas, social } from '../../data/site';
             <a href={`mailto:${site.email}`}>{site.email}</a>
           </p>
         </div>
-
-        <h5 class="social-title">Follow us on Social Media</h5>
-        <ul class="social-links">
-          {
-            social.map((item) => (
-              <li>
-                <a href={item.href} rel="noopener noreferrer" target="_blank">
-                  {item.name}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
       </div>
     </div>
   </div>
@@ -65,28 +52,6 @@ import { site, serviceAreas, social } from '../../data/site';
 
   .contact-form-wrap {
     min-width: 0;
-  }
-
-  .social-title {
-    font-family: var(--font-heading);
-    font-size: 0.9375rem;
-    font-weight: 600;
-    color: var(--ink-heading);
-    margin: 24px 0 10px;
-  }
-
-  .social-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 18px;
-  }
-
-  .social-links a:focus-visible {
-    outline: 2px solid var(--brand);
-    outline-offset: 2px;
   }
 
   .contact-form {
