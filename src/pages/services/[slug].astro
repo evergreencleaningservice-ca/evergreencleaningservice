@@ -3,6 +3,7 @@ import type { InferGetStaticPropsType } from 'astro';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { site } from '../../data/site';
+import { normalizeBody } from '../../lib/normalize-body';
 
 export async function getStaticPaths() {
   const services = await getCollection('services');
@@ -17,7 +18,10 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { service } = Astro.props as Props;
 const { title, description, image } = service.data;
+// `render()` is also what fills `service.rendered`, which is normalised below.
+// Keep the call even though `Content` is only the fallback.
 const { Content } = await render(service);
+const body = service.rendered?.html ? normalizeBody(service.rendered.html) : null;
 ---
 
 <BaseLayout title={`${title} - ${site.legalName}`} description={description} image={image}>
@@ -33,7 +37,7 @@ const { Content } = await render(service);
   <div class="section-padding">
     <div class="container service-container">
       <article class="entry-content">
-        <Content />
+        {body ? <Fragment set:html={body} /> : <Content />}
       </article>
     </div>
   </div>

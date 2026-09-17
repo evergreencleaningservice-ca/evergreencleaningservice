@@ -58,5 +58,12 @@ export default defineConfig({
     // Left over from the OnePress demo content the old install never removed.
     '/portfolio/project-title-sixth/': '/cleaning-demo-gallery/',
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // The category archive carries robots "follow, noindex" to match the
+      // original, so listing it in the sitemap would invite crawlers to index
+      // what those pages ask them not to. /blog/ covers the same posts.
+      filter: (page) => !/\/category\/blog\//.test(page),
+    }),
+  ],
 });
