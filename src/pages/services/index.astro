@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { site, nav } from '../../data/site';
+
+/*
+ * The original /services/ URL was an empty WordPress page archive (no content of
+ * its own), so this landing page is assembled from the service pages themselves.
+ * The heading and eyebrow are the ones the homepage uses over the same set of
+ * services; the card order follows the Services menu in the site navigation.
+ */
+const navServices = nav.find((item) => item.label === 'Services')?.children ?? [];
+const navOrder = navServices.map((child) =>
+  (child.href ?? '').replace(/^\/services\//, '').replace(/\/$/, ''),
+);
+
+const rank = (id: string) => {
+  const index = navOrder.indexOf(id);
+  return index === -1 ? navOrder.length : index;
+};
+
+const services = (await getCollection('services')).sort(
+  (a, b) => rank(a.id) - rank(b.id) || a.data.title.localeCompare(b.data.title),
+);
+---
+
+<BaseLayout title="Services - Evergreen Office Cleaning">
+  <div class="page-header">
+    <div class="container">
+      <p class="section-subtitle">{site.name}</p>
+      <h1 class="entry-title">Our Commercial Cleaning Services</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <span>Services</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+      <div class="grid grid-3">
+        {
+          services.map((service, index) => (
+            <ServiceCard service={service} loading={index < 3 ? 'eager' : 'lazy'} />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-header .section-subtitle {
+    margin-bottom: 6px;
+  }
+
+  .page-header .entry-title {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+</style>
