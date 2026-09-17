@@ -1,0 +1,57 @@
+---
+/**
+ * The original section (id="sid1679612802692") embedded a Trustindex Google
+ * review widget. The third-party widget is gone; the band keeps the heading,
+ * the five-star badge and the site's own Google review link.
+ */
+const reviewUrl = 'https://g.page/r/CW9cqxQ9_IfYEBM/review';
+---
+
+<section class="section-padding section-alt" id="reviews" aria-labelledby="reviews-title">
+  <div class="container text-center">
+    <div class="section-title-area">
+      <h2 class="section-title" id="reviews-title">Google Reviews</h2>
+    </div>
+
+    <a class="review-link" href={reviewUrl} target="_blank" rel="noopener">
+      <img
+        src="/images/google-reviews-5-star.png"
+        alt=""
+        width="124"
+        height="93"
+        loading="lazy"
+        decoding="async"
+      />
+      <span>Read our Google reviews</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .review-link {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 28px;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--ink-heading);
+    max-width: 100%;
+  }
+
+  .review-link:hover,
+  .review-link:focus-visible {
+    color: var(--brand);
+    text-decoration: none;
+    border-color: var(--brand);
+  }
+
+  .review-link img {
+    width: 124px;
+    height: auto;
+  }
+</style>

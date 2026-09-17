@@ -1,0 +1,56 @@
+---
+import { getEntry, render } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+
+const entry = await getEntry('pages', 'cleaning-demo-gallery');
+if (!entry) throw new Error('Missing content entry: pages/cleaning-demo-gallery');
+
+const { Content } = await render(entry);
+
+// The body is nothing but thirteen photographs, one per paragraph. Lay them out
+// as a grid rather than a single stacked column, and lazy-load the lot — none of
+// them is above the fold, and at full size they are several megabytes together.
+// This page takes the HTML into its own wrapper (instead of handing it to
+// PageLayout) so the grid rules below can reach the markup with `:global()`.
+const galleryHtml = (entry.rendered?.html ?? '').replace(
+  /<img(?![^>]*\sloading=)\s/g,
+  '<img loading="lazy" decoding="async" ',
+);
+---
+
+<PageLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  image={entry.data.image}
+>
+  {
+    galleryHtml ? (
+      <div class="gallery-grid" set:html={galleryHtml} />
+    ) : (
+      <Content />
+    )
+  }
+</PageLayout>
+
+<style>
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  /* The photographs arrive wrapped in paragraphs from Markdown. */
+  .gallery-grid :global(p) {
+    margin: 0;
+  }
+
+  .gallery-grid :global(img) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    margin: 0;
+    border-radius: var(--radius);
+    background: var(--surface-alt);
+  }
+</style>

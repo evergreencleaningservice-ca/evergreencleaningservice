@@ -1,0 +1,142 @@
+---
+import { getCollection } from 'astro:content';
+
+type Post = {
+  id?: string;
+  slug?: string;
+  data: { title: string; description?: string; pubDate: Date | string; image?: string };
+};
+
+// The blog collection may not be wired up yet; an empty list just drops the
+// cards and leaves the "Visit Our Blog" button in place.
+let entries: Post[] = [];
+try {
+  entries = (await getCollection('blog')) as unknown as Post[];
+} catch {
+  entries = [];
+}
+
+const toSlug = (post: Post) => String(post.slug ?? post.id ?? '').replace(/\.mdx?$/, '');
+const toTime = (value: Date | string) => new Date(value).getTime();
+
+const posts = entries
+  .slice()
+  .sort((a, b) => toTime(b.data.pubDate) - toTime(a.data.pubDate))
+  .slice(0, 3);
+
+const dateFormat = new Intl.DateTimeFormat('en-CA', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<section class="section-padding" id="news" aria-labelledby="news-title">
+  <div class="container">
+    <div class="section-title-area">
+      <p class="section-subtitle">Evergreen Office Cleaning</p>
+      <h2 class="section-title" id="news-title">Latest News</h2>
+    </div>
+
+    {
+      posts.length > 0 && (
+        <div class="grid grid-3">
+          {posts.map((post) => (
+            <article class="post-card">
+              {post.data.image ? (
+                <a class="post-thumb" href={`/${toSlug(post)}/`} tabindex="-1" aria-hidden="true">
+                  <img
+                    src={post.data.image}
+                    alt=""
+                    width="600"
+                    height="300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              ) : (
+                /* No featured image on this post: hold the same space so the
+                   three cards stay level instead of one riding up. */
+                <div class="post-thumb post-thumb-empty" aria-hidden="true" />
+              )}
+              <div class="post-body">
+                <p class="post-meta">
+                  <a href="/category/blog/">Blog</a>
+                  <span> · </span>
+                  <time datetime={new Date(post.data.pubDate).toISOString().slice(0, 10)}>
+                    {dateFormat.format(new Date(post.data.pubDate))}
+                  </time>
+                </p>
+                <h3 class="post-title">
+                  <a href={`/${toSlug(post)}/`}>{post.data.title}</a>
+                </h3>
+                {post.data.description && <p class="post-excerpt">{post.data.description}</p>}
+              </div>
+            </article>
+          ))}
+        </div>
+      )
+    }
+
+    <p class="text-center news-action">
+      <a class="btn btn-primary btn-lg" href="/blog/">Visit Our Blog</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .post-thumb img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+  }
+
+  .post-thumb-empty {
+    aspect-ratio: 2 / 1;
+    background: var(--surface-alt);
+  }
+
+  .post-body {
+    padding: 22px 22px 26px;
+  }
+
+  .post-meta {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+  }
+
+  .post-title {
+    font-size: 1.15rem;
+    margin-bottom: 0.6em;
+  }
+
+  .post-title a {
+    color: var(--ink-heading);
+  }
+
+  .post-title a:hover,
+  .post-title a:focus-visible {
+    color: var(--brand);
+  }
+
+  .post-excerpt {
+    margin: 0;
+  }
+
+  .news-action {
+    margin: 40px 0 0;
+  }
+</style>

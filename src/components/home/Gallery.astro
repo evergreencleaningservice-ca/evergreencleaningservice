@@ -1,0 +1,100 @@
+---
+/**
+ * The original gallery images carried empty alt attributes. Alt text here is
+ * written from each file's own subject so the grid is usable with a screen
+ * reader; the images and their order are unchanged.
+ */
+const photos = [
+  {
+    src: '/images/Toronto-Industrial-Cleaning-demo.jpg',
+    alt: 'Industrial floor cleaned by the Evergreen team in Toronto',
+  },
+  {
+    src: '/images/office-cleaning-in-Toronto.jpg',
+    alt: 'Office cleaning under way in a Toronto workspace',
+  },
+  {
+    src: '/images/toronto-office-cleaning-services.jpg',
+    alt: 'Toronto office left tidy after a scheduled cleaning visit',
+  },
+  {
+    src: '/images/retailstore_1-1024x682.jpg',
+    alt: 'Retail store with clean floors and dusted display shelving',
+  },
+  {
+    src: '/images/commercial-lobby-cleaning-demo.jpg',
+    alt: 'Polished commercial building lobby',
+  },
+  {
+    src: '/images/office-cleaning-services-Toronto.jpg',
+    alt: 'Open-plan Toronto office after an office cleaning service',
+  },
+  {
+    src: '/images/toronto-office-cleaning.jpg',
+    alt: 'Clean desks and seating area in a Toronto office',
+  },
+  {
+    src: '/images/lobby.jpg',
+    alt: 'Building lobby with clean seating and glass',
+  },
+  {
+    src: '/images/dentistoffice_1-1024x683.jpg',
+    alt: 'Spotless dental clinic treatment room',
+  },
+  {
+    src: '/images/office-pic.jpg',
+    alt: 'Cleaned office workstations and meeting table',
+  },
+];
+---
+
+<section class="section-padding section-alt" id="gallery" aria-labelledby="gallery-title">
+  <div class="container">
+    <div class="section-title-area">
+      <p class="section-subtitle">Evergreen Cleaning makes</p>
+      <h2 class="section-title" id="gallery-title">Clean Spaces</h2>
+    </div>
+
+    <ul class="gallery-grid">
+      {
+        photos.map((photo) => (
+          <li>
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              width="600"
+              height="400"
+              loading="lazy"
+              decoding="async"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (min-width: 600px) {
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+</style>

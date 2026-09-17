@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+/*
+ * The original WordPress install served the OnePress theme's generic 404
+ * template, which was never captured in the archive, so there is no source copy
+ * to reproduce here. The wording below is plain wayfinding text only — no
+ * marketing claims, and no contact details beyond the ones in src/data/site.ts.
+ */
+const links = [
+  { href: '/', label: 'Home', note: 'Start again from the front page.' },
+  { href: '/services/', label: 'Services', note: 'Office, commercial, industrial and emergency cleaning.' },
+  { href: '/category/blog/', label: 'News', note: 'Cleaning articles and company updates.' },
+  { href: '/contact-us/', label: 'Contact Us', note: 'Ask us a question or request a quote.' },
+];
+---
+
+<BaseLayout
+  title={`Page Not Found - ${site.legalName}`}
+  description="The page you were looking for could not be found."
+  noindex
+>
+  <div class="page-header">
+    <div class="container">
+      <p class="section-subtitle">Error 404</p>
+      <h1 class="entry-title">Page Not Found</h1>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+      <p class="lede">
+        Sorry &mdash; we could not find that page. It may have been moved or removed. Here is where
+        to go next:
+      </p>
+
+      <ul class="not-found-links">
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+              <span>{link.note}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="help">
+        Still stuck? Call <a href={site.phoneHref}>{site.phone}</a> or email{' '}
+        <a href={`mailto:${site.email}`}>{site.email}</a> and we will point you in the right
+        direction.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .lede {
+    max-width: 46rem;
+    font-size: 1.05rem;
+  }
+
+  .not-found-links {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .not-found-links {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .not-found-links li {
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--brand);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    background: var(--surface);
+  }
+
+  .not-found-links a {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .not-found-links span {
+    display: block;
+    margin-top: 4px;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+
+  .help {
+    margin-top: 32px;
+    color: var(--ink-soft);
+  }
+</style>

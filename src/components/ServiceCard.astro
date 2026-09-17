@@ -1,0 +1,109 @@
+---
+/**
+ * Service teaser, used by the /services/ landing page.
+ * Pass a services collection entry: <ServiceCard service={service} loading="eager" />
+ */
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  service: CollectionEntry<'services'>;
+  /** Use "eager" for cards that are above the fold. */
+  loading?: 'lazy' | 'eager';
+}
+
+const { service, loading = 'lazy' } = Astro.props;
+const { title, description, image } = service.data;
+
+const href = `/services/${service.id}/`;
+---
+
+<article class="service-card">
+  {
+    image && (
+      <a class="service-card-thumb" href={href} tabindex="-1" aria-hidden="true">
+        <img src={image} alt="" width="640" height="400" loading={loading} decoding="async" />
+      </a>
+    )
+  }
+  <div class="service-card-body">
+    <h2 class="service-card-title"><a href={href}>{title}</a></h2>
+    {description && <p class="service-card-text">{description}</p>}
+    <a class="service-card-more" href={href}>
+      Learn more<span class="screen-reader-text"> about {title}</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition:
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .service-card:hover,
+  .service-card:focus-within {
+    box-shadow: 0 8px 20px rgba(50, 50, 50, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .service-card-thumb {
+    display: block;
+    background: var(--surface-alt);
+  }
+
+  .service-card-thumb img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 8 / 5;
+    object-fit: cover;
+  }
+
+  .service-card-body {
+    padding: 22px 24px 26px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+
+  .service-card-title {
+    font-size: 1.25rem;
+    margin: 0 0 10px;
+  }
+
+  .service-card-title a {
+    color: var(--ink-heading);
+  }
+
+  .service-card-title a:hover,
+  .service-card-title a:focus-visible {
+    color: var(--brand);
+  }
+
+  .service-card-text {
+    margin: 0 0 16px;
+  }
+
+  .service-card-more {
+    margin-top: auto;
+    align-self: flex-start;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--brand);
+  }
+
+  .service-card-more::after {
+    content: ' \2192';
+  }
+
+  .service-card a:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 3px;
+  }
+</style>

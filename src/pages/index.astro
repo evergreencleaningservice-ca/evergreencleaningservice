@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import Features from '../components/home/Features.astro';
+import Services from '../components/home/Services.astro';
+import Reviews from '../components/home/Reviews.astro';
+import About from '../components/home/About.astro';
+import Gallery from '../components/home/Gallery.astro';
+import Testimonials from '../components/home/Testimonials.astro';
+import Cta from '../components/home/Cta.astro';
+import News from '../components/home/News.astro';
+import Contact from '../components/home/Contact.astro';
+
+const title = 'Office Cleaning Services Toronto - Evergreen Office Cleaning';
+const description =
+  'Looking for commercial cleaning, office cleaning or janitorial services in Toronto and the GTA? Visit us to learn more about our services.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Hero />
+  <Features />
+  <Services />
+  <Reviews />
+  <About />
+  <Gallery />
+  <Testimonials />
+  <Cta />
+  <News />
+  <Contact />
+</BaseLayout>

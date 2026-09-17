@@ -1,0 +1,126 @@
+---
+const services = [
+  {
+    title: 'Commercial Cleaning',
+    href: '/services/commercial-cleaning/',
+    image: '/images/toronto_condo_one_old_mill_lobby2-crop-u536-1.jpg',
+    alt: 'Clean commercial lobby in a downtown Toronto building',
+    width: 506,
+    height: 360,
+    body: 'Our commercial cleaning service professionals are licensed, insured, and certified to handle your commercial cleaning requirements. From strip & wax and commercial carpet cleaning to post construction cleaning. Evergreen has you covered.',
+  },
+  {
+    title: 'Office Cleaning',
+    href: '/services/office-cleaning/',
+    image: '/images/office-pic.jpg',
+    alt: 'Cleaned Toronto office with desks and meeting space',
+    width: 510,
+    height: 360,
+    body: 'Partnering with Evergreen Cleaning Service to manage your office cleaning and janitorial needs will give you 20+ years of experience in providing the kind of detailed, floor-to-ceiling clean that will attract the employees, customers, and clientele you’ve been missing.',
+  },
+  {
+    title: 'Property Management and Building Maintenance',
+    href: '/services/building-maintenance/',
+    image: '/images/trash-removal-toronto-gta-640x400.jpg',
+    alt: 'Trash removal for a property in Toronto and the GTA',
+    width: 640,
+    height: 400,
+    body: 'General Building Maintenance Services in Toronto GTA At Evergreen Office Cleaning, we understand that maintaining a clean, functional, and professional workspace is essential to your business’s success. That’s why we …',
+  },
+];
+---
+
+<section class="section-padding" id="services" aria-labelledby="services-title">
+  <div class="container">
+    <div class="section-title-area">
+      <p class="section-subtitle">Evergreen Office Cleaning</p>
+      <h2 class="section-title" id="services-title">Our Commercial Cleaning Services</h2>
+    </div>
+
+    <div class="grid grid-3">
+      {
+        services.map((service) => (
+          <article class="service-card">
+            <img
+              class="service-thumb"
+              src={service.image}
+              alt={service.alt}
+              width={service.width}
+              height={service.height}
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="service-body">
+              <h3 class="service-title">
+                <a href={service.href}>{service.title}</a>
+              </h3>
+              <p>{service.body}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .service-card:hover,
+  .service-card:focus-within {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-thumb {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+  }
+
+  .service-body {
+    padding: 24px 22px 28px;
+  }
+
+  .service-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.6em;
+  }
+
+  .service-title a {
+    color: var(--ink-heading);
+  }
+
+  .service-title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .service-title a:hover,
+  .service-title a:focus-visible {
+    color: var(--brand);
+    text-decoration: none;
+  }
+
+  .service-card:focus-within {
+    outline: 3px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .service-body p {
+    margin: 0;
+  }
+</style>
