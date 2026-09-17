@@ -10,11 +10,13 @@ import { site } from '../../data/site';
 
     <div class="grid grid-3">
       <div class="step wow slideInUp">
-        <span class="step-icon" aria-hidden="true">
+        <span class="step-media">
+          <span class="step-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
             <rect x="2.5" y="4.5" width="19" height="15" rx="2"></rect>
             <path d="m3 7 9 6 9-6" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
+          </span>
         </span>
         <h3 class="step-title"><a href="/request-a-quote/">Contact</a></h3>
         <p>
@@ -26,11 +28,13 @@ import { site } from '../../data/site';
       </div>
 
       <div class="step wow slideInUp">
-        <span class="step-icon" aria-hidden="true">
+        <span class="step-media">
+          <span class="step-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
             <rect x="4" y="3" width="16" height="18" rx="2"></rect>
             <path d="M8 8h8M8 12h8M8 16h5" stroke-linecap="round"></path>
           </svg>
+          </span>
         </span>
         <h3 class="step-title">Assess</h3>
         <p>
@@ -40,11 +44,13 @@ import { site } from '../../data/site';
       </div>
 
       <div class="step wow slideInUp">
-        <span class="step-icon" aria-hidden="true">
+        <span class="step-media">
+          <span class="step-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
             <path d="M20.5 12a8.5 8.5 0 1 1-2.5-6" stroke-linecap="round"></path>
             <path d="M20.5 3.5v5h-5" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
+          </span>
         </span>
         <h3 class="step-title">Refresh</h3>
         <p>
@@ -62,21 +68,61 @@ import { site } from '../../data/site';
     text-align: center;
   }
 
+  /* The original draws this with a Font Awesome icon stack: `.fa-5x` at 4em of
+     the 14px root gives the stack a 56px font-size, so its box is 2.5em x 2em
+     (140 x 112px) and the `fa-stack-2x` circle behind the glyph is 2em — a
+     112px disc. The glyph itself is `fa-stack-1x`, so it stays at 56px.
+     Measured on the original: 140x112 box, circle 112px, glyph white. */
+  .step-media {
+    width: 140px;
+    height: 112px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .step-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 86px;
-    height: 86px;
+    width: 112px;
+    height: 112px;
     border-radius: 50%;
     background: var(--brand);
     color: #fff;
-    margin-bottom: 18px;
   }
 
   .step-icon svg {
-    width: 38px;
-    height: 38px;
+    width: 50px;
+    height: 50px;
+  }
+
+  /* `.feature-item:hover .icon-background-default` — the disc darkens to #333
+     and grows 10%, over .5s. Only the disc transitions in the theme, and only
+     on the way in; the glyph is a sibling there, so it neither moves nor
+     scales. Both are reproduced here. */
+  .step:hover .step-icon,
+  .step:focus-within .step-icon {
+    background: #333;
+    transform: scale(1.1);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .step:hover .step-icon svg,
+  .step:focus-within .step-icon svg {
+    transform: scale(0.909);
+    transition: all 0.5s ease-in-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .step:hover .step-icon,
+    .step:focus-within .step-icon,
+    .step:hover .step-icon svg,
+    .step:focus-within .step-icon svg {
+      transform: none;
+      transition: none;
+    }
   }
 
   .step-title {

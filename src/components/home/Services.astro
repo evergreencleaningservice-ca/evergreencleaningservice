@@ -64,23 +64,30 @@ const services = [
 </section>
 
 <style>
+  /* `.section-services .service-item` — a white card with 30px of padding
+     (20px at 720px and below), resting on a 1px shadow and lifting to a 6px
+     one on hover over 100ms. No transform and no border: the original's card
+     does not move, it deepens. */
   .service-card {
     position: relative;
     display: flex;
     flex-direction: column;
     background: #fff;
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    overflow: hidden;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    transition: all 100ms ease-out 0s;
+  }
+
+  @media screen and (max-width: 720px) {
+    .service-card {
+      padding: 20px;
+    }
   }
 
   .service-card:hover,
   .service-card:focus-within {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 9px rgba(0, 0, 0, 0.09);
   }
 
   .service-thumb {
@@ -88,15 +95,17 @@ const services = [
     height: auto;
     aspect-ratio: 16 / 11;
     object-fit: cover;
+    margin-bottom: 1.5625rem;
   }
 
   .service-body {
-    padding: 24px 22px 28px;
+    overflow: auto;
   }
 
   .service-title {
     font-size: 1.2rem;
-    margin-bottom: 0.6em;
+    color: var(--ink-heading);
+    margin-bottom: 0.625rem;
   }
 
   .service-title a {
@@ -122,5 +131,7 @@ const services = [
 
   .service-body p {
     margin: 0;
+    font-size: 14px;
+    color: var(--ink);
   }
 </style>
