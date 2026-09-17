@@ -48,4 +48,4 @@ Prevention is the best way to avoid Covid-19 from spreading. You can either use 
 
 Or …
 
-[Call Now](tel://4168034880)
+[Call Now](tel:+14168034880)

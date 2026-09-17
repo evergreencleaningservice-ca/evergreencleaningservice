@@ -21,9 +21,41 @@ export async function getStaticPaths() {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { post, newer, older } = Astro.props as Props;
+
+// `render()` is also what fills `post.rendered`, which is the HTML normalised
+// below. Keep the call even though `Content` is only the fallback.
 const { Content } = await render(post);
+
+/**
+ * Post bodies are Markdown generated from the archived WordPress HTML, so they
+ * carry the same WordPress habits the page bodies do — `PageLayout` cleans
+ * those up for `pages`, and a post body needs the identical treatment:
+ *
+ *  1. `/wp-content/uploads/<year>/<month>/<file>` is the old media path; this
+ *     build serves the same files from `/images/<file>`.
+ *  2. `astro.config.mjs` sets `trailingSlash: 'always'`, so an internal link
+ *     written without its trailing slash would 404 rather than resolve.
+ *  3. The archive writes `tel://` — the `//` turns the number into a URL
+ *     authority, which some dialers refuse.
+ *  4. Empty anchors are links with no accessible name, so assistive tech
+ *     announces a link that leads nowhere.
+ *  5. Every image in a post body sits below the page header and the featured
+ *     image, so they can all be lazy-loaded.
+ */
+function normalizeBody(html: string): string {
+  return html
+    .replace(/(href|src)="\/wp-content\/uploads\/[^"]*?\/([^"/]+)"/g, '$1="/images/$2"')
+    .replace(/href="(\/[^"?#]*)"/g, (whole, path: string) =>
+      path.endsWith('/') || /\.[a-z0-9]{2,5}$/i.test(path) ? whole : `href="${path}/"`,
+    )
+    .replace(/href="tel:\/\//g, 'href="tel:')
+    .replace(/<a\b[^>]*>\s*<\/a>/g, '')
+    .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" ');
+}
+
+const body = post.rendered?.html ? normalizeBody(post.rendered.html) : null;
 ---
 
 <PostLayout post={post} newer={newer} older={older}>
-  <Content />
+  {body ? <Fragment set:html={body} /> : <Content />}
 </PostLayout>

@@ -16,7 +16,12 @@ const { post, loading = 'lazy' } = Astro.props;
 const { title, description, pubDate, image } = post.data;
 
 const href = `/${post.id}/`;
+// Every post in the archive had a thumbnail, but a handful of those files are
+// not in /public/images, so those cards fall back to the logo. The logo is a
+// wide banner with the company name in it: it is letterboxed rather than
+// cropped to 2:1, otherwise the name is cut off (see .is-fallback below).
 const thumb = image ?? site.logo;
+const isFallback = !image;
 const isoDate = pubDate.toISOString().slice(0, 10);
 const dateLabel = new Intl.DateTimeFormat('en-CA', {
   year: 'numeric',
@@ -27,8 +32,20 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
 ---
 
 <article class="post-card">
-  <a class="post-card-thumb" href={href} tabindex="-1" aria-hidden="true">
-    <img src={thumb} alt="" loading={loading} decoding="async" width="600" height="300" />
+  <a
+    class:list={['post-card-thumb', isFallback && 'is-fallback']}
+    href={href}
+    tabindex="-1"
+    aria-hidden="true"
+  >
+    <img
+      src={thumb}
+      alt=""
+      loading={loading}
+      decoding="async"
+      width={isFallback ? 884 : 600}
+      height={isFallback ? 265 : 300}
+    />
   </a>
   <div class="post-card-body">
     <p class="post-card-meta">
@@ -71,6 +88,24 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
     height: auto;
     aspect-ratio: 2 / 1;
     object-fit: cover;
+  }
+
+  /* Logo fallback: hold the same 2:1 card shape, but letterbox the banner so
+     the company name inside it is never cropped. */
+  .post-card-thumb.is-fallback {
+    aspect-ratio: 2 / 1;
+    display: grid;
+    place-items: center;
+    padding: 16px 24px;
+  }
+
+  .post-card-thumb.is-fallback img {
+    aspect-ratio: auto;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
   }
 
   .post-card-body {
