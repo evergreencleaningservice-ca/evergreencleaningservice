@@ -1,6 +1,9 @@
 ---
 title: "Disinfection Cleaning"
 description: "Evergreen Cleaning Service provides various specialized disinfection cleaning services you may be looking for your business."
+# The archived featured image for this page (disinfection-cleaning-tech-e1616794679911.jpg)
+# was never downloaded into public/images, so this uses the page's own lead photo instead.
+image: "/images/office-disinfection-cleaning.jpg"
 ---
 
 ## Are You Concerned About Covid-19 In Your Office
