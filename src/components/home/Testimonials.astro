@@ -38,20 +38,22 @@ const testimonials = [
       {
         testimonials.map((item) => (
           <figure class="testimonial">
-            <div class="testimonial-author">
+            {/* figcaption has to be a direct child of figure, or it is not the
+                figure's caption as far as assistive technology is concerned. */}
+            <figcaption class="testimonial-author">
               <img
                 src={item.image}
-                alt={`${item.name}, ${item.role}`}
+                alt=""
                 width="96"
                 height="96"
                 loading="lazy"
                 decoding="async"
               />
-              <figcaption>
+              <span class="testimonial-meta">
                 <span class="testimonial-name">{item.name}</span>
                 <span class="testimonial-role">{item.role}</span>
-              </figcaption>
-            </div>
+              </span>
+            </figcaption>
             <h3 class="testimonial-title">{item.title}</h3>
             <blockquote>
               <p>{item.quote}</p>
@@ -86,7 +88,7 @@ const testimonials = [
     flex: none;
   }
 
-  .testimonial-author figcaption {
+  .testimonial-meta {
     display: flex;
     flex-direction: column;
     font-style: normal;

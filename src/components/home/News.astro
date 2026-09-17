@@ -43,7 +43,7 @@ const dateFormat = new Intl.DateTimeFormat('en-CA', {
         <div class="grid grid-3">
           {posts.map((post) => (
             <article class="post-card">
-              {post.data.image && (
+              {post.data.image ? (
                 <a class="post-thumb" href={`/${toSlug(post)}/`} tabindex="-1" aria-hidden="true">
                   <img
                     src={post.data.image}
@@ -54,6 +54,10 @@ const dateFormat = new Intl.DateTimeFormat('en-CA', {
                     decoding="async"
                   />
                 </a>
+              ) : (
+                /* No featured image on this post: hold the same space so the
+                   three cards stay level instead of one riding up. */
+                <div class="post-thumb post-thumb-empty" aria-hidden="true" />
               )}
               <div class="post-body">
                 <p class="post-meta">
@@ -75,7 +79,7 @@ const dateFormat = new Intl.DateTimeFormat('en-CA', {
     }
 
     <p class="text-center news-action">
-      <a class="btn btn-primary btn-lg" href="/category/blog/">Visit Our Blog</a>
+      <a class="btn btn-primary btn-lg" href="/blog/">Visit Our Blog</a>
     </p>
   </div>
 </section>
@@ -95,6 +99,11 @@ const dateFormat = new Intl.DateTimeFormat('en-CA', {
     height: auto;
     aspect-ratio: 2 / 1;
     object-fit: cover;
+  }
+
+  .post-thumb-empty {
+    aspect-ratio: 2 / 1;
+    background: var(--surface-alt);
   }
 
   .post-body {
