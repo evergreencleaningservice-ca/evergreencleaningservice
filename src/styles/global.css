@@ -1,46 +1,75 @@
 /*
- * Design system ported from the original OnePress theme build of
- * evergreencleaningservice.ca. Brand values come from the site's own
- * customizer overrides, not the theme defaults (which were cyan).
+ * Design system ported from the original OnePress build of
+ * evergreencleaningservice.ca.
+ *
+ * Every value here was measured from the archived site rendered with its own
+ * stylesheet, not eyeballed. Two mechanisms drive the whole scale and are the
+ * reason values are in rem rather than px:
+ *
+ *   1. The root font-size steps down with the viewport (16 -> 15 -> 14), so
+ *      anything sized in rem shrinks proportionally at each breakpoint.
+ *   2. The container is stepped, not fluid: 540 / 720 / 960 / 1140 with a
+ *      15px gutter, matching the Bootstrap grid the theme was built on.
+ *
+ * A few values are deliberately fixed px because the original fixes them too
+ * (body copy at 15px, section titles, the page title, the divider-free
+ * section heads). Those are marked where they appear.
  */
+
+html {
+  font-size: 16px;
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 991px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+}
 
 :root {
   --brand: #4d8c2b;
   --brand-hover: #69ed3d;
   --brand-dark: #3c6d21;
 
-  --ink: #3d4452;
-  --ink-soft: #686a6e;
-  --ink-heading: #2d3542;
+  --ink: #777777; /* body copy */
+  --ink-heading: #333333; /* all headings */
+  --ink-muted: #aaaaaa; /* section eyebrow */
   --rule: #e4e7ea;
+
   --surface: #ffffff;
-  --surface-alt: #efefef;
-  --surface-dark: #222222;
+  --surface-alt: #efefef; /* page-header band */
+  --surface-dark: #222222; /* inverse / CTA band */
+  --footer-bg: #111111;
+  --footer-ink: #bbbbbb;
 
   --font-heading: 'Raleway', Helvetica, Arial, sans-serif;
   --font-body: 'Open Sans', Helvetica, Arial, sans-serif;
 
-  --section-padding: 70px;
-  --container: 1170px;
-  --radius: 3px;
+  --section-padding: 4.375rem; /* 70px at the 16px root */
+  --gutter: 15px;
+  --radius: 2px;
   --shadow-header: 0 5px 10px rgba(50, 50, 50, 0.06);
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
+  box-sizing: inherit;
 }
 
 body {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 0.875rem;
   line-height: 1.7;
   color: var(--ink);
   background: var(--surface);
@@ -56,28 +85,30 @@ h6 {
   font-family: var(--font-heading);
   color: var(--ink-heading);
   font-weight: 600;
-  line-height: 1.25;
-  margin: 0 0 0.5em;
+  line-height: 1.2;
+  margin: 0 0 0.9375rem;
 }
 
 h1 {
-  font-size: 2.3rem;
+  font-size: 2.25rem;
 }
 h2 {
-  font-size: 1.9rem;
+  font-size: 2rem;
 }
 h3 {
-  font-size: 1.45rem;
+  font-size: 1.25rem;
+  line-height: 1.1;
 }
 h4 {
-  font-size: 1.2rem;
+  font-size: 1.0625rem;
+  line-height: 1.1;
 }
 h5 {
-  font-size: 1rem;
+  font-size: 0.9375rem;
 }
 
 p {
-  margin: 0 0 1.2em;
+  margin: 0 0 0.9375rem;
 }
 
 a {
@@ -100,11 +131,33 @@ img {
 
 /* ---------- layout ---------- */
 
+/* Stepped container, matching the theme's Bootstrap grid. */
 .container {
   width: 100%;
-  max-width: var(--container);
   margin: 0 auto;
-  padding: 0 16px;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
 }
 
 .section-padding {
@@ -115,48 +168,62 @@ img {
   background: var(--surface-alt);
 }
 
+/* The CTA band is dark in the original, not brand green. */
 .section-inverse {
-  background: var(--brand);
-  color: #fff;
+  background: var(--surface-dark);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .section-inverse h1,
 .section-inverse h2,
 .section-inverse h3 {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .section-title-area {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 60px;
 }
 
+/* Eyebrow above the section title. */
 .section-subtitle {
   font-family: var(--font-heading);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  font-size: 0.8rem;
+  font-size: 14px;
+  line-height: 1.1;
   font-weight: 700;
-  color: var(--ink-soft);
-  margin: 0 0 8px;
+  color: var(--ink-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 0.8125rem;
 }
 
 .section-title {
-  font-size: 2.1rem;
+  font-family: var(--font-heading);
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 800;
+  color: var(--ink-heading);
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
   margin: 0;
 }
 
-.section-title::after {
-  content: '';
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: var(--brand);
-  margin: 18px auto 0;
+@media (max-width: 991px) {
+  .section-subtitle {
+    font-size: 12px;
+  }
+  .section-title {
+    font-size: 30px;
+    letter-spacing: 2px;
+  }
 }
 
-.section-inverse .section-title::after {
-  background: rgba(255, 255, 255, 0.85);
+.section-inverse .section-title {
+  color: rgba(255, 255, 255, 0.99);
+}
+
+.section-inverse .section-subtitle {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .grid {
@@ -190,15 +257,17 @@ img {
 .btn {
   display: inline-block;
   font-family: var(--font-heading);
+  font-size: 0.875rem;
   font-weight: 600;
+  line-height: 1.25;
   text-align: center;
-  padding: 12px 28px;
+  text-transform: uppercase;
+  padding: 0.625rem 1.25rem;
   border-radius: var(--radius);
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
-  line-height: 1.4;
 }
 
 .btn:hover,
@@ -232,69 +301,113 @@ img {
 }
 
 .btn-lg {
-  font-size: 1.05rem;
-  padding: 14px 32px;
+  font-size: 1.0625rem;
+  padding: 0.75rem 1.5rem;
 }
 
 /* ---------- page header (inner pages) ---------- */
 
+/* The original sizes this band as a percentage of viewport width. */
 .page-header {
   background: var(--surface-alt);
   text-align: center;
-  padding: 46px 0;
+  padding: 3% 0;
 }
 
 .page-header .entry-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: 1px;
   color: var(--brand);
   margin: 0;
 }
 
 .breadcrumbs {
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-  margin-top: 10px;
+  font-size: 0.8125rem;
+  color: var(--ink);
+  margin-top: 8px;
 }
 
 .breadcrumbs a {
-  color: var(--ink-soft);
+  color: var(--ink);
 }
 
 .breadcrumbs a:hover {
   color: var(--brand);
 }
 
-/* ---------- prose (entry content) ---------- */
+/* ---------- prose ---------- */
+
+.entry-content {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
 
 .entry-content > *:first-child {
   margin-top: 0;
 }
 
-.entry-content h2,
-.entry-content h3,
+/* Body copy is a fixed 15px in the original, not part of the rem scale. */
+.entry-content p,
+.entry-content li {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.entry-content p {
+  margin: 0 0 0.9375rem;
+}
+
+.entry-content h2 {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin: 1.6em 0 0.9375rem;
+}
+
+.entry-content h2:first-child {
+  margin-top: 0;
+}
+
+@media (max-width: 767px) {
+  .entry-content h2 {
+    font-size: 1.5625rem;
+  }
+}
+
+.entry-content h3 {
+  font-size: 1.25rem;
+  line-height: 1.1;
+  margin: 1.6em 0 0.9375rem;
+}
+
 .entry-content h4 {
-  margin-top: 1.6em;
+  font-size: 1.0625rem;
+  line-height: 1.1;
+  margin: 1.6em 0 0.9375rem;
 }
 
 .entry-content ul,
 .entry-content ol {
-  margin: 0 0 1.2em;
+  margin: 0 0 0.9375rem;
   padding-left: 1.4em;
 }
 
 .entry-content li {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.4em;
 }
 
 .entry-content img {
   margin: 1.5em 0;
-  border-radius: var(--radius);
 }
 
 .entry-content blockquote {
   margin: 1.5em 0;
   padding: 0.5em 0 0.5em 1.2em;
   border-left: 4px solid var(--brand);
-  color: var(--ink-soft);
+  color: var(--ink);
   font-style: italic;
 }
 
