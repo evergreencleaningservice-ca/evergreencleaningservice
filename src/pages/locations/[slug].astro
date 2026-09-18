@@ -67,15 +67,17 @@ const schema = {
 
   <div class="section-padding">
     <div class="container">
-      <div class="loc-grid">
+      <div class="loc-grid location-page">
         <div class="loc-main">
           {
             location.detail ? (
               <Fragment>
-                <p class="loc-subtitle">{location.detail.subtitle}</p>
+                <p class="lead loc-subtitle">{location.detail.subtitle}</p>
                 {location.detail.intro.map((para) => (
                   <p class="loc-lead">{para}</p>
                 ))}
+
+                <hr />
 
                 <h2>{location.detail.servicesTitle}</h2>
                 <ul class="loc-detail">
@@ -86,6 +88,8 @@ const schema = {
                   ))}
                 </ul>
 
+                <hr />
+
                 <h2>{location.detail.reasonsTitle}</h2>
                 <ul class="loc-detail">
                   {location.detail.reasons.map((r) => (
@@ -95,12 +99,14 @@ const schema = {
                   ))}
                 </ul>
 
-                <a class="btn btn-primary btn-lg" href="/request-a-quote/">
-                  {location.detail.ctaLabel}
-                </a>
-                <p class="loc-direct">
-                  Direct phone: <a href={nap.phoneHref}>{nap.phoneDisplay}</a>
-                </p>
+                <div class="cta-block">
+                  <a class="btn btn-primary btn-lg" href="/request-a-quote/">
+                    {location.detail.ctaLabel}
+                  </a>
+                  <p class="loc-direct">
+                    Direct Phone: <a href={nap.phoneHref}>{nap.phoneDisplay}</a>
+                  </p>
+                </div>
               </Fragment>
             ) : (
               <Fragment>
@@ -203,6 +209,12 @@ const schema = {
     line-height: 1.35;
     color: var(--ink-heading);
     margin: 0 0 18px;
+  }
+
+  .loc-main hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 30px 0;
   }
 
   .loc-detail {

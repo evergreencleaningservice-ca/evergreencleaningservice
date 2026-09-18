@@ -11,7 +11,7 @@
  * who never submitted anything.
  */
 import LandingLayout from '../layouts/LandingLayout.astro';
-import { nap, site } from '../data/site';
+import { nap } from '../data/site';
 
 /* Both landing pages now promise a response within 2 business hours, so the
    `?t=` switch that rendered one of two numbers is gone — one promise, stated
@@ -25,7 +25,7 @@ import { nap, site } from '../data/site';
 ---
 
 <LandingLayout
-  title={`Thank you — we have your request | ${nap.name}`}
+  title="Thank You | Evergreen Cleaning Service"
   description="Your quote request has been received. Our account executive will be in touch shortly."
 >
   <section class="ty">
@@ -42,16 +42,15 @@ import { nap, site } from '../data/site';
         </svg>
       </div>
 
-      <h1>We Received Your Cleaning Request!</h1>
+      <h1>We Received Your Request</h1>
       <p class="ty-lead">
-        Thank you for reaching out to {site.legalName}. One of our dedicated account executives is
-        reviewing your facility requirements and will follow up with you within
-        {' '}<strong>2 business hours</strong>.
+        Thank you for requesting a commercial cleaning proposal. An account representative is
+        reviewing your details and will follow up within <strong>2 business hours</strong>.
       </p>
 
       <div class="ty-rush-box">
-        <strong>Need an immediate quote or emergency cleaning service?</strong><br />
-        Call us directly at <a href={nap.phoneHref}>{nap.phoneDisplay}</a>.
+        <strong>Need immediate support?</strong><br />
+        Call directly at <a href={nap.phoneHref}>{nap.phoneDisplay}</a>
       </div>
 
       <a class="ty-call" href={nap.phoneHref}>Call {nap.phoneDisplay} now</a>
@@ -59,7 +58,7 @@ import { nap, site } from '../data/site';
       {/* The one link off this page, and it only exists after the conversion
           has already been recorded — so it costs nothing the isolation rules
           were protecting. */}
-      <p class="ty-home"><a href="/">Return to Home Page</a></p>
+      <p class="ty-home"><a href="/">Return to Homepage</a></p>
     </div>
   </section>
   <script is:inline>

@@ -106,7 +106,7 @@ export const locations: Location[] = [
         'From corporate headquarters along the Hurontario corridor and the Airport Corporate Centre to high-traffic industrial complexes in Meadowvale, Evergreen Cleaning Service provides comprehensive commercial cleaning and janitorial solutions tailored to your operational schedule.',
         'With over 20 years of commercial cleaning experience across Peel Region and the GTA, our certified, bonded, and WSIB-insured teams ensure your facility maintains an immaculate, healthy environment for employees, clients, and visitors.',
       ],
-      servicesTitle: 'Mississauga Commercial Facilities We Service',
+      servicesTitle: 'Mississauga Commercial Facilities We Service:',
       services: [
         {
           label: 'Corporate Offices & Headquarters',
@@ -125,7 +125,7 @@ export const locations: Location[] = [
           body: 'Strip and waxing, floor polishing, and post-construction detailing.',
         },
       ],
-      reasonsTitle: 'Why Mississauga Property Managers Choose Evergreen',
+      reasonsTitle: 'Why Mississauga Property Managers Choose Evergreen:',
       reasons: [
         {
           label: 'Flexible Scheduling (Zero Disruption)',
@@ -185,7 +185,7 @@ export const locations: Location[] = [
         'As Vaughan continues rapid corporate expansion across the Vaughan Metropolitan Centre (VMC) and industrial sectors in Concord and Woodbridge, maintaining an exceptional physical workspace is critical. Evergreen Cleaning Service provides top-tier commercial office cleaning and building maintenance designed for modern businesses.',
         'Whether you run a high-tech corporate office, a commercial showroom along Highway 7, or a high-capacity distribution warehouse near Highway 400, our dedicated cleaning teams deliver consistent, reliable service.',
       ],
-      servicesTitle: 'Cleaning Services Tailored for Vaughan Enterprises',
+      servicesTitle: 'Cleaning Services Tailored for Vaughan Enterprises:',
       services: [
         {
           label: 'Commercial Office Janitorial',
@@ -204,7 +204,7 @@ export const locations: Location[] = [
           body: 'Rapid dispatch for unexpected spills, water events, or last-minute property inspections.',
         },
       ],
-      reasonsTitle: 'The Evergreen Difference for Vaughan Facilities',
+      reasonsTitle: 'The Evergreen Difference for Vaughan Facilities:',
       reasons: [
         {
           label: 'Consistent Teams',

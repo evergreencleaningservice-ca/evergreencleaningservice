@@ -42,7 +42,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <meta name="robots" content="noindex, follow" />
+    {/* The package specifies `noindex, nofollow` on both the landing page and
+        the thank-you page. Applied here so all three pages on this shell agree
+        rather than one of them drifting. */}
+    <meta name="robots" content="noindex, nofollow" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -103,6 +106,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
             event: 'click_to_call',
+            phone_number: '+14168034880',
             phone_destination: anchor.getAttribute('href'),
           });
         });

@@ -34,22 +34,13 @@ const badges = [
 ];
 
 const bullets = [
+  { label: 'WSIB Insured & Bonded', body: 'Complete liability security with fully vetted staff.' },
+  { label: 'After-Hours Flexibility', body: 'Scheduled entirely around your operating hours.' },
   {
-    label: 'WSIB Ontario Registered, Bonded & Insured',
-    body: 'Complete liability coverage and background-checked staff.',
+    label: 'Dedicated Crew',
+    body: 'The same familiar cleaners assigned to your building every visit.',
   },
-  {
-    label: 'Flexible After-Hours Service',
-    body: 'Scheduled around your business hours with zero daytime disruption.',
-  },
-  {
-    label: 'Consistent Cleaners',
-    body: 'The same dedicated crew cleans your facility on every visit.',
-  },
-  {
-    label: 'Fast, Free On-Site Proposals',
-    body: 'Accurate customized pricing without hidden contract clauses.',
-  },
+  { label: 'Free On-Site Proposals', body: 'Direct walkthroughs with competitive pricing.' },
 ];
 
 const facilityTypes = [
@@ -76,18 +67,18 @@ const sizes = [
 ---
 
 <LandingLayout
-  title="Commercial & Office Cleaning Toronto | Free On-Site Proposal"
+  title="Toronto & GTA Commercial Office Cleaning Quotes | Evergreen"
   description="Reliable commercial and office cleaning across Toronto, Mississauga, Vaughan and the GTA. Free on-site proposal, response within 2 business hours. WSIB insured and bonded."
-  callNote="Fast Response &middot; Direct Account Manager"
+  callNote="Fast Response &bull; Free Walkthrough Proposals"
 >
   <section class="lp-hero">
     <div class="lp-wrap lp-hero-grid">
       <div class="lp-pitch">
-        <p class="lp-eyebrow">Toronto &amp; GTA Commercial Cleaning Specialists</p>
-        <h1>Reliable Office &amp; Commercial Cleaning You Can Count On Every Single Night.</h1>
+        <p class="lp-eyebrow">Greater Toronto Area Commercial Janitorial</p>
+        <h1>Reliable Commercial Cleaning You Can Count On Every Single Night.</h1>
         <p class="lp-sub">
-          Over 20 years of trusted janitorial excellence for corporate offices, medical clinics,
-          and industrial facilities across Toronto, Mississauga, Vaughan, and the GTA.
+          Over 20 years of dedicated office and commercial cleaning in Toronto, Mississauga,
+          Vaughan, and across the GTA. Bonded, insured, and zero operational disruption.
         </p>
 
         <ul class="lp-bullets">
@@ -102,7 +93,7 @@ const sizes = [
 
         <p class="lp-rating">
           <span class="lp-rating-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          <span><strong>4.9 / 5</strong> rating from local GTA property managers and business owners</span>
+          <span><strong>4.9 / 5</strong> Rating from Local GTA Property Managers</span>
         </p>
 
         <ul class="lp-badges">
@@ -120,15 +111,15 @@ const sizes = [
       <div class="lp-form-col">
         <form id="ppc-lead-form" class="lp-form" novalidate>
           <h2>Get Your Free Quote</h2>
-          <p class="lp-form-note">We'll reach out within 2 business hours with pricing details.</p>
+          <p class="lp-form-note">We review your specifications and respond within 2 business hours.</p>
 
           <div class="lp-field">
-            <label for="fullName">Your Name <span aria-hidden="true">*</span></label>
+            <label for="fullName">Full Name <span aria-hidden="true">*</span></label>
             <input type="text" id="fullName" name="fullName" required autocomplete="name" placeholder="Jane Doe" />
           </div>
 
           <div class="lp-field">
-            <label for="workEmail">Work Email <span aria-hidden="true">*</span></label>
+            <label for="workEmail">Business Email <span aria-hidden="true">*</span></label>
             <input
               type="email"
               id="workEmail"
@@ -157,7 +148,7 @@ const sizes = [
           <div class="lp-field">
             <label for="facilityType">Facility Type <span aria-hidden="true">*</span></label>
             <select id="facilityType" name="facilityType" required>
-              <option value="" disabled selected>Select Facility Type...</option>
+              <option value="" disabled selected>Select facility type...</option>
               {facilityTypes.map((f) => <option value={f.label}>{f.label}</option>)}
             </select>
           </div>
@@ -165,7 +156,6 @@ const sizes = [
           <div class="lp-field">
             <label for="facilitySize">Approximate Area (Sq. Ft.)</label>
             <select id="facilitySize" name="facilitySize">
-              <option value="" disabled selected>Select approximate area</option>
               {sizes.map((s) => <option value={s.label}>{s.label}</option>)}
             </select>
           </div>
@@ -189,8 +179,8 @@ const sizes = [
               scoring on this form, not removing the check. */}
           <Recaptcha />
 
-          <button type="submit" class="lp-submit">Request Free Walkthrough &amp; Quote</button>
-          <p class="lp-confidential">We respect your privacy. No pushy sales calls, no spam.</p>
+          <button type="submit" class="lp-submit">Request Free Walkthrough &amp; Quote &rarr;</button>
+          <p class="lp-confidential">Strict privacy. No spam or aggressive sales calls.</p>
         </form>
       </div>
     </div>

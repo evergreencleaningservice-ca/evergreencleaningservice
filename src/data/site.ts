@@ -202,7 +202,7 @@ export const social = [
  */
 export const footerAreas = [
   { label: 'Toronto', href: '/locations/toronto-downtown/' },
-  { label: 'Greater Toronto Area', href: '/locations/' },
+  { label: 'Toronto & GTA', href: '/services/commercial-cleaning/' },
   { label: 'Mississauga', href: '/locations/mississauga/' },
   { label: 'Etobicoke', href: '/locations/etobicoke/' },
   { label: 'Richmond Hill', href: '/locations/' },
