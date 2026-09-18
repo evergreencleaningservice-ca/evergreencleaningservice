@@ -30,7 +30,7 @@ const hrefFor = (n: number) => (n === 1 ? base : `${base}page/${n}/`);
 // Office Cleaning", the paged archives end "- Evergreen Cleaning Service".
 const archiveTitle =
   page.currentPage > 1
-    ? `Blog Archives - Page ${page.currentPage} of ${page.lastPage} - ${site.legalName}`
+    ? `Blog Archives - Page ${page.currentPage} of ${page.lastPage} - ${site.name}`
     : `Blog Archives - ${site.name}`;
 ---
 
@@ -47,7 +47,7 @@ const archiveTitle =
   <meta slot="head" name="robots" content="follow, noindex" />
   <div class="page-header">
     <div class="container">
-      <h1 class="entry-title">Blog</h1>
+      <h1 class="page-title entry-title">Category: <span>Blog</span></h1>
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="/">{site.name}</a> &gt; <span>Blog</span>
       </nav>
@@ -57,11 +57,7 @@ const archiveTitle =
   <div class="section-padding">
     <div class="container content-grid">
       <div class="post-main">
-        <header>
-          <h1 class="page-title screen-reader-text">Category: Blog</h1>
-        </header>
-
-        <PostList posts={page.data} eager={2} />
+        <PostList posts={page.data} eager={2} flush />
 
         {
           page.lastPage > 1 && (

@@ -287,15 +287,25 @@ img {
    layouts, the service pages, and the blog and category listings — it lived as
    a scoped copy in two layouts, so the listings got no grid at all and their
    sidebar stacked underneath. */
+/* Inner pages: content beside the sidebar, as the theme's `.right-sidebar`
+   lays it out — the content column is 74.7747747748% of the container's inner
+   width with 39px to its right and a 1px rule between the two, and the sidebar
+   takes what is left. At 1440 that measures 790 + 39 + 1 + 280, which is the
+   original to the pixel. The theme stacks them below its own 940 breakpoint. */
 .content-grid {
   display: grid;
   gap: 40px;
 }
 
-@media (min-width: 992px) {
+@media screen and (min-width: 941px) {
   .content-grid {
-    grid-template-columns: minmax(0, 7.9fr) minmax(0, 2.9fr);
-    gap: 30px;
+    grid-template-columns: 74.7747747748% minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .content-grid > :first-child {
+    padding-right: 39px;
+    border-right: 1px solid #e9e9e9;
   }
 }
 

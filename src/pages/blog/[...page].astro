@@ -43,7 +43,7 @@ const pageSuffix = page.currentPage > 1 ? ` - Page ${page.currentPage} of ${page
 ---
 
 <BaseLayout
-  title={`News${pageSuffix} - ${site.legalName}`}
+  title={`News${pageSuffix} - ${site.name}`}
   description="Welcome to Evergreen Cleaning Services blog. Check in often for interesting articles and posts from our blog. We'd love to hear from you."
 >
   <div class="page-header">
@@ -62,7 +62,7 @@ const pageSuffix = page.currentPage > 1 ? ` - Page ${page.currentPage} of ${page
           <h1 class="page-title screen-reader-text">News</h1>
         </header>
 
-        <PostList posts={page.data} eager={2} />
+        <PostList posts={page.data} eager={2} flush />
 
         {
           page.lastPage > 1 && (

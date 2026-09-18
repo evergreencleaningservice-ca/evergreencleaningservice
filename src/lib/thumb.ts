@@ -10,17 +10,16 @@
  * later is picked up by the next build with no edit to the post.
  */
 import { readdirSync } from 'node:fs';
+import path from 'node:path';
 
-const IMAGES = new URL('../../public/images/', import.meta.url);
+/* Bundled, `import.meta.url` points at a build chunk rather than at this file,
+   so the directory is resolved from the project root the build runs in. */
+const IMAGES = path.join(process.cwd(), 'public', 'images');
 
 let files: Set<string> | null = null;
 const listing = () => {
   if (!files) {
-    try {
-      files = new Set(readdirSync(IMAGES));
-    } catch {
-      files = new Set();
-    }
+    files = new Set(readdirSync(IMAGES));
   }
   return files;
 };

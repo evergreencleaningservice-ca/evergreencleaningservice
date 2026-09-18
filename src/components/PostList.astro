@@ -35,13 +35,19 @@ interface Props {
   posts: Entry[];
   /** The first entries on a listing page are above the fold. */
   eager?: number;
+  /**
+   * On `/blog/` and the archives the first entry has no rule above it and no
+   * padding, so the list starts flush with the page title. The homepage's news
+   * band does not — the theme scopes that rule to `.archive`/`.blog`.
+   */
+  flush?: boolean;
 }
 
-const { posts, eager = 0 } = Astro.props;
+const { posts, eager = 0, flush = false } = Astro.props;
 const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '');
 ---
 
-<div class="post-list">
+<div class:list={['post-list', flush && 'is-flush']}>
   {
     posts.map((post, i) => (
       <article class="list-article">
@@ -89,6 +95,11 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
 
   .list-article:last-of-type {
     border-bottom: 1px solid #e9e9e9;
+  }
+
+  .is-flush .list-article:first-of-type {
+    border-top: none;
+    padding-top: 0;
   }
 
   /* Both the thumbnail and the copy beside it float, so the article clears. */

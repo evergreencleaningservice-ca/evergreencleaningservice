@@ -1,5 +1,9 @@
 export const site = {
   name: 'Evergreen Office Cleaning',
+  /* The business renamed itself: 2023 captures title every page "… - Evergreen
+     Cleaning Service", 2025 captures title them "… - Evergreen Office
+     Cleaning". `name` is the current one and is what titles use; `legalName`
+     is kept for the few places the old name is still the copy. */
   legalName: 'Evergreen Cleaning Service',
   url: 'https://www.evergreencleaningservice.ca',
   tagline: 'Leaders in Commercial Cleaning and Building Maintenance in Toronto and the GTA',
