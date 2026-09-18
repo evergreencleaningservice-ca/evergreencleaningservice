@@ -14,16 +14,31 @@ npm run build   # static build into dist/
 npm run preview # serve the built output
 npm run check   # astro check (types + content schema) — prompts to install
                 # @astrojs/check + typescript on first run; they are not dependencies
+npm run b2:sync # upload public/images to the Backblaze bucket
 ```
 
-Node 20+ is required (Astro 7). There is no database, no API keys and no `.env`.
+Node 20+ is required (Astro 7). There is no `.env`; everything that needs a
+credential reads it from the environment or from a Worker secret:
+
+| Where | What | For |
+| --- | --- | --- |
+| Worker secret | `DATABASE_URL` | Neon Postgres, `/api/submit-lead` |
+| Worker secret | `RESEND_API_KEY` | the lead notification email |
+| Environment | `B2_KEY_ID`, `B2_APP_KEY` | `npm run b2:sync` |
+| Environment | `CF_API_TOKEN` | the post-deploy edge purge |
+
+`npm run dev` needs none of them — it serves images from `public/` and the form
+posts nowhere.
 
 ## Project layout
 
 ```
 astro.config.mjs        site URL, trailingSlash: 'always', legacy redirects, sitemap
 public/
-  images/               all site imagery, flat, original WordPress basenames
+  images/               all site imagery, original WordPress basenames. Source of
+                        truth and what `astro dev` serves — but NOT deployed: the
+                        build repoints every reference at the Backblaze bucket
+                        (HANDOFF.md §3.1) and drops these from dist/.
   robots.txt            allow-all + sitemap pointer
 src/
   pages/                routes (see below)

@@ -79,6 +79,8 @@ scripts/
   noindex.mjs           adds the preview's noindex headers
   purge.mjs             purges the Cloudflare edge cache after deploy
   mkcrops.mjs           regenerates WordPress's 300x150 list crops with sharp
+  b2-sync.mjs           uploads public/images to the Backblaze bucket
+  images.mjs            repoints dist at the image host, then drops dist/images
 _research/
   gaps.md               EVERY known difference and why — read this first
   seo.md                the original's SEO, one entry per address (64 URLs)
@@ -87,6 +89,45 @@ _research/
 public/images/          100 files
 public/video/lead-net.mp4  the client's real clip, 720x540 H.264+AAC
 ```
+
+### 3.1 Image delivery — Backblaze B2, not the Worker
+
+Photos are not deployed with the site. They live in the B2 bucket
+`img-evergreencleaningservice` (us-east-005, allPublic) and are served from
+`https://img-evergreencleaningservice.10xconnections.com`. Three pieces, and
+they only work together:
+
+| Piece | Value |
+|---|---|
+| Bucket | `img-evergreencleaningservice`, keys mirror the repo — `public/images/a.jpg` → `images/a.jpg` |
+| DNS | CNAME `img-evergreencleaningservice.10xconnections.com` → `f005.backblazeb2.com`, **proxied** |
+| Rewrite | zone `10xconnections.com`, ruleset `dc23ca22b3244751a43bf30de1de73a2`, prefixes `/file/img-evergreencleaningservice` onto the path |
+
+Three things that are easy to undo by accident:
+
+- **The orange cloud is load-bearing.** B2 egress is free only through
+  Cloudflare (Bandwidth Alliance). Grey-clouded, the same traffic is billed.
+- **Without the rewrite rule every image 404s.** B2's download endpoint
+  addresses objects as `/file/<bucket>/<key>` and nothing else, so a bare CNAME
+  returns B2's own JSON error for every request.
+- **Source stays root-relative.** Components, markdown and redirect targets all
+  still write `/images/a.jpg`, so `astro dev` serves the local files and no
+  hostname is baked into content. `scripts/images.mjs` swaps the origin in
+  `dist` after the build and then deletes `dist/images` — and it *fails the
+  build* if any reference was left behind, because a missed one would keep
+  working from the Worker and the mistake would never surface.
+
+Objects carry `Cache-Control: public, max-age=86400, s-maxage=31536000` — a day
+in the browser, a year at the edge, and the edge is purgeable. Replacing a photo
+is: overwrite the file in `public/images`, `npm run b2:sync`, purge that URL.
+`npm run b2:sync -- --prune` also deletes bucket objects with no local
+counterpart; it is opt-in because it is the one step here that running again
+does not undo.
+
+The 101 legacy `/wp-content/uploads/…` rules in `_redirects` 301 to the image
+host, so every inbound link to an old WordPress upload still lands on the file.
+
+Credentials are `B2_KEY_ID` / `B2_APP_KEY` in the environment — never committed.
 
 ---
 

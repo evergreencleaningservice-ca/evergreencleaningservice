@@ -37,6 +37,44 @@ export const site = {
 } as const;
 
 /**
+ * Image delivery — Backblaze B2 behind Cloudflare, the house pattern (AD-9).
+ *
+ * Every photo on the site lives in the B2 bucket named below and is served from
+ * `host`, not from the Worker. The wiring is three pieces and they only work
+ * together, so all three are named here:
+ *
+ *   bucket      B2 `img-evergreencleaningservice`, allPublic, region
+ *               us-east-005. Keys mirror the repo exactly — `public/images/a.jpg`
+ *               is stored as `images/a.jpg` — so a path is the same string on
+ *               both hosts and the only thing that changes is the origin.
+ *   DNS         CNAME img-evergreencleaningservice.10xconnections.com ->
+ *               f005.backblazeb2.com, **proxied**. The orange cloud is not
+ *               optional: B2 egress is free only through Cloudflare (Bandwidth
+ *               Alliance), and grey-clouded it is billed at $0.01/GB.
+ *   rewrite     a zone URL-rewrite rule prefixes `/file/img-evergreencleaningservice`
+ *               onto the path, because B2's download endpoint addresses objects
+ *               as /file/<bucket>/<key> and nothing else. Without the rule every
+ *               request returns B2's own JSON 404.
+ *
+ * Source stays root-relative (`/images/a.jpg`) everywhere — components, markdown,
+ * redirect targets — so `astro dev` serves the local files and nothing in the
+ * content is pinned to a hostname. `scripts/images.mjs` swaps the origin in
+ * `dist` after the build, and `scripts/b2-sync.mjs` puts the files in the bucket.
+ */
+export const images = {
+  host: 'https://img-evergreencleaningservice.10xconnections.com',
+  bucket: 'img-evergreencleaningservice',
+  /* Hosts that may appear in front of `/images/` in built output — og:image and
+     JSON-LD are absolute, so they carry the canonical origin and need swapping
+     too. Anything not listed here is left alone rather than guessed at. */
+  rewriteOrigins: [
+    'https://www.evergreencleaningservice.ca',
+    'https://evergreencleaningservice.ca',
+    'https://evergreencleaningservice.10xconnections.com',
+  ],
+} as const;
+
+/**
  * The canonical NAP, Section 1 of the overhaul specification. One definition,
  * used by the footer, the contact page, the location pages, the landing pages
  * and the JSON-LD graph, so the six cannot drift apart. Anything that needs a
