@@ -20,7 +20,7 @@
  * Put the real rating and review count in and the first badge can say it.
  */
 import LandingLayout from '../../layouts/LandingLayout.astro';
-import Recaptcha from '../../components/Recaptcha.astro';
+import SpamGuard from '../../components/SpamGuard.astro';
 import { nap, site } from '../../data/site';
 import { reviews } from '../../data/reviews';
 
@@ -177,7 +177,7 @@ const sizes = [
               It is friction on a paid click, and worth saying out loud: if the
               conversion rate drops, the answer is reCAPTCHA v3 or Enterprise
               scoring on this form, not removing the check. */}
-          <Recaptcha />
+          <SpamGuard />
 
           <button type="submit" class="lp-submit">Request Free Walkthrough &amp; Quote &rarr;</button>
           <p class="lp-confidential">Strict privacy. No spam or aggressive sales calls.</p>
@@ -238,6 +238,17 @@ const sizes = [
 
   const param = (name: string) => new URLSearchParams(location.search).get(name) ?? '';
 
+  /* Turnstile writes cf-turnstile-response, reCAPTCHA writes the hidden field
+     SpamGuard renders. Read whichever is present. */
+  const token = (form: HTMLFormElement) =>
+    (form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value ||
+    (form.querySelector('.wpf-recaptcha-hidden') as HTMLInputElement | null)?.value ||
+    '';
+
+  const awaitToken = async (form: HTMLFormElement) => {
+    for (let i = 0; i < 60 && !token(form); i++) await new Promise((r) => setTimeout(r, 100));
+  };
+
   const showError = (message: string) => {
     if (!errorBox) return;
     errorBox.textContent = message;
@@ -276,6 +287,8 @@ const sizes = [
         submit.textContent = 'Sending…';
       }
 
+      await awaitToken(leadForm);
+
       try {
         const res = await fetch('/api/submit-lead', {
           method: 'POST',
@@ -287,8 +300,7 @@ const sizes = [
             phone: (document.getElementById('phone') as HTMLInputElement).value,
             size: facilitySize,
             facility_type: facilityType,
-            recaptcha:
-              (leadForm.querySelector('.wpf-recaptcha-hidden') as HTMLInputElement | null)?.value ?? '',
+            captcha: token(leadForm),
             page_url: location.href,
             referrer: document.referrer,
             // what makes the lead attributable to a click
@@ -304,8 +316,9 @@ const sizes = [
           return;
         }
         if (res.status === 403) {
+          (window as any).turnstile?.reset?.();
           (window as any).grecaptcha?.reset?.();
-          showError('That captcha did not verify. Please tick the box again and resubmit.');
+          showError('That security check did not verify. Please try submitting again.');
         } else {
           showError(
             'Something went wrong sending that. Please call (416) 803-4880 and we will take the details directly.'

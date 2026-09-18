@@ -1,5 +1,5 @@
 import { neon } from '@neondatabase/serverless';
-import { PRODUCTION_HOSTS, recaptcha } from './data/site';
+import { captcha, PRODUCTION_HOSTS } from './data/site';
 
 /**
  * The site's Worker.
@@ -32,13 +32,15 @@ export interface Env {
   LEAD_NOTIFY_TO?: string;
   LEAD_NOTIFY_FROM?: string;
   /**
-   * reCAPTCHA v2 secret, paired with the site key the forms render:
-   *   wrangler secret put RECAPTCHA_SECRET
+   * The captcha secret, paired with whatever `captcha.provider` renders:
+   *   wrangler secret put TURNSTILE_SECRET     (provider 'turnstile')
+   *   wrangler secret put RECAPTCHA_SECRET     (provider 'recaptcha')
    *
    * Required. With no secret this endpoint answers 503 rather than accepting
    * unverified posts — an unconfigured captcha that quietly passes everything
    * is worse than no captcha, because the form looks protected.
    */
+  TURNSTILE_SECRET?: string;
   RECAPTCHA_SECRET?: string;
 }
 
@@ -106,18 +108,27 @@ async function notify(env: Env, lead: Record<string, string>) {
 }
 
 /**
- * Ask Google whether this token is real.
+ * Ask the provider whether this token is real.
+ *
+ * Turnstile and reCAPTCHA take the same form-encoded `secret`/`response` pair
+ * and answer with the same `{ success, "error-codes" }` shape, so one function
+ * covers both and only the URL changes.
  *
  * Returns a reason string on failure and null on success, so the caller logs
  * something specific rather than "captcha failed" — `timeout-or-duplicate`
  * (a replayed or stale token) and `invalid-input-secret` (the wrong key) look
  * identical from the visitor's side and need completely different fixes.
  */
-async function verifyCaptcha(token: string, secret: string, ip: string): Promise<string | null> {
+async function verifyCaptcha(
+  url: string,
+  token: string,
+  secret: string,
+  ip: string
+): Promise<string | null> {
   if (!token) return 'no token submitted';
 
   try {
-    const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+    const res = await fetch(url, {
       method: 'POST',
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ secret, response: token, ...(ip ? { remoteip: ip } : {}) }),
@@ -127,7 +138,7 @@ async function verifyCaptcha(token: string, secret: string, ip: string): Promise
     const body = await res.json<{ success?: boolean; 'error-codes'?: string[] }>();
     return body.success ? null : (body['error-codes'] ?? ['unknown']).join(',');
   } catch (err) {
-    /* Google unreachable. Reject rather than fail open: an outage that turns
+    /* Provider unreachable. Reject rather than fail open: an outage that turns
        the captcha off is exactly when the form gets hammered. */
     return `siteverify unreachable: ${String(err)}`;
   }
@@ -156,28 +167,36 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
   /* --- captcha ------------------------------------------------------------
      After the honeypot, so a bot that fell into it costs nothing, and before
      the database, so an unverified post never reaches Neon or Resend. */
-  if (!env.RECAPTCHA_SECRET) {
-    console.error('submit-lead: no RECAPTCHA_SECRET; refusing to accept unverified submissions');
+  const turnstile = captcha.provider === 'turnstile';
+  const secret = turnstile ? env.TURNSTILE_SECRET : env.RECAPTCHA_SECRET;
+  const secretName = turnstile ? 'TURNSTILE_SECRET' : 'RECAPTCHA_SECRET';
+
+  if (!secret) {
+    console.error(`submit-lead: no ${secretName}; refusing to accept unverified submissions`);
     return json({ error: 'captcha unavailable' }, 503);
   }
 
-  /* Google publishes a v2 test pair that passes for any token on any domain.
-     It is the right default for staging and catastrophic on production, where
-     it would wave through every bot on the internet. Going live is a build and
-     a secret away from happening by accident, so the check lives here rather
-     than in anyone's memory. */
+  /* Both providers publish a test pair that passes for any token on any domain.
+     Either is the right default for staging and catastrophic on production,
+     where it would wave through every bot on the internet. Going live is a
+     build and a secret away from happening by accident, so the check lives
+     here rather than in anyone's memory. Cloudflare's always-fails test secret
+     is refused too: on production it would reject every real lead. */
   const host = new URL(request.url).hostname;
-  if (
-    env.RECAPTCHA_SECRET === recaptcha.testSecretKey &&
-    (PRODUCTION_HOSTS as readonly string[]).includes(host)
-  ) {
-    console.error('submit-lead: reCAPTCHA test secret is set on production host', host);
+  const TEST_SECRETS: readonly string[] = [
+    captcha.turnstile.testSecretKey,
+    captcha.turnstile.failSecretKey,
+    captcha.recaptcha.testSecretKey,
+  ];
+  if (TEST_SECRETS.includes(secret) && (PRODUCTION_HOSTS as readonly string[]).includes(host)) {
+    console.error(`submit-lead: ${secretName} is a published test key, on production host`, host);
     return json({ error: 'captcha misconfigured' }, 503);
   }
 
   const failure = await verifyCaptcha(
-    str(body.recaptcha ?? body['g-recaptcha-response'], 4000),
-    env.RECAPTCHA_SECRET,
+    turnstile ? captcha.turnstile.verifyUrl : captcha.recaptcha.verifyUrl,
+    str(body.captcha ?? body.recaptcha ?? body['g-recaptcha-response'] ?? body['cf-turnstile-response'], 4000),
+    secret,
     request.headers.get('cf-connecting-ip') ?? ''
   );
   if (failure) {

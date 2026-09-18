@@ -38,7 +38,7 @@
  */
 import { countries, DEFAULT_COUNTRY } from '../data/countries';
 import { site } from '../data/site';
-import Recaptcha from './Recaptcha.astro';
+import SpamGuard from './SpamGuard.astro';
 import FormRuntime from './FormRuntime.astro';
 
 interface Props {
@@ -170,7 +170,7 @@ const f = (name: string) => `${id}-${name}`;
     <input type="text" id={f('hp')} name="company-website" tabindex="-1" autocomplete="off" />
   </div>
 
-  <Recaptcha />
+  <SpamGuard />
 
   <button class="wpf-submit" type="submit">Submit</button>
 </form>

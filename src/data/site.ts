@@ -56,54 +56,67 @@ export const site = {
 } as const;
 
 /**
- * reCAPTCHA — v2 "I'm not a robot" checkbox, as the original has it.
+ * Spam protection on every form.
  *
- * Recovered from the 2026-09-18 archive capture: WPForms renders
- * `wpforms-is-recaptcha-type-v2` with `<div class="g-recaptcha"
- * data-sitekey="6Lcy1lwa…">`, loaded through
- * `api.js?onload=…&render=explicit`, positioned after the honeypot and before
- * the submit button. All of that is reproduced; only the class prefix differs,
- * because this site uses its own `wpf-` names throughout.
+ * TWO PROVIDERS, one switch. `provider` decides what renders and what the
+ * Worker verifies, so swapping is a one-word change plus a secret — not a
+ * rebuild. Both are supported because the client has an existing reCAPTCHA key
+ * and has not yet said which they will supply for production.
  *
- * TWO KEYS, AND WHY THERE HAS TO BE A SECOND ONE
+ * TURNSTILE is the default and the better fit here: it is invisible, so it puts
+ * no friction on a paid click, and it needs no third-party consent banner.
+ * Its widget writes the token into a hidden `cf-turnstile-response` input that
+ * it inserts into the form itself, which is what the submit handlers read.
  *
- * `clientSiteKey` below is the client's real key, read out of their own
- * markup. It cannot be used on staging: reCAPTCHA keys are domain-locked, and
- * asking Google for the widget with this key and the staging origin returns
- * "Invalid domain for site key" — measured, not assumed. Rendering it here
- * would put a red error box where the checkbox belongs.
+ * THE KEYS BELOW ARE CLOUDFLARE'S PUBLISHED TEST PAIR, not the client's.
+ * The API token in this environment has no Turnstile permission — creating a
+ * widget returns "Authentication error" — so a real one could not be
+ * provisioned here. Unlike Google's reCAPTCHA test pair, Cloudflare publishes a
+ * failing secret as well as a passing one, so both the accept and the reject
+ * path are provable on staging rather than only the happy one.
  *
- * The other half of the problem is that the **secret key is not in the markup**
- * and cannot be. Without it the Worker cannot call `siteverify`, and a captcha
- * nobody checks server-side stops nothing at all while looking like it does.
+ * TO GO LIVE, either:
  *
- * So the default is Google's official v2 test pair, which works on every domain
- * and always passes. That is a deliberate choice over shipping nothing: it
- * makes the whole path — widget, token, `siteverify`, accept/reject —
- * demonstrable on staging, and Google renders its own "for testing purposes
- * only" banner on the widget, so it cannot be mistaken for real protection.
+ *   Turnstile   create a widget at dash.cloudflare.com → Turnstile (or grant
+ *               the API token Account → Turnstile → Edit and ask for it), set
+ *               PUBLIC_TURNSTILE_SITE_KEY at build time and
+ *               `wrangler secret put TURNSTILE_SECRET`
+ *   reCAPTCHA   set `provider: 'recaptcha'`, build with
+ *               PUBLIC_RECAPTCHA_SITE_KEY=6Lcy1lwa… and
+ *               `wrangler secret put RECAPTCHA_SECRET`
  *
- * TO GO LIVE, two things are needed from the client's reCAPTCHA admin
- * (google.com/recaptcha/admin, the account that owns 6Lcy1lwa…):
- *
- *   1. the **secret key** for that site key → `wrangler secret put RECAPTCHA_SECRET`
- *   2. `evergreencleaningservice.10xconnections.com` added to the key's domain
- *      list, if staging is to exercise the real key before cutover
- *
- * then build with `PUBLIC_RECAPTCHA_SITE_KEY=6Lcy1lwa…`.
- *
- * Going live on the test pair by accident is not possible: `src/worker.ts`
- * refuses to accept the test secret on a production hostname and answers 503.
+ * Shipping on either test pair by accident is not possible: src/worker.ts
+ * refuses both test secrets on a PRODUCTION_HOSTS hostname and answers 503.
  */
-export const recaptcha = {
-  /** The client's own key, from their markup. Production only — domain-locked. */
-  clientSiteKey: '6Lcy1lwaAAAAAL_5DO8SACXqh0NF_QdzhkrAh-3K',
-  /** Google's published v2 test site key. Valid on any domain, always passes. */
-  testSiteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
-  /** Its matching secret. Not a credential — Google publishes it. Named here so
-      the Worker can recognise it and refuse to run on it in production. */
-  testSecretKey: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe',
+export const captcha = {
+  provider: 'turnstile' as 'turnstile' | 'recaptcha',
+
+  turnstile: {
+    /** Cloudflare's published invisible test key. Any domain, always passes. */
+    testSiteKey: '1x00000000000000000000BB',
+    /** Published, always passes. Named so the Worker can refuse it in prod. */
+    testSecretKey: '1x0000000000000000000000000000000AA',
+    /** Published, always fails — used to prove the reject path really rejects. */
+    failSecretKey: '2x0000000000000000000000000000000AA',
+    verifyUrl: 'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+  },
+
+  recaptcha: {
+    /* v2 checkbox, recovered from the original's own markup: WPForms renders
+       `wpforms-is-recaptcha-type-v2` with this key. Domain-locked to
+       evergreencleaningservice.ca — measured: asking Google for the widget with
+       it and the staging origin returns "Invalid domain for site key". */
+    clientSiteKey: '6Lcy1lwaAAAAAL_5DO8SACXqh0NF_QdzhkrAh-3K',
+    /** Google's published v2 test site key. Any domain, always passes. */
+    testSiteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+    /** Its matching secret. Published by Google, so not a credential. */
+    testSecretKey: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe',
+    verifyUrl: 'https://www.google.com/recaptcha/api/siteverify',
+  },
 } as const;
+
+/** Kept so existing imports keep resolving; `captcha.recaptcha` is the source. */
+export const recaptcha = captcha.recaptcha;
 
 /**
  * Image delivery — Backblaze B2 behind Cloudflare, the house pattern (AD-9).

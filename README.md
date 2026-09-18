@@ -24,8 +24,10 @@ credential reads it from the environment or from a Worker secret:
 | --- | --- | --- |
 | Worker secret | `DATABASE_URL` | Neon Postgres, `/api/submit-lead` |
 | Worker secret | `RESEND_API_KEY` | the lead notification email |
-| Worker secret | `RECAPTCHA_SECRET` | verifying form submissions; without it `/api/submit-lead` answers 503 |
-| Build env | `PUBLIC_RECAPTCHA_SITE_KEY` | the client's real site key; defaults to Google's test key (HANDOFF §7.1) |
+| Worker secret | `TURNSTILE_SECRET` | verifying form submissions (the default provider); without it `/api/submit-lead` answers 503 |
+| Worker secret | `RECAPTCHA_SECRET` | the same, if `captcha.provider` is switched to `recaptcha` |
+| Build env | `PUBLIC_TURNSTILE_SITE_KEY` | the real Turnstile key; defaults to Cloudflare's test key (HANDOFF §7.1) |
+| Build env | `PUBLIC_RECAPTCHA_SITE_KEY` | the client's reCAPTCHA key, used only when that provider is selected |
 | Environment | `B2_KEY_ID`, `B2_APP_KEY` | `npm run b2:sync` |
 | Environment | `CF_API_TOKEN` | the post-deploy edge purge |
 
@@ -113,12 +115,12 @@ This port is not a complete reproduction of the live site. Outstanding items:
    changed on the live site after its page's capture date is not reflected here and should be
    checked against the real site before launch.
 
-2. **Two forms still go nowhere, and the captcha keys are Google's test pair.** The quote and
-   contact forms now post to `/api/submit-lead` behind a reCAPTCHA v2 checkbox, but the
+2. **Two forms still go nowhere, and the captcha keys are published test keys.** The quote and
+   contact forms post to `/api/submit-lead` behind invisible Cloudflare Turnstile, but the
    comment form and the `/reviews/` testimonial form are still `action="#"` — neither is a
-   lead, and both need a destination decided. Separately, the client's real reCAPTCHA secret
-   has not been supplied, so the site runs on Google's published test key pair, which passes
-   every token. See HANDOFF §7.1 for the two steps to go live.
+   lead, and both need a destination decided. Separately, no production captcha keys have been
+   supplied, so the site runs on Cloudflare's published test pair, which passes every token.
+   See HANDOFF §7.1 for what go-live needs.
 
 3. **`/services/building-maintenance/` has almost no content.** That page was never archived.
    `src/content/services/building-maintenance.md` currently holds only the one-paragraph

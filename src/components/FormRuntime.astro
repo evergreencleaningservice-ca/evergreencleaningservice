@@ -100,6 +100,13 @@
         submit.textContent = 'Sending…';
       }
 
+      /* Turnstile is invisible and resolves on its own, but a visitor who
+         fills four fields quickly can beat it. Wait for the token rather than
+         posting without one and collecting a 403 they cannot act on. */
+      for (let i = 0; i < 60 && !value(form, 'cf-turnstile-response') && !value(form, 'g-recaptcha-hidden'); i++) {
+        await new Promise((r) => setTimeout(r, 100));
+      }
+
       const formId = form.dataset.formId ?? 'site-form';
       const payload: Payload = {
         form_id: formId,
@@ -110,7 +117,10 @@
         address: address(form),
         services: services(form),
         message: value(form, 'message') || value(form, 'comments'),
-        recaptcha: value(form, 'g-recaptcha-hidden'),
+        /* Turnstile writes `cf-turnstile-response`, reCAPTCHA writes
+           `g-recaptcha-hidden`. Whichever is on the page is what gets sent;
+           the Worker knows which provider it is verifying against. */
+        captcha: value(form, 'cf-turnstile-response') || value(form, 'g-recaptcha-hidden'),
         page_url: location.href,
         referrer: document.referrer,
         /* Present when the visitor arrived on an ad and then navigated to this
@@ -139,8 +149,9 @@
         /* A rejected captcha is the one failure a visitor can act on, so it
            gets its own message and the widget is reset for another try. */
         if (res.status === 403) {
+          window.turnstile?.reset?.();
           window.grecaptcha?.reset?.();
-          fail(form, 'That captcha did not verify. Please tick the box again and resubmit.');
+          fail(form, 'That security check did not verify. Please try submitting again.');
         } else {
           fail(
             form,

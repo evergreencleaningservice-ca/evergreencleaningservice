@@ -41,7 +41,7 @@
  * JSON-LD is a manual-action risk, not a rich result.
  */
 import LandingLayout from '../../layouts/LandingLayout.astro';
-import Recaptcha from '../../components/Recaptcha.astro';
+import SpamGuard from '../../components/SpamGuard.astro';
 import { nap, site } from '../../data/site';
 import { reviews } from '../../data/reviews';
 
@@ -190,7 +190,7 @@ const badges = [
             <input type="text" id="company_tax_id" name="company_tax_id" tabindex="-1" autocomplete="off" />
           </div>
 
-          <Recaptcha />
+          <SpamGuard />
 
           <button type="submit" class="lpq-submit">Request Same-Day Walkthrough / Quote</button>
 
@@ -263,6 +263,13 @@ const badges = [
     (form?.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | null)?.value?.trim() ??
     '';
 
+  /* Turnstile writes cf-turnstile-response, reCAPTCHA writes the hidden field
+     SpamGuard renders. Read whichever is present. */
+  const token = () =>
+    (form?.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value ||
+    (form?.querySelector('.wpf-recaptcha-hidden') as HTMLInputElement | null)?.value ||
+    '';
+
   const showError = (message: string) => {
     if (!errorBox) return;
     errorBox.textContent = message;
@@ -303,6 +310,8 @@ const badges = [
       facility_size: field('size'),
     });
 
+    for (let i = 0; i < 60 && !token(); i++) await new Promise((r) => setTimeout(r, 100));
+
     try {
       const res = await fetch('/api/submit-lead', {
         method: 'POST',
@@ -314,7 +323,7 @@ const badges = [
           phone: field('phone'),
           facility_type: field('facility_type'),
           size: field('size'),
-          recaptcha: field('g-recaptcha-hidden'),
+          captcha: token(),
           page_url: location.href,
           referrer: document.referrer,
           /* What makes the lead attributable to a click. */
@@ -331,8 +340,13 @@ const badges = [
       }
 
       if (res.status === 403) {
-        (window as unknown as { grecaptcha?: { reset?: () => void } }).grecaptcha?.reset?.();
-        showError('That security check did not verify. Please tick the box again and resubmit.');
+        const w = window as unknown as {
+          turnstile?: { reset?: () => void };
+          grecaptcha?: { reset?: () => void };
+        };
+        w.turnstile?.reset?.();
+        w.grecaptcha?.reset?.();
+        showError('That security check did not verify. Please try submitting again.');
       } else {
         showError(
           'Something went wrong sending that. Please call (416) 803-4880 and we will take the details directly.'

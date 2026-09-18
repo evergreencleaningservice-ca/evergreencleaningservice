@@ -251,69 +251,65 @@ These are the expensive ones. Read them before changing anything.
 `_research/gaps.md` is the full record, 17 sections. The ones that need a human
 decision:
 
-### 7.1 The forms — wired, and guarded by reCAPTCHA
+### 7.1 The forms — wired, and guarded by invisible Turnstile
 
-`QuoteForm` and `ContactForm` now post to `/api/submit-lead` through
-`FormRuntime.astro`, the same endpoint the PPC form uses. They spent the port on
-`action="#"`, validating in the browser and then dropping the enquiry; that was
-the launch blocker.
+`QuoteForm` and `ContactForm` post to `/api/submit-lead` through
+`FormRuntime.astro`, the same endpoint both landing pages use. They spent the
+port on `action="#"`, validating in the browser and then dropping the enquiry;
+that was the launch blocker.
 
 `Comments` and the testimonial form on `/reviews/` are **still `action="#"`**.
-Neither is a lead: a comment needs moderation and a testimonial needs a rating
-and a body, so both need a destination and a schema decision that has not been
-made. They are unchanged, and a submission from either still goes nowhere.
+Neither is a lead — a comment needs moderation, a testimonial needs a rating
+and a body — so both need a destination and a schema decision nobody has made.
 
-**reCAPTCHA v2 checkbox**, as the original has it — recovered from the
-2026-09-18 capture: `wpforms-is-recaptcha-type-v2`, `api.js?onload=…&render=explicit`,
-positioned after the honeypot and before the submit button. Rendered by
-`Recaptcha.astro`, verified server-side by `verifyCaptcha()` in `src/worker.ts`,
-which calls Google's `siteverify` and returns **403** on a bad token. Explicit
-render matters: `/contact-us/` and `/request-a-quote/` each carry two forms, and
-automatic rendering handles that badly.
+**Spam protection is `src/components/SpamGuard.astro`**, and which provider it
+renders is one word in `captcha.provider` (`src/data/site.ts`). Turnstile is the
+default: invisible, no checkbox, no consent banner, and no friction on a paid
+click. It drops its token into a hidden `cf-turnstile-response` input it inserts
+into the form; every submit handler reads that, falling back to reCAPTCHA's
+field so either provider works without touching the handlers. The Worker
+verifies against whichever provider is configured — both take the same
+`secret`/`response` pair and answer the same shape, so one function covers both.
 
-Four layers, in the order the Worker applies them: honeypot (answers 200, stores
-nothing), reCAPTCHA, required fields, email shape. The arithmetic question the
-original asks is checked in the browser only — the expected answer is in the
-page, so it is a speed bump, not a control, exactly as it is on the original.
+The arithmetic question the original asked (7+2, 7+1) is gone from every form,
+on instruction. It was never protection: WPForms printed the expected answer
+into the page beside the question.
 
-**THE KEYS ARE NOT THE CLIENT'S YET.** See the block in `src/data/site.ts`.
-Their site key `6Lcy1lwa…` is domain-locked — measured, not assumed: asking
-Google for the widget with that key and the staging origin returns *Invalid
-domain for site key* — and its **secret is not in the markup and cannot be**.
-So the default is Google's published v2 test pair, which works on any domain and
-**passes every token**. That makes the whole path demonstrable on staging and
-protects nothing there, which is the honest trade; Google renders its own "for
-testing purposes only" banner on the widget.
+Order of checks in the Worker: honeypot (answers 200, stores nothing), then
+captcha, then required fields, then email shape.
 
-To go live, from the client's reCAPTCHA admin:
+**THE KEYS ARE PUBLISHED TEST KEYS, not the client's.** The API token here has
+no Turnstile permission — creating a widget returns "Authentication error" — so
+a real one could not be provisioned. Unlike Google's pair, Cloudflare publishes
+a *failing* secret too, so both branches are provable rather than only the happy
+one, and both were.
 
-1. the secret for `6Lcy1lwa…` → `wrangler secret put RECAPTCHA_SECRET`
-2. build with `PUBLIC_RECAPTCHA_SITE_KEY=6Lcy1lwa…`
-3. optionally add `evergreencleaningservice.10xconnections.com` to that key's
-   domain list, so staging exercises the real key before cutover
+To go live, either:
 
-Shipping on the test pair by accident is not possible: the Worker refuses the
-test secret on a `PRODUCTION_HOSTS` hostname and answers 503.
+| Provider | What is needed |
+|---|---|
+| Turnstile | a widget from dash.cloudflare.com → Turnstile (or grant the token Account → Turnstile → Edit), then `PUBLIC_TURNSTILE_SITE_KEY` at build time and `wrangler secret put TURNSTILE_SECRET` |
+| reCAPTCHA | set `captcha.provider = 'recaptcha'`, build with `PUBLIC_RECAPTCHA_SITE_KEY=6Lcy1lwa…`, and `wrangler secret put RECAPTCHA_SECRET` |
+
+Shipping on a test pair by accident is not possible: the Worker refuses all
+three published test secrets on a `PRODUCTION_HOSTS` hostname and answers 503.
+The client's reCAPTCHA key is domain-locked to evergreencleaningservice.ca —
+measured, not assumed: the staging origin returns *Invalid domain for site key*.
 
 Measured on the deployed staging site:
 
 ```
-widget rendered, every container, no double-render
-  /request-a-quote/  2 of 2      /contact-us/  2 of 2
-  /                  1 of 1      /lp/commercial-cleaning/  1 of 1
-endpoint, no token ............... 403
-endpoint, honeypot filled ........ 200, nothing stored
-Google siteverify, test secret ... success:true (so the 200 above is Google's
-                                   verdict, not a short-circuit)
-Google siteverify, wrong secret .. success:false invalid-input-response
-end-to-end contact form .......... token captured, confirmation shown, row 8 in
-                                   Neon with business_name, address and message
+widget height ..................... 0px on every form — nothing to click
+token issued ...................... yes, without any interaction
+two forms on one page ............. /request-a-quote/ renders 2 widgets, and
+                                    the SECOND form submits successfully
+api.js loaded ..................... once per page, not once per widget
+end-to-end ........................ filled 4 fields, pressed submit, landed on
+                                    /thank-you/ — zero captcha interaction
+endpoint, no token ................ 403
+endpoint, always-FAILS secret ..... 403   <- the reject branch, proven
+endpoint, always-passes secret .... 200
 ```
-
-`leads` gained `business_name`, `address`, `services` and `message`
-(`migrations/0002_site_forms.sql`, applied). Without them a quote request would
-have stored a name, an email and a phone and dropped everything that makes it
-answerable.
 
 ### 7.1b The two landing pages
 
