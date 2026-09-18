@@ -192,7 +192,7 @@ const offers = [
         emergency and need something cleaned in a pinch, we can get it done.
       </p>
 
-      <p class="about-cta">
+      <p class="about-cta about-cta-last">
         <a href="/request-a-quote/">
           <img
             src="/images/free-quote-cta-button-1024x505.jpg"
@@ -303,6 +303,20 @@ const offers = [
     width: 269px;
     max-width: 100%;
     height: auto;
+  }
+
+  /* The editor leaves a 19px spacer above this one, on top of the paragraph's
+     own 15px — 34px from the text to the button, measured on the original.
+     It is also the narrower of the two: the markup sizes it 265px, not 269. */
+  .about-cta-last {
+    /* Padding, not margin: the paragraph above already ends in a 15px margin,
+       and two adjacent margins collapse to the larger of the two rather than
+       adding. The original's spacer is a real element, so its 19px stacks. */
+    padding-top: 19px;
+  }
+
+  .about-cta-last img {
+    width: 265px;
   }
 
   /* `.section-about .row > div { margin-top: 30px }`, plus the 15px left by
