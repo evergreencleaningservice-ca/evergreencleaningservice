@@ -25,6 +25,21 @@ if (!TOKEN) {
 const dist = path.resolve('dist');
 const urls = new Set([`${HOST}/`, `${HOST}/robots.txt`, `${HOST}/rss.xml`, `${HOST}/sitemap-index.xml`]);
 
+/* Redirect sources are not assets, so they were never in this list — and the
+   edge had cached their 404 from before the rules existed. A deploy that adds a
+   redirect then serves a stale 404 from the address it was meant to fix looks
+   exactly like a broken rule. Read them out of dist/_redirects so the list
+   cannot drift from what was deployed. */
+try {
+  const rules = fs.readFileSync(path.join('dist', '_redirects'), 'utf8').split('\n');
+  for (const line of rules) {
+    const from = line.trim().split(/\s+/)[0];
+    if (from && !from.startsWith('#') && !from.includes('*')) urls.add(HOST + from);
+  }
+} catch {
+  // no _redirects in this build; nothing extra to purge
+}
+
 const walk = (dir) => {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, entry.name);
