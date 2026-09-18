@@ -244,56 +244,100 @@ port points at that; where nothing survived, the reference was removed rather
 than left broken. Full list in the session notes; recoverable from the client's
 media library.
 
-## 16. The full-page census, and what it left
+## 16. The full-page census
 
-Every one of the 51 paired pages was diffed against its archived counterpart —
-visible text, links, images, heading outline, form fields, horizontal overflow —
-at 1440px, after stepping down the page so entrance animations had fired.
+Every paired URL diffed against its archived counterpart at 1440px — visible
+text, links, images, heading outline, form fields, horizontal overflow — after
+stepping down the page so entrance animations have fired. 58 pages: the home
+page, 7 pages, 5 service pages, 45 posts, and the blog and category listings.
 
-What it found and what was done is in the commit that closed it. What it could
-**not** close, and why:
+    pages diffed ...................... 58 of 58
+    scrolled before census ............ yes, stepped
 
-**The footer copyright line.** The port writes the current year and the current
-trading name, as the original's WordPress does. Forty-four of the reference
-pages are 2023 captures reading "Copyright © 2023 Evergreen Cleaning Service ~",
-six are 2025 captures reading "Copyright © 2025 Evergreen Office Cleaning ~",
-and the port reads 2026. All three are the same line rendered in different
-years. Not a defect.
+    MISSING
+      visible text nodes .............. 129
+      links ............................ 17
+      images ........................... 60
+      form fields ...................... 91
+      heading outline .................. 6 pages differ
+      horizontal overflow at 1440 ...... none
 
-**Two generations of form 1381.** The quote form exists in the archive twice:
-captures from December 2023 to July 2024 show seven services and no address
-block, captures from April 2025 to October 2025 show eight services and an
-address. The port carries the **2025** shape, which is the current site. Forty-
-six of the paired pages carry the older one, so the census reports an address
-block and "Property Management and Building Maintenance" as extra on each of
-them, and a single "Name *" field as missing. That is the older site
-disagreeing with the newer one, not the port disagreeing with either. An
-earlier pass of this port read the older shape off `/request-a-quote/` — whose
-newest capture is July 2024 — and removed a service and the address block. That
-was a regression and it is reverted; the 2025 shape is the one to keep.
+    ACCOUNTED FOR
+      footer copyright line ........... 108 text   (capture year)
+      /blog/page/3/ stale capture ..... 21 text · 14 links · 5 images · 1 page
+      reCAPTCHA's hidden input ........ 60 fields
+      older generation of form 1381 ... 31 fields
+      images the archive never kept ... 42
+      list crops with no source ....... 12
+      lazy-load placeholder ............ 1
+      green products' dead image links . 3
+      empty headings in the original ... 4 pages
+      hero the reference cannot render . 1 page
 
-**reCAPTCHA.** Each archived form carries a hidden `g-recaptcha-hidden` input
-that the port has no equivalent for: there is no site key for this network and
-no backend to verify a token against. 54 of the 78 "missing form fields" are
-this one input.
+    UNEXPLAINED DIFFERENCES ........... 0
 
-**Name and address fields.** WPForms labels a grouped field twice — once for
-the group, once per part — with both labels pointing at the first input. The
-port groups them in a `<fieldset>` with a `<legend>` instead, which renders
-identically and reads correctly to a screen reader. A census that matches a
-field to its first `<label>` reports the group label as missing.
+Each of those lines, and why it is not a defect:
 
-**Empty headings.** Four post pages carry an `<h3></h3>` or `<h4></h4>` the
-editor left behind. They render as nothing; the port does not reproduce them.
+**The footer copyright line** (108). The port writes the current year and the
+current trading name, as the original's WordPress does. The reference pages are
+2022, 2023 and 2025 captures, so they read 2022, 2023 and 2025 and name the
+business as it was called then; the port reads 2026. One line, three years.
 
-**Lightbox targets.** The gallery and the in-post image links point at
-`/wp-content/uploads/...` on the original and at `/images/...` here, because
-that is where the port serves them from. Same image, different address.
+**`/blog/page/3/`** (21 text, 14 links, 5 images, 1 heading outline). That
+page's snapshot predates eight posts, so its third page holds what is now the
+fourth. `/category/blog/page/3/` has a newer capture and the port matches it
+item for item, as it does pages 1 and 2 of both listings. The pagination is
+right; the snapshot is old.
 
-**The hero.** The reference copy never shows it — the slideshow script is not
-in the archive, so the hero renders as a spinner and its `<h2>` is invisible
-there. The hero was measured separately and is not something this census can
-speak to.
+**reCAPTCHA** (60). Each archived form carries a hidden `g-recaptcha-hidden`
+input the port has no equivalent for — no site key for this network, and no
+backend to verify a token against.
+
+**The older generation of form 1381** (31). The archive holds the quote form
+twice: seven services and no address from December 2023 to July 2024, eight
+services and an address from April 2025 on. The port carries the 2025 shape,
+which is the current site, so every page whose capture is older reports an
+address block as extra and a single "Name *" field as missing. An earlier pass
+here read the older shape off `/request-a-quote/`, whose newest capture is July
+2024, and removed a service and the address block; that was a regression and it
+is reverted.
+
+**Images** (42 + 12 + 1). Photos the Wayback crawler never stored, list crops
+whose source upload is gone too, and one lazy-load placeholder in the reference.
+See §14 and §15; a second sweep of the archive against every sibling size
+confirmed there is nothing left to recover.
+
+**The green products page** (3 links). Its three logos — ProSeries Green,
+Armstrong, ECOLOGO — are gone, and the Armstrong logo carried the page's only
+link to armstrongmanufacturing.com. The original's body text names the address
+without linking it, so the link went with the image rather than being moved.
+
+**Empty headings** (4 pages). `<h3></h3>` and `<h4></h4>` the editor left
+behind. They render as nothing; the port does not reproduce them.
+
+**The hero** (1 page). The reference never shows it — the slideshow script is
+not in the archive, so the hero renders as a spinner and its `<h2>` is invisible
+there. The hero was measured separately.
+
+### Two differences of markup, not of rendering
+
+Both were fixed rather than argued with, but they are worth knowing about,
+because the census compares text *nodes* and a page can read identically while
+splitting them differently:
+
+- the privacy policy's Gravatar paragraph. remark-gfm autolinks a bare address
+  that the original renders as plain text. A first attempt used an HTML comment
+  to break the autolinker, which stopped the link but split the paragraph into
+  two nodes — so the paragraph is written as raw HTML now.
+- the homepage's "Service Locations" line, where the original writes "Toronto,"
+  loose and the rest inside a leftover `<span>` from a paste.
+
+### What the census does not cover
+
+Spacing and computed style. This pass counts what is present; the measured
+work — container steps, the 940px breakpoint, type scale, section padding — is
+elsewhere in this file and in the session's measurement scripts. A page can pass
+every count here and still be a few pixels out, which is why both passes exist.
 
 ## 17. The Simple Banner plugin
 
