@@ -1,5 +1,29 @@
 ---
-/** The 16 services the original listed as a <br>-separated block of <strong>s. */
+/**
+ * The About band (`#about`).
+ *
+ * This is not a designed layout — in the original it is a block of WordPress
+ * editor content inside the section's `.section-desc`, every line of it centred,
+ * followed by one more centred block carrying the section's only `wow`.
+ *
+ * An earlier pass here treated it as a design brief and invented things the
+ * original does not have: the three "offers" became grey cards in a grid, the
+ * services list became a three-column list with green bullets, and both of the
+ * free-quote image buttons became green text buttons. All of that is gone.
+ *
+ * Measured off the original's own render (1440 / 940, root 16px / 15px):
+ *
+ *   paragraphs          15px, #777, centred
+ *   h1  Toronto Office Cleaning Services      40 / 37.5px, 600, #333
+ *   h2  the section's own headings            32 / 30px,   600, #333
+ *   h3  service lines and offer titles        20 / 18.75px, 600, #333
+ *
+ * Those step with the root font size, so they are written in rem.
+ *
+ * The `<h1>` is deliberate and belongs here: the original's hero title is an
+ * `<h2 class="hero-large-text">`, so this is the homepage's only `<h1>`. The
+ * port had none at all until now.
+ */
 const servicesOffered = [
   'Office Cleaning',
   'Carpet Cleaning',
@@ -35,100 +59,124 @@ const offers = [
 ];
 ---
 
-<section class="section-padding" id="about" aria-labelledby="about-title">
+<section class="section-about section-padding" id="about" aria-labelledby="about-title">
   <div class="container">
     <div class="section-title-area">
       <p class="section-subtitle">Evergreen Office Cleaning</p>
       <h2 class="section-title" id="about-title">Toronto Commercial Cleaning &amp; Janitorial</h2>
+
+      <div class="section-desc">
+        <h1>Toronto Office Cleaning Services</h1>
+        <h2>Our clients tell the story.</h2>
+        <p>
+          Year after year they keep coming back to us for all their office cleaning, janitorial, and
+          commercial cleaning services.
+        </p>
+        <p>
+          Why? Because we&#8217;re simply the best. Best in quality, best is services and we show up.
+          That&#8217;s not us bragging, that&#8217;s what they tell us.
+        </p>
+        <p>
+          If you have lived in a residential building, worked in an office building or visited a
+          retail complex in Toronto in the morning, chances are you have come across commercial
+          cleaners hard at work. A clean and organized building gives a good first impression, shows
+          that the owners care about the safety of anyone who visits and, also portrays
+          professionalism.
+        </p>
+
+        <h2>Services We Offer</h2>
+        {/* One centred bold line each, as the original writes it: a single h3
+            of <strong>s separated by <br>. */}
+        <h3 class="service-list">
+          {
+            servicesOffered.map((service, i) => (
+              <>
+                {i > 0 && <br />}
+                <strong>{service}</strong>
+              </>
+            ))
+          }
+        </h3>
+
+        <p>
+          <strong>Janitorial</strong> and <strong>commercial cleaning</strong> companies are common not
+          just in Toronto but all over the world and play a vital role in how businesses run. From the
+          local grocery store to global corporations, Evergreen Office Cleaning Service helps to make it
+          possible for businesses to do what they do on a daily basis without having to worry about
+          cleanliness.
+        </p>
+        <p>
+          Our commercial cleaning services include an array of various tasks, depending on the
+          contract we have with our clients. Some of the most common services include cleaning floors,
+          carpets, bathrooms, windows, staff kitchens, conference rooms, reception areas, office
+          cubicles and warehouses. We also sanitize specific areas, empty trash cans ad make sure
+          there’s an acceptable level of cleanliness on the premises.
+        </p>
+
+        {/* The original links this to the full-size image, as the editor's
+            image block does. */}
+        <a class="about-figure" href="/images/toronto-downtown-skyline.jpg">
+          <img
+            src="/images/toronto-downtown-skyline.jpg"
+            alt="Toronto commercial cleaning services - downtown skyline"
+            width="565"
+            height="377"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+
+        <p>
+          Most of the facilities or properties that call us for our wide range of cleaning services
+          are usually the most populated area’s of our city. In Canada, Ontario takes the first spot
+          with the number of commercial cleaning firms, with Quebec a close second. Property managers
+          and business owners can depend on Evergreen Office Cleaning when outsource their cleaning
+          duties, which explains why we’re growing so fast.
+        </p>
+        <p>
+          When looking for a commercial cleaner, it is imperative to pick one that understands the
+          importance of having clean and safe premises.
+        </p>
+
+        <h2>Evergreen Commercial Cleaning &amp; Janitorial offers:</h2>
+        {
+          offers.map((offer) => (
+            <>
+              <h3>{offer.title}</h3>
+              <p>{offer.body}</p>
+            </>
+          ))
+        }
+
+        <p class="about-cta">
+          <a href="/request-a-quote/">
+            <img
+              src="/images/free-quote-cta-button-1024x505.jpg"
+              alt="Request a free quote"
+              width="269"
+              height="133"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+        </p>
+      </div>
     </div>
 
-    <div class="about-body wow slideInUp">
-      <h3>Toronto Office Cleaning Services</h3>
-      <h3 class="about-lead-heading">Our clients tell the story.</h3>
-      <p>
-        Year after year they keep coming back to us for all their office cleaning, janitorial, and
-        commercial cleaning services.
-      </p>
-      <p>
-        Why? Because we&#8217;re simply the best. Best in quality, best is services and we show up.
-        That&#8217;s not us bragging, that&#8217;s what they tell us.
-      </p>
-      <p>
-        If you have lived in a residential building, worked in an office building or visited a retail
-        complex in Toronto in the morning, chances are you have come across commercial cleaners hard
-        at work. A clean and organized building gives a good first impression, shows that the owners
-        care about the safety of anyone who visits and, also portrays professionalism.
-      </p>
-
-      <h3>Services We Offer</h3>
-      <ul class="service-list">
-        {servicesOffered.map((service) => <li>{service}</li>)}
-      </ul>
-
-      <p>
-        <strong>Janitorial</strong> and <strong>commercial cleaning</strong> companies are common not
-        just in Toronto but all over the world and play a vital role in how businesses run. From the local
-        grocery store to global corporations, Evergreen Office Cleaning Service helps to make it possible
-        for businesses to do what they do on a daily basis without having to worry about cleanliness.
-      </p>
-      <p>
-        Our commercial cleaning services include an array of various tasks, depending on the contract
-        we have with our clients. Some of the most common services include cleaning floors, carpets,
-        bathrooms, windows, staff kitchens, conference rooms, reception areas, office cubicles and
-        warehouses. We also sanitize specific areas, empty trash cans ad make sure there’s an
-        acceptable level of cleanliness on the premises.
-      </p>
-
-      <img
-        class="about-figure"
-        src="/images/toronto-downtown-skyline.jpg"
-        alt="Toronto commercial cleaning services - downtown skyline"
-        width="565"
-        height="377"
-        loading="lazy"
-        decoding="async"
-      />
-
-      <p>
-        Most of the facilities or properties that call us for our wide range of cleaning services are
-        usually the most populated area’s of our city. In Canada, Ontario takes the first spot with
-        the number of commercial cleaning firms, with Quebec a close second. Property managers and
-        business owners can depend on Evergreen Office Cleaning when outsource their cleaning duties,
-        which explains why we’re growing so fast.
-      </p>
-      <p>
-        When looking for a commercial cleaner, it is imperative to pick one that understands the
-        importance of having clean and safe premises.
-      </p>
-    </div>
-
-    <h3 class="offers-title">Evergreen Commercial Cleaning &amp; Janitorial offers:</h3>
-    <div class="grid grid-3 offers">
-      {
-        offers.map((offer) => (
-          <div class="offer">
-            <h4>{offer.title}</h4>
-            <p>{offer.body}</p>
-          </div>
-        ))
-      }
-    </div>
-
-    <p class="text-center about-cta">
-      <a class="btn btn-primary btn-lg" href="/request-a-quote/">Get a Free Quote</a>
-    </p>
-
-    <div class="about-body">
-      <h3>We are Evergreen Office Cleaning</h3>
-      <h4>
+    {/* The section's only entrance animation, and it is on this block — not on
+        the editor content above it. */}
+    <div class="about-row wow slideInUp">
+      <h2>We are Evergreen Office Cleaning</h2>
+      <h3>
         Professional, affordable, and reliable office cleaning, janitorial and commercial cleaning
         services.
-      </h4>
-      <h5>We&#8217;ve been cleaning Toronto and GTA since 1989.</h5>
+      </h3>
+      <h4>We&#8217;ve been cleaning Toronto and GTA since 1989.</h4>
       <p>
-        Whether you need <a href="/services/office-cleaning/">office cleaning</a>, commercial cleaning
-        services, or <a href="/services/industrial-cleaning/">industrial cleaning</a>, our 20-plus years
-        of expertise can help your business make a a bold statement and that first impression.
+        Whether you need <a href="/services/office-cleaning/">office cleaning</a>, <a href="/"
+          >commercial cleaning services</a
+        >, or <a href="/services/industrial-cleaning/">industrial cleaning</a>, our 20-plus years of
+        expertise can help your business make a a bold statement and that first impression.
       </p>
       <p>
         Give your customers, employees, and visitors the opportunity to enjoy the same pride in your
@@ -143,96 +191,126 @@ const offers = [
         warehouses. We can handle any mess you throw at us, and if you&#8217;re ever have an
         emergency and need something cleaned in a pinch, we can get it done.
       </p>
-    </div>
 
-    <p class="text-center about-cta">
-      <a class="btn btn-primary btn-lg" href="/request-a-quote/">Request a Free Quote</a>
-    </p>
+      <p class="about-cta">
+        <a href="/request-a-quote/">
+          <img
+            src="/images/free-quote-cta-button-1024x505.jpg"
+            alt="Request a free quote"
+            width="265"
+            height="131"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+      </p>
+    </div>
   </div>
 </section>
 
 <style>
-  .about-body {
-    max-width: 820px;
-    margin: 0 auto;
+  .section-about .section-title-area {
+    margin-bottom: 30px;
+  }
+
+  /* `.section-desc { margin-top: 40px }` in the theme. */
+  .section-desc {
+    margin-top: 2.5rem;
     text-align: center;
   }
 
-  .about-body h3,
-  .about-body h4,
-  .about-body h5 {
-    margin-top: 1.6em;
+  .section-desc p,
+  .about-row p {
+    font-size: 15px;
+    color: var(--ink);
+    margin: 0 0 15px;
   }
 
-  .about-body > h3:first-child {
-    margin-top: 0;
-  }
-
-  .about-lead-heading {
-    color: var(--brand);
-  }
-
-  .service-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 8px 24px;
-    list-style: none;
-    margin: 0 0 1.6em;
-    padding: 0;
-    text-align: left;
-  }
-
-  .service-list li {
-    position: relative;
-    padding-left: 24px;
+  .section-desc h1,
+  .section-desc h2,
+  .section-desc h3,
+  .about-row h2,
+  .about-row h3,
+  .about-row h4 {
     font-family: var(--font-heading);
     font-weight: 600;
     color: var(--ink-heading);
+    /* Measured on the original: every heading and paragraph in this block
+       carries the same margin — none above, 15px below. There is no larger
+       gap before a heading, which is what made this run 147px long. */
+    margin: 0 0 15px;
   }
 
-  .service-list li::before {
-    content: '';
-    position: absolute;
-    left: 4px;
-    top: 0.62em;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--brand);
+  /* The theme's own heading line-heights: 1.3 on h1, 1.2 on h2, and the
+     1.1 base for the rest. Flattening them made the services list, which is a
+     single h3 of line breaks, 32px taller than the original's. */
+  .section-desc h1 {
+    line-height: 1.3;
   }
 
+  .section-desc h2,
+  .about-row h2 {
+    line-height: 1.2;
+  }
+
+  .section-desc h3,
+  .about-row h3,
+  .about-row h4 {
+    line-height: 1.1;
+  }
+
+  /* 40 / 32 / 20px at a 16px root, stepping with it to 37.5 / 30 / 18.75 at 15
+     and 35 / 28 / 17.5 at 14 — the original's measured scale. */
+  .section-desc h1 {
+    font-size: 2.5rem;
+  }
+
+  .section-desc h2,
+  .about-row h2 {
+    font-size: 2rem;
+  }
+
+  .section-desc h3,
+  .about-row h3 {
+    font-size: 1.25rem;
+  }
+
+  .about-row h4 {
+    font-size: 1.0625rem;
+  }
+
+  /* 20px under the image, measured — in the original it comes from a stray
+     <br> the editor left inside the figure. */
   .about-figure {
+    display: block;
+    margin: 0 0 20px;
+  }
+
+  .about-figure img {
+    display: block;
     width: 100%;
     max-width: 565px;
     height: auto;
-    margin: 2em auto;
-    border-radius: var(--radius);
-  }
-
-  .offers-title {
-    text-align: center;
-    margin-top: 2.2em;
-  }
-
-  .offers {
-    margin-bottom: 1.6em;
-  }
-
-  .offer {
-    background: var(--surface-alt);
-    border-radius: var(--radius);
-    padding: 26px 24px;
-  }
-
-  .offer h4 {
-    color: var(--brand-dark);
-  }
-
-  .offer p {
-    margin: 0;
+    margin: 0 auto;
   }
 
   .about-cta {
-    margin: 0 0 2.4em;
+    margin: 0;
   }
+
+  .about-cta img {
+    display: inline-block;
+    width: 269px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* `.section-about .row > div { margin-top: 30px }`, plus the 15px left by
+     the empty paragraph the editor ends the block with and the 7px the row
+     itself adds: 60px from the button to the heading, measured. */
+  .about-row {
+    margin-top: 52px;
+    text-align: center;
+  }
+
 </style>

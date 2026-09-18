@@ -160,7 +160,38 @@ Its five-star badge is a bare `<img>` whose alt calls it a button but which
 links nowhere; here it links to the business's Google review page, and looks
 identical.
 
-## 10. Images the archive never captured
+## 10. Entrance animations
+
+Every `wow slideInUp` the original carries is present, on the same element in
+the same section. Censused from both pages:
+
+| Section | Animated block |
+|---|---|
+| features | each of the three steps |
+| services | each of the three cards |
+| about | the "We are Evergreen Office Cleaning" block — **not** the editor content above it |
+| testimonials | the row |
+| news | the post list |
+| contact | the form, and the "WE ARE ACCEPTING NEW CLEANING CLIENTS" block |
+
+The original has one more `wow` than the port: a twelfth on the footer's
+copyright line. It carries **no animation class**, so WOW.js reveals it and
+nothing moves — dead markup left over from an earlier theme version. It is not
+reproduced.
+
+## 11. Two invisible markup differences
+
+Neither changes a pixel; both are recorded rather than silently made.
+
+- **Section subtitles** ("Evergreen Office Cleaning" above each section title)
+  are `<h5>` in the original and `<p>` here. The original's are headings that
+  sit *above* the `<h2>` they introduce, which reads as an out-of-order outline
+  to a screen reader. They are styled identically.
+- The original's **hero title is an `<h2>`** and its only `<h1>` is "Toronto
+  Office Cleaning Services" in the About band. The port matches that. It had
+  briefly carried an `<h1>` in both places.
+
+## 12. Images the archive never captured
 
 Roughly seventy images referenced by the original were never stored by the
 Wayback crawler. Where a sibling size-variant of the same asset survived, the

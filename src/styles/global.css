@@ -548,11 +548,9 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wow {
-    visibility: visible;
-  }
-
+  .wow,
   .animated {
+    visibility: visible;
     animation: none;
   }
 }

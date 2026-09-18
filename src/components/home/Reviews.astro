@@ -154,8 +154,14 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
   }
 
   /* --- the slider --- */
+  /* The track scrolls horizontally, and its off-screen cards otherwise count
+     towards the document's scrollWidth. Nothing could be scrolled sideways —
+     `body` has `overflow-x: hidden` — but it made the page look like it
+     overflowed by 785px at 390, which hides a real overflow if one ever
+     appears. Containing it here keeps that check meaningful. */
   .ti {
     position: relative;
+    overflow: hidden;
   }
 
   .ti-track {
