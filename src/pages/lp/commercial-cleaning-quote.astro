@@ -277,7 +277,7 @@ const badges = [
     /* Honeypot: behave exactly as success would. Telling a bot it failed
        teaches it to try again with the field empty. */
     if (field('company_tax_id')) {
-      window.location.href = '/thank-you/?t=2';
+      window.location.href = '/thank-you/?f=lp-commercial-cleaning-quote';
       return;
     }
 
@@ -326,7 +326,7 @@ const badges = [
       });
 
       if (res.ok) {
-        window.location.href = '/thank-you/?t=2';
+        window.location.href = '/thank-you/?f=lp-commercial-cleaning-quote';
         return;
       }
 

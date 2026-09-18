@@ -29,7 +29,9 @@ export function getStaticPaths() {
 }
 
 const { location } = Astro.props;
-const h1 = `Commercial Cleaning in ${location.name} | ${site.name}`;
+/* Client-supplied copy wins where it exists; the generated H1 stays the
+   fallback for the locations still on the template body. */
+const h1 = location.detail?.h1 ?? `Commercial Cleaning in ${location.name} | ${site.name}`;
 const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(location.mapQuery)}&t=&z=12&ie=UTF8&iwloc=&output=embed`;
 
 /* Per-page schema. The organisation graph is global (BaseLayout); this adds the
@@ -47,7 +49,10 @@ const schema = {
 };
 ---
 
-<BaseLayout title={pageTitle(`Commercial Cleaning in ${location.name}`)} description={location.description}>
+<BaseLayout
+  title={location.title ?? pageTitle(`Commercial Cleaning in ${location.name}`)}
+  description={location.description}
+>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
 
   <div class="page-header">
@@ -64,33 +69,73 @@ const schema = {
     <div class="container">
       <div class="loc-grid">
         <div class="loc-main">
-          <p class="loc-lead">
-            Evergreen Office Cleaning has cleaned commercial space across {location.region} since {site.since},
-            working {location.landmarks}.
-          </p>
+          {
+            location.detail ? (
+              <Fragment>
+                <p class="loc-subtitle">{location.detail.subtitle}</p>
+                {location.detail.intro.map((para) => (
+                  <p class="loc-lead">{para}</p>
+                ))}
 
-          <h2>What we clean in {location.name}</h2>
-          <p>{location.focus}</p>
+                <h2>{location.detail.servicesTitle}</h2>
+                <ul class="loc-detail">
+                  {location.detail.services.map((s) => (
+                    <li>
+                      <strong>{s.label}:</strong> {s.body}
+                    </li>
+                  ))}
+                </ul>
 
-          <h3>Facility types served</h3>
-          <ul class="loc-facilities">
-            {location.facilities.map((f) => <li>{f}</li>)}
-          </ul>
+                <h2>{location.detail.reasonsTitle}</h2>
+                <ul class="loc-detail">
+                  {location.detail.reasons.map((r) => (
+                    <li>
+                      <strong>{r.label}:</strong> {r.body}
+                    </li>
+                  ))}
+                </ul>
 
-          <h3>How we work</h3>
-          <p>
-            Every contract starts with an on-site walkthrough, not a phone quote — the scope of a
-            {' '}{location.name} facility is what sets the schedule and the crew size. You get a dedicated
-            account manager, after-hours crews where the space cannot be cleaned during business
-            hours, and a written scope you can hold us to.
-          </p>
-          <p>
-            We are bonded, insured and WSIB compliant. Call
-            {' '}<a href={nap.phoneHref}>{nap.phoneDisplay}</a> or
-            {' '}<a href="/request-a-quote/">request a walkthrough</a>.
-          </p>
+                <a class="btn btn-primary btn-lg" href="/request-a-quote/">
+                  {location.detail.ctaLabel}
+                </a>
+                <p class="loc-direct">
+                  Direct phone: <a href={nap.phoneHref}>{nap.phoneDisplay}</a>
+                </p>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <p class="loc-lead">
+                  Evergreen Office Cleaning has cleaned commercial space across {location.region} since{' '}
+                  {site.since}, working {location.landmarks}.
+                </p>
 
-          <a class="btn btn-primary btn-lg" href="/request-a-quote/">Request a free quote</a>
+                <h2>What we clean in {location.name}</h2>
+                <p>{location.focus}</p>
+
+                <h3>Facility types served</h3>
+                <ul class="loc-facilities">
+                  {location.facilities.map((f) => (
+                    <li>{f}</li>
+                  ))}
+                </ul>
+
+                <h3>How we work</h3>
+                <p>
+                  Every contract starts with an on-site walkthrough, not a phone quote — the scope of a{' '}
+                  {location.name} facility is what sets the schedule and the crew size. You get a
+                  dedicated account manager, after-hours crews where the space cannot be cleaned during
+                  business hours, and a written scope you can hold us to.
+                </p>
+                <p>
+                  We are bonded, insured and WSIB compliant. Call{' '}
+                  <a href={nap.phoneHref}>{nap.phoneDisplay}</a> or{' '}
+                  <a href="/request-a-quote/">request a walkthrough</a>.
+                </p>
+
+                <a class="btn btn-primary btn-lg" href="/request-a-quote/">Request a free quote</a>
+              </Fragment>
+            )
+          }
         </div>
 
         <aside class="loc-map" aria-label={`Map of ${location.name}`}>
@@ -149,6 +194,34 @@ const schema = {
     font-size: 1.25rem;
     line-height: 1.2;
     margin: 26px 0 12px;
+  }
+
+  .loc-subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--ink-heading);
+    margin: 0 0 18px;
+  }
+
+  .loc-detail {
+    margin: 0 0 22px;
+    padding-left: 20px;
+  }
+
+  .loc-detail li {
+    margin-bottom: 11px;
+    line-height: 1.6;
+  }
+
+  .loc-detail strong {
+    color: var(--ink-heading);
+  }
+
+  .loc-direct {
+    margin-top: 16px;
+    font-size: 0.9375rem;
   }
 
   .loc-facilities {

@@ -34,10 +34,30 @@ const badges = [
 ];
 
 const bullets = [
-  'A dedicated account manager, not a call centre',
-  'Flexible after-hours and weekend crews',
-  'Written scope after an on-site walkthrough',
-  'Bonded, insured and WSIB compliant',
+  {
+    label: 'WSIB Ontario Registered, Bonded & Insured',
+    body: 'Complete liability coverage and background-checked staff.',
+  },
+  {
+    label: 'Flexible After-Hours Service',
+    body: 'Scheduled around your business hours with zero daytime disruption.',
+  },
+  {
+    label: 'Consistent Cleaners',
+    body: 'The same dedicated crew cleans your facility on every visit.',
+  },
+  {
+    label: 'Fast, Free On-Site Proposals',
+    body: 'Accurate customized pricing without hidden contract clauses.',
+  },
+];
+
+const facilityTypes = [
+  { value: 'corporate-office', label: 'Corporate / Professional Office' },
+  { value: 'medical-dental', label: 'Medical / Dental Clinic' },
+  { value: 'industrial-warehouse', label: 'Industrial / Warehouse' },
+  { value: 'retail-commercial', label: 'Retail Store / Showroom' },
+  { value: 'other', label: 'Other Commercial Property' },
 ];
 
 const steps = [
@@ -47,25 +67,42 @@ const steps = [
 ];
 
 const sizes = [
-  { value: 'under-5k', label: 'Under 5,000 sq. ft. (Small Office)' },
-  { value: '5k-20k', label: '5,000 - 20,000 sq. ft. (Mid-size Commercial)' },
-  { value: '20k-50k', label: '20,000 - 50,000 sq. ft. (Large Facility / Industrial)' },
-  { value: '50k-plus', label: '50,000+ sq. ft. (Multi-tenant / Warehouse)' },
-  { value: 'post-construction', label: 'Post-Construction Turnover' },
+  { value: 'under-2500', label: 'Under 2,500 sq. ft.' },
+  { value: '2500-10000', label: '2,500 - 10,000 sq. ft.' },
+  { value: '10000-25000', label: '10,000 - 25,000 sq. ft.' },
+  { value: '25000-plus', label: '25,000+ sq. ft.' },
+  { value: 'not-sure', label: 'Not Sure / Needs Assessment' },
 ];
 ---
 
 <LandingLayout
   title="Commercial & Office Cleaning Toronto | Free On-Site Proposal"
-  description="Top-rated commercial and office cleaning in Toronto and the GTA. Get a walkthrough estimate within 24 business hours. Bonded, insured and WSIB compliant."
+  description="Reliable commercial and office cleaning across Toronto, Mississauga, Vaughan and the GTA. Free on-site proposal, response within 2 business hours. WSIB insured and bonded."
+  callNote="Fast Response &middot; Direct Account Manager"
 >
   <section class="lp-hero">
     <div class="lp-wrap lp-hero-grid">
       <div class="lp-pitch">
-        <h1>Top-Rated Commercial &amp; Office Cleaning in Toronto</h1>
+        <p class="lp-eyebrow">Toronto &amp; GTA Commercial Cleaning Specialists</p>
+        <h1>Reliable Office &amp; Commercial Cleaning You Can Count On Every Single Night.</h1>
         <p class="lp-sub">
-          On-site walkthrough, written scope, and a crew that turns up. Serving Toronto and the
-          GTA since {site.since}.
+          Over 20 years of trusted janitorial excellence for corporate offices, medical clinics,
+          and industrial facilities across Toronto, Mississauga, Vaughan, and the GTA.
+        </p>
+
+        <ul class="lp-bullets">
+          {
+            bullets.map((b) => (
+              <li>
+                <strong>{b.label}:</strong> {b.body}
+              </li>
+            ))
+          }
+        </ul>
+
+        <p class="lp-rating">
+          <span class="lp-rating-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span><strong>4.9 / 5</strong> rating from local GTA property managers and business owners</span>
         </p>
 
         <ul class="lp-badges">
@@ -78,24 +115,20 @@ const sizes = [
             ))
           }
         </ul>
-
-        <ul class="lp-bullets">
-          {bullets.map((b) => <li>{b}</li>)}
-        </ul>
       </div>
 
       <div class="lp-form-col">
         <form id="ppc-lead-form" class="lp-form" novalidate>
-          <h2>Request an On-Site Proposal</h2>
-          <p class="lp-form-note">Receive a detailed proposal within 24 business hours.</p>
+          <h2>Get Your Free Quote</h2>
+          <p class="lp-form-note">We'll reach out within 2 business hours with pricing details.</p>
 
           <div class="lp-field">
-            <label for="fullName">Full Name <span aria-hidden="true">*</span></label>
+            <label for="fullName">Your Name <span aria-hidden="true">*</span></label>
             <input type="text" id="fullName" name="fullName" required autocomplete="name" placeholder="Jane Doe" />
           </div>
 
           <div class="lp-field">
-            <label for="workEmail">Business Email <span aria-hidden="true">*</span></label>
+            <label for="workEmail">Work Email <span aria-hidden="true">*</span></label>
             <input
               type="email"
               id="workEmail"
@@ -122,10 +155,18 @@ const sizes = [
           </div>
 
           <div class="lp-field">
-            <label for="facilitySize">Facility Size / Scope <span aria-hidden="true">*</span></label>
-            <select id="facilitySize" name="facilitySize" required>
-              <option value="" disabled selected>Select facility size</option>
-              {sizes.map((s) => <option value={s.value}>{s.label}</option>)}
+            <label for="facilityType">Facility Type <span aria-hidden="true">*</span></label>
+            <select id="facilityType" name="facilityType" required>
+              <option value="" disabled selected>Select Facility Type...</option>
+              {facilityTypes.map((f) => <option value={f.label}>{f.label}</option>)}
+            </select>
+          </div>
+
+          <div class="lp-field">
+            <label for="facilitySize">Approximate Area (Sq. Ft.)</label>
+            <select id="facilitySize" name="facilitySize">
+              <option value="" disabled selected>Select approximate area</option>
+              {sizes.map((s) => <option value={s.label}>{s.label}</option>)}
             </select>
           </div>
 
@@ -134,6 +175,8 @@ const sizes = [
           <div class="lp-hp" aria-hidden="true">
             <label for="company_tax_id">Company tax ID</label>
             <input type="text" id="company_tax_id" name="company_tax_id" tabindex="-1" autocomplete="off" />
+            <label for="website_trap">Website</label>
+            <input type="text" id="website_trap" name="website_trap" tabindex="-1" autocomplete="off" />
           </div>
 
           <p class="lp-error" id="lp-error" role="alert" hidden></p>
@@ -146,8 +189,8 @@ const sizes = [
               scoring on this form, not removing the check. */}
           <Recaptcha />
 
-          <button type="submit" class="lp-submit">Get My Free Proposal &rarr;</button>
-          <p class="lp-confidential">Information is kept strictly confidential.</p>
+          <button type="submit" class="lp-submit">Request Free Walkthrough &amp; Quote</button>
+          <p class="lp-confidential">We respect your privacy. No pushy sales calls, no spam.</p>
         </form>
       </div>
     </div>
@@ -218,7 +261,8 @@ const sizes = [
 
       // Honeypot: a bot filled the hidden field. Stop, silently.
       const honeypot = leadForm.querySelector<HTMLInputElement>('input[name="company_tax_id"]');
-      if (honeypot?.value) return;
+      const trap = leadForm.querySelector<HTMLInputElement>('input[name="website_trap"]');
+      if (honeypot?.value || trap?.value) return;
 
       if (!leadForm.checkValidity()) {
         leadForm.reportValidity();
@@ -227,11 +271,13 @@ const sizes = [
 
       const submit = leadForm.querySelector<HTMLButtonElement>('button[type="submit"]');
       const facilitySize = (document.getElementById('facilitySize') as HTMLSelectElement).value;
+      const facilityType = (document.getElementById('facilityType') as HTMLSelectElement).value;
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'lead_form_submission',
         form_id: 'ppc-lead-form',
+        facility_type: facilityType,
         facility_size: facilitySize,
       });
 
@@ -250,6 +296,7 @@ const sizes = [
             email: (document.getElementById('workEmail') as HTMLInputElement).value,
             phone: (document.getElementById('phone') as HTMLInputElement).value,
             size: facilitySize,
+            facility_type: facilityType,
             recaptcha:
               (leadForm.querySelector('.wpf-recaptcha-hidden') as HTMLInputElement | null)?.value ?? '',
             page_url: location.href,
@@ -263,7 +310,7 @@ const sizes = [
         });
 
         if (res.ok) {
-          window.location.href = '/thank-you/';
+          window.location.href = '/thank-you/?f=ppc-lead-form';
           return;
         }
         if (res.status === 403) {
@@ -312,6 +359,35 @@ const sizes = [
     }
   }
 
+  .lp-eyebrow {
+    display: inline-block;
+    margin: 0 0 14px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: rgba(77, 140, 43, 0.12);
+    color: var(--brand);
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+
+  .lp-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 24px;
+    font-size: 0.9375rem;
+    color: var(--ink-heading);
+  }
+
+  .lp-rating-stars {
+    color: #fbc02d;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+  }
+
   .lp-pitch h1 {
     font-size: 2.25rem;
     line-height: 1.15;
@@ -319,7 +395,36 @@ const sizes = [
   }
 
   @media (min-width: 768px) {
-    .lp-pitch h1 {
+    .lp-eyebrow {
+    display: inline-block;
+    margin: 0 0 14px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: rgba(77, 140, 43, 0.12);
+    color: var(--brand);
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+
+  .lp-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 24px;
+    font-size: 0.9375rem;
+    color: var(--ink-heading);
+  }
+
+  .lp-rating-stars {
+    color: #fbc02d;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+  }
+
+  .lp-pitch h1 {
       font-size: 2.75rem;
     }
   }
@@ -367,9 +472,17 @@ const sizes = [
   }
 
   .lp-bullets {
-    margin: 0;
+    margin: 0 0 22px;
     padding-left: 20px;
-    line-height: 1.8;
+    line-height: 1.65;
+  }
+
+  .lp-bullets li {
+    margin-bottom: 10px;
+  }
+
+  .lp-bullets strong {
+    color: var(--ink-heading);
   }
 
   /* --- the form --- */

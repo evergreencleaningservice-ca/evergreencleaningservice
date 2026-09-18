@@ -45,11 +45,12 @@ const icons: Record<string, string> = {
       </div>
 
       <div class="footer-col footer-col-areas">
+        <h4 class="footer-areas-title">Service Areas</h4>
         <ul class="footer-areas">
           {
             footerAreas.map((area) => (
               <li>
-                <a href="#">{area}</a>
+                <a href={area.href}>{area.label}</a>
               </li>
             ))
           }
@@ -137,6 +138,16 @@ const icons: Record<string, string> = {
     max-width: 100%;
   }
 
+  .footer-areas-title {
+    margin: 0 0 12px;
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--ink-heading);
+  }
+
   .footer-areas {
     list-style: none;
     margin: 0;
@@ -162,7 +173,17 @@ const icons: Record<string, string> = {
   }
 
   @media (max-width: 767px) {
-    .footer-areas {
+    .footer-areas-title {
+    margin: 0 0 12px;
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--ink-heading);
+  }
+
+  .footer-areas {
       text-align: center;
     }
   }

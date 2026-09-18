@@ -39,6 +39,26 @@ export type Location = {
   description: string;
   /** true where the copy was written here rather than supplied */
   needsClientReview?: boolean;
+  /** Explicit title tag, where the client has specified one */
+  title?: string;
+  /**
+   * Long-form client-supplied copy. Where present the page renders this
+   * instead of the generic body built from `focus`/`facilities`/`landmarks`,
+   * which stays the fallback for the locations that have no long copy yet.
+   */
+  detail?: LocationDetail;
+};
+
+export type LocationDetail = {
+  /** Overrides the template's generated H1 */
+  h1: string;
+  subtitle: string;
+  intro: string[];
+  servicesTitle: string;
+  services: { label: string; body: string }[];
+  reasonsTitle: string;
+  reasons: { label: string; body: string }[];
+  ctaLabel: string;
 };
 
 export const locations: Location[] = [
@@ -77,7 +97,51 @@ export const locations: Location[] = [
     landmarks: 'the Airport Corporate Centre, Meadowvale Business Park, Sheridan Park and the Dixie–Britannia corridor',
     mapQuery: 'Mississauga, Ontario, Canada',
     description:
-      'Commercial and office cleaning in Mississauga — logistics hubs, Pearson-area business parks and flex offices, cleaned on schedules built around shift work.',
+      'Trusted commercial cleaning and office janitorial services in Mississauga and the Airport Corporate Centre. WSIB insured, bonded, and reliable. Request a quote.',
+    title: 'Commercial Cleaning & Office Janitorial Services Mississauga | Evergreen',
+    detail: {
+      h1: 'Commercial Cleaning & Office Janitorial Services in Mississauga',
+      subtitle: 'Reliable, Professional Facility Maintenance for Mississauga Businesses',
+      intro: [
+        'From corporate headquarters along the Hurontario corridor and the Airport Corporate Centre to high-traffic industrial complexes in Meadowvale, Evergreen Cleaning Service provides comprehensive commercial cleaning and janitorial solutions tailored to your operational schedule.',
+        'With over 20 years of commercial cleaning experience across Peel Region and the GTA, our certified, bonded, and WSIB-insured teams ensure your facility maintains an immaculate, healthy environment for employees, clients, and visitors.',
+      ],
+      servicesTitle: 'Mississauga Commercial Facilities We Service',
+      services: [
+        {
+          label: 'Corporate Offices & Headquarters',
+          body: 'Daily or multi-day evening janitorial care, boardroom maintenance, workstation sanitization, and washroom hygiene programs.',
+        },
+        {
+          label: 'Logistics & Industrial Warehouses',
+          body: "Heavy-duty floor scrubbing, high-dusting, and facility upkeep in Mississauga's major freight and manufacturing hubs.",
+        },
+        {
+          label: 'Medical & Dental Clinics',
+          body: 'Health-grade sanitization adhering strictly to clinical hygiene standards and cross-contamination prevention protocols.',
+        },
+        {
+          label: 'Retail & Showrooms',
+          body: 'Strip and waxing, floor polishing, and post-construction detailing.',
+        },
+      ],
+      reasonsTitle: 'Why Mississauga Property Managers Choose Evergreen',
+      reasons: [
+        {
+          label: 'Flexible Scheduling (Zero Disruption)',
+          body: 'Complete after-hours and weekend coverage scheduled around your operational shifts.',
+        },
+        {
+          label: 'Direct Account Management',
+          body: 'You receive direct access to an account executive who coordinates your site walkthroughs, inspections, and adjustments.',
+        },
+        {
+          label: 'Fully Insured & Background-Checked',
+          body: 'All cleaning personnel undergo background screening and are covered under full liability insurance and WSIB Ontario.',
+        },
+      ],
+      ctaLabel: 'Request a Free Mississauga Walkthrough & Proposal',
+    },
   },
   {
     slug: 'etobicoke',
@@ -112,7 +176,51 @@ export const locations: Location[] = [
     landmarks: 'the Highway 400 distribution corridor, Concord, Woodbridge and the Vaughan Metropolitan Centre',
     mapQuery: 'Vaughan, Ontario, Canada',
     description:
-      'Commercial and industrial cleaning in Vaughan — distribution centres, manufacturing floors and corporate headquarters, including high dusting and concrete floor scrubbing.',
+      'Professional commercial cleaning and janitorial services in Vaughan, Concord, and Woodbridge. Reliable, WSIB insured, and bonded. Get a quote today.',
+    title: 'Commercial Office Cleaning & Janitorial Vaughan & Concord | Evergreen',
+    detail: {
+      h1: 'Commercial Cleaning & Building Maintenance in Vaughan & Concord',
+      subtitle: 'Keep Your Vaughan Commercial Property Spotless, Professional, and Safe',
+      intro: [
+        'As Vaughan continues rapid corporate expansion across the Vaughan Metropolitan Centre (VMC) and industrial sectors in Concord and Woodbridge, maintaining an exceptional physical workspace is critical. Evergreen Cleaning Service provides top-tier commercial office cleaning and building maintenance designed for modern businesses.',
+        'Whether you run a high-tech corporate office, a commercial showroom along Highway 7, or a high-capacity distribution warehouse near Highway 400, our dedicated cleaning teams deliver consistent, reliable service.',
+      ],
+      servicesTitle: 'Cleaning Services Tailored for Vaughan Enterprises',
+      services: [
+        {
+          label: 'Commercial Office Janitorial',
+          body: 'Complete vacuuming, trash removal, touch-point disinfection, glass cleaning, and kitchen sanitization.',
+        },
+        {
+          label: 'Industrial & Warehouse Floor Care',
+          body: 'Auto-scrubbing, degreasing, concrete sealing, and post-construction cleaning.',
+        },
+        {
+          label: 'Commercial Carpet & Hard Floor Care',
+          body: 'Hot water extraction carpet cleaning and hard-surface floor strip, seal, and wax.',
+        },
+        {
+          label: 'Emergency Clean-Up Services',
+          body: 'Rapid dispatch for unexpected spills, water events, or last-minute property inspections.',
+        },
+      ],
+      reasonsTitle: 'The Evergreen Difference for Vaughan Facilities',
+      reasons: [
+        {
+          label: 'Consistent Teams',
+          body: 'You receive dedicated cleaners assigned to your specific property for consistent quality and site familiarity.',
+        },
+        {
+          label: 'WSIB Ontario Registered & Bonded',
+          body: 'Total peace of mind for property managers and building owners.',
+        },
+        {
+          label: 'Eco-Friendly Solutions',
+          body: 'Green cleaning products that protect indoor air quality without sacrificing disinfectant power.',
+        },
+      ],
+      ctaLabel: 'Schedule an On-Site Vaughan Consultation',
+    },
   },
   {
     slug: 'markham',

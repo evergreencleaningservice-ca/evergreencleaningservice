@@ -11,38 +11,23 @@
  * who never submitted anything.
  */
 import LandingLayout from '../layouts/LandingLayout.astro';
-import { nap } from '../data/site';
+import { nap, site } from '../data/site';
 
-/* The two landing pages promise different response times — 24 business hours
-   on /lp/commercial-cleaning/, 2 on /lp/commercial-cleaning-quote/ — and this
-   page is shared, so the promise arrives with the redirect as `?t=2`.
+/* Both landing pages now promise a response within 2 business hours, so the
+   `?t=` switch that rendered one of two numbers is gone — one promise, stated
+   once. What still arrives on the URL is `?f=<form_id>`, and it is used for
+   the conversion event only, never written into the page as text.
    
-   It CANNOT be read here. This is a static build: `Astro.url.searchParams` is
-   evaluated once, at build time, against a URL that has no query string, so
-   reading it here bakes one answer into the HTML and the redirect changes
-   nothing. (It did exactly that, and the end-to-end test caught it: the form
-   redirected to `?t=2` and the page said 24.)
-   
-   So both numbers are rendered and CSS picks one, switched by a class that a
-   head script sets before first paint — no flicker, and no dependence on when
-   a module script happens to run. Nothing from the query string is ever
-   written into the page as text, so an editable `?t=` is not an injection
-   surface; it only toggles a class. */
+   Worth keeping in mind if a third page ever needs a different promise: this
+   is a static build, so `Astro.url.searchParams` resolves once at build time
+   against a URL with no query string. Reading a param in frontmatter bakes
+   one answer into the HTML. It has to be done in the browser. */
 ---
 
 <LandingLayout
   title={`Thank you — we have your request | ${nap.name}`}
   description="Your quote request has been received. Our account executive will be in touch shortly."
 >
-  {/* Placed above the text it affects and synchronous, so it runs while the
-      parser is still upstream of `.ty-lead` — the class is set before that
-      paragraph is ever painted, and there is no flash of the wrong number. */}
-  <script is:inline>
-    if (new URLSearchParams(location.search).get('t') === '2') {
-      document.documentElement.classList.add('ty-fast');
-    }
-  </script>
-
   <section class="ty">
     <div class="ty-inner">
       <div class="ty-tick" aria-hidden="true">
@@ -57,18 +42,24 @@ import { nap } from '../data/site';
         </svg>
       </div>
 
-      <h1>Thank you — we have your request</h1>
+      <h1>We Received Your Cleaning Request!</h1>
       <p class="ty-lead">
-        Our account executive will contact you within
-        {' '}<strong><span class="ty-slow">24</span><span class="ty-fast-n">2</span> business hours</strong>
-        {' '}to arrange your on-site walkthrough.
-      </p>
-      <p>
-        Need it sooner? Call us directly and someone will pick up — no queue, no call centre.
+        Thank you for reaching out to {site.legalName}. One of our dedicated account executives is
+        reviewing your facility requirements and will follow up with you within
+        {' '}<strong>2 business hours</strong>.
       </p>
 
+      <div class="ty-rush-box">
+        <strong>Need an immediate quote or emergency cleaning service?</strong><br />
+        Call us directly at <a href={nap.phoneHref}>{nap.phoneDisplay}</a>.
+      </div>
+
       <a class="ty-call" href={nap.phoneHref}>Call {nap.phoneDisplay} now</a>
-      <p class="ty-rush">For same-day and emergency requests, calling is always faster.</p>
+
+      {/* The one link off this page, and it only exists after the conversion
+          has already been recorded — so it costs nothing the isolation rules
+          were protecting. */}
+      <p class="ty-home"><a href="/">Return to Home Page</a></p>
     </div>
   </section>
   <script is:inline>
@@ -87,12 +78,15 @@ import { nap } from '../data/site';
      * `lead_form_confirmed`, and use `form_id` to tell the two landing pages
      * apart. Destination-based conversions can fire on this URL directly.
      */
-    var fast = new URLSearchParams(location.search).get('t') === '2';
+    /* Whitelisted: `?f=` is visitor-editable, so an unknown value reports as
+       'unknown' rather than being passed through into the analytics stream. */
+    var known = ['ppc-lead-form', 'lp-commercial-cleaning-quote'];
+    var f = new URLSearchParams(location.search).get('f');
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'lead_form_confirmed',
-      form_id: fast ? 'lp-commercial-cleaning-quote' : 'ppc-lead-form',
-      response_promise_hours: fast ? 2 : 24,
+      form_id: known.indexOf(f) === -1 ? 'unknown' : f,
+      response_promise_hours: 2,
     });
   </script>
 </LandingLayout>
@@ -147,23 +141,26 @@ import { nap } from '../data/site';
     background: var(--brand-dark);
   }
 
-  /* Default is the weaker promise; the head script opts into the stronger one
-     only when the fast landing page sent the visitor here. */
-  .ty-fast-n {
-    display: none;
+  .ty-rush-box {
+    margin: 26px 0 0;
+    padding: 20px;
+    border-radius: 6px;
+    background: #f4f8f4;
+    line-height: 1.6;
   }
 
-  :global(html.ty-fast) .ty-slow {
-    display: none;
+  .ty-rush-box a {
+    color: var(--brand);
+    font-weight: 700;
   }
 
-  :global(html.ty-fast) .ty-fast-n {
-    display: inline;
+  .ty-home {
+    margin: 22px 0 0;
+    font-size: 0.9375rem;
   }
 
-  .ty-rush {
-    margin: 12px 0 0;
-    font-size: 0.8125rem;
-    color: var(--ink);
+  .ty-home a {
+    color: var(--brand);
+    font-weight: 600;
   }
 </style>

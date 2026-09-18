@@ -146,7 +146,12 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
   /* Honeypot. A real person never sees this field, so anything in it is a bot.
      Answer 200 rather than an error — telling a bot it failed teaches it to try
      again with the field left blank. Nothing is stored. */
-  if (str(body.company_tax_id, 200) || str(body['company-website'], 200)) return json({ ok: true });
+  if (
+    str(body.company_tax_id, 200) ||
+    str(body['company-website'], 200) ||
+    str(body.website_trap, 200)
+  )
+    return json({ ok: true });
 
   /* --- captcha ------------------------------------------------------------
      After the honeypot, so a bot that fell into it costs nothing, and before

@@ -187,16 +187,30 @@ export const social = [
   { name: 'LinkedIn', href: 'https://www.linkedin.com/company/evergreen-cleaning-service-toronto/' },
 ] as const;
 
-/** Footer service-area list, in the order the original site shows it. */
+/**
+ * Footer service-area list, in the order the original site shows it.
+ *
+ * Every entry on the original is `href="#"` — eight links that go nowhere.
+ * That was faithfully ported and is pure loss now that the location pages
+ * exist, so each one points at a real page.
+ *
+ * Richmond Hill and Scarborough have no page of their own. They are areas the
+ * business serves, named in `serviceAreas` on the contact section, so they are
+ * kept here and aimed at the /locations/ hub rather than dropped — removing a
+ * claimed service area to tidy a list would be a change to what the business
+ * says it covers, which is not a developer's call.
+ */
 export const footerAreas = [
-  'Toronto',
-  'Greater Toronto Area',
-  'Mississauga',
-  'Etobicoke',
-  'Richmond Hill',
-  'Markham',
-  'Vaughan',
-  'Scarborough',
+  { label: 'Toronto', href: '/locations/toronto-downtown/' },
+  { label: 'Greater Toronto Area', href: '/locations/' },
+  { label: 'Mississauga', href: '/locations/mississauga/' },
+  { label: 'Etobicoke', href: '/locations/etobicoke/' },
+  { label: 'Richmond Hill', href: '/locations/' },
+  { label: 'Markham', href: '/locations/markham/' },
+  { label: 'Vaughan / Concord', href: '/locations/vaughan/' },
+  { label: 'Scarborough', href: '/locations/' },
+  { label: 'Brampton', href: '/locations/brampton/' },
+  { label: 'Oakville', href: '/locations/oakville/' },
 ] as const;
 
 /**
