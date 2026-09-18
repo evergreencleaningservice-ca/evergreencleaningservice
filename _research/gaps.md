@@ -96,14 +96,23 @@ committed at `public/video/lead-net.mp4` — 720x540, H.264 and AAC, 42.2s, moov
 atom ahead of the data so it starts without the whole file. If it is ever
 missing the widget renders nothing rather than showing an empty black box.
 
-**One thing about it still needs a human eye.** The clip is 4:3 landscape and
-the widget shows portrait, so the orb fits the frame (letterboxed, as the
-original's does) while the panel takes a 320x477 slice out of the middle of it,
-which is the picture area the original has. Whether that centre slice frames the
-speaker the way the live widget does cannot be checked from here — this
-container's Chromium is the open-source build with no H.264 decoder, so the clip
-has never been played or seen during this build. If the crop is wrong, the one
-value to change is the `aspect-ratio` on `.leadnet-stage`.
+The clip is 4:3 landscape and the widget shows portrait, so the orb fits the
+frame while the panel takes a 320x477 slice out of the middle of it, which is
+the picture area the original has.
+
+The clip also carries **black letterbox bars baked in** — it is widescreen
+footage inside a 4:3 container. The portrait crop keeps them, which put black
+bands above and below the picture that the original does not have. Rather than
+hard-code a bar height, the widget reads the first frame on a canvas and finds
+the picture band, then scales and offsets the video so the bars fall outside the
+panel. That survives the clip being replaced. The orb is deliberately left
+alone: the original's orb shows the bars too.
+
+**What has not been seen here.** This container's Chromium is the open-source
+build with no H.264 decoder, so the client's clip has never been decoded during
+this build. The layout and the bar-finding were proved against a generated
+720x540 clip with 67.5px bars, which this Chromium can decode; how the portrait
+crop frames the speaker still wants a human eye.
 
 ## 9. Images the archive never captured
 

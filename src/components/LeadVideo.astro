@@ -97,7 +97,7 @@ const hasPoster = inPublic(poster);
       {/* --- open --- */}
       <div class="leadnet-panel">
         <div class="leadnet-bar">
-          <button class="leadnet-ctrl" type="button" data-act="playpause" aria-pressed="false">
+          <button class="leadnet-ctrl" type="button" data-act="playpause">
             <span class="screen-reader-text leadnet-ctrl-label">Pause video</span>
             <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M8 5h3v14H8zm5 0h3v14h-3z" />
@@ -121,7 +121,7 @@ const hasPoster = inPublic(poster);
             </svg>
           </button>
 
-          <button class="leadnet-ctrl" type="button" data-act="mute" aria-pressed="true">
+          <button class="leadnet-ctrl" type="button" data-act="mute">
             <span class="screen-reader-text leadnet-ctrl-label">Turn the sound on</span>
             <svg class="i-unmuted" viewBox="0 0 24 24" aria-hidden="true">
               <path fill="currentColor" d="M4 9v6h4l5 4V5L8 9z" />
@@ -366,19 +366,24 @@ const hasPoster = inPublic(poster);
     background: #5a5a5a;
   }
 
-  /* Each toggle carries both icons; the script picks which one shows. */
+  /* Each toggle carries both icons and the script picks one — but the two
+     buttons read differently, which is the convention every media player
+     follows and which an earlier pass here got wrong for the speaker.
+     Play/pause shows the ACTION: a pause bar while it is playing. The speaker
+     shows the STATE: waves when you can hear it, crossed out when you cannot.
+     Showing the speaker's action inverted it — waves meant silence. */
   .leadnet-ctrl .i-play,
-  .leadnet-ctrl .i-muted {
+  .leadnet-ctrl .i-unmuted {
     display: none;
   }
 
   .leadnet-ctrl.is-paused .i-pause,
-  .leadnet-ctrl.is-unmuted .i-unmuted {
+  .leadnet-ctrl.is-unmuted .i-muted {
     display: none;
   }
 
   .leadnet-ctrl.is-paused .i-play,
-  .leadnet-ctrl.is-unmuted .i-muted {
+  .leadnet-ctrl.is-unmuted .i-unmuted {
     display: block;
   }
 
@@ -392,10 +397,17 @@ const hasPoster = inPublic(poster);
     line-height: 0;
     aspect-ratio: 320 / 477;
     background: #000;
+    overflow: hidden;
   }
 
+  /* Absolutely placed because the script may resize and offset it to crop the
+     letterbox bars baked into the clip — see `fitToPicture`. Until it does,
+     these values fill the stage. */
   .leadnet-video {
     display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -494,7 +506,6 @@ const hasPoster = inPublic(poster);
 
     const setPaused = (paused: boolean) => {
       playPause.classList.toggle('is-paused', paused);
-      playPause.setAttribute('aria-pressed', String(paused));
       label(playPause, paused ? 'Play video' : 'Pause video');
     };
 
@@ -502,6 +513,80 @@ const hasPoster = inPublic(poster);
     // refused anyway the element shows its poster, which is still the right
     // thing to look at.
     const nudge = (el: HTMLVideoElement) => el.play().catch(() => {});
+
+    // --- cropping the clip's baked-in letterbox ---
+    //
+    // The client's clip is widescreen footage inside a 4:3 container, so it
+    // carries black bars top and bottom. The panel crops to portrait, and
+    // those bars survive the crop — they show as black bands above and below
+    // the picture, which the original widget does not have.
+    //
+    // The bar height is a property of the clip, not something to hard-code:
+    // read it off the first frame instead, so this keeps working if the clip
+    // is ever replaced. The orb is deliberately left alone — the original's
+    // orb shows the bars too.
+    let cropped = false;
+
+    const findPicture = (el: HTMLVideoElement) => {
+      const w = el.videoWidth;
+      const h = el.videoHeight;
+      if (!w || !h) return null;
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        if (!ctx) return null;
+        ctx.drawImage(el, 0, 0);
+
+        const dark = (y: number) => {
+          const d = ctx.getImageData(0, y, w, 1).data;
+          for (let i = 0; i < d.length; i += 4) {
+            if (d[i] > 24 || d[i + 1] > 24 || d[i + 2] > 24) return false;
+          }
+          return true;
+        };
+
+        // Never eat more than a third from either end: a dark opening frame
+        // must not be mistaken for a letterbox.
+        let top = 0;
+        let bottom = h - 1;
+        while (top < h / 3 && dark(top)) top++;
+        while (bottom > (h * 2) / 3 && dark(bottom)) bottom--;
+
+        const picture = bottom - top + 1;
+        // A few stray rows are not a letterbox, and neither is a frame that
+        // came back mostly black.
+        if (picture > h - 8 || picture < h / 2) return null;
+        return { top, bottom, h, picture };
+      } catch {
+        // A cross-origin clip taints the canvas. Leave the video as it is.
+        return null;
+      }
+    };
+
+    // Scale the video box so the picture alone covers the stage, then offset it
+    // so the picture's centre sits on the stage's centre.
+    const fitToPicture = (el: HTMLVideoElement) => {
+      if (cropped) return;
+      const found = findPicture(el);
+      if (!found) return;
+      cropped = true;
+      const middle = (found.top + found.bottom) / 2;
+      video.style.height = `${(100 * found.h) / found.picture}%`;
+      video.style.top = `${100 * (0.5 - middle / found.picture)}%`;
+    };
+
+    // The orb's clip loads first, so measure from whichever has a frame.
+    thumb.addEventListener('loadeddata', () => fitToPicture(thumb));
+    video.addEventListener('loadeddata', () => fitToPicture(video));
+    // A clip that opens on a fade from black gives nothing to measure at the
+    // first frame, so try once more a second in, by which time it has a picture.
+    thumb.addEventListener('timeupdate', function retry() {
+      if (thumb.currentTime < 1) return;
+      thumb.removeEventListener('timeupdate', retry);
+      fitToPicture(thumb);
+    });
 
     // --- open and close ---
     panel.querySelector('.leadnet-open')!.addEventListener('click', () => {
@@ -546,7 +631,6 @@ const hasPoster = inPublic(poster);
     mute.addEventListener('click', () => {
       video.muted = !video.muted;
       mute.classList.toggle('is-unmuted', !video.muted);
-      mute.setAttribute('aria-pressed', String(video.muted));
       label(mute, video.muted ? 'Turn the sound on' : 'Turn the sound off');
     });
 
