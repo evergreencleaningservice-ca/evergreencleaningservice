@@ -84,6 +84,8 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
     </noscript>
   </head>
   <body>
+    <GoogleTagManager noscript />
+
     {/* `#page` and `#content` are the original's ids: the skip link and the
         footer's back-to-top arrow both address them. */}
     <div id="page" class="site">

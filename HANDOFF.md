@@ -259,21 +259,41 @@ used to say so; it was removed because the original has no such line and the
 brief is to match. The component headers and `gaps.md` record this. Either wire
 a handler or put the notice back — the client has not chosen.
 
-### 7.2 Google Tag Manager is not rendered
+### 7.2 Google Tag Manager — live on staging as well as production
 
-`site.ts` defines `gtmId: 'GTM-5PRC4HBV'` and **nothing uses it**. The original
-carries the container on every 2025 capture.
+`GTM-5PRC4HBV` loads on every page, in both halves the original has: the head
+loader and the `<noscript>` iframe first inside `<body>`.
 
-Reading the live container shows it is not decorative: Google Ads
-`AW-16819334998` with three conversion actions and Enhanced Conversions,
-remarketing, Microsoft Ads UET `187178776` with four tags, GA4
-`G-R27QW21PMT`, a conversion linker, and a SearchKings agency template.
-**Shipping without it loses all paid-ads conversion tracking on day one.**
+**One id, not five.** Verified against the 2026-09-18 archive capture: the
+original's markup contains `GTM-5PRC4HBV` four times and no `AW-`, `G-`, `UA-`
+or UET id anywhere. Everything else arrives inside the container — Google Ads
+`AW-16819334998` (three conversion actions, two with Enhanced Conversions, plus
+remarketing and a conversion linker), GA4 `G-R27QW21PMT`, Microsoft Ads UET
+`187178776`, and the SearchKings template. Tag Assistant lists three Google tags
+on a page whose source contains one, because it reports what loaded. Adding
+gtag directly alongside this would double-count every conversion.
 
-It was deliberately not added yet: firing live conversion tags from a staging
-site the client is clicking through would push fake conversions into their real
-Google Ads and GA4 accounts. It needs a hostname condition, or to go in at
-cutover.
+**Where it fires** is `site.analyticsHosts` and nothing else. An earlier version
+also required a build-time `PUBLIC_ANALYTICS=1` that `build:preview` never set,
+so staging shipped no tag at all and there was no way to confirm the port short
+of going live — two mechanisms for one decision, and two ways to ship a silently
+untagged site. That guard is gone; the hostname allowlist is the only one.
+
+Staging is on the list deliberately, and it costs something: staging pageviews
+reach the live GA4 property and the live remarketing lists. Loading a page is
+not a conversion — those fire on `lead_form_submission` and `click_to_call` —
+so **do not submit the staging form unless testing the form is the point**, or
+it registers a real conversion in the client's Google Ads account.
+
+The loader pushes `site_environment: 'staging' | 'production'` ahead of
+`gtm.start`, so SearchKings can exclude staging with one blocking trigger on
+`site_environment equals staging` without any change here.
+
+Measured in Chromium on the deployed staging site — home, a blog post and the
+PPC landing page: `google_tag_manager` holds `GTM-5PRC4HBV`, `G-R27QW21PMT` and
+`AW-16819334998`; `analytics.google.com/g/collect`, the AW remarketing pixel and
+`bat.bing.com/p/action/187178776.js` all fire. On `*.workers.dev`, nothing
+loads.
 
 ### 7.3 The Simple Banner plugin
 

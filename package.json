@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "PUBLIC_ANALYTICS=1 astro build && npm run redirects && npm run images",
+    "build": "astro build && npm run redirects && npm run images",
     "build:preview": "astro build && npm run redirects && node scripts/noindex.mjs && npm run images",
     "preview": "astro preview",
     "check": "astro check",

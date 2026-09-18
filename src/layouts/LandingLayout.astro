@@ -53,6 +53,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
   </head>
 
   <body class="lp">
+    <GoogleTagManager noscript />
+
     <header class="lp-header">
       <div class="lp-header-inner">
         <a class="lp-logo" href="/lp/commercial-cleaning/">

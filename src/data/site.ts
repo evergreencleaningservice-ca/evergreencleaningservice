@@ -26,13 +26,22 @@ export const site = {
      linker and the SearchKings agency template — so this one id brings all of
      them. See src/components/GoogleTagManager.astro. */
   gtmId: 'GTM-5PRC4HBV',
-  /* Hostnames the tag may fire on. Anything else — the staging preview, a
-     local server, a Workers *.workers.dev URL — loads nothing, so a click
-     while reviewing the site never lands in the client's Google Ads account
-     as a conversion. */
+  /* Hostnames the GTM container may load on. Anything else — a local dev
+     server, a *.workers.dev URL, a branch preview — loads nothing at all.
+     This is the only guard; see src/components/GoogleTagManager.astro.
+
+     The staging hostname is on the list on purpose. A tag that cannot be
+     observed anywhere but production cannot be verified before go-live, which
+     is how this site shipped 76 pages with a dead loader on them. The cost is
+     that staging pageviews reach the live GA4 property and the live
+     remarketing lists — and that submitting the staging form registers a real
+     conversion in the client's Google Ads account. The loader pushes
+     `site_environment: 'staging'` ahead of `gtm.start`, so the agency can
+     block staging inside the container without touching this repo. */
   analyticsHosts: [
     'www.evergreencleaningservice.ca',
     'evergreencleaningservice.ca',
+    'evergreencleaningservice.10xconnections.com',
   ],
 } as const;
 
