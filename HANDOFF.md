@@ -315,6 +315,41 @@ end-to-end contact form .......... token captured, confirmation shown, row 8 in
 have stored a name, an email and a phone and dropped everything that makes it
 answerable.
 
+### 7.1b The two landing pages
+
+`/lp/commercial-cleaning/` and `/lp/commercial-cleaning-quote/` are siblings,
+not a page and its replacement. Both noindex, both excluded from the sitemap,
+both post to `/api/submit-lead`, and they carry different `form_id`s
+(`ppc-lead-form`, `lp-commercial-cleaning-quote`) so their conversion data does
+not merge. Kill whichever loses.
+
+Three things the second one settled that are worth not re-deciding:
+
+- **The layout's logo used to link to `/lp/commercial-cleaning/` by hardcode.**
+  On any other landing page that is an escape hatch to a different offer — the
+  one thing `LandingLayout` exists to prevent. It self-links now.
+- **`/thank-you/` is shared and the two promise different response times.** The
+  promise arrives as `?t=2`. It cannot be read in frontmatter: this is a static
+  build, so `Astro.url.searchParams` resolves once against a URL with no query
+  string. The first version did exactly that and shipped a page that said 24
+  after redirecting to `?t=2`. Both numbers are now in the HTML and a
+  synchronous head script picks one by class before paint.
+- **The conversion hook is a `dataLayer` push, not `gtag()`.** The container
+  already holds AW-16819334998 with its conversion actions; a gtag call
+  alongside it reports every lead twice, and Smart Bidding learns from the
+  doubles. The page announces `lead_form_confirmed` with the `form_id`; the
+  agency triggers on it.
+
+Departures from the brief for the second page, each recorded in the page's own
+header: "Since 2009" (the client's site says since **1989**, and separately
+"over 20 years" — 2009 appears nowhere); Turnstile (the API token has no
+Turnstile permission, so it ships on the v2 checkbox); and `tel:4168034880`
+(the site's canonical anchor is E.164 `tel:+14168034880`).
+
+The 4.9/5 rating renders as briefed and is deliberately **not** in the page's
+JSON-LD — nobody here has checked it against the real Google profile, and an
+unverified `aggregateRating` is a manual-action risk rather than a rich result.
+
 ### 7.2 Google Tag Manager — live on staging as well as production
 
 `GTM-5PRC4HBV` loads on every page, in both halves the original has: the head

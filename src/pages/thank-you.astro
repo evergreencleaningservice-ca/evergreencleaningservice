@@ -12,12 +12,37 @@
  */
 import LandingLayout from '../layouts/LandingLayout.astro';
 import { nap } from '../data/site';
+
+/* The two landing pages promise different response times — 24 business hours
+   on /lp/commercial-cleaning/, 2 on /lp/commercial-cleaning-quote/ — and this
+   page is shared, so the promise arrives with the redirect as `?t=2`.
+   
+   It CANNOT be read here. This is a static build: `Astro.url.searchParams` is
+   evaluated once, at build time, against a URL that has no query string, so
+   reading it here bakes one answer into the HTML and the redirect changes
+   nothing. (It did exactly that, and the end-to-end test caught it: the form
+   redirected to `?t=2` and the page said 24.)
+   
+   So both numbers are rendered and CSS picks one, switched by a class that a
+   head script sets before first paint — no flicker, and no dependence on when
+   a module script happens to run. Nothing from the query string is ever
+   written into the page as text, so an editable `?t=` is not an injection
+   surface; it only toggles a class. */
 ---
 
 <LandingLayout
   title={`Thank you — we have your request | ${nap.name}`}
-  description="Your proposal request has been received. We will be in touch within 24 business hours."
+  description="Your quote request has been received. Our account executive will be in touch shortly."
 >
+  {/* Placed above the text it affects and synchronous, so it runs while the
+      parser is still upstream of `.ty-lead` — the class is set before that
+      paragraph is ever painted, and there is no flash of the wrong number. */}
+  <script is:inline>
+    if (new URLSearchParams(location.search).get('t') === '2') {
+      document.documentElement.classList.add('ty-fast');
+    }
+  </script>
+
   <section class="ty">
     <div class="ty-inner">
       <div class="ty-tick" aria-hidden="true">
@@ -34,17 +59,42 @@ import { nap } from '../data/site';
 
       <h1>Thank you — we have your request</h1>
       <p class="ty-lead">
-        One of our team will be in touch within <strong>24 business hours</strong> to arrange your
-        on-site walkthrough.
+        Our account executive will contact you within
+        {' '}<strong><span class="ty-slow">24</span><span class="ty-fast-n">2</span> business hours</strong>
+        {' '}to arrange your on-site walkthrough.
       </p>
       <p>
-        If it is urgent, call us directly on
-        {' '}<a href={nap.phoneHref}>{nap.phoneDisplay}</a> — someone will pick up.
+        Need it sooner? Call us directly and someone will pick up — no queue, no call centre.
       </p>
 
-      <a class="ty-call" href={nap.phoneHref}>Call {nap.phoneDisplay}</a>
+      <a class="ty-call" href={nap.phoneHref}>Call {nap.phoneDisplay} now</a>
+      <p class="ty-rush">For same-day and emergency requests, calling is always faster.</p>
     </div>
   </section>
+  <script is:inline>
+    /* CONVERSION HOOK.
+     *
+     * This is the dataLayer event, not a gtag call, and that is deliberate.
+     * GTM-5PRC4HBV already carries Google Ads AW-16819334998 with its
+     * conversion actions and a conversion linker. Firing
+     * `gtag('event','conversion', …)` from here as well would report every
+     * lead twice — once from the container, once from the page — and
+     * double-counted conversions are worse than none, because Smart Bidding
+     * learns from them.
+     *
+     * So the page announces the conversion and the container decides what to
+     * do with it. For the agency: trigger on Custom Event
+     * `lead_form_confirmed`, and use `form_id` to tell the two landing pages
+     * apart. Destination-based conversions can fire on this URL directly.
+     */
+    var fast = new URLSearchParams(location.search).get('t') === '2';
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'lead_form_confirmed',
+      form_id: fast ? 'lp-commercial-cleaning-quote' : 'ppc-lead-form',
+      response_promise_hours: fast ? 2 : 24,
+    });
+  </script>
 </LandingLayout>
 
 <style>
@@ -95,5 +145,25 @@ import { nap } from '../data/site';
 
   .ty-call:hover {
     background: var(--brand-dark);
+  }
+
+  /* Default is the weaker promise; the head script opts into the stronger one
+     only when the fast landing page sent the visitor here. */
+  .ty-fast-n {
+    display: none;
+  }
+
+  :global(html.ty-fast) .ty-slow {
+    display: none;
+  }
+
+  :global(html.ty-fast) .ty-fast-n {
+    display: inline;
+  }
+
+  .ty-rush {
+    margin: 12px 0 0;
+    font-size: 0.8125rem;
+    color: var(--ink);
   }
 </style>

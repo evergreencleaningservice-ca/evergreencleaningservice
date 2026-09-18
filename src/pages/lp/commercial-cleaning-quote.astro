@@ -1,0 +1,748 @@
+---
+/**
+ * /lp/commercial-cleaning-quote/ — the second PPC landing page.
+ *
+ * A sibling of /lp/commercial-cleaning/, not a replacement. Both are noindex,
+ * both post to /api/submit-lead, and they carry **different `form_id`s** so
+ * their conversion data does not merge — which is the whole point of running
+ * two. Kill whichever loses.
+ *
+ * Isolation comes from `LandingLayout`: no global nav, no sidebar, no dot
+ * navigation, no floating video widget, and a footer of privacy and terms only.
+ * Four link targets on the whole page — the logo (self), the phone, and the two
+ * footer links. Nothing else leaves.
+ *
+ * WHERE THIS DEPARTS FROM THE BRIEF, and why. All three are recorded rather
+ * than silently resolved:
+ *
+ *  1. "Serving GTA Since 2009 / 20+ Years Experience". The client's own site
+ *     says "We've been cleaning Toronto and GTA since 1989" and, separately,
+ *     "for over 20 years" — verified in the 2026-09-18 archive capture. 2009
+ *     appears nowhere and is most likely 2026 minus "20+ years". A founding
+ *     date on a trust badge is the wrong thing to guess at, so this uses the
+ *     client's own two claims: since 1989, 20+ years. Worth their sign-off.
+ *
+ *  2. "Silent spam prevention (Cloudflare Turnstile or invisible reCAPTCHA)."
+ *     Turnstile is the right answer and could not be provisioned: the API token
+ *     in this environment returns an authentication error on the Turnstile
+ *     endpoint, and invisible reCAPTCHA has no published test key pair to
+ *     develop against. So this ships the v2 checkbox the rest of the site uses
+ *     — which does satisfy the brief's actual prohibition, since there is no
+ *     arithmetic field anywhere on this page. Swapping in Turnstile is a site
+ *     key, a Worker secret and a component; see HANDOFF §7.1.
+ *
+ *  3. "tel:4168034880". The site's canonical anchor is `tel:+14168034880`
+ *     (E.164), set in `nap` and used by every other phone link. Consistency
+ *     wins over the brief's shorthand; both dial the same number.
+ *
+ * The 4.9/5 rating is rendered as specified and is NOT in the page's
+ * structured data. It is a number nobody here has verified against the
+ * business's actual Google profile, and an unverified `aggregateRating` in
+ * JSON-LD is a manual-action risk, not a rich result.
+ */
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import Recaptcha from '../../components/Recaptcha.astro';
+import { nap, site } from '../../data/site';
+import { reviews } from '../../data/reviews';
+
+/* The three the brief names, pulled from the real Trustindex-recovered set
+   rather than retyped, so the words are the reviewer's own. `industry` is the
+   only thing added — the brief asks for a property type beside each name and
+   the reviews do not carry one, so these come from the review text itself. */
+const WANTED: Record<string, string> = {
+  'Mark Post': 'Professional services office',
+  'Edward Sherman': 'Multi-tenant commercial property',
+  'Michael Katchen': 'Corporate office, downtown Toronto',
+};
+const picked = reviews
+  .filter((r) => r.name in WANTED)
+  .map((r) => ({ ...r, industry: WANTED[r.name] }));
+
+const facilityTypes = [
+  'Corporate Office',
+  'Medical / Dental Clinic',
+  'Industrial / Warehouse',
+  'Retail / Commercial',
+  'Other',
+];
+
+const squareFootage = ['Under 2,500 sq ft', '2,500 – 10,000 sq ft', '10,000+ sq ft', 'Not Sure'];
+
+const differentiators = [
+  'WSIB Insured, Bonded & Background-Checked Cleaners',
+  'Flexible After-Hours & Weekend Schedules (Zero Disruption)',
+  'Dedicated Account Representative for Every Client',
+  'Fast, Free On-Site Consultations & Walkthroughs',
+];
+
+const badges = [
+  { title: 'WSIB Ontario', note: 'Registered and in good standing' },
+  { title: 'Bonded & Insured', note: 'Full commercial liability cover' },
+  { title: 'Serving the GTA Since 1989', note: '20+ years of commercial contracts' },
+  { title: 'Google Verified Reviews', note: '5-star rated by local clients' },
+];
+---
+
+<LandingLayout
+  title="Commercial Cleaning Quote — Toronto & GTA | Evergreen Office Cleaning"
+  description="Free on-site walkthrough and custom quote for commercial cleaning across Toronto and the GTA. WSIB insured, bonded, background-checked crews. Response within 2 business hours."
+  callNote="Direct Access to Account Representative"
+>
+  <!-- ================= HERO ================= -->
+  <section class="lpq-hero">
+    <div class="lpq-wrap lpq-hero-grid">
+      <div class="lpq-pitch">
+        <h1>Toronto &amp; GTA Commercial Cleaning You Can Count On.</h1>
+        <p class="lpq-sub">
+          Over 20 years of reliable janitorial and facility maintenance for offices, clinics and
+          commercial spaces across the GTA.
+        </p>
+
+        <ul class="lpq-bullets">
+          {
+            differentiators.map((item) => (
+              <li>
+                <span class="lpq-tick" aria-hidden="true">
+                  ✓
+                </span>
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+
+        <p class="lpq-microproof">
+          <span class="lpq-stars" aria-hidden="true">★</span>
+          <strong>4.9/5</strong> rating on Google Reviews
+          <span class="lpq-microproof-note">(local Toronto clients)</span>
+        </p>
+      </div>
+
+      <!-- ================= FORM ================= -->
+      <div class="lpq-form-col">
+        <form id="lpq-form" class="lpq-form" novalidate>
+          <h2>Get Your Free Custom Quote</h2>
+          <p class="lpq-form-note">Fast response within 2 business hours.</p>
+
+          <div class="lpq-error" id="lpq-error" role="alert" hidden></div>
+
+          <div class="lpq-field">
+            <label for="lpq-name">Full Name <span aria-hidden="true">*</span></label>
+            <input
+              type="text"
+              id="lpq-name"
+              name="name"
+              required
+              autocomplete="name"
+              placeholder="Jane Doe"
+            />
+          </div>
+
+          <div class="lpq-field lpq-field-2">
+            <div>
+              <label for="lpq-email">Business Email <span aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                id="lpq-email"
+                name="email"
+                required
+                inputmode="email"
+                autocomplete="email"
+                spellcheck="false"
+                placeholder="jane@company.ca"
+              />
+            </div>
+            <div>
+              <label for="lpq-phone">Phone <span aria-hidden="true">*</span></label>
+              <input
+                type="tel"
+                id="lpq-phone"
+                name="phone"
+                required
+                inputmode="tel"
+                autocomplete="tel"
+                placeholder="(416) 555-0123"
+              />
+            </div>
+          </div>
+
+          <div class="lpq-field">
+            <label for="lpq-facility">Facility Type <span aria-hidden="true">*</span></label>
+            <select id="lpq-facility" name="facility_type" required>
+              <option value="" selected disabled>Select one…</option>
+              {facilityTypes.map((t) => <option value={t}>{t}</option>)}
+            </select>
+          </div>
+
+          <div class="lpq-field">
+            <label for="lpq-size">Approximate Square Footage <span aria-hidden="true">*</span></label>
+            <select id="lpq-size" name="size" required>
+              <option value="" selected disabled>Select one…</option>
+              {squareFootage.map((s) => <option value={s}>{s}</option>)}
+            </select>
+          </div>
+
+          {/* Honeypot. Off-screen rather than display:none — a bot that reads
+              computed styles skips hidden fields, and one that does not fills
+              this and gets a cheerful 200 with nothing stored. */}
+          <div class="lpq-hp" aria-hidden="true">
+            <label for="company_tax_id">Company tax ID</label>
+            <input type="text" id="company_tax_id" name="company_tax_id" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <Recaptcha />
+
+          <button type="submit" class="lpq-submit">Request Same-Day Walkthrough / Quote</button>
+
+          <p class="lpq-privacy">100% Privacy Protected. No spam, ever.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRUST STRIP ================= -->
+  <section class="lpq-trust" aria-label="Credentials">
+    <div class="lpq-wrap">
+      <ul class="lpq-badges">
+        {
+          badges.map((b) => (
+            <li>
+              <span class="lpq-badge-title">{b.title}</span>
+              <span class="lpq-badge-note">{b.note}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= PROOF ================= -->
+  <section class="lpq-proof">
+    <div class="lpq-wrap">
+      <h2>What GTA facility managers say</h2>
+      <ul class="lpq-reviews">
+        {
+          picked.map((r) => (
+            <li>
+              <p class="lpq-review-stars" aria-label={`${r.rating} out of 5`}>
+                <span aria-hidden="true">{'★'.repeat(r.rating)}</span>
+              </p>
+              <p class="lpq-review-body">{r.text}</p>
+              <p class="lpq-review-who">
+                <strong>{r.name}</strong>
+                <span>{r.industry}</span>
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <a class="lpq-jump" href="#lpq-form">Get my free quote &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ================= STICKY MOBILE BAR ================= -->
+  <div class="lpq-sticky" slot="sticky">
+    <a class="lpq-sticky-call" href={nap.phoneHref} data-call>
+      <span aria-hidden="true">📞</span> Tap to Call: {nap.phoneDisplay}
+    </a>
+    <a class="lpq-sticky-quote" href="#lpq-form">Free Quote</a>
+  </div>
+</LandingLayout>
+
+<script>
+  /* Posts to /api/submit-lead and redirects to /thank-you/ only on a 200, so a
+     failure surfaces to the visitor rather than pretending to have worked —
+     and so the thank-you page, which is what the Google Ads destination
+     conversion fires on, is never reached by a lead that was not stored. */
+  const form = document.getElementById('lpq-form') as HTMLFormElement | null;
+  const errorBox = document.getElementById('lpq-error');
+
+  const param = (name: string) => new URLSearchParams(location.search).get(name) ?? '';
+  const field = (name: string) =>
+    (form?.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | null)?.value?.trim() ??
+    '';
+
+  const showError = (message: string) => {
+    if (!errorBox) return;
+    errorBox.textContent = message;
+    errorBox.hidden = false;
+    errorBox.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  };
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (errorBox) errorBox.hidden = true;
+
+    /* Honeypot: behave exactly as success would. Telling a bot it failed
+       teaches it to try again with the field empty. */
+    if (field('company_tax_id')) {
+      window.location.href = '/thank-you/?t=2';
+      return;
+    }
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const label = submit?.textContent ?? 'Submit';
+    if (submit) {
+      submit.disabled = true;
+      submit.textContent = 'Sending…';
+    }
+
+    const formId = 'lp-commercial-cleaning-quote';
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'lead_form_submission',
+      form_id: formId,
+      facility_type: field('facility_type'),
+      facility_size: field('size'),
+    });
+
+    try {
+      const res = await fetch('/api/submit-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          form_id: formId,
+          name: field('name'),
+          email: field('email'),
+          phone: field('phone'),
+          facility_type: field('facility_type'),
+          size: field('size'),
+          recaptcha: field('g-recaptcha-hidden'),
+          page_url: location.href,
+          referrer: document.referrer,
+          /* What makes the lead attributable to a click. */
+          gclid: param('gclid'),
+          utm_source: param('utm_source'),
+          utm_medium: param('utm_medium'),
+          utm_campaign: param('utm_campaign'),
+        }),
+      });
+
+      if (res.ok) {
+        window.location.href = '/thank-you/?t=2';
+        return;
+      }
+
+      if (res.status === 403) {
+        (window as unknown as { grecaptcha?: { reset?: () => void } }).grecaptcha?.reset?.();
+        showError('That security check did not verify. Please tick the box again and resubmit.');
+      } else {
+        showError(
+          'Something went wrong sending that. Please call (416) 803-4880 and we will take the details directly.'
+        );
+      }
+    } catch {
+      showError(
+        'We could not reach the server. Please call (416) 803-4880 and we will take the details directly.'
+      );
+    }
+
+    if (submit) {
+      submit.disabled = false;
+      submit.textContent = label;
+    }
+  });
+</script>
+
+<style>
+  .lpq-wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  /* ---------- hero ---------- */
+
+  .lpq-hero {
+    padding: 40px 0 26px;
+    background: linear-gradient(180deg, #f6f8f5 0%, #fff 100%);
+  }
+
+  .lpq-hero-grid {
+    display: grid;
+    gap: 32px;
+  }
+
+  @media (min-width: 941px) {
+    .lpq-hero-grid {
+      grid-template-columns: minmax(0, 1fr) 430px;
+      align-items: start;
+    }
+  }
+
+  .lpq-pitch h1 {
+    font-family: var(--font-heading);
+    font-size: 2.125rem;
+    font-weight: 800;
+    line-height: 1.18;
+    color: var(--ink-heading);
+    margin: 0 0 14px;
+  }
+
+  @media (min-width: 941px) {
+    .lpq-pitch h1 {
+      font-size: 2.75rem;
+    }
+  }
+
+  .lpq-sub {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    margin: 0 0 22px;
+    max-width: 52ch;
+  }
+
+  .lpq-bullets {
+    list-style: none;
+    margin: 0 0 22px;
+    padding: 0;
+  }
+
+  .lpq-bullets li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 11px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--ink-heading);
+  }
+
+  .lpq-tick {
+    flex: 0 0 22px;
+    height: 22px;
+    margin-top: 1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(77, 140, 43, 0.12);
+    color: var(--brand);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .lpq-microproof {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--ink-heading);
+  }
+
+  .lpq-stars {
+    color: #f5a623;
+    font-size: 1.05rem;
+  }
+
+  .lpq-microproof-note {
+    color: var(--ink);
+  }
+
+  /* ---------- form ---------- */
+
+  .lpq-form {
+    padding: 26px 24px 22px;
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--brand);
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  }
+
+  .lpq-form h2 {
+    font-family: var(--font-heading);
+    font-size: 1.4375rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--ink-heading);
+    margin: 0 0 4px;
+  }
+
+  .lpq-form-note {
+    margin: 0 0 18px;
+    font-size: 0.875rem;
+    color: var(--ink);
+  }
+
+  .lpq-field {
+    margin-bottom: 14px;
+  }
+
+  .lpq-field-2 {
+    display: grid;
+    gap: 14px;
+  }
+
+  @media (min-width: 480px) {
+    .lpq-field-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .lpq-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-heading);
+  }
+
+  .lpq-field input,
+  .lpq-field select {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #ccd2d6;
+    border-radius: var(--radius);
+    background: #fff;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--ink-heading);
+  }
+
+  .lpq-field input:focus,
+  .lpq-field select:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(77, 140, 43, 0.15);
+  }
+
+  .lpq-field input:user-invalid {
+    border-color: #d9534f;
+  }
+
+  .lpq-submit {
+    width: 100%;
+    margin-top: 4px;
+    padding: 15px 18px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--brand);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 1.0625rem;
+    font-weight: 800;
+    line-height: 1.25;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .lpq-submit:hover:not(:disabled) {
+    background: var(--brand-dark);
+  }
+
+  .lpq-submit:disabled {
+    opacity: 0.65;
+    cursor: default;
+  }
+
+  .lpq-privacy {
+    margin: 10px 0 0;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--ink);
+  }
+
+  .lpq-error {
+    margin-bottom: 14px;
+    padding: 10px 12px;
+    border: 1px solid #d9534f;
+    border-radius: var(--radius);
+    background: #fdf3f3;
+    color: #a94442;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  /* Off-screen, not display:none — see the note in the markup. */
+  .lpq-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  /* ---------- trust strip ---------- */
+
+  .lpq-trust {
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface-tint);
+  }
+
+  .lpq-badges {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 16px;
+    text-align: center;
+  }
+
+  @media (min-width: 620px) {
+    .lpq-badges {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 941px) {
+    .lpq-badges {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .lpq-badge-title {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: var(--ink-heading);
+  }
+
+  .lpq-badge-note {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.8125rem;
+    color: var(--ink);
+  }
+
+  /* ---------- proof ---------- */
+
+  .lpq-proof {
+    padding: 46px 0 10px;
+    text-align: center;
+  }
+
+  .lpq-proof h2 {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--ink-heading);
+    margin: 0 0 26px;
+  }
+
+  .lpq-reviews {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: grid;
+    gap: 20px;
+    text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    .lpq-reviews {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .lpq-reviews li {
+    padding: 20px;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  .lpq-review-stars {
+    margin: 0 0 8px;
+    color: #f5a623;
+    letter-spacing: 2px;
+  }
+
+  .lpq-review-body {
+    margin: 0 0 14px;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .lpq-review-who {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .lpq-review-who strong {
+    display: block;
+    color: var(--ink-heading);
+  }
+
+  .lpq-review-who span {
+    color: var(--ink);
+  }
+
+  .lpq-jump {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 4px;
+    background: var(--brand);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .lpq-jump:hover {
+    background: var(--brand-dark);
+  }
+
+  /* ---------- sticky mobile bar ---------- */
+
+  .lpq-sticky {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 50;
+    display: flex;
+    gap: 1px;
+    background: var(--rule);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.12);
+  }
+
+  /* The brief's breakpoint: phones only. Above it the header call button and
+     the form are both on screen, so a fixed bar is only lost real estate. */
+  @media (min-width: 768px) {
+    .lpq-sticky {
+      display: none;
+    }
+  }
+
+  .lpq-sticky-call,
+  .lpq-sticky-quote {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding: 8px 10px;
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    font-weight: 800;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .lpq-sticky-call {
+    flex: 1 1 62%;
+    background: var(--brand);
+    color: #fff;
+  }
+
+  .lpq-sticky-quote {
+    flex: 1 1 38%;
+    background: var(--ink-heading);
+    color: #fff;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lpq-jump,
+    .lpq-submit {
+      transition: none;
+    }
+  }
+</style>

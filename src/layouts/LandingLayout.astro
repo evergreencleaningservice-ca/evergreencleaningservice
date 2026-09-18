@@ -24,9 +24,13 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  /** Optional line under the header phone number, e.g. "Direct Access to
+      Account Representative". Omitted on the LPs that do not ask for one, so
+      adding it here changed nothing about the existing page. */
+  callNote?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, callNote } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 ---
 
@@ -57,13 +61,19 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 
     <header class="lp-header">
       <div class="lp-header-inner">
-        <a class="lp-logo" href="/lp/commercial-cleaning/">
+        {/* Self-link. It used to be hardcoded to /lp/commercial-cleaning/,
+            which on any other landing page is an escape hatch to a different
+            offer — the one thing this layout exists to prevent. */}
+        <a class="lp-logo" href={Astro.url.pathname}>
           <img src={site.logo} alt={nap.name} width="220" height="52" />
         </a>
-        <a class="lp-call" href={nap.phoneHref} data-call>
-          <span class="lp-call-label">Call</span>
-          <span class="lp-call-number">{nap.phoneDisplay}</span>
-        </a>
+        <div class="lp-call-wrap">
+          <a class="lp-call" href={nap.phoneHref} data-call>
+            <span class="lp-call-label">Call</span>
+            <span class="lp-call-number">{nap.phoneDisplay}</span>
+          </a>
+          {callNote && <p class="lp-call-note">{callNote}</p>}
+        </div>
       </div>
     </header>
 
@@ -162,6 +172,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
     font-size: 1.25rem;
     font-weight: 800;
     color: var(--brand);
+  }
+
+  .lp-call-wrap {
+    text-align: right;
+  }
+
+  .lp-call-note {
+    margin: 2px 0 0;
+    font-size: 11px;
+    line-height: 1.3;
+    color: var(--ink);
   }
 
   .lp-footer {

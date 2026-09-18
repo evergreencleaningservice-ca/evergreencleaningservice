@@ -193,6 +193,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
     utm_medium: str(body.utm_medium, 120),
     utm_campaign: str(body.utm_campaign, 200),
     /* The site's own forms ask for these; the PPC form sends none of them. */
+    facility_type: str(body.facility_type, 120),
     business_name: str(body.business_name, 200),
     address: str(body.address, 400),
     services: str(body.services, 400),
@@ -217,13 +218,14 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
       INSERT INTO leads
         (form_id, full_name, work_email, phone, facility_size,
          page_url, referrer, gclid, utm_source, utm_medium, utm_campaign,
-         business_name, address, services, message,
+         facility_type, business_name, address, services, message,
          ip_country, user_agent)
       VALUES
         (${lead.form_id}, ${lead.full_name}, ${lead.work_email}, ${lead.phone},
          ${lead.facility_size}, ${lead.page_url}, ${lead.referrer}, ${lead.gclid},
          ${lead.utm_source}, ${lead.utm_medium}, ${lead.utm_campaign},
-         ${lead.business_name}, ${lead.address}, ${lead.services}, ${lead.message},
+         ${lead.facility_type}, ${lead.business_name}, ${lead.address}, ${lead.services},
+         ${lead.message},
          ${(request as Request & { cf?: { country?: string } }).cf?.country ?? ''},
          ${str(request.headers.get('user-agent'), 300)})
     `;
