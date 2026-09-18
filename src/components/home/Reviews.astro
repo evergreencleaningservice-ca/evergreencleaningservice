@@ -9,9 +9,24 @@
  *
  * Its settings come from that template's attributes rather than guesswork:
  * a slider, up to three columns, cards targeting 300px, six-second autoplay
- * and left-aligned text. Long reviews are clamped to four lines with an
- * ellipsis and no control to expand them, which is what the original shows —
- * its markup carries a "Read more" that its own layout never displays.
+ * and left-aligned text.
+ *
+ * The behaviour is read from Trustindex's own loader.js, which is still served
+ * from their CDN, rather than inferred from a screenshot:
+ *
+ *   - Autoplay is `setInterval(move, 6000)` with a 1000ms animation, held
+ *     while `isMouseOver`.
+ *   - There is no `data-slider-loop` on this widget, and without it the
+ *     slider does not wrap: `toggleNavigation` hides the next control at the
+ *     last review and flips the autoplay direction to "prev", then flips back
+ *     at the first. It paces to the end and walks back.
+ *   - Its next/prev controls are not on show — the original's visible surface
+ *     is the timer, a swipe, and the arrow keys while it is on screen.
+ *   - "Read more" appears only where the text is actually clipped. Where it is
+ *     not, the widget replaces the label with a non-breaking space and sets
+ *     opacity to 0 instead of removing it, which is what keeps the cards in a
+ *     row the same height. Opening animates the text box's height over half a
+ *     second and swaps the label to the template's "Hide".
  *
  * One deliberate difference: the original's badge is a bare `<img>` whose alt
  * calls it a "button" but which does not link anywhere. It links to the
@@ -113,39 +128,15 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
               <div class="ti-text">
                 <p>{r.text}</p>
               </div>
+              {/* Rendered for every card, blanked by the script on the ones
+                  that are not clipped — that is how the original keeps the
+                  cards the same height. */}
+              <button class="ti-more" type="button" aria-expanded="false">Read more</button>
             </article>
           ))
         }
       </div>
 
-      <div class="ti-controls">
-        <button class="ti-arrow" type="button" data-dir="-1">
-          <span class="screen-reader-text">Previous reviews</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m15 5-7 7 7 7"
-            />
-          </svg>
-        </button>
-        <button class="ti-arrow" type="button" data-dir="1">
-          <span class="screen-reader-text">More reviews</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="m9 5 7 7-7 7"
-            />
-          </svg>
-        </button>
-      </div>
     </div>
   </div>
 </section>
@@ -282,44 +273,54 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
     overflow: hidden;
   }
 
-  .ti-controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 22px;
+  /* The widget animates the text box's height open and shut over half a
+     second rather than snapping. */
+  .ti-text {
+    overflow: hidden;
+    transition: height 0.5s ease;
   }
 
-  .ti-arrow {
-    width: 36px;
-    height: 36px;
-    display: grid;
-    place-items: center;
+  .ti-card.is-open .ti-text p {
+    -webkit-line-clamp: unset;
+  }
+
+  .ti-more {
+    display: block;
+    margin: 6px 0 0;
     padding: 0;
-    border: 1px solid #dcdcdc;
-    border-radius: 50%;
-    background: #fff;
-    color: #555;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 15px;
+    line-height: 1.45;
+    color: #7a7a7a;
+    text-align: left;
     cursor: pointer;
-    transition:
-      background 0.15s ease,
-      color 0.15s ease;
   }
 
-  .ti-arrow svg {
-    width: 17px;
-    height: 17px;
+  .ti-more:hover {
+    color: #111;
   }
 
-  .ti-arrow:hover {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: #fff;
+  /* A review short enough not to be clipped still keeps this line, invisible
+     and unclickable, so every card in a row is the same height. That is what
+     the widget does — it replaces the label with a non-breaking space and
+     sets opacity to 0 rather than removing it. */
+  .ti-more.is-blank {
+    opacity: 0;
+    pointer-events: none;
   }
 
-  .ti-arrow:focus-visible,
+  .ti-more:focus-visible,
   .section-desc a:focus-visible {
     outline: 2px solid var(--brand);
     outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ti-text {
+      transition: none;
+    }
   }
 </style>
 
@@ -329,32 +330,92 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
     const cards = [...track.querySelectorAll<HTMLElement>('.ti-card')];
     const still = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    const step = (dir: number) => {
+    // --- "Read more" ---
+    //
+    // The widget shows the control only where the text is actually clipped,
+    // and where it is not it keeps the line as a blank rather than removing
+    // it, so the cards in a row stay the same height. Opening animates the
+    // text box's height and swaps the label to "Hide".
+    for (const card of cards) {
+      const box = card.querySelector<HTMLElement>('.ti-text')!;
+      const para = box.querySelector<HTMLElement>('p')!;
+      const more = card.querySelector<HTMLButtonElement>('.ti-more')!;
+
+      const measure = () => {
+        if (card.classList.contains('is-open')) return;
+        // The clamp is on the paragraph, so the paragraph is what overflows.
+        // Measuring the wrapper instead reports every card as unclipped.
+        const clipped = para.scrollHeight > para.clientHeight + 1;
+        more.classList.toggle('is-blank', !clipped);
+        more.setAttribute('aria-hidden', String(!clipped));
+        more.tabIndex = clipped ? 0 : -1;
+      };
+
+      more.addEventListener('click', () => {
+        const from = box.offsetHeight;
+        const open = !card.classList.contains('is-open');
+        card.classList.toggle('is-open', open);
+        more.textContent = open ? 'Hide' : 'Read more';
+        more.setAttribute('aria-expanded', String(open));
+        // from a fixed height to the new one, so there is something to animate
+        const to = open ? box.scrollHeight : box.clientHeight;
+        box.style.height = `${from}px`;
+        requestAnimationFrame(() => {
+          box.style.height = `${to}px`;
+        });
+        window.setTimeout(() => {
+          box.style.height = '';
+        }, 520);
+      });
+
+      measure();
+      window.addEventListener('resize', measure);
+    }
+
+    // --- the slider ---
+    //
+    // This widget carries no `data-slider-loop`, and without it the original
+    // does not wrap: at the last review it hides its next control and flips
+    // its own autoplay direction to "prev", then flips back at the first. So
+    // it paces to the end and walks back, rather than jumping to the start.
+    let dir = 1;
+
+    const step = () => {
       const card = cards[0];
       if (!card) return;
       const by = card.getBoundingClientRect().width + 20;
       const max = track.scrollWidth - track.clientWidth;
-      // wrap, so the slider keeps going round as the widget's autoplay does
-      let to = track.scrollLeft + dir * by;
-      if (to > max + 1) to = 0;
-      if (to < -1) to = max;
-      track.scrollTo({ left: to, behavior: still.matches ? 'auto' : 'smooth' });
+      if (max <= 1) return; // everything already fits; nothing to move
+      if (track.scrollLeft >= max - 1) dir = -1;
+      if (track.scrollLeft <= 1) dir = 1;
+      track.scrollTo({
+        left: Math.min(max, Math.max(0, track.scrollLeft + dir * by)),
+        behavior: still.matches ? 'auto' : 'smooth',
+      });
     };
 
-    for (const btn of slider.querySelectorAll<HTMLButtonElement>('.ti-arrow')) {
-      btn.addEventListener('click', () => step(Number(btn.dataset.dir)));
-    }
+    // The original has no visible arrows; it moves on its own timer, on a
+    // swipe, and on the arrow keys while it is on screen. Keeping the arrow
+    // keys is what leaves it reachable without a mouse.
+    document.addEventListener('keyup', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      const box = slider.getBoundingClientRect();
+      if (box.bottom < 0 || box.top > window.innerHeight) return;
+      dir = e.key === 'ArrowRight' ? 1 : -1;
+      step();
+    });
 
-    // Six-second autoplay, from the widget's own data-pager-autoplay-timeout.
-    // It holds while someone is reading — pointer over it or focus inside —
-    // and never starts at all if the visitor asked for less motion.
+    // Six seconds, from the widget's own data-pager-autoplay-timeout. It
+    // holds while the pointer is over the widget, as the original's
+    // `isMouseOver` does, and also while focus is inside it or the tab is in
+    // the background — and never starts if the visitor asked for less motion.
     const wait = Number(slider.dataset.autoplay ?? 6000);
     let timer: number | undefined;
     const stop = () => window.clearInterval(timer);
     const start = () => {
       stop();
       if (still.matches) return;
-      timer = window.setInterval(() => step(1), wait);
+      timer = window.setInterval(step, wait);
     };
 
     slider.addEventListener('pointerenter', stop);

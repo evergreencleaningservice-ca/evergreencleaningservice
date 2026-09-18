@@ -131,6 +131,24 @@ guesswork: `data-layout-category="slider"`, `ti-col-3`,
 `data-review-target-width="300"`, `data-pager-autoplay-timeout="6"`,
 `ti-text-align-left`.
 
+Its **behaviour** was read from Trustindex's `loader.js`, which is still served
+from their CDN and is reachable from here even though the client's own origin is
+not:
+
+- Autoplay is `setInterval(move, 6000)` with a 1000ms animation, held while
+  `isMouseOver`.
+- This widget carries no `data-slider-loop`, and without it the slider does not
+  wrap. `toggleNavigation` hides the next control at the last review and flips
+  the autoplay direction to `prev`, then flips back at the first — it paces to
+  the end and walks back. The port does the same.
+- Its next/prev controls are not on show. The original's visible surface is the
+  timer, a swipe, and the arrow keys while the widget is on screen.
+- "Read more" appears only where the text is actually clipped. Where it is not,
+  the widget replaces the label with a non-breaking space and sets opacity to 0
+  rather than removing it — which is what keeps the cards in a row the same
+  height. Opening animates the text box's height over half a second and swaps
+  the label to the template's "Hide".
+
 Two things follow from it being static rather than live:
 
 - **New reviews will not appear by themselves.** The client's Google reviews are
@@ -138,11 +156,9 @@ Two things follow from it being static rather than live:
 - **The dates are worked out at build time**, so a rebuild keeps them honest —
   "5 years ago" rather than a frozen string.
 
-The original's markup carries a "Read more" control that its own layout never
-displays, so reviews here clamp to four lines with an ellipsis and no control,
-which is what the original shows. Its five-star badge is a bare `<img>` whose
-alt calls it a button but which links nowhere; here it links to the business's
-Google review page, and looks identical.
+Its five-star badge is a bare `<img>` whose alt calls it a button but which
+links nowhere; here it links to the business's Google review page, and looks
+identical.
 
 ## 10. Images the archive never captured
 
