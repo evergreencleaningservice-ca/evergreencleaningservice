@@ -74,14 +74,22 @@ const services = [
     flex-direction: column;
     background: #fff;
     padding: 30px;
-    text-align: center;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
     transition: all 100ms ease-out 0s;
   }
 
+  /* The theme centres this card's text and tightens its padding only at 720px
+     and below — `.service-content { text-align: center }` lives inside that
+     media query. An earlier pass here lifted it out and centred the cards at
+     every width, which is not what the original does: on a desktop its cards
+     are set left. */
   @media screen and (max-width: 720px) {
     .service-card {
       padding: 20px;
+    }
+
+    .service-body {
+      text-align: center;
     }
   }
 

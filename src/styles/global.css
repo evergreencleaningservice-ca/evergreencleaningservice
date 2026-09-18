@@ -221,7 +221,10 @@ img {
   margin: 0;
 }
 
-@media (max-width: 991px) {
+/* The theme sizes these up at `min-width: 940px` — its own breakpoint, the one
+   the dot nav uses too, not the 992 of the grid. Stepping down at 991 instead
+   left the 940-991 band a size small: 30px where the original has 40px. */
+@media screen and (max-width: 939px) {
   .section-subtitle {
     font-size: 12px;
   }
@@ -248,6 +251,19 @@ img {
   .grid-2 {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* The theme's three-across sections carry `col-sm-6 col-lg-4`, and it takes
+   those widths at 576px and 992px — so two across for the whole 576-991 band,
+   three only from 992. Going straight to three at 768 squeezed the cards to
+   about 210px and wrapped every card title onto three lines. */
+@media (min-width: 576px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
   .grid-3 {
     grid-template-columns: repeat(3, 1fr);
   }
