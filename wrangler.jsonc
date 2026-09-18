@@ -3,11 +3,40 @@
   "name": "evergreencleaningservice",
   "compatibility_date": "2026-09-17",
 
-  // Astro builds a fully static site, so this Worker has no script of its own:
-  // it just serves ./dist from Cloudflare's asset storage.
+  // The site is static except for POST /api/submit-lead. Cloudflare serves a
+  // matching asset first and only calls the Worker when nothing matches, so the
+  // script costs nothing on the other 71 routes.
+  "main": "src/worker.ts",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     // Unknown paths render the site's own 404 page rather than a bare Cloudflare one.
     "not_found_handling": "404-page"
-  }
+  },
+
+  // Lead storage for the PPC forms.
+  //
+  // NOT YET PROVISIONED. `wrangler d1 create evergreencleaningservice-forms`
+  // fails with "maximum number of D1 databases" — the account holds 10 of 10 on
+  // the Workers Free plan, and all ten are live client databases. Creating this
+  // one needs either the paid plan or a deletion, and both are the account
+  // owner's call, not this build's.
+  //
+  // When the database exists:
+  //   wrangler d1 create evergreencleaningservice-forms
+  //   wrangler d1 execute evergreencleaningservice-forms --remote --file=migrations/0001_leads.sql
+  //   paste database_id below and uncomment the block
+  //
+  // Until then the endpoint answers 503 rather than 200, so a submission is
+  // visibly rejected instead of silently lost.
+  //
+  // "d1_databases": [
+  //   {
+  //     "binding": "LEADS",
+  //     "database_name": "evergreencleaningservice-forms",
+  //     "database_id": "<paste from wrangler d1 create>"
+  //   }
+  // ],
+
+  "observability": { "enabled": true }
 }

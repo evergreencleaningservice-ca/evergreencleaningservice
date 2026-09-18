@@ -1,0 +1,189 @@
+---
+/**
+ * The PPC landing-page shell — Section 3.1, "PPC Isolation Rules".
+ *
+ * Deliberately not BaseLayout. The isolation rules are the point of the
+ * template, and inheriting the site shell would defeat every one of them:
+ *
+ *   no global navigation   the header here is a logo and a call button, nothing
+ *                          else. No menu, no services dropdown, no search.
+ *   no external links      the footer carries copyright, privacy and terms and
+ *                          nothing else — no social profiles, no blog links.
+ *   no side nav            the dot navigation and the floating video widget are
+ *                          both absent.
+ *
+ * Landing pages are noindex: they duplicate the service pages' intent and would
+ * compete with them in organic results, and a PPC page has no reason to be in
+ * the index at all.
+ */
+import { nap, site } from '../data/site';
+import { organizationGraph } from '../lib/schema';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+---
+
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="noindex, follow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Raleway:wght@600;700;800&display=swap"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationGraph())} is:inline />
+  </head>
+
+  <body class="lp">
+    <header class="lp-header">
+      <div class="lp-header-inner">
+        <a class="lp-logo" href="/lp/commercial-cleaning/">
+          <img src={site.logo} alt={nap.name} width="220" height="52" />
+        </a>
+        <a class="lp-call" href={nap.phoneHref} data-call>
+          <span class="lp-call-label">Call</span>
+          <span class="lp-call-number">{nap.phoneDisplay}</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="lp-footer">
+      <div class="lp-footer-inner">
+        <p>&copy; {new Date().getFullYear()} {nap.name}. {nap.addressLine}</p>
+        <p class="lp-footer-links">
+          <a href="/privacy/">Privacy Policy</a>
+          <span aria-hidden="true">·</span>
+          <a href="/privacy/">Terms of Service</a>
+        </p>
+      </div>
+    </footer>
+
+    <slot name="sticky" />
+
+    <script>
+      /* Section 4.1 — click-to-call tracking. Bound here rather than on the
+         page so it covers the header button, the sticky bar and anything else
+         that dials. */
+      document.querySelectorAll<HTMLAnchorElement>('a[href^="tel:"]').forEach((anchor) => {
+        anchor.addEventListener('click', () => {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'click_to_call',
+            phone_destination: anchor.getAttribute('href'),
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* The landing page opts out of the site's own chrome entirely. */
+  body.lp {
+    background: #fff;
+    /* room for the sticky bar so it never covers the submit button */
+    padding-bottom: 76px;
+  }
+
+  @media (min-width: 768px) {
+    body.lp {
+      padding-bottom: 0;
+    }
+  }
+
+  .lp-header {
+    border-bottom: 1px solid #e5e7eb;
+    background: #fff;
+  }
+
+  .lp-header-inner,
+  .lp-footer-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .lp-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 76px;
+  }
+
+  .lp-logo img {
+    display: block;
+    width: 220px;
+    height: auto;
+  }
+
+  .lp-call {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-decoration: none;
+    color: var(--ink-heading);
+  }
+
+  .lp-call-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: var(--ink-soft);
+  }
+
+  .lp-call-number {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--brand);
+  }
+
+  .lp-footer {
+    margin-top: 60px;
+    padding: 28px 0;
+    border-top: 1px solid #e5e7eb;
+    background: #f8fafc;
+    font-size: 13px;
+    color: #64748b;
+  }
+
+  .lp-footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    justify-content: space-between;
+  }
+
+  .lp-footer p {
+    margin: 0;
+  }
+
+  .lp-footer a {
+    color: #475569;
+  }
+
+  .lp-footer-links span {
+    margin: 0 6px;
+  }
+</style>

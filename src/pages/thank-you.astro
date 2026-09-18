@@ -1,0 +1,99 @@
+---
+/**
+ * Where /api/submit-lead sends a visitor after a successful submission.
+ *
+ * Its own page rather than an in-place message because a distinct URL is what
+ * a destination-based conversion in Google Ads and GA4 can fire on — belt and
+ * braces alongside the dataLayer event, which is what the spec asks for.
+ *
+ * noindex: a thank-you page has nothing to offer a search result, and an
+ * indexed one can be landed on directly, which fires the conversion for someone
+ * who never submitted anything.
+ */
+import LandingLayout from '../layouts/LandingLayout.astro';
+import { nap } from '../data/site';
+---
+
+<LandingLayout
+  title={`Thank you — we have your request | ${nap.name}`}
+  description="Your proposal request has been received. We will be in touch within 24 business hours."
+>
+  <section class="ty">
+    <div class="ty-inner">
+      <div class="ty-tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="34" height="34">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M20 6 9 17l-5-5"></path>
+        </svg>
+      </div>
+
+      <h1>Thank you — we have your request</h1>
+      <p class="ty-lead">
+        One of our team will be in touch within <strong>24 business hours</strong> to arrange your
+        on-site walkthrough.
+      </p>
+      <p>
+        If it is urgent, call us directly on
+        {' '}<a href={nap.phoneHref}>{nap.phoneDisplay}</a> — someone will pick up.
+      </p>
+
+      <a class="ty-call" href={nap.phoneHref}>Call {nap.phoneDisplay}</a>
+    </div>
+  </section>
+</LandingLayout>
+
+<style>
+  .ty {
+    padding: 70px 15px 90px;
+  }
+
+  .ty-inner {
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .ty-tick {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background: rgba(77, 140, 43, 0.12);
+    color: var(--brand);
+    margin-bottom: 22px;
+  }
+
+  .ty-inner h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 14px;
+  }
+
+  .ty-lead {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .ty-call {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 14px 26px;
+    border-radius: 6px;
+    background: var(--brand);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .ty-call:hover {
+    background: var(--brand-dark);
+  }
+</style>
