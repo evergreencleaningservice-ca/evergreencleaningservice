@@ -38,9 +38,15 @@ export const footerAreas = [
   'Scarborough',
 ] as const;
 
-/** Longer service-area line used in the contact section. */
-export const serviceAreas =
-  'Toronto, East York, Etobicoke, North York, Scarborough, York, Mississauga, Vaughan, Brampton, Markham, Oakville, Richmond Hill';
+/**
+ * The longer service-area line in the contact section. The original writes the
+ * first name loose and the rest inside a span — a leftover from a paste — so it
+ * is two pieces here too, which is how it reads on the page.
+ */
+export const serviceAreas = {
+  first: 'Toronto,',
+  rest: 'East York, Etobicoke, North York, Scarborough, York, Mississauga, Vaughan, Brampton, Markham, Oakville, Richmond Hill',
+} as const;
 
 export type NavItem = {
   label: string;
