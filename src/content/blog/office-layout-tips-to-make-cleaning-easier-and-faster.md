@@ -2,6 +2,7 @@
 title: "Office Layout Tips to Make Cleaning Easier And Faster"
 description: "Ever considered if your office layout impacts cleaning it? Here are a few things to consider, especially if you are looking at layout plans."
 pubDate: 2023-02-07
+image: "/images/office-layout-3-300x150.jpg"
 ---
 
 ## Tips for A Smart Office Layout

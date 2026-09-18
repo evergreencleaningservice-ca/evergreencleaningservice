@@ -215,7 +215,20 @@ uses a uniform grid at the original's own `data-spacing="5"`. Side by side the
 two read the same; the difference is that the original's rows can have unequal
 image widths where the source aspect ratios differ.
 
-## 14. Images the archive never captured
+## 14. Blog post thumbnails
+
+Eight of the 38 posts still have no featured image. The listing pages name the
+file for every one of them, so the addresses are known — they are recorded in
+the session's `postimages.json` — but the archive returns 404 or nothing for
+those eight, and it was answering "Temporarily Offline" while this was being
+retried. Worth another attempt later; they affect the blog listings only, not
+the homepage.
+
+The ninth, `office-layout-3-300x150.jpg`, was recovered this way and is in
+place, so all three posts in the homepage's Latest News band have their
+thumbnail.
+
+## 15. Images the archive never captured
 
 Roughly seventy images referenced by the original were never stored by the
 Wayback crawler. Where a sibling size-variant of the same asset survived, the
