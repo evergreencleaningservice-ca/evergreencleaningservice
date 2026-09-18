@@ -1,4 +1,25 @@
 ---
+/**
+ * The testimonials band.
+ *
+ * Measured off the original's own render, and its `.tes_author` rules:
+ *
+ *   card      white, 1px solid rgba(0,0,0,.125), 4px radius, 25px padding
+ *   avatar    max-width 70px, FLOATED left, 500px radius, 2px white border,
+ *             15px to its right
+ *   name      a <cite>, so italic by default; 16px, 700, #777
+ *   role      13px, 400, #777, on its own line
+ *   title     17px, 600, #333, 12px below
+ *   quote     15px, #777, no rule beside it
+ *
+ * The float matters: at a wide card the name sits beside the avatar, and as
+ * the card narrows it drops underneath. A flex row — which is what this
+ * component had — keeps them side by side at every width and squeezes the
+ * name instead.
+ *
+ * `.card-deck` is three across from 576px and stacked below it, with 15px on
+ * each side of a card, so 30px between them.
+ */
 const testimonials = [
   {
     title: 'Highly Recommend',
@@ -34,25 +55,25 @@ const testimonials = [
       <h2 class="section-title" id="testimonials-title">Testimonials</h2>
     </div>
 
-    <div class="grid grid-3 wow slideInUp">
+    <div class="card-deck wow slideInUp">
       {
         testimonials.map((item) => (
           <figure class="testimonial">
             {/* figcaption has to be a direct child of figure, or it is not the
                 figure's caption as far as assistive technology is concerned. */}
-            <figcaption class="testimonial-author">
+            <figcaption class="tes-author">
               <img
                 src={item.image}
                 alt=""
-                width="96"
-                height="96"
+                width="70"
+                height="70"
                 loading="lazy"
                 decoding="async"
               />
-              <span class="testimonial-meta">
-                <span class="testimonial-name">{item.name}</span>
-                <span class="testimonial-role">{item.role}</span>
-              </span>
+              <cite class="tes-name">
+                {item.name}
+                <span>{item.role}</span>
+              </cite>
             </figcaption>
             <h3 class="testimonial-title">{item.title}</h3>
             <blockquote>
@@ -66,57 +87,93 @@ const testimonials = [
 </section>
 
 <style>
-  .testimonial {
-    margin: 0;
-    background: var(--surface-alt);
-    border-radius: var(--radius);
-    padding: 28px 26px 30px;
-  }
-
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 18px;
-  }
-
-  .testimonial-author img {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex: none;
-  }
-
-  .testimonial-meta {
+  /* `.card-deck`: flex row wrap from 576px, each card `flex: 1 0 0%`, with
+     15px either side — 30px between. Below 576 they stack. */
+  .card-deck {
     display: flex;
     flex-direction: column;
-    font-style: normal;
+    gap: 30px;
   }
 
-  .testimonial-name {
-    font-family: var(--font-heading);
+  @media (min-width: 576px) {
+    .card-deck {
+      flex-flow: row wrap;
+      gap: 0;
+    }
+
+    .testimonial {
+      flex: 1 0 0%;
+    }
+
+    .testimonial:not(:first-child) {
+      margin-left: 15px;
+    }
+
+    .testimonial:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+
+  .testimonial {
+    margin: 0;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    padding: 1.5625rem;
+  }
+
+  /* `.tes_author { margin-bottom: 25px }` with a clearfix, because both the
+     avatar and the name float. */
+  .tes-author {
+    position: relative;
+    margin-bottom: 25px;
+  }
+
+  .tes-author::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  .tes-author img {
+    max-width: 70px;
+    width: 70px;
+    height: auto;
+    float: left;
+    border-radius: 500px;
+    border: 2px solid #fff;
+    margin-right: 15px;
+  }
+
+  /* A <cite>, so italic without asking. */
+  .tes-name {
+    float: left;
+    margin-top: 10px;
+    font-size: 16px;
     font-weight: 700;
-    color: var(--ink-heading);
+    color: var(--ink);
   }
 
-  .testimonial-role {
-    font-size: 0.82rem;
-    color: var(--ink-soft);
+  .tes-name span {
+    display: block;
+    font-weight: 400;
+    font-size: 13px;
   }
 
   .testimonial-title {
-    font-size: 1.15rem;
-    margin-bottom: 0.6em;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--ink-heading);
+    margin: 0 0 0.75rem;
   }
 
   .testimonial blockquote {
     margin: 0;
-    padding-left: 16px;
-    border-left: 3px solid var(--brand);
   }
 
   .testimonial blockquote p {
     margin: 0;
+    font-size: 0.9375rem;
+    color: var(--ink);
   }
 </style>
