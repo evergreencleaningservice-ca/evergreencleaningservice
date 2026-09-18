@@ -46,14 +46,29 @@ const json = (body: unknown, status = 200) =>
     headers: { 'content-type': 'application/json; charset=utf-8' },
   });
 
+/**
+ * Email the lead to the client.
+ *
+ * A failure here must not fail the submission — the lead is already stored and
+ * can be read back — but it must not be invisible either. An earlier version
+ * swallowed everything, and a wrong API key then looked exactly like success:
+ * the endpoint answered 200, the row landed, and no email was sent or logged
+ * anywhere. Every outcome below is logged.
+ */
 async function notify(env: Env, lead: Record<string, string>) {
-  if (!env.RESEND_API_KEY || !env.LEAD_NOTIFY_TO || !env.LEAD_NOTIFY_FROM) return;
+  const missing = (['RESEND_API_KEY', 'LEAD_NOTIFY_TO', 'LEAD_NOTIFY_FROM'] as const).filter(
+    (k) => !env[k]
+  );
+  if (missing.length) {
+    console.warn('notify: not configured, no email sent. missing:', missing.join(', '));
+    return;
+  }
   const lines = Object.entries(lead)
     .filter(([, v]) => v)
     .map(([k, v]) => `${k}: ${v}`)
     .join('\n');
   try {
-    await fetch('https://api.resend.com/emails', {
+    const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         authorization: `Bearer ${env.RESEND_API_KEY}`,
@@ -67,9 +82,16 @@ async function notify(env: Env, lead: Record<string, string>) {
         text: lines,
       }),
     });
-  } catch {
-    // A failed notification must not fail the submission: the lead is already
-    // in the database and can be read from there.
+
+    if (!res.ok) {
+      // the body carries Resend's reason — an invalid key, an unverified
+      // sender — and without it this is undiagnosable from the outside
+      console.error('notify: resend rejected the send', res.status, await res.text());
+      return;
+    }
+    console.log('notify: sent', (await res.json<{ id?: string }>()).id ?? '');
+  } catch (err) {
+    console.error('notify: request to resend failed', err);
   }
 }
 
