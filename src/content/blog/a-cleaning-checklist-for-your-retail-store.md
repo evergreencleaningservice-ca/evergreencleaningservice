@@ -5,7 +5,7 @@ pubDate: 2022-10-27
 image: "/images/retail-storefront-cleaning.jpg"
 ---
 
-## Retail Store Cleaning
+# Retail Store Cleaning
 
 It takes a lot of work to run a retail storefront. Not only do you have to worry about managing employees, but you also have to manage inventory and serve customers. There’s always something that needs to be done. With seemingly endless tasks that you need to complete, it can make things increasingly difficult when you have to add cleaning responsibilities. You need to worry about keeping your store clean, but you also need to disinfect it all the time to ensure your employees don’t get sick and your customers stay healthy.
 

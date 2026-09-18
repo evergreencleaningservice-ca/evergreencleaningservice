@@ -22,6 +22,7 @@
  *   excerpt  15px, #777 — WordPress's first 30 words, not the description
  */
 import { excerpt } from '../lib/excerpt';
+import { thumb } from '../lib/thumb';
 
 type Entry = {
   id?: string;
@@ -48,7 +49,7 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
           <div class="list-article-thumb">
             <a href={`/${toSlug(post)}/`} tabindex="-1" aria-hidden="true">
               <img
-                src={post.data.image}
+                src={thumb(post.data.image)}
                 alt=""
                 width="300"
                 height="150"

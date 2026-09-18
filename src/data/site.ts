@@ -6,7 +6,10 @@ export const site = {
   description:
     'Looking for commercial cleaning, office cleaning or janitorial services in Toronto and the GTA? Visit us to learn more about our services.',
   phone: '(416) 803-4880',
-  phoneHref: 'tel:+14168034880',
+  // The original writes `tel://416-803-4880`. The `//` turns the number into a
+  // URL authority, so it is dropped here; the digits are otherwise untouched,
+  // which is what every `tel:` link on the old site dials.
+  phoneHref: 'tel:416-803-4880',
   email: 'evergreencleaning416@gmail.com',
   logo: '/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg',
   since: 1989,

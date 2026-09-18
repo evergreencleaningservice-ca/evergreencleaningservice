@@ -62,7 +62,7 @@ const offers = [
 <section class="section-about section-padding" id="about" aria-labelledby="about-title">
   <div class="container">
     <div class="section-title-area">
-      <p class="section-subtitle">Evergreen Office Cleaning</p>
+      <h5 class="section-subtitle">Evergreen Office Cleaning</h5>
       <h2 class="section-title" id="about-title">Toronto Commercial Cleaning &amp; Janitorial</h2>
 
       <div class="section-desc">
@@ -91,7 +91,11 @@ const offers = [
           {
             servicesOffered.map((service, i) => (
               <>
-                {i > 0 && <br />}
+                {i > 0 && (
+                  <>
+                    <br />{' '}
+                  </>
+                )}
                 <strong>{service}</strong>
               </>
             ))

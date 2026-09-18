@@ -77,12 +77,18 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
     </noscript>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <Header />
-    <main id="main">
-      <slot />
-    </main>
-    <Footer />
+    {/* `#page` and `#content` are the original's ids: the skip link and the
+        footer's back-to-top arrow both address them. */}
+    <div id="page" class="site">
+      <a class="skip-link" href="#content">Skip to content</a>
+      <Header />
+      <div id="content" class="site-content">
+        <main id="main" class="site-main">
+          <slot />
+        </main>
+      </div>
+      <Footer />
+    </div>
 
     {/* The original loads this site-wide, as a third-party script. It renders
         nothing until the client's clip is in public/video/ — see the note in
@@ -94,16 +100,22 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
       const blocks = document.querySelectorAll<HTMLElement>('.wow');
       const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+      const reveal = (el: HTMLElement) => {
+        el.style.visibility = 'visible';
+        el.classList.add('animated');
+      };
+
       if (still || !('IntersectionObserver' in window)) {
-        for (const el of blocks) el.style.visibility = 'visible';
+        for (const el of blocks) reveal(el);
       } else {
+        const waiting = new Set<HTMLElement>(blocks);
         const io = new IntersectionObserver(
           (entries) => {
             for (const entry of entries) {
               if (!entry.isIntersecting) continue;
               const el = entry.target as HTMLElement;
-              el.style.visibility = 'visible';
-              el.classList.add('animated');
+              reveal(el);
+              waiting.delete(el);
               io.unobserve(el);
             }
           },
@@ -111,6 +123,33 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
           { rootMargin: '0px 0px -10% 0px', threshold: 0 }
         );
         for (const el of blocks) io.observe(el);
+
+        /* A jump — an anchor link, a dot on the side nav, a restored scroll
+           position — moves a block from below the viewport to above it without
+           ever intersecting, and the observer never fires for it. WOW.js scans
+           every box on every scroll and so never loses one; this sweep does the
+           same for anything the observer has passed over, which is what keeps a
+           section from being left parked at `visibility: hidden`. */
+        let queued = false;
+        const sweep = () => {
+          queued = false;
+          const edge = window.innerHeight * 0.9;
+          for (const el of waiting) {
+            if (el.getBoundingClientRect().top < edge) {
+              reveal(el);
+              waiting.delete(el);
+              io.unobserve(el);
+            }
+          }
+          if (!waiting.size) window.removeEventListener('scroll', onScroll);
+        };
+        const onScroll = () => {
+          if (queued) return;
+          queued = true;
+          requestAnimationFrame(sweep);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
       }
     </script>
   </body>

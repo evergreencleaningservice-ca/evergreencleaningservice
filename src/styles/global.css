@@ -281,6 +281,32 @@ img {
   }
 }
 
+/* ---------- content + sidebar ----------
+   The original runs its inner pages as col-md-8 + sidebar, which puts the
+   content column at 790px on a 1140px container. Shared by the page and post
+   layouts, the service pages, and the blog and category listings — it lived as
+   a scoped copy in two layouts, so the listings got no grid at all and their
+   sidebar stacked underneath. */
+.content-grid {
+  display: grid;
+  gap: 40px;
+}
+
+@media (min-width: 992px) {
+  .content-grid {
+    grid-template-columns: minmax(0, 7.9fr) minmax(0, 2.9fr);
+    gap: 30px;
+  }
+}
+
+.content-grid.is-full {
+  display: block;
+}
+
+.content-grid.is-full .entry-content {
+  max-width: 860px;
+}
+
 /* ---------- buttons ---------- */
 
 .btn {

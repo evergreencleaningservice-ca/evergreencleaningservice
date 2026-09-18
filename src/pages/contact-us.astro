@@ -49,14 +49,13 @@ const addressHtml = rawBody.slice(0, cutAt);
   contentHtml={addressHtml}
 >
   <h4>Phone:</h4>
-  <p><a href={site.phoneHref}>{site.phone}</a></p>
+  <p><a href={site.phoneHref}>+1 {site.phone}</a></p>
 
   <h4>Email:</h4>
   <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
 
-  <section class="form-section" aria-labelledby="contact-form-heading">
-    <h2 id="contact-form-heading">General Contact Form</h2>
-    <p class="form-note">Fields marked <span class="req">*</span> are required.</p>
+  <section class="form-section" aria-label="General Contact Form">
+    <div class="wpforms-title">General Contact Form</div>
 
     {/* See the TODO in this file's frontmatter: action="#" is a placeholder. */}
     <ContactForm id="contact-page" />
@@ -70,10 +69,15 @@ const addressHtml = rawBody.slice(0, cutAt);
     border-top: 1px solid var(--rule);
   }
 
-  .form-note {
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    margin-bottom: 1.8rem;
+  /* WPForms' own form title: 26px, 10px below. Not a heading on the original
+     either — it is a plain div, so it stays out of the heading outline. */
+  .wpforms-title {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 600;
+    color: var(--ink-heading);
+    margin: 0 0 10px;
   }
 
   .req {

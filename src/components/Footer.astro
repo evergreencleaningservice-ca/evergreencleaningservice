@@ -45,7 +45,6 @@ const icons: Record<string, string> = {
       </div>
 
       <div class="footer-col footer-col-areas">
-        <h2 class="screen-reader-text">Service areas</h2>
         <ul class="footer-areas">
           {footerAreas.map((area) => <li>{area}</li>)}
         </ul>
@@ -75,6 +74,23 @@ const icons: Record<string, string> = {
 
   <div class="site-info">
     <div class="container">
+      <div class="btt">
+        <a class="back-to-top" href="#page" title="Back To Top">
+          <span class="screen-reader-text">Back to top</span>
+          {/* fa-angle-double-up, drawn rather than loaded: the original pulls
+              this one glyph from a Font Awesome webfont. */}
+          <svg viewBox="0 0 320 512" aria-hidden="true" focusable="false">
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-width="46"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M36 246 160 122l124 124M36 390 160 266l124 124"
+            />
+          </svg>
+        </a>
+      </div>
       <p>
         Copyright &copy; {year} {site.name} ~ <a href="/privacy/">Privacy Policy</a>
       </p>
@@ -185,13 +201,65 @@ const icons: Record<string, string> = {
 
   /* --- copyright band --- */
   .site-info {
+    position: relative;
     background: var(--surface-dark);
     padding: 2.1875rem 0;
     text-align: center;
   }
 
+  .site-info .container {
+    position: initial;
+  }
+
   .site-info p {
     margin: 0;
+  }
+
+  /* The back-to-top arrow: a 50px square rotated -45deg with one rounded
+     corner, so it reads as a peak rising out of the copyright band. The icon
+     inside is rotated back upright. Measured off the original:
+       .site-footer .btt a { 50x50, right:60px, top:-25px, #222 on #999 }
+       @media (max-width: 940px) { right: 0; left: 0 }   -> centred */
+  .site-footer .btt a {
+    position: absolute;
+    right: 60px;
+    top: -25px;
+    z-index: 99;
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    border-radius: 0 20px 0 0;
+    background: var(--surface-dark);
+    color: #999;
+    line-height: 50px;
+    text-align: center;
+    transform: rotate(-45deg);
+    transition: all 0.2s linear 0s;
+  }
+
+  .site-footer .btt a:hover {
+    color: var(--brand);
+  }
+
+  .site-footer .btt a svg {
+    width: 18px;
+    height: 29px;
+    margin-left: 3px;
+    vertical-align: middle;
+    transform: rotate(45deg);
+  }
+
+  .site-footer .btt a:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  @media screen and (max-width: 940px) {
+    .site-footer .btt a {
+      right: 0;
+      left: 0;
+    }
   }
 
   .site-footer a {
