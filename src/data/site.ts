@@ -21,7 +21,19 @@ export const site = {
   legacyEmail: 'evergreencleaning416@gmail.com',
   logo: '/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg',
   since: 1989,
+  /* The container the original carries on every 2025 capture. It holds Google
+     Ads AW-16819334998, GA4 G-R27QW21PMT, Microsoft UET 187178776, a conversion
+     linker and the SearchKings agency template — so this one id brings all of
+     them. See src/components/GoogleTagManager.astro. */
   gtmId: 'GTM-5PRC4HBV',
+  /* Hostnames the tag may fire on. Anything else — the staging preview, a
+     local server, a Workers *.workers.dev URL — loads nothing, so a click
+     while reviewing the site never lands in the client's Google Ads account
+     as a conversion. */
+  analyticsHosts: [
+    'www.evergreencleaningservice.ca',
+    'evergreencleaningservice.ca',
+  ],
 } as const;
 
 /**

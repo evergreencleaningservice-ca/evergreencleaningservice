@@ -1,0 +1,68 @@
+---
+/**
+ * Google Tag Manager — the only analytics or advertising tag the original site
+ * carries in its own markup. Everything else is configured inside the container
+ * and arrives with it:
+ *
+ *   Google Ads    AW-16819334998 — three conversion actions, two with Enhanced
+ *                 Conversions reading the form fields, plus a remarketing tag
+ *                 and a conversion linker (the piece that makes gclid
+ *                 attribution survive)
+ *   GA4           G-R27QW21PMT
+ *   Microsoft Ads UET 187178776 — pageload plus custom events for form
+ *                 submission and outbound clicks
+ *   SearchKings   the agency's own template, account 535014
+ *
+ * So this file copies one id and not five. Adding gtag directly alongside it
+ * would double-count every conversion.
+ *
+ * NOT COPIED, because it is not there: the specification's Section 4.2 says to
+ * "retain ClickCease". There is no ClickCease script on any archived page and
+ * no ClickCease tag in the container — there is nothing to retain. If the
+ * client wants click-fraud filtering it is a new integration, not a migration.
+ *
+ * TWO GUARDS, deliberately belt and braces, because the cost of getting this
+ * wrong is fake conversions in the client's live Google Ads account:
+ *
+ *   build-time  the tag is only emitted when PUBLIC_ANALYTICS is set, which
+ *               `npm run build` does and `npm run build:preview` does not. The
+ *               staging site therefore ships no tag at all.
+ *   run-time    even then it only loads on a hostname in `analyticsHosts`. If a
+ *               production build is ever deployed to the preview hostname, the
+ *               tag stays quiet instead of reporting staging clicks as leads.
+ */
+import { site } from '../data/site';
+
+const enabled = import.meta.env.PUBLIC_ANALYTICS === '1' && Boolean(site.gtmId);
+const hosts = JSON.stringify(site.analyticsHosts);
+const gtmId = site.gtmId;
+---
+
+{
+  /* `is:inline` script bodies are raw text, not JSX — an earlier version wrapped
+     this in {`...`} and Astro emitted the braces and backticks verbatim, so the
+     loader sat inside a template literal and never ran. The tag was on the page
+     and did nothing. Keep this as plain JavaScript. */
+  enabled && (
+    <script
+      is:inline
+      define:vars={{ gtmId, hosts }}
+    >
+      window.dataLayer = window.dataLayer || [];
+      if (JSON.parse(hosts).indexOf(location.hostname) !== -1) {
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != 'dataLayer' ? '&l=' + l : '';
+          j.async = true;
+          j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', gtmId);
+      } else {
+        console.info('analytics: suppressed on ' + location.hostname);
+      }
+    </script>
+  )
+}

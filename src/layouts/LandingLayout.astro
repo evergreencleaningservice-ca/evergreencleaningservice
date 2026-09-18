@@ -18,6 +18,7 @@
  */
 import { nap, site } from '../data/site';
 import { organizationGraph } from '../lib/schema';
+import GoogleTagManager from '../components/GoogleTagManager.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -45,6 +46,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Raleway:wght@600;700;800&display=swap"
     />
+
+    <GoogleTagManager />
 
     <script type="application/ld+json" set:html={JSON.stringify(organizationGraph())} is:inline />
   </head>
