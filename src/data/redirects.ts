@@ -72,15 +72,41 @@ export const legacyRedirects: Redirect[] = [
 ];
 
 /**
+ * The paginated news archive, one rule per page rather than a wildcard.
+ *
+ * `/blog/page/*` was a wildcard sitting directly above `/blog/*`, which is
+ * correct if `_redirects` is strictly first-match-in-file-order. It is not:
+ * measured on the deployed site, `/blog/page/2/` matched the broader
+ * `/blog/*` and redirected to `/page/2/`, which does not exist — a 301 into a
+ * 404, the worst shape a redirect can take, because a crawler records the
+ * move and then finds nothing. Both of the old site's pagination addresses
+ * were doing it.
+ *
+ * Static rules do not depend on that ordering, and the page count is finite
+ * and known, so they are generated from it. `LAST_NEWS_PAGE` tracks
+ * `pageSize: 10` in src/pages/insights/[...page].astro — raise it when the
+ * post count crosses a multiple of ten.
+ */
+const LAST_NEWS_PAGE = 4;
+
+export const newsPageRedirects: Redirect[] = Array.from(
+  { length: LAST_NEWS_PAGE - 1 },
+  (_, i) => ({ from: `/blog/page/${i + 2}/`, to: `/insights/page/${i + 2}/` })
+);
+
+/**
  * Wildcards. Cloudflare's `_redirects` supports a trailing `*` and `:splat`.
  *
  * The `/blog/:slug/` rule is the one that was actually broken: those addresses
  * 404'd on the port although the original redirected them, because the posts
  * moved to root-level slugs years ago. The uploads rule recovers every image
  * address at once, including the ones in the original's own og:image tags.
+ *
+ * Nothing here may overlap anything else: these are matched last, and as the
+ * pagination bug proved, a narrower wildcard above a broader one is not a
+ * guarantee.
  */
 export const wildcardRedirects: Redirect[] = [
-  { from: '/blog/page/*', to: '/insights/page/:splat' },
   { from: '/blog/*', to: '/:splat' },
   { from: '/tag/*', to: '/category/blog/' },
   { from: '/author/*', to: '/category/blog/' },

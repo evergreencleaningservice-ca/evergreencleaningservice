@@ -12,7 +12,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { specRedirects, legacyRedirects, wildcardRedirects } from '../src/data/redirects.ts';
+import {
+  specRedirects,
+  legacyRedirects,
+  newsPageRedirects,
+  wildcardRedirects,
+} from '../src/data/redirects.ts';
 
 const uploadRedirects = JSON.parse(
   fs.readFileSync(path.resolve('src/data/upload-redirects.json'), 'utf8')
@@ -37,6 +42,7 @@ section(
   'Image addresses — explicit, because a splat cannot take just the basename',
   Object.entries(uploadRedirects).map(([from, to]) => ({ from, to }))
 );
+section('News pagination — static, because wildcard order is not honoured', newsPageRedirects);
 section('Wildcards, last so the rules above win', wildcardRedirects);
 
 fs.writeFileSync(path.join(dist, '_redirects'), lines.join('\n'));
