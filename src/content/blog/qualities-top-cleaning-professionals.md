@@ -1,6 +1,7 @@
 ---
 title: "Qualities of The Top Cleaning Professionals"
 description: "What does it take to be a successful professional in the commercial cleanining business? Read more to find out the traits that are needed."
+image: "/images/lobby_1-e1597778322357-1024x546.jpg"
 pubDate: 2020-07-31
 ---
 

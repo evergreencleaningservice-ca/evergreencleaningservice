@@ -11,7 +11,7 @@ If you find yourself sneezing first thing when you walk into your office, automa
 
 Therefore, the million-dollar question is how can you keep your office air clean? Well, here are a few tips collected from experts that will surely help you maintain clean air within your office.
 
-![cleaning a counter](/images/cleaning-a-counter-300x150.jpg)
+![cleaning a counter](/images/cleaning-a-counter.jpg)
 
 ### Consider Using Microfiber Cloths
 

@@ -35,7 +35,7 @@ Mops have also remained relevant to this day. Nonetheless, the old cloth mops ha
 
 Soaps and detergents have been around for many years. Although these have remained unchanged for a long time, modern soaps and detergents come in different types and varieties, ranging from organic and eco-friendly options. Eco-friendly soaps are also considered safe for the environment and on your hands. That said, it would be best to differentiate between detergents and soaps. Detergents, for example, are mainly made of synthetic chemicals, while soaps are made from natural ingredients, e.g., acids from animal fats and plant oils. That said, it is common for a detergent to be touted as ‘natural’ while it basically isn’t all-natural but contains some chemical components. Greener products, on the other hand, are free of phthalates, ammonia, triclosan, and [parabens](https://en.wikipedia.org/wiki/Paraben).
 
-![cleaning a counter](/images/cleaning-a-counter-300x150.jpg)
+![cleaning a counter](/images/cleaning-a-counter.jpg)
 
 ### Cleaning Surfaces: Now Vs. Then
 

@@ -218,23 +218,31 @@ image widths where the source aspect ratios differ.
 
 ## 14. Blog post thumbnails
 
-Eight of the 38 posts have no featured image, and they are **not recoverable
-from the archive** — retrying will not help.
+**This section said eight were unrecoverable and retrying would not help. That
+was wrong, and the reason is worth keeping.** The check behind it queried each
+exact URL. The archive frequently holds no capture of the full-size upload while
+holding a sibling size perfectly well, so asking for the stem as a prefix
+(`…/name*`) and taking the largest finds files an exact-URL query reports as
+gone. `lobby_1-e1597778322357` came back that way at 2400x1280, and the
+`-300x150` crop the listings want is generated from it.
 
-The blog listing pages name the file for every one of the 38, so the addresses
-are all known. But a CDX query for those eight returns no capture at all,
-neither for the `-300x150` crop the listings use nor for the full-size upload
-it is derived from:
+Seven of the 38 posts still have no featured image, confirmed against prefix
+queries this time — neither the crop nor any sibling of the upload survives:
 
     dental-office-1 · air-quality-1 · hand-sanitizer · duster · slips
-    lobby_1-e1597778322357 · post-covid-19-office · office-building-exterior
+    post-covid-19-office · office-building-exterior
 
 They exist only in the client's media library. They affect the blog listings,
 not the homepage.
 
-The ninth, `office-layout-3-300x150.jpg`, was recovered this way and is in
-place, so all three posts in the homepage's Latest News band have their
-thumbnail.
+One near miss worth recording: a prefix query for `slips*` matches
+`slips-trips-and-falls-*`, which is a **different upload** that is already in
+the repo. It came back valid, complete and the wrong photograph. Compare the
+stem after stripping the size suffix before accepting anything a prefix query
+returns.
+
+`office-layout-3-300x150.jpg` was recovered earlier and is in place, so all
+three posts in the homepage's Latest News band have their thumbnail.
 
 ## 15. Images the archive never captured
 
@@ -243,6 +251,23 @@ Wayback crawler. Where a sibling size-variant of the same asset survived, the
 port points at that; where nothing survived, the reference was removed rather
 than left broken. Full list in the session notes; recoverable from the client's
 media library.
+
+A second sweep, this time asking the archive for each stem as a prefix rather
+than by exact URL (see §14), recovered three more of them — `cleaning-a-counter`
+at 768x512, which seven posts carry in their body, `handwashing` at 768x512 in
+two, and `lobby_1-e1597778322357`. Ten list crops were regenerated from
+full-size files already in the repo by `scripts/mkcrops.mjs`.
+
+Three kinds of bad result came out of that sweep, and all three look like
+success until checked:
+
+- a file truncated at exactly 1 MiB by the proxy, with a valid JPEG header and
+  no end-of-image marker. Validate the terminator, not the MIME type.
+- a 300x150 list crop saved under the full-size name. Correct for a listing,
+  wrong in a post body, where it puts a 2:1 crop at 300px where a 3:2 photo
+  belongs.
+- a complete, valid file of the wrong subject, from a prefix matching a
+  different upload.
 
 ## 16. The full-page census
 

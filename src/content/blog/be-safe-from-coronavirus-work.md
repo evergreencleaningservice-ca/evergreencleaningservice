@@ -30,6 +30,8 @@ This can help to keep you from spreading germs and viral droplets. A good way to
 
 This is especially true if you have a fever. If you aren’t convinced your work can continue without you, try to discuss a work-at-home situation with your employer.
 
+![handwashing](/images/handwashing.jpg)
+
 
 ## Some extra steps you can take to help contain this outbreak
 
