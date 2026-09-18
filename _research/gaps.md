@@ -191,7 +191,20 @@ Neither changes a pixel; both are recorded rather than silently made.
   Office Cleaning Services" in the About band. The port matches that. It had
   briefly carried an `<h1>` in both places.
 
-## 12. Images the archive never captured
+## 12. The gallery's justified layout
+
+The gallery images link to their full-size files and carry the theme's
+`g-zoom-in` hover, as the original's do. What is **not** reproduced is the
+justified-gallery script the original runs over them, which sizes each row to a
+187px height and varies the widths to each image's own aspect ratio.
+
+That script is not in the archive and does not run in the reference copy — its
+gallery items measure 0x0 there — so there is nothing to port it from. The port
+uses a uniform grid at the original's own `data-spacing="5"`. Side by side the
+two read the same; the difference is that the original's rows can have unequal
+image widths where the source aspect ratios differ.
+
+## 13. Images the archive never captured
 
 Roughly seventy images referenced by the original were never stored by the
 Wayback crawler. Where a sibling size-variant of the same asset survived, the
