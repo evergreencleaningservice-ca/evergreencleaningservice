@@ -1,0 +1,312 @@
+---
+/**
+ * The contact form — WPForms form **1384** on the original, which is a
+ * different form from the quote form (1381) and had been confused with it: the
+ * homepage's contact band was rendering the quote form, services checklist and
+ * all, and the quote form had an address block that form 1381 does not have.
+ *
+ * 1384's fields, in the original's order:
+ *
+ *   Name *               First / Last
+ *   Business name *
+ *   Address *            Address Line 1 (placeholder "Street address & unit #")
+ *                        City / State ("Ontario") / Postal Code / Country (CA)
+ *   Phone *              before Email, not after it
+ *   Email *
+ *   Comment or Message *
+ *   Custom Captcha *     "What is 7+1?" — the quote form asks 7+2
+ *   honeypot, then a "Submit" button
+ *
+ * The format is WPForms's, measured off the original's render: the field label
+ * sits above in 11px/600 uppercase with 2px tracking, and each sub-label —
+ * First, Last, City, and so on — sits **below** its input in the same style.
+ * Inputs are 38px tall on #f2f2f2 with no border and a 2px radius; the
+ * required asterisks are red.
+ *
+ * Used by the homepage's contact band and by /contact-us/, which had been
+ * carrying its own near-copy of these fields.
+ */
+import { countries, DEFAULT_COUNTRY } from '../data/countries';
+import { site } from '../data/site';
+
+interface Props {
+  /** Prefix for the field ids, so two forms can share a page. */
+  id?: string;
+}
+
+const { id = 'contact' } = Astro.props;
+const f = (name: string) => `${id}-${name}`;
+
+// The original's own arithmetic question. The sum is checked server-side once
+// there is an endpoint; the hidden field is only a carrier.
+const captcha = { a: 7, b: 1 };
+---
+
+<form class="wpf" method="post" action="#" aria-label="Contact us">
+  <p class="wpf-note" role="note">
+    This form is not connected yet, so a submission will not reach us. Please call
+    <a href={site.phoneHref}>{site.phone}</a> or email
+    <a href={`mailto:${site.email}`}>{site.email}</a> in the meantime.
+  </p>
+
+  <fieldset class="wpf-field">
+    <legend class="wpf-label">Name <span class="wpf-req" aria-hidden="true">*</span></legend>
+    <div class="wpf-row wpf-row-2">
+      <div class="wpf-col">
+        <input type="text" id={f('first')} name="first-name" autocomplete="given-name" required />
+        <label class="wpf-sub" for={f('first')}>First</label>
+      </div>
+      <div class="wpf-col">
+        <input type="text" id={f('last')} name="last-name" autocomplete="family-name" required />
+        <label class="wpf-sub" for={f('last')}>Last</label>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="wpf-field">
+    <label class="wpf-label" for={f('business')}>
+      Business name <span class="wpf-req" aria-hidden="true">*</span>
+    </label>
+    <input type="text" id={f('business')} name="business-name" autocomplete="organization" required />
+  </div>
+
+  <fieldset class="wpf-field">
+    <legend class="wpf-label">Address <span class="wpf-req" aria-hidden="true">*</span></legend>
+
+    <div class="wpf-row">
+      <div class="wpf-col">
+        <input
+          type="text"
+          id={f('address1')}
+          name="address1"
+          placeholder="Street address &amp; unit #"
+          autocomplete="address-line1"
+          required
+        />
+        <label class="wpf-sub" for={f('address1')}>Address Line 1</label>
+      </div>
+    </div>
+
+    <div class="wpf-row wpf-row-2">
+      <div class="wpf-col">
+        <input type="text" id={f('city')} name="city" autocomplete="address-level2" required />
+        <label class="wpf-sub" for={f('city')}>City</label>
+      </div>
+      <div class="wpf-col">
+        {/* The original ships this prefilled with Ontario. */}
+        <input
+          type="text"
+          id={f('state')}
+          name="state"
+          value="Ontario"
+          autocomplete="address-level1"
+          required
+        />
+        <label class="wpf-sub" for={f('state')}>State / Province / Region</label>
+      </div>
+    </div>
+
+    <div class="wpf-row wpf-row-2">
+      <div class="wpf-col">
+        <input type="text" id={f('postal')} name="postal" autocomplete="postal-code" required />
+        <label class="wpf-sub" for={f('postal')}>Postal Code</label>
+      </div>
+      <div class="wpf-col">
+        <select id={f('country')} name="country" autocomplete="country" required>
+          {
+            countries.map((c) => (
+              <option value={c.code} selected={c.code === DEFAULT_COUNTRY}>
+                {c.name}
+              </option>
+            ))
+          }
+        </select>
+        <label class="wpf-sub" for={f('country')}>Country</label>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="wpf-field">
+    <label class="wpf-label" for={f('phone')}>
+      Phone <span class="wpf-req" aria-hidden="true">*</span>
+    </label>
+    <input type="tel" id={f('phone')} name="phone" inputmode="tel" autocomplete="tel" required />
+  </div>
+
+  <div class="wpf-field">
+    <label class="wpf-label" for={f('email')}>
+      Email <span class="wpf-req" aria-hidden="true">*</span>
+    </label>
+    <input
+      type="email"
+      id={f('email')}
+      name="email"
+      inputmode="email"
+      autocomplete="email"
+      spellcheck="false"
+      required
+    />
+  </div>
+
+  <div class="wpf-field">
+    <label class="wpf-label" for={f('message')}>
+      Comment or Message <span class="wpf-req" aria-hidden="true">*</span>
+    </label>
+    <textarea id={f('message')} name="message" required></textarea>
+  </div>
+
+  <div class="wpf-field">
+    <label class="wpf-label" for={f('captcha')}>
+      Custom Captcha <span class="wpf-req" aria-hidden="true">*</span>
+    </label>
+    <p class="wpf-question" id={f('captcha-q')}>What is {captcha.a}+{captcha.b}?</p>
+    <input
+      type="text"
+      id={f('captcha')}
+      name="captcha"
+      inputmode="numeric"
+      autocomplete="off"
+      aria-describedby={f('captcha-q')}
+      required
+    />
+    <input type="hidden" name="captcha-sum" value={captcha.a + captcha.b} />
+  </div>
+
+  {/* Honeypot, as the original has. Real people never see it. */}
+  <div class="wpf-hp" aria-hidden="true">
+    <label for={f('hp')}>Message</label>
+    <input type="text" id={f('hp')} name="company-website" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <button class="wpf-submit" type="submit">Submit</button>
+</form>
+
+<style>
+  .wpf {
+    margin: 0;
+  }
+
+  .wpf-note {
+    font-size: 14px;
+    color: var(--ink);
+    margin: 0 0 20px;
+  }
+
+  .wpf-field {
+    margin: 0 0 20px;
+    padding: 0;
+    border: 0;
+    min-width: 0; /* a fieldset will not shrink below its content without this */
+  }
+
+  /* Measured: 11px, 600, uppercase, 2px tracking, #777. */
+  .wpf-label {
+    display: block;
+    padding: 0;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  /* The same, but under its input — which is what WPForms's "sublabel after"
+     means, and what the port had above the field instead. */
+  .wpf-sub {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ink);
+    margin-top: 4px;
+  }
+
+  .wpf-req {
+    color: #f00;
+  }
+
+  .wpf-row {
+    display: grid;
+    gap: 0 20px;
+    margin-bottom: 10px;
+  }
+
+  .wpf-row:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 480px) {
+    .wpf-row-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .wpf input[type='text'],
+  .wpf input[type='tel'],
+  .wpf input[type='email'],
+  .wpf select,
+  .wpf textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 38px;
+    padding: 10px;
+    border: 0;
+    border-radius: 2px;
+    background: #f2f2f2;
+    font-family: inherit;
+    font-size: 15px;
+    color: #000;
+  }
+
+  .wpf textarea {
+    height: 215px;
+    resize: vertical;
+  }
+
+  .wpf input:focus-visible,
+  .wpf select:focus-visible,
+  .wpf textarea:focus-visible,
+  .wpf-submit:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .wpf-question {
+    margin: 0 0 4px;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .wpf-hp {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .wpf-submit {
+    border: 0;
+    border-radius: 2px;
+    background: var(--brand);
+    color: #fff;
+    padding: 15px 23px;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .wpf-submit:hover {
+    background: var(--brand-hover, #3f7523);
+  }
+</style>

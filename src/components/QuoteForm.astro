@@ -11,7 +11,6 @@
  * WordPress; nothing here delivers yet, and the note in the markup says so
  * rather than pretending otherwise.
  */
-import { countries, DEFAULT_COUNTRY } from '../data/countries';
 import { site } from '../data/site';
 
 interface Props {
@@ -22,10 +21,12 @@ interface Props {
 const { variant = 'page', id = 'quote' } = Astro.props;
 
 /** The original's services checklist, in its order. */
+// The original's seven, in its order. An earlier pass had eight, with
+// "Property Management and Building Maintenance" added and the first two
+// swapped.
 const services = [
-  'Office Cleaning',
   'Commercial Cleaning',
-  'Property Management and Building Maintenance',
+  'Office Cleaning',
   'Janitorial Services',
   'Commercial Carpet Cleaning',
   'Floor Services / Finishing',
@@ -71,54 +72,6 @@ const f = (name: string) => `${id}-${name}`;
     <input type="text" id={f('business')} name="business" autocomplete="organization" required />
   </div>
 
-  <fieldset class="field-group">
-    <legend>Address <span class="req" aria-hidden="true">*</span></legend>
-    <div class="field">
-      <label for={f('address1')}>Address Line 1</label>
-      <input
-        type="text"
-        id={f('address1')}
-        name="address1"
-        autocomplete="address-line1"
-        required
-      />
-    </div>
-    <div class="row row-2">
-      <div class="field">
-        <label for={f('city')}>City</label>
-        <input type="text" id={f('city')} name="city" autocomplete="address-level2" required />
-      </div>
-      <div class="field">
-        <label for={f('state')}>State / Province / Region</label>
-        <input type="text" id={f('state')} name="state" autocomplete="address-level1" required />
-      </div>
-    </div>
-    <div class="row row-2">
-      <div class="field">
-        <label for={f('postal')}>Postal Code</label>
-        <input
-          type="text"
-          id={f('postal')}
-          name="postal"
-          autocomplete="postal-code"
-          inputmode="text"
-          required
-        />
-      </div>
-      <div class="field">
-        <label for={f('country')}>Country</label>
-        <select id={f('country')} name="country" autocomplete="country" required>
-          {
-            countries.map((c) => (
-              <option value={c.code} selected={c.code === DEFAULT_COUNTRY}>
-                {c.name}
-              </option>
-            ))
-          }
-        </select>
-      </div>
-    </div>
-  </fieldset>
 
   <div class="row row-2">
     <div class="field">
