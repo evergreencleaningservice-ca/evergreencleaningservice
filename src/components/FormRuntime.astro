@@ -1,0 +1,188 @@
+---
+/**
+ * The submit handler shared by the site's WPForms-shaped forms.
+ *
+ * Renders nothing. It exists so the quote form and the contact form — which
+ * appear together on the homepage and on every service page — get one
+ * implementation and one copy of the script, rather than one each.
+ *
+ * WHY THIS EXISTS AT ALL. Both forms carried `action="#"` until now: they
+ * validated in the browser and then reloaded the page, and the enquiry was
+ * gone. `_research/gaps.md` and HANDOFF §7.1 have called that the launch
+ * blocker since the port began. Adding a captcha in front of a form that
+ * discards the submission would have been the worse version of the same bug —
+ * protection theatre over a hole — so the forms are wired to the endpoint that
+ * already existed for the PPC form, and the captcha now guards something real.
+ *
+ * It picks up any `form[data-endpoint]`, so a new form opts in with one
+ * attribute and inherits the honeypot, captcha, error handling and confirmation
+ * behaviour rather than reimplementing them.
+ */
+---
+
+<script>
+  /* WPForms's own submit flow, as the original behaves: validate, POST, then
+     replace the form with a confirmation message rather than navigating. */
+  type Payload = Record<string, string>;
+
+  const param = (name: string) => new URLSearchParams(location.search).get(name) ?? '';
+  const value = (form: HTMLFormElement, name: string) =>
+    (form.elements.namedItem(name) as HTMLInputElement | null)?.value?.trim() ?? '';
+
+  /* The address is four inputs on screen and one thing in the world. Composed
+     here rather than in four columns, because what the client needs is the
+     address of the site to be cleaned, in one readable line. */
+  const address = (form: HTMLFormElement) =>
+    [
+      value(form, 'address1'),
+      value(form, 'city'),
+      value(form, 'state'),
+      value(form, 'postal'),
+      value(form, 'country'),
+    ]
+      .filter(Boolean)
+      .join(', ');
+
+  const services = (form: HTMLFormElement) =>
+    [...form.querySelectorAll<HTMLInputElement>('input[name="services"]:checked')]
+      .map((el) => el.value)
+      .join(', ');
+
+  const confirm = (form: HTMLFormElement) => {
+    const box = document.createElement('div');
+    box.className = 'wpf-confirm';
+    box.setAttribute('role', 'status');
+    box.textContent =
+      'Thanks — we have your request and will be in touch shortly. If it is urgent, call (416) 803-4880.';
+    form.replaceWith(box);
+    box.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  };
+
+  const fail = (form: HTMLFormElement, message: string) => {
+    let box = form.querySelector<HTMLElement>('.wpf-error');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'wpf-error';
+      box.setAttribute('role', 'alert');
+      form.prepend(box);
+    }
+    box.textContent = message;
+    box.hidden = false;
+  };
+
+  document.querySelectorAll<HTMLFormElement>('form[data-endpoint]').forEach((form) => {
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      form.querySelector<HTMLElement>('.wpf-error')?.setAttribute('hidden', '');
+
+      /* Honeypot. Invisible to a person, so anything in it is a bot. Behave
+         exactly as a success would — telling a bot it failed teaches it to try
+         again with the field empty. Nothing is sent. */
+      if (value(form, 'company-website')) {
+        confirm(form);
+        return;
+      }
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      /* The arithmetic question the original asks. Checked here for the same
+         reason the original asks it — it turns away the crudest scripted
+         posts — and not relied on for anything: the expected answer is in the
+         page, so it is a speed bump, and reCAPTCHA is the actual control. */
+      const sum = value(form, 'captcha-sum');
+      if (sum && value(form, 'captcha') !== sum) {
+        fail(form, 'That answer is not right — please check the sum and try again.');
+        return;
+      }
+
+      const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      const label = submit?.textContent ?? 'Submit';
+      if (submit) {
+        submit.disabled = true;
+        submit.textContent = 'Sending…';
+      }
+
+      const formId = form.dataset.formId ?? 'site-form';
+      const payload: Payload = {
+        form_id: formId,
+        name: [value(form, 'first-name'), value(form, 'last-name')].filter(Boolean).join(' '),
+        email: value(form, 'email'),
+        phone: value(form, 'phone'),
+        business_name: value(form, 'business-name'),
+        address: address(form),
+        services: services(form),
+        message: value(form, 'message') || value(form, 'comments'),
+        recaptcha: value(form, 'g-recaptcha-hidden'),
+        page_url: location.href,
+        referrer: document.referrer,
+        /* Present when the visitor arrived on an ad and then navigated to this
+           form, which is the ordinary case for the site's own pages. */
+        gclid: param('gclid'),
+        utm_source: param('utm_source'),
+        utm_medium: param('utm_medium'),
+        utm_campaign: param('utm_campaign'),
+      };
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'lead_form_submission', form_id: formId });
+
+      try {
+        const res = await fetch(form.dataset.endpoint as string, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          confirm(form);
+          return;
+        }
+
+        /* A rejected captcha is the one failure a visitor can act on, so it
+           gets its own message and the widget is reset for another try. */
+        if (res.status === 403) {
+          window.grecaptcha?.reset?.();
+          fail(form, 'That captcha did not verify. Please tick the box again and resubmit.');
+        } else {
+          fail(
+            form,
+            'Something went wrong sending that. Please call (416) 803-4880 and we will take the details directly.'
+          );
+        }
+      } catch {
+        fail(
+          form,
+          'We could not reach the server. Please call (416) 803-4880 and we will take the details directly.'
+        );
+      }
+
+      if (submit) {
+        submit.disabled = false;
+        submit.textContent = label;
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .wpf-confirm {
+    padding: 18px 20px;
+    border: 1px solid var(--brand);
+    border-radius: var(--radius);
+    background: #f2f8ee;
+    line-height: 1.6;
+  }
+
+  .wpf-error {
+    margin-bottom: 18px;
+    padding: 12px 15px;
+    border: 1px solid #d9534f;
+    border-radius: var(--radius);
+    background: #fdf3f3;
+    color: #a94442;
+    line-height: 1.5;
+  }
+</style>

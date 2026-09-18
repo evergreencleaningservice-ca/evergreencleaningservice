@@ -1,4 +1,5 @@
 import { neon } from '@neondatabase/serverless';
+import { PRODUCTION_HOSTS, recaptcha } from './data/site';
 
 /**
  * The site's Worker.
@@ -30,6 +31,15 @@ export interface Env {
   RESEND_API_KEY?: string;
   LEAD_NOTIFY_TO?: string;
   LEAD_NOTIFY_FROM?: string;
+  /**
+   * reCAPTCHA v2 secret, paired with the site key the forms render:
+   *   wrangler secret put RECAPTCHA_SECRET
+   *
+   * Required. With no secret this endpoint answers 503 rather than accepting
+   * unverified posts — an unconfigured captcha that quietly passes everything
+   * is worse than no captcha, because the form looks protected.
+   */
+  RECAPTCHA_SECRET?: string;
 }
 
 type LeadBody = Record<string, unknown>;
@@ -95,6 +105,34 @@ async function notify(env: Env, lead: Record<string, string>) {
   }
 }
 
+/**
+ * Ask Google whether this token is real.
+ *
+ * Returns a reason string on failure and null on success, so the caller logs
+ * something specific rather than "captcha failed" — `timeout-or-duplicate`
+ * (a replayed or stale token) and `invalid-input-secret` (the wrong key) look
+ * identical from the visitor's side and need completely different fixes.
+ */
+async function verifyCaptcha(token: string, secret: string, ip: string): Promise<string | null> {
+  if (!token) return 'no token submitted';
+
+  try {
+    const res = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ secret, response: token, ...(ip ? { remoteip: ip } : {}) }),
+    });
+    if (!res.ok) return `siteverify http ${res.status}`;
+
+    const body = await res.json<{ success?: boolean; 'error-codes'?: string[] }>();
+    return body.success ? null : (body['error-codes'] ?? ['unknown']).join(',');
+  } catch (err) {
+    /* Google unreachable. Reject rather than fail open: an outage that turns
+       the captcha off is exactly when the form gets hammered. */
+    return `siteverify unreachable: ${String(err)}`;
+  }
+}
+
 async function submitLead(request: Request, env: Env): Promise<Response> {
   if (request.method !== 'POST') return json({ error: 'method not allowed' }, 405);
 
@@ -108,7 +146,39 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
   /* Honeypot. A real person never sees this field, so anything in it is a bot.
      Answer 200 rather than an error — telling a bot it failed teaches it to try
      again with the field left blank. Nothing is stored. */
-  if (str(body.company_tax_id, 200)) return json({ ok: true });
+  if (str(body.company_tax_id, 200) || str(body['company-website'], 200)) return json({ ok: true });
+
+  /* --- captcha ------------------------------------------------------------
+     After the honeypot, so a bot that fell into it costs nothing, and before
+     the database, so an unverified post never reaches Neon or Resend. */
+  if (!env.RECAPTCHA_SECRET) {
+    console.error('submit-lead: no RECAPTCHA_SECRET; refusing to accept unverified submissions');
+    return json({ error: 'captcha unavailable' }, 503);
+  }
+
+  /* Google publishes a v2 test pair that passes for any token on any domain.
+     It is the right default for staging and catastrophic on production, where
+     it would wave through every bot on the internet. Going live is a build and
+     a secret away from happening by accident, so the check lives here rather
+     than in anyone's memory. */
+  const host = new URL(request.url).hostname;
+  if (
+    env.RECAPTCHA_SECRET === recaptcha.testSecretKey &&
+    (PRODUCTION_HOSTS as readonly string[]).includes(host)
+  ) {
+    console.error('submit-lead: reCAPTCHA test secret is set on production host', host);
+    return json({ error: 'captcha misconfigured' }, 503);
+  }
+
+  const failure = await verifyCaptcha(
+    str(body.recaptcha ?? body['g-recaptcha-response'], 4000),
+    env.RECAPTCHA_SECRET,
+    request.headers.get('cf-connecting-ip') ?? ''
+  );
+  if (failure) {
+    console.warn('submit-lead: captcha rejected —', failure);
+    return json({ error: 'captcha failed' }, 403);
+  }
 
   const lead = {
     form_id: str(body.form_id, 64) || 'ppc-lead-form',
@@ -122,6 +192,11 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
     utm_source: str(body.utm_source, 120),
     utm_medium: str(body.utm_medium, 120),
     utm_campaign: str(body.utm_campaign, 200),
+    /* The site's own forms ask for these; the PPC form sends none of them. */
+    business_name: str(body.business_name, 200),
+    address: str(body.address, 400),
+    services: str(body.services, 400),
+    message: str(body.message, 4000),
   };
 
   const missing = (['full_name', 'work_email', 'phone'] as const).filter((k) => !lead[k]);
@@ -142,11 +217,13 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
       INSERT INTO leads
         (form_id, full_name, work_email, phone, facility_size,
          page_url, referrer, gclid, utm_source, utm_medium, utm_campaign,
+         business_name, address, services, message,
          ip_country, user_agent)
       VALUES
         (${lead.form_id}, ${lead.full_name}, ${lead.work_email}, ${lead.phone},
          ${lead.facility_size}, ${lead.page_url}, ${lead.referrer}, ${lead.gclid},
          ${lead.utm_source}, ${lead.utm_medium}, ${lead.utm_campaign},
+         ${lead.business_name}, ${lead.address}, ${lead.services}, ${lead.message},
          ${(request as Request & { cf?: { country?: string } }).cf?.country ?? ''},
          ${str(request.headers.get('user-agent'), 300)})
     `;

@@ -1,3 +1,17 @@
+/**
+ * The hostnames this site is served from, named once because three unrelated
+ * pieces of behaviour key off them — the analytics allowlist, the Worker's
+ * refusal to run on reCAPTCHA test keys in production, and the image-origin
+ * rewrite. Deriving them from one list keeps a change in one place from
+ * quietly altering the meaning of another.
+ */
+export const PRODUCTION_HOSTS = [
+  'www.evergreencleaningservice.ca',
+  'evergreencleaningservice.ca',
+] as const;
+
+export const PREVIEW_HOST = 'evergreencleaningservice.10xconnections.com';
+
 export const site = {
   name: 'Evergreen Office Cleaning',
   /* The business renamed itself: 2023 captures title every page "… - Evergreen
@@ -38,11 +52,57 @@ export const site = {
      conversion in the client's Google Ads account. The loader pushes
      `site_environment: 'staging'` ahead of `gtm.start`, so the agency can
      block staging inside the container without touching this repo. */
-  analyticsHosts: [
-    'www.evergreencleaningservice.ca',
-    'evergreencleaningservice.ca',
-    'evergreencleaningservice.10xconnections.com',
-  ],
+  analyticsHosts: [...PRODUCTION_HOSTS, PREVIEW_HOST],
+} as const;
+
+/**
+ * reCAPTCHA — v2 "I'm not a robot" checkbox, as the original has it.
+ *
+ * Recovered from the 2026-09-18 archive capture: WPForms renders
+ * `wpforms-is-recaptcha-type-v2` with `<div class="g-recaptcha"
+ * data-sitekey="6Lcy1lwa…">`, loaded through
+ * `api.js?onload=…&render=explicit`, positioned after the honeypot and before
+ * the submit button. All of that is reproduced; only the class prefix differs,
+ * because this site uses its own `wpf-` names throughout.
+ *
+ * TWO KEYS, AND WHY THERE HAS TO BE A SECOND ONE
+ *
+ * `clientSiteKey` below is the client's real key, read out of their own
+ * markup. It cannot be used on staging: reCAPTCHA keys are domain-locked, and
+ * asking Google for the widget with this key and the staging origin returns
+ * "Invalid domain for site key" — measured, not assumed. Rendering it here
+ * would put a red error box where the checkbox belongs.
+ *
+ * The other half of the problem is that the **secret key is not in the markup**
+ * and cannot be. Without it the Worker cannot call `siteverify`, and a captcha
+ * nobody checks server-side stops nothing at all while looking like it does.
+ *
+ * So the default is Google's official v2 test pair, which works on every domain
+ * and always passes. That is a deliberate choice over shipping nothing: it
+ * makes the whole path — widget, token, `siteverify`, accept/reject —
+ * demonstrable on staging, and Google renders its own "for testing purposes
+ * only" banner on the widget, so it cannot be mistaken for real protection.
+ *
+ * TO GO LIVE, two things are needed from the client's reCAPTCHA admin
+ * (google.com/recaptcha/admin, the account that owns 6Lcy1lwa…):
+ *
+ *   1. the **secret key** for that site key → `wrangler secret put RECAPTCHA_SECRET`
+ *   2. `evergreencleaningservice.10xconnections.com` added to the key's domain
+ *      list, if staging is to exercise the real key before cutover
+ *
+ * then build with `PUBLIC_RECAPTCHA_SITE_KEY=6Lcy1lwa…`.
+ *
+ * Going live on the test pair by accident is not possible: `src/worker.ts`
+ * refuses to accept the test secret on a production hostname and answers 503.
+ */
+export const recaptcha = {
+  /** The client's own key, from their markup. Production only — domain-locked. */
+  clientSiteKey: '6Lcy1lwaAAAAAL_5DO8SACXqh0NF_QdzhkrAh-3K',
+  /** Google's published v2 test site key. Valid on any domain, always passes. */
+  testSiteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+  /** Its matching secret. Not a credential — Google publishes it. Named here so
+      the Worker can recognise it and refuse to run on it in production. */
+  testSecretKey: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe',
 } as const;
 
 /**

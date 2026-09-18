@@ -24,11 +24,14 @@ credential reads it from the environment or from a Worker secret:
 | --- | --- | --- |
 | Worker secret | `DATABASE_URL` | Neon Postgres, `/api/submit-lead` |
 | Worker secret | `RESEND_API_KEY` | the lead notification email |
+| Worker secret | `RECAPTCHA_SECRET` | verifying form submissions; without it `/api/submit-lead` answers 503 |
+| Build env | `PUBLIC_RECAPTCHA_SITE_KEY` | the client's real site key; defaults to Google's test key (HANDOFF §7.1) |
 | Environment | `B2_KEY_ID`, `B2_APP_KEY` | `npm run b2:sync` |
 | Environment | `CF_API_TOKEN` | the post-deploy edge purge |
 
-`npm run dev` needs none of them — it serves images from `public/` and the form
-posts nowhere.
+`npm run dev` needs none of them, and cannot exercise the form: `astro dev` has
+no Worker, so `/api/submit-lead` 404s there. Test submissions against a
+deployed preview.
 
 ## Project layout
 
@@ -110,10 +113,12 @@ This port is not a complete reproduction of the live site. Outstanding items:
    changed on the live site after its page's capture date is not reflected here and should be
    checked against the real site before launch.
 
-2. **The forms are markup only.** The contact / quote form in
-   `src/components/home/Contact.astro` has `action="#"` and no backend. A submission goes
-   nowhere. It needs a form endpoint (serverless POST route or a hosted form service), and the
-   visible "not connected yet" notice in that component should be removed once it delivers.
+2. **Two forms still go nowhere, and the captcha keys are Google's test pair.** The quote and
+   contact forms now post to `/api/submit-lead` behind a reCAPTCHA v2 checkbox, but the
+   comment form and the `/reviews/` testimonial form are still `action="#"` — neither is a
+   lead, and both need a destination decided. Separately, the client's real reCAPTCHA secret
+   has not been supplied, so the site runs on Google's published test key pair, which passes
+   every token. See HANDOFF §7.1 for the two steps to go live.
 
 3. **`/services/building-maintenance/` has almost no content.** That page was never archived.
    `src/content/services/building-maintenance.md` currently holds only the one-paragraph

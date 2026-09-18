@@ -28,14 +28,20 @@
  * `variant="sidebar"` is the narrow-column rendering the original uses in the
  * sidebar — the same form, stacked.
  *
- * NOT WIRED UP. `action="#"` is a placeholder: there is no endpoint behind this
- * form, so a submission goes nowhere. The visible "this form is not connected"
- * line that used to say so has been removed — the original has no such line and
- * the brief is to match it — so nothing on the page now tells a visitor. This
- * needs a real handler before the site takes enquiries; see _research/gaps.md.
+ * WIRED UP. Posts to /api/submit-lead — the endpoint the PPC form already
+ * used — via `FormRuntime.astro`, and is guarded by the reCAPTCHA v2 checkbox
+ * the original carries. It spent the port with `action="#"`, which validated in
+ * the browser and then dropped the enquiry; that was the launch blocker named
+ * in HANDOFF §7.1.
+ *
+ * `action` stays "#" as a no-JS fallback that does nothing rather than posting
+ * the visitor's details somewhere that will not receive them. The original has
+ * no no-JS path either — WPForms needs its own script to submit.
  */
 import { countries, DEFAULT_COUNTRY } from '../data/countries';
 import { site } from '../data/site';
+import Recaptcha from './Recaptcha.astro';
+import FormRuntime from './FormRuntime.astro';
 
 interface Props {
   variant?: 'page' | 'sidebar';
@@ -64,6 +70,8 @@ const captcha = { a: 7, b: 2 };
   class:list={['wpf', 'quote-form', variant === 'sidebar' && 'is-sidebar']}
   method="post"
   action="#"
+  data-endpoint="/api/submit-lead"
+  data-form-id="quote-form-1381"
   aria-label="Request a quote"
 >
   <fieldset class="wpf-field">
@@ -206,8 +214,12 @@ const captcha = { a: 7, b: 2 };
     <input type="text" id={f('hp')} name="company-website" tabindex="-1" autocomplete="off" />
   </div>
 
+  <Recaptcha />
+
   <button class="wpf-submit" type="submit">Submit</button>
 </form>
+
+<FormRuntime />
 
 <style>
   .wpf {

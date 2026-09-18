@@ -251,13 +251,69 @@ These are the expensive ones. Read them before changing anything.
 `_research/gaps.md` is the full record, 17 sections. The ones that need a human
 decision:
 
-### 7.1 The forms have no backend — **the launch blocker**
+### 7.1 The forms — wired, and guarded by reCAPTCHA
 
-`QuoteForm`, `ContactForm` and `Comments` all post to `action="#"`. A visitor's
-enquiry is **dropped silently**. A visible "this form is not connected" notice
-used to say so; it was removed because the original has no such line and the
-brief is to match. The component headers and `gaps.md` record this. Either wire
-a handler or put the notice back — the client has not chosen.
+`QuoteForm` and `ContactForm` now post to `/api/submit-lead` through
+`FormRuntime.astro`, the same endpoint the PPC form uses. They spent the port on
+`action="#"`, validating in the browser and then dropping the enquiry; that was
+the launch blocker.
+
+`Comments` and the testimonial form on `/reviews/` are **still `action="#"`**.
+Neither is a lead: a comment needs moderation and a testimonial needs a rating
+and a body, so both need a destination and a schema decision that has not been
+made. They are unchanged, and a submission from either still goes nowhere.
+
+**reCAPTCHA v2 checkbox**, as the original has it — recovered from the
+2026-09-18 capture: `wpforms-is-recaptcha-type-v2`, `api.js?onload=…&render=explicit`,
+positioned after the honeypot and before the submit button. Rendered by
+`Recaptcha.astro`, verified server-side by `verifyCaptcha()` in `src/worker.ts`,
+which calls Google's `siteverify` and returns **403** on a bad token. Explicit
+render matters: `/contact-us/` and `/request-a-quote/` each carry two forms, and
+automatic rendering handles that badly.
+
+Four layers, in the order the Worker applies them: honeypot (answers 200, stores
+nothing), reCAPTCHA, required fields, email shape. The arithmetic question the
+original asks is checked in the browser only — the expected answer is in the
+page, so it is a speed bump, not a control, exactly as it is on the original.
+
+**THE KEYS ARE NOT THE CLIENT'S YET.** See the block in `src/data/site.ts`.
+Their site key `6Lcy1lwa…` is domain-locked — measured, not assumed: asking
+Google for the widget with that key and the staging origin returns *Invalid
+domain for site key* — and its **secret is not in the markup and cannot be**.
+So the default is Google's published v2 test pair, which works on any domain and
+**passes every token**. That makes the whole path demonstrable on staging and
+protects nothing there, which is the honest trade; Google renders its own "for
+testing purposes only" banner on the widget.
+
+To go live, from the client's reCAPTCHA admin:
+
+1. the secret for `6Lcy1lwa…` → `wrangler secret put RECAPTCHA_SECRET`
+2. build with `PUBLIC_RECAPTCHA_SITE_KEY=6Lcy1lwa…`
+3. optionally add `evergreencleaningservice.10xconnections.com` to that key's
+   domain list, so staging exercises the real key before cutover
+
+Shipping on the test pair by accident is not possible: the Worker refuses the
+test secret on a `PRODUCTION_HOSTS` hostname and answers 503.
+
+Measured on the deployed staging site:
+
+```
+widget rendered, every container, no double-render
+  /request-a-quote/  2 of 2      /contact-us/  2 of 2
+  /                  1 of 1      /lp/commercial-cleaning/  1 of 1
+endpoint, no token ............... 403
+endpoint, honeypot filled ........ 200, nothing stored
+Google siteverify, test secret ... success:true (so the 200 above is Google's
+                                   verdict, not a short-circuit)
+Google siteverify, wrong secret .. success:false invalid-input-response
+end-to-end contact form .......... token captured, confirmation shown, row 8 in
+                                   Neon with business_name, address and message
+```
+
+`leads` gained `business_name`, `address`, `services` and `message`
+(`migrations/0002_site_forms.sql`, applied). Without them a quote request would
+have stored a name, an email and a phone and dropped everything that makes it
+answerable.
 
 ### 7.2 Google Tag Manager — live on staging as well as production
 

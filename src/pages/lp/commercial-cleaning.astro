@@ -20,6 +20,7 @@
  * Put the real rating and review count in and the first badge can say it.
  */
 import LandingLayout from '../../layouts/LandingLayout.astro';
+import Recaptcha from '../../components/Recaptcha.astro';
 import { nap, site } from '../../data/site';
 import { reviews } from '../../data/reviews';
 
@@ -137,6 +138,14 @@ const sizes = [
 
           <p class="lp-error" id="lp-error" role="alert" hidden></p>
 
+          {/* The endpoint requires a verified token from every caller, so the
+              PPC form carries the checkbox too — otherwise a form_id is all it
+              would take to post straight past the captcha on the other two.
+              It is friction on a paid click, and worth saying out loud: if the
+              conversion rate drops, the answer is reCAPTCHA v3 or Enterprise
+              scoring on this form, not removing the check. */}
+          <Recaptcha />
+
           <button type="submit" class="lp-submit">Get My Free Proposal &rarr;</button>
           <p class="lp-confidential">Information is kept strictly confidential.</p>
         </form>
@@ -241,6 +250,8 @@ const sizes = [
             email: (document.getElementById('workEmail') as HTMLInputElement).value,
             phone: (document.getElementById('phone') as HTMLInputElement).value,
             size: facilitySize,
+            recaptcha:
+              (leadForm.querySelector('.wpf-recaptcha-hidden') as HTMLInputElement | null)?.value ?? '',
             page_url: location.href,
             referrer: document.referrer,
             // what makes the lead attributable to a click
@@ -255,9 +266,14 @@ const sizes = [
           window.location.href = '/thank-you/';
           return;
         }
-        showError(
-          'Something went wrong sending that. Please call (416) 803-4880 and we will take the details directly.'
-        );
+        if (res.status === 403) {
+          (window as any).grecaptcha?.reset?.();
+          showError('That captcha did not verify. Please tick the box again and resubmit.');
+        } else {
+          showError(
+            'Something went wrong sending that. Please call (416) 803-4880 and we will take the details directly.'
+          );
+        }
       } catch {
         showError(
           'We could not reach the server. Please call (416) 803-4880 and we will take the details directly.'
