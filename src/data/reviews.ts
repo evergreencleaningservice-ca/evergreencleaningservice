@@ -7,7 +7,10 @@
  * its script hydrate from there. The archive captured that template, so every
  * review below is the real one: name, date, rating and full text, taken from
  * it rather than retyped. The avatars came from the Google URLs in the same
- * template and are served from this site.
+ * template and are served from this site, each with a `-2x` beside it. The
+ * retina file is named `-2x` rather than the usual `@2x` because Cloudflare's
+ * asset server answers an `@` in a path with a 307 to its percent-encoded
+ * form, which would cost every retina visitor a redirect per avatar.
  *
  * Widget settings, from the template's own attributes:
  *   data-layout-category="slider"   ti-col-3   data-review-target-width="300"

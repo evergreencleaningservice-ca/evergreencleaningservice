@@ -50,7 +50,7 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
                 <img
                   class="ti-avatar"
                   src={r.avatar}
-                  srcset={`${r.avatar} 1x, ${r.avatar.replace(/\.png$/, '@2x.png')} 2x`}
+                  srcset={`${r.avatar} 1x, ${r.avatar.replace(/\.png$/, '-2x.png')} 2x`}
                   alt=""
                   width="40"
                   height="40"
