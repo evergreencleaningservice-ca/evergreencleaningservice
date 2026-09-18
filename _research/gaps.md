@@ -217,12 +217,19 @@ image widths where the source aspect ratios differ.
 
 ## 14. Blog post thumbnails
 
-Eight of the 38 posts still have no featured image. The listing pages name the
-file for every one of them, so the addresses are known — they are recorded in
-the session's `postimages.json` — but the archive returns 404 or nothing for
-those eight, and it was answering "Temporarily Offline" while this was being
-retried. Worth another attempt later; they affect the blog listings only, not
-the homepage.
+Eight of the 38 posts have no featured image, and they are **not recoverable
+from the archive** — retrying will not help.
+
+The blog listing pages name the file for every one of the 38, so the addresses
+are all known. But a CDX query for those eight returns no capture at all,
+neither for the `-300x150` crop the listings use nor for the full-size upload
+it is derived from:
+
+    dental-office-1 · air-quality-1 · hand-sanitizer · duster · slips
+    lobby_1-e1597778322357 · post-covid-19-office · office-building-exterior
+
+They exist only in the client's media library. They affect the blog listings,
+not the homepage.
 
 The ninth, `office-layout-3-300x150.jpg`, was recovered this way and is in
 place, so all three posts in the homepage's Latest News band have their
