@@ -14,29 +14,19 @@
     "not_found_handling": "404-page"
   },
 
-  // Lead storage for the PPC forms.
+  // Lead storage is Neon Postgres, reached with @neondatabase/serverless over
+  // HTTP — no binding here, and nothing to bind: the connection string is a
+  // Worker secret, because it carries a role password.
   //
-  // NOT YET PROVISIONED. `wrangler d1 create evergreencleaningservice-forms`
-  // fails with "maximum number of D1 databases" — the account holds 10 of 10 on
-  // the Workers Free plan, and all ten are live client databases. Creating this
-  // one needs either the paid plan or a deletion, and both are the account
-  // owner's call, not this build's.
+  //   wrangler secret put DATABASE_URL
   //
-  // When the database exists:
-  //   wrangler d1 create evergreencleaningservice-forms
-  //   wrangler d1 execute evergreencleaningservice-forms --remote --file=migrations/0001_leads.sql
-  //   paste database_id below and uncomment the block
+  // Neon project long-firefly-62771888, database `evergreen`. Schema in
+  // migrations/0001_leads.sql. D1 was the original plan and is not usable: the
+  // Cloudflare account holds 10 of 10 databases on the Workers Free plan and
+  // every one is a live client database.
   //
-  // Until then the endpoint answers 503 rather than 200, so a submission is
-  // visibly rejected instead of silently lost.
-  //
-  // "d1_databases": [
-  //   {
-  //     "binding": "LEADS",
-  //     "database_name": "evergreencleaningservice-forms",
-  //     "database_id": "<paste from wrangler d1 create>"
-  //   }
-  // ],
+  // Without the secret the endpoint answers 503, not 200, so a submission is
+  // visibly rejected rather than silently lost.
 
   "observability": { "enabled": true }
 }

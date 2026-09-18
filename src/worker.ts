@@ -1,3 +1,5 @@
+import { neon } from '@neondatabase/serverless';
+
 /**
  * The site's Worker.
  *
@@ -15,8 +17,15 @@
 
 export interface Env {
   ASSETS: Fetcher;
-  /** D1, bound in wrangler.jsonc. See the note there — not yet provisioned. */
-  LEADS?: D1Database;
+  /**
+   * Neon Postgres connection string, set as a Worker secret:
+   *   wrangler secret put DATABASE_URL
+   *
+   * Neon rather than D1 because the account is at its D1 database limit, and
+   * Neon's serverless driver talks HTTP rather than raw TCP, so it works from a
+   * Worker with no tunnel, no pooler and nothing of ours to keep running.
+   */
+  DATABASE_URL?: string;
   /** Optional. When set, the lead is also emailed to the client via Resend. */
   RESEND_API_KEY?: string;
   LEAD_NOTIFY_TO?: string;
@@ -97,38 +106,28 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
   if (missing.length) return json({ error: 'missing required fields', fields: missing }, 422);
   if (!looksLikeEmail(lead.work_email)) return json({ error: 'invalid email' }, 422);
 
-  if (!env.LEADS) {
-    /* No database bound. Say so loudly rather than returning 200 and losing the
-       enquiry — a form that reports success and drops the lead is the failure
-       this endpoint exists to end. */
-    console.error('submit-lead: no D1 binding; lead not stored', lead.work_email);
+  if (!env.DATABASE_URL) {
+    /* No database configured. Say so loudly rather than returning 200 and
+       losing the enquiry — a form that reports success and drops the lead is
+       the failure this endpoint exists to end. */
+    console.error('submit-lead: no DATABASE_URL; lead not stored', lead.work_email);
     return json({ error: 'lead storage unavailable' }, 503);
   }
 
   try {
-    await env.LEADS.prepare(
-      `INSERT INTO leads
-         (form_id, full_name, work_email, phone, facility_size,
-          page_url, referrer, gclid, utm_source, utm_medium, utm_campaign,
-          ip_country, user_agent)
-       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`
-    )
-      .bind(
-        lead.form_id,
-        lead.full_name,
-        lead.work_email,
-        lead.phone,
-        lead.facility_size,
-        lead.page_url,
-        lead.referrer,
-        lead.gclid,
-        lead.utm_source,
-        lead.utm_medium,
-        lead.utm_campaign,
-        (request as Request & { cf?: { country?: string } }).cf?.country ?? '',
-        str(request.headers.get('user-agent'), 300)
-      )
-      .run();
+    const sql = neon(env.DATABASE_URL);
+    await sql`
+      INSERT INTO leads
+        (form_id, full_name, work_email, phone, facility_size,
+         page_url, referrer, gclid, utm_source, utm_medium, utm_campaign,
+         ip_country, user_agent)
+      VALUES
+        (${lead.form_id}, ${lead.full_name}, ${lead.work_email}, ${lead.phone},
+         ${lead.facility_size}, ${lead.page_url}, ${lead.referrer}, ${lead.gclid},
+         ${lead.utm_source}, ${lead.utm_medium}, ${lead.utm_campaign},
+         ${(request as Request & { cf?: { country?: string } }).cf?.country ?? ''},
+         ${str(request.headers.get('user-agent'), 300)})
+    `;
   } catch (err) {
     console.error('submit-lead: insert failed', err);
     return json({ error: 'lead storage failed' }, 500);

@@ -17,6 +17,7 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
+    "@neondatabase/serverless": "^1.1.0",
     "astro": "^7.3.3"
   },
   "devDependencies": {
