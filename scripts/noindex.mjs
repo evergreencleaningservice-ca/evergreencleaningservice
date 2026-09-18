@@ -33,9 +33,13 @@ fs.writeFileSync(
   ['/*', '  X-Robots-Tag: noindex, nofollow', '  Cache-Control: no-cache', ''].join('\n')
 );
 
+// robots.txt must NOT disallow here. `Disallow: /` stops a crawler fetching the
+// page at all, so it never reads the X-Robots-Tag above — and the URL can still
+// be indexed from an inbound link, with no way for the noindex to be seen. The
+// header is the single source of truth; robots.txt only says what this is.
 fs.writeFileSync(
   path.join(dist, 'robots.txt'),
-  ['# Preview deployment — not the live site.', 'User-agent: *', 'Disallow: /', ''].join('\n')
+  ['# Preview deployment — not the live site.', 'User-agent: *', 'Allow: /', ''].join('\n')
 );
 
 console.log('noindex: preview build marked noindex (X-Robots-Tag + robots.txt)');

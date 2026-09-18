@@ -10,14 +10,56 @@ export const site = {
   description:
     'Looking for commercial cleaning, office cleaning or janitorial services in Toronto and the GTA? Visit us to learn more about our services.',
   phone: '(416) 803-4880',
-  // The original writes `tel://416-803-4880`. The `//` turns the number into a
-  // URL authority, so it is dropped here; the digits are otherwise untouched,
-  // which is what every `tel:` link on the old site dials.
-  phoneHref: 'tel:416-803-4880',
-  email: 'evergreencleaning416@gmail.com',
+  /* The original writes `tel://416-803-4880`. Section 1 of the overhaul
+     specification mandates a single anchor format, `tel:+14168034880`, which is
+     also the correct E.164 form — so this now diverges from the original
+     deliberately. Defined once in `nap` and mirrored here for the few callers
+     that still read `site`. */
+  phoneHref: 'tel:+14168034880',
+  /* Superseded by `nap.email` (Section 1 deprecates this address). Kept only
+     so the old value is on record; nothing renders it. */
+  legacyEmail: 'evergreencleaning416@gmail.com',
   logo: '/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg',
   since: 1989,
   gtmId: 'GTM-5PRC4HBV',
+} as const;
+
+/**
+ * The canonical NAP, Section 1 of the overhaul specification. One definition,
+ * used by the footer, the contact page, the location pages, the landing pages
+ * and the JSON-LD graph, so the six cannot drift apart. Anything that needs a
+ * name, address, phone or email reads it from here.
+ *
+ * TWO THINGS TO CONFIRM BEFORE GO-LIVE:
+ *
+ *  1. `info@evergreencleaningservice.ca` is what the spec mandates and it
+ *     replaces evergreencleaning416@gmail.com everywhere. The domain has MX
+ *     records (SiteGround), so it accepts mail — but that does not prove this
+ *     local-part is a real mailbox. If it bounces, every contact route on the
+ *     site is dead. Send a test message to it before the domain is cut over.
+ *  2. The coordinates below are the spec's. 43.6503, -79.3892 is the generic
+ *     centroid for "Toronto" rather than the pin for 243 Queen St W., which is
+ *     nearer 43.6496, -79.3925. Left as specified; worth correcting with the
+ *     client, since the geo is what a local pack reads.
+ */
+export const nap = {
+  name: 'Evergreen Office Cleaning',
+  streetAddress: '243 Queen St W.',
+  addressLocality: 'Toronto',
+  addressRegion: 'ON',
+  postalCode: 'M5V 1Z4',
+  addressCountry: 'CA',
+  addressCountryName: 'Canada',
+  /** One line, for places that cannot take the structured form. */
+  addressLine: '243 Queen St W., Toronto, ON M5V 1Z4, Canada',
+  phoneDisplay: '(416) 803-4880',
+  /** The spec's anchor format, which is also the correct E.164 form. */
+  phoneHref: 'tel:+14168034880',
+  phoneSchema: '+1-416-803-4880',
+  email: 'info@evergreencleaningservice.ca',
+  latitude: 43.6503,
+  longitude: -79.3892,
+  priceRange: '$$',
 } as const;
 
 export const social = [

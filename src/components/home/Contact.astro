@@ -1,6 +1,6 @@
 ---
 import ContactForm from '../ContactForm.astro';
-import { site, serviceAreas } from '../../data/site';
+import { site, serviceAreas, nap } from '../../data/site';
 ---
 
 <section class="section-padding section-alt" id="contact" aria-labelledby="contact-title">
@@ -34,10 +34,10 @@ import { site, serviceAreas } from '../../data/site';
             Canada
           </address>
           <p class="contact-line">
-            <a href={site.phoneHref}>+1 {site.phone}</a>
+            <a href={nap.phoneHref}>+1 {nap.phoneDisplay}</a>
           </p>
           <p class="contact-line">
-            <a href={`mailto:${site.email}`}>{site.email}</a>
+            <a href={`mailto:${nap.email}`}>{nap.email}</a>
           </p>
         </div>
       </div>

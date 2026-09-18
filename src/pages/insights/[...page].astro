@@ -1,6 +1,6 @@
 ---
 /**
- * `/blog/` and its pages.
+ * `/insights/` and its pages — `/blog/` 301s here (Section 2.1).
  *
  * The original renders these with the same `.list-article` list the homepage's
  * news band uses, inside `#content-inside .container.right-sidebar` with the
@@ -37,7 +37,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { page } = Astro.props as Props;
 
-const base = '/blog/';
+const base = '/insights/';
 const hrefFor = (n: number) => (n === 1 ? base : `${base}page/${n}/`);
 const pageSuffix = page.currentPage > 1 ? ` - Page ${page.currentPage} of ${page.lastPage}` : '';
 ---

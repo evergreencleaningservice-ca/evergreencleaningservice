@@ -1,0 +1,115 @@
+---
+/**
+ * The /locations/ hub. Not in the spec's directory tree as a page of its own,
+ * but the seven sub-location pages need a parent: without one their breadcrumb
+ * points at a 404 and nothing on the site links to them, which would leave
+ * seven orphan pages for a crawler to find on its own.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { locations } from '../../data/locations';
+import { site, nap } from '../../data/site';
+
+const description =
+  'Commercial and office cleaning across the Greater Toronto Area — downtown Toronto, Mississauga, Etobicoke, Vaughan, Markham, Brampton and Oakville.';
+---
+
+<BaseLayout title={`Service Areas Across the GTA - ${site.name}`} description={description}>
+  <div class="page-header">
+    <div class="container">
+      <h1 class="entry-title">Service Areas</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <span aria-current="page">Locations</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+      <p class="loc-lead">
+        Evergreen Office Cleaning works across the Greater Toronto Area from
+        {' '}{nap.streetAddress}, {nap.addressLocality}. Each area below has its own crews and its own
+        schedule, built around the kind of space it holds.
+      </p>
+
+      <ul class="loc-list">
+        {
+          locations.map((location) => (
+            <li>
+              <a href={`/locations/${location.slug}/`}>
+                <h2>{location.name}</h2>
+                <p>{location.focus}</p>
+                <span class="loc-more">Commercial cleaning in {location.name} &rarr;</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .loc-lead {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    max-width: 780px;
+    margin: 0 0 36px;
+  }
+
+  .loc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .loc-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 992px) {
+    .loc-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .loc-list a {
+    display: block;
+    height: 100%;
+    padding: 24px;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .loc-list a:hover {
+    border-color: var(--brand);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+  }
+
+  .loc-list h2 {
+    font-size: 1.25rem;
+    margin: 0 0 10px;
+  }
+
+  .loc-list p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+
+  .loc-more {
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--brand);
+  }
+</style>

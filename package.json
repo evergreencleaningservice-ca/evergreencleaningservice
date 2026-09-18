@@ -6,12 +6,13 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
-    "build:preview": "astro build && node scripts/noindex.mjs",
+    "build": "astro build && npm run redirects",
+    "build:preview": "astro build && npm run redirects && node scripts/noindex.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "deploy:preview": "npm run build:preview && wrangler deploy && node scripts/purge.mjs",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "redirects": "node --experimental-strip-types scripts/redirects.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

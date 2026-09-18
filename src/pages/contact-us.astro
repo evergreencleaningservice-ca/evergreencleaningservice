@@ -1,7 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
-import { site } from '../data/site';
+import { site, nap } from '../data/site';
 import ContactForm from '../components/ContactForm.astro';
 
 const entry = await getEntry('pages', 'contact-us');
@@ -49,10 +49,10 @@ const addressHtml = rawBody.slice(0, cutAt);
   contentHtml={addressHtml}
 >
   <h4>Phone:</h4>
-  <p><a href={site.phoneHref}>+1 {site.phone}</a></p>
+  <p><a href={nap.phoneHref}>+1 {nap.phoneDisplay}</a></p>
 
   <h4>Email:</h4>
-  <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+  <p><a href={`mailto:${nap.email}`}>{nap.email}</a></p>
 
   <section class="form-section" aria-label="General Contact Form">
     <div class="wpforms-title">General Contact Form</div>
