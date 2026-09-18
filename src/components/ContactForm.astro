@@ -14,8 +14,14 @@
  *   Phone *              before Email, not after it
  *   Email *
  *   Comment or Message *
- *   Custom Captcha *     "What is 7+1?" — the quote form asks 7+2
  *   honeypot, then a "Submit" button
+ *
+ * The original also asks "What is 7+1?" here (7+2 on the quote form). It is
+ * REMOVED, on instruction, to take friction off every form on the site. It was
+ * never the protection anyway: the expected answer is emitted into the page
+ * beside the question, so it stops nothing a script would not walk straight
+ * past. The honeypot and the reCAPTCHA checkbox below are what actually guard
+ * this form, and both are still here.
  *
  * The format is WPForms's, measured off the original's render: the field label
  * sits above in 11px/600 uppercase with 2px tracking, and each sub-label —
@@ -42,10 +48,6 @@ interface Props {
 
 const { id = 'contact' } = Astro.props;
 const f = (name: string) => `${id}-${name}`;
-
-// The original's own arithmetic question. The sum is checked server-side once
-// there is an endpoint; the hidden field is only a carrier.
-const captcha = { a: 7, b: 1 };
 ---
 
 <form
@@ -162,23 +164,6 @@ const captcha = { a: 7, b: 1 };
     <textarea id={f('message')} name="message" required></textarea>
   </div>
 
-  <div class="wpf-field">
-    <label class="wpf-label" for={f('captcha')}>
-      Custom Captcha <span class="wpf-req" aria-hidden="true">*</span>
-    </label>
-    <p class="wpf-question" id={f('captcha-q')}>What is {captcha.a}+{captcha.b}?</p>
-    <input
-      type="text"
-      id={f('captcha')}
-      name="captcha"
-      inputmode="numeric"
-      autocomplete="off"
-      aria-describedby={f('captcha-q')}
-      required
-    />
-    <input type="hidden" name="captcha-sum" value={captcha.a + captcha.b} />
-  </div>
-
   {/* Honeypot, as the original has. Real people never see it. */}
   <div class="wpf-hp" aria-hidden="true">
     <label for={f('hp')}>Message</label>
@@ -286,11 +271,6 @@ const captcha = { a: 7, b: 1 };
     outline-offset: 2px;
   }
 
-  .wpf-question {
-    margin: 0 0 4px;
-    font-size: 15px;
-    color: var(--ink);
-  }
 
   .wpf-hp {
     position: absolute;

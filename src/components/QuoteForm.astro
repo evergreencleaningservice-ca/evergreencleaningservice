@@ -28,6 +28,11 @@
  * `variant="sidebar"` is the narrow-column rendering the original uses in the
  * sidebar — the same form, stacked.
  *
+ * The original's "What is 7+2?" arithmetic question is REMOVED, on instruction,
+ * to take friction off every form on the site. It was never the protection: the
+ * expected answer is emitted into the page beside the question. The honeypot
+ * and the reCAPTCHA checkbox are what guard this form.
+ *
  * WIRED UP. Posts to /api/submit-lead — the endpoint the PPC form already
  * used — via `FormRuntime.astro`, and is guarded by the reCAPTCHA v2 checkbox
  * the original carries. It spent the port with `action="#"`, which validated in
@@ -63,7 +68,6 @@ const services = [
   'Other',
 ];
 
-const captcha = { a: 7, b: 2 };
 ---
 
 <form
@@ -189,23 +193,6 @@ const captcha = { a: 7, b: 2 };
   <div class="wpf-field">
     <label class="wpf-label" for={f('comments')}>Additional comments</label>
     <textarea id={f('comments')} name="comments" rows={variant === 'sidebar' ? 3 : 5}></textarea>
-  </div>
-
-  <div class="wpf-field">
-    <label class="wpf-label" for={f('captcha')}>
-      Custom Captcha <span class="wpf-req" aria-hidden="true">*</span>
-    </label>
-    <p class="wpf-question" id={f('captcha-q')}>What is {captcha.a}+{captcha.b}?</p>
-    <input
-      type="text"
-      id={f('captcha')}
-      name="captcha"
-      inputmode="numeric"
-      autocomplete="off"
-      aria-describedby={f('captcha-q')}
-      required
-    />
-    <input type="hidden" name="captcha-sum" value={captcha.a + captcha.b} />
   </div>
 
   {/* Honeypot, as the original has. Real people never see it. */}
@@ -339,11 +326,6 @@ const captcha = { a: 7, b: 2 };
     color: var(--ink);
   }
 
-  .wpf-question {
-    margin: 0 0 4px;
-    font-size: 15px;
-    color: var(--ink);
-  }
 
   .wpf-hp {
     position: absolute;

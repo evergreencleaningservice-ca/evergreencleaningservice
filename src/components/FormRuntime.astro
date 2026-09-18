@@ -15,8 +15,13 @@
  * already existed for the PPC form, and the captcha now guards something real.
  *
  * It picks up any `form[data-endpoint]`, so a new form opts in with one
- * attribute and inherits the honeypot, captcha, error handling and confirmation
+ * attribute and inherits the honeypot, error handling and confirmation
  * behaviour rather than reimplementing them.
+ *
+ * The arithmetic question the original asked ("What is 7+2?") is gone from
+ * every form, so the check that used to live here is gone with it. It was a
+ * speed bump, never a control — the expected answer was printed in the page
+ * next to the question. reCAPTCHA and the honeypot are the protection.
  */
 ---
 
@@ -85,16 +90,6 @@
 
       if (!form.checkValidity()) {
         form.reportValidity();
-        return;
-      }
-
-      /* The arithmetic question the original asks. Checked here for the same
-         reason the original asks it — it turns away the crudest scripted
-         posts — and not relied on for anything: the expected answer is in the
-         page, so it is a speed bump, and reCAPTCHA is the actual control. */
-      const sum = value(form, 'captcha-sum');
-      if (sum && value(form, 'captcha') !== sum) {
-        fail(form, 'That answer is not right — please check the sum and try again.');
         return;
       }
 
