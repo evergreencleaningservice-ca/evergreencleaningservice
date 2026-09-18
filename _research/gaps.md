@@ -79,11 +79,17 @@ refuses this network at the firewall (SiteGround answers with its IP-reputation
 captcha instead of the page; confirmed again while building this). So the panel
 is reconstructed from a screenshot of it working.
 
-| Taken from the screenshot | Inferred |
+It has the original's two states: **collapsed** to a round thumbnail with a
+green ring, a "Click to open ->" pill and a small grey dismiss badge, and
+**open** to the full panel.
+
+| Measured off the screenshots | Inferred |
 |---|---|
-| Panel size and corner, control bar, the three controls and their order, the close button | The 3s delay before it slides in |
-| The "Request below" caption and the "Request a Free Quote" button, icon above label | That the clip plays once rather than looping |
-| The "Powered by Lead Net" strip | That a dismissal is remembered for the rest of the session |
+| Orb 80px with a 4px `#4e8b2b` ring — the site's own green | The delay before the bubble appears |
+| Dismiss badge 20px of `#868686`, 6px left and 4px above the orb's corner | That the thumbnail loops while the panel's clip plays once |
+| Pill 120x39, 7px from the orb | That closing the panel returns to the bubble, while dismissing the bubble ends it |
+| Panel 320px wide; control bar, its three controls in order, the close button | That a dismissal is remembered for the rest of the session |
+| "Request below", the "Request a Free Quote" button with its icon above the label, the "Powered by Lead Net" strip | |
 
 **The clip itself is the client's.** It is a recording of a real person, so it is
 not something to approximate. `public/video/lead-net.webm` currently holds a
