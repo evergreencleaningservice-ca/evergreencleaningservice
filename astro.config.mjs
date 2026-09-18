@@ -15,10 +15,21 @@ export default defineConfig({
   // asset router serves as real 301s.
   integrations: [
     sitemap({
-      // The category archive carries robots "follow, noindex" to match the
-      // original, so listing it in the sitemap would invite crawlers to index
-      // what those pages ask them not to. /blog/ covers the same posts.
-      filter: (page) => !/\/category\/blog\//.test(page),
+      /*
+       * Nothing noindexed goes in the sitemap. Submitting a URL and then
+       * telling the crawler not to index it is a contradiction, and Search
+       * Console reports it as an error against the property.
+       *
+       *   /category/blog/  "follow, noindex", matching the original. /insights/
+       *                    covers the same posts and is indexable.
+       *   /lp/*            PPC landing pages, noindex by design — they compete
+       *                    with the service pages for the same intent and exist
+       *                    only for paid traffic.
+       *   /thank-you/      a conversion confirmation. Indexed, it can be landed
+       *                    on directly, firing the conversion for someone who
+       *                    submitted nothing.
+       */
+      filter: (page) => !/\/(category\/blog|lp|thank-you)\//.test(page),
     }),
   ],
 });
