@@ -2,7 +2,8 @@
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import PostCard from '../../../components/PostCard.astro';
+import PostList from '../../../components/PostList.astro';
+import Sidebar from '../../../components/Sidebar.astro';
 import { site } from '../../../data/site';
 
 export const getStaticPaths = (async ({ paginate }) => {
@@ -23,7 +24,6 @@ const { page } = Astro.props as Props;
 
 const base = '/category/blog/';
 const hrefFor = (n: number) => (n === 1 ? base : `${base}page/${n}/`);
-const pageNumbers = Array.from({ length: page.lastPage }, (_, i) => i + 1);
 
 // Copied from the archived <title>s. The original is inconsistent on purpose or
 // by accident, but it is what the source serves: page one ends "- Evergreen
@@ -55,102 +55,65 @@ const archiveTitle =
   </div>
 
   <div class="section-padding">
-    <div class="container">
-      <div class="grid grid-2">
+    <div class="container content-grid">
+      <div class="post-main">
+        <header>
+          <h1 class="page-title screen-reader-text">Category: Blog</h1>
+        </header>
+
+        <PostList posts={page.data} eager={2} />
+
         {
-          page.data.map((post, index) => (
-            <PostCard post={post} loading={index < 2 ? 'eager' : 'lazy'} />
-          ))
+          page.lastPage > 1 && (
+            <nav class="posts-navigation" aria-label="Posts navigation">
+              <h2 class="screen-reader-text">Posts navigation</h2>
+              <div class="nav-links">
+                {page.currentPage < page.lastPage && (
+                  <div class="nav-previous">
+                    <a href={hrefFor(page.currentPage + 1)} rel="next">
+                      Older posts
+                    </a>
+                  </div>
+                )}
+                {page.currentPage > 1 && (
+                  <div class="nav-next">
+                    <a href={hrefFor(page.currentPage - 1)} rel="prev">
+                      Newer posts
+                    </a>
+                  </div>
+                )}
+              </div>
+            </nav>
+          )
         }
       </div>
 
-      {
-        page.lastPage > 1 && (
-          <nav class="pagination" aria-label="Blog pagination">
-            {page.currentPage > 1 && (
-              <a class="page-link page-arrow" href={hrefFor(page.currentPage - 1)} rel="prev">
-                Newer posts
-              </a>
-            )}
-
-            <ul class="page-numbers">
-              {pageNumbers.map((n) => (
-                <li>
-                  {n === page.currentPage ? (
-                    <span class="page-link is-current" aria-current="page">
-                      <span class="screen-reader-text">Page </span>
-                      {n}
-                    </span>
-                  ) : (
-                    <a class="page-link" href={hrefFor(n)}>
-                      <span class="screen-reader-text">Page </span>
-                      {n}
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ul>
-
-            {page.currentPage < page.lastPage && (
-              <a class="page-link page-arrow" href={hrefFor(page.currentPage + 1)} rel="next">
-                Older posts
-              </a>
-            )}
-          </nav>
-        )
-      }
+      <Sidebar />
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .pagination {
+  .posts-navigation {
+    margin-top: 30px;
+  }
+
+  .nav-links {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 48px;
+    justify-content: space-between;
+    gap: 16px;
   }
 
-  .page-numbers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .nav-next {
+    margin-left: auto;
   }
 
-  .page-link {
-    display: inline-block;
-    min-width: 40px;
-    padding: 8px 14px;
-    text-align: center;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    color: var(--ink-heading);
-    background: var(--surface);
+  .nav-links a {
+    color: var(--brand);
   }
 
-  a.page-link:hover,
-  a.page-link:focus-visible {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: #fff;
-    text-decoration: none;
-  }
-
-  .page-link.is-current {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: #fff;
-  }
-
-  a.page-link:focus-visible {
-    outline: 2px solid var(--brand-dark);
-    outline-offset: 2px;
+  .nav-links a:hover,
+  .nav-links a:focus-visible {
+    color: var(--brand-hover, #3f7523);
   }
 </style>

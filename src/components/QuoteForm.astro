@@ -1,16 +1,34 @@
 ---
 /**
- * The Request Quote form, matching the original's field set exactly.
+ * The quote form — WPForms form **1381**.
  *
- * The original was a WPForms embed appearing both on /request-a-quote/ and in
- * the sidebar of every inner page, so this is one component used in both
- * places. `variant="sidebar"` is the narrow column rendering — same fields,
- * tighter layout.
+ * WHICH VERSION. The archive holds two generations of this form, and an
+ * earlier pass here took the wrong one. Captures from December 2023 to July
+ * 2024 show seven services and no address block; captures from April 2025 to
+ * October 2025 show **eight services and an address block**. The later shape
+ * is the current one, and it is what this builds. (The giveaway was that 46 of
+ * the archived pages carry the old shape and only 5 carry the new one — the
+ * majority is the older site, not the current one.)
  *
- * TODO: the submit endpoint still needs wiring. The original posted to
- * WordPress; nothing here delivers yet, and the note in the markup says so
- * rather than pretending otherwise.
+ * Its fields, in the original's order:
+ *
+ *   Name *                First / Last
+ *   Name of Business *
+ *   Address *             Address Line 1 ("Street address & unit #"), City,
+ *                         State ("Ontario"), Postal Code, Country (CA)
+ *   Email *               before Phone here; form 1384 has them the other way
+ *   Phone *
+ *   I'm interested a quote for these services   eight, not required
+ *   Additional comments                          not required
+ *   Custom Captcha *      "What is 7+2?" — the contact form asks 7+1
+ *
+ * Format is WPForms's, shared with the contact form: the field label above in
+ * 11px/600 uppercase on 2px tracking, and each sub-label BELOW its input.
+ *
+ * `variant="sidebar"` is the narrow-column rendering the original uses in the
+ * sidebar — the same form, stacked.
  */
+import { countries, DEFAULT_COUNTRY } from '../data/countries';
 import { site } from '../data/site';
 
 interface Props {
@@ -19,14 +37,13 @@ interface Props {
 }
 
 const { variant = 'page', id = 'quote' } = Astro.props;
+const f = (name: string) => `${id}-${name}`;
 
-/** The original's services checklist, in its order. */
-// The original's seven, in its order. An earlier pass had eight, with
-// "Property Management and Building Maintenance" added and the first two
-// swapped.
+/** The original's eight, in its order. */
 const services = [
-  'Commercial Cleaning',
   'Office Cleaning',
+  'Commercial Cleaning',
+  'Property Management and Building Maintenance',
   'Janitorial Services',
   'Commercial Carpet Cleaning',
   'Floor Services / Finishing',
@@ -34,67 +51,122 @@ const services = [
   'Other',
 ];
 
-// The original used a WPForms "custom captcha" — a small arithmetic question.
-// Kept so the ported form has the same anti-spam step; the answer is checked
-// server-side once the endpoint exists.
 const captcha = { a: 7, b: 2 };
-const f = (name: string) => `${id}-${name}`;
 ---
 
 <form
-  class:list={['quote-form', variant === 'sidebar' && 'is-sidebar']}
+  class:list={['wpf', 'quote-form', variant === 'sidebar' && 'is-sidebar']}
   method="post"
   action="#"
   aria-label="Request a quote"
 >
-  <p class="form-note" role="note">
+  <p class="wpf-note" role="note">
     This form is not connected yet, so a submission will not reach us. Please call
     <a href={site.phoneHref}>{site.phone}</a> or email
     <a href={`mailto:${site.email}`}>{site.email}</a> in the meantime.
   </p>
 
-  <fieldset class="field-group">
-    <legend>Name <span class="req" aria-hidden="true">*</span></legend>
-    <div class="row row-2">
-      <div class="field">
-        <label for={f('first')}>First</label>
+  <fieldset class="wpf-field">
+    <legend class="wpf-label">Name <span class="wpf-req" aria-hidden="true">*</span></legend>
+    <div class="wpf-row wpf-row-2">
+      <div class="wpf-col">
         <input type="text" id={f('first')} name="first-name" autocomplete="given-name" required />
+        <label class="wpf-sub" for={f('first')}>First</label>
       </div>
-      <div class="field">
-        <label for={f('last')}>Last</label>
+      <div class="wpf-col">
         <input type="text" id={f('last')} name="last-name" autocomplete="family-name" required />
+        <label class="wpf-sub" for={f('last')}>Last</label>
       </div>
     </div>
   </fieldset>
 
-  <div class="field">
-    <label for={f('business')}>Name of Business <span class="req" aria-hidden="true">*</span></label>
-    <input type="text" id={f('business')} name="business" autocomplete="organization" required />
+  <div class="wpf-field">
+    <label class="wpf-label" for={f('business')}>
+      Name of Business <span class="wpf-req" aria-hidden="true">*</span>
+    </label>
+    <input type="text" id={f('business')} name="business-name" autocomplete="organization" required />
   </div>
 
+  <fieldset class="wpf-field">
+    <legend class="wpf-label">Address <span class="wpf-req" aria-hidden="true">*</span></legend>
 
-  <div class="row row-2">
-    <div class="field">
-      <label for={f('email')}>Email <span class="req" aria-hidden="true">*</span></label>
-      <input
-        type="email"
-        id={f('email')}
-        name="email"
-        inputmode="email"
-        autocomplete="email"
-        spellcheck="false"
-        required
-      />
+    <div class="wpf-row">
+      <div class="wpf-col">
+        <input
+          type="text"
+          id={f('address1')}
+          name="address1"
+          placeholder="Street address &amp; unit #"
+          autocomplete="address-line1"
+          required
+        />
+        <label class="wpf-sub" for={f('address1')}>Address Line 1</label>
+      </div>
     </div>
-    <div class="field">
-      <label for={f('phone')}>Phone <span class="req" aria-hidden="true">*</span></label>
-      <input type="tel" id={f('phone')} name="phone" inputmode="tel" autocomplete="tel" required />
+
+    <div class="wpf-row wpf-row-2">
+      <div class="wpf-col">
+        <input type="text" id={f('city')} name="city" autocomplete="address-level2" required />
+        <label class="wpf-sub" for={f('city')}>City</label>
+      </div>
+      <div class="wpf-col">
+        <input
+          type="text"
+          id={f('state')}
+          name="state"
+          value="Ontario"
+          autocomplete="address-level1"
+          required
+        />
+        <label class="wpf-sub" for={f('state')}>State / Province / Region</label>
+      </div>
     </div>
+
+    <div class="wpf-row wpf-row-2">
+      <div class="wpf-col">
+        <input type="text" id={f('postal')} name="postal" autocomplete="postal-code" required />
+        <label class="wpf-sub" for={f('postal')}>Postal Code</label>
+      </div>
+      <div class="wpf-col">
+        <select id={f('country')} name="country" autocomplete="country" required>
+          {
+            countries.map((c) => (
+              <option value={c.code} selected={c.code === DEFAULT_COUNTRY}>
+                {c.name}
+              </option>
+            ))
+          }
+        </select>
+        <label class="wpf-sub" for={f('country')}>Country</label>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="wpf-field">
+    <label class="wpf-label" for={f('email')}>
+      Email <span class="wpf-req" aria-hidden="true">*</span>
+    </label>
+    <input
+      type="email"
+      id={f('email')}
+      name="email"
+      inputmode="email"
+      autocomplete="email"
+      spellcheck="false"
+      required
+    />
   </div>
 
-  <fieldset class="field-group">
-    <legend>I'm interested a quote for these services</legend>
-    <ul class="choices">
+  <div class="wpf-field">
+    <label class="wpf-label" for={f('phone')}>
+      Phone <span class="wpf-req" aria-hidden="true">*</span>
+    </label>
+    <input type="tel" id={f('phone')} name="phone" inputmode="tel" autocomplete="tel" required />
+  </div>
+
+  <fieldset class="wpf-field">
+    <legend class="wpf-label">I'm interested a quote for these services</legend>
+    <ul class="wpf-choices">
       {
         services.map((s, i) => (
           <li>
@@ -106,175 +178,187 @@ const f = (name: string) => `${id}-${name}`;
     </ul>
   </fieldset>
 
-  <div class="field">
-    <label for={f('comments')}>Additional comments</label>
+  <div class="wpf-field">
+    <label class="wpf-label" for={f('comments')}>Additional comments</label>
     <textarea id={f('comments')} name="comments" rows={variant === 'sidebar' ? 3 : 5}></textarea>
   </div>
 
-  <div class="field">
-    <label for={f('captcha')}>
-      Custom Captcha <span class="req" aria-hidden="true">*</span>
+  <div class="wpf-field">
+    <label class="wpf-label" for={f('captcha')}>
+      Custom Captcha <span class="wpf-req" aria-hidden="true">*</span>
     </label>
-    <p class="captcha-q">What is {captcha.a}+{captcha.b}?</p>
+    <p class="wpf-question" id={f('captcha-q')}>What is {captcha.a}+{captcha.b}?</p>
     <input
       type="text"
       id={f('captcha')}
       name="captcha"
       inputmode="numeric"
       autocomplete="off"
+      aria-describedby={f('captcha-q')}
       required
     />
     <input type="hidden" name="captcha-sum" value={captcha.a + captcha.b} />
   </div>
 
-  {/* Honeypot, as the original had. Real people never see it. */}
-  <div class="honeypot" aria-hidden="true">
-    <label for={f('hp')}>Leave this field empty</label>
+  {/* Honeypot, as the original has. Real people never see it. */}
+  <div class="wpf-hp" aria-hidden="true">
+    <label for={f('hp')}>Message</label>
     <input type="text" id={f('hp')} name="company-website" tabindex="-1" autocomplete="off" />
   </div>
 
-  <button class="btn btn-primary" type="submit">Submit</button>
+  <button class="wpf-submit" type="submit">Submit</button>
 </form>
 
 <style>
-  .quote-form {
-    max-width: 640px;
+  .wpf {
+    margin: 0;
   }
 
-  .is-sidebar {
-    max-width: none;
-  }
-
-  .form-note {
-    font-size: 13px;
+  .wpf-note {
+    font-size: 14px;
     color: var(--ink);
-    margin: 0 0 14px;
+    margin: 0 0 20px;
   }
 
-  .req {
-    color: var(--brand-dark);
-    font-weight: 700;
-  }
-
-  .field-group {
-    /* Fieldsets default to min-width: min-content, which forces horizontal
-       scroll in a narrow column. */
-    min-width: 0;
-    border: 0;
+  .wpf-field {
+    margin: 0 0 20px;
     padding: 0;
-    margin: 0 0 14px;
+    border: 0;
+    min-width: 0;
   }
 
-  .field-group legend,
-  .field label {
+  .wpf-label {
     display: block;
     padding: 0;
     font-family: var(--font-heading);
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 600;
-    color: var(--ink-heading);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ink);
     margin-bottom: 4px;
   }
 
-  .field-group legend {
-    margin-bottom: 8px;
+  .wpf-sub {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ink);
+    margin-top: 4px;
   }
 
-  .field {
-    margin-bottom: 12px;
+  .wpf-req {
+    color: #f00;
   }
 
-  .row {
+  .wpf-row {
     display: grid;
-    gap: 0 12px;
+    gap: 0 20px;
+    margin-bottom: 10px;
   }
 
-  @media (min-width: 560px) {
-    .quote-form:not(.is-sidebar) .row-2 {
+  .wpf-row:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 480px) {
+    .wpf:not(.is-sidebar) .wpf-row-2 {
       grid-template-columns: 1fr 1fr;
     }
   }
 
-  input[type='text'],
-  input[type='email'],
-  input[type='tel'],
-  select,
-  textarea {
+  .wpf input[type='text'],
+  .wpf input[type='tel'],
+  .wpf input[type='email'],
+  .wpf select,
+  .wpf textarea {
     width: 100%;
     max-width: 100%;
-    font: inherit;
+    height: 38px;
+    padding: 10px;
+    border: 0;
+    border-radius: 2px;
+    background: #f2f2f2;
+    font-family: inherit;
     font-size: 15px;
-    color: inherit;
-    background: #fff;
-    padding: 8px 10px;
-    border: 1px solid #cdd2d7;
-    border-radius: var(--radius);
+    color: #000;
   }
 
-  .is-sidebar input,
-  .is-sidebar select,
-  .is-sidebar textarea {
-    font-size: 14px;
-    padding: 7px 9px;
-  }
-
-  textarea {
+  .wpf textarea {
+    height: 215px;
     resize: vertical;
   }
 
-  input:focus-visible,
-  select:focus-visible,
-  textarea:focus-visible,
-  button:focus-visible {
+  .is-sidebar textarea {
+    height: 110px;
+  }
+
+  .wpf input:focus-visible,
+  .wpf select:focus-visible,
+  .wpf textarea:focus-visible,
+  .wpf-submit:focus-visible {
     outline: 2px solid var(--brand);
     outline-offset: 2px;
   }
 
-  .choices {
+  .wpf-choices {
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  .choices li {
+  .wpf-choices li {
     display: flex;
     align-items: flex-start;
     gap: 8px;
     margin-bottom: 6px;
   }
 
-  .choices input {
-    width: auto;
-    margin-top: 3px;
+  .wpf-choices input {
     flex: none;
+    margin-top: 3px;
   }
 
-  .choices label {
-    margin: 0;
-    font-weight: 400;
-    font-size: 14px;
+  .wpf-choices label {
+    font-size: 15px;
     color: var(--ink);
   }
 
-  .honeypot {
+  .wpf-question {
+    margin: 0 0 4px;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .wpf-hp {
     position: absolute;
     width: 1px;
     height: 1px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
     white-space: nowrap;
   }
 
-  .captcha-q {
-    font-size: 14px;
-    margin: 0 0 4px;
+  .wpf-submit {
+    border: 0;
+    border-radius: 2px;
+    background: var(--brand);
+    color: #fff;
+    padding: 15px 23px;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.2s ease;
   }
 
-  .quote-form .btn {
-    margin-top: 6px;
-  }
-
-  .is-sidebar .btn {
-    width: 100%;
+  .wpf-submit:hover {
+    background: var(--brand-hover, #3f7523);
   }
 </style>
