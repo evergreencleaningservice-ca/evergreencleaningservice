@@ -91,12 +91,19 @@ green ring, a "Click to open ->" pill and a small grey dismiss badge, and
 | Panel 320px wide; control bar, its three controls in order, the close button | That a dismissal is remembered for the rest of the session |
 | "Request below", the "Request a Free Quote" button with its icon above the label, the "Powered by Lead Net" strip | |
 
-**The clip itself is the client's.** It is a recording of a real person, so it is
-not something to approximate. `public/video/lead-net.webm` currently holds a
-placeholder that says so on screen. Dropping the real file in as
-`public/video/lead-net.mp4` replaces it with no code change — the component
-prefers the MP4 and falls back to whatever is present. With neither file there,
-the widget renders nothing at all rather than showing an empty black box.
+**The clip is the client's own**, supplied from their Lead Net dashboard and
+committed at `public/video/lead-net.mp4` — 720x540, H.264 and AAC, 42.2s, moov
+atom ahead of the data so it starts without the whole file. If it is ever
+missing the widget renders nothing rather than showing an empty black box.
+
+**One thing about it still needs a human eye.** The clip is 4:3 landscape and
+the widget shows portrait, so the orb fits the frame (letterboxed, as the
+original's does) while the panel takes a 320x477 slice out of the middle of it,
+which is the picture area the original has. Whether that centre slice frames the
+speaker the way the live widget does cannot be checked from here — this
+container's Chromium is the open-source build with no H.264 decoder, so the clip
+has never been played or seen during this build. If the crop is wrong, the one
+value to change is the `aspect-ratio` on `.leadnet-stage`.
 
 ## 9. Images the archive never captured
 

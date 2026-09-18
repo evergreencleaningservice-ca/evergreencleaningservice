@@ -26,13 +26,12 @@
  * closing the panel returns to the bubble while dismissing the bubble ends it,
  * and that a dismissal lasts the rest of the session.
  *
- * THE VIDEO ITSELF IS THE CLIENT'S. It is a recording of a real person, so it
- * is not something to approximate or stand in for. Drop the file at
- * `public/video/lead-net.mp4` (and a first-frame `lead-net.jpg` beside it) and
- * it is used with no change here. `public/video/lead-net.webm` currently holds
- * a placeholder that says as much on screen. With neither file present the
- * component renders nothing at all, rather than putting an empty black box in
- * the corner of every page.
+ * THE CLIP is the client's own, supplied from their Lead Net dashboard and
+ * committed at `public/video/lead-net.mp4`: 720x540, H.264 and AAC, 42.2s,
+ * with its moov atom ahead of the data so it starts without the whole file.
+ * Note it is 4:3 landscape while the widget shows portrait — see the note on
+ * `.leadnet-stage`. If the file is ever missing the component renders nothing
+ * at all, rather than putting an empty black box in the corner of every page.
  */
 import { existsSync } from 'node:fs';
 import path from 'node:path';
@@ -52,7 +51,7 @@ interface Props {
 }
 
 const {
-  sources = ['/video/lead-net.mp4', '/video/lead-net.webm'],
+  sources = ['/video/lead-net.mp4'],
   poster = '/video/lead-net.jpg',
   ctaHref = '/request-a-quote/',
   ctaLabel = 'Request a Free Quote',
@@ -267,11 +266,14 @@ const hasPoster = inPublic(poster);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
 
+  /* The clip is 4:3 landscape, and the orb fits it rather than cropping it —
+     in the original it sits in a letterboxed band with black above and below,
+     which is what `contain` on a black orb gives. */
   .leadnet-thumb {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 50%;
   }
 
@@ -380,15 +382,23 @@ const hasPoster = inPublic(poster);
     display: block;
   }
 
+  /* The panel, unlike the orb, crops. In the original the picture area is
+     320x477 — portrait — while the clip is 720x540 landscape, so the widget is
+     taking a tall slice out of the middle of the frame. Fixing the box to that
+     ratio and covering it reproduces what the original shows, and holds the
+     panel's height steady before the clip has loaded. */
   .leadnet-stage {
     position: relative;
     line-height: 0;
+    aspect-ratio: 320 / 477;
+    background: #000;
   }
 
   .leadnet-video {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     background: #000;
   }
 
