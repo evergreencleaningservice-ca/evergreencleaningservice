@@ -114,7 +114,37 @@ this build. The layout and the bar-finding were proved against a generated
 720x540 clip with 67.5px bars, which this Chromium can decode; how the portrait
 crop frames the speaker still wants a human eye.
 
-## 9. Images the archive never captured
+## 9. The Google reviews widget
+
+The original's reviews band runs a Trustindex script. The script is not ported;
+the band is a static slider carrying the same four reviews.
+
+They are not retyped or approximated. The Trustindex WordPress plugin writes the
+whole widget into the page inside `<template id="trustindex-google-widget-html">`
+for its script to hydrate from, and the archive captured that template — so the
+names, dates, ratings and full review text in `src/data/reviews.ts` are the real
+ones, and the avatars were fetched from the Google URLs in the same template and
+are served from this site.
+
+The slider's settings come from the template's own attributes rather than from
+guesswork: `data-layout-category="slider"`, `ti-col-3`,
+`data-review-target-width="300"`, `data-pager-autoplay-timeout="6"`,
+`ti-text-align-left`.
+
+Two things follow from it being static rather than live:
+
+- **New reviews will not appear by themselves.** The client's Google reviews are
+  fixed at the four the archive holds. Adding one means adding it to that file.
+- **The dates are worked out at build time**, so a rebuild keeps them honest —
+  "5 years ago" rather than a frozen string.
+
+The original's markup carries a "Read more" control that its own layout never
+displays, so reviews here clamp to four lines with an ellipsis and no control,
+which is what the original shows. Its five-star badge is a bare `<img>` whose
+alt calls it a button but which links nowhere; here it links to the business's
+Google review page, and looks identical.
+
+## 10. Images the archive never captured
 
 Roughly seventy images referenced by the original were never stored by the
 Wayback crawler. Where a sibling size-variant of the same asset survived, the
