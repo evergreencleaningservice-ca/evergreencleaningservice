@@ -9,26 +9,23 @@
  * static-asset router reads a `_redirects` file and returns real 301s, so that
  * is where these go — written into dist/ by scripts/redirects.mjs.
  *
- * TWO CORRECTIONS TO THE SPECIFICATION'S MAP, both deliberate:
+ * ON THE SPECIFICATION'S MAP
  *
- *  1. Six of its eight legacy source URLs never existed on this site. The full
- *     Internet Archive crawl of evergreencleaningservice.ca has no record of
- *     /commercial-cleaning-toronto-gta/, /office-cleaning-and-janitorial-toronto/,
- *     /property-management-and-building-maintenance/, /pressure-washing-services/,
- *     /graffiti-removal-services/ or /submit-your-testimonial/. They are kept
- *     anyway — a redirect from an address nobody links to costs nothing — but
- *     the addresses that DO carry equity were missing from the spec and are
- *     added below under "legacy addresses that actually exist".
+ * An earlier pass of this file claimed six of Section 2.1's legacy sources
+ * "never existed", on the evidence that the Internet Archive crawl has no
+ * record of them. That was wrong, and the reasoning was wrong: Wayback's
+ * coverage is partial, so absence from the crawl is "not captured", not "not
+ * there". The client confirms these addresses exist on the live site. The live
+ * origin cannot settle it from here — SiteGround answers this network with a
+ * captcha interstitial that returns 202 for every path, which is neither a 200
+ * nor a 404 — so the spec is taken at its word and implemented verbatim.
  *
- *  2. Three of its targets do not exist either. A 301 into a 404 is worse than
- *     no redirect, so those point at the real equivalent instead:
- *       /services/disinfection-cleaning/  ->  /services/disinfection-cleaning-service/
- *       /services/emergency-cleaning/     ->  /services/emergency-cleaning-services/
- *       /services/pressure-washing/, /services/graffiti-removal/, /reviews/
- *                                         ->  the /services/ hub and /testimonials/
- *     The spec wants dedicated pages for pressure washing and graffiti removal.
- *     Building them means writing service copy and making commercial claims the
- *     client has not supplied, so they are not invented here. Flagged for copy.
+ * Every target in the map is now a page that exists. Three were created and
+ * two renamed to match the service tree in Section 2.2:
+ *   /services/disinfection-cleaning-service/ -> /services/disinfection-cleaning/
+ *   /services/emergency-cleaning-services/   -> /services/emergency-cleaning/
+ *   /services/pressure-washing/, /services/post-construction-cleaning/,
+ *   /services/graffiti-removal/              -> new, copy marked needsClientCopy
  */
 
 export type Redirect = { from: string; to: string };
@@ -39,12 +36,12 @@ export const specRedirects: Redirect[] = [
   { from: '/office-cleaning-and-janitorial-toronto/', to: '/services/office-cleaning/' },
   { from: '/industrial-cleaning/', to: '/services/industrial-cleaning/' },
   { from: '/property-management-and-building-maintenance/', to: '/services/building-maintenance/' },
-  { from: '/disinfection-cleaning/', to: '/services/disinfection-cleaning-service/' },
-  { from: '/pressure-washing-services/', to: '/services/' },
-  { from: '/graffiti-removal-services/', to: '/services/' },
-  { from: '/emergency-cleaning/', to: '/services/emergency-cleaning-services/' },
+  { from: '/disinfection-cleaning/', to: '/services/disinfection-cleaning/' },
+  { from: '/pressure-washing-services/', to: '/services/pressure-washing/' },
+  { from: '/graffiti-removal-services/', to: '/services/graffiti-removal/' },
+  { from: '/emergency-cleaning/', to: '/services/emergency-cleaning/' },
   { from: '/blog/', to: '/insights/' },
-  { from: '/submit-your-testimonial/', to: '/testimonials/' },
+  { from: '/submit-your-testimonial/', to: '/reviews/' },
 ];
 
 /**
@@ -55,10 +52,15 @@ export const legacyRedirects: Redirect[] = [
   // the 2019 service URLs the /services/ tree replaced
   { from: '/office-cleaning/', to: '/services/office-cleaning/' },
   { from: '/commercial-cleaning/', to: '/services/commercial-cleaning/' },
-  { from: '/emergency-service/', to: '/services/emergency-cleaning-services/' },
+  { from: '/emergency-service/', to: '/services/emergency-cleaning/' },
+
+  // the two service pages this overhaul renamed, so their old paths keep working
+  { from: '/services/disinfection-cleaning-service/', to: '/services/disinfection-cleaning/' },
+  { from: '/services/emergency-cleaning-services/', to: '/services/emergency-cleaning/' },
 
   // WordPress pages that moved
-  { from: '/testimonial/', to: '/testimonials/' },
+  { from: '/testimonial/', to: '/reviews/' },
+  { from: '/testimonials/', to: '/reviews/' },
   { from: '/portfolio/project-title-sixth/', to: '/cleaning-demo-gallery/' },
 
   // feeds and sitemaps — the port serves these under different names

@@ -2,8 +2,8 @@
 import { getEntry } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
 
-const entry = await getEntry('pages', 'testimonials');
-if (!entry) throw new Error('Missing content entry: pages/testimonials');
+const entry = await getEntry('pages', 'reviews');
+if (!entry) throw new Error('Missing content entry: pages/reviews');
 
 /**
  * Like contact-us and request-a-quote, this entry ends with the old WPForms
@@ -18,8 +18,8 @@ const fieldDumpAt = rawBody.indexOf('>Name *<');
 const cutAt = fieldDumpAt === -1 ? -1 : rawBody.lastIndexOf('<p', fieldDumpAt);
 if (cutAt === -1) {
   throw new Error(
-    'testimonials: expected the flattened WPForms block in the page body to cut at. ' +
-      'src/content/pages/testimonials.md has changed shape — check it before rendering it verbatim.',
+    'reviews: expected the flattened WPForms block in the page body to cut at. ' +
+      'src/content/pages/reviews.md has changed shape — check it before rendering it verbatim.',
   );
 }
 const introHtml = rawBody.slice(0, cutAt);

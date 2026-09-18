@@ -33,6 +33,14 @@ const services = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     image: z.string().optional(),
+    /**
+     * Set on pages whose copy was written for this build rather than taken from
+     * the client's own site. Pressure washing, post-construction and graffiti
+     * removal are in the overhaul specification's service tree but had no page
+     * to port, so the copy is plausible and unverified — it needs the client's
+     * sign-off before it describes what they will actually do.
+     */
+    needsClientCopy: z.boolean().optional(),
   }),
 });
 

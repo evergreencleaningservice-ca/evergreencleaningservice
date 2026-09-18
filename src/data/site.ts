@@ -104,7 +104,7 @@ export const nav: NavItem[] = [
     href: '/about-us/',
     children: [
       { label: 'Green Clean Products', href: '/green-clean-products/' },
-      { label: 'Submit Your Testimonial', href: '/testimonials/' },
+      { label: 'Submit Your Testimonial', href: '/reviews/' },
     ],
   },
   {
