@@ -26,6 +26,12 @@
  * closing the panel returns to the bubble while dismissing the bubble ends it,
  * and that a dismissal lasts the rest of the session.
  *
+ * The orb's thumbnail is muted, because nothing else is allowed to autoplay.
+ * The panel opens with the sound ON: opening is a click, and a click is the
+ * gesture browsers want before they will play audio. The screenshot of the
+ * original's open panel shows its sound button still offering to turn sound
+ * on, so this is a deliberate departure, asked for.
+ *
  * THE CLIP is the client's own, supplied from their Lead Net dashboard and
  * committed at `public/video/lead-net.mp4`: 720x540, H.264 and AAC, 42.2s,
  * with its moov atom ahead of the data so it starts without the whole file.
@@ -509,6 +515,12 @@ const hasPoster = inPublic(poster);
       label(playPause, paused ? 'Play video' : 'Pause video');
     };
 
+    const setMuted = (muted: boolean) => {
+      video.muted = muted;
+      mute.classList.toggle('is-unmuted', !muted);
+      label(mute, muted ? 'Turn the sound on' : 'Turn the sound off');
+    };
+
     // Muted autoplay is the only kind a browser allows unprompted. If it is
     // refused anyway the element shows its poster, which is still the right
     // thing to look at.
@@ -592,10 +604,17 @@ const hasPoster = inPublic(poster);
     panel.querySelector('.leadnet-open')!.addEventListener('click', () => {
       panel.classList.add('is-open');
       thumb.pause();
-      // Opening is a user gesture, but the original still opens muted — the
-      // sound button is the visitor's to press.
       video.currentTime = 0;
-      nudge(video);
+      // Opening is a click, and a click is the gesture a browser wants before
+      // it will play sound — so the message starts audible rather than making
+      // the visitor find the speaker button. If a browser refuses anyway, fall
+      // back to muted so something plays, and leave the button showing that
+      // the sound is off rather than claiming it is on.
+      setMuted(false);
+      video.play().catch(() => {
+        setMuted(true);
+        nudge(video);
+      });
     });
 
     // The panel's close returns to the bubble; the bubble's dismiss ends it.
@@ -628,11 +647,7 @@ const hasPoster = inPublic(poster);
       nudge(video);
     });
 
-    mute.addEventListener('click', () => {
-      video.muted = !video.muted;
-      mute.classList.toggle('is-unmuted', !video.muted);
-      label(mute, video.muted ? 'Turn the sound on' : 'Turn the sound off');
-    });
+    mute.addEventListener('click', () => setMuted(!video.muted));
 
     video.addEventListener('play', () => setPaused(false));
     video.addEventListener('pause', () => setPaused(true));
