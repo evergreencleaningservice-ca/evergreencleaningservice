@@ -27,6 +27,12 @@
  *
  * `variant="sidebar"` is the narrow-column rendering the original uses in the
  * sidebar — the same form, stacked.
+ *
+ * NOT WIRED UP. `action="#"` is a placeholder: there is no endpoint behind this
+ * form, so a submission goes nowhere. The visible "this form is not connected"
+ * line that used to say so has been removed — the original has no such line and
+ * the brief is to match it — so nothing on the page now tells a visitor. This
+ * needs a real handler before the site takes enquiries; see _research/gaps.md.
  */
 import { countries, DEFAULT_COUNTRY } from '../data/countries';
 import { site } from '../data/site';
@@ -60,12 +66,6 @@ const captcha = { a: 7, b: 2 };
   action="#"
   aria-label="Request a quote"
 >
-  <p class="wpf-note" role="note">
-    This form is not connected yet, so a submission will not reach us. Please call
-    <a href={site.phoneHref}>{site.phone}</a> or email
-    <a href={`mailto:${site.email}`}>{site.email}</a> in the meantime.
-  </p>
-
   <fieldset class="wpf-field">
     <legend class="wpf-label">Name <span class="wpf-req" aria-hidden="true">*</span></legend>
     <div class="wpf-row wpf-row-2">

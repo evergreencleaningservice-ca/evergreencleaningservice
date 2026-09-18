@@ -80,7 +80,7 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
     {/* `#page` and `#content` are the original's ids: the skip link and the
         footer's back-to-top arrow both address them. */}
     <div id="page" class="site">
-      <a class="skip-link" href="#content">Skip to content</a>
+      <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
       <Header />
       <div id="content" class="site-content">
         <main id="main" class="site-main">

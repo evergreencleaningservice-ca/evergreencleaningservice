@@ -7,12 +7,12 @@
  * the live site after the 2023 capture, they are in the client's WordPress
  * database and would need importing.
  *
- * TODO: the submit endpoint still needs wiring. The original posted to
- * WordPress's wp-comments-post.php, which a static build has no equivalent for.
- * A comment needs somewhere to be stored, read back from, and moderated before
- * it appears — so this needs a backend decision (the same database the forms
- * will use, or a hosted comment service) before it can accept anything. The
- * note in the markup says so rather than silently dropping what people write.
+ * NOT WIRED UP. The original posts to WordPress's wp-comments-post.php, which
+ * a static build has no equivalent for, so `action="#"` goes nowhere. A comment
+ * needs somewhere to be stored, read back and moderated before it appears, so
+ * this needs the same backend decision the forms do. Nothing on the page says
+ * so — the original has no such notice and the brief is to match it — which
+ * means a visitor's comment is dropped silently. See _research/gaps.md.
  */
 ---
 
@@ -28,8 +28,10 @@
 
   <form class="comment-form" method="post" action="#" aria-labelledby="reply-title">
     <p class="comment-notes">
-      Your email address will not be published. Required fields are marked
-      <span class="req" aria-hidden="true">*</span>
+      <span id="email-notes">Your email address will not be published.</span>{' '}
+      <span class="required-field-message"
+        >Required fields are marked <span class="req" aria-hidden="true">*</span></span
+      >
     </p>
 
     <div class="field">
@@ -68,7 +70,7 @@
       </label>
     </div>
 
-    <button class="btn btn-primary" type="submit">Post Comment</button>
+    <input class="btn btn-primary submit" name="submit" type="submit" value="Post Comment" />
   </form>
   </div>
 </div>
