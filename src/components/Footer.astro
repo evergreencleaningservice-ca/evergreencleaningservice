@@ -46,7 +46,13 @@ const icons: Record<string, string> = {
 
       <div class="footer-col footer-col-areas">
         <ul class="footer-areas">
-          {footerAreas.map((area) => <li>{area}</li>)}
+          {
+            footerAreas.map((area) => (
+              <li>
+                <a href="#">{area}</a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
@@ -139,8 +145,20 @@ const icons: Record<string, string> = {
   }
 
   .footer-areas li {
-    margin-bottom: 7px;
-    line-height: 1.6;
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  /* The original's menu widget: each area is a link that goes nowhere, #777
+     resting, brand green and underlined on hover. */
+  .site-footer .footer-areas a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .site-footer .footer-areas a:hover {
+    color: var(--brand);
+    text-decoration: underline;
   }
 
   @media (max-width: 767px) {

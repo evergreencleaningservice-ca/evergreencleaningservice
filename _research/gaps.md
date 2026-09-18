@@ -190,17 +190,18 @@ copyright line. It carries **no animation class**, so WOW.js reveals it and
 nothing moves — dead markup left over from an earlier theme version. It is not
 reproduced.
 
-## 12. Two invisible markup differences
+## 12. Heading levels
 
-Neither changes a pixel; both are recorded rather than silently made.
+The original's **hero title is an `<h2>`** and its only `<h1>` is "Toronto
+Office Cleaning Services" in the About band. The port matches that. It had
+briefly carried an `<h1>` in both places.
 
-- **Section subtitles** ("Evergreen Office Cleaning" above each section title)
-  are `<h5>` in the original and `<p>` here. The original's are headings that
-  sit *above* the `<h2>` they introduce, which reads as an out-of-order outline
-  to a screen reader. They are styled identically.
-- The original's **hero title is an `<h2>`** and its only `<h1>` is "Toronto
-  Office Cleaning Services" in the About band. The port matches that. It had
-  briefly carried an `<h1>` in both places.
+**Section subtitles** ("Evergreen Office Cleaning" above each section title)
+were `<p>` here and are `<h5>` in the original; the full-page census in §16
+caught it and they are `<h5>` now, as are the `h4` step, service-card and
+testimonial titles. The outline reads oddly — each eyebrow is a heading that
+sits *above* the `<h2>` it introduces — but it is the theme's outline, and
+matching it is the brief.
 
 ## 13. The gallery's justified layout
 
@@ -242,3 +243,74 @@ Wayback crawler. Where a sibling size-variant of the same asset survived, the
 port points at that; where nothing survived, the reference was removed rather
 than left broken. Full list in the session notes; recoverable from the client's
 media library.
+
+## 16. The full-page census, and what it left
+
+Every one of the 51 paired pages was diffed against its archived counterpart —
+visible text, links, images, heading outline, form fields, horizontal overflow —
+at 1440px, after stepping down the page so entrance animations had fired.
+
+What it found and what was done is in the commit that closed it. What it could
+**not** close, and why:
+
+**The footer copyright line.** The port writes the current year and the current
+trading name, as the original's WordPress does. Forty-four of the reference
+pages are 2023 captures reading "Copyright © 2023 Evergreen Cleaning Service ~",
+six are 2025 captures reading "Copyright © 2025 Evergreen Office Cleaning ~",
+and the port reads 2026. All three are the same line rendered in different
+years. Not a defect.
+
+**Two generations of form 1381.** The quote form exists in the archive twice:
+captures from December 2023 to July 2024 show seven services and no address
+block, captures from April 2025 to October 2025 show eight services and an
+address. The port carries the **2025** shape, which is the current site. Forty-
+six of the paired pages carry the older one, so the census reports an address
+block and "Property Management and Building Maintenance" as extra on each of
+them, and a single "Name *" field as missing. That is the older site
+disagreeing with the newer one, not the port disagreeing with either. An
+earlier pass of this port read the older shape off `/request-a-quote/` — whose
+newest capture is July 2024 — and removed a service and the address block. That
+was a regression and it is reverted; the 2025 shape is the one to keep.
+
+**reCAPTCHA.** Each archived form carries a hidden `g-recaptcha-hidden` input
+that the port has no equivalent for: there is no site key for this network and
+no backend to verify a token against. 54 of the 78 "missing form fields" are
+this one input.
+
+**Name and address fields.** WPForms labels a grouped field twice — once for
+the group, once per part — with both labels pointing at the first input. The
+port groups them in a `<fieldset>` with a `<legend>` instead, which renders
+identically and reads correctly to a screen reader. A census that matches a
+field to its first `<label>` reports the group label as missing.
+
+**Empty headings.** Four post pages carry an `<h3></h3>` or `<h4></h4>` the
+editor left behind. They render as nothing; the port does not reproduce them.
+
+**Lightbox targets.** The gallery and the in-post image links point at
+`/wp-content/uploads/...` on the original and at `/images/...` here, because
+that is where the port serves them from. Same image, different address.
+
+**The hero.** The reference copy never shows it — the slideshow script is not
+in the archive, so the hero renders as a spinner and its `<h2>` is invisible
+there. The hero was measured separately and is not something this census can
+speak to.
+
+## 17. The Simple Banner plugin
+
+The April 2025 capture carries the **Simple Banner** plugin, configured with
+`hide_simple_banner: "no"` and this text:
+
+> Concerned about Coronavirus and Looking for a Disinfection Cleaning Services?
+> -> LEARN MORE
+
+linking to `/services/disinfection-cleaning-service/`, on a `#2ca516` bar
+across the top of every page. The markup is an empty
+`<div class="simple-banner simple-banner-text" style="display:none !important">`
+that the plugin's own script fills and reveals, so it is invisible in the
+reference copy and there is no capture of it rendered.
+
+It is **not built**, deliberately: the client's own side-by-side screenshots of
+the live site show no such bar, which suggests the banner was switched off some
+time after that capture. It is recorded here rather than added, because adding
+it would put a green bar across every page of a site the client is reviewing
+against screenshots that do not have one. Worth one question to the client.
