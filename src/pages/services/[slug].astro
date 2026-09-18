@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import { site } from '../../data/site';
+import { breadcrumbSchema } from '../../lib/schema';
 import { normalizeBody } from '../../lib/normalize-body';
 
 export async function getStaticPaths() {
@@ -26,6 +27,19 @@ const body = service.rendered?.html ? normalizeBody(service.rendered.html) : nul
 ---
 
 <BaseLayout title={`${title} - ${site.name}`} description={description} image={image}>
+<script
+  slot="head"
+  type="application/ld+json"
+  set:html={JSON.stringify(
+    breadcrumbSchema([
+      { name: site.name, url: '/' },
+      { name: 'Services', url: '/services/' },
+      { name: title },
+    ])
+  )}
+  is:inline
+/>
+
   <div class="page-header">
     <div class="container">
       <h1 class="entry-title">{title}</h1>

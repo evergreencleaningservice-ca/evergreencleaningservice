@@ -4,6 +4,7 @@ import BaseLayout from './BaseLayout.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Comments from '../components/Comments.astro';
 import { site } from '../data/site';
+import { articleSchema, breadcrumbSchema } from '../lib/schema';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -25,6 +26,26 @@ const { title, description, pubDate, image } = post.data;
   type="article"
   publishedTime={pubDate.toISOString()}
 >
+<script
+  slot="head"
+  type="application/ld+json"
+  set:html={JSON.stringify(articleSchema({ title, description, pubDate, image, slug: post.id }))}
+  is:inline
+/>
+<script
+  slot="head"
+  type="application/ld+json"
+  set:html={JSON.stringify(
+    breadcrumbSchema([
+      { name: site.name, url: '/' },
+      { name: 'News', url: '/insights/' },
+      { name: 'Blog', url: '/category/blog/' },
+      { name: title },
+    ])
+  )}
+  is:inline
+/>
+
   <div class="section-padding">
     <div class="container post-container content-grid">
       <div class="post-main">

@@ -121,3 +121,68 @@ export const organizationGraph = () => ({
     },
   ],
 });
+
+const ORG = { '@id': ORG_ID };
+
+/**
+ * Breadcrumbs.
+ *
+ * The original emitted BreadcrumbList on three pages of 64. This port emitted
+ * it on none, while rendering a *visible* breadcrumb trail on service pages,
+ * location pages, posts and the archives — the markup was there and the machine
+ * -readable version was not. That is the regression this closes.
+ *
+ * Pass the trail without the current page's own URL: schema.org wants the last
+ * item to be the page itself, named but not linked.
+ */
+export const breadcrumbSchema = (trail: { name: string; url?: string }[]) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: trail.map((step, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: step.name,
+    ...(step.url ? { item: step.url.startsWith('http') ? step.url : `${site.url}${step.url}` } : {}),
+  })),
+});
+
+/**
+ * A blog post.
+ *
+ * Rank Math emitted BlogPosting on 37 of the original's pages and Article on 15.
+ * This port emitted neither, which left all 38 posts carrying nothing but the
+ * business's own graph — no headline, no publish date, no author, nothing that
+ * says "this is an article" at all.
+ */
+export const articleSchema = (post: {
+  title: string;
+  description?: string;
+  pubDate: Date;
+  image?: string;
+  slug: string;
+}) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${site.url}/${post.slug}/#article`,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${site.url}/${post.slug}/` },
+  headline: post.title,
+  ...(post.description ? { description: post.description } : {}),
+  datePublished: post.pubDate.toISOString(),
+  dateModified: post.pubDate.toISOString(),
+  ...(post.image ? { image: `${site.url}${post.image}` } : {}),
+  author: ORG,
+  publisher: ORG,
+  isPartOf: { '@id': SITE_ID },
+});
+
+/** A listing page — the archives and the news index. */
+export const collectionSchema = (opts: { name: string; url: string; description?: string }) => ({
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  '@id': `${site.url}${opts.url}#collection`,
+  name: opts.name,
+  url: `${site.url}${opts.url}`,
+  ...(opts.description ? { description: opts.description } : {}),
+  isPartOf: { '@id': SITE_ID },
+  publisher: ORG,
+});
