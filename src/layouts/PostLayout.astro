@@ -4,6 +4,7 @@ import BaseLayout from './BaseLayout.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Comments from '../components/Comments.astro';
 import { site } from '../data/site';
+import { pageTitle } from '../lib/title';
 import { articleSchema, breadcrumbSchema } from '../lib/schema';
 
 interface Props {
@@ -20,7 +21,7 @@ const { title, description, pubDate, image } = post.data;
 ---
 
 <BaseLayout
-  title={`${title} - ${site.name}`}
+  title={pageTitle(`${title}`)}
   description={description}
   image={image}
   type="article"

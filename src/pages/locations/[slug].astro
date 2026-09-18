@@ -19,6 +19,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Reviews from '../../components/home/Reviews.astro';
 import { locations } from '../../data/locations';
 import { site, nap } from '../../data/site';
+import { pageTitle } from '../../lib/title';
 
 export function getStaticPaths() {
   return locations.map((location) => ({
@@ -46,7 +47,7 @@ const schema = {
 };
 ---
 
-<BaseLayout title={`Commercial Cleaning in ${location.name} - ${site.name}`} description={location.description}>
+<BaseLayout title={pageTitle(`Commercial Cleaning in ${location.name}`)} description={location.description}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
 
   <div class="page-header">

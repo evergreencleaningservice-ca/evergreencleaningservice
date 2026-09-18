@@ -8,12 +8,13 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { locations } from '../../data/locations';
 import { site, nap } from '../../data/site';
+import { pageTitle } from '../../lib/title';
 
 const description =
   'Commercial and office cleaning across the Greater Toronto Area — downtown Toronto, Mississauga, Etobicoke, Vaughan, Markham, Brampton and Oakville.';
 ---
 
-<BaseLayout title={`Service Areas Across the GTA - ${site.name}`} description={description}>
+<BaseLayout title={pageTitle(`Service Areas Across the GTA`)} description={description}>
   <div class="page-header">
     <div class="container">
       <h1 class="entry-title">Service Areas</h1>

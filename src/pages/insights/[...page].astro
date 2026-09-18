@@ -21,6 +21,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostList from '../../components/PostList.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import { site } from '../../data/site';
+import { pageTitle, pageDescription } from '../../lib/title';
+import { collectionSchema, breadcrumbSchema } from '../../lib/schema';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = (await getCollection('blog')).sort(
@@ -40,12 +42,32 @@ const { page } = Astro.props as Props;
 const base = '/insights/';
 const hrefFor = (n: number) => (n === 1 ? base : `${base}page/${n}/`);
 const pageSuffix = page.currentPage > 1 ? ` - Page ${page.currentPage} of ${page.lastPage}` : '';
+
+const listDescription = pageDescription(
+  'News and advice from Evergreen Office Cleaning on commercial cleaning, office hygiene and facility maintenance in Toronto and the GTA.',
+  page.currentPage,
+  page.lastPage
+);
 ---
 
 <BaseLayout
-  title={`News${pageSuffix} - ${site.name}`}
-  description="Welcome to Evergreen Cleaning Services blog. Check in often for interesting articles and posts from our blog. We'd love to hear from you."
+  title={pageTitle(`News${pageSuffix}`)}
+  description={listDescription}
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      collectionSchema({ name: `News${pageSuffix}`, url: hrefFor(page.currentPage), description: listDescription })
+    )}
+    is:inline
+  />
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbSchema([{ name: site.name, url: '/' }, { name: 'News' }]))}
+    is:inline
+  />
   <div class="page-header">
     <div class="container">
       <h1 class="entry-title">News</h1>

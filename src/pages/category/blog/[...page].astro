@@ -5,6 +5,8 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PostList from '../../../components/PostList.astro';
 import Sidebar from '../../../components/Sidebar.astro';
 import { site } from '../../../data/site';
+import { pageTitle, pageDescription } from '../../../lib/title';
+import { collectionSchema, breadcrumbSchema } from '../../../lib/schema';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = (await getCollection('blog')).sort(
@@ -28,16 +30,43 @@ const hrefFor = (n: number) => (n === 1 ? base : `${base}page/${n}/`);
 // Copied from the archived <title>s. The original is inconsistent on purpose or
 // by accident, but it is what the source serves: page one ends "- Evergreen
 // Office Cleaning", the paged archives end "- Evergreen Cleaning Service".
-const archiveTitle =
+const archiveTitle = pageTitle(
   page.currentPage > 1
-    ? `Blog Archives - Page ${page.currentPage} of ${page.lastPage} - ${site.name}`
-    : `Blog Archives - ${site.name}`;
+    ? `Blog Archives - Page ${page.currentPage} of ${page.lastPage}`
+    : 'Blog Archives'
+);
+
+const archiveDescription = pageDescription(
+  'Every post from Evergreen Office Cleaning, filed under Blog — commercial cleaning, office hygiene and facility maintenance across Toronto and the GTA.',
+  page.currentPage,
+  page.lastPage
+);
 ---
 
 <BaseLayout
   title={archiveTitle}
-  description="Visit our Evergreen Cleaning Service blog for industry updates and standards, interesting reads and new posts by our authors"
+  description={archiveDescription}
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      collectionSchema({
+        name: 'Blog Archives',
+        url: page.currentPage === 1 ? '/category/blog/' : `/category/blog/page/${page.currentPage}/`,
+        description: archiveDescription,
+      })
+    )}
+    is:inline
+  />
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      breadcrumbSchema([{ name: site.name, url: '/' }, { name: 'News', url: '/insights/' }, { name: 'Blog' }])
+    )}
+    is:inline
+  />
   {/*
     The original sends `follow, noindex` on every page of this archive: keep the
     posts crawlable through it, keep the archive itself out of the index.

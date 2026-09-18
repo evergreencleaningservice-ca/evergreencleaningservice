@@ -4,6 +4,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import { site } from '../../data/site';
+import { pageTitle } from '../../lib/title';
 import { breadcrumbSchema } from '../../lib/schema';
 import { normalizeBody } from '../../lib/normalize-body';
 
@@ -26,7 +27,7 @@ const { Content } = await render(service);
 const body = service.rendered?.html ? normalizeBody(service.rendered.html) : null;
 ---
 
-<BaseLayout title={`${title} - ${site.name}`} description={description} image={image}>
+<BaseLayout title={pageTitle(`${title}`)} description={description} image={image}>
 <script
   slot="head"
   type="application/ld+json"
