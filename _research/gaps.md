@@ -160,7 +160,18 @@ Its five-star badge is a bare `<img>` whose alt calls it a button but which
 links nowhere; here it links to the business's Google review page, and looks
 identical.
 
-## 10. Entrance animations
+## 10. The About band's second free-quote button
+
+The April 2025 archive ends the "We are Evergreen Office Cleaning" block with a
+second free-quote image button, inside a `wp-block-columns`. **The live site
+does not have it** — the client confirmed after seeing it in the port — so it is
+not built.
+
+This is the same class of difference as section 1: the archive is from April
+2025 and the site has changed since. The one button at the end of the editor
+content above it is present on both and stays.
+
+## 11. Entrance animations
 
 Every `wow slideInUp` the original carries is present, on the same element in
 the same section. Censused from both pages:
@@ -179,7 +190,7 @@ copyright line. It carries **no animation class**, so WOW.js reveals it and
 nothing moves — dead markup left over from an earlier theme version. It is not
 reproduced.
 
-## 11. Two invisible markup differences
+## 12. Two invisible markup differences
 
 Neither changes a pixel; both are recorded rather than silently made.
 
@@ -191,7 +202,7 @@ Neither changes a pixel; both are recorded rather than silently made.
   Office Cleaning Services" in the About band. The port matches that. It had
   briefly carried an `<h1>` in both places.
 
-## 12. The gallery's justified layout
+## 13. The gallery's justified layout
 
 The gallery images link to their full-size files and carry the theme's
 `g-zoom-in` hover, as the original's do. What is **not** reproduced is the
@@ -204,7 +215,7 @@ uses a uniform grid at the original's own `data-spacing="5"`. Side by side the
 two read the same; the difference is that the original's rows can have unequal
 image widths where the source aspect ratios differ.
 
-## 13. Images the archive never captured
+## 14. Images the archive never captured
 
 Roughly seventy images referenced by the original were never stored by the
 Wayback crawler. Where a sibling size-variant of the same asset survived, the

@@ -8,8 +8,8 @@
  *
  * An earlier pass here treated it as a design brief and invented things the
  * original does not have: the three "offers" became grey cards in a grid, the
- * services list became a three-column list with green bullets, and both of the
- * free-quote image buttons became green text buttons. All of that is gone.
+ * services list became a three-column list with green bullets, and the
+ * free-quote image button became a green text button. All of that is gone.
  *
  * Measured off the original's own render (1440 / 940, root 16px / 15px):
  *
@@ -164,7 +164,11 @@ const offers = [
     </div>
 
     {/* The section's only entrance animation, and it is on this block — not on
-        the editor content above it. */}
+        the editor content above it.
+
+        The April 2025 archive ends this block with a second free-quote button.
+        The live site does not have it — confirmed by the client — so it is not
+        here either. The one above, at the end of the editor content, stays. */}
     <div class="about-row wow slideInUp">
       <h2>We are Evergreen Office Cleaning</h2>
       <h3>
@@ -190,19 +194,6 @@ const offers = [
         offices, health, dental and medial clinics, retail outlets, to industrial building and
         warehouses. We can handle any mess you throw at us, and if you&#8217;re ever have an
         emergency and need something cleaned in a pinch, we can get it done.
-      </p>
-
-      <p class="about-cta about-cta-last">
-        <a href="/request-a-quote/">
-          <img
-            src="/images/free-quote-cta-button-1024x505.jpg"
-            alt="Request a free quote"
-            width="265"
-            height="131"
-            loading="lazy"
-            decoding="async"
-          />
-        </a>
       </p>
     </div>
   </div>
@@ -303,20 +294,6 @@ const offers = [
     width: 269px;
     max-width: 100%;
     height: auto;
-  }
-
-  /* The editor leaves a 19px spacer above this one, on top of the paragraph's
-     own 15px — 34px from the text to the button, measured on the original.
-     It is also the narrower of the two: the markup sizes it 265px, not 269. */
-  .about-cta-last {
-    /* Padding, not margin: the paragraph above already ends in a 15px margin,
-       and two adjacent margins collapse to the larger of the two rather than
-       adding. The original's spacer is a real element, so its 19px stacks. */
-    padding-top: 19px;
-  }
-
-  .about-cta-last img {
-    width: 265px;
   }
 
   /* `.section-about .row > div { margin-top: 30px }`, plus the 15px left by
