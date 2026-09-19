@@ -10,7 +10,10 @@
  *   Name *               First / Last
  *   Business name *
  *   Address *            Address Line 1 (placeholder "Street address & unit #")
- *                        City / State ("Ontario") / Postal Code / Country (CA)
+ *                        City / State ("Ontario") / Postal Code
+ *                        (the original's Country selector is removed — every
+ *                        address these forms take is in Ontario, so picking
+ *                        Canada out of 195 options was friction buying nothing)
  *   Phone *              before Email, not after it
  *   Email *
  *   Comment or Message *
@@ -20,8 +23,8 @@
  * REMOVED, on instruction, to take friction off every form on the site. It was
  * never the protection anyway: the expected answer is emitted into the page
  * beside the question, so it stops nothing a script would not walk straight
- * past. The honeypot and the reCAPTCHA checkbox below are what actually guard
- * this form, and both are still here.
+ * past. The honeypot and the invisible Turnstile check below are what actually
+ * guard this form, and both are still here.
  *
  * The format is WPForms's, measured off the original's render: the field label
  * sits above in 11px/600 uppercase with 2px tracking, and each sub-label —
@@ -32,11 +35,10 @@
  * Used by the homepage's contact band and by /contact-us/, which had been
  * carrying its own near-copy of these fields.
  *
- * WIRED UP. Posts to /api/submit-lead via `FormRuntime.astro`, guarded by the
- * reCAPTCHA v2 checkbox the original carries. Until now `action="#"` meant a
- * submission validated and then vanished — the launch blocker in HANDOFF §7.1.
+ * WIRED UP. Posts to /api/submit-lead via `FormRuntime.astro`, guarded by
+ * `SpamGuard.astro`. Until now `action="#"` meant a submission validated and
+ * then vanished — the launch blocker in HANDOFF §7.1.
  */
-import { countries, DEFAULT_COUNTRY } from '../data/countries';
 import { site } from '../data/site';
 import SpamGuard from './SpamGuard.astro';
 import FormRuntime from './FormRuntime.astro';
@@ -115,22 +117,10 @@ const f = (name: string) => `${id}-${name}`;
       </div>
     </div>
 
-    <div class="wpf-row wpf-row-2">
+    <div class="wpf-row">
       <div class="wpf-col">
         <input type="text" id={f('postal')} name="postal" autocomplete="postal-code" required />
         <label class="wpf-sub" for={f('postal')}>Postal Code</label>
-      </div>
-      <div class="wpf-col">
-        <select id={f('country')} name="country" autocomplete="country" required>
-          {
-            countries.map((c) => (
-              <option value={c.code} selected={c.code === DEFAULT_COUNTRY}>
-                {c.name}
-              </option>
-            ))
-          }
-        </select>
-        <label class="wpf-sub" for={f('country')}>Country</label>
       </div>
     </div>
   </fieldset>

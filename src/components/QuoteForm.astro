@@ -43,7 +43,6 @@
  * the visitor's details somewhere that will not receive them. The original has
  * no no-JS path either — WPForms needs its own script to submit.
  */
-import { countries, DEFAULT_COUNTRY } from '../data/countries';
 import { site } from '../data/site';
 import SpamGuard from './SpamGuard.astro';
 import FormRuntime from './FormRuntime.astro';
@@ -134,22 +133,10 @@ const services = [
       </div>
     </div>
 
-    <div class="wpf-row wpf-row-2">
+    <div class="wpf-row">
       <div class="wpf-col">
         <input type="text" id={f('postal')} name="postal" autocomplete="postal-code" required />
         <label class="wpf-sub" for={f('postal')}>Postal Code</label>
-      </div>
-      <div class="wpf-col">
-        <select id={f('country')} name="country" autocomplete="country" required>
-          {
-            countries.map((c) => (
-              <option value={c.code} selected={c.code === DEFAULT_COUNTRY}>
-                {c.name}
-              </option>
-            ))
-          }
-        </select>
-        <label class="wpf-sub" for={f('country')}>Country</label>
       </div>
     </div>
   </fieldset>

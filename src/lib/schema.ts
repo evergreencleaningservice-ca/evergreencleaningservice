@@ -81,22 +81,22 @@ export const organizationGraph = () => ({
       sameAs: social.map((s) => s.href),
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Commercial Cleaning & Janitorial Catalog',
+        name: 'Commercial Cleaning Services',
         itemListElement: [
           {
-            name: 'Office Cleaning Services',
+            name: 'Office Cleaning & Janitorial',
             description:
-              'Daily, weekly, and customized janitorial solutions for modern workspaces and corporate suites.',
+              'Daily and weekly janitorial contracts for corporate offices and multi-tenant buildings in Toronto and the GTA.',
           },
           {
-            name: 'Industrial & Warehouse Cleaning',
+            name: 'Industrial & Warehouse Floor Scrubbing',
             description:
-              'Heavy-duty concrete floor scrubbing, high dusting, and warehouse maintenance.',
+              'Heavy industrial cleaning, strip & wax, and machine floor scrubbing for distribution centres.',
           },
           {
             name: 'Post-Construction Cleaning',
             description:
-              'Complete rough, secondary, and final turnover cleaning for commercial buildouts.',
+              'Rough, final, and touch-up post-construction cleanup for commercial builds.',
           },
         ].map((s) => ({
           '@type': 'Offer',

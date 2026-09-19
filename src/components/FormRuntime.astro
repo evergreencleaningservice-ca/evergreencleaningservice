@@ -21,7 +21,7 @@
  * The arithmetic question the original asked ("What is 7+2?") is gone from
  * every form, so the check that used to live here is gone with it. It was a
  * speed bump, never a control — the expected answer was printed in the page
- * next to the question. reCAPTCHA and the honeypot are the protection.
+ * next to the question. `SpamGuard` and the honeypot are the protection.
  */
 ---
 
@@ -36,14 +36,17 @@
 
   /* The address is four inputs on screen and one thing in the world. Composed
      here rather than in four columns, because what the client needs is the
-     address of the site to be cleaned, in one readable line. */
+     address of the site to be cleaned, in one readable line.
+
+     No country: the selector is gone from both forms. Every address these
+     forms take is in Ontario — asking a Toronto facility manager to pick
+     Canada out of 195 countries is friction that buys nothing. */
   const address = (form: HTMLFormElement) =>
     [
       value(form, 'address1'),
       value(form, 'city'),
       value(form, 'state'),
       value(form, 'postal'),
-      value(form, 'country'),
     ]
       .filter(Boolean)
       .join(', ');

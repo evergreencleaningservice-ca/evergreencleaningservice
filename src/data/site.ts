@@ -30,9 +30,6 @@ export const site = {
      deliberately. Defined once in `nap` and mirrored here for the few callers
      that still read `site`. */
   phoneHref: 'tel:+14168034880',
-  /* Superseded by `nap.email` (Section 1 deprecates this address). Kept only
-     so the old value is on record; nothing renders it. */
-  legacyEmail: 'evergreencleaning416@gmail.com',
   logo: '/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg',
   since: 1989,
   /* The container the original carries on every 2025 capture. It holds Google
