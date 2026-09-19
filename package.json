@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && npm run redirects && npm run images",
+    "build": "npm run preflight && astro build && npm run redirects && npm run images",
     "build:preview": "astro build && npm run redirects && node scripts/noindex.mjs && npm run images",
     "preview": "astro preview",
     "check": "astro check",
@@ -14,7 +14,8 @@
     "deploy": "npm run b2:sync && npm run build && wrangler deploy",
     "redirects": "node --experimental-strip-types scripts/redirects.mjs",
     "images": "node --experimental-strip-types scripts/images.mjs",
-    "b2:sync": "node --experimental-strip-types scripts/b2-sync.mjs"
+    "b2:sync": "node --experimental-strip-types scripts/b2-sync.mjs",
+    "preflight": "node --experimental-strip-types scripts/preflight.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

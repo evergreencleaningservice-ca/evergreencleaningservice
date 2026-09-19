@@ -15,7 +15,21 @@ npm run preview # serve the built output
 npm run check   # astro check (types + content schema) — prompts to install
                 # @astrojs/check + typescript on first run; they are not dependencies
 npm run b2:sync # upload public/images to the Backblaze bucket
+npm run preflight # refuses a production build that would ship a test captcha key
 ```
+
+Going live needs **both** halves of the captcha pair, in two different places:
+
+```bash
+export PUBLIC_TURNSTILE_SITE_KEY=<real site key>   # build-time, baked into the HTML
+npx wrangler secret put TURNSTILE_SECRET           # Worker secret, never in the repo
+npm run build && npx wrangler deploy
+```
+
+Setting one without the other breaks every form silently — a test site key with
+a real secret makes `siteverify` reject genuine submissions with a 403. `npm run
+build` refuses rather than letting that ship; the Worker answers 503 on the
+other half.
 
 Node 20+ is required (Astro 7). There is no `.env`; everything that needs a
 credential reads it from the environment or from a Worker secret:
