@@ -253,9 +253,9 @@ export const nav: NavItem[] = [
   {
     label: 'Services',
     children: [
-      { label: 'Disinfection Cleaning', href: '/services/disinfection-cleaning-service/' },
+      { label: 'Disinfection Cleaning', href: '/services/disinfection-cleaning/' },
       { label: 'Office Cleaning', href: '/services/office-cleaning/' },
-      { label: 'Emergency Cleaning', href: '/services/emergency-cleaning-services/' },
+      { label: 'Emergency Cleaning', href: '/services/emergency-cleaning/' },
       { label: 'Commercial Cleaning', href: '/services/commercial-cleaning/' },
       { label: 'Industrial Cleaning', href: '/services/industrial-cleaning/' },
       {

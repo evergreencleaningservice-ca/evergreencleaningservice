@@ -54,6 +54,6 @@ As for the bathroom, scrub the sinks and toilets, dust and wipe the cabinets, an
 
 You can handle the cleaning when moving out of your current commercial space or opt to hire professionals to handle the job. Hiring professional cleaners is the best option, especially if time is an issue. You will have a team of cleaning specialists taking care of the job for you to focus on settling in and resuming business operations.
 
-At [Evergreen Cleaning](/about-us/), we are the [pros to call](/testimonials/) when you need your commercial spaces spruced up when moving in or out. We are here to help make the relocation process as seamless as possible. [Contact us](/contact-us/) today for a free quote and to know more about our services.
+At [Evergreen Cleaning](/about-us/), we are the [pros to call](/reviews/) when you need your commercial spaces spruced up when moving in or out. We are here to help make the relocation process as seamless as possible. [Contact us](/contact-us/) today for a free quote and to know more about our services.
 
 ![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

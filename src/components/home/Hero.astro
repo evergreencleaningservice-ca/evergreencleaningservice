@@ -34,11 +34,25 @@ const words = [
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
 
-  {/* An h2, as the original's own hero is (`h2.hero-large-text`). The page's
-      single h1 is "Toronto Office Cleaning Services" in the About band — the
-      port had this as an h1 too, which gave the homepage two. */}
+  {/* THE PAGE'S ONE h1.
+      The original theme marks this up as `h2.hero-large-text` and puts the
+      h1 down in the About band. That is backwards for a crawler: the first
+      and most prominent thing on the page should be what the page is about.
+      The h1 moved here and the About band's heading became an h2, which
+      keeps the phrase "Toronto Office Cleaning Services" on the page and in
+      the outline without the homepage carrying two h1s.
+
+      Only the tag changed. `.hero-title` carries every pixel of the styling,
+      so this renders identically.
+
+      NOTE for whoever owns the copy: what a crawler and a screen reader
+      actually read here is "Evergreen Office Cleaning, Building Maintenance,
+      Commercial Cleaning, Janitorial Services, Disinfection Cleaning" — the
+      five rotating words, read as a list. It is a weak h1 for a page
+      targeting Toronto office cleaning. Rewriting hero copy is a content
+      decision, not a markup one, so it is flagged rather than done. */}
   <div class="container hero-inner">
-    <h2 class="hero-title">
+    <h1 class="hero-title">
       Evergreen{' '}
       <span class="hero-rotator">
         {
@@ -51,7 +65,7 @@ const words = [
           ))
         }
       </span>
-    </h2>
+    </h1>
 
     <p class="hero-sub">
       Leaders in Commercial Cleaning and Building Maintenance in Toronto and the GTA

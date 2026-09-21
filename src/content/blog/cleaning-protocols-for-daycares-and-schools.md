@@ -18,7 +18,7 @@ This helps prevent students from spreading germs to each other and to teachers a
 
 We have included a checklist articulating the specific areas that ought to be addressed, and while these are among the areas our service will tackle, we are always willing to adjust the list to accommodate your specific preferences and needs.
 
-[Evergreen Cleaning](/services/disinfection-cleaning-service/) is committed to taking all necessary precautions during this pandemic, and we pledge to provide the most effective and efficient service possible.
+[Evergreen Cleaning](/services/disinfection-cleaning/) is committed to taking all necessary precautions during this pandemic, and we pledge to provide the most effective and efficient service possible.
 
 When it comes to the cleaning of offices and classrooms, focus should be placed on chairs, desks, doors handles, flooring, closets, computer equipment, filing cabinets, and more.
 

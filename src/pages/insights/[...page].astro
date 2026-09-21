@@ -8,9 +8,13 @@
  *
  * Two more things taken from the archived markup:
  *
- *  - The visible title is the page-header band's `<h1 class="entry-title">`;
- *    inside the main column there is a second, screen-reader-only
- *    `<h1 class="page-title screen-reader-text">News</h1>`.
+ *  - The visible title is the page-header band's `<h1 class="entry-title">`.
+ *    The original ALSO carries a second, screen-reader-only
+ *    `<h1 class="page-title screen-reader-text">News</h1>` inside the main
+ *    column, and that one is NOT reproduced. It gave every page of this
+ *    archive two h1s reading "News, News" — a WordPress theme artefact, not
+ *    a design decision, and the only thing it adds for a screen-reader user
+ *    is hearing the same word twice. The visible h1 is the page title.
  *  - Pagination is WordPress's `posts-navigation`: "Older posts" and "Newer
  *    posts" only. There are no numbered page links; this page had a numbered
  *    list as well.
@@ -80,10 +84,6 @@ const listDescription = pageDescription(
   <div class="section-padding">
     <div class="container content-grid">
       <div class="post-main">
-        <header>
-          <h1 class="page-title screen-reader-text">News</h1>
-        </header>
-
         <PostList posts={page.data} eager={2} flush />
 
         {

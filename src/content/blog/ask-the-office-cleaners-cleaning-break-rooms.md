@@ -5,7 +5,7 @@ pubDate: 2023-03-31
 image: "/images/break-room-2-scaled.jpg"
 ---
 
-# Cleaning Office Break Rooms
+## Cleaning Office Break Rooms
 
 Like many amazing employers, you’ve set up the best office break room you could possibly imagine. A fairly decent space for a quick snack, a much-needed lunch break, or just a place for your people to catch their breath in the course of their busy schedules. Break rooms are amazing. They’re extremely flexible and can be used for a wide range of purposes, from quiet solo work and informal meetings, to fun office gatherings and after-hours socials. However, being a multipurpose space, they tend to get untidy really quickly. Simple tasks like applying jam on toast lead to sticky spots and crumbs everywhere.  Pizza lovers leave greasy fingerprints on every surface they can find. Mind you – there is a limit to how many times you can flip those sofa cushions. At Evergreen Cleaning, we’ve seen some really messy and mucky spaces – so let’s ask a team of professional [Toronto office cleaners](https://www.greencleanofficemaintenance.com/) how they go about cleaning office break rooms.
 

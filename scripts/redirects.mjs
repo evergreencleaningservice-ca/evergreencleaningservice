@@ -23,7 +23,10 @@ const uploadRedirects = JSON.parse(
   fs.readFileSync(path.resolve('src/data/upload-redirects.json'), 'utf8')
 );
 
-const dist = path.resolve('dist');
+/* `DIST` lets a test build into a throwaway directory and generate the map
+   beside it, so the rules under test are the ones this script really emits
+   rather than a copy of the logic. Defaults to the real output directory. */
+const dist = path.resolve(process.env.DIST || 'dist');
 if (!fs.existsSync(dist)) {
   console.error('redirects: dist/ not found — run the build first.');
   process.exit(1);
@@ -47,4 +50,4 @@ section('Wildcards, last so the rules above win', wildcardRedirects);
 
 fs.writeFileSync(path.join(dist, '_redirects'), lines.join('\n'));
 const count = lines.filter((l) => l.endsWith(' 301')).length;
-console.log(`redirects: ${count} rules written to dist/_redirects`);
+console.log(`redirects: ${count} rules written to ${path.relative(process.cwd(), path.join(dist, '_redirects'))}`);

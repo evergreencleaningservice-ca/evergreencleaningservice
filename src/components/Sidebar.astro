@@ -2,13 +2,26 @@
 /**
  * The inner-page sidebar, matching the original's <aside id="secondary">.
  *
- * Four widgets, in the original's order: search, Recent Posts, a Request Quote
- * form, and the tag cloud. It appears on every inner page, service page and
- * post — but not the homepage, which the original renders full width.
+ * Three widgets, in the original's order: search, Recent Posts and a Request
+ * Quote form. It appears on every inner page, service page and post — but not
+ * the homepage, which the original renders full width.
+ *
+ * THE TAG CLOUD IS GONE, and this is the one place this component departs
+ * from the original. It rendered 26 links on 63 pages — 1,638 internal links
+ * — and every one of them went to the same place, because this port has no
+ * tag taxonomy and `/tag/*` is a blanket 301 to `/category/blog/`. So it was
+ * 26 different words all meaning "the blog", repeated site-wide: nothing for
+ * a visitor to choose between, and a crawler spending its budget on 1,638
+ * redirects to one page.
+ *
+ * The 301 STAYS. Removing the widget removes the links this site makes;
+ * `/tag/<slug>/` addresses still exist out in the world — in backlinks,
+ * bookmarks and Google's index — and they still land on the blog archive in
+ * one hop. Deleting the rule would turn those into 404s, which is the
+ * opposite of the point.
  */
 import { getCollection } from 'astro:content';
 import QuoteForm from './QuoteForm.astro';
-import { tags } from '../data/tags';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -51,19 +64,6 @@ const posts = (await getCollection('blog'))
   <section class="widget widget-quote">
     <h2 class="widget-title">Request Quote</h2>
     <QuoteForm variant="sidebar" id="sidebar-quote" />
-  </section>
-
-  <section class="widget widget-tags">
-    <h2 class="widget-title">Tags</h2>
-    <div class="tag-cloud">
-      {
-        tags.map((tag) => (
-          <a href={tag.href} style={`font-size:${tag.size}`}>
-            {tag.name}
-          </a>
-        ))
-      }
-    </div>
   </section>
 </aside>
 
@@ -162,20 +162,4 @@ const posts = (await getCollection('blog'))
 
   /* quote form */
 
-  /* tag cloud */
-  .tag-cloud {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 8px;
-    align-items: baseline;
-  }
-
-  .tag-cloud a {
-    color: var(--ink);
-    line-height: 1.4;
-  }
-
-  .tag-cloud a:hover {
-    color: var(--brand);
-  }
 </style>
