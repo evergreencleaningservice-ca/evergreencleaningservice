@@ -52,4 +52,4 @@ Run a humidifier: Humidity levels can drop too low in the worst days. Running th
 
 Having the professionals handle all the cleaning makes the process a lot smoother and simpler. It is also a cost-effective way of ensuring all the said areas are thoroughly cleaned, hence a clean, healthy, and comfortable workplace. We at [Evergreen Cleaning Service](/about-us/) have the experience and expertise required to ensure your workplace is clean throughout the winter months and we have all the equipment needed to make it happen. We offer professional, affordable, and reliable office cleaning, janitorial and commercial cleaning services. We’ve been serving the Toronto GTA since 1989 and would be happy to give you a quote. [Contact us](/contact-us/) today!
 
-![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/evergreen-cleaning-toronto-logo-banner.jpg)

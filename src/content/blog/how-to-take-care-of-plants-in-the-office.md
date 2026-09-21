@@ -39,4 +39,4 @@ Select a particular area for your plant. Once a particular area is assigned for 
 
 Finally, enjoy plants but don’t have a green thumb?  Here at Evergreen Cleaning Services we are happy to make tending to your plants part of our routine cleaning procedures.  [Contact us](/contact-us/) today for all of your commercial cleaning and janitorial needs.
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

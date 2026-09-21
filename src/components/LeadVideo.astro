@@ -285,13 +285,16 @@ const hasPoster = inPublic(poster);
     border-radius: 50%;
   }
 
-  /* Sits over the orb's upper-left corner, 6px left and 4px above it. */
+  /* Sits over the orb's upper-left corner, 6px left and 4px above it.
+     26px rather than the 20px it was: a 20x20 target fails WCAG 2.2's 24x24
+     minimum, and a dismiss control that is hard to hit is the one control on
+     the widget a person is most likely to be trying to hit. */
   .leadnet-dismiss {
     position: absolute;
-    top: -4px;
-    right: 66px;
-    width: 20px;
-    height: 20px;
+    top: -7px;
+    right: 63px;
+    width: 26px;
+    height: 26px;
     display: grid;
     place-items: center;
     padding: 0;

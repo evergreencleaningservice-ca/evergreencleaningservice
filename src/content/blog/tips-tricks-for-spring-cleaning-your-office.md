@@ -35,4 +35,4 @@ It might not be an excessive workload that is stressing you out. It might be all
 
 For all of your commercial cleaning needs in the GTA, [contact us](/contact-us/) at [Evergreen Commercial Cleaning & Janitorial](/services/)
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

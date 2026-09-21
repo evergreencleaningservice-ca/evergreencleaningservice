@@ -25,3 +25,5 @@ pnpm-debug.log*
 .astro-test-dist/
 .astro-test-dist-links/
 .astro-test-dist-content/
+.measure/
+.astro-test-dist-images/

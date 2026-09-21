@@ -25,4 +25,4 @@ If your schedule is jam-packed, you may not have any time left over for cleaning
 
 _**If you are searching for dependable cleaners in the Toronto area, you may want to take a closer look at [Evergreen Cleaning](/about-us/). We have extensive experience with office cleaning. If you reach out to us, we will be happy to tell you more about our services. If you can’t keep up with your office on your own, hiring cleaners is the smartest thing that you can do.**_
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

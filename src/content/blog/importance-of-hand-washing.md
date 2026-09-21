@@ -34,4 +34,4 @@ If you are looking to keep your office clean and everyone in it healthy, you can
 
 #### [Contact us](/request-a-quote/) to get a free assessment of your office/workspace.
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

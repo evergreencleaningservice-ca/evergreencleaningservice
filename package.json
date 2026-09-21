@@ -18,6 +18,8 @@
     "images": "node --experimental-strip-types scripts/images.mjs",
     "b2:sync": "node --experimental-strip-types scripts/b2-sync.mjs",
     "preflight": "node --experimental-strip-types scripts/preflight.mjs",
+    "images:variants": "node --experimental-strip-types scripts/hero-variants.mjs",
+    "measure": "node --experimental-strip-types scripts/measure.mjs",
     "captcha:check": "node --experimental-strip-types scripts/captcha-check.mjs",
     "secret:check": "node --experimental-strip-types scripts/secret-check.mjs",
     "verify:indexing": "node --experimental-strip-types scripts/verify-indexing.mjs"
@@ -30,6 +32,9 @@
   },
   "devDependencies": {
     "happy-dom": "^20.14.5",
+    "lighthouse": "^13.5.0",
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.4",
     "vitest": "^3.2.7",
     "wrangler": "^4.134.0"
   }

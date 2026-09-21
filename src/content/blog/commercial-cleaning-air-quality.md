@@ -52,4 +52,4 @@ While you can boost your air quality on your own, professionals will complete it
 
 [Contact us](/contact-us/) at [Evergreen Commercial Cleaning & Janitorial](/about-us/) to schedule a professional cleaning session for your property and improve your air quality.
 
-![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/evergreen-cleaning-toronto-logo-banner.jpg)

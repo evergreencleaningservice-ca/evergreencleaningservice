@@ -49,4 +49,4 @@ Floor stripping and waxing is recommended every four to six months. While how fr
 
 We are a [professional commercial cleaning](/about-us/) company based in Toronto, providing a complete range of commercial cleaning services. We are renowned for our expertise and efficiency. We serve local businesses, offices, and industrial buildings. With our cutting-edge commercial floor cleaning, waxing, stripping, and buffing services, your office floors will be looking as clean as new. [Contact us](/contact-us/) today for more information!
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

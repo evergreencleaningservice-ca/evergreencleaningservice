@@ -30,4 +30,4 @@ We’ve also come across some really fancy office break rooms with table footbal
 
 Need help getting all the cobwebs, crusts, and crumbs out of your break room? Evergreen Cleaning is an experienced team of expert office cleaners who know everything there is to know about the trade. Contact us today to learn more about how we can help make office cleaning easy and convenient, with minimal disruptions to your operations.
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

@@ -54,4 +54,4 @@ _**If you are searching for a [commercial cleaning service](/about-us/) in the G
 
 _**We would love to help!**_
 
-![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/evergreen-cleaning-toronto-logo-banner.jpg)

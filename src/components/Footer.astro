@@ -45,7 +45,7 @@ const icons: Record<string, string> = {
       </div>
 
       <div class="footer-col footer-col-areas footer-service-areas">
-        <h4 class="footer-areas-title">Service Areas</h4>
+        <h2 class="footer-areas-title">Service Areas</h2>
         <ul class="footer-areas">
           {
             footerAreas.map((area) => (
@@ -61,7 +61,7 @@ const icons: Record<string, string> = {
 
   <div class="footer-connect">
     <div class="container">
-      <h5 class="footer-connect-title">Follow us on Social Media</h5>
+      <h2 class="footer-connect-title">Follow us on Social Media</h2>
       <ul class="footer-social">
         {
           social.map((item) => (
@@ -106,6 +106,12 @@ const icons: Record<string, string> = {
 </footer>
 
 <style>
+  /* The two footer section titles are h2, not h4.
+     The footer is the last landmark on every page, and the heading before it
+     varies — h2 on the homepage, h3 inside a blog post. An h4 there skipped a
+     level on every page and failed heading-order; an h2 is valid after
+     anything, because going back UP the outline is allowed and only skipping
+     DOWN is not. They are styled by class, so nothing moved a pixel. */
   .site-footer {
     background: var(--footer-bg);
     color: var(--footer-ink);
@@ -301,8 +307,16 @@ const icons: Record<string, string> = {
     }
   }
 
+  /* Underlined, not only coloured.
+     `#69ed3d` against the surrounding footer text measures 1.25:1 — well
+     under the 3:1 that lets colour alone mark a link — and a link inside a
+     sentence that is only distinguished by hue is invisible to anyone who
+     cannot separate those two hues. An underline is the distinction that
+     does not depend on seeing colour at all, and it costs nothing here. */
   .site-footer a {
     color: var(--brand-hover);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   .site-footer a:hover {

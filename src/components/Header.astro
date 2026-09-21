@@ -9,7 +9,23 @@ const isCurrent = (href?: string) =>
 <header class="site-header" id="site-header">
   <div class="container header-inner">
     <a class="site-logo" href="/">
-      <img src={site.logo} alt="Evergreen Cleaning Service Toronto logo" width="884" height="265" />
+      {/* AVIF then WebP then the original JPEG. It renders at 220px wide,
+          so the 440px variants cover a 2x screen and nothing wider is
+          emitted — a bigger file is not a sharper logo. `eager`, because it
+          is above the fold on every page; `width`/`height` are the source's
+          intrinsic ratio so the header does not reflow when it lands. */}
+      <picture>
+        <source type="image/avif" srcset="/images/cropped-evergreen-cleaning-toronto-logo-banner.avif" />
+        <source type="image/webp" srcset="/images/cropped-evergreen-cleaning-toronto-logo-banner.webp" />
+        <img
+          src={site.logo}
+          alt="Evergreen Cleaning Service Toronto logo"
+          width="884"
+          height="265"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
       <span class="screen-reader-text">{site.name}</span>
     </a>
 
@@ -76,6 +92,7 @@ const isCurrent = (href?: string) =>
     justify-content: space-between;
   }
 
+  .site-logo picture,
   .site-logo img {
     display: block;
     height: 100px;

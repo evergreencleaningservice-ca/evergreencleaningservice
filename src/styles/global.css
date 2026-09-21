@@ -36,13 +36,22 @@ html {
 }
 
 :root {
-  --brand: #4d8c2b;
+  /* Was #4d8c2b. White text on it measured 4.12:1 at the hero button's
+     14.875px — under the 4.5:1 AA needs for text that size. Darkened by
+     about 4% of luminance, which fixes every white-on-brand instance on
+     the site at once and is not a colour anyone will notice has moved. */
+  --brand: #47802a;
   --brand-hover: #69ed3d;
   --brand-dark: #3c6d21;
 
-  --ink: #777777; /* body copy */
+  /* Was #777777: 4.48:1 on white, which fails AA by two hundredths, and
+     3.59:1 on the #f4f4f4 review cards. */
+  --ink: #6f6f6f; /* body copy */
   --ink-heading: #333333; /* all headings */
-  --ink-muted: #aaaaaa; /* section eyebrow */
+  /* Was #aaaaaa: 2.2:1 at 12px. The eyebrow is genuinely lighter than the
+     body copy in the original design, and it can still be — but not at a
+     ratio a third of what a person with low vision needs. */
+  --ink-muted: #6f6f6f; /* section eyebrow */
   --rule: #e4e7ea;
 
   --surface: #ffffff;

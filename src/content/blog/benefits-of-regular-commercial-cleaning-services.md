@@ -53,4 +53,4 @@ Keeping a clean workplace involves picking up papers, keeping rooms free of clut
 
 _**If you are interested in the types of benefits listed here, don’t delay! [Contact us](/contact-us/) and make arrangements with [Evergreen Cleaning](/services/) for regular cleaning services for your commercial location.**_
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

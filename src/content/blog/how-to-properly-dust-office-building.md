@@ -79,4 +79,4 @@ Proper dusting is important not only to keeping your employees healthy and inspi
 
 For all of your commercial cleaning needs, [contact](/contact-us/) the team at [Evergreen Commercial Cleaning & Janitorial](/about-us/) and we’ll be happy to get rid of your dust!
 
-![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/evergreen-cleaning-toronto-logo-banner.jpg)

@@ -42,12 +42,24 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {/* A bare /favicon.ico request is made by every browser whether or not
+        the document asks for one, and without a file it is a 404 in the
+        console — which Lighthouse counts against Best Practices. */}
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon-512.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonical} />
     {/* The package specifies `noindex, nofollow` on both the landing page and
         the thank-you page. Applied here so all three pages on this shell agree
         rather than one of them drifting. */}
     <meta name="robots" content="noindex, nofollow" />
 
+    {/* The hero image — this page's LCP — is served from the image bucket,
+        a different origin from the document. Without this the browser cannot
+        even begin the DNS lookup and TLS handshake for it until it has
+        parsed the markup that references it. One preconnect buys back that
+        round trip on the single most important request on the page. */}
+    <link rel="preconnect" href="https://img-evergreencleaningservice.10xconnections.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

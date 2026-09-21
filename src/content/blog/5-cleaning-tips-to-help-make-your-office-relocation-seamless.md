@@ -56,4 +56,4 @@ You can handle the cleaning when moving out of your current commercial space or 
 
 At [Evergreen Cleaning](/about-us/), we are the [pros to call](/reviews/) when you need your commercial spaces spruced up when moving in or out. We are here to help make the relocation process as seamless as possible. [Contact us](/contact-us/) today for a free quote and to know more about our services.
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
