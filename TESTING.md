@@ -89,8 +89,13 @@ a tested one.
 - **Resend itself.** `tests/worker/notification.test.ts` asserts the exact
   JSON the Worker sends, including that `reply_to` is absent for a phone-only
   lead — but Resend is stubbed. Whether the API accepts a given key, sender
-  and payload is a deployed check, and Resend has never been configured on
-  this project.
+  and payload is a deployed check. That check has now been made, and it
+  passed: the Phase 9 staging submission was delivered from
+  `leads@brandingcentres.com` to `info@evergreencleaningservice.ca`, with
+  `reply_to` correctly absent because the lead carried a phone and no email.
+  So the sender and key are proven; what remains untested here is every path
+  Resend can fail on afterwards — a bounce, a suppression, a rate limit —
+  none of which the Worker currently reports anywhere a person would see.
 - **The captcha providers.** `siteverify` is stubbed. Whether Cloudflare
   accepts a given key pair is a deployed-preview check.
 - **Page-level fidelity against the original.** The `tests/build/*` files do

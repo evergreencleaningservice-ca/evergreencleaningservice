@@ -73,6 +73,52 @@ const get = async (path) => {
   return { res, body: await res.text() };
 };
 
+/**
+ * REFUSE TO REPORT ON A PAGE THAT IS NOT THE PAGE.
+ *
+ * The production origin sits behind SiteGround's IP-reputation challenge, which
+ * answers this network with HTTP 202, an `sg-captcha: challenge` header and a
+ * 170-byte meta-refresh interstitial — for every path, including `robots.txt`
+ * and the sitemap.
+ *
+ * Run against that, every check below reads the interstitial and reports on it.
+ * The output is devastating and entirely false: fourteen failures saying the
+ * canonical is missing, the landing pages are not noindexed and the sitemap is
+ * empty. None of it is about the site. Worse, the interstitial itself carries
+ * `x-robots-tag: noindex`, so the one check that "passes" passes for the wrong
+ * reason.
+ *
+ * A tool that cannot see the site must say so and stop, not invent findings.
+ * This is the estate's most expensive failure class — a status code accepted as
+ * evidence of content — and it is cheaper to detect here than to argue with a
+ * report later.
+ */
+const challenged = (res, body) =>
+  res.status === 202 ||
+  res.headers.has('sg-captcha') ||
+  /\.well-known\/sgcaptcha/i.test(body);
+
+{
+  const { res, body } = await get('/');
+  if (challenged(res, body)) {
+    console.error(
+      `\nverify-indexing: CANNOT REPORT on ${target.origin}.\n\n` +
+        `  The origin answered HTTP ${res.status}` +
+        `${res.headers.get('sg-captcha') ? ` with sg-captcha: ${res.headers.get('sg-captcha')}` : ''}` +
+        ` and served a challenge\n  interstitial rather than the page. Every check in this script would be\n` +
+        `  reading that interstitial, so the result would be a page of failures that\n` +
+        `  say nothing about the site.\n\n` +
+        `  This is an IP-reputation challenge keyed to the requesting address — the\n` +
+        `  token in the interstitial names it — so it is a property of THIS network,\n` +
+        `  not evidence that the site is broken or that a crawler is blocked.\n\n` +
+        `  Run this from a network the origin answers normally, or, for the question\n` +
+        `  of whether a verified crawler can reach it, use Search Console's URL\n` +
+        `  Inspection, which requests from a Googlebot address.\n`
+    );
+    process.exit(3);
+  }
+}
+
 console.log(`\nverify-indexing: ${target.origin} (expected ${target.indexable ? 'INDEXABLE' : 'NOINDEX'})\n`);
 
 /* --- 1. the X-Robots-Tag header, which is the source of truth ------------ */
