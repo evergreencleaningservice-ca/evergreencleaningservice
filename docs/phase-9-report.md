@@ -1,9 +1,12 @@
 # Phase 9 — improve the quote experience
 
 **Commits** `2302e7c` (the change), `dfa1f6d` (the measurement tooling),
-`fa4c41d` (this report) and `95f3901` (the closeout — §14), on
-`claude/optimistic-clarke-wz1p8g`. Deployed to staging as version
-`2af2e691-0f1a-4dec-9434-a35fbb65f513`; the closeout is not yet deployed.
+`fa4c41d` (this report), `95f3901` (the closeout — §14) and `f06ce58`, on
+`claude/optimistic-clarke-wz1p8g`. Deployed to staging from `f06ce58` as
+version **`8177899f-3bc3-41d6-9f43-ca8d35ca3ae2`** (deployment
+`d3d1f66e-c8ff-4c77-b238-7f8e2cf46ce9`, 21 Sep 2026 13:22 UTC, 100% of
+traffic), superseding `2af2e691` which predated the closeout. §15 records
+the verification.
 
 Nothing in production, DNS, GTM, Google Ads, GA4, Microsoft Ads, the Neon
 schema, persistent attribution or the Turnstile production credentials was
@@ -594,3 +597,119 @@ failure, which is the audit that fires when a focusable element sits inside
 ### Suite after the closeout
 
 **378 pass, 14 files.** No test was weakened or removed to accommodate the fix.
+
+---
+
+## 15. Staging redeploy — verification
+
+Redeployed from `f06ce58` so the staging build matches the branch. The
+previous version, `2af2e691`, predated the closeout and still carried the
+unconditional `reply_to`.
+
+| | |
+| --- | --- |
+| Staging version | **`8177899f-3bc3-41d6-9f43-ca8d35ca3ae2`** |
+| Deployment | `d3d1f66e-c8ff-4c77-b238-7f8e2cf46ce9`, 21 Sep 2026 13:22 UTC, 100% |
+| Built from | `f06ce58`, working tree clean, identical to `origin/claude/optimistic-clarke-wz1p8g` |
+| `95f3901` in the deployed history | yes — `git merge-base --is-ancestor` |
+| `f06ce58` in the deployed history | yes — it is HEAD |
+| Worker hostname binding | `evergreencleaningservice.10xconnections.com` only, zone `10xconnections.com` |
+| Test suite | **378 pass, 14 files, 0 failures** |
+| Preview build | `npm run build:preview` clean — 130 redirect rules, noindex applied, 1,132 image references repointed |
+
+### `/request-a-quote/` on the deployed origin
+
+Rendered in a real browser at 390px and 1440px, **no JavaScript errors**:
+
+| | 390px | 1440px |
+| --- | --- | --- |
+| Lead forms | 1 | 1 |
+| `form_id` | `quick-quote` | `quick-quote` |
+| H1 | one, "Request a Quote" | same |
+| Controls rendered | the 7 asked + the honeypot | same |
+| `required` in the form | 4 | 4 |
+| `placeholder=` in the form | 0 | 0 |
+| `<label>` in the form | 8 | 8 |
+| Form height | 1,086px | 770px |
+| Page height | 2,925px | 1,956px |
+| Horizontal overflow | none | none |
+| Header links | 14 | 14 |
+| Turnstile token field | present | present |
+
+The heights match the local build exactly, which is the point of checking
+both. Also confirmed on the deployed HTML: no `address1`, no `last-name`, no
+`quote-form-1381`; the click-to-call, "Serving Toronto since 1989" and the
+published hours are all present; the Turnstile container is there with **no
+eager script tag** to challenges.cloudflare.com.
+
+### Indexability
+
+`X-Robots-Tag: noindex, nofollow` on `/`, `/request-a-quote/`,
+`/lp/commercial-cleaning/` and `/services/office-cleaning/`, all HTTP 200.
+`robots.txt` allows crawling, which is deliberate: a `Disallow: /` would stop
+the crawler ever reading the header that carries the noindex.
+
+### The phone-only payload, verified without writing anything
+
+Three independent lines of evidence, none of which creates a lead:
+
+1. **The deployed bundle itself.** Fetched from the Cloudflare API: 5,890
+   lines, and `reply_to` appears exactly **once**, at line 5698:
+
+   ```js
+   const email = (lead.work_email ?? "").trim();
+   if (email && looksLikeEmail(email)) payload.reply_to = email;
+   ```
+
+2. **That deployed code, executed.** `notificationPayload` was lifted verbatim
+   out of the fetched bundle and run against five leads. Nothing was written
+   anywhere; this is the function Cloudflare is currently serving:
+
+   | Lead | `reply_to` key | Keys sent |
+   | --- | --- | --- |
+   | phone only | **absent** | `from, subject, text, to` |
+   | email only | present | `from, reply_to, subject, text, to` |
+   | both | present | `from, reply_to, subject, text, to` |
+   | whitespace email | **absent** | `from, subject, text, to` |
+   | malformed email | **absent** | `from, subject, text, to` |
+
+   The phone-only body, as the deployed code renders it, shows
+   `Email: (not supplied)` beside `Phone: 416 555 0142`.
+
+3. **The live endpoint, probed without storing.** Four requests, all rejected
+   or absorbed before any insert:
+
+   | Probe | Response |
+   | --- | --- |
+   | no contact method | 422 `{"fields":["contact"]}` |
+   | malformed email | 422 `{"fields":["work_email","contact"]}` |
+   | no name | 422 `{"fields":["full_name"]}` |
+   | honeypot filled | 200 `{"ok":true}` — answered like success, stored nothing |
+
+**Neon after all of it: 20 rows, highest id 20, newest still the 11:48 UTC
+Phase 9 test lead, and zero rows carrying the probes' `form_id`.** No lead was
+created by this redeploy.
+
+### What was not touched
+
+| | Evidence |
+| --- | --- |
+| Production | Nameservers still `ns1/ns2.siteground.net`; apex and `www` A records unchanged and still SiteGround's. The Worker is bound to the staging hostname only. |
+| DNS | No record was created, edited or deleted. |
+| GTM | Container on staging is still `GTM-5PRC4HBV`. No Tag Manager API call was made. |
+| Google Ads / GA4 / Microsoft Ads | No API call, no credential used. |
+| Neon | Read-only `SELECT` only. No schema change, no write, no branch, no snapshot. Row 20 is still there and still not deleted. |
+| Turnstile | Staging still uses the published test key `1x00000000000000000000BB`. No production key pair exists to change. |
+
+### One observation, pre-existing and not caused by this work
+
+`https://www.evergreencleaningservice.ca/` answers **HTTP 202** from this
+container with a SiteGround captcha interstitial
+(`/.well-known/sgcaptcha/`) rather than the site — including with a browser
+user agent. That is SiteGround's bot protection responding to a datacentre
+IP. Nothing in this session touched production, and DNS confirms it is
+unchanged; but it does mean **production content cannot be fetched from this
+environment**, which matters twice: it is why the reference for the port is
+the Internet Archive, and it is squarely the subject of Phase 12's
+crawler and WAF testing. Worth knowing before launch, because whatever
+refuses this container may also refuse a crawler.
