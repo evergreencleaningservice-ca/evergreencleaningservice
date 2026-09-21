@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import LeadVideo from '../components/LeadVideo.astro';
 import GoogleTagManager from '../components/GoogleTagManager.astro';
 import Attribution from '../components/Attribution.astro';
+import PhoneTracking from '../components/PhoneTracking.astro';
 import { site } from '../data/site';
 import { organizationGraph } from '../lib/schema';
 import '../styles/global.css';
@@ -169,5 +170,7 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
         window.addEventListener('resize', onScroll, { passive: true });
       }
     </script>
+
+    <PhoneTracking />
   </body>
 </html>

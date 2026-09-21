@@ -104,7 +104,7 @@ const schema = {
                     {location.detail.ctaLabel}
                   </a>
                   <p class="loc-direct">
-                    Direct Phone: <a href={nap.phoneHref}>{nap.phoneDisplay}</a>
+                    Direct Phone: <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a>
                   </p>
                 </div>
               </Fragment>
@@ -134,7 +134,7 @@ const schema = {
                 </p>
                 <p>
                   We are bonded, insured and WSIB compliant. Call{' '}
-                  <a href={nap.phoneHref}>{nap.phoneDisplay}</a> or{' '}
+                  <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a> or{' '}
                   <a href="/request-a-quote/">request a walkthrough</a>.
                 </p>
 
@@ -161,7 +161,7 @@ const schema = {
               {nap.addressCountryName}
             </p>
             <p>
-              <a href={nap.phoneHref}>{nap.phoneDisplay}</a><br />
+              <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a><br />
               <a href={`mailto:${nap.email}`}>{nap.email}</a>
             </p>
           </div>

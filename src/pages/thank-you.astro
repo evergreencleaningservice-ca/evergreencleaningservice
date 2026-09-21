@@ -60,10 +60,10 @@ import { nap } from '../data/site';
 
       <div class="ty-rush-box">
         <strong>Need immediate support?</strong><br />
-        Call directly at <a href={nap.phoneHref}>{nap.phoneDisplay}</a>
+        Call directly at <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a>
       </div>
 
-      <a class="ty-call" href={nap.phoneHref}>Call {nap.phoneDisplay} now</a>
+      <a class="ty-call" href={nap.phoneHref} data-call-location="content">Call {nap.phoneDisplay} now</a>
 
       {/* The one link off this page. The conversion was recorded before the
           visitor got here, so it costs nothing the isolation rules were

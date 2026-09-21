@@ -20,6 +20,7 @@ import { nap, site } from '../data/site';
 import { organizationGraph } from '../lib/schema';
 import GoogleTagManager from '../components/GoogleTagManager.astro';
 import Attribution from '../components/Attribution.astro';
+import PhoneTracking from '../components/PhoneTracking.astro';
 import '../styles/global.css';
 /* The paid pages' shared styling. Loaded here so a page cannot forget it, and
    so the two pages cannot drift into two copies of the same CSS again. */
@@ -126,7 +127,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
         </a>
         <div class="lp-actions">
           <div class="lp-call-wrap">
-            <a class="lp-call" href={nap.phoneHref} data-call>
+            <a class="lp-call" href={nap.phoneHref} data-call data-call-location="paid_header">
               <span class="lp-call-label">Call</span>
               <span class="lp-call-number">{nap.phoneDisplay}</span>
             </a>
@@ -159,21 +160,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 
     <slot name="sticky" />
 
-    <script>
-      /* Section 4.1 — click-to-call tracking. Bound here rather than on the
-         page so it covers the header button, the sticky bar and anything else
-         that dials. */
-      document.querySelectorAll<HTMLAnchorElement>('a[href^="tel:"]').forEach((anchor) => {
-        anchor.addEventListener('click', () => {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: 'click_to_call',
-            phone_number: '+14168034880',
-            phone_destination: anchor.getAttribute('href'),
-          });
-        });
-      });
-    </script>
+    {/* REPLACED in Phase 11. This used to bind a listener to every `tel:`
+        anchor and push `click_to_call` with the number HARDCODED — which was
+        wrong for precisely the visitors who matter, since the container loads
+        CallTrackingMetrics and rewrites the number for paid arrivals. One
+        delegated sitewide handler now reads both numbers at click time. */}
+    <PhoneTracking />
   </body>
 </html>
 

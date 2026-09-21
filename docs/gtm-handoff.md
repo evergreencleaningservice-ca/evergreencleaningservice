@@ -45,7 +45,11 @@ Counted in the container source: `lead_form_submission` **0**,
 
 ## 2. The website's side of the contract — already built and tested
 
-**There is exactly one conversion event.**
+**There is exactly one CONVERSION event, and one separate telephone event.**
+
+`lead_form_submission` is the conversion. `phone_click` (§7) is a telephone
+click — a distinct event with a distinct meaning, which must not be merged
+with it or given its value without the advertising owner's approval.
 
 ```js
 window.dataLayer.push({
@@ -202,27 +206,215 @@ and silently degrade enhanced conversions to nothing.
 
 ---
 
-## 7. Phase 11 — `phone_click`, when it is built
+## 7. `phone_click` — telephone-click tracking (Phase 11, BUILT)
 
-Not yet in scope, specified here so the container is not rebuilt twice.
+**Status: shipped to staging and ready for the container.** The event name is
+settled and will not change again. Nothing in this section has been applied to
+the container — every step below is for the account owner.
 
-The site already pushes, from the landing-page layout only:
+### 7.1 What the site now pushes
+
+One delegated, sitewide listener. It fires on every genuine activation of any
+`tel:` link on any of the 77 pages, by pointer or by keyboard, including clicks
+on icons nested inside the link:
 
 ```js
-{ event: 'click_to_call', phone_number: '+14168034880', phone_destination: 'tel:…' }
+{
+  event:              'phone_click',
+  page_path:          '/services/office-cleaning/',   // path only, no query
+  link_location:      'header',                       // controlled list, below
+  displayed_number:   '(416) 803-4880',               // read at click time
+  destination_number: '+14168034880',                 // read at click time
+  tracking_provider:  'calltrackingmetrics'           // or 'unknown'
+}
 ```
 
-There is **no trigger for it**, so it currently goes nowhere. Phase 11 will
-extend it site-wide and settle on one name. Until then:
+**`click_to_call` is retired.** It existed on three pages, pushed the number
+**hardcoded**, and had no trigger. Do not build anything on that name.
 
-- do not build a trigger on `click_to_call` yet;
-- when Phase 11 lands, the event name will be confirmed in writing before any
-  container change;
-- a phone click is **not** the same conversion action as a form lead. Create a
-  separate Ads conversion action for it, with its own value, or Smart Bidding
-  will treat a tap on a phone number as equivalent to a qualified enquiry.
+### 7.2 Why both numbers are separate fields
 
----
+The container loads **CallTrackingMetrics**, account **535014**, from
+`535014.tctm.co/t.js`. Read out of the live script, it carries three
+dynamic-number-insertion rules, each replacing the canonical `1.416.803.4880`:
+
+| Rule | Fires for | Swaps in |
+| --- | --- | --- |
+| Google Ads (Performance Max) [Cleaning] | `pmax=true` with google/cpc, or `gclid`/`wbraid`/`gbraid` | tracking number `2278896` |
+| Google Ads [Cleaning] | google/cpc, or `gclid`/`wbraid`/`gbraid` | tracking number `2161590` |
+| Bing Paid [Cleaning] | Microsoft paid traffic | tracking number `2176788` |
+
+It rewrites **both** the visible text and the `tel:` href. So for exactly the
+visitors whose calls most need attributing, the old hardcoded event named the
+wrong number. `displayed_number` and `destination_number` are now read off the
+element at the moment it is activated, and reported separately — if they
+disagree, that is a fact worth seeing rather than one to average away.
+
+`tracking_provider` is `calltrackingmetrics` when `window.__ctm` is present and
+`unknown` otherwise. It is never `none`: the site cannot prove the absence of a
+provider it has not heard of.
+
+### 7.3 `link_location` — the controlled list
+
+Ten values, chosen by the component that renders the link, never derived from
+its visible text. Counts are from the current build:
+
+| Value | Where | Links |
+| --- | --- | --- |
+| `header` | site header navigation | 74 |
+| `mobile_navigation` | the same link while the mobile drawer is open | — |
+| `hero` | homepage hero button | 1 |
+| `content` | body prose, including Markdown-authored links | 29 |
+| `quote_sidebar` | `/request-a-quote/` trust panel | 1 |
+| `paid_header` | landing-page header | 3 |
+| `paid_sticky` | landing-page mobile sticky bar | 2 |
+| `paid_cta` | landing-page final call-to-action | 2 |
+| `form_note` | the line under the short form's button | 3 |
+| `footer` | **unused — the site has no footer telephone link** | 0 |
+
+`header` and `mobile_navigation` are the same anchor: the value is resolved
+from whether the drawer is open when it is clicked.
+
+### 7.4 Variables to create (GTM)
+
+Five Data Layer Variables, Version 2, no default value:
+
+| Variable name | Data Layer Variable Name |
+| --- | --- |
+| `DLV - page_path` | `page_path` |
+| `DLV - link_location` | `link_location` |
+| `DLV - displayed_number` | `displayed_number` |
+| `DLV - destination_number` | `destination_number` |
+| `DLV - tracking_provider` | `tracking_provider` |
+
+Leave the default empty rather than setting one. An empty value in a report
+says "this event did not carry it"; a default says "it carried this", which is
+a different and false statement.
+
+### 7.5 Trigger
+
+One **Custom Event** trigger:
+
+- Trigger type: Custom Event
+- Event name: `phone_click`
+- Use regex matching: **off**
+- This trigger fires on: **All Custom Events**
+
+Do **not** add conditions on `link_location` or any number field. They are
+reporting dimensions; a missing one should produce an incomplete row, not a
+silently absent conversion.
+
+### 7.6 GA4
+
+One **GA4 Event** tag on the trigger above.
+
+- Configuration tag: the existing GA4 config (`G-R27QW21PMT`)
+- Event Name: `phone_click`
+- Event Parameters: `page_path`, `link_location`, `displayed_number`,
+  `destination_number`, `tracking_provider`, each from the matching variable
+
+**Mark it a key event?** Our recommendation: **yes, but as its own key event,
+never merged with the form lead.** A telephone click and a stored quote request
+are different things (see 7.9), and GA4 key events feed Google Ads if the
+property is linked — so merging them would make the two indistinguishable
+downstream. Register the custom dimensions in GA4 Admin → Custom definitions,
+event-scoped, or the parameters will not appear in reports.
+
+### 7.7 Google Ads
+
+Create a **separate conversion action**. Do not reuse either form action.
+
+- Goal: Contact → Phone call (website)
+- Conversion name: `Phone click (website)`
+- Count: **One** — see 7.9
+- Click-through window: the account's standard
+- Value: see 7.9 before setting one
+- Tag: a Google Ads Conversion Tracking tag on the `phone_click` trigger, or
+  import the GA4 key event — **one or the other, never both**
+
+### 7.8 Microsoft Ads (UET)
+
+One UET Event tag on the same trigger:
+
+- Event action: `phone_click`
+- Event category: `contact`
+- Event label: `{{DLV - link_location}}`
+- Event value: leave empty unless 7.9 has been settled
+- UET tag ID: `187178776`
+
+### 7.9 A phone click is not a lead — read before assigning value
+
+**A `phone_click` means a person activated a telephone link. It does not mean
+a call connected, that anybody answered, that it lasted more than two seconds,
+or that the caller was a qualified prospect.** A mis-tap produces one. So does
+a person checking the number before calling from a desk phone. So does a
+competitor.
+
+`lead_form_submission` means something materially stronger: a lead was
+validated, stored in the database and a notification sent.
+
+**Do not give `phone_click` the same conversion value as `lead_form_submission`
+without the advertising owner's explicit approval.** Smart Bidding optimises
+towards whatever it is told is valuable, and telling it a tap equals a stored
+enquiry will buy taps. If a value is wanted, derive it from the call-tracking
+account — CallTrackingMetrics already records which calls connected and for how
+long — rather than from the click.
+
+The honest default is **no value, count One**, until call-duration data exists
+to base one on.
+
+### 7.10 Duplicate protection
+
+Three layers, two already in the site:
+
+1. **One delegated listener**, bound once per document and guarded, so a second
+   initialisation cannot bind a second listener. Tested.
+2. **No synthetic firing** — the event is pushed only from a real activation,
+   never on load or render. Tested.
+3. **In the container:** set the Ads conversion action's count to **One**, and
+   pick either the GA4 key-event import *or* a direct Ads tag, not both. Two
+   paths to one conversion is the most common way this gets double-counted.
+
+Two separate intentional clicks are **two events**, deliberately — a person who
+taps, hangs up and taps again has tried to call twice. Deduplication is the
+conversion action's job, not the website's.
+
+### 7.11 Verification
+
+Do these in order, on staging, **before** production.
+
+**Tag Assistant**
+1. Preview against `https://evergreencleaningservice.10xconnections.com/`.
+2. Click the header telephone number. One `phone_click` appears in the event
+   stream — **one, not two**.
+3. Open it and confirm all five parameters are populated.
+4. Repeat on `/request-a-quote/` (`quote_sidebar`), `/lp/commercial-cleaning/`
+   (`paid_header`, then the sticky bar at phone width: `paid_sticky`), and a
+   service page (`content`).
+5. Confirm no `lead_form_submission` fires from any of them.
+
+**GA4 DebugView**
+6. Enable debug mode, repeat one click, confirm `phone_click` arrives with all
+   five parameters.
+7. Confirm the parameters are registered as custom dimensions, or they will
+   show in DebugView and nowhere else.
+
+**Microsoft UET**
+8. Install UET Tag Helper, repeat one click, confirm one custom event with
+   action `phone_click` and the label carrying the location.
+
+**Dynamic number replacement — the one that matters**
+9. Load the staging site with a paid-traffic query string, e.g.
+   `?gclid=TEST123` or `?utm_source=google&utm_medium=cpc`.
+10. Wait for CallTrackingMetrics to swap the number. The displayed number and
+    the `tel:` href should both change.
+11. Click it. Confirm `displayed_number` and `destination_number` are the
+    **tracking** number, not `(416) 803-4880`, and `tracking_provider` reads
+    `calltrackingmetrics`.
+12. Load the same page with no campaign parameters, click again, and confirm
+    both fields read the canonical number. **If step 11 still shows the
+    canonical number, the event is right and the swap did not happen — check
+    CallTrackingMetrics, not the website.**
 
 ## 8. Verification checklist
 
@@ -275,10 +467,14 @@ Run against the staging origin `https://evergreencleaningservice.10xconnections.
 | Google Ads access to `AW-16819334998` | Not held |
 | GA4 access to `G-R27QW21PMT` | Not held |
 | Microsoft Advertising access to UET `187178776` | Not held |
+| CallTrackingMetrics account `535014` | Not held. It is loaded by the container and performs dynamic number insertion (§7.2); its three tracking numbers and its call records are inside that account. |
 
-Until ownership is resolved, none of §3 can be applied, and the new site will
-report zero form conversions from the moment DNS moves. **This is the item to
-settle first.**
+Until ownership is resolved, neither §3 nor §7 can be applied, and the new site
+will report zero form conversions and zero telephone clicks from the moment DNS
+moves. **This is the item to settle first.**
+
+The website's half of both is finished and tested. Every remaining step needs
+an account nobody here can sign in to.
 
 ---
 

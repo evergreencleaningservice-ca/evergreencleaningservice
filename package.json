@@ -28,7 +28,8 @@
     "lh:local": "node scripts/lh-local.mjs",
     "form:a11y": "node scripts/form-a11y.mjs",
     "lp:census": "node scripts/lp-census.mjs",
-    "lp:sticky": "node scripts/sticky-clearance.mjs"
+    "lp:sticky": "node scripts/sticky-clearance.mjs",
+    "tel:inventory": "node scripts/tel-inventory.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

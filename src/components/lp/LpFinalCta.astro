@@ -26,7 +26,7 @@ const { quoteAnchor, heading = 'Ready for a quote?' } = Astro.props;
       a working day — no obligation, and no visit until you ask for one.
     </p>
     <div class="lpx-final-actions">
-      <a class="lpx-btn lpx-btn-primary" href={nap.phoneHref} data-call>Call {nap.phoneDisplay}</a>
+      <a class="lpx-btn lpx-btn-primary" href={nap.phoneHref} data-call data-call-location="paid_cta">Call {nap.phoneDisplay}</a>
       <a class="lpx-btn lpx-btn-ghost" href={`#${quoteAnchor}`}>Get my free quote</a>
     </div>
   </div>

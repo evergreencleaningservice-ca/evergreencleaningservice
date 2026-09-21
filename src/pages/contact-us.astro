@@ -49,7 +49,7 @@ const addressHtml = rawBody.slice(0, cutAt);
   contentHtml={addressHtml}
 >
   <h4>Phone:</h4>
-  <p><a href={nap.phoneHref}>+1 {nap.phoneDisplay}</a></p>
+  <p><a href={nap.phoneHref} data-call-location="content">+1 {nap.phoneDisplay}</a></p>
 
   <h4>Email:</h4>
   <p><a href={`mailto:${nap.email}`}>{nap.email}</a></p>

@@ -34,7 +34,12 @@ const isCurrent = (href?: string) =>
       <span class="screen-reader-text">Menu</span>
     </button>
 
-    <nav class="site-nav" aria-label="Primary">
+    {/* `data-call-drawer` marks the element whose `is-open` state turns this
+        same navigation into the mobile drawer. The telephone item inside it
+        reports `header` when the bar is a bar and `mobile_navigation` when it
+        is a drawer — one link, two honest answers, neither guessed from the
+        link's text. */}
+    <nav class="site-nav" aria-label="Primary" data-call-drawer>
       <ul class="onepress-menu" id="primary-menu">
         {
           nav.map((item) => (
@@ -42,6 +47,8 @@ const isCurrent = (href?: string) =>
               {item.href ? (
                 <a
                   href={item.href}
+                  data-call-location={item.href.startsWith('tel:') ? 'header' : undefined}
+                  data-call-location-open={item.href.startsWith('tel:') ? 'mobile_navigation' : undefined}
                   aria-current={
                     item.href === '/' ? (pathname === '/' ? 'page' : undefined)
                     : isCurrent(item.href) ? 'page'
