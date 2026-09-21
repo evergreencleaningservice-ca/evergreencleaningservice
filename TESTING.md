@@ -58,6 +58,8 @@ the phase reports rather than pretended away in a unit test.
 | `tests/quick-quote.test.ts` | happy-dom | Phase 9. The short quote form: phone-or-email from six directions, a malformed optional field, no address and no surname, the failure matrix, one conversion, no PII, repeat clicks, both Turnstile timings, and errors and success as assistive technology receives them. |
 | `tests/worker/lead-validation.test.ts` | node | Phase 9. `leadProblems` — a name and one way to reply — and the endpoint agreeing with the form: phone-only, email-only, no address, and the 422s that name the field. |
 | `tests/build/quote-page.test.ts` | node | Phase 9. `/request-a-quote/` as emitted: one lead form where there were two, one H1, the full navigation, the sidebar's verified claims, no placeholder-as-label, and the rendered field contract matched against the fixture the behavioural suite drives. |
+| `tests/phone-click.test.ts` | happy-dom | Phase 11. The one telephone-click event: one activation is one event by mouse, keyboard or a click on a nested icon; nothing fires on load or for a non-telephone link; re-initialising binds no second listener; and both numbers are read at click time, so a dynamic-number swap is reported as what the visitor actually saw and dialled. |
+| `tests/build/phone-links.test.ts` | node | Phase 11. All 115 `tel:` links across all 77 pages: one canonical normalised destination, an explicit `data-call-location` on every one, values only from the controlled list, the handler delivered to every page, and no tracking number hardcoded anywhere. |
 | `tests/build/landing-pages.test.ts` | node | Phase 10. Both paid pages from one table: the shared components, the short form, the absence of site navigation, the minimal header and legal footer, the real telephone number, no unverifiable claim, noindex and sitemap exclusion, the spam and conversion protections — and, asserted as loudly as the shared parts, that the two reporting identities stay distinct. |
 
 Because every lead form on the site imports `src/lib/lead-submit.ts`, a pass
@@ -109,6 +111,10 @@ a tested one.
   stop running it. `npm run form:a11y -- <dist> [page] [formId]` drives any of
   the three forms; `npm run lp:sticky -- <dist>` checks the landing pages'
   mobile bar never obscures a focused control, against WCAG 2.2's 2.4.11.
+- **Where every telephone link is.** `npm run tel:inventory -- <dist>
+  [--json <file>]` classifies every `tel:` link in a build by location and
+  exits non-zero if any lacks explicit metadata or carries a non-canonical
+  destination — a gate as well as a report.
 - **What the landing pages measure at each width.** `npm run lp:census --
   <dist> <outDir> [label]` records fields, form position, page length,
   requests, bytes, CLS and the links off each page, and screenshots all three
