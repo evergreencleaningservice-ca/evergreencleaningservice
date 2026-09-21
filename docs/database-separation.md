@@ -19,12 +19,25 @@ the decision can be made before the DNS cutover, not during it.
 | Branch limit | 10 |
 | History retention | **21,600 seconds — six hours** |
 | Snapshots | none |
-| `leads` table | 38 columns, **19 rows** |
+| `leads` table | 38 columns, **20 rows** |
 
-Those 19 rows are all test data: 11 submitted from the staging hostname, 8
-direct API probes (`form_id = 'probe'`). **Zero carry a production
-`page_url`**, and the newest is dated 19 Sep 2026. The database has never
-received a real enquiry.
+Those 20 rows are all test data, counted by `page_url` on 21 Sep 2026:
+
+| Origin | Rows | ids |
+| --- | --- | --- |
+| staging hostname | 12 | 2–20 |
+| no `page_url` — direct API probe | 7 | 3–17 |
+| `https://example.com/lp/...?gclid=VERIFY_GCLID` | 1 | 1 |
+
+**Zero carry a production `page_url`.** The newest is **row 20**, written by
+the Phase 9 staging check (`full_name` "ZZTEST", `business_name` "ZZ TEST —
+Phase 9 staging check, not a real lead"); it has deliberately not been
+deleted. The database has never received a real enquiry.
+
+*(An earlier revision of this document said "11 staging, 8 probes" and
+attributed the probes to `form_id = 'probe'`. That was wrong on both counts —
+only three rows carry that `form_id`, and seven have no `page_url` at all.
+The table above is counted from the live database.)*
 
 One Worker reads it, through the `DATABASE_URL` secret. That Worker serves
 staging today and will serve production after the cutover. **So unless
@@ -67,7 +80,7 @@ Steps, in order:
    that was skipped before migration `0004`, and on a six-hour retention
    window it is the only thing standing between a bad `ALTER` and a rebuild.
 2. **Create a branch named `staging` from `main`.** It inherits the schema —
-   all 38 columns, both indexes — and the 19 rows.
+   all 38 columns, both indexes — and the 20 rows.
 3. **Delete the 19 test rows from `main`.** `TRUNCATE leads` on the branch
    that will become production, so production starts empty. The rows survive
    on `staging` if anyone wants them.
@@ -133,15 +146,30 @@ tolerates nulls. For anything that is *not* additive:
    - **No project-level point-in-time beyond that window**, and no automated
      scheduled snapshots — `set_snapshot_schedule` exists but the retention
      that backs it does not stretch on free.
-   - Branch limit 10, which is ample.
+   - Branch limit **10 per organisation**, of which this project uses **one**
+     (`main`, `br-small-union-av5ypk4e`) and the org's other project
+     (`autumn-bar-26388127`, `10xid`) uses its own. Ample either way.
+   - **Per-branch logical size limit 0.5 GiB** (`branch_logical_size_limit`
+     512 MB). The `leads` branch is currently 31.1 MB.
+   - The compute-hour allowance is **not exposed** by the project or
+     organisation API and is therefore not stated here. What is visible is
+     this project's usage in the current period (1 Sep – 1 Oct 2026):
+     **1,189 s of compute time, 4,692 s active**, on a fixed 0.25 CU
+     endpoint with `suspend_timeout_seconds: 0`. Read the current allowance
+     off the Neon billing page before relying on headroom.
+
+   *(Re-verified against the live project on 21 Sep 2026, per the Phase 9
+   instruction to confirm the plan limits before anything is executed.
+   Nothing was changed.)*
 
    **If the lead database is going to hold real customer enquiries — which it
    is — six hours of recovery is the thing I would raise.** A paid tier buys a
    longer window. Whether that is worth it is a business call, not a technical
    one, and it does not block the separation above.
 
-2. **Whether to keep the 19 test rows at all.** The recommendation keeps them
+2. **Whether to keep the 20 test rows at all.** The recommendation keeps them
    on `staging` and clears `main`. Deleting them outright is also defensible.
+   Row 20 in particular is a Phase 9 check left in place pending a decision.
 
 3. **Whether a second project is wanted instead of a branch**, per the
    trade-off above.
