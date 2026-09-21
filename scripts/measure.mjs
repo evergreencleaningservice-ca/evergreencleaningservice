@@ -47,6 +47,33 @@ const WIDTHS = [390, 768, 1440];
 
 const RUNS = 3;
 
+/**
+ * The browser both halves of this script drive.
+ *
+ * `/opt/pw-browsers/chromium` is a SYMLINK TO THE BINARY, not a directory —
+ * an earlier default here appended `/chrome-linux/chrome` to it and produced
+ * a path that does not exist, so Lighthouse failed with "CHROME_PATH must be
+ * set to a Chrome/Chromium executable" on a machine where Chromium was
+ * installed and working. Every other script in this directory already used
+ * the symlink directly; this one disagreed with them.
+ *
+ * Resolved once, here, and checked, so the failure is a clear message rather
+ * than a stack trace out of chrome-launcher.
+ */
+const CHROME = (() => {
+  const candidates = [
+    process.env.CHROME_PATH,
+    '/opt/pw-browsers/chromium',
+    '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
+  ].filter(Boolean);
+  const found = candidates.find((p) => fs.existsSync(p));
+  if (!found) {
+    console.error(`measure: no chromium found. Tried:\n  ${candidates.join('\n  ')}`);
+    process.exit(2);
+  }
+  return found;
+})();
+
 const median = (xs) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)];
 const round = (n) => (n === null || n === undefined ? null : Math.round(n));
 
@@ -69,7 +96,7 @@ for (let run = 1; run <= RUNS; run++) {
       '--quiet',
       '--chrome-flags=--headless=new --no-sandbox --disable-dev-shm-usage --ignore-certificate-errors',
     ],
-    { stdio: ['ignore', 'ignore', 'inherit'], env: { ...process.env, CHROME_PATH: process.env.CHROME_PATH ?? '/opt/pw-browsers/chromium/chrome-linux/chrome' } }
+    { stdio: ['ignore', 'ignore', 'inherit'], env: { ...process.env, CHROME_PATH: CHROME } }
   );
 
   const lh = JSON.parse(fs.readFileSync(json, 'utf8'));
@@ -150,18 +177,25 @@ const shots = spawn(
        HTTPS goes through this environment's own proxy, which terminates TLS
        with its own CA, so the browser sees a certificate it has no reason to
        trust and refuses with ERR_CERT_AUTHORITY_INVALID. Both halves are
-       needed — `ignoreHTTPSErrors` on the context did not help on its own
+       needed: the ignoreHTTPSErrors context option did not help on its own
        once the navigation was blocked at the network layer. Against
-       localhost neither does anything. */
+       localhost neither does anything.
+
+       NOTE, and it is the reason this file would not parse at all: this
+       whole block is inside a TEMPLATE LITERAL passed to node --input-type
+       via -e. A backtick anywhere in here — even in prose, even inside a
+       comment — closes the literal and the file becomes a syntax error.
+       Naming the option in backticks is what broke it. Do not reintroduce
+       them; quote identifiers with plain words instead. */
     const browser = await chromium.launch({
-      executablePath: process.env.CHROME_PATH,
+      executablePath: ${JSON.stringify(CHROME)},
       args: ['--no-sandbox', '--disable-dev-shm-usage', '--ignore-certificate-errors'],
     });
     for (const [name, url] of ${JSON.stringify(SHOTS)}) {
       for (const width of ${JSON.stringify(WIDTHS)}) {
         const page = await browser.newPage({ viewport: { width, height: 900 }, ignoreHTTPSErrors: true });
         try {
-          /* `load`, not `networkidle`: a deployed page carries third-party
+          /* waitUntil load, NOT networkidle: a deployed page carries third-party
              tags that keep polling, so networkidle may never arrive. The
              wait after it is what lets the hero and the fonts settle. */
           await page.goto('${origin}' + url, { waitUntil: 'load', timeout: 45000 });

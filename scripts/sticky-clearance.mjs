@@ -18,6 +18,24 @@
  * check, so the two corrections are in the code below and named where they
  * are made.
  *
+ * IT STILL CRIES WOLF, and Phase 13 recorded the fourth instance. Run against
+ * the deployed staging build it reported
+ *
+ *     FAIL /lp/commercial-cleaning/ @390 business-name (33px of 48px clear)
+ *
+ * Hand-checked in a real browser against the same deployed origin, focusing
+ * one control at a time with `scroll-behavior` forced to `auto` and the
+ * position settled before measuring, EVERY real control clears the bar by
+ * 356–380px — `business-name` by 380px — and `document.elementFromPoint` at
+ * each control's centre returns the control itself. The only element that
+ * measures as obscured is `company-website`, which is the clipped honeypot
+ * and is not a control a visitor can reach.
+ *
+ * So the residual failure is this script's, not the pages'. Treat a FAIL here
+ * as a prompt to hand-check, never as a finding to report. The deterministic
+ * per-control probe is the one to trust; it lives in the Phase 13 evidence
+ * rather than here because it needs a deployed origin.
+ *
  * WHAT IT MEASURES, AND AGAINST WHICH RULE. It focuses each control the way a
  * keyboard does, lets the browser scroll, and then measures how much of the
  * control is left clear of the bar.
