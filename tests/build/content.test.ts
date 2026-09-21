@@ -123,31 +123,64 @@ describe('every duration claim reads from the founding year', () => {
 });
 
 describe('nothing was invented', () => {
-  it('the unverified 4.9/5 rating is confined to the two landing pages', () => {
-    /* FLAGGED, NOT CHANGED. Both PPC landing pages display "4.9/5". Nobody
-       here has checked that against the business's actual Google profile —
-       four reviews were recovered from the archive and they carry no
-       aggregate. It came from the PPC brief, so removing it is the client's
-       call, not a content correction, and Phase 7 was told to identify a
-       questionable factual statement rather than silently rewrite it.
-       See the Phase 7 report.
+  it('no page anywhere states a numeric rating', () => {
+    /* REMOVED, not confined. Both PPC landing pages displayed "4.9/5". It
+       came from the PPC brief, nobody verified it against the business's
+       Google Business Profile, and the four reviews recovered from the
+       archive carry no aggregate. An invented rating is a factual claim and
+       a Google policy violation, so it is gone and this is what keeps it
+       gone.
 
-       What this test does is stop it spreading. If the rating turns up on a
-       third page, or in structured data, this fails. */
-    expect(find(/\b\d\.\d\s*\/\s*5\b/).sort()).toEqual([
-      'lp/commercial-cleaning-quote/index.html',
-      'lp/commercial-cleaning/index.html',
-    ]);
+       The replacement is the founding year — the one trust point that is
+       verified and already stated across the site. Put a real, current
+       rating and review count in `src/data/reviews.ts` and a rating line can
+       come back; until then this test fails if one reappears. */
+    const shapes = [
+      /\b\d[.,]\d\s*\/\s*5\b/,          // 4.9 / 5
+      /\b\d[.,]\d\s*(out of|of)\s*5\b/i,  // 4.9 out of 5
+      /\b\d[.,]\d\s*star/i,               // 4.9 star
+      /\brated\s+\d[.,]?\d?\b/i,          // rated 4.9
+    ];
+    for (const shape of shapes) expect(find(shape), String(shape)).toEqual([]);
   });
 
-  it('the rating is not in any page\'s structured data', () => {
-    /* An unverified `aggregateRating` in JSON-LD is a manual-action risk,
-       not a rich result. */
+  it('star glyphs appear only on an individually quoted review', () => {
+    /* Deliberately narrow, and it took a failing test to get it right.
+       Stars on a single quoted review are that reviewer's own rating — real,
+       attributable, and carrying an aria-label of its own. Stars on a
+       standalone line are an AGGREGATE, which is the claim nobody has
+       verified. So: every run of stars must sit inside a review item. */
+    const stray: string[] = [];
     for (const { page, text } of pages) {
-      const blocks = [...text.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)];
-      for (const [, json] of blocks) {
+      const withoutReviews = text.replace(
+        /<p class="lpq-review-stars"[^>]*>.*?<\/p>/g,
+        ''
+      );
+      if (/[\u2605\u2606]{3,}|(&#9733;){3,}/.test(withoutReviews)) stray.push(page);
+    }
+    expect(stray).toEqual([]);
+  });
+
+  it('the landing pages say the verified thing instead', () => {
+    for (const page of [
+      'lp/commercial-cleaning/index.html',
+      'lp/commercial-cleaning-quote/index.html',
+    ]) {
+      expect(pages.find((p) => p.page === page)!.text).toMatch(/Serving Toronto since 1989/);
+    }
+  });
+
+  it('no rating reaches structured data', () => {
+    /* An unverified `aggregateRating` in JSON-LD is a manual-action risk,
+       not a rich result — and a verified one still has to be maintained,
+       which nothing here does yet. */
+    for (const { page, text } of pages) {
+      for (const [, json] of text.matchAll(
+        /<script type="application\/ld\+json">(.*?)<\/script>/g
+      )) {
         expect(json, page).not.toContain('aggregateRating');
         expect(json, page).not.toContain('ratingValue');
+        expect(json, page).not.toContain('reviewCount');
       }
     }
   });

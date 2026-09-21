@@ -38,10 +38,13 @@
  *     (E.164), set in `nap` and used by every other phone link. Consistency
  *     wins over the brief's shorthand; both dial the same number.
  *
- * The 4.9/5 rating is rendered as specified and is NOT in the page's
- * structured data. It is a number nobody here has verified against the
- * business's actual Google profile, and an unverified `aggregateRating` in
- * JSON-LD is a manual-action risk, not a rich result.
+ * The 4.9/5 rating the brief specified is NOT rendered and is NOT in the
+ * page's structured data. It is a number nobody has verified against the
+ * business's actual Google profile; an unverified `aggregateRating` in
+ * JSON-LD is a manual-action risk rather than a rich result, and a visible
+ * invented rating is a Google policy violation on top of being untrue. The
+ * line now carries the founding year, which is verified and is stated
+ * across the rest of the site.
  */
 import LandingLayout from '../../layouts/LandingLayout.astro';
 import SpamGuard from '../../components/SpamGuard.astro';
@@ -114,10 +117,13 @@ const badges = [
           }
         </ul>
 
+        {/* Was "★ 4.9/5 rating on Google Reviews (local Toronto clients)".
+            REMOVED — unverified. See the note on the same line in
+            /lp/commercial-cleaning/. */}
         <p class="lpq-microproof">
-          <span class="lpq-stars" aria-hidden="true">★</span>
-          <strong>4.9/5</strong> rating on Google Reviews
-          <span class="lpq-microproof-note">(local Toronto clients)</span>
+          <span class="lpq-stars" aria-hidden="true">&#10003;</span>
+          <strong>Serving Toronto since 1989</strong>
+          <span class="lpq-microproof-note">(commercial contracts across the GTA)</span>
         </p>
       </div>
 
@@ -411,9 +417,12 @@ const badges = [
     color: var(--ink-heading);
   }
 
+  /* Was gold, for a star glyph beside a rating. Green tick now — a star
+     beside text reads as a rating even when the words are about a year. */
   .lpq-stars {
-    color: #f5a623;
+    color: var(--brand);
     font-size: 1.05rem;
+    font-weight: 700;
   }
 
   .lpq-microproof-note {

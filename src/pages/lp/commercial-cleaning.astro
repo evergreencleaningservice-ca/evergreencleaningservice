@@ -11,8 +11,10 @@
  *   "4.9/5 Google Rating"  — there are four recovered Google reviews and no
  *                            verified rating or review count. A star rating is
  *                            a factual claim, and an invented one is also a
- *                            Google policy violation. The badge instead says
- *                            what can be shown: real reviews, quoted below.
+ *                            Google policy violation. The badge says what can
+ *                            be shown: real reviews, quoted below. The rating
+ *                            line that DID render one was removed outright —
+ *                            see the comment beside `.lp-rating`.
  *   "20+ Years in Business" — the business has traded since 1989. The spec
  *                            understates it, and the site itself contradicted
  *                            itself: "since 1989" in one place, "over 20
@@ -93,9 +95,17 @@ const sizes = [
           }
         </ul>
 
+        {/* Was "★★★★★ 4.9 / 5 Rating from Local GTA Property Managers".
+            REMOVED, not restyled. Nobody has verified that number against
+            the business's Google Business Profile; the four reviews
+            recovered from the archive carry no aggregate, and an invented
+            rating is both a factual claim and a Google policy violation.
+            What replaces it is the one trust point that IS verified and
+            appears across the site. Put a real, current rating and review
+            count in `src/data/reviews.ts` and this can say it again. */}
         <p class="lp-rating">
-          <span class="lp-rating-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          <span><strong>4.9 / 5</strong> Rating from Local GTA Property Managers</span>
+          <span class="lp-rating-mark" aria-hidden="true">&#10003;</span>
+          <span><strong>Serving Toronto since 1989</strong> — commercial cleaning across the GTA</span>
         </p>
 
         <ul class="lp-badges">
@@ -352,10 +362,14 @@ const sizes = [
     color: var(--ink-heading);
   }
 
-  .lp-rating-stars {
-    color: #fbc02d;
+  /* Was `.lp-rating-stars`, gold, for five star glyphs. The stars went with
+     the unverified rating — a row of stars beside any text still reads as a
+     rating, whatever the words say. A brand-green tick is a trust mark that
+     claims nothing numeric. */
+  .lp-rating-mark {
+    color: var(--brand);
     font-size: 1.15rem;
-    letter-spacing: 1px;
+    font-weight: 700;
   }
 
   .lp-pitch h1 {
@@ -388,11 +402,6 @@ const sizes = [
     color: var(--ink-heading);
   }
 
-  .lp-rating-stars {
-    color: #fbc02d;
-    font-size: 1.15rem;
-    letter-spacing: 1px;
-  }
 
   .lp-pitch h1 {
       font-size: 2.75rem;
