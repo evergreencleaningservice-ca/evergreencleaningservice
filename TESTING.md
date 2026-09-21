@@ -43,6 +43,7 @@ reports rather than pretended away in a unit test.
 | File | Environment | Covers |
 | --- | --- | --- |
 | `tests/lead-submit.test.ts` | happy-dom | Phase 2. The shared submit pipeline: event ordering, the failure matrix, duplicate clicks, control recovery, the PII allowlist, captcha token handling. |
+| `tests/conversion-event.test.ts` | happy-dom | Phase 2 closeout. One canonical conversion event: delivery protection across the redirect (against a simulated container), and zero conversions from a reload, a direct visit, a back-button return or a resubmit. |
 | `tests/attribution.test.ts` | happy-dom | Phase 3. First- and latest-touch rules, survival across internal navigation, expiry in both retention modes, sanitising and length limits, and that nothing reaches the DOM. |
 | `tests/captcha-hosts.test.ts` | node | Phase 4. The production and staging hostname allowlists, and detection of every published key. |
 | `tests/build/indexability.test.ts` | node | Phase 5. Builds the site in production mode into a throwaway directory and reads the emitted HTML: canonicals on the final domain, which pages are noindex, the sitemap's contents and origin, the allow-all `robots.txt`, and that only `build:preview` marks the output noindex. |
@@ -79,7 +80,15 @@ a tested one.
   tests prove the artefact; `npm run verify:indexing -- staging|production`
   proves the origin, and has to be run against a deployed site.
 - **The GTM container.** Tests prove what this site pushes into
-  `window.dataLayer`. They cannot prove what container GTM-5PRC4HBV does with
-  it — that needs Tag Assistant against the deployed preview, and, as of the
-  Phase 1 baseline, the container has no trigger for either event this site
-  emits.
+  `window.dataLayer`, and `tests/conversion-event.test.ts` simulates a
+  container that honours `eventCallback`. They cannot prove what container
+  GTM-5PRC4HBV does with the event — that needs Tag Assistant against the
+  deployed preview, and, as of the Phase 1 baseline, the container has **no
+  trigger for `lead_form_submission` at all**. `docs/gtm-handoff.md` is the
+  specification for fixing that, and §8 of it is the manual checklist.
+- **A real Turnstile key pair.** The build and deploy gates prove that a
+  missing key, a malformed key and the published test keys are refused. They
+  do **not** prove that a genuine Cloudflare sitekey and secret work together:
+  no production key pair has been issued, so no real staging submission has
+  ever been made with one. That is a deployed check, and it is blocked on
+  Cloudflare access.

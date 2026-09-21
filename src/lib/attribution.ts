@@ -26,21 +26,28 @@
  * store: nothing outlives the visit, so there is nothing to disclose, retain
  * or offer a choice about.
  *
- * A 90-day cross-visit store is implemented and OFF. Switching `MODE` to
+ * Being clear about what that does and does not deliver: it gives attribution
+ * that survives internal navigation within one tab. It is NOT 90-day
+ * cross-visit attribution, and it should not be described as such.
+ *
+ * A 90-day cross-visit store IS implemented, and is OFF. Switching `MODE` to
  * 'persistent' moves the record to `localStorage` with a 90-day TTL, which is
  * a materially different thing: advertising click identifiers, kept on a
- * person's device for three months, for marketing measurement. Under PIPEDA
- * that is a purpose the site has to identify and obtain consent for, and:
+ * person's device for three months, for marketing measurement.
  *
- *   - this site has no consent mechanism of any kind, and
+ * Three things are unresolved, and none of them is a developer's call:
+ *
+ *   - the site has no consent mechanism of any kind;
+ *   - Google Consent Mode v2 is not configured;
  *   - `/privacy/` is still the inherited WordPress boilerplate. It describes
  *     login and comment cookies this static site does not set, and says
  *     nothing about advertising identifiers.
  *
- * So the switch stays off until someone with the authority to decide says
- * otherwise, and turning it on is three things, not one: the flag, a privacy
- * policy that describes the store, and a consent mechanism gating it. See
- * `TESTING.md` and the Phase 3 report.
+ * That kind of processing is what Canadian privacy law (PIPEDA) and the
+ * site's own policy are likely to have something to say about. **This is not
+ * legal advice and no lawyer has reviewed it.** The switch stays off until
+ * the site's consent and privacy requirements have been confirmed by someone
+ * qualified to confirm them. See README.md and the Phase 3 report.
  * ---------------------------------------------------------------------------
  */
 

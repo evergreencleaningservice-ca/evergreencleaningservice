@@ -2,22 +2,32 @@
 /**
  * Where /api/submit-lead sends a visitor after a successful submission.
  *
- * Its own page rather than an in-place message because a distinct URL is what
- * a destination-based conversion in Google Ads and GA4 can fire on — belt and
- * braces alongside the dataLayer event, which is what the spec asks for.
+ * Its own page rather than an in-place message because the PPC package asks
+ * for a distinct confirmation URL, and because a landing page that has done
+ * its job should stop selling.
+ *
+ * It is NOT a measurement point. It pushes nothing into the dataLayer and no
+ * destination conversion may be configured on it; the single conversion event
+ * fires on the form, before the redirect. See the script below.
  *
  * noindex: a thank-you page has nothing to offer a search result, and an
- * indexed one can be landed on directly, which fires the conversion for someone
- * who never submitted anything.
+ * indexed one gets landed on directly by people who never submitted
+ * anything.
  */
 import LandingLayout from '../layouts/LandingLayout.astro';
 import { nap } from '../data/site';
 
 /* Both landing pages now promise a response within 2 business hours, so the
    `?t=` switch that rendered one of two numbers is gone — one promise, stated
-   once. What still arrives on the URL is `?f=<form_id>`, and it is used for
-   the conversion event only, never written into the page as text.
-   
+   once.
+
+   `?f=<form_id>` still arrives on the URL because the landing pages send it,
+   and it is now READ BY NOTHING. It was feeding the conversion event this
+   page no longer pushes, and it was never trustworthy for that: a query
+   parameter is whatever the person in the address bar decides it is. Which
+   form was submitted is carried by the one-time marker in sessionStorage, and
+   by `form_id` on the single conversion event the form itself pushed.
+
    Worth keeping in mind if a third page ever needs a different promise: this
    is a static build, so `Astro.url.searchParams` resolves once at build time
    against a URL with no query string. Reading a param in frontmatter bakes
@@ -55,38 +65,44 @@ import { nap } from '../data/site';
 
       <a class="ty-call" href={nap.phoneHref}>Call {nap.phoneDisplay} now</a>
 
-      {/* The one link off this page, and it only exists after the conversion
-          has already been recorded — so it costs nothing the isolation rules
-          were protecting. */}
+      {/* The one link off this page. The conversion was recorded before the
+          visitor got here, so it costs nothing the isolation rules were
+          protecting. */}
       <p class="ty-home"><a href="/">Return to Homepage</a></p>
     </div>
   </section>
-  <script is:inline>
-    /* CONVERSION HOOK.
+  <script>
+    /* NOT A CONVERSION POINT. Deliberately.
      *
-     * This is the dataLayer event, not a gtag call, and that is deliberate.
-     * GTM-5PRC4HBV already carries Google Ads AW-16819334998 with its
-     * conversion actions and a conversion linker. Firing
-     * `gtag('event','conversion', …)` from here as well would report every
-     * lead twice — once from the container, once from the page — and
-     * double-counted conversions are worse than none, because Smart Bidding
-     * learns from them.
+     * This page used to push `lead_form_confirmed` on every load, and its own
+     * comment invited a destination-based conversion on the URL as well.
+     * Three ways that over-reports: a container triggering on both events
+     * counts every PPC lead twice; a reload, a back-button return or a
+     * bookmark each counted again; and anyone who simply opened the URL —
+     * a person, a crawler — reported a conversion for a form they never
+     * filled in.
      *
-     * So the page announces the conversion and the container decides what to
-     * do with it. For the agency: trigger on Custom Event
-     * `lead_form_confirmed`, and use `form_id` to tell the two landing pages
-     * apart. Destination-based conversions can fire on this URL directly.
-     */
-    /* Whitelisted: `?f=` is visitor-editable, so an unknown value reports as
-       'unknown' rather than being passed through into the analytics stream. */
-    var known = ['ppc-lead-form', 'lp-commercial-cleaning-quote'];
-    var f = new URLSearchParams(location.search).get('f');
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'lead_form_confirmed',
-      form_id: known.indexOf(f) === -1 ? 'unknown' : f,
-      response_promise_hours: 2,
-    });
+     * The site now has exactly one conversion event, `lead_form_submission`,
+     * pushed once by `lead-submit.ts` after /api/submit-lead answers 2xx, and
+     * the landing pages wait for GTM to deliver it before navigating here.
+     * So by the time this page loads the conversion is already recorded, and
+     * there is nothing left for it to announce.
+     *
+     * WHOEVER CONFIGURES THE CONTAINER: do not create a destination
+     * conversion, a page-view trigger or a GA4 key event on /thank-you/.
+     * docs/gtm-handoff.md is the specification.
+     *
+     * All this does is consume the one-time success marker, so the page can
+     * tell a genuine arrival from a reload or a direct visit. It pushes
+     * nothing. */
+    import { applyThankYouConfirmation } from '../lib/confirmation';
+
+    try {
+      applyThankYouConfirmation();
+    } catch {
+      /* private browsing, or blocked site data. The confirmation copy is the
+         same either way; only the body attribute is lost. */
+    }
   </script>
 </LandingLayout>
 

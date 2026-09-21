@@ -22,24 +22,27 @@
  * only after a 2xx, and nowhere else.
  *
  * The second defect, in `/lp/commercial-cleaning-quote/` only: a honeypot hit
- * redirected the bot to `/thank-you/`, which pushes `lead_form_confirmed`. A
- * bot filling a field no person can see would have reported a conversion. The
- * honeypot now mimics success *in place*, with no navigation and no event —
- * which deceives a bot exactly as well, because a bot does not compare.
+ * redirected the bot to `/thank-you/`, which pushed a second conversion-shaped
+ * event. A bot filling a field no person can see would have reported a
+ * conversion. The honeypot now mimics success *in place*, with no navigation
+ * and no event — which deceives a bot exactly as well, because a bot does not
+ * compare.
  *
  * THE EVENT CONTRACT, for whoever holds the GTM container:
  *
- *   lead_form_submission   pushed here, once, only after /api/submit-lead
- *                          answers 2xx. This is the lead.
- *   lead_form_confirmed    pushed by /thank-you/, which the two landing pages
- *                          navigate to after a stored lead. This is the
- *                          landing pages' confirmation view.
+ *   lead_form_submission   ONE event. Pushed here, once, only after
+ *                          /api/submit-lead answers 2xx. This is the lead,
+ *                          and it is the only conversion on the site.
  *
- * They are deliberately different events. A container that triggers on both
- * would count each PPC lead twice.
+ * There is deliberately no second event. `/thank-you/` pushes nothing, and a
+ * destination conversion must not be configured on that URL — a container
+ * counting both would report every PPC lead twice, and Smart Bidding would
+ * learn from the doubled number. `confirmation.ts` explains how the
+ * confirmation page tells a genuine arrival from a reload without measuring
+ * anything. `docs/gtm-handoff.md` is the specification for the container.
  *
  * NOTE, and it is a launch blocker rather than a code problem: container
- * GTM-5PRC4HBV as published today has **no trigger for either event**. Its
+ * GTM-5PRC4HBV as published today has **no trigger for this event**. Its
  * three Google Ads conversion tags fire on GTM's native `gtm.formSubmit` with
  * `gtm.elementId` equal to `wpforms-form-1381` or `wpforms-form-1384` — the
  * WordPress WPForms DOM ids. Neither id exists on this site and these forms
@@ -48,6 +51,7 @@
  */
 
 import { attributionPayload } from './attribution';
+import { markLeadConfirmed } from './confirmation';
 
 declare global {
   interface Window {
@@ -110,10 +114,69 @@ export function sanitizeEventParams(params: Dict): Dict {
   return out;
 }
 
-/** Push the conversion event. Exported so a test can assert on it directly. */
-export function pushLeadEvent(params: Dict): void {
+/**
+ * THE site's conversion event. One name, one place it is pushed.
+ *
+ * `/thank-you/` deliberately pushes nothing — see `confirmation.ts`. A
+ * container that triggered on both this and a confirmation-page event would
+ * count every PPC lead twice.
+ */
+export const LEAD_EVENT = 'lead_form_submission';
+
+/**
+ * How long to give GTM to deliver the tags before navigating anyway.
+ *
+ * Two seconds is the usual figure for `eventTimeout` and it is a ceiling, not
+ * a wait: with GTM present the callback normally fires in tens of
+ * milliseconds. The visitor sees "Sending…" throughout either way.
+ */
+export const TAG_DELIVERY_TIMEOUT_MS = 2000;
+
+/**
+ * Push the conversion event, and optionally wait until it has been delivered.
+ *
+ * WHY THE WAIT EXISTS. `dataLayer.push` is synchronous, but what it starts is
+ * not: the Google Ads conversion tag and the GA4 event each send a network
+ * beacon, and `window.location.href = …` immediately afterwards can abort
+ * them in flight. The lead is stored either way, so the failure is invisible —
+ * the row is in Neon, the email arrives, and the conversion is missing from
+ * Google Ads. That is the worst shape of bug this project has: silent, and
+ * only visible in a report weeks later.
+ *
+ * GTM's answer is `eventCallback`, which it invokes once every tag for the
+ * event has fired, bounded by `eventTimeout`. Neither key is data — GTM
+ * strips both — so they are added after sanitising rather than through it.
+ *
+ * Belt AND braces, because `eventCallback` only works if GTM is there to
+ * honour it. With no container on the page the push is an ordinary array push
+ * and the callback would never be invoked at all, so a local timer of the
+ * same length guarantees the caller is always released exactly once.
+ */
+export function pushLeadEvent(
+  params: Dict,
+  onDelivered?: () => void,
+  timeoutMs: number = TAG_DELIVERY_TIMEOUT_MS
+): void {
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'lead_form_submission', ...sanitizeEventParams(params) });
+
+  const event: Record<string, unknown> = { event: LEAD_EVENT, ...sanitizeEventParams(params) };
+
+  if (!onDelivered) {
+    window.dataLayer.push(event);
+    return;
+  }
+
+  let released = false;
+  const release = () => {
+    if (released) return;
+    released = true;
+    onDelivered();
+  };
+
+  event.eventCallback = release;
+  event.eventTimeout = timeoutMs;
+  window.dataLayer.push(event);
+  setTimeout(release, timeoutMs);
 }
 
 /** Read a field's trimmed value, by `name`, without caring which kind it is. */
@@ -148,6 +211,15 @@ export interface LeadFormHooks {
   eventParams?: (form: HTMLFormElement) => Dict;
   /** A stored lead. Redirect, or swap the form for a confirmation. */
   onSuccess: (form: HTMLFormElement) => void;
+  /**
+   * True when `onSuccess` navigates away.
+   *
+   * It then runs from GTM's `eventCallback` instead of immediately, so the
+   * conversion beacons are not aborted by the navigation. A form that stays
+   * on the page leaves this false and shows its confirmation at once —
+   * waiting would be a delay the visitor can see and nothing would be gained.
+   */
+  awaitTagDelivery?: boolean;
   /** Mimic success without storing, navigating or reporting a conversion. */
   onHoneypot?: (form: HTMLFormElement) => void;
   /** Something a visitor can act on. Called for every non-2xx and for a throw. */
@@ -159,6 +231,8 @@ export interface LeadFormHooks {
    * anyway. Six seconds in the browser; tests pass a small number.
    */
   tokenWaitMs?: number;
+  /** Ceiling on the wait for tag delivery. Tests pass a small number. */
+  tagDeliveryTimeoutMs?: number;
 }
 
 export const MESSAGES = {
@@ -254,13 +328,27 @@ export function wireLeadForm(form: HTMLFormElement, hooks: LeadFormHooks): void 
     }
 
     if (res.ok) {
-      /* THE ONE PLACE THIS EVENT IS PUSHED. After a 2xx, so it means a lead
-         was stored — and before onSuccess, because onSuccess may navigate and
-         a push after a navigation starts is a push into a page being torn
-         down. inFlight is deliberately left set: the attempt succeeded, and
-         the form is about to be replaced or the page left. */
-      pushLeadEvent({ form_id: hooks.formId, ...(hooks.eventParams?.(form) ?? {}) });
-      hooks.onSuccess(form);
+      /* The lead is stored. Record that this visitor genuinely submitted,
+         for `/thank-you/` to consume exactly once — it is how a real arrival
+         is told from a reload, a bookmark or a direct visit, and it carries
+         no personal information. */
+      markLeadConfirmed(hooks.formId);
+
+      /* THE ONE PLACE THE CONVERSION EVENT IS PUSHED. After a 2xx, so it
+         means a lead was stored, and nowhere else on the site.
+
+         inFlight is deliberately left set. The attempt succeeded and the form
+         is about to be replaced or the page left; a second submit of a form
+         that has already converted is a duplicate, never a new lead. A
+         genuinely new submission comes from a fresh page load. */
+      const params = { form_id: hooks.formId, ...(hooks.eventParams?.(form) ?? {}) };
+
+      if (hooks.awaitTagDelivery) {
+        pushLeadEvent(params, () => hooks.onSuccess(form), hooks.tagDeliveryTimeoutMs);
+      } else {
+        pushLeadEvent(params);
+        hooks.onSuccess(form);
+      }
       return;
     }
 

@@ -98,23 +98,35 @@ from the ad that paid for the first. It keeps a **first touch** (never
 overwritten) and a **latest touch** (updated only by a later campaign arrival —
 never by direct or internal navigation).
 
-**It ships session-scoped.** The record lives in `sessionStorage`, so it ends
-when the tab closes. That covers the case it exists for and it is not a
-marketing identifier store: nothing outlives the visit.
+**What is implemented and live: within-session attribution only.** The record
+lives in `sessionStorage`, so it survives internal navigation within the
+current browser tab and ends when that tab closes. A visitor who arrives on an
+ad and submits from the fourth page is attributed correctly. A visitor who
+comes back tomorrow, or in a new tab, is not.
 
-A 90-day cross-visit store is written, tested and **off**. Turning it on is
-`MODE = 'persistent'` — and it is three changes, not one:
+**What is implemented and disabled: persistent cross-visit attribution.** The
+90-day store is written and tested; `MODE = 'persistent'` switches it to
+`localStorage` with a 90-day TTL. It is off.
 
-1. the flag;
-2. `/privacy/`, which is still the inherited WordPress boilerplate describing
-   login and comment cookies this static site does not set, rewritten to
-   describe advertising identifiers kept for 90 days and why;
-3. a consent mechanism gating it. The site has none of any kind today.
+**This does not yet deliver 90-day cross-visit attribution.** Session scope is
+a privacy-conservative interim implementation, not the same feature.
 
-Under PIPEDA, storing advertising click identifiers on a person's device for
-three months for marketing measurement is a purpose that has to be identified
-and consented to. **That is a client decision, not a build setting**, and the
-flag stays off until someone with the authority to make it says otherwise.
+**What is unresolved, and is not a developer's call:**
+
+1. a consent mechanism — the site has none of any kind today;
+2. Google Consent Mode v2 signals to GTM — not configured;
+3. `/privacy/`, which is still the inherited WordPress boilerplate describing
+   login and comment cookies this static site does not set. It does not
+   describe a 90-day store, and it already fails to describe GTM, Google Ads,
+   GA4 and Microsoft UET, all of which are live;
+4. client approval.
+
+Keeping advertising click identifiers on a visitor's device for three months
+for marketing measurement is the kind of processing Canadian privacy law
+(PIPEDA) and the site's own policy are likely to have something to say about.
+**Nothing here is legal advice**, and no lawyer has looked at it. The
+persistent implementation stays disabled until the site's consent and privacy
+requirements have been confirmed by someone qualified to confirm them.
 
 ## Project layout
 

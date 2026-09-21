@@ -284,6 +284,11 @@ const badges = [
       formId: 'lp-commercial-cleaning-quote',
       honeypots: ['company_tax_id', 'website_trap'],
       sendingLabel: 'Sending…',
+      /* This page navigates on success, so the conversion event is given
+         time to be delivered first — otherwise the redirect can abort the
+         Google Ads and GA4 beacons in flight and the lead is stored with
+         no conversion recorded. See pushLeadEvent in lead-submit.ts. */
+      awaitTagDelivery: true,
 
       payload: (f): Dict => ({
         form_id: 'lp-commercial-cleaning-quote',

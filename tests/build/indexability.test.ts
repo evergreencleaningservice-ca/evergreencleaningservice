@@ -251,6 +251,64 @@ describe('the preview build marks itself noindex', () => {
   });
 });
 
+describe('the built /thank-you/ page is not a measurement point', () => {
+  /* Rides this file's production build rather than paying for a second one.
+     The rule is Phase 2 closeout's, not Phase 5's: the site has exactly one
+     conversion event, pushed on the form after a 2xx, and a destination
+     conversion on this URL would double-count every PPC lead. */
+  it('carries no lead event of any name', () => {
+    const html = read('thank-you/index.html');
+    expect(html).not.toMatch(/lead_form_confirmed/);
+    expect(html).not.toMatch(/lead_form_submission/);
+  });
+
+  it("the page's own script touches the dataLayer nowhere", () => {
+    /* Deliberately narrow, and checked against the page's OWN bundle rather
+       than the whole document. Two other things on this page do mention the
+       data layer and both are correct: the GTM loader, which names it, and
+       the landing layout's click-to-call handler, which pushes
+       `click_to_call` from a click — a Phase 11 event, not a conversion, and
+       not something a page load can fire. What must be empty is the script
+       that runs when /thank-you/ opens. */
+    const entry = read('thank-you/index.html').match(
+      /src="\/_astro\/(thank-you\.astro[^"]+\.js)"/
+    )?.[1];
+    expect(entry).toBeTruthy();
+
+    /* Follow the imports: the entry chunk is two lines and everything it
+       does is in the modules it pulls in, so reading only the entry would
+       prove nothing. */
+    const seen = new Set<string>();
+    const collect = (name: string): string => {
+      if (seen.has(name)) return '';
+      seen.add(name);
+      const code = fs.readFileSync(path.join(out, '_astro', name), 'utf8');
+      const deps = [...code.matchAll(/["']\.\/([A-Za-z0-9._-]+\.js)["']/g)].map((m) => m[1]);
+      return code + deps.map(collect).join('');
+    };
+    const bundle = collect(entry!);
+
+    expect(bundle).not.toMatch(/dataLayer/);
+    /* and it really is the confirmation logic that got bundled */
+    expect(bundle).toContain('ecs_lead_confirmed_v1');
+    expect(bundle).toMatch(/sessionStorage/);
+  });
+
+  it('no page on the site emits lead_form_confirmed any more', () => {
+    for (const page of pages) expect(read(page)).not.toContain('lead_form_confirmed');
+  });
+
+  it('the conversion event ships in exactly one bundled module', () => {
+    const scripts = fs
+      .readdirSync(path.join(out, '_astro'))
+      .filter((f) => f.endsWith('.js'))
+      .filter((f) =>
+        fs.readFileSync(path.join(out, '_astro', f), 'utf8').includes('lead_form_submission')
+      );
+    expect(scripts).toHaveLength(1);
+  });
+});
+
 describe('the two builds cannot be confused', () => {
   const scripts = JSON.parse(fs.readFileSync(path.join(repo, 'package.json'), 'utf8')).scripts;
 
