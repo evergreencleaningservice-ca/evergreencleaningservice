@@ -144,17 +144,28 @@ const shots = spawn(
     import { chromium } from 'playwright';
     /* This container pins a chromium build under PLAYWRIGHT_BROWSERS_PATH and
        the npm playwright package may expect a newer one. Launch the browser
-       that is actually installed rather than the one it would download. */
+       that is actually installed rather than the one it would download.
+
+       The certificate flag is for measuring a DEPLOYED origin: outbound
+       HTTPS goes through this environment's own proxy, which terminates TLS
+       with its own CA, so the browser sees a certificate it has no reason to
+       trust and refuses with ERR_CERT_AUTHORITY_INVALID. Both halves are
+       needed — `ignoreHTTPSErrors` on the context did not help on its own
+       once the navigation was blocked at the network layer. Against
+       localhost neither does anything. */
     const browser = await chromium.launch({
       executablePath: process.env.CHROME_PATH,
-      args: ['--no-sandbox', '--disable-dev-shm-usage'],
+      args: ['--no-sandbox', '--disable-dev-shm-usage', '--ignore-certificate-errors'],
     });
     for (const [name, url] of ${JSON.stringify(SHOTS)}) {
       for (const width of ${JSON.stringify(WIDTHS)}) {
-        const page = await browser.newPage({ viewport: { width, height: 900 } });
+        const page = await browser.newPage({ viewport: { width, height: 900 }, ignoreHTTPSErrors: true });
         try {
-          await page.goto('${origin}' + url, { waitUntil: 'networkidle', timeout: 30000 });
-          await page.waitForTimeout(700);
+          /* `load`, not `networkidle`: a deployed page carries third-party
+             tags that keep polling, so networkidle may never arrive. The
+             wait after it is what lets the hero and the fonts settle. */
+          await page.goto('${origin}' + url, { waitUntil: 'load', timeout: 45000 });
+          await page.waitForTimeout(2500);
           await page.screenshot({ path: '${outDir}/' + name + '-' + width + '.png', fullPage: false });
         } catch (err) {
           console.error('screenshot failed:', url, width, String(err).split('\\n')[0]);
