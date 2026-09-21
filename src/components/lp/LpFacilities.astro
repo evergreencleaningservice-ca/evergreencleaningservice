@@ -1,0 +1,36 @@
+---
+/**
+ * The property types the business cleans.
+ *
+ * On the page rather than in the form: the long forms used to make "facility
+ * type" a required select, which is a question the account executive asks on
+ * the walkthrough. Saying what we clean is the page's job; asking is not the
+ * form's.
+ */
+import { FACILITY_TYPES } from '../../data/landing';
+
+interface Props {
+  heading?: string;
+}
+const { heading = 'Buildings we look after' } = Astro.props;
+---
+
+<section class="lpx-section" aria-labelledby="lpx-facilities-h">
+  <div class="lpx-wrap">
+    <h2 id="lpx-facilities-h">{heading}</h2>
+    <p class="lpx-section-note">
+      If your building is not on this list, it is still worth asking — most of what we do is
+      scheduled around a space rather than a category.
+    </p>
+    <ul class="lpx-cards lpx-cards-3">
+      {
+        FACILITY_TYPES.map((f) => (
+          <li>
+            <strong>{f.title}</strong>
+            <span>{f.body}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

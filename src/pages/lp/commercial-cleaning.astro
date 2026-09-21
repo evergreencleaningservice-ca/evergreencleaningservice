@@ -1,722 +1,85 @@
 ---
 /**
- * /lp/commercial-cleaning/ — Sections 3 and 4 of the overhaul specification.
+ * /lp/commercial-cleaning/ — the broad commercial-cleaning paid page.
  *
- * Laid out as the spec's wireframe: headline and trust badges on the left, the
- * proposal form on the right and above the fold, review proof beneath, then the
- * three-step process, then the sticky mobile bar.
+ * WHAT THIS FILE IS NOW. Almost nothing. The layout, the hero, the benefits,
+ * the facility list, the reviews, the service area, the final call and the
+ * sticky bar are all components shared with its sibling, and the copy they
+ * print is in `src/data/landing.ts`. What is left here is the three things
+ * that genuinely differ between the two pages: the intent, the headline, and
+ * the reporting identity.
  *
- * TWO CLAIMS FROM THE SPEC'S MOCKUP ARE NOT PRINTED HERE.
+ * That is the point of Phase 10. Before it, this page and
+ * /lp/commercial-cleaning-quote/ were two independent implementations of the
+ * same offer — two hero grids differing by 10px for no recorded reason, two
+ * sets of four "differentiators" of which only two agreed, two honeypots, two
+ * sticky bars, two lots of ~400 lines of CSS, and two forms that asked
+ * different questions. Two pages selling the same service to the same city
+ * should not disagree about what the business does.
  *
- *   "4.9/5 Google Rating"  — there are four recovered Google reviews and no
- *                            verified rating or review count. A star rating is
- *                            a factual claim, and an invented one is also a
- *                            Google policy violation. The badge says what can
- *                            be shown: real reviews, quoted below. The rating
- *                            line that DID render one was removed outright —
- *                            see the comment beside `.lp-rating`.
- *   "20+ Years in Business" — the business has traded since 1989. The spec
- *                            understates it, and the site itself contradicted
- *                            itself: "since 1989" in one place, "over 20
- *                            years" in another. Phase 7 settled every one of
- *                            them on the founding year, which is durable —
- *                            a computed "N+ years" goes stale between builds
- *                            and has to be right every January.
+ * WHAT CHANGED FOR A VISITOR:
  *
- * Put the real rating and review count in and the first badge can say it.
+ *   The form is the Phase 9 short form. Five fields of which four were
+ *   required — full name, business email, phone, facility type — become
+ *   seven of which four are, and crucially a phone number OR an email is
+ *   enough. Somebody who only wants to be called no longer has to surrender
+ *   an email address to ask for a quote.
+ *
+ *   The form moved up. Measured at 390px it began 1,006px down a 3,424px
+ *   page, below four bullet points a visitor had to scroll past before they
+ *   could act. The bullets are now below it.
+ *
+ *   Success happens in place. This page used to navigate to /thank-you/,
+ *   which is why it carried `awaitTagDelivery` — the conversion event had to
+ *   be given time to reach the tags before the redirect could abort them.
+ *   With no redirect there is nothing to outrun.
+ *
+ * THE REPORTING IDENTITY IS UNCHANGED: `ppc-lead-form`, which is what the ten
+ * rows already in the leads table carry.
  */
 import LandingLayout from '../../layouts/LandingLayout.astro';
-import SpamGuard from '../../components/SpamGuard.astro';
-import { nap, site } from '../../data/site';
-import { reviews } from '../../data/reviews';
+import QuickQuoteForm from '../../components/QuickQuoteForm.astro';
+import LpHero from '../../components/lp/LpHero.astro';
+import LpBenefits from '../../components/lp/LpBenefits.astro';
+import LpFacilities from '../../components/lp/LpFacilities.astro';
+import LpReviews from '../../components/lp/LpReviews.astro';
+import LpAreas from '../../components/lp/LpAreas.astro';
+import LpFinalCta from '../../components/lp/LpFinalCta.astro';
+import LpSticky from '../../components/lp/LpSticky.astro';
+import { REPLY_PROMISE } from '../../data/landing';
 
-const badges = [
-  { label: 'Real Google reviews', detail: 'from Toronto businesses' },
-  { label: `In business since ${site.since}`, detail: 'Commercial cleaning across the GTA' },
-  { label: 'WSIB compliant & bonded', detail: 'Fully insured crews' },
-];
-
-const bullets = [
-  { label: 'WSIB Insured & Bonded', body: 'Complete liability security with fully vetted staff.' },
-  { label: 'After-Hours Flexibility', body: 'Scheduled entirely around your operating hours.' },
-  {
-    label: 'Dedicated Crew',
-    body: 'The same familiar cleaners assigned to your building every visit.',
-  },
-  { label: 'Free On-Site Proposals', body: 'Direct walkthroughs with competitive pricing.' },
-];
-
-const facilityTypes = [
-  { value: 'corporate-office', label: 'Corporate / Professional Office' },
-  { value: 'medical-dental', label: 'Medical / Dental Clinic' },
-  { value: 'industrial-warehouse', label: 'Industrial / Warehouse' },
-  { value: 'retail-commercial', label: 'Retail Store / Showroom' },
-  { value: 'other', label: 'Other Commercial Property' },
-];
-
-const steps = [
-  { n: 1, title: 'Walkthrough', body: 'We visit your facility and scope the work with you — not over the phone.' },
-  { n: 2, title: 'Custom plan', body: 'A written schedule and scope, priced to your space and your hours.' },
-  { n: 3, title: 'Pristine clean', body: 'Your own crew and account manager, with the standard held to the scope.' },
-];
-
-const sizes = [
-  { value: 'under-2500', label: 'Under 2,500 sq. ft.' },
-  { value: '2500-10000', label: '2,500 - 10,000 sq. ft.' },
-  { value: '10000-25000', label: '10,000 - 25,000 sq. ft.' },
-  { value: '25000-plus', label: '25,000+ sq. ft.' },
-  { value: 'not-sure', label: 'Not Sure / Needs Assessment' },
-];
+/** The DOM id and anchor target. Unchanged, so existing #links still work. */
+const FORM_ANCHOR = 'ppc-lead-form';
+/** The conversion identity. Unchanged, so the existing rows still line up. */
+const FORM_ID = 'ppc-lead-form';
 ---
 
 <LandingLayout
-  title="Toronto & GTA Commercial Office Cleaning Quotes | Evergreen"
-  description="Reliable commercial and office cleaning across Toronto, Mississauga, Vaughan and the GTA. Free on-site proposal, response within 2 business hours. WSIB insured and bonded."
-  callNote="Fast Response &bull; Free Walkthrough Proposals"
+  title="Commercial & Office Cleaning in Toronto and the GTA | Evergreen"
+  description="Commercial and office cleaning across Toronto, Mississauga, Vaughan and the GTA. WSIB covered, bonded and insured. Free on-site walkthrough and a reply within 2 business hours."
+  callNote="Free walkthrough &bull; No obligation"
+  quoteAnchor={FORM_ANCHOR}
 >
-  <section class="lp-hero">
-    <div class="lp-wrap lp-hero-grid">
-      <div class="lp-pitch">
-        <p class="lp-eyebrow">Greater Toronto Area Commercial Janitorial</p>
-        <h1>Reliable Commercial Cleaning You Can Count On Every Single Night.</h1>
-        <p class="lp-sub">
-          Dedicated office and commercial cleaning in Toronto, Mississauga,
-          Vaughan, and across the GTA since 1989. Bonded, insured, and zero
-          operational disruption.
-        </p>
+  <LpHero
+    eyebrow="Toronto & GTA commercial janitorial"
+    heading="Commercial cleaning in Toronto you can count on, every night."
+    sub="Offices, clinics, warehouses and retail across Toronto and the GTA — cleaned around your hours by a bonded, insured, WSIB-covered crew that turns up."
+  >
+    <QuickQuoteForm
+      id={FORM_ANCHOR}
+      formId={FORM_ID}
+      heading="Get your free quote"
+      intro={`Seven short questions. An account executive replies ${REPLY_PROMISE} on a working day.`}
+      submitLabel="Get my free quote"
+      eagerCaptcha
+    />
+  </LpHero>
 
-        <ul class="lp-bullets">
-          {
-            bullets.map((b) => (
-              <li>
-                <strong>{b.label}:</strong> {b.body}
-              </li>
-            ))
-          }
-        </ul>
+  <LpBenefits />
+  <LpFacilities />
+  <LpReviews />
+  <LpAreas />
+  <LpFinalCta quoteAnchor={FORM_ANCHOR} />
 
-        {/* Was "★★★★★ 4.9 / 5 Rating from Local GTA Property Managers".
-            REMOVED, not restyled. Nobody has verified that number against
-            the business's Google Business Profile; the four reviews
-            recovered from the archive carry no aggregate, and an invented
-            rating is both a factual claim and a Google policy violation.
-            What replaces it is the one trust point that IS verified and
-            appears across the site. Put a real, current rating and review
-            count in `src/data/reviews.ts` and this can say it again. */}
-        <p class="lp-rating">
-          <span class="lp-rating-mark" aria-hidden="true">&#10003;</span>
-          <span><strong>Serving Toronto since 1989</strong> — commercial cleaning across the GTA</span>
-        </p>
-
-        <ul class="lp-badges">
-          {
-            badges.map((b) => (
-              <li>
-                <strong>{b.label}</strong>
-                <span>{b.detail}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-
-      <div class="lp-form-col">
-        <form id="ppc-lead-form" class="lp-form" novalidate>
-          <h2>Get Your Free Quote</h2>
-          <p class="lp-form-note">We review your specifications and respond within 2 business hours.</p>
-
-          <div class="lp-field">
-            <label for="fullName">Full Name <span aria-hidden="true">*</span></label>
-            <input type="text" id="fullName" name="fullName" required autocomplete="name" placeholder="Jane Doe" />
-          </div>
-
-          <div class="lp-field">
-            <label for="workEmail">Business Email <span aria-hidden="true">*</span></label>
-            <input
-              type="email"
-              id="workEmail"
-              name="workEmail"
-              required
-              autocomplete="email"
-              inputmode="email"
-              spellcheck="false"
-              placeholder="jane@company.com"
-            />
-          </div>
-
-          <div class="lp-field">
-            <label for="phone">Phone Number <span aria-hidden="true">*</span></label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              required
-              autocomplete="tel"
-              inputmode="tel"
-              placeholder="(416) 555-0199"
-            />
-          </div>
-
-          <div class="lp-field">
-            <label for="facilityType">Facility Type <span aria-hidden="true">*</span></label>
-            <select id="facilityType" name="facilityType" required>
-              <option value="" disabled selected>Select facility type...</option>
-              {facilityTypes.map((f) => <option value={f.label}>{f.label}</option>)}
-            </select>
-          </div>
-
-          <div class="lp-field">
-            <label for="facilitySize">Approximate Area (Sq. Ft.)</label>
-            <select id="facilitySize" name="facilitySize">
-              {sizes.map((s) => <option value={s.label}>{s.label}</option>)}
-            </select>
-          </div>
-
-          {/* Honeypot, replacing the original's arithmetic captcha (Section 3.2).
-              Hidden from everyone, including assistive technology; a bot fills it. */}
-          <div class="lp-hp" aria-hidden="true">
-            <label for="company_tax_id">Company tax ID</label>
-            <input type="text" id="company_tax_id" name="company_tax_id" tabindex="-1" autocomplete="off" />
-            <label for="website_trap">Website</label>
-            <input type="text" id="website_trap" name="website_trap" tabindex="-1" autocomplete="off" />
-          </div>
-
-          <p class="lp-error" id="lp-error" role="alert" hidden></p>
-
-          {/* The endpoint requires a verified token from every caller, so the
-              PPC form carries the checkbox too — otherwise a form_id is all it
-              would take to post straight past the captcha on the other two.
-              It is friction on a paid click, and worth saying out loud: if the
-              conversion rate drops, the answer is reCAPTCHA v3 or Enterprise
-              scoring on this form, not removing the check. */}
-          <SpamGuard />
-
-          <button type="submit" class="lp-submit">Request Free Walkthrough &amp; Quote &rarr;</button>
-          <p class="lp-confidential">Strict privacy. No spam or aggressive sales calls.</p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <section class="lp-proof">
-    <div class="lp-wrap">
-      <h2>What Toronto businesses say</h2>
-      <ul class="lp-reviews">
-        {
-          reviews.slice(0, 4).map((r) => (
-            <li>
-              <p class="lp-review-body">{r.text}</p>
-              <p class="lp-review-who">
-                <strong>{r.name}</strong>
-                <span>Google review</span>
-              </p>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <section class="lp-process">
-    <div class="lp-wrap">
-      <h2>How it works</h2>
-      <ol class="lp-steps">
-        {
-          steps.map((s) => (
-            <li>
-              <span class="lp-step-n">{s.n}</span>
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-            </li>
-          ))
-        }
-      </ol>
-    </div>
-  </section>
-
-  {/* Section 3.3 — sticky mobile action bar, under 768px only. */}
-  <div class="lp-sticky" slot="sticky">
-    <a class="lp-sticky-call" href={nap.phoneHref} data-call>{nap.phoneDisplay}</a>
-    <a class="lp-sticky-quote" href="#ppc-lead-form">Instant Quote</a>
-  </div>
+  <LpSticky slot="sticky" quoteAnchor={FORM_ANCHOR} />
 </LandingLayout>
-
-<script>
-  /* Section 4.1 — the lead pipeline.
-
-     Ordering, honeypot, duplicate-click guard and the dataLayer contract live
-     in `src/lib/lead-submit.ts`, shared with the other landing page and with
-     the site's own forms. Until now this page carried its own copy, which had
-     drifted from the other two. What stays here is what is specific to this
-     page: its fields, its error box and where a stored lead goes next. */
-  import { fieldValue, wireLeadForm } from '../../lib/lead-submit';
-  import type { Dict } from '../../lib/lead-submit';
-
-  const leadForm = document.getElementById('ppc-lead-form') as HTMLFormElement | null;
-  const errorBox = document.getElementById('lp-error');
-
-  const showError = (message: string) => {
-    if (!errorBox) return;
-    errorBox.textContent = message;
-    errorBox.hidden = false;
-  };
-
-  if (leadForm) {
-    leadForm.addEventListener('submit', () => {
-      if (errorBox) errorBox.hidden = true;
-    });
-
-    wireLeadForm(leadForm, {
-      formId: 'ppc-lead-form',
-      honeypots: ['company_tax_id', 'website_trap'],
-      sendingLabel: 'Sending…',
-      /* This page navigates on success, so the conversion event is given
-         time to be delivered first — otherwise the redirect can abort the
-         Google Ads and GA4 beacons in flight and the lead is stored with
-         no conversion recorded. See pushLeadEvent in lead-submit.ts. */
-      awaitTagDelivery: true,
-
-      payload: (f): Dict => ({
-        form_id: 'ppc-lead-form',
-        name: fieldValue(f, 'fullName'),
-        email: fieldValue(f, 'workEmail'),
-        phone: fieldValue(f, 'phone'),
-        size: fieldValue(f, 'facilitySize'),
-        facility_type: fieldValue(f, 'facilityType'),
-        /* Where the form was submitted. The campaign identifiers, the
-           landing page and the referrer come from `attribution.ts`, which
-           remembers the arrival — reading them off location.search here
-           returned nothing for any visitor who read a second page. */
-        page_url: location.href,
-      }),
-
-      /* Campaign segmentation, not a person. Filtered again by the module's
-         allowlist before anything reaches the dataLayer. */
-      eventParams: (f): Dict => ({
-        facility_type: fieldValue(f, 'facilityType'),
-        facility_size: fieldValue(f, 'facilitySize'),
-      }),
-
-      onSuccess: () => {
-        window.location.href = '/thank-you/?f=ppc-lead-form';
-      },
-      /* A bot never reaches /thank-you/, because /thank-you/ pushes
-         `lead_form_confirmed` and that would be a conversion reported for a
-         field no person can see. It gets the confirmation copy in place. */
-      onHoneypot: (f) => {
-        f.innerHTML = '';
-        const box = document.createElement('p');
-        box.setAttribute('role', 'status');
-        box.textContent = 'Thanks — we have your request and will be in touch shortly.';
-        f.append(box);
-      },
-      onError: (_f, message) => showError(message),
-    });
-  }
-</script>
-
-<style>
-  .lp-wrap {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 15px;
-  }
-
-  .lp-hero {
-    padding: 44px 0 20px;
-    background: linear-gradient(180deg, #f6f8f5 0%, #fff 100%);
-  }
-
-  .lp-hero-grid {
-    display: grid;
-    gap: 34px;
-  }
-
-  @media (min-width: 941px) {
-    .lp-hero-grid {
-      grid-template-columns: minmax(0, 1fr) 420px;
-      align-items: start;
-    }
-  }
-
-  .lp-eyebrow {
-    display: inline-block;
-    margin: 0 0 14px;
-    padding: 4px 12px;
-    border-radius: 4px;
-    background: rgba(77, 140, 43, 0.12);
-    color: var(--brand);
-    font-family: var(--font-heading);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
-  }
-
-  .lp-rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0 0 24px;
-    font-size: 0.9375rem;
-    color: var(--ink-heading);
-  }
-
-  /* Was `.lp-rating-stars`, gold, for five star glyphs. The stars went with
-     the unverified rating — a row of stars beside any text still reads as a
-     rating, whatever the words say. A brand-green tick is a trust mark that
-     claims nothing numeric. */
-  .lp-rating-mark {
-    color: var(--brand);
-    font-size: 1.15rem;
-    font-weight: 700;
-  }
-
-  .lp-pitch h1 {
-    font-size: 2.25rem;
-    line-height: 1.15;
-    margin: 0 0 14px;
-  }
-
-  @media (min-width: 768px) {
-    .lp-eyebrow {
-    display: inline-block;
-    margin: 0 0 14px;
-    padding: 4px 12px;
-    border-radius: 4px;
-    background: rgba(77, 140, 43, 0.12);
-    color: var(--brand);
-    font-family: var(--font-heading);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
-  }
-
-  .lp-rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0 0 24px;
-    font-size: 0.9375rem;
-    color: var(--ink-heading);
-  }
-
-
-  .lp-pitch h1 {
-      font-size: 2.75rem;
-    }
-  }
-
-  .lp-sub {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: var(--ink);
-    margin: 0 0 26px;
-  }
-
-  .lp-badges {
-    list-style: none;
-    margin: 0 0 26px;
-    padding: 0;
-    display: grid;
-    gap: 12px;
-  }
-
-  @media (min-width: 560px) {
-    .lp-badges {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  .lp-badges li {
-    padding: 14px 16px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-  }
-
-  .lp-badges strong {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: 0.9375rem;
-    color: var(--ink-heading);
-  }
-
-  .lp-badges span {
-    display: block;
-    font-size: 0.8125rem;
-    color: var(--ink-soft);
-    margin-top: 3px;
-  }
-
-  .lp-bullets {
-    margin: 0 0 22px;
-    padding-left: 20px;
-    line-height: 1.65;
-  }
-
-  .lp-bullets li {
-    margin-bottom: 10px;
-  }
-
-  .lp-bullets strong {
-    color: var(--ink-heading);
-  }
-
-  /* --- the form --- */
-  .lp-form {
-    background: #fff;
-    border: 1px solid #f1f5f9;
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
-  }
-
-  .lp-form h2 {
-    font-size: 1.375rem;
-    margin: 0 0 4px;
-  }
-
-  .lp-form-note {
-    font-size: 0.75rem;
-    color: #4b5563;
-    margin: 0 0 18px;
-  }
-
-  .lp-field {
-    margin-bottom: 14px;
-  }
-
-  .lp-field label {
-    display: block;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: #374151;
-    margin-bottom: 5px;
-  }
-
-  .lp-field label span {
-    color: #dc2626;
-  }
-
-  .lp-field input,
-  .lp-field select {
-    width: 100%;
-    font: inherit;
-    font-size: 0.875rem;
-    padding: 10px 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    background: #fff;
-    color: var(--ink-heading);
-  }
-
-  .lp-field input:focus,
-  .lp-field select:focus {
-    outline: none;
-    border-color: var(--brand);
-    box-shadow: 0 0 0 3px rgba(77, 140, 43, 0.15);
-  }
-
-  /* Hidden from sighted users and from assistive technology alike. */
-  .lp-hp {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-  }
-
-  .lp-error {
-    margin: 0 0 12px;
-    padding: 10px 12px;
-    border-radius: 6px;
-    background: #fef2f2;
-    border: 1px solid #fecaca;
-    color: #991b1b;
-    font-size: 0.8125rem;
-  }
-
-  .lp-submit {
-    width: 100%;
-    border: 0;
-    border-radius: 6px;
-    background: var(--brand);
-    color: #fff;
-    font-family: var(--font-heading);
-    font-size: 0.9375rem;
-    font-weight: 700;
-    padding: 14px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-
-  .lp-submit:hover:not(:disabled) {
-    background: var(--brand-dark);
-  }
-
-  .lp-submit:disabled {
-    opacity: 0.7;
-    cursor: default;
-  }
-
-  .lp-confidential {
-    text-align: center;
-    font-size: 0.75rem;
-    color: #6b7280;
-    margin: 10px 0 0;
-  }
-
-  /* --- proof --- */
-  .lp-proof {
-    padding: 48px 0 8px;
-  }
-
-  .lp-proof h2,
-  .lp-process h2 {
-    font-size: 1.75rem;
-    text-align: center;
-    margin: 0 0 28px;
-  }
-
-  .lp-reviews {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 20px;
-  }
-
-  @media (min-width: 768px) {
-    .lp-reviews {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  @media (min-width: 1100px) {
-    .lp-reviews {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-  }
-
-  .lp-reviews li {
-    background: #f8fafc;
-    border-radius: 12px;
-    padding: 20px;
-  }
-
-  .lp-review-body {
-    font-size: 0.9375rem;
-    line-height: 1.55;
-    margin: 0 0 14px;
-  }
-
-  .lp-review-who strong {
-    display: block;
-    font-family: var(--font-heading);
-    font-size: 0.875rem;
-  }
-
-  .lp-review-who span {
-    font-size: 0.75rem;
-    color: var(--ink-soft);
-  }
-
-  /* --- process --- */
-  .lp-process {
-    padding: 44px 0 0;
-  }
-
-  .lp-steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 22px;
-    counter-reset: step;
-  }
-
-  @media (min-width: 768px) {
-    .lp-steps {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-
-  .lp-steps li {
-    text-align: center;
-    padding: 0 12px;
-  }
-
-  .lp-step-n {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: var(--brand);
-    color: #fff;
-    font-family: var(--font-heading);
-    font-size: 1.125rem;
-    font-weight: 800;
-    margin-bottom: 12px;
-  }
-
-  .lp-steps h3 {
-    font-size: 1.0625rem;
-    margin: 0 0 6px;
-  }
-
-  .lp-steps p {
-    font-size: 0.9375rem;
-    line-height: 1.55;
-    color: var(--ink);
-    margin: 0;
-  }
-
-  /* --- sticky mobile bar, Section 3.3 --- */
-  .lp-sticky {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 50;
-    display: flex;
-    gap: 8px;
-    padding: 8px;
-    background: #fff;
-    border-top: 1px solid #e5e7eb;
-    box-shadow: 0 -4px 14px rgba(15, 23, 42, 0.1);
-  }
-
-  @media (min-width: 768px) {
-    .lp-sticky {
-      display: none;
-    }
-  }
-
-  .lp-sticky a {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 13px 8px;
-    border-radius: 8px;
-    font-family: var(--font-heading);
-    font-size: 0.875rem;
-    font-weight: 700;
-    text-decoration: none;
-    color: #fff;
-  }
-
-  .lp-sticky-call {
-    background: var(--brand);
-  }
-
-  .lp-sticky-quote {
-    background: #0f172a;
-  }
-</style>

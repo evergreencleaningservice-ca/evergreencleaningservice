@@ -50,9 +50,31 @@ interface Props {
   heading?: string;
   /** Small line under the heading. */
   intro?: string;
+  /**
+   * The REPORTING identity — what lands in `form_id` on the conversion event
+   * and in the `form_id` column in Neon. Distinct from `id`, which is the DOM
+   * element and the anchor target.
+   *
+   * The two landing pages keep the identities they already report under, so
+   * the rows already in the table continue to line up with the rows to come.
+   * Merging them would make the two pages indistinguishable in the conversion
+   * data, which is the entire reason for running two.
+   */
+  formId?: string;
+  /** Text on the submit button. */
+  submitLabel?: string;
+  /** Load the captcha at once — for a form inside the first screen. */
+  eagerCaptcha?: boolean;
 }
 
-const { id = 'quick-quote', heading, intro } = Astro.props;
+const {
+  id = 'quick-quote',
+  heading,
+  intro,
+  formId = 'quick-quote',
+  submitLabel = 'Get my free quote',
+  eagerCaptcha = false,
+} = Astro.props;
 const f = (name: string) => `${id}-${name}`;
 
 /* The site's own service names, as the service pages use them. */
@@ -75,7 +97,7 @@ const SERVICES = [
   action="#"
   novalidate
   data-endpoint="/api/submit-lead"
-  data-form-id="quick-quote"
+  data-form-id={formId}
   data-quick-quote
   aria-labelledby={heading ? f('heading') : undefined}
   aria-label={heading ? undefined : 'Request a quote'}
@@ -193,9 +215,9 @@ const SERVICES = [
     <input type="text" id={f('hp')} name="company-website" tabindex="-1" autocomplete="off" />
   </div>
 
-  <SpamGuard />
+  <SpamGuard eager={eagerCaptcha} />
 
-  <button class="qq-submit" type="submit">Get my free quote</button>
+  <button class="qq-submit" type="submit">{submitLabel}</button>
 
   <p class="qq-after">
     An account executive reads this and replies within <strong>2 business hours</strong> on a

@@ -21,6 +21,9 @@ import { organizationGraph } from '../lib/schema';
 import GoogleTagManager from '../components/GoogleTagManager.astro';
 import Attribution from '../components/Attribution.astro';
 import '../styles/global.css';
+/* The paid pages' shared styling. Loaded here so a page cannot forget it, and
+   so the two pages cannot drift into two copies of the same CSS again. */
+import '../styles/landing.css';
 
 interface Props {
   title: string;
@@ -29,9 +32,15 @@ interface Props {
       Account Representative". Omitted on the LPs that do not ask for one, so
       adding it here changed nothing about the existing page. */
   callNote?: string;
+  /**
+   * The on-page form's id. Given one, the header carries a Quote button
+   * beside the telephone — the second of the two actions a paid page offers,
+   * and an in-page anchor rather than a link that leaves.
+   */
+  quoteAnchor?: string;
 }
 
-const { title, description, callNote } = Astro.props;
+const { title, description, callNote, quoteAnchor } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 ---
 
@@ -61,6 +70,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
         round trip on the single most important request on the page. */}
     <link rel="preconnect" href="https://img-evergreencleaningservice.10xconnections.com" />
 
+    {/* The two faces the first screen actually uses: Raleway for the headline
+        and the buttons, Open Sans for everything else. Both are same-origin
+        and, without this, are not discoverable until global.css has been
+        fetched and parsed — so the headline paints in the fallback, the
+        webfont lands, and the whole page reflows.
+
+        MEASURED, not assumed: at 390px this single reflow was the ENTIRE
+        layout shift on both landing pages. Blocking woff2 took CLS from
+        0.0478 to exactly 0. The numbers with the preload in place are in the
+        Phase 10 report; `font-display: swap` is kept, so a font that somehow
+        does not arrive still shows text rather than nothing.
+
+        Only these two. The italic face is not used above the fold, and
+        preloading a font a page does not render is pure cost. */}
+    <link rel="preload" href="/fonts/raleway.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/open-sans.woff2" as="font" type="font/woff2" crossorigin />
+
     <GoogleTagManager />
     <Attribution />
 
@@ -76,14 +102,39 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
             which on any other landing page is an escape hatch to a different
             offer — the one thing this layout exists to prevent. */}
         <a class="lp-logo" href={Astro.url.pathname}>
-          <img src={site.logo} alt={nap.name} width="220" height="52" />
+          {/* `width`/`height` are the SOURCE's intrinsic dimensions, 884x265,
+              not the rendered size. They were declared 220x52 — a ratio of
+              4.23 against the file's real 3.34 — so the browser reserved 52px
+              of height, the image landed needing 66px, and every landing page
+              shifted its whole layout down by 14px on load. Measured at 390px
+              that single reflow was the largest layout shift on the page.
+
+              The AVIF and WebP variants already exist (they are what the site
+              header serves) and were simply not used here. */}
+          <picture>
+            <source type="image/avif" srcset="/images/cropped-evergreen-cleaning-toronto-logo-banner.avif" />
+            <source type="image/webp" srcset="/images/cropped-evergreen-cleaning-toronto-logo-banner.webp" />
+            <img
+              src={site.logo}
+              alt={nap.name}
+              width="884"
+              height="265"
+              loading="eager"
+              decoding="async"
+            />
+          </picture>
         </a>
-        <div class="lp-call-wrap">
-          <a class="lp-call" href={nap.phoneHref} data-call>
-            <span class="lp-call-label">Call</span>
-            <span class="lp-call-number">{nap.phoneDisplay}</span>
-          </a>
-          {callNote && <p class="lp-call-note">{callNote}</p>}
+        <div class="lp-actions">
+          <div class="lp-call-wrap">
+            <a class="lp-call" href={nap.phoneHref} data-call>
+              <span class="lp-call-label">Call</span>
+              <span class="lp-call-number">{nap.phoneDisplay}</span>
+            </a>
+            {callNote && <p class="lp-call-note">{callNote}</p>}
+          </div>
+          {quoteAnchor && (
+            <a class="lp-header-quote" href={`#${quoteAnchor}`}>Free quote</a>
+          )}
         </div>
       </div>
     </header>
@@ -95,10 +146,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
     <footer class="lp-footer">
       <div class="lp-footer-inner">
         <p>&copy; {new Date().getFullYear()} {nap.name}. {nap.addressLine}</p>
+        {/* ONE legal link, not two. This used to render "Privacy Policy" and
+            "Terms of Service" side by side, both pointing at /privacy/ —
+            there is no terms document on this site, so the second link was a
+            label for something that does not exist. A mislabelled link on a
+            page collecting personal information is worse than no link. */}
         <p class="lp-footer-links">
           <a href="/privacy/">Privacy Policy</a>
-          <span aria-hidden="true">·</span>
-          <a href="/privacy/">Terms of Service</a>
         </p>
       </div>
     </footer>
@@ -157,9 +211,18 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
     min-height: 76px;
   }
 
+  .lp-logo picture,
   .lp-logo img {
     display: block;
+  }
+
+  .lp-logo img {
+    /* `max-width` rather than `width`, so a 390px header shrinks the logo
+       instead of squeezing the call and quote buttons out of the row. With
+       the intrinsic dimensions now declared correctly on the element, the
+       reserved box is right at every rendered width. */
     width: 220px;
+    max-width: 100%;
     height: auto;
   }
 
@@ -188,6 +251,39 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 
   .lp-call-wrap {
     text-align: right;
+  }
+
+  .lp-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .lp-header-quote {
+    display: none;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    background: var(--brand);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .lp-header-quote:hover {
+    background: var(--brand-dark);
+    color: #fff;
+  }
+
+  /* On a phone the sticky bar already carries both actions, and a second
+     Quote button in the header would only shrink the logo. */
+  @media (min-width: 560px) {
+    .lp-header-quote {
+      display: inline-flex;
+    }
   }
 
   .lp-call-note {

@@ -26,7 +26,9 @@
     "perf:matrix": "node --experimental-strip-types scripts/perf-matrix.mjs",
     "verify:indexing": "node --experimental-strip-types scripts/verify-indexing.mjs",
     "lh:local": "node scripts/lh-local.mjs",
-    "form:a11y": "node scripts/form-a11y.mjs"
+    "form:a11y": "node scripts/form-a11y.mjs",
+    "lp:census": "node scripts/lp-census.mjs",
+    "lp:sticky": "node scripts/sticky-clearance.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

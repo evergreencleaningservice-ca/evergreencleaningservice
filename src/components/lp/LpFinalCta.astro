@@ -1,0 +1,33 @@
+---
+/**
+ * The last thing on the page: call, or go back to the form.
+ *
+ * Two actions and no third. The anchor scrolls to the form already on this
+ * page rather than navigating anywhere, so the only link that leaves is the
+ * telephone — which is the one leaving we want.
+ */
+import { nap } from '../../data/site';
+import { REPLY_PROMISE } from '../../data/landing';
+
+interface Props {
+  /** The form's DOM id on this page, for the quote button. */
+  quoteAnchor: string;
+  heading?: string;
+}
+
+const { quoteAnchor, heading = 'Ready for a quote?' } = Astro.props;
+---
+
+<section class="lpx-final" aria-labelledby="lpx-final-h">
+  <div class="lpx-wrap">
+    <h2 id="lpx-final-h">{heading}</h2>
+    <p>
+      Tell us where you are and what needs cleaning. An account executive replies {REPLY_PROMISE} on
+      a working day — no obligation, and no visit until you ask for one.
+    </p>
+    <div class="lpx-final-actions">
+      <a class="lpx-btn lpx-btn-primary" href={nap.phoneHref} data-call>Call {nap.phoneDisplay}</a>
+      <a class="lpx-btn lpx-btn-ghost" href={`#${quoteAnchor}`}>Get my free quote</a>
+    </div>
+  </div>
+</section>

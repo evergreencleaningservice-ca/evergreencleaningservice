@@ -23,6 +23,23 @@
 import { captcha } from '../data/site';
 import Recaptcha from './Recaptcha.astro';
 
+interface Props {
+  /**
+   * Load api.js at once instead of waiting for the form to be approached.
+   *
+   * For a form that is ALREADY in the first screen, which is the paid landing
+   * pages' whole layout. The deferral below exists because the site's inner
+   * pages carry a quote form in the sidebar, far below the fold, on every
+   * page — there, waiting saves 269KB and four requests on a page nobody
+   * scrolls. On a landing page whose form is the first thing a visitor sees,
+   * the observer fires on load anyway and the focus listener is a race: the
+   * token would start arriving only once someone is already typing.
+   */
+  eager?: boolean;
+}
+
+const { eager = false } = Astro.props;
+
 const turnstileKey =
   import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || captcha.turnstile.testSiteKey;
 
@@ -69,6 +86,12 @@ const loader = `
     var widgets = document.querySelectorAll('.cf-turnstile');
     if (!widgets.length) return;
 
+    /* An above-the-fold form asked for it immediately. One such widget on the
+       page is enough: api.js is loaded once and finds every widget itself. */
+    for (var e = 0; e < widgets.length; e++) {
+      if (widgets[e].hasAttribute('data-eager')) { inject(); return; }
+    }
+
     var targets = [];
     for (var i = 0; i < widgets.length; i++) {
       targets.push(widgets[i].closest(FORMS) || widgets[i]);
@@ -112,6 +135,7 @@ const loader = `
         data-appearance="interaction-only"
         data-response-field-name="cf-turnstile-response"
         data-retry="auto"
+        data-eager={eager ? '' : undefined}
       />
       <noscript>
         <p class="spamguard-noscript">

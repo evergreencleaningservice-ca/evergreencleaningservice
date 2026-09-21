@@ -1,0 +1,434 @@
+/*
+ * The paid landing pages' shared styling.
+ *
+ * One stylesheet instead of the ~400 lines of near-identical CSS each page
+ * used to carry. The two had drifted in the usual way: `.lp-wrap` and
+ * `.lpq-wrap` were the same rule under two names, the hero grids differed by
+ * 10px of gap and 10px of column width for no reason anybody recorded, and
+ * `/lp/commercial-cleaning/` carried a `@media (min-width: 768px)` block that
+ * re-declared `.lp-eyebrow` and `.lp-rating` identically to the rules above
+ * it — dead weight from an edit that was never finished.
+ *
+ * Loaded by LandingLayout, so a page cannot forget it, and scoped under
+ * `body.lp` so nothing here can reach the rest of the site.
+ */
+
+.lpx-wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* ---------- hero ---------- */
+
+.lpx-hero {
+  padding: 30px 0 26px;
+  background: linear-gradient(180deg, #f6f8f5 0%, #fff 100%);
+}
+
+.lpx-hero-grid {
+  display: grid;
+  gap: 28px;
+}
+
+@media (min-width: 941px) {
+  .lpx-hero {
+    padding: 44px 0 34px;
+  }
+
+  .lpx-hero-grid {
+    grid-template-columns: minmax(0, 1fr) 460px;
+    gap: 44px;
+    align-items: start;
+  }
+}
+
+.lpx-eyebrow {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: rgba(77, 140, 43, 0.12);
+  color: var(--brand-dark);
+  font-family: var(--font-heading);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.lpx-pitch h1 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.16;
+  color: var(--ink-heading);
+  margin: 0 0 12px;
+}
+
+@media (min-width: 768px) {
+  .lpx-pitch h1 {
+    font-size: 2.5rem;
+  }
+}
+
+.lpx-sub {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0 0 18px;
+  max-width: 54ch;
+}
+
+/* The four trust points, compact enough to sit above the form on a phone. */
+.lpx-trust {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+.lpx-trust li {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--ink-heading);
+  font-weight: 600;
+}
+
+/* A tick, not a star. A star beside text reads as a rating however the
+   sentence is worded, and there is no verified rating to report. */
+.lpx-trust li::before {
+  content: '✓';
+  color: var(--brand);
+  font-weight: 700;
+}
+
+/* ---------- the form column ---------- */
+
+.lpx-form-col {
+  min-width: 0;
+}
+
+.lpx-form-card {
+  padding: 22px 20px 20px;
+  border: 1px solid var(--rule);
+  border-top: 4px solid var(--brand);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
+}
+
+@media (min-width: 560px) {
+  .lpx-form-card {
+    padding: 26px 24px 22px;
+  }
+}
+
+/* ---------- generic section ---------- */
+
+.lpx-section {
+  padding: 40px 0 0;
+}
+
+.lpx-section h2 {
+  font-family: var(--font-heading);
+  font-size: 1.625rem;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--ink-heading);
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.lpx-section-note {
+  margin: 0 auto 26px;
+  max-width: 62ch;
+  text-align: center;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* ---------- benefits and facilities ---------- */
+
+.lpx-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 620px) {
+  .lpx-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 941px) {
+  .lpx-cards-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lpx-cards-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.lpx-cards li {
+  padding: 18px 18px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.lpx-cards strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  color: var(--ink-heading);
+  margin-bottom: 4px;
+}
+
+.lpx-cards span {
+  display: block;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+/* ---------- reviews ---------- */
+
+.lpx-reviews {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+
+@media (min-width: 768px) {
+  .lpx-reviews {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.lpx-reviews li {
+  padding: 20px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: #fff;
+}
+
+/* Each card's own star row is the rating THAT REVIEWER left, which is a fact
+   from the review itself. There is deliberately no aggregate anywhere: no
+   average, no review count, no "rated N/5". */
+.lpx-review-stars {
+  margin: 0 0 8px;
+  color: #b8860b;
+  letter-spacing: 2px;
+  font-size: 0.9375rem;
+}
+
+.lpx-review-body {
+  margin: 0 0 12px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.lpx-review-who {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.lpx-review-who strong {
+  display: block;
+  font-family: var(--font-heading);
+  color: var(--ink-heading);
+}
+
+.lpx-review-who span {
+  color: var(--ink);
+}
+
+/* ---------- service area ---------- */
+
+.lpx-areas {
+  margin: 38px 0 0;
+  padding: 22px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--surface-tint);
+}
+
+.lpx-areas p {
+  margin: 0 auto;
+  max-width: 70ch;
+  text-align: center;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.lpx-areas strong {
+  color: var(--ink-heading);
+}
+
+/* ---------- final call to action ---------- */
+
+.lpx-final {
+  padding: 42px 0 8px;
+  text-align: center;
+}
+
+.lpx-final h2 {
+  font-family: var(--font-heading);
+  font-size: 1.625rem;
+  font-weight: 800;
+  color: var(--ink-heading);
+  margin: 0 0 8px;
+}
+
+.lpx-final p {
+  margin: 0 auto 22px;
+  max-width: 56ch;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.lpx-final-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.lpx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 48px is the tap target; the padding here clears it on its own. */
+  min-height: 52px;
+  padding: 14px 26px;
+  border-radius: 6px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.lpx-btn-primary {
+  background: var(--brand);
+  color: #fff;
+}
+
+.lpx-btn-primary:hover {
+  background: var(--brand-dark);
+  color: #fff;
+}
+
+.lpx-btn-ghost {
+  background: #fff;
+  color: var(--brand-dark);
+  border: 2px solid var(--brand);
+}
+
+.lpx-btn-ghost:hover {
+  background: #f2f8ee;
+  color: var(--brand-dark);
+}
+
+.lpx-btn:focus-visible,
+.lpx-sticky a:focus-visible {
+  outline: 3px solid var(--ink-heading);
+  outline-offset: 3px;
+}
+
+/* ---------- sticky mobile bar ---------- */
+
+.lpx-sticky {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 50;
+  display: flex;
+  gap: 1px;
+  background: var(--rule);
+  box-shadow: 0 -2px 10px rgba(15, 23, 42, 0.12);
+}
+
+/* Phones only. Above this the header call button and the form are both on
+   screen already, so a fixed bar is lost real estate rather than a shortcut.
+   `body.lp` reserves matching padding so the bar can never cover the submit
+   button or the last field — which is the accessibility failure this pattern
+   usually ships with. */
+@media (min-width: 768px) {
+  .lpx-sticky {
+    display: none;
+  }
+}
+
+.lpx-sticky a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 8px 10px;
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}
+
+/*
+ * Keep the bar off whatever the visitor just focused.
+ *
+ * A GUARD, NOT A FIX, and the distinction is worth recording because it was
+ * nearly written down the other way round. This went in after a check
+ * reported the message textarea sitting under the bar when focused — the
+ * classic failure of this pattern, since reserving page padding stops the bar
+ * covering the END of the document but does nothing for the scroll a key
+ * press triggers.
+ *
+ * The check was wrong. It focused controls in sequence without resetting the
+ * scroll, and the site sets `scroll-behavior: smooth`, so it was measuring
+ * positions the page was still animating through. Measured properly,
+ * `scripts/sticky-clearance.mjs` passes with this rule and without it: every
+ * control lands 48px clear either way, because Chrome's own scroll-into-view
+ * already accounts for the fixed bar.
+ *
+ * It is kept because it makes the clearance a property of this stylesheet
+ * rather than of a browser heuristic — if the bar grows, or a browser scrolls
+ * differently, the guarantee holds. 76px matches the padding `body.lp`
+ * already reserves: the bar's 56px plus room to breathe. It is not load-
+ * bearing today and the report does not claim it repaired anything.
+ *
+ * Only where the bar exists. Above 768px it is `display: none` and this would
+ * make focus scroll further than it needs to.
+ */
+@media (max-width: 767.98px) {
+  body.lp .qq input,
+  body.lp .qq select,
+  body.lp .qq textarea,
+  body.lp .qq-submit,
+  body.lp .qq-summary {
+    scroll-margin-bottom: 76px;
+  }
+}
+
+.lpx-sticky-call {
+  flex: 1 1 60%;
+  background: var(--brand);
+  color: #fff;
+}
+
+.lpx-sticky-quote {
+  flex: 1 1 40%;
+  background: var(--ink-heading);
+  color: #fff;
+}

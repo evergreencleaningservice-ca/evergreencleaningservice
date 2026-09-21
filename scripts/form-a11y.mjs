@@ -28,7 +28,7 @@
  * also a test — the pipeline must still submit once its token deadline
  * expires rather than hanging forever on a widget that will never resolve.
  *
- *   node scripts/form-a11y.mjs <distDir>
+ *   node scripts/form-a11y.mjs <distDir> [pagePath] [formDomId]
  *
  * Exits non-zero, naming each failure, if any check fails.
  */
@@ -37,7 +37,18 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
 
-const dist = process.argv[2];
+const [dist, pageArg, formArg] = process.argv.slice(2);
+/* Which page, and which form on it. Defaults to the quote page, which is what
+   Phase 9 used this for; Phase 10 points it at the two landing pages, whose
+   forms carry different DOM ids. */
+const PAGE = pageArg ?? '/request-a-quote/';
+const FORM = formArg ?? 'quote';
+const F = (sel = '') => `#${CSS_ESCAPE(FORM)}${sel ? ' ' + sel : ''}`;
+/* Node has no CSS.escape; the ids in use are plain, so a guard is enough. */
+function CSS_ESCAPE(v) {
+  if (!/^[A-Za-z][\w-]*$/.test(v)) throw new Error(`unsafe form id: ${v}`);
+  return v;
+}
 const TYPES = {
   '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript',
   '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png',
@@ -82,24 +93,24 @@ for (const width of [390, 1440]) {
   /* Turnstile is not reachable from here and must not be needed. */
   await page.route('**challenges.cloudflare.com**', (r) => r.abort());
 
-  await page.goto(`${ORIGIN}/request-a-quote/`, { waitUntil: 'load' });
+  await page.goto(`${ORIGIN}${PAGE}`, { waitUntil: 'load' });
 
   /* --- reach the form with the keyboard alone -------------------------- */
   const order = [];
   let landed = false;
   for (let i = 0; i < 40; i++) {
     await page.keyboard.press('Tab');
-    const info = await page.evaluate(() => {
+    const info = await page.evaluate((FORMID) => {
       const el = document.activeElement;
       if (!el) return null;
       return {
         tag: el.tagName,
         name: el.getAttribute('name'),
-        inForm: !!el.closest('form#quote'),
+        inForm: !!el.closest('form#' + FORMID),
         outline: getComputedStyle(el).outlineStyle,
         outlineWidth: getComputedStyle(el).outlineWidth,
       };
-    });
+    }, FORM);
     if (!info) break;
     if (info.inForm) {
       landed = true;
@@ -124,22 +135,22 @@ for (const width of [390, 1440]) {
   /* --- every focused control shows a focus ring ------------------------ */
   const noRing = [];
   for (const name of ['first-name', 'business-name', 'phone', 'email', 'postal', 'services', 'message']) {
-    await page.focus(`#quote [name="${name}"]`);
-    const ring = await page.evaluate((n) => {
-      const el = document.querySelector(`#quote [name="${n}"]`);
+    await page.focus(F(`[name="${name}"]`));
+    const ring = await page.evaluate(([n, formId]) => {
+      const el = document.querySelector(`#${formId} [name="${n}"]`);
       const s = getComputedStyle(el);
       return { style: s.outlineStyle, width: parseFloat(s.outlineWidth) || 0 };
-    }, name);
+    }, [name, FORM]);
     if (ring.style === 'none' || ring.width === 0) noRing.push(name);
   }
   check(`${width}: every field takes a visible focus ring`, noRing.length === 0, noRing.join(','));
 
   /* --- submit empty, with the keyboard --------------------------------- */
-  await page.focus('#quote [name="first-name"]');
+  await page.focus(F('[name="first-name"]'));
   await page.keyboard.press('Enter');
   await page.waitForTimeout(400);
 
-  const afterEmpty = await page.evaluate(() => {
+  const afterEmpty = await page.evaluate((FORMID) => {
     const el = document.activeElement;
     const s = document.querySelector('[data-qq-summary]');
     return {
@@ -147,14 +158,14 @@ for (const width of [390, 1440]) {
       summaryText: s?.textContent ?? '',
       role: s?.getAttribute('role'),
       live: s?.getAttribute('aria-live'),
-      invalid: [...document.querySelectorAll('#quote [aria-invalid="true"]')].map((e) =>
+      invalid: [...document.querySelectorAll(`#${FORMID} [aria-invalid="true"]`)].map((e) =>
         e.getAttribute('name')
       ),
-      perField: [...document.querySelectorAll('#quote [data-qq-error]')]
+      perField: [...document.querySelectorAll(`#${FORMID} [data-qq-error]`)]
         .filter((e) => e.textContent.trim())
         .map((e) => e.getAttribute('data-qq-error')),
     };
-  });
+  }, FORM);
   check(`${width}: Enter in a field submits the form`, afterEmpty.summaryText !== '');
   check(`${width}: focus moves to the error summary`, afterEmpty.focusIsSummary);
   check(
@@ -174,7 +185,7 @@ for (const width of [390, 1440]) {
   );
 
   /* --- fill it in by keyboard only, phone only ------------------------- */
-  await page.focus('#quote [name="first-name"]');
+  await page.focus(F('[name="first-name"]'));
   await page.keyboard.type('Dana');
   await page.keyboard.press('Tab');
   await page.keyboard.type('Placeholder Holdings Inc');
@@ -188,12 +199,13 @@ for (const width of [390, 1440]) {
   await page.waitForTimeout(100);
 
   const cleared = await page.evaluate(
-    () => [...document.querySelectorAll('#quote [data-qq-error]')].filter((e) => e.textContent.trim()).length
+    (FORMID) => [...document.querySelectorAll(`#${FORMID} [data-qq-error]`)].filter((e) => e.textContent.trim()).length,
+    FORM
   );
   check(`${width}: errors clear as the visitor types`, cleared === 0, `${cleared} left`);
 
   /* Submit from the button, reached by keyboard. */
-  await page.focus('#quote button[type="submit"]');
+  await page.focus(F('button[type="submit"]'));
   await page.keyboard.press('Enter');
   /* Turnstile is unreachable here (aborted above), so the pipeline spends its
      full 6s token deadline before posting anyway. Wait for the outcome rather
@@ -215,17 +227,17 @@ for (const width of [390, 1440]) {
     posted?.address === 'M5V 1Z4'
   );
 
-  const success = await page.evaluate(() => {
+  const success = await page.evaluate((FORMID) => {
     const box = document.querySelector('.qq-confirm');
     return box
       ? {
           focused: document.activeElement === box,
           role: box.getAttribute('role'),
           text: box.textContent.replace(/\s+/g, ' ').trim(),
-          formGone: !document.querySelector('form#quote'),
+          formGone: !document.querySelector('form#' + FORMID),
         }
       : null;
-  });
+  }, FORM);
   check(`${width}: success replaces the form`, success?.formGone === true);
   check(`${width}: success is a status region and takes focus`,
     success?.role === 'status' && success?.focused === true);
