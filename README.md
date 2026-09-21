@@ -49,6 +49,32 @@ credential reads it from the environment or from a Worker secret:
 no Worker, so `/api/submit-lead` 404s there. Test submissions against a
 deployed preview.
 
+## Attribution, and one decision that is not a developer's to make
+
+`src/lib/attribution.ts` remembers how a visitor arrived, so a lead submitted
+from `/contact-us/` on the fourth page of a visit still carries the click id
+from the ad that paid for the first. It keeps a **first touch** (never
+overwritten) and a **latest touch** (updated only by a later campaign arrival —
+never by direct or internal navigation).
+
+**It ships session-scoped.** The record lives in `sessionStorage`, so it ends
+when the tab closes. That covers the case it exists for and it is not a
+marketing identifier store: nothing outlives the visit.
+
+A 90-day cross-visit store is written, tested and **off**. Turning it on is
+`MODE = 'persistent'` — and it is three changes, not one:
+
+1. the flag;
+2. `/privacy/`, which is still the inherited WordPress boilerplate describing
+   login and comment cookies this static site does not set, rewritten to
+   describe advertising identifiers kept for 90 days and why;
+3. a consent mechanism gating it. The site has none of any kind today.
+
+Under PIPEDA, storing advertising click identifiers on a person's device for
+three months for marketing measurement is a purpose that has to be identified
+and consented to. **That is a client decision, not a build setting**, and the
+flag stays off until someone with the authority to make it says otherwise.
+
 ## Project layout
 
 ```

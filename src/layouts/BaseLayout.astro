@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import LeadVideo from '../components/LeadVideo.astro';
 import GoogleTagManager from '../components/GoogleTagManager.astro';
+import Attribution from '../components/Attribution.astro';
 import { site } from '../data/site';
 import { organizationGraph } from '../lib/schema';
 import '../styles/global.css';
@@ -74,6 +75,7 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
     <script type="application/ld+json" set:html={JSON.stringify(organizationGraph())} is:inline />
 
     <GoogleTagManager />
+    <Attribution />
 
     <slot name="head" />
 

@@ -268,8 +268,6 @@ const badges = [
   const form = document.getElementById('lpq-form') as HTMLFormElement | null;
   const errorBox = document.getElementById('lpq-error');
 
-  const param = (name: string) => new URLSearchParams(location.search).get(name) ?? '';
-
   const showError = (message: string) => {
     if (!errorBox) return;
     errorBox.textContent = message;
@@ -294,13 +292,11 @@ const badges = [
         phone: fieldValue(f, 'phone'),
         facility_type: fieldValue(f, 'facility_type'),
         size: fieldValue(f, 'size'),
+        /* Where the form was submitted. The campaign identifiers, the
+           landing page and the referrer come from `attribution.ts`, which
+           remembers the arrival — reading them off location.search here
+           returned nothing for any visitor who read a second page. */
         page_url: location.href,
-        referrer: document.referrer,
-        /* What makes the lead attributable to a click. */
-        gclid: param('gclid'),
-        utm_source: param('utm_source'),
-        utm_medium: param('utm_medium'),
-        utm_campaign: param('utm_campaign'),
       }),
 
       eventParams: (f): Dict => ({

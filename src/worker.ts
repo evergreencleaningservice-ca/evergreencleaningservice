@@ -1,5 +1,6 @@
 import { neon } from '@neondatabase/serverless';
 import { captcha, PRODUCTION_HOSTS } from './data/site';
+import { isHoneypotHit, looksLikeEmail, missingFields, normalizeLead, str } from './lib/lead-fields';
 
 /**
  * The site's Worker.
@@ -45,12 +46,6 @@ export interface Env {
 }
 
 type LeadBody = Record<string, unknown>;
-
-const str = (v: unknown, max: number) =>
-  typeof v === 'string' ? v.trim().slice(0, max) : '';
-
-/** Deliberately permissive: a shape check, not an attempt to validate email. */
-const looksLikeEmail = (v: string) => /^[^@\s]+@[^@\s.]+\.[^@\s]+$/.test(v);
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -157,12 +152,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
   /* Honeypot. A real person never sees this field, so anything in it is a bot.
      Answer 200 rather than an error — telling a bot it failed teaches it to try
      again with the field left blank. Nothing is stored. */
-  if (
-    str(body.company_tax_id, 200) ||
-    str(body['company-website'], 200) ||
-    str(body.website_trap, 200)
-  )
-    return json({ ok: true });
+  if (isHoneypotHit(body)) return json({ ok: true });
 
   /* --- captcha ------------------------------------------------------------
      After the honeypot, so a bot that fell into it costs nothing, and before
@@ -204,27 +194,12 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
     return json({ error: 'captcha failed' }, 403);
   }
 
-  const lead = {
-    form_id: str(body.form_id, 64) || 'ppc-lead-form',
-    full_name: str(body.name ?? body.fullName, 120),
-    work_email: str(body.email ?? body.workEmail, 200),
-    phone: str(body.phone, 40),
-    facility_size: str(body.size ?? body.facilitySize, 64),
-    page_url: str(body.page_url, 500),
-    referrer: str(body.referrer, 500),
-    gclid: str(body.gclid, 200),
-    utm_source: str(body.utm_source, 120),
-    utm_medium: str(body.utm_medium, 120),
-    utm_campaign: str(body.utm_campaign, 200),
-    /* The site's own forms ask for these; the PPC form sends none of them. */
-    facility_type: str(body.facility_type, 120),
-    business_name: str(body.business_name, 200),
-    address: str(body.address, 400),
-    services: str(body.services, 400),
-    message: str(body.message, 4000),
-  };
+  /* Normalisation, length limits and the sanitising of everything that came
+     off a query string live in `src/lib/lead-fields.ts`, which is a pure
+     function and is tested as one. */
+  const lead = normalizeLead(body);
 
-  const missing = (['full_name', 'work_email', 'phone'] as const).filter((k) => !lead[k]);
+  const missing = missingFields(lead);
   if (missing.length) return json({ error: 'missing required fields', fields: missing }, 422);
   if (!looksLikeEmail(lead.work_email)) return json({ error: 'invalid email' }, 422);
 
@@ -240,16 +215,27 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
     const sql = neon(env.DATABASE_URL);
     await sql`
       INSERT INTO leads
-        (form_id, full_name, work_email, phone, facility_size,
-         page_url, referrer, gclid, utm_source, utm_medium, utm_campaign,
-         facility_type, business_name, address, services, message,
+        (form_id, full_name, work_email, phone, facility_size, facility_type,
+         business_name, address, services, message, page_url,
+         gclid, gbraid, wbraid, msclkid, gad_source, gclsrc,
+         utm_source, utm_medium, utm_campaign, utm_term, utm_content, utm_id,
+         landing_page, referrer, touch_at,
+         first_gclid, first_msclkid, first_utm_source, first_utm_medium,
+         first_utm_campaign, first_landing_page, first_referrer, first_touch_at,
          ip_country, user_agent)
       VALUES
         (${lead.form_id}, ${lead.full_name}, ${lead.work_email}, ${lead.phone},
-         ${lead.facility_size}, ${lead.page_url}, ${lead.referrer}, ${lead.gclid},
+         ${lead.facility_size}, ${lead.facility_type},
+         ${lead.business_name}, ${lead.address}, ${lead.services}, ${lead.message},
+         ${lead.page_url},
+         ${lead.gclid}, ${lead.gbraid}, ${lead.wbraid}, ${lead.msclkid},
+         ${lead.gad_source}, ${lead.gclsrc},
          ${lead.utm_source}, ${lead.utm_medium}, ${lead.utm_campaign},
-         ${lead.facility_type}, ${lead.business_name}, ${lead.address}, ${lead.services},
-         ${lead.message},
+         ${lead.utm_term}, ${lead.utm_content}, ${lead.utm_id},
+         ${lead.landing_page}, ${lead.referrer}, ${lead.touch_at},
+         ${lead.first_gclid}, ${lead.first_msclkid}, ${lead.first_utm_source},
+         ${lead.first_utm_medium}, ${lead.first_utm_campaign},
+         ${lead.first_landing_page}, ${lead.first_referrer}, ${lead.first_touch_at},
          ${(request as Request & { cf?: { country?: string } }).cf?.country ?? ''},
          ${str(request.headers.get('user-agent'), 300)})
     `;

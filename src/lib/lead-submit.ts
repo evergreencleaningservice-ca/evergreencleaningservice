@@ -47,6 +47,8 @@
  * conversions. See `_research/baseline.md`.
  */
 
+import { attributionPayload } from './attribution';
+
 declare global {
   interface Window {
     dataLayer?: Record<string, unknown>[];
@@ -234,7 +236,16 @@ export function wireLeadForm(form: HTMLFormElement, hooks: LeadFormHooks): void 
       res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...hooks.payload(form), captcha: captchaToken(form) }),
+        /* Attribution is merged here rather than by each caller, so the
+           three forms cannot disagree about it, and it is merged FIRST so a
+           page can still override a field deliberately. Reading it at submit
+           time rather than at page load means a campaign arrival in another
+           tab of the same session is already accounted for. */
+        body: JSON.stringify({
+          ...attributionPayload(),
+          ...hooks.payload(form),
+          captcha: captchaToken(form),
+        }),
       });
     } catch {
       hooks.onError(form, MESSAGES.network);

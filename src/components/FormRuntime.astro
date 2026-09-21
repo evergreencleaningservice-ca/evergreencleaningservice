@@ -37,8 +37,6 @@
   import { fieldValue as value, wireLeadForm } from '../lib/lead-submit';
   import type { Dict } from '../lib/lead-submit';
 
-  const param = (name: string) => new URLSearchParams(location.search).get(name) ?? '';
-
   /* The address is four inputs on screen and one thing in the world. Composed
      here rather than in four columns, because what the client needs is the
      address of the site to be cleaned, in one readable line.
@@ -109,14 +107,11 @@
         address: address(f),
         services: services(f),
         message: value(f, 'message') || value(f, 'comments'),
+        /* Where the form was submitted. The campaign identifiers, the
+           landing page and the referrer come from `attribution.ts`, which
+           remembers the arrival — reading them off location.search here
+           returned nothing for any visitor who read a second page. */
         page_url: location.href,
-        referrer: document.referrer,
-        /* Present when the visitor arrived on an ad and then navigated to
-           this form, which is the ordinary case for the site's own pages. */
-        gclid: param('gclid'),
-        utm_source: param('utm_source'),
-        utm_medium: param('utm_medium'),
-        utm_campaign: param('utm_campaign'),
       }),
 
       onSuccess: confirm,
