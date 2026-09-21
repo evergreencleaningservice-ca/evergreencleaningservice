@@ -191,6 +191,34 @@ export const nap = {
   priceRange: '$$',
 } as const;
 
+/**
+ * Opening hours, once.
+ *
+ * These were previously a literal inside `schema.ts` and nowhere else, which
+ * meant the only place the site stated its hours was a machine-readable block
+ * no visitor ever sees. The quote page now shows them beside the phone number,
+ * so the two have to agree: `hours` is the structured form the JSON-LD is
+ * built from, and `hoursNote` is the same fact written for a person.
+ *
+ * Change one and change the other — they are checked against each other in
+ * tests/unit/site-hours.test.ts.
+ */
+export const hours = [
+  {
+    days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '07:00',
+    closes: '22:00',
+  },
+  {
+    days: ['Saturday', 'Sunday'],
+    opens: '08:00',
+    closes: '20:00',
+  },
+] as const;
+
+/** The same hours, for a human, beside the click-to-call. */
+export const hoursNote = 'Monday to Friday 7am–10pm · Weekends 8am–8pm';
+
 export const social = [
   { name: 'Facebook', href: 'https://www.facebook.com/Evergreen-Cleaning-Service-104007224426820' },
   { name: 'Twitter', href: 'https://twitter.com/EvergreenClean8/' },

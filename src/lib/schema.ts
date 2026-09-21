@@ -24,7 +24,7 @@
  *  and a factual claim the client cannot support. It goes in when someone
  *  supplies the real figure from the Google Business Profile.
  */
-import { nap, site, social } from '../data/site';
+import { hours, nap, site, social } from '../data/site';
 
 const ORG_ID = `${site.url}/#organization`;
 const SITE_ID = `${site.url}/#website`;
@@ -55,20 +55,12 @@ export const organizationGraph = () => ({
         latitude: nap.latitude,
         longitude: nap.longitude,
       },
-      openingHoursSpecification: [
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          opens: '07:00',
-          closes: '22:00',
-        },
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Saturday', 'Sunday'],
-          opens: '08:00',
-          closes: '20:00',
-        },
-      ],
+      openingHoursSpecification: hours.map((h) => ({
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: [...h.days],
+        opens: h.opens,
+        closes: h.closes,
+      })),
       areaServed: [
         'Toronto',
         'Mississauga',

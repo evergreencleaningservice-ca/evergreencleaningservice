@@ -49,11 +49,23 @@ reports rather than pretended away in a unit test.
 | `tests/build/indexability.test.ts` | node | Phase 5. Builds the site in production mode into a throwaway directory and reads the emitted HTML: canonicals on the final domain, which pages are noindex, the sitemap's contents and origin, the allow-all `robots.txt`, and that only `build:preview` marks the output noindex. |
 | `tests/build/gates.test.ts` | node | Phase 4. `preflight.mjs`, `captcha-check.mjs` and `secret-check.mjs` run as child processes — real argv, real exit codes, a real `dist/` — because a gate that crashes instead of checking exits non-zero either way. |
 | `tests/worker/submit-lead.test.ts` | node | Phase 3 and Phase 4. `/api/submit-lead`: which columns the INSERT actually names and binds, server-side sanitising, the honeypot, the captcha failure paths, and the refusal of published test secrets on a production host. |
+| `tests/build/headings-and-links.test.ts` | node | Phase 6. One meaningful H1 per emitted page, and internal links that reach a 200 without a redirect, read off the build and the generated `_redirects` together. |
+| `tests/build/content.test.ts` | node | Phase 7. The corrections to the copy, asserted against the emitted HTML so a claim cannot come back through a component. |
+| `tests/build/images.test.ts` | node | Phase 8. Image formats, dimensions, loading and decoding attributes, and that no reference to a local `/images/` path survives the B2 rewrite. |
+| `tests/quick-quote.test.ts` | happy-dom | Phase 9. The short quote form: phone-or-email from six directions, a malformed optional field, no address and no surname, the failure matrix, one conversion, no PII, repeat clicks, both Turnstile timings, and errors and success as assistive technology receives them. |
+| `tests/worker/lead-validation.test.ts` | node | Phase 9. `leadProblems` — a name and one way to reply — and the endpoint agreeing with the form: phone-only, email-only, no address, and the 422s that name the field. |
+| `tests/build/quote-page.test.ts` | node | Phase 9. `/request-a-quote/` as emitted: one lead form where there were two, one H1, the full navigation, the sidebar's verified claims, no placeholder-as-label, and the rendered field contract matched against the fixture the behavioural suite drives. |
 
-Because all three lead forms — the two PPC landing pages and the shared
-`FormRuntime` used by the quote and contact forms — import
-`src/lib/lead-submit.ts`, a pass here is a pass for all three. Before this they
-were three copies of the same logic, and they had drifted.
+Because all the lead forms — the two PPC landing pages, the shared
+`FormRuntime` used by the quote and contact forms, and the short quote form —
+import `src/lib/lead-submit.ts`, a pass here is a pass for all of them. Before
+this they were three copies of the same logic, and they had drifted.
+
+`tests/fixtures/quick-quote.ts` is the one description of the short form's
+fields. `tests/quick-quote.test.ts` drives it; `tests/build/quote-page.test.ts`
+asserts the built component still matches it. That pairing is deliberate: a
+hand-built DOM fixture is the fastest way to test behaviour and the easiest
+thing in a repository to leave behind when the component changes.
 
 ## What is not tested
 

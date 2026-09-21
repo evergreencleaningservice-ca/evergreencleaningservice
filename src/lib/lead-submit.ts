@@ -224,6 +224,27 @@ export interface LeadFormHooks {
   onHoneypot?: (form: HTMLFormElement) => void;
   /** Something a visitor can act on. Called for every non-2xx and for a throw. */
   onError: (form: HTMLFormElement, message: string) => void;
+  /**
+   * A rule the browser cannot express, checked after `checkValidity()`.
+   *
+   * The short quote form needs "a phone number OR an email address, at least
+   * one" — HTML `required` can only say "this field, always", and marking
+   * both required is exactly the friction the short form exists to remove.
+   * Return null to proceed, or the message and the field to send the visitor
+   * to.
+   */
+  validate?: (form: HTMLFormElement) => { message: string; field?: string } | null;
+  /**
+   * How to show per-field validity problems.
+   *
+   * Defaults to `form.reportValidity()`, the browser's own bubbles, which is
+   * what every form on the site used before. A form carrying `novalidate`
+   * and rendering its own inline messages passes its renderer here instead —
+   * calling `reportValidity()` on such a form would show the browser bubble
+   * ON TOP of the inline message, which is two of the same complaint in two
+   * places.
+   */
+  reportInvalid?: (form: HTMLFormElement) => void;
   /** Button text while the request is in flight. */
   sendingLabel?: string;
   /**
@@ -279,7 +300,22 @@ export function wireLeadForm(form: HTMLFormElement, hooks: LeadFormHooks): void 
     }
 
     if (!form.checkValidity()) {
-      form.reportValidity();
+      if (hooks.reportInvalid) hooks.reportInvalid(form);
+      else form.reportValidity();
+      return;
+    }
+
+    /* Rules the browser has no vocabulary for. Runs after checkValidity so a
+       visitor is never told about a cross-field rule while a single field is
+       still malformed — one problem at a time, in the order they can fix
+       them. */
+    const problem = hooks.validate?.(form);
+    if (problem) {
+      hooks.onError(form, problem.message);
+      if (problem.field) {
+        const target = form.elements.namedItem(problem.field);
+        (target as HTMLElement | null)?.focus?.();
+      }
       return;
     }
 

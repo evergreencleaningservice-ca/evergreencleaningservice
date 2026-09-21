@@ -55,6 +55,17 @@ export function isoOrNull(v: unknown, now: Date = new Date()): string | null {
 /** Deliberately permissive: a shape check, not an attempt to validate email. */
 export const looksLikeEmail = (v: string): boolean => /^[^@\s]+@[^@\s.]+\.[^@\s]+$/.test(v);
 
+/**
+ * Deliberately permissive too: at least seven digits, however they are
+ * written.
+ *
+ * Seven is the length of a local number without an area code. Anything
+ * stricter rejects real numbers — extensions, "+1 (416) 803-4880", a number
+ * typed with spaces where someone's keyboard put them — and a lead refused
+ * because a regex disliked its punctuation is a lead lost to nothing.
+ */
+export const looksLikePhone = (v: string): boolean => (v.match(/\d/g) ?? []).length >= 7;
+
 /** The honeypot names in use across the site's three forms. */
 export const HONEYPOT_FIELDS = ['company_tax_id', 'company-website', 'website_trap'] as const;
 
@@ -143,8 +154,41 @@ export function normalizeLead(body: Record<string, unknown>, now: Date = new Dat
   };
 }
 
-/** The three the site cannot do anything useful without. */
-export const REQUIRED_FIELDS = ['full_name', 'work_email', 'phone'] as const;
+/**
+ * What a lead cannot be accepted without.
+ *
+ * A name, and a way to reply. It used to be name AND email AND phone, all
+ * three, which meant a visitor who only wanted to be called was refused
+ * unless they also surrendered an email address — and one who only wanted to
+ * be emailed had to invent a phone number. The short quote form removes that
+ * on the page; this is the same rule on the server, so the endpoint agrees
+ * with the form rather than quietly disagreeing with it.
+ */
+export const REQUIRED_FIELDS = ['full_name'] as const;
 
+/**
+ * Every reason this body cannot become a lead, as field names a client can
+ * act on. Empty means it can.
+ *
+ * `contact` is the cross-field rule: phone or email, at least one. An address
+ * is NOT required and never was on the server; the long form made it required
+ * in the browser only.
+ */
+export function leadProblems(lead: Lead): string[] {
+  const problems: string[] = REQUIRED_FIELDS.filter((key) => !lead[key]);
+
+  /* A supplied contact method has to be a plausible one. An absent one is
+     fine as long as the other is there — that is the whole point. */
+  if (lead.work_email && !looksLikeEmail(lead.work_email)) problems.push('work_email');
+  if (lead.phone && !looksLikePhone(lead.phone)) problems.push('phone');
+
+  const hasEmail = Boolean(lead.work_email) && looksLikeEmail(lead.work_email);
+  const hasPhone = Boolean(lead.phone) && looksLikePhone(lead.phone);
+  if (!hasEmail && !hasPhone) problems.push('contact');
+
+  return problems;
+}
+
+/** Kept for callers that only want the absent-and-mandatory list. */
 export const missingFields = (lead: Lead): string[] =>
   REQUIRED_FIELDS.filter((key) => !lead[key]);

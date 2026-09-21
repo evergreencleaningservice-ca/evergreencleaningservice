@@ -1,0 +1,454 @@
+---
+/**
+ * The short lead form — the primary quote experience, and the one cold paid
+ * traffic sees.
+ *
+ * WHY IT EXISTS. The form it replaces asks for eighteen fields and requires
+ * nine of them, including a complete street address and a last name, before
+ * it will accept an enquiry from someone who has not yet decided to buy
+ * anything. Measured on the built page: 1,363px tall at 390px wide, on a page
+ * 4,376px tall. Everything it asks that is not "who are you and how do I call
+ * you back" is a question the account executive can ask on the phone, and
+ * every one of them is a place to give up.
+ *
+ * WHAT IT ASKS, AND WHAT IT REFUSES TO ASK:
+ *
+ *   first name      not a full name. A surname buys nothing at this stage.
+ *   business name   the one qualifying fact that matters for commercial
+ *                   cleaning, and it is one field.
+ *   phone           EITHER of these. Not both.
+ *   email
+ *   postal or city  how we know whether we serve you. One short field, and it
+ *                   takes a postal code or a place name — a visitor should
+ *                   never have to guess which format a box wants.
+ *   service         one select.
+ *   message         optional, and labelled optional.
+ *
+ * NO street address. NO square footage, frequency or preferred schedule. Those
+ * are qualification, and qualification happens after a lead exists, not as a
+ * condition of creating one. The long form is still there for anyone who
+ * wants to hand over the full picture up front — it is a choice now, not a
+ * toll.
+ *
+ * "PHONE OR EMAIL" IS THE ONE RULE HTML CANNOT STATE. `required` can only say
+ * "this field, always", and marking both required is precisely the friction
+ * this form removes. It is checked in `validate` below, after the browser has
+ * finished with per-field validity, so a visitor is never told about a
+ * cross-field rule while a single field is still malformed.
+ *
+ * Everything behind the form is unchanged: the same endpoint, the same
+ * honeypot, the same Turnstile, the same single `lead_form_submission` after
+ * a 2xx, the same attribution merged invisibly by `lead-submit.ts`.
+ */
+import SpamGuard from './SpamGuard.astro';
+import { nap } from '../data/site';
+
+interface Props {
+  /** Prefix for field ids, so two of these can share a page. */
+  id?: string;
+  /** Heading rendered above the fields. Omit to render none. */
+  heading?: string;
+  /** Small line under the heading. */
+  intro?: string;
+}
+
+const { id = 'quick-quote', heading, intro } = Astro.props;
+const f = (name: string) => `${id}-${name}`;
+
+/* The site's own service names, as the service pages use them. */
+const SERVICES = [
+  'Office cleaning & janitorial',
+  'Commercial cleaning',
+  'Industrial & warehouse cleaning',
+  'Disinfection cleaning',
+  'Post-construction cleaning',
+  'Emergency cleaning',
+  'Building maintenance',
+  'Something else',
+];
+---
+
+<form
+  class="qq"
+  id={id}
+  method="post"
+  action="#"
+  novalidate
+  data-endpoint="/api/submit-lead"
+  data-form-id="quick-quote"
+  data-quick-quote
+  aria-labelledby={heading ? f('heading') : undefined}
+  aria-label={heading ? undefined : 'Request a quote'}
+>
+  {heading && <h2 class="qq-heading" id={f('heading')}>{heading}</h2>}
+  {intro && <p class="qq-intro">{intro}</p>}
+
+  {/* The error summary. Always in the DOM with a reserved height, so showing
+      it moves nothing — an error that shifts the layout moves the field the
+      visitor is about to correct. */}
+  <div class="qq-summary" data-qq-summary role="alert" aria-live="assertive" tabindex="-1"></div>
+
+  <div class="qq-row">
+    <div class="qq-field">
+      <label class="qq-label" for={f('first')}>First name <span class="qq-req">*</span></label>
+      <input
+        type="text"
+        id={f('first')}
+        name="first-name"
+        autocomplete="given-name"
+        autocapitalize="words"
+        required
+        aria-describedby={f('first-error')}
+      />
+      <p class="qq-error" id={f('first-error')} data-qq-error="first-name"></p>
+    </div>
+
+    <div class="qq-field">
+      <label class="qq-label" for={f('business')}>Business name <span class="qq-req">*</span></label>
+      <input
+        type="text"
+        id={f('business')}
+        name="business-name"
+        autocomplete="organization"
+        required
+        aria-describedby={f('business-error')}
+      />
+      <p class="qq-error" id={f('business-error')} data-qq-error="business-name"></p>
+    </div>
+  </div>
+
+  <fieldset class="qq-contact">
+    <legend class="qq-label">
+      How should we reach you? <span class="qq-req">*</span>
+      <span class="qq-hint">Phone or email — whichever you prefer. One is enough.</span>
+    </legend>
+
+    <div class="qq-row">
+      <div class="qq-field">
+        <label class="qq-sublabel" for={f('phone')}>Phone</label>
+        <input
+          type="tel"
+          id={f('phone')}
+          name="phone"
+          inputmode="tel"
+          autocomplete="tel"
+          aria-describedby={f('contact-error')}
+        />
+      </div>
+
+      <div class="qq-field">
+        <label class="qq-sublabel" for={f('email')}>Email</label>
+        <input
+          type="email"
+          id={f('email')}
+          name="email"
+          inputmode="email"
+          autocomplete="email"
+          spellcheck="false"
+          aria-describedby={f('contact-error')}
+        />
+      </div>
+    </div>
+
+    <p class="qq-error" id={f('contact-error')} data-qq-error="contact"></p>
+  </fieldset>
+
+  <div class="qq-row">
+    <div class="qq-field">
+      <label class="qq-label" for={f('postal')}>
+        Postal code or city <span class="qq-req">*</span>
+      </label>
+      <input
+        type="text"
+        id={f('postal')}
+        name="postal"
+        autocomplete="postal-code"
+        autocapitalize="characters"
+        required
+        aria-describedby={f('postal-error')}
+      />
+      <p class="qq-error" id={f('postal-error')} data-qq-error="postal"></p>
+    </div>
+
+    <div class="qq-field">
+      <label class="qq-label" for={f('service')}>Service needed <span class="qq-req">*</span></label>
+      <select id={f('service')} name="services" required aria-describedby={f('service-error')}>
+        <option value="">Choose one…</option>
+        {SERVICES.map((s) => <option value={s}>{s}</option>)}
+      </select>
+      <p class="qq-error" id={f('service-error')} data-qq-error="services"></p>
+    </div>
+  </div>
+
+  <div class="qq-field">
+    <label class="qq-label" for={f('message')}>
+      Anything we should know? <span class="qq-optional">Optional</span>
+    </label>
+    <textarea id={f('message')} name="message" rows="3" data-qq-optional></textarea>
+  </div>
+
+  {/* Honeypot. A person never sees it, so anything in it is a bot. */}
+  <div class="qq-hp" aria-hidden="true">
+    <label for={f('hp')}>Company website</label>
+    <input type="text" id={f('hp')} name="company-website" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <SpamGuard />
+
+  <button class="qq-submit" type="submit">Get my free quote</button>
+
+  <p class="qq-after">
+    An account executive reads this and replies within <strong>2 business hours</strong> on a
+    working day. No obligation, and no visit until you ask for one. Prefer to talk now?{' '}
+    <a href={nap.phoneHref}>Call {nap.phoneDisplay}</a>.
+  </p>
+</form>
+
+<script>
+  /* Wired here rather than by `FormRuntime`, which binds every
+     `form[data-endpoint]` with the browser's own validation bubbles. This
+     form renders its own inline messages and needs the cross-field
+     "phone or email" rule, so it brings its own wiring — and `FormRuntime`
+     skips it, because `wireLeadForm` refuses a form it has already bound and
+     this script runs first. */
+  import { wireQuickQuote } from '../lib/quick-quote';
+
+  document
+    .querySelectorAll<HTMLFormElement>('form[data-quick-quote]')
+    .forEach((form) => wireQuickQuote(form));
+</script>
+
+<style>
+  .qq {
+    margin: 0;
+  }
+
+  .qq-heading {
+    margin: 0 0 6px;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    line-height: 1.25;
+    color: var(--ink-heading);
+  }
+
+  .qq-intro {
+    margin: 0 0 20px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* Reserved, so revealing an error shifts nothing. */
+  .qq-summary {
+    min-height: 0;
+    margin: 0;
+  }
+
+  .qq-summary:not(:empty) {
+    min-height: auto;
+    margin: 0 0 18px;
+    padding: 12px 14px;
+    border: 1px solid #d9534f;
+    border-left-width: 4px;
+    border-radius: var(--radius);
+    background: #fdf3f3;
+    color: #a94442;
+    line-height: 1.5;
+  }
+
+  .qq-summary:focus-visible {
+    outline: 2px solid #a94442;
+    outline-offset: 2px;
+  }
+
+  .qq-row {
+    display: grid;
+    gap: 0 18px;
+  }
+
+  @media (min-width: 560px) {
+    .qq-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .qq-field {
+    margin: 0 0 14px;
+    min-width: 0;
+  }
+
+  .qq-contact {
+    margin: 0 0 6px;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  .qq-label {
+    display: block;
+    padding: 0;
+    margin: 0 0 5px;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: var(--ink-heading);
+  }
+
+  .qq-sublabel {
+    display: block;
+    margin: 0 0 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .qq-hint {
+    display: block;
+    margin-top: 2px;
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+
+  .qq-req {
+    color: #c0392b;
+  }
+
+  .qq-optional {
+    font-weight: 400;
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+
+  .qq input[type='text'],
+  .qq input[type='tel'],
+  .qq input[type='email'],
+  .qq select,
+  .qq textarea {
+    width: 100%;
+    max-width: 100%;
+    /* 48px: comfortably over the 24px minimum, and the size a thumb expects. */
+    min-height: 48px;
+    padding: 11px 12px;
+    border: 1px solid #cfd4cb;
+    border-radius: var(--radius);
+    background: #fff;
+    font-family: inherit;
+    font-size: 16px; /* under 16px, iOS zooms the page on focus */
+    color: var(--ink-heading);
+  }
+
+  .qq textarea {
+    min-height: 84px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+
+  .qq input:focus-visible,
+  .qq select:focus-visible,
+  .qq textarea:focus-visible,
+  .qq-submit:focus-visible {
+    outline: 3px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .qq [aria-invalid='true'] {
+    border-color: #c0392b;
+    background: #fffafa;
+  }
+
+  /* Reserved height, again: the message appears into space already held. */
+  .qq-error {
+    min-height: 1.15rem;
+    margin: 3px 0 0;
+    font-size: 12.5px;
+    line-height: 1.15rem;
+    color: #a94442;
+  }
+
+  .qq-hp {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .qq-submit {
+    width: 100%;
+    min-height: 52px;
+    margin-top: 6px;
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--brand);
+    color: #fff;
+    padding: 15px 22px;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .qq-submit:hover:not(:disabled) {
+    background: var(--brand-dark);
+  }
+
+  .qq-submit:disabled {
+    opacity: 0.75;
+    cursor: progress;
+  }
+
+  @media (min-width: 560px) {
+    .qq-submit {
+      width: auto;
+      min-width: 260px;
+    }
+  }
+
+  .qq-after {
+    margin: 14px 0 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  .qq-after a {
+    color: var(--brand);
+    font-weight: 700;
+  }
+</style>
+
+<style is:global>
+  /* Replaces the form on success, so it is not scoped to this component. */
+  .qq-confirm {
+    display: grid;
+    gap: 6px;
+    padding: 20px 22px;
+    border: 1px solid var(--brand);
+    border-left-width: 4px;
+    border-radius: var(--radius);
+    background: #f2f8ee;
+    line-height: 1.6;
+    color: var(--ink-heading);
+  }
+
+  .qq-confirm strong {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+  }
+
+  .qq-confirm a {
+    color: var(--brand);
+    font-weight: 700;
+  }
+
+  .qq-confirm:focus-visible {
+    outline: 3px solid var(--brand);
+    outline-offset: 3px;
+  }
+</style>

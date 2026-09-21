@@ -313,7 +313,12 @@ describe('the endpoint still behaves as it did', () => {
     captchaPasses();
     const res = await post({ captcha: 'a-token', email: 'jane@example.com' });
     expect(res.status).toBe(422);
-    expect((await res.json()).fields).toEqual(['full_name', 'phone']);
+    /* PHASE 9 CHANGED THIS ASSERTION, deliberately. It used to expect
+       `['full_name', 'phone']`, because the endpoint required a name AND an
+       email AND a phone. A valid email is now a complete way to reply, so a
+       body carrying one is short of a name and nothing else. The rule and
+       every case around it are in tests/worker/lead-validation.test.ts. */
+    expect((await res.json()).fields).toEqual(['full_name']);
   });
 
   it('answers 422 for an email that is not one', async () => {

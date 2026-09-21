@@ -1,6 +1,6 @@
 import { neon } from '@neondatabase/serverless';
 import { captcha } from './data/site';
-import { isHoneypotHit, looksLikeEmail, missingFields, normalizeLead, str } from './lib/lead-fields';
+import { isHoneypotHit, leadProblems, normalizeLead, str } from './lib/lead-fields';
 import { allowedCaptchaHostnames, isProductionHost, isPublishedTestSecret } from './lib/captcha-hosts';
 
 /**
@@ -71,10 +71,31 @@ async function notify(env: Env, lead: Record<string, string>) {
     console.warn('notify: not configured, no email sent. missing:', missing.join(', '));
     return;
   }
-  const lines = Object.entries(lead)
-    .filter(([, v]) => v)
-    .map(([k, v]) => `${k}: ${v}`)
-    .join('\n');
+  /* The core fields are listed ALWAYS, with "(not supplied)" where a value
+     is absent, because the short quote form legitimately omits things and an
+     account executive needs to know the difference between "no email" and
+     "email lost somewhere between the form and here". The rest — attribution,
+     the page, the user agent — is listed only when present, because thirty
+     empty lines of utm_ is noise, not information. */
+  const CORE: [keyof typeof lead | string, string][] = [
+    ['full_name', 'Name'],
+    ['business_name', 'Business'],
+    ['phone', 'Phone'],
+    ['work_email', 'Email'],
+    ['address', 'Postal code / city'],
+    ['services', 'Service needed'],
+    ['message', 'Message'],
+  ];
+  const core = CORE.map(([key, label]) => {
+    const value = (lead as Record<string, string>)[key as string];
+    return `${label}: ${value && value.trim() ? value : '(not supplied)'}`;
+  });
+
+  const extra = Object.entries(lead)
+    .filter(([key, v]) => !CORE.some(([c]) => c === key) && v && String(v).trim())
+    .map(([k, v]) => `${k}: ${v}`);
+
+  const lines = [...core, '', ...extra].join('\n');
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -234,9 +255,12 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
      function and is tested as one. */
   const lead = normalizeLead(body);
 
-  const missing = missingFields(lead);
-  if (missing.length) return json({ error: 'missing required fields', fields: missing }, 422);
-  if (!looksLikeEmail(lead.work_email)) return json({ error: 'invalid email' }, 422);
+  /* A name, and one way to reply. Phone OR email — requiring both refused a
+     visitor who only wanted a call unless they also handed over an email
+     address, and the short quote form no longer asks for both. An address is
+     not required and never was here. */
+  const problems = leadProblems(lead);
+  if (problems.length) return json({ error: 'invalid lead', fields: problems }, 422);
 
   if (!env.DATABASE_URL) {
     /* No database configured. Say so loudly rather than returning 200 and
