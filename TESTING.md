@@ -58,6 +58,7 @@ the phase reports rather than pretended away in a unit test.
 | `tests/quick-quote.test.ts` | happy-dom | Phase 9. The short quote form: phone-or-email from six directions, a malformed optional field, no address and no surname, the failure matrix, one conversion, no PII, repeat clicks, both Turnstile timings, and errors and success as assistive technology receives them. |
 | `tests/worker/lead-validation.test.ts` | node | Phase 9. `leadProblems` — a name and one way to reply — and the endpoint agreeing with the form: phone-only, email-only, no address, and the 422s that name the field. |
 | `tests/build/quote-page.test.ts` | node | Phase 9. `/request-a-quote/` as emitted: one lead form where there were two, one H1, the full navigation, the sidebar's verified claims, no placeholder-as-label, and the rendered field contract matched against the fixture the behavioural suite drives. |
+| `tests/build/landing-pages.test.ts` | node | Phase 10. Both paid pages from one table: the shared components, the short form, the absence of site navigation, the minimal header and legal footer, the real telephone number, no unverifiable claim, noindex and sitemap exclusion, the spam and conversion protections — and, asserted as loudly as the shared parts, that the two reporting identities stay distinct. |
 
 Because all the lead forms — the two PPC landing pages, the shared
 `FormRuntime` used by the quote and contact forms, and the short quote form —
@@ -99,7 +100,14 @@ a tested one.
   forty checks at 390px and 1440px against a build, with the endpoint stubbed
   inside the browser so no lead is stored. It is a script rather than a test
   because a browser in the suite would make `npm test` slow enough that people
-  stop running it.
+  stop running it. `npm run form:a11y -- <dist> [page] [formId]` drives any of
+  the three forms; `npm run lp:sticky -- <dist>` checks the landing pages'
+  mobile bar never obscures a focused control, against WCAG 2.2's 2.4.11.
+- **What the landing pages measure at each width.** `npm run lp:census --
+  <dist> <outDir> [label]` records fields, form position, page length,
+  requests, bytes, CLS and the links off each page, and screenshots all three
+  widths. It is how Phase 10's before/after table was produced — one
+  instrument on both sides, so the difference is the code's.
 - **Performance.** Nothing in the suite measures speed. `npm run measure`
   runs Lighthouse three times and reports the median; `npm run perf:matrix`
   attributes third-party cost by blocking one origin at a time inside the
