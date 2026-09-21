@@ -1,6 +1,7 @@
 import { neon } from '@neondatabase/serverless';
-import { captcha, PRODUCTION_HOSTS } from './data/site';
+import { captcha } from './data/site';
 import { isHoneypotHit, looksLikeEmail, missingFields, normalizeLead, str } from './lib/lead-fields';
+import { allowedCaptchaHostnames, isProductionHost, isPublishedTestSecret } from './lib/captcha-hosts';
 
 /**
  * The site's Worker.
@@ -103,24 +104,34 @@ async function notify(env: Env, lead: Record<string, string>) {
 }
 
 /**
- * Ask the provider whether this token is real.
+ * Ask the provider whether this token is real, and where it was solved.
  *
  * Turnstile and reCAPTCHA take the same form-encoded `secret`/`response` pair
- * and answer with the same `{ success, "error-codes" }` shape, so one function
- * covers both and only the URL changes.
+ * and answer with the same `{ success, hostname, "error-codes" }` shape, so
+ * one function covers both and only the URL changes.
  *
- * Returns a reason string on failure and null on success, so the caller logs
- * something specific rather than "captcha failed" — `timeout-or-duplicate`
- * (a replayed or stale token) and `invalid-input-secret` (the wrong key) look
- * identical from the visitor's side and need completely different fixes.
+ * The reason is returned rather than logged here so the caller says something
+ * specific — `timeout-or-duplicate` (a replayed or stale token) and
+ * `invalid-input-secret` (the wrong key) look identical from the visitor's
+ * side and need completely different fixes.
+ *
+ * `hostname` is where the visitor solved the challenge, which is not
+ * necessarily this site: a token minted on any page carrying the same site key
+ * verifies here too. The caller checks it against an allowlist.
  */
+interface CaptchaResult {
+  ok: boolean;
+  reason: string;
+  hostname: string;
+}
+
 async function verifyCaptcha(
   url: string,
   token: string,
   secret: string,
   ip: string
-): Promise<string | null> {
-  if (!token) return 'no token submitted';
+): Promise<CaptchaResult> {
+  if (!token) return { ok: false, reason: 'no token submitted', hostname: '' };
 
   try {
     const res = await fetch(url, {
@@ -128,14 +139,22 @@ async function verifyCaptcha(
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ secret, response: token, ...(ip ? { remoteip: ip } : {}) }),
     });
-    if (!res.ok) return `siteverify http ${res.status}`;
+    if (!res.ok) return { ok: false, reason: `siteverify http ${res.status}`, hostname: '' };
 
-    const body = await res.json<{ success?: boolean; 'error-codes'?: string[] }>();
-    return body.success ? null : (body['error-codes'] ?? ['unknown']).join(',');
+    const body = await res.json<{
+      success?: boolean;
+      hostname?: string;
+      'error-codes'?: string[];
+    }>();
+    const hostname = typeof body.hostname === 'string' ? body.hostname : '';
+    if (!body.success) {
+      return { ok: false, reason: (body['error-codes'] ?? ['unknown']).join(','), hostname };
+    }
+    return { ok: true, reason: '', hostname };
   } catch (err) {
     /* Provider unreachable. Reject rather than fail open: an outage that turns
        the captcha off is exactly when the form gets hammered. */
-    return `siteverify unreachable: ${String(err)}`;
+    return { ok: false, reason: `siteverify unreachable: ${String(err)}`, hostname: '' };
   }
 }
 
@@ -166,31 +185,47 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
     return json({ error: 'captcha unavailable' }, 503);
   }
 
-  /* Both providers publish a test pair that passes for any token on any domain.
-     Either is the right default for staging and catastrophic on production,
-     where it would wave through every bot on the internet. Going live is a
-     build and a secret away from happening by accident, so the check lives
-     here rather than in anyone's memory. Cloudflare's always-fails test secret
-     is refused too: on production it would reject every real lead. */
+  /* Both providers publish a test pair that passes for any token on any
+     domain. Either is the right default for staging and catastrophic on
+     production, where it would wave through every bot on the internet. This
+     is the ONLY layer that can see the secret's value, and therefore the only
+     one that can catch this at all — a build cannot, and `wrangler secret
+     list` shows names, not values. Cloudflare's always-fails test secret is
+     refused too: on production it would reject every real lead. */
   const host = new URL(request.url).hostname;
-  const TEST_SECRETS: readonly string[] = [
-    captcha.turnstile.testSecretKey,
-    captcha.turnstile.failSecretKey,
-    captcha.recaptcha.testSecretKey,
-  ];
-  if (TEST_SECRETS.includes(secret) && (PRODUCTION_HOSTS as readonly string[]).includes(host)) {
+  if (isPublishedTestSecret(secret) && isProductionHost(host)) {
     console.error(`submit-lead: ${secretName} is a published test key, on production host`, host);
     return json({ error: 'captcha misconfigured' }, 503);
   }
 
-  const failure = await verifyCaptcha(
+  const result = await verifyCaptcha(
     turnstile ? captcha.turnstile.verifyUrl : captcha.recaptcha.verifyUrl,
     str(body.captcha ?? body.recaptcha ?? body['g-recaptcha-response'] ?? body['cf-turnstile-response'], 4000),
     secret,
     request.headers.get('cf-connecting-ip') ?? ''
   );
-  if (failure) {
-    console.warn('submit-lead: captcha rejected —', failure);
+  if (!result.ok) {
+    console.warn('submit-lead: captcha rejected —', result.reason);
+    return json({ error: 'captcha failed' }, 403);
+  }
+
+  /* The token is real. That is not the same as the token being ours.
+     `hostname` is where the challenge was actually solved; a copy of this
+     page on a host someone else controls, carrying the same public site key,
+     mints tokens that verify here perfectly well. See `lib/captcha-hosts.ts`
+     for the allowlist and for why production's is a closed one.
+
+     An absent hostname is treated as a mismatch rather than waved through.
+     Both providers document it as present on success, so its absence means
+     either a provider change or something answering in their place, and
+     neither should quietly buy a lead. If genuine submissions ever start
+     failing, this is the log line to look for. */
+  const allowed = allowedCaptchaHostnames(host, secret);
+  if (!allowed.includes(result.hostname)) {
+    console.warn(
+      'submit-lead: captcha solved on an unexpected hostname —',
+      JSON.stringify({ solvedOn: result.hostname, requestHost: host, allowed })
+    );
     return json({ error: 'captcha failed' }, 403);
   }
 

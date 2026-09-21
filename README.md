@@ -27,9 +27,41 @@ npm run build && npx wrangler deploy
 ```
 
 Setting one without the other breaks every form silently — a test site key with
-a real secret makes `siteverify` reject genuine submissions with a 403. `npm run
-build` refuses rather than letting that ship; the Worker answers 503 on the
-other half.
+a real secret makes `siteverify` reject genuine submissions with a 403.
+
+### Where the captcha is enforced, and what each layer can see
+
+Three layers, because no single one can see everything. The runtime is the
+strongest and the other two exist so a mistake is caught earlier and louder.
+
+| Layer | Can see | Enforces | Cannot |
+| --- | --- | --- | --- |
+| `astro build` — `scripts/preflight.mjs` | `PUBLIC_TURNSTILE_SITE_KEY` | refuses a production build with the variable missing or set to a published test key | see the secret; it does not exist at build time |
+| `astro build` — `scripts/captcha-check.mjs` | every emitted `.html` | refuses a production build with any published key in the **output**, whatever put it there | anything the build did not emit |
+| `wrangler deploy` — `scripts/secret-check.mjs` | secret **names** | refuses a production deploy with `DATABASE_URL` or `TURNSTILE_SECRET` unset; refuses rather than passing if it cannot read the list at all | secret **values** — so it cannot tell a real secret from a published one |
+| the Worker, at runtime | the secret's value, and `siteverify`'s answer | 503 for a published test secret on a production host; 403 for a token solved on a hostname that is not ours | — |
+
+Both build gates are skipped by `npm run build:preview`: staging is *meant* to
+run on test keys.
+
+### Accepted captcha hostnames
+
+`siteverify` returns the hostname the challenge was solved on. A token solved
+on a copy of this page, on a host someone else controls, carrying the same
+public site key, verifies here perfectly well — so the hostname is checked
+against a per-environment allowlist. A mismatch is a 403: no lead is stored, no
+email is sent, and the browser never pushes a conversion event, because it only
+pushes on a 2xx.
+
+| Environment | Accepted |
+| --- | --- |
+| **Production** | `www.evergreencleaningservice.ca`, `evergreencleaningservice.ca` — and nothing else. Not staging, not `example.com`. |
+| **Staging** | `evergreencleaningservice.10xconnections.com`, plus `example.com` *only while a published test secret is in use*, because that is what Cloudflare's dummy `siteverify` reports. |
+| **`wrangler dev` / `*.workers.dev`** | the request's own hostname. |
+
+An **absent** hostname is treated as a mismatch, not waved through. If genuine
+submissions ever start failing with 403, the Worker log line to look for is
+`captcha solved on an unexpected hostname`.
 
 Node 20+ is required (Astro 7). There is no `.env`; everything that needs a
 credential reads it from the environment or from a Worker secret:

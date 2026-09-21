@@ -86,10 +86,10 @@ const post = (body: unknown, origin = PREVIEW, env: Partial<typeof ENV> = {}) =>
   );
 
 /** Every siteverify call succeeds unless a test says otherwise. */
-const captchaPasses = () =>
+const captchaPasses = (hostname = 'evergreencleaningservice.10xconnections.com') =>
   vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
     const url = String(input);
-    if (url.includes('siteverify')) return Response.json({ success: true });
+    if (url.includes('siteverify')) return Response.json({ success: true, hostname });
     return Response.json({ id: 'email-id' });
   });
 
@@ -357,10 +357,66 @@ describe('the endpoint still behaves as it did', () => {
   });
 
   it('allows a test secret on the staging host, which is what it is for', async () => {
-    captchaPasses();
+    /* Cloudflare's dummy siteverify reports example.com whatever host asked. */
+    captchaPasses('example.com');
     const res = await post(FULL_BODY, PREVIEW, {
       TURNSTILE_SECRET: captcha.turnstile.testSecretKey,
     });
     expect(res.status).toBe(200);
+  });
+});
+
+describe('Phase 4 — the token has to have been solved on one of our hostnames', () => {
+  const PROD = 'https://www.evergreencleaningservice.ca';
+
+  it('accepts a token solved on the host that was asked', async () => {
+    captchaPasses('www.evergreencleaningservice.ca');
+    expect((await post(FULL_BODY, PROD)).status).toBe(200);
+    expect(queries).toHaveLength(1);
+  });
+
+  it('accepts the apex on the www host and vice versa', async () => {
+    captchaPasses('evergreencleaningservice.ca');
+    expect((await post(FULL_BODY, PROD)).status).toBe(200);
+  });
+
+  it.each([
+    ['a host an attacker controls', 'evil.example'],
+    ['a lookalike', 'www.evergreencleaningservice.ca.evil.example'],
+    ['the staging host', 'evergreencleaningservice.10xconnections.com'],
+    ["the test key's dummy hostname", 'example.com'],
+    ['nothing at all', ''],
+  ])('rejects a token solved on %s, and stores nothing', async (_label, hostname) => {
+    captchaPasses(hostname);
+    const res = await post(FULL_BODY, PROD, { TURNSTILE_SECRET: 'a-real-production-secret' });
+    expect(res.status).toBe(403);
+    expect(await res.json()).toEqual({ error: 'captcha failed' });
+    expect(queries).toHaveLength(0);
+  });
+
+  it('rejects a production token replayed at staging', async () => {
+    captchaPasses('www.evergreencleaningservice.ca');
+    const res = await post(FULL_BODY, PREVIEW, { TURNSTILE_SECRET: 'a-real-production-secret' });
+    expect(res.status).toBe(403);
+    expect(queries).toHaveLength(0);
+  });
+
+  it('a missing hostname is treated as a mismatch, not waved through', async () => {
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) =>
+      String(input).includes('siteverify')
+        ? Response.json({ success: true })
+        : Response.json({ id: 'email-id' })
+    );
+    expect((await post(FULL_BODY, PROD)).status).toBe(403);
+    expect(queries).toHaveLength(0);
+  });
+
+  it('a rejected hostname never reaches Neon or Resend', async () => {
+    const fetchSpy = captchaPasses('evil.example');
+    await post(FULL_BODY, PROD, { TURNSTILE_SECRET: 'a-real-production-secret' });
+    expect(queries).toHaveLength(0);
+    /* one call: siteverify. No Resend. */
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(String(fetchSpy.mock.calls[0][0])).toContain('siteverify');
   });
 });

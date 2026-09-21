@@ -44,6 +44,8 @@ reports rather than pretended away in a unit test.
 | --- | --- | --- |
 | `tests/lead-submit.test.ts` | happy-dom | Phase 2. The shared submit pipeline: event ordering, the failure matrix, duplicate clicks, control recovery, the PII allowlist, captcha token handling. |
 | `tests/attribution.test.ts` | happy-dom | Phase 3. First- and latest-touch rules, survival across internal navigation, expiry in both retention modes, sanitising and length limits, and that nothing reaches the DOM. |
+| `tests/captcha-hosts.test.ts` | node | Phase 4. The production and staging hostname allowlists, and detection of every published key. |
+| `tests/build/gates.test.ts` | node | Phase 4. `preflight.mjs`, `captcha-check.mjs` and `secret-check.mjs` run as child processes — real argv, real exit codes, a real `dist/` — because a gate that crashes instead of checking exits non-zero either way. |
 | `tests/worker/submit-lead.test.ts` | node | Phase 3 and Phase 4. `/api/submit-lead`: which columns the INSERT actually names and binds, server-side sanitising, the honeypot, the captcha failure paths, and the refusal of published test secrets on a production host. |
 
 Because all three lead forms — the two PPC landing pages and the shared

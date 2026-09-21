@@ -6,18 +6,20 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run preflight && astro build && npm run redirects && npm run images",
+    "build": "npm run preflight && astro build && npm run redirects && npm run images && npm run captcha:check",
     "build:preview": "astro build && npm run redirects && node scripts/noindex.mjs && npm run images",
     "preview": "astro preview",
     "test": "vitest run",
     "test:watch": "vitest",
     "check": "astro check",
     "deploy:preview": "npm test && npm run b2:sync && npm run build:preview && wrangler deploy && node scripts/purge.mjs",
-    "deploy": "npm test && npm run b2:sync && npm run build && wrangler deploy",
+    "deploy": "npm test && npm run secret:check && npm run b2:sync && npm run build && wrangler deploy",
     "redirects": "node --experimental-strip-types scripts/redirects.mjs",
     "images": "node --experimental-strip-types scripts/images.mjs",
     "b2:sync": "node --experimental-strip-types scripts/b2-sync.mjs",
-    "preflight": "node --experimental-strip-types scripts/preflight.mjs"
+    "preflight": "node --experimental-strip-types scripts/preflight.mjs",
+    "captcha:check": "node --experimental-strip-types scripts/captcha-check.mjs",
+    "secret:check": "node --experimental-strip-types scripts/secret-check.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
