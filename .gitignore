@@ -20,3 +20,6 @@ pnpm-debug.log*
 
 # wrangler
 .wrangler/
+
+# test build output
+.astro-test-dist/

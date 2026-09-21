@@ -16,7 +16,16 @@ npm run check   # astro check (types + content schema) — prompts to install
                 # @astrojs/check + typescript on first run; they are not dependencies
 npm run b2:sync # upload public/images to the Backblaze bucket
 npm run preflight # refuses a production build that would ship a test captcha key
+npm test        # the whole suite (see TESTING.md)
+npm run verify:indexing -- staging      # check a DEPLOYED origin's indexability
+npm run verify:indexing -- production   # the same, against the live site
 ```
+
+`verify:indexing` is the go-live check that cannot be a unit test: it reads
+what an origin actually serves. Run it against **production immediately after
+the DNS cutover** — the one mistake that would cost most is launching with the
+staging `X-Robots-Tag: noindex` still attached, and it is invisible from the
+page.
 
 Going live needs **both** halves of the captcha pair, in two different places:
 

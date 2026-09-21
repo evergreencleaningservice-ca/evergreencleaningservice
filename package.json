@@ -19,7 +19,8 @@
     "b2:sync": "node --experimental-strip-types scripts/b2-sync.mjs",
     "preflight": "node --experimental-strip-types scripts/preflight.mjs",
     "captcha:check": "node --experimental-strip-types scripts/captcha-check.mjs",
-    "secret:check": "node --experimental-strip-types scripts/secret-check.mjs"
+    "secret:check": "node --experimental-strip-types scripts/secret-check.mjs",
+    "verify:indexing": "node --experimental-strip-types scripts/verify-indexing.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
