@@ -29,16 +29,76 @@ const turnstileKey =
 /* Built as a string and written with `set:html`, because Astro emits an
    `is:inline` script body as RAW TEXT. Wrapping it in {`...`} publishes the
    braces and backticks verbatim and the loader never runs — that exact bug
-   shipped on 76 pages once already (see GoogleTagManager.astro). */
+   shipped on 76 pages once already (see GoogleTagManager.astro).
+
+   DEFERRED, AND THE NUMBERS SAY WHY. api.js used to load on first paint on
+   every page carrying a form, which — because the sidebar carries a quote
+   form — is every inner page on the site. Measured on deployed staging,
+   median of three mobile runs, by blocking challenges.cloudflare.com:
+   269KB and 4 requests, worth 1,243ms of LCP. The widget is invisible
+   (`interaction-only`) and is not needed until someone is at the form, so
+   it now loads on whichever of these happens first:
+
+     - the form scrolls within 600px of the viewport, or
+     - anything inside it takes focus or is typed into.
+
+   The focus path is the one that matters for correctness: a visitor who
+   tabs straight to a field starts the load immediately, and the submit
+   pipeline already waits up to six seconds for a token before posting
+   (`lead-submit.ts`), which is far longer than api.js takes once started.
+
+   No timer backstop. A timer would reintroduce the cost it exists to avoid
+   on every page nobody scrolls. A form that is never approached and never
+   touched is a form that is never submitted. */
 const loader = `
 (function () {
-  if (document.querySelector('script[data-turnstile]')) return;
-  var s = document.createElement('script');
-  s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-  s.async = true;
-  s.defer = true;
-  s.setAttribute('data-turnstile', '');
-  document.head.appendChild(s);
+  var FORMS = 'form';
+  var MARGIN = '600px';
+
+  function inject() {
+    if (document.querySelector('script[data-turnstile]')) return;
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    s.async = true;
+    s.defer = true;
+    s.setAttribute('data-turnstile', '');
+    document.head.appendChild(s);
+  }
+
+  function arm() {
+    var widgets = document.querySelectorAll('.cf-turnstile');
+    if (!widgets.length) return;
+
+    var targets = [];
+    for (var i = 0; i < widgets.length; i++) {
+      targets.push(widgets[i].closest(FORMS) || widgets[i]);
+    }
+
+    /* Focus or a keystroke anywhere in the form: load now. */
+    for (var j = 0; j < targets.length; j++) {
+      targets[j].addEventListener('focusin', inject, { once: true });
+      targets[j].addEventListener('input', inject, { once: true });
+    }
+
+    /* Approaching the viewport: load now. No IntersectionObserver (a very
+       old browser) means load immediately, which is the previous
+       behaviour — never worse than it was. */
+    if (!('IntersectionObserver' in window)) { inject(); return; }
+
+    var io = new IntersectionObserver(function (entries) {
+      for (var k = 0; k < entries.length; k++) {
+        if (entries[k].isIntersecting) { inject(); io.disconnect(); return; }
+      }
+    }, { rootMargin: MARGIN });
+
+    for (var m = 0; m < targets.length; m++) io.observe(targets[m]);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', arm, { once: true });
+  } else {
+    arm();
+  }
 })();
 `.trim();
 ---

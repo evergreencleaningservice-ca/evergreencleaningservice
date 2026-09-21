@@ -18,6 +18,7 @@
     "images": "node --experimental-strip-types scripts/images.mjs",
     "b2:sync": "node --experimental-strip-types scripts/b2-sync.mjs",
     "preflight": "node --experimental-strip-types scripts/preflight.mjs",
+    "fonts:fetch": "node --experimental-strip-types scripts/fonts-fetch.mjs",
     "images:variants": "node --experimental-strip-types scripts/hero-variants.mjs",
     "measure": "node --experimental-strip-types scripts/measure.mjs",
     "captcha:check": "node --experimental-strip-types scripts/captcha-check.mjs",
