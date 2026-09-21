@@ -23,6 +23,7 @@
     "measure": "node --experimental-strip-types scripts/measure.mjs",
     "captcha:check": "node --experimental-strip-types scripts/captcha-check.mjs",
     "secret:check": "node --experimental-strip-types scripts/secret-check.mjs",
+    "perf:matrix": "node --experimental-strip-types scripts/perf-matrix.mjs",
     "verify:indexing": "node --experimental-strip-types scripts/verify-indexing.mjs"
   },
   "dependencies": {

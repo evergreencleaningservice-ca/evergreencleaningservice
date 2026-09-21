@@ -279,3 +279,72 @@ Run against the staging origin `https://evergreencleaningservice.10xconnections.
 Until ownership is resolved, none of §3 can be applied, and the new site will
 report zero form conversions from the moment DNS moves. **This is the item to
 settle first.**
+
+---
+
+## 10. Measured cost of the container, added after Phase 8
+
+The Phase 8 follow-up measured what the container costs, by **request
+blocking inside the measuring browser only**. Nothing in the container was
+changed, and nothing about what a visitor receives was altered. Deployed
+staging, median of three mobile Lighthouse runs per condition, same page and
+conditions throughout.
+
+| Condition | Perf | FCP | LCP | TBT | Reqs | KB | Main-thread |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Normal | 51 | 2,861 | 10,257 | 518 | 37 | 912 | 1,810 |
+| **GTM blocked** | **86** | 2,712 | **3,189** | **0** | 21 | 304 | 844 |
+| SearchKings blocked | 49 | 5,344 | 10,083 | 446 | 37 | 944 | 1,825 |
+| ClickCease blocked | 48 | 5,436 | 9,653 | 478 | 37 | 921 | 1,764 |
+| 535014.tctm.co blocked | 56 | 2,805 | 9,914 | 433 | 37 | 960 | 1,641 |
+| Turnstile blocked | 48 | 5,294 | 10,080 | 491 | 37 | 978 | 1,781 |
+| Google Fonts blocked | 55 | 2,835 | 9,921 | 466 | 37 | 912 | 1,801 |
+| **All optional third parties blocked** | **86** | 2,729 | **3,240** | **0** | 21 | 304 | 745 |
+
+**Read this carefully before acting on it.**
+
+- **The container as a whole is the cost, not any one vendor inside it.**
+  Blocking GTM is worth 35 Performance points, 7.1 seconds of LCP, all 518ms
+  of Total Blocking Time, 16 requests and 608KB. Blocking SearchKings,
+  ClickCease or tctm.co *individually*, while the container still loads,
+  moves Performance by −2, −3 and +5 — inside the run-to-run spread.
+- **"GTM blocked" and "all optional third parties blocked" are the same
+  number** (86 / ~3.2s), because ClickCease, SearchKings, tctm.co and the
+  Bing UET beacon are all loaded *by* the container. Removing individual
+  vendors will not approach that; consolidating what the container loads at
+  all is what would.
+- **3.2s LCP is the site's own floor in this test environment**, not a target
+  the container can be tuned to. The remaining ~7s is the container.
+- **The absolute milliseconds are this environment's.** Outbound HTTPS from
+  the measuring container goes through a proxy that terminates TLS, adding a
+  hop and a re-encryption the live site never pays. Both halves of every
+  comparison carry that overhead equally, so the **differences** are the
+  finding and the absolutes are not.
+
+### What this does and does not authorise
+
+**It does not authorise removing anything.** SearchKings, ClickCease and the
+call-tracking tag are the client's vendors, on accounts nobody here has
+access to, and a tag that looks like dead weight in a Lighthouse run may be
+the thing attributing a phone call. The numbers above are for whoever holds
+those accounts to act on.
+
+**GTM's own loading was not touched, deliberately.** Deferring or
+conditionally loading the container would improve every number in that table
+and is exactly the wrong thing to do without first analysing conversion
+attribution, consent behaviour and tag reliability. A container that loads
+late misses early interactions; a container that loads conditionally misses
+them unpredictably. That is a measurement decision, not a performance one.
+
+### Recommended, in order, for whoever holds the accounts
+
+1. **Establish which of ClickCease, SearchKings `galaxy.min.js` and
+   `535014.tctm.co` are still wanted after the handover.** All three are
+   SearchKings' stack. If the answer is none, that is 16 requests and 608KB
+   that leave with them — and §3.3 and §6 of this document already cover the
+   container changes that go with it.
+2. **Confirm call tracking is not among them** before removing anything.
+   `535014.tctm.co` has the shape of a call-tracking provider, and removing a
+   call-tracking script silently ends phone attribution.
+3. **Re-measure with this same matrix afterwards** rather than assuming the
+   saving. `npm run perf:matrix` reproduces the table above.

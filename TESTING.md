@@ -74,6 +74,12 @@ a tested one.
   `wp-check-nothing-is-missing` diff, which is a separate, browser-based
   procedure run against the preview hostname.
 - **Anything visual.** No layout, no breakpoints, no screenshots.
+- **Performance.** Nothing in the suite measures speed. `npm run measure`
+  runs Lighthouse three times and reports the median; `npm run perf:matrix`
+  attributes third-party cost by blocking one origin at a time inside the
+  measuring browser. Both need a running origin, both are slow, and both
+  belong in a report rather than in a test — a Lighthouse score is a
+  measurement of a network on a day, not a property of the code.
 - **Deployed response headers.** `X-Robots-Tag` is `dist/_headers` as
   Cloudflare interprets it, and that can be wrong while the repository is
   right — a stale deploy, an edge cache, a zone transform rule. The build
