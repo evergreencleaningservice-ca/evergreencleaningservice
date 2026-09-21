@@ -1,6 +1,7 @@
 import { neon } from '@neondatabase/serverless';
 import { captcha } from './data/site';
 import { isHoneypotHit, leadProblems, normalizeLead, str } from './lib/lead-fields';
+import { notificationPayload } from './lib/notification';
 import { allowedCaptchaHostnames, isProductionHost, isPublishedTestSecret } from './lib/captcha-hosts';
 
 /**
@@ -71,31 +72,15 @@ async function notify(env: Env, lead: Record<string, string>) {
     console.warn('notify: not configured, no email sent. missing:', missing.join(', '));
     return;
   }
-  /* The core fields are listed ALWAYS, with "(not supplied)" where a value
-     is absent, because the short quote form legitimately omits things and an
-     account executive needs to know the difference between "no email" and
-     "email lost somewhere between the form and here". The rest — attribution,
-     the page, the user agent — is listed only when present, because thirty
-     empty lines of utm_ is noise, not information. */
-  const CORE: [keyof typeof lead | string, string][] = [
-    ['full_name', 'Name'],
-    ['business_name', 'Business'],
-    ['phone', 'Phone'],
-    ['work_email', 'Email'],
-    ['address', 'Postal code / city'],
-    ['services', 'Service needed'],
-    ['message', 'Message'],
-  ];
-  const core = CORE.map(([key, label]) => {
-    const value = (lead as Record<string, string>)[key as string];
-    return `${label}: ${value && value.trim() ? value : '(not supplied)'}`;
-  });
+  /* The body and the reply address are built in `lib/notification.ts`, where
+     the exact JSON can be asserted on without an API key or a network. That
+     matters here more than it usually would: `reply_to` used to be set from
+     `work_email` unconditionally, which was fine only while the endpoint
+     required an email on every lead. The short quote form takes a phone
+     number instead, so an empty `reply_to` would now be sent — and a lead
+     whose notification Resend refuses is a lead nobody is told about. */
+  const payload = notificationPayload(lead, env.LEAD_NOTIFY_FROM!, env.LEAD_NOTIFY_TO!);
 
-  const extra = Object.entries(lead)
-    .filter(([key, v]) => !CORE.some(([c]) => c === key) && v && String(v).trim())
-    .map(([k, v]) => `${k}: ${v}`);
-
-  const lines = [...core, '', ...extra].join('\n');
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -103,13 +88,7 @@ async function notify(env: Env, lead: Record<string, string>) {
         authorization: `Bearer ${env.RESEND_API_KEY}`,
         'content-type': 'application/json',
       },
-      body: JSON.stringify({
-        from: env.LEAD_NOTIFY_FROM,
-        to: [env.LEAD_NOTIFY_TO],
-        reply_to: lead.work_email,
-        subject: `New proposal request — ${lead.full_name}`,
-        text: lines,
-      }),
+      body: JSON.stringify(payload),
     });
 
     if (!res.ok) {

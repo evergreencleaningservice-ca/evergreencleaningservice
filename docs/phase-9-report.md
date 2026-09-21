@@ -1,8 +1,9 @@
 # Phase 9 — improve the quote experience
 
-**Commits** `2302e7c` (the change) and `dfa1f6d` (the measurement tooling), on
+**Commits** `2302e7c` (the change), `dfa1f6d` (the measurement tooling),
+`fa4c41d` (this report) and `COMMIT_CLOSEOUT` (the closeout — §14), on
 `claude/optimistic-clarke-wz1p8g`. Deployed to staging as version
-`2af2e691-0f1a-4dec-9434-a35fbb65f513`.
+`2af2e691-0f1a-4dec-9434-a35fbb65f513`; the closeout is not yet deployed.
 
 Nothing in production, DNS, GTM, Google Ads, GA4, Microsoft Ads, the Neon
 schema, persistent attribution or the Turnstile production credentials was
@@ -16,7 +17,7 @@ identified in §9.
 Measured on the built site before any edit, at three widths, with screenshots
 in `.measure/p9/`.
 
-| Surface | Lead forms | Visible fields | Required | Form height @390 |
+| Surface | Lead forms | Visitor-visible fields | Required | Form height @390 |
 | --- | --- | --- | --- | --- |
 | `/request-a-quote/` | **2** — the page form and an identical sidebar copy, both `data-form-id="quote-form-1381"` | 18 each | 9 each | 1,363px, then 1,236px more, on a 4,376px page |
 | homepage | 1 (`contact-form-1384`) | 10 | **10** | 1,021px |
@@ -123,8 +124,10 @@ seven-digits-anywhere heuristic produced.
 
 | | Before | After |
 | --- | --- | --- |
-| Labels (not placeholders) | 19 labels, 0 placeholder-only | 7 labels, 0 placeholder-only, `placeholder=` absent from the form entirely |
-| `autocomplete` tokens | 20 of 38 controls | 6 of 6 applicable controls |
+| `<label>` elements on the page | 39 | **8** — one per control, the honeypot's included |
+| Fields labelled only by a placeholder | 0 | **0** |
+| `placeholder=` attributes on the page | 3 | **0** — absent from the quote form entirely |
+| `autocomplete` on applicable controls | 20 of 38 controls | **6 of 6** |
 | Input types / `inputmode` | mixed | `tel` + `inputmode="tel"`, `email` + `inputmode="email"`, `postal-code`, `organization`, `given-name` |
 | Controls under 44px tall | **36** | **0** (48px fields, 52px submit) |
 | Font size in inputs | below 16px | 16px — under that, iOS zooms the page on focus |
@@ -144,13 +147,14 @@ learn three things that were all knowable at once.
 
 ## 6. Tests
 
-**353 pass, 13 files.** 120 of them are new.
+**378 pass, 14 files.** 145 of them are new.
 
 | File | Env | Tests |
 | --- | --- | --- |
 | `tests/quick-quote.test.ts` | happy-dom | 45 |
 | `tests/worker/lead-validation.test.ts` | node | 34 |
 | `tests/build/quote-page.test.ts` | node | 41 |
+| `tests/worker/notification.test.ts` | node | 25 (added in the closeout, §14) |
 
 Every case the phase brief listed is covered: telephone-only, email-only, both,
 neither-rejected, a malformed optional contact, success with no address and no
@@ -197,7 +201,9 @@ change and not the network.
 | | Before | After |
 | --- | --- | --- |
 | Lead forms on the page | 2 | **1** |
-| Visible fields | 38 | **8** (7 asked + the 1×1 honeypot) |
+| **Visitor-visible fields** | 36 (18 in each of the two identical forms) | **7** |
+| Clipped, non-visible honeypots | 2 | **1** |
+| **Form controls in total** | 38 | **8** |
 | Required fields | 18 | **4** |
 | Completion steps | 18 fields → submit → navigate to `/thank-you/` | 7 fields → submit → confirmation in place |
 | Form height @390 | 1,363px + 1,236px | **1,086px** |
@@ -423,17 +429,17 @@ single biggest difference between them and a page built for paid traffic.
 
 3. **Decide the page set with the ad accounts, not from the codebase.** The
    right number of landing pages is the number of ad groups that deserve their
-   own message. I do not have access to the Google Ads or Microsoft Ads
-   accounts, so I would propose the structure and stop:
+   own message. **Decision 1 below settles this: no new pages until the ad
+   groups and their final URLs are known.** The sketch that follows is kept
+   only to show the shape of the question, and none of it is to be built:
 
    - `/lp/office-cleaning/` — the largest term set
    - `/lp/commercial-cleaning/` — exists
    - `/lp/janitorial-services/`
    - `/lp/post-construction-cleaning/` — a distinct, higher-value intent
 
-   **Whether these match real ad groups is a question for whoever holds the
-   accounts.** Building four pages against guessed ad groups is four pages
-   nobody sends traffic to.
+   **None of those four is approved and none is to be created.** Building
+   pages against guessed ad groups is pages nobody sends traffic to.
 
 4. **Above-the-fold contract.** Each page: one headline naming the service and
    the city, one sub-line naming the proof (since 1989, WSIB, bonded), the form
@@ -459,10 +465,132 @@ single biggest difference between them and a page built for paid traffic.
   every page, so it should be designed once rather than sprinkled onto landing
   pages first.
 
-### Open questions I would need answered before starting
+### Decisions taken — Paolo, 21 Sep 2026
 
-1. Which ad groups are actually running, and what do they bid on?
-2. Is there a call-tracking number in use today, and on which pages?
-3. Should the landing pages carry the same phone number as the site, or a
-   tracked one? (This is really a Phase 11 question, but it changes the
-   layout.)
+These are settled. Phase 10 starts from them rather than re-asking.
+
+1. **No speculative landing pages.** Do not create new landing pages until the
+   actual Google Ads and Microsoft Ads ad groups and their final URLs are
+   known. The four addresses sketched above were inferred from the service
+   names in this codebase, not from any ad account, and they stay a sketch.
+
+2. **The real phone number everywhere.** `(416) 803-4880` in visible content,
+   in the JSON-LD and in the footer, on paid pages as on every other page.
+   Dynamic number insertion may be implemented later, in Phase 11; until then
+   there is one number and the NAP stays consistent.
+
+3. **Update and consolidate the two existing landing pages in Phase 10.** They
+   are staging pages, not production destinations, so there is no live
+   landing-page experiment to preserve.
+
+4. **Keep their `form_id` values distinct** — `ppc-lead-form` and `lpq-form`.
+   Telling the two apart is the point of the conversion data.
+
+5. **How to describe point 3.** Changing these forms does not erase or reset
+   historical Google Ads data; that data lives in the ad account and is
+   untouched by anything in this repository. What changes is the future
+   visitor experience and what is measured from here on. An earlier draft of
+   this report framed it as risking conversion history, which was wrong, and
+   the framing is corrected here rather than quietly dropped.
+
+---
+
+## 14. Closeout — the phone-only notification defect
+
+Found while answering a question about §3, not by a test. Fixed before Phase 9
+was accepted.
+
+### What was wrong
+
+`notify()` sent `reply_to: lead.work_email` unconditionally. That was correct
+for exactly as long as the endpoint required an email address on every lead,
+which it did until §3 of this phase made a phone number sufficient on its own.
+From that change onward a phone-only lead would have sent `reply_to: ""`, which
+is not an email address. Resend validates that field, so the likely outcome is
+a rejected send.
+
+**The lead is never lost.** The row is written before `notify()` runs, and
+`notify()` catches its own failures so the visitor still receives a 200. What
+would have been lost is anyone being told the lead arrived — which is worse
+than a visible error, because nothing anywhere says a thing is wrong.
+
+It had never executed. Resend is not configured on staging or anywhere else, so
+`notify()` has only ever taken its "not configured" branch. A defect that has
+never run is still a defect; this one would have fired on the first real
+phone-only enquiry after launch, which is precisely the path Phase 9 exists to
+open.
+
+### The fix
+
+`src/lib/notification.ts` — new, pure, no environment and no network:
+
+- `notificationPayload(lead, from, to)` builds the exact body Resend receives.
+  `reply_to` is **omitted entirely** when there is no usable address: not an
+  empty string, not `null`, not `undefined`, not a placeholder. An absent key
+  is the only correct way to say "there is no reply address".
+- An address is included only if it passes `looksLikeEmail`, the same shape
+  check the endpoint validates with. So even a malformed address that somehow
+  reached the database — a hand-written row, a future import — cannot produce a
+  payload Resend will refuse.
+- `notificationText(lead)` keeps the body behaviour unchanged: all seven core
+  fields always listed, `(not supplied)` where absent, attribution appended
+  only when non-empty.
+
+`src/worker.ts` now calls it and sends `JSON.stringify(payload)`. Nothing else
+about `notify()` changed — the not-configured warning, the rejected-send error
+with Resend's own reason, and the caught exception all behave as before.
+
+### Proof
+
+`tests/worker/notification.test.ts`, **25 tests**, two levels: the builder
+directly, then the Worker end to end with Neon and `siteverify` stubbed,
+reading the actual bytes sent to Resend. A correct builder the handler does not
+call is worth nothing, and the handler calling it wrongly is the exact class of
+mistake being fixed.
+
+| Case | Asserted |
+| --- | --- |
+| Phone-only | Row stored with `work_email: ''`; the Resend body has no `reply_to` key at all, verified after a `JSON.stringify` round trip because `stringify` drops `undefined` but keeps `''` |
+| Email-only | Row stored; `reply_to` is the address; body shows `Phone: (not supplied)` |
+| Both | Both columns stored; `reply_to` is the address; both shown in the body |
+| Empty / whitespace email | No `reply_to` key |
+| Malformed email | No `reply_to` key — refused rather than passed on |
+| Every payload shape | Only Resend's own keys, no `null`, no `undefined`, no empty string, `to` an array |
+| Body | `(not supplied)` for each absent core field; never prints `undefined` |
+| Resend rejects (422) | Row still stored, visitor still gets 200, failure logged |
+| Resend request throws | Row still stored, visitor still gets 200, failure logged |
+| Resend unconfigured | Row still stored, nothing sent, warning logged |
+
+**The tests were verified against the defect.** Temporarily restoring the old
+`payload.reply_to = lead.work_email` line makes **10 of the 25 fail**, including
+the end-to-end phone-only case. A test that passes against both the bug and the
+fix proves nothing, so this was checked rather than assumed.
+
+### Corrections to this report
+
+Three numbers in §5 and §7 were wrong and are fixed above:
+
+- "8 visible fields (7 asked + the 1×1 honeypot)" conflated two things. It is
+  now stated as **seven visitor-visible fields, one clipped non-visible
+  honeypot, eight form controls in total** — and the before column likewise,
+  as 36 visitor-visible fields across the two identical forms, 2 honeypots,
+  38 controls.
+  The honeypot's input measures 26×48 and reports a non-zero rectangle; it
+  paints no pixels because its wrapper carries `clip-path: inset(50%)` and
+  `overflow: hidden`. The census counted it as visible because
+  `getBoundingClientRect()` does not account for `clip-path`.
+- "19 labels" was the figure for one form, quoted as if it were the page. The
+  page carried **39** `<label>` elements before and has **8** now.
+- "0 placeholder-only" was right — no field was ever labelled by a placeholder
+  alone — but the page did carry **3** `placeholder=` attributes before, and
+  now carries none in the quote form.
+
+That the honeypot is genuinely not exposed is established independently of the
+census, by the accessibility tree: it does not appear in the form's ARIA
+snapshot, and Lighthouse scores accessibility 100 with no `aria-hidden-focus`
+failure, which is the audit that fires when a focusable element sits inside
+`aria-hidden`.
+
+### Suite after the closeout
+
+**378 pass, 14 files.** No test was weakened or removed to accommodate the fix.
