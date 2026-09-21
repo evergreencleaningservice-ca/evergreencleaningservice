@@ -171,12 +171,105 @@ for (const name of names) {
   }
 }
 
-/* The apex is the only name a registry knows about — and it is the SHORTEST
-   name queried, not a name with a particular label count. `.ca` puts the apex
-   at two labels, which an earlier version of this line mistook for a
-   subdomain and so asked RDAP about `www.`, getting a 403 that looked like the
-   registry being unavailable. */
+/* --- the records a cutover must reproduce exactly ------------------------- */
+
+/**
+ * THE ZONE INVENTORY. Everything that has to exist on the other side of a
+ * nameserver move, probed by name rather than assumed.
+ *
+ * This exists because of the estate's most expensive DNS failure: three
+ * domains moved between providers, and the new provider minted a fresh
+ * default zone. MX, SPF, DKIM and the real A record were simply absent from
+ * it. Nobody noticed until mail stopped.
+ *
+ * `ANY` cannot be used to enumerate a zone — RFC 8482 lets a resolver answer
+ * it with a single HINFO, and dns.google does exactly that, so an `ANY` sweep
+ * comes back looking like an empty zone. Each name is therefore asked for the
+ * specific types it could plausibly carry.
+ */
+const MAIL_AND_SERVICE = {
+  /* DKIM is the one most often lost, because the selector is provider-chosen
+     and there is no way to discover it from the apex. These are the common
+     selectors; a provider using a different one will not be found here, which
+     is why the live control panel is still the authority. */
+  TXT: [
+    '_dmarc',
+    'default._domainkey',
+    'selector1._domainkey',
+    'selector2._domainkey',
+    's1._domainkey',
+    's2._domainkey',
+    'k1._domainkey',
+    'mail._domainkey',
+    '_acme-challenge',
+  ],
+  CNAME: [
+    'default._domainkey',
+    'selector1._domainkey',
+    'selector2._domainkey',
+    /* Microsoft 365 service records. Probed so their ABSENCE is recorded as a
+       measurement rather than left as an assumption — this domain has none,
+       and a runbook that lists M365 steps for a SiteGround mailbox is worse
+       than one that says plainly there are none. */
+    'autodiscover',
+    'lyncdiscover',
+    'sip',
+    'enterpriseregistration',
+    'enterpriseenrollment',
+    'msoid',
+  ],
+  A: ['mail', 'autodiscover', 'ftp', 'webmail', 'cpanel', 'webdisk'],
+  SRV: ['_sip._tls', '_sipfederationtls._tcp', '_autodiscover._tcp'],
+};
+
+/**
+ * The apex is the SHORTEST name queried, not a name with a particular label
+ * count. `.ca` puts it at two labels, which an earlier version of this line
+ * mistook for a subdomain — so it asked RDAP about `www.` and got a 403 that
+ * read exactly like the registry being unavailable.
+ */
 const apex = names.slice().sort((a, b) => a.split('.').length - b.split('.').length)[0];
+
+console.log('\n=== mail and service records (must survive any cutover)');
+{
+  let found = 0;
+  for (const [type, labels] of Object.entries(MAIL_AND_SERVICE)) {
+    for (const label of labels) {
+      const r = await query(RESOLVERS[0], `${label}.${apex}`, type);
+      if (!r.answers.length) continue;
+      found++;
+      console.log(`  ${type.padEnd(6)} ${label.padEnd(26)} ${r.answers.join(' | ').slice(0, 110)}`);
+    }
+  }
+  if (!found) console.log('  (none found — check the provider control panel before trusting this)');
+}
+
+/* --- DNSSEC --------------------------------------------------------------- */
+
+/**
+ * DNSSEC decides the SEQUENCING of a nameserver move, not just a checkbox.
+ * With a DS record published at the parent, changing nameservers without
+ * first removing it takes the whole domain dark — resolvers get a signed
+ * delegation they cannot validate and return SERVFAIL, which looks exactly
+ * like the site being down and cannot be fixed by putting the records back.
+ */
+console.log('\n=== DNSSEC');
+{
+  const ds = await query(RESOLVERS[0], apex, 'DS');
+  const dnskey = await query(RESOLVERS[0], apex, 'DNSKEY');
+  const signed = ds.answers.length > 0;
+  console.log(`  DS at parent:  ${signed ? ds.answers.join(' | ') : 'none'}`);
+  console.log(`  DNSKEY:        ${dnskey.answers.length ? `${dnskey.answers.length} key(s)` : 'none'}`);
+  console.log(
+    signed
+      ? '  *** SIGNED — the DS record must be removed at the registrar and allowed to\n' +
+          '      expire from the parent BEFORE any nameserver change, or the domain\n' +
+          '      goes dark with SERVFAIL for validating resolvers.'
+      : '  unsigned — no DS/DNSKEY sequencing constraint on a nameserver move.\n' +
+          '  Re-verify on the day: this can be switched on from a control panel at any time.'
+  );
+}
+
 console.log(`\n=== registry (RDAP) — ${apex}`);
 const reg = await rdap(apex);
 if (reg.error) console.log(`  unavailable: ${reg.error}`);

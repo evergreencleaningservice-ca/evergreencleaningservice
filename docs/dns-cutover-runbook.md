@@ -1,252 +1,386 @@
 # DNS cutover and rollback runbook
 
 **Cutover date: `TBD`.** Not yet determined, and not needed to complete this
-plan. Everything below is written so that fixing the date is the only thing
-left to decide.
+plan.
 
-**This runbook does not authorise itself.** Phase 12 is an investigation. No
-step here has been executed, and none may be until the go/no-go table in
-`docs/phase-12-report.md` clears and the cutover is explicitly approved.
-
----
-
-## 0. The shape of the problem
-
-| | Today | After cutover |
-|---|---|---|
-| Registrar | Go Daddy Domains Canada | unchanged |
-| Nameservers | `ns1.siteground.net`, `ns2.siteground.net` | **decision below** |
-| Web origin | SiteGround CDN, 8 rotating Google Cloud addresses | Cloudflare Worker |
-| Mail | SiteGround (`mx10/20/30.antispam.mailspamprotection.com`) | **unchanged — must not move** |
-| A-record TTL | 30 s | 30 s |
-| NS TTL | 21 600 s (6 h) | 6 h |
-
-Measured 2026-09-21 from dns.google and cloudflare-dns, agreeing, and from
-CIRA's RDAP. Re-measure on the day: `npm run dns:snapshot`.
-
-### The registry lock
-
-RDAP reports `client update prohibited`, `client transfer prohibited`,
-`client delete prohibited` — GoDaddy's standard lock. Changing nameservers
-from inside the GoDaddy account normally works despite it; a registrar
-*transfer* does not. **Confirm the nameserver field is editable before the
-cutover window opens, not during it.**
+**This runbook does not authorise itself.** No step here has been executed.
+None may be until the go/no-go table in `docs/phase-12-report.md` clears and
+the cutover is explicitly approved.
 
 ---
 
-## 1. The decision that shapes everything: which level to cut at
+## 0. Correction to the first version of this document
 
-Two ways to move the site. They are not equivalent and the difference is six
-hours and the client's email.
+The first version recommended leaving DNS at SiteGround and simply repointing
+the apex and `www` A records at the Worker, and called the cutover and
+rollback a thirty-second operation. **That was wrong, and it was wrong in the
+way that matters: it described an architecture Cloudflare does not support.**
 
-### Option A — change the A records inside the SiteGround DNS zone (recommended)
+A Worker Custom Domain requires the hostname to be inside an **active
+Cloudflare zone**. Cloudflare's documentation is explicit:
 
-Leave the nameservers at SiteGround. Replace the apex and `www` A records with
-the Cloudflare Worker's.
+> To add a Custom Domain, you must have: 1. An active Cloudflare zone. 2. A
+> Worker to invoke.
+>
+> You cannot create a Custom Domain on a hostname with an existing CNAME DNS
+> record or **on a zone you do not own**.
+>
+> After you set up a Custom Domain for your Worker, Cloudflare will create DNS
+> records and issue necessary certificates on your behalf. The created DNS
+> records will point directly to your Worker.
 
-- **Propagates in ~30 seconds.** The A-record TTL is 30 s, measured.
-- **Rollback is the same 30 seconds** — put the old addresses back.
-- **MX, SPF, DMARC and the `mail`/`autodiscover`/`ftp` records are never
-  touched**, so email cannot break.
-- Costs: the zone stays on SiteGround, so the SiteGround account must remain
-  open and paid, and a Worker custom hostname needs a domain-control proof
-  that SiteGround DNS must serve.
+— <https://developers.cloudflare.com/workers/configuration/routing/custom-domains/>
 
-### Option B — move the nameservers to Cloudflare
+Two consequences kill the original plan:
 
-- **Six-hour TTL**, so both rollback and cutover are slow, and slow is the
-  opposite of what a rollback needs.
-- **It is the step that breaks client email on this estate.** GoDaddy and
-  Cloudflare both mint a fresh default zone on delegation, and the real MX,
-  SPF and DMARC records are simply absent from it.
+1. **Cloudflare creates the record; you do not.** The record points "directly
+   to your Worker" and is an internal binding, not an address published for
+   third-party DNS to copy. There is **no stable Worker A-record address**,
+   and none is invented here.
+2. **The certificate follows the zone.** A Custom Domain generates an Advanced
+   Certificate on the target zone. Without the zone, there is no certificate
+   path at all.
 
-**Recommendation: Option A.** Move to Cloudflare nameservers later, as a
-separate, unhurried change, if the zone is wanted there at all.
-
-### Non-negotiable, whichever option
-
-> **Export the full SiteGround DNS zone before changing anything, and attach
-> the export to the cutover record.**
-
-Three domains on this estate were reported migrated on the strength of a
-registrar panel that had accepted the input and not persisted it. The
-nameservers had never changed and the apex A records had not taken. A panel
-shows what was typed; only a resolver shows what is true.
-
-Minimum to capture, per `npm run dns:snapshot`: `NS`, `A` (all 8), `MX` (all
-3), apex `TXT`/SPF, `_dmarc` `TXT`, `SOA`, and the `mail`, `autodiscover` and
-`ftp` A records at `35.209.221.162`.
+The 30-second A-record TTL is still true and still useful — it is measured. It
+simply is not a rollback plan for an architecture that never applied. TTL is
+one input to propagation, not the whole of it; caching resolvers, negative
+caching and certificate issuance all add time. **Nothing in this runbook
+describes cutover or rollback as guaranteed in thirty seconds.**
 
 ---
 
-## 2. Before the window opens
+## 1. Measured starting state
 
-Each of these is a gate. None is optional.
+All measured 2026-09-21 via `npm run dns:snapshot` — two public resolvers in
+agreement, plus CIRA's RDAP. **Re-run on the day; do not trust this table as
+current.**
 
-1. **Go/no-go table in `docs/phase-12-report.md` clears.** Turnstile, lead
-   notification and conversion tracking are all operational — the site does
-   not launch otherwise.
-2. **A production build exists and was built with a real Turnstile site key.**
-   `npm run build` refuses without one; that refusal is the gate working.
-3. **`npm run launch:check dist` reports no blocker that is not deliberate.**
-   The staging noindex and the test key must both be absent from a production
-   build.
-4. **DNS zone exported** (§1) and attached.
-5. **Neon: snapshot taken.** Retention on the free plan is a six-hour PITR
-   window, which is shorter than a cutover day. A snapshot is a separate,
-   explicit action.
-6. **Database separation decided.** Staging and production currently share one
-   Neon branch. Twenty rows exist, all test data, none from production —
-   measured — so nothing is at risk today, but from cutover real leads land in
-   the same place staging writes to. See `docs/database-separation.md`.
-7. **Rollback rehearsed on paper**, with the old A records in the hand of the
-   person making the change, not in a browser tab.
+### Registry
+
+| | |
+|---|---|
+| Registrar | Go Daddy Domains Canada, Inc |
+| Registered / expires | 2016-08-26 / 2027-08-26 |
+| Status | `client update prohibited`, `client transfer prohibited`, `client delete prohibited` |
+| Nameservers | `ns1.siteground.net`, `ns2.siteground.net` — registry and resolvers agree |
+| **DNSSEC** | **Unsigned.** No DS at the parent, no DNSKEY. |
+
+### The zone, in full
+
+| Name | Type | Value | TTL |
+|---|---|---|---|
+| apex | A | rotating pool of 8 Google Cloud addresses (SiteGround CDN) | 30 s |
+| `www` | A | same rotating pool | 30 s |
+| apex | MX | `mx10`, `mx20`, `mx30`.`antispam.mailspamprotection.com` (10/20/30) | 21 600 s |
+| apex | TXT (SPF) | `v=spf1 +a +mx +ip4:35.209.221.162 include:evergreencleaningservice.ca.spf.auto.dnssmarthost.net ~all` | 14 400 s |
+| `_dmarc` | TXT | `v=DMARC1; p=reject; rua=mailto:no-reply@evergreencleaningservice.ca` | 300 s |
+| `default._domainkey` | CNAME | `evergreencleaningservice.ca.default.dkim.auto.dnssmarthost.net.` | |
+| `mail` | A | `35.209.221.162` | 21 600 s |
+| `autodiscover` | A | `35.209.221.162` | 21 600 s |
+| `ftp` | A | `35.209.221.162` | 21 600 s |
+| apex | SOA | `ns1.siteground.net root.c90221.sgvps.net` | |
+| apex | CAA | **none** | |
+| apex | AAAA | **none** | |
+
+### Microsoft 365: there is none
+
+Probed explicitly and **absent**: `lyncdiscover`, `sip`,
+`enterpriseregistration`, `enterpriseenrollment`, `msoid`, and every M365 SRV
+record. `autodiscover` exists but is an A record at SiteGround's mail IP, not
+a CNAME to `autodiscover.outlook.com`.
+
+**Mail is SiteGround end to end** — `mailspamprotection.com` for inbound
+filtering, `dnssmarthost.net` for SPF and DKIM. A cutover checklist listing
+M365 steps for this domain would be describing records that do not exist.
+Re-verify with `npm run dns:snapshot` on the day; if M365 has been adopted
+since, those records join the inventory below and nothing else changes.
+
+**DKIM is the record most often lost in a provider move**, because the
+selector is provider-chosen and cannot be discovered from the apex. This
+domain's selector is `default`. It is a CNAME into SiteGround's autoconfig,
+so **it cannot be recreated by copying a public key** — the target hostname
+must be reproduced verbatim, and it only resolves while the SiteGround mail
+service exists.
 
 ---
 
-## 3. The cutover
+## 2. The three supported architectures
 
-Times are relative to T, the moment the A records change.
+### Option 1 — Move authoritative DNS to Cloudflare (**recommended**)
+
+The only arrangement that supports a Worker Custom Domain on this account's
+plan.
+
+**Prerequisite, and it is the whole risk:** every record in §1 is inventoried
+and recreated in the Cloudflare zone *before* the nameservers change.
+Cloudflare's scan finds most records; it does not reliably find all of them,
+and the failure mode is a zone that looks complete and is missing mail.
+
+| | |
+|---|---|
+| Supports Worker Custom Domain | Yes |
+| Plan required | Free is sufficient |
+| Apex support | Yes (CNAME flattening) |
+| Propagation | NS TTL 21 600 s (6 h); realistically up to 24–48 h for full worldwide convergence |
+| Rollback | Hours, not minutes — see §5 |
+
+### Option 2 — Partial (CNAME) zone, keeping SiteGround authoritative
+
+Genuinely supported by Cloudflare, and **almost certainly unavailable here**:
+
+> A CNAME setup (partial) is only available to customers on a **Business or
+> Enterprise plan**.
+
+— <https://developers.cloudflare.com/dns/zone-setups/partial-setup/>
+
+Two further constraints:
+
+- The apex can only be proxied if the authoritative provider supports **CNAME
+  flattening**. Whether SiteGround's DNS does is **unverified** — it needs the
+  SiteGround control panel.
+- A Custom Domain cannot be created on a hostname that already has a CNAME
+  record, which is exactly what a partial setup puts there. The Worker would
+  be attached by **route**, not Custom Domain.
+
+**Do not plan on this option without first confirming the Cloudflare plan and
+SiteGround's CNAME-flattening support.** Both are listed as blocked checks.
+
+### Option 3 — Deploy to a conventional origin with a real address
+
+Put the site somewhere with a stable, publishable IP that SiteGround DNS can
+target with an A record.
+
+| | |
+|---|---|
+| Supports Worker Custom Domain | N/A — no Worker |
+| DNS change | A records only; MX, SPF, DKIM, DMARC never touched |
+| Rollback | Fast, bounded by the 30 s A-record TTL |
+| Cost | Abandons the Workers deployment this project is built on |
+
+The honest trade: Option 3 is by far the safest DNS change and the most
+expensive engineering change. It is listed because it is a real alternative,
+not because it is recommended.
+
+**Recommendation: Option 1.** Option 2 only if both its preconditions are
+confirmed. Option 3 only if moving authoritative DNS is refused outright.
+
+---
+
+## 3. Option 1, in detail
+
+### 3.1 Before anything changes
+
+1. **Export the full zone** and attach it to the cutover record. §1 is the
+   checklist; `npm run dns:snapshot` regenerates it.
+
+   > Three domains on this estate were reported migrated on the strength of a
+   > registrar panel that had accepted the input and not persisted it. The
+   > nameservers had never changed and the apex A records had not taken. A
+   > panel shows what was typed; only a resolver shows what is true.
+
+2. **Confirm the Cloudflare account plan** — decides whether Option 2 exists.
+3. **Confirm the registry lock is editable.** `client update prohibited` is
+   GoDaddy's standard lock; changing nameservers from inside the GoDaddy
+   account normally works despite it. Confirm **before** the window opens.
+4. **Re-check DNSSEC.** Currently unsigned, so there is no sequencing
+   constraint. **If it has been signed since:** remove the DS at the registrar
+   and wait for it to expire from the parent *before* touching nameservers. A
+   signed delegation the new nameservers cannot validate returns SERVFAIL —
+   the domain goes dark, and putting the records back does not fix it.
+5. **Lower TTLs 48 h ahead** if possible: drop the NS TTL and the MX/SPF/DKIM
+   TTLs from 21 600 s to 300 s. This is the single most effective thing
+   available for shortening rollback, and it must be done days in advance to
+   have any effect.
+
+### 3.2 Build the Cloudflare zone — before the nameservers move
+
+Add the domain to Cloudflare, let the scan run, then **reconcile every row of
+§1 by hand**. Required before delegation:
+
+- [ ] apex and `www` — placeholder proxied records; the Custom Domain will
+      replace them (see 3.3)
+- [ ] MX ×3 → `mx10/20/30.antispam.mailspamprotection.com`, priorities 10/20/30
+- [ ] SPF TXT at apex — **exactly one record**, verbatim
+- [ ] DKIM `default._domainkey` CNAME → `evergreencleaningservice.ca.default.dkim.auto.dnssmarthost.net.`, **DNS-only, never proxied**
+- [ ] DMARC `_dmarc` TXT — verbatim, `p=reject`
+- [ ] `mail`, `autodiscover`, `ftp` A → `35.209.221.162`, **DNS-only, never proxied**
+- [ ] CAA — none today; if one is added later it must permit Cloudflare
+- [ ] Any M365 records, if they exist by then — **always DNS-only**
+
+**Proxying a mail or service record breaks it.** `mail`, `autodiscover`,
+`ftp` and every `_domainkey` record stay grey-clouded.
+
+Then verify the Cloudflare zone answers correctly **before** delegating, by
+querying its assigned nameservers directly.
+
+### 3.3 Worker Custom Domain and TLS
+
+A Custom Domain requires an **exact hostname match** — a Worker attached to
+`example.com` does not receive `www.example.com`. So:
+
+- Add **two** Custom Domains: `evergreencleaningservice.ca` and
+  `www.evergreencleaningservice.ca`; **or**
+- Add one Custom Domain and a **Redirect Rule** for the other, which also
+  needs a proxied placeholder record on the redirecting hostname
+  (`192.0.2.0` A or `100::` AAAA — reserved originless placeholders).
+
+Decide which before the window; the site's canonical is
+`https://www.evergreencleaningservice.ca/`, so `www` is the Custom Domain and
+the apex redirects to it.
+
+Cloudflare issues an **Advanced Certificate** on the zone for each Custom
+Domain. Issuance is **not instant** — allow for it explicitly and confirm the
+certificate is *active* before announcing cutover. Note: deleting a Custom
+Domain does **not** delete its certificate; that is a manual cleanup.
+
+### 3.4 Sequence
+
+`T` is the nameserver change. No step is assigned a duration it cannot
+guarantee.
 
 | When | Step |
 |---|---|
-| T−60m | Re-run `npm run dns:snapshot`; confirm it matches the export. Freeze WordPress edits. |
-| T−30m | Deploy the production build to the Worker. **Do not yet attach the custom hostname.** Verify on the `workers.dev` URL. |
-| T−15m | `npm run launch:check dist https://<workers.dev URL>`. |
-| T−5m | Attach `www.evergreencleaningservice.ca` and the apex as Worker custom hostnames. Certificate issuance can take minutes — it must be **issued and active** before T. |
-| **T** | Change the apex and `www` A records in the SiteGround zone to the Cloudflare addresses. |
-| T+2m | `npm run dns:snapshot` — both public resolvers must return the new addresses. Not the panel. |
-| T+5m | §4 launch-day checks. |
-| T+30m | Re-run §4. Check Worker logs for 5xx. |
-| T+2h | Re-run §4. Submit one real lead end to end (§4.6). |
-| T+24h | Search Console: submit the sitemap, request indexing on the homepage, check Coverage for a spike in 404s. |
+| T−48h | Lower NS and MX/SPF/DKIM TTLs. Re-run `npm run dns:snapshot`. |
+| T−24h | Cloudflare zone built and reconciled against §1. Verify by querying Cloudflare's nameservers directly. |
+| T−2h | Deploy the production build. Verify on the `workers.dev` URL. `npm run launch:check dist <workers.dev URL>`. |
+| T−1h | Freeze WordPress edits. Final `npm run dns:snapshot` — must match the export. |
+| **T** | Change nameservers at GoDaddy to the Cloudflare pair. |
+| T+15m | Cloudflare reports the zone active. Custom Domains attach; certificate issuance begins. |
+| T+1h | Certificate **active**. §4 checks. Expect mixed results while delegation propagates — that is propagation, not failure. |
+| T+6h | Past the old 6 h NS TTL. §4 again; most resolvers now on Cloudflare. |
+| T+24h | §4 again. Search Console: submit sitemap, check Coverage for a 404 spike. |
+| T+48h | Convergence assumed complete. Final §4. |
 
-**The SiteGround site is not switched off at cutover.** It stays up, unchanged
-and reachable, for at least 14 days — it is the rollback target, and a
-rollback into a site that has been deleted is not a rollback.
+**The SiteGround site stays up, unchanged, for at least 14 days.** It is the
+rollback target, and a rollback into a deleted site is not a rollback.
 
 ---
 
 ## 4. Launch-day checks
 
-Run every one after cutover, and again at T+30m and T+2h.
+Run all of these at every checkpoint in §3.4.
 
 1. **The homepage renders.** Load it and read the body text. HTTP 200 is not a
-   website; 44 domains on this estate were once reported as "serving a site"
-   on the strength of a status code and 25 of them served nothing.
-2. **`npm run verify:indexing -- production`.** Must report the site is
-   indexable. If it refuses with "CANNOT REPORT", the origin is serving a
-   challenge, not the site — read §6.
-3. **`npm run parity -- https://www.evergreencleaningservice.ca`.** Every
-   legacy address still resolves.
-4. **Both paid landing pages** load, are `noindex`, and show the form.
-5. **Telephone links dial** `+14168034880` on a real phone, and a tap pushes
-   one `phone_click` into `dataLayer`.
-6. **One real lead, submitted end to end** — form → Neon row → Resend email in
-   the client's inbox. Not a simulation. Delete the row afterwards.
-7. **Email still works.** Send a message to `info@evergreencleaningservice.ca`
-   from outside and confirm it arrives. This is the check that catches a zone
-   edit that took more than it should have.
-8. **Mobile, at 390 px**, in a normal window and in incognito, **then refresh**
-   — a page on this estate once passed incognito on first load and 403'd on
+   website — 44 domains on this estate were once reported as "serving a site"
+   on the strength of a status code; 25 of them served nothing.
+2. **`npm run verify:indexing -- production`** — must report indexable. A
+   "CANNOT REPORT" means a challenge interstitial, not a verdict; see §6.
+3. **`npm run parity -- https://www.evergreencleaningservice.ca`** — all 50
+   redirect variants, both slash spellings, query strings preserved.
+4. **Both paid landing pages** load, are `noindex`, show the form, and show
+   `•` and `—` rather than raw entity text.
+5. **Telephone links dial** `+14168034880`; one tap pushes one `phone_click`.
+6. **One real lead, end to end** — form → Neon row → Resend email in the
+   client's inbox. Not a simulation. Delete the row afterwards.
+7. **Mail works, in both directions.** Send *to*
+   `info@evergreencleaningservice.ca` from outside and confirm arrival; send
+   *from* it and confirm SPF, DKIM and DMARC all pass at the receiving end.
+   DMARC is `p=reject`, so a broken DKIM CNAME means mail is rejected
+   outright, not filed as spam.
+8. **Mobile at 390 px**, normal window and incognito, **then refresh** — a
+   page on this estate once passed incognito on first load and 403'd on
    refresh.
 
 ---
 
 ## 5. Rollback
 
-### Thresholds — decided now, so nobody has to decide them at the time
+### Thresholds — decided now, so nobody has to decide them under pressure
 
-Roll back immediately, without further discussion, on any one of:
+Roll back on any one of:
 
 | Threshold | Why it is absolute |
 |---|---|
-| The homepage does not render for more than **5 minutes** | Beyond a certificate-issuance delay; something is wrong. |
-| **Any** interruption to mail delivery | Email is the business. Nothing about a website justifies it. |
-| Lead submission fails, or a lead is accepted and not stored | A lost lead cannot be recovered and is not visible as a failure. |
-| Production is serving `noindex` | Every hour compounds. Deindexing is slow to happen and slower to undo. |
-| More than **5%** of the 130 redirect rules 404 | Link equity is leaving. |
+| **Any** interruption to mail delivery, in either direction | Email is the business. No website change justifies it. |
+| SPF, DKIM or DMARC failing at a receiving server | With `p=reject`, this is silent total mail loss. |
+| Homepage not rendering more than **30 minutes** after the certificate is active | Beyond issuance and propagation; something is wrong. |
+| Lead submission fails, or a lead is accepted and not stored | A lost lead is unrecoverable and invisible. |
+| Production serving `noindex` | Compounds hourly; slow to happen, slower to undo. |
+| More than **5%** of the 154 redirect rules 404 | Link equity leaving. |
 | 5xx above **1%** of requests over any 10-minute window | |
-| Anything unexplained after **60 minutes** | An unknown cause at 60 minutes is not about to become clear at 90. Roll back, then diagnose without the clock running. |
+| Anything unexplained **4 hours** after the certificate is active | An unknown cause at 4 h will not clarify at 6. Roll back, then diagnose without the clock running. |
 
-Do **not** roll back for: a slow first byte on a cold cache, a single 404 on an
-address nobody links to, or a Lighthouse score. Those are Monday's work.
+Do **not** roll back for: resolvers still returning old records inside the
+propagation window, a slow first byte on a cold cache, a single 404 on an
+unlinked address, or a Lighthouse score.
 
-### The procedure
+### The procedure, and its honest timing
 
-1. Restore the previous apex and `www` A records in the SiteGround zone from
-   the export. **~30 seconds**, because the TTL is 30 s.
-2. Confirm from two public resolvers (`npm run dns:snapshot`) — never from the
+1. Change the nameservers at GoDaddy back to `ns1`/`ns2.siteground.net`.
+2. Confirm from two public resolvers (`npm run dns:snapshot`) — never from a
    panel.
 3. Load the homepage and read the body text.
-4. Send a test email to `info@evergreencleaningservice.ca`.
-5. Detach the Worker custom hostnames.
+4. Test mail in both directions.
+5. Detach the Worker Custom Domains.
 6. Write down what happened **before** attempting a fix.
 
-If nameservers were moved (Option B), rollback takes up to six hours and the
-full zone must be recreated from the export. This is the reason Option A is
-recommended.
+**Rollback is not fast, and pretending otherwise is the most dangerous thing
+this document could do.** A nameserver change is bounded by the NS TTL — 6 h
+at today's value, lower only if §3.1 step 5 was done days ahead — plus
+resolvers that ignore TTLs, plus negative caching. **Plan for hours, and up to
+48 h for full worldwide convergence.** The SiteGround zone still exists
+throughout, which is what makes rollback possible at all.
+
+This asymmetry is the strongest argument for Option 3 if the business cannot
+tolerate a multi-hour worst case.
 
 ---
 
 ## 6. Production indexing safeguards
 
-The single most expensive mistake available at cutover is launching with
-staging's `noindex` still attached. It deindexes the business, it is invisible
-from the page, and nobody notices for weeks.
+Launching with staging's `noindex` still attached deindexes the business. It
+is invisible from the page and nobody notices for weeks.
 
-**Four independent guards, because one is a single point of failure:**
+**Four independent guards:**
 
 1. `npm run build` (production) does not run `scripts/noindex.mjs`. Only
    `build:preview` does.
-2. `tests/build/indexability.test.ts` asserts that only the preview build is
-   marked noindex.
+2. `tests/build/indexability.test.ts` asserts only the preview build is
+   noindexed.
 3. `npm run launch:check` refuses a build carrying a sitewide noindex.
-4. `npm run verify:indexing -- production` reads the **deployed origin**,
-   which is the only one of the four that can catch a stale deploy, an edge
-   cache or a zone transform rule.
+4. `npm run verify:indexing -- production` reads the **deployed origin** — the
+   only one of the four that catches a stale deploy, an edge cache or a zone
+   transform rule.
 
-**Also required at cutover, and not automatable from here:**
+Also required, and not automatable from here:
 
-- `robots.txt` on production must **not** `Disallow: /`. That blocks the
-  crawl, so the noindex is never read, and the URL can still be indexed from
-  an inbound link with no way for the noindex to be seen.
-- The three genuinely-noindex routes — both `/lp/` pages and `/thank-you/` —
-  must still be noindex, and still absent from the sitemap.
+- `robots.txt` must **not** `Disallow: /`. That blocks the crawl, so the
+  noindex is never read, and the URL can still be indexed from an inbound
+  link with no way for the noindex to be seen.
+- Both `/lp/` pages and `/thank-you/` stay noindex and stay out of the sitemap.
 - Submit `https://www.evergreencleaningservice.ca/sitemap-index.xml` in Search
   Console after cutover.
 
 ### The SiteGround challenge, and why cutover ends it
 
 Production answers this network with HTTP 202, `sg-captcha: challenge`, and a
-170-byte interstitial — for every path, every user-agent, including
-`robots.txt`. The interstitial carries **`x-robots-tag: noindex`**.
+170-byte interstitial — every path, every user-agent, including `robots.txt`.
+The interstitial carries **`x-robots-tag: noindex`**.
 
-The challenge is keyed to the **requesting IP address**: the interstitial's
-own token contains it (`?y=ipr:<our egress IP>:…`), and it changes as this
-container's egress rotates. It is not a user-agent rule — identical responses
-came back for desktop, mobile, three crawler strings and no user-agent at all.
+The challenge is keyed to the **requesting IP**: the interstitial's own token
+contains it (`?y=ipr:<egress IP>:…`) and it changed as this container's egress
+rotated. It is not a user-agent rule — desktop, mobile, three crawler strings
+and no user-agent all got identical responses.
 
-**This was investigated and not bypassed.** No user-agent was whitelisted, no
-crawler-specific content exists, and no challenge was solved or replayed.
+**Investigated and not bypassed.** No user-agent whitelisted, no
+crawler-specific content, no challenge solved or replayed.
 
 Whether a *verified* Googlebot is challenged **cannot be determined from
-here** and is listed as blocked in the Phase 12 report. What can be said is
-that after cutover the question disappears: Cloudflare Workers serves the site
-and SiteGround's WAF is no longer in the path.
+here**. After cutover the question disappears: Cloudflare serves the site and
+SiteGround's WAF leaves the path.
 
 ---
 
-## 7. What needs SiteGround access, and is therefore not done
+## 7. Blocked — needs access not held
 
-Credentials were deliberately not requested. Each of these is a manual
-follow-up for someone who has them:
-
-| Item | Why it matters |
+| Item | Needed for |
 |---|---|
-| Whether the WAF challenges verified crawlers | Decides whether the current site is being crawled at all. |
-| The live `robots.txt` and `sitemap_index.xml` | The port's redirect targets assume Rank Math's defaults; unconfirmed. |
-| The WordPress media library, reconciled against the 101-entry upload map | Images the Internet Archive never captured are not in the map and will 404. |
-| The live page inventory | The port's URL list came from the archive, whose coverage is partial. |
-| Any `.htaccess` redirects | Would be lost at cutover and are invisible from outside. |
-| Whether SiteGround also serves mail | Decides whether the hosting account can ever be closed. |
+| **Cloudflare account plan** | Decides whether Option 2 exists at all |
+| **SiteGround CNAME-flattening support** | Decides whether Option 2 can cover the apex |
+| Whether the WAF challenges verified crawlers | Whether the current site is being crawled |
+| Live `robots.txt` and `sitemap_index.xml` | Redirect targets assume Rank Math defaults; unconfirmed |
+| WordPress media library vs the 101-entry upload map | Images the archive never captured will 404 |
+| Live page inventory | The port's URL list came from the archive; partial coverage |
+| Any `.htaccess` redirects | Lost at cutover, invisible from outside |
+| Full SiteGround DNS zone export | §1 is built from public resolvers and may miss a record nothing queries |
+| Whether SiteGround also serves mail | It does, on this evidence — decides whether the account can ever close |

@@ -1,8 +1,14 @@
 # Phase 12 — WAF, crawler and launch-readiness audit
 
-2026-09-21. Investigation only. Nothing was deployed, no DNS record was
-changed, no Neon branch was created, no analytics or WAF account was touched,
-and no production Turnstile key was created.
+2026-09-21. Audit `bb2ede0`, corrective closeout `f3ed583`, staging version
+`bc76be72-8e51-4eb3-ad21-be433bbbcb23`.
+
+The audit was investigation only. The closeout that follows it fixed the two
+defects the audit found in this repository (B3, B4) and deployed them to
+**staging only**. No DNS record or nameserver was changed, no Neon branch was
+created and no Neon row was altered, and nothing was touched in GTM, Google
+Ads, GA4, UET, CallTrackingMetrics, Turnstile, Resend or SiteGround.
+Production was not deployed to and has not been launched.
 
 The SiteGround challenge was **investigated and not bypassed**: no user-agent
 was whitelisted, no crawler-specific content was created, and no challenge was
@@ -12,25 +18,98 @@ solved, replayed or routed around.
 
 ## 1. The go/no-go table
 
-The site does not launch until Turnstile, lead notifications and conversion
-tracking are all operational. Against that bar:
+Updated after the corrective closeout (`f3ed583`, staging version
+`bc76be72-8e51-4eb3-ad21-be433bbbcb23`). Each item is classified by what it
+actually blocks, because "blocker" alone flattens a deindexing risk and a
+reporting gap into the same word.
 
-| # | Blocker | State | Owner | Blocks launch? |
-|---|---|---|---|---|
-| **B1** | **No production Turnstile key pair.** Staging serves Cloudflare's published test sitekey `1x00000000000000000000BB` — confirmed on the live origin. `npm run build` refuses to produce a production build without a real one (verified: exit 1). | **Open** | Cloudflare account | **Yes** |
-| **B2** | **GTM consumes neither conversion event.** The site pushes `lead_form_submission` and `phone_click` into `dataLayer`; container `GTM-5PRC4HBV` has no trigger for either. Cutting over today would report zero form and zero telephone conversions. | **Open** | Agency / GTM | **Yes** |
-| **B3** | **Two paid landing pages show a raw HTML entity to visitors.** `/lp/commercial-cleaning/` reads "Free walkthrough **&bull;** No obligation"; `/lp/commercial-cleaning-quote/` reads "FREE QUOTE **&MDASH;** TORONTO & THE GTA" in the hero, above the H1. Both confirmed in a real browser. These are the pages behind paid clicks. | **Open** | This repo — 2 lines | **Yes** |
-| **B4** | **All 24 exact-match legacy redirects 404 without a trailing slash.** WordPress answers both spellings today; after cutover the slashless form is a dead link. Measured against the deployed origin. | **Open** | This repo | **Yes** |
-| **B5** | **Staging and production share one Neon branch.** 20 rows, all test data, none from production — so nothing is at risk today, but from cutover real leads land where staging writes. Branch creation is not authorised; needs approval, a snapshot and a rollback plan. | **Open, approved in principle** | Decision + Neon | **Yes** |
-| **B6** | **Six-hour PITR only.** Free plan. Shorter than a cutover day. A snapshot is a separate explicit action before cutover. | **Open** | Neon | **Yes** |
-| B7 | Upload-path map covers 101 archive-derived addresses; any image the Internet Archive never captured 404s. Cannot be enumerated without the live media library. | Open | SiteGround | No — degrades |
-| B8 | Neon `main` branch is not protected. | Open | Neon | No |
-| B9 | Whether a verified crawler reaches production **cannot be determined from this network**. | **Blocked** | Search Console | No — see §3 |
-| **R1** | Lead notification email is **operational**. Verified: the Phase 9 staging lead was delivered from `leads@brandingcentres.com` to `info@evergreencleaningservice.ca`, `reply_to` correctly absent for a phone-only lead. | **Resolved** | — | — |
+| # | Blocker | Class | State | Owner | Resolution needed |
+|---|---|---|---|---|---|
+| **B1** | No production Turnstile key pair. Staging serves Cloudflare's published test sitekey `1x00000000000000000000BB`. | **Launch-blocking** | **Open** | Cloudflare account holder | Create a Turnstile widget for the production hostnames; set `PUBLIC_TURNSTILE_SITE_KEY` at build time and `wrangler secret put TURNSTILE_SECRET`; prove one real staging submission with the genuine pair. |
+| **B2** | GTM consumes neither conversion event. The site pushes `lead_form_submission` and `phone_click`; container `GTM-5PRC4HBV` has no trigger for either. | **Launch-blocking** and **paid-media-blocking** | **Open** | Agency (GTM container) | Build triggers, tags and variables per `docs/gtm-handoff.md` §7; verify both events in Tag Assistant against staging; confirm the Ads conversion action fires. |
+| ~~**B3**~~ | ~~Raw HTML entity visible to visitors on both paid landing pages.~~ | ~~Paid-media-blocking~~ | **CLOSED** `f3ed583` | — | Evidence in §1.1. |
+| ~~**B4**~~ | ~~Exact-match legacy redirects 404 without a trailing slash.~~ | ~~Launch-blocking~~ | **CLOSED** `f3ed583` | — | Evidence in §1.2. |
+| **B5** | Staging and production share one Neon branch. 20 rows, all test data, **none from production**. From cutover, real leads land where staging writes. | **Operational risk** — becomes launch-blocking at cutover | **Open, approved in principle** | Paolo (approval) + Neon | Explicit approval, a snapshot, a rollback plan, then a separate production branch and a `DATABASE_URL` per environment. Branch creation remains unauthorised. |
+| **B6** | Six-hour PITR only (Neon free plan). Shorter than a cutover day. | **Operational risk** | **Open** | Neon | Take an explicit snapshot before cutover; PITR alone is not a recovery plan for a launch. |
+| B7 | Upload-path map covers 101 archive-derived addresses. An upload address the Internet Archive never captured 404s. | Operational risk (SEO/image traffic) | Open | SiteGround access | Reconcile the map against the live WordPress media library. Cannot be enumerated from outside. |
+| B8 | Neon `main` branch is not protected. | Operational risk | Open | Neon | Enable branch protection. One setting. |
+| B9 | Whether a **verified** crawler reaches production cannot be determined from this network. | Informational — **Blocked** | **Blocked** | Search Console access | URL Inspection from a verified Googlebot address. Moot after cutover: SiteGround's WAF leaves the path entirely. |
+| **R1** | Lead notification email. | — | **Resolved** | — | Verified delivered: `leads@brandingcentres.com` → `info@evergreencleaningservice.ca`, `reply_to` correctly absent for a phone-only lead. |
 
-**Verdict: no-go.** Six blockers, three of which (B3, B4, B5) were found by
-this audit. B1 and B2 were already known and remain the two that matter most —
-a launch without them is a site that cannot prove it works.
+**Verdict: still no-go, and for the two reasons that were always the real
+ones.** B1 and B2 are untouched by this closeout and neither is fixable in
+this repository — a site that cannot verify a human and cannot report a
+conversion should not take a paid click. B5 and B6 are operational risks that
+become launch-blocking the moment real leads arrive.
+
+**Launch-blocking:** B1, B2 (and B5 at cutover).
+**Paid-media-blocking:** B2.
+**Operational risk:** B5, B6, B7, B8.
+**Blocked, informational:** B9.
+
+### 1.1 B3 — closed, with evidence
+
+Both strings were props rendered through `{expression}`, and Astro escapes
+expression output, so the entity reached the visitor verbatim. Replaced with
+literal `•` and `—` in named frontmatter constants.
+
+Verified in Chromium against the **deployed** staging origin at 390 px and
+1440 px — not against a local build:
+
+```
+/lp/commercial-cleaning/       textContent: "Free walkthrough • No obligation"
+/lp/commercial-cleaning-quote/ textContent: "Free quote — Toronto & the GTA"
+                               innerText:   "FREE QUOTE — TORONTO & THE GTA"
+both: visible: true | raw entities in element: none | anywhere on page: none
+```
+
+`npm run launch:check` now reports *"no double-escaped entity in any page"*
+across all 77 pages, matching **case-insensitively** — the em dash sits in a
+`text-transform: uppercase` element, renders as `&MDASH;`, and the original
+case-sensitive detector walked straight past it.
+
+### 1.2 B4 — closed, with evidence
+
+`bothSlashSpellings` in `src/data/redirects.ts` expands every exact-match rule
+into both spellings, each pointing at the same final target in one hop.
+Wildcards untouched. The map grew 130 → 154.
+
+Verified against the **deployed Worker**:
+
+```
+=== B4 — every exact-match source, both spellings, one hop
+  50 of 50 variants: 301, correct target, single hop; both spellings agree
+
+=== B4 — query strings survive, both spellings
+   ok  /office-cleaning/?gclid=TEST123        301 → /services/office-cleaning/?gclid=TEST123
+   ok  /office-cleaning?gclid=TEST123         301 → /services/office-cleaning/?gclid=TEST123
+   ok  /commercial-cleaning/?utm_source=…     301 → /services/commercial-cleaning/?utm_source=…
+   ok  /commercial-cleaning?utm_source=…      301 → /services/commercial-cleaning/?utm_source=…
+   ok  /blog/?page=2                          301 → /insights/?page=2
+   ok  /blog?page=2                           301 → /insights/?page=2
+   ok  /testimonials?msclkid=abc&utm_term=…   301 → /reviews/?msclkid=abc&utm_term=…
+```
+
+`gclid` and `msclkid` surviving matters specifically: these are the addresses
+a paid click lands on, and a redirect that drops them breaks attribution on
+exactly the traffic that is paid for.
+
+**The arithmetic, corrected.** The original finding said "24 exact-match
+rules / 48 variants". There are **26** exact-match rules. Twenty-four are
+directory-style and take both spellings — the 48 the finding meant. The other
+two, `/sitemap.xml` and `/sitemap_index.xml`, are file addresses with one
+legitimate spelling each: **48 + 2 = 50 emitted sources.** The "24" came from
+a measurement that filtered on a trailing slash, so it counted the
+directory-style rules only. That is the right set for the defect and not the
+whole map. A first pass of the fix emitted `/sitemap.xml/` — an address no
+server produces and no crawler requests — and that is now explicitly excluded.
+
+Coverage: `tests/build/redirect-variants.test.ts`, 14 tests, asserting the
+expansion and the emitted file, including that no wildcard was disturbed and
+that every specific rule still precedes the splat it would collide with.
+Phase 6's rule-count assertion moved 130 → 154 rather than being relaxed to a
+bound — a count that *falls* is a link class going dark, which is what that
+test exists to catch.
 
 ---
 
@@ -171,7 +250,18 @@ the number correctly through it.
 
 ---
 
-## 5. DNS and registry
+## 5. DNS, registry and the cutover architecture
+
+> **Correction.** The first version of the runbook recommended leaving DNS at
+> SiteGround and repointing the A records at the Worker, and called cutover
+> and rollback a thirty-second operation. **Both claims were wrong.** A Worker
+> Custom Domain requires an *active Cloudflare zone*; Cloudflare creates the
+> record itself and it points directly at the Worker, so there is no stable
+> address for third-party DNS to target. The partial-zone alternative is real
+> but **Business/Enterprise-only**. The 30-second A-record TTL is measured and
+> true, and it was never a rollback plan for an architecture that did not
+> apply. The runbook is rewritten around the three supported options; see
+> `docs/dns-cutover-runbook.md` §0 and §2.
 
 `npm run dns:snapshot` — two public resolvers plus CIRA's RDAP, agreeing.
 
@@ -185,22 +275,39 @@ the number correctly through it.
 | MX | `mx10/20/30.antispam.mailspamprotection.com`, TTL 21 600 s |
 | SPF | `v=spf1 +a +mx +ip4:35.209.221.162 include:…dnssmarthost.net ~all` |
 | DMARC | **`p=reject`** |
+| DKIM | `default._domainkey` **CNAME** → `evergreencleaningservice.ca.default.dkim.auto.dnssmarthost.net.` |
 | `mail`, `autodiscover`, `ftp` | `35.209.221.162` |
 | CAA / AAAA | none |
+| **DNSSEC** | **Unsigned** — no DS at the parent, no DNSKEY |
+| **Microsoft 365** | **None.** `lyncdiscover`, `sip`, `enterpriseregistration`, `enterpriseenrollment`, `msoid` and the M365 SRV records were each probed and are absent. |
 
-Three consequences:
+Four consequences:
 
-- **The 30-second A-record TTL is the single best fact in this report.** Cut
-  over inside the SiteGround zone and both the switch and the rollback take
-  about thirty seconds. Moving nameservers instead makes rollback a six-hour
-  operation.
-- **DMARC `p=reject` makes the sender choice load-bearing.** Notification mail
-  is sent from `leads@brandingcentres.com`, a verified Resend domain, so
-  alignment holds. Sending from `@evergreencleaningservice.ca` would fail —
-  that domain is not in Resend at all.
+- **Mail is SiteGround end to end** — `mailspamprotection.com` inbound,
+  `dnssmarthost.net` for SPF and DKIM. `autodiscover` is an A record at
+  SiteGround's mail IP, not a CNAME to Outlook. A cutover checklist listing
+  Microsoft 365 steps for this domain would be describing records that do not
+  exist.
+- **DKIM is the record most often lost in a provider move**, because the
+  selector is provider-chosen and undiscoverable from the apex. This one is
+  `default`, and it is a **CNAME into SiteGround's autoconfig** — so it cannot
+  be recreated by copying a public key. The target hostname must be reproduced
+  verbatim, and it resolves only while the SiteGround mail service exists.
+  Combined with `p=reject`, a broken DKIM CNAME means mail is **rejected
+  outright**, not filed as spam.
+- **DNSSEC is unsigned, which removes a sequencing hazard** — there is no DS
+  to withdraw before a nameserver change. Re-verify on the day: it can be
+  switched on from a control panel at any time, and moving nameservers with a
+  live DS takes the domain dark with SERVFAIL in a way that putting the
+  records back does not fix.
 - **The registry lock must be confirmed editable before the window opens.**
 
-Full runbook: `docs/dns-cutover-runbook.md`.
+The 30-second A-record TTL is real, and it is **not** a rollback plan: the
+supported architectures all involve a nameserver change, bounded by the
+21 600 s NS TTL and realistically by 24–48 h for full convergence.
+
+Full runbook, including the three supported architectures and the
+record-by-record rebuild list: `docs/dns-cutover-runbook.md`.
 
 ---
 
@@ -264,17 +371,23 @@ container specification and §8 the manual checklist.
 
 ## 7. Tests, builds, dry run, staging verification
 
+Re-run in full after the closeout, against staging version
+`bc76be72-8e51-4eb3-ad21-be433bbbcb23`.
+
 | Check | Result |
 |---|---|
-| `npm test` | **509 passed, 17 files** |
+| `npm test` | **523 passed, 18 files** (+14 for B4 coverage) |
 | `npm run build` (production) | **refuses**, exit 1 — no real Turnstile key. The gate working. |
-| `npm run build:preview` | **passes** — 77 pages, 130 redirect rules, 1138 image references repointed |
+| `npm run build:preview` | **passes** — 77 pages, **154** redirect rules, 1138 image references repointed |
 | `npx wrangler deploy --dry-run` | **passes** — 185 files, 214.16 KiB, `env.ASSETS` bound |
+| `npm run deploy:preview` | **deployed** — version `bc76be72-8e51-4eb3-ad21-be433bbbcb23`, 230 URLs purged |
 | `npm run verify:indexing -- staging` | **22 of 22 passed** |
 | `npm run verify:indexing -- production` | **refuses** (exit 3) — origin served a challenge |
-| `npm run parity` | **60 of 60 passed** |
-| `npm run tel:inventory` | 115 links, 77 pages, one canonical destination |
-| `npm run launch:check` | 7 passed, 5 blocking — 2 deliberate for staging, **3 real** |
+| `npm run parity` | **117 of 117 passed** (was 60; +50 variants, +7 query-string cases) |
+| B4 — all variants on the deployed Worker | **50 of 50**, single hop, both spellings agree, query strings preserved |
+| B3 — browser verification, deployed origin | **passed** at 390 px and 1440 px, both pages, no raw entity |
+| `npm run tel:inventory` | 115 links, 77 pages, one canonical destination, exit 0 |
+| `npm run launch:check` | **only the 2 deliberate staging blockers remain** — the test key and the staging noindex. B3 and B4 both clear. |
 
 Staging is correctly `noindex, nofollow`, canonicals name the final domain,
 and all three genuinely-noindex routes are excluded from the sitemap.
@@ -300,16 +413,25 @@ and all three genuinely-noindex routes are excluded from the sitemap.
 
 ## 9. What Phase 13 needs before it can start
 
-In dependency order:
+B3 and B4 are done. What remains is entirely outside this repository:
 
-1. **B3** — two-line copy fix, then rebuild. Smallest and entirely in this repo.
-2. **B4** — emit both slash spellings, then re-run `npm run parity`.
-3. **B1** — create the Turnstile pair, set the build variable and the Worker
+1. **B1** — create the Turnstile pair, set the build variable and the Worker
    secret, then prove one real submission on staging with a genuine key.
-4. **B2** — build the container per `docs/gtm-handoff.md` §7 and verify both
-   events in Tag Assistant against staging.
-5. **B5 / B6** — approve database separation, snapshot, then branch.
-6. Re-run everything in §7 and re-issue the go/no-go table.
+   *Needs Cloudflare Turnstile permission, which the API token here lacks.*
+2. **B2** — build the container per `docs/gtm-handoff.md` §7 and verify both
+   events in Tag Assistant against staging. *Needs GTM access.*
+3. **B5 / B6** — approve database separation, snapshot, then branch, and give
+   production its own `DATABASE_URL`. *Needs explicit approval.*
+4. **Decide the DNS architecture** — see the runbook §2. This needs one fact
+   nobody here can read: the Cloudflare account plan. Free or Pro means
+   Option 1 (move authoritative DNS to Cloudflare) is the only supported route
+   to a Worker Custom Domain.
+5. Re-run everything in §7 and re-issue the go/no-go table.
+
+Phase 13 is the final acceptance report and is not started. The site has not
+been launched. No DNS record, nameserver, Neon branch, Neon row, GTM
+container, Ads, GA4, UET, CallTrackingMetrics, Turnstile, Resend or SiteGround
+setting was changed by this closeout.
 
 Phase 13 is the final acceptance report and is not started. The site has not
 been launched.
@@ -327,3 +449,17 @@ been launched.
 | `docs/dns-cutover-runbook.md` | Cutover, rollback thresholds, indexing safeguards, SiteGround follow-ups |
 | `scripts/verify-indexing.mjs` | **changed** — refuses to report when served a challenge |
 | `TESTING.md` | **corrected** — the stale claim that Resend was never configured |
+
+### Added by the corrective closeout (`f3ed583`)
+
+| File | What changed |
+|---|---|
+| `src/pages/lp/commercial-cleaning.astro` | B3 — literal `•` in a named constant |
+| `src/pages/lp/commercial-cleaning-quote.astro` | B3 — literal `—` in a named constant |
+| `src/data/redirects.ts` | B4 — `bothSlashSpellings`, the central expansion |
+| `scripts/redirects.mjs` | B4 — applies it to spec, legacy and pagination rules; wildcards untouched |
+| `tests/build/redirect-variants.test.ts` | B4 — 14 tests over the expansion and the emitted file |
+| `tests/build/headings-and-links.test.ts` | rule count 130 → 154, pinned not relaxed |
+| `scripts/migration-parity.mjs` | all 50 variants and 7 query-string cases against a deployed origin |
+| `scripts/dns-snapshot.mjs` | mail/service record inventory (incl. DKIM selectors and M365 probes) and DNSSEC state |
+| `docs/dns-cutover-runbook.md` | **rewritten** around the three supported Cloudflare architectures |
