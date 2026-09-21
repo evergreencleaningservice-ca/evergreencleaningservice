@@ -240,8 +240,16 @@ describe('the legacy redirect map', () => {
   it('still carries every rule — removing links did not remove redirects', () => {
     /* The tag cloud went; `/tag/*` did NOT. Those addresses still exist in
        backlinks and in Google's index, and deleting the rule would turn them
-       into 404s. */
-    expect(redirects.length).toBe(130);
+       into 404s.
+
+       The count moved from 130 to 154 in the Phase 12 closeout, and the
+       direction is the whole point of this assertion: every exact-match
+       source is now emitted in both trailing-slash spellings (B4), so the map
+       GREW by 24. A count that falls is a link class going dark, which is
+       what this test is here to catch — so it is pinned rather than relaxed
+       to a lower bound. `tests/build/redirect-variants.test.ts` owns the
+       arithmetic behind the number. */
+    expect(redirects.length).toBe(154);
     expect(redirects.some((r) => r.from === '/tag/*')).toBe(true);
     expect(redirects.some((r) => r.from === '/author/*')).toBe(true);
   });

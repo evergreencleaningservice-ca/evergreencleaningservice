@@ -66,6 +66,19 @@ const FORM_ID = 'lp-commercial-cleaning-quote';
 /* The three reviewers who talk about responsiveness and account handling,
    which is what someone already asking for a quote is weighing up. */
 const REVIEWERS = ['Mark Post', 'Edward Sherman', 'Michael Katchen'] as const;
+
+/**
+ * A LITERAL EM DASH, not `&mdash;`. Same defect as the sibling page's
+ * `CALL_NOTE`: a prop rendered through an expression is escaped again, so the
+ * entity reached the visitor verbatim.
+ *
+ * This one sat in the hero eyebrow, directly above the H1 — the first line on
+ * the page — and it very nearly went unreported, because the element is
+ * `text-transform: uppercase` and the rendered text reads `&MDASH;`. The
+ * detector that found the sibling was case-sensitive and skipped straight
+ * past it. `npm run launch:check` now matches case-insensitively.
+ */
+const EYEBROW = 'Free quote — Toronto & the GTA';
 ---
 
 <LandingLayout
@@ -75,7 +88,7 @@ const REVIEWERS = ['Mark Post', 'Edward Sherman', 'Michael Katchen'] as const;
   quoteAnchor={FORM_ANCHOR}
 >
   <LpHero
-    eyebrow="Free quote &mdash; Toronto & the GTA"
+    eyebrow={EYEBROW}
     heading="Get a commercial cleaning quote for your building."
     sub="Tell us where you are and what needs cleaning. We walk the space, write the scope, and price it to your hours — serving Toronto since 1989."
   >

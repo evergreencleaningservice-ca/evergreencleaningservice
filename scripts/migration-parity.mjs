@@ -38,6 +38,7 @@ import {
   legacyRedirects,
   newsPageRedirects,
   wildcardRedirects,
+  bothSlashSpellings,
 } from '../src/data/redirects.ts';
 
 const args = process.argv.slice(2);
@@ -282,29 +283,116 @@ for (const [label, path] of ONCE_DEAD) {
  * of inventing a path and reporting its 404 as a defect.
  */
 const uploadCount = Object.keys(uploadRedirects).length;
-/* --- the slashless variant, recorded because a real link may omit it ------ */
+/* --- B4: every exact-match source, in BOTH spellings, one hop ------------- */
 
 /**
- * Not every inbound link carries the trailing slash WordPress served. Those
- * still arrive, and they take TWO hops: the `_redirects` 301, then the edge's
- * own 307 normalising the slash on. Both are followed by every crawler and by
- * every browser, so this is recorded as measured behaviour rather than
- * asserted as a pass — but it is recorded, because "two hops, second one
- * temporary" is the kind of detail that is invisible until someone audits a
- * redirect chain and reports it as a defect.
+ * The closeout check for B4, run against the deployed origin.
+ *
+ * Before the fix, all 24 directory-style legacy rules answered 404 without a
+ * trailing slash — `_redirects` matches exactly, and with no asset at the
+ * slashless path the edge had nothing to normalise onto. Every inbound link
+ * written without the slash worked on WordPress and would have died at
+ * cutover.
+ *
+ * Three things are asserted per variant, because two of them can pass while
+ * the third fails:
+ *
+ *   the status is a real 301          — not a 302, and not a 200 meta refresh
+ *   ONE hop, not two                  — the Location must be the final target
+ *                                       itself, so following it lands on a 200
+ *                                       with nothing further to follow
+ *   both spellings agree              — the slashed and slashless forms must
+ *                                       reach the SAME canonical address, or
+ *                                       the map has quietly forked
  */
-console.log('\n=== Redirect chains for slashless legacy links (measured)');
-for (const p of ['/blog/workplace-cleaning-checklist-winter', '/office-cleaning']) {
-  const hops = [];
-  let url = new URL(p, origin);
-  for (let i = 0; i < 4; i++) {
-    const { res } = await req(url, 'HEAD');
-    hops.push(`${res.status}`);
+console.log('\n=== B4 — every exact-match source, both spellings, one hop');
+{
+  const EXACT = [...specRedirects, ...legacyRedirects, ...newsPageRedirects];
+  const variants = bothSlashSpellings(EXACT);
+  const landing = new Map();
+  let bad = 0;
+
+  for (const rule of variants) {
+    checked++;
+    const problems = [];
+    const { res } = await req(new URL(rule.from, origin), 'HEAD');
     const loc = res.headers.get('location');
-    if (!loc) break;
-    url = new URL(loc, origin);
+
+    if (res.status !== 301) problems.push(`HTTP ${res.status}, not 301`);
+    else {
+      const got = new URL(loc, origin).pathname;
+      if (got !== rule.to) problems.push(`→ ${got}, expected ${rule.to}`);
+
+      /* One hop: the target must answer 200 directly. A second redirect here
+         is the chain this fix exists to avoid. */
+      const t = await req(new URL(loc, origin), 'HEAD');
+      if (t.res.status === 200) {
+        landing.set(rule.from, got);
+      } else if ([301, 302, 307, 308].includes(t.res.status)) {
+        problems.push(`chained: ${got} → ${t.res.headers.get('location')}`);
+      } else {
+        problems.push(`target answers ${t.res.status}`);
+      }
+    }
+
+    if (problems.length) {
+      bad++;
+      failed++;
+      console.log(`  FAIL  ${rule.from.padEnd(50)} ${problems.join('; ')}`);
+    }
+    rows.push({ group: 'b4-variants', from: rule.from, to: rule.to, status: res.status, location: loc, problems });
   }
-  console.log(`  ${p.padEnd(46)} ${hops.join(' → ')}  final ${url.pathname}`);
+
+  /* Both spellings of one source must land in the same place. */
+  const forked = [];
+  for (const rule of EXACT) {
+    const bare = rule.from.replace(/\/$/, '');
+    const a = landing.get(`${bare}/`);
+    const b = landing.get(bare);
+    if (a && b && a !== b) forked.push(`${bare}: "${a}" vs "${b}"`);
+  }
+  if (forked.length) {
+    failed += forked.length;
+    for (const f of forked) console.log(`  FAIL  spellings disagree — ${f}`);
+  }
+
+  console.log(
+    `  ${variants.length - bad} of ${variants.length} variants: 301, correct target, single hop` +
+      (forked.length ? `; ${forked.length} forked` : '; both spellings agree')
+  );
+}
+
+/* --- B4: query strings survive the hop ------------------------------------ */
+
+/**
+ * These are precisely the addresses a paid click lands on, so a redirect that
+ * drops `?gclid=` breaks attribution on exactly the traffic that is paid for.
+ * Cloudflare's static router is expected to carry the query onto the Location
+ * — expected, so asserted, against the real origin and in both spellings.
+ */
+console.log('\n=== B4 — query strings survive, both spellings');
+{
+  const CASES = [
+    ['/office-cleaning/', '?gclid=TEST123'],
+    ['/office-cleaning', '?gclid=TEST123'],
+    ['/commercial-cleaning/', '?utm_source=google&utm_medium=cpc&utm_campaign=x'],
+    ['/commercial-cleaning', '?utm_source=google&utm_medium=cpc&utm_campaign=x'],
+    ['/blog/', '?page=2'],
+    ['/blog', '?page=2'],
+    ['/testimonials', '?msclkid=abc&utm_term=office%20cleaning'],
+  ];
+  for (const [p, qs] of CASES) {
+    checked++;
+    const { res } = await req(new URL(p + qs, origin), 'HEAD');
+    const loc = res.headers.get('location') ?? '';
+    const gotQuery = loc.includes('?') ? loc.slice(loc.indexOf('?')) : '';
+    const ok = res.status === 301 && gotQuery === qs;
+    if (!ok) failed++;
+    rows.push({ group: 'b4-query', from: p + qs, status: res.status, location: loc, problems: ok ? [] : ['query not preserved'] });
+    console.log(
+      `  ${ok ? ' ok ' : 'FAIL'}  ${(p + qs).padEnd(58)} ${res.status} → ${loc || '(none)'}`
+    );
+  }
 }
 
 console.log('\n=== Upload-path coverage (measured, not asserted)');

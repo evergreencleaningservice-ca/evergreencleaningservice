@@ -52,12 +52,28 @@ import { REPLY_PROMISE } from '../../data/landing';
 const FORM_ANCHOR = 'ppc-lead-form';
 /** The conversion identity. Unchanged, so the existing rows still line up. */
 const FORM_ID = 'ppc-lead-form';
+
+/**
+ * A LITERAL BULLET, not `&bull;`.
+ *
+ * This string is passed as a PROP and rendered by the layout as `{callNote}`,
+ * and Astro escapes the output of an expression. So an HTML entity written
+ * here is emitted as `&amp;bull;` and the visitor reads the six characters
+ * `&bull;` — on a page behind paid clicks. It shipped that way and was found
+ * by rendering the page rather than by reading the source, because the entity
+ * spelling is correct in template markup and wrong only here, and the two are
+ * indistinguishable by eye.
+ *
+ * `npm run launch:check` now fails the build artefact on any double-escaped
+ * entity, so this cannot come back silently.
+ */
+const CALL_NOTE = 'Free walkthrough • No obligation';
 ---
 
 <LandingLayout
   title="Commercial & Office Cleaning in Toronto and the GTA | Evergreen"
   description="Commercial and office cleaning across Toronto, Mississauga, Vaughan and the GTA. WSIB covered, bonded and insured. Free on-site walkthrough and a reply within 2 business hours."
-  callNote="Free walkthrough &bull; No obligation"
+  callNote={CALL_NOTE}
   quoteAnchor={FORM_ANCHOR}
 >
   <LpHero

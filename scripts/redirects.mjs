@@ -17,6 +17,7 @@ import {
   legacyRedirects,
   newsPageRedirects,
   wildcardRedirects,
+  bothSlashSpellings,
 } from '../src/data/redirects.ts';
 
 const uploadRedirects = JSON.parse(
@@ -39,13 +40,24 @@ const section = (title, rows) => {
   lines.push('');
 };
 
-section('Section 2.1 of the overhaul specification', specRedirects);
-section('Legacy addresses the archive shows this site actually served', legacyRedirects);
+/* Every exact-match source is emitted in both trailing-slash spellings, each
+   going straight to the same final target in one hop. See
+   `bothSlashSpellings` in src/data/redirects.ts for why. */
+section('Section 2.1 of the overhaul specification', bothSlashSpellings(specRedirects));
+section(
+  'Legacy addresses the archive shows this site actually served',
+  bothSlashSpellings(legacyRedirects)
+);
 section(
   'Image addresses — explicit, because a splat cannot take just the basename',
   Object.entries(uploadRedirects).map(([from, to]) => ({ from, to }))
 );
-section('News pagination — static, because wildcard order is not honoured', newsPageRedirects);
+section(
+  'News pagination — static, because wildcard order is not honoured',
+  bothSlashSpellings(newsPageRedirects)
+);
+/* Wildcards are NOT expanded: a splat already matches both spellings, and a
+   duplicated rule here would shadow the one below it. */
 section('Wildcards, last so the rules above win', wildcardRedirects);
 
 fs.writeFileSync(path.join(dist, '_redirects'), lines.join('\n'));

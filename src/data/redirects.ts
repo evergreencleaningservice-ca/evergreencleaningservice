@@ -30,6 +30,83 @@
 
 export type Redirect = { from: string; to: string };
 
+/**
+ * Expand an exact-match rule into BOTH trailing-slash spellings.
+ *
+ * THE DEFECT THIS FIXES. `_redirects` matches a path exactly. A rule written
+ * `/office-cleaning/` does not match `/office-cleaning`, and because there is
+ * no asset at the slashless path either, the edge has nothing to normalise
+ * onto and answers 404. Measured against the deployed Worker before this
+ * existed: **all 24 exact-match legacy rules 404'd without the slash.**
+ *
+ * That is a regression created by the migration, not a pre-existing gap.
+ * WordPress answers both spellings today — it 301s the slashless form onto
+ * the slashed one — so every inbound link written without a trailing slash
+ * works right now and would have died at cutover. Directory listings, email
+ * signatures and citations omit the slash constantly.
+ *
+ * ONE HOP, NOT TWO. The slashless variant is mapped straight to the same
+ * final target, never to the slashed source. Chaining
+ * `/office-cleaning` → `/office-cleaning/` → `/services/office-cleaning/`
+ * would work in a browser and is still worse: it doubles the latency on a
+ * cold connection and spends redirect budget for nothing.
+ *
+ * QUERY STRINGS survive without being mentioned here. Cloudflare's static
+ * router carries the original query onto the Location of a `_redirects` hop,
+ * which matters because these are exactly the addresses a `?utm_source=` or a
+ * `?gclid=` arrives on. Asserted against the deployed origin rather than
+ * taken on trust — see `tests/build/redirect-variants.test.ts` and
+ * `npm run parity`.
+ *
+ * NOT FOR WILDCARDS. A splat rule already matches both spellings, and
+ * expanding one would emit a duplicate that shadows the rule beneath it.
+ */
+export function bothSlashSpellings(rules: Redirect[]): Redirect[] {
+  const out: Redirect[] = [];
+  const seen = new Set<string>();
+
+  for (const rule of rules) {
+    if (rule.from.includes('*')) {
+      throw new Error(
+        `bothSlashSpellings received the wildcard rule "${rule.from}". ` +
+          'Wildcards already match both spellings and must not be expanded.'
+      );
+    }
+
+    /**
+     * A FILE ADDRESS HAS NO SLASHED SPELLING. `/sitemap.xml` is a file, and
+     * `/sitemap.xml/` is not an address anybody has ever linked to — no
+     * server produced it and no crawler will request it. An earlier version
+     * of this function emitted it anyway, along with `/sitemap_index.xml/`,
+     * because it treated every source as a directory.
+     *
+     * Harmless at the edge, but it puts rules in the map that can never
+     * match, and a redirect map is read by people deciding what is covered.
+     * Detected by an extension on the last segment, which is what separates
+     * `/sitemap.xml` from `/feed` — the latter is a WordPress route and does
+     * take both spellings.
+     */
+    const lastSegment = rule.from.replace(/\/$/, '').split('/').pop() ?? '';
+    const isFile = /\.[a-z0-9]{2,5}$/i.test(lastSegment);
+
+    const bare = rule.from.replace(/\/$/, '');
+    const spellings = isFile ? [bare] : [`${bare}/`, bare];
+
+    /* The slashed spelling first, so it keeps its original precedence among
+       rules that were deliberately ordered. */
+    for (const from of spellings) {
+      /* `/` reduced to '' is not an address, and the root is never a legacy
+         redirect source anyway. */
+      if (from === '') continue;
+      if (seen.has(from)) continue;
+      seen.add(from);
+      out.push({ from, to: rule.to });
+    }
+  }
+
+  return out;
+}
+
 /** Section 2.1, as specified — with targets corrected to pages that exist. */
 export const specRedirects: Redirect[] = [
   { from: '/commercial-cleaning-toronto-gta/', to: '/services/commercial-cleaning/' },
