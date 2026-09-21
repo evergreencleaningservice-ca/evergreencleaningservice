@@ -61,6 +61,7 @@ import { createServer } from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
+import { requireChrome } from './lib/chrome.mjs';
 
 const dist = process.argv[2];
 
@@ -96,7 +97,7 @@ const PAGES = [
 ];
 
 const browser = await chromium.launch({
-  executablePath: process.env.CHROME_PATH || '/opt/pw-browsers/chromium',
+  executablePath: requireChrome(),
   args: ['--no-sandbox'],
 });
 

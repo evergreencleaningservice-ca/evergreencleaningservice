@@ -29,6 +29,7 @@ import { createServer } from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
+import { requireChrome } from './lib/chrome.mjs';
 import lighthouse from 'lighthouse';
 
 const [dist, label, runsArg, pathArg] = process.argv.slice(2);
@@ -57,7 +58,7 @@ const url = `http://127.0.0.1:${server.address().port}${PAGE}`;
 
 const PORT = 9222 + Math.floor(Math.random() * 500);
 const browser = await chromium.launch({
-  executablePath: process.env.CHROME_PATH || '/opt/pw-browsers/chromium',
+  executablePath: requireChrome(),
   args: [
     '--no-sandbox',
     '--disable-dev-shm-usage',

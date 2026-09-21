@@ -20,6 +20,7 @@
 import { execFileSync, spawn } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { requireChrome } from './lib/chrome.mjs';
 
 const label = process.argv[2];
 const origin = process.argv[3] ?? 'http://localhost:4321';
@@ -48,31 +49,11 @@ const WIDTHS = [390, 768, 1440];
 const RUNS = 3;
 
 /**
- * The browser both halves of this script drive.
- *
- * `/opt/pw-browsers/chromium` is a SYMLINK TO THE BINARY, not a directory —
- * an earlier default here appended `/chrome-linux/chrome` to it and produced
- * a path that does not exist, so Lighthouse failed with "CHROME_PATH must be
- * set to a Chrome/Chromium executable" on a machine where Chromium was
- * installed and working. Every other script in this directory already used
- * the symlink directly; this one disagreed with them.
- *
- * Resolved once, here, and checked, so the failure is a clear message rather
- * than a stack trace out of chrome-launcher.
+ * The browser both halves of this script drive, resolved by the shared
+ * helper so this file cannot disagree with `perf-matrix.mjs` about where
+ * Chromium is — which is exactly what went wrong before it existed.
  */
-const CHROME = (() => {
-  const candidates = [
-    process.env.CHROME_PATH,
-    '/opt/pw-browsers/chromium',
-    '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
-  ].filter(Boolean);
-  const found = candidates.find((p) => fs.existsSync(p));
-  if (!found) {
-    console.error(`measure: no chromium found. Tried:\n  ${candidates.join('\n  ')}`);
-    process.exit(2);
-  }
-  return found;
-})();
+const CHROME = requireChrome();
 
 const median = (xs) => [...xs].sort((a, b) => a - b)[Math.floor(xs.length / 2)];
 const round = (n) => (n === null || n === undefined ? null : Math.round(n));

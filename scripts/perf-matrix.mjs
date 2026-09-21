@@ -32,6 +32,18 @@
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { requireChrome } from './lib/chrome.mjs';
+
+/**
+ * The browser Lighthouse drives.
+ *
+ * Until the Phase 13 closeout this script had no resolution at all: it passed
+ * `process.env` straight through, so with `CHROME_PATH` unset chrome-launcher
+ * searched and failed, and the Phase 13 third-party matrix had to be produced
+ * with the variable exported by hand. Resolved here through the same helper
+ * `measure.mjs` uses, so the two cannot disagree about where Chromium is.
+ */
+const CHROME = requireChrome();
 
 const origin = process.argv[2] ?? 'https://evergreencleaningservice.10xconnections.com';
 const RUNS = Number(process.argv[3] ?? 3);
@@ -80,7 +92,10 @@ function runOnce(label, blocked, run) {
   ];
   for (const pattern of blocked) args.push(`--blocked-url-patterns=${pattern}`);
 
-  execFileSync('npx', args, { stdio: ['ignore', 'ignore', 'inherit'], env: process.env });
+  execFileSync('npx', args, {
+    stdio: ['ignore', 'ignore', 'inherit'],
+    env: { ...process.env, CHROME_PATH: CHROME },
+  });
   const lh = JSON.parse(fs.readFileSync(json, 'utf8'));
   const n = (id) => lh.audits[id]?.numericValue ?? null;
   const requests = lh.audits['network-requests']?.details?.items ?? [];

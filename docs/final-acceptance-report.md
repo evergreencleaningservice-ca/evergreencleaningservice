@@ -26,7 +26,7 @@ statement cannot survive by being quoted from a file nobody reopened.
 
 | Check | Result |
 |---|---|
-| `npm test` | **523 passed, 18 files, 0 failed** |
+| `npm test` | **549 passed, 19 files, 0 failed** (523 at the report's first issue; +26 for the shared Chrome resolver added in the closeout) |
 | `npm run build:preview` | **passes** — 77 pages, 154 redirect rules, 1138 image references repointed |
 | `npm run build` (production) | **refuses, exit 1** — see below |
 | `npx wrangler deploy --dry-run` | **passes** — 185 files, 214.16 KiB (58.29 KiB gzip), `env.ASSETS` bound |
@@ -345,6 +345,11 @@ the spread shown because a wide spread is itself the finding.
 41 against a target of 85, and it is **below the Phase 1 baseline of 51**.
 That is stated plainly rather than explained away.
 
+A confirming run during the Phase 13 closeout, on the same deployed version,
+returned a median of **42** (runs 42 / 42 / 79). The single 79 is why the
+median rather than the best is reported: one favourable run on a shared
+machine is not a result, and the wide spread is itself worth seeing.
+
 ### Site-controlled performance, measured in isolation
 
 Same build, served over loopback with no network and no third party:
@@ -480,25 +485,57 @@ disappears: Cloudflare serves the site and SiteGround's WAF leaves the path.
 16 captures, 8 page categories × 390 px and 1440 px, against the deployed
 staging origin. **0 failures.**
 
-**Location:** `.measure/phase13-visual/` — `<category>-<width>.png`
-**Structured findings:** `.measure/phase13-visual/findings.json`
-**Lighthouse captures and JSON:** `.measure/phase13-staging/`
-**Third-party matrix:** `.measure/matrix/matrix.json`
+### Permanent evidence — committed
 
-> **`.measure/` is gitignored, and this container is ephemeral.** The captures
-> are evidence for this report, not repository artefacts — 65 MB of PNGs and
-> Lighthouse JSON do not belong in a source tree. Everything above regenerates
-> from the deployed origin with:
->
-> ```
-> node --experimental-strip-types scripts/visual-acceptance.mjs
-> node --experimental-strip-types scripts/measure.mjs <label> https://evergreencleaningservice.10xconnections.com
-> CHROME_PATH=/opt/pw-browsers/chromium node --experimental-strip-types scripts/perf-matrix.mjs
-> ```
->
-> Anyone who needs the images filed against the handoff should run the first
-> command and attach the output; re-running it against a **different** deployed
-> version will not reproduce these exact captures.
+**`docs/evidence/phase-13/`** — eight labelled contact sheets, one per
+category, each pairing the 390 px and 1440 px capture side by side under a
+header naming the route, the staging version and the date.
+
+| Sheet | Category | Size |
+|---|---|---|
+| `homepage.webp` | Homepage | 71 KB |
+| `quote.webp` | Request a quote | 37 KB |
+| `lp-commercial-cleaning.webp` | Paid — commercial cleaning | 56 KB |
+| `lp-commercial-cleaning-quote.webp` | Paid — quote | 53 KB |
+| `service.webp` | Service page | 70 KB |
+| `location.webp` | Location page | 82 KB |
+| `blog-archive.webp` | Blog archive | 58 KB |
+| `thank-you.webp` | Thank you | 34 KB |
+| `index.json` | Manifest — routes, widths, byte sizes | 2 KB |
+| **Total** | | **≈ 461 KB** |
+
+Mobile keeps its native 390 px width; desktop is halved to 720 px. Both stay
+legible at 100 % zoom — the `•` in *"Free walkthrough • No obligation"* is
+readable in both columns of `lp-commercial-cleaning.webp`, which is the point:
+compressed further, a screenshot stops being evidence.
+
+Regenerate with `node scripts/evidence-sheet.mjs`.
+
+### Working captures — not committed
+
+**`.measure/`** holds the raw PNGs, Lighthouse JSON and the third-party
+matrix. It is **gitignored and this container is ephemeral**: 65 MB of
+captures and reports do not belong in a source tree, and every future run
+would add another set. The committed sheets above are the durable record.
+
+| | |
+|---|---|
+| Raw captures | `.measure/phase13-visual/<category>-<width>.png` |
+| Structured findings | `.measure/phase13-visual/findings.json` |
+| Lighthouse JSON | `.measure/phase13-staging/` |
+| Third-party matrix | `.measure/matrix/matrix.json` |
+
+Everything regenerates from the deployed origin:
+
+```
+node --experimental-strip-types scripts/visual-acceptance.mjs
+node scripts/evidence-sheet.mjs
+node --experimental-strip-types scripts/measure.mjs <label> https://evergreencleaningservice.10xconnections.com
+node --experimental-strip-types scripts/perf-matrix.mjs
+```
+
+Re-running against a **different** deployed version will not reproduce these
+exact captures.
 
 | Category | Route | 390 px | 1440 px |
 |---|---|---|---|
@@ -576,13 +613,27 @@ here as the brief requires.
 | `scripts/sticky-clearance.mjs` | Header note only | Discloses the fourth false positive so a FAIL is not reported as a finding |
 | `docs/final-acceptance-report.md` | **New** | This document |
 
-**One defect left unfixed, deliberately.** `scripts/perf-matrix.mjs` carries
-the same wrong `CHROME_PATH` default that `measure.mjs` did, and fails the
-same way. It was run with `CHROME_PATH=/opt/pw-browsers/chromium` set in the
-environment rather than edited, to keep the number of files touched during an
-acceptance audit to the minimum that made the audit possible. It is a
-one-line fix for whoever picks it up next; the third-party matrix in §7 was
-produced with the environment variable set.
+### Documentation and tooling closeout
+
+Added after the report was first issued, still reporting-only. **No site code,
+content, schema or configuration was changed**, and the build output is
+byte-identical to the deployed version — 185 files, 214.16 KiB, so no
+redeploy was needed or made.
+
+| File | Change | Why |
+|---|---|---|
+| `scripts/lib/chrome.mjs` | **New** — one browser resolver, shared | Seven scripts disagreed about where Chromium is. It handles an executable, a symlink to one, a directory containing one, and an explicit `CHROME_PATH` — and **throws** on an unusable explicit path rather than silently falling back |
+| `scripts/perf-matrix.mjs` | Uses the shared resolver | Previously had no resolution at all; the §7 matrix had to be produced with an environment-variable workaround. **Now runs with no `CHROME_PATH` set** |
+| `scripts/measure.mjs` | Uses the shared resolver | Replaces the local fix made earlier in Phase 13 |
+| `scripts/lh-local.mjs`, `form-a11y.mjs`, `lp-census.mjs`, `sticky-clearance.mjs`, `visual-acceptance.mjs` | Use the shared resolver | Removes the last five ad-hoc copies, so the drift cannot recur |
+| `tests/tooling/chrome-resolution.test.ts` | **New** — 26 tests | Covers all four path shapes, the throw-on-bad-override rule, and asserts **every** browser-driving script imports the helper and hardcodes no path of its own |
+| `scripts/evidence-sheet.mjs` | **New** | Builds the committed contact sheets from the raw captures |
+| `docs/evidence/phase-13/` | **New** — 8 sheets + manifest, **≈461 KB** | Durable visual evidence; `.measure/` is gitignored and ephemeral |
+
+Both measurement scripts were re-run **with no `CHROME_PATH` in the
+environment** to prove it: `perf-matrix.mjs` produced a full eight-condition
+matrix, and `measure.mjs` completed three Lighthouse runs and its screenshots,
+exit 0.
 
 ---
 
@@ -591,10 +642,19 @@ produced with the environment variable set.
 **There are eight.** The "six blockers" count is retired: B3 and B4 are closed,
 and the remaining items are re-enumerated and reclassified below.
 
+> **On wording.** None of these items means "the account does not exist",
+> except O1. The GTM container, CallTrackingMetrics account 535014, the Neon
+> project and Resend all **exist and were read directly**; Cloudflare access
+> exists at some level; the Ads, GA4 and UET properties are referenced by the
+> live container and so almost certainly exist. What is missing is
+> **credentials, access, ownership or configuration** — different things for
+> different systems, named per row. The one established absence is a
+> production Turnstile key pair. §14.4 has the per-system table.
+
 | # | Condition | Class | Owner | Action required | Evidence to close |
 |---|---|---|---|---|---|
-| **O1** | No production Turnstile key pair. Staging serves the published test sitekey `1x00000000000000000000BB`; `npm run build` refuses to build for production (exit 1). | **Launch blocker** | Cloudflare account holder | Create a Turnstile widget for `www.evergreencleaningservice.ca` and the apex. Set `PUBLIC_TURNSTILE_SITE_KEY` at build time and `wrangler secret put TURNSTILE_SECRET`. | A production build completing, plus **one real staging submission accepted with the genuine pair** and one rejected with the published failing secret. |
-| **O2** | Container `GTM-5PRC4HBV` has **no trigger** for `lead_form_submission` or `phone_click`. Its two conversion triggers are gated on WPForms DOM ids that do not exist here. | **Launch blocker** and **paid-media blocker** | Agency / whoever owns GTM after SearchKings | Build triggers, tags and variables per `docs/gtm-handoff.md` §7. Rebuild enhanced conversions, which currently depend on a SearchKings script that will not exist. | Tag Assistant against staging showing both events firing their tags, and a test conversion visible in Google Ads and GA4. |
+| **O1** | **No production Turnstile key pair has been issued** — the one established absence, not an access gap. Staging serves the published test sitekey `1x00000000000000000000BB`; `npm run build` refuses to build for production (exit 1). Cloudflare access exists, but the API token here holds no Turnstile permission. | **Launch blocker** | Cloudflare account holder (Turnstile permission) | Create a Turnstile widget for `www.evergreencleaningservice.ca` and the apex. Set `PUBLIC_TURNSTILE_SITE_KEY` at build time and `wrangler secret put TURNSTILE_SECRET`. | A production build completing, plus **one real staging submission accepted with the genuine pair** and one rejected with the published failing secret. |
+| **O2** | Container `GTM-5PRC4HBV` **exists and is live** — it was read directly. The **required conversion configuration has not been applied**: no trigger for `lead_form_submission` or `phone_click`, and its two existing conversion triggers are gated on WPForms DOM ids this site does not render. Ads, GA4 and UET are referenced by the container; **their ownership and access are unresolved.** | **Launch blocker** and **paid-media blocker** | Whoever holds GTM/Ads/GA4/UET access after the SearchKings transition (ownership unresolved — blocker A1) | Build triggers, tags and variables per `docs/gtm-handoff.md` §7. Rebuild enhanced conversions, which currently depend on a SearchKings script that will not exist. | Tag Assistant against staging showing both events firing their tags, and a test conversion visible in Google Ads and GA4. |
 | **O3** | Staging and production share one Neon branch. 20 rows, all test data, **none from production**. | **Operational risk** → **launch blocker at cutover** | Paolo (approval) + Neon | Approve separation, take a snapshot, create a production branch, give production its own `DATABASE_URL`. Branch creation remains unauthorised. | Two branches; a staging submission landing in staging only; production `DATABASE_URL` set as a Worker secret. |
 | **O4** | Neon free plan: **six-hour PITR**, shorter than a cutover day. Branch `main` is also **not protected**. | **Operational risk** | Neon account holder | Take an explicit snapshot before cutover; enable branch protection. | Snapshot listed; protection enabled. |
 | **O5** | The upload-path map is an allowlist of **101** archive-derived addresses. An upload URL the Internet Archive never captured answers 404. | **Operational risk** (image/SEO traffic) | SiteGround access | Export the live WordPress media library and reconcile against the map. | A diff showing every live media path either mapped or deliberately excluded. |
@@ -715,9 +775,23 @@ repository. External blockers stay as deductions.
 
 The two staging scores rose because the work is measurably done. **The
 production score is low and must stay low**: it measures operational
-readiness, and five of its eight criteria depend on accounts and approvals
-that do not exist yet. Inflating it because the repository is strong would
+readiness, and five of its eight criteria depend on **credentials, access,
+ownership or configuration that are missing or unverified** — not on further
+work in this repository. Inflating it because the repository is strong would
 invert the one number that decides whether to launch.
+
+**To be precise about what is and is not missing**, because "the accounts do
+not exist" would be wrong for most of them:
+
+| System | Verified state |
+|---|---|
+| GTM container `GTM-5PRC4HBV` | **Exists**, is live on the site, and was read directly. The required **conversion configuration has not been applied** — it has no trigger for either website event. |
+| CallTrackingMetrics account `535014` | **Exists** and is actively performing dynamic number insertion, read from the live script. **Ownership and administrative access are unresolved.** |
+| Cloudflare | **Access exists at some level** — this session deploys Workers and reads secrets. **Turnstile permission is absent** on the token used here, and the **account plan is unverified**. |
+| Google Ads `AW-16819334998`, GA4 `G-R27QW21PMT`, Microsoft UET `187178776` | All three **are referenced by the live container**, so they almost certainly exist. **Ownership, access and configuration are unresolved**, pending the SearchKings transition. |
+| Production Turnstile key pair | **Does not exist, or has not been issued.** This is the one genuine absence, and it is established rather than assumed: the build gate refuses, and the deployed origin serves the published test key. |
+| Resend | **Exists and is operational.** Verified by a delivered message. |
+| Neon project `long-firefly-62771888` | **Exists.** Separation and snapshot policy are the open items, not access. |
 
 ---
 

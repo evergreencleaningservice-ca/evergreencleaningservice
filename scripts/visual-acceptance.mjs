@@ -19,6 +19,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
+import { requireChrome } from './lib/chrome.mjs';
 import { PREVIEW_HOST, nap } from '../src/data/site.ts';
 
 const origin = (process.argv[2] ?? `https://${PREVIEW_HOST}`).replace(/\/$/, '');
@@ -39,12 +40,8 @@ const PAGES = [
 
 const WIDTHS = [390, 1440];
 
-const CHROME = ['/opt/pw-browsers/chromium', process.env.CHROME_PATH].find(
-  (p) => p && fs.existsSync(p)
-);
-
 const browser = await chromium.launch({
-  executablePath: CHROME,
+  executablePath: requireChrome(),
   args: ['--no-sandbox', '--disable-dev-shm-usage', '--ignore-certificate-errors'],
 });
 

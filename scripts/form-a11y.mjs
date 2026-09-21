@@ -36,6 +36,7 @@ import { createServer } from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
+import { requireChrome } from './lib/chrome.mjs';
 
 const [dist, pageArg, formArg] = process.argv.slice(2);
 /* Which page, and which form on it. Defaults to the quote page, which is what
@@ -76,7 +77,7 @@ const check = (name, pass, detail = '') => {
 };
 
 const browser = await chromium.launch({
-  executablePath: '/opt/pw-browsers/chromium',
+  executablePath: requireChrome(),
   args: ['--no-sandbox'],
 });
 
