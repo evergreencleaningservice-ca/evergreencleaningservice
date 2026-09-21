@@ -60,10 +60,12 @@ the phase reports rather than pretended away in a unit test.
 | `tests/build/quote-page.test.ts` | node | Phase 9. `/request-a-quote/` as emitted: one lead form where there were two, one H1, the full navigation, the sidebar's verified claims, no placeholder-as-label, and the rendered field contract matched against the fixture the behavioural suite drives. |
 | `tests/build/landing-pages.test.ts` | node | Phase 10. Both paid pages from one table: the shared components, the short form, the absence of site navigation, the minimal header and legal footer, the real telephone number, no unverifiable claim, noindex and sitemap exclusion, the spam and conversion protections — and, asserted as loudly as the shared parts, that the two reporting identities stay distinct. |
 
-Because all the lead forms — the two PPC landing pages, the shared
-`FormRuntime` used by the quote and contact forms, and the short quote form —
-import `src/lib/lead-submit.ts`, a pass here is a pass for all of them. Before
-this they were three copies of the same logic, and they had drifted.
+Because every lead form on the site imports `src/lib/lead-submit.ts`, a pass
+there is a pass for all of them. Before Phase 2 they were three copies of the
+same logic and had drifted; after Phase 10 the two landing pages and
+`/request-a-quote/` all render the same `QuickQuoteForm` component as well, so
+`tests/quick-quote.test.ts` covers the behaviour of all three and each page's
+build test covers what is specific to it.
 
 `tests/fixtures/quick-quote.ts` is the one description of the short form's
 fields. `tests/quick-quote.test.ts` drives it; `tests/build/quote-page.test.ts`
@@ -82,7 +84,11 @@ a tested one.
   preview is the only place those are real.
 - **Neon.** The database insert is not reached in tests; there is no test
   database. An insert failure is covered only as "the endpoint answers 500".
-- **Resend.** The notification email is fire-and-log; not asserted on.
+- **Resend itself.** `tests/worker/notification.test.ts` asserts the exact
+  JSON the Worker sends, including that `reply_to` is absent for a phone-only
+  lead — but Resend is stubbed. Whether the API accepts a given key, sender
+  and payload is a deployed check, and Resend has never been configured on
+  this project.
 - **The captcha providers.** `siteverify` is stubbed. Whether Cloudflare
   accepts a given key pair is a deployed-preview check.
 - **Page-level fidelity against the original.** The `tests/build/*` files do
