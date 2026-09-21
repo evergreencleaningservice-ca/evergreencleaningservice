@@ -4,7 +4,7 @@ description: "Need emergency cleaning, water damage, or post construction cleani
 image: "/images/floodedoffice_1.jpg"
 ---
 
-We recognize that your need for emergency cleaning services may occur without notice or warning. With our 20-plus years of commercial cleaning service experience, Evergreen Cleaning Service is prepared to deal with the unexpected and restore your space to its ideal clean and full functionality.
+We recognize that your need for emergency cleaning services may occur without notice or warning. With commercial cleaning experience going back to 1989, Evergreen Cleaning Service is prepared to deal with the unexpected and restore your space to its ideal clean and full functionality.
 
 ![emergency office cleaning](/images/floodedoffice_1.jpg)
 

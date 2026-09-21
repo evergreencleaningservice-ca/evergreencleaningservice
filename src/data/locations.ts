@@ -104,7 +104,7 @@ export const locations: Location[] = [
       subtitle: 'Reliable, Professional Facility Maintenance for Mississauga Businesses',
       intro: [
         'From corporate headquarters along the Hurontario corridor and the Airport Corporate Centre to high-traffic industrial complexes in Meadowvale, Evergreen Cleaning Service provides comprehensive commercial cleaning and janitorial solutions tailored to your operational schedule.',
-        'With over 20 years of commercial cleaning experience across Peel Region and the GTA, our certified, bonded, and WSIB-insured teams ensure your facility maintains an immaculate, healthy environment for employees, clients, and visitors.',
+        'Serving Peel Region and the GTA since 1989, our certified, bonded, and WSIB-insured teams ensure your facility maintains an immaculate, healthy environment for employees, clients, and visitors.',
       ],
       servicesTitle: 'Mississauga Commercial Facilities We Service:',
       services: [

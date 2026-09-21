@@ -13,9 +13,13 @@
  *                            a factual claim, and an invented one is also a
  *                            Google policy violation. The badge instead says
  *                            what can be shown: real reviews, quoted below.
- *   "20+ Years in Business" — the business has traded since 1989, which is 36
- *                            years. The spec understates it; the badge uses the
- *                            figure the site itself has always published.
+ *   "20+ Years in Business" — the business has traded since 1989. The spec
+ *                            understates it, and the site itself contradicted
+ *                            itself: "since 1989" in one place, "over 20
+ *                            years" in another. Phase 7 settled every one of
+ *                            them on the founding year, which is durable —
+ *                            a computed "N+ years" goes stale between builds
+ *                            and has to be right every January.
  *
  * Put the real rating and review count in and the first badge can say it.
  */
@@ -24,12 +28,9 @@ import SpamGuard from '../../components/SpamGuard.astro';
 import { nap, site } from '../../data/site';
 import { reviews } from '../../data/reviews';
 
-const year = new Date().getFullYear();
-const yearsTrading = year - site.since;
-
 const badges = [
   { label: 'Real Google reviews', detail: 'from Toronto businesses' },
-  { label: `${yearsTrading}+ years in business`, detail: `Cleaning the GTA since ${site.since}` },
+  { label: `In business since ${site.since}`, detail: 'Commercial cleaning across the GTA' },
   { label: 'WSIB compliant & bonded', detail: 'Fully insured crews' },
 ];
 
@@ -77,8 +78,9 @@ const sizes = [
         <p class="lp-eyebrow">Greater Toronto Area Commercial Janitorial</p>
         <h1>Reliable Commercial Cleaning You Can Count On Every Single Night.</h1>
         <p class="lp-sub">
-          Over 20 years of dedicated office and commercial cleaning in Toronto, Mississauga,
-          Vaughan, and across the GTA. Bonded, insured, and zero operational disruption.
+          Dedicated office and commercial cleaning in Toronto, Mississauga,
+          Vaughan, and across the GTA since 1989. Bonded, insured, and zero
+          operational disruption.
         </p>
 
         <ul class="lp-bullets">

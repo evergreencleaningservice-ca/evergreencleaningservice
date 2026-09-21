@@ -24,3 +24,4 @@ pnpm-debug.log*
 # test build output
 .astro-test-dist/
 .astro-test-dist-links/
+.astro-test-dist-content/

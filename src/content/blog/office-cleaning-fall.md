@@ -33,7 +33,7 @@ During the summer, you’re likely spending a lot of time outdoors. This, along 
 
 As the weather takes a turn for the worse, you will notice that pests become much more frequent. After all, food sources begin to disappear. This means that you are likely to experience an influx of unwanted pests like spiders. Dusting becomes increasingly important during these months. This is especially true as it relates to crumbs in the office kitchen and more.
 
-When you require your autumn cleaning, you can count on Evergreen Cleaning to deliver. [Evergreen Cleaning](/about-us/) is one of Toronto’s best and longest-servicing office cleaning company. They have been serving clients within the region for more than 20 years.
+When you require your autumn cleaning, you can count on Evergreen Cleaning to deliver. [Evergreen Cleaning](/about-us/) is one of Toronto’s best and longest-servicing office cleaning company. They have been serving clients within the region since 1989.
 
 [Contact us](/contact-us/) today to book your fall deep office clean!
 
