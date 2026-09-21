@@ -33,10 +33,13 @@ with a real `Request` and a hand-built `env`. That covers every decision the
 endpoint makes. It does **not** run the Workers runtime; see *What is not
 tested* below.
 
-There is deliberately no browser-automation layer. Playwright against a
-deployed preview is the right tool for the handful of things that genuinely
-need a browser, and those are listed as manual staging checks in the phase
-reports rather than pretended away in a unit test.
+There is deliberately no browser in the suite. A browser would make `npm test`
+slow enough that people stop running it, and most of what it would buy is
+already covered by building the site and reading the emitted HTML. The two
+things that genuinely need one — real focus and tab order, and a deployed
+origin's response headers — are scripts instead (`npm run form:a11y`,
+`npm run verify:indexing`), run against a build or a preview and reported in
+the phase reports rather than pretended away in a unit test.
 
 ## What the suite covers
 
@@ -81,17 +84,32 @@ a tested one.
 - **Resend.** The notification email is fire-and-log; not asserted on.
 - **The captcha providers.** `siteverify` is stubbed. Whether Cloudflare
   accepts a given key pair is a deployed-preview check.
-- **Rendered Astro pages.** Nothing asserts on the HTML of a built page beyond
-  what the build scripts already check. Page-level fidelity is covered by the
-  `wp-check-nothing-is-missing` diff, which is a separate, browser-based
-  procedure run against the preview hostname.
+- **Page-level fidelity against the original.** The `tests/build/*` files do
+  assert on emitted HTML, but each one asks a specific question — headings,
+  links, images, indexability, the quote page. Whether a ported page still
+  looks and behaves like the page it replaces is the
+  `wp-check-nothing-is-missing` diff, a separate browser-based procedure run
+  against the preview hostname.
 - **Anything visual.** No layout, no breakpoints, no screenshots.
+- **Real focus, real tab order, the real accessibility tree.** happy-dom has
+  no layout and no accessibility tree, so `tests/quick-quote.test.ts` can
+  prove the code focuses the right element and not that a person pressing Tab
+  reaches it, that the focus ring is visible, or what a screen reader is
+  handed. `npm run form:a11y -- <distDir>` does that part in a real browser —
+  forty checks at 390px and 1440px against a build, with the endpoint stubbed
+  inside the browser so no lead is stored. It is a script rather than a test
+  because a browser in the suite would make `npm test` slow enough that people
+  stop running it.
 - **Performance.** Nothing in the suite measures speed. `npm run measure`
   runs Lighthouse three times and reports the median; `npm run perf:matrix`
   attributes third-party cost by blocking one origin at a time inside the
   measuring browser. Both need a running origin, both are slow, and both
   belong in a report rather than in a test — a Lighthouse score is a
   measurement of a network on a day, not a property of the code.
+  `npm run lh:local -- <distDir> <label> [runs] [path]` is the exception that
+  proves the rule: it serves a build over loopback with no network and no
+  third party, which makes two builds comparable to each other and makes its
+  absolute numbers meaningless as production figures.
 - **Deployed response headers.** `X-Robots-Tag` is `dist/_headers` as
   Cloudflare interprets it, and that can be wrong while the repository is
   right — a stale deploy, an edge cache, a zone transform rule. The build

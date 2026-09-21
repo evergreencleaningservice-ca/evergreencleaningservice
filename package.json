@@ -24,7 +24,9 @@
     "captcha:check": "node --experimental-strip-types scripts/captcha-check.mjs",
     "secret:check": "node --experimental-strip-types scripts/secret-check.mjs",
     "perf:matrix": "node --experimental-strip-types scripts/perf-matrix.mjs",
-    "verify:indexing": "node --experimental-strip-types scripts/verify-indexing.mjs"
+    "verify:indexing": "node --experimental-strip-types scripts/verify-indexing.mjs",
+    "lh:local": "node scripts/lh-local.mjs",
+    "form:a11y": "node scripts/form-a11y.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
