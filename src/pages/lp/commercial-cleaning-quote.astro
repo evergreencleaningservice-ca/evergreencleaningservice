@@ -251,24 +251,24 @@ const badges = [
 </LandingLayout>
 
 <script>
-  /* Posts to /api/submit-lead and redirects to /thank-you/ only on a 200, so a
-     failure surfaces to the visitor rather than pretending to have worked —
+  /* Posts to /api/submit-lead and redirects to /thank-you/ only on a 200, so
+     a failure surfaces to the visitor rather than pretending to have worked —
      and so the thank-you page, which is what the Google Ads destination
-     conversion fires on, is never reached by a lead that was not stored. */
+     conversion fires on, is never reached by a lead that was not stored.
+
+     The pipeline is `src/lib/lead-submit.ts`, shared with the other landing
+     page and with the site's own forms. This page used to carry its own copy,
+     in which a honeypot hit redirected the bot to /thank-you/ — and
+     /thank-you/ pushes `lead_form_confirmed`, so a bot filling a field no
+     person can see reported a conversion. It now gets the confirmation copy
+     in place, with no navigation and no event. */
+  import { fieldValue, wireLeadForm } from '../../lib/lead-submit';
+  import type { Dict } from '../../lib/lead-submit';
+
   const form = document.getElementById('lpq-form') as HTMLFormElement | null;
   const errorBox = document.getElementById('lpq-error');
 
   const param = (name: string) => new URLSearchParams(location.search).get(name) ?? '';
-  const field = (name: string) =>
-    (form?.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | null)?.value?.trim() ??
-    '';
-
-  /* Turnstile writes cf-turnstile-response, reCAPTCHA writes the hidden field
-     SpamGuard renders. Read whichever is present. */
-  const token = () =>
-    (form?.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value ||
-    (form?.querySelector('.wpf-recaptcha-hidden') as HTMLInputElement | null)?.value ||
-    '';
 
   const showError = (message: string) => {
     if (!errorBox) return;
@@ -277,92 +277,50 @@ const badges = [
     errorBox.scrollIntoView({ block: 'center', behavior: 'smooth' });
   };
 
-  form?.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    if (errorBox) errorBox.hidden = true;
-
-    /* Honeypot: behave exactly as success would. Telling a bot it failed
-       teaches it to try again with the field empty. */
-    if (field('company_tax_id')) {
-      window.location.href = '/thank-you/?f=lp-commercial-cleaning-quote';
-      return;
-    }
-
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-    const label = submit?.textContent ?? 'Submit';
-    if (submit) {
-      submit.disabled = true;
-      submit.textContent = 'Sending…';
-    }
-
-    const formId = 'lp-commercial-cleaning-quote';
-
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'lead_form_submission',
-      form_id: formId,
-      facility_type: field('facility_type'),
-      facility_size: field('size'),
+  if (form) {
+    form.addEventListener('submit', () => {
+      if (errorBox) errorBox.hidden = true;
     });
 
-    for (let i = 0; i < 60 && !token(); i++) await new Promise((r) => setTimeout(r, 100));
+    wireLeadForm(form, {
+      formId: 'lp-commercial-cleaning-quote',
+      honeypots: ['company_tax_id', 'website_trap'],
+      sendingLabel: 'Sending…',
 
-    try {
-      const res = await fetch('/api/submit-lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          form_id: formId,
-          name: field('name'),
-          email: field('email'),
-          phone: field('phone'),
-          facility_type: field('facility_type'),
-          size: field('size'),
-          captcha: token(),
-          page_url: location.href,
-          referrer: document.referrer,
-          /* What makes the lead attributable to a click. */
-          gclid: param('gclid'),
-          utm_source: param('utm_source'),
-          utm_medium: param('utm_medium'),
-          utm_campaign: param('utm_campaign'),
-        }),
-      });
+      payload: (f): Dict => ({
+        form_id: 'lp-commercial-cleaning-quote',
+        name: fieldValue(f, 'name'),
+        email: fieldValue(f, 'email'),
+        phone: fieldValue(f, 'phone'),
+        facility_type: fieldValue(f, 'facility_type'),
+        size: fieldValue(f, 'size'),
+        page_url: location.href,
+        referrer: document.referrer,
+        /* What makes the lead attributable to a click. */
+        gclid: param('gclid'),
+        utm_source: param('utm_source'),
+        utm_medium: param('utm_medium'),
+        utm_campaign: param('utm_campaign'),
+      }),
 
-      if (res.ok) {
+      eventParams: (f): Dict => ({
+        facility_type: fieldValue(f, 'facility_type'),
+        facility_size: fieldValue(f, 'size'),
+      }),
+
+      onSuccess: () => {
         window.location.href = '/thank-you/?f=lp-commercial-cleaning-quote';
-        return;
-      }
-
-      if (res.status === 403) {
-        const w = window as unknown as {
-          turnstile?: { reset?: () => void };
-          grecaptcha?: { reset?: () => void };
-        };
-        w.turnstile?.reset?.();
-        w.grecaptcha?.reset?.();
-        showError('That security check did not verify. Please try submitting again.');
-      } else {
-        showError(
-          'Something went wrong sending that. Please call (416) 803-4880 and we will take the details directly.'
-        );
-      }
-    } catch {
-      showError(
-        'We could not reach the server. Please call (416) 803-4880 and we will take the details directly.'
-      );
-    }
-
-    if (submit) {
-      submit.disabled = false;
-      submit.textContent = label;
-    }
-  });
+      },
+      onHoneypot: (f) => {
+        f.innerHTML = '';
+        const box = document.createElement('p');
+        box.setAttribute('role', 'status');
+        box.textContent = 'Thanks — we have your request and will be in touch shortly.';
+        f.append(box);
+      },
+      onError: (_f, message) => showError(message),
+    });
+  }
 </script>
 
 <style>

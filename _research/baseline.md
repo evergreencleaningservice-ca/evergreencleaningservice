@@ -119,3 +119,62 @@ Recorded so a later change cannot quietly undo it:
 - 130 redirect rules, including 101 legacy `/wp-content/uploads/…` image URLs
 - Staging `noindex, nofollow`; production must not inherit it
 - CLS already at 0.001
+
+## 1.6 The GTM container, read rather than assumed
+
+Measured 21 Sep 2026 by fetching `https://www.googletagmanager.com/gtm.js?id=GTM-5PRC4HBV`
+(477,122 bytes) and reading its `macros`, `predicates`, `rules` and `tags`
+arrays. This section exists because an earlier claim in this session —
+that the `FormRuntime` ordering defect was "actively costing money" — was
+asserted without checking the container. It was wrong twice over: the code
+has never run on production (production is still WordPress), and the
+container has no trigger that would have heard it.
+
+**What the container actually contains.**
+
+| | |
+|---|---|
+| Google Ads account | `AW-16819334998` (macro 5) |
+| Conversion labels | `lkxPCIq_14oaENbeitQ-`, `BzWyCJzt44oaENbeitQ-`, `ERU-CJ_t44oaENbeitQ-` |
+| GA4 | `G-R27QW21PMT` |
+| Microsoft Advertising UET | `187178776`, queue `uetq_sk` |
+
+**Its triggers, decoded from `rules` and `predicates`:**
+
+| Rule | Condition | Fires |
+|---|---|---|
+| 1 | `event == gtm.js` | the page-load tags, GA4 config, conversion linker |
+| 2 | `event == gtm.formSubmit` **and** `gtm.elementId == "wpforms-form-1384"` | Ads conversion + UET |
+| 3 | `event == gtm.formSubmit` **and** `gtm.elementId == "wpforms-form-1381"` | Ads conversion + UET |
+| 4 | `event == gtm.linkClick` **and** the href starts with `mailto:` | Ads conversion |
+
+Counted in the container source: `lead_form_submission` **0**,
+`lead_form_confirmed` **0**, `thank-you` **0**, `tel:` **0**,
+`click_to_call` **0**, `phone_click` **0**.
+
+**Four consequences, all of them launch items rather than code defects:**
+
+1. **Conversions would be zero, not inflated.** The two conversion triggers
+   are gated on `gtm.elementId` being a WPForms DOM id. Neither id exists on
+   this site, and these forms call `preventDefault()` and post by `fetch`.
+   The container must gain a Custom Event trigger on `lead_form_submission`
+   (and, for the landing pages' destination conversion, `lead_form_confirmed`)
+   before the DNS cutover, or Smart Bidding loses its signal on day one.
+2. **Click-to-call has never been tracked, on either site.** There is no
+   `tel:` trigger — only `mailto:`. The `click_to_call` event
+   `LandingLayout.astro` already pushes goes nowhere today. Phase 11 is
+   therefore new tracking, not a port.
+3. **Enhanced conversions depend on SearchKings' own script.** Macro 3 reads
+   `sessionStorage.getItem("searchkings_galaxy_tracking_event_data")` and
+   feeds macro 4, the enhanced-conversions data source. That script does not
+   exist on this site, and will not exist anywhere once SearchKings is out.
+   Enhanced conversions degrade to the `AUTO` collector (macro 17) unless the
+   container is rebuilt.
+4. **The container is configured for WPForms field names.** Macro 16 maps
+   `wpforms[fields][0][first]` → "First name" and so on, with a click listener
+   bound to `form`. None of those selectors match this site.
+
+**Who can act on this is blocker A1** in the question list sent to
+Harjit@BrandingCentres.com: who owns the Google Ads, GTM and GA4 accounts once
+SearchKings is out. Nothing in this repository can change a container it does
+not have credentials for.

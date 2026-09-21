@@ -9,9 +9,11 @@
     "build": "npm run preflight && astro build && npm run redirects && npm run images",
     "build:preview": "astro build && npm run redirects && node scripts/noindex.mjs && npm run images",
     "preview": "astro preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "check": "astro check",
-    "deploy:preview": "npm run b2:sync && npm run build:preview && wrangler deploy && node scripts/purge.mjs",
-    "deploy": "npm run b2:sync && npm run build && wrangler deploy",
+    "deploy:preview": "npm test && npm run b2:sync && npm run build:preview && wrangler deploy && node scripts/purge.mjs",
+    "deploy": "npm test && npm run b2:sync && npm run build && wrangler deploy",
     "redirects": "node --experimental-strip-types scripts/redirects.mjs",
     "images": "node --experimental-strip-types scripts/images.mjs",
     "b2:sync": "node --experimental-strip-types scripts/b2-sync.mjs",
@@ -24,6 +26,8 @@
     "astro": "^7.3.3"
   },
   "devDependencies": {
+    "happy-dom": "^20.14.5",
+    "vitest": "^3.2.7",
     "wrangler": "^4.134.0"
   }
 }

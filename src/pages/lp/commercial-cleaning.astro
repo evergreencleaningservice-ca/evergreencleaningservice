@@ -230,24 +230,20 @@ const sizes = [
 </LandingLayout>
 
 <script>
-  /* Section 4.1 — the dataLayer pipeline.
-     The form posts to /api/submit-lead and only redirects on a 200, so a
-     failure surfaces to the visitor instead of pretending to have worked. */
+  /* Section 4.1 — the lead pipeline.
+
+     Ordering, honeypot, duplicate-click guard and the dataLayer contract live
+     in `src/lib/lead-submit.ts`, shared with the other landing page and with
+     the site's own forms. Until now this page carried its own copy, which had
+     drifted from the other two. What stays here is what is specific to this
+     page: its fields, its error box and where a stored lead goes next. */
+  import { fieldValue, wireLeadForm } from '../../lib/lead-submit';
+  import type { Dict } from '../../lib/lead-submit';
+
   const leadForm = document.getElementById('ppc-lead-form') as HTMLFormElement | null;
   const errorBox = document.getElementById('lp-error');
 
   const param = (name: string) => new URLSearchParams(location.search).get(name) ?? '';
-
-  /* Turnstile writes cf-turnstile-response, reCAPTCHA writes the hidden field
-     SpamGuard renders. Read whichever is present. */
-  const token = (form: HTMLFormElement) =>
-    (form.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value ||
-    (form.querySelector('.wpf-recaptcha-hidden') as HTMLInputElement | null)?.value ||
-    '';
-
-  const awaitToken = async (form: HTMLFormElement) => {
-    for (let i = 0; i < 60 && !token(form); i++) await new Promise((r) => setTimeout(r, 100));
-  };
 
   const showError = (message: string) => {
     if (!errorBox) return;
@@ -256,84 +252,52 @@ const sizes = [
   };
 
   if (leadForm) {
-    leadForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    leadForm.addEventListener('submit', () => {
       if (errorBox) errorBox.hidden = true;
+    });
 
-      // Honeypot: a bot filled the hidden field. Stop, silently.
-      const honeypot = leadForm.querySelector<HTMLInputElement>('input[name="company_tax_id"]');
-      const trap = leadForm.querySelector<HTMLInputElement>('input[name="website_trap"]');
-      if (honeypot?.value || trap?.value) return;
+    wireLeadForm(leadForm, {
+      formId: 'ppc-lead-form',
+      honeypots: ['company_tax_id', 'website_trap'],
+      sendingLabel: 'Sending…',
 
-      if (!leadForm.checkValidity()) {
-        leadForm.reportValidity();
-        return;
-      }
-
-      const submit = leadForm.querySelector<HTMLButtonElement>('button[type="submit"]');
-      const facilitySize = (document.getElementById('facilitySize') as HTMLSelectElement).value;
-      const facilityType = (document.getElementById('facilityType') as HTMLSelectElement).value;
-
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'lead_form_submission',
+      payload: (f): Dict => ({
         form_id: 'ppc-lead-form',
-        facility_type: facilityType,
-        facility_size: facilitySize,
-      });
+        name: fieldValue(f, 'fullName'),
+        email: fieldValue(f, 'workEmail'),
+        phone: fieldValue(f, 'phone'),
+        size: fieldValue(f, 'facilitySize'),
+        facility_type: fieldValue(f, 'facilityType'),
+        page_url: location.href,
+        referrer: document.referrer,
+        // what makes the lead attributable to a click
+        gclid: param('gclid'),
+        utm_source: param('utm_source'),
+        utm_medium: param('utm_medium'),
+        utm_campaign: param('utm_campaign'),
+      }),
 
-      if (submit) {
-        submit.disabled = true;
-        submit.textContent = 'Sending…';
-      }
+      /* Campaign segmentation, not a person. Filtered again by the module's
+         allowlist before anything reaches the dataLayer. */
+      eventParams: (f): Dict => ({
+        facility_type: fieldValue(f, 'facilityType'),
+        facility_size: fieldValue(f, 'facilitySize'),
+      }),
 
-      await awaitToken(leadForm);
-
-      try {
-        const res = await fetch('/api/submit-lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            form_id: 'ppc-lead-form',
-            name: (document.getElementById('fullName') as HTMLInputElement).value,
-            email: (document.getElementById('workEmail') as HTMLInputElement).value,
-            phone: (document.getElementById('phone') as HTMLInputElement).value,
-            size: facilitySize,
-            facility_type: facilityType,
-            captcha: token(leadForm),
-            page_url: location.href,
-            referrer: document.referrer,
-            // what makes the lead attributable to a click
-            gclid: param('gclid'),
-            utm_source: param('utm_source'),
-            utm_medium: param('utm_medium'),
-            utm_campaign: param('utm_campaign'),
-          }),
-        });
-
-        if (res.ok) {
-          window.location.href = '/thank-you/?f=ppc-lead-form';
-          return;
-        }
-        if (res.status === 403) {
-          (window as any).turnstile?.reset?.();
-          (window as any).grecaptcha?.reset?.();
-          showError('That security check did not verify. Please try submitting again.');
-        } else {
-          showError(
-            'Something went wrong sending that. Please call (416) 803-4880 and we will take the details directly.'
-          );
-        }
-      } catch {
-        showError(
-          'We could not reach the server. Please call (416) 803-4880 and we will take the details directly.'
-        );
-      }
-
-      if (submit) {
-        submit.disabled = false;
-        submit.textContent = 'Get My Free Proposal →';
-      }
+      onSuccess: () => {
+        window.location.href = '/thank-you/?f=ppc-lead-form';
+      },
+      /* A bot never reaches /thank-you/, because /thank-you/ pushes
+         `lead_form_confirmed` and that would be a conversion reported for a
+         field no person can see. It gets the confirmation copy in place. */
+      onHoneypot: (f) => {
+        f.innerHTML = '';
+        const box = document.createElement('p');
+        box.setAttribute('role', 'status');
+        box.textContent = 'Thanks — we have your request and will be in touch shortly.';
+        f.append(box);
+      },
+      onError: (_f, message) => showError(message),
     });
   }
 </script>

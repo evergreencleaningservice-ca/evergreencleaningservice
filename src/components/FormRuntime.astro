@@ -27,12 +27,17 @@
 
 <script>
   /* WPForms's own submit flow, as the original behaves: validate, POST, then
-     replace the form with a confirmation message rather than navigating. */
-  type Payload = Record<string, string>;
+     replace the form with a confirmation message rather than navigating.
+
+     The pipeline itself — ordering, honeypot, duplicate-click guard, the
+     dataLayer contract — lives in `src/lib/lead-submit.ts`, shared with the
+     two PPC landing pages. This file is now only what is specific to the
+     site's own WPForms-shaped forms: which fields they have and what a
+     confirmation looks like. */
+  import { fieldValue as value, wireLeadForm } from '../lib/lead-submit';
+  import type { Dict } from '../lib/lead-submit';
 
   const param = (name: string) => new URLSearchParams(location.search).get(name) ?? '';
-  const value = (form: HTMLFormElement, name: string) =>
-    (form.elements.namedItem(name) as HTMLInputElement | null)?.value?.trim() ?? '';
 
   /* The address is four inputs on screen and one thing in the world. Composed
      here rather than in four columns, because what the client needs is the
@@ -79,99 +84,45 @@
   };
 
   document.querySelectorAll<HTMLFormElement>('form[data-endpoint]').forEach((form) => {
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
+    const formId = form.dataset.formId ?? 'site-form';
+
+    /* Clearing the previous error belongs to the form, not the pipeline, and
+       is registered first so it runs before the pipeline can set a new one. */
+    form.addEventListener('submit', () => {
       form.querySelector<HTMLElement>('.wpf-error')?.setAttribute('hidden', '');
+    });
 
-      /* Honeypot. Invisible to a person, so anything in it is a bot. Behave
-         exactly as a success would — telling a bot it failed teaches it to try
-         again with the field empty. Nothing is sent. */
-      if (value(form, 'company-website')) {
-        confirm(form);
-        return;
-      }
+    wireLeadForm(form, {
+      formId,
+      endpoint: form.dataset.endpoint,
+      /* This shape of form carries WPForms's own honeypot name. The other
+         two are the landing pages'; listing all three costs nothing and
+         means a field renamed on one form still stops a bot on another. */
+      honeypots: ['company-website', 'company_tax_id', 'website_trap'],
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-      const label = submit?.textContent ?? 'Submit';
-      if (submit) {
-        submit.disabled = true;
-        submit.textContent = 'Sending…';
-      }
-
-      /* Turnstile is invisible and resolves on its own, but a visitor who
-         fills four fields quickly can beat it. Wait for the token rather than
-         posting without one and collecting a 403 they cannot act on. */
-      for (let i = 0; i < 60 && !value(form, 'cf-turnstile-response') && !value(form, 'g-recaptcha-hidden'); i++) {
-        await new Promise((r) => setTimeout(r, 100));
-      }
-
-      const formId = form.dataset.formId ?? 'site-form';
-      const payload: Payload = {
+      payload: (f): Dict => ({
         form_id: formId,
-        name: [value(form, 'first-name'), value(form, 'last-name')].filter(Boolean).join(' '),
-        email: value(form, 'email'),
-        phone: value(form, 'phone'),
-        business_name: value(form, 'business-name'),
-        address: address(form),
-        services: services(form),
-        message: value(form, 'message') || value(form, 'comments'),
-        /* Turnstile writes `cf-turnstile-response`, reCAPTCHA writes
-           `g-recaptcha-hidden`. Whichever is on the page is what gets sent;
-           the Worker knows which provider it is verifying against. */
-        captcha: value(form, 'cf-turnstile-response') || value(form, 'g-recaptcha-hidden'),
+        name: [value(f, 'first-name'), value(f, 'last-name')].filter(Boolean).join(' '),
+        email: value(f, 'email'),
+        phone: value(f, 'phone'),
+        business_name: value(f, 'business-name'),
+        address: address(f),
+        services: services(f),
+        message: value(f, 'message') || value(f, 'comments'),
         page_url: location.href,
         referrer: document.referrer,
-        /* Present when the visitor arrived on an ad and then navigated to this
-           form, which is the ordinary case for the site's own pages. */
+        /* Present when the visitor arrived on an ad and then navigated to
+           this form, which is the ordinary case for the site's own pages. */
         gclid: param('gclid'),
         utm_source: param('utm_source'),
         utm_medium: param('utm_medium'),
         utm_campaign: param('utm_campaign'),
-      };
+      }),
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'lead_form_submission', form_id: formId });
-
-      try {
-        const res = await fetch(form.dataset.endpoint as string, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-
-        if (res.ok) {
-          confirm(form);
-          return;
-        }
-
-        /* A rejected captcha is the one failure a visitor can act on, so it
-           gets its own message and the widget is reset for another try. */
-        if (res.status === 403) {
-          window.turnstile?.reset?.();
-          window.grecaptcha?.reset?.();
-          fail(form, 'That security check did not verify. Please try submitting again.');
-        } else {
-          fail(
-            form,
-            'Something went wrong sending that. Please call (416) 803-4880 and we will take the details directly.'
-          );
-        }
-      } catch {
-        fail(
-          form,
-          'We could not reach the server. Please call (416) 803-4880 and we will take the details directly.'
-        );
-      }
-
-      if (submit) {
-        submit.disabled = false;
-        submit.textContent = label;
-      }
+      onSuccess: confirm,
+      /* Mimics success without reporting a conversion. */
+      onHoneypot: confirm,
+      onError: (f, message) => fail(f, message),
     });
   });
 </script>
