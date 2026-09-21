@@ -105,41 +105,39 @@ const words = [
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
 
-  {/* THE PAGE'S ONE h1.
-      The original theme marks this up as `h2.hero-large-text` and puts the
-      h1 down in the About band. That is backwards for a crawler: the first
-      and most prominent thing on the page should be what the page is about.
-      The h1 moved here and the About band's heading became an h2, which
-      keeps the phrase "Toronto Office Cleaning Services" on the page and in
-      the outline without the homepage carrying two h1s.
+  {/* THE ROTATOR IS DECORATION, AND IS MARKED AS SUCH.
 
-      Only the tag changed. `.hero-title` carries every pixel of the styling,
-      so this renders identically.
+      It used to be the page's h1. What a crawler and a screen reader
+      actually got from that was "Evergreen Office Cleaning, Building
+      Maintenance, Commercial Cleaning, Janitorial Services, Disinfection
+      Cleaning" — five rotating words read out as a comma list, which is not
+      a heading, is not a sentence, and is a weak h1 for a page targeting
+      Toronto office cleaning.
 
-      NOTE for whoever owns the copy: what a crawler and a screen reader
-      actually read here is "Evergreen Office Cleaning, Building Maintenance,
-      Commercial Cleaning, Janitorial Services, Disinfection Cleaning" — the
-      five rotating words, read as a list. It is a weak h1 for a page
-      targeting Toronto office cleaning. Rewriting hero copy is a content
-      decision, not a markup one, so it is flagged rather than done. */}
+      So it is a div now, `aria-hidden`, and nothing about it changed on
+      screen: same 75px uppercase type, same fade, same classes carrying
+      every pixel of the styling. Assistive technology skips it entirely,
+      which also removes the five screen-reader commas that were in there to
+      stop the words running together.
+
+      The h1 below is stable text, visible, and says what the page is. It is
+      NOT a hidden keyword line — it is the sentence a visitor reads. */}
   <div class="container hero-inner">
-    <h1 class="hero-title">
+    <div class="hero-brandmark" aria-hidden="true">
       Evergreen{' '}
       <span class="hero-rotator">
         {
           words.map((word, i) => (
-            <span class:list={['hero-word', i === 0 && 'is-active']}>
-              {word}
-              {/* Keeps the words apart for screen readers, which read all five. */}
-              {i < words.length - 1 && <span class="screen-reader-text">, </span>}
-            </span>
+            <span class:list={['hero-word', i === 0 && 'is-active']}>{word}</span>
           ))
         }
       </span>
-    </h1>
+    </div>
+
+    <h1 class="hero-title">Professional Office &amp; Commercial Cleaning in Toronto</h1>
 
     <p class="hero-sub">
-      Leaders in Commercial Cleaning and Building Maintenance in Toronto and the GTA
+      Building maintenance and janitorial services across the GTA since 1989
     </p>
 
     <p class="hero-actions">
@@ -201,8 +199,10 @@ const words = [
   }
 
   /* Measured from the original: 75px / 800 / uppercase, with the tracking
-     stepping down alongside the size at each breakpoint. */
-  .hero-title {
+     stepping down alongside the size at each breakpoint. These are the
+     brandmark's numbers — they used to be .hero-title's, and the selector
+     was renamed with the element. Nothing about the rendering changed. */
+  .hero-brandmark {
     font-family: var(--font-heading);
     color: #fff;
     font-size: 75px;
@@ -214,16 +214,35 @@ const words = [
   }
 
   @media (max-width: 991px) {
-    .hero-title {
+    .hero-brandmark {
       font-size: 60px;
       letter-spacing: 3px;
     }
   }
 
   @media (max-width: 767px) {
-    .hero-title {
+    .hero-brandmark {
       font-size: 35px;
       letter-spacing: 2px;
+    }
+  }
+
+  /* The real heading. Sized to read as one — clearly above the supporting
+     line beneath it, clearly below the brandmark above it. */
+  .hero-title {
+    font-family: var(--font-heading);
+    color: #fff;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0.5px;
+    margin: 0 0 0.75rem;
+  }
+
+  @media (max-width: 767px) {
+    .hero-title {
+      font-size: 22px;
+      line-height: 1.3;
     }
   }
 

@@ -158,10 +158,34 @@ describe('every page has exactly one meaningful H1', () => {
 describe('the homepage heading outline', () => {
   const home = () => read('index.html');
 
-  it('the hero headline is the single H1', () => {
+  it('the single H1 is stable, meaningful text', () => {
+    /* It was the rotating brandmark, whose accessible name was five words
+       read as a comma list — not a heading and not a sentence. */
     const h1 = headings(home(), 1);
-    expect(h1).toHaveLength(1);
-    expect(h1[0]).toMatch(/^Evergreen/);
+    expect(h1).toEqual(['Professional Office &amp; Commercial Cleaning in Toronto']);
+  });
+
+  it('is present in the initial HTML, not injected by script', () => {
+    expect(home()).toContain('<h1 class="hero-title"');
+  });
+
+  it('is not a visually hidden keyword line', () => {
+    expect(home()).not.toMatch(/<h1[^>]*class="[^"]*screen-reader-text/);
+    expect(home()).not.toMatch(/<h1[^>]*hidden/);
+  });
+
+  it('the rotating brandmark is decoration and hidden from assistive tech', () => {
+    const brandmark = home().match(/<div class="hero-brandmark"[^>]*>/)?.[0] ?? '';
+    expect(brandmark).toContain('aria-hidden="true"');
+    /* and the five screen-reader commas that used to separate the words are
+       gone with it — nothing in there is announced at all now. */
+    expect(home()).not.toMatch(/hero-word[^>]*>[^<]*<span class="screen-reader-text">,/);
+  });
+
+  it('no rotating word is a heading any more', () => {
+    for (const level of [1, 2, 3, 4, 5, 6])
+      for (const h of headings(home(), level))
+        expect(h).not.toMatch(/Janitorial Services|Disinfection Cleaning/);
   });
 
   it('keeps "Toronto Office Cleaning Services" on the page, as an H2', () => {
