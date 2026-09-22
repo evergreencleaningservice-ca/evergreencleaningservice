@@ -41,7 +41,7 @@
  * suffix stripped, since `armstrong-logo-300x89.jpg` and `armstrong-logo.jpg`
  * are the same asset.
  *
- * KNOWN_LOST is the honest part, and it is down to FIVE. Those five are still
+ * KNOWN_LOST is the honest part, and it is down to FOUR. Those five are still
  * challenged on every attempt and are not faked. The list is pinned in both
  * directions: a NEW loss fails, and a RECOVERY fails too, loudly, until the
  * entry is deleted. That is what took it from 28 to 5 rather than letting it
@@ -70,7 +70,6 @@ const KNOWN_LOST: Record<string, string[]> = {
     'moving-the-office-2',
   ],
   '/cleaning-check-list-dental-clinics/': ['dental-office-reception'],
-  '/how-to-take-care-of-plants-in-the-office/': ['office-plants-2'],
   '/keep-your-office-at-home-clean/': ['office-cleaners'],
 };
 
@@ -160,7 +159,7 @@ describe('body images carried over from the original', () => {
     }
 
     expect(recovered, 'these images are back — remove them from KNOWN_LOST').toEqual([]);
-    expect(stillLost).toHaveLength(5);
+    expect(stillLost).toHaveLength(4);
   });
 
   it('/green-clean-products/ carries all four of its images again', () => {

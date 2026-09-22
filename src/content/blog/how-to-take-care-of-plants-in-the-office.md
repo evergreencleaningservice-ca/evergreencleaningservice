@@ -9,6 +9,8 @@ image: "/images/office-plants-300x150.jpg"
 
 One great way to add nature into your life is to get office plants. With that said, many employers forget that plants in the office can easily get brown, their leaves can droop and even start to fall. This will create a large mess, but that shouldn’t stop you from bringing plants into the office. All it means is that you need to take care of them properly.
 
+![office plants](/images/office-plants-2.webp)
+
 Here are a few reasons why it is a good idea to have plants in the office as well as how you can take care of them.
 
 ### Why Plants Belong in The Office

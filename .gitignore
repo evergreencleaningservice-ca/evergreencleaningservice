@@ -27,3 +27,4 @@ pnpm-debug.log*
 .astro-test-dist-content/
 .measure/
 .astro-test-dist-images/
+.harvest-outstanding.json
