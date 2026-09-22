@@ -33,7 +33,8 @@
     "form:a11y": "node scripts/form-a11y.mjs",
     "lp:census": "node scripts/lp-census.mjs",
     "lp:sticky": "node scripts/sticky-clearance.mjs",
-    "tel:inventory": "node scripts/tel-inventory.mjs"
+    "tel:inventory": "node scripts/tel-inventory.mjs",
+    "image:parity": "node --experimental-strip-types scripts/image-parity.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

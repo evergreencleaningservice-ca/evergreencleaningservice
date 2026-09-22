@@ -129,9 +129,69 @@ needs SiteGround access — open item **O5**.
 | **Homepage H1** | One H1: *"Professional Office & Commercial Cleaning in Toronto"*. Six pages previously carried two H1s; **0 do now**. |
 | **Landing-page raw entities (B3)** | `/lp/commercial-cleaning/` now renders `Free walkthrough • No obligation`; `/lp/commercial-cleaning-quote/` renders `Free quote — Toronto & the GTA`. Verified in a browser on the deployed origin at 390 px and 1440 px: **no raw entity anywhere on either page**, and none on any of the 8 categories captured. |
 
+### Image content parity — **28 body images are missing from 14 pages**
+
+> **Correction, found after this report was first issued.** Everything in the
+> alt audit below is true and none of it was the right question. Those checks
+> audit the images the port **does** serve. Not one of them asks whether an
+> image the original carried is **absent** — so a page that dropped an image
+> entirely passes all of them.
+>
+> `/green-clean-products/` serves **none of the four** body images the
+> original carries, including the **Armstrong Manufacturing logo and the
+> ECOLOGO certification mark** — the evidential content of a page whose
+> subject is certified green products. It also still renders the figcaption
+> *"Pro Series Green Products"* beneath the image that is no longer there.
+> It was found by a person comparing two browser windows.
+
+Measured against the archived originals, page by page:
+
+| | |
+|---|---|
+| Pages in the original carrying body images | **54** |
+| Body image references in the original | **210** |
+| **Lost — port serves fewer than the original** | **28 across 14 pages** |
+| Substituted — same count, different file (deliberate) | 5 pages |
+| Paginated archives excluded (thumbnails reshuffle) | 4 pages |
+
+Worst affected:
+
+| Page | Present / original |
+|---|---|
+| `/green-clean-products/` | **0 of 4** |
+| `/the-return-of-employees-post-covid-19-is-your-office-ready/` | **0 of 2** |
+| `/cleaning-check-list-dental-clinics/` | 0 of 3 |
+| `/5-cleaning-tips-to-help-make-your-office-relocation-seamless/` | 0 of 3 |
+| `/commercial-cleaning-air-quality/` | 0 of 3 |
+| `/services/industrial-cleaning/` | 1 of 2 |
+| + 8 blog posts | 1–2 lost each |
+
+**Root cause, established not guessed.** A scratchpad record from the port,
+`unresolved-images.json`, lists **41 images the harvester could not fetch**.
+Every one of the 28 losses is on that list. The port dropped the references
+rather than emitting broken images — defensible — and then reported nothing,
+which is not.
+
+**They cannot be recovered from here.** The files are not in `public/images/`,
+return 404 from the image host, and the live origin answers even a direct
+request for `/wp-content/uploads/…` with SiteGround's HTTP 202 challenge,
+which must not be bypassed. The Internet Archive holds 364 archived upload
+images but only **5 of the 41**, and none of the four this page needs.
+
+**Recovery needs the WordPress media library** — SiteGround file manager or
+FTP (`ftp.evergreencleaningservice.ca` resolves). Tracked as open item **O9**.
+
+**Now gated.** `tests/build/image-parity.test.ts` compares every built page
+against `src/data/original-page-images.json`, a committed manifest of the
+original's body images. A **new** loss fails the build; so does a **recovery**
+that is not removed from the known-lost list, so the list cannot quietly
+become a graveyard. `npm run image:parity` runs the same comparison against
+an archive directory.
+
 ### Image alt audit
 
-Measured across all 69 crawled pages:
+True, and insufficient on its own — see above. Measured across all 69 crawled
+pages:
 
 | | |
 |---|---|
@@ -639,7 +699,7 @@ exit 0.
 
 ## 13. Open items — recounted from scratch
 
-**There are eight.** The "six blockers" count is retired: B3 and B4 are closed,
+**There are nine.** The "six blockers" count is retired: B3 and B4 are closed,
 and the remaining items are re-enumerated and reclassified below.
 
 > **On wording.** None of these items means "the account does not exist",
@@ -661,6 +721,8 @@ and the remaining items are re-enumerated and reclassified below.
 | **O6** | Whether a **verified** crawler currently reaches production cannot be determined from this network; the challenge interstitial carries `x-robots-tag: noindex`. | **Informational — blocked** | Search Console access | URL Inspection from a verified Googlebot address. Moot after cutover. | A live URL-Inspection fetch returning the page. |
 | **O7** | Persistent attribution (`localStorage`, 90 days) is implemented and **disabled**. Session-only attribution under-credits paid clicks that convert on a later visit. | **Paid-media blocker** (measurement quality) | Paolo + whoever owns the privacy policy | Decide whether a 90-day identifier is acceptable under PIPEDA and the site's own policy; if yes, enable the mode and update the policy. | A recorded decision; if enabled, the policy text and the mode change. |
 | **O8** | **Authoritative-DNS migration not approved.** A Worker Custom Domain requires an active Cloudflare zone; the zone must be built and every record reproduced before nameservers move. | **Launch blocker** | Paolo (approval) + Cloudflare + GoDaddy | Approve Option 1 in `docs/dns-cutover-runbook.md` §2. Build the Cloudflare zone and reconcile **every** record in §1 of the runbook — MX ×3, SPF, the `default._domainkey` DKIM **CNAME**, DMARC `p=reject`, and the `mail`/`autodiscover`/`ftp` A records, all DNS-only. Confirm the registrar lock is editable and re-check DNSSEC on the day. | Cloudflare's assigned nameservers answering **every** record correctly **before** delegation; mail verified in both directions after. |
+
+| **O9** | **28 body images are missing from 14 pages**, including all four on `/green-clean-products/` (Armstrong and ECOLOGO marks). 41 images were unresolvable at port time; the files are not in the repo, not on the image host, and unreachable from here — the live origin challenges even direct `/wp-content/uploads/` requests, and the Internet Archive holds only 5 of the 41. | **Launch blocker** — the site would go live with certification marks removed from a page claiming certification | SiteGround file manager / FTP access | Export the WordPress media library, add the 41 files to `public/images/`, restore the references, and delete the recovered entries from `KNOWN_LOST`. | `npm test` green with `KNOWN_LOST` emptied, plus the pages rendering the images in a browser. |
 
 ### Two dependencies that are not blockers, stated precisely
 
