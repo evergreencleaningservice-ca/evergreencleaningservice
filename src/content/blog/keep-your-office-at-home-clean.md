@@ -9,6 +9,7 @@ image: "/images/woman-at-a-desk.jpg"
 
 Working from home can be challenging, especially when you don’t have a clean and organized office to work in. With that said, maintaining your office isn’t always easy. There’s always work to be done, and sometimes, it feels like the paperwork doesn’t stop piling up. It doesn’t take long for an office to get messy. Furthermore, it’s easy for the surfaces in your office to become covered in dust. Below, we’ve put together some suggestions that will help you to stay on top of paperwork and keep your office neat and organized everyday!
 
+![woman wiping down desk](/images/woman-wiping-down-her-desk.jpg)
 
 ### Make Sure Cleaning Products Are Easy to Access
 
@@ -17,7 +18,6 @@ It’s likely that you’ll use [commercial cleaning](/) products more regularly
 ### Have A System for Filing Your Papers
 
 It’s not necessary for an office to be cluttered with papers. Instead, you may want to scan documents and back them up to the cloud. Of course, it isn’t possible for all businesses to go paper-free. If this is the case for you, you may want to invest in a filing cabinet. Not only can a filing cabinet keep papers from covering your desk, but it can make it easier for you to find the documents that you need. You can come up with an organizational system and use dividers to separate your documents. When you need a document or a piece of information, you will be able to find it in an instant. Find an organizational system that makes sense for you.
-
 
 ### Don’t Be Afraid to Get Help
 

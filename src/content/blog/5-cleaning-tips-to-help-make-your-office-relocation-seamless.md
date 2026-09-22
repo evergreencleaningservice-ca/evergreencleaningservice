@@ -13,7 +13,6 @@ Moving office can be daunting when you consider the different processes to cover
 
 Here we discuss a few steps to help reduce stress and ensure you stay organized, thus saving time and energy.
 
-
 ### Pack Up Everything Before Cleaning
 
 The last thing you want is to make the task that awaits you harder for you when you also have lots of other things to do when moving out of your office. Avoid cleaning the space before you are out of the property.
@@ -28,6 +27,7 @@ If the logistics allow, it is best to relocate your office furniture, equipment,
 
 The dedicated area allows you to keep things organized, streamlining the process to ensure your business operations experience fewer disruptions as the moving date draws closer. The designated spot for your office items also presents an opportunity to inventory, coordinate logistics, and evaluate other elements as you sort and pack.
 
+![moving the office](/images/moving-the-office-3.webp)
 
 ### Clean From Top to Bottom
 
@@ -48,7 +48,6 @@ The bathroom and kitchen will still be used while everyone works hard to sort an
 Start with the kitchen, then finish with the bathroom. Sweep and wipe all the surfaces, working from top to bottom. Be attentive when cleaning the corners, knobs on the drawers and cabinet doors, the top of the fridge and microwave, and wipe the switches. Remember to give the floor a thorough cleaning.
 
 As for the bathroom, scrub the sinks and toilets, dust and wipe the cabinets, and mop the floor. Ensure you remove the water spots, scum, and smudges on the walls. Also, remember to clean the mirrors to leave them glistening.
-
 
 ### Final Thoughts
 

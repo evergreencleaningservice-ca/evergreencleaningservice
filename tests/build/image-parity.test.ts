@@ -22,12 +22,18 @@
  * comparing two browser windows found it in seconds; three automated passes
  * did not, because none was looking.
  *
- * ROOT CAUSE, recorded so the fix is not mistaken for a port bug: 41 images
- * could not be harvested when the content was ported — the live origin
- * answers this network with SiteGround's IP-reputation challenge, and the
- * Internet Archive holds only 5 of the 41. The port dropped the references
- * rather than emitting broken images, which is defensible, and then said
- * nothing, which is not.
+ * ROOT CAUSE: 41 images could not be harvested when the content was ported.
+ * The port dropped the references rather than emitting broken images, which is
+ * defensible, and then said nothing, which is not.
+ *
+ * RECOVERED — 23 of the 28 lost slots, after this test was written. Two
+ * separate obstacles turned out to have separate answers. The page HTML is
+ * behind SiteGround's IP-reputation challenge, so Firecrawl fetches it from
+ * its own infrastructure. The image files are reachable directly, but only on
+ * the APEX: `evergreencleaningservice.ca/wp-content/uploads/…` returns the
+ * bytes while the same path on `www.` returns the interstitial. An earlier
+ * check that used `www.` for both concluded, wrongly, that the files were
+ * gone for good.
  *
  * THE MANIFEST is `src/data/original-page-images.json`, extracted once from
  * the archived originals and committed, because the archive rendering lived in
@@ -35,11 +41,11 @@
  * suffix stripped, since `armstrong-logo-300x89.jpg` and `armstrong-logo.jpg`
  * are the same asset.
  *
- * KNOWN_LOST is the honest part. Those 28 image slots cannot be restored from any
- * source reachable here, so the test cannot demand them yet. It pins the exact
- * set instead: a NEW loss fails, and recovering one also fails, loudly, until
- * the list is updated. A list that silences a finding has to cost something to
- * keep.
+ * KNOWN_LOST is the honest part, and it is down to FIVE. Those five are still
+ * challenged on every attempt and are not faked. The list is pinned in both
+ * directions: a NEW loss fails, and a RECOVERY fails too, loudly, until the
+ * entry is deleted. That is what took it from 28 to 5 rather than letting it
+ * rot into a graveyard of things fixed long ago.
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -59,39 +65,13 @@ const out = path.join(repo, '.astro-test-dist-imgparity');
  * Closing them needs the WordPress media library — see the Phase 13 report.
  */
 const KNOWN_LOST: Record<string, string[]> = {
-  '/green-clean-products/': [
-    'proseriesgreen-logo',
-    'armstrong-logo',
-    'ecologo',
-    'green_clean_products_large-1',
-  ],
-  '/the-return-of-employees-post-covid-19-is-your-office-ready/': [
-    'covid-19-elbow-bump',
-    'covid19-office',
-  ],
-  '/services/industrial-cleaning/': ['industial-cleaning-demo-toronto-1'],
   '/5-cleaning-tips-to-help-make-your-office-relocation-seamless/': [
     'moving-the-office',
     'moving-the-office-2',
-    'moving-the-office-3',
   ],
-  '/5-tips-for-maintaining-clean-office-air/': ['clean-office-air'],
-  '/cleaning-check-list-dental-clinics/': [
-    'dental-office-1',
-    'dental-office-break-room',
-    'dental-office-reception',
-  ],
-  '/cleaning-protocols-for-daycares-and-schools/': ['classroom', 'school-cafeteria'],
-  /* `clean-office-air` is used on two pages and unresolved for both, so it
-     appears twice in this list rather than once. Counted per page, because
-     the loss is per page: it is a hole in each of them. */
-  '/commercial-cleaning-air-quality/': ['air-quality-1', 'stinky-air-in-the-office', 'clean-office-air'],
-  '/does-hand-sanitization-actually-help-prevent-illnesses/': ['hand-sanitizer-in-a-store'],
-  '/how-to-properly-dust-office-building/': ['dust-on-a-desk'],
-  '/how-to-take-care-of-plants-in-the-office/': ['office-plants-2', 'office-plant-3'],
-  '/keep-your-office-at-home-clean/': ['woman-wiping-down-her-desk', 'office-cleaners'],
-  '/office-layout-tips-to-make-cleaning-easier-and-faster/': ['office-layout-2', 'office-layout'],
-  '/preventing-slips-trips-falls-in-your-workplace/': ['slips'],
+  '/cleaning-check-list-dental-clinics/': ['dental-office-reception'],
+  '/how-to-take-care-of-plants-in-the-office/': ['office-plants-2'],
+  '/keep-your-office-at-home-clean/': ['office-cleaners'],
 };
 
 /** Routes the original served that the port deliberately redirects. */
@@ -180,16 +160,30 @@ describe('body images carried over from the original', () => {
     }
 
     expect(recovered, 'these images are back — remove them from KNOWN_LOST').toEqual([]);
-    expect(stillLost).toHaveLength(28);
+    expect(stillLost).toHaveLength(5);
   });
 
-  it('records that /green-clean-products/ is the worst of them', () => {
-    /* Named explicitly because it is the page a person spotted by eye, and
-       because losing all four leaves the page making a certification claim
-       with the certification marks removed. */
+  it('/green-clean-products/ carries all four of its images again', () => {
+    /* The page a person spotted by eye. Losing all four left it making a
+       certification claim with the certification marks removed, so it is
+       asserted by name rather than left to the aggregate. */
     const have = built.get('/green-clean-products/');
     expect(have, 'the page must still build').toBeDefined();
-    expect([...have!]).toEqual([]);
-    expect(KNOWN_LOST['/green-clean-products/']).toHaveLength(4);
+    expect([...have!].sort()).toEqual(
+      ['armstrong-logo', 'ecologo', 'green_clean_products_large-1', 'proseriesgreen-logo'].sort()
+    );
+    expect(KNOWN_LOST['/green-clean-products/']).toBeUndefined();
+  });
+
+  it('places each image where the original has it, not at the end', () => {
+    /* An image on the right page in the wrong place is still wrong: the
+       Armstrong logo belongs above the line inviting the reader to visit
+       Armstrong, and the ECOLOGO mark above the paragraph explaining what
+       the mark means. Asserted on the emitted order. */
+    const html = fs.readFileSync(path.join(out, 'green-clean-products', 'index.html'), 'utf8');
+    const at = (needle: string) => html.indexOf(needle);
+    expect(at('armstrong-logo')).toBeLessThan(at('For more information visit Armstrong'));
+    expect(at('ECOLOGO')).toBeLessThan(at('In April of 2013'));
+    expect(at('green_clean_products_LARGE-1')).toBeGreaterThan(at('In April of 2013'));
   });
 });

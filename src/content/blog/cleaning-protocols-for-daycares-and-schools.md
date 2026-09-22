@@ -11,6 +11,8 @@ Now that the economy is beginning the reopening process, schools and daycare fac
 
 Below is a [commercial cleaning services](/) checklist for cleaning schools and similar facilities that can provide a comprehensive sanitation process. By following these tips, it is possible to achieve disinfection and complete cleaning of a range of surfaces.
 
+![classroom disinfection](/images/classroom.jpg)
+
  
 #### When it comes to schools, daily cleaning is key.
 
@@ -28,6 +30,7 @@ Lobby cleaning should encompass surfaces such as entrance glass, door frames and
 
 #### Bathrooms need a great deal of attention as well, which should include cleaning of garbage cans, walls, cubicle walls, toilets, soap dispensers, towel dispensers, floors, sinks, and more.
 
+![school cafeteria](/images/school-cafeteria.jpg)
 
 Cafeteria cleaning should extend to coutertop disinfection, cupboards, stoves, refrigerators, seating, flooring, cashier stations, vending machines and all glassware and utensils.
 
@@ -40,7 +43,6 @@ The entire school should receive cleaning of vents and light switches on a daily
 #### By adhering to this commercial cleaning checklist, it is possible to rest assured that schools and daycare facilities are fully disinfected and as clean as they can be.
 
 Evergreen Clean utilizes the latest non-toxic, environmentally sound cleaning products endorsed by the CDC. Because we understand the fact that children of all ages touch surfaces often and are prone to touching their mouths and faces far more frequently than adults, we strive to offer comprehensive cleaning services at every facility we serve.
-
 
 The pandemic has truly brought into stark relief just how important regular cleaning and disinfection work is, particularly in buildings that serve young people. Parents need to be able to have confidence in the safety of the place they send their kids to learn and socialize each and every day. Because the health of everyone can be affected by an outbreak among children, this is an issue of critical importance for our entire society.
 

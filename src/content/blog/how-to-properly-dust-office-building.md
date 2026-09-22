@@ -14,6 +14,7 @@ Dust is composed of very tiny particles most of which can only be seen through a
 
 The most common constituents of dust include pollen, dirt, soil, soot, hair, fabric fibres, microscopic decaying insects, plant materials and dead skin cells, called dander.
 
+![dust on a desk](/images/dust-on-a-desk.jpg)
 
 #### Dusting an office building is so important!
 

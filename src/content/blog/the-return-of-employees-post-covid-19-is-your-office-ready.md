@@ -8,6 +8,7 @@ With impending lifting of the COVID-19 lockdown, many offices are about to resum
 
 The COVID-19 pandemic is still raging and as such, it is imperative that your employees observe social distancing. Additionally, after such a huge absence from the office, it is likely that there are certain protocols that were observed at the workplace before the lockdown that may greatly affect the sanitation, productivity, and general safety of your employees. In this article, the discussion will feature our top three ideas on how you can create a conducive workspace for your employees if you are planning on opening up the office to your employees.
 
+![covid-19 elbow bump](/images/covid-19-elbow-bump.jpg)
 
 ### Deep Clean the Entire Office
 
@@ -25,6 +26,7 @@ Additionally, you should also ensure that the general state of the office is app
 
 Even after the lockdown is lifted, the country will still be following social distancing protocols to curb the spread of COVID-19. As such, you should take the necessary measures to ensure that your office layout conforms to the laid down social distancing regulations. In the period before the start of the pandemic, many offices had started following the open office layout plan but as matters stand, it may be necessary to re-introduce physical barriers in the office – albeit for a while.
 
+![covid19 office ](/images/covid19-office.jpg)
 
 To protect your employees, you will need to carry out maintenance within the office to limit human contact and touch. This may require you to reintroduce more secluded working spaces such as cubicles, plexiglass dividers and even private office if you have the space.
 
