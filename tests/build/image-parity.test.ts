@@ -26,7 +26,7 @@
  * The port dropped the references rather than emitting broken images, which is
  * defensible, and then said nothing, which is not.
  *
- * RECOVERED — 23 of the 28 lost slots, after this test was written. Two
+ * RECOVERED — 25 of the 28 lost slots, after this test was written. Two
  * separate obstacles turned out to have separate answers. The page HTML is
  * behind SiteGround's IP-reputation challenge, so Firecrawl fetches it from
  * its own infrastructure. The image files are reachable directly, but only on
@@ -41,11 +41,12 @@
  * suffix stripped, since `armstrong-logo-300x89.jpg` and `armstrong-logo.jpg`
  * are the same asset.
  *
- * KNOWN_LOST is the honest part, and it is down to FOUR. Those five are still
- * challenged on every attempt and are not faked. The list is pinned in both
- * directions: a NEW loss fails, and a RECOVERY fails too, loudly, until the
- * entry is deleted. That is what took it from 28 to 5 rather than letting it
- * rot into a graveyard of things fixed long ago.
+ * KNOWN_LOST is the honest part, and it is down to THREE. Those three are
+ * still challenged on every attempt and are not faked. The list is pinned in
+ * BOTH directions: a new loss fails, and a recovery fails too, loudly, until
+ * the entry is deleted. It is that second half which walked the list down
+ * from 28 to 3 as the images came back, instead of letting it rot into a
+ * graveyard of things fixed long ago.
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -58,18 +59,22 @@ const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-imgparity');
 
 /**
- * Body images the ORIGINAL carries that the port cannot serve, because the
- * files were never harvested and are not reachable.
+ * Body images the ORIGINAL carries that the port still cannot serve.
  *
- * Every entry is a real content loss, not an exemption earned on merit.
- * Closing them needs the WordPress media library — see the Phase 13 report.
+ * THREE, down from twenty-eight. Each of these was requested repeatedly over
+ * two patient harvesting passes and challenged every single time, while
+ * twenty-five of their neighbours came back. They are a real content loss,
+ * not an exemption earned on merit, and they are pinned rather than papered
+ * over: a page that quietly stops expecting its image has lost it twice.
+ *
+ * Closing them needs either another harvest on a luckier egress address or
+ * the WordPress media library — SiteGround file manager or FTP.
  */
 const KNOWN_LOST: Record<string, string[]> = {
   '/5-cleaning-tips-to-help-make-your-office-relocation-seamless/': [
     'moving-the-office',
     'moving-the-office-2',
   ],
-  '/cleaning-check-list-dental-clinics/': ['dental-office-reception'],
   '/keep-your-office-at-home-clean/': ['office-cleaners'],
 };
 
@@ -159,7 +164,7 @@ describe('body images carried over from the original', () => {
     }
 
     expect(recovered, 'these images are back — remove them from KNOWN_LOST').toEqual([]);
-    expect(stillLost).toHaveLength(4);
+    expect(stillLost).toHaveLength(3);
   });
 
   it('/green-clean-products/ carries all four of its images again', () => {

@@ -14,6 +14,8 @@ To offer a good first impression for your patients, you should clean the exterio
 
 There are a number of different areas that need special attention. First of all, your clinic sign should be professional looking and clean. Also, make sure that there is no garbage or debris on your premises. Finally, wipe away any fingerprints that you notice.
 
+![dental office reception](/images/dental-office-reception.jpg)
+
 ### Clean Your Reception Area
 
 You need to have a welcoming, comfortable, and clean reception area. Anyone visiting your dental clinic is going to notice how organized and clean our reception area is. If this area is not appealing, it may turn off prospective new patients. They may decide to go to a different clinic instead.
