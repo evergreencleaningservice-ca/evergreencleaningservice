@@ -49,6 +49,8 @@ Start with the kitchen, then finish with the bathroom. Sweep and wipe all the su
 
 As for the bathroom, scrub the sinks and toilets, dust and wipe the cabinets, and mop the floor. Ensure you remove the water spots, scum, and smudges on the walls. Also, remember to clean the mirrors to leave them glistening.
 
+![moving the office](/images/moving-the-office-2.webp)
+
 ### Final Thoughts
 
 You can handle the cleaning when moving out of your current commercial space or opt to hire professionals to handle the job. Hiring professional cleaners is the best option, especially if time is an issue. You will have a team of cleaning specialists taking care of the job for you to focus on settling in and resuming business operations.
