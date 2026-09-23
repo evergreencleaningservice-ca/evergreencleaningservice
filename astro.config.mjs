@@ -28,8 +28,14 @@ export default defineConfig({
        *   /thank-you/      a conversion confirmation. Indexed, it can be landed
        *                    on directly, firing the conversion for someone who
        *                    submitted nothing.
+       *   /tag/*           26 tag archives and their pages, "follow, noindex"
+       *                    exactly as the original serves them. They exist to
+       *                    be browsed and to carry crawlers through to the
+       *                    posts, not to be indexed as 34 thin pages listing
+       *                    the same 38 articles the indexable /insights/
+       *                    already covers.
        */
-      filter: (page) => !/\/(category\/blog|lp|thank-you)\//.test(page),
+      filter: (page) => !/\/(category\/blog|lp|thank-you|tag)\//.test(page),
     }),
   ],
 });

@@ -2,6 +2,7 @@
 title: "The Return Of Employees Post COVID-19, Is Your Office Ready?"
 description: "Thinking about the post lockdown return of your employees? Considering the changes you will need to make in your office? Let us help."
 pubDate: 2021-04-29
+tags: ["commercial-cleaning", "commercial-office-cleaning", "covid-19", "janitorial-services"]
 ---
 
 With impending lifting of the COVID-19 lockdown, many offices are about to resume operations. While the return of employees to their usual work stations heralds great things, some challenges are likely to arise.

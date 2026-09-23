@@ -3,6 +3,7 @@ title: "End Of Summer Cleaning"
 description: "As summer draws closer to the end, now might be the time to get the office in shape before it becomes a busy hub of activity again."
 pubDate: 2021-08-25
 image: "/images/office-cleaning-crew-Dell-Notebook.jpg"
+tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 
 ## Time to Address Hidden and Often Missed Areas

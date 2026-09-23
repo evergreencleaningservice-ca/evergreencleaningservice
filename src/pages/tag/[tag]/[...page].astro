@@ -1,0 +1,172 @@
+---
+/**
+ * The tag archives — /tag/<slug>/ and /tag/<slug>/page/N/.
+ *
+ * These are what make the sidebar's tag cloud worth having. Without them
+ * `/tag/*` was a blanket 301 to `/category/blog/`, so every tag link led to
+ * the same page and the cloud was twenty-six words for one destination; the
+ * cloud was dropped for exactly that reason. Building the archives fixes the
+ * cause rather than hiding the symptom, and it is what the original serves.
+ *
+ * Measured off the original's /tag/cleaning/:
+ *
+ *   title        "<name> Archives - Evergreen Office Cleaning"
+ *   h1           Tag: <span><name></span>
+ *   breadcrumbs  Evergreen Office Cleaning > News > <name>
+ *   robots       follow, noindex — crawl through to the posts, keep the
+ *                archive itself out of the index, same as /category/blog/
+ *   paging       10 per page, "Older posts" / "Newer posts"
+ *
+ * The name keeps the original's casing, so it reads "Tag: Dusting" and
+ * "Tag: commercial cleaning" exactly as the source does.
+ */
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostList from '../../../components/PostList.astro';
+import Sidebar from '../../../components/Sidebar.astro';
+import { site } from '../../../data/site';
+import { tags as allTags } from '../../../data/tags';
+import { pageTitle, pageDescription } from '../../../lib/title';
+import { collectionSchema, breadcrumbSchema } from '../../../lib/schema';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+  return allTags.flatMap((tag) => {
+    const mine = posts.filter((post) => post.data.tags.includes(tag.slug));
+    return paginate(mine, {
+      pageSize: 10,
+      params: { tag: tag.slug },
+      props: { tag },
+    }).map((route) => ({
+      ...route,
+      params: {
+        ...route.params,
+        page: route.params.page ? `page/${route.params.page}` : undefined,
+      },
+    }));
+  });
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page, tag } = Astro.props as Props;
+
+const base = `/tag/${tag.slug}/`;
+const hrefFor = (n: number) => (n === 1 ? base : `${base}page/${n}/`);
+const canonical = hrefFor(page.currentPage);
+
+const archiveTitle = pageTitle(
+  page.currentPage > 1
+    ? `${tag.name} Archives - Page ${page.currentPage} of ${page.lastPage}`
+    : `${tag.name} Archives`
+);
+
+const archiveDescription = pageDescription(
+  `Every Evergreen Office Cleaning post tagged ${tag.name} — commercial cleaning, office hygiene and facility maintenance across Toronto and the GTA.`,
+  page.currentPage,
+  page.lastPage
+);
+---
+
+<BaseLayout title={archiveTitle} description={archiveDescription}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      collectionSchema({
+        name: `${tag.name} Archives`,
+        url: canonical,
+        description: archiveDescription,
+      })
+    )}
+    is:inline
+  />
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      breadcrumbSchema([
+        { name: site.name, url: '/' },
+        { name: 'News', url: '/insights/' },
+        { name: tag.name },
+      ])
+    )}
+    is:inline
+  />
+  {/* As on /category/blog/: follow so the posts stay reachable, noindex so
+      twenty-six thin archives do not compete with them. */}
+  <meta slot="head" name="robots" content="follow, noindex" />
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title entry-title">Tag: <span>{tag.name}</span></h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <a href="/insights/">News</a> &gt;
+        <span aria-current="page">{tag.name}</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container content-grid">
+      <div class="post-main">
+        <PostList posts={page.data} eager={2} flush />
+
+        {
+          page.lastPage > 1 && (
+            <nav class="posts-navigation" aria-label="Posts navigation">
+              <h2 class="screen-reader-text">Posts navigation</h2>
+              <div class="nav-links">
+                {page.currentPage < page.lastPage && (
+                  <div class="nav-previous">
+                    <a href={hrefFor(page.currentPage + 1)} rel="next">
+                      Older posts
+                    </a>
+                  </div>
+                )}
+                {page.currentPage > 1 && (
+                  <div class="nav-next">
+                    <a href={hrefFor(page.currentPage - 1)} rel="prev">
+                      Newer posts
+                    </a>
+                  </div>
+                )}
+              </div>
+            </nav>
+          )
+        }
+      </div>
+
+      <Sidebar />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .posts-navigation {
+    margin-top: 30px;
+  }
+
+  .nav-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .nav-next {
+    margin-left: auto;
+  }
+
+  .nav-links a {
+    color: var(--brand);
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus-visible {
+    color: var(--brand-hover, #3f7523);
+  }
+</style>

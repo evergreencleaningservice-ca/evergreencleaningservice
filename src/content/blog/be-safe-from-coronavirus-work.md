@@ -3,6 +3,7 @@ title: "Keep Yourself Safe From Coronavirus At Work"
 description: "Still working outside your home during the coronavirus outbreak? Take a look at what you can do to decrease the risk of contracting the virus and stay safe."
 pubDate: 2020-03-31
 image: "/images/Coronavirus-at-work.jpg"
+tags: ["commercial-office-cleaning", "coronavirus"]
 ---
 
 ## Tips You Can Use to Keep Yourself Safe

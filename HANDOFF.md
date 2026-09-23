@@ -61,7 +61,7 @@ Reference material lives in the scratchpad, not the repo:
 ```
 src/
   components/           Header, Footer, Sidebar, DotNav, LeadVideo,
-                        QuoteForm (WPForms 1381), ContactForm (1384),
+                        QuickQuoteForm, ContactForm (WPForms 1384),
                         Comments, PostList, PostCard, ServiceCard
   components/home/      Hero, Features, Services, Reviews, About, Gallery,
                         Testimonials, Cta, News, Contact
@@ -253,7 +253,7 @@ decision:
 
 ### 7.1 The forms — wired, and guarded by invisible Turnstile
 
-`QuoteForm` and `ContactForm` post to `/api/submit-lead` through
+`QuickQuoteForm` and `ContactForm` post to `/api/submit-lead` through
 `FormRuntime.astro`, the same endpoint both landing pages use. They spent the
 port on `action="#"`, validating in the browser and then dropping the enquiry;
 that was the launch blocker.

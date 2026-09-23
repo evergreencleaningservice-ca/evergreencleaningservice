@@ -3,6 +3,7 @@ title: "Qualities of The Top Cleaning Professionals"
 description: "What does it take to be a successful professional in the commercial cleanining business? Read more to find out the traits that are needed."
 image: "/images/lobby_1-e1597778322357-1024x546.jpg"
 pubDate: 2020-07-31
+tags: ["commercial-cleaning", "commercial-office-cleaning"]
 ---
 
 Things aren’t always as it seems when it comes to being a professional cleaner. The job may come across as extremely boring. This is especially true if you’ve only watched Hollywood’s depiction of the profession. However, this simply isn’t the case. The cleaning industry is not only a viable sector of the Canadian labour force, but the industry is anticipating wide-spread growth with demands continually increasing.

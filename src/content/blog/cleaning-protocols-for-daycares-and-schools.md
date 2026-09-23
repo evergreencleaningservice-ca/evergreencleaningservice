@@ -3,6 +3,7 @@ title: "Commercial Cleaning Protocols for Daycares and Schools"
 description: "Wondering if your school or daycare is clean? By following these tips, it is possible to achieve disinfection and complete cleaning of a wide range of surfaces."
 pubDate: 2020-09-29
 image: "/images/lobby-1024x682.jpg"
+tags: ["commercial-cleaning", "daycares", "janitorial-services", "schools"]
 ---
 
 ## Disinfection and Complete Cleaning

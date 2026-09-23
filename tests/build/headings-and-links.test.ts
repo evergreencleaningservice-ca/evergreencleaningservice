@@ -226,11 +226,27 @@ describe('internal links', () => {
     expect(hrefs).toContain('/reviews/');
   });
 
-  it('the tag cloud is gone from every page', () => {
-    /* 26 links on 63 pages, all 301ing to the same archive. */
+  it('the tag cloud is back, and every link in it leads somewhere different', () => {
+    /* THIS TEST USED TO ASSERT THE OPPOSITE, and the reason it did is worth
+       keeping: the cloud was 26 links on 63 pages that all 301'd to the same
+       archive, so it was 26 words for one destination. That was true, and it
+       was fixed the wrong way round — by deleting the client's navigation and
+       putting an invented "Request Quote" form in its place.
+
+       The archives exist now, so the links lead to 26 different pages and the
+       cloud means what it looks like it means. What this asserts is the part
+       that was actually broken: distinct destinations, each one real. */
     const tagLinks = [...internalLinks().keys()].filter((href) => href.startsWith('/tag/'));
-    expect(tagLinks).toEqual([]);
-    for (const page of pages) expect(read(page)).not.toContain('widget-tags');
+
+    /* The cloud's own 26 are the archive roots. The rest of the /tag/ links
+       are the "Older posts" hops the five busiest tags need, which is why
+       this counts the roots rather than every /tag/ href. */
+    const roots = tagLinks.filter((href) => /^\/tag\/[^/]+\/$/.test(href));
+    expect(new Set(roots).size).toBe(26);
+
+    for (const href of tagLinks) {
+      expect(fs.existsSync(path.join(out, href.slice(1), 'index.html')), href).toBe(true);
+    }
   });
 });
 
@@ -238,9 +254,10 @@ describe('internal links', () => {
 
 describe('the legacy redirect map', () => {
   it('still carries every rule — removing links did not remove redirects', () => {
-    /* The tag cloud went; `/tag/*` did NOT. Those addresses still exist in
-       backlinks and in Google's index, and deleting the rule would turn them
-       into 404s.
+    /* `/tag/*` stays even now that the 26 archives are real pages that never
+       reach it. It is the fallback for the nine tags the original carries
+       with no posts, and for any other /tag/… address still live in a
+       backlink or Google's index; deleting it would turn those into 404s.
 
        The count moved from 130 to 154 in the Phase 12 closeout, and the
        direction is the whole point of this assertion: every exact-match

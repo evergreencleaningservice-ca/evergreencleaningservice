@@ -2,6 +2,7 @@
 title: "Workplace Cleaning Checklist for Winter"
 description: "Don't wait for spring! Keep the office clean all winter with this easy checklist that will ensure you or your cleaners aren't misssing a single thing."
 pubDate: 2020-02-24
+tags: ["commercial-cleaning", "entrance", "winter"]
 ---
 
 Many people take spring cleaning very seriously. While it makes perfect sense to clean after the winter, it would be even better if you had the workplace cleaned during the winter season. Winter cleaning involves managing snow, ice, and salt in your office. In addition to this, the temperature and humidity of the season affects air quality in most buildings. This is one of the reasons most of your employees (and even customers) may be uncomfortable indoors, with some catching flu or cold. All this can be avoided if you have the business cleaned routinely throughout the season. Here is a checklist to help you get started.

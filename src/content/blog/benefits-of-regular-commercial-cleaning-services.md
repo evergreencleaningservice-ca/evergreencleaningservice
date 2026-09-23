@@ -3,6 +3,7 @@ title: "Benefits of Regular Commercial Cleaning Services"
 description: "Think regular commercial cleaning isn't that important to your business? Think again! Let's talk benefits of regular professional cleaning services."
 pubDate: 2022-08-31
 image: "/images/office-plants-300x150.jpg"
+tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 
 ## Retain Your Cutting Edge and Remain Competitive

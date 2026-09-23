@@ -3,6 +3,7 @@ title: "How to Keep Your Office Fridge Clean"
 description: "Office fridge overflowing with leftovers and old employee lunch items? Read on to find out to avoid this issue and keep things clean."
 pubDate: 2022-02-25
 image: "/images/office-fridge.jpg"
+tags: ["cleaning", "commercial-office-cleaning", "janitorial-services", "office", "refrigerator"]
 ---
 
 ### Tips for Maintaining a Clean Office Fridge

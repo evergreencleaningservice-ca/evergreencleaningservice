@@ -3,6 +3,7 @@ title: "Key Office Areas to Have Cleaned and Disinfected"
 description: "Are the key areas of your office cleaned and disinfected routinely? Let us explain why attending to key ares in the office is so important."
 pubDate: 2021-09-30
 image: "/images/office-interior.jpg"
+tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "office"]
 ---
 
 ## Get Your Office Space Professionally Cleaned

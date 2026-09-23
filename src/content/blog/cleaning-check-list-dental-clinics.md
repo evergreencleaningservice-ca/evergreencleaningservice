@@ -2,6 +2,7 @@
 title: "Cleaning Check List for Dental Clinics"
 description: "Patients expect a neat and safe environment. So, you should definitely not make any compromises when it comes to your dental office's cleanliness."
 pubDate: 2020-04-29
+tags: ["commercial-cleaning", "dental-office"]
 ---
 
 Successful dental offices must look presentable and professional. The premises need to be organized, clean, and completely spotless. Your patients need to feel confident when they walk into your clinic without having to worry about any hygiene issues. Patients expect a neat and safe environment. So, you should definitely not make any compromises when it comes to your dental office’s cleanliness.

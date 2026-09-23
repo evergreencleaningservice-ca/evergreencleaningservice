@@ -70,8 +70,12 @@ afterAll(() => fs.rmSync(out, { recursive: true, force: true }));
 
 describe('every rendered tel: link', () => {
   it('is present on every page of the site', () => {
-    expect(pageCount).toBe(77);
-    expect(new Set(links.map((l) => l.page)).size).toBe(77);
+    /* 111 = the 77 pages this site had before the tag taxonomy, plus 26 tag
+       archives and the 8 pagination pages the five busiest tags need. Pinned
+       rather than a lower bound: a count that FALLS is a page that stopped
+       building, which is exactly what this is here to catch. */
+    expect(pageCount).toBe(111);
+    expect(new Set(links.map((l) => l.page)).size).toBe(111);
     expect(links.length).toBeGreaterThanOrEqual(115);
   });
 
@@ -106,9 +110,9 @@ describe('the locations the site actually uses', () => {
   const at = (loc: string) => links.filter((l) => l.location === loc);
 
   it('the site header carries one on every non-paid page', () => {
-    /* 74 = 77 pages less the three on the landing-page shell, which have
+    /* 108 = 111 pages less the three on the landing-page shell, which have
        their own header. */
-    expect(at('header')).toHaveLength(74);
+    expect(at('header')).toHaveLength(108);
   });
 
   it('the header link doubles as the mobile drawer item', () => {

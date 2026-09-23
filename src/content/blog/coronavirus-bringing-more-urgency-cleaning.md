@@ -3,6 +3,7 @@ title: "The Coronavirus Is Bringing More Urgency to Cleaning"
 description: "Coronavirus has made it more important than ever to have a clean home and office space. Here we discuss some of the challenges faced by commercial cleaners."
 pubDate: 2020-06-30
 image: "/images/virus-molecule-1.jpg"
+tags: ["commercial-cleaning", "coronavirus", "office"]
 ---
 
 Due to the unprecedented coronavirus epidemic, there is more urgency for cleaning than ever before. More people are looking to heed the advice from the [Centers for Disease Control and Prevention](https://www.cdc.gov/) by deep cleaning their homes and offices knowing that their ability to thwart the virus depends on it.

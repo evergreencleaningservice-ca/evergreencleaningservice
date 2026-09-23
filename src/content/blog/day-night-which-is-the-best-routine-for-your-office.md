@@ -3,6 +3,7 @@ title: "Day Or Night – Which Is the Best Routine For Your Office?"
 description: "Deciding between night or daytime cleaning at the office? We weigh out the pros and cons of each to help make your decision a little easier."
 pubDate: 2021-05-31
 image: "/images/cleaning-team.jpg"
+tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
 ### Nightly Office Cleaning vs Day Office Cleaning

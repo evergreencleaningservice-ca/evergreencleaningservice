@@ -185,6 +185,21 @@ export const newsPageRedirects: Redirect[] = Array.from(
  */
 export const wildcardRedirects: Redirect[] = [
   { from: '/blog/*', to: '/:splat' },
+  /**
+   * `/tag/*` is now a FALLBACK, not the destination for every tag.
+   *
+   * The site builds real archives for the 26 tags that have posts, so
+   * `/tag/cleaning/` is a static asset and never reaches this rule. What still
+   * does: the nine tags WordPress's theme-unit-test import left behind with
+   * zero posts (`emptyTagSlugs` in src/data/tags.ts) and any other `/tag/…`
+   * address out in a backlink or Google's index. The blog archive is the right
+   * landing place for a tag with nothing filed under it.
+   *
+   * That an asset wins over this wildcard is MEASURED on the deployed site,
+   * not assumed — `tests/build/tags.test.ts` pins the rule's shape and the
+   * deploy check confirms `/tag/cleaning/` answers 200 while
+   * `/tag/not-a-real-tag/` still answers 301.
+   */
   { from: '/tag/*', to: '/category/blog/' },
   { from: '/author/*', to: '/category/blog/' },
 ];

@@ -3,6 +3,7 @@ title: "Benefits of Commercial Deep Cleaning Services"
 description: "Work setting in need of a deep clean? Let the pros explain what this is and why it has its benefits to your commercial setting."
 pubDate: 2022-04-26
 image: "/images/cleaning-team.jpg"
+tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
 ## The Great Benefits of Hiring Commercial Cleaners
