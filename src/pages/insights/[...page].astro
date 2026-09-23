@@ -1,0 +1,144 @@
+---
+/**
+ * `/insights/` and its pages — `/blog/` 301s here (Section 2.1).
+ *
+ * The original renders these with the same `.list-article` list the homepage's
+ * news band uses, inside `#content-inside .container.right-sidebar` with the
+ * sidebar beside it — not as a grid of cards, which is what this page was.
+ *
+ * Two more things taken from the archived markup:
+ *
+ *  - The visible title is the page-header band's `<h1 class="entry-title">`.
+ *    The original ALSO carries a second, screen-reader-only
+ *    `<h1 class="page-title screen-reader-text">News</h1>` inside the main
+ *    column, and that one is NOT reproduced. It gave every page of this
+ *    archive two h1s reading "News, News" — a WordPress theme artefact, not
+ *    a design decision, and the only thing it adds for a screen-reader user
+ *    is hearing the same word twice. The visible h1 is the page title.
+ *  - Pagination is WordPress's `posts-navigation`: "Older posts" and "Newer
+ *    posts" only. There are no numbered page links; this page had a numbered
+ *    list as well.
+ */
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { site } from '../../data/site';
+import { pageTitle, pageDescription } from '../../lib/title';
+import { collectionSchema, breadcrumbSchema } from '../../lib/schema';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+  return paginate(posts, { pageSize: 10 }).map((route) => ({
+    ...route,
+    params: { page: route.params.page ? `page/${route.params.page}` : undefined },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page } = Astro.props as Props;
+
+const base = '/insights/';
+const hrefFor = (n: number) => (n === 1 ? base : `${base}page/${n}/`);
+const pageSuffix = page.currentPage > 1 ? ` - Page ${page.currentPage} of ${page.lastPage}` : '';
+
+const listDescription = pageDescription(
+  'News and advice from Evergreen Office Cleaning on commercial cleaning, office hygiene and facility maintenance in Toronto and the GTA.',
+  page.currentPage,
+  page.lastPage
+);
+---
+
+<BaseLayout
+  title={pageTitle(`News${pageSuffix}`)}
+  description={listDescription}
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      collectionSchema({ name: `News${pageSuffix}`, url: hrefFor(page.currentPage), description: listDescription })
+    )}
+    is:inline
+  />
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbSchema([{ name: site.name, url: '/' }, { name: 'News' }]))}
+    is:inline
+  />
+  <div class="page-header">
+    <div class="container">
+      <h1 class="entry-title">News</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <span>News</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container content-grid">
+      <div class="post-main">
+        <PostList posts={page.data} eager={2} flush />
+
+        {
+          page.lastPage > 1 && (
+            <nav class="posts-navigation" aria-label="Posts navigation">
+              <h2 class="screen-reader-text">Posts navigation</h2>
+              <div class="nav-links">
+                {page.currentPage < page.lastPage && (
+                  <div class="nav-previous">
+                    <a href={hrefFor(page.currentPage + 1)} rel="next">
+                      Older posts
+                    </a>
+                  </div>
+                )}
+                {page.currentPage > 1 && (
+                  <div class="nav-next">
+                    <a href={hrefFor(page.currentPage - 1)} rel="prev">
+                      Newer posts
+                    </a>
+                  </div>
+                )}
+              </div>
+            </nav>
+          )
+        }
+      </div>
+
+      <Sidebar />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* `.navigation.posts-navigation` — "Older posts" on the left, "Newer posts"
+     on the right, as WordPress lays it out. */
+  .posts-navigation {
+    margin-top: 30px;
+  }
+
+  .nav-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .nav-next {
+    margin-left: auto;
+  }
+
+  .nav-links a {
+    color: var(--brand);
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus-visible {
+    color: var(--brand-hover, #3f7523);
+  }
+</style>

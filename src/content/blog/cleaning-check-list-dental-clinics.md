@@ -14,6 +14,7 @@ To offer a good first impression for your patients, you should clean the exterio
 
 There are a number of different areas that need special attention. First of all, your clinic sign should be professional looking and clean. Also, make sure that there is no garbage or debris on your premises. Finally, wipe away any fingerprints that you notice.
 
+![dental office reception](/images/dental-office-reception.jpg)
 
 ### Clean Your Reception Area
 
@@ -35,6 +36,7 @@ Not all patients need to use your dental clinic’s restroom’s but those who d
 
 You should also keep the windows and mirrors clean and disinfect the doorknobs. You should stock your restrooms with quality paper and soap products, so your patients do not ever run out of these supplies.
 
+![dental office break room](/images/dental-office-break-room.jpg)
 
 ### Clean Your Employee Breakroom
 
@@ -54,4 +56,4 @@ _**If you are searching for a [commercial cleaning service](/about-us/) in the G
 
 _**We would love to help!**_
 
-![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/evergreen-cleaning-toronto-logo-banner.jpg)

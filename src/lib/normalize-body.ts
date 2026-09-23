@@ -12,7 +12,14 @@
  *     authority, which some dialers refuse.
  *  4. Empty anchors are links with no accessible name, so assistive tech
  *     announces a link that leads nowhere.
- *  5. Every image in a body sits below the page header and any featured image,
+ *  5. A `tel:` link written in Markdown has no component to carry its
+ *     analytics location, so it is stamped here — `content`, which is what it
+ *     is: a telephone number inside the prose of a page. Twenty-five of them
+ *     came across from WordPress this way. Doing it at normalisation rather
+ *     than leaving them to the runtime fallback means the inventory can
+ *     require EVERY rendered link to carry explicit metadata, and a link with
+ *     none becomes a build-time failure rather than a silent default.
+ *  6. Every image in a body sits below the page header and any featured image,
  *     so they can all be lazy-loaded.
  */
 export function normalizeBody(html: string): string {
@@ -22,6 +29,11 @@ export function normalizeBody(html: string): string {
       path.endsWith('/') || /\.[a-z0-9]{2,5}$/i.test(path) ? whole : `href="${path}/"`
     )
     .replace(/href="tel:\/\//g, 'href="tel:')
+    .replace(
+      /<a\b((?:[^>]*?\s)?href="tel:[^"]*"[^>]*)>/g,
+      (whole, attrs: string) =>
+        /\bdata-call-location=/.test(attrs) ? whole : `<a${attrs} data-call-location="content">`
+    )
     .replace(/<a\b[^>]*>\s*<\/a>/g, '')
     .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" ');
 }

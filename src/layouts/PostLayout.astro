@@ -4,6 +4,8 @@ import BaseLayout from './BaseLayout.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Comments from '../components/Comments.astro';
 import { site } from '../data/site';
+import { pageTitle } from '../lib/title';
+import { articleSchema, breadcrumbSchema } from '../lib/schema';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -16,35 +18,49 @@ interface Props {
 const { post, newer, older } = Astro.props;
 const { title, description, pubDate, image } = post.data;
 
-const isoDate = pubDate.toISOString().slice(0, 10);
-const dateLabel = new Intl.DateTimeFormat('en-CA', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'UTC',
-}).format(pubDate);
 ---
 
 <BaseLayout
-  title={`${title} - ${site.legalName}`}
+  title={pageTitle(`${title}`)}
   description={description}
   image={image}
   type="article"
   publishedTime={pubDate.toISOString()}
 >
+<script
+  slot="head"
+  type="application/ld+json"
+  set:html={JSON.stringify(articleSchema({ title, description, pubDate, image, slug: post.id }))}
+  is:inline
+/>
+<script
+  slot="head"
+  type="application/ld+json"
+  set:html={JSON.stringify(
+    breadcrumbSchema([
+      { name: site.name, url: '/' },
+      { name: 'News', url: '/insights/' },
+      { name: 'Blog', url: '/category/blog/' },
+      { name: title },
+    ])
+  )}
+  is:inline
+/>
+
   <div class="section-padding">
     <div class="container post-container content-grid">
       <div class="post-main">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">{site.name}</a> &gt; <a href="/blog/">News</a> &gt;
+        <a href="/">{site.name}</a> &gt; <a href="/insights/">News</a> &gt;
         <a href="/category/blog/">Blog</a> &gt; <span aria-current="page">{title}</span>
       </nav>
 
+      {/* The original prints no date on a post — there is no `.entry-meta` on
+          the page at all. The date stays in the head as `article:published_time`
+          and in the JSON-LD, where the original also keeps it, but it is not
+          shown. */}
       <header class="entry-header">
         <h1 class="entry-title">{title}</h1>
-        <p class="post-date">
-          <time datetime={isoDate}>{dateLabel}</time>
-        </p>
       </header>
       {
         image && (
@@ -58,28 +74,10 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
         <slot />
       </article>
 
-      {
-        (newer || older) && (
-          <nav class="post-nav" aria-label="More posts">
-            <div class="post-nav-item post-nav-prev">
-              {older && (
-                <a href={`/${older.id}/`}>
-                  <span class="post-nav-label">Previous post</span>
-                  <span class="post-nav-title">{older.data.title}</span>
-                </a>
-              )}
-            </div>
-            <div class="post-nav-item post-nav-next">
-              {newer && (
-                <a href={`/${newer.id}/`}>
-                  <span class="post-nav-label">Next post</span>
-                  <span class="post-nav-title">{newer.data.title}</span>
-                </a>
-              )}
-            </div>
-          </nav>
-        )
-      }
+      {/* The original has no previous/next navigation on a post — the article
+          runs straight into the comment form. A pair of links here was an
+          addition, so it is gone; `newer` and `older` stay on the props in case
+          the client wants it back. */}
 
       <Comments />
       </div>
@@ -107,27 +105,6 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
     min-width: 0;
   }
 
-  .post-date {
-    font-family: var(--font-heading);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--ink-soft);
-    margin: 12px 0 0;
-  }
-
-  .content-grid {
-    display: grid;
-    gap: 40px;
-  }
-
-  @media (min-width: 992px) {
-    .content-grid {
-      grid-template-columns: minmax(0, 7.9fr) minmax(0, 2.9fr);
-      gap: 30px;
-    }
-  }
 
   .post-container {
   }
@@ -145,53 +122,6 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
     background: var(--surface-alt);
   }
 
-  .post-nav {
-    display: grid;
-    gap: 16px;
-    margin-top: 48px;
-    padding-top: 28px;
-    border-top: 1px solid var(--rule);
-  }
-
-  @media (min-width: 600px) {
-    .post-nav {
-      grid-template-columns: 1fr 1fr;
-    }
-    .post-nav-next {
-      text-align: right;
-    }
-  }
-
-  .post-nav-item a {
-    display: block;
-  }
-
-  .post-nav-label {
-    display: block;
-    font-family: var(--font-heading);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--ink-soft);
-    margin-bottom: 4px;
-  }
-
-  .post-nav-title {
-    display: block;
-    font-family: var(--font-heading);
-    font-weight: 600;
-  }
-
-  .post-nav-item a:hover .post-nav-title,
-  .post-nav-item a:focus-visible .post-nav-title {
-    color: var(--brand-dark);
-  }
-
-  .post-nav-item a:focus-visible {
-    outline: 2px solid var(--brand);
-    outline-offset: 3px;
-  }
 
   .post-back {
     margin: 40px 0 0;

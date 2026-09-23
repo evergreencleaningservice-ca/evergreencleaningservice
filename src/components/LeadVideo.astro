@@ -8,7 +8,9 @@
  *
  *   OPEN — the panel: a black control bar (pause, restart, sound, close) over
  *   the portrait clip, a caption and a green call-to-action across the foot of
- *   the picture, and a "Powered by Lead Net" strip beneath.
+ *   the picture, and a "Powered by Branding Centres" strip beneath. The
+ *   original reads "Powered by Lead Net"; the client asked for their own
+ *   name there instead, so this line is a deliberate departure.
  *
  * WHERE THIS CAME FROM. The widget is not in the record. It was added to the
  * live site after the April 2025 archive capture — no snapshot of it exists,
@@ -196,7 +198,7 @@ const hasPoster = inPublic(poster);
           </div>
         </div>
 
-        <p class="leadnet-by">Powered by Lead Net</p>
+        <p class="leadnet-by">Powered by Branding Centres</p>
       </div>
     </aside>
   )
@@ -283,13 +285,16 @@ const hasPoster = inPublic(poster);
     border-radius: 50%;
   }
 
-  /* Sits over the orb's upper-left corner, 6px left and 4px above it. */
+  /* Sits over the orb's upper-left corner, 6px left and 4px above it.
+     26px rather than the 20px it was: a 20x20 target fails WCAG 2.2's 24x24
+     minimum, and a dismiss control that is hard to hit is the one control on
+     the widget a person is most likely to be trying to hit. */
   .leadnet-dismiss {
     position: absolute;
-    top: -4px;
-    right: 66px;
-    width: 20px;
-    height: 20px;
+    top: -7px;
+    right: 63px;
+    width: 26px;
+    height: 26px;
     display: grid;
     place-items: center;
     padding: 0;

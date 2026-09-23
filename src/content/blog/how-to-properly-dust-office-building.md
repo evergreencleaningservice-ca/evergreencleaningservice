@@ -14,6 +14,7 @@ Dust is composed of very tiny particles most of which can only be seen through a
 
 The most common constituents of dust include pollen, dirt, soil, soot, hair, fabric fibres, microscopic decaying insects, plant materials and dead skin cells, called dander.
 
+![dust on a desk](/images/dust-on-a-desk.jpg)
 
 #### Dusting an office building is so important!
 
@@ -79,4 +80,4 @@ Proper dusting is important not only to keeping your employees healthy and inspi
 
 For all of your commercial cleaning needs, [contact](/contact-us/) the team at [Evergreen Commercial Cleaning & Janitorial](/about-us/) and we’ll be happy to get rid of your dust!
 
-![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/evergreen-cleaning-toronto-logo-banner.jpg)

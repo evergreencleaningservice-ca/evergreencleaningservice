@@ -1,0 +1,112 @@
+---
+/**
+ * /lp/commercial-cleaning-quote/ — the quote-intent paid page.
+ *
+ * A sibling of /lp/commercial-cleaning/, not a replacement. Both are noindex,
+ * both post to /api/submit-lead, and they keep DIFFERENT reporting identities
+ * so their conversion data never merges — which is the whole reason for
+ * running two. Kill whichever loses.
+ *
+ * THE DIFFERENCE BETWEEN THE TWO IS INTENT, and after Phase 10 that is the
+ * only difference. This page answers a searcher who has already decided to
+ * get a quote ("commercial cleaning quote Toronto"): the headline is about
+ * the quote rather than the cleaning, the reviews chosen are the three from
+ * people who talk about responsiveness and account handling, and the sections
+ * that argue the case sit lower. Its sibling answers the broader service
+ * search. Everything structural is shared.
+ *
+ * A NOTE ON THE REPORTING IDENTITY, because it is not what it looks like.
+ * The DOM id of this page's form is `lpq-form` and always has been, but the
+ * value it has always REPORTED — in `form_id` on the conversion event, and in
+ * the `form_id` column in Neon — is `lp-commercial-cleaning-quote`. Two rows
+ * in the leads table carry it. Both are preserved here, each doing its own
+ * job: `lpq-form` stays the element id and the anchor target, so `#lpq-form`
+ * links still resolve; `lp-commercial-cleaning-quote` stays the conversion
+ * identity, so the rows already recorded continue to line up with the rows to
+ * come. Changing either would break something that currently works.
+ *
+ * WHAT CHANGED FOR A VISITOR:
+ *
+ *   The form is the Phase 9 short form. It used to require all five of its
+ *   fields — full name, business email, phone, facility type AND approximate
+ *   square footage — before it would accept an enquiry. Square footage is a
+ *   question for the walkthrough, not a toll on asking.
+ *
+ *   Success happens in place, so the page no longer navigates to /thank-you/
+ *   and no longer needs `awaitTagDelivery` to outrun its own redirect.
+ *
+ *   Two claims are gone. "Google Verified Reviews — 5-star rated by local
+ *   clients" was an aggregate nobody has verified, of exactly the shape Phase
+ *   7 removed from both these pages. "Request Same-Day Walkthrough" promised
+ *   a response nobody has committed to; the reply promise is two business
+ *   hours and is now stated once, in `src/data/landing.ts`. "100% Privacy
+ *   Protected. No spam, ever." was a guarantee and is gone too.
+ *
+ *   And an accessibility defect is fixed: the review cards put `aria-label`
+ *   on a `<p>`, which is prohibited — a paragraph has no accessible name to
+ *   set — and cost this page 4 Lighthouse accessibility points. `LpReviews`
+ *   announces the rating as visually-hidden text instead.
+ */
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import QuickQuoteForm from '../../components/QuickQuoteForm.astro';
+import LpHero from '../../components/lp/LpHero.astro';
+import LpBenefits from '../../components/lp/LpBenefits.astro';
+import LpFacilities from '../../components/lp/LpFacilities.astro';
+import LpReviews from '../../components/lp/LpReviews.astro';
+import LpAreas from '../../components/lp/LpAreas.astro';
+import LpFinalCta from '../../components/lp/LpFinalCta.astro';
+import LpSticky from '../../components/lp/LpSticky.astro';
+import { REPLY_PROMISE } from '../../data/landing';
+
+/** The DOM id and anchor target — unchanged, so `#lpq-form` still resolves. */
+const FORM_ANCHOR = 'lpq-form';
+/** The conversion identity — unchanged, so the two existing rows still match. */
+const FORM_ID = 'lp-commercial-cleaning-quote';
+
+/* The three reviewers who talk about responsiveness and account handling,
+   which is what someone already asking for a quote is weighing up. */
+const REVIEWERS = ['Mark Post', 'Edward Sherman', 'Michael Katchen'] as const;
+
+/**
+ * A LITERAL EM DASH, not `&mdash;`. Same defect as the sibling page's
+ * `CALL_NOTE`: a prop rendered through an expression is escaped again, so the
+ * entity reached the visitor verbatim.
+ *
+ * This one sat in the hero eyebrow, directly above the H1 — the first line on
+ * the page — and it very nearly went unreported, because the element is
+ * `text-transform: uppercase` and the rendered text reads `&MDASH;`. The
+ * detector that found the sibling was case-sensitive and skipped straight
+ * past it. `npm run launch:check` now matches case-insensitively.
+ */
+const EYEBROW = 'Free quote — Toronto & the GTA';
+---
+
+<LandingLayout
+  title="Commercial Cleaning Quote — Toronto & GTA | Evergreen Office Cleaning"
+  description="Get a free commercial cleaning quote for your Toronto or GTA building. On-site walkthrough, written scope, WSIB covered and bonded crews, and a reply within 2 business hours."
+  callNote="Talk to an account executive"
+  quoteAnchor={FORM_ANCHOR}
+>
+  <LpHero
+    eyebrow={EYEBROW}
+    heading="Get a commercial cleaning quote for your building."
+    sub="Tell us where you are and what needs cleaning. We walk the space, write the scope, and price it to your hours — serving Toronto since 1989."
+  >
+    <QuickQuoteForm
+      id={FORM_ANCHOR}
+      formId={FORM_ID}
+      heading="Get your free custom quote"
+      intro={`Seven short questions. An account executive replies ${REPLY_PROMISE} on a working day.`}
+      submitLabel="Request my free quote"
+      eagerCaptcha
+    />
+  </LpHero>
+
+  <LpReviews heading="What GTA facility managers say" names={REVIEWERS} />
+  <LpBenefits heading="What the quote covers" />
+  <LpFacilities />
+  <LpAreas />
+  <LpFinalCta quoteAnchor={FORM_ANCHOR} heading="Get your quote" />
+
+  <LpSticky slot="sticky" quoteAnchor={FORM_ANCHOR} />
+</LandingLayout>

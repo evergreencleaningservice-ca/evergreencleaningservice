@@ -1,0 +1,194 @@
+---
+/**
+ * The theme's `.list-article` post list — a single column, each entry a
+ * 300x150 thumbnail floated left with the copy flowing beside it, ruled above
+ * and below.
+ *
+ * The original uses this same list in four places, which is why it is a
+ * component: the homepage's news band, `/blog/` and its pages, `/category/blog/`
+ * and its pages, and the tag archives. Its CSS says so too — the rules are
+ * written `.section-news .list-article, .archive .list-article, .blog
+ * .list-article`.
+ *
+ * Measured off the original's render:
+ *
+ *   article  border-top 1px #e9e9e9, 25px top and bottom; last also has a
+ *            border-bottom
+ *   thumb    300x150, float left, 30px to its right. Three states: floated
+ *            above 940px, hidden entirely from 721 to 940, full width below
+ *   meta     11px/700 uppercase, 1.2px tracking, 10px below, brand green,
+ *            reading just "Blog"
+ *   title    22px, weight 500, #333
+ *   excerpt  15px, #777 — WordPress's first 30 words, not the description
+ */
+import { excerpt } from '../lib/excerpt';
+import { thumb } from '../lib/thumb';
+
+type Entry = {
+  id?: string;
+  slug?: string;
+  body?: string;
+  data: { title: string; description?: string; pubDate: Date | string; image?: string };
+};
+
+interface Props {
+  posts: Entry[];
+  /** The first entries on a listing page are above the fold. */
+  eager?: number;
+  /**
+   * On `/blog/` and the archives the first entry has no rule above it and no
+   * padding, so the list starts flush with the page title. The homepage's news
+   * band does not — the theme scopes that rule to `.archive`/`.blog`.
+   */
+  flush?: boolean;
+}
+
+const { posts, eager = 0, flush = false } = Astro.props;
+const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '');
+---
+
+<div class:list={['post-list', flush && 'is-flush']}>
+  {
+    posts.map((post, i) => (
+      <article class="list-article">
+        {post.data.image && (
+          <div class="list-article-thumb">
+            <a href={`/${toSlug(post)}/`} tabindex="-1" aria-hidden="true">
+              <img
+                src={thumb(post.data.image)}
+                alt=""
+                width="300"
+                height="150"
+                loading={i < eager ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </a>
+          </div>
+        )}
+        <div class="list-article-content">
+          <div class="list-article-meta">
+            <a href="/category/blog/" rel="category tag">
+              Blog
+            </a>
+          </div>
+          <header class="entry-header">
+            <h2 class="entry-title">
+              <a href={`/${toSlug(post)}/`} rel="bookmark">
+                {post.data.title}
+              </a>
+            </h2>
+          </header>
+          <div class="entry-excerpt">
+            <p>{excerpt(post.body, post.data.description)}</p>
+          </div>
+        </div>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .list-article {
+    border-top: 1px solid #e9e9e9;
+    padding: 25px 0;
+  }
+
+  .list-article:last-of-type {
+    border-bottom: 1px solid #e9e9e9;
+  }
+
+  .is-flush .list-article:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  /* Both the thumbnail and the copy beside it float, so the article clears. */
+  .list-article::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  .list-article-thumb {
+    float: left;
+    margin-right: 30px;
+  }
+
+  .list-article-thumb img {
+    display: block;
+    width: 300px;
+    height: 150px;
+    object-fit: cover;
+  }
+
+  .list-article-thumb a:hover img {
+    opacity: 0.8;
+  }
+
+  .list-article-content {
+    float: none;
+    overflow: hidden;
+  }
+
+  .list-article-meta {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 10px;
+  }
+
+  .list-article-meta a {
+    color: var(--brand);
+  }
+
+  .entry-header {
+    margin: 0;
+  }
+
+  .entry-title {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--ink-heading);
+    margin: 0 0 0.5rem;
+  }
+
+  .entry-title a {
+    color: inherit;
+  }
+
+  .entry-title a:hover,
+  .entry-title a:focus-visible {
+    color: var(--brand);
+  }
+
+  .entry-excerpt p {
+    margin: 0;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  /* Three states, and the middle one is easy to miss: hidden entirely between
+     721 and 940, full width below that. */
+  @media screen and (max-width: 940px) {
+    .list-article-thumb {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    .list-article-thumb {
+      display: block;
+      float: none;
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 30px;
+    }
+
+    .list-article-thumb img {
+      width: 100%;
+      height: auto;
+    }
+  }
+</style>

@@ -1,0 +1,29 @@
+---
+/**
+ * Records the campaign touch for this page load. Renders nothing.
+ *
+ * It has to be on every page, not only the ones with a form: the case it
+ * exists for is a visitor who arrives on an ad, reads three pages, and then
+ * submits from a fourth. By then `location.search` is empty. Without this,
+ * that lead reaches Google Ads with no click id and is attributed to nothing.
+ *
+ * `src/lib/attribution.ts` holds the rules — first touch is never overwritten,
+ * only a campaign arrival updates the last touch, and direct or internal
+ * navigation updates neither. It also holds the retention decision: session
+ * scope by default, because a 90-day marketing identifier store is a consent
+ * question this site has not answered.
+ */
+---
+
+<script>
+  import { recordTouch } from '../lib/attribution';
+
+  /* Wrapped because it must never be able to break a page. Private browsing
+     throws on the first storage access, and an attribution record is not
+     worth a blank screen. */
+  try {
+    recordTouch();
+  } catch {
+    /* no attribution for this visit; the page is unaffected */
+  }
+</script>

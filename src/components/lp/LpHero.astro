@@ -1,0 +1,46 @@
+---
+/**
+ * The first screen of a paid landing page: the claim, the proof, and the form.
+ *
+ * WHY THE BENEFITS ARE NOT IN HERE. Both pages used to open with the headline,
+ * a sub-line and then four bullet points, and on a phone that pushed the form
+ * to 1,006px down a 3,424px page — measured. A visitor who arrived on a paid
+ * click had to scroll past the entire argument before they could act on it.
+ * The bullets now live in `LpBenefits`, below the form, where someone who
+ * wants convincing will still find them and someone who is already convinced
+ * does not have to scroll through them.
+ *
+ * So the pitch above the form is three things only: what this is, what it is
+ * for, and the four trust points — which are short enough to sit beside the
+ * form rather than in front of it.
+ */
+import { TRUST_POINTS } from '../../data/landing';
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  sub: string;
+}
+
+const { eyebrow, heading, sub } = Astro.props;
+---
+
+<section class="lpx-hero">
+  <div class="lpx-wrap lpx-hero-grid">
+    <div class="lpx-pitch">
+      {eyebrow && <p class="lpx-eyebrow">{eyebrow}</p>}
+      <h1>{heading}</h1>
+      <p class="lpx-sub">{sub}</p>
+
+      <ul class="lpx-trust">
+        {TRUST_POINTS.map((point) => <li>{point}</li>)}
+      </ul>
+    </div>
+
+    <div class="lpx-form-col">
+      <div class="lpx-form-card">
+        <slot />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,128 @@
+---
+/**
+ * The reCAPTCHA v2 checkbox, in the place WPForms puts it: after the honeypot,
+ * immediately before the submit button.
+ *
+ * The original's container, for reference —
+ *
+ *   <div class="wpforms-recaptcha-container wpforms-is-recaptcha wpforms-is-recaptcha-type-v2">
+ *     <div class="g-recaptcha" data-sitekey="…"></div>
+ *     <input type="text" name="g-recaptcha-hidden" class="wpforms-recaptcha-hidden" …>
+ *   </div>
+ *
+ * — reproduced below with this site's own `wpf-` class prefix. `g-recaptcha` is
+ * kept exactly, because Google's own script selects on it.
+ *
+ * WHY EXPLICIT RENDER rather than letting api.js find the widgets itself: the
+ * homepage carries two forms (the contact form in the page, the quote form in
+ * the sidebar), and a service page carries the sidebar form beside its own.
+ * Automatic rendering handles multiple widgets badly and gives no hook for
+ * writing the token somewhere a submit handler can read it. The original uses
+ * `render=explicit` for the same reason.
+ *
+ * The hidden input is the contract with `FormRuntime.astro`: Google's callback
+ * writes the token into it, the expiry and error callbacks clear it, and the
+ * submit handler refuses to post without it. That mirrors WPForms's own
+ * `g-recaptcha-hidden` field, which exists so the form's validator has
+ * something to validate.
+ */
+import { recaptcha } from '../data/site';
+
+/* The client's key is domain-locked to evergreencleaningservice.ca, so it is
+   opt-in through the environment rather than the default — see the note in
+   src/data/site.ts. Unset, this is Google's test key, which renders a real
+   widget carrying Google's own "for testing purposes only" banner. */
+const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || recaptcha.testSiteKey;
+---
+
+<div class="wpf-recaptcha wpf-field">
+  <div class="g-recaptcha" data-sitekey={siteKey}></div>
+  <input
+    type="text"
+    name="g-recaptcha-hidden"
+    class="wpf-recaptcha-hidden"
+    tabindex="-1"
+    autocomplete="off"
+    aria-hidden="true"
+    required
+  />
+</div>
+
+<script is:inline>
+  /* Inline and idempotent. A page can hold two of these components; the loader
+     must run once, and `grecaptcha.render()` must not be called twice on the
+     same element — reCAPTCHA throws on that and takes the rest of the page's
+     scripts down with it. */
+  (function () {
+    if (window.__wpfRecaptcha) return;
+    window.__wpfRecaptcha = true;
+
+    window.wpfRecaptchaLoad = function () {
+      document.querySelectorAll('.g-recaptcha').forEach(function (el) {
+        if (el.dataset.wpfRendered) return;
+        el.dataset.wpfRendered = '1';
+
+        var hidden = el.parentNode.querySelector('.wpf-recaptcha-hidden');
+        var set = function (value) {
+          if (!hidden) return;
+          hidden.value = value;
+          /* The field is `required`, so clearing it after an expiry is what
+             re-blocks the submit button without any state of our own. */
+          hidden.setCustomValidity(value ? '' : 'Please confirm you are not a robot.');
+        };
+        set('');
+
+        try {
+          el.dataset.wpfWidgetId = window.grecaptcha.render(el, {
+            sitekey: el.dataset.sitekey,
+            callback: set,
+            'expired-callback': function () {
+              set('');
+            },
+            'error-callback': function () {
+              set('');
+            },
+          });
+        } catch (err) {
+          /* An invalid domain, a blocked script, a key that was deleted. Do not
+             leave the form permanently unsubmittable over it — drop the
+             requirement and say why in the console, where a reviewer looking
+             for "why is there no checkbox" will find it. */
+          if (hidden) {
+            hidden.required = false;
+            hidden.setCustomValidity('');
+          }
+          if (window.console) console.warn('recaptcha: widget did not render —', err);
+        }
+      });
+    };
+
+    var s = document.createElement('script');
+    s.src = 'https://www.google.com/recaptcha/api.js?onload=wpfRecaptchaLoad&render=explicit';
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  })();
+</script>
+
+<style>
+  .wpf-recaptcha {
+    /* The widget is a fixed 304x78 iframe; this keeps the row from collapsing
+       before it loads and the form jumping when it does. */
+    min-height: 78px;
+  }
+
+  /* Visually hidden, but focusable enough for the browser to report its
+     validation message against — `display:none` would make the `required`
+     silently unenforceable and the submit button dead with no explanation. */
+  .wpf-recaptcha-hidden {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0) !important;
+    height: 1px !important;
+    width: 1px !important;
+    border: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+</style>

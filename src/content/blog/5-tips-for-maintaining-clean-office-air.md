@@ -11,7 +11,7 @@ If you find yourself sneezing first thing when you walk into your office, automa
 
 Therefore, the million-dollar question is how can you keep your office air clean? Well, here are a few tips collected from experts that will surely help you maintain clean air within your office.
 
-![cleaning a counter](/images/cleaning-a-counter-300x150.jpg)
+![cleaning a counter](/images/cleaning-a-counter.jpg)
 
 ### Consider Using Microfiber Cloths
 
@@ -39,4 +39,4 @@ Did you know that regular vacuums can release the dust collected back into the a
 
 In conclusion, these are but a few ways to improve and maintain the quality of air in an office. Nevertheless, hiring a professional office cleaning company like us at [Evergreen Cleaning](/about-us/) is the best way to ensure the air quality of your office is at its utmost standard. If you are looking for the best commercial cleaning services, [contact us](/contact-us/) today. At Evergreen Cleaning, we value our clients and offer services tailored to our client’s needs.
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

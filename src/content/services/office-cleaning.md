@@ -12,7 +12,7 @@ For your employees, you are creating a positive and hygienic atmosphere that wil
 
 **_Do you want to impress people with your company’s superior level of organization, efficiency, and effectiveness?_**
 
-Partnering with Evergreen Cleaning Service to manage the janitorial services of your office will give you 20-plus years of experience in providing the kind of detailed, floor-to-ceiling clean that will attract the employees, customers, and clientele you most desire.
+Partnering with Evergreen Cleaning Service to manage the janitorial services of your office will give you experience going back to 1989 in providing the kind of detailed, floor-to-ceiling clean that will attract the employees, customers, and clientele you most desire.
 
 ![office cleaning services Toronto](/images/office-cleaning-services-Toronto.jpg)
 

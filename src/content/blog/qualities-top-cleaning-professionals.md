@@ -1,6 +1,7 @@
 ---
 title: "Qualities of The Top Cleaning Professionals"
 description: "What does it take to be a successful professional in the commercial cleanining business? Read more to find out the traits that are needed."
+image: "/images/lobby_1-e1597778322357-1024x546.jpg"
 pubDate: 2020-07-31
 ---
 
@@ -27,4 +28,4 @@ Because of this, every cleaning professional must be effective at working togeth
 
 As you can tell, the work of a cleaning professional isn’t always as it is perceived to be. The truth is, you need to be well-trained, humble, and you need to be an effective all-around team player in order to succeed. If you are looking to hire a [professional cleaner](/services/commercial-cleaning/) to maintain your commercial property, [contact us](/contact-us/) today and we can connect you with our highly trained staff.
 
-![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/evergreen-cleaning-toronto-logo-banner.jpg)

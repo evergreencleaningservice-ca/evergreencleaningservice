@@ -8,6 +8,7 @@ image: "/images/warehouse-clean.jpg"
 
 Industrial spaces tend to accumulate dust, dirt, and clutter rather quickly, and combined with what is often a lack of natural light, can make work-spaces unsafe, unhealthy, and unappealing for employees.
 
+![industial cleaning demo Toronto 1](/images/industial-cleaning-demo-Toronto-1.jpg)
 
 At Evergreen Cleaning Service we recognize that a clean and regularly maintained plant, factory, warehouse, industrial building or facility, can impact worker safety and productivity. To your business partners and customers, a neat and well-presented space acts as a signal of the efficient and organized operation you want to project.
 

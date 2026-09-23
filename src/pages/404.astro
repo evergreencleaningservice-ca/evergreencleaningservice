@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site } from '../data/site';
+import { site, nap } from '../data/site';
+import { pageTitle } from '../lib/title';
 
 /*
  * The original WordPress install served the OnePress theme's generic 404
@@ -17,7 +18,7 @@ const links = [
 ---
 
 <BaseLayout
-  title={`Page Not Found - ${site.legalName}`}
+  title={pageTitle(`Page Not Found`)}
   description="The page you were looking for could not be found."
   noindex
 >
@@ -47,8 +48,8 @@ const links = [
       </ul>
 
       <p class="help">
-        Still stuck? Call <a href={site.phoneHref}>{site.phone}</a> or email{' '}
-        <a href={`mailto:${site.email}`}>{site.email}</a> and we will point you in the right
+        Still stuck? Call <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a> or email{' '}
+        <a href={`mailto:${nap.email}`}>{nap.email}</a> and we will point you in the right
         direction.
       </p>
     </div>

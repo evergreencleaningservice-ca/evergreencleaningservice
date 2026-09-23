@@ -1,0 +1,15 @@
+---
+/**
+ * Installs the one sitewide telephone-click listener.
+ *
+ * A component rather than a line in each layout, so the site cannot end up
+ * with two implementations the way it had two landing-page implementations
+ * before Phase 10. Both layouts render this once; the handler itself is
+ * idempotent, so rendering it twice would still bind one listener.
+ */
+---
+
+<script>
+  import { wirePhoneClicks } from '../lib/phone-click';
+  wirePhoneClicks();
+</script>

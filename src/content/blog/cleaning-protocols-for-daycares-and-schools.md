@@ -11,6 +11,8 @@ Now that the economy is beginning the reopening process, schools and daycare fac
 
 Below is a [commercial cleaning services](/) checklist for cleaning schools and similar facilities that can provide a comprehensive sanitation process. By following these tips, it is possible to achieve disinfection and complete cleaning of a range of surfaces.
 
+![classroom disinfection](/images/classroom.jpg)
+
  
 #### When it comes to schools, daily cleaning is key.
 
@@ -18,7 +20,7 @@ This helps prevent students from spreading germs to each other and to teachers a
 
 We have included a checklist articulating the specific areas that ought to be addressed, and while these are among the areas our service will tackle, we are always willing to adjust the list to accommodate your specific preferences and needs.
 
-[Evergreen Cleaning](/services/disinfection-cleaning-service/) is committed to taking all necessary precautions during this pandemic, and we pledge to provide the most effective and efficient service possible.
+[Evergreen Cleaning](/services/disinfection-cleaning/) is committed to taking all necessary precautions during this pandemic, and we pledge to provide the most effective and efficient service possible.
 
 When it comes to the cleaning of offices and classrooms, focus should be placed on chairs, desks, doors handles, flooring, closets, computer equipment, filing cabinets, and more.
 
@@ -28,6 +30,7 @@ Lobby cleaning should encompass surfaces such as entrance glass, door frames and
 
 #### Bathrooms need a great deal of attention as well, which should include cleaning of garbage cans, walls, cubicle walls, toilets, soap dispensers, towel dispensers, floors, sinks, and more.
 
+![school cafeteria](/images/school-cafeteria.jpg)
 
 Cafeteria cleaning should extend to coutertop disinfection, cupboards, stoves, refrigerators, seating, flooring, cashier stations, vending machines and all glassware and utensils.
 
@@ -41,9 +44,8 @@ The entire school should receive cleaning of vents and light switches on a daily
 
 Evergreen Clean utilizes the latest non-toxic, environmentally sound cleaning products endorsed by the CDC. Because we understand the fact that children of all ages touch surfaces often and are prone to touching their mouths and faces far more frequently than adults, we strive to offer comprehensive cleaning services at every facility we serve.
 
-
 The pandemic has truly brought into stark relief just how important regular cleaning and disinfection work is, particularly in buildings that serve young people. Parents need to be able to have confidence in the safety of the place they send their kids to learn and socialize each and every day. Because the health of everyone can be affected by an outbreak among children, this is an issue of critical importance for our entire society.
 
 Therefore, in order to keep fighting against the spread of the coronavirus, our cleaning teams remain dedicated to ensuring that all surfaces with which others are likely to come into contact are treated with safe, yet effective chemicals designed to provide the disinfection results the public health crisis demands.
 
-![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/evergreen-cleaning-toronto-logo-banner.jpg)

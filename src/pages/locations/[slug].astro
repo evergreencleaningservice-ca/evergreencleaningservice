@@ -1,0 +1,270 @@
+---
+/**
+ * The GTA sub-location pages — Section 2.3 of the overhaul specification.
+ *
+ * Page anatomy, as specified:
+ *   Dynamic H1   "[Service] in [City/Region] | Evergreen Office Cleaning"
+ *   Unique focus  each page's own service radius, from src/data/locations.ts
+ *   Facility types served
+ *   Google Maps embed centred on the municipal zone
+ *   Reviews
+ *
+ * The spec also asks for "dedicated localized case studies" and "local client
+ * testimonials". Neither exists in anything the client has supplied, and
+ * writing them would mean inventing named clients and outcomes, so the section
+ * is left out rather than filled with invented proof. The real Google reviews
+ * are shown instead, unattributed to any city. Flagged in _research/gaps.md.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Reviews from '../../components/home/Reviews.astro';
+import { locations } from '../../data/locations';
+import { site, nap } from '../../data/site';
+import { pageTitle } from '../../lib/title';
+
+export function getStaticPaths() {
+  return locations.map((location) => ({
+    params: { slug: location.slug },
+    props: { location },
+  }));
+}
+
+const { location } = Astro.props;
+/* Client-supplied copy wins where it exists; the generated H1 stays the
+   fallback for the locations still on the template body. */
+const h1 = location.detail?.h1 ?? `Commercial Cleaning in ${location.name} | ${site.name}`;
+const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(location.mapQuery)}&t=&z=12&ie=UTF8&iwloc=&output=embed`;
+
+/* Per-page schema. The organisation graph is global (BaseLayout); this adds the
+   service-in-place record that makes the page its own entity rather than a
+   duplicate of the others. */
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Commercial Cleaning',
+  provider: { '@id': `${site.url}/#organization` },
+  areaServed: { '@type': 'City', name: location.name },
+  name: `Commercial Cleaning in ${location.name}`,
+  description: location.description,
+  url: `${site.url}/locations/${location.slug}/`,
+};
+---
+
+<BaseLayout
+  title={location.title ?? pageTitle(`Commercial Cleaning in ${location.name}`)}
+  description={location.description}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="entry-title">{h1}</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <a href="/locations/">Locations</a> &gt;
+        <span aria-current="page">{location.name}</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="section-padding">
+    <div class="container">
+      <div class="loc-grid location-page">
+        <div class="loc-main">
+          {
+            location.detail ? (
+              <Fragment>
+                <p class="lead loc-subtitle">{location.detail.subtitle}</p>
+                {location.detail.intro.map((para) => (
+                  <p class="loc-lead">{para}</p>
+                ))}
+
+                <hr />
+
+                <h2>{location.detail.servicesTitle}</h2>
+                <ul class="loc-detail">
+                  {location.detail.services.map((s) => (
+                    <li>
+                      <strong>{s.label}:</strong> {s.body}
+                    </li>
+                  ))}
+                </ul>
+
+                <hr />
+
+                <h2>{location.detail.reasonsTitle}</h2>
+                <ul class="loc-detail">
+                  {location.detail.reasons.map((r) => (
+                    <li>
+                      <strong>{r.label}:</strong> {r.body}
+                    </li>
+                  ))}
+                </ul>
+
+                <div class="cta-block">
+                  <a class="btn btn-primary btn-lg" href="/request-a-quote/">
+                    {location.detail.ctaLabel}
+                  </a>
+                  <p class="loc-direct">
+                    Direct Phone: <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a>
+                  </p>
+                </div>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <p class="loc-lead">
+                  Evergreen Office Cleaning has cleaned commercial space across {location.region} since{' '}
+                  {site.since}, working {location.landmarks}.
+                </p>
+
+                <h2>What we clean in {location.name}</h2>
+                <p>{location.focus}</p>
+
+                <h3>Facility types served</h3>
+                <ul class="loc-facilities">
+                  {location.facilities.map((f) => (
+                    <li>{f}</li>
+                  ))}
+                </ul>
+
+                <h3>How we work</h3>
+                <p>
+                  Every contract starts with an on-site walkthrough, not a phone quote — the scope of a{' '}
+                  {location.name} facility is what sets the schedule and the crew size. You get a
+                  dedicated account manager, after-hours crews where the space cannot be cleaned during
+                  business hours, and a written scope you can hold us to.
+                </p>
+                <p>
+                  We are bonded, insured and WSIB compliant. Call{' '}
+                  <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a> or{' '}
+                  <a href="/request-a-quote/">request a walkthrough</a>.
+                </p>
+
+                <a class="btn btn-primary btn-lg" href="/request-a-quote/">Request a free quote</a>
+              </Fragment>
+            )
+          }
+        </div>
+
+        <aside class="loc-map" aria-label={`Map of ${location.name}`}>
+          <iframe
+            src={mapSrc}
+            width="100%"
+            height="420"
+            style="border:0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title={`Map of ${location.name}, Ontario`}></iframe>
+          <div class="loc-nap">
+            <h3>{nap.name}</h3>
+            <p>
+              {nap.streetAddress}<br />
+              {nap.addressLocality}, {nap.addressRegion} {nap.postalCode}<br />
+              {nap.addressCountryName}
+            </p>
+            <p>
+              <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a><br />
+              <a href={`mailto:${nap.email}`}>{nap.email}</a>
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <Reviews />
+</BaseLayout>
+
+<style>
+  .loc-grid {
+    display: grid;
+    gap: 40px;
+  }
+
+  @media screen and (min-width: 941px) {
+    .loc-grid {
+      grid-template-columns: minmax(0, 1fr) 380px;
+    }
+  }
+
+  .loc-lead {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .loc-main h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 30px 0 15px;
+  }
+
+  .loc-main h3 {
+    font-size: 1.25rem;
+    line-height: 1.2;
+    margin: 26px 0 12px;
+  }
+
+  .loc-subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--ink-heading);
+    margin: 0 0 18px;
+  }
+
+  .loc-main hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 30px 0;
+  }
+
+  .loc-detail {
+    margin: 0 0 22px;
+    padding-left: 20px;
+  }
+
+  .loc-detail li {
+    margin-bottom: 11px;
+    line-height: 1.6;
+  }
+
+  .loc-detail strong {
+    color: var(--ink-heading);
+  }
+
+  .loc-direct {
+    margin-top: 16px;
+    font-size: 0.9375rem;
+  }
+
+  .loc-facilities {
+    margin: 0 0 18px;
+    padding-left: 20px;
+  }
+
+  .loc-facilities li {
+    margin-bottom: 7px;
+  }
+
+  .loc-map iframe {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius);
+  }
+
+  .loc-nap {
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--surface-alt);
+    border-radius: var(--radius);
+  }
+
+  .loc-nap h3 {
+    font-size: 1.0625rem;
+    margin: 0 0 10px;
+  }
+
+  .loc-nap p {
+    margin: 0 0 10px;
+    line-height: 1.6;
+  }
+</style>

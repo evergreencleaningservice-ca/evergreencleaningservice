@@ -20,3 +20,11 @@ pnpm-debug.log*
 
 # wrangler
 .wrangler/
+
+# test build output
+.astro-test-dist/
+.astro-test-dist-links/
+.astro-test-dist-content/
+.measure/
+.astro-test-dist-images/
+.harvest-outstanding.json

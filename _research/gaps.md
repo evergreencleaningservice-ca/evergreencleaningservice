@@ -190,17 +190,18 @@ copyright line. It carries **no animation class**, so WOW.js reveals it and
 nothing moves — dead markup left over from an earlier theme version. It is not
 reproduced.
 
-## 12. Two invisible markup differences
+## 12. Heading levels
 
-Neither changes a pixel; both are recorded rather than silently made.
+The original's **hero title is an `<h2>`** and its only `<h1>` is "Toronto
+Office Cleaning Services" in the About band. The port matches that. It had
+briefly carried an `<h1>` in both places.
 
-- **Section subtitles** ("Evergreen Office Cleaning" above each section title)
-  are `<h5>` in the original and `<p>` here. The original's are headings that
-  sit *above* the `<h2>` they introduce, which reads as an out-of-order outline
-  to a screen reader. They are styled identically.
-- The original's **hero title is an `<h2>`** and its only `<h1>` is "Toronto
-  Office Cleaning Services" in the About band. The port matches that. It had
-  briefly carried an `<h1>` in both places.
+**Section subtitles** ("Evergreen Office Cleaning" above each section title)
+were `<p>` here and are `<h5>` in the original; the full-page census in §16
+caught it and they are `<h5>` now, as are the `h4` step, service-card and
+testimonial titles. The outline reads oddly — each eyebrow is a heading that
+sits *above* the `<h2>` it introduces — but it is the theme's outline, and
+matching it is the brief.
 
 ## 13. The gallery's justified layout
 
@@ -217,23 +218,31 @@ image widths where the source aspect ratios differ.
 
 ## 14. Blog post thumbnails
 
-Eight of the 38 posts have no featured image, and they are **not recoverable
-from the archive** — retrying will not help.
+**This section said eight were unrecoverable and retrying would not help. That
+was wrong, and the reason is worth keeping.** The check behind it queried each
+exact URL. The archive frequently holds no capture of the full-size upload while
+holding a sibling size perfectly well, so asking for the stem as a prefix
+(`…/name*`) and taking the largest finds files an exact-URL query reports as
+gone. `lobby_1-e1597778322357` came back that way at 2400x1280, and the
+`-300x150` crop the listings want is generated from it.
 
-The blog listing pages name the file for every one of the 38, so the addresses
-are all known. But a CDX query for those eight returns no capture at all,
-neither for the `-300x150` crop the listings use nor for the full-size upload
-it is derived from:
+Seven of the 38 posts still have no featured image, confirmed against prefix
+queries this time — neither the crop nor any sibling of the upload survives:
 
     dental-office-1 · air-quality-1 · hand-sanitizer · duster · slips
-    lobby_1-e1597778322357 · post-covid-19-office · office-building-exterior
+    post-covid-19-office · office-building-exterior
 
 They exist only in the client's media library. They affect the blog listings,
 not the homepage.
 
-The ninth, `office-layout-3-300x150.jpg`, was recovered this way and is in
-place, so all three posts in the homepage's Latest News band have their
-thumbnail.
+One near miss worth recording: a prefix query for `slips*` matches
+`slips-trips-and-falls-*`, which is a **different upload** that is already in
+the repo. It came back valid, complete and the wrong photograph. Compare the
+stem after stripping the size suffix before accepting anything a prefix query
+returns.
+
+`office-layout-3-300x150.jpg` was recovered earlier and is in place, so all
+three posts in the homepage's Latest News band have their thumbnail.
 
 ## 15. Images the archive never captured
 
@@ -242,3 +251,135 @@ Wayback crawler. Where a sibling size-variant of the same asset survived, the
 port points at that; where nothing survived, the reference was removed rather
 than left broken. Full list in the session notes; recoverable from the client's
 media library.
+
+A second sweep, this time asking the archive for each stem as a prefix rather
+than by exact URL (see §14), recovered three more of them — `cleaning-a-counter`
+at 768x512, which seven posts carry in their body, `handwashing` at 768x512 in
+two, and `lobby_1-e1597778322357`. Ten list crops were regenerated from
+full-size files already in the repo by `scripts/mkcrops.mjs`.
+
+Three kinds of bad result came out of that sweep, and all three look like
+success until checked:
+
+- a file truncated at exactly 1 MiB by the proxy, with a valid JPEG header and
+  no end-of-image marker. Validate the terminator, not the MIME type.
+- a 300x150 list crop saved under the full-size name. Correct for a listing,
+  wrong in a post body, where it puts a 2:1 crop at 300px where a 3:2 photo
+  belongs.
+- a complete, valid file of the wrong subject, from a prefix matching a
+  different upload.
+
+## 16. The full-page census
+
+Every paired URL diffed against its archived counterpart at 1440px — visible
+text, links, images, heading outline, form fields, horizontal overflow — after
+stepping down the page so entrance animations have fired. 58 pages: the home
+page, 7 pages, 5 service pages, 45 posts, and the blog and category listings.
+
+    pages diffed ...................... 58 of 58
+    scrolled before census ............ yes, stepped
+
+    MISSING
+      visible text nodes .............. 129
+      links ............................ 17
+      images ........................... 60
+      form fields ...................... 91
+      heading outline .................. 6 pages differ
+      horizontal overflow at 1440 ...... none
+
+    ACCOUNTED FOR
+      footer copyright line ........... 108 text   (capture year)
+      /blog/page/3/ stale capture ..... 21 text · 14 links · 5 images · 1 page
+      reCAPTCHA's hidden input ........ 60 fields
+      older generation of form 1381 ... 31 fields
+      images the archive never kept ... 42
+      list crops with no source ....... 12
+      lazy-load placeholder ............ 1
+      green products' dead image links . 3
+      empty headings in the original ... 4 pages
+      hero the reference cannot render . 1 page
+
+    UNEXPLAINED DIFFERENCES ........... 0
+
+Each of those lines, and why it is not a defect:
+
+**The footer copyright line** (108). The port writes the current year and the
+current trading name, as the original's WordPress does. The reference pages are
+2022, 2023 and 2025 captures, so they read 2022, 2023 and 2025 and name the
+business as it was called then; the port reads 2026. One line, three years.
+
+**`/blog/page/3/`** (21 text, 14 links, 5 images, 1 heading outline). That
+page's snapshot predates eight posts, so its third page holds what is now the
+fourth. `/category/blog/page/3/` has a newer capture and the port matches it
+item for item, as it does pages 1 and 2 of both listings. The pagination is
+right; the snapshot is old.
+
+**reCAPTCHA** (60). Each archived form carries a hidden `g-recaptcha-hidden`
+input the port has no equivalent for — no site key for this network, and no
+backend to verify a token against.
+
+**The older generation of form 1381** (31). The archive holds the quote form
+twice: seven services and no address from December 2023 to July 2024, eight
+services and an address from April 2025 on. The port carries the 2025 shape,
+which is the current site, so every page whose capture is older reports an
+address block as extra and a single "Name *" field as missing. An earlier pass
+here read the older shape off `/request-a-quote/`, whose newest capture is July
+2024, and removed a service and the address block; that was a regression and it
+is reverted.
+
+**Images** (42 + 12 + 1). Photos the Wayback crawler never stored, list crops
+whose source upload is gone too, and one lazy-load placeholder in the reference.
+See §14 and §15; a second sweep of the archive against every sibling size
+confirmed there is nothing left to recover.
+
+**The green products page** (3 links). Its three logos — ProSeries Green,
+Armstrong, ECOLOGO — are gone, and the Armstrong logo carried the page's only
+link to armstrongmanufacturing.com. The original's body text names the address
+without linking it, so the link went with the image rather than being moved.
+
+**Empty headings** (4 pages). `<h3></h3>` and `<h4></h4>` the editor left
+behind. They render as nothing; the port does not reproduce them.
+
+**The hero** (1 page). The reference never shows it — the slideshow script is
+not in the archive, so the hero renders as a spinner and its `<h2>` is invisible
+there. The hero was measured separately.
+
+### Two differences of markup, not of rendering
+
+Both were fixed rather than argued with, but they are worth knowing about,
+because the census compares text *nodes* and a page can read identically while
+splitting them differently:
+
+- the privacy policy's Gravatar paragraph. remark-gfm autolinks a bare address
+  that the original renders as plain text. A first attempt used an HTML comment
+  to break the autolinker, which stopped the link but split the paragraph into
+  two nodes — so the paragraph is written as raw HTML now.
+- the homepage's "Service Locations" line, where the original writes "Toronto,"
+  loose and the rest inside a leftover `<span>` from a paste.
+
+### What the census does not cover
+
+Spacing and computed style. This pass counts what is present; the measured
+work — container steps, the 940px breakpoint, type scale, section padding — is
+elsewhere in this file and in the session's measurement scripts. A page can pass
+every count here and still be a few pixels out, which is why both passes exist.
+
+## 17. The Simple Banner plugin
+
+The April 2025 capture carries the **Simple Banner** plugin, configured with
+`hide_simple_banner: "no"` and this text:
+
+> Concerned about Coronavirus and Looking for a Disinfection Cleaning Services?
+> -> LEARN MORE
+
+linking to `/services/disinfection-cleaning-service/`, on a `#2ca516` bar
+across the top of every page. The markup is an empty
+`<div class="simple-banner simple-banner-text" style="display:none !important">`
+that the plugin's own script fills and reveals, so it is invisible in the
+reference copy and there is no capture of it rendered.
+
+It is **not built**, deliberately: the client's own side-by-side screenshots of
+the live site show no such bar, which suggests the banner was switched off some
+time after that capture. It is recorded here rather than added, because adding
+it would put a green bar across every page of a site the client is reviewing
+against screenshots that do not have one. Worth one question to the client.

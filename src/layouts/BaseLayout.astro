@@ -2,7 +2,11 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import LeadVideo from '../components/LeadVideo.astro';
+import GoogleTagManager from '../components/GoogleTagManager.astro';
+import Attribution from '../components/Attribution.astro';
+import PhoneTracking from '../components/PhoneTracking.astro';
 import { site } from '../data/site';
+import { organizationGraph } from '../lib/schema';
 import '../styles/global.css';
 
 interface Props {
@@ -34,6 +38,17 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {/* A bare /favicon.ico request is made by every browser whether or not
+        the document asks for one, and without a file it is a 404 in the
+        console — which Lighthouse counts against Best Practices.
+
+        The .ico carries THREE sizes — 16 for the tab, 32 for the bookmark
+        bar, 48 for a Windows shortcut — so `sizes` lists all three. It
+        claimed only 32x32 while the file held one image, and both halves of
+        that were wrong once the icon was rebuilt from the real logo mark. */}
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-512.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
@@ -54,8 +69,12 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {/* The hero image — this page's LCP — is served from the image bucket,
+        a different origin from the document. Without this the browser cannot
+        even begin the DNS lookup and TLS handshake for it until it has
+        parsed the markup that references it. One preconnect buys back that
+        round trip on the single most important request on the page. */}
+    <link rel="preconnect" href="https://img-evergreencleaningservice.10xconnections.com" />
     {/*
       Weights chosen by measuring which faces actually compute on the original,
       not by reading its @font-face list. Raleway 800 carries the hero heading
@@ -63,10 +82,12 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
       without them the browser synthesises fake bold and fake oblique, which
       looks close in a computed-style dump and wrong on screen.
     */}
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400;1,700&family=Raleway:wght@400;500;600;700;800&display=swap"
-    />
+
+    {/* Section 2.4: the organisation graph, on every page. */}
+    <script type="application/ld+json" set:html={JSON.stringify(organizationGraph())} is:inline />
+
+    <GoogleTagManager />
+    <Attribution />
 
     <slot name="head" />
 
@@ -77,12 +98,20 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
     </noscript>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <Header />
-    <main id="main">
-      <slot />
-    </main>
-    <Footer />
+    <GoogleTagManager noscript />
+
+    {/* `#page` and `#content` are the original's ids: the skip link and the
+        footer's back-to-top arrow both address them. */}
+    <div id="page" class="site">
+      <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+      <Header />
+      <div id="content" class="site-content">
+        <main id="main" class="site-main">
+          <slot />
+        </main>
+      </div>
+      <Footer />
+    </div>
 
     {/* The original loads this site-wide, as a third-party script. It renders
         nothing until the client's clip is in public/video/ — see the note in
@@ -94,16 +123,22 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
       const blocks = document.querySelectorAll<HTMLElement>('.wow');
       const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+      const reveal = (el: HTMLElement) => {
+        el.style.visibility = 'visible';
+        el.classList.add('animated');
+      };
+
       if (still || !('IntersectionObserver' in window)) {
-        for (const el of blocks) el.style.visibility = 'visible';
+        for (const el of blocks) reveal(el);
       } else {
+        const waiting = new Set<HTMLElement>(blocks);
         const io = new IntersectionObserver(
           (entries) => {
             for (const entry of entries) {
               if (!entry.isIntersecting) continue;
               const el = entry.target as HTMLElement;
-              el.style.visibility = 'visible';
-              el.classList.add('animated');
+              reveal(el);
+              waiting.delete(el);
               io.unobserve(el);
             }
           },
@@ -111,7 +146,36 @@ const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
           { rootMargin: '0px 0px -10% 0px', threshold: 0 }
         );
         for (const el of blocks) io.observe(el);
+
+        /* A jump — an anchor link, a dot on the side nav, a restored scroll
+           position — moves a block from below the viewport to above it without
+           ever intersecting, and the observer never fires for it. WOW.js scans
+           every box on every scroll and so never loses one; this sweep does the
+           same for anything the observer has passed over, which is what keeps a
+           section from being left parked at `visibility: hidden`. */
+        let queued = false;
+        const sweep = () => {
+          queued = false;
+          const edge = window.innerHeight * 0.9;
+          for (const el of waiting) {
+            if (el.getBoundingClientRect().top < edge) {
+              reveal(el);
+              waiting.delete(el);
+              io.unobserve(el);
+            }
+          }
+          if (!waiting.size) window.removeEventListener('scroll', onScroll);
+        };
+        const onScroll = () => {
+          if (queued) return;
+          queued = true;
+          requestAnimationFrame(sweep);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
       }
     </script>
+
+    <PhoneTracking />
   </body>
 </html>

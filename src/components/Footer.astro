@@ -44,10 +44,16 @@ const icons: Record<string, string> = {
         </a>
       </div>
 
-      <div class="footer-col footer-col-areas">
-        <h2 class="screen-reader-text">Service areas</h2>
+      <div class="footer-col footer-col-areas footer-service-areas">
+        <h2 class="footer-areas-title">Service Areas</h2>
         <ul class="footer-areas">
-          {footerAreas.map((area) => <li>{area}</li>)}
+          {
+            footerAreas.map((area) => (
+              <li>
+                <a href={area.href}>{area.label}</a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
@@ -55,7 +61,7 @@ const icons: Record<string, string> = {
 
   <div class="footer-connect">
     <div class="container">
-      <h5 class="footer-connect-title">Follow us on Social Media</h5>
+      <h2 class="footer-connect-title">Follow us on Social Media</h2>
       <ul class="footer-social">
         {
           social.map((item) => (
@@ -75,6 +81,23 @@ const icons: Record<string, string> = {
 
   <div class="site-info">
     <div class="container">
+      <div class="btt">
+        <a class="back-to-top" href="#page" title="Back To Top">
+          <span class="screen-reader-text">Back to top</span>
+          {/* fa-angle-double-up, drawn rather than loaded: the original pulls
+              this one glyph from a Font Awesome webfont. */}
+          <svg viewBox="0 0 320 512" aria-hidden="true" focusable="false">
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-width="46"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M36 246 160 122l124 124M36 390 160 266l124 124"
+            />
+          </svg>
+        </a>
+      </div>
       <p>
         Copyright &copy; {year} {site.name} ~ <a href="/privacy/">Privacy Policy</a>
       </p>
@@ -83,6 +106,12 @@ const icons: Record<string, string> = {
 </footer>
 
 <style>
+  /* The two footer section titles are h2, not h4.
+     The footer is the last landmark on every page, and the heading before it
+     varies — h2 on the homepage, h3 inside a blog post. An h4 there skipped a
+     level on every page and failed heading-order; an h2 is valid after
+     anything, because going back UP the outline is allowed and only skipping
+     DOWN is not. They are styled by class, so nothing moved a pixel. */
   .site-footer {
     background: var(--footer-bg);
     color: var(--footer-ink);
@@ -115,6 +144,16 @@ const icons: Record<string, string> = {
     max-width: 100%;
   }
 
+  .footer-areas-title {
+    margin: 0 0 12px;
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--ink-heading);
+  }
+
   .footer-areas {
     list-style: none;
     margin: 0;
@@ -123,12 +162,34 @@ const icons: Record<string, string> = {
   }
 
   .footer-areas li {
-    margin-bottom: 7px;
-    line-height: 1.6;
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  /* The original's menu widget: each area is a link that goes nowhere, #777
+     resting, brand green and underlined on hover. */
+  .site-footer .footer-areas a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .site-footer .footer-areas a:hover {
+    color: var(--brand);
+    text-decoration: underline;
   }
 
   @media (max-width: 767px) {
-    .footer-areas {
+    .footer-areas-title {
+    margin: 0 0 12px;
+    font-family: var(--font-heading);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--ink-heading);
+  }
+
+  .footer-areas {
       text-align: center;
     }
   }
@@ -185,17 +246,77 @@ const icons: Record<string, string> = {
 
   /* --- copyright band --- */
   .site-info {
+    position: relative;
     background: var(--surface-dark);
     padding: 2.1875rem 0;
     text-align: center;
+  }
+
+  .site-info .container {
+    position: initial;
   }
 
   .site-info p {
     margin: 0;
   }
 
+  /* The back-to-top arrow: a 50px square rotated -45deg with one rounded
+     corner, so it reads as a peak rising out of the copyright band. The icon
+     inside is rotated back upright. Measured off the original:
+       .site-footer .btt a { 50x50, right:60px, top:-25px, #222 on #999 }
+       @media (max-width: 940px) { right: 0; left: 0 }   -> centred */
+  .site-footer .btt a {
+    position: absolute;
+    right: 60px;
+    top: -25px;
+    z-index: 99;
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    border-radius: 0 20px 0 0;
+    background: var(--surface-dark);
+    color: #999;
+    line-height: 50px;
+    text-align: center;
+    transform: rotate(-45deg);
+    transition: all 0.2s linear 0s;
+  }
+
+  .site-footer .btt a:hover {
+    color: var(--brand);
+  }
+
+  .site-footer .btt a svg {
+    width: 18px;
+    height: 29px;
+    margin-left: 3px;
+    vertical-align: middle;
+    transform: rotate(45deg);
+  }
+
+  .site-footer .btt a:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  @media screen and (max-width: 940px) {
+    .site-footer .btt a {
+      right: 0;
+      left: 0;
+    }
+  }
+
+  /* Underlined, not only coloured.
+     `#69ed3d` against the surrounding footer text measures 1.25:1 — well
+     under the 3:1 that lets colour alone mark a link — and a link inside a
+     sentence that is only distinguished by hue is invisible to anyone who
+     cannot separate those two hues. An underline is the distinction that
+     does not depend on seeing colour at all, and it costs nothing here. */
   .site-footer a {
     color: var(--brand-hover);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   .site-footer a:hover {

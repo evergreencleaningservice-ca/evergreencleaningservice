@@ -65,4 +65,4 @@ Be sure to talk to your commercial cleaning company to set up a suitable cleanin
 
 For all of your commercial cleaning needs in the GTA, [contacts us](/contact-us/) today at [Evergreen Cleaning & Janitorial](/services/).
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

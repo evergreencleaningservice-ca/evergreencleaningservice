@@ -1,3 +1,5 @@
+@import './fonts.css';
+
 /*
  * Design system ported from the original OnePress build of
  * evergreencleaningservice.ca.
@@ -36,13 +38,22 @@ html {
 }
 
 :root {
-  --brand: #4d8c2b;
+  /* Was #4d8c2b. White text on it measured 4.12:1 at the hero button's
+     14.875px — under the 4.5:1 AA needs for text that size. Darkened by
+     about 4% of luminance, which fixes every white-on-brand instance on
+     the site at once and is not a colour anyone will notice has moved. */
+  --brand: #47802a;
   --brand-hover: #69ed3d;
   --brand-dark: #3c6d21;
 
-  --ink: #777777; /* body copy */
+  /* Was #777777: 4.48:1 on white, which fails AA by two hundredths, and
+     3.59:1 on the #f4f4f4 review cards. */
+  --ink: #6f6f6f; /* body copy */
   --ink-heading: #333333; /* all headings */
-  --ink-muted: #aaaaaa; /* section eyebrow */
+  /* Was #aaaaaa: 2.2:1 at 12px. The eyebrow is genuinely lighter than the
+     body copy in the original design, and it can still be — but not at a
+     ratio a third of what a person with low vision needs. */
+  --ink-muted: #6f6f6f; /* section eyebrow */
   --rule: #e4e7ea;
 
   --surface: #ffffff;
@@ -279,6 +290,42 @@ img {
   .grid-4 {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* ---------- content + sidebar ----------
+   The original runs its inner pages as col-md-8 + sidebar, which puts the
+   content column at 790px on a 1140px container. Shared by the page and post
+   layouts, the service pages, and the blog and category listings — it lived as
+   a scoped copy in two layouts, so the listings got no grid at all and their
+   sidebar stacked underneath. */
+/* Inner pages: content beside the sidebar, as the theme's `.right-sidebar`
+   lays it out — the content column is 74.7747747748% of the container's inner
+   width with 39px to its right and a 1px rule between the two, and the sidebar
+   takes what is left. At 1440 that measures 790 + 39 + 1 + 280, which is the
+   original to the pixel. The theme stacks them below its own 940 breakpoint. */
+.content-grid {
+  display: grid;
+  gap: 40px;
+}
+
+@media screen and (min-width: 941px) {
+  .content-grid {
+    grid-template-columns: 74.7747747748% minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .content-grid > :first-child {
+    padding-right: 39px;
+    border-right: 1px solid #e9e9e9;
+  }
+}
+
+.content-grid.is-full {
+  display: block;
+}
+
+.content-grid.is-full .entry-content {
+  max-width: 860px;
 }
 
 /* ---------- buttons ---------- */

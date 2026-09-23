@@ -6,19 +6,48 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
-    "build:preview": "astro build && node scripts/noindex.mjs",
+    "build": "npm run preflight && astro build && npm run redirects && npm run images && npm run captcha:check",
+    "build:preview": "astro build && npm run redirects && node scripts/noindex.mjs && npm run images",
     "preview": "astro preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "check": "astro check",
-    "deploy:preview": "npm run build:preview && wrangler deploy && node scripts/purge.mjs",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy:preview": "npm test && npm run b2:sync && npm run build:preview && wrangler deploy && node scripts/purge.mjs",
+    "deploy": "npm test && npm run secret:check && npm run b2:sync && npm run build && wrangler deploy",
+    "redirects": "node --experimental-strip-types scripts/redirects.mjs",
+    "images": "node --experimental-strip-types scripts/images.mjs",
+    "b2:sync": "node --experimental-strip-types scripts/b2-sync.mjs",
+    "preflight": "node --experimental-strip-types scripts/preflight.mjs",
+    "fonts:fetch": "node --experimental-strip-types scripts/fonts-fetch.mjs",
+    "images:variants": "node --experimental-strip-types scripts/hero-variants.mjs",
+    "measure": "node --experimental-strip-types scripts/measure.mjs",
+    "captcha:check": "node --experimental-strip-types scripts/captcha-check.mjs",
+    "secret:check": "node --experimental-strip-types scripts/secret-check.mjs",
+    "perf:matrix": "node --experimental-strip-types scripts/perf-matrix.mjs",
+    "verify:indexing": "node --experimental-strip-types scripts/verify-indexing.mjs",
+    "waf:probe": "node --experimental-strip-types scripts/waf-probe.mjs",
+    "dns:snapshot": "node --experimental-strip-types scripts/dns-snapshot.mjs",
+    "parity": "node --experimental-strip-types scripts/migration-parity.mjs",
+    "launch:check": "node --experimental-strip-types scripts/launch-check.mjs",
+    "lh:local": "node scripts/lh-local.mjs",
+    "form:a11y": "node scripts/form-a11y.mjs",
+    "lp:census": "node scripts/lp-census.mjs",
+    "lp:sticky": "node scripts/sticky-clearance.mjs",
+    "tel:inventory": "node scripts/tel-inventory.mjs",
+    "image:parity": "node --experimental-strip-types scripts/image-parity.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
+    "@neondatabase/serverless": "^1.1.0",
     "astro": "^7.3.3"
   },
   "devDependencies": {
+    "happy-dom": "^20.14.5",
+    "lighthouse": "^13.5.0",
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.4",
+    "vitest": "^3.2.7",
     "wrangler": "^4.134.0"
   }
 }

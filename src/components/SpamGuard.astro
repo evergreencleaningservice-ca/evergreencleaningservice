@@ -1,0 +1,179 @@
+---
+/**
+ * The spam check on every form. Renders whichever provider `site.captcha`
+ * names, so the two never diverge and a form opts in by rendering this once.
+ *
+ * TURNSTILE (the default) is invisible: no checkbox, no image grid, nothing to
+ * click. Cloudflare runs its checks while the visitor fills the form and drops
+ * a token into a hidden `cf-turnstile-response` input it inserts into the form
+ * itself. That input is the contract with every submit handler on the site —
+ * they read it, and the Worker verifies it against Cloudflare before the lead
+ * reaches the database. A visitor it cannot clear silently is shown an
+ * interactive challenge by Cloudflare; that is Cloudflare's UI, not ours.
+ *
+ * Implicit rendering, not explicit: api.js finds every `.cf-turnstile` on the
+ * page by itself and handles several correctly, which is what /contact-us/ and
+ * /request-a-quote/ need — each carries two forms. reCAPTCHA needed explicit
+ * rendering for that; Turnstile does not, so this is the simpler of the two.
+ *
+ * The `<noscript>` line is not decoration. With scripting off, no token is ever
+ * produced and the Worker will answer 403, so the visitor needs to be told why
+ * the form cannot work rather than watching it fail.
+ */
+import { captcha } from '../data/site';
+import Recaptcha from './Recaptcha.astro';
+
+interface Props {
+  /**
+   * Load api.js at once instead of waiting for the form to be approached.
+   *
+   * For a form that is ALREADY in the first screen, which is the paid landing
+   * pages' whole layout. The deferral below exists because the site's inner
+   * pages carry a quote form in the sidebar, far below the fold, on every
+   * page — there, waiting saves 269KB and four requests on a page nobody
+   * scrolls. On a landing page whose form is the first thing a visitor sees,
+   * the observer fires on load anyway and the focus listener is a race: the
+   * token would start arriving only once someone is already typing.
+   */
+  eager?: boolean;
+}
+
+const { eager = false } = Astro.props;
+
+const turnstileKey =
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || captcha.turnstile.testSiteKey;
+
+/* Built as a string and written with `set:html`, because Astro emits an
+   `is:inline` script body as RAW TEXT. Wrapping it in {`...`} publishes the
+   braces and backticks verbatim and the loader never runs — that exact bug
+   shipped on 76 pages once already (see GoogleTagManager.astro).
+
+   DEFERRED, AND THE NUMBERS SAY WHY. api.js used to load on first paint on
+   every page carrying a form, which — because the sidebar carries a quote
+   form — is every inner page on the site. Measured on deployed staging,
+   median of three mobile runs, by blocking challenges.cloudflare.com:
+   269KB and 4 requests, worth 1,243ms of LCP. The widget is invisible
+   (`interaction-only`) and is not needed until someone is at the form, so
+   it now loads on whichever of these happens first:
+
+     - the form scrolls within 600px of the viewport, or
+     - anything inside it takes focus or is typed into.
+
+   The focus path is the one that matters for correctness: a visitor who
+   tabs straight to a field starts the load immediately, and the submit
+   pipeline already waits up to six seconds for a token before posting
+   (`lead-submit.ts`), which is far longer than api.js takes once started.
+
+   No timer backstop. A timer would reintroduce the cost it exists to avoid
+   on every page nobody scrolls. A form that is never approached and never
+   touched is a form that is never submitted. */
+const loader = `
+(function () {
+  var FORMS = 'form';
+  var MARGIN = '600px';
+
+  function inject() {
+    if (document.querySelector('script[data-turnstile]')) return;
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    s.async = true;
+    s.defer = true;
+    s.setAttribute('data-turnstile', '');
+    document.head.appendChild(s);
+  }
+
+  function arm() {
+    var widgets = document.querySelectorAll('.cf-turnstile');
+    if (!widgets.length) return;
+
+    /* An above-the-fold form asked for it immediately. One such widget on the
+       page is enough: api.js is loaded once and finds every widget itself. */
+    for (var e = 0; e < widgets.length; e++) {
+      if (widgets[e].hasAttribute('data-eager')) { inject(); return; }
+    }
+
+    var targets = [];
+    for (var i = 0; i < widgets.length; i++) {
+      targets.push(widgets[i].closest(FORMS) || widgets[i]);
+    }
+
+    /* Focus or a keystroke anywhere in the form: load now. */
+    for (var j = 0; j < targets.length; j++) {
+      targets[j].addEventListener('focusin', inject, { once: true });
+      targets[j].addEventListener('input', inject, { once: true });
+    }
+
+    /* Approaching the viewport: load now. No IntersectionObserver (a very
+       old browser) means load immediately, which is the previous
+       behaviour — never worse than it was. */
+    if (!('IntersectionObserver' in window)) { inject(); return; }
+
+    var io = new IntersectionObserver(function (entries) {
+      for (var k = 0; k < entries.length; k++) {
+        if (entries[k].isIntersecting) { inject(); io.disconnect(); return; }
+      }
+    }, { rootMargin: MARGIN });
+
+    for (var m = 0; m < targets.length; m++) io.observe(targets[m]);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', arm, { once: true });
+  } else {
+    arm();
+  }
+})();
+`.trim();
+---
+
+{
+  captcha.provider === 'turnstile' ? (
+    <div class="spamguard">
+      <div
+        class="cf-turnstile"
+        data-sitekey={turnstileKey}
+        data-appearance="interaction-only"
+        data-response-field-name="cf-turnstile-response"
+        data-retry="auto"
+        data-eager={eager ? '' : undefined}
+      />
+      <noscript>
+        <p class="spamguard-noscript">
+          This form needs JavaScript enabled to verify you are not a bot. Please enable it, or call
+          us on (416) 803-4880 and we will take the details directly.
+        </p>
+      </noscript>
+    </div>
+  ) : (
+    <Recaptcha />
+  )
+}
+
+{
+  /* Injected rather than written as a plain <script src>: a page can hold two
+     forms — /contact-us/ and /request-a-quote/ both do — and a component emits
+     its markup once per instance, so a literal script tag would load api.js
+     twice and initialise Turnstile twice on the same page. The guard makes
+     every copy after the first a no-op. */
+  captcha.provider === 'turnstile' && <script is:inline set:html={loader} />
+}
+
+<style>
+  /* `interaction-only` means the widget draws nothing until Cloudflare decides
+     a visitor needs a challenge, so this collapses to zero height in the
+     ordinary case and only takes space when there is something to show. */
+  .spamguard:not(:empty) {
+    margin-bottom: 4px;
+  }
+
+  .spamguard-noscript {
+    margin: 0 0 12px;
+    padding: 10px 12px;
+    border: 1px solid #d9534f;
+    border-radius: var(--radius);
+    background: #fdf3f3;
+    color: #a94442;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+</style>

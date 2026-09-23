@@ -1,0 +1,107 @@
+---
+/**
+ * Google Tag Manager — GTM-5PRC4HBV, the only tag the original site carries in
+ * its own markup. Verified against the 2026-09-18 archive capture: the string
+ * `GTM-5PRC4HBV` appears four times (two comments, the head loader, the body
+ * noscript) and no `AW-`, `G-`, `UA-` or UET id appears anywhere. So this file
+ * copies one id, not five.
+ *
+ * Everything else is configured inside the container and arrives with it:
+ *
+ *   Google Ads    AW-16819334998 — three conversion actions, two with Enhanced
+ *                 Conversions reading the form fields, plus a remarketing tag
+ *                 and a conversion linker (the piece that makes gclid
+ *                 attribution survive)
+ *   GA4           G-R27QW21PMT
+ *   Microsoft Ads UET 187178776 — pageload plus custom events for form
+ *                 submission and outbound clicks
+ *   SearchKings   the agency's own template, account 535014 (the `SK` in the
+ *                 original's comments)
+ *
+ * That is why Tag Assistant on the original lists three Google tags while the
+ * page source contains one: it reports what loaded, not what was hard-coded.
+ * Adding gtag directly alongside this would double-count every conversion.
+ *
+ * NOT COPIED, because it is not there: the specification's Section 4.2 says to
+ * "retain ClickCease". There is no ClickCease script on any archived page and
+ * no ClickCease tag in the container — there is nothing to retain. If the
+ * client wants click-fraud filtering it is a new integration, not a migration.
+ *
+ * WHERE IT FIRES
+ *
+ * One guard, not two. An earlier version also required a build-time
+ * `PUBLIC_ANALYTICS=1`, which `build:preview` did not set — so the staging
+ * deploy shipped no tag at all and there was no way to confirm the port worked
+ * short of going live. Two mechanisms for one decision is also two ways to ship
+ * a silently untagged site, which is the bug this replaces.
+ *
+ * What remains is `site.analyticsHosts`: the container loads on the production
+ * hostnames and on the staging hostname, and nowhere else. localhost and
+ * *.workers.dev stay quiet, so a dev server cannot push anything into the
+ * client's Google Ads account.
+ *
+ * Staging IS tagged, deliberately, and that has a cost worth knowing: its
+ * pageviews land in the live GA4 property and its visitors enter the live
+ * remarketing lists. Conversions do not follow from merely loading — they fire
+ * on `lead_form_submission` and `click_to_call` — so testing the staging form
+ * WILL register a conversion in the client's live Google Ads account. Don't,
+ * unless that is the thing being tested.
+ *
+ * `site_environment` is pushed before `gtm.start` so it is readable by every
+ * tag in the container. If the agency wants staging out of the data entirely,
+ * that variable is the hook: a blocking trigger on
+ * `site_environment equals staging` costs them one exception and needs no
+ * change here.
+ */
+import { site } from '../data/site';
+
+interface Props {
+  /** Emits the `<noscript>` iframe half instead of the head loader. Goes
+      first inside `<body>`, exactly where the original puts it. */
+  noscript?: boolean;
+}
+
+const { noscript = false } = Astro.props;
+const gtmId = site.gtmId;
+
+/* Built as a string and written with `set:html` so what reaches the page is
+   exactly these bytes. An earlier version wrapped an `is:inline` body in
+   {`...`}; Astro emits inline script bodies as raw text, so the braces and
+   backticks were published verbatim and the loader sat inside a template
+   literal, on 76 pages, doing nothing. Anything that hides the emitted text
+   behind a templating rule is a place that bug can come back. */
+const loader = `
+(function (w, d, s, l, i, hosts) {
+  w[l] = w[l] || [];
+  if (hosts.indexOf(d.location.hostname) === -1) {
+    if (w.console && console.info) console.info('analytics: suppressed on ' + d.location.hostname);
+    return;
+  }
+  w[l].push({ site_environment: d.location.hostname.indexOf('10xconnections.com') === -1 ? 'production' : 'staging' });
+  w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+  var f = d.getElementsByTagName(s)[0],
+    j = d.createElement(s),
+    dl = l != 'dataLayer' ? '&l=' + l : '';
+  j.async = true;
+  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+  f.parentNode.insertBefore(j, f);
+})(window, document, 'script', 'dataLayer', ${JSON.stringify(gtmId)}, ${JSON.stringify(site.analyticsHosts)});
+`.trim();
+---
+
+{
+  gtmId &&
+    (noscript ? (
+      <Fragment>
+        {/* The original's own markup, minus SiteGround Speed Optimizer's
+            lazy-load rewrite of the `src` — that is the host's artifact, not
+            the tag. Unconditioned, as the original has it: without JavaScript
+            there is no hostname check to run. */}
+        <noscript
+          set:html={`<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`}
+        />
+      </Fragment>
+    ) : (
+      <script is:inline set:html={loader} />
+    ))
+}

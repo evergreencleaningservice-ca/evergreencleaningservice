@@ -75,4 +75,4 @@ As you can see, there is a lot that needs to get done when it comes to keeping a
 
 ### In the GTA, [contact us](/contact-us/) today for all of your [commercial cleaning and janitorial needs](/services/)!
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

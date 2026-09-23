@@ -40,7 +40,7 @@ Potential disruptions not only occur to employees when cleaners are there but ca
 
 Cleaning teams will have all of the necessary protection needed for all situations. However, office workers will not. When high places are being cleaned such as light fixtures or ceiling fans, the proper gear will be worn by the cleaners that are needed for these tasks just in case something falls. Office employees within the area will not and might be at risk. They will be saved from this risk by nighttime cleaning. Cleaners will also wear safety goggles and gloves while they are working, while employees will not. You won’t ever need to worry about this if you have night office cleaning since the cleaning will not affect your employees. Almost 20 million individuals are allergic to dust mites. Therefore, some people inside your building may no appreciate dusting during the day due to their health issues. Night office cleaning can improve safety and health.
 
-![evergreen logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
 
 ### Call Evergreen Commercial Cleaning Today!
 

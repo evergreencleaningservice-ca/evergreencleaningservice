@@ -1,0 +1,160 @@
+---
+/**
+ * What sits beside the quote form instead of a second copy of it.
+ *
+ * `/request-a-quote/` used to render the long quote form TWICE — once as the
+ * page and once in the sidebar, same fields, same 18 inputs, same nine
+ * required. Measured at 390px: 1,363px of form, then 1,236px more of the same
+ * form, on a 4,376px page. A visitor who scrolled past the first one arrived
+ * at what looks like a second, different thing to fill in, and there is no
+ * reading of that which helps anybody.
+ *
+ * So the sidebar carries the things a person weighing up a quote actually
+ * wants next to the box they are typing into: a way to talk to someone now,
+ * and the facts that are true.
+ *
+ * EVERY CLAIM HERE IS ONE THE SITE ALREADY MAKES AND CAN SUPPORT. The founding
+ * year is on the homepage, /about-us/ and the service pages. WSIB coverage and
+ * bonding are the original's own words. The two-business-hour reply is the
+ * landing pages' existing promise. There is no rating, no review count, no
+ * certification and no response time faster than the one already published —
+ * Phase 7 removed an unverified 4.9/5 from two landing pages and nothing here
+ * reintroduces that shape of claim.
+ */
+import { hoursNote, nap } from '../data/site';
+
+const POINTS = [
+  {
+    title: 'Serving Toronto since 1989',
+    body: 'Commercial contracts across Toronto and the GTA.',
+  },
+  {
+    title: 'WSIB covered and bonded',
+    body: 'Fully insured crews, vetted before they hold a key.',
+  },
+  {
+    title: 'A reply within 2 business hours',
+    body: 'An account executive, not an auto-responder.',
+  },
+  {
+    title: 'No obligation',
+    body: 'A quote is a quote. No visit until you ask for one.',
+  },
+];
+---
+
+<aside class="qa" aria-label="Why Evergreen">
+  <div class="qa-call">
+    <p class="qa-call-label">Rather talk it through?</p>
+    <a class="qa-call-link" href={nap.phoneHref} data-call data-call-location="quote_sidebar">{nap.phoneDisplay}</a>
+    <p class="qa-call-note">{hoursNote}</p>
+  </div>
+
+  <ul class="qa-points">
+    {
+      POINTS.map((p) => (
+        <li>
+          <strong>{p.title}</strong>
+          <span>{p.body}</span>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="qa-address">
+    {nap.name}<br />
+    {nap.addressLine}
+  </p>
+</aside>
+
+<style>
+  .qa {
+    display: grid;
+    gap: 22px;
+    align-content: start;
+  }
+
+  .qa-call {
+    padding: 20px;
+    border: 1px solid var(--brand);
+    border-radius: var(--radius);
+    background: #f2f8ee;
+    text-align: center;
+  }
+
+  .qa-call-label {
+    margin: 0 0 4px;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+
+  .qa-call-link {
+    display: inline-block;
+    /* A phone number is the one thing on this page someone may be trying to
+       tap while walking. 48px of height, not a text link's 20. */
+    min-height: 48px;
+    padding: 8px 6px;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 32px;
+    color: var(--brand-dark);
+    text-decoration: none;
+  }
+
+  .qa-call-link:hover,
+  .qa-call-link:focus-visible {
+    text-decoration: underline;
+  }
+
+  .qa-call-note {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+
+  .qa-points {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 14px;
+  }
+
+  .qa-points li {
+    display: grid;
+    gap: 2px;
+    padding-left: 24px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .qa-points li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--brand);
+    font-weight: 700;
+  }
+
+  .qa-points strong {
+    font-family: var(--font-heading);
+    font-size: 14.5px;
+    color: var(--ink-heading);
+  }
+
+  .qa-points span {
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+
+  .qa-address {
+    margin: 0;
+    padding-top: 18px;
+    border-top: 1px solid #e3e6e0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+</style>

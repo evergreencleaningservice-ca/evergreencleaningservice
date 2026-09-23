@@ -1,0 +1,26 @@
+---
+/**
+ * The phone-only sticky bar: call, or jump to the form.
+ *
+ * It is fixed to the bottom on phones, which is exactly the pattern that
+ * usually ships covering the thing it is meant to help you reach. `body.lp`
+ * carries bottom padding equal to the bar's height, so the page can always be
+ * scrolled clear of it — the submit button and the last field included. There
+ * is a test for that, because it is the kind of thing a later padding change
+ * breaks silently.
+ *
+ * Hidden entirely at 768px and up, where the header's call button and the form
+ * are both already on screen.
+ */
+import { nap } from '../../data/site';
+
+interface Props {
+  quoteAnchor: string;
+}
+const { quoteAnchor } = Astro.props;
+---
+
+<div class="lpx-sticky">
+  <a class="lpx-sticky-call" href={nap.phoneHref} data-call data-call-location="paid_sticky">Call {nap.phoneDisplay}</a>
+  <a class="lpx-sticky-quote" href={`#${quoteAnchor}`}>Free quote</a>
+</div>

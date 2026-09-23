@@ -8,62 +8,28 @@ export default defineConfig({
   build: {
     format: 'directory',
   },
-  // Old WordPress addresses that no longer have a page of their own. Kept so
-  // existing links and search results still land somewhere useful.
-  redirects: {
-    // The 2019 service URLs the current /services/ tree replaced.
-    '/office-cleaning/': '/services/office-cleaning/',
-    '/commercial-cleaning/': '/services/commercial-cleaning/',
-    '/industrial-cleaning/': '/services/industrial-cleaning/',
-    '/emergency-service/': '/services/emergency-cleaning-services/',
-    '/testimonial/': '/testimonials/',
-
-    // WordPress tag and author archives. This port has no tag or author
-    // taxonomy, so every archive URL the old site served (the list comes from
-    // the 200-status captures in the archive crawl) goes to the news archive.
-    '/author/webmaster/': '/category/blog/',
-    '/tag/ai/': '/category/blog/',
-    '/tag/air-quality/': '/category/blog/',
-    '/tag/allergies/': '/category/blog/',
-    '/tag/breakroom/': '/category/blog/',
-    '/tag/cleaning/': '/category/blog/',
-    '/tag/cleaning/page/2/': '/category/blog/',
-    '/tag/cleaning-products/': '/category/blog/',
-    '/tag/commercial-cleaning/': '/category/blog/',
-    '/tag/commercial-cleaning/page/2/': '/category/blog/',
-    '/tag/commercial-office-cleaning/': '/category/blog/',
-    '/tag/commercial-office-cleaning/page/2/': '/category/blog/',
-    '/tag/commercial-office-cleaning/page/3/': '/category/blog/',
-    '/tag/coronavirus/': '/category/blog/',
-    '/tag/covid-19/': '/category/blog/',
-    '/tag/daycares/': '/category/blog/',
-    '/tag/dental-office/': '/category/blog/',
-    '/tag/dust/': '/category/blog/',
-    '/tag/dusting/': '/category/blog/',
-    '/tag/entrance/': '/category/blog/',
-    '/tag/janitorial-services/': '/category/blog/',
-    '/tag/janitorial-services/page/2/': '/category/blog/',
-    '/tag/manual-cleaning/': '/category/blog/',
-    '/tag/moving/': '/category/blog/',
-    '/tag/office/': '/category/blog/',
-    '/tag/office/page/2/': '/category/blog/',
-    '/tag/plants/': '/category/blog/',
-    '/tag/refrigerator/': '/category/blog/',
-    '/tag/relocating/': '/category/blog/',
-    '/tag/retail/': '/category/blog/',
-    '/tag/robotic/': '/category/blog/',
-    '/tag/schools/': '/category/blog/',
-    '/tag/winter/': '/category/blog/',
-
-    // Left over from the OnePress demo content the old install never removed.
-    '/portfolio/project-title-sixth/': '/cleaning-demo-gallery/',
-  },
+  // Redirects are NOT declared here. Astro's static redirects build an HTML
+  // page that returns 200 with a meta refresh; the specification asks for 301s
+  // and Section 5 tests for them. They live in src/data/redirects.ts and are
+  // written to dist/_redirects by scripts/redirects.mjs, which Cloudflare's
+  // asset router serves as real 301s.
   integrations: [
     sitemap({
-      // The category archive carries robots "follow, noindex" to match the
-      // original, so listing it in the sitemap would invite crawlers to index
-      // what those pages ask them not to. /blog/ covers the same posts.
-      filter: (page) => !/\/category\/blog\//.test(page),
+      /*
+       * Nothing noindexed goes in the sitemap. Submitting a URL and then
+       * telling the crawler not to index it is a contradiction, and Search
+       * Console reports it as an error against the property.
+       *
+       *   /category/blog/  "follow, noindex", matching the original. /insights/
+       *                    covers the same posts and is indexable.
+       *   /lp/*            PPC landing pages, noindex by design — they compete
+       *                    with the service pages for the same intent and exist
+       *                    only for paid traffic.
+       *   /thank-you/      a conversion confirmation. Indexed, it can be landed
+       *                    on directly, firing the conversion for someone who
+       *                    submitted nothing.
+       */
+      filter: (page) => !/\/(category\/blog|lp|thank-you)\//.test(page),
     }),
   ],
 });

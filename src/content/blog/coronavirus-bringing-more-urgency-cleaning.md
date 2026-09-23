@@ -34,4 +34,4 @@ A lot of effective chemical disinfectants have become in short supply throughout
 
 Various chemicals and products have been proven to be effective ranging from regular soap and water, hydrogen peroxide, rubbing alcohol, and even household bleach.
 
-![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/evergreen-cleaning-toronto-logo-banner.jpg)

@@ -14,16 +14,129 @@ npm run build   # static build into dist/
 npm run preview # serve the built output
 npm run check   # astro check (types + content schema) — prompts to install
                 # @astrojs/check + typescript on first run; they are not dependencies
+npm run b2:sync # upload public/images to the Backblaze bucket
+npm run preflight # refuses a production build that would ship a test captcha key
+npm test        # the whole suite (see TESTING.md)
+npm run verify:indexing -- staging      # check a DEPLOYED origin's indexability
+npm run verify:indexing -- production   # the same, against the live site
 ```
 
-Node 20+ is required (Astro 7). There is no database, no API keys and no `.env`.
+`verify:indexing` is the go-live check that cannot be a unit test: it reads
+what an origin actually serves. Run it against **production immediately after
+the DNS cutover** — the one mistake that would cost most is launching with the
+staging `X-Robots-Tag: noindex` still attached, and it is invisible from the
+page.
+
+Going live needs **both** halves of the captcha pair, in two different places:
+
+```bash
+export PUBLIC_TURNSTILE_SITE_KEY=<real site key>   # build-time, baked into the HTML
+npx wrangler secret put TURNSTILE_SECRET           # Worker secret, never in the repo
+npm run build && npx wrangler deploy
+```
+
+Setting one without the other breaks every form silently — a test site key with
+a real secret makes `siteverify` reject genuine submissions with a 403.
+
+### Where the captcha is enforced, and what each layer can see
+
+Three layers, because no single one can see everything. The runtime is the
+strongest and the other two exist so a mistake is caught earlier and louder.
+
+| Layer | Can see | Enforces | Cannot |
+| --- | --- | --- | --- |
+| `astro build` — `scripts/preflight.mjs` | `PUBLIC_TURNSTILE_SITE_KEY` | refuses a production build with the variable missing or set to a published test key | see the secret; it does not exist at build time |
+| `astro build` — `scripts/captcha-check.mjs` | every emitted `.html` | refuses a production build with any published key in the **output**, whatever put it there | anything the build did not emit |
+| `wrangler deploy` — `scripts/secret-check.mjs` | secret **names** | refuses a production deploy with `DATABASE_URL` or `TURNSTILE_SECRET` unset; refuses rather than passing if it cannot read the list at all | secret **values** — so it cannot tell a real secret from a published one |
+| the Worker, at runtime | the secret's value, and `siteverify`'s answer | 503 for a published test secret on a production host; 403 for a token solved on a hostname that is not ours | — |
+
+Both build gates are skipped by `npm run build:preview`: staging is *meant* to
+run on test keys.
+
+### Accepted captcha hostnames
+
+`siteverify` returns the hostname the challenge was solved on. A token solved
+on a copy of this page, on a host someone else controls, carrying the same
+public site key, verifies here perfectly well — so the hostname is checked
+against a per-environment allowlist. A mismatch is a 403: no lead is stored, no
+email is sent, and the browser never pushes a conversion event, because it only
+pushes on a 2xx.
+
+| Environment | Accepted |
+| --- | --- |
+| **Production** | `www.evergreencleaningservice.ca`, `evergreencleaningservice.ca` — and nothing else. Not staging, not `example.com`. |
+| **Staging** | `evergreencleaningservice.10xconnections.com`, plus `example.com` *only while a published test secret is in use*, because that is what Cloudflare's dummy `siteverify` reports. |
+| **`wrangler dev` / `*.workers.dev`** | the request's own hostname. |
+
+An **absent** hostname is treated as a mismatch, not waved through. If genuine
+submissions ever start failing with 403, the Worker log line to look for is
+`captcha solved on an unexpected hostname`.
+
+Node 20+ is required (Astro 7). There is no `.env`; everything that needs a
+credential reads it from the environment or from a Worker secret:
+
+| Where | What | For |
+| --- | --- | --- |
+| Worker secret | `DATABASE_URL` | Neon Postgres, `/api/submit-lead` |
+| Worker secret | `RESEND_API_KEY` | the lead notification email |
+| Worker secret | `TURNSTILE_SECRET` | verifying form submissions (the default provider); without it `/api/submit-lead` answers 503 |
+| Worker secret | `RECAPTCHA_SECRET` | the same, if `captcha.provider` is switched to `recaptcha` |
+| Build env | `PUBLIC_TURNSTILE_SITE_KEY` | the real Turnstile key; defaults to Cloudflare's test key (HANDOFF §7.1) |
+| Build env | `PUBLIC_RECAPTCHA_SITE_KEY` | the client's reCAPTCHA key, used only when that provider is selected |
+| Environment | `B2_KEY_ID`, `B2_APP_KEY` | `npm run b2:sync` |
+| Environment | `CF_API_TOKEN` | the post-deploy edge purge |
+
+`npm run dev` needs none of them, and cannot exercise the form: `astro dev` has
+no Worker, so `/api/submit-lead` 404s there. Test submissions against a
+deployed preview.
+
+## Attribution, and one decision that is not a developer's to make
+
+`src/lib/attribution.ts` remembers how a visitor arrived, so a lead submitted
+from `/contact-us/` on the fourth page of a visit still carries the click id
+from the ad that paid for the first. It keeps a **first touch** (never
+overwritten) and a **latest touch** (updated only by a later campaign arrival —
+never by direct or internal navigation).
+
+**What is implemented and live: within-session attribution only.** The record
+lives in `sessionStorage`, so it survives internal navigation within the
+current browser tab and ends when that tab closes. A visitor who arrives on an
+ad and submits from the fourth page is attributed correctly. A visitor who
+comes back tomorrow, or in a new tab, is not.
+
+**What is implemented and disabled: persistent cross-visit attribution.** The
+90-day store is written and tested; `MODE = 'persistent'` switches it to
+`localStorage` with a 90-day TTL. It is off.
+
+**This does not yet deliver 90-day cross-visit attribution.** Session scope is
+a privacy-conservative interim implementation, not the same feature.
+
+**What is unresolved, and is not a developer's call:**
+
+1. a consent mechanism — the site has none of any kind today;
+2. Google Consent Mode v2 signals to GTM — not configured;
+3. `/privacy/`, which is still the inherited WordPress boilerplate describing
+   login and comment cookies this static site does not set. It does not
+   describe a 90-day store, and it already fails to describe GTM, Google Ads,
+   GA4 and Microsoft UET, all of which are live;
+4. client approval.
+
+Keeping advertising click identifiers on a visitor's device for three months
+for marketing measurement is the kind of processing Canadian privacy law
+(PIPEDA) and the site's own policy are likely to have something to say about.
+**Nothing here is legal advice**, and no lawyer has looked at it. The
+persistent implementation stays disabled until the site's consent and privacy
+requirements have been confirmed by someone qualified to confirm them.
 
 ## Project layout
 
 ```
 astro.config.mjs        site URL, trailingSlash: 'always', legacy redirects, sitemap
 public/
-  images/               all site imagery, flat, original WordPress basenames
+  images/               all site imagery, original WordPress basenames. Source of
+                        truth and what `astro dev` serves — but NOT deployed: the
+                        build repoints every reference at the Backblaze bucket
+                        (HANDOFF.md §3.1) and drops these from dist/.
   robots.txt            allow-all + sitemap pointer
 src/
   pages/                routes (see below)
@@ -95,10 +208,12 @@ This port is not a complete reproduction of the live site. Outstanding items:
    changed on the live site after its page's capture date is not reflected here and should be
    checked against the real site before launch.
 
-2. **The forms are markup only.** The contact / quote form in
-   `src/components/home/Contact.astro` has `action="#"` and no backend. A submission goes
-   nowhere. It needs a form endpoint (serverless POST route or a hosted form service), and the
-   visible "not connected yet" notice in that component should be removed once it delivers.
+2. **Two forms still go nowhere, and the captcha keys are published test keys.** The quote and
+   contact forms post to `/api/submit-lead` behind invisible Cloudflare Turnstile, but the
+   comment form and the `/reviews/` testimonial form are still `action="#"` — neither is a
+   lead, and both need a destination decided. Separately, no production captcha keys have been
+   supplied, so the site runs on Cloudflare's published test pair, which passes every token.
+   See HANDOFF §7.1 for what go-live needs.
 
 3. **`/services/building-maintenance/` has almost no content.** That page was never archived.
    `src/content/services/building-maintenance.md` currently holds only the one-paragraph

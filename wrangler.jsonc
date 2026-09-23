@@ -3,11 +3,30 @@
   "name": "evergreencleaningservice",
   "compatibility_date": "2026-09-17",
 
-  // Astro builds a fully static site, so this Worker has no script of its own:
-  // it just serves ./dist from Cloudflare's asset storage.
+  // The site is static except for POST /api/submit-lead. Cloudflare serves a
+  // matching asset first and only calls the Worker when nothing matches, so the
+  // script costs nothing on the other 71 routes.
+  "main": "src/worker.ts",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     // Unknown paths render the site's own 404 page rather than a bare Cloudflare one.
     "not_found_handling": "404-page"
-  }
+  },
+
+  // Lead storage is Neon Postgres, reached with @neondatabase/serverless over
+  // HTTP — no binding here, and nothing to bind: the connection string is a
+  // Worker secret, because it carries a role password.
+  //
+  //   wrangler secret put DATABASE_URL
+  //
+  // Neon project long-firefly-62771888, database `evergreen`. Schema in
+  // migrations/0001_leads.sql. D1 was the original plan and is not usable: the
+  // Cloudflare account holds 10 of 10 databases on the Workers Free plan and
+  // every one is a live client database.
+  //
+  // Without the secret the endpoint answers 503, not 200, so a submission is
+  // visibly rejected rather than silently lost.
+
+  "observability": { "enabled": true }
 }

@@ -1,0 +1,320 @@
+---
+/**
+ * The PPC landing-page shell — Section 3.1, "PPC Isolation Rules".
+ *
+ * Deliberately not BaseLayout. The isolation rules are the point of the
+ * template, and inheriting the site shell would defeat every one of them:
+ *
+ *   no global navigation   the header here is a logo and a call button, nothing
+ *                          else. No menu, no services dropdown, no search.
+ *   no external links      the footer carries copyright, privacy and terms and
+ *                          nothing else — no social profiles, no blog links.
+ *   no side nav            the dot navigation and the floating video widget are
+ *                          both absent.
+ *
+ * Landing pages are noindex: they duplicate the service pages' intent and would
+ * compete with them in organic results, and a PPC page has no reason to be in
+ * the index at all.
+ */
+import { nap, site } from '../data/site';
+import { organizationGraph } from '../lib/schema';
+import GoogleTagManager from '../components/GoogleTagManager.astro';
+import Attribution from '../components/Attribution.astro';
+import PhoneTracking from '../components/PhoneTracking.astro';
+import '../styles/global.css';
+/* The paid pages' shared styling. Loaded here so a page cannot forget it, and
+   so the two pages cannot drift into two copies of the same CSS again. */
+import '../styles/landing.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Optional line under the header phone number, e.g. "Direct Access to
+      Account Representative". Omitted on the LPs that do not ask for one, so
+      adding it here changed nothing about the existing page. */
+  callNote?: string;
+  /**
+   * The on-page form's id. Given one, the header carries a Quote button
+   * beside the telephone — the second of the two actions a paid page offers,
+   * and an in-page anchor rather than a link that leaves.
+   */
+  quoteAnchor?: string;
+}
+
+const { title, description, callNote, quoteAnchor } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+---
+
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {/* A bare /favicon.ico request is made by every browser whether or not
+        the document asks for one, and without a file it is a 404 in the
+        console — which Lighthouse counts against Best Practices.
+
+        The .ico carries THREE sizes — 16 for the tab, 32 for the bookmark
+        bar, 48 for a Windows shortcut — so `sizes` lists all three. It
+        claimed only 32x32 while the file held one image, and both halves of
+        that were wrong once the icon was rebuilt from the real logo mark. */}
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-512.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonical} />
+    {/* The package specifies `noindex, nofollow` on both the landing page and
+        the thank-you page. Applied here so all three pages on this shell agree
+        rather than one of them drifting. */}
+    <meta name="robots" content="noindex, nofollow" />
+
+    {/* The hero image — this page's LCP — is served from the image bucket,
+        a different origin from the document. Without this the browser cannot
+        even begin the DNS lookup and TLS handshake for it until it has
+        parsed the markup that references it. One preconnect buys back that
+        round trip on the single most important request on the page. */}
+    <link rel="preconnect" href="https://img-evergreencleaningservice.10xconnections.com" />
+
+    {/* The two faces the first screen actually uses: Raleway for the headline
+        and the buttons, Open Sans for everything else. Both are same-origin
+        and, without this, are not discoverable until global.css has been
+        fetched and parsed — so the headline paints in the fallback, the
+        webfont lands, and the whole page reflows.
+
+        MEASURED, not assumed: at 390px this single reflow was the ENTIRE
+        layout shift on both landing pages. Blocking woff2 took CLS from
+        0.0478 to exactly 0. The numbers with the preload in place are in the
+        Phase 10 report; `font-display: swap` is kept, so a font that somehow
+        does not arrive still shows text rather than nothing.
+
+        Only these two. The italic face is not used above the fold, and
+        preloading a font a page does not render is pure cost. */}
+    <link rel="preload" href="/fonts/raleway.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/open-sans.woff2" as="font" type="font/woff2" crossorigin />
+
+    <GoogleTagManager />
+    <Attribution />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationGraph())} is:inline />
+  </head>
+
+  <body class="lp">
+    <GoogleTagManager noscript />
+
+    <header class="lp-header">
+      <div class="lp-header-inner">
+        {/* Self-link. It used to be hardcoded to /lp/commercial-cleaning/,
+            which on any other landing page is an escape hatch to a different
+            offer — the one thing this layout exists to prevent. */}
+        <a class="lp-logo" href={Astro.url.pathname}>
+          {/* `width`/`height` are the SOURCE's intrinsic dimensions, 884x265,
+              not the rendered size. They were declared 220x52 — a ratio of
+              4.23 against the file's real 3.34 — so the browser reserved 52px
+              of height, the image landed needing 66px, and every landing page
+              shifted its whole layout down by 14px on load. Measured at 390px
+              that single reflow was the largest layout shift on the page.
+
+              The AVIF and WebP variants already exist (they are what the site
+              header serves) and were simply not used here. */}
+          <picture>
+            <source type="image/avif" srcset="/images/cropped-evergreen-cleaning-toronto-logo-banner.avif" />
+            <source type="image/webp" srcset="/images/cropped-evergreen-cleaning-toronto-logo-banner.webp" />
+            <img
+              src={site.logo}
+              alt={nap.name}
+              width="884"
+              height="265"
+              loading="eager"
+              decoding="async"
+            />
+          </picture>
+        </a>
+        <div class="lp-actions">
+          <div class="lp-call-wrap">
+            <a class="lp-call" href={nap.phoneHref} data-call data-call-location="paid_header">
+              <span class="lp-call-label">Call</span>
+              <span class="lp-call-number">{nap.phoneDisplay}</span>
+            </a>
+            {callNote && <p class="lp-call-note">{callNote}</p>}
+          </div>
+          {quoteAnchor && (
+            <a class="lp-header-quote" href={`#${quoteAnchor}`}>Free quote</a>
+          )}
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="lp-footer">
+      <div class="lp-footer-inner">
+        <p>&copy; {new Date().getFullYear()} {nap.name}. {nap.addressLine}</p>
+        {/* ONE legal link, not two. This used to render "Privacy Policy" and
+            "Terms of Service" side by side, both pointing at /privacy/ —
+            there is no terms document on this site, so the second link was a
+            label for something that does not exist. A mislabelled link on a
+            page collecting personal information is worse than no link. */}
+        <p class="lp-footer-links">
+          <a href="/privacy/">Privacy Policy</a>
+        </p>
+      </div>
+    </footer>
+
+    <slot name="sticky" />
+
+    {/* REPLACED in Phase 11. This used to bind a listener to every `tel:`
+        anchor and push `click_to_call` with the number HARDCODED — which was
+        wrong for precisely the visitors who matter, since the container loads
+        CallTrackingMetrics and rewrites the number for paid arrivals. One
+        delegated sitewide handler now reads both numbers at click time. */}
+    <PhoneTracking />
+  </body>
+</html>
+
+<style is:global>
+  /* The landing page opts out of the site's own chrome entirely. */
+  body.lp {
+    background: #fff;
+    /* room for the sticky bar so it never covers the submit button */
+    padding-bottom: 76px;
+  }
+
+  @media (min-width: 768px) {
+    body.lp {
+      padding-bottom: 0;
+    }
+  }
+
+  .lp-header {
+    border-bottom: 1px solid #e5e7eb;
+    background: #fff;
+  }
+
+  .lp-header-inner,
+  .lp-footer-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .lp-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 76px;
+  }
+
+  .lp-logo picture,
+  .lp-logo img {
+    display: block;
+  }
+
+  .lp-logo img {
+    /* `max-width` rather than `width`, so a 390px header shrinks the logo
+       instead of squeezing the call and quote buttons out of the row. With
+       the intrinsic dimensions now declared correctly on the element, the
+       reserved box is right at every rendered width. */
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .lp-call {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-decoration: none;
+    color: var(--ink-heading);
+  }
+
+  .lp-call-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: var(--ink-soft);
+  }
+
+  .lp-call-number {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--brand);
+  }
+
+  .lp-call-wrap {
+    text-align: right;
+  }
+
+  .lp-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .lp-header-quote {
+    display: none;
+    align-items: center;
+    min-height: 44px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    background: var(--brand);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .lp-header-quote:hover {
+    background: var(--brand-dark);
+    color: #fff;
+  }
+
+  /* On a phone the sticky bar already carries both actions, and a second
+     Quote button in the header would only shrink the logo. */
+  @media (min-width: 560px) {
+    .lp-header-quote {
+      display: inline-flex;
+    }
+  }
+
+  .lp-call-note {
+    margin: 2px 0 0;
+    font-size: 11px;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+
+  .lp-footer {
+    margin-top: 60px;
+    padding: 28px 0;
+    border-top: 1px solid #e5e7eb;
+    background: #f8fafc;
+    font-size: 13px;
+    color: #64748b;
+  }
+
+  .lp-footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    justify-content: space-between;
+  }
+
+  .lp-footer p {
+    margin: 0;
+  }
+
+  .lp-footer a {
+    color: #475569;
+  }
+
+  .lp-footer-links span {
+    margin: 0 6px;
+  }
+</style>

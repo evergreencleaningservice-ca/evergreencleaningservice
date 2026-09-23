@@ -1,0 +1,181 @@
+---
+/**
+ * Where /api/submit-lead sends a visitor after a successful submission.
+ *
+ * Its own page rather than an in-place message because the PPC package asks
+ * for a distinct confirmation URL, and because a landing page that has done
+ * its job should stop selling.
+ *
+ * It is NOT a measurement point. It pushes nothing into the dataLayer and no
+ * destination conversion may be configured on it; the single conversion event
+ * fires on the form, before the redirect. See the script below.
+ *
+ * noindex: a thank-you page has nothing to offer a search result, and an
+ * indexed one gets landed on directly by people who never submitted
+ * anything.
+ */
+import LandingLayout from '../layouts/LandingLayout.astro';
+import { nap } from '../data/site';
+
+/* Both landing pages now promise a response within 2 business hours, so the
+   `?t=` switch that rendered one of two numbers is gone — one promise, stated
+   once.
+
+   `?f=<form_id>` still arrives on the URL because the landing pages send it,
+   and it is now READ BY NOTHING. It was feeding the conversion event this
+   page no longer pushes, and it was never trustworthy for that: a query
+   parameter is whatever the person in the address bar decides it is. Which
+   form was submitted is carried by the one-time marker in sessionStorage, and
+   by `form_id` on the single conversion event the form itself pushed.
+
+   Worth keeping in mind if a third page ever needs a different promise: this
+   is a static build, so `Astro.url.searchParams` resolves once at build time
+   against a URL with no query string. Reading a param in frontmatter bakes
+   one answer into the HTML. It has to be done in the browser. */
+---
+
+<LandingLayout
+  title="Thank You | Evergreen Cleaning Service"
+  description="Your quote request has been received. Our account executive will be in touch shortly."
+>
+  <section class="ty">
+    <div class="ty-inner">
+      <div class="ty-tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="34" height="34">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M20 6 9 17l-5-5"></path>
+        </svg>
+      </div>
+
+      <h1>We Received Your Request</h1>
+      <p class="ty-lead">
+        Thank you for requesting a commercial cleaning proposal. An account representative is
+        reviewing your details and will follow up within <strong>2 business hours</strong>.
+      </p>
+
+      <div class="ty-rush-box">
+        <strong>Need immediate support?</strong><br />
+        Call directly at <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a>
+      </div>
+
+      <a class="ty-call" href={nap.phoneHref} data-call-location="content">Call {nap.phoneDisplay} now</a>
+
+      {/* The one link off this page. The conversion was recorded before the
+          visitor got here, so it costs nothing the isolation rules were
+          protecting. */}
+      <p class="ty-home"><a href="/">Return to Homepage</a></p>
+    </div>
+  </section>
+  <script>
+    /* NOT A CONVERSION POINT. Deliberately.
+     *
+     * This page used to push `lead_form_confirmed` on every load, and its own
+     * comment invited a destination-based conversion on the URL as well.
+     * Three ways that over-reports: a container triggering on both events
+     * counts every PPC lead twice; a reload, a back-button return or a
+     * bookmark each counted again; and anyone who simply opened the URL —
+     * a person, a crawler — reported a conversion for a form they never
+     * filled in.
+     *
+     * The site now has exactly one conversion event, `lead_form_submission`,
+     * pushed once by `lead-submit.ts` after /api/submit-lead answers 2xx, and
+     * the landing pages wait for GTM to deliver it before navigating here.
+     * So by the time this page loads the conversion is already recorded, and
+     * there is nothing left for it to announce.
+     *
+     * WHOEVER CONFIGURES THE CONTAINER: do not create a destination
+     * conversion, a page-view trigger or a GA4 key event on /thank-you/.
+     * docs/gtm-handoff.md is the specification.
+     *
+     * All this does is consume the one-time success marker, so the page can
+     * tell a genuine arrival from a reload or a direct visit. It pushes
+     * nothing. */
+    import { applyThankYouConfirmation } from '../lib/confirmation';
+
+    try {
+      applyThankYouConfirmation();
+    } catch {
+      /* private browsing, or blocked site data. The confirmation copy is the
+         same either way; only the body attribute is lost. */
+    }
+  </script>
+</LandingLayout>
+
+<style>
+  .ty {
+    padding: 70px 15px 90px;
+  }
+
+  .ty-inner {
+    max-width: 620px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .ty-tick {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background: rgba(77, 140, 43, 0.12);
+    color: var(--brand);
+    margin-bottom: 22px;
+  }
+
+  .ty-inner h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin: 0 0 14px;
+  }
+
+  .ty-lead {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .ty-call {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 14px 26px;
+    border-radius: 6px;
+    background: var(--brand);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .ty-call:hover {
+    background: var(--brand-dark);
+  }
+
+  .ty-rush-box {
+    margin: 26px 0 0;
+    padding: 20px;
+    border-radius: 6px;
+    background: #f4f8f4;
+    line-height: 1.6;
+  }
+
+  .ty-rush-box a {
+    color: var(--brand);
+    font-weight: 700;
+  }
+
+  .ty-home {
+    margin: 22px 0 0;
+    font-size: 0.9375rem;
+  }
+
+  .ty-home a {
+    color: var(--brand);
+    font-weight: 600;
+  }
+</style>

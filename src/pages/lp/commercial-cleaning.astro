@@ -1,0 +1,101 @@
+---
+/**
+ * /lp/commercial-cleaning/ — the broad commercial-cleaning paid page.
+ *
+ * WHAT THIS FILE IS NOW. Almost nothing. The layout, the hero, the benefits,
+ * the facility list, the reviews, the service area, the final call and the
+ * sticky bar are all components shared with its sibling, and the copy they
+ * print is in `src/data/landing.ts`. What is left here is the three things
+ * that genuinely differ between the two pages: the intent, the headline, and
+ * the reporting identity.
+ *
+ * That is the point of Phase 10. Before it, this page and
+ * /lp/commercial-cleaning-quote/ were two independent implementations of the
+ * same offer — two hero grids differing by 10px for no recorded reason, two
+ * sets of four "differentiators" of which only two agreed, two honeypots, two
+ * sticky bars, two lots of ~400 lines of CSS, and two forms that asked
+ * different questions. Two pages selling the same service to the same city
+ * should not disagree about what the business does.
+ *
+ * WHAT CHANGED FOR A VISITOR:
+ *
+ *   The form is the Phase 9 short form. Five fields of which four were
+ *   required — full name, business email, phone, facility type — become
+ *   seven of which four are, and crucially a phone number OR an email is
+ *   enough. Somebody who only wants to be called no longer has to surrender
+ *   an email address to ask for a quote.
+ *
+ *   The form moved up. Measured at 390px it began 1,006px down a 3,424px
+ *   page, below four bullet points a visitor had to scroll past before they
+ *   could act. The bullets are now below it.
+ *
+ *   Success happens in place. This page used to navigate to /thank-you/,
+ *   which is why it carried `awaitTagDelivery` — the conversion event had to
+ *   be given time to reach the tags before the redirect could abort them.
+ *   With no redirect there is nothing to outrun.
+ *
+ * THE REPORTING IDENTITY IS UNCHANGED: `ppc-lead-form`, which is what the ten
+ * rows already in the leads table carry.
+ */
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import QuickQuoteForm from '../../components/QuickQuoteForm.astro';
+import LpHero from '../../components/lp/LpHero.astro';
+import LpBenefits from '../../components/lp/LpBenefits.astro';
+import LpFacilities from '../../components/lp/LpFacilities.astro';
+import LpReviews from '../../components/lp/LpReviews.astro';
+import LpAreas from '../../components/lp/LpAreas.astro';
+import LpFinalCta from '../../components/lp/LpFinalCta.astro';
+import LpSticky from '../../components/lp/LpSticky.astro';
+import { REPLY_PROMISE } from '../../data/landing';
+
+/** The DOM id and anchor target. Unchanged, so existing #links still work. */
+const FORM_ANCHOR = 'ppc-lead-form';
+/** The conversion identity. Unchanged, so the existing rows still line up. */
+const FORM_ID = 'ppc-lead-form';
+
+/**
+ * A LITERAL BULLET, not `&bull;`.
+ *
+ * This string is passed as a PROP and rendered by the layout as `{callNote}`,
+ * and Astro escapes the output of an expression. So an HTML entity written
+ * here is emitted as `&amp;bull;` and the visitor reads the six characters
+ * `&bull;` — on a page behind paid clicks. It shipped that way and was found
+ * by rendering the page rather than by reading the source, because the entity
+ * spelling is correct in template markup and wrong only here, and the two are
+ * indistinguishable by eye.
+ *
+ * `npm run launch:check` now fails the build artefact on any double-escaped
+ * entity, so this cannot come back silently.
+ */
+const CALL_NOTE = 'Free walkthrough • No obligation';
+---
+
+<LandingLayout
+  title="Commercial & Office Cleaning in Toronto and the GTA | Evergreen"
+  description="Commercial and office cleaning across Toronto, Mississauga, Vaughan and the GTA. WSIB covered, bonded and insured. Free on-site walkthrough and a reply within 2 business hours."
+  callNote={CALL_NOTE}
+  quoteAnchor={FORM_ANCHOR}
+>
+  <LpHero
+    eyebrow="Toronto & GTA commercial janitorial"
+    heading="Commercial cleaning in Toronto you can count on, every night."
+    sub="Offices, clinics, warehouses and retail across Toronto and the GTA — cleaned around your hours by a bonded, insured, WSIB-covered crew that turns up."
+  >
+    <QuickQuoteForm
+      id={FORM_ANCHOR}
+      formId={FORM_ID}
+      heading="Get your free quote"
+      intro={`Seven short questions. An account executive replies ${REPLY_PROMISE} on a working day.`}
+      submitLabel="Get my free quote"
+      eagerCaptcha
+    />
+  </LpHero>
+
+  <LpBenefits />
+  <LpFacilities />
+  <LpReviews />
+  <LpAreas />
+  <LpFinalCta quoteAnchor={FORM_ANCHOR} />
+
+  <LpSticky slot="sticky" quoteAnchor={FORM_ANCHOR} />
+</LandingLayout>

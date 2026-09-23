@@ -15,7 +15,7 @@ The following are five cleaning products that we recommend you keep handy in any
 
 Your office should always look presentable even if no clients are coming to your office. However, you can make a good impression by ensuring your front door and windows are presentable, especially if your clients come into your office regularly. It is also important to have a clean working environment even if your workers are the only ones who see the front doors and windows of your office. Having a clean working environment improves the happiness and productivity of your workers. Use a glass cleaner to clean up smudges between professional cleanings, so you do not have to wait for your professional cleaners to clean your glasses.
 
-![cleaning a counter](/images/cleaning-a-counter-300x150.jpg)
+![cleaning a counter](/images/cleaning-a-counter.jpg)
 
 ### Disinfecting Wipes
 
@@ -39,4 +39,4 @@ It is important to have some of the essentials cleaning products in your office 
 
 Hiring professional [commercial cleaning services](/) is one of the best ways for keeping your office looking great at all times. Call us today to learn how we can help improve the cleanliness of your office space.
 
-![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/evergreen-cleaning-toronto-logo-banner.jpg)

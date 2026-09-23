@@ -1,50 +1,79 @@
 ---
+/**
+ * The primary quote page.
+ *
+ * WHAT CHANGED, AND WHY IT WAS WRONG BEFORE
+ *
+ * This page used to render the long quote form twice — once as the page and
+ * once in the sidebar, the same eighteen fields with the same nine required,
+ * and both carrying `data-form-id="quote-form-1381"` so the two were
+ * indistinguishable in the conversion data. Measured at 390px: 1,363px of form,
+ * a gap, then 1,236px more of the identical form, on a 4,376px page. A visitor
+ * who scrolled past the first arrived at what reads as a second, different
+ * thing to fill in.
+ *
+ * It now renders the short form once, with the sidebar replaced by the two
+ * things that actually help someone deciding whether to type into it: a phone
+ * number they can tap, and four claims this site can already support.
+ *
+ * WHAT DELIBERATELY DID NOT CHANGE
+ *
+ *  - The complete site navigation stays. Stripping it is a paid-landing-page
+ *    technique and belongs to those pages, not to an organic page someone may
+ *    have reached mid-way through reading about a service.
+ *  - The page keeps one H1, the one `PageLayout` renders from the content
+ *    entry's title. The form's own heading is an H2 under it.
+ *
+ * The archived body is not rendered: it is the old WPForms embed flattened
+ * into Markdown — field labels and service checkboxes as prose — so there is
+ * no `contentHtml` passed here. The form below is the page.
+ */
 import { getEntry } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
-import QuoteForm from '../components/QuoteForm.astro';
+import QuickQuoteForm from '../components/QuickQuoteForm.astro';
+import QuoteAside from '../components/QuoteAside.astro';
 
 const entry = await getEntry('pages', 'request-a-quote');
 if (!entry) throw new Error('Missing content entry: pages/request-a-quote');
-
-/**
- * This page has no prose in the archive. Its Markdown body is nothing but the
- * old WPForms embed (form id 1381) flattened into text — field labels, the
- * service checkboxes, the arithmetic captcha — so there is no `<Content />` to
- * render here. The title, description and the field list below are the page.
- */
-
-/*
- * TODO — the submit endpoint is not wired up yet.
- *
- * The original form posted back to WordPress and was protected by a
- * server-side arithmetic captcha ("What is 7+2?") plus reCAPTCHA v2. Neither
- * survives a static build, so the markup below is a plain HTML form with
- * `action="#"`: it validates in the browser and then goes nowhere. Before
- * launch, point `action` at a real handler and re-add spam protection there —
- * the honeypot below is only half the job.
- */
-
-const services = [
-  'Commercial Cleaning',
-  'Office Cleaning',
-  'Janitorial Services',
-  'Commercial Carpet Cleaning',
-  'Floor Services / Finishing',
-  'Reno Construction Clean-up',
-  'Other',
-];
 ---
 
 <PageLayout
   title={entry.data.title}
   description={entry.data.description}
   image={entry.data.image}
+  sidebar={false}
 >
-  <QuoteForm id="quote" />
+  <div class="rq">
+    <div class="rq-form">
+      <QuickQuoteForm
+        id="quote"
+        heading="Tell us where to send it"
+        intro="Six short questions. No site visit, no obligation, and we only need one way to reach you."
+      />
+    </div>
+    <QuoteAside />
+  </div>
 </PageLayout>
 
 <style>
-  .entry-content + :global(.quote-form) {
-    margin-top: 30px;
+  .rq {
+    display: grid;
+    gap: 36px;
+  }
+
+  /* Two columns only when the form still has room to breathe beside the
+     aside. Below this the aside follows the form rather than preceding it —
+     the phone number is a fallback for someone who does not want to type, not
+     a thing to read before the form. */
+  @media screen and (min-width: 780px) {
+    .rq {
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: 44px;
+      align-items: start;
+    }
+  }
+
+  .rq-form {
+    min-width: 0;
   }
 </style>

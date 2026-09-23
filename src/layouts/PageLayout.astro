@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Sidebar from '../components/Sidebar.astro';
 import { site } from '../data/site';
+import { pageTitle } from '../lib/title';
 
 interface Props {
   title: string;
@@ -60,7 +61,7 @@ const body = contentHtml ? normalizeBody(contentHtml) : null;
 ---
 
 <BaseLayout
-  title={`${title} - ${site.legalName}`}
+  title={pageTitle(`${title}`)}
   description={description || undefined}
   image={image}
 >
@@ -85,28 +86,6 @@ const body = contentHtml ? normalizeBody(contentHtml) : null;
 </BaseLayout>
 
 <style>
-  /* The original runs these pages as col-md-8 + sidebar, which puts the content
-     column at 790px on a 1140px container. */
-  .content-grid {
-    display: grid;
-    gap: 40px;
-  }
-
-  @media (min-width: 992px) {
-    .content-grid {
-      grid-template-columns: minmax(0, 7.9fr) minmax(0, 2.9fr);
-      gap: 30px;
-    }
-  }
-
-  .content-grid.is-full {
-    display: block;
-  }
-
-  .content-grid.is-full .entry-content {
-    max-width: 860px;
-  }
-
 
 
   .breadcrumbs a:focus-visible {

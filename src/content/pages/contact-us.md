@@ -15,7 +15,7 @@ description: "Contact us for more information or to request a free quote. We'd l
 
 #### Email:
 
-[evergreencleaning416@gmail.com](mailto:evergreencleaning416@gmail.com)
+[info@evergreencleaningservice.ca](mailto:info@evergreencleaningservice.ca)
 
 General Contact Form
 

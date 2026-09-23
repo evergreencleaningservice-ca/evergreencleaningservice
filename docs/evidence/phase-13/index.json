@@ -1,0 +1,91 @@
+{
+  "phase": 13,
+  "capturedAt": "2026-09-21",
+  "origin": "https://evergreencleaningservice.10xconnections.com",
+  "stagingVersion": "bc76be72-8e51-4eb3-ad21-be433bbbcb23",
+  "widths": [
+    {
+      "captured": 390,
+      "stored": 390
+    },
+    {
+      "captured": 1440,
+      "stored": 720
+    }
+  ],
+  "totalBytes": 470248,
+  "sheets": [
+    {
+      "slug": "homepage",
+      "title": "Homepage",
+      "route": "/",
+      "file": "homepage.webp",
+      "bytes": 72212,
+      "width": 1158,
+      "height": 1014
+    },
+    {
+      "slug": "quote",
+      "title": "Request a quote",
+      "route": "/request-a-quote/",
+      "file": "quote.webp",
+      "bytes": 37836,
+      "width": 1158,
+      "height": 1014
+    },
+    {
+      "slug": "lp-commercial-cleaning",
+      "title": "Paid — commercial cleaning",
+      "route": "/lp/commercial-cleaning/",
+      "file": "lp-commercial-cleaning.webp",
+      "bytes": 57114,
+      "width": 1158,
+      "height": 1014
+    },
+    {
+      "slug": "lp-commercial-cleaning-quote",
+      "title": "Paid — quote",
+      "route": "/lp/commercial-cleaning-quote/",
+      "file": "lp-commercial-cleaning-quote.webp",
+      "bytes": 53954,
+      "width": 1158,
+      "height": 1014
+    },
+    {
+      "slug": "service",
+      "title": "Service page",
+      "route": "/services/office-cleaning/",
+      "file": "service.webp",
+      "bytes": 71456,
+      "width": 1158,
+      "height": 1014
+    },
+    {
+      "slug": "location",
+      "title": "Location page",
+      "route": "/locations/mississauga/",
+      "file": "location.webp",
+      "bytes": 83734,
+      "width": 1158,
+      "height": 1014
+    },
+    {
+      "slug": "blog-archive",
+      "title": "Blog archive",
+      "route": "/insights/",
+      "file": "blog-archive.webp",
+      "bytes": 59098,
+      "width": 1158,
+      "height": 1014
+    },
+    {
+      "slug": "thank-you",
+      "title": "Thank you",
+      "route": "/thank-you/",
+      "file": "thank-you.webp",
+      "bytes": 34844,
+      "width": 1158,
+      "height": 1014
+    }
+  ]
+}

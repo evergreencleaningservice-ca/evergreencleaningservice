@@ -1,0 +1,143 @@
+---
+/**
+ * The submit handler shared by the site's WPForms-shaped forms.
+ *
+ * Renders nothing. It exists so the quote form and the contact form — which
+ * appear together on the homepage and on every service page — get one
+ * implementation and one copy of the script, rather than one each.
+ *
+ * WHY THIS EXISTS AT ALL. Both forms carried `action="#"` until now: they
+ * validated in the browser and then reloaded the page, and the enquiry was
+ * gone. `_research/gaps.md` and HANDOFF §7.1 have called that the launch
+ * blocker since the port began. Adding a captcha in front of a form that
+ * discards the submission would have been the worse version of the same bug —
+ * protection theatre over a hole — so the forms are wired to the endpoint that
+ * already existed for the PPC form, and the captcha now guards something real.
+ *
+ * It picks up any `form[data-endpoint]`, so a new form opts in with one
+ * attribute and inherits the honeypot, error handling and confirmation
+ * behaviour rather than reimplementing them.
+ *
+ * The arithmetic question the original asked ("What is 7+2?") is gone from
+ * every form, so the check that used to live here is gone with it. It was a
+ * speed bump, never a control — the expected answer was printed in the page
+ * next to the question. `SpamGuard` and the honeypot are the protection.
+ */
+---
+
+<script>
+  /* WPForms's own submit flow, as the original behaves: validate, POST, then
+     replace the form with a confirmation message rather than navigating.
+
+     The pipeline itself — ordering, honeypot, duplicate-click guard, the
+     dataLayer contract — lives in `src/lib/lead-submit.ts`, shared with the
+     two PPC landing pages. This file is now only what is specific to the
+     site's own WPForms-shaped forms: which fields they have and what a
+     confirmation looks like. */
+  import { fieldValue as value, wireLeadForm } from '../lib/lead-submit';
+  import type { Dict } from '../lib/lead-submit';
+
+  /* The address is four inputs on screen and one thing in the world. Composed
+     here rather than in four columns, because what the client needs is the
+     address of the site to be cleaned, in one readable line.
+
+     No country: the selector is gone from both forms. Every address these
+     forms take is in Ontario — asking a Toronto facility manager to pick
+     Canada out of 195 countries is friction that buys nothing. */
+  const address = (form: HTMLFormElement) =>
+    [
+      value(form, 'address1'),
+      value(form, 'city'),
+      value(form, 'state'),
+      value(form, 'postal'),
+    ]
+      .filter(Boolean)
+      .join(', ');
+
+  const services = (form: HTMLFormElement) =>
+    [...form.querySelectorAll<HTMLInputElement>('input[name="services"]:checked')]
+      .map((el) => el.value)
+      .join(', ');
+
+  const confirm = (form: HTMLFormElement) => {
+    const box = document.createElement('div');
+    box.className = 'wpf-confirm';
+    box.setAttribute('role', 'status');
+    box.textContent =
+      'Thanks — we have your request and will be in touch shortly. If it is urgent, call (416) 803-4880.';
+    form.replaceWith(box);
+    box.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  };
+
+  const fail = (form: HTMLFormElement, message: string) => {
+    let box = form.querySelector<HTMLElement>('.wpf-error');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'wpf-error';
+      box.setAttribute('role', 'alert');
+      form.prepend(box);
+    }
+    box.textContent = message;
+    box.hidden = false;
+  };
+
+  document.querySelectorAll<HTMLFormElement>('form[data-endpoint]').forEach((form) => {
+    const formId = form.dataset.formId ?? 'site-form';
+
+    /* Clearing the previous error belongs to the form, not the pipeline, and
+       is registered first so it runs before the pipeline can set a new one. */
+    form.addEventListener('submit', () => {
+      form.querySelector<HTMLElement>('.wpf-error')?.setAttribute('hidden', '');
+    });
+
+    wireLeadForm(form, {
+      formId,
+      endpoint: form.dataset.endpoint,
+      /* This shape of form carries WPForms's own honeypot name. The other
+         two are the landing pages'; listing all three costs nothing and
+         means a field renamed on one form still stops a bot on another. */
+      honeypots: ['company-website', 'company_tax_id', 'website_trap'],
+
+      payload: (f): Dict => ({
+        form_id: formId,
+        name: [value(f, 'first-name'), value(f, 'last-name')].filter(Boolean).join(' '),
+        email: value(f, 'email'),
+        phone: value(f, 'phone'),
+        business_name: value(f, 'business-name'),
+        address: address(f),
+        services: services(f),
+        message: value(f, 'message') || value(f, 'comments'),
+        /* Where the form was submitted. The campaign identifiers, the
+           landing page and the referrer come from `attribution.ts`, which
+           remembers the arrival — reading them off location.search here
+           returned nothing for any visitor who read a second page. */
+        page_url: location.href,
+      }),
+
+      onSuccess: confirm,
+      /* Mimics success without reporting a conversion. */
+      onHoneypot: confirm,
+      onError: (f, message) => fail(f, message),
+    });
+  });
+</script>
+
+<style is:global>
+  .wpf-confirm {
+    padding: 18px 20px;
+    border: 1px solid var(--brand);
+    border-radius: var(--radius);
+    background: #f2f8ee;
+    line-height: 1.6;
+  }
+
+  .wpf-error {
+    margin-bottom: 18px;
+    padding: 12px 15px;
+    border: 1px solid #d9534f;
+    border-radius: var(--radius);
+    background: #fdf3f3;
+    color: #a94442;
+    line-height: 1.5;
+  }
+</style>

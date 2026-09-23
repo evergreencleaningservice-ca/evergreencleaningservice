@@ -47,4 +47,4 @@ For all of your commercial cleaning needs, [contact Evergreen Cleaning today](/c
 
 #### All of us can help to prevent the spread of COVID-19.
 
-![evergreen cleaning toronto logo banner](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![](/images/evergreen-cleaning-toronto-logo-banner.jpg)
