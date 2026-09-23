@@ -209,6 +209,23 @@ export interface LeadFormHooks {
   payload: (form: HTMLFormElement) => Dict;
   /** Extra event keys. Re-filtered through the allowlist before the push. */
   eventParams?: (form: HTMLFormElement) => Dict;
+  /**
+   * Whether a 2xx from this form is a CONVERSION. Defaults to true.
+   *
+   * The blog comment form and the testimonial form set it false. They use
+   * every other part of this pipeline — honeypot, captcha wait, the
+   * duplicate-click guard, the error messages — because those are about
+   * getting a submission through intact, which they need as much as a lead
+   * does. What they are not is a sale.
+   *
+   * `lead_form_submission` is the site's ONE conversion event and the number
+   * the client's Google Ads spend is judged on. Pushing it for a comment
+   * would inflate that number with people who were reading the blog, which is
+   * worse than not measuring comments at all. False also skips
+   * `markLeadConfirmed`, so a commenter cannot make `/thank-you/` believe
+   * they submitted an enquiry.
+   */
+  conversion?: boolean;
   /** A stored lead. Redirect, or swap the form for a confirmation. */
   onSuccess: (form: HTMLFormElement) => void;
   /**
@@ -364,6 +381,15 @@ export function wireLeadForm(form: HTMLFormElement, hooks: LeadFormHooks): void 
     }
 
     if (res.ok) {
+      /* Stored, but not a sale. The comment and testimonial forms stop here:
+         no conversion event, no `/thank-you/` ticket, just the confirmation.
+         See `conversion` in LeadFormHooks for why that matters more than it
+         looks. `inFlight` stays set, as below. */
+      if (hooks.conversion === false) {
+        hooks.onSuccess(form);
+        return;
+      }
+
       /* The lead is stored. Record that this visitor genuinely submitted,
          for `/thank-you/` to consume exactly once — it is how a real arrival
          is told from a reload, a bookmark or a direct visit, and it carries

@@ -258,9 +258,22 @@ decision:
 port on `action="#"`, validating in the browser and then dropping the enquiry;
 that was the launch blocker.
 
-`Comments` and the testimonial form on `/reviews/` are **still `action="#"`**.
-Neither is a lead — a comment needs moderation, a testimonial needs a rating
-and a body — so both need a destination and a schema decision nobody has made.
+`Comments` and the testimonial form on `/reviews/` are now wired too, through
+`SubmissionRuntime.astro` to `POST /api/submit-post`, behind the same honeypot
+and the same Turnstile check. They spent the port on `action="#"` as well — the
+comment form on all 38 posts — dropping every submission silently.
+
+Neither is a lead, and the code says so in two places: they store into
+`submissions` (migrations/0005) rather than `leads`, and they pass
+`conversion: false`, so neither pushes `lead_form_submission`. A blog comment
+counted as a conversion would corrupt the one number the client's ad spend is
+judged on.
+
+**Every row lands `status = 'pending'`.** The site renders no comment threads
+and no submitted testimonials, so nothing a stranger types can reach a page
+before a person approves it. What is still to be built is the moderation
+surface — somewhere to read the queue and set the status. Until then the rows
+accumulate safely and are readable straight from Neon.
 
 **Spam protection is `src/components/SpamGuard.astro`**, and which provider it
 renders is one word in `captcha.provider` (`src/data/site.ts`). Turnstile is the

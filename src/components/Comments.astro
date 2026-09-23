@@ -7,13 +7,32 @@
  * the live site after the 2023 capture, they are in the client's WordPress
  * database and would need importing.
  *
- * NOT WIRED UP. The original posts to WordPress's wp-comments-post.php, which
- * a static build has no equivalent for, so `action="#"` goes nowhere. A comment
- * needs somewhere to be stored, read back and moderated before it appears, so
- * this needs the same backend decision the forms do. Nothing on the page says
- * so — the original has no such notice and the brief is to match it — which
- * means a visitor's comment is dropped silently. See _research/gaps.md.
+ * NOW WIRED UP, AND GUARDED. It posted to `action="#"` for the whole port:
+ * a visitor typed a comment, the page reloaded, and the comment was gone —
+ * silently, on all 38 posts. It now posts to `/api/submit-post`, behind the
+ * same honeypot and the same invisible Turnstile check the lead forms use.
+ * The captcha and the storage arrived together on purpose: a captcha in front
+ * of a form that discards its input protects nothing.
+ *
+ * NOT A CONVERSION. `SubmissionRuntime` passes `conversion: false`, so a
+ * comment never pushes `lead_form_submission`. Someone reading the blog is not
+ * a sales enquiry, and counting them as one would corrupt the single number
+ * the client's ad spend is judged on.
+ *
+ * NOT PUBLISHED BY BEING SUBMITTED. Every row lands `pending`, and this site
+ * renders no comment threads, so nothing a stranger types can appear on a page
+ * before a person has looked at it. The moderation surface is still to be
+ * built; the state is in the schema from the first row rather than retrofitted
+ * later. See migrations/0005_submissions.sql.
  */
+import SpamGuard from './SpamGuard.astro';
+
+interface Props {
+  /** The post's public slug, so a comment files against the right article. */
+  slug: string;
+}
+
+const { slug } = Astro.props;
 ---
 
 <div id="comments" class="comments-area">
@@ -26,7 +45,14 @@
       >
     </h3>
 
-  <form class="comment-form" method="post" action="#" aria-labelledby="reply-title">
+  <form
+    class="comment-form"
+    method="post"
+    action="#"
+    aria-labelledby="reply-title"
+    data-post-kind="comment"
+    data-post-slug={slug}
+  >
     <p class="comment-notes">
       <span id="email-notes">Your email address will not be published.</span>{' '}
       <span class="required-field-message"
@@ -70,7 +96,21 @@
       </label>
     </div>
 
-    <input class="btn btn-primary submit" name="submit" type="submit" value="Post Comment" />
+    {/* Honeypot. The original comment form had none — WordPress relied on
+        Akismet, which does not come with a static build. A real person never
+        sees this field, so anything in it is a bot. */}
+    <div class="form-hp wpf-hp" aria-hidden="true">
+      <label for="comment-hp">Leave this field empty</label>
+      <input type="text" id="comment-hp" name="company-website" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <SpamGuard />
+
+    {/* A <button>, where the original had <input type="submit">. The shared
+        pipeline disables the submit control and shows "Sending…" while the
+        request is in flight, and it finds that control as
+        `button[type=submit]`. Same classes, same label, same rendering. */}
+    <button class="btn btn-primary submit" name="submit" type="submit">Post Comment</button>
   </form>
   </div>
 </div>
@@ -170,5 +210,23 @@
     font-weight: 400;
     font-size: 14px;
     color: var(--ink);
+  }
+
+  /* The honeypot, hidden the way the other forms hide theirs. Astro scopes
+     styles per component, so this rule has to live here — the identical one
+     in ContactForm and on /reviews/ does not reach this markup.
+
+     NOT `display: none` and not `hidden`: a bot that reads either skips the
+     field, which is the one thing that must not happen. Taken out of the
+     layout and out of the accessibility tree instead, so a person never sees
+     it and a screen reader never announces it. */
+  .wpf-hp {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 </style>
