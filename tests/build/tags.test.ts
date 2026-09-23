@@ -33,7 +33,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { tags, emptyTagSlugs } from '../../src/data/tags';
-import { wildcardRedirects } from '../../src/data/redirects';
+import { emptyTagRedirects, wildcardRedirects } from '../../src/data/redirects';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-tags');
@@ -216,20 +216,42 @@ describe('the sidebar cloud', () => {
   });
 });
 
-describe('the /tag/* wildcard is a fallback, not the destination', () => {
-  it('is still in the redirect map, for empty tags and stale inbound links', () => {
-    /* Deleting it would turn every /tag/alignment/ and every stale backlink
-       into a 404, which is the opposite of the point. */
-    const rule = wildcardRedirects.find((r) => r.from === '/tag/*');
-    expect(rule, '/tag/* must stay as the fallback').toBeDefined();
-    expect(rule?.to).toBe('/category/blog/');
+describe('no /tag/* wildcard, because it shadowed every archive', () => {
+  /**
+   * THE BUG THIS EXISTS TO PREVENT, measured on the deployed site rather than
+   * reasoned about. With `/tag/*  /category/blog/  301` in `_redirects` and
+   * `/tag/cleaning/index.html` in the same bundle, the live origin answered
+   * `/tag/cleaning/` with a 301 to `/category/blog/`. All 26 archives were
+   * built, deployed, and unreachable.
+   *
+   * Cloudflare's asset router consults `_redirects` BEFORE it looks for a
+   * matching asset. A wildcard redirect therefore beats a real file, and no
+   * amount of specificity or file ordering changes that.
+   */
+  it('has no /tag/ wildcard left to swallow them', () => {
+    expect(wildcardRedirects.find((r) => r.from.startsWith('/tag/'))).toBeUndefined();
   });
 
-  it('does not shadow the archives, which are real assets', () => {
-    /* The wildcard cannot match what the asset router serves first. This
-       asserts the assets exist; the deploy check confirms the live 200 vs
-       301 split, because file-order precedence in _redirects is not a
-       guarantee — see the /blog/page/N/ bug in src/data/redirects.ts. */
+  it('redirects the nine empty tags by name instead', () => {
+    expect(emptyTagRedirects).toHaveLength(9);
+    for (const rule of emptyTagRedirects) {
+      expect(rule.to).toBe('/category/blog/');
+      const slug = rule.from.replace(/^\/tag\/|\/$/g, '');
+      expect(emptyTagSlugs).toContain(slug);
+    }
+  });
+
+  it('never names a tag that has a real archive', () => {
+    /* The whole failure mode in one assertion: a rule here for a tag that
+       also builds a page means that page is unreachable. */
+    const clouded = new Set(tags.map((t) => t.slug));
+    const shadowed = emptyTagRedirects
+      .map((r) => r.from.replace(/^\/tag\/|\/$/g, ''))
+      .filter((slug) => clouded.has(slug));
+    expect(shadowed, 'this rule would hide a real archive').toEqual([]);
+  });
+
+  it('leaves the 26 archives as plain assets', () => {
     expect(exists('tag', 'cleaning', 'index.html')).toBe(true);
     expect(exists('tag', 'commercial-cleaning', 'page', '3', 'index.html')).toBe(true);
   });

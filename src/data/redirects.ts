@@ -28,6 +28,11 @@
  *   /services/graffiti-removal/              -> new, copy marked needsClientCopy
  */
 
+/* Extension included deliberately: scripts/redirects.mjs loads this file with
+   node's bare type-stripping, which does not resolve extensionless specifiers.
+   Every script→src import in this repo is written the same way. */
+import { emptyTagSlugs } from './tags.ts';
+
 export type Redirect = { from: string; to: string };
 
 /**
@@ -185,24 +190,39 @@ export const newsPageRedirects: Redirect[] = Array.from(
  */
 export const wildcardRedirects: Redirect[] = [
   { from: '/blog/*', to: '/:splat' },
-  /**
-   * `/tag/*` is now a FALLBACK, not the destination for every tag.
-   *
-   * The site builds real archives for the 26 tags that have posts, so
-   * `/tag/cleaning/` is a static asset and never reaches this rule. What still
-   * does: the nine tags WordPress's theme-unit-test import left behind with
-   * zero posts (`emptyTagSlugs` in src/data/tags.ts) and any other `/tag/…`
-   * address out in a backlink or Google's index. The blog archive is the right
-   * landing place for a tag with nothing filed under it.
-   *
-   * That an asset wins over this wildcard is MEASURED on the deployed site,
-   * not assumed — `tests/build/tags.test.ts` pins the rule's shape and the
-   * deploy check confirms `/tag/cleaning/` answers 200 while
-   * `/tag/not-a-real-tag/` still answers 301.
-   */
-  { from: '/tag/*', to: '/category/blog/' },
   { from: '/author/*', to: '/category/blog/' },
 ];
+
+/**
+ * The nine tag addresses that redirect — and the reason `/tag/*` is NOT here.
+ *
+ * `/tag/*` used to be a blanket 301 to `/category/blog/`, which was right
+ * while this site had no tag archives. It has 26 of them now, and the
+ * wildcard SHADOWED EVERY ONE.
+ *
+ * That is the finding, and it was measured rather than reasoned about:
+ * deployed with both in place, `/tag/cleaning/` answered 301 to
+ * `/category/blog/` even though `/tag/cleaning/index.html` was sitting in the
+ * bundle. Cloudflare's asset router consults `_redirects` BEFORE it looks for
+ * a matching asset, so a wildcard redirect beats a real file every time. An
+ * asset does not win by being more specific, and nothing about the file order
+ * changes it — the same lesson the `/blog/page/N/` bug taught one level up.
+ *
+ * So the wildcard is replaced by exactly the addresses that still need it:
+ * the nine tags WordPress's theme-unit-test import left behind with zero
+ * posts. A tag with nothing filed under it has no archive worth serving, and
+ * the blog is the right place to land.
+ *
+ * WHAT THIS GIVES UP, stated plainly: a `/tag/<something-else>/` address now
+ * 404s instead of redirecting. That matches the original, which 404s an
+ * unknown term archive too — the old wildcard was more generous than the site
+ * it was porting. Every tag address the original actually serves is covered,
+ * 26 by a real page and 9 by a rule.
+ */
+export const emptyTagRedirects: Redirect[] = emptyTagSlugs.map((slug) => ({
+  from: `/tag/${slug}/`,
+  to: '/category/blog/',
+}));
 
 /**
  * The image addresses, one rule each.

@@ -254,20 +254,22 @@ describe('internal links', () => {
 
 describe('the legacy redirect map', () => {
   it('still carries every rule — removing links did not remove redirects', () => {
-    /* `/tag/*` stays even now that the 26 archives are real pages that never
-       reach it. It is the fallback for the nine tags the original carries
-       with no posts, and for any other /tag/… address still live in a
-       backlink or Google's index; deleting it would turn those into 404s.
+    /* The count moved from 130 to 154 in the Phase 12 closeout, and from 154
+       to 171 when the tag archives were built: `/tag/*` came OUT (one rule)
+       and the nine zero-post tags went in by name, in both trailing-slash
+       spellings (eighteen). The wildcard had to go because Cloudflare reads
+       `_redirects` before it looks for an asset, so it was answering 301 for
+       all 26 real archives — see `emptyTagRedirects` in
+       src/data/redirects.ts.
 
-       The count moved from 130 to 154 in the Phase 12 closeout, and the
-       direction is the whole point of this assertion: every exact-match
-       source is now emitted in both trailing-slash spellings (B4), so the map
-       GREW by 24. A count that falls is a link class going dark, which is
-       what this test is here to catch — so it is pinned rather than relaxed
-       to a lower bound. `tests/build/redirect-variants.test.ts` owns the
-       arithmetic behind the number. */
-    expect(redirects.length).toBe(154);
-    expect(redirects.some((r) => r.from === '/tag/*')).toBe(true);
+       The direction is the point of this assertion: every exact-match source
+       is emitted in both spellings (B4), so the map GROWS. A count that falls
+       is a link class going dark, which is what this test catches — so it is
+       pinned rather than relaxed to a lower bound.
+       `tests/build/redirect-variants.test.ts` owns the arithmetic. */
+    expect(redirects.length).toBe(171);
+    expect(redirects.some((r) => r.from === '/tag/*')).toBe(false);
+    expect(redirects.some((r) => r.from === '/tag/markup/')).toBe(true);
     expect(redirects.some((r) => r.from === '/author/*')).toBe(true);
   });
 
