@@ -54,8 +54,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
     <meta name="description" content={description} />
     {/* A bare /favicon.ico request is made by every browser whether or not
         the document asks for one, and without a file it is a 404 in the
-        console — which Lighthouse counts against Best Practices. */}
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        console — which Lighthouse counts against Best Practices.
+
+        The .ico carries THREE sizes — 16 for the tab, 32 for the bookmark
+        bar, 48 for a Windows shortcut — so `sizes` lists all three. It
+        claimed only 32x32 while the file held one image, and both halves of
+        that were wrong once the icon was rebuilt from the real logo mark. */}
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-512.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonical} />
