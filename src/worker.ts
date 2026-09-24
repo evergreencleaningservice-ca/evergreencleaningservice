@@ -286,6 +286,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
          landing_page, referrer, touch_at,
          first_gclid, first_msclkid, first_utm_source, first_utm_medium,
          first_utm_campaign, first_landing_page, first_referrer, first_touch_at,
+         marketing_consent, consent_text,
          ip_country, user_agent)
       VALUES
         (${lead.form_id}, ${lead.full_name}, ${lead.work_email}, ${lead.phone},
@@ -300,6 +301,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
          ${lead.first_gclid}, ${lead.first_msclkid}, ${lead.first_utm_source},
          ${lead.first_utm_medium}, ${lead.first_utm_campaign},
          ${lead.first_landing_page}, ${lead.first_referrer}, ${lead.first_touch_at},
+         ${lead.marketing_consent}, ${lead.consent_text || null},
          ${(request as Request & { cf?: { country?: string } }).cf?.country ?? ''},
          ${str(request.headers.get('user-agent'), 300)})
     `;

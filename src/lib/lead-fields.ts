@@ -17,6 +17,17 @@ export const str = (v: unknown, max: number): string =>
   typeof v === 'string' ? v.trim().slice(0, max) : '';
 
 /**
+ * An affirmative, and only an affirmative.
+ *
+ * A checkbox posts nothing when it is unticked, so `undefined` is the common
+ * case and must read as NO. Everything else is an allowlist rather than a
+ * truthiness test: `Boolean("false")` is `true`, and that one line of
+ * JavaScript would turn every declined consent into a granted one.
+ */
+export const isYes = (v: unknown): boolean =>
+  v === true || (typeof v === 'string' && ['true', 'yes', 'on', '1'].includes(v.trim().toLowerCase()));
+
+/**
  * The same, with control characters and markup-shaped characters removed.
  *
  * Applied to every attribution field, because those come from a query string
@@ -85,6 +96,14 @@ export interface Lead {
   message: string;
   page_url: string;
 
+  /**
+   * Express consent to marketing email, and the exact wording it was given
+   * against. Both, because CASL puts the burden of proof on the sender and
+   * "they ticked a box" is not a defence without the box's words.
+   */
+  marketing_consent: boolean;
+  consent_text: string;
+
   /* latest touch — the click that produced this enquiry */
   gclid: string;
   gbraid: string;
@@ -126,6 +145,14 @@ export function normalizeLead(body: Record<string, unknown>, now: Date = new Dat
     services: str(body.services, 400),
     message: str(body.message, 4000),
     page_url: safeStr(body.page_url, 500),
+
+    /* Only a real affirmative counts. A checkbox that was never touched sends
+       nothing at all, and an absent value must read as "no" rather than as
+       "unknown" — under CASL the default is no consent. */
+    marketing_consent: isYes(body.marketing_consent),
+    /* Kept only when they actually agreed; storing the wording beside a `false`
+       would suggest a record of something that did not happen. */
+    consent_text: isYes(body.marketing_consent) ? str(body.consent_text, 500) : '',
 
     gclid: safeStr(body.gclid, 256),
     gbraid: safeStr(body.gbraid, 256),

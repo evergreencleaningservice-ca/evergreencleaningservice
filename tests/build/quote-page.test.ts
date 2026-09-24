@@ -137,12 +137,22 @@ describe('the rendered form matches the contract the unit suite tests', () => {
     const visible = FIELDS.length;
     expect(visible).toBe(7);
     /* And the page agrees: every contract field is present, and the only
-       extra controls are the honeypot, the captcha token and the button. */
+       extra controls are the honeypot, the captcha token, the optional
+       marketing-consent box and the button.
+
+       `marketing-consent` is excluded rather than added to FIELDS because it
+       is not one of the seven QUESTIONS — it asks nothing about the enquiry,
+       it is optional, it has no error slot, and nothing about the quote
+       depends on it. Counting it here would quietly turn "seven questions"
+       into eight, which is the number this test exists to hold down. Its own
+       rules live in "the marketing consent box" below. */
     const named = [...form().matchAll(/<(?:input|select|textarea)\b[^>]*\bname="([^"]+)"/g)].map(
       (m) => m[1]
     );
-    expect(named.filter((n) => !['company-website', 'cf-turnstile-response'].includes(n)).sort())
-      .toEqual(FIELDS.map((f) => f.name).sort());
+    const EXTRAS = ['company-website', 'cf-turnstile-response', 'marketing-consent'];
+    expect(named.filter((n) => !EXTRAS.includes(n)).sort()).toEqual(
+      FIELDS.map((f) => f.name).sort()
+    );
   });
 });
 
@@ -160,7 +170,30 @@ describe('every field is labelled', () => {
   });
 
   it('uses no placeholder as a substitute for a label', () => {
-    expect(quickQuoteForm()).not.toMatch(/\bplaceholder=/i);
+    /* THIS USED TO FORBID `placeholder=` ENTIRELY, which was broader than the
+       rule its own name states. The anti-pattern is a placeholder standing IN
+       for a label — it disappears the moment someone types, taking the only
+       description of the field with it, and it is invisible to assistive
+       technology that looks for a label.
+
+       A placeholder ALONGSIDE a real label is not that. It is an example of
+       the format wanted, and the form now carries six of them. So the rule is
+       enforced as written: a placeholder is allowed, a missing label is not. */
+    const form = quickQuoteForm();
+    const labelled = new Set(
+      [...form.matchAll(/<label[^>]*\bfor="([^"]+)"/g)].map((m) => m[1])
+    );
+
+    const placeholdered = [...form.matchAll(/<(?:input|textarea)\b[^>]*>/g)]
+      .map((m) => m[0])
+      .filter((tag) => /\bplaceholder=/i.test(tag));
+
+    expect(placeholdered.length, 'expected the form to use placeholders').toBeGreaterThan(0);
+    for (const tag of placeholdered) {
+      const id = attr(tag, 'id');
+      expect(id, `a placeholdered field has no id: ${tag}`).toBeTruthy();
+      expect(labelled, `placeholder with no <label for="${id}">`).toContain(id!);
+    }
   });
 
   it('describes each field by the element that will hold its error', () => {
@@ -177,6 +210,60 @@ describe('every field is labelled', () => {
 
   it('marks the optional field optional in its label', () => {
     expect(quickQuoteForm()).toMatch(/Anything we should know\?[\s\S]{0,120}Optional/i);
+  });
+});
+
+describe('the marketing consent box', () => {
+  /**
+   * Canada's anti-spam law is why these assertions are worth the lines.
+   * CASL needs EXPRESS consent before a commercial electronic message, and it
+   * puts the burden of proving it on the sender. Three things break that, and
+   * all three are one attribute away at any time:
+   *
+   *   `checked`   a pre-ticked box is not express consent. It is the single
+   *               most common way a consent record becomes worthless.
+   *   `required`  turns an optional offer into a gate on a paid click, and a
+   *               consent given under duress is not freely given either.
+   *   the wording  must identify the sender and say how to stop.
+   */
+  const box = () => quickQuoteForm().match(/<input[^>]*name="marketing-consent"[^>]*>/)?.[0];
+
+  it('is on the form', () => {
+    expect(box(), 'the consent checkbox is missing').toBeTruthy();
+    expect(attr(box()!, 'type')).toBe('checkbox');
+  });
+
+  it('is NOT pre-ticked', () => {
+    expect(box()).not.toMatch(/\bchecked\b/);
+  });
+
+  it('is NOT required — it governs marketing, not the enquiry', () => {
+    expect(box()).not.toMatch(/\brequired\b/);
+  });
+
+  it('names the sender and says how to stop', () => {
+    const form = quickQuoteForm();
+    expect(form).toMatch(/Evergreen Office Cleaning/);
+    expect(form).toMatch(/Unsubscribe any time/i);
+  });
+
+  it('says plainly that the quote reply does not depend on it', () => {
+    expect(quickQuoteForm()).toMatch(/separate from your quote/i);
+  });
+
+  it('carries a real label tied to the box', () => {
+    const form = quickQuoteForm();
+    const id = attr(box()!, 'id');
+    expect(id).toBeTruthy();
+    expect(form).toMatch(new RegExp(`<label[^>]*for="${id}"`));
+  });
+
+  it('does not copy the reference design’s REQUIRED data-processing box', () => {
+    /* The form this was modelled on also demands "I agree to allow … to store
+       and process my personal data" before it will submit. That is a GDPR
+       pattern; under PIPEDA an enquiry carries implied consent to be replied
+       to, and a second required box is friction that buys nothing here. */
+    expect(quickQuoteForm()).not.toMatch(/store and process my personal data/i);
   });
 });
 
