@@ -77,32 +77,6 @@ const {
 } = Astro.props;
 const f = (name: string) => `${id}-${name}`;
 
-/**
- * Ontario first, then the rest alphabetically.
- *
- * NOT ALPHABETICAL THROUGHOUT, deliberately. This client cleans Toronto and
- * the GTA; all but a rounding error of these answers are Ontario, and putting
- * it first saves every one of those visitors a scroll. The rest are present
- * because a national enquiry is not an error to reject — it is a lead to pass
- * on or decline by hand.
- *
- * The territories are included for the same reason.
- */
-const PROVINCES = [
-  'Ontario',
-  'Alberta',
-  'British Columbia',
-  'Manitoba',
-  'New Brunswick',
-  'Newfoundland and Labrador',
-  'Northwest Territories',
-  'Nova Scotia',
-  'Nunavut',
-  'Prince Edward Island',
-  'Quebec',
-  'Saskatchewan',
-  'Yukon',
-];
 
 /**
  * The marketing-consent wording, in one place because it is submitted with
@@ -192,7 +166,7 @@ const CONSENT_TEXT =
     </div>
 
     <div class="qq-field">
-      <label class="qq-label" for={f('email')}>Work email <span class="qq-req">*</span></label>
+      <label class="qq-label" for={f('email')}>Email <span class="qq-req">*</span></label>
       <input
         type="email"
         id={f('email')}
@@ -205,36 +179,6 @@ const CONSENT_TEXT =
         aria-describedby={f('email-error')}
       />
       <p class="qq-error" id={f('email-error')} data-qq-error="email"></p>
-    </div>
-  </div>
-
-  <div class="qq-row">
-    <div class="qq-field">
-      <label class="qq-label" for={f('address')}>Address <span class="qq-req">*</span></label>
-      <input
-        type="text"
-        id={f('address')}
-        name="address"
-        autocomplete="street-address"
-        placeholder="Property address"
-        required
-        aria-describedby={f('address-error')}
-      />
-      <p class="qq-error" id={f('address-error')} data-qq-error="address"></p>
-    </div>
-
-    <div class="qq-field">
-      <label class="qq-label" for={f('province')}>Province <span class="qq-req">*</span></label>
-      {/* A SELECT, WHERE THE REFERENCE SHOWS A BARE BOX. It renders the same
-          way at rest — empty, no placeholder — and it is the one field on
-          this form whose value gets read as a category rather than as prose.
-          Free text produces "ON", "Ont", "ontario" and "Ontari" for the same
-          answer, and the province is what decides which crew is dispatched. */}
-      <select id={f('province')} name="province" required aria-describedby={f('province-error')}>
-        <option value=""></option>
-        {PROVINCES.map((p) => <option value={p}>{p}</option>)}
-      </select>
-      <p class="qq-error" id={f('province-error')} data-qq-error="province"></p>
     </div>
   </div>
 

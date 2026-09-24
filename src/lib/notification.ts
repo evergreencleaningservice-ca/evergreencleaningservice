@@ -47,7 +47,8 @@ export interface ResendPayload {
 /**
  * Tracks the form. When the quote form took the reference design's field set,
  * `business_name` and `services` stopped being asked for — so they came out
- * of this list too. They are always-rendered fields: leaving them in would
+ * of this list too. `province` never made it in for long: it was asked for
+ * on one revision of the quote form and removed on the next. They are always-rendered fields: leaving them in would
  * have printed "Business: (not supplied)" and "Service needed: (not
  * supplied)" on every single lead from now on, which is exactly the noise the
  * `extra` pass below exists to keep out.
@@ -61,7 +62,6 @@ export const CORE_FIELDS: readonly (readonly [string, string])[] = [
   ['phone', 'Phone'],
   ['work_email', 'Email'],
   ['address', 'Address'],
-  ['province', 'Province'],
   ['message', 'Cleaning needs'],
 ] as const;
 

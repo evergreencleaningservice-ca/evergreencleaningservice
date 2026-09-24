@@ -123,24 +123,23 @@ describe('the rendered form matches the contract the unit suite tests', () => {
     }
   });
 
-  it('asks seven required questions', () => {
-    /* Four, until the client chose the reference design's field set. A
-       surname, a street address and a province are asked for now, and the
-       message is no longer optional. The number is pinned rather than
+  it('asks five required questions', () => {
+    /* Four, then seven when the reference design's address and province
+       boxes went in, then five when they came back out. Pinned rather than
        loosened: a field quietly becoming required is a conversion cost
        somebody should have to state out loud. */
     const required = (form().match(/\brequired(?=[\s/>])/g) ?? []).length;
     expect(required).toBe(REQUIRED_COUNT);
-    expect(required).toBe(7);
+    expect(required).toBe(5);
   });
 
   it.each(BANNED_FIELDS)('does not ask for %s', (name) => {
     expect(control(quote, name)).toBeNull();
   });
 
-  it('asks seven visible questions in total', () => {
+  it('asks five visible questions in total', () => {
     const visible = FIELDS.length;
-    expect(visible).toBe(7);
+    expect(visible).toBe(5);
     /* And the page agrees: every contract field is present, and the only
        extra controls are the honeypot, the captcha token, the optional
        marketing-consent box and the button.

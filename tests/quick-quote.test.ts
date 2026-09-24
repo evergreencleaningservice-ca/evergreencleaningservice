@@ -76,7 +76,7 @@ beforeEach(() => {
 
 /* ---------- 1. one contact method is enough ------------------------------ */
 
-describe('every field the reference form asks for is required', () => {
+describe('every field the form asks for is required', () => {
   /**
    * THIS BLOCK USED TO ASSERT THE OPPOSITE, and the change is a decision
    * rather than a drift. The form took "phone OR email, one is enough" —
@@ -99,8 +99,6 @@ describe('every field the reference form asks for is required', () => {
       name: 'Dana Okonkwo',
       phone: '416 555 0142',
       email: 'dana@placeholder-holdings.example',
-      address: '243 Queen St W',
-      province: 'Ontario',
       message: 'Two floors of open-plan office, nightly.',
     });
     expect(leadEvents()).toHaveLength(1);
@@ -115,7 +113,7 @@ describe('every field the reference form asks for is required', () => {
     expect(VALID_LEAD['last-name']).toBe('Okonkwo');
   });
 
-  it.each(['first-name', 'last-name', 'phone', 'email', 'address', 'province', 'message'])(
+  it.each(['first-name', 'last-name', 'phone', 'email', 'message'])(
     'marks %s required in the markup',
     (name) => {
       const form = mount();
@@ -125,12 +123,12 @@ describe('every field the reference form asks for is required', () => {
     }
   );
 
-  it('asks for seven required fields', () => {
+  it('asks for five required fields', () => {
     const form = mount();
     const required = Array.from(form.elements).filter(
       (el) => (el as HTMLInputElement).required
     ).length;
-    expect(required).toBe(7);
+    expect(required).toBe(5);
   });
 
   it('no longer carries a shared contact error slot', () => {
@@ -162,7 +160,7 @@ describe('a field that is filled in badly', () => {
 
   it('posts nothing when a required field is simply empty', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_LEAD, province: '' });
+    const form = ready({ ...VALID_LEAD, 'last-name': '' });
 
     await submit(form);
 
@@ -174,19 +172,18 @@ describe('a field that is filled in badly', () => {
 
 /* ---------- 3. what the form asks for now -------------------------------- */
 
-describe('the reference field set, as it reaches the endpoint', () => {
-  it('sends a street address and a province as separate values', async () => {
+describe('the field set, as it reaches the endpoint', () => {
+  it('sends only what the form now asks for', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
     const form = ready(VALID_LEAD);
 
     await submit(form);
 
     const body = sentBody(fetchSpy);
-    /* `address` used to carry "postal code or city" in one box. It carries a
-       street address now, and the province is its own column — see
-       migrations/0007_province.sql. */
-    expect(body.address).toBe('243 Queen St W');
-    expect(body.province).toBe('Ontario');
+    expect(body.name).toBe('Dana Okonkwo');
+    expect(body.phone).toBe('416 555 0142');
+    expect(body.email).toBe('dana@placeholder-holdings.example');
+    expect(body.message).toBe('Two floors of open-plan office, nightly.');
   });
 
   it('stops sending the fields the form stopped asking for', async () => {
@@ -196,13 +193,15 @@ describe('the reference field set, as it reaches the endpoint', () => {
     await submit(form);
 
     const body = sentBody(fetchSpy);
-    /* Their COLUMNS survive, because 23 earlier leads answered them. The
-       payload does not, because nothing on screen fills them any more. */
-    expect(Object.keys(body)).not.toContain('business_name');
-    expect(Object.keys(body)).not.toContain('services');
-    expect(form.elements.namedItem('business-name')).toBeNull();
-    expect(form.elements.namedItem('services')).toBeNull();
-    expect(form.elements.namedItem('postal')).toBeNull();
+    /* Their COLUMNS survive — earlier leads answered them, and `address` is
+       still filled by the contact form on /contact-us/. The payload does not,
+       because nothing on this form fills them any more. */
+    for (const key of ['business_name', 'services', 'address', 'province']) {
+      expect(Object.keys(body), `${key} should not be sent`).not.toContain(key);
+    }
+    for (const name of ['business-name', 'services', 'postal', 'address', 'province']) {
+      expect(form.elements.namedItem(name), `${name} should not be on the form`).toBeNull();
+    }
   });
 });
 
@@ -411,16 +410,16 @@ describe('errors are announced, not just coloured', () => {
       ...VALID_LEAD,
       'first-name': '',
       'last-name': '',
-      address: '',
-      province: '',
+      phone: '',
+      message: '',
     });
 
     await submit(form);
 
     expect(errorFor('first-name')).toContain('first name');
     expect(errorFor('last-name')).toContain('last name');
-    expect(errorFor('address')).toContain('address');
-    expect(errorFor('province')).toContain('province');
+    expect(errorFor('phone')).toContain('phone');
+    expect(errorFor('message')).toContain('cleaned');
     expect(summary()).toContain('4 things need a moment');
   });
 
@@ -485,7 +484,7 @@ describe('errors are announced, not just coloured', () => {
 
   it('a stale error does not survive the next attempt', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_LEAD, 'first-name': '', address: '' });
+    const form = ready({ ...VALID_LEAD, 'first-name': '', phone: '' });
     await submit(form);
     expect(summary()).toContain('2 things');
 
@@ -493,7 +492,7 @@ describe('errors are announced, not just coloured', () => {
     await submit(form);
 
     expect(errorFor('first-name')).toBe('');
-    expect(summary()).toContain('address');
+    expect(summary()).toContain('phone');
     expect(summary()).not.toContain('2 things');
   });
 });
@@ -533,8 +532,8 @@ describe('keyboard behaviour', () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
     const form = ready(VALID_LEAD);
 
-    const address = form.elements.namedItem('address') as HTMLInputElement;
-    address.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    const firstName = form.elements.namedItem('first-name') as HTMLInputElement;
+    firstName.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
     /* happy-dom does not synthesise the implicit submit, so the assertion is
        that nothing intercepted the key on a real field. */
     await submit(form);

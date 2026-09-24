@@ -177,17 +177,17 @@ describe('the short form', () => {
     expect(forms).toHaveLength(1);
   });
 
-  it.each(PAGES)('$name asks the reference form\u2019s seven questions, all required', ({ name }) => {
+  it.each(PAGES)('$name asks five questions, all required', ({ name }) => {
     const form = leadForm(name);
     for (const spec of FIELDS) {
       const tag = control(form, spec.name);
       expect(tag, `${name}: missing ${spec.name}`).not.toBeNull();
       expect(new RegExp(`\\brequired(?=[\\s/>=])`, 'i').test(tag!)).toBe(spec.required);
     }
-    /* Seven, where it was four. The client chose the reference design's
-       field set: a surname, a street address and a province are now asked
-       for, and the message is no longer optional. */
-    expect((form.match(/\brequired(?=[\s/>])/g) ?? []).length).toBe(7);
+    /* Five. It was four, then briefly seven when the reference design's
+       address and province boxes went in, then five when they came back out.
+       The message stayed required through all of it. */
+    expect((form.match(/\brequired(?=[\s/>])/g) ?? []).length).toBe(5);
   });
 
   it.each(PAGES)('$name asks for none of the fields nothing on this site asks for', ({ name }) => {

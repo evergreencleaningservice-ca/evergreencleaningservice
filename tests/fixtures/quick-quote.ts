@@ -43,16 +43,21 @@ export interface FieldSpec {
  * — first name, business name, phone OR email, postal code, one service
  * select — because it is what cold paid traffic sees and every field is a
  * place to give up. That is now replaced by the client's chosen reference:
- * seven fields, ALL REQUIRED, including a surname, a street address and a
- * province.
+ * five fields, ALL REQUIRED, including a surname.
+
+ * A street address and a province were asked for on one revision in between
+ * and taken back out: where the building is is a question the account
+ * executive asks on the call, not a condition of making contact.
  *
  * It asks more and it will convert somewhat worse; that is a business
  * decision the client made with the trade-off in front of them, not an
  * oversight. What it buys is a lead that can be dispatched without a
  * qualifying call.
  *
- * Gone: `business-name`, `postal` and the `services` select. Their columns
- * survive in the database because 23 earlier leads answered them.
+ * Gone: `business-name`, `postal`, the `services` select, and the `address`
+ * and `province` boxes that briefly replaced the postal one. Their columns
+ * survive in the database — earlier leads answered them, and `address` is
+ * still filled by the contact form on /contact-us/.
  *
  * Note every field now has its OWN error key. The old form shared one
  * `contact` slot between phone and email, because the rule was "either of
@@ -93,15 +98,6 @@ export const FIELDS: FieldSpec[] = [
     inputmode: 'email',
     errorKey: 'email',
   },
-  {
-    name: 'address',
-    tag: 'input',
-    type: 'text',
-    required: true,
-    autocomplete: 'street-address',
-    errorKey: 'address',
-  },
-  { name: 'province', tag: 'select', required: true, errorKey: 'province' },
   { name: 'message', tag: 'textarea', required: true, errorKey: 'message' },
 ];
 
@@ -168,22 +164,10 @@ export function quickQuoteMarkup({
              aria-describedby="${id}-phone-error" />
       ${err('phone')}
 
-      <label for="${id}-email">Work email</label>
+      <label for="${id}-email">Email</label>
       <input type="email" id="${id}-email" name="email" inputmode="email" autocomplete="email" required
              aria-describedby="${id}-email-error" />
       ${err('email')}
-
-      <label for="${id}-address">Address</label>
-      <input type="text" id="${id}-address" name="address" autocomplete="street-address" required
-             aria-describedby="${id}-address-error" />
-      ${err('address')}
-
-      <label for="${id}-province">Province</label>
-      <select id="${id}-province" name="province" required aria-describedby="${id}-province-error">
-        <option value=""></option>
-        <option value="Ontario">Ontario</option>
-      </select>
-      ${err('province')}
 
       <label for="${id}-message">Cleaning needs</label>
       <textarea id="${id}-message" name="message" rows="4" required
@@ -233,7 +217,5 @@ export const VALID_LEAD = {
   'last-name': 'Okonkwo',
   phone: '416 555 0142',
   email: 'dana@placeholder-holdings.example',
-  address: '243 Queen St W',
-  province: 'Ontario',
   message: 'Two floors of open-plan office, nightly.',
 };

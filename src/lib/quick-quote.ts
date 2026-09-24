@@ -69,11 +69,7 @@ function messageFor(name: string, el: HTMLInputElement | HTMLSelectElement): str
       case 'phone':
         return 'Please add a mobile phone number.';
       case 'email':
-        return 'Please add a work email address.';
-      case 'address':
-        return 'Please add the address of the property to be cleaned.';
-      case 'province':
-        return 'Please choose the province.';
+        return 'Please add an email address.';
       case 'message':
         return 'Please tell us what you need cleaned.';
       default:
@@ -265,11 +261,12 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
       name: [fieldValue(f, 'first-name'), fieldValue(f, 'last-name')].filter(Boolean).join(' '),
       phone: fieldValue(f, 'phone'),
       email: fieldValue(f, 'email'),
-      /* A street address now, where this field carried "postal code or city"
-         before. Both are addresses and both are what the visitor typed, so
-         they share a column; see migrations/0007_province.sql. */
-      address: fieldValue(f, 'address'),
-      province: fieldValue(f, 'province'),
+      /* NO ADDRESS AND NO PROVINCE. Both were asked for briefly and then
+         taken back out: where the building is is a question the account
+         executive asks on the call, not a condition of making contact. Their
+         columns stay in the database — `address` is still filled by the
+         contact form on /contact-us/, and `province` holds what the few leads
+         taken while it was asked actually answered. */
       message: fieldValue(f, 'message'),
       page_url: location.href,
 
