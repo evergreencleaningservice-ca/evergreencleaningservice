@@ -3,6 +3,7 @@ title: "6 Common Cleaning Products That You Should Never Mix Together"
 description: "Cleaning product do's and don't can be confusing. Let us help set you you on the right path with the right tools for the job."
 pubDate: 2021-07-30
 image: "/images/cleaning-supplies.jpg"
+tags: ["cleaning-products", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
 ## To Mix or Not to Mix?

@@ -2,6 +2,7 @@
 title: "How to Properly Dust an Office Building"
 description: "Dust taking over at the office? Let us give you some tips from the experts who know how to take back your workspace."
 pubDate: 2020-10-31
+tags: ["commercial-office-cleaning", "dust", "dusting"]
 ---
 
 Dusting is one of those tasks that never seems to be completed. Once you have gone over the entire area, it seems you could sometimes begin again. The best way to approach the task of dusting is with a better understanding of the nature of the problem. This will allow you to properly train your staff in the fine art dust collection and removal.

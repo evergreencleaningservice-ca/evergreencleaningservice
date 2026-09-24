@@ -16,6 +16,7 @@ import {
   specRedirects,
   legacyRedirects,
   newsPageRedirects,
+  emptyTagRedirects,
   wildcardRedirects,
   bothSlashSpellings,
 } from '../src/data/redirects.ts';
@@ -56,6 +57,11 @@ section(
   'News pagination — static, because wildcard order is not honoured',
   bothSlashSpellings(newsPageRedirects)
 );
+/* The nine zero-post tags, named one by one rather than swept up by a
+   `/tag/*` wildcard. The wildcard shadowed all 26 real tag archives, because
+   Cloudflare reads this file before it looks for a matching asset — see
+   `emptyTagRedirects` in src/data/redirects.ts. */
+section("Tags the original carries with no posts", bothSlashSpellings(emptyTagRedirects));
 /* Wildcards are NOT expanded: a splat already matches both spellings, and a
    duplicated rule here would shadow the one below it. */
 section('Wildcards, last so the rules above win', wildcardRedirects);

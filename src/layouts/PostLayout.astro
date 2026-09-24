@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Comments from '../components/Comments.astro';
+import SubmissionRuntime from '../components/SubmissionRuntime.astro';
 import { site } from '../data/site';
 import { pageTitle } from '../lib/title';
 import { articleSchema, breadcrumbSchema } from '../lib/schema';
@@ -79,7 +80,8 @@ const { title, description, pubDate, image } = post.data;
           addition, so it is gone; `newer` and `older` stay on the props in case
           the client wants it back. */}
 
-      <Comments />
+      <Comments slug={post.id} />
+      <SubmissionRuntime />
       </div>
 
       <Sidebar />

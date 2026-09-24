@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build)",
+      "Bash(npm run build:preview)",
+      "Bash(npm run preview)",
+      "Bash(npm run verify:indexing *)",
+      "Bash(npm run tel:inventory)",
+      "Bash(npm run parity)",
+      "Bash(npm run captcha:check)",
+      "Bash(npm run form:a11y)",
+      "Bash(npm run lp:sticky)",
+      "Bash(npm run dns:snapshot)",
+      "Bash(npm run image:parity)",
+      "Bash(npm run launch:check)",
+      "Bash(npm run waf:probe)",
+
+      "mcp__Firecrawl__firecrawl_scrape",
+
+      "mcp__Neon__list_projects",
+      "mcp__Neon__list_branches",
+      "mcp__Neon__describe_project",
+      "mcp__Neon__describe_table_schema",
+      "mcp__Neon__get_database_tables",
+      "mcp__Neon__list_snapshots",
+
+      "mcp__Resend__list-emails",
+      "mcp__Resend__list-domains",
+      "mcp__Resend__get-email",
+
+      "mcp__Cloudflare_Developer_Platform__workers_list",
+      "mcp__Cloudflare_Developer_Platform__workers_get_worker",
+      "mcp__Cloudflare_Developer_Platform__workers_get_worker_code",
+      "mcp__Cloudflare_Developer_Platform__search_cloudflare_documentation",
+
+      "mcp__github__list_pull_requests",
+      "mcp__github__pull_request_read",
+      "mcp__github__get_file_contents",
+      "mcp__github__list_commits",
+      "mcp__github__get_commit"
+    ]
+  }
+}

@@ -3,6 +3,7 @@ title: "Keep Your Office at Home Clean"
 description: "Working from home wrecking havoc on your home office? Here we give you some tips on keeping your workspace spic and span."
 pubDate: 2021-02-26
 image: "/images/woman-at-a-desk.jpg"
+tags: ["cleaning", "office"]
 ---
 
 ## How to Ensure Your Home Office Stays Clean

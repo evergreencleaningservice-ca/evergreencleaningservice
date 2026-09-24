@@ -3,6 +3,7 @@ title: "Control Allergies with Professional Janitorial Services"
 description: "Concerned about allergies in the workplace? Find out how janitorial services can help with that and keep productivity at its peak."
 pubDate: 2020-01-10
 image: "/images/Spacious.jpg"
+tags: ["allergies", "commercial-cleaning", "janitorial-services", "office"]
 ---
 
 Allergies are undoubtedly one of the most irritating things in the workplace that can affect both the efficiency and productivity of the employees. Allergies take a toll on the human body and prevent it from performing certain tasks. The health of an employees is paramount for any company out there as it contributes to a great working environment. This translates to more productivity and, ultimately, more revenue.

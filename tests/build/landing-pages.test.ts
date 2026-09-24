@@ -202,12 +202,21 @@ describe('the short form', () => {
   });
 
   it.each(PAGES)('$name labels every field and uses no placeholder as a label', ({ name }) => {
+    /* The rule is a placeholder standing IN for a label, which vanishes the
+       moment someone types and is invisible to a screen reader looking for a
+       label. A placeholder ALONGSIDE a real label is a format hint, and the
+       form now carries six. So: placeholders allowed, missing labels not.
+       Mirrored in tests/build/quote-page.test.ts. */
     const form = leadForm(name);
-    expect(form).not.toMatch(/\bplaceholder=/i);
     const labelled = new Set([...form.matchAll(/<label\b[^>]*\bfor="([^"]+)"/g)].map((m) => m[1]));
     for (const spec of FIELDS) {
       const id = control(form, spec.name)!.match(/\bid="([^"]+)"/)![1];
       expect(labelled, `${name}: ${spec.name} unlabelled`).toContain(id);
+    }
+    for (const tag of [...form.matchAll(/<(?:input|textarea)\b[^>]*>/g)].map((m) => m[0])) {
+      if (!/\bplaceholder=/i.test(tag)) continue;
+      const id = tag.match(/\bid="([^"]+)"/)?.[1];
+      expect(labelled, `${name}: placeholder with no label (${id})`).toContain(id!);
     }
   });
 });

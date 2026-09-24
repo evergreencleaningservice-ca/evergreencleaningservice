@@ -1,6 +1,7 @@
 import { neon } from '@neondatabase/serverless';
 import { captcha } from './data/site';
 import { isHoneypotHit, leadProblems, normalizeLead, str } from './lib/lead-fields';
+import { normalizeSubmission, submissionProblems } from './lib/submission-fields';
 import { notificationPayload } from './lib/notification';
 import { allowedCaptchaHostnames, isProductionHost, isPublishedTestSecret } from './lib/captcha-hosts';
 
@@ -158,6 +159,82 @@ async function verifyCaptcha(
   }
 }
 
+/**
+ * The captcha gate, shared by every endpoint that accepts a public form.
+ *
+ * Extracted from `submitLead` when the comment and testimonial forms were
+ * wired up. It is the same gate, not a second implementation of it, and that
+ * is the whole reason it is a function: a copy would eventually differ, and
+ * the endpoint that drifted would be the one nobody was watching.
+ *
+ * Returns the rejection to send, or null to carry on. `label` only names the
+ * endpoint in the logs, so a failure says which form it came from.
+ */
+async function captchaGuard(
+  request: Request,
+  env: Env,
+  body: Record<string, unknown>,
+  label: string
+): Promise<Response | null> {
+  const turnstile = captcha.provider === 'turnstile';
+  const secret = turnstile ? env.TURNSTILE_SECRET : env.RECAPTCHA_SECRET;
+  const secretName = turnstile ? 'TURNSTILE_SECRET' : 'RECAPTCHA_SECRET';
+
+  if (!secret) {
+    console.error(`${label}: no ${secretName}; refusing to accept unverified submissions`);
+    return json({ error: 'captcha unavailable' }, 503);
+  }
+
+  /* Both providers publish a test pair that passes for any token on any
+     domain. Either is the right default for staging and catastrophic on
+     production, where it would wave through every bot on the internet. This
+     is the ONLY layer that can see the secret's value, and therefore the only
+     one that can catch this at all — a build cannot, and `wrangler secret
+     list` shows names, not values. Cloudflare's always-fails test secret is
+     refused too: on production it would reject every real submission. */
+  const host = new URL(request.url).hostname;
+  if (isPublishedTestSecret(secret) && isProductionHost(host)) {
+    console.error(`${label}: ${secretName} is a published test key, on production host`, host);
+    return json({ error: 'captcha misconfigured' }, 503);
+  }
+
+  const result = await verifyCaptcha(
+    turnstile ? captcha.turnstile.verifyUrl : captcha.recaptcha.verifyUrl,
+    str(
+      body.captcha ?? body.recaptcha ?? body['g-recaptcha-response'] ?? body['cf-turnstile-response'],
+      4000
+    ),
+    secret,
+    request.headers.get('cf-connecting-ip') ?? ''
+  );
+  if (!result.ok) {
+    console.warn(`${label}: captcha rejected —`, result.reason);
+    return json({ error: 'captcha failed' }, 403);
+  }
+
+  /* The token is real. That is not the same as the token being ours.
+     `hostname` is where the challenge was actually solved; a copy of this
+     page on a host someone else controls, carrying the same public site key,
+     mints tokens that verify here perfectly well. See `lib/captcha-hosts.ts`
+     for the allowlist and for why production's is a closed one.
+
+     An absent hostname is treated as a mismatch rather than waved through.
+     Both providers document it as present on success, so its absence means
+     either a provider change or something answering in their place, and
+     neither should quietly buy a submission. If genuine submissions ever
+     start failing, this is the log line to look for. */
+  const allowed = allowedCaptchaHostnames(host, secret);
+  if (!allowed.includes(result.hostname)) {
+    console.warn(
+      `${label}: captcha solved on an unexpected hostname —`,
+      JSON.stringify({ solvedOn: result.hostname, requestHost: host, allowed })
+    );
+    return json({ error: 'captcha failed' }, 403);
+  }
+
+  return null;
+}
+
 async function submitLead(request: Request, env: Env): Promise<Response> {
   if (request.method !== 'POST') return json({ error: 'method not allowed' }, 405);
 
@@ -173,61 +250,10 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
      again with the field left blank. Nothing is stored. */
   if (isHoneypotHit(body)) return json({ ok: true });
 
-  /* --- captcha ------------------------------------------------------------
-     After the honeypot, so a bot that fell into it costs nothing, and before
+  /* After the honeypot, so a bot that fell into it costs nothing, and before
      the database, so an unverified post never reaches Neon or Resend. */
-  const turnstile = captcha.provider === 'turnstile';
-  const secret = turnstile ? env.TURNSTILE_SECRET : env.RECAPTCHA_SECRET;
-  const secretName = turnstile ? 'TURNSTILE_SECRET' : 'RECAPTCHA_SECRET';
-
-  if (!secret) {
-    console.error(`submit-lead: no ${secretName}; refusing to accept unverified submissions`);
-    return json({ error: 'captcha unavailable' }, 503);
-  }
-
-  /* Both providers publish a test pair that passes for any token on any
-     domain. Either is the right default for staging and catastrophic on
-     production, where it would wave through every bot on the internet. This
-     is the ONLY layer that can see the secret's value, and therefore the only
-     one that can catch this at all — a build cannot, and `wrangler secret
-     list` shows names, not values. Cloudflare's always-fails test secret is
-     refused too: on production it would reject every real lead. */
-  const host = new URL(request.url).hostname;
-  if (isPublishedTestSecret(secret) && isProductionHost(host)) {
-    console.error(`submit-lead: ${secretName} is a published test key, on production host`, host);
-    return json({ error: 'captcha misconfigured' }, 503);
-  }
-
-  const result = await verifyCaptcha(
-    turnstile ? captcha.turnstile.verifyUrl : captcha.recaptcha.verifyUrl,
-    str(body.captcha ?? body.recaptcha ?? body['g-recaptcha-response'] ?? body['cf-turnstile-response'], 4000),
-    secret,
-    request.headers.get('cf-connecting-ip') ?? ''
-  );
-  if (!result.ok) {
-    console.warn('submit-lead: captcha rejected —', result.reason);
-    return json({ error: 'captcha failed' }, 403);
-  }
-
-  /* The token is real. That is not the same as the token being ours.
-     `hostname` is where the challenge was actually solved; a copy of this
-     page on a host someone else controls, carrying the same public site key,
-     mints tokens that verify here perfectly well. See `lib/captcha-hosts.ts`
-     for the allowlist and for why production's is a closed one.
-
-     An absent hostname is treated as a mismatch rather than waved through.
-     Both providers document it as present on success, so its absence means
-     either a provider change or something answering in their place, and
-     neither should quietly buy a lead. If genuine submissions ever start
-     failing, this is the log line to look for. */
-  const allowed = allowedCaptchaHostnames(host, secret);
-  if (!allowed.includes(result.hostname)) {
-    console.warn(
-      'submit-lead: captcha solved on an unexpected hostname —',
-      JSON.stringify({ solvedOn: result.hostname, requestHost: host, allowed })
-    );
-    return json({ error: 'captcha failed' }, 403);
-  }
+  const rejected = await captchaGuard(request, env, body as Record<string, unknown>, 'submit-lead');
+  if (rejected) return rejected;
 
   /* Normalisation, length limits and the sanitising of everything that came
      off a query string live in `src/lib/lead-fields.ts`, which is a pure
@@ -260,6 +286,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
          landing_page, referrer, touch_at,
          first_gclid, first_msclkid, first_utm_source, first_utm_medium,
          first_utm_campaign, first_landing_page, first_referrer, first_touch_at,
+         marketing_consent, consent_text,
          ip_country, user_agent)
       VALUES
         (${lead.form_id}, ${lead.full_name}, ${lead.work_email}, ${lead.phone},
@@ -274,6 +301,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
          ${lead.first_gclid}, ${lead.first_msclkid}, ${lead.first_utm_source},
          ${lead.first_utm_medium}, ${lead.first_utm_campaign},
          ${lead.first_landing_page}, ${lead.first_referrer}, ${lead.first_touch_at},
+         ${lead.marketing_consent}, ${lead.consent_text || null},
          ${(request as Request & { cf?: { country?: string } }).cf?.country ?? ''},
          ${str(request.headers.get('user-agent'), 300)})
     `;
@@ -286,10 +314,82 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
   return json({ ok: true });
 }
 
+/**
+ * POST /api/submit-post — a blog comment or a testimonial.
+ *
+ * SEPARATE FROM /api/submit-lead ON PURPOSE. Neither of these is a sales
+ * enquiry. Routing them through the lead endpoint would put them in `leads`,
+ * where they would be counted as conversions and emailed to the client as
+ * enquiries to follow up — so the client would chase a blog comment as a
+ * prospect, and the one number their ad spend is judged on would be wrong.
+ *
+ * Same gate, though: the same honeypot, the same captcha, the same hostname
+ * check, via `captchaGuard`.
+ *
+ * Nothing stored here is published by storing it. Every row lands `pending`
+ * and the site renders neither comment threads nor submitted testimonials
+ * yet, so moderation is a decision that still has to be made by a person with
+ * somewhere to make it.
+ */
+async function submitPost(request: Request, env: Env): Promise<Response> {
+  if (request.method !== 'POST') return json({ error: 'method not allowed' }, 405);
+
+  let body: Record<string, unknown>;
+  try {
+    body = (await request.json()) as Record<string, unknown>;
+  } catch {
+    return json({ error: 'bad request' }, 400);
+  }
+
+  /* Honeypot first, and answering 200 for the same reason the lead endpoint
+     does: an error teaches a bot to retry with the field left empty. */
+  if (isHoneypotHit(body)) return json({ ok: true });
+
+  const rejected = await captchaGuard(request, env, body, 'submit-post');
+  if (rejected) return rejected;
+
+  const submission = normalizeSubmission(body);
+  const problems = submissionProblems(submission);
+  if (problems.length) return json({ error: 'invalid submission', fields: problems }, 422);
+
+  if (!env.DATABASE_URL) {
+    /* Say so loudly rather than returning 200 and dropping it. A form that
+       reports success and discards the submission is the exact bug these two
+       forms had for the whole port, and it is not worth re-creating one layer
+       further down. */
+    console.error('submit-post: no DATABASE_URL; submission not stored', submission.kind);
+    return json({ error: 'submission storage unavailable' }, 503);
+  }
+
+  try {
+    const sql = neon(env.DATABASE_URL);
+    await sql`
+      INSERT INTO submissions
+        (kind, post_slug, author_name, author_email, author_url,
+         business_title, body, page_url, ip_country, user_agent)
+      VALUES
+        (${submission.kind}, ${submission.post_slug || null}, ${submission.author_name},
+         ${submission.author_email}, ${submission.author_url || null},
+         ${submission.business_title || null}, ${submission.body},
+         ${submission.page_url || null},
+         ${(request as Request & { cf?: { country?: string } }).cf?.country ?? ''},
+         ${str(request.headers.get('user-agent'), 300)})
+    `;
+  } catch (err) {
+    console.error('submit-post: insert failed', err);
+    return json({ error: 'submission storage failed' }, 500);
+  }
+
+  /* No notification and no conversion event. A comment is not a lead, and
+     `lead_form_submission` stays the site's only conversion. */
+  return json({ ok: true });
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     if (url.pathname === '/api/submit-lead') return submitLead(request, env);
+    if (url.pathname === '/api/submit-post') return submitPost(request, env);
     return env.ASSETS.fetch(request);
   },
 } satisfies ExportedHandler<Env>;

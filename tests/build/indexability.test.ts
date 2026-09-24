@@ -42,6 +42,14 @@ const NOINDEX_ROUTES = [
 /** The blog archive is `follow, noindex`, which is a different decision. */
 const isBlogArchive = (page: string) => page.startsWith('category/blog/');
 
+/**
+ * The 26 tag archives are `follow, noindex` for the same reason, and because
+ * the original serves them that way — measured on /tag/cleaning/. Crawlable
+ * through to the posts; not 34 thin pages competing with /insights/, which
+ * lists the same 38 articles and IS indexable.
+ */
+const isTagArchive = (page: string) => page.startsWith('tag/');
+
 let pages: string[] = [];
 const read = (rel: string) => fs.readFileSync(path.join(out, rel), 'utf8');
 
@@ -140,7 +148,13 @@ describe('canonicals', () => {
 describe('which pages are indexable', () => {
   it('no public page carries a noindex', () => {
     const noindexed = pages.filter((page) => {
-      if (NOINDEX_ROUTES.includes(page) || isBlogArchive(page) || page === '404.html') return false;
+      if (
+        NOINDEX_ROUTES.includes(page) ||
+        isBlogArchive(page) ||
+        isTagArchive(page) ||
+        page === '404.html'
+      )
+        return false;
       const html = read(page);
       if (isRedirectStub(html)) return false;
       return /noindex/i.test(robotsMetaOf(html));
@@ -165,6 +179,15 @@ describe('which pages are indexable', () => {
     const archive = pages.filter(isBlogArchive);
     expect(archive.length).toBeGreaterThan(1);
     for (const page of archive) expect(robotsMetaOf(read(page))).toBe('follow, noindex');
+  });
+
+  it('every tag archive keeps follow, noindex too', () => {
+    /* Asserted positively as well as excused above, so a tag page cannot
+       drift into being indexable without this failing. 26 archives plus the
+       8 pagination pages the five busiest tags need. */
+    const archives = pages.filter(isTagArchive);
+    expect(archives).toHaveLength(34);
+    for (const page of archives) expect(robotsMetaOf(read(page))).toBe('follow, noindex');
   });
 });
 

@@ -4,8 +4,9 @@
  * The preview is served from evergreencleaningservice.10xconnections.com while
  * the real site is still the WordPress install on evergreencleaningservice.ca.
  * Two copies of the same copy, both indexable, would compete with each other,
- * so every preview response carries X-Robots-Tag: noindex and robots.txt
- * disallows everything.
+ * so every preview response carries X-Robots-Tag: noindex, nofollow. That
+ * header is the whole mechanism; robots.txt stays permissive on purpose, for
+ * the reason spelled out where it is written below.
  *
  * This runs for `npm run build:preview` only. The production build
  * (`npm run build`) never calls it, so going live is just a matter of deploying

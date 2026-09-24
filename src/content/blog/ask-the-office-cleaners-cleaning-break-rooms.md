@@ -3,6 +3,7 @@ title: "Ask the Office Cleaners: Cleaning Break Rooms"
 description: "Got a breakroom that needs cleaning? Here we discuss the most common messes we deal with in breakrooms and how to clean up!"
 pubDate: 2023-03-31
 image: "/images/break-room-2-scaled.jpg"
+tags: ["breakroom", "cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 
 ## Cleaning Office Break Rooms

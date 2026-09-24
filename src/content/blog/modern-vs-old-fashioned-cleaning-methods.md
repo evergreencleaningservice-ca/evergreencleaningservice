@@ -3,6 +3,7 @@ title: "Modern Vs. Old-Fashioned Cleaning Methods"
 description: "Ever wondered which cleaning techniques are the most effective? Let us give you the run down on the evolution of cleaning."
 pubDate: 2022-12-07
 image: "/images/mop-and-bucket.jpg"
+tags: ["cleaning", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning"]
 ---
 
 ## The Evolution of Commercial Cleaning Methods

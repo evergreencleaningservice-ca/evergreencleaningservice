@@ -13,6 +13,13 @@ const blog = defineCollection({
     description: z.string().optional(),
     pubDate: z.coerce.date(),
     image: z.string().optional(),
+    /**
+     * Tag slugs, as the original's WordPress assigns them. Every slug must be
+     * one of `src/data/tags.ts` — `tests/build/tags.test.ts` enforces that, so
+     * a typo becomes a failing test rather than an archive page nobody links
+     * to. Three posts genuinely carry none and simply omit the key.
+     */
+    tags: z.array(z.string()).default([]),
   }),
 });
 

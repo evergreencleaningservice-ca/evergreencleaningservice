@@ -3,6 +3,7 @@ title: "Tips & Tricks for Spring Cleaning Your Office"
 description: "Spring is in the air and so is spring cleaning at the office. Here are some tips and tricks we've found useful in keeping offices tidy."
 pubDate: 2022-03-23
 image: "/images/clean-office-area.jpg"
+tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "office"]
 ---
 
 ## Keep Your Office Clean

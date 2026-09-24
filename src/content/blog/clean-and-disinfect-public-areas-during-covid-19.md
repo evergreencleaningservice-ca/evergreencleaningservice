@@ -3,6 +3,7 @@ title: "How To Clean And Disinfect Public Areas During COVID-19"
 description: "Guidance on how to clean and disinfect public settings during the Covid-19 pandemic. All of us can help stop the spread right now."
 pubDate: 2020-05-27
 image: "/images/office-cleaning-services-Toronto.jpg"
+tags: ["commercial-cleaning", "coronavirus", "janitorial-services", "office"]
 ---
 
 This article offers guidance on how to clean and disinfect public settings, including workplaces, communal residences, public transit, museums, public libraries, universities, and schools.

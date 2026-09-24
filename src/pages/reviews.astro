@@ -1,6 +1,8 @@
 ---
 import { getEntry } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
+import SpamGuard from '../components/SpamGuard.astro';
+import SubmissionRuntime from '../components/SubmissionRuntime.astro';
 
 const entry = await getEntry('pages', 'reviews');
 if (!entry) throw new Error('Missing content entry: pages/reviews');
@@ -46,7 +48,13 @@ const introHtml = rawBody.slice(0, cutAt);
   <p class="form-note">Fields marked <span class="req">*</span> are required.</p>
 
   {/* See the TODO in this file's frontmatter: action="#" is a placeholder. */}
-  <form class="site-form" method="post" action="#" aria-label="Submit your testimonial">
+  <form
+    class="site-form"
+    method="post"
+    action="#"
+    aria-label="Submit your testimonial"
+    data-post-kind="review"
+  >
     <fieldset class="form-group">
       <legend>Name <span class="req" aria-hidden="true">*</span></legend>
       <div class="form-row form-row-2">
@@ -121,8 +129,11 @@ const introHtml = rawBody.slice(0, cutAt);
       />
     </div>
 
+    <SpamGuard />
+
     <button class="btn btn-primary btn-lg" type="submit">Submit</button>
   </form>
+  <SubmissionRuntime />
 </PageLayout>
 
 <style>

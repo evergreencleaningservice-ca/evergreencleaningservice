@@ -425,3 +425,55 @@ describe('Phase 4 — the token has to have been solved on one of our hostnames'
     expect(String(fetchSpy.mock.calls[0][0])).toContain('siteverify');
   });
 });
+
+describe('marketing consent reaches the row truthfully', () => {
+  /**
+   * CASL puts the burden of proving express consent on the sender, so the
+   * failure that matters here is a FALSE POSITIVE: a row claiming a consent
+   * nobody gave. Every case below is a way that has happened in real code.
+   */
+  it('stores true and the exact wording when the box was ticked', async () => {
+    captchaPasses();
+    await post({
+      ...FULL_BODY,
+      marketing_consent: 'yes',
+      consent_text: 'Email me occasional cleaning tips and offers from Evergreen Office Cleaning.',
+    });
+    const { byName } = insert();
+    expect(byName.marketing_consent).toBe(true);
+    expect(String(byName.consent_text)).toContain('Evergreen Office Cleaning');
+  });
+
+  it('stores false when the box was left alone and nothing was sent', async () => {
+    /* An unticked checkbox posts NOTHING. Absent has to read as "no". */
+    captchaPasses();
+    await post(FULL_BODY);
+    const { byName } = insert();
+    expect(byName.marketing_consent).toBe(false);
+    expect(byName.consent_text).toBeNull();
+  });
+
+  it('does not let the string "false" become a yes', async () => {
+    /* `Boolean("false")` is true — one line of JavaScript away from turning
+       every declined consent into a granted one. */
+    captchaPasses();
+    await post({ ...FULL_BODY, marketing_consent: 'false' });
+    expect(insert().byName.marketing_consent).toBe(false);
+  });
+
+  it.each(['no', '0', 'off', '', 'maybe', 'null'])('treats %s as no consent', async (value) => {
+    captchaPasses();
+    await post({ ...FULL_BODY, marketing_consent: value });
+    expect(insert().byName.marketing_consent).toBe(false);
+  });
+
+  it('keeps no wording for a consent that was not given', async () => {
+    /* Storing the text beside a false would read, later, as a record of
+       something that did not happen. */
+    captchaPasses();
+    await post({ ...FULL_BODY, marketing_consent: 'no', consent_text: 'Email me offers.' });
+    const { byName } = insert();
+    expect(byName.marketing_consent).toBe(false);
+    expect(byName.consent_text).toBeNull();
+  });
+});

@@ -154,6 +154,29 @@ export interface QuickQuoteOptions {
 }
 
 /**
+ * The marketing-consent pair: whether it was ticked, and the exact wording it
+ * was ticked against.
+ *
+ * THE WORDING IS READ OFF THE PAGE rather than imported as a constant. Under
+ * CASL the sender has to be able to show what was agreed to, and the only text
+ * that can honestly claim to be that is the text the visitor was actually
+ * looking at. Reading it from the label makes the record true even if someone
+ * edits the copy and forgets there was a second copy of it elsewhere.
+ *
+ * Both keys are omitted entirely when the box is not ticked. An untouched
+ * checkbox is not a declined consent to be recorded; it is nothing happening.
+ */
+const consent = (form: HTMLFormElement): Record<string, string> => {
+  const box = form.querySelector<HTMLInputElement>('input[name="marketing-consent"]');
+  if (!box?.checked) return {};
+  const label = form.querySelector<HTMLLabelElement>(`label[for="${box.id}"]`);
+  return {
+    marketing_consent: 'yes',
+    consent_text: (label?.textContent ?? '').replace(/\s+/g, ' ').trim().slice(0, 500),
+  };
+};
+
+/**
  * Wire one short quote form.
  *
  * Idempotent through `wireLeadForm`, which refuses a form it has already
@@ -237,6 +260,11 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
       services: fieldValue(f, 'services'),
       message: fieldValue(f, 'message'),
       page_url: location.href,
+
+      /* Express marketing consent. An unticked checkbox posts nothing at all,
+         so this reads `.checked` rather than a field value — an absent value
+         has to mean NO, which is what CASL assumes by default. */
+      ...consent(f),
     }),
 
     onSuccess: confirm,

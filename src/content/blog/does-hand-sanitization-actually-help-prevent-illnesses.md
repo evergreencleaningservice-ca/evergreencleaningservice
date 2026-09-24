@@ -2,6 +2,7 @@
 title: "Does Hand Sanitization Actually Help to Prevent Illnesses?"
 description: "Ever wondered if hand sanitizer is really a good substitute for hand washing? Read here for hand sanitizer basics."
 pubDate: 2021-01-31
+tags: ["commercial-cleaning", "commercial-office-cleaning", "coronavirus", "janitorial-services"]
 ---
 
 ## Hand Sanitizer and Illnesses

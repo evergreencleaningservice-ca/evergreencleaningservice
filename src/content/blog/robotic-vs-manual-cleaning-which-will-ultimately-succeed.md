@@ -3,6 +3,7 @@ title: "Robotic Vs. Manual Cleaning: Which Will Ultimately Succeed?"
 description: "Concerned about AI taking over the cleaning industry? Here we examine robotic versus manual cleaning in the commercial cleaning industry."
 pubDate: 2023-01-31
 image: "/images/AI-in-cleaning1-300x150.jpg"
+tags: ["ai", "cleaning", "commercial-cleaning", "commercial-office-cleaning", "manual-cleaning", "robotic"]
 ---
 
 ## AI in Commercial Cleaning

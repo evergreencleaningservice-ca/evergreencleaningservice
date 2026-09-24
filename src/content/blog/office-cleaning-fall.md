@@ -3,6 +3,7 @@ title: "Office Cleaning in the Fall?"
 description: "Office cleaning in the fall? Here we discuss how a fall deep office clean is just as important as the traditional spring clean."
 pubDate: 2022-09-30
 image: "/images/cleaning-a-counter.jpg"
+tags: ["commercial-cleaning", "commercial-office-cleaning", "office"]
 ---
 
 ## Autumn Office Cleaning Should Be Prioritized

@@ -1,0 +1,104 @@
+---
+/**
+ * The submit handler for the site's two NON-lead forms: blog comments and the
+ * testimonial form on /reviews/.
+ *
+ * Renders nothing, and is the sibling of `FormRuntime.astro` — that one wires
+ * the forms that produce enquiries, this one wires the forms that produce
+ * content. They share `lib/lead-submit.ts` for everything that is about
+ * getting a submission through intact (honeypot, waiting for the invisible
+ * captcha token, the duplicate-click guard, the error messages) and differ in
+ * the one place it matters: these pass `conversion: false`, so a comment never
+ * pushes `lead_form_submission` and never marks a `/thank-you/` ticket.
+ *
+ * WHY THESE FORMS NEEDED ANYTHING AT ALL. Both posted to `action="#"`. They
+ * validated in the browser, reloaded the page, and the comment or testimonial
+ * was gone — no error, no notice, nothing stored. 38 blog posts carried the
+ * comment form. Adding a captcha to a form that discards its input would have
+ * been the worse version of that bug, so the wiring and the captcha land
+ * together.
+ *
+ * A form opts in with `data-post-kind`, which is also what tells the endpoint
+ * whether it is looking at a comment or a testimonial.
+ */
+---
+
+<script>
+  import { fieldValue as value, wireLeadForm } from '../lib/lead-submit';
+  import type { Dict } from '../lib/lead-submit';
+
+  /* What the visitor is told, per kind. Both say the same two things: it
+     arrived, and a person will look at it before it appears. Promising
+     publication would be a promise this site cannot keep — every row lands
+     `pending` and nothing renders it yet. */
+  const CONFIRMATION: Record<string, string> = {
+    comment: 'Thanks — your comment has been sent and will appear once it has been reviewed.',
+    review:
+      'Thank you for the kind words. Your testimonial has been sent and will appear once it has been reviewed.',
+  };
+
+  const confirm = (form: HTMLFormElement) => {
+    const kind = form.dataset.postKind ?? 'comment';
+    const box = document.createElement('div');
+    box.className = 'wpf-confirm';
+    box.setAttribute('role', 'status');
+    box.textContent = CONFIRMATION[kind] ?? CONFIRMATION.comment;
+    form.replaceWith(box);
+    box.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  };
+
+  const fail = (form: HTMLFormElement, message: string) => {
+    let box = form.querySelector<HTMLElement>('.wpf-error');
+    if (!box) {
+      box = document.createElement('div');
+      box.className = 'wpf-error';
+      box.setAttribute('role', 'alert');
+      form.prepend(box);
+    }
+    box.textContent = message;
+    box.hidden = false;
+  };
+
+  document.querySelectorAll<HTMLFormElement>('form[data-post-kind]').forEach((form) => {
+    const kind = form.dataset.postKind ?? 'comment';
+
+    form.addEventListener('submit', () => {
+      form.querySelector<HTMLElement>('.wpf-error')?.setAttribute('hidden', '');
+    });
+
+    wireLeadForm(form, {
+      /* Used for the duplicate-click guard's bookkeeping and nothing else
+         here — no dataLayer event carries it, because none is pushed. */
+      formId: `${kind}-form`,
+      endpoint: '/api/submit-post',
+      /* THE LINE THAT KEEPS THE CONVERSION NUMBER HONEST. */
+      conversion: false,
+      honeypots: ['company-website', 'company_tax_id', 'website_trap'],
+
+      payload: (f): Dict => ({
+        kind,
+        /* Comments only. Set from the page, not read out of the URL, so a
+           post reached through a redirect still files its comment against
+           the right slug. */
+        post_slug: f.dataset.postSlug ?? '',
+        /* The comment form has one name field; the testimonial form has
+           first and last. Composed here so the endpoint sees one shape. */
+        author_name:
+          value(f, 'author') ||
+          [value(f, 'first-name'), value(f, 'last-name')].filter(Boolean).join(' '),
+        author_email: value(f, 'email'),
+        author_url: value(f, 'url'),
+        business_title: value(f, 'business-title'),
+        body: value(f, 'comment') || value(f, 'review'),
+        page_url: location.href,
+      }),
+
+      onSuccess: confirm,
+      /* Mimics success. A bot is told the same thing a person is told, and
+         nothing is stored. */
+      onHoneypot: confirm,
+      onError: (f, message) => fail(f, message),
+      sendingLabel: 'Sending…',
+    });
+  });
+</script>
