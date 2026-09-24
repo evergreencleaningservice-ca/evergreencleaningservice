@@ -408,12 +408,24 @@ const CONSENT_TEXT =
     padding: 13px 14px;
     /* FILLED, NOT OUTLINED. The field is described by its own tint rather
        than by a rule around it, so a column of inputs reads as a stack of
-       targets instead of a stack of boxes. Taken from the reference design,
-       whose pale blue is its own brand colour — this is the same idea in a
-       neutral tint that sits under Evergreen's green without competing. */
+       targets instead of a stack of boxes.
+
+       #ebf2fa IS MEASURED, not chosen. Sampled from the reference design's
+       own screenshot: nine probes across all six inputs and the textarea
+       returned the identical value, so it is the fill, not an artefact of
+       one compressed pixel.
+
+       A first attempt used a neutral green-grey (#eef1ec) on the reasoning
+       that the reference's blue is its own brand colour. Side by side that
+       was wrong in the way that matters: at that lightness the field barely
+       separated from white, so the form read as a page with text on it
+       rather than as a set of boxes to fill. The blue is doing structural
+       work here, not brand work — it says "this is where you type" — and it
+       sits under Evergreen's green without competing for it. The button
+       stays green; only the boxes are the reference's. */
     border: 1px solid transparent;
     border-radius: var(--radius);
-    background: #eef1ec;
+    background: #ebf2fa;
     font-family: inherit;
     font-size: 16px; /* under 16px, iOS zooms the page on focus */
     color: var(--ink-heading);
@@ -429,14 +441,27 @@ const CONSENT_TEXT =
   .qq input[type='email']:hover,
   .qq select:hover,
   .qq textarea:hover {
-    background: #e7ebe4;
+    /* One step deeper than the resting fill, enough to register under a
+       cursor without becoming a second state to read. */
+    background: #e2ecf8;
   }
 
   /* A placeholder is a hint, never the label — every field above keeps its
      own <label for>. Kept well clear of the text colour so the two are never
      mistaken for one another. */
   .qq ::placeholder {
-    color: #8a8f86;
+    /* Measured off the reference at #757575 — the darkest pixel inside three
+       separate placeholder runs, every time. Neutral rather than tinted,
+       which is what keeps it reading as a hint instead of as a fourth colour
+       in the field.
+
+       SHIPPED ONE STEP DARKER, and this is the one place the reference is
+       not copied exactly. #757575 on #ebf2fa computes to 4.08:1, under the
+       4.5:1 WCAG AA wants for text this size; #6b6b6b is 4.72:1. The two are
+       indistinguishable side by side, so the difference costs nothing and
+       buys a form that is readable to someone whose eyesight is not the
+       designer's. */
+    color: #6b6b6b;
     opacity: 1; /* Firefox dims placeholders by default */
   }
 
