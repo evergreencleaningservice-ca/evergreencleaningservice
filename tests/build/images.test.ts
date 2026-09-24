@@ -11,9 +11,8 @@
  *
  * These tests assert the shape of the fix rather than the score, because a
  * score is a measurement and this is a contract: whatever the network does on
- * the day, the first slide must be eager and prioritised, the other two must
- * not be fetched at all, and every modern-format file must be smaller than
- * the JPEG it replaces.
+ * the day, the single hero image must be eager and prioritised, and every
+ * modern-format file must be smaller than the JPEG it replaces.
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -49,85 +48,71 @@ beforeAll(() => {
 
 afterAll(() => fs.rmSync(out, { recursive: true, force: true }));
 
-/** The hero's three <picture> blocks, in document order. */
-const slides = () => [...home.matchAll(/<picture class="hero-slide[^"]*"[\s\S]*?<\/picture>/g)].map((m) => m[0]);
+const BASE = 'evergreen-commercial-cleaning-hero';
+const WIDTHS = [480, 768, 1000, 1600];
+const SOURCE_WIDTH = 1916;
 
-describe('the hero is an image element, not a background', () => {
-  it('renders three <picture> slides', () => {
-    expect(slides()).toHaveLength(3);
+/** The homepage hero <picture> blocks. There must be exactly one. */
+const heroes = () => [...home.matchAll(/<picture class="hero-slide[^"]*"[\s\S]*?<\/picture>/g)].map((m) => m[0]);
+const hero = () => heroes()[0];
+
+describe('the hero is one image element, not a background or a carousel', () => {
+  it('renders exactly one <picture>', () => {
+    expect(heroes()).toHaveLength(1);
   });
 
-  it('no hero slide is a CSS background-image any more', () => {
+  it('is not a CSS background-image', () => {
     expect(home).not.toMatch(/hero-slide[^>]*style="background-image/);
-    expect(home).not.toMatch(/background-image:\s*url\(['"]?\/images\/business-team/);
+    expect(home).not.toMatch(/background-image:\s*url\(['"]?\/images\/evergreen-commercial-cleaning-hero/);
   });
 });
 
-describe('the first slide is the LCP and is treated as one', () => {
-  const first = () => slides()[0];
-
-  it('is eager, prioritised, and carries its own source', () => {
-    expect(first()).toContain('loading="eager"');
-    expect(first()).toContain('fetchpriority="high"');
-    expect(first()).toMatch(/<img\b[^>]*(?<![\w-])src="[^"]+business-team-1000\.jpg"/);
-  });
-
-  it('declares intrinsic width and height, so nothing reflows', () => {
-    expect(first()).toMatch(/width="1000"/);
-    expect(first()).toMatch(/height="667"/);
-  });
-
-  it('offers AVIF then WebP then JPEG, each with a 3-width srcset', () => {
-    expect(first()).toMatch(/<source type="image\/avif" srcset="[^"]+"/);
-    expect(first()).toMatch(/<source type="image\/webp" srcset="[^"]+"/);
-    for (const format of ['avif', 'webp', 'jpg']) {
-      for (const width of [480, 768, 1000]) {
-        expect(first()).toContain(`business-team-${width}.${format} ${width}w`);
-      }
-    }
-    expect(first()).toContain('sizes="100vw"');
+describe('the hero is the LCP and is treated as one', () => {
+  it('is eager, high priority, and carries its own source', () => {
+    expect(hero()).toContain('loading="eager"');
+    expect(hero()).toContain('fetchpriority="high"');
+    expect(hero()).toMatch(new RegExp(String.raw`<img\b[^>]*(?<![\w-])src="[^"]+${BASE}-1000\.jpg"`));
   });
 
   it('is not lazy — a lazy LCP is a slower LCP', () => {
-    expect(first()).not.toContain('loading="lazy"');
-  });
-});
-
-describe('the carousel does not download every slide at load', () => {
-  it('slides two and three ship no src at all', () => {
-    for (const slide of slides().slice(1)) {
-      expect(slide).not.toMatch(/<img\b[^>]*(?<![\w-])src=/);
-      expect(slide).not.toMatch(/<source\b[^>]*(?<![\w-])srcset=/);
-      expect(slide).toMatch(/data-src="/);
-      expect(slide).toMatch(/data-srcset="/);
-    }
+    expect(hero()).not.toContain('loading="lazy"');
   });
 
-  it('only one hero image is fetchable from the markup', () => {
-    /* `loading="lazy"` would not have been enough: the three slides are
-       stacked full-bleed at the top of the page, so all of them are inside
-       the viewport and a lazy image inside the viewport loads immediately. */
-    const fetchable = [...home.matchAll(/<img\b[^>]*(?<![\w-])src="[^"]*business-[a-z]/g)];
+  it('declares the 1916x821 intrinsic size, so nothing reflows', () => {
+    expect(hero()).toMatch(/width="1916"/);
+    expect(hero()).toMatch(/height="821"/);
+  });
+
+  it('offers AVIF then WebP then JPEG, each with a 480/768/1000/1600 srcset', () => {
+    const avif = hero().indexOf('<source type="image/avif"');
+    const webp = hero().indexOf('<source type="image/webp"');
+    const img = hero().indexOf('<img');
+    expect(avif).toBeGreaterThan(-1);
+    expect(webp).toBeGreaterThan(avif);
+    expect(img).toBeGreaterThan(webp);
+    for (const format of ['avif', 'webp', 'jpg'])
+      for (const width of WIDTHS) expect(hero()).toContain(`${BASE}-${width}.${format} ${width}w`);
+    expect(hero()).toContain('sizes="100vw"');
+  });
+
+  it('ships every candidate in the markup — nothing is deferred to script', () => {
+    expect(hero()).not.toMatch(/data-src|data-srcset/);
+    expect(hero()).toMatch(/<source type="image\/avif" srcset="/);
+    expect(hero()).toMatch(/<source type="image\/webp" srcset="/);
+  });
+
+  it('is the only fetchable hero image in the markup', () => {
+    const fetchable = [...home.matchAll(/<img\b[^>]*(?<![\w-])src="[^"]*evergreen-commercial-cleaning-hero/g)];
     expect(fetchable).toHaveLength(1);
-  });
-
-  it('the deferred slides are still marked lazy as a second line of defence', () => {
-    for (const slide of slides().slice(1)) expect(slide).toContain('loading="lazy"');
+    expect(home).not.toMatch(/business-team-\d+\.(avif|webp|jpg)/);
   });
 });
 
 describe('the generated variants are genuinely smaller', () => {
-  const bases = [
-    'business-team',
-    'business-introductions',
-    'toronto-commercial-cleaning-business-meeting',
-  ];
-
   it('every width exists in all three formats', () => {
-    for (const base of bases)
-      for (const width of [480, 768, 1000])
-        for (const ext of ['avif', 'webp', 'jpg'])
-          expect(fs.existsSync(path.join(publicImages, `${base}-${width}.${ext}`)), `${base}-${width}.${ext}`).toBe(true);
+    for (const width of WIDTHS)
+      for (const ext of ['avif', 'webp', 'jpg'])
+        expect(fs.existsSync(path.join(publicImages, `${BASE}-${width}.${ext}`)), `${BASE}-${width}.${ext}`).toBe(true);
   });
 
   it('no AVIF or WebP is larger than the JPEG at the same width', () => {
@@ -135,29 +120,23 @@ describe('the generated variants are genuinely smaller', () => {
        extension. `scripts/hero-variants.mjs` refuses to emit one; this is
        the check that survives someone changing the quality settings. */
     const heavier: string[] = [];
-    for (const base of bases)
-      for (const width of [480, 768, 1000]) {
-        const jpeg = fs.statSync(path.join(publicImages, `${base}-${width}.jpg`)).size;
-        for (const ext of ['avif', 'webp']) {
-          const bytes = fs.statSync(path.join(publicImages, `${base}-${width}.${ext}`)).size;
-          if (bytes >= jpeg) heavier.push(`${base}-${width}.${ext} ${bytes} >= jpeg ${jpeg}`);
-        }
+    for (const width of WIDTHS) {
+      const jpeg = fs.statSync(path.join(publicImages, `${BASE}-${width}.jpg`)).size;
+      for (const ext of ['avif', 'webp']) {
+        const bytes = fs.statSync(path.join(publicImages, `${BASE}-${width}.${ext}`)).size;
+        if (bytes >= jpeg) heavier.push(`${BASE}-${width}.${ext} ${bytes} >= jpeg ${jpeg}`);
       }
+    }
     expect(heavier).toEqual([]);
   });
 
-  it('nothing was upscaled past the 1000px source', () => {
-    const wider = fs
+  it('the 1600px ceiling is used, and nothing was upscaled past the 1916px source', () => {
+    const widths = fs
       .readdirSync(publicImages)
-      .filter((f) => /-(\d+)\.(avif|webp|jpg)$/.test(f))
-      .filter((f) => Number(f.match(/-(\d+)\./)![1]) > 1000);
-    expect(wider).toEqual([]);
-  });
-
-  it('the LCP image is a large saving on the original', () => {
-    const original = fs.statSync(path.join(publicImages, 'business-team.jpg')).size;
-    const avif = fs.statSync(path.join(publicImages, 'business-team-1000.avif')).size;
-    expect(avif).toBeLessThan(original * 0.5);
+      .filter((f) => f.startsWith(`${BASE}-`) && /-(\d+)\.(avif|webp|jpg)$/.test(f))
+      .map((f) => Number(f.match(/-(\d+)\./)![1]));
+    expect(Math.max(...widths)).toBe(1600);
+    expect(widths.filter((w) => w > SOURCE_WIDTH)).toEqual([]);
   });
 });
 
@@ -170,8 +149,8 @@ describe('alt attributes', () => {
     expect(missing).toEqual([]);
   });
 
-  it('the hero slides are decorative, because the heading says the same thing', () => {
-    for (const slide of slides()) expect(slide).toMatch(/alt(=""|\s|>)/);
+  it('the hero is decorative, because the heading says the same thing', () => {
+    expect(hero()).toMatch(/<img\b[^>]*\salt(=""|\s|>)/);
   });
 
   it('no alt text is a filename in disguise', () => {

@@ -30,13 +30,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
 
+/* The current hero is the generated commercial-cleaning montage (1916x821
+   PNG). Its 1600 variant keeps wide desktops sharp; 480/768/1000 cover phones
+   and tablets. The earlier slideshow sources are kept so their existing
+   variants stay reproducible, but the homepage no longer references them. */
+const LEGACY_WIDTHS = [480, 768, 1000];
 const SOURCES = [
-  'business-team.jpg',
-  'business-introductions.jpg',
-  'toronto-commercial-cleaning-business-meeting.jpg',
+  { file: 'evergreen-commercial-cleaning-hero.png', widths: [480, 768, 1000, 1600] },
+  { file: 'business-team.jpg', widths: LEGACY_WIDTHS },
+  { file: 'business-introductions.jpg', widths: LEGACY_WIDTHS },
+  { file: 'toronto-commercial-cleaning-business-meeting.jpg', widths: LEGACY_WIDTHS },
 ];
-
-const WIDTHS = [480, 768, 1000];
 
 /* Chosen by measuring, not by habit: these land every variant well under the
    JPEG at the same width while staying visually indistinguishable at hero
@@ -52,16 +56,16 @@ let written = 0;
 let skipped = 0;
 const oversized = [];
 
-for (const source of SOURCES) {
+for (const { file: source, widths } of SOURCES) {
   const input = path.join(dir, source);
   if (!fs.existsSync(input)) {
     console.error(`hero-variants: ${source} not found in public/images`);
     process.exit(1);
   }
-  const base = source.replace(/\.jpe?g$/i, '');
+  const base = source.replace(/\.(jpe?g|png)$/i, '');
   const meta = await sharp(input).metadata();
 
-  for (const width of WIDTHS) {
+  for (const width of widths) {
     if (width > meta.width) continue; /* never upscale */
 
     /* The JPEG at this width is the baseline every modern format must beat. */
