@@ -177,28 +177,43 @@ describe('the short form', () => {
     expect(forms).toHaveLength(1);
   });
 
-  it.each(PAGES)('$name asks the seven short-form questions, four required', ({ name }) => {
+  it.each(PAGES)('$name asks five questions, all required', ({ name }) => {
     const form = leadForm(name);
     for (const spec of FIELDS) {
       const tag = control(form, spec.name);
       expect(tag, `${name}: missing ${spec.name}`).not.toBeNull();
       expect(new RegExp(`\\brequired(?=[\\s/>=])`, 'i').test(tag!)).toBe(spec.required);
     }
-    expect((form.match(/\brequired(?=[\s/>])/g) ?? []).length).toBe(4);
+    /* Five. It was four, then briefly seven when the reference design's
+       address and province boxes went in, then five when they came back out.
+       The message stayed required through all of it. */
+    expect((form.match(/\brequired(?=[\s/>])/g) ?? []).length).toBe(5);
   });
 
-  it.each(PAGES)('$name asks for none of the fields the long forms required', ({ name }) => {
+  it.each(PAGES)('$name asks for none of the fields nothing on this site asks for', ({ name }) => {
+    /* `last-name`, `city`, `state` and `province` came OFF this list when the
+       reference field set was adopted — the form asks for them now. What is
+       left is split address lines and the qualification questions that belong
+       in the account executive's first call. */
     for (const banned of [...BANNED_FIELDS, 'fullName', 'workEmail', 'facilityType', 'facilitySize']) {
       expect(control(html[name], banned), `${name} still asks for ${banned}`).toBeNull();
     }
   });
 
-  it.each(PAGES)('$name accepts a phone OR an email, requiring neither', ({ name }) => {
+  it.each(PAGES)('$name requires BOTH a phone and an email, each with its own error', ({ name }) => {
+    /* THIS ASSERTED THE OPPOSITE until the reference field set was adopted:
+       "phone OR email, one is enough", sharing a single error slot keyed
+       `contact` because the rule had no field of its own. Both are required
+       now, so each needs somewhere separate to say what is wrong with it —
+       one slot for two required fields shows one message and hides the
+       other. */
     const form = leadForm(name);
     for (const field of ['phone', 'email']) {
-      expect(/\brequired(?=[\s/>=])/i.test(control(form, field)!)).toBe(false);
+      expect(/\brequired(?=[\s/>=])/i.test(control(form, field)!)).toBe(true);
     }
-    expect(form).toContain('data-qq-error="contact"');
+    expect(form).not.toContain('data-qq-error="contact"');
+    expect(form).toContain('data-qq-error="phone"');
+    expect(form).toContain('data-qq-error="email"');
   });
 
   it.each(PAGES)('$name labels every field and uses no placeholder as a label', ({ name }) => {

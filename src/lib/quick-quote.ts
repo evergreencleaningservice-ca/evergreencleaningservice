@@ -14,10 +14,15 @@
  *   1. The browser's bubble shows one problem at a time, disappears on the
  *      next click, and cannot be read back by a screen reader after it has
  *      gone.
- *   2. "Phone or email, at least one" cannot be expressed in HTML at all.
- *      `required` says "this field, always". Marking both required is exactly
- *      the friction this form exists to remove, and marking neither means the
- *      browser has nothing to say when a visitor submits with both empty.
+ *   2. A message that names the field — "Please add your last name" rather
+ *      than "Please fill in this field" — and that can be shown for every
+ *      empty box at once instead of whichever one the browser reached first.
+ *
+ * Reason 2 used to read differently: "phone or email, at least one" could not
+ * be expressed in HTML at all, and that rule was the reason this machinery
+ * existed. The reference field set marks every field required, so HTML can
+ * now state the rule — but not the messages, and not all of them at once,
+ * which is why none of this went away with it.
  *
  * So the form carries `novalidate`, the constraint API is still used for
  * per-field validity (it knows what a valid email looks like better than a
@@ -29,23 +34,23 @@
 import { fieldValue, wireLeadForm } from './lead-submit';
 
 /**
- * Which error slot a field's message belongs in.
+ * Errors are written into `[data-qq-error="<the field's own name>"]`.
  *
- * Every field writes into `[data-qq-error="<its own name>"]` except phone and
- * email, which share one slot keyed `contact` — because they are one question
- * ("how should we reach you?") with two boxes, and the cross-field rule has no
- * field of its own to hang a message on.
+ * ONE SLOT PER FIELD, and it did not used to be. Phone and email shared a
+ * slot keyed `contact`, because they were one question with two boxes and the
+ * "either is enough" rule had no field of its own to hang a message on. With
+ * the reference field set both are required and each has something separate
+ * to say, so the mapping is gone.
  *
- * Getting this wrong is silent: `markInvalid` looks up a slot that does not
- * exist, finds nothing, and the visitor is refused with no message at all.
- * That is exactly what happened before this mapping existed.
+ * Getting this wrong is SILENT, which is why it is worth a comment rather
+ * than being obvious: a lookup for a slot that does not exist finds nothing,
+ * writes nothing, and the visitor is refused with no message at all. That is
+ * exactly what happened when this mapping was first missing — and again, for
+ * one test run, when the `contact` slot was removed from the markup while
+ * this function still pointed at it.
  */
-const slotKey = (name: string): string =>
-  name === 'phone' || name === 'email' ? 'contact' : name;
-
-/** Errors are written into `[data-qq-error="<key>"]`; `contact` is the pair. */
 const errorSlot = (form: HTMLFormElement, key: string) =>
-  form.querySelector<HTMLElement>(`[data-qq-error="${slotKey(key)}"]`);
+  form.querySelector<HTMLElement>(`[data-qq-error="${key}"]`);
 
 const summarySlot = (form: HTMLFormElement) =>
   form.querySelector<HTMLElement>('[data-qq-summary]');
@@ -59,13 +64,19 @@ function messageFor(name: string, el: HTMLInputElement | HTMLSelectElement): str
     switch (name) {
       case 'first-name':
         return 'Please add your first name.';
-      case 'business-name':
-        return 'Please add your business name.';
-      case 'postal':
-        return 'Please add a postal code or your city.';
-      case 'services':
-        return 'Please choose the service you need.';
+      case 'last-name':
+        return 'Please add your last name.';
+      case 'phone':
+        return 'Please add a mobile phone number.';
+      case 'email':
+        return 'Please add an email address.';
+      case 'message':
+        return 'Please tell us what you need cleaned.';
       default:
+        /* Every field on this form has a case above. The fallback is for a
+           field added later whose message nobody wrote — it is a worse
+           message, not a missing one, so a visitor is never refused in
+           silence. */
         return 'This one is needed.';
     }
   }
@@ -134,18 +145,12 @@ export function reportInvalidFields(form: HTMLFormElement): void {
   if (!summary) first?.focus();
 }
 
-/** Phone or email — the rule HTML has no word for. */
-export function contactMethodProblem(
-  form: HTMLFormElement
-): { message: string; field?: string } | null {
-  const phone = fieldValue(form, 'phone');
-  const email = fieldValue(form, 'email');
-  if (phone || email) return null;
-  return {
-    message: 'Please add a phone number or an email address, so we can reply. Either is fine.',
-    field: 'phone',
-  };
-}
+/* `contactMethodProblem` lived here: "phone OR email, one is enough", the
+   rule HTML has no word for and `validate` existed to carry. The reference
+   field set marks both required, so the browser now states the rule itself
+   and the function had no caller left. Removed rather than kept warm — an
+   exported validator nothing validates is a trap for the next person, who
+   would reasonably assume the site still accepts one or the other. */
 
 export interface QuickQuoteOptions {
   /** Small numbers in tests; the real one is the module default. */
@@ -199,8 +204,6 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
     const el = event.target as HTMLInputElement | null;
     if (!el?.name) return;
     el.removeAttribute('aria-invalid');
-    /* `slotKey` sends phone and email to the shared `contact` slot, so
-       touching either one clears the pair's message. */
     const slot = errorSlot(form, el.name);
     if (slot) slot.textContent = '';
   });
@@ -245,19 +248,25 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
     tagDeliveryTimeoutMs: options.tagDeliveryTimeoutMs,
 
     reportInvalid: reportInvalidFields,
-    validate: contactMethodProblem,
+    /* NO CROSS-FIELD RULE ANY MORE. This form used to accept "phone OR
+       email, one is enough", which `required` cannot express and
+       `contactMethodProblem` checked by hand. The reference field set marks
+       both required, so the browser states the rule on its own and the hook
+       has nothing left to add. */
 
     payload: (f) => ({
       form_id: f.dataset.formId ?? 'quick-quote',
-      name: fieldValue(f, 'first-name'),
-      business_name: fieldValue(f, 'business-name'),
+      /* One name in the database, two boxes on screen. Composed here so the
+         endpoint and the notification email see the shape they always saw. */
+      name: [fieldValue(f, 'first-name'), fieldValue(f, 'last-name')].filter(Boolean).join(' '),
       phone: fieldValue(f, 'phone'),
       email: fieldValue(f, 'email'),
-      /* One box, either format. The Worker stores it as the address it is —
-         a postal code or a place name is what we have, and pretending it is
-         a street address would be a lie in a column. */
-      address: fieldValue(f, 'postal'),
-      services: fieldValue(f, 'services'),
+      /* NO ADDRESS AND NO PROVINCE. Both were asked for briefly and then
+         taken back out: where the building is is a question the account
+         executive asks on the call, not a condition of making contact. Their
+         columns stay in the database — `address` is still filled by the
+         contact form on /contact-us/, and `province` holds what the few leads
+         taken while it was asked actually answered. */
       message: fieldValue(f, 'message'),
       page_url: location.href,
 

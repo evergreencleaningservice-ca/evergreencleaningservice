@@ -280,7 +280,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
     await sql`
       INSERT INTO leads
         (form_id, full_name, work_email, phone, facility_size, facility_type,
-         business_name, address, services, message, page_url,
+         business_name, address, province, services, message, page_url,
          gclid, gbraid, wbraid, msclkid, gad_source, gclsrc,
          utm_source, utm_medium, utm_campaign, utm_term, utm_content, utm_id,
          landing_page, referrer, touch_at,
@@ -291,7 +291,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
       VALUES
         (${lead.form_id}, ${lead.full_name}, ${lead.work_email}, ${lead.phone},
          ${lead.facility_size}, ${lead.facility_type},
-         ${lead.business_name}, ${lead.address}, ${lead.services}, ${lead.message},
+         ${lead.business_name}, ${lead.address}, ${lead.province || null}, ${lead.services}, ${lead.message},
          ${lead.page_url},
          ${lead.gclid}, ${lead.gbraid}, ${lead.wbraid}, ${lead.msclkid},
          ${lead.gad_source}, ${lead.gclsrc},

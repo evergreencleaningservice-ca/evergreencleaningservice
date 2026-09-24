@@ -23,11 +23,11 @@
  */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { LEAD_EVENT } from '../src/lib/lead-submit';
-import { contactMethodProblem, wireQuickQuote } from '../src/lib/quick-quote';
+import { wireQuickQuote } from '../src/lib/quick-quote';
 import { recordTouch } from '../src/lib/attribution';
 import {
-  VALID_EMAIL_ONLY,
-  VALID_PHONE_ONLY,
+  VALID_LEAD,
+  VALID_LEAD,
   fill,
   quickQuoteMarkup,
 } from './fixtures/quick-quote';
@@ -76,172 +76,132 @@ beforeEach(() => {
 
 /* ---------- 1. one contact method is enough ------------------------------ */
 
-describe('phone or email, at least one, never both', () => {
-  it('accepts a telephone number with no email address', async () => {
+describe('every field the form asks for is required', () => {
+  /**
+   * THIS BLOCK USED TO ASSERT THE OPPOSITE, and the change is a decision
+   * rather than a drift. The form took "phone OR email, one is enough" —
+   * deliberately, because it is what cold paid traffic sees and every extra
+   * box is a place to give up. The client chose the reference design's field
+   * set instead: seven fields, all required.
+   *
+   * It converts somewhat worse and qualifies somewhat better. What these
+   * tests hold is that the rule is now stated by the browser rather than by
+   * a hand-written cross-field check, and that nothing posts until it is met.
+   */
+  it('accepts a complete submission', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
 
     expect(fetchSpy).toHaveBeenCalledTimes(1);
     expect(sentBody(fetchSpy)).toMatchObject({
+      name: 'Dana Okonkwo',
       phone: '416 555 0142',
-      email: '',
-      name: 'Dana',
-      business_name: 'Placeholder Holdings Inc',
+      email: 'dana@placeholder-holdings.example',
+      message: 'Two floors of open-plan office, nightly.',
     });
     expect(leadEvents()).toHaveLength(1);
     expect(confirmation()).not.toBeNull();
   });
 
-  it('accepts an email address with no telephone number', async () => {
+  it('joins the two name boxes into the one name the database stores', () => {
+    /* Two fields on screen, one column behind it. A surname that vanished
+       between the form and the row would be the kind of loss nobody notices
+       until a client asks who a lead was. */
+    expect(VALID_LEAD['first-name']).toBe('Dana');
+    expect(VALID_LEAD['last-name']).toBe('Okonkwo');
+  });
+
+  it.each(['first-name', 'last-name', 'phone', 'email', 'message'])(
+    'marks %s required in the markup',
+    (name) => {
+      const form = mount();
+      const el = form.elements.namedItem(name) as HTMLInputElement;
+      expect(el, `no field named ${name}`).toBeTruthy();
+      expect(el.required, `${name} should be required`).toBe(true);
+    }
+  );
+
+  it('asks for five required fields', () => {
+    const form = mount();
+    const required = Array.from(form.elements).filter(
+      (el) => (el as HTMLInputElement).required
+    ).length;
+    expect(required).toBe(5);
+  });
+
+  it('no longer carries a shared contact error slot', () => {
+    /* Phone and email each have their own now. One slot for two required
+       fields would show one message and hide the other. */
+    mount();
+    expect(document.querySelector('[data-qq-error="contact"]')).toBeNull();
+    expect(document.querySelector('[data-qq-error="phone"]')).not.toBeNull();
+    expect(document.querySelector('[data-qq-error="email"]')).not.toBeNull();
+  });
+});
+
+/* ---------- 2. a required field filled in badly -------------------------- */
+
+describe('a field that is filled in badly', () => {
+  it('rejects a malformed email and says so on the email field', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_EMAIL_ONLY);
+    const form = ready({ ...VALID_LEAD, email: 'dana@' });
 
     await submit(form);
 
-    expect(fetchSpy).toHaveBeenCalledTimes(1);
-    expect(sentBody(fetchSpy)).toMatchObject({
-      phone: '',
-      email: 'dana@placeholder-holdings.example',
-    });
-    expect(leadEvents()).toHaveLength(1);
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(leadEvents()).toHaveLength(0);
+    expect(errorFor('email')).toContain('does not look complete');
+    expect((form.elements.namedItem('email') as HTMLInputElement).getAttribute('aria-invalid')).toBe(
+      'true'
+    );
   });
 
-  it('accepts both when a visitor chooses to give both', async () => {
+  it('posts nothing when a required field is simply empty', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_PHONE_ONLY, email: 'dana@placeholder-holdings.example' });
-
-    await submit(form);
-
-    expect(fetchSpy).toHaveBeenCalledTimes(1);
-    expect(leadEvents()).toHaveLength(1);
-  });
-
-  it('refuses neither, without posting and without a conversion', async () => {
-    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_PHONE_ONLY, phone: '', email: '' });
+    const form = ready({ ...VALID_LEAD, 'last-name': '' });
 
     await submit(form);
 
     expect(fetchSpy).not.toHaveBeenCalled();
     expect(leadEvents()).toHaveLength(0);
     expect(confirmation()).toBeNull();
-    expect(summary()).toContain('phone number or an email address');
-    /* And it says either is fine, rather than leaving a visitor to guess that
-       the form wants both back. */
-    expect(summary()).toContain('Either is fine');
-  });
-
-  it('sends the visitor to the phone field when neither is filled', async () => {
-    vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_PHONE_ONLY, phone: '', email: '' });
-
-    await submit(form);
-
-    expect(document.activeElement).toBe(form.elements.namedItem('phone'));
-  });
-
-  it('neither field is marked required in the markup', () => {
-    const form = mount();
-    expect((form.elements.namedItem('phone') as HTMLInputElement).required).toBe(false);
-    expect((form.elements.namedItem('email') as HTMLInputElement).required).toBe(false);
-  });
-
-  it('contactMethodProblem is exact about what satisfies it', () => {
-    const form = mount();
-
-    fill(form, { phone: '', email: '' });
-    expect(contactMethodProblem(form)).not.toBeNull();
-
-    fill(form, { phone: '416 555 0142', email: '' });
-    expect(contactMethodProblem(form)).toBeNull();
-
-    fill(form, { phone: '', email: 'a@b.example' });
-    expect(contactMethodProblem(form)).toBeNull();
-
-    /* Whitespace is not a contact method. */
-    fill(form, { phone: '   ', email: '  ' });
-    expect(contactMethodProblem(form)).not.toBeNull();
   });
 });
 
-/* ---------- 2. a malformed optional field is still rejected -------------- */
+/* ---------- 3. what the form asks for now -------------------------------- */
 
-describe('an optional field that is filled in badly', () => {
-  it('rejects a malformed email even though email is optional', async () => {
+describe('the field set, as it reaches the endpoint', () => {
+  it('sends only what the form now asks for', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_PHONE_ONLY, email: 'dana@' });
-
-    await submit(form);
-
-    expect(fetchSpy).not.toHaveBeenCalled();
-    expect(leadEvents()).toHaveLength(0);
-    expect(errorFor('contact')).toContain('does not look complete');
-    expect((form.elements.namedItem('email') as HTMLInputElement).getAttribute('aria-invalid')).toBe(
-      'true'
-    );
-  });
-
-  it('reports a malformed email before the cross-field rule, not after', async () => {
-    vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    /* Both a bad email AND no phone. The visitor should be told the thing they
-       can act on — fix the address they are clearly trying to give — not be
-       told to supply a different contact method entirely. */
-    const form = ready({ ...VALID_PHONE_ONLY, phone: '', email: 'dana@' });
-
-    await submit(form);
-
-    expect(errorFor('contact')).toContain('does not look complete');
-    expect(summary()).not.toContain('Either is fine');
-  });
-});
-
-/* ---------- 3. what the form no longer asks for -------------------------- */
-
-describe('the fields the long form required and this one does not', () => {
-  it('succeeds with no street address anywhere in the payload', async () => {
-    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
 
     const body = sentBody(fetchSpy);
-    /* `address` carries the postal-code-or-city box, which is one short field
-       and not a street address. Nothing asks for a street, a unit or a
-       province. */
-    expect(body.address).toBe('M5V 1Z4');
-    expect(Object.keys(body)).not.toContain('address1');
-    expect(Object.keys(body)).not.toContain('city');
-    expect(Object.keys(body)).not.toContain('state');
+    expect(body.name).toBe('Dana Okonkwo');
+    expect(body.phone).toBe('416 555 0142');
+    expect(body.email).toBe('dana@placeholder-holdings.example');
+    expect(body.message).toBe('Two floors of open-plan office, nightly.');
   });
 
-  it('succeeds with no last name', async () => {
+  it('stops sending the fields the form stopped asking for', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
 
-    expect(sentBody(fetchSpy).name).toBe('Dana');
-    expect(form.elements.namedItem('last-name')).toBeNull();
-  });
-
-  it('succeeds with the optional message left empty', async () => {
-    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY);
-
-    await submit(form);
-
-    expect(sentBody(fetchSpy).message).toBe('');
-    expect(leadEvents()).toHaveLength(1);
-  });
-
-  it('asks for four required fields, not nine', () => {
-    const form = mount();
-    const required = Array.from(form.elements).filter(
-      (el) => (el as HTMLInputElement).required
-    ).length;
-    expect(required).toBe(4);
+    const body = sentBody(fetchSpy);
+    /* Their COLUMNS survive — earlier leads answered them, and `address` is
+       still filled by the contact form on /contact-us/. The payload does not,
+       because nothing on this form fills them any more. */
+    for (const key of ['business_name', 'services', 'address', 'province']) {
+      expect(Object.keys(body), `${key} should not be sent`).not.toContain(key);
+    }
+    for (const name of ['business-name', 'services', 'postal', 'address', 'province']) {
+      expect(form.elements.namedItem(name), `${name} should not be on the form`).toBeNull();
+    }
   });
 });
 
@@ -250,7 +210,7 @@ describe('the fields the long form required and this one does not', () => {
 describe('failures never report a conversion', () => {
   it.each([400, 401, 404, 422, 429, 500, 502, 503])('HTTP %i', async (code) => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(status(code));
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
 
@@ -263,7 +223,7 @@ describe('failures never report a conversion', () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(status(403));
     const reset = vi.fn();
     window.turnstile = { reset } as never;
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
 
@@ -278,7 +238,7 @@ describe('failures never report a conversion', () => {
 
   it('a network failure says call us, and reports nothing', async () => {
     vi.spyOn(globalThis, 'fetch').mockRejectedValue(new TypeError('Failed to fetch'));
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
 
@@ -288,7 +248,7 @@ describe('failures never report a conversion', () => {
 
   it('a missing required field posts nothing', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_PHONE_ONLY, 'business-name': '' });
+    const form = ready({ ...VALID_LEAD, 'last-name': '' });
 
     await submit(form);
 
@@ -302,7 +262,7 @@ describe('failures never report a conversion', () => {
 describe('the short form uses the site pipeline, not its own', () => {
   it('posts exactly one request and one event for repeated clicks', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form, 5);
 
@@ -312,7 +272,7 @@ describe('the short form uses the site pipeline, not its own', () => {
 
   it('a second submit after a success is still one conversion', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
     await submit(form);
@@ -327,7 +287,7 @@ describe('the short form uses the site pipeline, not its own', () => {
       'https://www.google.com/'
     );
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
 
@@ -341,7 +301,7 @@ describe('the short form uses the site pipeline, not its own', () => {
 
   it('identifies itself as quick-quote in the payload and the event', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
 
@@ -351,7 +311,7 @@ describe('the short form uses the site pipeline, not its own', () => {
 
   it('puts no personal information in the dataLayer', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_PHONE_ONLY, email: 'dana@placeholder-holdings.example' });
+    const form = ready({ ...VALID_LEAD, email: 'dana@placeholder-holdings.example' });
 
     await submit(form);
 
@@ -371,7 +331,7 @@ describe('the short form uses the site pipeline, not its own', () => {
 
   it('answers a honeypot hit like a success, without posting or converting', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY, { honeypot: 'http://spam.example' });
+    const form = ready(VALID_LEAD, { honeypot: 'http://spam.example' });
 
     await submit(form);
 
@@ -392,7 +352,7 @@ describe('the deferred captcha', () => {
       postedAfter = Date.now() - started;
       return ok();
     });
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
 
@@ -406,7 +366,7 @@ describe('the deferred captcha', () => {
 
   it('waits for a token that arrives after the visitor has hit submit', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY, { token: null });
+    const form = ready(VALID_LEAD, { token: null });
 
     /* Turnstile resolving late — the deferred loader's whole point is that the
        widget may not have executed when a fast visitor submits. */
@@ -427,7 +387,7 @@ describe('the deferred captcha', () => {
 
   it('still posts when no token ever arrives, and lets the server decide', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(status(403));
-    const form = ready(VALID_PHONE_ONLY, { token: null });
+    const form = ready(VALID_LEAD, { token: null });
 
     await submit(form);
 
@@ -447,26 +407,25 @@ describe('errors are announced, not just coloured', () => {
   it('reports every problem at once rather than one per attempt', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
     const form = ready({
+      ...VALID_LEAD,
       'first-name': '',
-      'business-name': '',
-      phone: '416 555 0142',
-      email: '',
-      postal: '',
-      services: '',
+      'last-name': '',
+      phone: '',
+      message: '',
     });
 
     await submit(form);
 
     expect(errorFor('first-name')).toContain('first name');
-    expect(errorFor('business-name')).toContain('business name');
-    expect(errorFor('postal')).toContain('postal code');
-    expect(errorFor('services')).toContain('service');
+    expect(errorFor('last-name')).toContain('last name');
+    expect(errorFor('phone')).toContain('phone');
+    expect(errorFor('message')).toContain('cleaned');
     expect(summary()).toContain('4 things need a moment');
   });
 
   it('marks each bad field aria-invalid and each error is described by id', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_PHONE_ONLY, 'first-name': '' });
+    const form = ready({ ...VALID_LEAD, 'first-name': '' });
 
     await submit(form);
 
@@ -479,7 +438,7 @@ describe('errors are announced, not just coloured', () => {
 
   it('the summary is a live region and takes focus', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_PHONE_ONLY, 'first-name': '' });
+    const form = ready({ ...VALID_LEAD, 'first-name': '' });
 
     await submit(form);
 
@@ -492,7 +451,7 @@ describe('errors are announced, not just coloured', () => {
 
   it('clears a field error the moment the visitor starts fixing it', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_PHONE_ONLY, 'first-name': '' });
+    const form = ready({ ...VALID_LEAD, 'first-name': '' });
     await submit(form);
     expect(errorFor('first-name')).not.toBe('');
 
@@ -506,20 +465,26 @@ describe('errors are announced, not just coloured', () => {
 
   it('clears the contact error when either phone or email is touched', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_PHONE_ONLY, phone: '', email: '' });
+    /* Phone and email each own their slot now — they shared one keyed
+       `contact` while the rule was "either is enough". Touching one must
+       clear ITS message and leave the other's standing. */
+    const form = ready({ ...VALID_LEAD, phone: '', email: '' });
     await submit(form);
     expect(summary()).not.toBe('');
+    expect(errorFor('phone')).not.toBe('');
+    expect(errorFor('email')).not.toBe('');
 
     const email = form.elements.namedItem('email') as HTMLInputElement;
     email.value = 'd';
     email.dispatchEvent(new Event('input', { bubbles: true }));
 
-    expect(errorFor('contact')).toBe('');
+    expect(errorFor('email')).toBe('');
+    expect(errorFor('phone'), 'the phone message must survive').not.toBe('');
   });
 
   it('a stale error does not survive the next attempt', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_PHONE_ONLY, 'first-name': '', postal: '' });
+    const form = ready({ ...VALID_LEAD, 'first-name': '', phone: '' });
     await submit(form);
     expect(summary()).toContain('2 things');
 
@@ -527,7 +492,7 @@ describe('errors are announced, not just coloured', () => {
     await submit(form);
 
     expect(errorFor('first-name')).toBe('');
-    expect(summary()).toContain('postal code');
+    expect(summary()).toContain('phone');
     expect(summary()).not.toContain('2 things');
   });
 });
@@ -535,7 +500,7 @@ describe('errors are announced, not just coloured', () => {
 describe('success is announced, and the visitor keeps their place', () => {
   it('replaces the form with a focusable status box', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
 
@@ -550,7 +515,7 @@ describe('success is announced, and the visitor keeps their place', () => {
 
   it('says what happens next and offers the phone number', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
     await submit(form);
 
@@ -565,10 +530,10 @@ describe('success is announced, and the visitor keeps their place', () => {
 describe('keyboard behaviour', () => {
   it('Enter in a text field submits, as a visitor expects', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
 
-    const postal = form.elements.namedItem('postal') as HTMLInputElement;
-    postal.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    const firstName = form.elements.namedItem('first-name') as HTMLInputElement;
+    firstName.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
     /* happy-dom does not synthesise the implicit submit, so the assertion is
        that nothing intercepted the key on a real field. */
     await submit(form);
@@ -605,7 +570,7 @@ describe('the submit button', () => {
         resolve = r;
       })
     );
-    const form = ready(VALID_PHONE_ONLY);
+    const form = ready(VALID_LEAD);
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
     const label = button.textContent;
 

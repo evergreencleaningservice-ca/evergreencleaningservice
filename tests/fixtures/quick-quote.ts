@@ -36,6 +36,33 @@ export interface FieldSpec {
  * deliberately `required: false`: the rule is "one of the two", which HTML
  * cannot state, so it lives in `contactMethodProblem` and is tested there.
  */
+/**
+ * The reference design's field set, adopted wholesale.
+ *
+ * WHAT CHANGED AND WHY IT IS WORTH READING. This form was deliberately short
+ * — first name, business name, phone OR email, postal code, one service
+ * select — because it is what cold paid traffic sees and every field is a
+ * place to give up. That is now replaced by the client's chosen reference:
+ * five fields, ALL REQUIRED, including a surname.
+
+ * A street address and a province were asked for on one revision in between
+ * and taken back out: where the building is is a question the account
+ * executive asks on the call, not a condition of making contact.
+ *
+ * It asks more and it will convert somewhat worse; that is a business
+ * decision the client made with the trade-off in front of them, not an
+ * oversight. What it buys is a lead that can be dispatched without a
+ * qualifying call.
+ *
+ * Gone: `business-name`, `postal`, the `services` select, and the `address`
+ * and `province` boxes that briefly replaced the postal one. Their columns
+ * survive in the database — earlier leads answered them, and `address` is
+ * still filled by the contact form on /contact-us/.
+ *
+ * Note every field now has its OWN error key. The old form shared one
+ * `contact` slot between phone and email, because the rule was "either of
+ * these"; with both required there is a separate thing to say about each.
+ */
 export const FIELDS: FieldSpec[] = [
   {
     name: 'first-name',
@@ -46,53 +73,53 @@ export const FIELDS: FieldSpec[] = [
     errorKey: 'first-name',
   },
   {
-    name: 'business-name',
+    name: 'last-name',
     tag: 'input',
     type: 'text',
     required: true,
-    autocomplete: 'organization',
-    errorKey: 'business-name',
+    autocomplete: 'family-name',
+    errorKey: 'last-name',
   },
   {
     name: 'phone',
     tag: 'input',
     type: 'tel',
-    required: false,
+    required: true,
     autocomplete: 'tel',
     inputmode: 'tel',
-    errorKey: 'contact',
+    errorKey: 'phone',
   },
   {
     name: 'email',
     tag: 'input',
     type: 'email',
-    required: false,
+    required: true,
     autocomplete: 'email',
     inputmode: 'email',
-    errorKey: 'contact',
+    errorKey: 'email',
   },
-  {
-    name: 'postal',
-    tag: 'input',
-    type: 'text',
-    required: true,
-    autocomplete: 'postal-code',
-    errorKey: 'postal',
-  },
-  { name: 'services', tag: 'select', required: true, errorKey: 'services' },
-  { name: 'message', tag: 'textarea', required: false },
+  { name: 'message', tag: 'textarea', required: true, errorKey: 'message' },
 ];
 
-/** Names the form must never ask for. Each was on the form it replaces. */
+/**
+ * Names the form must never ask for.
+ *
+ * MUCH SHORTER THAN IT WAS. This list began as "everything the eighteen-field
+ * form asked that the short form refused", and `last-name`, `address1`,
+ * `city`, `state` and `province` were on it — the short form existed to not
+ * ask those. The client has since chosen the reference design, which asks for
+ * a surname, a street address and a province, so keeping them banned would be
+ * testing a decision that was reversed.
+ *
+ * What stays banned is what NOTHING on the site asks for and nothing should
+ * start asking for without a deliberate change: the split address lines, and
+ * the qualification questions (square footage, frequency) that belong in the
+ * account executive's first call rather than in front of a stranger.
+ */
 export const BANNED_FIELDS = [
-  'last-name',
-  'lastName',
   'address1',
   'address2',
   'street',
-  'city',
-  'state',
-  'province',
   'size',
   'facility_size',
   'frequency',
@@ -127,36 +154,25 @@ export function quickQuoteMarkup({
              aria-describedby="${id}-first-name-error" />
       ${err('first-name')}
 
-      <label for="${id}-business">Business name</label>
-      <input type="text" id="${id}-business" name="business-name" autocomplete="organization" required
-             aria-describedby="${id}-business-name-error" />
-      ${err('business-name')}
+      <label for="${id}-last">Last name</label>
+      <input type="text" id="${id}-last" name="last-name" autocomplete="family-name" required
+             aria-describedby="${id}-last-name-error" />
+      ${err('last-name')}
 
-      <fieldset class="qq-contact">
-        <legend>How should we reach you?</legend>
-        <label for="${id}-phone">Phone</label>
-        <input type="tel" id="${id}-phone" name="phone" inputmode="tel" autocomplete="tel"
-               aria-describedby="${id}-contact-error" />
-        <label for="${id}-email">Email</label>
-        <input type="email" id="${id}-email" name="email" inputmode="email" autocomplete="email"
-               aria-describedby="${id}-contact-error" />
-        ${err('contact')}
-      </fieldset>
+      <label for="${id}-phone">Mobile phone</label>
+      <input type="tel" id="${id}-phone" name="phone" inputmode="tel" autocomplete="tel" required
+             aria-describedby="${id}-phone-error" />
+      ${err('phone')}
 
-      <label for="${id}-postal">Postal code or city</label>
-      <input type="text" id="${id}-postal" name="postal" autocomplete="postal-code" required
-             aria-describedby="${id}-postal-error" />
-      ${err('postal')}
+      <label for="${id}-email">Email</label>
+      <input type="email" id="${id}-email" name="email" inputmode="email" autocomplete="email" required
+             aria-describedby="${id}-email-error" />
+      ${err('email')}
 
-      <label for="${id}-service">Service needed</label>
-      <select id="${id}-service" name="services" required aria-describedby="${id}-services-error">
-        <option value="">Choose one…</option>
-        <option value="Office cleaning &amp; janitorial">Office cleaning &amp; janitorial</option>
-      </select>
-      ${err('services')}
-
-      <label for="${id}-message">Anything we should know?</label>
-      <textarea id="${id}-message" name="message" rows="3"></textarea>
+      <label for="${id}-message">Cleaning needs</label>
+      <textarea id="${id}-message" name="message" rows="4" required
+                aria-describedby="${id}-message-error"></textarea>
+      ${err('message')}
 
       <div class="qq-hp" aria-hidden="true">
         <label for="${id}-hp">Company website</label>
@@ -188,19 +204,18 @@ export function fill(
   }
 }
 
-/** The minimum a lead needs, with a phone as the contact method. */
-export const VALID_PHONE_ONLY = {
+/**
+ * A complete submission. Every field on the reference form is required, so
+ * there is no longer a "minimum" that omits one — this IS the minimum.
+ *
+ * `VALID_PHONE_ONLY` and `VALID_EMAIL_ONLY` are gone with the rule they
+ * existed for: the form used to take a phone OR an email and those two
+ * constants were the two shapes that satisfied it. Both are now required.
+ */
+export const VALID_LEAD = {
   'first-name': 'Dana',
-  'business-name': 'Placeholder Holdings Inc',
+  'last-name': 'Okonkwo',
   phone: '416 555 0142',
-  email: '',
-  postal: 'M5V 1Z4',
-  services: 'Office cleaning & janitorial',
-};
-
-/** The same, with an email instead. */
-export const VALID_EMAIL_ONLY = {
-  ...VALID_PHONE_ONLY,
-  phone: '',
   email: 'dana@placeholder-holdings.example',
+  message: 'Two floors of open-plan office, nightly.',
 };

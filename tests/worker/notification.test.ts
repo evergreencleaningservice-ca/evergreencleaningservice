@@ -130,7 +130,7 @@ describe('the message body', () => {
 
     expect(text).toContain('Phone: 416 555 0142');
     expect(text).toContain(`Email: ${NOT_SUPPLIED}`);
-    expect(text).toContain(`Message: ${NOT_SUPPLIED}`);
+    expect(text).toContain(`Cleaning needs: ${NOT_SUPPLIED}`);
   });
 
   it('shows (not supplied) for a missing phone on an email-only lead', () => {
@@ -140,10 +140,15 @@ describe('the message body', () => {
     expect(text).toContain('Email: dana@placeholder.example');
   });
 
-  it('lists all seven core fields even when the lead is nearly empty', () => {
+  it('lists every core field even when the lead is nearly empty', () => {
     const text = notificationText(normalizeLead({ name: 'Dana' }) as unknown as Record<string, string>);
     for (const [, label] of CORE_FIELDS) expect(text).toContain(`${label}:`);
-    expect(text.split('\n').filter((l) => l.includes(NOT_SUPPLIED))).toHaveLength(6);
+    /* Five core fields: `business_name` and `services` came out when the
+       form stopped asking for them, and `province` was in the list for one
+       revision before the form dropped it too. Four are (not supplied) here
+       because only the name was given. */
+    expect(CORE_FIELDS).toHaveLength(5);
+    expect(text.split('\n').filter((l) => l.includes(NOT_SUPPLIED))).toHaveLength(4);
   });
 
   it('lists a non-empty attribution field but not an empty one', () => {
