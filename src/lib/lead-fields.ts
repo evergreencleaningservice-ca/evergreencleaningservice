@@ -92,6 +92,8 @@ export interface Lead {
   facility_type: string;
   business_name: string;
   address: string;
+  /** Province of the building to be cleaned. Added with the reference field set. */
+  province: string;
   services: string;
   message: string;
   page_url: string;
@@ -142,6 +144,7 @@ export function normalizeLead(body: Record<string, unknown>, now: Date = new Dat
     facility_type: str(body.facility_type, 120),
     business_name: str(body.business_name, 200),
     address: str(body.address, 400),
+    province: str(body.province, 100),
     services: str(body.services, 400),
     message: str(body.message, 4000),
     page_url: safeStr(body.page_url, 500),

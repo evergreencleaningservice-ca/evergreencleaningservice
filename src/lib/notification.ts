@@ -44,14 +44,25 @@ export interface ResendPayload {
  * visitor gave no email" and "the email was lost somewhere between the form
  * and here". The first is a lead to phone; the second is a bug.
  */
+/**
+ * Tracks the form. When the quote form took the reference design's field set,
+ * `business_name` and `services` stopped being asked for — so they came out
+ * of this list too. They are always-rendered fields: leaving them in would
+ * have printed "Business: (not supplied)" and "Service needed: (not
+ * supplied)" on every single lead from now on, which is exactly the noise the
+ * `extra` pass below exists to keep out.
+ *
+ * Nothing is lost by removing them. The columns still exist and still hold
+ * what earlier leads answered, and a lead that somehow carries either value
+ * is picked up by `extra` and printed.
+ */
 export const CORE_FIELDS: readonly (readonly [string, string])[] = [
   ['full_name', 'Name'],
-  ['business_name', 'Business'],
   ['phone', 'Phone'],
   ['work_email', 'Email'],
-  ['address', 'Postal code / city'],
-  ['services', 'Service needed'],
-  ['message', 'Message'],
+  ['address', 'Address'],
+  ['province', 'Province'],
+  ['message', 'Cleaning needs'],
 ] as const;
 
 export const NOT_SUPPLIED = '(not supplied)';

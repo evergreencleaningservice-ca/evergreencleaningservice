@@ -123,10 +123,15 @@ describe('the rendered form matches the contract the unit suite tests', () => {
     }
   });
 
-  it('asks four required questions, not nine', () => {
+  it('asks seven required questions', () => {
+    /* Four, until the client chose the reference design's field set. A
+       surname, a street address and a province are asked for now, and the
+       message is no longer optional. The number is pinned rather than
+       loosened: a field quietly becoming required is a conversion cost
+       somebody should have to state out loud. */
     const required = (form().match(/\brequired(?=[\s/>])/g) ?? []).length;
     expect(required).toBe(REQUIRED_COUNT);
-    expect(required).toBe(4);
+    expect(required).toBe(7);
   });
 
   it.each(BANNED_FIELDS)('does not ask for %s', (name) => {
@@ -208,8 +213,16 @@ describe('every field is labelled', () => {
     }
   });
 
-  it('marks the optional field optional in its label', () => {
-    expect(quickQuoteForm()).toMatch(/Anything we should know\?[\s\S]{0,120}Optional/i);
+  it('has no optional field left to mark', () => {
+    /* "Anything we should know? (Optional)" was the one field a visitor could
+       skip. The reference form's equivalent is "Cleaning needs", required —
+       so there is nothing to label optional, and nothing should claim to be.
+       The consent checkbox is not a question about the enquiry and has its
+       own block below. */
+    const f = quickQuoteForm();
+    expect(f).not.toMatch(/Anything we should know/i);
+    expect(f).not.toMatch(/qq-optional/);
+    expect(f).toMatch(/Cleaning needs/i);
   });
 });
 

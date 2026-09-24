@@ -77,16 +77,31 @@ const {
 } = Astro.props;
 const f = (name: string) => `${id}-${name}`;
 
-/* The site's own service names, as the service pages use them. */
-const SERVICES = [
-  'Office cleaning & janitorial',
-  'Commercial cleaning',
-  'Industrial & warehouse cleaning',
-  'Disinfection cleaning',
-  'Post-construction cleaning',
-  'Emergency cleaning',
-  'Building maintenance',
-  'Something else',
+/**
+ * Ontario first, then the rest alphabetically.
+ *
+ * NOT ALPHABETICAL THROUGHOUT, deliberately. This client cleans Toronto and
+ * the GTA; all but a rounding error of these answers are Ontario, and putting
+ * it first saves every one of those visitors a scroll. The rest are present
+ * because a national enquiry is not an error to reject — it is a lead to pass
+ * on or decline by hand.
+ *
+ * The territories are included for the same reason.
+ */
+const PROVINCES = [
+  'Ontario',
+  'Alberta',
+  'British Columbia',
+  'Manitoba',
+  'New Brunswick',
+  'Newfoundland and Labrador',
+  'Northwest Territories',
+  'Nova Scotia',
+  'Nunavut',
+  'Prince Edward Island',
+  'Quebec',
+  'Saskatchewan',
+  'Yukon',
 ];
 
 /**
@@ -140,103 +155,103 @@ const CONSENT_TEXT =
     </div>
 
     <div class="qq-field">
-      <label class="qq-label" for={f('business')}>Business name <span class="qq-req">*</span></label>
+      <label class="qq-label" for={f('last')}>Last name <span class="qq-req">*</span></label>
       <input
         type="text"
-        id={f('business')}
-        name="business-name"
-        autocomplete="organization"
-        placeholder="Acme Dental"
+        id={f('last')}
+        name="last-name"
+        autocomplete="family-name"
+        autocapitalize="words"
+        placeholder="Doe"
         required
-        aria-describedby={f('business-error')}
+        aria-describedby={f('last-error')}
       />
-      <p class="qq-error" id={f('business-error')} data-qq-error="business-name"></p>
+      <p class="qq-error" id={f('last-error')} data-qq-error="last-name"></p>
     </div>
   </div>
 
-  <fieldset class="qq-contact">
-    <legend class="qq-label">
-      How should we reach you? <span class="qq-req">*</span>
-      <span class="qq-hint">Phone or email — whichever you prefer. One is enough.</span>
-    </legend>
-
-    <div class="qq-row">
-      <div class="qq-field">
-        <label class="qq-sublabel" for={f('phone')}>Phone</label>
-        <input
-          type="tel"
-          id={f('phone')}
-          name="phone"
-          inputmode="tel"
-          autocomplete="tel"
-          {/* A FORMAT MASK, NOT AN EXAMPLE NUMBER. The first attempt used a
-              plausible-looking 416 number and `landing-pages.test.ts` caught
-              it: these pages must show exactly one telephone number, the real
-              one, so a second set of digits on screen is a number a visitor
-              could read as the client's. The reference design masks it the
-              same way. */}
-          placeholder="+1 XXX XXX XXXX"
-          aria-describedby={f('contact-error')}
-        />
-      </div>
-
-      <div class="qq-field">
-        <label class="qq-sublabel" for={f('email')}>Email</label>
-        <input
-          type="email"
-          id={f('email')}
-          name="email"
-          inputmode="email"
-          autocomplete="email"
-          spellcheck="false"
-          placeholder="jane@yourcompany.com"
-          aria-describedby={f('contact-error')}
-        />
-      </div>
+  <div class="qq-row">
+    <div class="qq-field">
+      <label class="qq-label" for={f('phone')}>Mobile phone <span class="qq-req">*</span></label>
+      <input
+        type="tel"
+        id={f('phone')}
+        name="phone"
+        inputmode="tel"
+        autocomplete="tel"
+        {/* A FORMAT MASK, NOT AN EXAMPLE NUMBER. An earlier attempt used a
+            plausible-looking 416 number and `landing-pages.test.ts` caught
+            it: these pages must show exactly one telephone number, the real
+            one, so a second set of digits on screen is a number a visitor
+            could read as the client's. The reference masks it the same way. */}
+        placeholder="+1 XXX XXX XXXX"
+        required
+        aria-describedby={f('phone-error')}
+      />
+      <p class="qq-error" id={f('phone-error')} data-qq-error="phone"></p>
     </div>
 
-    <p class="qq-error" id={f('contact-error')} data-qq-error="contact"></p>
-  </fieldset>
+    <div class="qq-field">
+      <label class="qq-label" for={f('email')}>Work email <span class="qq-req">*</span></label>
+      <input
+        type="email"
+        id={f('email')}
+        name="email"
+        inputmode="email"
+        autocomplete="email"
+        spellcheck="false"
+        placeholder="jane@yourcompany.com"
+        required
+        aria-describedby={f('email-error')}
+      />
+      <p class="qq-error" id={f('email-error')} data-qq-error="email"></p>
+    </div>
+  </div>
 
   <div class="qq-row">
     <div class="qq-field">
-      <label class="qq-label" for={f('postal')}>
-        Postal code or city <span class="qq-req">*</span>
-      </label>
+      <label class="qq-label" for={f('address')}>Address <span class="qq-req">*</span></label>
       <input
         type="text"
-        id={f('postal')}
-        name="postal"
-        autocomplete="postal-code"
-        autocapitalize="characters"
-        placeholder="M5V 2T6 — or Toronto"
+        id={f('address')}
+        name="address"
+        autocomplete="street-address"
+        placeholder="Property address"
         required
-        aria-describedby={f('postal-error')}
+        aria-describedby={f('address-error')}
       />
-      <p class="qq-error" id={f('postal-error')} data-qq-error="postal"></p>
+      <p class="qq-error" id={f('address-error')} data-qq-error="address"></p>
     </div>
 
     <div class="qq-field">
-      <label class="qq-label" for={f('service')}>Service needed <span class="qq-req">*</span></label>
-      <select id={f('service')} name="services" required aria-describedby={f('service-error')}>
-        <option value="">Choose one…</option>
-        {SERVICES.map((s) => <option value={s}>{s}</option>)}
+      <label class="qq-label" for={f('province')}>Province <span class="qq-req">*</span></label>
+      {/* A SELECT, WHERE THE REFERENCE SHOWS A BARE BOX. It renders the same
+          way at rest — empty, no placeholder — and it is the one field on
+          this form whose value gets read as a category rather than as prose.
+          Free text produces "ON", "Ont", "ontario" and "Ontari" for the same
+          answer, and the province is what decides which crew is dispatched. */}
+      <select id={f('province')} name="province" required aria-describedby={f('province-error')}>
+        <option value=""></option>
+        {PROVINCES.map((p) => <option value={p}>{p}</option>)}
       </select>
-      <p class="qq-error" id={f('service-error')} data-qq-error="services"></p>
+      <p class="qq-error" id={f('province-error')} data-qq-error="province"></p>
     </div>
   </div>
 
   <div class="qq-field">
     <label class="qq-label" for={f('message')}>
-      Anything we should know? <span class="qq-optional">Optional</span>
+      Cleaning needs <span class="qq-req">*</span>
     </label>
     <textarea
       id={f('message')}
       name="message"
-      rows="3"
-      placeholder="Your facility type, and the cleaning problem you'd most like solved."
-      data-qq-optional></textarea>
+      rows="4"
+      placeholder="How can we help? Please describe your facility type and the main cleaning challenges you'd like us to solve."
+      required
+      aria-describedby={f('message-error')}></textarea>
+    <p class="qq-error" id={f('message-error')} data-qq-error="message"></p>
   </div>
+
 
   {/*
     Express consent to marketing email — optional, and unticked.

@@ -1,0 +1,27 @@
+-- The quote form adopts the reference design's field set, which asks for a
+-- street address and a province where this form asked for "postal code or
+-- city" in one box.
+--
+-- `address` already exists and keeps its meaning — the place to be cleaned.
+-- What it holds changes: rows written before this migration carry a postal
+-- code or a place name, rows after it carry a street address. Both are
+-- addresses and both are what the visitor typed, so they are not separated.
+--
+-- `province` is new because it is a different fact. Folding it into `address`
+-- as free text would make "which province" a string search rather than a
+-- column, and the one question this client's crews are dispatched by is where
+-- the building is.
+--
+-- NULLABLE, with no default. The 23 rows already in this table predate the
+-- field and nobody was asked, so NULL is the truthful value for them — unlike
+-- `marketing_consent`, where "not asked" and "declined" mean the same thing
+-- in law and false is honest. Here, empty would claim a blank answer to a
+-- question never put.
+--
+-- NOT DROPPED: `business_name` and `services`. The reference's form asks for
+-- neither, so nothing new will fill them, but 23 rows have values there and
+-- deleting a column to tidy the schema would delete those answers with it.
+--
+-- Applied to Neon project long-firefly-62771888, database `evergreen`.
+
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS province TEXT;
