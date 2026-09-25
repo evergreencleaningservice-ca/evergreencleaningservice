@@ -62,16 +62,7 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
           cards.map((r) => (
             <article class="ti-card">
               <header class="ti-head">
-                <img
-                  class="ti-avatar"
-                  src={r.avatar}
-                  srcset={`${r.avatar} 1x, ${r.avatar.replace(/\.png$/, '-2x.png')} 2x`}
-                  alt=""
-                  width="40"
-                  height="40"
-                  loading="lazy"
-                  decoding="async"
-                />
+                <span class="ti-avatar" aria-hidden="true">{r.name.split(' ').map((w) => w[0]).join('')}</span>
                 <div class="ti-who">
                   <p class="ti-name">{r.name}</p>
                   <p class="ti-age">{r.age}</p>
@@ -213,7 +204,12 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    object-fit: cover;
+    background: #e3efe4;
+    color: #1b5e20;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
   }
 
   .ti-who {

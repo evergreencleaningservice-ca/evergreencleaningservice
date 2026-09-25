@@ -17,7 +17,10 @@ interface Props {
 }
 
 const { post, newer, older } = Astro.props;
-const { title, description, pubDate, image } = post.data;
+const { title, description, pubDate, image, imageAlt } = post.data;
+/* Refreshed featured images ship as AVIF/WebP/JPEG siblings at 960x480. */
+const modern = image && /-feature\.jpg$/.test(image);
+const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
 
 ---
 
@@ -66,7 +69,17 @@ const { title, description, pubDate, image } = post.data;
       {
         image && (
           <div class="post-featured">
-            <img src={image} alt="" width="1200" height="600" decoding="async" />
+            <picture>
+              {modern && <source type="image/avif" srcset={sibling('avif')} />}
+              {modern && <source type="image/webp" srcset={sibling('webp')} />}
+              <img
+                src={image}
+                alt={imageAlt ?? ''}
+                width={modern ? 960 : 1200}
+                height={modern ? 480 : 600}
+                decoding="async"
+              />
+            </picture>
           </div>
         )
       }

@@ -1,7 +1,8 @@
 ---
 title: "Property Management and Building Maintenance"
 description: "General Building Maintenance Services in Toronto GTA At Evergreen Office Cleaning, we understand that maintaining a clean, functional, and professional workspace is essential to your business’s success."
-image: "/images/trash-removal-toronto-gta-640x400.jpg"
+image: "/images/gta-office-building-exterior-plaza.jpg"
+imageAlt: "GTA commercial office building entrance and plaza maintained by Evergreen"
 ---
 
 <!--

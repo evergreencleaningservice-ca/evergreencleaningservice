@@ -21,7 +21,33 @@
  *     none becomes a build-time failure rather than a silent default.
  *  6. Every image in a body sits below the page header and any featured image,
  *     so they can all be lazy-loaded.
+ *  7. Images with no `width`/`height` reserve no space until they load, which
+ *     shifts the copy below them. Local `/images/` JPEG/PNG files are stamped
+ *     with their intrinsic size so the browser can reserve the box.
  */
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+function intrinsicSize(file: string): [number, number] | null {
+  try {
+    const path = join(process.cwd(), 'public', 'images', file);
+    if (!existsSync(path)) return null;
+    const b = readFileSync(path);
+    if (b[0] === 0x89 && b[1] === 0x50) return [b.readUInt32BE(16), b.readUInt32BE(20)];
+    if (b[0] === 0xff && b[1] === 0xd8) {
+      let i = 2;
+      while (i + 9 < b.length) {
+        if (b[i] !== 0xff) { i++; continue; }
+        const m = b[i + 1];
+        if (m >= 0xc0 && m <= 0xcf && m !== 0xc4 && m !== 0xc8 && m !== 0xcc)
+          return [b.readUInt16BE(i + 7), b.readUInt16BE(i + 5)];
+        i += 2 + b.readUInt16BE(i + 2);
+      }
+    }
+  } catch {}
+  return null;
+}
+
 export function normalizeBody(html: string): string {
   return html
     .replace(/(href|src)="\/wp-content\/uploads\/[^"]*?\/([^"/]+)"/g, '$1="/images/$2"')
@@ -35,5 +61,9 @@ export function normalizeBody(html: string): string {
         /\bdata-call-location=/.test(attrs) ? whole : `<a${attrs} data-call-location="content">`
     )
     .replace(/<a\b[^>]*>\s*<\/a>/g, '')
-    .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" ');
+    .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" ')
+    .replace(/<img(?![^>]*\swidth=)([^>]*?\ssrc="\/images\/([^"/]+\.(?:jpe?g|png))")/gi, (whole, _rest, file: string) => {
+      const size = intrinsicSize(decodeURIComponent(file));
+      return size ? whole.replace('<img', `<img width="${size[0]}" height="${size[1]}"`) : whole;
+    });
 }

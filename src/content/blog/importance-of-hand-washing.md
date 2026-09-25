@@ -2,7 +2,7 @@
 title: "Importance Of Hand-washing"
 description: "How important is hand-washing? Here we discuss the importance of just that and how it impacts your office team."
 pubDate: 2022-08-02
-image: "/images/hand-sanitizing-woman-300x150.jpg"
+image: "/images/office-worker-sanitizing-surfaces.jpg"
 tags: ["commercial-cleaning", "janitorial-services", "office"]
 ---
 
@@ -16,7 +16,7 @@ Thus, to prevent spreading harmful bacteria, germs, and viruses, you’ll need t
 
 A lot of people don’t realize how many germs can transfer after a firm handshake either.
 
-![handwashing](/images/handwashing.jpg)
+![handwashing](/images/commercial-handwashing-hygiene.jpg)
 
 
 ### There’s A Right Way to Wash Your Hands
@@ -29,7 +29,7 @@ There are numerous ways you can promote better hand washing techniques for impro
 
 While handwashing is one of the most important things to keep people in an office from spreading germs, it’s just as important to clean the office. The office needs to be both cleaned and disinfected to keep the spread of germs minimal. You want to have all of the shared spaces cleaned as frequently as possible. It can dramatically reduce the risk of having germs spread between one another. Some of the more germ-ridden areas include keyboards, mice, phones, printers, and more.
 
-![cleaning a counter](/images/cleaning-a-counter.jpg)
+![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 If you are looking to keep your office clean and everyone in it healthy, you can contract professional services from [Evergreen Cleaning](/about-us/). Evergreen Cleaning helps to keep your office free of germs and spotless. When you hire Evergreen, you are getting a company that prides itself on providing the highest level of service. We guarantee a comprehensive cleaning of everything from your lobbies to your washrooms. With regular cleaning, you can keep your office hygienic and keep your employees and customers healthy.
 

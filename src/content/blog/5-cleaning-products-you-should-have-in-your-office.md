@@ -2,7 +2,8 @@
 title: "5 Commercial Cleaning Products You Should Have in Your Office"
 description: "Here we discuss five cleaning products that we recommend you keep handy in any office, commercial and industrial work setting."
 pubDate: 2020-11-30
-image: "/images/cleaning-supplies.jpg"
+image: "/images/janitorial-cart-preparation-supplies.jpg"
+imageAlt: "Cleaner loading microfibre cloths and spray bottles on a janitorial cart in a Toronto office building"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
@@ -16,7 +17,7 @@ The following are five cleaning products that we recommend you keep handy in any
 
 Your office should always look presentable even if no clients are coming to your office. However, you can make a good impression by ensuring your front door and windows are presentable, especially if your clients come into your office regularly. It is also important to have a clean working environment even if your workers are the only ones who see the front doors and windows of your office. Having a clean working environment improves the happiness and productivity of your workers. Use a glass cleaner to clean up smudges between professional cleanings, so you do not have to wait for your professional cleaners to clean your glasses.
 
-![cleaning a counter](/images/cleaning-a-counter.jpg)
+![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### Disinfecting Wipes
 
@@ -30,7 +31,7 @@ It is important to have spot removers, such as Shout, in your office. [Stain rem
 
 Use white vinegar to disinfect, shine your windows, and clean stubborn spots in your office. It is simple, cheap, and effective. Also, use white vinegar to clean your coffee machine. How? Run the white vinegar through one cycle. Then, use water to rinse your coffee machine on the next cycle. Keep a cheap bottle of white vinegar under the sink in your break room.
 
-![sponge and spray](/images/sponge-and-spray-scaled.jpg)
+![Labelled spray bottle and microfibre cloths used for surface cleaning](/images/eco-friendly-cleaning-spray-microfibre.jpg)
 
 ### Air Freshener
 

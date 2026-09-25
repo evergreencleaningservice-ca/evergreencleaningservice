@@ -2,7 +2,8 @@
 title: "6 Common Cleaning Products That You Should Never Mix Together"
 description: "Cleaning product do's and don't can be confusing. Let us help set you you on the right path with the right tools for the job."
 pubDate: 2021-07-30
-image: "/images/cleaning-supplies.jpg"
+image: "/images/eco-friendly-cleaning-spray-microfibre.jpg"
+imageAlt: "Gloved cleaner wiping a steel surface with a labelled spray bottle and green microfibre cloths"
 tags: ["cleaning-products", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
@@ -12,7 +13,7 @@ It can be very easy to become frustrated when you have a tough cleaning job that
 
 However, the scary truth is there are certain products that when they are used alone are safe, but when they are mixed together with other products can cause unsafe chemical reactions or fumes. Even if the cleaning product combination is not toxic or dangerous, you never know for sure what effect two products may have when combined on a fabric or surface.
 
-![cleaning products](/images/cleaning-products-1.jpg)
+![Janitorial cart stocked with cloths, sprays and supplies](/images/janitorial-cart-preparation-supplies.jpg)
 
 ### Always make sure you read the ingredient and warning labels on the cleaning products you use – and never mix the following together:
 
@@ -30,7 +31,7 @@ Vinegar is acidic and baking soda is basic. When they are combined, you mainly g
 
 [Chloramine](https://en.wikipedia.org/wiki/Chloramines), which is a toxic gas, is produced when ammonia and bleach are combined. The same symptoms are caused as with vinegar and bleach – in addition to chest pain and shortness of breath. Ammonia is contained in many window and glass cleaners, so never mix them with bleach.
 
-![sponge and spray](/images/sponge-and-spray-scaled.jpg)
+![Labelled spray bottle and microfibre cloths used for surface cleaning](/images/eco-friendly-cleaning-spray-microfibre.jpg)
 
 #### Two Drain Cleaners
 

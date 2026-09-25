@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run preflight && astro build && npm run redirects && npm run images && npm run captcha:check",
+    "build": "npm run preflight && astro build && npm run redirects && npm run images && node bin/check-images.mjs && npm run captcha:check",
     "build:preview": "astro build && npm run redirects && node scripts/noindex.mjs && npm run images",
     "preview": "astro preview",
     "test": "vitest run",

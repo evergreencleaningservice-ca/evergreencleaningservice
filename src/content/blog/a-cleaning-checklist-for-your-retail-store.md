@@ -2,7 +2,8 @@
 title: "A Cleaning Checklist For Your Retail Store"
 description: "Does your storefront need cleaning? Need to refresh your business? Here we discuss what areas of your store will benefit from a good clean!"
 pubDate: 2022-10-27
-image: "/images/retail-storefront-cleaning.jpg"
+image: "/images/car-dealership-showroom-floor-mopping.jpg"
+imageAlt: "Cleaner mopping a bright retail showroom floor"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "retail"]
 ---
 
@@ -12,7 +13,7 @@ It takes a lot of work to run a retail storefront. Not only do you have to worry
 
 When you get [Evergreen Cleaning](/about-us/)‘s professional cleaning services, it allows you to re-focus your energy on day-to-day tasks that you need to complete. It will enable you to focus on revenue-producing activities without having to worry about the tedious cleaning process. You can have peace of mind knowing that your storefront will be clean, and you can continue to handle what you need to do without worrying about it. We will assess all of your store’s needs and figure out the proper cleaning schedule to stick to. Whether you need janitorial services to clean your store before it opens or if you need it after closing time, you can get what you need to be handled by Evergreen’s professional staff. Are you looking at doing the cleaning yourself? If so, here is a comprehensive checklist that you can use.
 
-![clean storefront display](/images/retail-storefront-clean-2.jpg)
+![Cleaner mopping a bright retail showroom floor](/images/car-dealership-showroom-floor-mopping.jpg)
 
 ## Retail Storefront Checklist:
 
@@ -34,7 +35,7 @@ When you get [Evergreen Cleaning](/about-us/)‘s professional cleaning services
 
 – Get rid of the trash out of the trashcans
 
-![retail outlet](/images/retail-outlet.jpg)
+![Cleaner wiping a glass railing in a building common area](/images/common-areas-glass-railing-cleaning.jpg)
 
 ## Retail Store Break room Cleaning Checklist:
 
@@ -70,7 +71,7 @@ When you get [Evergreen Cleaning](/about-us/)‘s professional cleaning services
 
 – Sweep the walkway
 
-![clean retail storefront](/images/retail-storefront-cleaning.jpg)
+![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 As you can see, there is a lot that needs to get done when it comes to keeping a retail store clean. A lot of stores have even more that’s required. It depends on how much volume a store gets and the types of products they sell. You can call the professionals at Evergreen to ensure that you get all of the cleanings you need to do without allocating your valuable time to it. That way you can better focus your efforts on more important things that generate revenue for your business.
 

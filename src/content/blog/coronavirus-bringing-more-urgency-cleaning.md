@@ -2,7 +2,8 @@
 title: "The Coronavirus Is Bringing More Urgency to Cleaning"
 description: "Coronavirus has made it more important than ever to have a clean home and office space. Here we discuss some of the challenges faced by commercial cleaners."
 pubDate: 2020-06-30
-image: "/images/virus-molecule-1.jpg"
+image: "/images/touchpoint-disinfection-door-handle.jpg"
+imageAlt: "Cleaner disinfecting an office door handle"
 tags: ["commercial-cleaning", "coronavirus", "office"]
 ---
 
@@ -25,7 +26,7 @@ Due to the virus, it is more important than ever before for cleaning staff to ut
 
 #### Cleaning is only one of the aspects of curbing the spreading of the virus.
 
-![Commercial Cleaning](/images/condo_1.jpg)
+![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 The CDC recommends spraying various surfaces with either household bleach that has been diluted or with cleaning products that feature a minimum of 70% alcohol. The [US Environmental Protection Agency](https://www.epa.gov/coronavirus) has offered up a list of different antimicrobial chemicals that have been proven to effectively get rid of germs that can lead to viral respiratory illnesses. For some workplaces, the crews use an electrostatically-charged mist to spray these cleaners in order to get better adhesion to the various surfaces that need to be disinfected.
 

@@ -2,7 +2,8 @@
 title: "Keep Yourself Safe From Coronavirus At Work"
 description: "Still working outside your home during the coronavirus outbreak? Take a look at what you can do to decrease the risk of contracting the virus and stay safe."
 pubDate: 2020-03-31
-image: "/images/Coronavirus-at-work.jpg"
+image: "/images/door-handle-disinfection-office.jpg"
+imageAlt: "Cleaner spraying and wiping an office glass door handle to disinfect it"
 tags: ["commercial-office-cleaning", "coronavirus"]
 ---
 
@@ -31,7 +32,7 @@ This can help to keep you from spreading germs and viral droplets. A good way to
 
 This is especially true if you have a fever. If you aren’t convinced your work can continue without you, try to discuss a work-at-home situation with your employer.
 
-![handwashing](/images/handwashing.jpg)
+![handwashing](/images/commercial-handwashing-hygiene.jpg)
 
 
 ## Some extra steps you can take to help contain this outbreak

@@ -36,7 +36,6 @@ import sharp from 'sharp';
    variants stay reproducible, but the homepage no longer references them. */
 const LEGACY_WIDTHS = [480, 768, 1000];
 const SOURCES = [
-  { file: 'evergreen-commercial-cleaning-hero.png', widths: [480, 768, 1000, 1600] },
   { file: 'business-team.jpg', widths: LEGACY_WIDTHS },
   { file: 'business-introductions.jpg', widths: LEGACY_WIDTHS },
   { file: 'toronto-commercial-cleaning-business-meeting.jpg', widths: LEGACY_WIDTHS },

@@ -2,7 +2,8 @@
 title: "Benefits of Regular Commercial Cleaning Services"
 description: "Think regular commercial cleaning isn't that important to your business? Think again! Let's talk benefits of regular professional cleaning services."
 pubDate: 2022-08-31
-image: "/images/office-plants-300x150.jpg"
+image: "/images/office-backpack-vacuum-toronto.jpg"
+imageAlt: "Cleaner vacuuming an open-plan Toronto office with a backpack vacuum"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 
@@ -12,7 +13,7 @@ Incomplete cleaning services and those that perform their duties semi-regularly 
 
 **Here is what you can expect from the reliable cleaning services from Evergreen Cleaning.** 
 
-![quality office cleaning](/images/office-cleaning-sacramento-clean-office.jpg)
+![Cleaner vacuuming an open-plan office with a backpack vacuum](/images/office-backpack-vacuum-toronto.jpg)
 
 ### Impress Your Guests and Clients
 
@@ -42,7 +43,7 @@ Break rooms
 
 By keeping these elements of the business completely clean, you can avoid the risk of spreading disease. This will also reduce the number of days your employees will be sick.
 
-![clean lobby](/images/lobby.jpg)
+![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 ### Promote Employee Satisfaction and Productivity
 

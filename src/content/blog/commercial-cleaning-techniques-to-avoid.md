@@ -2,7 +2,8 @@
 title: "Commercial Cleaning Techniques To Avoid"
 description: "When it comes to cleaning many think more is a good thing and while this can be true, in some aspects more can do greater harm than good. Let us show you which techniques to avoid"
 pubDate: 2022-11-30
-image: "/images/cleaning-products-2-300x150.jpg"
+image: "/images/marble-floor-restoration-buffing.jpg"
+imageAlt: "Technician buffing a marble floor with a floor machine"
 tags: ["cleaning", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning"]
 ---
 
@@ -14,7 +15,7 @@ Unfortunately, a lot of the cleaning tips and tricks out there aren’t practica
 
 This article will provide you with the top tips and cleaning techniques to avoid:
 
-![sponge and spray](/images/sponge-and-spray-scaled.jpg)
+![Labelled spray bottle and microfibre cloths used for surface cleaning](/images/eco-friendly-cleaning-spray-microfibre.jpg)
 
 ### Use More Product
 
@@ -38,7 +39,7 @@ If you have anything silver, you’ve likely delved into random ideas on cleanin
 
 While using toothpaste on your silver is going to work, it’s also overly abrasive. Because of this, you could end up scratching the metal. Toothpaste is designed for brushing your teeth. Your teeth and enamel are stronger than silver. Silver is much more delicate, and you could end up irreparably damaging it. Stick to using toothpaste to clean your teeth. If you must, you can use it to clean silver that’s not too valuable for you.
 
-![cleaning a counter](/images/cleaning-a-counter.jpg)
+![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### Clean Everything with Vinegar
 
@@ -58,7 +59,7 @@ There are also a lot of people that believe that wood surfaces should be frequen
 
 To get a better effect, you’ll want to clean the wooden surfaces with regular dusting using a gentle cloth. Try to give the wood a solid polish every two to four months. You can go even longer if the wood isn’t frequently used.
 
-![cleaning products](/images/cleaning-products-1.jpg)
+![Janitorial cart stocked with cloths, sprays and supplies](/images/janitorial-cart-preparation-supplies.jpg)
 
 The cleanliness of your home or office can impact the quality of life of everyone that uses it. Cleaning is a serious task. It can dictate the overall health and wellness of all occupants. Don’t go for the first cleaning method you hear on the internet or from word of mouth. Stick to using tried and true cleaning methods from professionals. It’s always a good idea to hand the reigns off to [professional cleaners](/contact-us/) that know what they are doing.
 

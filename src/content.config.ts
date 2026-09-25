@@ -13,6 +13,7 @@ const blog = defineCollection({
     description: z.string().optional(),
     pubDate: z.coerce.date(),
     image: z.string().optional(),
+    imageAlt: z.string().optional(),
     /**
      * Tag slugs, as the original's WordPress assigns them. Every slug must be
      * one of `src/data/tags.ts` — `tests/build/tags.test.ts` enforces that, so
@@ -30,6 +31,7 @@ const pages = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     image: z.string().optional(),
+    imageAlt: z.string().optional(),
   }),
 });
 
@@ -40,6 +42,7 @@ const services = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     image: z.string().optional(),
+    imageAlt: z.string().optional(),
     /**
      * Set on pages whose copy was written for this build rather than taken from
      * the client's own site. Pressure washing, post-construction and graffiti

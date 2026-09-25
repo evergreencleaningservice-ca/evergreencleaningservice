@@ -1,31 +1,32 @@
 ---
 title: "Cleaning Demo Gallery"
 description: "Here you'll find images of clean work spaces, sparkling floors, clean windows, fresh smalling carpeting, and glistening chorome fixtures."
-image: "/images/Toronto-Industrial-Cleaning-demo.jpg"
+image: "/images/warehouse-floor-scrubber-industrial.jpg"
+imageAlt: "Warehouse floor being scrubbed by an Evergreen technician"
 ---
 
-![Toronto locker facility with clean floors](/images/Toronto-Industrial-Cleaning-demo.jpg)
+![Toronto locker facility with clean floors](/images/gallery-industrial-cleaning-toronto.jpg)
 
-![office cleaning results](/images/office-cleaning-in-Toronto.jpg)
+![office cleaning results](/images/gallery-office-cleaning-services.jpg)
 
-![Toronto office space cleaning results](/images/toronto-office-cleaning-services.jpg)
+![Toronto office space cleaning results](/images/gallery-toronto-office-janitorial.jpg)
 
-![clean retail shop](/images/retailstore_1-1024x682.jpg)
+![clean retail shop](/images/gallery-retail-store-cleaning.jpg)
 
-![business lobby area with clean mirror walls](/images/commercial-lobby-cleaning-demo.jpg)
+![business lobby area with clean mirror walls](/images/gallery-commercial-lobby-cleaning.jpg)
 
-![Toronto business lobby cleaning demo](/images/office-cleaning-services-Toronto.jpg)
+![Toronto business lobby cleaning demo](/images/gallery-office-cleaning-team.jpg)
 
-![cleaned office space](/images/toronto-office-cleaning.jpg)
+![cleaned office space](/images/gallery-corporate-office-cleaning.jpg)
 
-![clean lobby](/images/lobby.jpg)
+![clean lobby](/images/gallery-lobby-floor-care.jpg)
 
-![dentists office](/images/dentistoffice_1-1024x683.jpg)
+![dentists office](/images/gallery-dental-clinic-cleaning.jpg)
 
-![toronto office cleaning demo](/images/office-pic.jpg)
+![toronto office cleaning demo](/images/gallery-office-detail-cleaning.jpg)
 
-![medical cleaning](/images/medical.jpg)
+![medical cleaning](/images/gallery-medical-clinic-cleaning.jpg)
 
-![Commercial Cleaning](/images/50k-sqft-warehouse-clean-and-waxing.jpg)
+![Commercial Cleaning](/images/gallery-large-warehouse-clean-wax.jpg)
 
-![highrise condo lobby cleaning](/images/mima_nyc_condo_lobby_01-734x550.jpg)
+![highrise condo lobby cleaning](/images/gallery-condo-lobby-maintenance.jpg)

@@ -2,7 +2,8 @@
 title: "Office Cleaning in the Fall?"
 description: "Office cleaning in the fall? Here we discuss how a fall deep office clean is just as important as the traditional spring clean."
 pubDate: 2022-09-30
-image: "/images/cleaning-a-counter.jpg"
+image: "/images/fall-high-dusting-office-ceiling.jpg"
+imageAlt: "Cleaner high-dusting an office ceiling vent with autumn trees outside"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "office"]
 ---
 
@@ -12,7 +13,7 @@ Autumn office cleaning Is equally as important as a spring office cleaning but n
 
 While it fall might not be near as fun of a time to start anew, it’s equally as important. In this article, you will learn exactly why autumn cleaning should be prioritized as much as spring cleaning.
 
-![office clean](/images/office-cleaning-1.jpg)
+![Cleaner washing office windows with a pole in Toronto](/images/office-window-cleaning-toronto.jpg)
 
 ### The Temperature Changes
 
@@ -28,7 +29,7 @@ The days get gradually shorter and shorter as the winter approaches. Thus, you w
 
 During the summer, you’re likely spending a lot of time outdoors. This, along with pollen, can mean that your office can become very messy. It can be very difficult to worry about cleaning during the summer months when your staff is busy. It’s also likely you had your windows open the season which can allow more pollen to enter the workspace. As soon as the summer months are over, it’s time to tackle the mess you’ve been allowing to build up.
 
-![office cleaning](/images/office-clean-2.jpg)
+![Cleaner vacuuming an open-plan office with a backpack vacuum](/images/office-backpack-vacuum-toronto.jpg)
 
 ### Pests Invade
 

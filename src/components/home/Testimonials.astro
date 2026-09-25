@@ -27,7 +27,6 @@ const testimonials = [
       'Evergreen Cleaning Services have been taking care of the cleaning in our spa for the last 3 years. They do a great job especially on the floors, spa chairs and tables. I highly recommend!',
     name: 'Brenda Carmichael',
     role: 'Toronto Spa Business Owner',
-    image: '/images/woman-e1575589655377.jpg',
   },
   {
     title: 'They Have It Covered',
@@ -35,7 +34,6 @@ const testimonials = [
       'We’ve been contracting Evergreen Cleaning Service for the last 5 years and we’re not interested switching any time soon. Their staff are professional and dependable. This is one area I don’t need to be concerned with – they have it covered!',
     name: 'Allen Robinson',
     role: 'Founder & CEO',
-    image: '/images/team4-e1616789976355.jpg',
   },
   {
     title: 'Fantastic To Work With',
@@ -43,7 +41,6 @@ const testimonials = [
       'Fantastic company to work with and they always try to accommodate when we have unexpected emergency clean up job we need done.',
     name: 'Paul Lockheart',
     role: 'Toronto Business Owner',
-    image: '/images/team5-e1616790026507.jpg',
   },
 ];
 ---
@@ -62,14 +59,7 @@ const testimonials = [
             {/* figcaption has to be a direct child of figure, or it is not the
                 figure's caption as far as assistive technology is concerned. */}
             <figcaption class="tes-author">
-              <img
-                src={item.image}
-                alt=""
-                width="70"
-                height="70"
-                loading="lazy"
-                decoding="async"
-              />
+              <span class="tes-initials" aria-hidden="true">{item.name.split(' ').map((w) => w[0]).join('')}</span>
               <cite class="tes-name">
                 {item.name}
                 <span>{item.role}</span>
@@ -135,14 +125,18 @@ const testimonials = [
     clear: both;
   }
 
-  .tes-author img {
-    max-width: 70px;
-    width: 70px;
-    height: auto;
+  .tes-initials {
     float: left;
-    border-radius: 500px;
-    border: 2px solid #fff;
+    width: 70px;
+    height: 70px;
     margin-right: 15px;
+    border-radius: 50%;
+    background: #e3efe4;
+    color: #1b5e20;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 70px;
+    text-align: center;
   }
 
   /* A <cite>, so italic without asking. */

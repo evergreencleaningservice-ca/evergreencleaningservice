@@ -2,7 +2,8 @@
 title: "COVID-19 Commercial Cleaning Expectations Examined"
 description: "Commercial cleaning standards have had to up their game since the beginning of Covid-19. Find how we've addressed today's' cleaning standard."
 pubDate: 2022-01-18
-image: "/images/woman-at-a-desk.jpg"
+image: "/images/cleaning-quality-inspection-clipboard.jpg"
+imageAlt: "Supervisor inspecting a cleaned office with a checklist on a clipboard"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "coronavirus", "covid-19", "janitorial-services"]
 ---
 
@@ -14,7 +15,7 @@ Commercial facilities have invested a great deal of their budget into making sur
 
 These same facilities must also place their faith in customers following health and safety guidelines set forth by the CDC. That includes wearing masks, social distancing, and practicing proper hygiene. Commercial cleaning companies have had to readjust to the new normal and work to create a new cleaning regimen that keeps high traffic areas disinfected including often touched surfaces while also using the proper CDC approved cleaning supplies.
 
-![woman at desk in office](/images/woman-at-a-desk.jpg)
+![Supervisor checking a cleaned office against a checklist](/images/cleaning-quality-inspection-clipboard.jpg)
 
 ### Cleaning Expectations and the Pandemic
 
@@ -38,7 +39,7 @@ We have changed the way we think about cleaning, and that includes developing ne
 
 Our newly made improvements will demonstrate our commitment to a healthier world while allowing us to do our part in beating the pandemic!
 
-![sanitizing station](/images/sanitization-station.jpg)
+![sanitizing station](/images/workplace-sanitization-station.jpg)
 
 ### Quick Tip
 

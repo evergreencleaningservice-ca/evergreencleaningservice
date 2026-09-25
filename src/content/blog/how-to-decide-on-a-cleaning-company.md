@@ -2,14 +2,15 @@
 title: "How to Decide on a Cleaning Company"
 description: "You've looked at a few websites and now you're wondering which cleaning company to hire or even consider hiring? Here are some tips to help you decide."
 pubDate: 2019-12-07
-image: "/images/business-owner.jpg"
+image: "/images/cleaning-quality-inspection-clipboard.jpg"
+imageAlt: "Supervisor checking cleaning quality against a checklist in an office"
 ---
 
 ## Tips For Deciding On The Best Cleaning Service
 
 You can’t run a successful business without having the proper cleaning strategy in place. And for the most part, companies are going to look at [professional cleaning services](/services/) as rather than hiring an in-house janitor. This is because a professional cleaning service won’t have a problem coming in after your staff has left, making it much easier to clean the entire space.
 
-![Business owner contemplating which cleaning company to hire](/images/business-owner.jpg)
+![Supervisor checking a cleaned office against a checklist](/images/cleaning-quality-inspection-clipboard.jpg)
 
 In most area’s there are a multitude of cleaning companies to choose from, it’s critical to choose one that’s right for your business.
 

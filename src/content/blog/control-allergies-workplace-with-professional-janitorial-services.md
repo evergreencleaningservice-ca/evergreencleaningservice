@@ -2,7 +2,8 @@
 title: "Control Allergies with Professional Janitorial Services"
 description: "Concerned about allergies in the workplace? Find out how janitorial services can help with that and keep productivity at its peak."
 pubDate: 2020-01-10
-image: "/images/Spacious.jpg"
+image: "/images/office-backpack-vacuum-toronto.jpg"
+imageAlt: "Cleaner vacuuming office carpet with a backpack vacuum to reduce dust"
 tags: ["allergies", "commercial-cleaning", "janitorial-services", "office"]
 ---
 
@@ -10,7 +11,7 @@ Allergies are undoubtedly one of the most irritating things in the workplace tha
 
 That’s why some of the most successful companies in the world put extra effort to ascertain a healthy work environment for their employees. Ask any seasoned manager or business owner, and they will explain why it’s essential to maintain a healthy workplace.
 
-![allergies in the office](/images/Spacious.jpg)
+![Cleaner vacuuming an open-plan office with a backpack vacuum](/images/office-backpack-vacuum-toronto.jpg)
 
 This is one of the primary reasons why businesses use [janitorial services](/services/). These services help control allergies by ensuring that no allergens are present in the workplace. There are many common allergens that a professional janitorial service will eliminate.
 
@@ -38,7 +39,7 @@ Carpets are certainly the most apparent allergy sources due to their ability to 
 
 Pet danger allergies are another common form of allergies nowadays. They spread through pet hair and odor and can be quite disruptive for everyone in the workplace, not only making health concerns but also taking away the morale of the employees. Nobody wants to work in an office that’s full of pet odor and dander. Again, this is where professional janitorial services come in handy. They ensure that these allergens are eliminated through thorough cleaning, thus improving the air quality in the office.
 
-![office cleaning results](/images/office-cleaning-in-Toronto.jpg)
+![Boardroom carpet being cleaned with an extraction wand](/images/carpet-extraction-boardroom-toronto.jpg)
 
 ### Dust and Pollen
 

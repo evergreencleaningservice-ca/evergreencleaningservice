@@ -2,7 +2,8 @@
 title: "End Of Summer Cleaning"
 description: "As summer draws closer to the end, now might be the time to get the office in shape before it becomes a busy hub of activity again."
 pubDate: 2021-08-25
-image: "/images/office-cleaning-crew-Dell-Notebook.jpg"
+image: "/images/summer-office-window-cleaning.jpg"
+imageAlt: "Cleaner washing an office window with a squeegee, Toronto skyline behind"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 
@@ -10,7 +11,7 @@ tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitor
 
 As summer is slowly drawing to a close, your office will once again become a hub of hard work. Before all of your employees return from their vacations, why not use this time to have the office deep cleaned professionally? With fewer people in the building, it’s much easier to address hidden and often missed areas. Below is a carefully compiled list of locations that require specialized attention.
 
-![cleaning supplies](/images/cleaning-supplies.jpg)
+![Janitorial cart stocked with cloths, sprays and supplies](/images/janitorial-cart-preparation-supplies.jpg)
 
 ### Lobby Or Reception Areas
 
@@ -30,7 +31,7 @@ Did you maintain high disinfecting standards throughout the entirety of summer v
 
 –_**Desktops, drawer fronts, handrails, and doorknobs**_
 
-![office cleaners](/images/office-cleaning-crew-Dell-Notebook.jpg)
+![Cleaner washing an office window with a squeegee](/images/summer-office-window-cleaning.jpg)
 
 The health and safety of your employees depend on your ability to provide a clean and virus-free environment. At [Evergreen Cleaning](/about-us/), we can help you deep clean your office and your flooring for reasonable rates in Toronto and the surrounding areas! We can sanitize and disinfect buildings of any size, and our services utilize eco-friendly options.
 

@@ -48,9 +48,9 @@ beforeAll(() => {
 
 afterAll(() => fs.rmSync(out, { recursive: true, force: true }));
 
-const BASE = 'evergreen-commercial-cleaning-hero';
+const BASE = 'evergreen-modern-commercial-cleaning-hero';
 const WIDTHS = [480, 768, 1000, 1600];
-const SOURCE_WIDTH = 1916;
+const SOURCE_WIDTH = 1942;
 
 /** The homepage hero <picture> blocks. There must be exactly one. */
 const heroes = () => [...home.matchAll(/<picture class="hero-slide[^"]*"[\s\S]*?<\/picture>/g)].map((m) => m[0]);
@@ -63,7 +63,7 @@ describe('the hero is one image element, not a background or a carousel', () => 
 
   it('is not a CSS background-image', () => {
     expect(home).not.toMatch(/hero-slide[^>]*style="background-image/);
-    expect(home).not.toMatch(/background-image:\s*url\(['"]?\/images\/evergreen-commercial-cleaning-hero/);
+    expect(home).not.toMatch(/background-image:\s*url\(['"]?\/images\/evergreen-modern-commercial-cleaning-hero/);
   });
 });
 
@@ -78,9 +78,9 @@ describe('the hero is the LCP and is treated as one', () => {
     expect(hero()).not.toContain('loading="lazy"');
   });
 
-  it('declares the 1916x821 intrinsic size, so nothing reflows', () => {
-    expect(hero()).toMatch(/width="1916"/);
-    expect(hero()).toMatch(/height="821"/);
+  it('declares the 1942x809 intrinsic size, so nothing reflows', () => {
+    expect(hero()).toMatch(/width="1942"/);
+    expect(hero()).toMatch(/height="809"/);
   });
 
   it('offers AVIF then WebP then JPEG, each with a 480/768/1000/1600 srcset', () => {
@@ -102,7 +102,7 @@ describe('the hero is the LCP and is treated as one', () => {
   });
 
   it('is the only fetchable hero image in the markup', () => {
-    const fetchable = [...home.matchAll(/<img\b[^>]*(?<![\w-])src="[^"]*evergreen-commercial-cleaning-hero/g)];
+    const fetchable = [...home.matchAll(/<img\b[^>]*(?<![\w-])src="[^"]*evergreen-modern-commercial-cleaning-hero/g)];
     expect(fetchable).toHaveLength(1);
     expect(home).not.toMatch(/business-team-\d+\.(avif|webp|jpg)/);
   });
@@ -130,7 +130,7 @@ describe('the generated variants are genuinely smaller', () => {
     expect(heavier).toEqual([]);
   });
 
-  it('the 1600px ceiling is used, and nothing was upscaled past the 1916px source', () => {
+  it('the 1600px ceiling is used, and nothing was upscaled past the 1942px source', () => {
     const widths = fs
       .readdirSync(publicImages)
       .filter((f) => f.startsWith(`${BASE}-`) && /-(\d+)\.(avif|webp|jpg)$/.test(f))

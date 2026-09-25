@@ -2,7 +2,8 @@
 title: "Robotic Vs. Manual Cleaning: Which Will Ultimately Succeed?"
 description: "Concerned about AI taking over the cleaning industry? Here we examine robotic versus manual cleaning in the commercial cleaning industry."
 pubDate: 2023-01-31
-image: "/images/AI-in-cleaning1-300x150.jpg"
+image: "/images/warehouse-floor-scrubber-industrial.jpg"
+imageAlt: "Operator-driven floor scrubber cleaning a large warehouse floor"
 tags: ["ai", "cleaning", "commercial-cleaning", "commercial-office-cleaning", "manual-cleaning", "robotic"]
 ---
 
@@ -18,7 +19,7 @@ Regardless of how much innovation takes place within the cleaning industry, ther
 
 There are many differences between the level of cleaning that robots and humans can do, but it is possible for the two to work seamlessly together. Below, we will discuss these nuances in further detail.
 
-![AI in cleaning](/images/AI-in-cleaning-2.jpg)
+![Floor scrubber cleaning a large warehouse floor](/images/warehouse-floor-scrubber-industrial.jpg)
 
 ### Interacting With Consumers
 
@@ -46,7 +47,7 @@ Some machines may prove easier to maintain than others, but at the end of the da
 
 It’s also well worth noting that the cleaning robots would still regularly require disinfection after each cleaning session. Though the robots can’t directly spread viruses, they can store them on their surface and spread them indirectly.
 
-![AI vs. manual cleaning](/images/AI-vs-manual-cleaning.jpg)
+![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 ### Lack Of Thoroughness with Automated Vacuums
 

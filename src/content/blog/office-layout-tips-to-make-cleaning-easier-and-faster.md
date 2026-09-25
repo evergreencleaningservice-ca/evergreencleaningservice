@@ -2,7 +2,7 @@
 title: "Office Layout Tips to Make Cleaning Easier And Faster"
 description: "Ever considered if your office layout impacts cleaning it? Here are a few things to consider, especially if you are looking at layout plans."
 pubDate: 2023-02-07
-image: "/images/office-layout-3-300x150.jpg"
+image: "/images/modern-office-layout-cleaning.jpg"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
@@ -14,7 +14,7 @@ Sometimes, achieving a harmonious balance between functionality and aesthetics i
 
 If you’re looking to improve your workplace design to make it easier to clean while still ensuring it’s aesthetically pleasing, the following are some great tips for your office layout.
 
-![office](/images/office-layout-2.webp)
+![office](/images/modern-office-layout-cleaning.jpg)
 
 ### Go for an Open Floor Plan
 
@@ -36,7 +36,7 @@ One of the hardest parts of cleaning a commercial office is moving around heavy 
 
 You also don’t have to worry about dirt and dust accumulating underneath all the furniture. It keeps you from having to worry about tipping the furniture and falling over while cleaning is underway since the individual pieces can be moved completely out of the way. It will also make it a lot easier to move things around and reorganize them when the time comes. With time, you may feel like the look is getting stale, and you may want to spruce up the space by moving things around from time to time.
 
-![office](/images/office-layout.webp)
+![office](/images/modern-office-layout-cleaning.jpg)
 
 ### Remove Carpets
 

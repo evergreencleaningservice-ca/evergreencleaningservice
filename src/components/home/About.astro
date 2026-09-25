@@ -122,9 +122,9 @@ const offers = [
 
         {/* The original links this to the full-size image, as the editor's
             image block does. */}
-        <a class="about-figure" href="/images/toronto-downtown-skyline.jpg">
+        <a class="about-figure" href="/images/toronto-skyline-modern.jpg">
           <img
-            src="/images/toronto-downtown-skyline.jpg"
+            src="/images/toronto-skyline-modern.jpg"
             alt="Toronto commercial cleaning services - downtown skyline"
             width="565"
             height="377"
@@ -156,16 +156,7 @@ const offers = [
         }
 
         <p class="about-cta">
-          <a href="/request-a-quote/">
-            <img
-              src="/images/free-quote-cta-button-1024x505.jpg"
-              alt="Request a free quote"
-              width="269"
-              height="133"
-              loading="lazy"
-              decoding="async"
-            />
-          </a>
+          <a class="about-cta-btn" href="/request-a-quote/">Request a Free Quote</a>
         </p>
       </div>
     </div>
@@ -296,11 +287,21 @@ const offers = [
     margin: 0;
   }
 
-  .about-cta img {
+  .about-cta-btn {
     display: inline-block;
-    width: 269px;
-    max-width: 100%;
-    height: auto;
+    padding: 0.85rem 1.5rem;
+    background: var(--brand, #2e7d32);
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    min-height: 44px;
+  }
+
+  .about-cta-btn:hover,
+  .about-cta-btn:focus-visible {
+    background: #1b5e20;
+    color: #fff;
   }
 
   /* `.section-about .row > div { margin-top: 30px }`, plus the 15px left by

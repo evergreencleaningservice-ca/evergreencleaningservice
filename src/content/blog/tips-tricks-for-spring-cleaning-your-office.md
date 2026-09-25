@@ -2,7 +2,8 @@
 title: "Tips & Tricks for Spring Cleaning Your Office"
 description: "Spring is in the air and so is spring cleaning at the office. Here are some tips and tricks we've found useful in keeping offices tidy."
 pubDate: 2022-03-23
-image: "/images/clean-office-area.jpg"
+image: "/images/spring-office-desk-cleaning-toronto.jpg"
+imageAlt: "Cleaner wiping office desks in spring with cherry blossoms and the Toronto skyline outside"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "office"]
 ---
 
@@ -10,7 +11,7 @@ tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "office"
 
 A staffing company conducted a survey recently which showed that 57% of co-workers and clients admitted that they judge a company based on the cleanliness of its workplace. Out of those who admitted to it, 55% of them reported that they had a bad impression of a company that did not have a clean office. Make sure that you don’t provide a negative impression to staff and visitors. The following are some useful tips and tricks to help keep your office clean.
 
-![clean office area](/images/clean-office-area.jpg)
+![Cleaner wiping office desks in a Toronto office](/images/spring-office-desk-cleaning-toronto.jpg)
 
 ### Divide your workplace into several Zones
 
@@ -24,7 +25,7 @@ According to experts, we have a long way to go to achieving a paperless office. 
 
 The only things you should keep within arm’s length are the items you use on a regular basis. Keep away coffee mugs, boxes of pens, and stacks of paper. Eliminate all visual clutter and just keep the essentials within your reach instead. The only items you should have on your workstation are things like a lamp, a notepad, your computer, a pen holder, and a framed family photograph. Create a separate zone for your paperwork, personal items, and other supplies.
 
-![clean office desk](/images/clean-office-desk.jpg)
+![Cleaner vacuuming an open-plan office with a backpack vacuum](/images/office-backpack-vacuum-toronto.jpg)
 
 ### Sort out your Catch-all drawers
 

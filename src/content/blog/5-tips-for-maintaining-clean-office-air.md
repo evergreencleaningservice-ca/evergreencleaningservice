@@ -2,7 +2,8 @@
 title: "5 Tips for Maintaining Clean Office Air"
 description: "How good is the air quality in your office space? Here we discuss some tips to assist in keeping the air fresh and comfortable."
 pubDate: 2022-05-25
-image: "/images/microfibre-cloths-300x150.jpg"
+image: "/images/fall-high-dusting-office-ceiling.jpg"
+imageAlt: "Cleaner high-dusting an office ceiling and vents"
 tags: ["air-quality", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
@@ -12,7 +13,7 @@ If you find yourself sneezing first thing when you walk into your office, automa
 
 Therefore, the million-dollar question is how can you keep your office air clean? Well, here are a few tips collected from experts that will surely help you maintain clean air within your office.
 
-![cleaning a counter](/images/cleaning-a-counter.jpg)
+![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### Consider Using Microfiber Cloths
 
@@ -22,7 +23,7 @@ Anytime you are dusting your office using a regular duster, chances are a large 
 
 An office is constantly collecting dust from the surrounding areas. As such, you will always find dust on your desk, keyboard, kitchen surfaces, and areas not accessed often. All these affect the level of cleanliness within an office, including the air. This is where the benefit of hiring a professional commercial cleaning service comes into the picture. These are professionals who will constantly ensure your office is at the highest level possible in terms of cleanness.
 
-![sponge and spray](/images/sponge-and-spray-scaled.jpg)
+![Labelled spray bottle and microfibre cloths used for surface cleaning](/images/eco-friendly-cleaning-spray-microfibre.jpg)
 
 ### Eco-Friendly Cleaning Products
 
@@ -32,7 +33,7 @@ Evergreen Cleaning recommends using [eco-friendly products](/green-clean-product
 
 It is a known fact that air purifiers are a great addition to improving the air quality within an office. That is because these units use both a HEPA filter and fan to capture and remove airborne pollutants. For this reason, having an air purifier in your office is a great way to maintain the air quality.
 
-![microfibre dusting cloths](/images/microfibre-cloths-300x150.jpg)
+![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### Vacuum
 

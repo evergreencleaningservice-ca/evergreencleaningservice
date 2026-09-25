@@ -1,7 +1,7 @@
 ---
 title: "About Us"
 description: "Looking for commercial cleaning in Toronto. Visit our website to learn more and request a fee quotation for cleaning and disinfection."
-image: "/images/free-quote-cta-button-1024x505.jpg"
+image: "/images/toronto-skyline-modern.jpg"
 ---
 
 ## We are Evergreen Office Cleaning
@@ -16,4 +16,4 @@ Give your customers, employees, and visitors the opportunity to enjoy the same p
 
 Since 1989 we’ve been delivering professional cleaning services to a multitude of businesses in the Toronto and GTA area. From professional firms and private offices, health, dental and medical clinics, retail outlets, to industrial building and warehouses. We can handle any mess you throw at us, and if you’re ever in an emergency and need something cleaned in a pinch, we can get it done.
 
-[![free quote cta button](/images/free-quote-cta-button-1024x505.jpg)](/request-a-quote/)
+<a class="btn btn-primary btn-lg" href="/request-a-quote/">Request a Free Quote</a>

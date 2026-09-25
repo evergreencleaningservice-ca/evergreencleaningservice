@@ -2,7 +2,8 @@
 title: "Commercial Cleaning Protocols for Daycares and Schools"
 description: "Wondering if your school or daycare is clean? By following these tips, it is possible to achieve disinfection and complete cleaning of a wide range of surfaces."
 pubDate: 2020-09-29
-image: "/images/lobby-1024x682.jpg"
+image: "/images/touchpoint-disinfection-door-handle.jpg"
+imageAlt: "Cleaner wiping a door handle as part of a high-touch disinfection routine"
 tags: ["commercial-cleaning", "daycares", "janitorial-services", "schools"]
 ---
 
@@ -12,7 +13,7 @@ Now that the economy is beginning the reopening process, schools and daycare fac
 
 Below is a [commercial cleaning services](/) checklist for cleaning schools and similar facilities that can provide a comprehensive sanitation process. By following these tips, it is possible to achieve disinfection and complete cleaning of a range of surfaces.
 
-![classroom disinfection](/images/classroom.jpg)
+![Cleaner disinfecting an office door handle](/images/touchpoint-disinfection-door-handle.jpg)
 
  
 #### When it comes to schools, daily cleaning is key.
@@ -31,7 +32,7 @@ Lobby cleaning should encompass surfaces such as entrance glass, door frames and
 
 #### Bathrooms need a great deal of attention as well, which should include cleaning of garbage cans, walls, cubicle walls, toilets, soap dispensers, towel dispensers, floors, sinks, and more.
 
-![school cafeteria](/images/school-cafeteria.jpg)
+![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 Cafeteria cleaning should extend to coutertop disinfection, cupboards, stoves, refrigerators, seating, flooring, cashier stations, vending machines and all glassware and utensils.
 

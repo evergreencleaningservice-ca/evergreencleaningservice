@@ -2,7 +2,7 @@
 title: "How To Take Care of Plants in The Office"
 description: "Like the look of plants in the office? Here we discuss the benefits of having them and how to care for them."
 pubDate: 2021-06-30
-image: "/images/office-plants-300x150.jpg"
+image: "/images/office-plants-clean-workplace.jpg"
 tags: ["janitorial-services", "office", "plants"]
 ---
 
@@ -10,7 +10,7 @@ tags: ["janitorial-services", "office", "plants"]
 
 One great way to add nature into your life is to get office plants. With that said, many employers forget that plants in the office can easily get brown, their leaves can droop and even start to fall. This will create a large mess, but that shouldn’t stop you from bringing plants into the office. All it means is that you need to take care of them properly.
 
-![office plants](/images/office-plants-2.webp)
+![office plants](/images/office-plants-clean-workplace.jpg)
 
 Here are a few reasons why it is a good idea to have plants in the office as well as how you can take care of them.
 
@@ -30,7 +30,7 @@ According to a University of Technology Sydney study, it was found that plants c
 
 A report from 2015 shows that spaces that contain plants and other natural materials tend to have staff that are happier and report higher levels of well being. As a matter of fact, it was found that 15% of staff experienced this.
 
-![office plant care](/images/office-plant-3.webp)
+![office plant care](/images/office-plants-clean-workplace.jpg)
 
 #### Taking Care of Plants in The Office
 

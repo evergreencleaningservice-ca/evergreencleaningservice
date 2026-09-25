@@ -3,7 +3,8 @@ title: "Disinfection Cleaning"
 description: "Evergreen Cleaning Service provides various specialized disinfection cleaning services you may be looking for your business."
 # The archived featured image for this page (disinfection-cleaning-tech-e1616794679911.jpg)
 # was never downloaded into public/images, so this uses the page's own lead photo instead.
-image: "/images/office-disinfection-cleaning.jpg"
+image: "/images/door-handle-disinfection-office.jpg"
+imageAlt: "Cleaner disinfecting a glass office door handle"
 ---
 
 ## Are You Concerned About Covid-19 In Your Office
@@ -14,7 +15,7 @@ If you want to prevent bacteria and germs from spreading within your office, Eve
 
 **_You’ll have peace of mind knowing your office will be as cleaned as possible._**
 
-![clean disinfected office space](/images/office-disinfection-cleaning.jpg)
+![Cleaner spraying and wiping a glass office door handle](/images/door-handle-disinfection-office.jpg)
 
 Corona-viruses, including Covid-19, are related to the virus that causes the common cold. Therefore, this virus can spread via coughing, close contact with those who are infected and sneezing. Touching surfaces that are contaminated is another way to catch the virus.
 
@@ -23,7 +24,7 @@ Corona-viruses, including Covid-19, are related to the virus that causes the com
   
 Before we disinfect, we’ll need to clean all surfaces, objects and contents. If this is not done initially, then the disinfectant we use will not be able to penetrate grime and dirt. In turn, surfaces won’t be thoroughly disinfected.
 
-![virus molecule](/images/virus-molecule-1-1024x546.jpg)
+![Cleaner in protective gloves disinfecting a commercial workspace](/images/commercial-disinfection-service.jpg)
 
 **_Quite simply, everything is clean with plain detergent first to remove surface residue. Afterwards, you can use a disinfectant. We use specialized products for disinfection cleaning._**
 
@@ -38,7 +39,7 @@ We can work with you to provide your employees and yourself with a cleaner and s
 
 ### Infection Prevention & Control
 
-![office cleaner 1](/images/office-cleaner-1.jpg)
+![Evening janitorial crew cleaning a Toronto office](/images/night-janitorial-crew-office-toronto.jpg)
 
   
 Prevention is the best way to avoid Covid-19 from spreading. You can either use a one-off disinfecting service while your workers are at home working or you can have it done regularly if your workers are back in the office.

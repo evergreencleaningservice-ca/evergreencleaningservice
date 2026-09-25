@@ -2,7 +2,8 @@
 title: "Key Office Areas to Have Cleaned and Disinfected"
 description: "Are the key areas of your office cleaned and disinfected routinely? Let us explain why attending to key ares in the office is so important."
 pubDate: 2021-09-30
-image: "/images/office-interior.jpg"
+image: "/images/door-handle-disinfection-office.jpg"
+imageAlt: "Cleaner disinfecting a glass office door handle"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "office"]
 ---
 
@@ -10,7 +11,7 @@ tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "office"
 
 With the summer vacation season over and fall being in full swing, there is no better time than now to get your office space professionally cleaned. Use this opportunity while things at the office are somewhat slower and it is less crowded to make the space as clean as possible for your employees and guests. With that being said, here are some of the most crucial areas you need to have cleaned within your office.
 
-![clean office interior](/images/Office-interior-2.jpg)
+![Cleaner vacuuming an open-plan office with a backpack vacuum](/images/office-backpack-vacuum-toronto.jpg)
 
 ### Reception/Lobby
 
@@ -34,7 +35,7 @@ Office phones, keyboards, and mice
 
 Kitchen area
 
-![busy office interior](/images/office-interior.jpg)
+![Evening janitorial crew cleaning a Toronto office](/images/night-janitorial-crew-office-toronto.jpg)
 
 We understand that the health and safety of everyone who uses your office are among your top priorities. This is why we are fully prepared to help you with your office cleaning needs. From professional carpet cleaning to a thorough and deep office clean, the cleaning experts at [Evergreen Cleaning](/about-us/) have you covered.
 

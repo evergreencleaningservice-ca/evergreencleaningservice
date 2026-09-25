@@ -2,7 +2,8 @@
 title: "Benefits of Commercial Deep Cleaning Services"
 description: "Work setting in need of a deep clean? Let the pros explain what this is and why it has its benefits to your commercial setting."
 pubDate: 2022-04-26
-image: "/images/cleaning-team.jpg"
+image: "/images/carpet-extraction-boardroom-toronto.jpg"
+imageAlt: "Technician deep cleaning boardroom carpet with a hot-water extraction wand"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
@@ -10,7 +11,7 @@ tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitor
 
 Studies show that having a healthy environment is crucial to not only the health and well-being of your employees but also their motivation and ultimately, productivity. A superficial tidy might seem acceptable here and there, but that’s not enough to achieve a degree of cleanliness that ascertains optimum operation. Ultimately, dust will gather, bacteria will multiply, and your workplace will become a demotivating space for your employees and unappealing for your clients and partners. In addition, you can only put off certain deep cleaning tasks for so long. Whether your premises is a warehouse, retail space, or office complex, commercial cleaning services are essential. If you are still on the fence or hesitant, here are some great benefits of hiring commercial cleaners.
 
-![cleaning a counter](/images/cleaning-a-counter.jpg)
+![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### First Impressions are Important
 
@@ -46,7 +47,7 @@ Hospital-grade cleaning
 
 Post-construction cleaning
 
-![cleaning team](/images/cleaning-team.jpg)
+![Evening janitorial crew cleaning a Toronto office](/images/night-janitorial-crew-office-toronto.jpg)
 
 ### We Implement a Systematic Approach
 

@@ -2,7 +2,8 @@
 title: "How To Clean And Disinfect Public Areas During COVID-19"
 description: "Guidance on how to clean and disinfect public settings during the Covid-19 pandemic. All of us can help stop the spread right now."
 pubDate: 2020-05-27
-image: "/images/office-cleaning-services-Toronto.jpg"
+image: "/images/common-areas-glass-railing-cleaning.jpg"
+imageAlt: "Cleaner wiping a glass railing in a building common area"
 tags: ["commercial-cleaning", "coronavirus", "janitorial-services", "office"]
 ---
 
@@ -14,7 +15,7 @@ Surfaces that are touched with hands frequently are the most likely ones to be c
 
 It is not known yet how long the virus that causes COVID-19 can live on a surface. However, it is suggested by early evidence that it can live on surfaces and objects from a couple of hours to a few days.
 
-![Being safe at work](/images/Coronavirus-at-work.jpg)
+![Cleaner spraying and wiping a glass office door handle](/images/door-handle-disinfection-office.jpg)
 
 #### Select a product that cleans and also disinfects
 
@@ -26,7 +27,7 @@ Disinfecting products use chemicals to kill germs on surfaces
 
 Only use approved hard-surface disinfectant with a [DIN (Drug Identification Number)](https://en.wikipedia.org/wiki/Drug_Identification_Number). These are 8-digit numbers provided by [Health Canada](https://www.canada.ca/en/health-canada.html). The DIN confirms that the disinfectant product has been approved and is safe to use in Canada.
 
-![office cleaning crew](/images/office-cleaning-crew.jpg)
+![Evening janitorial crew cleaning a Toronto office](/images/night-janitorial-crew-office-toronto.jpg)
 
 #### Developing a cleaning procedure
 

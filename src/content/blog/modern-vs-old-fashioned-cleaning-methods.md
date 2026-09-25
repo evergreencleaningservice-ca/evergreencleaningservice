@@ -2,7 +2,8 @@
 title: "Modern Vs. Old-Fashioned Cleaning Methods"
 description: "Ever wondered which cleaning techniques are the most effective? Let us give you the run down on the evolution of cleaning."
 pubDate: 2022-12-07
-image: "/images/mop-and-bucket.jpg"
+image: "/images/lobby-floor-scrubber-commercial.jpg"
+imageAlt: "Technician using a modern auto scrubber on a lobby floor"
 tags: ["cleaning", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning"]
 ---
 
@@ -12,7 +13,7 @@ Everything changes at some point, and so are cleaning methods. Although some of 
 
 Modern cleaning habits haven’t, however, made old-fashioned cleaning methods obsolete. Most cleaning tactics used hundreds of years ago are still relevant, effective, and practiced to this date. A good example is using hot water to dissolve grease and clean tough stains. In other words, all modern technology has done is make these methods more efficient. Here is a brief outline and comparison between modern and old-fashioned cleaning methods and how these methods have improved over time.
 
-![cleaning tools](/images/mop-and-bucket.jpg)
+![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 ### Floor Cleaning: Now and Then
 
@@ -36,7 +37,7 @@ Mops have also remained relevant to this day. Nonetheless, the old cloth mops ha
 
 Soaps and detergents have been around for many years. Although these have remained unchanged for a long time, modern soaps and detergents come in different types and varieties, ranging from organic and eco-friendly options. Eco-friendly soaps are also considered safe for the environment and on your hands. That said, it would be best to differentiate between detergents and soaps. Detergents, for example, are mainly made of synthetic chemicals, while soaps are made from natural ingredients, e.g., acids from animal fats and plant oils. That said, it is common for a detergent to be touted as ‘natural’ while it basically isn’t all-natural but contains some chemical components. Greener products, on the other hand, are free of phthalates, ammonia, triclosan, and [parabens](https://en.wikipedia.org/wiki/Paraben).
 
-![cleaning a counter](/images/cleaning-a-counter.jpg)
+![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### Cleaning Surfaces: Now Vs. Then
 

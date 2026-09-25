@@ -1,14 +1,15 @@
 ---
 title: "Industrial Cleaning"
 description: "We are currently accepting new clients requiring industrial cleaning. Visit our website for more info and to schedule an onsite consultation & proposal."
-image: "/images/warehouse-clean.jpg"
+image: "/images/warehouse-floor-scrubber-industrial.jpg"
+imageAlt: "Floor scrubber cleaning an industrial warehouse aisle"
 ---
 
 ## The value of industrial cleaning is too frequently overlooked and underappreciated among janitorial services.
 
 Industrial spaces tend to accumulate dust, dirt, and clutter rather quickly, and combined with what is often a lack of natural light, can make work-spaces unsafe, unhealthy, and unappealing for employees.
 
-![industial cleaning demo Toronto 1](/images/industial-cleaning-demo-Toronto-1.jpg)
+![Floor scrubber cleaning a large warehouse floor](/images/warehouse-floor-scrubber-industrial.jpg)
 
 At Evergreen Cleaning Service we recognize that a clean and regularly maintained plant, factory, warehouse, industrial building or facility, can impact worker safety and productivity. To your business partners and customers, a neat and well-presented space acts as a signal of the efficient and organized operation you want to project.
 
@@ -16,7 +17,7 @@ Whether your facility is large or small in scale, we appreciate that you may req
 
 **_We understand that you may have strict standards of health and safety that need to be met. We know how to meet those standards._**
 
-![Toronto Industrial Cleaning demo](/images/Toronto-Industrial-Cleaning-demo.jpg)
+![Technician high-dusting warehouse ceilings from a lift](/images/high-dusting-warehouse-lift.jpg)
 
 ## We Provide Industrial Cleaning Service to:
 

@@ -15,7 +15,7 @@ Dust is composed of very tiny particles most of which can only be seen through a
 
 The most common constituents of dust include pollen, dirt, soil, soot, hair, fabric fibres, microscopic decaying insects, plant materials and dead skin cells, called dander.
 
-![dust on a desk](/images/dust-on-a-desk.jpg)
+![dust on a desk](/images/dust-on-office-desk-detail.jpg)
 
 #### Dusting an office building is so important!
 
@@ -53,7 +53,7 @@ Dusting should be done as often as needed depending on the measure of dust that 
 
 Divide the room into 2 sections, everything that is above eye level or below knee level should be dusted once every week. Everything in between this margin, should be dusted every week.
 
-![dusting](/images/office-cleaning-crew-Dell-Notebook.jpg)
+![Cleaner high-dusting an office ceiling and vents](/images/fall-high-dusting-office-ceiling.jpg)
 
 ### Proper Dusting Protocol
 

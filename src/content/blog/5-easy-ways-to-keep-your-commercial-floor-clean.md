@@ -2,7 +2,8 @@
 title: "5 Easy Ways to Keep Your Commercial Floor Clean"
 description: "Do your floors sparkle? Here we discuss the benefits of clean commercial floors and how to ensure they stay that way."
 pubDate: 2021-11-24
-image: "/images/floor-care.jpg"
+image: "/images/lobby-floor-scrubber-commercial.jpg"
+imageAlt: "Evergreen technician running an auto floor scrubber across a polished commercial lobby floor"
 ---
 
 ## Sparkling Clean Floors
@@ -13,7 +14,7 @@ But as you already know, ensuring that your commercial floors remain sparkling c
 
 To help you avoid this situation; we have provided our top three tips on how to keep your office building clean and tidy.
 
-![school lobby](/images/lobby-scaled.jpg)
+![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 ### Set up more garbage cans
 
@@ -37,7 +38,7 @@ Commercial floor cleaning is a demanding task. Regardless of how many in-house j
 
 Besides ensuring the best results, hiring a commercial cleaning company that specializes in floor cleaning services, stripping, and waxing helps to realize significant savings on costs.
 
-![floor care](/images/floor-care.jpg)
+![Technician buffing a hard floor with a floor machine](/images/marble-floor-restoration-buffing.jpg)
 
 ### Strip and wax your floors
 

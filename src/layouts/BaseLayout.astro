@@ -28,7 +28,11 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
-const ogImage = new URL(image ?? site.logo, Astro.site ?? site.url).href;
+/* Social previews use the 1200x630 crop generated beside each master. */
+const ogPath = image
+  ? image.replace(/(-\d+x\d+)?\.(jpe?g|png|webp|avif)$/i, '-og.jpg')
+  : '/images/evergreen-modern-commercial-cleaning-hero-og.jpg';
+const ogImage = new URL(ogPath, Astro.site ?? site.url).href;
 ---
 
 <!doctype html>

@@ -21,7 +21,11 @@ const href = `/services/${service.id}/`;
   {
     image && (
       <a class="service-card-thumb" href={href} tabindex="-1" aria-hidden="true">
-        <img src={image} alt="" width="640" height="400" loading={loading} decoding="async" />
+        <picture>
+          {/-card\.jpg$/.test(image) && <source type="image/avif" srcset={image.replace(/\.jpg$/, '.avif')} />}
+          {/-card\.jpg$/.test(image) && <source type="image/webp" srcset={image.replace(/\.jpg$/, '.webp')} />}
+          <img src={image} alt="" width="640" height="400" loading={loading} decoding="async" />
+        </picture>
       </a>
     )
   }

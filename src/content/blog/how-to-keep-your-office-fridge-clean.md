@@ -2,7 +2,8 @@
 title: "How to Keep Your Office Fridge Clean"
 description: "Office fridge overflowing with leftovers and old employee lunch items? Read on to find out to avoid this issue and keep things clean."
 pubDate: 2022-02-25
-image: "/images/office-fridge.jpg"
+image: "/images/eco-friendly-surface-cleaning-green-cloths.jpg"
+imageAlt: "Gloved cleaner wiping a counter with a green microfibre cloth"
 tags: ["cleaning", "commercial-office-cleaning", "janitorial-services", "office", "refrigerator"]
 ---
 
@@ -12,7 +13,7 @@ The office fridge is one of the most difficult areas to keep clean. It is a high
 
 With the constant influx of items from employees, food is continually being pushed to the back of the fridge and forgotten about. This poses a serious health risk to employees as the rotting food starts to collect bacteria that can quickly spread to other foods. We’ve put together a list of tips for maintaining a clean office fridge and preventing the spread of [bacteria](https://www.cdc.gov/foodsafety/foodborne-germs.html) to your employees.
 
-![clean fridge](/images/clean-fridge-2.jpg)
+![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### How to Keep Your Office Refrigerator Clean and Tidy
 
@@ -28,7 +29,7 @@ Putting labels on food items allows employees to throw out each other’s food o
 
 Consider asking your employees to be putting their fresh food at the back of the fridge. Food that may have been forgotten about will be pushed to the front and the owners will be more inclined to eat it or throw it out as it will be right there in front of their eyes when they open the fridge. This will go a long way in keeping the fridge fresher, thus making it much easier to keep the office clean.
 
-![clean fridge](/images/office-fridge.jpg)
+![Labelled spray bottle and microfibre cloths used for surface cleaning](/images/eco-friendly-cleaning-spray-microfibre.jpg)
 
 #### We Can Help!
 

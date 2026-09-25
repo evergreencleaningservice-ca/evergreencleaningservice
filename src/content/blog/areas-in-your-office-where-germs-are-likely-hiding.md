@@ -2,7 +2,8 @@
 title: "Areas In Your Office Where Germs Are Likely Hiding"
 description: "Germs at the office? Let us tell you how to alleviate those hidden germs for good and ensure that your office is a healthy one."
 pubDate: 2021-10-28
-image: "/images/germs-on-a-door-handle.jpg"
+image: "/images/touchpoint-disinfection-door-handle.jpg"
+imageAlt: "Cleaner disinfecting an office door handle, a high-touch germ hotspot"
 ---
 
 ## Hidden Germs …
@@ -11,7 +12,7 @@ The average office worker is exposed to approximately 10 million bacteria every 
 
 Unfortunately, missing some surfaces in the office that have bacteria and flu viruses is quite easy. Now, due to Covid-19, it is even more critical that these areas are not overlooked, especially if they are handled by lots of people and have a lot of traffic on most days.
 
-![woman at a desk](/images/woman-at-a-desk.jpg)
+![Cleaner wiping office desks in a Toronto office](/images/spring-office-desk-cleaning-toronto.jpg)
 
 ### Cleaning Routine at The Office
 
@@ -41,7 +42,7 @@ Any appliance that deals with food will automatically be used by many people. So
 
 Most people automatically think about bathroom doors and handles when thinking about cleaning doors. However, all door handles need to be cleaned as well as all keypads and fingerprint scanners. Remember, these will be touched and handled just as often as the handles in the bathroom. Also, keep in mind that the building’s exterior handles would also be touched by clients, visitors and delivery persons. You should also clean the handles on storage cupboards, drawers, closets etc.
 
-![germs on a door handle](/images/germs-on-a-door-handle.jpg)
+![Cleaner disinfecting an office door handle](/images/touchpoint-disinfection-door-handle.jpg)
 
 #### Conference Rooms
 

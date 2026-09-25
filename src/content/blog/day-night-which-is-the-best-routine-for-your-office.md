@@ -2,7 +2,8 @@
 title: "Day Or Night – Which Is the Best Routine For Your Office?"
 description: "Deciding between night or daytime cleaning at the office? We weigh out the pros and cons of each to help make your decision a little easier."
 pubDate: 2021-05-31
-image: "/images/cleaning-team.jpg"
+image: "/images/night-janitorial-crew-office-toronto.jpg"
+imageAlt: "Night janitorial crew cleaning an office above the Toronto skyline"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
@@ -23,7 +24,7 @@ Offices contain workplaces, washrooms, as well as other high touch points that a
 
 As previously mentioned, places such as high touch point areas, workplaces, and washrooms will continue to get dirty throughout the day. When you have day cleaners that will help to ensure that high-traffic areas stay clean during the day. If you have had an air conditioning unit malfunction that caused your conference room to flood or had an employee spill coffee on your carpet, having day cleaners has the advantage of them cleaning up these areas fairly quickly. Garbage cans will also be emptied throughout the day regularly.
 
-![cleaning supplies](/images/cleaning-supplies.jpg)
+![Janitorial cart stocked with cloths, sprays and supplies](/images/janitorial-cart-preparation-supplies.jpg)
 
 ### Benefits of Night Office Cleaning
 
