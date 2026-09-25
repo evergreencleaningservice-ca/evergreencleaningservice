@@ -14,6 +14,10 @@
       "Bash(npm run image:parity)",
       "Bash(npm run launch:check)",
       "Bash(npm run waf:probe)",
+      "Bash(git push origin main)",
+      "Bash(npm run build:preview:*)",
+      "Bash(npx wrangler deploy:*)",
+      "Bash(node scripts/purge.mjs:*)",
 
       "mcp__Firecrawl__firecrawl_scrape",
 
