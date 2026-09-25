@@ -15,6 +15,7 @@
  * match the measured original (~24px glyph, margin 0 13px).
  */
 import { footerAreas, site, social } from '../data/site';
+import GoogleReviewLink from './GoogleReviewLink.astro';
 
 const year = new Date().getFullYear();
 
@@ -32,16 +33,7 @@ const icons: Record<string, string> = {
   <div class="footer-widgets" id="footer-widgets">
     <div class="container footer-widgets-grid">
       <div class="footer-col footer-col-review">
-        <a href="https://g.page/r/CW9cqxQ9_IfYEBM/review" rel="noopener noreferrer" target="_blank">
-          <img
-            src="/images/Google-Review-Link.png"
-            alt="Leave Evergreen Office Cleaning a Google review"
-            width="247"
-            height="122"
-            loading="lazy"
-            decoding="async"
-          />
-        </a>
+        <GoogleReviewLink />
       </div>
 
       <div class="footer-col footer-col-areas footer-service-areas">
@@ -137,11 +129,9 @@ const icons: Record<string, string> = {
     }
   }
 
-  .footer-col-review img {
-    margin: 0 auto;
-    width: 247px;
-    height: auto;
-    max-width: 100%;
+  .footer-col-review {
+    display: flex;
+    justify-content: center;
   }
 
   .footer-areas-title {

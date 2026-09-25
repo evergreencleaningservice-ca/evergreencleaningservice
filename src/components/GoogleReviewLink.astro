@@ -1,0 +1,125 @@
+---
+interface Props {
+  variant?: 'summary' | 'cta';
+}
+
+const { variant = 'cta' } = Astro.props;
+const reviewUrl = 'https://g.page/r/CW9cqxQ9_IfYEBM/review';
+---
+
+<a
+  class:list={['google-review-link', `google-review-link--${variant}`]}
+  href={reviewUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <svg class="google-review-link__mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path
+      fill="#4285F4"
+      d="M23.5 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h6.47a5.53 5.53 0 0 1-2.4 3.58v3h3.86c2.26-2.09 3.57-5.17 3.57-8.82"
+    />
+    <path
+      fill="#34A853"
+      d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09A11.99 11.99 0 0 0 12 24"
+    />
+    <path fill="#FBBC05" d="M5.27 14.29a7.2 7.2 0 0 1 0-4.58V6.62H1.29a12 12 0 0 0 0 10.76z" />
+    <path
+      fill="#EA4335"
+      d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.7 0 3.99 2.47 1.29 6.62l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75"
+    />
+  </svg>
+
+  <span class="google-review-link__copy">
+    <span class="google-review-link__eyebrow">
+      {variant === 'summary' ? 'Customer feedback' : 'Share your experience'}
+    </span>
+    <strong>{variant === 'summary' ? 'Share a review on Google' : 'Review us on Google'}</strong>
+    <span class="screen-reader-text">(opens in a new tab)</span>
+  </span>
+
+  <svg class="google-review-link__arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</a>
+
+<style>
+  .google-review-link {
+    display: inline-grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.875rem;
+    min-width: min(100%, 17rem);
+    padding: 0.9rem 1rem;
+    border: 1px solid #e1e5ea;
+    border-radius: 14px;
+    background: #fff;
+    color: #202124;
+    box-shadow: 0 8px 28px rgb(30 43 37 / 9%);
+    text-align: left;
+    text-decoration: none;
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease,
+      transform 160ms ease;
+  }
+
+  .google-review-link:hover {
+    border-color: #a8c8b3;
+    box-shadow: 0 12px 34px rgb(30 43 37 / 14%);
+    transform: translateY(-2px);
+  }
+
+  .google-review-link:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--brand) 38%, transparent);
+    outline-offset: 3px;
+  }
+
+  .google-review-link__mark {
+    width: 2rem;
+    height: 2rem;
+    flex: none;
+  }
+
+  .google-review-link__copy {
+    display: grid;
+    gap: 0.15rem;
+    line-height: 1.2;
+  }
+
+  .google-review-link__eyebrow {
+    color: #687078;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .google-review-link strong {
+    color: #202124;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .google-review-link__arrow {
+    width: 1.15rem;
+    height: 1.15rem;
+    color: var(--brand);
+    transition: transform 160ms ease;
+  }
+
+  .google-review-link:hover .google-review-link__arrow {
+    transform: translateX(3px);
+  }
+
+  .google-review-link--summary {
+    min-width: min(100%, 18.5rem);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .google-review-link,
+    .google-review-link__arrow {
+      transition: none;
+    }
+  }
+</style>

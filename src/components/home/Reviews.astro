@@ -1,7 +1,7 @@
 ---
 /**
  * The Google reviews band (the original's `sid1679612802692`): the heading, the
- * five-star badge, and the Trustindex review slider.
+ * modern review call-to-action, and the Trustindex review slider.
  *
  * The widget itself is a third-party script and is not reproduced — this is a
  * static slider carrying the same four reviews, read out of the widget's own
@@ -28,13 +28,13 @@
  *     row the same height. Opening animates the text box's height over half a
  *     second and swaps the label to the template's "Hide".
  *
- * One deliberate difference: the original's badge is a bare `<img>` whose alt
- * calls it a "button" but which does not link anywhere. It links to the
- * business's Google review page here. Nothing about it looks different.
+ * One deliberate difference: the original's dated raster badge is replaced by
+ * an accessible responsive call-to-action linking to the business's Google
+ * review page.
  */
 import { relativeAge, reviews } from '../../data/reviews';
+import GoogleReviewLink from '../GoogleReviewLink.astro';
 
-const reviewUrl = 'https://g.page/r/CW9cqxQ9_IfYEBM/review';
 const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
 ---
 
@@ -43,16 +43,7 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
     <div class="section-title-area">
       <h2 class="section-title" id="reviews-title">Google Reviews</h2>
       <div class="section-desc">
-        <a href={reviewUrl} target="_blank" rel="noopener noreferrer">
-          <img
-            src="/images/google-reviews-5-star.png"
-            alt="Read our Google reviews"
-            width="124"
-            height="93"
-            loading="lazy"
-            decoding="async"
-          />
-        </a>
+        <GoogleReviewLink variant="summary" />
       </div>
     </div>
 
@@ -137,11 +128,9 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
     margin-top: 18px;
   }
 
-  .section-desc img {
-    display: block;
-    margin: 0 auto;
-    width: 124px;
-    height: auto;
+  .section-desc {
+    display: flex;
+    justify-content: center;
   }
 
   /* --- the slider --- */
