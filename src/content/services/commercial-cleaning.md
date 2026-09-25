@@ -1,6 +1,6 @@
 ---
 title: "Commercial Cleaning"
-description: "Looking for commercial cleaning service provider in the Torotno area? Visit our website to learn more about Evergreen Cleaning Service today."
+description: "Looking for commercial cleaning service provider in the Toronto area? Visit our website to learn more about Evergreen Cleaning Service today."
 image: "/images/toronto_condo_one_old_mill_lobby2-crop-u536-1.jpg"
 ---
 
@@ -10,7 +10,7 @@ Evergreen Cleaning Service has noticed, as you have, that social media and **_on
 
 ![commercial lobby cleaning demo](/images/commercial-lobby-cleaning-demo.jpg)
 
-### Evergreen Cleaning Service is excited to partner with for any of your cleaning needs and to show you why over 80% of our new business is the result of direct customer referrals.
+### Evergreen Cleaning Service is excited to partner with you for any of your cleaning needs and to show you why over 80% of our new business is the result of direct customer referrals.
 
 Our cleaning services professionals are licensed, insured, and certified to handle your commercial cleaning requirements. We understand that the presence of our workers, even if they are not interacting with customers, becomes part of the customer experience. We appreciate that your products and equipment have been purposefully arranged. Our friendly and approachable staff is experienced and has been fully trained to ensure that the janitorial services we provide meet the demands of you and your clientele, in the most efficient and timely manner. Ask us about our free consultation and estimate. No matter the size, shape, or complexity of your commercial space, we can give you an Evergreen Clean advantage!
 
@@ -42,7 +42,7 @@ Commercial Cleaning
 -   Interior Window Cleaning
 -   [High Level and Industrial Cleaning](/services/industrial-cleaning/)
 
-### Ready to make a change? Contact us and lets do it together.
+### Ready to make a change? Contact us and let's do it together.
 
 [Request Quote](/request-a-quote/)
 
