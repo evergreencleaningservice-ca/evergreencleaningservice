@@ -179,7 +179,34 @@
 .lpx-sub {
   font-size: 1.0625rem;
   line-height: 1.6;
-  color: var(--ink);
+  /**
+   * DARKER THAN `--ink`, AND MEASURED RATHER THAN NUDGED.
+   *
+   * This line sits on the hero photograph. `--ink` is #6f6f6f, the site's
+   * body copy colour, which is comfortable on white and is not what this
+   * text is on: measured in Chromium against the built page, #6f6f6f over
+   * the scrim'd photo gives 4.29:1 on the background's mean (#ededee) and
+   * 2.97:1 over its darker regions — under the 4.5:1 WCAG AA wants for text
+   * this size, in both cases.
+   *
+   * #4f4f4f is picked against the WORST case rather than the photo on
+   * screen today, which is the rule the scrim's own comment sets: a value
+   * tuned to the current image does not survive swapping it.
+   *
+   * Two worst cases, and it clears both. The scrim's theoretical floor is
+   * 0.80 white over pure black, an effective #cccccc, where #4f4f4f
+   * measures 5.10:1. The empirical floor is the darkest pixel actually
+   * rendered in this text's band at 1440px, #c8c8c7, where it measures
+   * 4.89:1. #555 was tried first and cleared the theoretical floor at
+   * 4.64:1 but not the empirical one, at 4.45:1 — so it went one step
+   * darker. On the background's mean the line measures about 7:1.
+   *
+   * SCOPED HERE, NOT FIXED AT THE TOKEN. `--ink` is used in about thirty
+   * places sitewide, almost all of them body copy on white where it is
+   * fine. Darkening the token to fix one line on two pages would restyle
+   * the whole site as a side effect.
+   */
+  color: #4f4f4f;
   margin: 0 0 18px;
   max-width: 54ch;
 }

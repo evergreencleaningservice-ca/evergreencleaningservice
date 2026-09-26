@@ -514,3 +514,76 @@ describe('the hero scrim', () => {
     ).toBeGreaterThanOrEqual(1);
   });
 });
+
+/* --- both heroes carry the photograph ------------------------------------ */
+
+/**
+ * The quote page had the photograph first and its sibling did not, which
+ * made the pages differ by more than the thing they exist to compare. Both
+ * carry it now, and these hold that.
+ */
+describe('the hero photograph', () => {
+  const allCss = () =>
+    fs
+      .readdirSync(path.join(out, '_astro'))
+      .filter((f) => f.endsWith('.css'))
+      .map((f) => fs.readFileSync(path.join(out, '_astro', f), 'utf8'))
+      .join('\n');
+
+  it.each(PAGES)('$name renders it eagerly and at high priority', ({ name }) => {
+    const h = html[name];
+    expect(h, 'the hero should be in its photograph variant').toContain('lpx-hero has-media');
+    expect(h).toContain('lpx-hero-media');
+    /* This is the first paint on a paid click. A hero image that lazy-loads
+       is a hero image the visitor watches arrive. */
+    expect(h).toContain('loading="eager"');
+    expect(h).toContain('fetchpriority="high"');
+  });
+
+  it.each(PAGES)('$name offers every width in the srcset, including 1600', ({ name }) => {
+    /* 1600 IS THE ONE THAT BITES. Three of the four hero image sets in
+       `public/images/` stop at 1000px, so pointing this component at one of
+       them emits a srcset entry that 404s on a wide screen — and only on a
+       wide screen, which is not where anyone checks. */
+    const widths = [...html[name].matchAll(/-(\d+)\.avif/g)].map((m) => Number(m[1]));
+    expect([...new Set(widths)].sort((a, b) => a - b)).toEqual([480, 768, 1000, 1600]);
+  });
+
+  it.each(PAGES)('$name points at a set that exists on disk', ({ name }) => {
+    const refs = [...new Set([...html[name].matchAll(/\/images\/([\w-]+\.(?:avif|webp|jpg))/g)].map((m) => m[1]))];
+    const heroRefs = refs.filter((f) => /-(480|768|1000|1600)\./.test(f));
+    expect(heroRefs.length).toBeGreaterThan(0);
+    const missing = heroRefs.filter((f) => !fs.existsSync(path.join(out, 'images', f)));
+    expect(missing, 'srcset entries with no file behind them').toEqual([]);
+  });
+
+  it('keeps the hero sub-line dark enough to read over the photograph', () => {
+    /**
+     * `--ink` (#6f6f6f) is the site's body colour and is fine on white. Over
+     * the scrim'd photograph it measured 4.29:1 on the background's mean and
+     * 2.97:1 over its darker regions — both under WCAG AA's 4.5:1 for text
+     * this size. It shipped that way on the quote page before anyone looked.
+     *
+     * Asserted as a luminance bound rather than an exact hex, so the colour
+     * can be tuned without editing this test, but cannot drift lighter than
+     * the scrim's own worst case supports.
+     */
+    const rule = allCss().match(/\.lpx-sub\{([^}]*)\}/)?.[1] ?? '';
+    expect(rule, 'the sub-line rule went missing').not.toBe('');
+
+    const hex = rule.match(/color:#([0-9a-f]{3,6})/)?.[1];
+    expect(hex, '.lpx-sub must set its own colour, not inherit --ink').toBeTruthy();
+
+    const full = hex!.length === 3 ? hex!.replace(/./g, (c) => c + c) : hex!;
+    const chan = (i: number) => {
+      const c = parseInt(full.slice(i * 2, i * 2 + 2), 16) / 255;
+      return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+    };
+    const L = 0.2126 * chan(0) + 0.7152 * chan(1) + 0.0722 * chan(2);
+
+    /* Against #cccccc — the scrim's own stated floor, 0.80 white over black. */
+    const FLOOR = 0.6038;
+    const ratio = (FLOOR + 0.05) / (L + 0.05);
+    expect(ratio).toBeGreaterThanOrEqual(4.5);
+  });
+});
