@@ -62,10 +62,8 @@ const control = (form: HTMLFormElement, name: string) =>
 function messageFor(name: string, el: HTMLInputElement | HTMLSelectElement): string {
   if (el.validity.valueMissing) {
     switch (name) {
-      case 'first-name':
-        return 'Please add your first name.';
-      case 'last-name':
-        return 'Please add your last name.';
+      case 'name':
+        return 'Please add your name.';
       case 'phone':
         return 'Please add a mobile phone number.';
       case 'email':
@@ -159,29 +157,6 @@ export interface QuickQuoteOptions {
 }
 
 /**
- * The marketing-consent pair: whether it was ticked, and the exact wording it
- * was ticked against.
- *
- * THE WORDING IS READ OFF THE PAGE rather than imported as a constant. Under
- * CASL the sender has to be able to show what was agreed to, and the only text
- * that can honestly claim to be that is the text the visitor was actually
- * looking at. Reading it from the label makes the record true even if someone
- * edits the copy and forgets there was a second copy of it elsewhere.
- *
- * Both keys are omitted entirely when the box is not ticked. An untouched
- * checkbox is not a declined consent to be recorded; it is nothing happening.
- */
-const consent = (form: HTMLFormElement): Record<string, string> => {
-  const box = form.querySelector<HTMLInputElement>('input[name="marketing-consent"]');
-  if (!box?.checked) return {};
-  const label = form.querySelector<HTMLLabelElement>(`label[for="${box.id}"]`);
-  return {
-    marketing_consent: 'yes',
-    consent_text: (label?.textContent ?? '').replace(/\s+/g, ' ').trim().slice(0, 500),
-  };
-};
-
-/**
  * Wire one short quote form.
  *
  * Idempotent through `wireLeadForm`, which refuses a form it has already
@@ -256,9 +231,7 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
 
     payload: (f) => ({
       form_id: f.dataset.formId ?? 'quick-quote',
-      /* One name in the database, two boxes on screen. Composed here so the
-         endpoint and the notification email see the shape they always saw. */
-      name: [fieldValue(f, 'first-name'), fieldValue(f, 'last-name')].filter(Boolean).join(' '),
+      name: fieldValue(f, 'name'),
       phone: fieldValue(f, 'phone'),
       email: fieldValue(f, 'email'),
       /* NO ADDRESS AND NO PROVINCE. Both were asked for briefly and then
@@ -269,11 +242,6 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
          taken while it was asked actually answered. */
       message: fieldValue(f, 'message'),
       page_url: location.href,
-
-      /* Express marketing consent. An unticked checkbox posts nothing at all,
-         so this reads `.checked` rather than a field value — an absent value
-         has to mean NO, which is what CASL assumes by default. */
-      ...consent(f),
     }),
 
     onSuccess: confirm,

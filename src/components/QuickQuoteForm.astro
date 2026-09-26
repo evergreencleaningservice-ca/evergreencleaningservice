@@ -41,7 +41,6 @@
  * a 2xx, the same attribution merged invisibly by `lead-submit.ts`.
  */
 import SpamGuard from './SpamGuard.astro';
-import { nap } from '../data/site';
 
 interface Props {
   /** Prefix for field ids, so two of these can share a page. */
@@ -78,18 +77,6 @@ const {
 const f = (name: string) => `${id}-${name}`;
 
 
-/**
- * The marketing-consent wording, in one place because it is submitted with
- * the form as well as displayed beside the box.
- *
- * CASL wants the sender identified and an unsubscribe route stated, so both
- * are in the sentence rather than assumed. It is written as a plain offer, not
- * as a legal clause: a box nobody reads is not meaningful consent however
- * carefully it is drafted.
- */
-const CONSENT_TEXT =
-  `Email me occasional cleaning tips and offers from ${nap.name}. ` +
-  'Unsubscribe any time — this is separate from your quote, which we will reply to either way.';
 ---
 
 <form
@@ -112,36 +99,19 @@ const CONSENT_TEXT =
       visitor is about to correct. */}
   <div class="qq-summary" data-qq-summary role="alert" aria-live="assertive" tabindex="-1"></div>
 
-  <div class="qq-row">
-    <div class="qq-field">
-      <label class="qq-label" for={f('first')}>First name <span class="qq-req">*</span></label>
-      <input
-        type="text"
-        id={f('first')}
-        name="first-name"
-        autocomplete="given-name"
-        autocapitalize="words"
-        placeholder="Jane"
-        required
-        aria-describedby={f('first-error')}
-      />
-      <p class="qq-error" id={f('first-error')} data-qq-error="first-name"></p>
-    </div>
-
-    <div class="qq-field">
-      <label class="qq-label" for={f('last')}>Last name <span class="qq-req">*</span></label>
-      <input
-        type="text"
-        id={f('last')}
-        name="last-name"
-        autocomplete="family-name"
-        autocapitalize="words"
-        placeholder="Doe"
-        required
-        aria-describedby={f('last-error')}
-      />
-      <p class="qq-error" id={f('last-error')} data-qq-error="last-name"></p>
-    </div>
+  <div class="qq-field">
+    <label class="qq-label" for={f('name')}>Full name <span class="qq-req">*</span></label>
+    <input
+      type="text"
+      id={f('name')}
+      name="name"
+      autocomplete="name"
+      autocapitalize="words"
+      placeholder="Jane Doe"
+      required
+      aria-describedby={f('name-error')}
+    />
+    <p class="qq-error" id={f('name-error')} data-qq-error="name"></p>
   </div>
 
   <div class="qq-row">
@@ -197,29 +167,6 @@ const CONSENT_TEXT =
   </div>
 
 
-  {/*
-    Express consent to marketing email — optional, and unticked.
-
-    WHY IT IS HERE AT ALL. Canada's anti-spam law needs express consent before
-    a commercial electronic message, and the burden of proving it sits with the
-    sender. The enquiry itself does not need a box: someone asking for a quote
-    plainly expects a reply, which is implied consent under PIPEDA. This box is
-    only about email that is marketing.
-
-    WHY IT IS NOT REQUIRED AND NOT PRE-TICKED. A pre-ticked box is not express
-    consent under CASL, and a required one is a hard gate on a paid click. The
-    reference design this was modelled on also carries a REQUIRED
-    "store and process my personal data" box; that is a GDPR pattern and it is
-    deliberately not copied here.
-
-    The wording is submitted with the form, not just the boolean, so a row can
-    always say what its sender actually agreed to even after this copy changes.
-  */}
-  <div class="qq-consent">
-    <input type="checkbox" id={f('consent')} name="marketing-consent" value="yes" />
-    <label for={f('consent')}>{CONSENT_TEXT}</label>
-  </div>
-
   {/* Honeypot. A person never sees it, so anything in it is a bot. */}
   <div class="qq-hp" aria-hidden="true">
     <label for={f('hp')}>Company website</label>
@@ -230,11 +177,6 @@ const CONSENT_TEXT =
 
   <button class="qq-submit" type="submit">{submitLabel}</button>
 
-  <p class="qq-after">
-    An account executive reads this and replies within <strong>2 business hours</strong> on a
-    working day. No obligation, and no visit until you ask for one. Prefer to talk now?{' '}
-    <a href={nap.phoneHref} data-call-location="form_note">Call {nap.phoneDisplay}</a>.
-  </p>
 </form>
 
 <script>
@@ -461,31 +403,6 @@ const CONSENT_TEXT =
     white-space: nowrap;
   }
 
-  /* Marketing consent. Optional, unticked, and visually quieter than the
-     fields — it is an offer, not another thing to fill in. */
-  .qq-consent {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-top: 4px;
-  }
-
-  .qq-consent input {
-    flex: none;
-    /* 18px and nudged down to sit on the first line of the label, which wraps
-       to two or three lines at phone width. */
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-    accent-color: var(--brand);
-  }
-
-  .qq-consent label {
-    font-size: 13px;
-    line-height: 1.45;
-    color: var(--ink);
-  }
-
   .qq-submit {
     width: 100%;
     min-height: 52px;
@@ -519,17 +436,6 @@ const CONSENT_TEXT =
     }
   }
 
-  .qq-after {
-    margin: 14px 0 0;
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-
-  .qq-after a {
-    color: var(--brand);
-    font-weight: 700;
-  }
 </style>
 
 <style is:global>

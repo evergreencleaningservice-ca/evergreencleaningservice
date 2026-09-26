@@ -128,9 +128,22 @@ describe('the locations the site actually uses', () => {
     ['paid_header', 3],
     ['paid_sticky', 2],
     ['paid_cta', 2],
-    ['form_note', 3],
   ])('%s appears %i time(s)', (loc, count) => {
     expect(at(loc)).toHaveLength(count);
+  });
+
+  it('form_note is gone with the note that carried it', () => {
+    /* The quote form closed with "An account executive reads this and replies
+       within 2 business hours … Prefer to talk now? Call (416) 803-4880", and
+       that sentence held the only `form_note` telephone link on the site.
+       The client asked for the note to go, so the link went with it.
+
+       WORTH KNOWING RATHER THAN SILENTLY ABSORBING: the form no longer offers
+       a visitor who would rather phone than type anywhere to click. The
+       header and the sticky bar still carry the number on the paid pages, so
+       the number is never more than a glance away — but it is one fewer
+       route, and it was the one closest to the moment of hesitation. */
+    expect(at('form_note')).toHaveLength(0);
   });
 
   it('body prose is labelled content, including links from Markdown', () => {

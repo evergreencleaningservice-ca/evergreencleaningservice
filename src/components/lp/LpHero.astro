@@ -20,12 +20,56 @@ interface Props {
   eyebrow?: string;
   heading: string;
   sub: string;
+  /**
+   * Base name of an image set in /images/, e.g.
+   * `evergreen-modern-commercial-cleaning-hero`, which resolves to the
+   * `-480/-768/-1000/-1600` AVIF, WebP and JPEG siblings. Omit it and the
+   * hero keeps the plain gradient it had.
+   */
+  image?: string;
+  imageAlt?: string;
 }
 
-const { eyebrow, heading, sub } = Astro.props;
+const { eyebrow, heading, sub, image, imageAlt } = Astro.props;
+
+/* Matches the homepage hero's set, because it is the same set. */
+const WIDTHS = [480, 768, 1000, 1600] as const;
+const NATURAL = { width: 1942, height: 809 };
+
+const srcset = (base: string, ext: string) =>
+  WIDTHS.map((w) => `/images/${base}-${w}.${ext} ${w}w`).join(', ');
 ---
 
-<section class="lpx-hero">
+<section class:list={['lpx-hero', image && 'has-media']}>
+  {
+    /* AN <img>, NOT A CSS BACKGROUND, for the reason the homepage hero gives
+       at length: a background image cannot be given a srcset, cannot be
+       fetched at high priority, and cannot carry alt text. This is the first
+       paint on a paid click, so it is eager and high priority — the whole
+       point of the page is that it appears fast.
+
+       `alt` is empty by default and that is correct: the photo illustrates
+       the heading beside it rather than saying anything the heading does
+       not. A screen reader should skip it, not read a description of a
+       stock photograph. */
+    image && (
+      <picture class="lpx-hero-media">
+        <source type="image/avif" srcset={srcset(image, 'avif')} sizes="100vw" />
+        <source type="image/webp" srcset={srcset(image, 'webp')} sizes="100vw" />
+        <img
+          src={`/images/${image}-1000.jpg`}
+          srcset={srcset(image, 'jpg')}
+          sizes="100vw"
+          width={NATURAL.width}
+          height={NATURAL.height}
+          alt={imageAlt ?? ''}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+    )
+  }
   <div class="lpx-wrap lpx-hero-grid">
     <div class="lpx-pitch">
       {eyebrow && <p class="lpx-eyebrow">{eyebrow}</p>}
