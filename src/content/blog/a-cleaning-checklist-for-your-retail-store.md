@@ -2,8 +2,8 @@
 title: "A Cleaning Checklist For Your Retail Store"
 description: "Does your storefront need cleaning? Need to refresh your business? Here we discuss what areas of your store will benefit from a good clean!"
 pubDate: 2022-10-27
-image: "/images/car-dealership-showroom-floor-mopping.jpg"
-imageAlt: "Cleaner mopping a bright retail showroom floor"
+image: "/images/blog-retail-store-cleaning-checklist-feature.jpg"
+imageAlt: "Professional cleaner wiping a checkout counter in a bright contemporary retail store"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "retail"]
 ---
 

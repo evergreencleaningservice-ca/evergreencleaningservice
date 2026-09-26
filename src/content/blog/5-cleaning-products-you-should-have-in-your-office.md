@@ -2,8 +2,8 @@
 title: "5 Commercial Cleaning Products You Should Have in Your Office"
 description: "Here we discuss five cleaning products that we recommend you keep handy in any office, commercial and industrial work setting."
 pubDate: 2020-11-30
-image: "/images/janitorial-cart-preparation-supplies.jpg"
-imageAlt: "Cleaner loading microfibre cloths and spray bottles on a janitorial cart in a Toronto office building"
+image: "/images/blog-office-cleaning-products-feature.jpg"
+imageAlt: "Professional cleaner organizing essential unbranded cleaning supplies on a janitorial cart in a Toronto office"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 

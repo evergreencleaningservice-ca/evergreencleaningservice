@@ -2,6 +2,8 @@
 title: "The Return Of Employees Post COVID-19, Is Your Office Ready?"
 description: "Thinking about the post lockdown return of your employees? Considering the changes you will need to make in your office? Let us help."
 pubDate: 2021-04-29
+image: "/images/blog-office-return-readiness-feature.jpg"
+imageAlt: "Professional cleaner making final preparations in a bright office ready for returning employees"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "covid-19", "janitorial-services"]
 ---
 

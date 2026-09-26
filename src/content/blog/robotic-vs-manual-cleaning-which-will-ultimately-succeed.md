@@ -2,8 +2,8 @@
 title: "Robotic Vs. Manual Cleaning: Which Will Ultimately Succeed?"
 description: "Concerned about AI taking over the cleaning industry? Here we examine robotic versus manual cleaning in the commercial cleaning industry."
 pubDate: 2023-01-31
-image: "/images/warehouse-floor-scrubber-industrial.jpg"
-imageAlt: "Operator-driven floor scrubber cleaning a large warehouse floor"
+image: "/images/blog-robotic-versus-manual-cleaning-feature.jpg"
+imageAlt: "Cleaner detailing floor edges while an autonomous scrubber handles an open lobby area"
 tags: ["ai", "cleaning", "commercial-cleaning", "commercial-office-cleaning", "manual-cleaning", "robotic"]
 ---
 

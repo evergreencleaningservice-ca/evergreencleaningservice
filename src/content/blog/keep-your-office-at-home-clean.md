@@ -2,8 +2,8 @@
 title: "Keep Your Office at Home Clean"
 description: "Working from home wrecking havoc on your home office? Here we give you some tips on keeping your workspace spic and span."
 pubDate: 2021-02-26
-image: "/images/spring-office-desk-cleaning-toronto.jpg"
-imageAlt: "Cleaner wiping office desks in a Toronto office"
+image: "/images/blog-home-office-cleaning-feature.jpg"
+imageAlt: "Person cleaning an organized home-office desk in a bright Toronto condo"
 tags: ["cleaning", "office"]
 ---
 

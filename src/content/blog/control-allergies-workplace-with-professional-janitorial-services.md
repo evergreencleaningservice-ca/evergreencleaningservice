@@ -2,8 +2,8 @@
 title: "Control Allergies with Professional Janitorial Services"
 description: "Concerned about allergies in the workplace? Find out how janitorial services can help with that and keep productivity at its peak."
 pubDate: 2020-01-10
-image: "/images/office-backpack-vacuum-toronto.jpg"
-imageAlt: "Cleaner vacuuming office carpet with a backpack vacuum to reduce dust"
+image: "/images/blog-workplace-allergy-control-feature.jpg"
+imageAlt: "Professional cleaners using HEPA vacuum tools on office carpet edges and ventilation areas"
 tags: ["allergies", "commercial-cleaning", "janitorial-services", "office"]
 ---
 

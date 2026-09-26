@@ -2,7 +2,8 @@
 title: "Importance Of Hand-washing"
 description: "How important is hand-washing? Here we discuss the importance of just that and how it impacts your office team."
 pubDate: 2022-08-02
-image: "/images/office-worker-sanitizing-surfaces.jpg"
+image: "/images/blog-hand-washing-importance-feature.jpg"
+imageAlt: "Office worker thoroughly washing their hands with soap at a workplace sink"
 tags: ["commercial-cleaning", "janitorial-services", "office"]
 ---
 

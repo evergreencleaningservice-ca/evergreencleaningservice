@@ -1,8 +1,8 @@
 ---
 title: "Qualities of The Top Cleaning Professionals"
 description: "What does it take to be a successful professional in the commercial cleanining business? Read more to find out the traits that are needed."
-image: "/images/cleaning-quality-inspection-clipboard.jpg"
-imageAlt: "Cleaning professional completing a quality inspection checklist"
+image: "/images/blog-top-cleaning-professional-qualities-feature.jpg"
+imageAlt: "Commercial cleaning team checking equipment together before an office shift"
 pubDate: 2020-07-31
 tags: ["commercial-cleaning", "commercial-office-cleaning"]
 ---

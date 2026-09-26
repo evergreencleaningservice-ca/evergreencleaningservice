@@ -2,8 +2,8 @@
 title: "COVID-19 Commercial Cleaning Expectations Examined"
 description: "Commercial cleaning standards have had to up their game since the beginning of Covid-19. Find how we've addressed today's' cleaning standard."
 pubDate: 2022-01-18
-image: "/images/cleaning-quality-inspection-clipboard.jpg"
-imageAlt: "Supervisor inspecting a cleaned office with a checklist on a clipboard"
+image: "/images/blog-commercial-cleaning-expectations-feature.jpg"
+imageAlt: "Facilities manager and cleaning supervisor inspecting the quality of a cleaned office lobby"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "coronavirus", "covid-19", "janitorial-services"]
 ---
 

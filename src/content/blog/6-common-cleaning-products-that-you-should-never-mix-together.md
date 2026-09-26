@@ -2,8 +2,8 @@
 title: "6 Common Cleaning Products That You Should Never Mix Together"
 description: "Cleaning product do's and don't can be confusing. Let us help set you you on the right path with the right tools for the job."
 pubDate: 2021-07-30
-image: "/images/eco-friendly-cleaning-spray-microfibre.jpg"
-imageAlt: "Gloved cleaner wiping a steel surface with a labelled spray bottle and green microfibre cloths"
+image: "/images/blog-cleaning-products-never-mix-feature.jpg"
+imageAlt: "Gloved cleaner safely separating unbranded cleaning products in a janitorial supply room"
 tags: ["cleaning-products", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 

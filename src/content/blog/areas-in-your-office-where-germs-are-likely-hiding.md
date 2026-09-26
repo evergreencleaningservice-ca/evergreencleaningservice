@@ -2,8 +2,8 @@
 title: "Areas In Your Office Where Germs Are Likely Hiding"
 description: "Germs at the office? Let us tell you how to alleviate those hidden germs for good and ensure that your office is a healthy one."
 pubDate: 2021-10-28
-image: "/images/touchpoint-disinfection-door-handle.jpg"
-imageAlt: "Cleaner disinfecting an office door handle, a high-touch germ hotspot"
+image: "/images/blog-office-germ-hotspots-feature.jpg"
+imageAlt: "Gloved cleaner disinfecting a shared office keyboard and other high-touch equipment"
 ---
 
 ## Hidden Germs …
