@@ -458,3 +458,59 @@ describe('the mobile sticky bar', () => {
     expect(css).toMatch(/@media \(width>=768px\)\{\.lpx-sticky\{display:none\}\}/);
   });
 });
+
+/* --- the hero photograph's scrim must stay BEHIND the content ------------- */
+
+/**
+ * This block exists because of a bug that looked like a colour choice.
+ *
+ * The quote page's hero sits on a photograph, and a `::after` scrim washes
+ * that photograph pale so dark text has something safe to sit on. The scrim
+ * was given `position: absolute; inset: 0`, and the content wrapper over it
+ * was given `position: relative` — and nothing else.
+ *
+ * That is not enough. A `::after` pseudo-element is generated after the
+ * element's last child, so with both at `z-index: auto` they paint in DOM
+ * order and the SCRIM WINS. An 86% white wash (88%→55% on desktop) landed on
+ * top of the heading, the trust points and the opaque white form card. The
+ * rendered result, measured with Chromium at 1440px: heading ink #dedfe0 on
+ * #f6f9fa, a contrast ratio of 1.26:1 against a 4.5:1 requirement. The form
+ * card appeared translucent with the photo showing through it.
+ *
+ * It was reported as "the text and form is light and not very visible", which
+ * is exactly right and points at the wrong layer — every colour in the file
+ * was correct. With `z-index: 1` on the wrapper the same measurement gives
+ * #424143 on #f3f7f7, 9.41:1.
+ *
+ * The rule this pins: any full-bleed scrim implies a lifted content layer.
+ */
+describe('the hero scrim', () => {
+  const allCss = () =>
+    fs
+      .readdirSync(path.join(out, '_astro'))
+      .filter((f) => f.endsWith('.css'))
+      .map((f) => fs.readFileSync(path.join(out, '_astro', f), 'utf8'))
+      .join('\n');
+
+  it('is a full-bleed overlay, which is what makes the stacking matter', () => {
+    const scrim = allCss().match(/\.lpx-hero\.has-media:after\{([^}]*)\}/)?.[1] ?? '';
+    expect(scrim, 'the scrim rule went missing').not.toBe('');
+    expect(scrim).toContain('position:absolute');
+    expect(scrim).toContain('inset:0');
+  });
+
+  it('is overpainted by the content, not the other way round', () => {
+    const wrap = allCss().match(/\.lpx-hero\.has-media>\.lpx-wrap\{([^}]*)\}/)?.[1] ?? '';
+    expect(wrap, 'the content wrapper rule went missing').not.toBe('');
+
+    /* `position` is required for `z-index` to apply at all, so both halves of
+       the contract are asserted — dropping either reintroduces the bug. */
+    expect(wrap).toMatch(/position:(relative|absolute|sticky)/);
+
+    const z = Number(wrap.match(/z-index:(-?\d+)/)?.[1] ?? NaN);
+    expect(
+      z,
+      'the hero content needs a positive z-index or the scrim paints over it'
+    ).toBeGreaterThanOrEqual(1);
+  });
+});

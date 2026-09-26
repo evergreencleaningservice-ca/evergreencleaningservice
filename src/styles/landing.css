@@ -72,8 +72,29 @@
   pointer-events: none;
 }
 
+/**
+ * THE `z-index` IS LOAD-BEARING, AND LEAVING IT OFF IS THE BUG THIS COMMENT
+ * EXISTS TO PREVENT COMING BACK.
+ *
+ * `position: relative` alone is not enough. A `::after` pseudo-element is
+ * generated after the element's last child, so with both the scrim and this
+ * wrapper at `z-index: auto` they paint in DOM order and the scrim goes ON
+ * TOP — over the heading, over the trust points, and over the form card.
+ *
+ * What that looked like on screen: an 86% white wash across the entire hero
+ * (88%→55% on desktop). The heading ink rendered as pale grey, the trust
+ * points were barely legible, and the opaque white form card appeared
+ * translucent with the photograph showing through it. Everything read as a
+ * styling choice — "the text is too light" — when nothing about the colours
+ * was wrong at all. The stacking was.
+ *
+ * `z-index: 1` lifts the content out of the scrim's way. The scrim then does
+ * the one job it was written for: lightening the PHOTOGRAPH so dark text has
+ * something safe to sit on.
+ */
 .lpx-hero.has-media > .lpx-wrap {
   position: relative;
+  z-index: 1;
 }
 
 .lpx-hero-grid {
