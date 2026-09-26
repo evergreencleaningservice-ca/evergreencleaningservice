@@ -43,11 +43,13 @@ export interface FieldSpec {
  * — first name, business name, phone OR email, postal code, one service
  * select — because it is what cold paid traffic sees and every field is a
  * place to give up. That is now replaced by the client's chosen reference:
- * five fields, ALL REQUIRED, including a surname.
+ * four fields, ALL REQUIRED.
 
  * A street address and a province were asked for on one revision in between
  * and taken back out: where the building is is a question the account
- * executive asks on the call, not a condition of making contact.
+ * executive asks on the call, not a condition of making contact. First and
+ * last name were two boxes for one revision and are now one, which is what
+ * the database always stored anyway.
  *
  * It asks more and it will convert somewhat worse; that is a business
  * decision the client made with the trade-off in front of them, not an
@@ -65,20 +67,12 @@ export interface FieldSpec {
  */
 export const FIELDS: FieldSpec[] = [
   {
-    name: 'first-name',
+    name: 'name',
     tag: 'input',
     type: 'text',
     required: true,
-    autocomplete: 'given-name',
-    errorKey: 'first-name',
-  },
-  {
-    name: 'last-name',
-    tag: 'input',
-    type: 'text',
-    required: true,
-    autocomplete: 'family-name',
-    errorKey: 'last-name',
+    autocomplete: 'name',
+    errorKey: 'name',
   },
   {
     name: 'phone',
@@ -149,15 +143,10 @@ export function quickQuoteMarkup({
           aria-label="Request a quote">
       <div class="qq-summary" data-qq-summary role="alert" aria-live="assertive" tabindex="-1"></div>
 
-      <label for="${id}-first">First name</label>
-      <input type="text" id="${id}-first" name="first-name" autocomplete="given-name" required
-             aria-describedby="${id}-first-name-error" />
-      ${err('first-name')}
-
-      <label for="${id}-last">Last name</label>
-      <input type="text" id="${id}-last" name="last-name" autocomplete="family-name" required
-             aria-describedby="${id}-last-name-error" />
-      ${err('last-name')}
+      <label for="${id}-name">Full name</label>
+      <input type="text" id="${id}-name" name="name" autocomplete="name" required
+             aria-describedby="${id}-name-error" />
+      ${err('name')}
 
       <label for="${id}-phone">Mobile phone</label>
       <input type="tel" id="${id}-phone" name="phone" inputmode="tel" autocomplete="tel" required
@@ -213,8 +202,7 @@ export function fill(
  * constants were the two shapes that satisfied it. Both are now required.
  */
 export const VALID_LEAD = {
-  'first-name': 'Dana',
-  'last-name': 'Okonkwo',
+  name: 'Dana Okonkwo',
   phone: '416 555 0142',
   email: 'dana@placeholder-holdings.example',
   message: 'Two floors of open-plan office, nightly.',

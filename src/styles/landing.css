@@ -26,6 +26,56 @@
   background: linear-gradient(180deg, #f6f8f5 0%, #fff 100%);
 }
 
+/* --- the optional hero photograph ---------------------------------------- */
+
+.lpx-hero.has-media {
+  position: relative;
+  /* The gradient is the no-photo treatment; the photo replaces it. */
+  background: #f6f8f5;
+}
+
+.lpx-hero-media {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+.lpx-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* The interesting part of this frame is its upper middle, not its centre. */
+  object-position: 50% 40%;
+}
+
+/**
+ * The scrim, and the numbers in it are the whole reason this is not a
+ * decorative flourish.
+ *
+ * Dark text sits directly on this photograph, and a photograph is not a
+ * colour — its brightness varies across the frame and changes entirely if
+ * someone swaps the image. So the wash is set for the WORST case rather than
+ * the one on screen today: at 0.80 white over pure black the effective
+ * background is #cccccc, where the heading ink still measures about 9.4:1.
+ * A lighter scrim would look better and would be a promise this component
+ * cannot keep for the next photo.
+ *
+ * It is strongest on the left, where the copy is, and thinnest on the right,
+ * where an opaque form card covers the photo anyway — so the picture stays
+ * visible exactly where nothing has to be read over it.
+ */
+.lpx-hero.has-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.86);
+  pointer-events: none;
+}
+
+.lpx-hero.has-media > .lpx-wrap {
+  position: relative;
+}
+
 .lpx-hero-grid {
   display: grid;
   gap: 28px;
@@ -36,8 +86,20 @@
     padding: 44px 0 34px;
   }
 
+  .lpx-hero.has-media::after {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.88) 0%,
+      rgba(255, 255, 255, 0.8) 45%,
+      rgba(255, 255, 255, 0.55) 100%
+    );
+  }
+
+  /* EQUAL COLUMNS. The form column was a fixed 460px against a flexible
+     pitch column, which made the form visibly the smaller of the two. It now
+     matches the heading block beside it. */
   .lpx-hero-grid {
-    grid-template-columns: minmax(0, 1fr) 460px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 44px;
     align-items: start;
   }

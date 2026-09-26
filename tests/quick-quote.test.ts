@@ -105,15 +105,15 @@ describe('every field the form asks for is required', () => {
     expect(confirmation()).not.toBeNull();
   });
 
-  it('joins the two name boxes into the one name the database stores', () => {
-    /* Two fields on screen, one column behind it. A surname that vanished
-       between the form and the row would be the kind of loss nobody notices
-       until a client asks who a lead was. */
-    expect(VALID_LEAD['first-name']).toBe('Dana');
-    expect(VALID_LEAD['last-name']).toBe('Okonkwo');
+  it('takes the whole name in one box', () => {
+    /* Two boxes for one revision, now one — which is what the database
+       always stored anyway. The split bought a surname the client could
+       address people by and cost a field; merging returns the field and
+       keeps the surname, because people type both into one box. */
+    expect(VALID_LEAD.name).toBe('Dana Okonkwo');
   });
 
-  it.each(['first-name', 'last-name', 'phone', 'email', 'message'])(
+  it.each(['name', 'phone', 'email', 'message'])(
     'marks %s required in the markup',
     (name) => {
       const form = mount();
@@ -123,12 +123,12 @@ describe('every field the form asks for is required', () => {
     }
   );
 
-  it('asks for five required fields', () => {
+  it('asks for four required fields', () => {
     const form = mount();
     const required = Array.from(form.elements).filter(
       (el) => (el as HTMLInputElement).required
     ).length;
-    expect(required).toBe(5);
+    expect(required).toBe(4);
   });
 
   it('no longer carries a shared contact error slot', () => {
@@ -160,7 +160,7 @@ describe('a field that is filled in badly', () => {
 
   it('posts nothing when a required field is simply empty', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_LEAD, 'last-name': '' });
+    const form = ready({ ...VALID_LEAD, name: '' });
 
     await submit(form);
 
@@ -199,7 +199,7 @@ describe('the field set, as it reaches the endpoint', () => {
     for (const key of ['business_name', 'services', 'address', 'province']) {
       expect(Object.keys(body), `${key} should not be sent`).not.toContain(key);
     }
-    for (const name of ['business-name', 'services', 'postal', 'address', 'province']) {
+    for (const name of ['business-name', 'services', 'postal', 'address', 'province', 'first-name', 'last-name']) {
       expect(form.elements.namedItem(name), `${name} should not be on the form`).toBeNull();
     }
   });
@@ -233,7 +233,7 @@ describe('failures never report a conversion', () => {
     expect(confirmation()).toBeNull();
     /* The visitor can try again: the button is live and the fields are intact. */
     expect(form.querySelector<HTMLButtonElement>('button[type="submit"]')!.disabled).toBe(false);
-    expect((form.elements.namedItem('first-name') as HTMLInputElement).value).toBe('Dana');
+    expect((form.elements.namedItem('name') as HTMLInputElement).value).toBe('Dana Okonkwo');
   });
 
   it('a network failure says call us, and reports nothing', async () => {
@@ -248,7 +248,7 @@ describe('failures never report a conversion', () => {
 
   it('a missing required field posts nothing', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_LEAD, 'last-name': '' });
+    const form = ready({ ...VALID_LEAD, name: '' });
 
     await submit(form);
 
@@ -408,37 +408,37 @@ describe('errors are announced, not just coloured', () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
     const form = ready({
       ...VALID_LEAD,
-      'first-name': '',
-      'last-name': '',
+      name: '',
       phone: '',
+      email: '',
       message: '',
     });
 
     await submit(form);
 
-    expect(errorFor('first-name')).toContain('first name');
-    expect(errorFor('last-name')).toContain('last name');
+    expect(errorFor('name')).toContain('name');
     expect(errorFor('phone')).toContain('phone');
+    expect(errorFor('email')).toContain('email');
     expect(errorFor('message')).toContain('cleaned');
     expect(summary()).toContain('4 things need a moment');
   });
 
   it('marks each bad field aria-invalid and each error is described by id', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_LEAD, 'first-name': '' });
+    const form = ready({ ...VALID_LEAD, name: '' });
 
     await submit(form);
 
-    const first = form.elements.namedItem('first-name') as HTMLInputElement;
-    expect(first.getAttribute('aria-invalid')).toBe('true');
-    const describedBy = first.getAttribute('aria-describedby');
+    const nameBox = form.elements.namedItem('name') as HTMLInputElement;
+    expect(nameBox.getAttribute('aria-invalid')).toBe('true');
+    const describedBy = nameBox.getAttribute('aria-describedby');
     expect(describedBy).toBeTruthy();
-    expect(document.getElementById(describedBy!)?.textContent).toContain('first name');
+    expect(document.getElementById(describedBy!)?.textContent).toContain('name');
   });
 
   it('the summary is a live region and takes focus', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_LEAD, 'first-name': '' });
+    const form = ready({ ...VALID_LEAD, name: '' });
 
     await submit(form);
 
@@ -451,16 +451,16 @@ describe('errors are announced, not just coloured', () => {
 
   it('clears a field error the moment the visitor starts fixing it', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_LEAD, 'first-name': '' });
+    const form = ready({ ...VALID_LEAD, name: '' });
     await submit(form);
-    expect(errorFor('first-name')).not.toBe('');
+    expect(errorFor('name')).not.toBe('');
 
-    const first = form.elements.namedItem('first-name') as HTMLInputElement;
-    first.value = 'D';
-    first.dispatchEvent(new Event('input', { bubbles: true }));
+    const nameBox = form.elements.namedItem('name') as HTMLInputElement;
+    nameBox.value = 'D';
+    nameBox.dispatchEvent(new Event('input', { bubbles: true }));
 
-    expect(errorFor('first-name')).toBe('');
-    expect(first.hasAttribute('aria-invalid')).toBe(false);
+    expect(errorFor('name')).toBe('');
+    expect(nameBox.hasAttribute('aria-invalid')).toBe(false);
   });
 
   it('clears the contact error when either phone or email is touched', async () => {
@@ -484,14 +484,14 @@ describe('errors are announced, not just coloured', () => {
 
   it('a stale error does not survive the next attempt', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_LEAD, 'first-name': '', phone: '' });
+    const form = ready({ ...VALID_LEAD, name: '', phone: '' });
     await submit(form);
     expect(summary()).toContain('2 things');
 
-    fill(form, { 'first-name': 'Dana' });
+    fill(form, { name: 'Dana Okonkwo' });
     await submit(form);
 
-    expect(errorFor('first-name')).toBe('');
+    expect(errorFor('name')).toBe('');
     expect(summary()).toContain('phone');
     expect(summary()).not.toContain('2 things');
   });
@@ -532,8 +532,8 @@ describe('keyboard behaviour', () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
     const form = ready(VALID_LEAD);
 
-    const firstName = form.elements.namedItem('first-name') as HTMLInputElement;
-    firstName.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    const nameBox = form.elements.namedItem('name') as HTMLInputElement;
+    nameBox.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
     /* happy-dom does not synthesise the implicit submit, so the assertion is
        that nothing intercepted the key on a real field. */
     await submit(form);
