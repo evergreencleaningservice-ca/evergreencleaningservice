@@ -46,7 +46,6 @@ import LpReviews from '../../components/lp/LpReviews.astro';
 import LpAreas from '../../components/lp/LpAreas.astro';
 import LpFinalCta from '../../components/lp/LpFinalCta.astro';
 import LpSticky from '../../components/lp/LpSticky.astro';
-import { REPLY_PROMISE } from '../../data/landing';
 
 /** The DOM id and anchor target. Unchanged, so existing #links still work. */
 const FORM_ANCHOR = 'ppc-lead-form';
@@ -80,12 +79,25 @@ const CALL_NOTE = 'Free walkthrough • No obligation';
     eyebrow="Toronto & GTA commercial janitorial"
     heading="Commercial cleaning in Toronto you can count on, every night."
     sub="Offices, clinics, warehouses and retail across Toronto and the GTA — cleaned around your hours by a bonded, insured, WSIB-covered crew that turns up."
+    {/* THE SAME PHOTOGRAPH AS THE SIBLING PAGE, deliberately.
+
+        These two pages exist to compare INTENT — quote-seeking against
+        service-seeking — and they keep separate reporting identities so
+        their conversion data never merges. Giving them different imagery
+        would add a second variable to a test designed to isolate one, and
+        whichever page won, nobody could say whether it was the wording or
+        the picture.
+
+        It is also the only complete set: the other three hero images in
+        `public/images/` stop at 1000px, and this component's srcset asks
+        for 1600, so either of them would emit a URL that 404s on a wide
+        screen. */}
+    image="evergreen-modern-commercial-cleaning-hero"
   >
     <QuickQuoteForm
       id={FORM_ANCHOR}
       formId={FORM_ID}
       heading="Get your free quote"
-      intro={`Seven short questions. An account executive replies ${REPLY_PROMISE} on a working day.`}
       submitLabel="Get my free quote"
       eagerCaptcha
     />

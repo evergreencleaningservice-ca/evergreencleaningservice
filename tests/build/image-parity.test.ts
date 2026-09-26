@@ -93,14 +93,28 @@ const REDIRECTED = new Set([
  * count, new picture — a content decision made during the port, not a loss.
  * Listed so the strict check below can tell the two apart.
  */
-const SUBSTITUTED: Record<string, string[]> = {
-  '/be-safe-from-coronavirus-work/': ['safety-at-work'],
-  '/coronavirus-bringing-more-urgency-cleaning/': ['medical-office-reception-area'],
-  '/day-night-which-is-the-best-routine-for-your-office/': ['janitorial-cart'],
-  '/green-clean-products/': ['green_clean_products_large-1'],
-  '/qualities-top-cleaning-professionals/': ['istock-532149911-scaled'],
-  '/cleaning-protocols-for-daycares-and-schools/': ['istock-532149911-scaled'],
-};
+/**
+ * Pages that deliberately serve no body image at all.
+ *
+ * `/about-us/` is the only one, and it is an improvement rather than a loss:
+ * the original's single "body image" there was `free-quote-cta-button.png`, a
+ * picture of a button. It is now a real `<a class="btn">Request a Free
+ * Quote</a>` — selectable text, keyboard reachable, announced as a link, and
+ * no image request. A page that swaps a picture of a control for the control
+ * is not a page that lost a picture.
+ */
+const NO_BODY_IMAGE = new Set(['/about-us/']);
+
+/**
+ * The floor under the whole site, measured rather than guessed.
+ *
+ * 130 body images across the 45 manifest pages that build, at the time the
+ * imagery was refreshed. It is a FLOOR, not an equality: adding pictures is
+ * fine and should not fail a test. What it catches is the thing that would
+ * otherwise be invisible — a change that quietly strips images from many
+ * pages at once, which is precisely how the original 28 went missing.
+ */
+const TOTAL_BODY_IMAGES_FLOOR = 130;
 
 const built = new Map<string, Set<string>>();
 
@@ -129,23 +143,62 @@ describe('body images carried over from the original', () => {
     expect(Object.keys(originalImages).length).toBe(54);
   });
 
-  it('loses no image that is not already on the known-lost list', () => {
-    const unexpected: string[] = [];
+  it('leaves no page that had pictures showing none', () => {
+    /**
+     * THIS TEST USED TO COMPARE FILENAMES, one by one, against the original
+     * WordPress site. That was the right check while the port was still
+     * trying to reproduce that site: 28 images had been dropped silently and
+     * nothing noticed until a person compared two browser windows.
+     *
+     * The site's imagery has since been deliberately replaced — old stock
+     * photos swapped for new ones, several consolidated (three
+     * `moving-the-office` variants became one `office-relocation-cleanup`),
+     * and CTA graphics turned into real markup. 121 filenames stopped
+     * matching across 45 pages, every one of them on purpose.
+     *
+     * So filename identity is no longer the contract, and pinning it would
+     * mean this test fails on every legitimate refresh — which is how a test
+     * gets deleted rather than fixed. What survives is the INVARIANT the
+     * original bug actually broke: a page that illustrated itself must still
+     * illustrate itself. `/green-clean-products/` is still asserted by name
+     * below, because the specific images on it are the evidential point of
+     * the page rather than decoration.
+     */
+    const bare: string[] = [];
 
     for (const [slug, images] of Object.entries(originalImages as Record<string, string[]>)) {
       const route = slug === 'index' || slug === 'home' ? '/' : `/${slug}/`;
       if (REDIRECTED.has(route) || isPaginatedArchive(route)) continue;
+      if (NO_BODY_IMAGE.has(route)) continue;
       const have = built.get(route);
-      if (!have) continue;
-
-      const allowed = new Set([...(KNOWN_LOST[route] ?? []), ...(SUBSTITUTED[route] ?? [])]);
-      for (const stem of images) {
-        if (have.has(stem) || allowed.has(stem)) continue;
-        unexpected.push(`${route} lost ${stem}`);
-      }
+      if (!have || images.length === 0) continue;
+      if (have.size === 0) bare.push(route);
     }
 
-    expect(unexpected, 'a body image disappeared that nothing accounts for').toEqual([]);
+    expect(bare, 'this page illustrated itself and now shows nothing').toEqual([]);
+  });
+
+  it('pins the deliberately image-free pages, so a new one has to be declared', () => {
+    /* The other direction, as with KNOWN_LOST. If a page joins this set by
+       accident the test above passes and nobody hears about it, so the set
+       itself is pinned: adding to it is a decision somebody has to write
+       down. */
+    for (const route of NO_BODY_IMAGE) {
+      expect(built.get(route)?.size, `${route} is listed as image-free`).toBe(0);
+    }
+    expect(NO_BODY_IMAGE.size).toBe(1);
+  });
+
+  it('keeps at least as many body images as the refresh shipped with', () => {
+    let total = 0;
+    for (const [slug] of Object.entries(originalImages as Record<string, string[]>)) {
+      const route = slug === 'index' || slug === 'home' ? '/' : `/${slug}/`;
+      if (REDIRECTED.has(route) || isPaginatedArchive(route)) continue;
+      total += built.get(route)?.size ?? 0;
+    }
+    expect(total, 'body images have been stripped somewhere').toBeGreaterThanOrEqual(
+      TOTAL_BODY_IMAGES_FLOOR
+    );
   });
 
   it('pins the known-lost set exactly — a recovery must update the list', () => {
@@ -168,15 +221,24 @@ describe('body images carried over from the original', () => {
     expect(stillLost).toHaveLength(2);
   });
 
-  it('/green-clean-products/ carries all four of its images again', () => {
+  it('/green-clean-products/ carries all four of its images', () => {
     /* The page a person spotted by eye. Losing all four left it making a
        certification claim with the certification marks removed, so it is
-       asserted by name rather than left to the aggregate. */
+       asserted by name rather than left to the aggregate.
+
+       THE THREE MARKS ARE PINNED BY NAME and the photograph is not: the
+       Armstrong logo, the ECOLOGO mark and the ProSeries Green logo ARE the
+       claim, and no refresh may quietly swap them for something prettier.
+       The product photograph beside them is illustration, and the imagery
+       refresh replaced `green_clean_products_LARGE-1` with
+       `green-cleaning-products-unlabeled` — a swap the count still catches
+       but the names should not forbid. */
     const have = built.get('/green-clean-products/');
     expect(have, 'the page must still build').toBeDefined();
-    expect([...have!].sort()).toEqual(
-      ['armstrong-logo', 'ecologo', 'green-cleaning-products-unlabeled', 'proseriesgreen-logo'].sort()
-    );
+    for (const mark of ['armstrong-logo', 'ecologo', 'proseriesgreen-logo']) {
+      expect([...have!], `the ${mark} certification mark`).toContain(mark);
+    }
+    expect(have!.size, 'four images: three marks and the product photograph').toBe(4);
     expect(KNOWN_LOST['/green-clean-products/']).toBeUndefined();
   });
 
@@ -189,6 +251,12 @@ describe('body images carried over from the original', () => {
     const at = (needle: string) => html.indexOf(needle);
     expect(at('armstrong-logo')).toBeLessThan(at('For more information visit Armstrong'));
     expect(at('ECOLOGO')).toBeLessThan(at('In April of 2013'));
-    expect(at('green-cleaning-products-unlabeled')).toBeGreaterThan(at('In April of 2013'));
+    /* The product photograph, whatever it is currently called, sits after
+       the ECOLOGO paragraph. Located by elimination rather than by filename,
+       so the imagery refresh does not have to be re-encoded here. */
+    const photo = [...built.get('/green-clean-products/')!].find(
+      (s) => !['armstrong-logo', 'ecologo', 'proseriesgreen-logo'].includes(s)
+    )!;
+    expect(html.toLowerCase().indexOf(photo)).toBeGreaterThan(at('In April of 2013'));
   });
 });

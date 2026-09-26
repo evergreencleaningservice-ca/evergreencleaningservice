@@ -45,24 +45,38 @@ export interface ResendPayload {
  * and here". The first is a lead to phone; the second is a bug.
  */
 /**
- * Tracks the form. When the quote form took the reference design's field set,
- * `business_name` and `services` stopped being asked for — so they came out
- * of this list too. `province` never made it in for long: it was asked for
- * on one revision of the quote form and removed on the next. They are always-rendered fields: leaving them in would
- * have printed "Business: (not supplied)" and "Service needed: (not
- * supplied)" on every single lead from now on, which is exactly the noise the
- * `extra` pass below exists to keep out.
+ * Tracks the form, and has been edited in both directions.
  *
- * Nothing is lost by removing them. The columns still exist and still hold
- * what earlier leads answered, and a lead that somehow carries either value
- * is picked up by `extra` and printed.
+ * `business_name` and `province` came OUT when the quote form took the
+ * reference design's field set and stopped asking for them. These are
+ * always-rendered lines, so leaving them in would have printed
+ * "Business: (not supplied)" on every lead from then on — exactly the noise
+ * the `extra` pass below exists to keep out. Nothing was lost: the columns
+ * still hold what earlier leads answered, and `extra` prints any row that
+ * somehow carries a value.
+ *
+ * `services` went BACK IN when the quote form returned to the original
+ * site's service dropdown. It is the most useful line in the message now —
+ * it is what the enquiry is actually about — so it is worth the
+ * "(not supplied)" it prints on a lead from the contact form, which has no
+ * service field.
+ *
+ * TWO OF THESE ARE FORM-SPECIFIC, AND THAT IS THE DESIGN, not an oversight
+ * to tidy up. `address` is filled by the contact form and never by the quote
+ * form; `services` the other way round. Each prints "(not supplied)" on the
+ * other form's leads, and that is a true statement about the lead: the
+ * visitor was not asked. Collapsing them into one list per form would mean
+ * two message formats, and an account executive reading a lead at speed
+ * benefits far more from every message having the same shape than from
+ * saving one line.
  */
 export const CORE_FIELDS: readonly (readonly [string, string])[] = [
   ['full_name', 'Name'],
   ['phone', 'Phone'],
   ['work_email', 'Email'],
   ['address', 'Address'],
-  ['message', 'Cleaning needs'],
+  ['services', 'Service'],
+  ['message', 'Details'],
 ] as const;
 
 export const NOT_SUPPLIED = '(not supplied)';

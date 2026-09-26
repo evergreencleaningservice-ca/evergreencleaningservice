@@ -15,6 +15,8 @@
  * still a description of the component.
  */
 
+import { SERVICE_OPTIONS, SERVICE_OTHER } from '../../src/data/services';
+
 export interface FieldSpec {
   name: string;
   /** The tag the control is rendered as. */
@@ -43,11 +45,13 @@ export interface FieldSpec {
  * — first name, business name, phone OR email, postal code, one service
  * select — because it is what cold paid traffic sees and every field is a
  * place to give up. That is now replaced by the client's chosen reference:
- * five fields, ALL REQUIRED, including a surname.
+ * four fields, ALL REQUIRED.
 
  * A street address and a province were asked for on one revision in between
  * and taken back out: where the building is is a question the account
- * executive asks on the call, not a condition of making contact.
+ * executive asks on the call, not a condition of making contact. First and
+ * last name were two boxes for one revision and are now one, which is what
+ * the database always stored anyway.
  *
  * It asks more and it will convert somewhat worse; that is a business
  * decision the client made with the trade-off in front of them, not an
@@ -65,20 +69,12 @@ export interface FieldSpec {
  */
 export const FIELDS: FieldSpec[] = [
   {
-    name: 'first-name',
+    name: 'name',
     tag: 'input',
     type: 'text',
     required: true,
-    autocomplete: 'given-name',
-    errorKey: 'first-name',
-  },
-  {
-    name: 'last-name',
-    tag: 'input',
-    type: 'text',
-    required: true,
-    autocomplete: 'family-name',
-    errorKey: 'last-name',
+    autocomplete: 'name',
+    errorKey: 'name',
   },
   {
     name: 'phone',
@@ -98,7 +94,17 @@ export const FIELDS: FieldSpec[] = [
     inputmode: 'email',
     errorKey: 'email',
   },
-  { name: 'message', tag: 'textarea', required: true, errorKey: 'message' },
+  { name: 'service', tag: 'select', required: true, errorKey: 'service' },
+  /**
+   * `required: false` AS RENDERED, and that is the assertion, not an
+   * oversight. The box is hidden until "Other" is picked, and a hidden
+   * control that is `required` fails validation where nobody can see it.
+   * `wireServiceOther` adds the attribute at the moment it reveals the box
+   * and removes it again when it hides it, so the served markup must ship
+   * WITHOUT it. A build test that demanded `required` here would be
+   * demanding the bug.
+   */
+  { name: 'message', tag: 'textarea', required: false, errorKey: 'message' },
 ];
 
 /**
@@ -149,15 +155,10 @@ export function quickQuoteMarkup({
           aria-label="Request a quote">
       <div class="qq-summary" data-qq-summary role="alert" aria-live="assertive" tabindex="-1"></div>
 
-      <label for="${id}-first">First name</label>
-      <input type="text" id="${id}-first" name="first-name" autocomplete="given-name" required
-             aria-describedby="${id}-first-name-error" />
-      ${err('first-name')}
-
-      <label for="${id}-last">Last name</label>
-      <input type="text" id="${id}-last" name="last-name" autocomplete="family-name" required
-             aria-describedby="${id}-last-name-error" />
-      ${err('last-name')}
+      <label for="${id}-name">Full name</label>
+      <input type="text" id="${id}-name" name="name" autocomplete="name" required
+             aria-describedby="${id}-name-error" />
+      ${err('name')}
 
       <label for="${id}-phone">Mobile phone</label>
       <input type="tel" id="${id}-phone" name="phone" inputmode="tel" autocomplete="tel" required
@@ -169,10 +170,19 @@ export function quickQuoteMarkup({
              aria-describedby="${id}-email-error" />
       ${err('email')}
 
-      <label for="${id}-message">Cleaning needs</label>
-      <textarea id="${id}-message" name="message" rows="4" required
-                aria-describedby="${id}-message-error"></textarea>
-      ${err('message')}
+      <label for="${id}-service">Cleaning needs</label>
+      <select id="${id}-service" name="service" required aria-describedby="${id}-service-error">
+        <option value="" disabled selected>Select the service you need</option>
+        ${SERVICE_OPTIONS.map((s) => `<option value="${s}">${s}</option>`).join('')}
+      </select>
+      ${err('service')}
+
+      <div class="qq-field" data-qq-other hidden>
+        <label for="${id}-message">Tell us what you need</label>
+        <textarea id="${id}-message" name="message" rows="3"
+                  aria-describedby="${id}-message-error"></textarea>
+        ${err('message')}
+      </div>
 
       <div class="qq-hp" aria-hidden="true">
         <label for="${id}-hp">Company website</label>
@@ -213,9 +223,20 @@ export function fill(
  * constants were the two shapes that satisfied it. Both are now required.
  */
 export const VALID_LEAD = {
-  'first-name': 'Dana',
-  'last-name': 'Okonkwo',
+  name: 'Dana Okonkwo',
   phone: '416 555 0142',
   email: 'dana@placeholder-holdings.example',
-  message: 'Two floors of open-plan office, nightly.',
+  service: 'Office Cleaning',
+};
+
+/**
+ * The other branch: "Other" picked, so the free-text box is revealed and
+ * required, and the detail is part of a complete submission.
+ */
+export const VALID_LEAD_OTHER = {
+  name: 'Dana Okonkwo',
+  phone: '416 555 0142',
+  email: 'dana@placeholder-holdings.example',
+  service: SERVICE_OTHER,
+  message: 'Pressure washing the loading dock, quarterly.',
 };

@@ -26,6 +26,77 @@
   background: linear-gradient(180deg, #f6f8f5 0%, #fff 100%);
 }
 
+/* --- the optional hero photograph ---------------------------------------- */
+
+.lpx-hero.has-media {
+  position: relative;
+  /* The gradient is the no-photo treatment; the photo replaces it. */
+  background: #f6f8f5;
+}
+
+.lpx-hero-media {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+.lpx-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* The interesting part of this frame is its upper middle, not its centre. */
+  object-position: 50% 40%;
+}
+
+/**
+ * The scrim, and the numbers in it are the whole reason this is not a
+ * decorative flourish.
+ *
+ * Dark text sits directly on this photograph, and a photograph is not a
+ * colour — its brightness varies across the frame and changes entirely if
+ * someone swaps the image. So the wash is set for the WORST case rather than
+ * the one on screen today: at 0.80 white over pure black the effective
+ * background is #cccccc, where the heading ink still measures about 9.4:1.
+ * A lighter scrim would look better and would be a promise this component
+ * cannot keep for the next photo.
+ *
+ * It is strongest on the left, where the copy is, and thinnest on the right,
+ * where an opaque form card covers the photo anyway — so the picture stays
+ * visible exactly where nothing has to be read over it.
+ */
+.lpx-hero.has-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.86);
+  pointer-events: none;
+}
+
+/**
+ * THE `z-index` IS LOAD-BEARING, AND LEAVING IT OFF IS THE BUG THIS COMMENT
+ * EXISTS TO PREVENT COMING BACK.
+ *
+ * `position: relative` alone is not enough. A `::after` pseudo-element is
+ * generated after the element's last child, so with both the scrim and this
+ * wrapper at `z-index: auto` they paint in DOM order and the scrim goes ON
+ * TOP — over the heading, over the trust points, and over the form card.
+ *
+ * What that looked like on screen: an 86% white wash across the entire hero
+ * (88%→55% on desktop). The heading ink rendered as pale grey, the trust
+ * points were barely legible, and the opaque white form card appeared
+ * translucent with the photograph showing through it. Everything read as a
+ * styling choice — "the text is too light" — when nothing about the colours
+ * was wrong at all. The stacking was.
+ *
+ * `z-index: 1` lifts the content out of the scrim's way. The scrim then does
+ * the one job it was written for: lightening the PHOTOGRAPH so dark text has
+ * something safe to sit on.
+ */
+.lpx-hero.has-media > .lpx-wrap {
+  position: relative;
+  z-index: 1;
+}
+
 .lpx-hero-grid {
   display: grid;
   gap: 28px;
@@ -36,10 +107,43 @@
     padding: 44px 0 34px;
   }
 
+  .lpx-hero.has-media::after {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.88) 0%,
+      rgba(255, 255, 255, 0.8) 45%,
+      rgba(255, 255, 255, 0.55) 100%
+    );
+  }
+
+  /**
+   * A NARROWER FORM, VERTICALLY CENTRED AGAINST THE PITCH.
+   *
+   * The history matters, because this column has now been all three widths
+   * and each move was a correction of the last:
+   *
+   *   460px fixed   the form read as the lesser of the two columns
+   *   1fr / 1fr     equal halves, 533px each — too wide; a four-field form
+   *                 stretched across 533px looks padded out, and the long
+   *                 fields made the card taller than the copy beside it
+   *   1fr / 430px   here. Wide enough that "jane@yourcompany.com" and the
+   *                 phone mask both sit on one line in the paired row
+   *                 (measured, not guessed — see the note below), narrow
+   *                 enough to read as a form rather than a second panel.
+   *
+   * `minmax(0, 430px)` rather than a flat `430px`: below about 1010px of
+   * wrap the track has to be allowed to give way, and a fixed width would
+   * push the pitch column into overflow instead.
+   *
+   * `align-items: center` replaces `start`. The form is the taller element
+   * at every desktop width, so top-aligning left the copy stranded in the
+   * upper half with dead space beneath it. Centring sets the two blocks
+   * against each other's middles, which is what reads as "beside".
+   */
   .lpx-hero-grid {
-    grid-template-columns: minmax(0, 1fr) 460px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 430px);
     gap: 44px;
-    align-items: start;
+    align-items: center;
   }
 }
 
@@ -75,7 +179,34 @@
 .lpx-sub {
   font-size: 1.0625rem;
   line-height: 1.6;
-  color: var(--ink);
+  /**
+   * DARKER THAN `--ink`, AND MEASURED RATHER THAN NUDGED.
+   *
+   * This line sits on the hero photograph. `--ink` is #6f6f6f, the site's
+   * body copy colour, which is comfortable on white and is not what this
+   * text is on: measured in Chromium against the built page, #6f6f6f over
+   * the scrim'd photo gives 4.29:1 on the background's mean (#ededee) and
+   * 2.97:1 over its darker regions — under the 4.5:1 WCAG AA wants for text
+   * this size, in both cases.
+   *
+   * #4f4f4f is picked against the WORST case rather than the photo on
+   * screen today, which is the rule the scrim's own comment sets: a value
+   * tuned to the current image does not survive swapping it.
+   *
+   * Two worst cases, and it clears both. The scrim's theoretical floor is
+   * 0.80 white over pure black, an effective #cccccc, where #4f4f4f
+   * measures 5.10:1. The empirical floor is the darkest pixel actually
+   * rendered in this text's band at 1440px, #c8c8c7, where it measures
+   * 4.89:1. #555 was tried first and cleared the theoretical floor at
+   * 4.64:1 but not the empirical one, at 4.45:1 — so it went one step
+   * darker. On the background's mean the line measures about 7:1.
+   *
+   * SCOPED HERE, NOT FIXED AT THE TOKEN. `--ink` is used in about thirty
+   * places sitewide, almost all of them body copy on white where it is
+   * fine. Darkening the token to fix one line on two pages would restyle
+   * the whole site as a side effect.
+   */
+  color: #4f4f4f;
   margin: 0 0 18px;
   max-width: 54ch;
 }

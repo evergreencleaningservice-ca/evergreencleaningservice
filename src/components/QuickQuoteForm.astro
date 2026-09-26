@@ -11,37 +11,35 @@
  * you back" is a question the account executive can ask on the phone, and
  * every one of them is a place to give up.
  *
- * WHAT IT ASKS, AND WHAT IT REFUSES TO ASK:
+ * WHAT IT ASKS. Four fields, all required:
  *
- *   first name      not a full name. A surname buys nothing at this stage.
- *   business name   the one qualifying fact that matters for commercial
- *                   cleaning, and it is one field.
- *   phone           EITHER of these. Not both.
- *   email
- *   postal or city  how we know whether we serve you. One short field, and it
- *                   takes a postal code or a place name — a visitor should
- *                   never have to guess which format a box wants.
- *   service         one select.
- *   message         optional, and labelled optional.
+ *   full name       one box. It was first + last for one revision; the
+ *                   database only ever stored the two joined.
+ *   mobile phone    both required. An earlier revision took either one and
+ *                   left the other optional, which is the rule HTML cannot
+ *   email           state — the client chose the reference design, which
+ *                   asks for both, so the browser now states it itself.
+ *   cleaning needs  a SELECT of the original site's own service list, with
+ *                   "Other" revealing a free-text box.
  *
- * NO street address. NO square footage, frequency or preferred schedule. Those
- * are qualification, and qualification happens after a lead exists, not as a
- * condition of creating one. The long form is still there for anyone who
- * wants to hand over the full picture up front — it is a choice now, not a
- * toll.
+ * NO street address. NO province. NO square footage, frequency or preferred
+ * schedule. Those are qualification, and qualification happens after a lead
+ * exists, not as a condition of creating one. Address and province were each
+ * asked for on one revision in between and taken back out.
  *
- * "PHONE OR EMAIL" IS THE ONE RULE HTML CANNOT STATE. `required` can only say
- * "this field, always", and marking both required is precisely the friction
- * this form removes. It is checked in `validate` below, after the browser has
- * finished with per-field validity, so a visitor is never told about a
- * cross-field rule while a single field is still malformed.
+ * THIS COMMENT DESCRIBED A FORM THAT NO LONGER EXISTED. It still listed a
+ * business name, a "postal or city" box and an optional message, and
+ * explained at length a "phone OR email" rule that was removed several
+ * revisions ago along with the function that enforced it. Left as it was, the
+ * most authoritative-looking description of this component was also the least
+ * accurate thing in the file.
  *
  * Everything behind the form is unchanged: the same endpoint, the same
  * honeypot, the same Turnstile, the same single `lead_form_submission` after
  * a 2xx, the same attribution merged invisibly by `lead-submit.ts`.
  */
 import SpamGuard from './SpamGuard.astro';
-import { nap } from '../data/site';
+import { SERVICE_OPTIONS } from '../data/services';
 
 interface Props {
   /** Prefix for field ids, so two of these can share a page. */
@@ -78,18 +76,6 @@ const {
 const f = (name: string) => `${id}-${name}`;
 
 
-/**
- * The marketing-consent wording, in one place because it is submitted with
- * the form as well as displayed beside the box.
- *
- * CASL wants the sender identified and an unsubscribe route stated, so both
- * are in the sentence rather than assumed. It is written as a plain offer, not
- * as a legal clause: a box nobody reads is not meaningful consent however
- * carefully it is drafted.
- */
-const CONSENT_TEXT =
-  `Email me occasional cleaning tips and offers from ${nap.name}. ` +
-  'Unsubscribe any time — this is separate from your quote, which we will reply to either way.';
 ---
 
 <form
@@ -112,36 +98,19 @@ const CONSENT_TEXT =
       visitor is about to correct. */}
   <div class="qq-summary" data-qq-summary role="alert" aria-live="assertive" tabindex="-1"></div>
 
-  <div class="qq-row">
-    <div class="qq-field">
-      <label class="qq-label" for={f('first')}>First name <span class="qq-req">*</span></label>
-      <input
-        type="text"
-        id={f('first')}
-        name="first-name"
-        autocomplete="given-name"
-        autocapitalize="words"
-        placeholder="Jane"
-        required
-        aria-describedby={f('first-error')}
-      />
-      <p class="qq-error" id={f('first-error')} data-qq-error="first-name"></p>
-    </div>
-
-    <div class="qq-field">
-      <label class="qq-label" for={f('last')}>Last name <span class="qq-req">*</span></label>
-      <input
-        type="text"
-        id={f('last')}
-        name="last-name"
-        autocomplete="family-name"
-        autocapitalize="words"
-        placeholder="Doe"
-        required
-        aria-describedby={f('last-error')}
-      />
-      <p class="qq-error" id={f('last-error')} data-qq-error="last-name"></p>
-    </div>
+  <div class="qq-field">
+    <label class="qq-label" for={f('name')}>Full name <span class="qq-req">*</span></label>
+    <input
+      type="text"
+      id={f('name')}
+      name="name"
+      autocomplete="name"
+      autocapitalize="words"
+      placeholder="Jane Doe"
+      required
+      aria-describedby={f('name-error')}
+    />
+    <p class="qq-error" id={f('name-error')} data-qq-error="name"></p>
   </div>
 
   <div class="qq-row">
@@ -182,43 +151,55 @@ const CONSENT_TEXT =
     </div>
   </div>
 
+  {/* CLEANING NEEDS IS A SELECT, NOT A TEXTAREA.
+
+      It was a free-text box asking the visitor to "describe your facility
+      type and the main cleaning challenges you'd like us to solve" — a small
+      essay, demanded of someone who has not yet decided to buy anything, in
+      the last field before the button. The client asked for the original
+      site's own dropdown back, which is both less work for the visitor and
+      better data: a picked option is comparable across leads in a way that
+      prose never is.
+
+      The empty first option is `disabled` as well as valueless, so it can be
+      shown but not chosen. That is what makes `required` mean something on a
+      select: without it the first real service would be pre-selected and
+      every visitor who ignored the field would silently report wanting
+      whatever happened to be listed first. */}
   <div class="qq-field">
-    <label class="qq-label" for={f('message')}>
+    <label class="qq-label" for={f('service')}>
       Cleaning needs <span class="qq-req">*</span>
+    </label>
+    <select id={f('service')} name="service" required aria-describedby={f('service-error')}>
+      <option value="" disabled selected>Select the service you need</option>
+      {SERVICE_OPTIONS.map((service) => <option value={service}>{service}</option>)}
+    </select>
+    <p class="qq-error" id={f('service-error')} data-qq-error="service"></p>
+  </div>
+
+  {/* Revealed only when "Other" is picked, by `wireServiceOther`.
+
+      `hidden` IS SET IN THE MARKUP AND THE FIELD IS NOT `required` HERE.
+      Both matter, and they are the same mistake twice if either is dropped:
+      a hidden control that is `required` fails `checkValidity()` where
+      nobody can see it, and `reportInvalidFields` would then mark an
+      invisible field and refuse the visitor with a message pointing at
+      nothing. The reveal adds `required` at the moment it makes the box
+      visible and takes it away again when it hides it, so the two can never
+      disagree. */}
+  <div class="qq-field" data-qq-other hidden>
+    <label class="qq-label" for={f('message')}>
+      Tell us what you need <span class="qq-req">*</span>
     </label>
     <textarea
       id={f('message')}
       name="message"
-      rows="4"
-      placeholder="How can we help? Please describe your facility type and the main cleaning challenges you'd like us to solve."
-      required
+      rows="3"
+      placeholder="Describe the cleaning you're looking for."
       aria-describedby={f('message-error')}></textarea>
     <p class="qq-error" id={f('message-error')} data-qq-error="message"></p>
   </div>
 
-
-  {/*
-    Express consent to marketing email — optional, and unticked.
-
-    WHY IT IS HERE AT ALL. Canada's anti-spam law needs express consent before
-    a commercial electronic message, and the burden of proving it sits with the
-    sender. The enquiry itself does not need a box: someone asking for a quote
-    plainly expects a reply, which is implied consent under PIPEDA. This box is
-    only about email that is marketing.
-
-    WHY IT IS NOT REQUIRED AND NOT PRE-TICKED. A pre-ticked box is not express
-    consent under CASL, and a required one is a hard gate on a paid click. The
-    reference design this was modelled on also carries a REQUIRED
-    "store and process my personal data" box; that is a GDPR pattern and it is
-    deliberately not copied here.
-
-    The wording is submitted with the form, not just the boolean, so a row can
-    always say what its sender actually agreed to even after this copy changes.
-  */}
-  <div class="qq-consent">
-    <input type="checkbox" id={f('consent')} name="marketing-consent" value="yes" />
-    <label for={f('consent')}>{CONSENT_TEXT}</label>
-  </div>
 
   {/* Honeypot. A person never sees it, so anything in it is a bot. */}
   <div class="qq-hp" aria-hidden="true">
@@ -230,11 +211,6 @@ const CONSENT_TEXT =
 
   <button class="qq-submit" type="submit">{submitLabel}</button>
 
-  <p class="qq-after">
-    An account executive reads this and replies within <strong>2 business hours</strong> on a
-    working day. No obligation, and no visit until you ask for one. Prefer to talk now?{' '}
-    <a href={nap.phoneHref} data-call-location="form_note">Call {nap.phoneDisplay}</a>.
-  </p>
 </form>
 
 <script>
@@ -461,31 +437,6 @@ const CONSENT_TEXT =
     white-space: nowrap;
   }
 
-  /* Marketing consent. Optional, unticked, and visually quieter than the
-     fields — it is an offer, not another thing to fill in. */
-  .qq-consent {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-top: 4px;
-  }
-
-  .qq-consent input {
-    flex: none;
-    /* 18px and nudged down to sit on the first line of the label, which wraps
-       to two or three lines at phone width. */
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-    accent-color: var(--brand);
-  }
-
-  .qq-consent label {
-    font-size: 13px;
-    line-height: 1.45;
-    color: var(--ink);
-  }
-
   .qq-submit {
     width: 100%;
     min-height: 52px;
@@ -519,17 +470,6 @@ const CONSENT_TEXT =
     }
   }
 
-  .qq-after {
-    margin: 14px 0 0;
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-
-  .qq-after a {
-    color: var(--brand);
-    font-weight: 700;
-  }
 </style>
 
 <style is:global>

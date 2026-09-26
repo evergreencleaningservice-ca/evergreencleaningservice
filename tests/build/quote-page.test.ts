@@ -123,23 +123,36 @@ describe('the rendered form matches the contract the unit suite tests', () => {
     }
   });
 
-  it('asks five required questions', () => {
+  it('asks four required questions', () => {
     /* Four, then seven when the reference design's address and province
-       boxes went in, then five when they came back out. Pinned rather than
+       boxes went in, five when they came back out, and four once the two
+       name boxes became one. Pinned rather than
        loosened: a field quietly becoming required is a conversion cost
        somebody should have to state out loud. */
     const required = (form().match(/\brequired(?=[\s/>])/g) ?? []).length;
     expect(required).toBe(REQUIRED_COUNT);
-    expect(required).toBe(5);
+    expect(required).toBe(4);
   });
 
   it.each(BANNED_FIELDS)('does not ask for %s', (name) => {
     expect(control(quote, name)).toBeNull();
   });
 
-  it('asks five visible questions in total', () => {
-    const visible = FIELDS.length;
-    expect(visible).toBe(5);
+  it('asks four questions on arrival, and a fifth only if "Other" is picked', () => {
+    /* FIVE entries in the contract, FOUR of them on screen when the page
+       loads. `message` ships inside `[data-qq-other] hidden` and appears
+       only when the service select says "Other", so counting it as a fifth
+       question would misstate what a visitor is actually asked for — and
+       the count of questions is the number this test exists to hold down. */
+    expect(FIELDS).toHaveLength(5);
+    expect(FIELDS.filter((f) => f.name !== 'message')).toHaveLength(4);
+
+    /* Matched loosely on the attributes, not on the full opening tag:
+       Astro appends a scoped class, so a literal tag match pins the
+       bundler's output rather than the contract. */
+    const otherBox = form().match(/<div[^>]*\bdata-qq-other\b[^>]*>/)?.[0] ?? '';
+    expect(otherBox, 'the free-text box must be present').not.toBe('');
+    expect(otherBox, 'the free-text box must ship hidden').toContain('hidden');
     /* And the page agrees: every contract field is present, and the only
        extra controls are the honeypot, the captcha token, the optional
        marketing-consent box and the button.
@@ -225,59 +238,13 @@ describe('every field is labelled', () => {
   });
 });
 
-describe('the marketing consent box', () => {
-  /**
-   * Canada's anti-spam law is why these assertions are worth the lines.
-   * CASL needs EXPRESS consent before a commercial electronic message, and it
-   * puts the burden of proving it on the sender. Three things break that, and
-   * all three are one attribute away at any time:
-   *
-   *   `checked`   a pre-ticked box is not express consent. It is the single
-   *               most common way a consent record becomes worthless.
-   *   `required`  turns an optional offer into a gate on a paid click, and a
-   *               consent given under duress is not freely given either.
-   *   the wording  must identify the sender and say how to stop.
-   */
-  const box = () => quickQuoteForm().match(/<input[^>]*name="marketing-consent"[^>]*>/)?.[0];
+/* The marketing consent checkbox was removed from the form at the client's
+   request, and its tests went with it. `marketing_consent` and
+   `consent_text` keep their columns and the Worker still reads them — see
+   tests/worker/submit-lead.test.ts — so a future form can set them again
+   without a migration. Nothing on the site sets them today, which means every
+   new lead stores false. */
 
-  it('is on the form', () => {
-    expect(box(), 'the consent checkbox is missing').toBeTruthy();
-    expect(attr(box()!, 'type')).toBe('checkbox');
-  });
-
-  it('is NOT pre-ticked', () => {
-    expect(box()).not.toMatch(/\bchecked\b/);
-  });
-
-  it('is NOT required — it governs marketing, not the enquiry', () => {
-    expect(box()).not.toMatch(/\brequired\b/);
-  });
-
-  it('names the sender and says how to stop', () => {
-    const form = quickQuoteForm();
-    expect(form).toMatch(/Evergreen Office Cleaning/);
-    expect(form).toMatch(/Unsubscribe any time/i);
-  });
-
-  it('says plainly that the quote reply does not depend on it', () => {
-    expect(quickQuoteForm()).toMatch(/separate from your quote/i);
-  });
-
-  it('carries a real label tied to the box', () => {
-    const form = quickQuoteForm();
-    const id = attr(box()!, 'id');
-    expect(id).toBeTruthy();
-    expect(form).toMatch(new RegExp(`<label[^>]*for="${id}"`));
-  });
-
-  it('does not copy the reference design’s REQUIRED data-processing box', () => {
-    /* The form this was modelled on also demands "I agree to allow … to store
-       and process my personal data" before it will submit. That is a GDPR
-       pattern; under PIPEDA an enquiry carries implied consent to be replied
-       to, and a second required box is friction that buys nothing here. */
-    expect(quickQuoteForm()).not.toMatch(/store and process my personal data/i);
-  });
-});
 
 /* --- 4. one H1, full navigation ------------------------------------------- */
 
