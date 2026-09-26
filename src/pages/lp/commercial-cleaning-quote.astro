@@ -56,7 +56,6 @@ import LpReviews from '../../components/lp/LpReviews.astro';
 import LpAreas from '../../components/lp/LpAreas.astro';
 import LpFinalCta from '../../components/lp/LpFinalCta.astro';
 import LpSticky from '../../components/lp/LpSticky.astro';
-import { REPLY_PROMISE } from '../../data/landing';
 
 /** The DOM id and anchor target — unchanged, so `#lpq-form` still resolves. */
 const FORM_ANCHOR = 'lpq-form';
@@ -97,7 +96,6 @@ const EYEBROW = 'Free quote — Toronto & the GTA';
       id={FORM_ANCHOR}
       formId={FORM_ID}
       heading="Get your free custom quote"
-      intro={`Seven short questions. An account executive replies ${REPLY_PROMISE} on a working day.`}
       submitLabel="Request my free quote"
       eagerCaptcha
     />
