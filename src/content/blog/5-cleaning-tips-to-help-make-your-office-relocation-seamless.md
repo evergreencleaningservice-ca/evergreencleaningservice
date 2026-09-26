@@ -2,7 +2,8 @@
 title: "5 Cleaning Tips to Help Make Your Office Relocation Seamless"
 description: "Relocating your offices turning into a nightmare? Here we discuss a few ideas to make moving the office as painless as possible."
 pubDate: 2022-06-29
-image: "/images/office-relocation-cleanup.jpg"
+image: "/images/blog-office-relocation-cleaning-feature.jpg"
+imageAlt: "Professional cleaner preparing a bright office with packed moving boxes for a seamless relocation"
 tags: ["cleaning", "moving", "office", "relocating"]
 ---
 

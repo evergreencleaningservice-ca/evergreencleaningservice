@@ -2,6 +2,8 @@
 title: "How to Properly Dust an Office Building"
 description: "Dust taking over at the office? Let us give you some tips from the experts who know how to take back your workspace."
 pubDate: 2020-10-31
+image: "/images/blog-office-dusting-method-feature.jpg"
+imageAlt: "Professional cleaner using a telescoping vacuum duster on high office surfaces"
 tags: ["commercial-office-cleaning", "dust", "dusting"]
 ---
 

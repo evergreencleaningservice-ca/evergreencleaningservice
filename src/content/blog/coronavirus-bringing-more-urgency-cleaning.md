@@ -2,8 +2,8 @@
 title: "The Coronavirus Is Bringing More Urgency to Cleaning"
 description: "Coronavirus has made it more important than ever to have a clean home and office space. Here we discuss some of the challenges faced by commercial cleaners."
 pubDate: 2020-06-30
-image: "/images/touchpoint-disinfection-door-handle.jpg"
-imageAlt: "Cleaner disinfecting an office door handle"
+image: "/images/blog-urgent-infection-cleaning-feature.jpg"
+imageAlt: "Professional cleaner methodically disinfecting shared conference-room surfaces in the evening"
 tags: ["commercial-cleaning", "coronavirus", "office"]
 ---
 

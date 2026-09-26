@@ -2,8 +2,8 @@
 title: "Key Office Areas to Have Cleaned and Disinfected"
 description: "Are the key areas of your office cleaned and disinfected routinely? Let us explain why attending to key ares in the office is so important."
 pubDate: 2021-09-30
-image: "/images/door-handle-disinfection-office.jpg"
-imageAlt: "Cleaner disinfecting a glass office door handle"
+image: "/images/blog-key-office-disinfection-areas-feature.jpg"
+imageAlt: "Professional cleaner disinfecting a reception counter near other office high-touch areas"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "office"]
 ---
 

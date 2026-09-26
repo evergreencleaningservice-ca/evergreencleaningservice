@@ -2,7 +2,8 @@
 title: "Office Layout Tips to Make Cleaning Easier And Faster"
 description: "Ever considered if your office layout impacts cleaning it? Here are a few things to consider, especially if you are looking at layout plans."
 pubDate: 2023-02-07
-image: "/images/modern-office-layout-cleaning.jpg"
+image: "/images/blog-cleanable-office-layout-feature.jpg"
+imageAlt: "Cleaner vacuuming beneath uncluttered workstations in an easy-to-maintain office layout"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 

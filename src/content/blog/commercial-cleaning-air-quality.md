@@ -2,6 +2,8 @@
 title: "Commercial Cleaning and Air Quality"
 description: "Air quality in your office not at its best? Read on to discover how cleaning alone can improve the air quality in your commercial space."
 pubDate: 2020-08-31
+image: "/images/blog-commercial-cleaning-air-quality-feature.jpg"
+imageAlt: "Cleaner replacing an office air filter while a second worker uses a sealed HEPA vacuum"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 

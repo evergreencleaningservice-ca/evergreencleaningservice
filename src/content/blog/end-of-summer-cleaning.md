@@ -2,8 +2,8 @@
 title: "End Of Summer Cleaning"
 description: "As summer draws closer to the end, now might be the time to get the office in shape before it becomes a busy hub of activity again."
 pubDate: 2021-08-25
-image: "/images/summer-office-window-cleaning.jpg"
-imageAlt: "Cleaner washing an office window with a squeegee, Toronto skyline behind"
+image: "/images/blog-end-of-summer-cleaning-feature.jpg"
+imageAlt: "Professional cleaner washing office windows in warm late-summer light"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 

@@ -2,8 +2,8 @@
 title: "Benefits of Regular Commercial Cleaning Services"
 description: "Think regular commercial cleaning isn't that important to your business? Think again! Let's talk benefits of regular professional cleaning services."
 pubDate: 2022-08-31
-image: "/images/office-backpack-vacuum-toronto.jpg"
-imageAlt: "Cleaner vacuuming an open-plan Toronto office with a backpack vacuum"
+image: "/images/blog-regular-commercial-cleaning-feature.jpg"
+imageAlt: "Professional cleaner vacuuming between workstations as part of a regular office cleaning routine"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 

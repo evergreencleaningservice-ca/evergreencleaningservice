@@ -2,6 +2,8 @@
 title: "Cleaning Check List for Dental Clinics"
 description: "Patients expect a neat and safe environment. So, you should definitely not make any compromises when it comes to your dental office's cleanliness."
 pubDate: 2020-04-29
+image: "/images/blog-dental-clinic-cleaning-checklist-feature.jpg"
+imageAlt: "Professional cleaner disinfecting the exterior surfaces of a modern dental treatment chair"
 tags: ["commercial-cleaning", "dental-office"]
 ---
 

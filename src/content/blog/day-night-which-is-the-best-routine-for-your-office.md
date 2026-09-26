@@ -2,8 +2,8 @@
 title: "Day Or Night – Which Is the Best Routine For Your Office?"
 description: "Deciding between night or daytime cleaning at the office? We weigh out the pros and cons of each to help make your decision a little easier."
 pubDate: 2021-05-31
-image: "/images/night-janitorial-crew-office-toronto.jpg"
-imageAlt: "Night janitorial crew cleaning an office above the Toronto skyline"
+image: "/images/blog-day-versus-night-cleaning-feature.jpg"
+imageAlt: "Day porter and evening cleaner working at different times in a modern office"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 

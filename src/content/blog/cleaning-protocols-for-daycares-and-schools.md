@@ -2,8 +2,8 @@
 title: "Commercial Cleaning Protocols for Daycares and Schools"
 description: "Wondering if your school or daycare is clean? By following these tips, it is possible to achieve disinfection and complete cleaning of a wide range of surfaces."
 pubDate: 2020-09-29
-image: "/images/touchpoint-disinfection-door-handle.jpg"
-imageAlt: "Cleaner wiping a door handle as part of a high-touch disinfection routine"
+image: "/images/blog-daycare-school-cleaning-feature.jpg"
+imageAlt: "Professional cleaner wiping child-height tables in a bright daycare classroom after hours"
 tags: ["commercial-cleaning", "daycares", "janitorial-services", "schools"]
 ---
 

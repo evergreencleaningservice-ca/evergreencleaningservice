@@ -2,8 +2,8 @@
 title: "Modern Vs. Old-Fashioned Cleaning Methods"
 description: "Ever wondered which cleaning techniques are the most effective? Let us give you the run down on the evolution of cleaning."
 pubDate: 2022-12-07
-image: "/images/lobby-floor-scrubber-commercial.jpg"
-imageAlt: "Technician using a modern auto scrubber on a lobby floor"
+image: "/images/blog-modern-versus-old-cleaning-feature.jpg"
+imageAlt: "Professional cleaner using a modern floor scrubber while an old mop remains in storage"
 tags: ["cleaning", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning"]
 ---
 

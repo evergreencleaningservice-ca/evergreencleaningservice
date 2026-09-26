@@ -2,8 +2,8 @@
 title: "Ask the Office Cleaners: Cleaning Break Rooms"
 description: "Got a breakroom that needs cleaning? Here we discuss the most common messes we deal with in breakrooms and how to clean up!"
 pubDate: 2023-03-31
-image: "/images/eco-friendly-surface-cleaning-green-cloths.jpg"
-imageAlt: "Gloved cleaner wiping down a counter surface with a green microfibre cloth"
+image: "/images/blog-break-room-cleaning-feature.jpg"
+imageAlt: "Professional cleaner wiping a modern office break-room counter beside an organized refrigerator"
 tags: ["breakroom", "cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 

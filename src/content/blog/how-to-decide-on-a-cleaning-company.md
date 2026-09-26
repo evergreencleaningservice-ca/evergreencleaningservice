@@ -2,8 +2,8 @@
 title: "How to Decide on a Cleaning Company"
 description: "You've looked at a few websites and now you're wondering which cleaning company to hire or even consider hiring? Here are some tips to help you decide."
 pubDate: 2019-12-07
-image: "/images/cleaning-quality-inspection-clipboard.jpg"
-imageAlt: "Supervisor checking cleaning quality against a checklist in an office"
+image: "/images/blog-choosing-cleaning-company-feature.jpg"
+imageAlt: "Facility manager touring an office with a professional cleaning supervisor"
 ---
 
 ## Tips For Deciding On The Best Cleaning Service

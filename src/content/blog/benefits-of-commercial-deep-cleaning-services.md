@@ -2,8 +2,8 @@
 title: "Benefits of Commercial Deep Cleaning Services"
 description: "Work setting in need of a deep clean? Let the pros explain what this is and why it has its benefits to your commercial setting."
 pubDate: 2022-04-26
-image: "/images/carpet-extraction-boardroom-toronto.jpg"
-imageAlt: "Technician deep cleaning boardroom carpet with a hot-water extraction wand"
+image: "/images/blog-commercial-deep-cleaning-feature.jpg"
+imageAlt: "Commercial cleaning team deep cleaning office carpet and glass partitions after hours"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 

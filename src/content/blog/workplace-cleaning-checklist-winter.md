@@ -2,6 +2,8 @@
 title: "Workplace Cleaning Checklist for Winter"
 description: "Don't wait for spring! Keep the office clean all winter with this easy checklist that will ensure you or your cleaners aren't misssing a single thing."
 pubDate: 2020-02-24
+image: "/images/blog-winter-workplace-cleaning-checklist-feature.jpg"
+imageAlt: "Professional cleaner extracting salty slush from a commercial entrance mat after snowfall"
 tags: ["commercial-cleaning", "entrance", "winter"]
 ---
 
