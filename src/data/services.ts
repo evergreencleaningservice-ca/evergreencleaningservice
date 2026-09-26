@@ -1,36 +1,59 @@
 /**
  * The quote form's service list.
  *
- * NOT INVENTED HERE. These are the original site's own eight, in the
- * original's order, recovered from WPForms form **1381** — the checklist
- * headed "I'm interested a quote for these services". They are preserved
- * verbatim, including the client's own capitalisation and the spacing in
- * "Floor Services / Finishing", because these strings are what the business
- * has been receiving in its enquiries for years. Rewording them to match the
- * service pages' titles would quietly break comparison with every lead taken
- * before this port.
+ * SUPPLIED BY THE CLIENT, and that supersedes the archaeology. The list was
+ * first rebuilt from the original site's WPForms form **1381** — the
+ * checklist headed "I'm interested a quote for these services", eight
+ * options recovered verbatim. The client has since given their own list of
+ * six plus "Other", and a list the business states today beats one recovered
+ * from what its old website happened to be serving.
  *
- * WHAT CHANGED FROM THE ORIGINAL: it was a checklist of eight checkboxes and
- * is now a single select. The client asked for "the dropdown where the client
- * would select which cleaning service they want" — one answer, not a set.
- * The `services` column is TEXT and held a joined list before, so a single
- * value stores without a migration; rows written either way stay readable.
+ * The order is theirs too, not alphabetised and not reordered to match the
+ * old one: Commercial Cleaning leads, where the original opened with Office
+ * Cleaning.
  *
- * "Other" IS THE EIGHTH AND IS NOT A FALLBACK. It was on the original list
- * too, and selecting it reveals a free-text box so the visitor can say what
- * they actually need. That box is the only reason the list can stay this
- * short without turning a mismatch into an abandoned form.
+ * WHAT CHANGED AGAINST THE ORIGINAL EIGHT:
+ *
+ *   kept     Commercial Cleaning, Office Cleaning, Janitorial Services
+ *   added    Industrial Cleaning, Warehouse Cleaning,
+ *            Condo Common Area Cleaning
+ *   dropped  Property Management and Building Maintenance,
+ *            Commercial Carpet Cleaning, Floor Services / Finishing,
+ *            Reno Construction Clean-up
+ *
+ * DROPPED FROM THE FORM IS NOT DROPPED FROM THE SITE. Building maintenance
+ * still has its own service page, its navigation entry and its homepage
+ * card, and carpet and floor work is still described inside the service
+ * pages. This list is what a visitor can ASK FOR in one click; it is not the
+ * catalogue of what the business does, and shortening it does not shorten
+ * that.
+ *
+ * Leads already in the database carry the old strings — one row answers
+ * "Commercial Carpet Cleaning". Nothing rewrites them: they are what those
+ * visitors actually chose, and a value no longer offered is still a true
+ * record of an enquiry.
+ *
+ * WHAT CHANGED FROM THE ORIGINAL'S SHAPE: it was a checklist of checkboxes
+ * and is now a single select. The client asked for "the dropdown where the
+ * client would select which cleaning service they want" — one answer, not a
+ * set. The `services` column is TEXT and held a joined list before, so a
+ * single value stores without a migration; rows written either way stay
+ * readable.
+ *
+ * "Other" IS THE LAST OPTION AND IS NOT A FALLBACK. It was on the original
+ * list too, and selecting it reveals a free-text box so the visitor can say
+ * what they actually need. That box is the only reason the list can stay
+ * this short without turning a mismatch into an abandoned form.
  */
 
-/** The seven named services, in the original's order. */
+/** The six named services, in the client's order. */
 export const QUOTE_SERVICES = [
-  'Office Cleaning',
   'Commercial Cleaning',
-  'Property Management and Building Maintenance',
+  'Office Cleaning',
+  'Industrial Cleaning',
   'Janitorial Services',
-  'Commercial Carpet Cleaning',
-  'Floor Services / Finishing',
-  'Reno Construction Clean-up',
+  'Warehouse Cleaning',
+  'Condo Common Area Cleaning',
 ] as const;
 
 /**

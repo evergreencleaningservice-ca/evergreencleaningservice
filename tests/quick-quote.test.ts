@@ -656,14 +656,18 @@ describe('choosing "Other" reveals somewhere to type', () => {
     select.dispatchEvent(new Event('change', { bubbles: true }));
   };
 
-  it('offers the original site\'s eight services, in its order', () => {
+  it('offers the client\'s seven options, in their order', () => {
     const form = mount();
     const select = form.elements.namedItem('service') as HTMLSelectElement;
     const values = Array.from(select.options)
       .map((o) => o.value)
       .filter(Boolean);
     expect(values).toEqual([...SERVICE_OPTIONS]);
-    expect(values).toHaveLength(8);
+    /* SEVEN, not the original site's eight. The client supplied their own
+       list; the count is pinned so shrinking or padding it is a deliberate
+       edit here rather than a quiet drift in a data file. */
+    expect(values).toHaveLength(7);
+    expect(values[0]).toBe('Commercial Cleaning');
     expect(values.at(-1)).toBe('Other');
   });
 
