@@ -11,36 +11,35 @@
  * you back" is a question the account executive can ask on the phone, and
  * every one of them is a place to give up.
  *
- * WHAT IT ASKS, AND WHAT IT REFUSES TO ASK:
+ * WHAT IT ASKS. Four fields, all required:
  *
- *   first name      not a full name. A surname buys nothing at this stage.
- *   business name   the one qualifying fact that matters for commercial
- *                   cleaning, and it is one field.
- *   phone           EITHER of these. Not both.
- *   email
- *   postal or city  how we know whether we serve you. One short field, and it
- *                   takes a postal code or a place name — a visitor should
- *                   never have to guess which format a box wants.
- *   service         one select.
- *   message         optional, and labelled optional.
+ *   full name       one box. It was first + last for one revision; the
+ *                   database only ever stored the two joined.
+ *   mobile phone    both required. An earlier revision took either one and
+ *                   left the other optional, which is the rule HTML cannot
+ *   email           state — the client chose the reference design, which
+ *                   asks for both, so the browser now states it itself.
+ *   cleaning needs  a SELECT of the original site's own service list, with
+ *                   "Other" revealing a free-text box.
  *
- * NO street address. NO square footage, frequency or preferred schedule. Those
- * are qualification, and qualification happens after a lead exists, not as a
- * condition of creating one. The long form is still there for anyone who
- * wants to hand over the full picture up front — it is a choice now, not a
- * toll.
+ * NO street address. NO province. NO square footage, frequency or preferred
+ * schedule. Those are qualification, and qualification happens after a lead
+ * exists, not as a condition of creating one. Address and province were each
+ * asked for on one revision in between and taken back out.
  *
- * "PHONE OR EMAIL" IS THE ONE RULE HTML CANNOT STATE. `required` can only say
- * "this field, always", and marking both required is precisely the friction
- * this form removes. It is checked in `validate` below, after the browser has
- * finished with per-field validity, so a visitor is never told about a
- * cross-field rule while a single field is still malformed.
+ * THIS COMMENT DESCRIBED A FORM THAT NO LONGER EXISTED. It still listed a
+ * business name, a "postal or city" box and an optional message, and
+ * explained at length a "phone OR email" rule that was removed several
+ * revisions ago along with the function that enforced it. Left as it was, the
+ * most authoritative-looking description of this component was also the least
+ * accurate thing in the file.
  *
  * Everything behind the form is unchanged: the same endpoint, the same
  * honeypot, the same Turnstile, the same single `lead_form_submission` after
  * a 2xx, the same attribution merged invisibly by `lead-submit.ts`.
  */
 import SpamGuard from './SpamGuard.astro';
+import { SERVICE_OPTIONS } from '../data/services';
 
 interface Props {
   /** Prefix for field ids, so two of these can share a page. */
@@ -152,16 +151,51 @@ const f = (name: string) => `${id}-${name}`;
     </div>
   </div>
 
+  {/* CLEANING NEEDS IS A SELECT, NOT A TEXTAREA.
+
+      It was a free-text box asking the visitor to "describe your facility
+      type and the main cleaning challenges you'd like us to solve" — a small
+      essay, demanded of someone who has not yet decided to buy anything, in
+      the last field before the button. The client asked for the original
+      site's own dropdown back, which is both less work for the visitor and
+      better data: a picked option is comparable across leads in a way that
+      prose never is.
+
+      The empty first option is `disabled` as well as valueless, so it can be
+      shown but not chosen. That is what makes `required` mean something on a
+      select: without it the first real service would be pre-selected and
+      every visitor who ignored the field would silently report wanting
+      whatever happened to be listed first. */}
   <div class="qq-field">
-    <label class="qq-label" for={f('message')}>
+    <label class="qq-label" for={f('service')}>
       Cleaning needs <span class="qq-req">*</span>
+    </label>
+    <select id={f('service')} name="service" required aria-describedby={f('service-error')}>
+      <option value="" disabled selected>Select the service you need</option>
+      {SERVICE_OPTIONS.map((service) => <option value={service}>{service}</option>)}
+    </select>
+    <p class="qq-error" id={f('service-error')} data-qq-error="service"></p>
+  </div>
+
+  {/* Revealed only when "Other" is picked, by `wireServiceOther`.
+
+      `hidden` IS SET IN THE MARKUP AND THE FIELD IS NOT `required` HERE.
+      Both matter, and they are the same mistake twice if either is dropped:
+      a hidden control that is `required` fails `checkValidity()` where
+      nobody can see it, and `reportInvalidFields` would then mark an
+      invisible field and refuse the visitor with a message pointing at
+      nothing. The reveal adds `required` at the moment it makes the box
+      visible and takes it away again when it hides it, so the two can never
+      disagree. */}
+  <div class="qq-field" data-qq-other hidden>
+    <label class="qq-label" for={f('message')}>
+      Tell us what you need <span class="qq-req">*</span>
     </label>
     <textarea
       id={f('message')}
       name="message"
-      rows="4"
-      placeholder="How can we help? Please describe your facility type and the main cleaning challenges you'd like us to solve."
-      required
+      rows="3"
+      placeholder="Describe the cleaning you're looking for."
       aria-describedby={f('message-error')}></textarea>
     <p class="qq-error" id={f('message-error')} data-qq-error="message"></p>
   </div>

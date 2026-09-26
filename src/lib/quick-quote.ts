@@ -32,6 +32,7 @@
  */
 
 import { fieldValue, wireLeadForm } from './lead-submit';
+import { SERVICE_OTHER } from '../data/services';
 
 /**
  * Errors are written into `[data-qq-error="<the field's own name>"]`.
@@ -68,7 +69,11 @@ function messageFor(name: string, el: HTMLInputElement | HTMLSelectElement): str
         return 'Please add a mobile phone number.';
       case 'email':
         return 'Please add an email address.';
+      case 'service':
+        return 'Please choose the service you need.';
       case 'message':
+        /* Only reachable with "Other" picked — the box does not exist
+           otherwise, and is not `required` while it is hidden. */
         return 'Please tell us what you need cleaned.';
       default:
         /* Every field on this form has a case above. The fallback is for a
@@ -150,6 +155,58 @@ export function reportInvalidFields(form: HTMLFormElement): void {
    exported validator nothing validates is a trap for the next person, who
    would reasonably assume the site still accepts one or the other. */
 
+/**
+ * Show the free-text box when "Other" is picked, and hide it again otherwise.
+ *
+ * THE `hidden` AND `required` ATTRIBUTES ARE MOVED TOGETHER, ALWAYS. A hidden
+ * control that is still `required` fails `checkValidity()` somewhere the
+ * visitor cannot see, and `reportInvalidFields` would then write a message
+ * into a slot inside a hidden container and send focus to an invisible box —
+ * the silent refusal this file already carries one long comment about. So the
+ * two attributes are set in the same statement and never separately.
+ *
+ * The value is cleared on hide. Someone who types a note under "Other", then
+ * changes their mind and picks "Office Cleaning", has not asked us to keep
+ * the note — and sending it anyway would put text in the lead that the
+ * visitor believes they removed.
+ *
+ * Focus moves to the box on reveal. It appeared because of a deliberate
+ * choice the visitor just made, so it is the thing they are about to use;
+ * not moving focus leaves a keyboard user tabbing forwards into a field that
+ * was not there a moment ago.
+ *
+ * Exported and separately tested because it is the one piece of this form
+ * that changes the shape of the form itself.
+ */
+export function wireServiceOther(form: HTMLFormElement, otherValue = 'Other'): void {
+  const select = form.elements.namedItem('service') as HTMLSelectElement | null;
+  const box = form.querySelector<HTMLElement>('[data-qq-other]');
+  const field = form.elements.namedItem('message') as HTMLTextAreaElement | null;
+  if (!select || !box || !field) return;
+
+  const apply = () => {
+    const wanted = select.value === otherValue;
+    box.hidden = !wanted;
+    field.required = wanted;
+    if (!wanted) {
+      field.value = '';
+      field.removeAttribute('aria-invalid');
+      const slot = errorSlot(form, 'message');
+      if (slot) slot.textContent = '';
+    }
+  };
+
+  select.addEventListener('change', () => {
+    const revealing = select.value === otherValue && box.hidden;
+    apply();
+    if (revealing) field.focus();
+  });
+
+  /* Run once on wiring, so a select restored by the browser's back/forward
+     cache with "Other" already chosen shows its box without being touched. */
+  apply();
+}
+
 export interface QuickQuoteOptions {
   /** Small numbers in tests; the real one is the module default. */
   tokenWaitMs?: number;
@@ -190,6 +247,8 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
     const el = event.target as HTMLElement | null;
     if (event.key === 'Enter' && el?.closest('.qq-hp')) event.preventDefault();
   });
+
+  wireServiceOther(form, SERVICE_OTHER);
 
   const confirm = (f: HTMLFormElement) => {
     const box = document.createElement('div');
@@ -240,6 +299,13 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
          columns stay in the database — `address` is still filled by the
          contact form on /contact-us/, and `province` holds what the few leads
          taken while it was asked actually answered. */
+      /* `service` ON THE PAGE, `services` ON THE WIRE, and the mismatch is
+         deliberate. The column is `services` because the original site's
+         field was a checklist of eight and stored a joined list; this asks
+         for one, so the control reads `service`. Renaming the column to
+         match would orphan every row already in the table. */
+      services: fieldValue(f, 'service'),
+      /* Empty unless "Other" was picked — the box does not exist otherwise. */
       message: fieldValue(f, 'message'),
       page_url: location.href,
     }),
