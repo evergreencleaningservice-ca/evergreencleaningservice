@@ -27,10 +27,11 @@ import { wireQuickQuote } from '../src/lib/quick-quote';
 import { recordTouch } from '../src/lib/attribution';
 import {
   VALID_LEAD,
-  VALID_LEAD,
+  VALID_LEAD_OTHER,
   fill,
   quickQuoteMarkup,
 } from './fixtures/quick-quote';
+import { SERVICE_OPTIONS } from '../src/data/services';
 
 /* ---------- harness ------------------------------------------------------ */
 
@@ -99,7 +100,10 @@ describe('every field the form asks for is required', () => {
       name: 'Dana Okonkwo',
       phone: '416 555 0142',
       email: 'dana@placeholder-holdings.example',
-      message: 'Two floors of open-plan office, nightly.',
+      /* The SELECTION, under the column's name. A listed service sends no
+         free text at all — there is nowhere to type one. */
+      services: 'Office Cleaning',
+      message: '',
     });
     expect(leadEvents()).toHaveLength(1);
     expect(confirmation()).not.toBeNull();
@@ -113,7 +117,7 @@ describe('every field the form asks for is required', () => {
     expect(VALID_LEAD.name).toBe('Dana Okonkwo');
   });
 
-  it.each(['name', 'phone', 'email', 'message'])(
+  it.each(['name', 'phone', 'email', 'service'])(
     'marks %s required in the markup',
     (name) => {
       const form = mount();
@@ -122,6 +126,18 @@ describe('every field the form asks for is required', () => {
       expect(el.required, `${name} should be required`).toBe(true);
     }
   );
+
+  it('ships the free-text box hidden and NOT required', () => {
+    /* The pair that must never disagree. A hidden control carrying
+       `required` fails `checkValidity()` where the visitor cannot see it,
+       and the form then refuses them with a message in a hidden slot — the
+       silent refusal this component has been bitten by before. */
+    const form = mount();
+    const box = form.querySelector<HTMLElement>('[data-qq-other]')!;
+    const detail = form.elements.namedItem('message') as HTMLTextAreaElement;
+    expect(box.hidden, 'the other box should start hidden').toBe(true);
+    expect(detail.required, 'a hidden field must not be required').toBe(false);
+  });
 
   it('asks for four required fields', () => {
     const form = mount();
@@ -183,7 +199,23 @@ describe('the field set, as it reaches the endpoint', () => {
     expect(body.name).toBe('Dana Okonkwo');
     expect(body.phone).toBe('416 555 0142');
     expect(body.email).toBe('dana@placeholder-holdings.example');
-    expect(body.message).toBe('Two floors of open-plan office, nightly.');
+    expect(body.services).toBe('Office Cleaning');
+    expect(body.message).toBe('');
+  });
+
+  it('sends the typed detail when "Other" is the service', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
+    const form = ready(VALID_LEAD_OTHER);
+
+    await submit(form);
+
+    const body = sentBody(fetchSpy);
+    /* BOTH, not one standing in for the other. "Other" is a real answer to
+       "which service", and the prose is a separate fact; collapsing them
+       would make the service column unusable for comparison the moment
+       anyone picked Other. */
+    expect(body.services).toBe('Other');
+    expect(body.message).toBe('Pressure washing the loading dock, quarterly.');
   });
 
   it('stops sending the fields the form stopped asking for', async () => {
@@ -195,8 +227,13 @@ describe('the field set, as it reaches the endpoint', () => {
     const body = sentBody(fetchSpy);
     /* Their COLUMNS survive — earlier leads answered them, and `address` is
        still filled by the contact form on /contact-us/. The payload does not,
-       because nothing on this form fills them any more. */
-    for (const key of ['business_name', 'services', 'address', 'province']) {
+       because nothing on this form fills them any more.
+
+       `services` CAME OFF THIS LIST when the service dropdown came back. It
+       is asserted as SENT, above, rather than quietly dropped from both
+       lists — a field that is neither required nor forbidden is a field no
+       test is watching. */
+    for (const key of ['business_name', 'address', 'province']) {
       expect(Object.keys(body), `${key} should not be sent`).not.toContain(key);
     }
     for (const name of ['business-name', 'services', 'postal', 'address', 'province', 'first-name', 'last-name']) {
@@ -411,7 +448,7 @@ describe('errors are announced, not just coloured', () => {
       name: '',
       phone: '',
       email: '',
-      message: '',
+      service: '',
     });
 
     await submit(form);
@@ -419,7 +456,20 @@ describe('errors are announced, not just coloured', () => {
     expect(errorFor('name')).toContain('name');
     expect(errorFor('phone')).toContain('phone');
     expect(errorFor('email')).toContain('email');
-    expect(errorFor('message')).toContain('cleaned');
+    expect(errorFor('service')).toContain('service');
+    expect(summary()).toContain('4 things need a moment');
+  });
+
+  it('does not count the hidden free-text box among the problems', async () => {
+    /* Four, not five. The box is hidden and not required, so an empty one is
+       not a problem — and if it ever were counted, the visitor would be told
+       about a field that is not on their screen. */
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
+    const form = ready({ ...VALID_LEAD, name: '', phone: '', email: '', service: '' });
+
+    await submit(form);
+
+    expect(errorFor('message')).toBe('');
     expect(summary()).toContain('4 things need a moment');
   });
 
@@ -583,5 +633,97 @@ describe('the submit button', () => {
     await new Promise((r) => setTimeout(r, 50));
     expect(button.disabled).toBe(false);
     expect(button.textContent).toBe(label);
+  });
+});
+
+/* ---------- 8. the "Other" free-text box --------------------------------- */
+
+/**
+ * The one control on this form that changes the shape of the form.
+ *
+ * Every test here is about the pair of attributes `hidden` and `required`
+ * staying in step. They are what stands between this feature and the failure
+ * mode this component has already been bitten by once: a control the visitor
+ * cannot see, blocking a submission for a reason they cannot read.
+ */
+describe('choosing "Other" reveals somewhere to type', () => {
+  const box = (form: HTMLFormElement) => form.querySelector<HTMLElement>('[data-qq-other]')!;
+  const detail = (form: HTMLFormElement) =>
+    form.elements.namedItem('message') as HTMLTextAreaElement;
+  const pick = (form: HTMLFormElement, value: string) => {
+    const select = form.elements.namedItem('service') as HTMLSelectElement;
+    select.value = value;
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+  };
+
+  it('offers the client\'s seven options, in their order', () => {
+    const form = mount();
+    const select = form.elements.namedItem('service') as HTMLSelectElement;
+    const values = Array.from(select.options)
+      .map((o) => o.value)
+      .filter(Boolean);
+    expect(values).toEqual([...SERVICE_OPTIONS]);
+    /* SEVEN, not the original site's eight. The client supplied their own
+       list; the count is pinned so shrinking or padding it is a deliberate
+       edit here rather than a quiet drift in a data file. */
+    expect(values).toHaveLength(7);
+    expect(values[0]).toBe('Commercial Cleaning');
+    expect(values.at(-1)).toBe('Other');
+  });
+
+  it('has an unselectable placeholder, so `required` means something', () => {
+    /* Without a valueless FIRST option the browser pre-selects the first
+       real service, and every visitor who ignores the field silently reports
+       wanting whatever happens to be listed first. */
+    const form = mount();
+    const first = (form.elements.namedItem('service') as HTMLSelectElement).options[0];
+    expect(first.value).toBe('');
+    expect(first.disabled).toBe(true);
+  });
+
+  it('shows the box and makes it required when "Other" is picked', () => {
+    const form = mount();
+    pick(form, 'Other');
+    expect(box(form).hidden).toBe(false);
+    expect(detail(form).required).toBe(true);
+  });
+
+  it('hides it again, drops `required`, and clears what was typed', () => {
+    const form = mount();
+    pick(form, 'Other');
+    detail(form).value = 'Something I changed my mind about';
+
+    pick(form, 'Office Cleaning');
+
+    expect(box(form).hidden).toBe(true);
+    expect(detail(form).required).toBe(false);
+    /* Cleared, not kept. Sending prose the visitor believes they removed
+       would put words in a lead that nobody agreed to send. */
+    expect(detail(form).value).toBe('');
+  });
+
+  it('refuses an empty box once "Other" is showing', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
+    const form = ready({ ...VALID_LEAD, service: 'Other' });
+    pick(form, 'Other');
+
+    await submit(form);
+
+    expect(errorFor('message')).toContain('cleaned');
+    expect(confirmation()).toBeNull();
+  });
+
+  it('does not send the cleared note after a change of mind', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
+    const form = ready(VALID_LEAD);
+    pick(form, 'Other');
+    detail(form).value = 'Abandoned note';
+    pick(form, 'Janitorial Services');
+
+    await submit(form);
+
+    const body = sentBody(fetchSpy);
+    expect(body.services).toBe('Janitorial Services');
+    expect(body.message).toBe('');
   });
 });

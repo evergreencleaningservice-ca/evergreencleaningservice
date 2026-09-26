@@ -116,13 +116,34 @@
     );
   }
 
-  /* EQUAL COLUMNS. The form column was a fixed 460px against a flexible
-     pitch column, which made the form visibly the smaller of the two. It now
-     matches the heading block beside it. */
+  /**
+   * A NARROWER FORM, VERTICALLY CENTRED AGAINST THE PITCH.
+   *
+   * The history matters, because this column has now been all three widths
+   * and each move was a correction of the last:
+   *
+   *   460px fixed   the form read as the lesser of the two columns
+   *   1fr / 1fr     equal halves, 533px each — too wide; a four-field form
+   *                 stretched across 533px looks padded out, and the long
+   *                 fields made the card taller than the copy beside it
+   *   1fr / 430px   here. Wide enough that "jane@yourcompany.com" and the
+   *                 phone mask both sit on one line in the paired row
+   *                 (measured, not guessed — see the note below), narrow
+   *                 enough to read as a form rather than a second panel.
+   *
+   * `minmax(0, 430px)` rather than a flat `430px`: below about 1010px of
+   * wrap the track has to be allowed to give way, and a fixed width would
+   * push the pitch column into overflow instead.
+   *
+   * `align-items: center` replaces `start`. The form is the taller element
+   * at every desktop width, so top-aligning left the copy stranded in the
+   * upper half with dead space beneath it. Centring sets the two blocks
+   * against each other's middles, which is what reads as "beside".
+   */
   .lpx-hero-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr) minmax(0, 430px);
     gap: 44px;
-    align-items: start;
+    align-items: center;
   }
 }
 

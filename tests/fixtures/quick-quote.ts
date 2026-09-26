@@ -15,6 +15,8 @@
  * still a description of the component.
  */
 
+import { SERVICE_OPTIONS, SERVICE_OTHER } from '../../src/data/services';
+
 export interface FieldSpec {
   name: string;
   /** The tag the control is rendered as. */
@@ -92,7 +94,17 @@ export const FIELDS: FieldSpec[] = [
     inputmode: 'email',
     errorKey: 'email',
   },
-  { name: 'message', tag: 'textarea', required: true, errorKey: 'message' },
+  { name: 'service', tag: 'select', required: true, errorKey: 'service' },
+  /**
+   * `required: false` AS RENDERED, and that is the assertion, not an
+   * oversight. The box is hidden until "Other" is picked, and a hidden
+   * control that is `required` fails validation where nobody can see it.
+   * `wireServiceOther` adds the attribute at the moment it reveals the box
+   * and removes it again when it hides it, so the served markup must ship
+   * WITHOUT it. A build test that demanded `required` here would be
+   * demanding the bug.
+   */
+  { name: 'message', tag: 'textarea', required: false, errorKey: 'message' },
 ];
 
 /**
@@ -158,10 +170,19 @@ export function quickQuoteMarkup({
              aria-describedby="${id}-email-error" />
       ${err('email')}
 
-      <label for="${id}-message">Cleaning needs</label>
-      <textarea id="${id}-message" name="message" rows="4" required
-                aria-describedby="${id}-message-error"></textarea>
-      ${err('message')}
+      <label for="${id}-service">Cleaning needs</label>
+      <select id="${id}-service" name="service" required aria-describedby="${id}-service-error">
+        <option value="" disabled selected>Select the service you need</option>
+        ${SERVICE_OPTIONS.map((s) => `<option value="${s}">${s}</option>`).join('')}
+      </select>
+      ${err('service')}
+
+      <div class="qq-field" data-qq-other hidden>
+        <label for="${id}-message">Tell us what you need</label>
+        <textarea id="${id}-message" name="message" rows="3"
+                  aria-describedby="${id}-message-error"></textarea>
+        ${err('message')}
+      </div>
 
       <div class="qq-hp" aria-hidden="true">
         <label for="${id}-hp">Company website</label>
@@ -205,5 +226,17 @@ export const VALID_LEAD = {
   name: 'Dana Okonkwo',
   phone: '416 555 0142',
   email: 'dana@placeholder-holdings.example',
-  message: 'Two floors of open-plan office, nightly.',
+  service: 'Office Cleaning',
+};
+
+/**
+ * The other branch: "Other" picked, so the free-text box is revealed and
+ * required, and the detail is part of a complete submission.
+ */
+export const VALID_LEAD_OTHER = {
+  name: 'Dana Okonkwo',
+  phone: '416 555 0142',
+  email: 'dana@placeholder-holdings.example',
+  service: SERVICE_OTHER,
+  message: 'Pressure washing the loading dock, quarterly.',
 };

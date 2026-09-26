@@ -130,7 +130,11 @@ describe('the message body', () => {
 
     expect(text).toContain('Phone: 416 555 0142');
     expect(text).toContain(`Email: ${NOT_SUPPLIED}`);
-    expect(text).toContain(`Cleaning needs: ${NOT_SUPPLIED}`);
+    /* `services` IS supplied by the helper above, so it prints its value —
+       asserting it as missing here would be asserting the fixture wrong.
+       `message` is the field this lead genuinely left out. */
+    expect(text).toContain('Service: Office cleaning & janitorial');
+    expect(text).toContain(`Details: ${NOT_SUPPLIED}`);
   });
 
   it('shows (not supplied) for a missing phone on an email-only lead', () => {
@@ -143,12 +147,13 @@ describe('the message body', () => {
   it('lists every core field even when the lead is nearly empty', () => {
     const text = notificationText(normalizeLead({ name: 'Dana' }) as unknown as Record<string, string>);
     for (const [, label] of CORE_FIELDS) expect(text).toContain(`${label}:`);
-    /* Five core fields: `business_name` and `services` came out when the
-       form stopped asking for them, and `province` was in the list for one
-       revision before the form dropped it too. Four are (not supplied) here
-       because only the name was given. */
-    expect(CORE_FIELDS).toHaveLength(5);
-    expect(text.split('\n').filter((l) => l.includes(NOT_SUPPLIED))).toHaveLength(4);
+    /* SIX core fields. `business_name` and `province` came out when the form
+       stopped asking for them; `services` went back IN when the quote form
+       returned to the original site's service dropdown, which is the most
+       useful line in the message. Five are (not supplied) here because only
+       the name was given. */
+    expect(CORE_FIELDS).toHaveLength(6);
+    expect(text.split('\n').filter((l) => l.includes(NOT_SUPPLIED))).toHaveLength(5);
   });
 
   it('lists a non-empty attribution field but not an empty one', () => {

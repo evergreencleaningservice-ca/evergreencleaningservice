@@ -46,7 +46,6 @@ import LpReviews from '../../components/lp/LpReviews.astro';
 import LpAreas from '../../components/lp/LpAreas.astro';
 import LpFinalCta from '../../components/lp/LpFinalCta.astro';
 import LpSticky from '../../components/lp/LpSticky.astro';
-import { REPLY_PROMISE } from '../../data/landing';
 
 /** The DOM id and anchor target. Unchanged, so existing #links still work. */
 const FORM_ANCHOR = 'ppc-lead-form';
@@ -85,7 +84,6 @@ const CALL_NOTE = 'Free walkthrough • No obligation';
       id={FORM_ANCHOR}
       formId={FORM_ID}
       heading="Get your free quote"
-      intro={`Seven short questions. An account executive replies ${REPLY_PROMISE} on a working day.`}
       submitLabel="Get my free quote"
       eagerCaptcha
     />

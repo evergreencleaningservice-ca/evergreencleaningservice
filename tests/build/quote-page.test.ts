@@ -138,9 +138,21 @@ describe('the rendered form matches the contract the unit suite tests', () => {
     expect(control(quote, name)).toBeNull();
   });
 
-  it('asks four visible questions in total', () => {
-    const visible = FIELDS.length;
-    expect(visible).toBe(4);
+  it('asks four questions on arrival, and a fifth only if "Other" is picked', () => {
+    /* FIVE entries in the contract, FOUR of them on screen when the page
+       loads. `message` ships inside `[data-qq-other] hidden` and appears
+       only when the service select says "Other", so counting it as a fifth
+       question would misstate what a visitor is actually asked for — and
+       the count of questions is the number this test exists to hold down. */
+    expect(FIELDS).toHaveLength(5);
+    expect(FIELDS.filter((f) => f.name !== 'message')).toHaveLength(4);
+
+    /* Matched loosely on the attributes, not on the full opening tag:
+       Astro appends a scoped class, so a literal tag match pins the
+       bundler's output rather than the contract. */
+    const otherBox = form().match(/<div[^>]*\bdata-qq-other\b[^>]*>/)?.[0] ?? '';
+    expect(otherBox, 'the free-text box must be present').not.toBe('');
+    expect(otherBox, 'the free-text box must ship hidden').toContain('hidden');
     /* And the page agrees: every contract field is present, and the only
        extra controls are the honeypot, the captcha token, the optional
        marketing-consent box and the button.
