@@ -5,7 +5,7 @@ description: "Evergreen uses an approved line of cleaning products that meet or 
 
 ## Concerned about green cleaning and interested in the use of eco-friendly products? So are we.
 
-![proseriesgreen-logo](/images/ProSeriesGreen-Logo-150x150.png)
+<img src="/images/ProSeriesGreen-Logo-270x270.png" alt="ProSeries Green product logo" width="150" height="150" loading="lazy" decoding="async" />
 
 ## That’s why we use Armstrong Manufacturing Pro Series Green Products.
 
@@ -21,11 +21,11 @@ Armstrong Manufacturing have been a leading chemical manufacturer for 46 years 
 
 ProSeries Green™ — it’s your ideal choice for going “GREEN”.
 
-![armstrong-logo](/images/armstrong-logo-300x89.jpg)
+<img src="/images/armstrong-logo-324x92.png" alt="Armstrong Manufacturing Inc. logo" width="300" height="85" loading="lazy" decoding="async" />
 
 For more information visit Armstrong Manufacturing   armstrongmanufacturing.com
 
-![Green Certification Logo](/images/ECOLOGO-150x150.jpg)
+<img src="/images/ECOLOGO-450x450.webp" alt="UL ECOLOGO certification mark" width="150" height="150" loading="lazy" decoding="async" />
 
 In April of 2013 changes occurred between Environment Canada and Ecologo. UL Environment is now handling the certification of sustainable products. Green Certified Products will now display the newly updated ECOLOGO symbol. This is your reassurance of a truly sustainable, “GREEN” product!
 

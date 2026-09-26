@@ -97,6 +97,7 @@ const SUBSTITUTED: Record<string, string[]> = {
   '/be-safe-from-coronavirus-work/': ['safety-at-work'],
   '/coronavirus-bringing-more-urgency-cleaning/': ['medical-office-reception-area'],
   '/day-night-which-is-the-best-routine-for-your-office/': ['janitorial-cart'],
+  '/green-clean-products/': ['green_clean_products_large-1'],
   '/qualities-top-cleaning-professionals/': ['istock-532149911-scaled'],
   '/cleaning-protocols-for-daycares-and-schools/': ['istock-532149911-scaled'],
 };
@@ -174,7 +175,7 @@ describe('body images carried over from the original', () => {
     const have = built.get('/green-clean-products/');
     expect(have, 'the page must still build').toBeDefined();
     expect([...have!].sort()).toEqual(
-      ['armstrong-logo', 'ecologo', 'green_clean_products_large-1', 'proseriesgreen-logo'].sort()
+      ['armstrong-logo', 'ecologo', 'green-cleaning-products-unlabeled', 'proseriesgreen-logo'].sort()
     );
     expect(KNOWN_LOST['/green-clean-products/']).toBeUndefined();
   });
@@ -188,6 +189,6 @@ describe('body images carried over from the original', () => {
     const at = (needle: string) => html.indexOf(needle);
     expect(at('armstrong-logo')).toBeLessThan(at('For more information visit Armstrong'));
     expect(at('ECOLOGO')).toBeLessThan(at('In April of 2013'));
-    expect(at('green_clean_products_LARGE-1')).toBeGreaterThan(at('In April of 2013'));
+    expect(at('green-cleaning-products-unlabeled')).toBeGreaterThan(at('In April of 2013'));
   });
 });
