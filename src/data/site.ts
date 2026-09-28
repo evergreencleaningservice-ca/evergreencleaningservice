@@ -145,9 +145,8 @@ export const recaptcha = captcha.recaptcha;
  */
 export const images = {
   /* Moved from img-evergreencleaningservice.10xconnections.com on 2026-09-28,
-     once the client's zone was on Cloudflare. The old host is still wired up
-     so already-cached pages keep their images, and image-hosts.json forbids it
-     in new builds. */
+     once the client's zone was on Cloudflare. The old host was deleted the
+     same day, and image-hosts.json forbids it in builds. */
   host: 'https://img.evergreencleaningservice.ca',
   bucket: 'img-evergreencleaningservice',
   /* Hosts that may appear in front of `/images/` in built output — og:image and

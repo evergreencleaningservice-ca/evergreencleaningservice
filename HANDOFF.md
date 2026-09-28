@@ -106,8 +106,14 @@ they only work together:
 
 Until 2026-09-28 the host was `img-evergreencleaningservice.10xconnections.com`
 (CNAME and rule `d4da24eec9e54c9ea3b4c261934b1da6` in the `10xconnections.com`
-zone). That wiring is still live so pages cached before the move keep their
-images; `image-hosts.json` now forbids it, so no new build can reference it.
+zone). Both were deleted on 2026-09-28 — the host now answers 530 — and
+`image-hosts.json` forbids it, so no build can reference it again. The same
+day the old staging Custom Domain `evergreencleaningservice.10xconnections.com`
+was detached from the Worker. The Worker's only hostname is now
+`stage.evergreencleaningservice.ca`.
+
+The shared `10xconnections.com` rewrite ruleset `dc23ca22b3244751a43bf30de1de73a2`
+also carries another client's rule; only Evergreen's rule was removed from it.
 
 Three things that are easy to undo by accident:
 
