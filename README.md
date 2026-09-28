@@ -23,9 +23,14 @@ npm run verify:indexing -- production   # the same, against the live site
 
 `verify:indexing` is the go-live check that cannot be a unit test: it reads
 what an origin actually serves. Run it against **production immediately after
-the DNS cutover** — the one mistake that would cost most is launching with the
-staging `X-Robots-Tag: noindex` still attached, and it is invisible from the
-page.
+the DNS cutover** — the one mistake that would cost most is production
+answering with a `noindex`, and it is invisible from the page.
+
+Staging and production are **one build on one Worker**. The staging noindex is
+a rule in `public/_headers` that names `stage.evergreencleaningservice.ca` (and
+`*.workers.dev`) by hostname, so it ships in every build and never matches
+`www.` or the apex. There is no separate "preview build" noindex step any more,
+and nothing to remove at go-live.
 
 Going live needs **both** halves of the captcha pair, in two different places:
 

@@ -43,7 +43,7 @@ const ENV = {
   TURNSTILE_SECRET: 'a-real-looking-production-secret',
 };
 
-const PREVIEW = 'https://evergreencleaningservice.10xconnections.com';
+const PREVIEW = 'https://stage.evergreencleaningservice.ca';
 
 const COMMENT = {
   kind: 'comment',
@@ -65,7 +65,7 @@ const REVIEW = {
   page_url: `${PREVIEW}/reviews/`,
 };
 
-const captchaPasses = (hostname = 'evergreencleaningservice.10xconnections.com') =>
+const captchaPasses = (hostname = 'stage.evergreencleaningservice.ca') =>
   vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
     if (String(input).includes('siteverify')) return Response.json({ success: true, hostname });
     return Response.json({ id: 'email-id' });

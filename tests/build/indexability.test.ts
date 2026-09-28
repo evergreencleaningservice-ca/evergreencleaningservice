@@ -9,6 +9,12 @@
  * deindex the business. That is the most expensive mistake available at
  * cutover and it is invisible from the page.
  *
+ * ONE BUILD, BOTH ADDRESSES. Staging and production are the same files on the
+ * same Worker. The staging noindex is a `_headers` rule naming the staging
+ * hostname, so it is present in production's build too and simply never
+ * matches there. What this file guards is that no noindex rule can reach a
+ * production hostname.
+ *
  * WHAT THIS FILE PROVES AND WHAT IT CANNOT. It builds the site the way the
  * production build does and reads the emitted HTML, the sitemap and the build
  * scripts' own behaviour. It cannot prove what a deployed origin sends: an
@@ -20,10 +26,16 @@
  */
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { PREVIEW_HOST, PRODUCTION_HOSTS } from '../../src/data/site';
+import {
+  hostMatches,
+  noindexProblems,
+  noindexedHosts,
+  parseHeaders,
+  ruleHost,
+} from '../../src/lib/noindex-rules';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const ORIGIN = `https://${PRODUCTION_HOSTS[0]}`;
@@ -88,14 +100,17 @@ describe('the production build', () => {
     expect(pages.length).toBeGreaterThan(60);
   });
 
-  it('emits no _headers file, so nothing noindexes production', () => {
-    /* The noindex header comes from scripts/noindex.mjs, which only
-       `npm run build:preview` calls. If `astro build` ever started emitting
-       one, launching would deindex the site. */
-    expect(fs.existsSync(path.join(out, '_headers'))).toBe(false);
+  it('ships _headers whose only noindex is scoped to non-production hostnames', () => {
+    /* One build serves staging and production from the same Worker, so a
+       path-only noindex would reach the live site the moment its Custom
+       Domain is attached. Every noindex must name a host, and none of those
+       hosts may match www. or the apex. */
+    const text = read('_headers');
+    expect(noindexProblems(text, PRODUCTION_HOSTS)).toEqual([]);
+    expect(noindexedHosts(text).some((h) => hostMatches(h, PREVIEW_HOST))).toBe(true);
   });
 
-  it('ships the allow-all robots.txt from public/, not the preview one', () => {
+  it('ships the allow-all robots.txt from public/', () => {
     const robots = read('robots.txt');
     expect(robots).toMatch(/^\s*Allow:\s*\//m);
     expect(robots).not.toMatch(/^\s*Disallow:\s*\/\s*$/m);
@@ -226,51 +241,45 @@ describe('the sitemap', () => {
   });
 });
 
-describe('the preview build marks itself noindex', () => {
-  /* scripts/noindex.mjs run against a throwaway dist, the way
-     `npm run build:preview` runs it. */
-  const temps: string[] = [];
-  afterAll(() => {
-    while (temps.length) fs.rmSync(temps.pop()!, { recursive: true, force: true });
+describe('the hostname-scoped noindex', () => {
+  /* Reads public/_headers directly, so these run against the file that ships
+     in both builds, and proves the matching the rules rely on. */
+  const text = fs.readFileSync(path.join(repo, 'public', '_headers'), 'utf8');
+  const noindexedOn = (host: string) => noindexedHosts(text).some((h) => hostMatches(h, host));
+
+  it('noindexes staging', () => {
+    expect(noindexedOn(PREVIEW_HOST)).toBe(true);
+    const stage = parseHeaders(text).find((r) => ruleHost(r.url) === PREVIEW_HOST)!;
+    expect(stage.headers['x-robots-tag']).toBe('noindex, nofollow, noarchive');
   });
 
-  const runNoindex = () => {
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ecs-noindex-'));
-    temps.push(dir);
-    fs.mkdirSync(path.join(dir, 'dist'), { recursive: true });
-    fs.writeFileSync(path.join(dir, 'dist', 'robots.txt'), 'User-agent: *\nAllow: /\n');
-    const result = spawnSync(
-      'node',
-      ['--experimental-strip-types', path.join(repo, 'scripts', 'noindex.mjs')],
-      { cwd: dir, encoding: 'utf8' }
-    );
-    return { dir, result };
-  };
-
-  it('writes X-Robots-Tag: noindex, nofollow for every path', () => {
-    const { dir, result } = runNoindex();
-    expect(result.status).toBe(0);
-    const headers = fs.readFileSync(path.join(dir, 'dist', '_headers'), 'utf8');
-    expect(headers).toMatch(/^\/\*$/m);
-    expect(headers).toMatch(/^\s+X-Robots-Tag: noindex, nofollow$/m);
+  it('never noindexes www or the apex', () => {
+    for (const host of PRODUCTION_HOSTS) expect(noindexedOn(host)).toBe(false);
   });
 
-  it('does NOT use Disallow: / — the header is the single source of truth', () => {
-    const { dir } = runNoindex();
-    const robots = fs.readFileSync(path.join(dir, 'dist', 'robots.txt'), 'utf8');
-    expect(robots).not.toMatch(/Disallow:/);
-    expect(robots).toMatch(/^\s*Allow:\s*\//m);
+  it('noindexes workers.dev and its version previews, and nothing under the real zone', () => {
+    expect(noindexedOn('evergreencleaningservice.ash-47a.workers.dev')).toBe(true);
+    expect(noindexedOn('1a2b3c4d-evergreencleaningservice.ash-47a.workers.dev')).toBe(true);
+    expect(noindexedOn('evergreencleaningservice.ca')).toBe(false);
+    expect(noindexedOn('mail.evergreencleaningservice.ca')).toBe(false);
   });
 
-  it('fails rather than silently doing nothing when there is no build', () => {
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ecs-noindex-'));
-    temps.push(dir);
-    const result = spawnSync(
-      'node',
-      ['--experimental-strip-types', path.join(repo, 'scripts', 'noindex.mjs')],
-      { cwd: dir, encoding: 'utf8' }
-    );
-    expect(result.status).toBe(1);
+  it('has no path-only rule carrying a robots header', () => {
+    for (const rule of parseHeaders(text)) {
+      if ('x-robots-tag' in rule.headers) expect(ruleHost(rule.url)).not.toBeNull();
+    }
+  });
+
+  it('the checker refuses a sitewide noindex and one naming production', () => {
+    expect(noindexProblems('/*\n  X-Robots-Tag: noindex\n', PRODUCTION_HOSTS)).toHaveLength(1);
+    expect(
+      noindexProblems('https://www.evergreencleaningservice.ca/*\n  X-Robots-Tag: noindex\n', PRODUCTION_HOSTS)
+    ).toHaveLength(1);
+    expect(
+      noindexProblems('https://:sub.evergreencleaningservice.ca/*\n  X-Robots-Tag: noindex\n', PRODUCTION_HOSTS)
+    ).toHaveLength(1);
+    /* A path-only rule for something else is fine. */
+    expect(noindexProblems('/*\n  X-Frame-Options: DENY\n', PRODUCTION_HOSTS)).toEqual([]);
   });
 });
 
@@ -335,9 +344,9 @@ describe('the built /thank-you/ page is not a measurement point', () => {
 describe('the two builds cannot be confused', () => {
   const scripts = JSON.parse(fs.readFileSync(path.join(repo, 'package.json'), 'utf8')).scripts;
 
-  it('only build:preview marks the output noindex', () => {
-    expect(scripts['build:preview']).toContain('noindex.mjs');
-    expect(scripts.build).not.toContain('noindex.mjs');
+  it('neither build adds a noindex step — _headers from public/ is the only source', () => {
+    for (const name of ['build', 'build:preview']) expect(scripts[name]).not.toMatch(/noindex/);
+    expect(fs.existsSync(path.join(repo, 'scripts', 'noindex.mjs'))).toBe(false);
   });
 
   it('only the production build runs the captcha gates', () => {

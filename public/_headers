@@ -1,0 +1,26 @@
+# Noindex by HOSTNAME, never by path.
+#
+# One build is served on every address — staging and production are the same
+# Worker and the same files — so the only honest place to decide "is this
+# staging?" is the hostname the request arrived on. Each rule below names a
+# non-production host outright. There is deliberately no `/*` rule: a path-only
+# rule matches every host, and on this Worker that includes the live site.
+#
+# Production (www. and the apex) is never named here and never matched, so
+# attaching or detaching a Custom Domain cannot change what either address
+# says to a crawler. tests/build/indexability.test.ts and
+# scripts/launch-check.mjs both refuse a noindex rule that is not scoped to one
+# of these hosts.
+#
+# robots.txt stays allow-all on every host. `Disallow: /` would stop the crawl,
+# so this header would never be read.
+
+https://stage.evergreencleaningservice.ca/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Cache-Control: no-cache
+
+# workers.dev and its version-preview URLs (`<version>-<worker>.<account>`).
+# Cloudflare's own documented pattern; a placeholder never spans a dot, so this
+# cannot match a *.evergreencleaningservice.ca host.
+https://:version.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex, nofollow, noarchive

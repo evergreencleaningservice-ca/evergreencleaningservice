@@ -76,7 +76,6 @@ src/
   pages/                routes; [slug].astro is the blog post route
   styles/global.css     the ported theme CSS
 scripts/
-  noindex.mjs           adds the preview's noindex headers
   purge.mjs             purges the Cloudflare edge cache after deploy
   mkcrops.mjs           regenerates WordPress's 300x150 list crops with sharp
   b2-sync.mjs           uploads public/images to the Backblaze bucket
@@ -135,11 +134,14 @@ Credentials are `B2_KEY_ID` / `B2_APP_KEY` in the environment — never committe
 
 - **Branch**: develop and push on `claude/optimistic-clarke-wz1p8g`. Never push
   to `main` without being told to.
-- **Deploy with `npm run deploy:preview`, never `npm run deploy`.** The plain
-  one skips `noindex.mjs`, which means the preview serves `Allow: /` with no
-  `X-Robots-Tag` — a crawlable near-duplicate of the client's live site. This
-  has happened three times. `deploy:preview` = build + noindex + wrangler
-  deploy + edge purge.
+- **Staging is noindexed by hostname, not by build.** `public/_headers` names
+  `stage.evergreencleaningservice.ca` and `*.workers.dev`; www. and the apex
+  are never named, so the same deploy is correct on every address. (It used to
+  be a sitewide `/*` rule written only by `build:preview` — that would have
+  noindexed the live site the moment the Worker took the domain.) Once www. or
+  the apex is attached to the Worker, deploy only with `npm run deploy`: the
+  test-key build that `deploy:preview` ships would be served on production
+  too, and the Worker answers 503 to a test secret there.
 - **Secrets** (`RECAPTCHA_SECRET`, `SUPABASE_SERVICE_ROLE_KEY`, …) are Worker
   secrets, never committed.
 - **Never disable TLS verification or unset `HTTPS_PROXY`.** Report 403/407
@@ -448,7 +450,8 @@ mirroring the original's. That is an open decision: reproduce them exactly
    unexplained. If the scratchpad refs are gone, rebuild them with
    `mkref-all.mjs` (it needs `<scratchpad>/pages/`).
 3. `npm run build`, then serve `dist/` locally to look at anything.
-4. Deploy only with `npm run deploy:preview`.
+4. Deploy with `npm run deploy:preview` while only staging is attached to the
+   Worker; `npm run deploy` once www. or the apex is.
 
 The two things a reviewer will ask about first are the forms (§7.1) and GTM
 (§7.2). Neither is a code problem; both are decisions.

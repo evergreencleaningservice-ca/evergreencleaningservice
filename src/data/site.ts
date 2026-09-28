@@ -10,7 +10,14 @@ export const PRODUCTION_HOSTS = [
   'evergreencleaningservice.ca',
 ] as const;
 
-export const PREVIEW_HOST = 'evergreencleaningservice.10xconnections.com';
+/**
+ * Staging. Served by the same Worker, from the same build, as production — the
+ * only thing that tells the two apart is the hostname a request arrives on, so
+ * `public/_headers` noindexes this host by name and nothing else. It was
+ * `evergreencleaningservice.10xconnections.com` until that zone record was
+ * removed; that name no longer resolves.
+ */
+export const PREVIEW_HOST = 'stage.evergreencleaningservice.ca';
 
 export const site = {
   name: 'Evergreen Office Cleaning',
