@@ -93,7 +93,13 @@ export const site = {
  * refuses both test secrets on a PRODUCTION_HOSTS hostname and answers 503.
  */
 export const captcha = {
-  provider: 'turnstile' as 'turnstile' | 'recaptcha',
+  /* reCAPTCHA for go-live, decided 2026-09-28: no Turnstile widget has been
+     issued for this site, and the client's own reCAPTCHA v2 key (below) is
+     already registered to evergreencleaningservice.ca — which covers www.,
+     the apex and stage. as subdomains. Build with
+     PUBLIC_RECAPTCHA_SITE_KEY=<clientSiteKey>. Switching back to Turnstile is
+     this one word plus its two keys. */
+  provider: 'recaptcha' as 'turnstile' | 'recaptcha',
 
   turnstile: {
     /** Cloudflare's published invisible test key. Any domain, always passes. */

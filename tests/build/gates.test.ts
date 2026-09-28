@@ -23,6 +23,14 @@ import path from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import { captcha } from '../../src/data/site';
 
+/* The gates read whichever provider `captcha.provider` names, so the tests
+   name the same variable and secret rather than assuming Turnstile. */
+const TURNSTILE = captcha.provider === 'turnstile';
+const KEY_VAR = TURNSTILE ? 'PUBLIC_TURNSTILE_SITE_KEY' : 'PUBLIC_RECAPTCHA_SITE_KEY';
+const SECRET = TURNSTILE ? 'TURNSTILE_SECRET' : 'RECAPTCHA_SECRET';
+const TEST_SITE_KEY = captcha[captcha.provider].testSiteKey;
+const REAL_SITE_KEY = TURNSTILE ? '0x4AAAAAAABkMYinukE8nzYS' : captcha.recaptcha.clientSiteKey;
+
 const repo = path.resolve(import.meta.dirname, '../..');
 const script = (name: string) => path.join(repo, 'scripts', name);
 
@@ -119,15 +127,15 @@ describe('captcha-check — the artefact gate', () => {
 
 describe('preflight — the variable gate', () => {
   it('refuses a production build with no site key set', () => {
-    const { code, out } = run('preflight.mjs', { env: { PUBLIC_TURNSTILE_SITE_KEY: '' } });
+    const { code, out } = run('preflight.mjs', { env: { [KEY_VAR]: '' } });
     expect(code).toBe(1);
     expect(out).toContain('refusing to build for production');
-    expect(out).toContain('PUBLIC_TURNSTILE_SITE_KEY is not set');
+    expect(out).toContain(`${KEY_VAR} is not set`);
   });
 
   it('refuses a published test site key', () => {
     const { code, out } = run('preflight.mjs', {
-      env: { PUBLIC_TURNSTILE_SITE_KEY: captcha.turnstile.testSiteKey },
+      env: { [KEY_VAR]: TEST_SITE_KEY },
     });
     expect(code).toBe(1);
     expect(out).toContain('PUBLISHED TEST KEY');
@@ -135,7 +143,7 @@ describe('preflight — the variable gate', () => {
 
   it('allows a key that is neither missing nor published', () => {
     const { code, out } = run('preflight.mjs', {
-      env: { PUBLIC_TURNSTILE_SITE_KEY: '0x4AAAAAAABkMYinukE8nzYS' },
+      env: { [KEY_VAR]: REAL_SITE_KEY },
     });
     expect(code).toBe(0);
     expect(out).toContain('site key set and not a test key');
@@ -162,23 +170,23 @@ describe('secret-check — the deploy gate', () => {
 
   it('runs at all', () => {
     const { out } = run('secret-check.mjs', {
-      env: withFakeNpx(listing(['DATABASE_URL', 'TURNSTILE_SECRET'])),
+      env: withFakeNpx(listing(['DATABASE_URL', SECRET])),
     });
     expect(out).not.toMatch(/ERR_MODULE_NOT_FOUND|Cannot find module/);
   });
 
   it('passes when both required secrets are set, and says values are not checkable', () => {
     const { code, out } = run('secret-check.mjs', {
-      env: withFakeNpx(listing(['DATABASE_URL', 'TURNSTILE_SECRET'])),
+      env: withFakeNpx(listing(['DATABASE_URL', SECRET])),
     });
     expect(code).toBe(0);
-    expect(out).toContain('DATABASE_URL and TURNSTILE_SECRET are set');
+    expect(out).toContain(`DATABASE_URL and ${SECRET} are set`);
     expect(out).toContain('VALUES are not checkable from here');
   });
 
   it.each([
-    [['TURNSTILE_SECRET'], 'DATABASE_URL'],
-    [['DATABASE_URL'], 'TURNSTILE_SECRET'],
+    [[SECRET], 'DATABASE_URL'],
+    [['DATABASE_URL'], SECRET],
     [[], 'DATABASE_URL'],
   ])('refuses the deploy when a required secret is missing', (present, expected) => {
     const { code, out } = run('secret-check.mjs', { env: withFakeNpx(listing(present)) });
@@ -190,7 +198,7 @@ describe('secret-check — the deploy gate', () => {
 
   it('warns but does not refuse when only the optional email secrets are absent', () => {
     const { code, out } = run('secret-check.mjs', {
-      env: withFakeNpx(listing(['DATABASE_URL', 'TURNSTILE_SECRET'])),
+      env: withFakeNpx(listing(['DATABASE_URL', SECRET])),
     });
     expect(code).toBe(0);
     expect(out).toContain('RESEND_API_KEY');
@@ -210,7 +218,7 @@ describe('secret-check — the deploy gate', () => {
 
   it('never prints a secret value, only names', () => {
     const { out } = run('secret-check.mjs', {
-      env: withFakeNpx(listing(['DATABASE_URL', 'TURNSTILE_SECRET', 'RESEND_API_KEY'])),
+      env: withFakeNpx(listing(['DATABASE_URL', SECRET, 'RESEND_API_KEY'])),
     });
     expect(out).not.toMatch(/postgres:\/\/|0x4AAAAAAA|re_[A-Za-z0-9]/);
   });

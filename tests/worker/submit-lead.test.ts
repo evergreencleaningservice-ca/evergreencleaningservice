@@ -31,12 +31,17 @@ vi.mock('@neondatabase/serverless', () => ({
 
 const worker = (await import('../../src/worker')).default;
 const { captcha } = await import('../../src/data/site');
+const { testKeyHostnameFor } = await import('../../src/lib/captcha-hosts');
+
+/** Whichever secret the active captcha provider reads. */
+const SECRET = captcha.provider === 'turnstile' ? 'TURNSTILE_SECRET' : 'RECAPTCHA_SECRET';
 
 const ENV = {
   ASSETS: { fetch: async () => new Response('asset') } as unknown as Fetcher,
   DATABASE_URL: 'postgres://user:pw@example.neon.tech/evergreen',
   STAGING_DATABASE_URL: 'postgres://user:pw@staging.example.neon.tech/evergreen',
   TURNSTILE_SECRET: 'a-real-looking-production-secret',
+  RECAPTCHA_SECRET: 'a-real-looking-production-secret',
 };
 
 const PREVIEW = 'https://stage.evergreencleaningservice.ca';
@@ -307,7 +312,7 @@ describe('the endpoint still behaves as it did', () => {
 
   it('answers 503 with no captcha secret configured', async () => {
     captchaPasses();
-    const res = await post(FULL_BODY, PREVIEW, { TURNSTILE_SECRET: undefined });
+    const res = await post(FULL_BODY, PREVIEW, { [SECRET]: undefined });
     expect(res.status).toBe(503);
     expect(queries).toHaveLength(0);
   });
@@ -357,7 +362,7 @@ describe('the endpoint still behaves as it did', () => {
     ]) {
       queries.length = 0;
       const res = await post(FULL_BODY, 'https://www.evergreencleaningservice.ca', {
-        TURNSTILE_SECRET: secret,
+        [SECRET]: secret,
       });
       expect(res.status).toBe(503);
       expect(queries).toHaveLength(0);
@@ -365,11 +370,12 @@ describe('the endpoint still behaves as it did', () => {
   });
 
   it('allows a test secret on the staging host, which is what it is for', async () => {
-    /* Cloudflare's dummy siteverify reports example.com whatever host asked. */
-    captchaPasses('example.com');
-    const res = await post(FULL_BODY, PREVIEW, {
-      TURNSTILE_SECRET: captcha.turnstile.testSecretKey,
-    });
+    /* Each provider's dummy siteverify reports its own fixed hostname
+       whatever host asked — example.com for Cloudflare, testkey.google.com
+       for Google. */
+    const testSecret = captcha[captcha.provider].testSecretKey;
+    captchaPasses(testKeyHostnameFor(testSecret)!);
+    const res = await post(FULL_BODY, PREVIEW, { [SECRET]: testSecret });
     expect(res.status).toBe(200);
   });
 });
@@ -392,11 +398,12 @@ describe('Phase 4 — the token has to have been solved on one of our hostnames'
     ['a host an attacker controls', 'evil.example'],
     ['a lookalike', 'www.evergreencleaningservice.ca.evil.example'],
     ['the staging host', 'stage.evergreencleaningservice.ca'],
-    ["the test key's dummy hostname", 'example.com'],
+    ["Cloudflare's test key's dummy hostname", 'example.com'],
+    ["Google's test key's dummy hostname", 'testkey.google.com'],
     ['nothing at all', ''],
   ])('rejects a token solved on %s, and stores nothing', async (_label, hostname) => {
     captchaPasses(hostname);
-    const res = await post(FULL_BODY, PROD, { TURNSTILE_SECRET: 'a-real-production-secret' });
+    const res = await post(FULL_BODY, PROD, { [SECRET]: 'a-real-production-secret' });
     expect(res.status).toBe(403);
     expect(await res.json()).toEqual({ error: 'captcha failed' });
     expect(queries).toHaveLength(0);
@@ -404,7 +411,7 @@ describe('Phase 4 — the token has to have been solved on one of our hostnames'
 
   it('rejects a production token replayed at staging', async () => {
     captchaPasses('www.evergreencleaningservice.ca');
-    const res = await post(FULL_BODY, PREVIEW, { TURNSTILE_SECRET: 'a-real-production-secret' });
+    const res = await post(FULL_BODY, PREVIEW, { [SECRET]: 'a-real-production-secret' });
     expect(res.status).toBe(403);
     expect(queries).toHaveLength(0);
   });
@@ -421,7 +428,7 @@ describe('Phase 4 — the token has to have been solved on one of our hostnames'
 
   it('a rejected hostname never reaches Neon or Resend', async () => {
     const fetchSpy = captchaPasses('evil.example');
-    await post(FULL_BODY, PROD, { TURNSTILE_SECRET: 'a-real-production-secret' });
+    await post(FULL_BODY, PROD, { [SECRET]: 'a-real-production-secret' });
     expect(queries).toHaveLength(0);
     /* one call: siteverify. No Resend. */
     expect(fetchSpy).toHaveBeenCalledTimes(1);

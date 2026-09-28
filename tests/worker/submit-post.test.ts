@@ -36,12 +36,17 @@ vi.mock('@neondatabase/serverless', () => ({
 }));
 
 const worker = (await import('../../src/worker')).default;
+const { captcha } = await import('../../src/data/site');
+
+/** Whichever secret the active captcha provider reads. */
+const SECRET = captcha.provider === 'turnstile' ? 'TURNSTILE_SECRET' : 'RECAPTCHA_SECRET';
 
 const ENV = {
   ASSETS: { fetch: async () => new Response('asset') } as unknown as Fetcher,
   DATABASE_URL: 'postgres://user:pw@example.neon.tech/evergreen',
   STAGING_DATABASE_URL: 'postgres://user:pw@staging.example.neon.tech/evergreen',
   TURNSTILE_SECRET: 'a-real-looking-production-secret',
+  RECAPTCHA_SECRET: 'a-real-looking-production-secret',
 };
 
 const PREVIEW = 'https://stage.evergreencleaningservice.ca';
@@ -192,7 +197,7 @@ describe('the same gate as the lead endpoint', () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(COMMENT),
       }),
-      { ...ENV, TURNSTILE_SECRET: undefined } as never
+      { ...ENV, [SECRET]: undefined } as never
     );
     expect(res.status).toBe(503);
     expect(queries).toHaveLength(0);

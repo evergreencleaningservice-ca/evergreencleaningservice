@@ -34,11 +34,18 @@ and nothing to remove at go-live.
 
 Going live needs **both** halves of the captcha pair, in two different places:
 
+The site runs on the client's own **reCAPTCHA v2** key (`captcha.provider` in
+`src/data/site.ts`), registered to evergreencleaningservice.ca, which covers
+www., the apex and stage.:
+
 ```bash
-export PUBLIC_TURNSTILE_SITE_KEY=<real site key>   # build-time, baked into the HTML
-npx wrangler secret put TURNSTILE_SECRET           # Worker secret, never in the repo
-npm run build && npx wrangler deploy
+export PUBLIC_RECAPTCHA_SITE_KEY=6Lcy1lwaAAAAAL_5DO8SACXqh0NF_QdzhkrAh-3K  # build-time, baked into the HTML
+npx wrangler secret put RECAPTCHA_SECRET           # the matching secret, from Google's reCAPTCHA admin
+npm run deploy
 ```
+
+Switching to Turnstile is `provider: 'turnstile'` plus
+`PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET` the same way.
 
 Setting one without the other breaks every form silently — a test site key with
 a real secret makes `siteverify` reject genuine submissions with a 403.

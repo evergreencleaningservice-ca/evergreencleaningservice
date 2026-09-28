@@ -190,6 +190,7 @@ const ENV = {
   DATABASE_URL: 'postgres://user:pw@example.neon.tech/evergreen',
   STAGING_DATABASE_URL: 'postgres://user:pw@staging.example.neon.tech/evergreen',
   TURNSTILE_SECRET: 'a-real-looking-production-secret',
+  RECAPTCHA_SECRET: 'a-real-looking-production-secret',
   RESEND_API_KEY: 're_test_key',
   LEAD_NOTIFY_TO: TO,
   LEAD_NOTIFY_FROM: FROM,
