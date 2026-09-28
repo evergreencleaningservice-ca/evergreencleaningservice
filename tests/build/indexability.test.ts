@@ -362,3 +362,30 @@ describe('the two builds cannot be confused', () => {
     expect(config).not.toContain(PREVIEW_HOST);
   });
 });
+
+describe('the blog mirror file', () => {
+  /* /data/blog-posts.json is what the Worker copies into the `posts` table.
+     It must hold every post, each at the address the site really serves. */
+  const doc = () => JSON.parse(read('data/blog-posts.json'));
+  const sources = fs.readdirSync(path.join(repo, 'src/content/blog')).filter((f) => f.endsWith('.md'));
+
+  it('holds every post in src/content/blog, once', () => {
+    const { count, posts } = doc();
+    expect(count).toBe(sources.length);
+    expect(posts).toHaveLength(sources.length);
+    expect(new Set(posts.map((p: { slug: string }) => p.slug)).size).toBe(sources.length);
+  });
+
+  it('every post has a built page at its production url, and a body', () => {
+    for (const p of doc().posts) {
+      expect(p.url).toBe(`${ORIGIN}/${p.slug}/`);
+      expect(pages).toContain(`${p.slug}/index.html`);
+      expect(p.body_markdown.length).toBeGreaterThan(100);
+      expect(Number.isNaN(Date.parse(p.pub_date))).toBe(false);
+    }
+  });
+
+  it('is not in the sitemap', () => {
+    expect(read('sitemap-0.xml')).not.toContain('blog-posts.json');
+  });
+});

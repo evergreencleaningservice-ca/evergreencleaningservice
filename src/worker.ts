@@ -5,6 +5,7 @@ import { normalizeSubmission, submissionProblems } from './lib/submission-fields
 import { notificationPayload } from './lib/notification';
 import { allowedCaptchaHostnames, isProductionHost, isPublishedTestSecret } from './lib/captcha-hosts';
 import { databaseSecretFor, databaseUrlFor } from './lib/database-url';
+import { parsePosts, syncPosts, type Sql } from './lib/posts-sync';
 
 /**
  * The site's Worker.
@@ -394,7 +395,45 @@ async function submitPost(request: Request, env: Env): Promise<Response> {
   return json({ ok: true });
 }
 
+/**
+ * The scheduled mirror of the blog into Neon — both branches, every run.
+ *
+ * Reads /data/blog-posts.json from this Worker's own assets, so the posts
+ * are exactly the deployed build's, and the database credentials never leave
+ * Cloudflare. A branch whose secret is missing is reported and skipped; any
+ * failure is rethrown at the end so the run shows as failed in the dashboard
+ * rather than as a quiet success with a stale table.
+ */
+export async function syncBlogPosts(env: Env): Promise<void> {
+  const res = await env.ASSETS.fetch('https://assets.local/data/blog-posts.json');
+  if (!res.ok) throw new Error(`posts-sync: blog-posts.json answered ${res.status}`);
+  const posts = parsePosts(await res.json());
+
+  const failures: string[] = [];
+  for (const [branch, url] of [
+    ['main', env.DATABASE_URL],
+    ['staging', env.STAGING_DATABASE_URL],
+  ] as const) {
+    if (!url) {
+      console.warn(`posts-sync: ${branch} has no connection string; skipped`);
+      continue;
+    }
+    try {
+      const result = await syncPosts(neon(url) as unknown as Sql, posts);
+      console.log(`posts-sync: ${branch}`, JSON.stringify(result));
+    } catch (err) {
+      console.error(`posts-sync: ${branch} failed`, err);
+      failures.push(branch);
+    }
+  }
+  if (failures.length) throw new Error(`posts-sync failed on ${failures.join(', ')}`);
+}
+
 export default {
+  async scheduled(_controller: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
+    ctx.waitUntil(syncBlogPosts(env));
+  },
+
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     if (url.pathname === '/api/submit-lead') return submitLead(request, env);
