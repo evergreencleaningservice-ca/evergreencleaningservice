@@ -9,7 +9,8 @@ the repository at commit `eab08b5` on branch `claude/optimistic-clarke-wz1p8g`.
 
 A **pixel-and-behaviour-faithful clone** of the client's live WordPress site,
 `evergreencleaningservice.ca`, rebuilt as a static Astro site and deployed to a
-Cloudflare Workers preview at **`evergreencleaningservice.10xconnections.com`**.
+Cloudflare Workers preview at **`stage.evergreencleaningservice.ca`** (until
+2026-09-28, `evergreencleaningservice.10xconnections.com`).
 
 The brief is *match the original*, not improve it. That distinction has decided
 a lot of the work: where the port had something the original does not — a post

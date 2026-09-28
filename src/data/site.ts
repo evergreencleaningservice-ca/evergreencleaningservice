@@ -10,7 +10,10 @@ export const PRODUCTION_HOSTS = [
   'evergreencleaningservice.ca',
 ] as const;
 
-export const PREVIEW_HOST = 'evergreencleaningservice.10xconnections.com';
+/* Staging lives in the client's own zone, as a Worker Custom Domain on the
+   same Worker the preview build deploys to. It moved here from
+   evergreencleaningservice.10xconnections.com on 2026-09-28. */
+export const PREVIEW_HOST = 'stage.evergreencleaningservice.ca';
 
 export const site = {
   name: 'Evergreen Office Cleaning',
@@ -149,7 +152,7 @@ export const images = {
   rewriteOrigins: [
     'https://www.evergreencleaningservice.ca',
     'https://evergreencleaningservice.ca',
-    'https://evergreencleaningservice.10xconnections.com',
+    `https://${PREVIEW_HOST}`,
   ],
 } as const;
 

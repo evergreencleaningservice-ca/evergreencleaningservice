@@ -1,7 +1,7 @@
 /**
  * Marks a build as "preview only" so search engines ignore it.
  *
- * The preview is served from evergreencleaningservice.10xconnections.com while
+ * The preview is served from stage.evergreencleaningservice.ca while
  * the real site is still the WordPress install on evergreencleaningservice.ca.
  * Two copies of the same copy, both indexable, would compete with each other,
  * so every preview response carries X-Robots-Tag: noindex, nofollow. That
@@ -24,7 +24,7 @@ if (!fs.existsSync(dist)) {
 
 // Cloudflare Workers static assets reads _headers from the asset directory.
 //
-// The 10xconnections.com zone caches HTML at the edge, so without the
+// The zone caches HTML at the edge, so without the
 // Cache-Control below a deploy keeps serving the previous build until the
 // cache is purged. `no-cache` means "revalidate before serving", not "don't
 // store", so ETags still do the heavy lifting — the right trade for a preview
