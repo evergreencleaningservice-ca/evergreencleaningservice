@@ -32,6 +32,7 @@ const REQUIRED = [
 ];
 
 const OPTIONAL = [
+  ['STAGING_DATABASE_URL', 'Neon branch `staging`; without it the staging forms answer 503 (production is unaffected)'],
   ['RESEND_API_KEY', 'the lead notification email'],
   ['LEAD_NOTIFY_TO', 'who the notification goes to'],
   ['LEAD_NOTIFY_FROM', 'the sending address'],

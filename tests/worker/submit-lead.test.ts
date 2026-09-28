@@ -17,14 +17,16 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 /** Captures every tagged-template call the Worker makes. */
 const queries: { sql: string; values: unknown[] }[] = [];
+/** Every connection string the Worker opened, in order. */
+const connections: string[] = [];
 let insertShouldThrow = false;
 
 vi.mock('@neondatabase/serverless', () => ({
-  neon: () => (strings: TemplateStringsArray, ...values: unknown[]) => {
+  neon: (url: string) => (connections.push(url), (strings: TemplateStringsArray, ...values: unknown[]) => {
     if (insertShouldThrow) return Promise.reject(new Error('relation "leads" does not exist'));
     queries.push({ sql: strings.join('?'), values });
     return Promise.resolve([]);
-  },
+  }),
 }));
 
 const worker = (await import('../../src/worker')).default;
@@ -33,6 +35,7 @@ const { captcha } = await import('../../src/data/site');
 const ENV = {
   ASSETS: { fetch: async () => new Response('asset') } as unknown as Fetcher,
   DATABASE_URL: 'postgres://user:pw@example.neon.tech/evergreen',
+  STAGING_DATABASE_URL: 'postgres://user:pw@staging.example.neon.tech/evergreen',
   TURNSTILE_SECRET: 'a-real-looking-production-secret',
 };
 
@@ -329,7 +332,7 @@ describe('the endpoint still behaves as it did', () => {
 
   it('answers 503 rather than 200 when no database is configured', async () => {
     captchaPasses();
-    const res = await post(FULL_BODY, PREVIEW, { DATABASE_URL: undefined });
+    const res = await post(FULL_BODY, PREVIEW, { STAGING_DATABASE_URL: undefined });
     expect(res.status).toBe(503);
   });
 
@@ -475,5 +478,50 @@ describe('marketing consent reaches the row truthfully', () => {
     const { byName } = insert();
     expect(byName.marketing_consent).toBe(false);
     expect(byName.consent_text).toBeNull();
+  });
+});
+
+describe('staging and production write to different Neon branches', () => {
+  /* One Worker serves both, so the hostname is the only thing that can keep
+     a staging test out of the production lead table. */
+  const PROD = 'https://www.evergreencleaningservice.ca';
+  const MAIN = ENV.DATABASE_URL;
+  const STAGING = ENV.STAGING_DATABASE_URL;
+
+  beforeEach(() => {
+    connections.length = 0;
+  });
+
+  it('a lead on www. is written to main', async () => {
+    captchaPasses('www.evergreencleaningservice.ca');
+    expect((await post(FULL_BODY, PROD)).status).toBe(200);
+    expect(connections).toEqual([MAIN]);
+  });
+
+  it('a lead on the apex is written to main', async () => {
+    captchaPasses('evergreencleaningservice.ca');
+    expect((await post(FULL_BODY, 'https://evergreencleaningservice.ca')).status).toBe(200);
+    expect(connections).toEqual([MAIN]);
+  });
+
+  it('a lead on staging is written to the staging branch', async () => {
+    captchaPasses();
+    expect((await post(FULL_BODY)).status).toBe(200);
+    expect(connections).toEqual([STAGING]);
+  });
+
+  it('staging with no staging secret answers 503 and never borrows main', async () => {
+    captchaPasses();
+    const res = await post(FULL_BODY, PREVIEW, { STAGING_DATABASE_URL: undefined });
+    expect(res.status).toBe(503);
+    expect(connections).toEqual([]);
+    expect(queries).toHaveLength(0);
+  });
+
+  it('production with no production secret answers 503 and never borrows staging', async () => {
+    captchaPasses('www.evergreencleaningservice.ca');
+    const res = await post(FULL_BODY, PROD, { DATABASE_URL: undefined });
+    expect(res.status).toBe(503);
+    expect(connections).toEqual([]);
   });
 });

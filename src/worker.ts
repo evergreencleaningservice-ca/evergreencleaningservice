@@ -4,6 +4,7 @@ import { isHoneypotHit, leadProblems, normalizeLead, str } from './lib/lead-fiel
 import { normalizeSubmission, submissionProblems } from './lib/submission-fields';
 import { notificationPayload } from './lib/notification';
 import { allowedCaptchaHostnames, isProductionHost, isPublishedTestSecret } from './lib/captcha-hosts';
+import { databaseSecretFor, databaseUrlFor } from './lib/database-url';
 
 /**
  * The site's Worker.
@@ -23,14 +24,18 @@ import { allowedCaptchaHostnames, isProductionHost, isPublishedTestSecret } from
 export interface Env {
   ASSETS: Fetcher;
   /**
-   * Neon Postgres connection string, set as a Worker secret:
-   *   wrangler secret put DATABASE_URL
+   * Neon Postgres connection strings, set as Worker secrets. Which one a
+   * request uses depends on the hostname it arrived on — see
+   * `lib/database-url.ts`:
+   *   wrangler secret put DATABASE_URL           branch `main`, www. and the apex
+   *   wrangler secret put STAGING_DATABASE_URL   branch `staging`, everything else
    *
    * Neon rather than D1 because the account is at its D1 database limit, and
    * Neon's serverless driver talks HTTP rather than raw TCP, so it works from a
    * Worker with no tunnel, no pooler and nothing of ours to keep running.
    */
   DATABASE_URL?: string;
+  STAGING_DATABASE_URL?: string;
   /** Optional. When set, the lead is also emailed to the client via Resend. */
   RESEND_API_KEY?: string;
   LEAD_NOTIFY_TO?: string;
@@ -267,16 +272,18 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
   const problems = leadProblems(lead);
   if (problems.length) return json({ error: 'invalid lead', fields: problems }, 422);
 
-  if (!env.DATABASE_URL) {
-    /* No database configured. Say so loudly rather than returning 200 and
-       losing the enquiry — a form that reports success and drops the lead is
-       the failure this endpoint exists to end. */
-    console.error('submit-lead: no DATABASE_URL; lead not stored', lead.work_email);
+  const host = new URL(request.url).hostname;
+  const databaseUrl = databaseUrlFor(host, env);
+  if (!databaseUrl) {
+    /* No database configured for this host. Say so loudly rather than
+       returning 200 and losing the enquiry — a form that reports success and
+       drops the lead is the failure this endpoint exists to end. */
+    console.error(`submit-lead: no ${databaseSecretFor(host)} for ${host}; lead not stored`, lead.work_email);
     return json({ error: 'lead storage unavailable' }, 503);
   }
 
   try {
-    const sql = neon(env.DATABASE_URL);
+    const sql = neon(databaseUrl);
     await sql`
       INSERT INTO leads
         (form_id, full_name, work_email, phone, facility_size, facility_type,
@@ -352,17 +359,19 @@ async function submitPost(request: Request, env: Env): Promise<Response> {
   const problems = submissionProblems(submission);
   if (problems.length) return json({ error: 'invalid submission', fields: problems }, 422);
 
-  if (!env.DATABASE_URL) {
+  const host = new URL(request.url).hostname;
+  const databaseUrl = databaseUrlFor(host, env);
+  if (!databaseUrl) {
     /* Say so loudly rather than returning 200 and dropping it. A form that
        reports success and discards the submission is the exact bug these two
        forms had for the whole port, and it is not worth re-creating one layer
        further down. */
-    console.error('submit-post: no DATABASE_URL; submission not stored', submission.kind);
+    console.error(`submit-post: no ${databaseSecretFor(host)} for ${host}; submission not stored`, submission.kind);
     return json({ error: 'submission storage unavailable' }, 503);
   }
 
   try {
-    const sql = neon(env.DATABASE_URL);
+    const sql = neon(databaseUrl);
     await sql`
       INSERT INTO submissions
         (kind, post_slug, author_name, author_email, author_url,

@@ -40,6 +40,7 @@ const worker = (await import('../../src/worker')).default;
 const ENV = {
   ASSETS: { fetch: async () => new Response('asset') } as unknown as Fetcher,
   DATABASE_URL: 'postgres://user:pw@example.neon.tech/evergreen',
+  STAGING_DATABASE_URL: 'postgres://user:pw@staging.example.neon.tech/evergreen',
   TURNSTILE_SECRET: 'a-real-looking-production-secret',
 };
 
@@ -234,7 +235,7 @@ describe('what it refuses to store', () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(COMMENT),
       }),
-      { ...ENV, DATABASE_URL: undefined } as never
+      { ...ENV, STAGING_DATABASE_URL: undefined } as never
     );
     expect(res.status).toBe(503);
   });
