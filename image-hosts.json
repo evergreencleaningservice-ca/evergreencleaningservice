@@ -1,6 +1,6 @@
 {
-  "canonicalHost": "img-evergreencleaningservice.10xconnections.com",
+  "canonicalHost": "img.evergreencleaningservice.ca",
   "bucket": "img-evergreencleaningservice",
-  "forbiddenHosts": ["img.evergreencleaningservice.ca"],
+  "forbiddenHosts": ["img-evergreencleaningservice.10xconnections.com"],
   "exceptions": []
 }

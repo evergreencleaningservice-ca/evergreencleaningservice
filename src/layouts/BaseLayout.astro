@@ -5,7 +5,7 @@ import LeadVideo from '../components/LeadVideo.astro';
 import GoogleTagManager from '../components/GoogleTagManager.astro';
 import Attribution from '../components/Attribution.astro';
 import PhoneTracking from '../components/PhoneTracking.astro';
-import { site } from '../data/site';
+import { images, site } from '../data/site';
 import { organizationGraph } from '../lib/schema';
 import '../styles/global.css';
 
@@ -78,7 +78,7 @@ const ogImage = new URL(ogPath, Astro.site ?? site.url).href;
         even begin the DNS lookup and TLS handshake for it until it has
         parsed the markup that references it. One preconnect buys back that
         round trip on the single most important request on the page. */}
-    <link rel="preconnect" href="https://img-evergreencleaningservice.10xconnections.com" />
+    <link rel="preconnect" href={images.host} />
     {/*
       Weights chosen by measuring which faces actually compute on the original,
       not by reading its @font-face list. Raleway 800 carries the hero heading

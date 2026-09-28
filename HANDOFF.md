@@ -95,14 +95,19 @@ public/video/lead-net.mp4  the client's real clip, 720x540 H.264+AAC
 
 Photos are not deployed with the site. They live in the B2 bucket
 `img-evergreencleaningservice` (us-east-005, allPublic) and are served from
-`https://img-evergreencleaningservice.10xconnections.com`. Three pieces, and
+`https://img.evergreencleaningservice.ca`. Three pieces, and
 they only work together:
 
 | Piece | Value |
 |---|---|
 | Bucket | `img-evergreencleaningservice`, keys mirror the repo — `public/images/a.jpg` → `images/a.jpg` |
-| DNS | CNAME `img-evergreencleaningservice.10xconnections.com` → `f005.backblazeb2.com`, **proxied** |
-| Rewrite | zone `10xconnections.com`, ruleset `dc23ca22b3244751a43bf30de1de73a2`, prefixes `/file/img-evergreencleaningservice` onto the path |
+| DNS | CNAME `img.evergreencleaningservice.ca` → `f005.backblazeb2.com`, **proxied** |
+| Rewrite | zone `evergreencleaningservice.ca`, ruleset `a7818baee8bb404bad888536ce46df72` (rule `b80d7f51b28f40f3be7806a158dd6dba`), prefixes `/file/img-evergreencleaningservice` onto the path |
+
+Until 2026-09-28 the host was `img-evergreencleaningservice.10xconnections.com`
+(CNAME and rule `d4da24eec9e54c9ea3b4c261934b1da6` in the `10xconnections.com`
+zone). That wiring is still live so pages cached before the move keep their
+images; `image-hosts.json` now forbids it, so no new build can reference it.
 
 Three things that are easy to undo by accident:
 

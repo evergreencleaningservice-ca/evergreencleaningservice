@@ -129,7 +129,7 @@ export const recaptcha = captcha.recaptcha;
  *               us-east-005. Keys mirror the repo exactly — `public/images/a.jpg`
  *               is stored as `images/a.jpg` — so a path is the same string on
  *               both hosts and the only thing that changes is the origin.
- *   DNS         CNAME img-evergreencleaningservice.10xconnections.com ->
+ *   DNS         CNAME img.evergreencleaningservice.ca ->
  *               f005.backblazeb2.com, **proxied**. The orange cloud is not
  *               optional: B2 egress is free only through Cloudflare (Bandwidth
  *               Alliance), and grey-clouded it is billed at $0.01/GB.
@@ -144,7 +144,11 @@ export const recaptcha = captcha.recaptcha;
  * `dist` after the build, and `scripts/b2-sync.mjs` puts the files in the bucket.
  */
 export const images = {
-  host: 'https://img-evergreencleaningservice.10xconnections.com',
+  /* Moved from img-evergreencleaningservice.10xconnections.com on 2026-09-28,
+     once the client's zone was on Cloudflare. The old host is still wired up
+     so already-cached pages keep their images, and image-hosts.json forbids it
+     in new builds. */
+  host: 'https://img.evergreencleaningservice.ca',
   bucket: 'img-evergreencleaningservice',
   /* Hosts that may appear in front of `/images/` in built output — og:image and
      JSON-LD are absolute, so they carry the canonical origin and need swapping
