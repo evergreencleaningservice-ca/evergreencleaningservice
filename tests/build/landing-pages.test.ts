@@ -334,8 +334,9 @@ describe('claims', () => {
     expect(h).not.toMatch(/100%\s*(?:privacy|satisfaction)/i);
     expect(h).not.toMatch(/no spam,? ever/i);
     expect(h).not.toMatch(/same[- ]day|within (?:an|1) hour|instant quote/i);
-    /* The one reply promise the site has published since Phase 3. */
-    expect(h).toContain('2 business hours');
+    /* The one reply promise the site makes, and it names no time. */
+    expect(h).toContain('as soon as possible');
+    expect(h).not.toMatch(/business hours/i);
   });
 
   it.each(PAGES)('$name states the founding year rather than a computed duration', ({ name }) => {

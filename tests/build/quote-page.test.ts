@@ -275,7 +275,7 @@ describe('the page around the form', () => {
   });
 
   it('states what happens after submission', () => {
-    expect(quote).toMatch(/2 business hours/i);
+    expect(quote).toMatch(/as soon as possible/i);
     expect(quote).toMatch(/no obligation/i);
   });
 });
@@ -292,7 +292,7 @@ describe('the sidebar carries help, not a second form', () => {
   });
 
   it('makes only claims the site already makes', () => {
-    for (const claim of ['WSIB covered and bonded', 'A reply within 2 business hours', 'No obligation']) {
+    for (const claim of ['WSIB covered and bonded', 'A reply as soon as possible', 'No obligation']) {
       expect(quote).toContain(claim);
     }
   });

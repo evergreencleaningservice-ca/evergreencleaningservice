@@ -28,10 +28,10 @@
  *   service pages. It is the founding year, not a computed duration, so it
  *   does not go stale and does not need to be right every January.
  *
- *   "A reply within 2 business hours" is the promise both landing pages have
- *   carried since Phase 3 and which /request-a-quote/ adopted in Phase 9. It
- *   is pre-existing and is stated once here rather than three times in three
- *   wordings. Nothing faster is claimed anywhere, and "same-day walkthrough" —
+ *   "A reply as soon as possible" is the reply promise. Until 2026-09-30 it
+ *   was "within 2 business hours", which the landing pages carried since
+ *   Phase 3; the client asked for it to name no time. It is stated once here
+ *   rather than three times in three wordings. No time is claimed anywhere, and "same-day walkthrough" —
  *   which the quote page's submit button used to promise — is gone, because
  *   nobody has committed to it.
  */
@@ -73,7 +73,7 @@ export const FACILITY_TYPES = [
 export const TRUST_POINTS = [
   'Serving Toronto since 1989',
   'WSIB covered and bonded',
-  'A reply within 2 business hours',
+  'A reply as soon as possible',
   'No obligation',
 ] as const;
 
@@ -86,4 +86,4 @@ export const SERVICE_AREA_LINE =
   'Vaughan, Markham, Brampton, Richmond Hill and Oakville.';
 
 /** The reply promise, written once. */
-export const REPLY_PROMISE = 'within 2 business hours';
+export const REPLY_PROMISE = 'as soon as possible';
