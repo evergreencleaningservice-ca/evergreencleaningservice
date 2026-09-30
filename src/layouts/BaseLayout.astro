@@ -40,6 +40,9 @@ const ogImage = new URL(ogPath, Astro.site ?? site.url).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* As high in the head as possible, per Google's install instructions —
+        only the two metas the browser needs before anything else precede it. */}
+    <GoogleTagManager />
     <title>{title}</title>
     <meta name="description" content={description} />
     {/* A bare /favicon.ico request is made by every browser whether or not
@@ -90,7 +93,6 @@ const ogImage = new URL(ogPath, Astro.site ?? site.url).href;
     {/* Section 2.4: the organisation graph, on every page. */}
     <script type="application/ld+json" set:html={JSON.stringify(organizationGraph())} is:inline />
 
-    <GoogleTagManager />
     <Attribution />
 
     <slot name="head" />

@@ -42,7 +42,7 @@
  * anything. `docs/gtm-handoff.md` is the specification for the container.
  *
  * NOTE, and it is a launch blocker rather than a code problem: container
- * GTM-5PRC4HBV as published today has **no trigger for this event**. Its
+ * GTM-5PRC4HBV (replaced by GTM-5W69BTJQ on 30 Sep 2026) had **no trigger for this event**. Its
  * three Google Ads conversion tags fire on GTM's native `gtm.formSubmit` with
  * `gtm.elementId` equal to `wpforms-form-1381` or `wpforms-form-1384` — the
  * WordPress WPForms DOM ids. Neither id exists on this site and these forms

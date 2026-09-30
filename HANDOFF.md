@@ -385,8 +385,12 @@ unverified `aggregateRating` is a manual-action risk rather than a rich result.
 
 ### 7.2 Google Tag Manager — live on staging as well as production
 
-`GTM-5PRC4HBV` loads on every page, in both halves the original has: the head
-loader and the `<noscript>` iframe first inside `<body>`.
+**30 Sep 2026: the container is now `GTM-5W69BTJQ`** (`site.gtmId`), on every
+page and every landing page, in both halves Google specifies: the head loader
+directly after the charset and viewport metas, and the `<noscript>` iframe
+first inside `<body>`. It replaced `GTM-5PRC4HBV`, which the rest of this
+section describes. The Ads, GA4 and UET tags listed below lived inside the old
+container; they reach the site only once they are built in the new one.
 
 **One id, not five.** Verified against the 2026-09-18 archive capture: the
 original's markup contains `GTM-5PRC4HBV` four times and no `AW-`, `G-`, `UA-`

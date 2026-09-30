@@ -1,5 +1,11 @@
 # GTM implementation specification — Evergreen Office Cleaning
 
+> **30 Sep 2026: the site now loads a new container, `GTM-5W69BTJQ`.**
+> `GTM-5PRC4HBV`, described below, is no longer on the site. The events this
+> site pushes are unchanged, so §7 is the build list for the new container
+> too: it must be given the `lead_form_submission` and `phone_click` triggers
+> and the Ads, GA4 and UET tags, or the site records nothing.
+
 **For:** whoever holds Google Tag Manager `GTM-5PRC4HBV`, Google Ads
 `AW-16819334998`, GA4 `G-R27QW21PMT` and Microsoft Advertising UET `187178776`.
 

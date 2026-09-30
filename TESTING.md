@@ -146,7 +146,7 @@ a tested one.
 - **The GTM container.** Tests prove what this site pushes into
   `window.dataLayer`, and `tests/conversion-event.test.ts` simulates a
   container that honours `eventCallback`. They cannot prove what container
-  GTM-5PRC4HBV does with the event — that needs Tag Assistant against the
+  GTM-5W69BTJQ does with the event — that needs Tag Assistant against the
   deployed preview, and, as of the Phase 1 baseline, the container has **no
   trigger for `lead_form_submission` at all**. `docs/gtm-handoff.md` is the
   specification for fixing that, and §8 of it is the manual checklist.
