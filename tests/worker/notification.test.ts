@@ -25,6 +25,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   CORE_FIELDS,
   NOT_SUPPLIED,
+  formatSentAt,
   notificationPayload,
   notificationText,
   notifyRecipientFor,
@@ -127,45 +128,96 @@ describe('the payload is always well formed', () => {
 /* --- 2. the body ---------------------------------------------------------- */
 
 describe('the message body', () => {
-  it('shows (not supplied) for every core field the visitor left out', () => {
-    const text = notificationText(lead({ phone: '416 555 0142' }));
+  const SENT = new Date('2026-09-30T14:50:14Z');
+
+  it('is exactly the requested shape for a quote-form lead', () => {
+    const text = notificationText(
+      lead({
+        name: 'test',
+        phone: '6471112233',
+        email: 'test@test.com',
+        address: '',
+        services: 'Office Cleaning',
+        form_id: 'lp-commercial-cleaning-quote',
+        page_url: 'https://stage.evergreencleaningservice.ca/lp/commercial-cleaning-quote/',
+        landing_page: '/lp/commercial-cleaning-quote/',
+        referrer: 'https://tagassistant.google.com/',
+        touch_at: '2026-09-30T14:50:14.407Z',
+      }),
+      SENT
+    );
+
+    expect(text).toBe(
+      [
+        'Name: test',
+        'Phone: 6471112233',
+        'Email: test@test.com',
+        'Service: Office Cleaning',
+        '',
+        'Page URL: https://stage.evergreencleaningservice.ca/lp/commercial-cleaning-quote/',
+        'Time Sent: September 30, 2026 at 10:50 AM EDT',
+      ].join('\n')
+    );
+  });
+
+  it('leaves out form_id, landing page, referrer, touch times and attribution', () => {
+    const text = notificationText(
+      lead({
+        phone: '416 555 0142',
+        form_id: 'quick-quote',
+        landing_page: '/lp/x/',
+        referrer: 'https://www.google.com/',
+        touch_at: '2026-09-30T14:50:14.407Z',
+        first_touch_at: '2026-09-30T14:50:14.407Z',
+        gclid: 'P9TEST',
+        utm_source: 'google',
+      }),
+      SENT
+    );
+    for (const gone of ['form_id', 'landing_page', 'referrer', 'touch_at', 'gclid', 'utm_source', 'P9TEST']) {
+      expect(text).not.toContain(gone);
+    }
+  });
+
+  it('shows Address and Details only when the visitor filled them in', () => {
+    const empty = notificationText(lead({ phone: '416 555 0142', address: '' }), SENT);
+    expect(empty).not.toContain('Address:');
+    expect(empty).not.toContain('Details:');
+
+    const filledIn = notificationText(
+      lead({ phone: '416 555 0142', address: '100 King St W', message: 'Two floors, nightly.' }),
+      SENT
+    );
+    expect(filledIn).toContain('Address: 100 King St W');
+    expect(filledIn).toContain('Details: Two floors, nightly.');
+  });
+
+  it('shows (not supplied) for a missing email on a phone-only lead', () => {
+    const text = notificationText(lead({ phone: '416 555 0142' }), SENT);
 
     expect(text).toContain('Phone: 416 555 0142');
     expect(text).toContain(`Email: ${NOT_SUPPLIED}`);
-    /* `services` IS supplied by the helper above, so it prints its value —
-       asserting it as missing here would be asserting the fixture wrong.
-       `message` is the field this lead genuinely left out. */
     expect(text).toContain('Service: Office cleaning & janitorial');
-    expect(text).toContain(`Details: ${NOT_SUPPLIED}`);
   });
 
   it('shows (not supplied) for a missing phone on an email-only lead', () => {
-    const text = notificationText(lead({ email: 'dana@placeholder.example' }));
+    const text = notificationText(lead({ email: 'dana@placeholder.example' }), SENT);
 
     expect(text).toContain(`Phone: ${NOT_SUPPLIED}`);
     expect(text).toContain('Email: dana@placeholder.example');
   });
 
-  it('lists every core field even when the lead is nearly empty', () => {
-    const text = notificationText(normalizeLead({ name: 'Dana' }) as unknown as Record<string, string>);
+  it('lists every core field, the page and the time even when the lead is nearly empty', () => {
+    const text = notificationText(normalizeLead({ name: 'Dana' }) as unknown as Record<string, string>, SENT);
     for (const [, label] of CORE_FIELDS) expect(text).toContain(`${label}:`);
-    /* SIX core fields. `business_name` and `province` came out when the form
-       stopped asking for them; `services` went back IN when the quote form
-       returned to the original site's service dropdown, which is the most
-       useful line in the message. Five are (not supplied) here because only
-       the name was given. */
-    expect(CORE_FIELDS).toHaveLength(6);
-    expect(text.split('\n').filter((l) => l.includes(NOT_SUPPLIED))).toHaveLength(5);
+    expect(CORE_FIELDS).toHaveLength(4);
+    expect(text).toContain(`Page URL: ${NOT_SUPPLIED}`);
+    expect(text).toContain('Time Sent: ');
   });
 
-  it('lists a non-empty attribution field but not an empty one', () => {
-    const text = notificationText(
-      lead({ phone: '416 555 0142', gclid: 'P9TEST', utm_source: 'google' })
-    );
-    expect(text).toContain('gclid: P9TEST');
-    expect(text).toContain('utm_source: google');
-    expect(text).not.toContain('utm_term:');
-    expect(text).not.toContain('first_gclid:');
+  it('gives the time sent in Toronto time, winter and summer', () => {
+    expect(formatSentAt(new Date('2026-09-30T14:50:14Z'))).toBe('September 30, 2026 at 10:50 AM EDT');
+    expect(formatSentAt(new Date('2026-01-15T17:05:00Z'))).toBe('January 15, 2026 at 12:05 PM EST');
   });
 
   it('never prints the word undefined', () => {
