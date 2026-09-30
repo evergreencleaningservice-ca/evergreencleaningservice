@@ -13,22 +13,16 @@ interface Props {
   /** The form's DOM id on this page, for the quote button. */
   quoteAnchor: string;
   heading?: string;
-  /** Who replies and when, before the dash. Omit for the shared promise. */
-  reply?: string;
 }
 
-const {
-  quoteAnchor,
-  heading = 'Ready for a quote?',
-  reply = `An account executive replies ${REPLY_PROMISE}`,
-} = Astro.props;
+const { quoteAnchor, heading = 'Ready for a quote?' } = Astro.props;
 ---
 
 <section class="lpx-final" aria-labelledby="lpx-final-h">
   <div class="lpx-wrap">
     <h2 id="lpx-final-h">{heading}</h2>
     <p>
-      Tell us where you are and what needs cleaning. {reply} —
+      Tell us where you are and what needs cleaning. We reply {REPLY_PROMISE} —
       no obligation, and no visit until you ask for one.
     </p>
     <div class="lpx-final-actions">
