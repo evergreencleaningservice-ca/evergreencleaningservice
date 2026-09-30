@@ -75,6 +75,11 @@ function messageFor(name: string, el: HTMLInputElement | HTMLSelectElement): str
         /* Only reachable with "Other" picked — the box does not exist
            otherwise, and is not `required` while it is hidden. */
         return 'Please tell us what you need cleaned.';
+      case 'g-recaptcha-hidden':
+        /* The reCAPTCHA checkbox's token field, empty until it is ticked.
+           Without this case the visitor read "This one is needed." about a
+           field they cannot see. */
+        return 'Please tick "I\'m not a robot" before sending.';
       default:
         /* Every field on this form has a case above. The fallback is for a
            field added later whose message nobody wrote — it is a worse

@@ -195,8 +195,8 @@ describe('the image origin is preconnected', () => {
        The images are fetched by plain <img> elements, which do not use a
        CORS connection, so the preconnected one sat unused while the real one
        still had to be opened. */
-    expect(home).toMatch(/<link rel="preconnect" href="https:\/\/img-evergreencleaningservice\.10xconnections\.com"\s*\/?>/);
-    expect(home).not.toMatch(/img-evergreencleaningservice[^>]*crossorigin/);
+    expect(home).toMatch(/<link rel="preconnect" href="https:\/\/img\.evergreencleaningservice\.ca"\s*\/?>/);
+    expect(home).not.toMatch(/img\.evergreencleaningservice\.ca[^>]*crossorigin/);
   });
 
   it('the hero is not also preloaded', () => {

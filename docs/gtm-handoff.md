@@ -384,7 +384,7 @@ conversion action's job, not the website's.
 Do these in order, on staging, **before** production.
 
 **Tag Assistant**
-1. Preview against `https://evergreencleaningservice.10xconnections.com/`.
+1. Preview against `https://stage.evergreencleaningservice.ca/`.
 2. Click the header telephone number. One `phone_click` appears in the event
    stream — **one, not two**.
 3. Open it and confirm all five parameters are populated.
@@ -418,7 +418,7 @@ Do these in order, on staging, **before** production.
 
 ## 8. Verification checklist
 
-Run against the staging origin `https://evergreencleaningservice.10xconnections.com`
+Run against the staging origin `https://stage.evergreencleaningservice.ca`
 **before** the DNS cutover, then again on production immediately after.
 
 ### 8.1 Tag Assistant

@@ -9,7 +9,7 @@
  *
  *   PRODUCTION   www.evergreencleaningservice.ca
  *                evergreencleaningservice.ca
- *   STAGING      evergreencleaningservice.10xconnections.com
+ *   STAGING      stage.evergreencleaningservice.ca
  *                example.com — only while a published test secret is in use,
  *                because that is what Cloudflare's dummy siteverify reports
  */
@@ -37,7 +37,7 @@ describe('the documented allowlists', () => {
   });
 
   it('staging is the preview hostname', () => {
-    expect(STAGING_CAPTCHA_HOSTNAMES).toEqual(['evergreencleaningservice.10xconnections.com']);
+    expect(STAGING_CAPTCHA_HOSTNAMES).toEqual(['stage.evergreencleaningservice.ca']);
     expect(STAGING_CAPTCHA_HOSTNAMES).toEqual([PREVIEW_HOST]);
   });
 });

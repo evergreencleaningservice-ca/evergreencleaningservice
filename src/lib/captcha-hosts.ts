@@ -49,6 +49,21 @@ export const STAGING_CAPTCHA_HOSTNAMES: readonly string[] = [PREVIEW_HOST];
  */
 export const TEST_KEY_HOSTNAME = 'example.com';
 
+/**
+ * The same for Google's published reCAPTCHA test pair. Measured 2026-09-28:
+ * siteverify with the test secret answers
+ * `{"success":true,"hostname":"testkey.google.com", …}` for any token.
+ */
+export const RECAPTCHA_TEST_KEY_HOSTNAME = 'testkey.google.com';
+
+/** The hostname a published test secret's siteverify reports, if it is one. */
+export const testKeyHostnameFor = (secret: string): string | null =>
+  secret === captcha.recaptcha.testSecretKey
+    ? RECAPTCHA_TEST_KEY_HOSTNAME
+    : secret === captcha.turnstile.testSecretKey || secret === captcha.turnstile.failSecretKey
+      ? TEST_KEY_HOSTNAME
+      : null;
+
 /** Every published key on both providers. None of these is a credential. */
 export const PUBLISHED_TEST_SECRETS: readonly string[] = [
   captcha.turnstile.testSecretKey,
@@ -81,7 +96,8 @@ export function allowedCaptchaHostnames(requestHost: string, secret: string): re
   if (isProductionHost(requestHost)) return PRODUCTION_CAPTCHA_HOSTNAMES;
 
   const allowed = new Set<string>([requestHost, ...STAGING_CAPTCHA_HOSTNAMES]);
-  if (isPublishedTestSecret(secret)) allowed.add(TEST_KEY_HOSTNAME);
+  const testHost = testKeyHostnameFor(secret);
+  if (testHost) allowed.add(testHost);
   return [...allowed];
 }
 

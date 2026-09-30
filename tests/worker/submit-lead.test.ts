@@ -17,26 +17,34 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 /** Captures every tagged-template call the Worker makes. */
 const queries: { sql: string; values: unknown[] }[] = [];
+/** Every connection string the Worker opened, in order. */
+const connections: string[] = [];
 let insertShouldThrow = false;
 
 vi.mock('@neondatabase/serverless', () => ({
-  neon: () => (strings: TemplateStringsArray, ...values: unknown[]) => {
+  neon: (url: string) => (connections.push(url), (strings: TemplateStringsArray, ...values: unknown[]) => {
     if (insertShouldThrow) return Promise.reject(new Error('relation "leads" does not exist'));
     queries.push({ sql: strings.join('?'), values });
     return Promise.resolve([]);
-  },
+  }),
 }));
 
 const worker = (await import('../../src/worker')).default;
 const { captcha } = await import('../../src/data/site');
+const { testKeyHostnameFor } = await import('../../src/lib/captcha-hosts');
+
+/** Whichever secret the active captcha provider reads. */
+const SECRET = captcha.provider === 'turnstile' ? 'TURNSTILE_SECRET' : 'RECAPTCHA_SECRET';
 
 const ENV = {
   ASSETS: { fetch: async () => new Response('asset') } as unknown as Fetcher,
   DATABASE_URL: 'postgres://user:pw@example.neon.tech/evergreen',
+  STAGING_DATABASE_URL: 'postgres://user:pw@staging.example.neon.tech/evergreen',
   TURNSTILE_SECRET: 'a-real-looking-production-secret',
+  RECAPTCHA_SECRET: 'a-real-looking-production-secret',
 };
 
-const PREVIEW = 'https://evergreencleaningservice.10xconnections.com';
+const PREVIEW = 'https://stage.evergreencleaningservice.ca';
 
 /** A body with everything a real submission from the site now carries. */
 const FULL_BODY = {
@@ -86,7 +94,7 @@ const post = (body: unknown, origin = PREVIEW, env: Partial<typeof ENV> = {}) =>
   );
 
 /** Every siteverify call succeeds unless a test says otherwise. */
-const captchaPasses = (hostname = 'evergreencleaningservice.10xconnections.com') =>
+const captchaPasses = (hostname = 'stage.evergreencleaningservice.ca') =>
   vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
     const url = String(input);
     if (url.includes('siteverify')) return Response.json({ success: true, hostname });
@@ -304,7 +312,7 @@ describe('the endpoint still behaves as it did', () => {
 
   it('answers 503 with no captcha secret configured', async () => {
     captchaPasses();
-    const res = await post(FULL_BODY, PREVIEW, { TURNSTILE_SECRET: undefined });
+    const res = await post(FULL_BODY, PREVIEW, { [SECRET]: undefined });
     expect(res.status).toBe(503);
     expect(queries).toHaveLength(0);
   });
@@ -329,7 +337,7 @@ describe('the endpoint still behaves as it did', () => {
 
   it('answers 503 rather than 200 when no database is configured', async () => {
     captchaPasses();
-    const res = await post(FULL_BODY, PREVIEW, { DATABASE_URL: undefined });
+    const res = await post(FULL_BODY, PREVIEW, { STAGING_DATABASE_URL: undefined });
     expect(res.status).toBe(503);
   });
 
@@ -354,7 +362,7 @@ describe('the endpoint still behaves as it did', () => {
     ]) {
       queries.length = 0;
       const res = await post(FULL_BODY, 'https://www.evergreencleaningservice.ca', {
-        TURNSTILE_SECRET: secret,
+        [SECRET]: secret,
       });
       expect(res.status).toBe(503);
       expect(queries).toHaveLength(0);
@@ -362,11 +370,12 @@ describe('the endpoint still behaves as it did', () => {
   });
 
   it('allows a test secret on the staging host, which is what it is for', async () => {
-    /* Cloudflare's dummy siteverify reports example.com whatever host asked. */
-    captchaPasses('example.com');
-    const res = await post(FULL_BODY, PREVIEW, {
-      TURNSTILE_SECRET: captcha.turnstile.testSecretKey,
-    });
+    /* Each provider's dummy siteverify reports its own fixed hostname
+       whatever host asked — example.com for Cloudflare, testkey.google.com
+       for Google. */
+    const testSecret = captcha[captcha.provider].testSecretKey;
+    captchaPasses(testKeyHostnameFor(testSecret)!);
+    const res = await post(FULL_BODY, PREVIEW, { [SECRET]: testSecret });
     expect(res.status).toBe(200);
   });
 });
@@ -388,12 +397,13 @@ describe('Phase 4 — the token has to have been solved on one of our hostnames'
   it.each([
     ['a host an attacker controls', 'evil.example'],
     ['a lookalike', 'www.evergreencleaningservice.ca.evil.example'],
-    ['the staging host', 'evergreencleaningservice.10xconnections.com'],
-    ["the test key's dummy hostname", 'example.com'],
+    ['the staging host', 'stage.evergreencleaningservice.ca'],
+    ["Cloudflare's test key's dummy hostname", 'example.com'],
+    ["Google's test key's dummy hostname", 'testkey.google.com'],
     ['nothing at all', ''],
   ])('rejects a token solved on %s, and stores nothing', async (_label, hostname) => {
     captchaPasses(hostname);
-    const res = await post(FULL_BODY, PROD, { TURNSTILE_SECRET: 'a-real-production-secret' });
+    const res = await post(FULL_BODY, PROD, { [SECRET]: 'a-real-production-secret' });
     expect(res.status).toBe(403);
     expect(await res.json()).toEqual({ error: 'captcha failed' });
     expect(queries).toHaveLength(0);
@@ -401,7 +411,7 @@ describe('Phase 4 — the token has to have been solved on one of our hostnames'
 
   it('rejects a production token replayed at staging', async () => {
     captchaPasses('www.evergreencleaningservice.ca');
-    const res = await post(FULL_BODY, PREVIEW, { TURNSTILE_SECRET: 'a-real-production-secret' });
+    const res = await post(FULL_BODY, PREVIEW, { [SECRET]: 'a-real-production-secret' });
     expect(res.status).toBe(403);
     expect(queries).toHaveLength(0);
   });
@@ -418,7 +428,7 @@ describe('Phase 4 — the token has to have been solved on one of our hostnames'
 
   it('a rejected hostname never reaches Neon or Resend', async () => {
     const fetchSpy = captchaPasses('evil.example');
-    await post(FULL_BODY, PROD, { TURNSTILE_SECRET: 'a-real-production-secret' });
+    await post(FULL_BODY, PROD, { [SECRET]: 'a-real-production-secret' });
     expect(queries).toHaveLength(0);
     /* one call: siteverify. No Resend. */
     expect(fetchSpy).toHaveBeenCalledTimes(1);
@@ -475,5 +485,50 @@ describe('marketing consent reaches the row truthfully', () => {
     const { byName } = insert();
     expect(byName.marketing_consent).toBe(false);
     expect(byName.consent_text).toBeNull();
+  });
+});
+
+describe('staging and production write to different Neon branches', () => {
+  /* One Worker serves both, so the hostname is the only thing that can keep
+     a staging test out of the production lead table. */
+  const PROD = 'https://www.evergreencleaningservice.ca';
+  const MAIN = ENV.DATABASE_URL;
+  const STAGING = ENV.STAGING_DATABASE_URL;
+
+  beforeEach(() => {
+    connections.length = 0;
+  });
+
+  it('a lead on www. is written to main', async () => {
+    captchaPasses('www.evergreencleaningservice.ca');
+    expect((await post(FULL_BODY, PROD)).status).toBe(200);
+    expect(connections).toEqual([MAIN]);
+  });
+
+  it('a lead on the apex is written to main', async () => {
+    captchaPasses('evergreencleaningservice.ca');
+    expect((await post(FULL_BODY, 'https://evergreencleaningservice.ca')).status).toBe(200);
+    expect(connections).toEqual([MAIN]);
+  });
+
+  it('a lead on staging is written to the staging branch', async () => {
+    captchaPasses();
+    expect((await post(FULL_BODY)).status).toBe(200);
+    expect(connections).toEqual([STAGING]);
+  });
+
+  it('staging with no staging secret answers 503 and never borrows main', async () => {
+    captchaPasses();
+    const res = await post(FULL_BODY, PREVIEW, { STAGING_DATABASE_URL: undefined });
+    expect(res.status).toBe(503);
+    expect(connections).toEqual([]);
+    expect(queries).toHaveLength(0);
+  });
+
+  it('production with no production secret answers 503 and never borrows staging', async () => {
+    captchaPasses('www.evergreencleaningservice.ca');
+    const res = await post(FULL_BODY, PROD, { DATABASE_URL: undefined });
+    expect(res.status).toBe(503);
+    expect(connections).toEqual([]);
   });
 });

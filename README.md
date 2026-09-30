@@ -23,17 +23,32 @@ npm run verify:indexing -- production   # the same, against the live site
 
 `verify:indexing` is the go-live check that cannot be a unit test: it reads
 what an origin actually serves. Run it against **production immediately after
-the DNS cutover** — the one mistake that would cost most is launching with the
-staging `X-Robots-Tag: noindex` still attached, and it is invisible from the
-page.
+the DNS cutover** — the one mistake that would cost most is production
+answering with a `noindex`, and it is invisible from the page.
+
+Staging and production are **one build on one Worker**. The staging noindex is
+a rule in `public/_headers` that names `stage.evergreencleaningservice.ca` (and
+`*.workers.dev`) by hostname, so it ships in every build and never matches
+`www.` or the apex. There is no separate "preview build" noindex step any more,
+and nothing to remove at go-live.
+
+Both deploy scripts run `npm run deploy:guard` first, which refuses unless the
+checkout is a clean `main` matching `origin/main`. Merge first, then deploy.
 
 Going live needs **both** halves of the captcha pair, in two different places:
 
+The site runs on the client's own **reCAPTCHA v2** key (`captcha.provider` in
+`src/data/site.ts`), registered to evergreencleaningservice.ca, which covers
+www., the apex and stage.:
+
 ```bash
-export PUBLIC_TURNSTILE_SITE_KEY=<real site key>   # build-time, baked into the HTML
-npx wrangler secret put TURNSTILE_SECRET           # Worker secret, never in the repo
-npm run build && npx wrangler deploy
+export PUBLIC_RECAPTCHA_SITE_KEY=6Lcy1lwaAAAAAL_5DO8SACXqh0NF_QdzhkrAh-3K  # build-time, baked into the HTML
+npx wrangler secret put RECAPTCHA_SECRET           # the matching secret, from Google's reCAPTCHA admin
+npm run deploy
 ```
+
+Switching to Turnstile is `provider: 'turnstile'` plus
+`PUBLIC_TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET` the same way.
 
 Setting one without the other breaks every form silently — a test site key with
 a real secret makes `siteverify` reject genuine submissions with a 403.
@@ -65,7 +80,7 @@ pushes on a 2xx.
 | Environment | Accepted |
 | --- | --- |
 | **Production** | `www.evergreencleaningservice.ca`, `evergreencleaningservice.ca` — and nothing else. Not staging, not `example.com`. |
-| **Staging** | `evergreencleaningservice.10xconnections.com`, plus `example.com` *only while a published test secret is in use*, because that is what Cloudflare's dummy `siteverify` reports. |
+| **Staging** | `stage.evergreencleaningservice.ca`, plus `example.com` *only while a published test secret is in use*, because that is what Cloudflare's dummy `siteverify` reports. |
 | **`wrangler dev` / `*.workers.dev`** | the request's own hostname. |
 
 An **absent** hostname is treated as a mismatch, not waved through. If genuine

@@ -10,7 +10,14 @@ export const PRODUCTION_HOSTS = [
   'evergreencleaningservice.ca',
 ] as const;
 
-export const PREVIEW_HOST = 'evergreencleaningservice.10xconnections.com';
+/**
+ * Staging. Served by the same Worker, from the same build, as production — the
+ * only thing that tells the two apart is the hostname a request arrives on, so
+ * `public/_headers` noindexes this host by name and nothing else. It was
+ * `evergreencleaningservice.10xconnections.com` until that zone record was
+ * removed; that name no longer resolves.
+ */
+export const PREVIEW_HOST = 'stage.evergreencleaningservice.ca';
 
 export const site = {
   name: 'Evergreen Office Cleaning',
@@ -86,7 +93,13 @@ export const site = {
  * refuses both test secrets on a PRODUCTION_HOSTS hostname and answers 503.
  */
 export const captcha = {
-  provider: 'turnstile' as 'turnstile' | 'recaptcha',
+  /* reCAPTCHA for go-live, decided 2026-09-28: no Turnstile widget has been
+     issued for this site, and the client's own reCAPTCHA v2 key (below) is
+     already registered to evergreencleaningservice.ca — which covers www.,
+     the apex and stage. as subdomains. Build with
+     PUBLIC_RECAPTCHA_SITE_KEY=<clientSiteKey>. Switching back to Turnstile is
+     this one word plus its two keys. */
+  provider: 'recaptcha' as 'turnstile' | 'recaptcha',
 
   turnstile: {
     /** Cloudflare's published invisible test key. Any domain, always passes. */
@@ -126,7 +139,7 @@ export const recaptcha = captcha.recaptcha;
  *               us-east-005. Keys mirror the repo exactly — `public/images/a.jpg`
  *               is stored as `images/a.jpg` — so a path is the same string on
  *               both hosts and the only thing that changes is the origin.
- *   DNS         CNAME img-evergreencleaningservice.10xconnections.com ->
+ *   DNS         CNAME img.evergreencleaningservice.ca ->
  *               f005.backblazeb2.com, **proxied**. The orange cloud is not
  *               optional: B2 egress is free only through Cloudflare (Bandwidth
  *               Alliance), and grey-clouded it is billed at $0.01/GB.
@@ -141,7 +154,10 @@ export const recaptcha = captcha.recaptcha;
  * `dist` after the build, and `scripts/b2-sync.mjs` puts the files in the bucket.
  */
 export const images = {
-  host: 'https://img-evergreencleaningservice.10xconnections.com',
+  /* Moved from img-evergreencleaningservice.10xconnections.com on 2026-09-28,
+     once the client's zone was on Cloudflare. The old host was deleted the
+     same day, and image-hosts.json forbids it in builds. */
+  host: 'https://img.evergreencleaningservice.ca',
   bucket: 'img-evergreencleaningservice',
   /* Hosts that may appear in front of `/images/` in built output — og:image and
      JSON-LD are absolute, so they carry the canonical origin and need swapping
@@ -149,7 +165,7 @@ export const images = {
   rewriteOrigins: [
     'https://www.evergreencleaningservice.ca',
     'https://evergreencleaningservice.ca',
-    'https://evergreencleaningservice.10xconnections.com',
+    `https://${PREVIEW_HOST}`,
   ],
 } as const;
 

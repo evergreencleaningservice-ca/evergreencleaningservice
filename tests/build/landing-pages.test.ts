@@ -27,6 +27,7 @@ import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { BANNED_FIELDS, FIELDS } from '../fixtures/quick-quote';
 import { BENEFITS, FACILITY_TYPES, TRUST_POINTS } from '../../src/data/landing';
+import { CAPTCHA_MARKUP, TURNSTILE, questionRequiredCount } from './captcha-markup';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-lp');
@@ -187,7 +188,7 @@ describe('the short form', () => {
     /* Four. It was four, briefly seven with the reference design's address
        and province boxes, five when those came out, and four again once the
        two name boxes became one. The message stayed required throughout. */
-    expect((form.match(/\brequired(?=[\s/>])/g) ?? []).length).toBe(4);
+    expect(questionRequiredCount(form)).toBe(4);
   });
 
   it.each(PAGES)('$name asks for none of the fields nothing on this site asks for', ({ name }) => {
@@ -401,13 +402,17 @@ describe('spam, attribution and conversion protections', () => {
     expect(control(form, 'company-website')).toMatch(/tabindex="-1"/);
   });
 
-  it.each(PAGES)('$name renders the Turnstile widget', ({ name }) => {
-    expect(html[name]).toContain('class="cf-turnstile"');
-    expect(html[name]).toContain('data-response-field-name="cf-turnstile-response"');
+  it.each(PAGES)('$name renders the captcha widget', ({ name }) => {
+    expect(html[name]).toMatch(CAPTCHA_MARKUP);
+    if (TURNSTILE) expect(html[name]).toContain('data-response-field-name="cf-turnstile-response"');
+    else expect(leadForm(name)).toMatch(/name="g-recaptcha-hidden"[^>]*\brequired/);
   });
 
   it.each(PAGES)('$name asks the captcha to load eagerly, since its form is in the first screen', ({ name }) => {
-    expect(html[name]).toMatch(/class="cf-turnstile"[^>]*data-eager/);
+    /* Turnstile defers api.js unless told otherwise; reCAPTCHA's loader
+       always injects it on page load. */
+    if (TURNSTILE) expect(html[name]).toMatch(/class="cf-turnstile"[^>]*data-eager/);
+    else expect(html[name]).toContain('recaptcha/api.js?onload=wpfRecaptchaLoad');
   });
 
   it.each(PAGES)('$name loads attribution and the tag container', ({ name }) => {

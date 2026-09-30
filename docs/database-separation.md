@@ -1,8 +1,34 @@
 # Separating the staging and production lead databases
 
-**Status: recommendation only. Nothing has been changed.** No branch created,
-no schema altered, no secret rotated, no row touched. This document exists so
-the decision can be made before the DNS cutover, not during it.
+**Status: DONE, 2026-09-28.** Approved by Paolo and carried out before the DNS
+cutover. The rest of this document is the original recommendation, kept as the
+reasoning; this block is what was actually done.
+
+| | |
+| --- | --- |
+| Snapshot of `main` first | `snap-plain-frost-avyakpjp`, "main-before-staging-split-2026-09-28", 31 leads + 5 submissions, all test data |
+| Staging branch | `staging`, `br-lucky-flower-avmh5qid`, created from `main` — same schema, the 30 older test rows kept there |
+| `main` | cleared — `leads` and `submissions` empty, so production starts with no test data |
+| Row 31 | the 2026-09-28 cutover test lead — deleted from both branches |
+
+**Step 4 changed shape.** The plan below says to point "the preview Worker" at
+the branch. There is no separate preview Worker: staging and production are one
+Worker and one build (the staging noindex is scoped by hostname for the same
+reason). So the Worker chooses the branch by the hostname a request arrives on,
+in `src/lib/database-url.ts`:
+
+| Host | Secret | Branch |
+| --- | --- | --- |
+| `www.` and the apex | `DATABASE_URL` | `main` |
+| anything else — `stage.`, `*.workers.dev` | `STAGING_DATABASE_URL` | `staging` |
+
+Neither falls back to the other. A staging host with no `STAGING_DATABASE_URL`
+answers 503 rather than borrowing production's string; tests in
+`tests/database-url.test.ts` and `tests/worker/submit-lead.test.ts` pin that.
+
+**Migrations now run twice** — `staging` first, then `main`, per the procedure
+below. The two branches no longer share writes, so a column added to one is
+not on the other until the same file is run there.
 
 ---
 

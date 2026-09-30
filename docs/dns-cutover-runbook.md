@@ -328,16 +328,24 @@ tolerate a multi-hour worst case.
 
 ## 6. Production indexing safeguards
 
-Launching with staging's `noindex` still attached deindexes the business. It
-is invisible from the page and nobody notices for weeks.
+Production answering `noindex` deindexes the business. It is invisible from
+the page and nobody notices for weeks.
+
+**Staging and production are one build on one Worker.** The staging noindex is
+a `public/_headers` rule that names `stage.evergreencleaningservice.ca` (and
+`*.workers.dev`) by hostname; www. and the apex are never named. So each
+address is correct at every moment — attaching or detaching a Custom Domain
+changes which host a request arrives on, not what the build says to it. There
+is no noindex to remove at go-live.
 
 **Four independent guards:**
 
-1. `npm run build` (production) does not run `scripts/noindex.mjs`. Only
-   `build:preview` does.
-2. `tests/build/indexability.test.ts` asserts only the preview build is
-   noindexed.
-3. `npm run launch:check` refuses a build carrying a sitewide noindex.
+1. There is no path-only (`/*`) noindex rule in any build. `scripts/noindex.mjs`,
+   which wrote one for `build:preview`, is gone.
+2. `tests/build/indexability.test.ts` asserts every noindex rule names a host,
+   that staging and workers.dev match, and that www. and the apex do not.
+3. `npm run launch:check` refuses a build with any noindex rule that reaches a
+   production host, and one where staging is not noindexed.
 4. `npm run verify:indexing -- production` reads the **deployed origin** — the
    only one of the four that catches a stale deploy, an edge cache or a zone
    transform rule.

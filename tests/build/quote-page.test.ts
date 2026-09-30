@@ -27,6 +27,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { BANNED_FIELDS, FIELDS, REQUIRED_COUNT } from '../fixtures/quick-quote';
+import { CAPTCHA_FIELD, CAPTCHA_MARKUP, questionRequiredCount } from './captcha-markup';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-quote');
@@ -129,7 +130,7 @@ describe('the rendered form matches the contract the unit suite tests', () => {
        name boxes became one. Pinned rather than
        loosened: a field quietly becoming required is a conversion cost
        somebody should have to state out loud. */
-    const required = (form().match(/\brequired(?=[\s/>])/g) ?? []).length;
+    const required = questionRequiredCount(form());
     expect(required).toBe(REQUIRED_COUNT);
     expect(required).toBe(4);
   });
@@ -166,7 +167,7 @@ describe('the rendered form matches the contract the unit suite tests', () => {
     const named = [...form().matchAll(/<(?:input|select|textarea)\b[^>]*\bname="([^"]+)"/g)].map(
       (m) => m[1]
     );
-    const EXTRAS = ['company-website', 'cf-turnstile-response', 'marketing-consent'];
+    const EXTRAS = ['company-website', CAPTCHA_FIELD, 'marketing-consent'];
     expect(named.filter((n) => !EXTRAS.includes(n)).sort()).toEqual(
       FIELDS.map((f) => f.name).sort()
     );
@@ -319,8 +320,8 @@ describe('the sidebar carries help, not a second form', () => {
 /* --- 6. the captcha is still the deferred one ----------------------------- */
 
 describe('spam protection is unchanged', () => {
-  it('renders the Turnstile container and no eager api.js tag', () => {
-    expect(quote).toContain('class="cf-turnstile"');
+  it('renders the captcha container, and Turnstile with no eager api.js tag', () => {
+    expect(quote).toMatch(CAPTCHA_MARKUP);
     expect(quote).not.toMatch(/<script[^>]+challenges\.cloudflare\.com/i);
   });
 
