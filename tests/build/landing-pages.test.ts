@@ -416,7 +416,8 @@ describe('spam, attribution and conversion protections', () => {
   });
 
   it.each(PAGES)('$name loads attribution and the tag container', ({ name }) => {
-    expect(html[name]).toContain('GTM-5PRC4HBV');
+    expect(html[name]).toContain('GTM-5W69BTJQ');
+    expect(html[name]).not.toContain('GTM-5PRC4HBV');
     /* Attribution runs in the head so a campaign arrival is recorded before
        anything else on the page can navigate. */
     expect(html[name]).toMatch(/first_touch|attribution/i);

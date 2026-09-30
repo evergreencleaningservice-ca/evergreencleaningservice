@@ -39,11 +39,11 @@ export const site = {
   phoneHref: 'tel:+14168034880',
   logo: '/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg',
   since: 1989,
-  /* The container the original carries on every 2025 capture. It holds Google
-     Ads AW-16819334998, GA4 G-R27QW21PMT, Microsoft UET 187178776, a conversion
-     linker and the SearchKings agency template — so this one id brings all of
-     them. See src/components/GoogleTagManager.astro. */
-  gtmId: 'GTM-5PRC4HBV',
+  /* The client's new container, issued 30 Sep 2026, replacing GTM-5PRC4HBV
+     (the SearchKings-era container the original carried). Every tag — Google
+     Ads, GA4, Microsoft UET, conversion linker — is configured inside the
+     container, not here. See src/components/GoogleTagManager.astro. */
+  gtmId: 'GTM-5W69BTJQ',
   /* Hostnames the GTM container may load on. Anything else — a local dev
      server, a *.workers.dev URL, a branch preview — loads nothing at all.
      This is the only guard; see src/components/GoogleTagManager.astro.

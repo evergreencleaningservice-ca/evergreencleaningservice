@@ -50,6 +50,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* As high in the head as possible, per Google's install instructions —
+        only the two metas the browser needs before anything else precede it. */}
+    <GoogleTagManager />
     <title>{title}</title>
     <meta name="description" content={description} />
     {/* A bare /favicon.ico request is made by every browser whether or not
@@ -93,7 +96,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
     <link rel="preload" href="/fonts/raleway.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/open-sans.woff2" as="font" type="font/woff2" crossorigin />
 
-    <GoogleTagManager />
     <Attribution />
 
     <script type="application/ld+json" set:html={JSON.stringify(organizationGraph())} is:inline />
