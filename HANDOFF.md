@@ -156,6 +156,12 @@ Credentials are `B2_KEY_ID` / `B2_APP_KEY` in the environment — never committe
   anything merged since. `scripts/deploy-guard.mjs` runs first in both deploy
   scripts and refuses unless the checkout is a clean `main` that matches
   `origin/main`.
+- **Staging deploys itself.** `.github/workflows/deploy-staging.yml` runs
+  `npm run deploy:preview` on every push to `main`, so merging a PR is the
+  deploy. It needs the repository secrets `CLOUDFLARE_API_TOKEN`, `B2_KEY_ID`
+  and `B2_APP_KEY`. A manual deploy is still possible from an up-to-date `main`,
+  and re-running the workflow from the Actions tab does the same. **At go-live**
+  the workflow's command must become `npm run deploy` (see the next point).
 - **Staging is noindexed by hostname, not by build.** `public/_headers` names
   `stage.evergreencleaningservice.ca` and `*.workers.dev`; www. and the apex
   are never named, so the same deploy is correct on every address. (It used to

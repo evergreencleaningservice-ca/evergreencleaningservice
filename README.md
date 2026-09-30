@@ -35,6 +35,10 @@ and nothing to remove at go-live.
 Both deploy scripts run `npm run deploy:guard` first, which refuses unless the
 checkout is a clean `main` matching `origin/main`. Merge first, then deploy.
 
+Staging deploys itself: `.github/workflows/deploy-staging.yml` runs
+`npm run deploy:preview` on every push to `main`. It needs the repository secrets
+`CLOUDFLARE_API_TOKEN`, `B2_KEY_ID` and `B2_APP_KEY`.
+
 Going live needs **both** halves of the captcha pair, in two different places:
 
 The site runs on the client's own **reCAPTCHA v2** key (`captcha.provider` in
