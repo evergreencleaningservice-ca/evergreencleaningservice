@@ -39,6 +39,10 @@ import { isProductionHost } from './captcha-hosts';
  *
  * The fallback runs one way only. Production never reads the staging
  * address, so a test recipient cannot end up receiving real enquiries.
+ *
+ * Either may hold several addresses separated by commas, e.g.
+ * "evergreencleaning416@gmail.com,ads@brandingcentres.com" — see
+ * `recipientList`.
  */
 export interface NotifyEnv {
   LEAD_NOTIFY_TO?: string;
@@ -47,6 +51,18 @@ export interface NotifyEnv {
 
 export const notifyRecipientFor = (host: string, env: NotifyEnv): string | undefined =>
   isProductionHost(host) ? env.LEAD_NOTIFY_TO : env.STAGING_LEAD_NOTIFY_TO || env.LEAD_NOTIFY_TO;
+
+/**
+ * A recipient setting as the list Resend wants: split on commas, trimmed,
+ * blanks dropped. Without the split, "a@x.com,b@y.com" would reach Resend as
+ * ONE address, which it rejects — and a rejected send is a lead nobody hears
+ * about.
+ */
+export const recipientList = (to: string): string[] =>
+  to
+    .split(',')
+    .map((address) => address.trim())
+    .filter(Boolean);
 
 /** Exactly the body Resend's POST /emails accepts. */
 export interface ResendPayload {
@@ -137,7 +153,7 @@ export function notificationPayload(
 ): ResendPayload {
   const payload: ResendPayload = {
     from,
-    to: [to],
+    to: recipientList(to),
     subject: `New proposal request — ${lead.full_name}`,
     text: notificationText(lead, sentAt),
   };

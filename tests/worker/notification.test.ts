@@ -29,6 +29,7 @@ import {
   notificationPayload,
   notificationText,
   notifyRecipientFor,
+  recipientList,
 } from '../../src/lib/notification';
 import { PREVIEW_HOST, PRODUCTION_HOSTS } from '../../src/data/site';
 import { normalizeLead } from '../../src/lib/lead-fields';
@@ -91,6 +92,25 @@ describe('reply_to is present only when there is an address to reply to', () => 
     for (const bad of ['dana@', '@example.com', 'dana example.com', 'dana@example']) {
       expect('reply_to' in notificationPayload(lead({ email: bad }), FROM, TO)).toBe(false);
     }
+  });
+});
+
+describe('more than one recipient', () => {
+  it('sends to every address in a comma-separated setting', () => {
+    const payload = notificationPayload(
+      lead({ phone: '416 555 0142' }),
+      FROM,
+      'evergreencleaning416@gmail.com,ads@brandingcentres.com',
+    );
+    expect(payload.to).toEqual(['evergreencleaning416@gmail.com', 'ads@brandingcentres.com']);
+  });
+
+  it('tolerates spaces and stray commas', () => {
+    expect(recipientList(' a@x.example , b@y.example,, ')).toEqual(['a@x.example', 'b@y.example']);
+  });
+
+  it('leaves a single address as a list of one', () => {
+    expect(recipientList(TO)).toEqual([TO]);
   });
 });
 
