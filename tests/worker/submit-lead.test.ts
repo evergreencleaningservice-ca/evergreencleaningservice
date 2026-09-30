@@ -36,7 +36,7 @@ const ENV = {
   TURNSTILE_SECRET: 'a-real-looking-production-secret',
 };
 
-const PREVIEW = 'https://evergreencleaningservice.10xconnections.com';
+const PREVIEW = 'https://stage.evergreencleaningservice.ca';
 
 /** A body with everything a real submission from the site now carries. */
 const FULL_BODY = {
@@ -86,7 +86,7 @@ const post = (body: unknown, origin = PREVIEW, env: Partial<typeof ENV> = {}) =>
   );
 
 /** Every siteverify call succeeds unless a test says otherwise. */
-const captchaPasses = (hostname = 'evergreencleaningservice.10xconnections.com') =>
+const captchaPasses = (hostname = 'stage.evergreencleaningservice.ca') =>
   vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
     const url = String(input);
     if (url.includes('siteverify')) return Response.json({ success: true, hostname });
@@ -388,7 +388,7 @@ describe('Phase 4 — the token has to have been solved on one of our hostnames'
   it.each([
     ['a host an attacker controls', 'evil.example'],
     ['a lookalike', 'www.evergreencleaningservice.ca.evil.example'],
-    ['the staging host', 'evergreencleaningservice.10xconnections.com'],
+    ['the staging host', 'stage.evergreencleaningservice.ca'],
     ["the test key's dummy hostname", 'example.com'],
     ['nothing at all', ''],
   ])('rejects a token solved on %s, and stores nothing', async (_label, hostname) => {

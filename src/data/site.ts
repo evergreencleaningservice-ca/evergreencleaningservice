@@ -10,7 +10,10 @@ export const PRODUCTION_HOSTS = [
   'evergreencleaningservice.ca',
 ] as const;
 
-export const PREVIEW_HOST = 'evergreencleaningservice.10xconnections.com';
+/* Staging lives in the client's own zone, as a Worker Custom Domain on the
+   same Worker the preview build deploys to. It moved here from
+   evergreencleaningservice.10xconnections.com on 2026-09-28. */
+export const PREVIEW_HOST = 'stage.evergreencleaningservice.ca';
 
 export const site = {
   name: 'Evergreen Office Cleaning',
@@ -126,7 +129,7 @@ export const recaptcha = captcha.recaptcha;
  *               us-east-005. Keys mirror the repo exactly — `public/images/a.jpg`
  *               is stored as `images/a.jpg` — so a path is the same string on
  *               both hosts and the only thing that changes is the origin.
- *   DNS         CNAME img-evergreencleaningservice.10xconnections.com ->
+ *   DNS         CNAME img.evergreencleaningservice.ca ->
  *               f005.backblazeb2.com, **proxied**. The orange cloud is not
  *               optional: B2 egress is free only through Cloudflare (Bandwidth
  *               Alliance), and grey-clouded it is billed at $0.01/GB.
@@ -141,7 +144,10 @@ export const recaptcha = captcha.recaptcha;
  * `dist` after the build, and `scripts/b2-sync.mjs` puts the files in the bucket.
  */
 export const images = {
-  host: 'https://img-evergreencleaningservice.10xconnections.com',
+  /* Moved from img-evergreencleaningservice.10xconnections.com on 2026-09-28,
+     once the client's zone was on Cloudflare. The old host was deleted the
+     same day, and image-hosts.json forbids it in builds. */
+  host: 'https://img.evergreencleaningservice.ca',
   bucket: 'img-evergreencleaningservice',
   /* Hosts that may appear in front of `/images/` in built output — og:image and
      JSON-LD are absolute, so they carry the canonical origin and need swapping
@@ -149,7 +155,7 @@ export const images = {
   rewriteOrigins: [
     'https://www.evergreencleaningservice.ca',
     'https://evergreencleaningservice.ca',
-    'https://evergreencleaningservice.10xconnections.com',
+    `https://${PREVIEW_HOST}`,
   ],
 } as const;
 

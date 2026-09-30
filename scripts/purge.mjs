@@ -12,8 +12,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const ZONE = '6877348ccba648a3885c497c42c83db5'; // 10xconnections.com
-const HOST = 'https://evergreencleaningservice.10xconnections.com';
+const ZONE = '86ba115f2d433837c1d8a93b62288142'; // evergreencleaningservice.ca
+const HOST = 'https://stage.evergreencleaningservice.ca'; // PREVIEW_HOST in src/data/site.ts
 const TOKEN = process.env.CF_API_TOKEN ?? process.env.CLOUDFLARE_API_TOKEN;
 
 if (!TOKEN) {

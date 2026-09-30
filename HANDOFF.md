@@ -9,7 +9,8 @@ the repository at commit `eab08b5` on branch `claude/optimistic-clarke-wz1p8g`.
 
 A **pixel-and-behaviour-faithful clone** of the client's live WordPress site,
 `evergreencleaningservice.ca`, rebuilt as a static Astro site and deployed to a
-Cloudflare Workers preview at **`evergreencleaningservice.10xconnections.com`**.
+Cloudflare Workers preview at **`stage.evergreencleaningservice.ca`** (until
+2026-09-28, `evergreencleaningservice.10xconnections.com`).
 
 The brief is *match the original*, not improve it. That distinction has decided
 a lot of the work: where the port had something the original does not — a post
@@ -94,14 +95,25 @@ public/video/lead-net.mp4  the client's real clip, 720x540 H.264+AAC
 
 Photos are not deployed with the site. They live in the B2 bucket
 `img-evergreencleaningservice` (us-east-005, allPublic) and are served from
-`https://img-evergreencleaningservice.10xconnections.com`. Three pieces, and
+`https://img.evergreencleaningservice.ca`. Three pieces, and
 they only work together:
 
 | Piece | Value |
 |---|---|
 | Bucket | `img-evergreencleaningservice`, keys mirror the repo — `public/images/a.jpg` → `images/a.jpg` |
-| DNS | CNAME `img-evergreencleaningservice.10xconnections.com` → `f005.backblazeb2.com`, **proxied** |
-| Rewrite | zone `10xconnections.com`, ruleset `dc23ca22b3244751a43bf30de1de73a2`, prefixes `/file/img-evergreencleaningservice` onto the path |
+| DNS | CNAME `img.evergreencleaningservice.ca` → `f005.backblazeb2.com`, **proxied** |
+| Rewrite | zone `evergreencleaningservice.ca`, ruleset `a7818baee8bb404bad888536ce46df72` (rule `b80d7f51b28f40f3be7806a158dd6dba`), prefixes `/file/img-evergreencleaningservice` onto the path |
+
+Until 2026-09-28 the host was `img-evergreencleaningservice.10xconnections.com`
+(CNAME and rule `d4da24eec9e54c9ea3b4c261934b1da6` in the `10xconnections.com`
+zone). Both were deleted on 2026-09-28 — the host now answers 530 — and
+`image-hosts.json` forbids it, so no build can reference it again. The same
+day the old staging Custom Domain `evergreencleaningservice.10xconnections.com`
+was detached from the Worker. The Worker's only hostname is now
+`stage.evergreencleaningservice.ca`.
+
+The shared `10xconnections.com` rewrite ruleset `dc23ca22b3244751a43bf30de1de73a2`
+also carries another client's rule; only Evergreen's rule was removed from it.
 
 Four things that are easy to undo by accident:
 

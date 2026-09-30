@@ -16,7 +16,7 @@
  *
  * Usage:
  *   node scripts/launch-check.mjs [distDir] [origin]
- *   node scripts/launch-check.mjs dist https://evergreencleaningservice.10xconnections.com
+ *   node scripts/launch-check.mjs dist https://stage.evergreencleaningservice.ca
  */
 import fs from 'node:fs';
 import path from 'node:path';

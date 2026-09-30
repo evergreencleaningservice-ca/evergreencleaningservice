@@ -113,7 +113,7 @@ vi.mock('@neondatabase/serverless', () => ({
 
 const worker = (await import('../../src/worker')).default;
 
-const PREVIEW = 'https://evergreencleaningservice.10xconnections.com';
+const PREVIEW = 'https://stage.evergreencleaningservice.ca';
 const ENV = {
   ASSETS: { fetch: async () => new Response('asset') } as unknown as Fetcher,
   DATABASE_URL: 'postgres://user:pw@example.neon.tech/evergreen',
@@ -135,7 +135,7 @@ const captchaPasses = () =>
     if (String(input).includes('siteverify'))
       return Response.json({
         success: true,
-        hostname: 'evergreencleaningservice.10xconnections.com',
+        hostname: 'stage.evergreencleaningservice.ca',
       });
     return Response.json({ id: 'email-id' });
   });

@@ -16,7 +16,7 @@
  * compete with them in organic results, and a PPC page has no reason to be in
  * the index at all.
  */
-import { nap, site } from '../data/site';
+import { images, nap, site } from '../data/site';
 import { organizationGraph } from '../lib/schema';
 import GoogleTagManager from '../components/GoogleTagManager.astro';
 import Attribution from '../components/Attribution.astro';
@@ -74,7 +74,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
         even begin the DNS lookup and TLS handshake for it until it has
         parsed the markup that references it. One preconnect buys back that
         round trip on the single most important request on the page. */}
-    <link rel="preconnect" href="https://img-evergreencleaningservice.10xconnections.com" />
+    <link rel="preconnect" href={images.host} />
 
     {/* The two faces the first screen actually uses: Raleway for the headline
         and the buttons, Open Sans for everything else. Both are same-origin

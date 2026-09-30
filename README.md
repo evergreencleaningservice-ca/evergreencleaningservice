@@ -65,7 +65,7 @@ pushes on a 2xx.
 | Environment | Accepted |
 | --- | --- |
 | **Production** | `www.evergreencleaningservice.ca`, `evergreencleaningservice.ca` — and nothing else. Not staging, not `example.com`. |
-| **Staging** | `evergreencleaningservice.10xconnections.com`, plus `example.com` *only while a published test secret is in use*, because that is what Cloudflare's dummy `siteverify` reports. |
+| **Staging** | `stage.evergreencleaningservice.ca`, plus `example.com` *only while a published test secret is in use*, because that is what Cloudflare's dummy `siteverify` reports. |
 | **`wrangler dev` / `*.workers.dev`** | the request's own hostname. |
 
 An **absent** hostname is treated as a mismatch, not waved through. If genuine

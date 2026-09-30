@@ -45,7 +45,7 @@ import { requireChrome } from './lib/chrome.mjs';
  */
 const CHROME = requireChrome();
 
-const origin = process.argv[2] ?? 'https://evergreencleaningservice.10xconnections.com';
+const origin = process.argv[2] ?? 'https://stage.evergreencleaningservice.ca';
 const RUNS = Number(process.argv[3] ?? 3);
 const outDir = path.resolve('.measure', 'matrix');
 fs.mkdirSync(outDir, { recursive: true });
