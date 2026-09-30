@@ -2,7 +2,7 @@ import { neon } from '@neondatabase/serverless';
 import { captcha } from './data/site';
 import { isHoneypotHit, leadProblems, normalizeLead, str } from './lib/lead-fields';
 import { normalizeSubmission, submissionProblems } from './lib/submission-fields';
-import { notificationPayload } from './lib/notification';
+import { notificationPayload, notifyRecipientFor } from './lib/notification';
 import { allowedCaptchaHostnames, isProductionHost, isPublishedTestSecret } from './lib/captcha-hosts';
 import { databaseSecretFor, databaseUrlFor } from './lib/database-url';
 import { parsePosts, syncPosts, type Sql } from './lib/posts-sync';
@@ -40,6 +40,13 @@ export interface Env {
   /** Optional. When set, the lead is also emailed to the client via Resend. */
   RESEND_API_KEY?: string;
   LEAD_NOTIFY_TO?: string;
+  /**
+   * Optional. Where staging leads are emailed instead of LEAD_NOTIFY_TO, so
+   * the forms can be tested without touching where real leads go — see
+   * `notifyRecipientFor` in `lib/notification.ts`.
+   *   wrangler secret put STAGING_LEAD_NOTIFY_TO
+   */
+  STAGING_LEAD_NOTIFY_TO?: string;
   LEAD_NOTIFY_FROM?: string;
   /**
    * The captcha secret, paired with whatever `captcha.provider` renders:
@@ -71,11 +78,13 @@ const json = (body: unknown, status = 200) =>
  * the endpoint answered 200, the row landed, and no email was sent or logged
  * anywhere. Every outcome below is logged.
  */
-async function notify(env: Env, lead: Record<string, string>) {
-  const missing = (['RESEND_API_KEY', 'LEAD_NOTIFY_TO', 'LEAD_NOTIFY_FROM'] as const).filter(
-    (k) => !env[k]
-  );
-  if (missing.length) {
+async function notify(env: Env, lead: Record<string, string>, host: string) {
+  const to = notifyRecipientFor(host, env);
+  const missing = [
+    ...(['RESEND_API_KEY', 'LEAD_NOTIFY_FROM'] as const).filter((k) => !env[k]),
+    ...(to ? [] : ['LEAD_NOTIFY_TO']),
+  ];
+  if (missing.length || !to) {
     console.warn('notify: not configured, no email sent. missing:', missing.join(', '));
     return;
   }
@@ -86,7 +95,7 @@ async function notify(env: Env, lead: Record<string, string>) {
      required an email on every lead. The short quote form takes a phone
      number instead, so an empty `reply_to` would now be sent — and a lead
      whose notification Resend refuses is a lead nobody is told about. */
-  const payload = notificationPayload(lead, env.LEAD_NOTIFY_FROM!, env.LEAD_NOTIFY_TO!);
+  const payload = notificationPayload(lead, env.LEAD_NOTIFY_FROM!, to);
 
   try {
     const res = await fetch('https://api.resend.com/emails', {
@@ -318,7 +327,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
     return json({ error: 'lead storage failed' }, 500);
   }
 
-  await notify(env, lead);
+  await notify(env, lead, host);
   return json({ ok: true });
 }
 
