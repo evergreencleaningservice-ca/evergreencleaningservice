@@ -86,7 +86,7 @@ export const site = {
  *               PUBLIC_TURNSTILE_SITE_KEY at build time and
  *               `wrangler secret put TURNSTILE_SECRET`
  *   reCAPTCHA   set `provider: 'recaptcha'`, build with
- *               PUBLIC_RECAPTCHA_SITE_KEY=6Lcy1lwa… and
+ *               PUBLIC_RECAPTCHA_SITE_KEY=6LcyzNct… and
  *               `wrangler secret put RECAPTCHA_SECRET`
  *
  * Shipping on either test pair by accident is not possible: src/worker.ts
@@ -94,9 +94,9 @@ export const site = {
  */
 export const captcha = {
   /* reCAPTCHA for go-live, decided 2026-09-28: no Turnstile widget has been
-     issued for this site, and the client's own reCAPTCHA v2 key (below) is
-     already registered to evergreencleaningservice.ca — which covers www.,
-     the apex and stage. as subdomains. Build with
+     issued for this site. The v2 key (below) is registered to
+     evergreencleaningservice.ca — which covers www., the apex and stage. as
+     subdomains. Build with
      PUBLIC_RECAPTCHA_SITE_KEY=<clientSiteKey>. Switching back to Turnstile is
      this one word plus its two keys. */
   provider: 'recaptcha' as 'turnstile' | 'recaptcha',
@@ -112,11 +112,13 @@ export const captcha = {
   },
 
   recaptcha: {
-    /* v2 checkbox, recovered from the original's own markup: WPForms renders
-       `wpforms-is-recaptcha-type-v2` with this key. Domain-locked to
-       evergreencleaningservice.ca — measured: asking Google for the widget with
-       it and the staging origin returns "Invalid domain for site key". */
-    clientSiteKey: '6Lcy1lwaAAAAAL_5DO8SACXqh0NF_QdzhkrAh-3K',
+    /* v2 "I'm not a robot" checkbox, issued new for this site on 2026-09-30.
+       It replaces the key recovered from the original's WPForms markup
+       (6Lcy1lwa…), whose secret was never recovered. Domain-locked to
+       evergreencleaningservice.ca — measured: Google renders the widget for
+       www. and stage., and answers "Invalid domain for site key" for
+       example.com. The matching secret is the Worker secret RECAPTCHA_SECRET. */
+    clientSiteKey: '6LcyzNctAAAAACGzkXLGxWE2M4LC7jJiCfcTzZE7',
     /** Google's published v2 test site key. Any domain, always passes. */
     testSiteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
     /** Its matching secret. Published by Google, so not a credential. */
