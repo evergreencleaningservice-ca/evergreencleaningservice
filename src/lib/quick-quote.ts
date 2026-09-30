@@ -262,7 +262,7 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
     box.setAttribute('tabindex', '-1');
     box.innerHTML =
       '<strong>Thank you — we have your request.</strong>' +
-      '<span>An account executive will reply within 2 business hours on a working day. ' +
+      '<span>An account executive will reply as soon as possible. ' +
       'If it is urgent, call <a href="tel:+14168034880">(416) 803-4880</a>.</span>';
     f.replaceWith(box);
     /* Focus, not just `role="status"`: the form the visitor was inside has

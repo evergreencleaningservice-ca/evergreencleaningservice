@@ -202,8 +202,8 @@ describe('nothing was invented', () => {
   });
 
   it('no page promises a response time the original did not make', () => {
-    /* "2 business hours" is the landing pages' own promise and is kept.
-       Anything faster would be invented. */
+    /* The reply promise is "as soon as possible" and names no time.
+       Any timed promise would be invented. */
     expect(find(/\b(15|30|60)[- ]minute (response|callback)/i)).toEqual([]);
     expect(find(/\b24\/7\b/)).toEqual([]);
   });

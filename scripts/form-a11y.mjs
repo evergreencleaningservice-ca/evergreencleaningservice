@@ -243,7 +243,7 @@ for (const width of [390, 1440]) {
   check(`${width}: success is a status region and takes focus`,
     success?.role === 'status' && success?.focused === true);
   check(`${width}: success says what happens next`,
-    (success?.text ?? '').includes('2 business hours'));
+    (success?.text ?? '').includes('as soon as possible'));
 
   /* What a screen reader is handed at the end. */
   const snap = await page.locator('.qq-confirm').ariaSnapshot();
