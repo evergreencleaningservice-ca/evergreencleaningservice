@@ -22,18 +22,26 @@
  *   no invented customer count              — nobody has one
  *   no claim of a service not on the site
  *
+ * THE GOOGLE ADS COPY. "Evergreen Landing Page — Copy Changes" (Paolo Leone,
+ * 2026-09-30) set the reply promise, the offer bullets, the emergency line,
+ * the service area and the fine print below, first on the quote page and
+ * then on both pages. The ads quote this text and Google checks the page
+ * against them, so every string is the document's wording exactly: do not
+ * tidy it. The offer (first month free, from $30/hr, 30 days' notice) and
+ * the two-hour reply are the client's commitments as stated there, not
+ * claims recovered from the old site.
+ *
  * TWO THINGS THAT LOOK LIKE EXCEPTIONS AND ARE NOT:
  *
  *   "Serving Toronto since 1989" is on the homepage, /about-us/ and the
  *   service pages. It is the founding year, not a computed duration, so it
  *   does not go stale and does not need to be right every January.
  *
- *   "A reply as soon as possible" is the reply promise. Until 2026-09-30 it
- *   was "within 2 business hours", which the landing pages carried since
- *   Phase 3; the client asked for it to name no time. It is stated once here
- *   rather than three times in three wordings. The same day, the quote page
- *   alone was given "within 2 hours" for its Google Ads — see QUOTE_* at the
- *   foot of this file. "Same-day walkthrough" —
+ *   "We reply within 2 hours" is the reply promise, stated once here rather
+ *   than three times in three wordings. Its history: "within 2 business
+ *   hours" from Phase 3; "as soon as possible" from earlier on 2026-09-30,
+ *   when the client asked for no time to be named; then "within 2 hours" the
+ *   same day, from the Google Ads copy document below. "Same-day walkthrough" —
  *   which the quote page's submit button used to promise — is gone, because
  *   nobody has committed to it.
  */
@@ -68,15 +76,21 @@ export const FACILITY_TYPES = [
   { title: 'Building maintenance', body: 'Carpet, hard floors, pressure washing and periodic work.' },
 ] as const;
 
+/** The reply promise, written once. */
+export const REPLY_PROMISE = 'within 2 hours';
+
 /**
- * The trust line. Four points, each verifiable, and none of them a number
- * somebody would have to defend.
+ * The trust line: four points, each verifiable, then the offer the Google
+ * Ads make, which `FINE_PRINT` qualifies.
  */
 export const TRUST_POINTS = [
   'Serving Toronto since 1989',
   'WSIB covered and bonded',
-  'A reply as soon as possible',
+  `We reply ${REPLY_PROMISE}`,
   'No obligation',
+  'First month free on a signed recurring contract',
+  'From $30/hr, supplies and equipment included',
+  "Cancel anytime with 30 days' notice",
 ] as const;
 
 /**
@@ -85,56 +99,15 @@ export const TRUST_POINTS = [
  */
 export const SERVICE_AREA_LINE =
   'Toronto, North York, Scarborough, Etobicoke, East York and York, plus Mississauga, ' +
-  'Vaughan, Markham, Brampton, Richmond Hill and Oakville.';
-
-/** The reply promise, written once. */
-export const REPLY_PROMISE = 'as soon as possible';
-
-/* ---------------------------------------------------------------------------
- * THE QUOTE PAGE'S OWN COPY — /lp/commercial-cleaning-quote/ only.
- *
- * Source: "Evergreen Landing Page — Copy Changes" (Paolo Leone, 2026-09-30),
- * six edits so the page matches the new Google Ads. The ads quote this text
- * and Google checks the page against them, so every string below is the
- * document's wording exactly — do not tidy it.
- *
- * It overrides the shared copy above on that page only. The sibling,
- * /lp/commercial-cleaning/, still promises a reply "as soon as possible" and
- * lists the shorter service area; the document named the quote page and no
- * other. The offer (first month free, from $30/hr, 30 days' notice) and the
- * two-hour reply are the client's commitments as stated in that document,
- * not claims recovered from the old site.
- * ------------------------------------------------------------------------- */
-
-/** The quote page's reply promise. */
-export const QUOTE_REPLY_PROMISE = 'within 2 hours';
-
-/** Hero bullets: the shared four with the reply reworded, then the offer. */
-export const QUOTE_TRUST_POINTS = [
-  'Serving Toronto since 1989',
-  'WSIB covered and bonded',
-  `We reply ${QUOTE_REPLY_PROMISE}`,
-  'No obligation',
-  'First month free on a signed recurring contract',
-  'From $30/hr, supplies and equipment included',
-  "Cancel anytime with 30 days' notice",
-] as const;
-
-/** The closing section's reply line. */
-export const QUOTE_FINAL_REPLY = `We reply ${QUOTE_REPLY_PROMISE}`;
-
-/** "Where we work", with the three Durham towns the ads now cover. */
-export const QUOTE_SERVICE_AREA_LINE =
-  'Toronto, North York, Scarborough, Etobicoke, East York and York, plus Mississauga, ' +
   'Vaughan, Markham, Brampton, Richmond Hill, Oakville, Pickering, Ajax and Oshawa.';
 
 /** Under the submit button. The number itself comes from `nap`. */
-export const QUOTE_EMERGENCY = {
+export const EMERGENCY_NOTE = {
   before: 'Emergency cleaning? Call',
   after: "and leave a message. We'll get back to you quickly.",
 } as const;
 
 /** Footer small print, above the copyright line. Qualifies the offer bullets. */
-export const QUOTE_FINE_PRINT =
+export const FINE_PRINT =
   'First month free applies to new clients on a signed monthly or recurring cleaning contract. ' +
   "Starting rate of $30/hr varies by scope. Cancellation requires 30 days' notice.";

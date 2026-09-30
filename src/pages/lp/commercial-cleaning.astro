@@ -46,6 +46,8 @@ import LpReviews from '../../components/lp/LpReviews.astro';
 import LpAreas from '../../components/lp/LpAreas.astro';
 import LpFinalCta from '../../components/lp/LpFinalCta.astro';
 import LpSticky from '../../components/lp/LpSticky.astro';
+import LpFormNote from '../../components/lp/LpFormNote.astro';
+import { FINE_PRINT, REPLY_PROMISE } from '../../data/landing';
 
 /** The DOM id and anchor target. Unchanged, so existing #links still work. */
 const FORM_ANCHOR = 'ppc-lead-form';
@@ -71,9 +73,10 @@ const CALL_NOTE = 'Free walkthrough • No obligation';
 
 <LandingLayout
   title="Commercial & Office Cleaning in Toronto and the GTA | Evergreen"
-  description="Commercial and office cleaning across Toronto, Mississauga, Vaughan and the GTA. WSIB covered, bonded and insured. Free on-site walkthrough and a reply as soon as possible."
+  description="Commercial and office cleaning across Toronto, Mississauga, Vaughan and the GTA. WSIB covered, bonded and insured. Free on-site walkthrough and a reply within 2 hours."
   callNote={CALL_NOTE}
   quoteAnchor={FORM_ANCHOR}
+  finePrint={FINE_PRINT}
 >
   <LpHero
     eyebrow="Toronto & GTA commercial janitorial"
@@ -99,8 +102,10 @@ const CALL_NOTE = 'Free walkthrough • No obligation';
       formId={FORM_ID}
       heading="Get your free quote"
       submitLabel="Get my free quote"
+      replyPromise={REPLY_PROMISE}
       eagerCaptcha
     />
+    <LpFormNote />
   </LpHero>
 
   <LpBenefits />

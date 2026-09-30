@@ -7,17 +7,10 @@
  * paid to arrive on, so here the same information is plain text.
  */
 import { SERVICE_AREA_LINE } from '../../data/landing';
-
-interface Props {
-  /** The towns, as one sentence. Omit for the shared `SERVICE_AREA_LINE`. */
-  line?: string;
-}
-
-const { line = SERVICE_AREA_LINE } = Astro.props;
 ---
 
 <section class="lpx-areas" aria-label="Service area">
   <div class="lpx-wrap">
-    <p><strong>Where we work:</strong> {line}</p>
+    <p><strong>Where we work:</strong> {SERVICE_AREA_LINE}</p>
   </div>
 </section>

@@ -1,0 +1,20 @@
+---
+/**
+ * The line under a landing page's submit button: the emergency number.
+ *
+ * Rendered after the form, not inside it, so it stays put when a successful
+ * submission replaces the form with its confirmation. The same tel: link and
+ * tracking attributes as the header, so call tracking sees it too.
+ *
+ * The `{' '}`s are needed: the build compresses HTML, and without them the
+ * number runs into the words either side of it.
+ */
+import { nap } from '../../data/site';
+import { EMERGENCY_NOTE } from '../../data/landing';
+---
+
+<p class="lpx-form-note">
+  {EMERGENCY_NOTE.before}{' '}
+  <a href={nap.phoneHref} data-call data-call-location="form_note">{nap.phoneDisplay}</a>{' '}
+  {EMERGENCY_NOTE.after}
+</p>

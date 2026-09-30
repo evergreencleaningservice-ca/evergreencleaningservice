@@ -132,7 +132,7 @@ describe('the locations the site actually uses', () => {
     expect(at(loc)).toHaveLength(count);
   });
 
-  it('form_note is back once, as the quote page\'s emergency line', () => {
+  it('form_note is back, as the emergency line on both landing pages', () => {
     /* The quote form used to close with "An account executive reads this and
        replies within 2 business hours … Prefer to talk now? Call (416)
        803-4880". The client asked for that note to go, and the only
@@ -140,10 +140,12 @@ describe('the locations the site actually uses', () => {
 
        On 2026-09-30 the Google Ads copy document put a line back under the
        quote landing page's submit button — "Emergency cleaning? Call (416)
-       803-4880 and leave a message." — so the location has exactly one link
-       again, on that page and no other. */
-    expect(at('form_note').map((l) => l.page)).toEqual([
-      expect.stringContaining('lp/commercial-cleaning-quote'),
+       803-4880 and leave a message." — first on the quote page, then on
+       both. So the location has one link per landing page and no others. */
+    expect(at('form_note').map((l) => l.page).sort()).toEqual([
+      /* sorted: '-' sorts before '/' */
+      expect.stringContaining('lp/commercial-cleaning-quote/'),
+      expect.stringContaining('lp/commercial-cleaning/'),
     ]);
   });
 
