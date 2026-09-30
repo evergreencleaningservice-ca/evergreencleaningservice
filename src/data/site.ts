@@ -10,9 +10,13 @@ export const PRODUCTION_HOSTS = [
   'evergreencleaningservice.ca',
 ] as const;
 
-/* Staging lives in the client's own zone, as a Worker Custom Domain on the
-   same Worker the preview build deploys to. It moved here from
-   evergreencleaningservice.10xconnections.com on 2026-09-28. */
+/**
+ * Staging. Served by the same Worker, from the same build, as production — the
+ * only thing that tells the two apart is the hostname a request arrives on, so
+ * `public/_headers` noindexes this host by name and nothing else. It was
+ * `evergreencleaningservice.10xconnections.com` until that zone record was
+ * removed; that name no longer resolves.
+ */
 export const PREVIEW_HOST = 'stage.evergreencleaningservice.ca';
 
 export const site = {
@@ -89,7 +93,13 @@ export const site = {
  * refuses both test secrets on a PRODUCTION_HOSTS hostname and answers 503.
  */
 export const captcha = {
-  provider: 'turnstile' as 'turnstile' | 'recaptcha',
+  /* reCAPTCHA for go-live, decided 2026-09-28: no Turnstile widget has been
+     issued for this site, and the client's own reCAPTCHA v2 key (below) is
+     already registered to evergreencleaningservice.ca — which covers www.,
+     the apex and stage. as subdomains. Build with
+     PUBLIC_RECAPTCHA_SITE_KEY=<clientSiteKey>. Switching back to Turnstile is
+     this one word plus its two keys. */
+  provider: 'recaptcha' as 'turnstile' | 'recaptcha',
 
   turnstile: {
     /** Cloudflare's published invisible test key. Any domain, always passes. */

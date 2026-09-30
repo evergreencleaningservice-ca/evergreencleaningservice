@@ -117,7 +117,9 @@ const PREVIEW = 'https://stage.evergreencleaningservice.ca';
 const ENV = {
   ASSETS: { fetch: async () => new Response('asset') } as unknown as Fetcher,
   DATABASE_URL: 'postgres://user:pw@example.neon.tech/evergreen',
+  STAGING_DATABASE_URL: 'postgres://user:pw@staging.example.neon.tech/evergreen',
   TURNSTILE_SECRET: 'a-real-looking-production-secret',
+  RECAPTCHA_SECRET: 'a-real-looking-production-secret',
 };
 
 const post = (body: unknown) =>

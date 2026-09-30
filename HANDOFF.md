@@ -77,7 +77,6 @@ src/
   pages/                routes; [slug].astro is the blog post route
   styles/global.css     the ported theme CSS
 scripts/
-  noindex.mjs           adds the preview's noindex headers
   purge.mjs             purges the Cloudflare edge cache after deploy
   mkcrops.mjs           regenerates WordPress's 300x150 list crops with sharp
   b2-sync.mjs           uploads public/images to the Backblaze bucket
@@ -115,16 +114,12 @@ was detached from the Worker. The Worker's only hostname is now
 The shared `10xconnections.com` rewrite ruleset `dc23ca22b3244751a43bf30de1de73a2`
 also carries another client's rule; only Evergreen's rule was removed from it.
 
-Four things that are easy to undo by accident:
+The move to the new host was made in Cloudflare on 2026-09-28 but reached
+`main` only on 2026-09-30. In between, staging was deployed from a branch that
+still pointed at the deleted host, so every image on staging was broken. Staging
+is deployed from `main` and nothing else — see section 4.
 
-- **The zone and the ruleset are shared.** `10xconnections.com` also hosts
-  other client sites, and their image rewrites live in the same
-  `http_request_transform` ruleset. Adding a site means appending a rule
-  (`POST …/rulesets/<id>/rules`), never replacing the ruleset
-  (`PUT …/rulesets/<id>`), which silently drops every rule not in the body.
-  That is how this host went dark in September 2026: the CNAME was deleted and
-  the rewrite rule was dropped when another site's rule went in, and both had
-  to be recreated.
+Three things that are easy to undo by accident:
 
 - **The orange cloud is load-bearing.** B2 egress is free only through
   Cloudflare (Bandwidth Alliance). Grey-clouded, the same traffic is billed.
@@ -154,13 +149,21 @@ Credentials are `B2_KEY_ID` / `B2_APP_KEY` in the environment — never committe
 
 ## 4. Conventions that are not negotiable
 
-- **Branch**: develop and push on `claude/optimistic-clarke-wz1p8g`. Never push
-  to `main` without being told to.
-- **Deploy with `npm run deploy:preview`, never `npm run deploy`.** The plain
-  one skips `noindex.mjs`, which means the preview serves `Allow: /` with no
-  `X-Robots-Tag` — a crawlable near-duplicate of the client's live site. This
-  has happened three times. `deploy:preview` = build + noindex + wrangler
-  deploy + edge purge.
+- **Branch**: develop on a feature branch and merge to `main` by pull request.
+  Never push to `main` without being told to.
+- **Deploy from `main`, and only from `main`.** Staging runs whatever was last
+  deployed, so a deploy from a feature branch ships unmerged work and drops
+  anything merged since. `scripts/deploy-guard.mjs` runs first in both deploy
+  scripts and refuses unless the checkout is a clean `main` that matches
+  `origin/main`.
+- **Staging is noindexed by hostname, not by build.** `public/_headers` names
+  `stage.evergreencleaningservice.ca` and `*.workers.dev`; www. and the apex
+  are never named, so the same deploy is correct on every address. (It used to
+  be a sitewide `/*` rule written only by `build:preview` — that would have
+  noindexed the live site the moment the Worker took the domain.) Once www. or
+  the apex is attached to the Worker, deploy only with `npm run deploy`: the
+  test-key build that `deploy:preview` ships would be served on production
+  too, and the Worker answers 503 to a test secret there.
 - **Secrets** (`RECAPTCHA_SECRET`, `SUPABASE_SERVICE_ROLE_KEY`, …) are Worker
   secrets, never committed.
 - **Never disable TLS verification or unset `HTTPS_PROXY`.** Report 403/407
@@ -469,7 +472,8 @@ mirroring the original's. That is an open decision: reproduce them exactly
    unexplained. If the scratchpad refs are gone, rebuild them with
    `mkref-all.mjs` (it needs `<scratchpad>/pages/`).
 3. `npm run build`, then serve `dist/` locally to look at anything.
-4. Deploy only with `npm run deploy:preview`.
+4. Deploy with `npm run deploy:preview` while only staging is attached to the
+   Worker; `npm run deploy` once www. or the apex is.
 
 The two things a reviewer will ask about first are the forms (§7.1) and GTM
 (§7.2). Neither is a code problem; both are decisions.

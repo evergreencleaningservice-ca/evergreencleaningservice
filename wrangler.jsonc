@@ -28,5 +28,10 @@
   // Without the secret the endpoint answers 503, not 200, so a submission is
   // visibly rejected rather than silently lost.
 
+  // Blog mirror: every six hours at :07, the Worker copies the deployed
+  // build's /data/blog-posts.json into the `posts` table on both Neon
+  // branches. See src/lib/posts-sync.ts and migrations/0008_posts.sql.
+  "triggers": { "crons": ["7 */6 * * *"] },
+
   "observability": { "enabled": true }
 }

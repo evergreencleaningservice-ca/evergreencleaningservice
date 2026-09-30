@@ -460,6 +460,24 @@ describe('errors are announced, not just coloured', () => {
     expect(summary()).toContain('4 things need a moment');
   });
 
+  it('an unticked reCAPTCHA box is named in words, and nothing is sent', async () => {
+    /* With the reCAPTCHA provider the form carries the component's hidden,
+       required token field. Unticked, the visitor used to read "This one is
+       needed." about a field they cannot see. */
+    const spy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
+    const form = ready({ ...VALID_LEAD });
+    form.insertAdjacentHTML(
+      'beforeend',
+      '<input type="text" name="g-recaptcha-hidden" class="wpf-recaptcha-hidden" tabindex="-1" aria-hidden="true" required>'
+    );
+
+    await submit(form);
+
+    expect(spy).not.toHaveBeenCalled();
+    expect(summary()).toContain("I'm not a robot");
+    expect(summary()).not.toContain('This one is needed');
+  });
+
   it('does not count the hidden free-text box among the problems', async () => {
     /* Four, not five. The box is hidden and not required, so an empty one is
        not a problem — and if it ever were counted, the visitor would be told

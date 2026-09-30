@@ -28,6 +28,7 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { CAPTCHA_MARKUP } from './captcha-markup';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-forms');
@@ -75,8 +76,8 @@ beforeAll(() => {
         action: attr(attrs, 'action'),
         postKind,
         endpoint: attr(attrs, 'data-endpoint') || (postKind ? '/api/submit-post' : ''),
-        /* Turnstile's own markup, which `SpamGuard` renders. */
-        hasCaptcha: /cf-turnstile/.test(attrs + body),
+        /* The active provider's markup, which `SpamGuard` renders. */
+        hasCaptcha: CAPTCHA_MARKUP.test(attrs + body),
         hasHoneypot: /company-website|company_tax_id|website_trap/.test(body),
       };
     });

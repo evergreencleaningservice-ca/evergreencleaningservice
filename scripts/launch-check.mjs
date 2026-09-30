@@ -22,6 +22,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { PREVIEW_HOST, PRODUCTION_HOSTS, captcha } from '../src/data/site.ts';
 import { specRedirects, legacyRedirects, newsPageRedirects } from '../src/data/redirects.ts';
+import { hostMatches, noindexProblems, noindexedHosts } from '../src/lib/noindex-rules.ts';
 
 const dist = path.resolve(process.argv[2] || 'dist');
 const origin = process.argv[3] || `https://${PREVIEW_HOST}`;
@@ -113,16 +114,18 @@ console.log('\n2. Spam protection');
 
 console.log('\n3. Indexing posture of this build');
 {
+  /* Staging and production are one build on one Worker, so the noindex is
+     scoped by hostname. What must never ship is a rule that reaches a
+     production address — a path-only `/*` rule does, on every host. */
   const headers = path.join(dist, '_headers');
   const text = fs.existsSync(headers) ? fs.readFileSync(headers, 'utf8') : '';
-  const sitewideNoindex = /^\/\*[\s\S]{0,200}?X-Robots-Tag:\s*[^\n]*noindex/im.test(text);
-  if (sitewideNoindex)
-    record(
-      'block',
-      'this build carries the sitewide staging noindex',
-      'correct for staging; deindexes the business if promoted to production'
-    );
-  else record('pass', 'no sitewide noindex in _headers');
+  const problems = noindexProblems(text, PRODUCTION_HOSTS);
+  for (const p of problems)
+    record('block', 'a noindex rule reaches production', `${p} — this deindexes the business`);
+  if (problems.length === 0)
+    record('pass', 'no noindex rule reaches a production host', noindexedHosts(text).join(', ') || '(none)');
+  if (!noindexedHosts(text).some((h) => hostMatches(h, PREVIEW_HOST)))
+    record('block', `staging (${PREVIEW_HOST}) is not noindexed`, 'it would compete with the live site');
 
   const robots = path.join(dist, 'robots.txt');
   const rb = fs.existsSync(robots) ? fs.readFileSync(robots, 'utf8') : '';

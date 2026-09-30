@@ -1,5 +1,8 @@
 /**
- * Purges the Cloudflare edge cache for the preview hostname after a deploy.
+ * Purges the Cloudflare edge cache for every hostname this Worker serves,
+ * after a deploy — staging and both production addresses, because they are
+ * one build and one deploy lands on all of them at once. Purging a production
+ * URL before the cutover is harmless: it only empties a cache.
  *
  * Workers serves the new assets immediately, but the zone caches HTML at the
  * edge, so the custom domain can keep returning the previous build. Purge by
@@ -11,9 +14,10 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { PREVIEW_HOST, PRODUCTION_HOSTS } from '../src/data/site.ts';
 
 const ZONE = '86ba115f2d433837c1d8a93b62288142'; // evergreencleaningservice.ca
-const HOST = 'https://stage.evergreencleaningservice.ca'; // PREVIEW_HOST in src/data/site.ts
+const HOSTS = [PREVIEW_HOST, ...PRODUCTION_HOSTS].map((h) => `https://${h}`);
 const TOKEN = process.env.CF_API_TOKEN ?? process.env.CLOUDFLARE_API_TOKEN;
 
 if (!TOKEN) {
@@ -23,7 +27,7 @@ if (!TOKEN) {
 
 // Every built page, plus the root-level files the sitemap does not list.
 const dist = path.resolve('dist');
-const urls = new Set([`${HOST}/`, `${HOST}/robots.txt`, `${HOST}/rss.xml`, `${HOST}/sitemap-index.xml`]);
+const paths = new Set(['/', '/robots.txt', '/rss.xml', '/sitemap-index.xml']);
 
 /* Redirect sources are not assets, so they were never in this list — and the
    edge had cached their 404 from before the rules existed. A deploy that adds a
@@ -34,7 +38,7 @@ try {
   const rules = fs.readFileSync(path.join('dist', '_redirects'), 'utf8').split('\n');
   for (const line of rules) {
     const from = line.trim().split(/\s+/)[0];
-    if (from && !from.startsWith('#') && !from.includes('*')) urls.add(HOST + from);
+    if (from && !from.startsWith('#') && !from.includes('*')) paths.add(from);
   }
 } catch {
   // no _redirects in this build; nothing extra to purge
@@ -46,13 +50,13 @@ const walk = (dir) => {
     if (entry.isDirectory()) walk(full);
     else if (entry.name === 'index.html') {
       const rel = path.relative(dist, path.dirname(full)).split(path.sep).join('/');
-      urls.add(rel ? `${HOST}/${rel}/` : `${HOST}/`);
+      paths.add(rel ? `/${rel}/` : '/');
     }
   }
 };
 walk(dist);
 
-const list = [...urls];
+const list = HOSTS.flatMap((host) => [...paths].map((p) => host + p));
 const batches = [];
 for (let i = 0; i < list.length; i += 30) batches.push(list.slice(i, i + 30));
 

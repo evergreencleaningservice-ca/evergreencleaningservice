@@ -47,13 +47,18 @@
  * WILL register a conversion in the client's live Google Ads account. Don't,
  * unless that is the thing being tested.
  *
- * `site_environment` is pushed before `gtm.start` so it is readable by every
+ * `site_environment` is `production` on a PRODUCTION_HOSTS hostname and
+ * `staging` on anything else the allowlist lets through. It used to test for
+ * `10xconnections.com` in the hostname, which silently became `production`
+ * the moment staging moved to stage.evergreencleaningservice.ca.
+ *
+ * It is pushed before `gtm.start` so it is readable by every
  * tag in the container. If the agency wants staging out of the data entirely,
  * that variable is the hook: a blocking trigger on
  * `site_environment equals staging` costs them one exception and needs no
  * change here.
  */
-import { PREVIEW_HOST, site } from '../data/site';
+import { PRODUCTION_HOSTS, site } from '../data/site';
 
 interface Props {
   /** Emits the `<noscript>` iframe half instead of the head loader. Goes
@@ -71,13 +76,13 @@ const gtmId = site.gtmId;
    literal, on 76 pages, doing nothing. Anything that hides the emitted text
    behind a templating rule is a place that bug can come back. */
 const loader = `
-(function (w, d, s, l, i, hosts, previewHost) {
+(function (w, d, s, l, i, hosts, production) {
   w[l] = w[l] || [];
   if (hosts.indexOf(d.location.hostname) === -1) {
     if (w.console && console.info) console.info('analytics: suppressed on ' + d.location.hostname);
     return;
   }
-  w[l].push({ site_environment: d.location.hostname === previewHost ? 'staging' : 'production' });
+  w[l].push({ site_environment: production.indexOf(d.location.hostname) === -1 ? 'staging' : 'production' });
   w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
   var f = d.getElementsByTagName(s)[0],
     j = d.createElement(s),
@@ -85,7 +90,7 @@ const loader = `
   j.async = true;
   j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
   f.parentNode.insertBefore(j, f);
-})(window, document, 'script', 'dataLayer', ${JSON.stringify(gtmId)}, ${JSON.stringify(site.analyticsHosts)}, ${JSON.stringify(PREVIEW_HOST)});
+})(window, document, 'script', 'dataLayer', ${JSON.stringify(gtmId)}, ${JSON.stringify(site.analyticsHosts)}, ${JSON.stringify(PRODUCTION_HOSTS)});
 `.trim();
 ---
 
