@@ -1,0 +1,72 @@
+{
+  "captured": "2026-09-30T16:14:01Z",
+  "zone": "evergreencleaningservice.ca",
+  "zone_id": "86ba115f2d433837c1d8a93b62288142",
+  "purpose": "www. and apex records before the Worker Custom Domain replaced them. Rollback: detach the www Custom Domain, recreate these proxied A records.",
+  "records": [
+    {
+      "id": "a07f710a3bfb3788ecc4400cfda714ba",
+      "type": "A",
+      "name": "evergreencleaningservice.ca",
+      "content": "34.160.17.71",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "id": "818fe3f3e77b92180e42ce1f9837e20d",
+      "type": "A",
+      "name": "evergreencleaningservice.ca",
+      "content": "34.120.190.48",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "id": "b144b100d35133dcb5e61b3443b66a86",
+      "type": "A",
+      "name": "evergreencleaningservice.ca",
+      "content": "35.190.31.54",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "id": "322cc4e997627fd46579760b45b85cd5",
+      "type": "A",
+      "name": "evergreencleaningservice.ca",
+      "content": "34.160.81.203",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "id": "d1dae8226a4eaebeee81157707ebf3d4",
+      "type": "A",
+      "name": "www.evergreencleaningservice.ca",
+      "content": "35.190.31.54",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "id": "4851796406c6b37ff244e41337ee3b2c",
+      "type": "A",
+      "name": "www.evergreencleaningservice.ca",
+      "content": "34.160.81.203",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "id": "db94b4164fa95e58a611f2b6c376cea7",
+      "type": "A",
+      "name": "www.evergreencleaningservice.ca",
+      "content": "34.149.36.179",
+      "proxied": true,
+      "ttl": 1
+    },
+    {
+      "id": "481dccece364fed79b43583117671c33",
+      "type": "A",
+      "name": "www.evergreencleaningservice.ca",
+      "content": "34.120.190.48",
+      "proxied": true,
+      "ttl": 1
+    }
+  ]
+}

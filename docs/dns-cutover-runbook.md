@@ -1,5 +1,49 @@
 # DNS cutover and rollback runbook
 
+## LIVE — 2026-09-30, 16:14 UTC
+
+Approved by Paolo, who typed the hostname to confirm. The rest of this
+document is the plan as written. This block records what was actually done,
+and it wins wherever the two disagree.
+
+**The nameserver step had already happened.** The zone moved to Cloudflare
+(`dee`/`josh.ns.cloudflare.com`) before 2026-09-28, so Option 1's slow part
+was already behind us. Going live was three changes inside the zone:
+
+| Change | Detail |
+| --- | --- |
+| www. → Worker | Four proxied A records to SiteGround deleted, then `www.evergreencleaningservice.ca` attached as a Worker Custom Domain (id `75509be1…`, cert `d663ec0d…`). The gap between the two was about 2.6 s. |
+| apex → www. | Single Redirect in `http_request_dynamic_redirect`, ruleset `f638d7d8f8154bbf9af353ebf450b026`, rule `3d1f265974874bcd9a0e0cabeacf3928`: a 301 that keeps the path and query string. The apex A records to SiteGround are untouched and never reached. |
+| Always Use HTTPS | Turned on for the zone. It was off, and `http://www.` served plain HTTP once SiteGround left the path. |
+
+Deployed beforehand: `main` at `b59e74b`, Worker version
+`5aa6cbd3-44ad-4aba-b22a-250f3f634657`, on a new reCAPTCHA v2 pair (the
+recovered WPForms key never had its secret).
+
+Measured afterwards, from outside:
+- The homepage renders the new site.
+- A junk token on `/api/submit-lead` gets 403, not 503, so the production secret is real.
+- `verify:indexing -- production` 24/24.
+- `parity` 116/116.
+- `launch:check` 11/11 with 0 blocking.
+- MX, SPF, DKIM, DMARC and `mail` are unchanged on dns.google.
+
+**Rollback is minutes now, not the hours §5 describes**, because nothing
+changed at the registrar:
+
+1. Detach the www. Custom Domain (Workers → `evergreencleaningservice` →
+   Settings → Domains & Routes).
+2. Recreate the four proxied A records in
+   `docs/evidence/www-apex-dns-before-golive-2026-09-30.json`.
+3. Delete the apex redirect rule.
+
+SiteGround stays up and unchanged for at least 14 days as the target.
+
+Still open after launch: one real human lead end to end, and mail tested in
+both directions.
+
+---
+
 **Cutover date: `TBD`.** Not yet determined, and not needed to complete this
 plan.
 
