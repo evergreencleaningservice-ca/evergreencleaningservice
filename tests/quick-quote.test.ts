@@ -588,7 +588,7 @@ describe('success is announced, and the visitor keeps their place', () => {
     await submit(form);
 
     const text = confirmation()!.textContent ?? '';
-    expect(text).toContain('2 business hours');
+    expect(text).toContain('as soon as possible');
     expect(confirmation()!.querySelector('a')?.getAttribute('href')).toBe('tel:+14168034880');
   });
 });
