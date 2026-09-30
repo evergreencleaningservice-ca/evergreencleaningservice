@@ -99,6 +99,9 @@ a tested one.
   So the sender and key are proven; what remains untested here is every path
   Resend can fail on afterwards — a bounce, a suppression, a rate limit —
   none of which the Worker currently reports anywhere a person would see.
+  To send staging's notifications to a tester instead of the client, set
+  `STAGING_LEAD_NOTIFY_TO`; www. and the apex keep using `LEAD_NOTIFY_TO`
+  whatever it holds.
 - **The captcha providers.** `siteverify` is stubbed. Whether Cloudflare
   accepts a given key pair is a deployed-preview check.
 - **Page-level fidelity against the original.** The `tests/build/*` files do

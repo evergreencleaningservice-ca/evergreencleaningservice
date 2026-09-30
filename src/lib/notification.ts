@@ -25,6 +25,28 @@
  */
 
 import { looksLikeEmail } from './lead-fields';
+import { isProductionHost } from './captcha-hosts';
+
+/**
+ * Who a lead's notification goes to, by the hostname it arrived on.
+ *
+ * Staging and production are one Worker sharing one set of secrets, so
+ * changing LEAD_NOTIFY_TO to try the forms out would also send every real
+ * lead to the tester. STAGING_LEAD_NOTIFY_TO gives staging its own inbox:
+ *
+ *   www. and the apex   LEAD_NOTIFY_TO, always
+ *   anything else       STAGING_LEAD_NOTIFY_TO when set, else LEAD_NOTIFY_TO
+ *
+ * The fallback runs one way only. Production never reads the staging
+ * address, so a test recipient cannot end up receiving real enquiries.
+ */
+export interface NotifyEnv {
+  LEAD_NOTIFY_TO?: string;
+  STAGING_LEAD_NOTIFY_TO?: string;
+}
+
+export const notifyRecipientFor = (host: string, env: NotifyEnv): string | undefined =>
+  isProductionHost(host) ? env.LEAD_NOTIFY_TO : env.STAGING_LEAD_NOTIFY_TO || env.LEAD_NOTIFY_TO;
 
 /** Exactly the body Resend's POST /emails accepts. */
 export interface ResendPayload {

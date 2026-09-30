@@ -27,7 +27,9 @@ import {
   NOT_SUPPLIED,
   notificationPayload,
   notificationText,
+  notifyRecipientFor,
 } from '../../src/lib/notification';
+import { PREVIEW_HOST, PRODUCTION_HOSTS } from '../../src/data/site';
 import { normalizeLead } from '../../src/lib/lead-fields';
 
 const FROM = 'leads@send.example';
@@ -219,14 +221,14 @@ const post = (body: unknown, env: Partial<typeof ENV> = {}) =>
   );
 
 /** Stub siteverify and Resend; `resend` decides what Resend answers. */
-function stubNetwork(resend: () => Response) {
+function stubNetwork(resend: () => Response, hostname = 'stage.evergreencleaningservice.ca') {
   const calls: { url: string; body: Record<string, unknown> }[] = [];
   vi.spyOn(globalThis, 'fetch').mockImplementation(async (input, init) => {
     const url = String(input);
     if (url.includes('siteverify'))
       return Response.json({
         success: true,
-        hostname: 'stage.evergreencleaningservice.ca',
+        hostname,
       });
     if (url.includes('api.resend.com')) {
       calls.push({ url, body: JSON.parse(String((init as RequestInit).body)) });
@@ -347,5 +349,81 @@ describe('a failed notification never costs the lead', () => {
     expect(stored()).toMatchObject({ full_name: 'Dana' });
     expect(sent).toHaveLength(0);
     expect(warn).toHaveBeenCalled();
+  });
+});
+
+/* --- who it goes to ------------------------------------------------------- */
+
+const TESTER = 'tester@placeholder.example';
+
+describe('notifyRecipientFor', () => {
+  const env = { LEAD_NOTIFY_TO: TO, STAGING_LEAD_NOTIFY_TO: TESTER };
+
+  it.each(PRODUCTION_HOSTS)('%s always uses LEAD_NOTIFY_TO', (host) => {
+    expect(notifyRecipientFor(host, env)).toBe(TO);
+  });
+
+  it.each([PREVIEW_HOST, 'localhost', 'www.evergreencleaningservice.ca.evil.example'])(
+    '%s uses STAGING_LEAD_NOTIFY_TO when set',
+    (host) => {
+      expect(notifyRecipientFor(host, env)).toBe(TESTER);
+    }
+  );
+
+  it('staging falls back to LEAD_NOTIFY_TO when no staging address is set', () => {
+    expect(notifyRecipientFor(PREVIEW_HOST, { LEAD_NOTIFY_TO: TO })).toBe(TO);
+  });
+
+  it('production never falls back to the staging address', () => {
+    expect(notifyRecipientFor(PRODUCTION_HOSTS[0], { STAGING_LEAD_NOTIFY_TO: TESTER })).toBeUndefined();
+  });
+});
+
+describe('the Worker sends each host to its own recipient', () => {
+  const PROD = 'www.evergreencleaningservice.ca';
+  const postTo = (origin: string, env: Partial<typeof ENV> & { STAGING_LEAD_NOTIFY_TO?: string }) =>
+    worker.fetch(
+      new Request(`${origin}/api/submit-lead`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'user-agent': 'vitest' },
+        body: JSON.stringify({ ...QUICK, page_url: `${origin}/request-a-quote/` }),
+      }),
+      { ...ENV, ...env } as never
+    );
+
+  it('a staging lead goes to STAGING_LEAD_NOTIFY_TO', async () => {
+    const sent = stubNetwork(ok);
+    const res = await postTo(PREVIEW, { STAGING_LEAD_NOTIFY_TO: TESTER });
+
+    expect(res.status).toBe(200);
+    expect(sent).toHaveLength(1);
+    expect(sent[0].body.to).toEqual([TESTER]);
+  });
+
+  it('a www. lead still goes to LEAD_NOTIFY_TO with a staging address set', async () => {
+    const sent = stubNetwork(ok, PROD);
+    const res = await postTo(`https://${PROD}`, { STAGING_LEAD_NOTIFY_TO: TESTER });
+
+    expect(res.status).toBe(200);
+    expect(sent).toHaveLength(1);
+    expect(sent[0].body.to).toEqual([TO]);
+  });
+
+  it('staging with only a staging address still sends', async () => {
+    const sent = stubNetwork(ok);
+    const res = await postTo(PREVIEW, { LEAD_NOTIFY_TO: undefined, STAGING_LEAD_NOTIFY_TO: TESTER });
+
+    expect(res.status).toBe(200);
+    expect(sent[0].body.to).toEqual([TESTER]);
+  });
+
+  it('www. with only a staging address sends nothing, and says so', async () => {
+    const sent = stubNetwork(ok, PROD);
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const res = await postTo(`https://${PROD}`, { LEAD_NOTIFY_TO: undefined, STAGING_LEAD_NOTIFY_TO: TESTER });
+
+    expect(res.status).toBe(200);
+    expect(sent).toHaveLength(0);
+    expect(warn.mock.calls.flat().join(' ')).toContain('LEAD_NOTIFY_TO');
   });
 });
