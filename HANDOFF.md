@@ -326,7 +326,7 @@ To go live, either:
 | Provider | What is needed |
 |---|---|
 | Turnstile | a widget from dash.cloudflare.com → Turnstile (or grant the token Account → Turnstile → Edit), then `PUBLIC_TURNSTILE_SITE_KEY` at build time and `wrangler secret put TURNSTILE_SECRET` |
-| reCAPTCHA | set `captcha.provider = 'recaptcha'`, build with `PUBLIC_RECAPTCHA_SITE_KEY=6Lcy1lwa…`, and `wrangler secret put RECAPTCHA_SECRET` |
+| reCAPTCHA | set `captcha.provider = 'recaptcha'`, build with `PUBLIC_RECAPTCHA_SITE_KEY=6LcyzNct…`, and `wrangler secret put RECAPTCHA_SECRET` |
 
 Shipping on a test pair by accident is not possible: the Worker refuses all
 three published test secrets on a `PRODUCTION_HOSTS` hostname and answers 503.

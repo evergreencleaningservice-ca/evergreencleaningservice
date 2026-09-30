@@ -37,12 +37,12 @@ checkout is a clean `main` matching `origin/main`. Merge first, then deploy.
 
 Going live needs **both** halves of the captcha pair, in two different places:
 
-The site runs on the client's own **reCAPTCHA v2** key (`captcha.provider` in
+The site runs on a **reCAPTCHA v2** checkbox key issued for it on 2026-09-30 (`captcha.provider` in
 `src/data/site.ts`), registered to evergreencleaningservice.ca, which covers
 www., the apex and stage.:
 
 ```bash
-export PUBLIC_RECAPTCHA_SITE_KEY=6Lcy1lwaAAAAAL_5DO8SACXqh0NF_QdzhkrAh-3K  # build-time, baked into the HTML
+export PUBLIC_RECAPTCHA_SITE_KEY=6LcyzNctAAAAACGzkXLGxWE2M4LC7jJiCfcTzZE7  # build-time, baked into the HTML
 npx wrangler secret put RECAPTCHA_SECRET           # the matching secret, from Google's reCAPTCHA admin
 npm run deploy
 ```
