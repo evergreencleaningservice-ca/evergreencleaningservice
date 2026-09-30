@@ -59,45 +59,32 @@ export interface ResendPayload {
 }
 
 /**
- * The fields an account executive needs, always listed.
+ * What the email shows, and nothing else.
  *
- * Always, with `(not supplied)` where a value is absent, because the short
- * form legitimately omits things and there is a real difference between "this
- * visitor gave no email" and "the email was lost somewhere between the form
- * and here". The first is a lead to phone; the second is a bug.
- */
-/**
- * Tracks the form, and has been edited in both directions.
+ * The client asked for a short message: who, how to reach them, what it is
+ * about, where they asked from and when. Everything else the endpoint stores
+ * — attribution, form_id, landing page, referrer, touch times — stays in the
+ * database and out of the email.
  *
- * `business_name` and `province` came OUT when the quote form took the
- * reference design's field set and stopped asking for them. These are
- * always-rendered lines, so leaving them in would have printed
- * "Business: (not supplied)" on every lead from then on — exactly the noise
- * the `extra` pass below exists to keep out. Nothing was lost: the columns
- * still hold what earlier leads answered, and `extra` prints any row that
- * somehow carries a value.
+ * CORE_FIELDS are always listed, with `(not supplied)` where a value is
+ * absent, because there is a real difference between "this visitor gave no
+ * email" and "the email was lost somewhere between the form and here". The
+ * first is a lead to phone; the second is a bug.
  *
- * `services` went BACK IN when the quote form returned to the original
- * site's service dropdown. It is the most useful line in the message now —
- * it is what the enquiry is actually about — so it is worth the
- * "(not supplied)" it prints on a lead from the contact form, which has no
- * service field.
- *
- * TWO OF THESE ARE FORM-SPECIFIC, AND THAT IS THE DESIGN, not an oversight
- * to tidy up. `address` is filled by the contact form and never by the quote
- * form; `services` the other way round. Each prints "(not supplied)" on the
- * other form's leads, and that is a true statement about the lead: the
- * visitor was not asked. Collapsing them into one list per form would mean
- * two message formats, and an account executive reading a lead at speed
- * benefits far more from every message having the same shape than from
- * saving one line.
+ * OPTIONAL_FIELDS are listed only when the visitor filled them in. The quote
+ * form never asks for either, so printing them would put two
+ * "(not supplied)" lines on every quote lead; but the contact form does ask,
+ * and a message the visitor typed must not be left out of the email.
  */
 export const CORE_FIELDS: readonly (readonly [string, string])[] = [
   ['full_name', 'Name'],
   ['phone', 'Phone'],
   ['work_email', 'Email'],
-  ['address', 'Address'],
   ['services', 'Service'],
+] as const;
+
+export const OPTIONAL_FIELDS: readonly (readonly [string, string])[] = [
+  ['address', 'Address'],
   ['message', 'Details'],
 ] as const;
 
@@ -105,20 +92,34 @@ export const NOT_SUPPLIED = '(not supplied)';
 
 const filled = (v: unknown): boolean => typeof v === 'string' && v.trim() !== '';
 
-/** The message body: the core fields, then whatever else is non-empty. */
-export function notificationText(lead: Record<string, string>): string {
+/** When the lead was sent, in Toronto time, e.g. "September 30, 2026 at 10:50 AM EDT". */
+export const formatSentAt = (at: Date): string =>
+  new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Toronto',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZoneName: 'short',
+  }).format(at);
+
+/** The message body: the core fields, any optional field filled in, then the page and the time. */
+export function notificationText(lead: Record<string, string>, sentAt: Date = new Date()): string {
   const core = CORE_FIELDS.map(
     ([key, label]) => `${label}: ${filled(lead[key]) ? lead[key] : NOT_SUPPLIED}`
   );
+  const optional = OPTIONAL_FIELDS.filter(([key]) => filled(lead[key])).map(
+    ([key, label]) => `${label}: ${lead[key]}`
+  );
 
-  /* Attribution, the page, the user agent — only when present. Thirty empty
-     `utm_` lines are noise, and noise is what stops a person reading the
-     seven lines that matter. */
-  const extra = Object.entries(lead)
-    .filter(([key, value]) => !CORE_FIELDS.some(([c]) => c === key) && filled(value))
-    .map(([key, value]) => `${key}: ${value}`);
-
-  return [...core, '', ...extra].join('\n');
+  return [
+    ...core,
+    ...optional,
+    '',
+    `Page URL: ${filled(lead.page_url) ? lead.page_url : NOT_SUPPLIED}`,
+    `Time Sent: ${formatSentAt(sentAt)}`,
+  ].join('\n');
 }
 
 /**
@@ -131,13 +132,14 @@ export function notificationText(lead: Record<string, string>): string {
 export function notificationPayload(
   lead: Record<string, string>,
   from: string,
-  to: string
+  to: string,
+  sentAt: Date = new Date()
 ): ResendPayload {
   const payload: ResendPayload = {
     from,
     to: [to],
     subject: `New proposal request — ${lead.full_name}`,
-    text: notificationText(lead),
+    text: notificationText(lead, sentAt),
   };
 
   const email = (lead.work_email ?? '').trim();
