@@ -103,7 +103,16 @@ they only work together:
 | DNS | CNAME `img-evergreencleaningservice.10xconnections.com` → `f005.backblazeb2.com`, **proxied** |
 | Rewrite | zone `10xconnections.com`, ruleset `dc23ca22b3244751a43bf30de1de73a2`, prefixes `/file/img-evergreencleaningservice` onto the path |
 
-Three things that are easy to undo by accident:
+Four things that are easy to undo by accident:
+
+- **The zone and the ruleset are shared.** `10xconnections.com` also hosts
+  other client sites, and their image rewrites live in the same
+  `http_request_transform` ruleset. Adding a site means appending a rule
+  (`POST …/rulesets/<id>/rules`), never replacing the ruleset
+  (`PUT …/rulesets/<id>`), which silently drops every rule not in the body.
+  That is how this host went dark in September 2026: the CNAME was deleted and
+  the rewrite rule was dropped when another site's rule went in, and both had
+  to be recreated.
 
 - **The orange cloud is load-bearing.** B2 egress is free only through
   Cloudflare (Bandwidth Alliance). Grey-clouded, the same traffic is billed.
