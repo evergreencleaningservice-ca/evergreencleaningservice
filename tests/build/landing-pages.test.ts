@@ -26,7 +26,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { BANNED_FIELDS, FIELDS } from '../fixtures/quick-quote';
-import { BENEFITS, FACILITY_TYPES, TRUST_POINTS } from '../../src/data/landing';
+import {
+  BENEFITS,
+  FACILITY_TYPES,
+  QUOTE_FINE_PRINT,
+  QUOTE_SERVICE_AREA_LINE,
+  QUOTE_TRUST_POINTS,
+  SERVICE_AREA_LINE,
+  TRUST_POINTS,
+} from '../../src/data/landing';
 import { CAPTCHA_MARKUP, TURNSTILE, questionRequiredCount } from './captcha-markup';
 
 const repo = path.resolve(import.meta.dirname, '../..');
@@ -90,6 +98,9 @@ const leadForm = (page: string) => {
   return h.slice(start, h.indexOf('</form>', start) + 7);
 };
 
+/** Astro escapes `'` in text as `&#39;`; the constants carry the raw character. */
+const escapeAmp = (s: string) => s.replace(/'/g, '&#39;');
+
 const control = (fragment: string, name: string) =>
   fragment.match(new RegExp(`<(input|select|textarea)\\b[^>]*\\bname="${name}"[^>]*>`, 'i'))?.[0] ?? null;
 
@@ -129,12 +140,21 @@ describe('the two pages are one implementation', () => {
     }
   });
 
-  it('both pages print the same benefits, facilities and trust points', () => {
+  it('both pages print the same benefits and facilities', () => {
     for (const { name } of PAGES) {
       for (const b of BENEFITS) expect(html[name]).toContain(b.title);
       for (const f of FACILITY_TYPES) expect(html[name]).toContain(f.title);
-      for (const t of TRUST_POINTS) expect(html[name]).toContain(t);
     }
+  });
+
+  it('each page prints its own trust points, and the quote page adds only its ad offer', () => {
+    /* The quote page's bullets were rewritten for its Google Ads on
+       2026-09-30. Every shared point it did not reword must still be there,
+       so the two pages cannot drift apart any further than that. */
+    for (const t of TRUST_POINTS) expect(html['commercial-cleaning']).toContain(t);
+    for (const t of QUOTE_TRUST_POINTS) expect(html['commercial-cleaning-quote']).toContain(escapeAmp(t));
+    const reworded = TRUST_POINTS.filter((t) => !(QUOTE_TRUST_POINTS as readonly string[]).includes(t));
+    expect(reworded).toEqual(['A reply as soon as possible']);
   });
 
   it('neither page invents a benefit the other does not have', () => {
@@ -279,6 +299,52 @@ describe('isolation from the rest of the site', () => {
   });
 });
 
+/* --- 4b. the quote page's Google Ads copy (2026-09-30) -------------------- */
+
+describe("the quote page matches its ads", () => {
+  const quote = () => html['commercial-cleaning-quote'];
+  /* Visible text: tags dropped WITHOUT adding space, so a missing space
+     around a link shows up as run-together words, as a visitor would see. */
+  const text = (h: string) => h.replace(/<[^>]+>/g, '').replace(/&#39;/g, "'").replace(/\s+/g, ' ');
+
+  it('puts the emergency line directly under the form, dialling the real number', () => {
+    const h = quote();
+    /* The form's own module script is emitted right after it; nothing else
+       may come between the button and the note. */
+    const note = h
+      .slice(h.indexOf('</form>') + 7, h.indexOf('</form>') + 900)
+      .replace(/^\s*<script\b[^>]*><\/script>/, '');
+    expect(note).toMatch(/^\s*<p class="lpx-form-note"/);
+    expect(text(note)).toContain(
+      "Emergency cleaning? Call (416) 803-4880 and leave a message. We'll get back to you quickly.",
+    );
+    expect(note).toMatch(/<a href="tel:\+14168034880" data-call data-call-location="form_note">/);
+  });
+
+  it('closes with the two-hour reply', () => {
+    expect(text(quote())).toContain(
+      'We reply within 2 hours — no obligation, and no visit until you ask for one.',
+    );
+  });
+
+  it('lists Pickering, Ajax and Oshawa where it works; the service page does not', () => {
+    expect(quote()).toContain(QUOTE_SERVICE_AREA_LINE);
+    expect(quote()).toContain('Richmond Hill, Oakville, Pickering, Ajax and Oshawa.');
+    expect(html['commercial-cleaning']).toContain(SERVICE_AREA_LINE);
+    expect(html['commercial-cleaning']).not.toMatch(/Pickering|Oshawa/);
+  });
+
+  it('prints the small print in the footer, above the copyright, without a click', () => {
+    const h = quote();
+    const footer = h.slice(h.search(/<footer\b/i), h.search(/<\/footer>/i));
+    const fine = footer.indexOf(escapeAmp(QUOTE_FINE_PRINT));
+    expect(fine).toBeGreaterThan(-1);
+    expect(fine).toBeLessThan(footer.indexOf('&copy;'));
+    expect(footer).not.toMatch(/<details|hidden/);
+    expect(html['commercial-cleaning']).not.toContain('lp-footer-fine');
+  });
+});
+
 /* --- 5. the telephone number ---------------------------------------------- */
 
 describe('the real telephone number, everywhere', () => {
@@ -334,9 +400,21 @@ describe('claims', () => {
     expect(h).not.toMatch(/100%\s*(?:privacy|satisfaction)/i);
     expect(h).not.toMatch(/no spam,? ever/i);
     expect(h).not.toMatch(/same[- ]day|within (?:an|1) hour|instant quote/i);
-    /* The one reply promise the site makes, and it names no time. */
-    expect(h).toContain('as soon as possible');
     expect(h).not.toMatch(/business hours/i);
+  });
+
+  it('each page states exactly one reply promise', () => {
+    /* The service page names no time. The quote page says "within 2 hours",
+       because its Google Ads quote that and Google checks the page against
+       them — so "as soon as possible" must not survive anywhere on it,
+       including the success message the form carries in its markup. */
+    expect(html['commercial-cleaning']).toContain('as soon as possible');
+    expect(html['commercial-cleaning']).not.toMatch(/within 2 hours/i);
+
+    const quote = html['commercial-cleaning-quote'];
+    expect(quote).not.toMatch(/as soon as possible/i);
+    expect(quote).toContain('We reply within 2 hours');
+    expect(leadForm('commercial-cleaning-quote')).toContain('data-reply-promise="within 2 hours"');
   });
 
   it.each(PAGES)('$name states the founding year rather than a computed duration', ({ name }) => {

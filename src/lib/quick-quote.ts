@@ -255,6 +255,11 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
 
   wireServiceOther(form, SERVICE_OTHER);
 
+  /* Read before the form is replaced, and from the markup rather than typed
+     here, so a page that promises a specific time says the same thing after
+     submission as it did before. */
+  const promise = form.dataset.replyPromise || 'as soon as possible';
+
   const confirm = (f: HTMLFormElement) => {
     const box = document.createElement('div');
     box.className = 'qq-confirm';
@@ -262,7 +267,7 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
     box.setAttribute('tabindex', '-1');
     box.innerHTML =
       '<strong>Thank you — we have your request.</strong>' +
-      '<span>An account executive will reply as soon as possible. ' +
+      `<span>An account executive will reply ${promise}. ` +
       'If it is urgent, call <a href="tel:+14168034880">(416) 803-4880</a>.</span>';
     f.replaceWith(box);
     /* Focus, not just `role="status"`: the form the visitor was inside has

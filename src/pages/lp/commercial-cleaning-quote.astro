@@ -42,6 +42,10 @@
  *   hours and is now stated once, in `src/data/landing.ts`. "100% Privacy
  *   Protected. No spam, ever." was a guarantee and is gone too.
  *
+ *   2026-09-30, for the new Google Ads: a two-hour reply, the first-month
+ *   offer and its small print, an emergency line under the form, and three
+ *   more towns. The copy is in `src/data/landing.ts` under QUOTE_*.
+ *
  *   And an accessibility defect is fixed: the review cards put `aria-label`
  *   on a `<p>`, which is prohibited — a paragraph has no accessible name to
  *   set — and cost this page 4 Lighthouse accessibility points. `LpReviews`
@@ -56,6 +60,15 @@ import LpReviews from '../../components/lp/LpReviews.astro';
 import LpAreas from '../../components/lp/LpAreas.astro';
 import LpFinalCta from '../../components/lp/LpFinalCta.astro';
 import LpSticky from '../../components/lp/LpSticky.astro';
+import { nap } from '../../data/site';
+import {
+  QUOTE_EMERGENCY,
+  QUOTE_FINAL_REPLY,
+  QUOTE_FINE_PRINT,
+  QUOTE_REPLY_PROMISE,
+  QUOTE_SERVICE_AREA_LINE,
+  QUOTE_TRUST_POINTS,
+} from '../../data/landing';
 
 /** The DOM id and anchor target — unchanged, so `#lpq-form` still resolves. */
 const FORM_ANCHOR = 'lpq-form';
@@ -82,30 +95,43 @@ const EYEBROW = 'Free quote — Toronto & the GTA';
 
 <LandingLayout
   title="Commercial Cleaning Quote — Toronto & GTA | Evergreen Office Cleaning"
-  description="Get a free commercial cleaning quote for your Toronto or GTA building. On-site walkthrough, written scope, WSIB covered and bonded crews, and a reply as soon as possible."
+  description="Get a free commercial cleaning quote for your Toronto or GTA building. On-site walkthrough, written scope, WSIB covered and bonded crews, and a reply within 2 hours."
   callNote="Talk to an account executive"
   quoteAnchor={FORM_ANCHOR}
+  finePrint={QUOTE_FINE_PRINT}
 >
   <LpHero
     eyebrow={EYEBROW}
     heading="Get a commercial cleaning quote for your building."
     sub="Tell us where you are and what needs cleaning. We walk the space, write the scope, and price it to your hours — serving Toronto since 1989."
     image="evergreen-modern-commercial-cleaning-hero"
+    trustPoints={QUOTE_TRUST_POINTS}
   >
     <QuickQuoteForm
       id={FORM_ANCHOR}
       formId={FORM_ID}
       heading="Get your free custom quote"
       submitLabel="Request my free quote"
+      replyPromise={QUOTE_REPLY_PROMISE}
       eagerCaptcha
     />
+    {/* Outside the form, so it stays put when a successful submission
+        replaces the form with its confirmation. The same tel: link and
+        tracking attributes as the header, so call tracking sees it too.
+        The `{' '}`s are needed: the build compresses HTML, and without them
+        the number runs into the words either side of it. */}
+    <p class="lpx-form-note">
+      {QUOTE_EMERGENCY.before}{' '}
+      <a href={nap.phoneHref} data-call data-call-location="form_note">{nap.phoneDisplay}</a>{' '}
+      {QUOTE_EMERGENCY.after}
+    </p>
   </LpHero>
 
   <LpReviews heading="What GTA facility managers say" names={REVIEWERS} />
   <LpBenefits heading="What the quote covers" />
   <LpFacilities />
-  <LpAreas />
-  <LpFinalCta quoteAnchor={FORM_ANCHOR} heading="Get your quote" />
+  <LpAreas line={QUOTE_SERVICE_AREA_LINE} />
+  <LpFinalCta quoteAnchor={FORM_ANCHOR} heading="Get your quote" reply={QUOTE_FINAL_REPLY} />
 
   <LpSticky slot="sticky" quoteAnchor={FORM_ANCHOR} />
 </LandingLayout>

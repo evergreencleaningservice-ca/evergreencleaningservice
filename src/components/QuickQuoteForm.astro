@@ -63,6 +63,11 @@ interface Props {
   submitLabel?: string;
   /** Load the captcha at once — for a form inside the first screen. */
   eagerCaptcha?: boolean;
+  /**
+   * When the success message says a reply will come, e.g. "within 2 hours".
+   * Omit and it says "as soon as possible", the site-wide promise.
+   */
+  replyPromise?: string;
 }
 
 const {
@@ -72,6 +77,7 @@ const {
   formId = 'quick-quote',
   submitLabel = 'Get my free quote',
   eagerCaptcha = false,
+  replyPromise,
 } = Astro.props;
 const f = (name: string) => `${id}-${name}`;
 
@@ -86,6 +92,7 @@ const f = (name: string) => `${id}-${name}`;
   novalidate
   data-endpoint="/api/submit-lead"
   data-form-id={formId}
+  data-reply-promise={replyPromise}
   data-quick-quote
   aria-labelledby={heading ? f('heading') : undefined}
   aria-label={heading ? undefined : 'Request a quote'}

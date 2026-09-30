@@ -39,9 +39,11 @@ interface Props {
    * and an in-page anchor rather than a link that leaves.
    */
   quoteAnchor?: string;
+  /** Small print above the copyright line, for a page whose offer needs it. */
+  finePrint?: string;
 }
 
-const { title, description, callNote, quoteAnchor } = Astro.props;
+const { title, description, callNote, quoteAnchor, finePrint } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 ---
 
@@ -153,6 +155,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 
     <footer class="lp-footer">
       <div class="lp-footer-inner">
+        {finePrint && <p class="lp-footer-fine">{finePrint}</p>}
         <p>&copy; {new Date().getFullYear()} {nap.name}. {nap.addressLine}</p>
         {/* ONE legal link, not two. This used to render "Privacy Policy" and
             "Terms of Service" side by side, both pointing at /privacy/ —
@@ -310,6 +313,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 
   .lp-footer p {
     margin: 0;
+  }
+
+  /* Its own full-width row, so the copyright and privacy link keep theirs. */
+  .lp-footer .lp-footer-fine {
+    flex-basis: 100%;
+    font-size: 12px;
+    line-height: 1.5;
   }
 
   .lp-footer a {
