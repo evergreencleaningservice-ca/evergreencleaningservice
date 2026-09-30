@@ -591,6 +591,21 @@ describe('success is announced, and the visitor keeps their place', () => {
     expect(text).toContain('as soon as possible');
     expect(confirmation()!.querySelector('a')?.getAttribute('href')).toBe('tel:+14168034880');
   });
+
+  it("repeats the page's own reply promise when the form carries one", async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
+    document.body.innerHTML = quickQuoteMarkup();
+    const form = document.querySelector<HTMLFormElement>('form[data-quick-quote]')!;
+    form.dataset.replyPromise = 'within 2 hours';
+    wireQuickQuote(form, { tokenWaitMs: 50, tagDeliveryTimeoutMs: 50 });
+    fill(form, VALID_LEAD);
+
+    await submit(form);
+
+    const text = confirmation()!.textContent ?? '';
+    expect(text).toContain('An account executive will reply within 2 hours.');
+    expect(text).not.toContain('as soon as possible');
+  });
 });
 
 /* ---------- 8. the keyboard ---------------------------------------------- */

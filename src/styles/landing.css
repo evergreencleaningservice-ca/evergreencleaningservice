@@ -241,6 +241,20 @@
 
 /* ---------- the form column ---------- */
 
+/* The line under the submit button, e.g. the emergency number. */
+.lpx-form-note {
+  margin: 14px 0 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.lpx-form-note a {
+  color: var(--brand);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .lpx-form-col {
   min-width: 0;
 }

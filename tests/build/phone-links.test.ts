@@ -132,18 +132,19 @@ describe('the locations the site actually uses', () => {
     expect(at(loc)).toHaveLength(count);
   });
 
-  it('form_note is gone with the note that carried it', () => {
-    /* The quote form closed with "An account executive reads this and replies
-       within 2 business hours … Prefer to talk now? Call (416) 803-4880", and
-       that sentence held the only `form_note` telephone link on the site.
-       The client asked for the note to go, so the link went with it.
+  it('form_note is back once, as the quote page\'s emergency line', () => {
+    /* The quote form used to close with "An account executive reads this and
+       replies within 2 business hours … Prefer to talk now? Call (416)
+       803-4880". The client asked for that note to go, and the only
+       `form_note` link went with it.
 
-       WORTH KNOWING RATHER THAN SILENTLY ABSORBING: the form no longer offers
-       a visitor who would rather phone than type anywhere to click. The
-       header and the sticky bar still carry the number on the paid pages, so
-       the number is never more than a glance away — but it is one fewer
-       route, and it was the one closest to the moment of hesitation. */
-    expect(at('form_note')).toHaveLength(0);
+       On 2026-09-30 the Google Ads copy document put a line back under the
+       quote landing page's submit button — "Emergency cleaning? Call (416)
+       803-4880 and leave a message." — so the location has exactly one link
+       again, on that page and no other. */
+    expect(at('form_note').map((l) => l.page)).toEqual([
+      expect.stringContaining('lp/commercial-cleaning-quote'),
+    ]);
   });
 
   it('body prose is labelled content, including links from Markdown', () => {
