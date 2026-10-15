@@ -89,7 +89,7 @@ const hasPoster = inPublic(poster);
         <button class="leadnet-open" type="button">
           <span class="leadnet-hint">{hint}</span>
           <span class="leadnet-orb">
-            <video class="leadnet-thumb" src={src} poster={hasPoster ? poster : undefined} muted loop playsinline preload="metadata" />
+            <video class="leadnet-thumb" src={src} poster={hasPoster ? poster : undefined} muted loop playsinline preload="none" />
           </span>
           <span class="screen-reader-text">Open the video message</span>
         </button>
@@ -669,17 +669,26 @@ const hasPoster = inPublic(poster);
       /* private browsing — treat as not dismissed */
     }
 
+    // The orb's clip is `preload="none"`: it is a 40KB+ download that
+    // nothing on the first screen needs, so it used to compete with the hero
+    // image and the page's own scripts on every page view. The countdown now
+    // starts after the page has finished loading, and the clip is fetched
+    // only when the bubble actually appears (`nudge` asks it to play).
     if (!dismissed) {
       const delay = Number(panel.dataset.delay ?? 0);
-      window.setTimeout(
-        () => {
-          panel.hidden = false;
-          // one frame, so the transition has a starting state to move from
-          requestAnimationFrame(() => panel.classList.add('is-in'));
-          nudge(thumb);
-        },
-        Number.isFinite(delay) ? delay : 0
-      );
+      const reveal = () =>
+        window.setTimeout(
+          () => {
+            panel.hidden = false;
+            // one frame, so the transition has a starting state to move from
+            requestAnimationFrame(() => panel.classList.add('is-in'));
+            thumb.preload = 'auto';
+            nudge(thumb);
+          },
+          Number.isFinite(delay) ? delay : 0
+        );
+      if (document.readyState === 'complete') reveal();
+      else window.addEventListener('load', reveal, { once: true });
     }
   }
 </script>

@@ -85,6 +85,24 @@ beforeAll(() => {
     .join('\n');
 }, 180_000);
 
+
+/**
+ * Every stylesheet the build emitted. Since 2026-10-15 the build inlines CSS
+ * (`build.inlineStylesheets: 'always'`), so the rules live in <style> blocks
+ * inside the pages rather than in dist/_astro/*.css; both are read, so the
+ * assertions below hold whichever way a future build emits them.
+ */
+function builtCss(): string {
+  const dir = path.join(out, '_astro');
+  const files = fs.existsSync(dir)
+    ? fs.readdirSync(dir).filter((f) => f.endsWith('.css')).map((f) => fs.readFileSync(path.join(dir, f), 'utf8'))
+    : [];
+  const inline = Object.values(html).flatMap((page) =>
+    [...String(page).matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1])
+  );
+  return [...files, ...inline].join('\n');
+}
+
 afterAll(() => fs.rmSync(out, { recursive: true, force: true }));
 
 /* --- helpers -------------------------------------------------------------- */
@@ -503,11 +521,7 @@ describe('spam, attribution and conversion protections', () => {
 describe('the mobile sticky bar', () => {
   it.each(PAGES)('$name reserves page padding at least as tall as the bar', ({ name }) => {
     expect(html[name]).toContain('lpx-sticky');
-    const css = fs
-      .readdirSync(path.join(out, '_astro'))
-      .filter((f) => f.endsWith('.css'))
-      .map((f) => fs.readFileSync(path.join(out, '_astro', f), 'utf8'))
-      .join('\n');
+    const css = builtCss();
 
     const reserved = Number(css.match(/body\.lp\{[^}]*padding-bottom:(\d+)px/)?.[1] ?? 0);
     const barHeight = Number(css.match(/\.lpx-sticky a\{[^}]*min-height:(\d+)px/)?.[1] ?? 0);
@@ -516,11 +530,7 @@ describe('the mobile sticky bar', () => {
   });
 
   it('the bar is hidden on anything wider than a phone', () => {
-    const css = fs
-      .readdirSync(path.join(out, '_astro'))
-      .filter((f) => f.endsWith('.css'))
-      .map((f) => fs.readFileSync(path.join(out, '_astro', f), 'utf8'))
-      .join('\n');
+    const css = builtCss();
     expect(css).toMatch(/@media \(width>=768px\)\{\.lpx-sticky\{display:none\}\}/);
   });
 });
@@ -552,11 +562,7 @@ describe('the mobile sticky bar', () => {
  */
 describe('the hero scrim', () => {
   const allCss = () =>
-    fs
-      .readdirSync(path.join(out, '_astro'))
-      .filter((f) => f.endsWith('.css'))
-      .map((f) => fs.readFileSync(path.join(out, '_astro', f), 'utf8'))
-      .join('\n');
+    builtCss();
 
   it('is a full-bleed overlay, which is what makes the stacking matter', () => {
     const scrim = allCss().match(/\.lpx-hero\.has-media:after\{([^}]*)\}/)?.[1] ?? '';
@@ -590,11 +596,7 @@ describe('the hero scrim', () => {
  */
 describe('the hero photograph', () => {
   const allCss = () =>
-    fs
-      .readdirSync(path.join(out, '_astro'))
-      .filter((f) => f.endsWith('.css'))
-      .map((f) => fs.readFileSync(path.join(out, '_astro', f), 'utf8'))
-      .join('\n');
+    builtCss();
 
   it.each(PAGES)('$name renders it eagerly and at high priority', ({ name }) => {
     const h = html[name];

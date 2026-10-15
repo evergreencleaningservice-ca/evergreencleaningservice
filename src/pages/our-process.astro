@@ -1,0 +1,157 @@
+---
+/**
+ * /our-process/ — how Evergreen works and how quality is kept.
+ *
+ * Adapted from a principle the competitor review found useful (a visible,
+ * step-by-step account of what happens after a request), written only from
+ * the business's own statements — see src/data/process.ts for every source.
+ * There is no named inspection system, no checklist length and no guarantee
+ * here, because none has been supplied; the client intake list asks for them.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProcessSteps from '../components/blocks/ProcessSteps.astro';
+import TrustStrip from '../components/blocks/TrustStrip.astro';
+import QuoteBand from '../components/blocks/QuoteBand.astro';
+import FaqList from '../components/blocks/FaqList.astro';
+import LinkCards from '../components/blocks/LinkCards.astro';
+import ReviewQuotes from '../components/blocks/ReviewQuotes.astro';
+import { PRICING_FACTORS } from '../data/process';
+import { site } from '../data/site';
+import { breadcrumbSchema } from '../lib/schema';
+
+const title = 'How We Work: Walkthrough, Proposal & Quality | Evergreen';
+const description =
+  'How Evergreen works: a free walkthrough, a written proposal, a consistent crew, and inspections coordinated by your account executive.';
+
+const faqs = [
+  {
+    q: 'Is the walkthrough free?',
+    a: 'Yes. The on-site walkthrough and the proposal that follows are free and carry no obligation.',
+  },
+  {
+    q: 'Who do I contact once cleaning has started?',
+    a: 'Your account executive. They are your direct contact for walkthroughs, inspections and any change to the scope or schedule.',
+  },
+  {
+    q: 'What if our needs change?',
+    a: 'The scope is adjusted with your account executive — more frequent visits, extra areas, periodic floor care or a one-off deep clean can all be added.',
+  },
+  {
+    q: 'Who will be cleaning our building?',
+    a: 'A team assigned to your property, so the same people clean it each visit. Our cleaning staff undergo background screening, and the business is bonded and covered by liability insurance and WSIB Ontario.',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      breadcrumbSchema([{ name: site.name, url: '/' }, { name: 'About', url: '/about-us/' }, { name: 'How We Work' }])
+    )}
+    is:inline
+  />
+
+  <section class="proc-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <a href="/about-us/">About</a> &gt;
+        <span aria-current="page">How We Work</span>
+      </nav>
+      <h1>How we work</h1>
+      <p>
+        From the first call to the hundredth clean: what happens after you get in touch, who you deal
+        with, and how the work is kept to the standard you agreed.
+      </p>
+    </div>
+  </section>
+
+  <div class="container section-padding stack">
+    <ProcessSteps heading="From first call to a regular schedule" />
+
+    <section aria-label="Quality">
+      <h2 class="blk-title">How quality is kept</h2>
+      <div class="cols-2">
+        <div>
+          <h3>One person who knows your building</h3>
+          <p>
+            Every client is assigned an account executive. They are the person you call — not a
+            switchboard — and they coordinate site walkthroughs, inspections and adjustments to the
+            scope as your needs change.
+          </p>
+          <h3>The same crew</h3>
+          <p>
+            A dedicated team is assigned to your property. The people who clean it learn its layout, its
+            access arrangements and your preferences, and the standard does not reset every time the rota
+            changes.
+          </p>
+        </div>
+        <div>
+          <h3>A written scope</h3>
+          <p>
+            What is cleaned, how often and when is written into your proposal, so both sides can check the
+            work against the same list.
+          </p>
+          <h3>Proactive maintenance</h3>
+          <p>
+            Periodic work — carpet extraction, strip and wax, high dusting — is planned into the schedule
+            so floors and finishes last longer, rather than waiting until they look worn.
+          </p>
+          <h3>Products chosen with care</h3>
+          <p>
+            Our standard line is <a href="/green-clean-products/">Armstrong's ProSeries Green</a>,
+            third-party certified to UL Environment (ECOLOGO) standards, fragrance-free and free of VOCs.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <TrustStrip />
+
+    <section aria-label="What affects the price">
+      <h2 class="blk-title">What affects the price</h2>
+      <ul class="check-list">
+        {PRICING_FACTORS.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <ReviewQuotes names={['Edward Sherman', 'Michael Katchen']} />
+
+    <FaqList faqs={faqs} />
+
+    <LinkCards
+      heading="Services"
+      items={[
+        { title: 'Office Cleaning', href: '/services/office-cleaning/' },
+        { title: 'Commercial Cleaning', href: '/services/commercial-cleaning/' },
+        { title: 'Building Maintenance & Floor Care', href: '/services/building-maintenance/' },
+        { title: 'Post-Construction Cleaning', href: '/services/post-construction-cleaning/' },
+      ]}
+    />
+
+    <QuoteBand location="content" />
+  </div>
+</BaseLayout>
+
+<style>
+  .proc-hero {
+    background: var(--surface-tint);
+    border-bottom: 1px solid var(--rule);
+    padding: 28px 0 32px;
+  }
+  .proc-hero h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin: 10px 0 12px;
+  }
+  .proc-hero p {
+    max-width: 820px;
+    font-size: 1.0625rem;
+    margin: 0;
+  }
+  h3 {
+    font-size: 1.1rem;
+    margin: 18px 0 6px;
+  }
+</style>

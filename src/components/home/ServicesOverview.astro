@@ -1,0 +1,159 @@
+---
+/**
+ * What Evergreen does — every service, each a descriptive link to its page.
+ * Replaces the original's three cards, which covered three of nine services
+ * and left the rest reachable only through a hover menu.
+ */
+const PRIMARY = [
+  {
+    title: 'Office Cleaning',
+    href: '/services/office-cleaning/',
+    text: 'Recurring after-hours janitorial service for offices of every size.',
+    image: 'office-backpack-vacuum-toronto',
+  },
+  {
+    title: 'Commercial Cleaning',
+    href: '/services/commercial-cleaning/',
+    text: 'Retail, institutional, hospitality and mixed-use buildings.',
+    image: 'lobby-floor-scrubber-commercial',
+  },
+  {
+    title: 'Industrial & Warehouse Cleaning',
+    href: '/services/industrial-cleaning/',
+    text: 'Plant and warehouse floors, high dusting and staff facilities.',
+    image: 'warehouse-floor-scrubber-industrial',
+  },
+];
+
+const MORE = [
+  { title: 'Post-Construction Cleaning', href: '/services/post-construction-cleaning/', text: 'Clean-up after a renovation or fit-out, before handover.' },
+  { title: 'Building Maintenance & Floor Care', href: '/services/building-maintenance/', text: 'Strip and wax, carpet extraction, high dusting, windows.' },
+  { title: 'Disinfection Cleaning', href: '/services/disinfection-cleaning/', text: 'Clean first, then disinfect the surfaces people touch.' },
+  { title: 'Emergency Cleaning', href: '/services/emergency-cleaning/', text: 'Floods, water damage and messes that cannot wait.' },
+  { title: 'Pressure Washing', href: '/services/pressure-washing/', text: 'Entrances, walkways, loading docks and exteriors.' },
+  { title: 'Graffiti Removal', href: '/services/graffiti-removal/', text: 'Removal matched to the surface it is on.' },
+];
+---
+
+<section class="section-padding home-services" id="services" aria-labelledby="services-title">
+  <div class="container">
+    <h2 class="blk-title" id="services-title">What we clean</h2>
+    <p class="blk-intro">
+      Regular janitorial contracts, periodic maintenance and one-off specialty work — scoped on site and
+      scheduled around your business.
+    </p>
+    <ul class="hs-primary">
+      {
+        PRIMARY.map((s) => (
+          <li>
+            <a href={s.href}>
+              <picture>
+                <source type="image/avif" srcset={`/images/${s.image}-480.avif 480w, /images/${s.image}-768.avif 768w`} sizes="(min-width: 992px) 360px, 100vw" />
+                <source type="image/webp" srcset={`/images/${s.image}-480.webp 480w, /images/${s.image}-768.webp 768w`} sizes="(min-width: 992px) 360px, 100vw" />
+                <img src={`/images/${s.image}-480.jpg`} alt="" width="480" height="320" loading="lazy" decoding="async" />
+              </picture>
+              <span class="hs-body">
+                <strong>{s.title}</strong>
+                <span>{s.text}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <ul class="hs-more">
+      {
+        MORE.map((s) => (
+          <li>
+            <a href={s.href}>
+              <strong>{s.title}</strong>
+              <span>{s.text}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hs-primary,
+  .hs-more {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  @media (min-width: 768px) {
+    .hs-primary {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .hs-more {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .hs-more {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .hs-more {
+    margin-top: 18px;
+  }
+  .hs-primary a,
+  .hs-more a {
+    display: block;
+    height: 100%;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .hs-primary a:hover,
+  .hs-more a:hover,
+  .hs-primary a:focus-visible,
+  .hs-more a:focus-visible {
+    border-color: var(--brand);
+    text-decoration: none;
+  }
+  .hs-primary img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+  @media (max-width: 767px) {
+    .hs-primary img {
+      aspect-ratio: 16 / 9;
+    }
+  }
+  .hs-body {
+    display: block;
+    padding: 14px 16px 16px;
+  }
+  .hs-more a {
+    padding: 14px 16px;
+  }
+  .hs-primary strong,
+  .hs-more strong {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--brand-dark);
+    margin-bottom: 4px;
+  }
+  .hs-primary strong::after,
+  .hs-more strong::after {
+    content: ' →';
+  }
+  .hs-primary span span,
+  .hs-more span {
+    display: block;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+</style>

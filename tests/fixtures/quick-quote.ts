@@ -96,6 +96,12 @@ export const FIELDS: FieldSpec[] = [
   },
   { name: 'service', tag: 'select', required: true, errorKey: 'service' },
   /**
+   * Optional city or area of the building (2026-10-15) — the one optional
+   * question, and deliberately not a street address. No error slot: it can
+   * only be left blank, which is allowed.
+   */
+  { name: 'location', tag: 'input', type: 'text', required: false, autocomplete: 'address-level2' },
+  /**
    * `required: false` AS RENDERED, and that is the assertion, not an
    * oversight. The box is hidden until "Other" is picked, and a hidden
    * control that is `required` fails validation where nobody can see it.

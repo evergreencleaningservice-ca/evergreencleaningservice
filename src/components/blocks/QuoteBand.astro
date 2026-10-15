@@ -1,0 +1,81 @@
+---
+/** The next step: call or ask for a quote. Two actions, nothing else. */
+import { hoursNote, nap } from '../../data/site';
+
+interface Props {
+  heading?: string;
+  text?: string;
+  location?: 'service_cta' | 'content' | 'hero';
+}
+const {
+  heading = 'Get a free on-site walkthrough and quote',
+  text = 'Tell us about your building and we will arrange a time to walk it with you. No obligation.',
+  location = 'service_cta',
+} = Astro.props;
+---
+
+<section class="blk-quoteband" aria-label={heading}>
+  <div>
+    <h2>{heading}</h2>
+    <p>{text}</p>
+  </div>
+  <div class="blk-quoteband-actions">
+    <a class="btn btn-primary btn-lg" href="/request-a-quote/" data-cta-location={location}>Request a quote</a>
+    <a class="btn btn-ghost btn-lg" href={nap.phoneHref} data-call-location="content">Call {nap.phoneDisplay}</a>
+    <p class="blk-quoteband-hours">{hoursNote}</p>
+  </div>
+</section>
+
+<style>
+  .blk-quoteband {
+    display: grid;
+    gap: 18px;
+    align-items: center;
+    background: var(--brand-dark);
+    color: #fff;
+    border-radius: 8px;
+    padding: 28px 24px;
+  }
+  @media (min-width: 900px) {
+    .blk-quoteband {
+      grid-template-columns: 1fr auto;
+      padding: 32px 36px;
+    }
+  }
+  .blk-quoteband h2 {
+    color: #fff;
+    font-size: 1.6rem;
+    margin: 0 0 6px;
+  }
+  .blk-quoteband p {
+    margin: 0;
+    color: #eef6ea;
+  }
+  .blk-quoteband-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .blk-quoteband-actions .btn {
+    margin: 0;
+  }
+  .blk-quoteband .btn-primary {
+    background: #fff;
+    border-color: #fff;
+    color: var(--brand-dark);
+  }
+  .blk-quoteband .btn-primary:hover,
+  .blk-quoteband .btn-primary:focus-visible {
+    background: #eef6ea;
+    color: var(--brand-dark);
+  }
+  .blk-quoteband .btn-ghost {
+    border-color: #fff;
+    color: #fff;
+  }
+  .blk-quoteband-hours {
+    flex-basis: 100%;
+    font-size: 0.8125rem;
+  }
+</style>

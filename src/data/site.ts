@@ -285,31 +285,71 @@ export type NavItem = {
   children?: NavItem[];
 };
 
+/**
+ * The primary navigation (restructured 2026-10-15).
+ *
+ * Three hubs a buyer actually navigates by — what is cleaned (Services), whose
+ * building it is (Industries) and where it is (Service Areas) — each a real,
+ * crawlable page as well as a menu, so the hierarchy exists in links and not
+ * only in a hover state. The telephone number and the quote button are no
+ * longer menu items; Header.astro renders them as persistent actions.
+ *
+ * "Blog" points at /insights/, the indexable listing. /category/blog/ (the
+ * original WordPress address, noindex) still resolves for old links.
+ */
 export const nav: NavItem[] = [
-  { label: 'Home', href: '/' },
-  { label: `Call Now: ${site.phone}`, href: site.phoneHref },
+  {
+    label: 'Services',
+    href: '/services/',
+    children: [
+      { label: 'Office Cleaning', href: '/services/office-cleaning/' },
+      { label: 'Commercial Cleaning', href: '/services/commercial-cleaning/' },
+      { label: 'Post-Construction Cleaning', href: '/services/post-construction-cleaning/' },
+      { label: 'Building Maintenance & Floor Care', href: '/services/building-maintenance/' },
+      { label: 'Industrial & Warehouse Cleaning', href: '/services/industrial-cleaning/' },
+      { label: 'Disinfection Cleaning', href: '/services/disinfection-cleaning/' },
+      { label: 'Emergency Cleaning', href: '/services/emergency-cleaning/' },
+      { label: 'Pressure Washing', href: '/services/pressure-washing/' },
+      { label: 'Graffiti Removal', href: '/services/graffiti-removal/' },
+      { label: 'All services', href: '/services/' },
+    ],
+  },
+  {
+    label: 'Industries',
+    href: '/industries/',
+    children: [
+      { label: 'Offices', href: '/services/office-cleaning/' },
+      { label: 'Medical & Dental Clinics', href: '/industries/medical-dental-clinics/' },
+      { label: 'Property Managers & Condos', href: '/industries/property-management/' },
+      { label: 'Industrial & Warehouses', href: '/services/industrial-cleaning/' },
+      { label: 'All industries', href: '/industries/' },
+    ],
+  },
+  {
+    label: 'Service Areas',
+    href: '/locations/',
+    children: [
+      { label: 'Downtown Toronto', href: '/locations/toronto-downtown/' },
+      { label: 'Etobicoke', href: '/locations/etobicoke/' },
+      { label: 'Mississauga', href: '/locations/mississauga/' },
+      { label: 'Brampton', href: '/locations/brampton/' },
+      { label: 'Oakville', href: '/locations/oakville/' },
+      { label: 'Vaughan & Concord', href: '/locations/vaughan/' },
+      { label: 'Markham', href: '/locations/markham/' },
+      { label: 'All service areas', href: '/locations/' },
+    ],
+  },
   {
     label: 'About',
     href: '/about-us/',
     children: [
+      { label: 'About Evergreen', href: '/about-us/' },
+      { label: 'How We Work', href: '/our-process/' },
       { label: 'Green Clean Products', href: '/green-clean-products/' },
+      { label: 'Cleaning Gallery', href: '/cleaning-demo-gallery/' },
       { label: 'Submit Your Testimonial', href: '/reviews/' },
     ],
   },
-  {
-    label: 'Services',
-    children: [
-      { label: 'Disinfection Cleaning', href: '/services/disinfection-cleaning/' },
-      { label: 'Office Cleaning', href: '/services/office-cleaning/' },
-      { label: 'Emergency Cleaning', href: '/services/emergency-cleaning/' },
-      { label: 'Commercial Cleaning', href: '/services/commercial-cleaning/' },
-      { label: 'Industrial Cleaning', href: '/services/industrial-cleaning/' },
-      {
-        label: 'Property Management and Building Maintenance',
-        href: '/services/building-maintenance/',
-      },
-    ],
-  },
-  { label: 'Blog', href: '/category/blog/' },
-  { label: 'Contact Us', href: '/contact-us/' },
+  { label: 'Blog', href: '/insights/' },
+  { label: 'Contact', href: '/contact-us/' },
 ];

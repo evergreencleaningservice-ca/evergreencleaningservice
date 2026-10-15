@@ -48,6 +48,10 @@ const out = path.join(repo, '.astro-test-dist');
 const NOINDEX_ROUTES = [
   'lp/commercial-cleaning/index.html',
   'lp/commercial-cleaning-quote/index.html',
+  /* Added 2026-10-15, from src/data/landing-pages.ts: campaign-only pages
+     that repeat the intent of an indexable service page. */
+  'lp/office-cleaning/index.html',
+  'lp/post-construction-cleaning/index.html',
   'thank-you/index.html',
 ];
 

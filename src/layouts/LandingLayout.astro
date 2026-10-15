@@ -143,7 +143,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
             {callNote && <p class="lp-call-note">{callNote}</p>}
           </div>
           {quoteAnchor && (
-            <a class="lp-header-quote" href={`#${quoteAnchor}`}>Free quote</a>
+            <a class="lp-header-quote" href={`#${quoteAnchor}`} data-quote-cta data-cta-location="paid_header">Free quote</a>
           )}
         </div>
       </div>

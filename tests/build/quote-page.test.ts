@@ -145,8 +145,11 @@ describe('the rendered form matches the contract the unit suite tests', () => {
        only when the service select says "Other", so counting it as a fifth
        question would misstate what a visitor is actually asked for — and
        the count of questions is the number this test exists to hold down. */
-    expect(FIELDS).toHaveLength(5);
-    expect(FIELDS.filter((f) => f.name !== 'message')).toHaveLength(4);
+    /* Six since 2026-10-15: the optional city-or-area box is the fifth
+       visible question; all four required ones are unchanged. */
+    expect(FIELDS).toHaveLength(6);
+    expect(FIELDS.filter((f) => f.name !== 'message')).toHaveLength(5);
+    expect(FIELDS.filter((f) => f.required)).toHaveLength(4);
 
     /* Matched loosely on the attributes, not on the full opening tag:
        Astro appends a scoped class, so a literal tag match pins the
@@ -226,15 +229,13 @@ describe('every field is labelled', () => {
     }
   });
 
-  it('has no optional field left to mark', () => {
-    /* "Anything we should know? (Optional)" was the one field a visitor could
-       skip. The reference form's equivalent is "Cleaning needs", required —
-       so there is nothing to label optional, and nothing should claim to be.
-       The consent checkbox is not a question about the enquiry and has its
-       own block below. */
+  it('marks exactly one field optional — the city or area', () => {
+    /* "Anything we should know? (Optional)" is still gone. Since 2026-10-15
+       the one optional question is where the building is, and it says so. */
     const f = quickQuoteForm();
     expect(f).not.toMatch(/Anything we should know/i);
-    expect(f).not.toMatch(/qq-optional/);
+    expect([...f.matchAll(/qq-optional/g)]).toHaveLength(1);
+    expect(f).toMatch(/City or area of the building/);
     expect(f).toMatch(/Cleaning needs/i);
   });
 });

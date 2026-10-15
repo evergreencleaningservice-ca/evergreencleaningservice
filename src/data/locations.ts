@@ -66,19 +66,22 @@ export const locations: Location[] = [
     slug: 'toronto-downtown',
     name: 'Downtown Toronto',
     region: 'downtown Toronto',
+    /* Rewritten 2026-10-15: the earlier focus and facility list named
+       specific districts and building types nobody had confirmed Evergreen
+       works in. These are the facility types the client itself lists. */
     focus:
-      'Tower suites and multi-tenant office floors in the Financial District, King West and the Entertainment District, where cleaning has to work around building security, loading-dock windows and shared elevator access.',
+      'Offices, multi-tenant buildings, clinics and retail space close to our Queen Street West office, cleaned after hours around building access and security rules.',
     facilities: [
-      'Financial District tower suites',
-      'King West and Entertainment District studios',
-      'Multi-tenant floors with shared common areas',
-      'Ground-floor retail and showroom space',
-      'Boardroom and event floors',
+      'Office buildings and professional offices',
+      'Multi-tenant floors and shared common areas',
+      'Medical and dental clinics',
+      'Retail stores and showrooms',
+      'Institutional and public buildings',
     ],
     landmarks: 'the Financial District, King West, the Entertainment District and the St. Lawrence area',
     mapQuery: 'Downtown Toronto, Ontario, Canada',
     description:
-      'Commercial and office cleaning in downtown Toronto — Financial District towers, King West studios and multi-tenant floors, cleaned after hours by a bonded, insured and WSIB-compliant crew.',
+      'Commercial and office cleaning in downtown Toronto — offices, multi-tenant buildings, clinics and retail, cleaned after hours by a WSIB-covered crew.',
     needsClientReview: true,
   },
   {
@@ -244,38 +247,41 @@ export const locations: Location[] = [
     slug: 'brampton',
     name: 'Brampton',
     region: 'Brampton',
+    /* Rewritten 2026-10-15 to the client's own facility list; the earlier
+       corridor-by-corridor detail was unverified. */
     focus:
-      'Warehousing and third-party logistics along the Highway 407 and Airport Road corridors, together with the multi-tenant offices and trade counters that sit beside them.',
+      'Warehouses, industrial buildings and the offices attached to them, on schedules built around shifts.',
     facilities: [
-      'Warehousing and third-party logistics',
-      'Trade counters and parts departments',
-      'Multi-tenant offices and business centres',
-      'Food-handling and packaging facilities',
-      'Automotive and transport depots',
+      'Warehouses and distribution facilities',
+      'Industrial buildings and plants',
+      'Offices and multi-tenant business buildings',
+      'Retail stores and showrooms',
+      'Medical and dental clinics',
     ],
     landmarks: 'the Airport Road and Highway 407 logistics corridors, Bramalea and the Steeles Avenue industrial belt',
     mapQuery: 'Brampton, Ontario, Canada',
     description:
-      'Commercial and industrial cleaning in Brampton — warehousing, logistics facilities and the offices attached to them, on schedules built around shift changes.',
+      'Commercial and industrial cleaning in Brampton — warehouses, industrial buildings and the offices attached to them, on schedules built around shifts.',
     needsClientReview: true,
   },
   {
     slug: 'oakville',
     name: 'Oakville',
     region: 'Oakville',
+    /* Rewritten 2026-10-15 to the client's own facility list. */
     focus:
-      'Professional offices, medical and dental practices, and the corporate campuses along the Queen Elizabeth Way, where presentation matters as much as hygiene.',
+      'Professional offices, medical and dental clinics and client-facing commercial space, where presentation matters as much as hygiene.',
     facilities: [
-      'Professional and legal offices',
-      'Medical and dental practices',
-      'Corporate campuses along the QEW',
-      'Showrooms and client-facing reception areas',
-      'Light industrial with office frontage',
+      'Professional offices',
+      'Medical and dental clinics',
+      'Retail stores and showrooms',
+      'Office and industrial buildings',
+      'Condominium common areas',
     ],
     landmarks: 'the QEW corporate corridor, Winston Park, Bronte and the Kerr Street commercial area',
     mapQuery: 'Oakville, Ontario, Canada',
     description:
-      'Commercial and office cleaning in Oakville — professional offices, medical practices and QEW corporate campuses, cleaned to a standard clients see.',
+      'Commercial and office cleaning in Oakville — professional offices, medical and dental clinics and client-facing space, cleaned to a standard clients see.',
     needsClientReview: true,
   },
 ];

@@ -55,17 +55,20 @@ const find = (pattern: RegExp) =>
 
 describe('the grammatical errors are gone from every page', () => {
   it.each([
-    ['"best is services"', /best is services/i, /best in service\b/i],
-    ['"cans ad make sure"', /cans ad make sure/i, /cans and make sure/i],
-    ['"most populated area’s"', /populated area[’']s/i, /populated areas of our city/i],
-    ['"when outsource their"', /when outsource their/i, /when they outsource their/i],
+    /* These four lived only in the homepage's long About essay, which the
+       2026-10-15 homepage rewrite retired. The misspelling must still appear
+       nowhere; there is no longer a corrected sentence to look for. */
+    ['"best is services"', /best is services/i, null],
+    ['"cans ad make sure"', /cans ad make sure/i, null],
+    ['"most populated area’s"', /populated area[’']s/i, null],
+    ['"when outsource their"', /when outsource their/i, null],
     ['"make a a bold statement"', /make a a bold/i, /make a bold statement/i],
     ['"medial clinics"', /medial clinic/i, /medical clinic/i],
     ['"if you’re ever have an emergency"', /ever have an emergency/i, /ever in an emergency/i],
     ['"There staff are professional"', /There staff are/i, /Their staff are/i],
   ])('%s is corrected', (_label, wrong, right) => {
     expect(find(wrong)).toEqual([]);
-    expect(find(right).length).toBeGreaterThan(0);
+    if (right) expect(find(right).length).toBeGreaterThan(0);
   });
 
   it('fixes both copies of the About text, not just one', () => {

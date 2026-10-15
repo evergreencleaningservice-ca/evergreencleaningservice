@@ -24,3 +24,18 @@ https://stage.evergreencleaningservice.ca/*
 # cannot match a *.evergreencleaningservice.ca host.
 https://:version.:subdomain.workers.dev/*
   X-Robots-Tag: noindex, nofollow, noarchive
+
+# Long-lived caching for files whose names change when their content does.
+#
+# Astro fingerprints everything under /_astro/ (e.g. global.BoPM8NAr.css), so
+# a changed file is always a new URL and the old one can be kept forever.
+# Without this rule Workers static assets answer `max-age=0, must-revalidate`
+# and every repeat visit re-validates every stylesheet and script.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The three self-hosted font files are NOT fingerprinted, so they get a month
+# rather than a year: long enough to matter on repeat visits, short enough
+# that `npm run fonts:fetch` replacing a file is picked up without a rename.
+/fonts/*
+  Cache-Control: public, max-age=2592000

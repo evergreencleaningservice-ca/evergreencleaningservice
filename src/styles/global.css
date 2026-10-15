@@ -48,7 +48,9 @@ html {
 
   /* Was #777777: 4.48:1 on white, which fails AA by two hundredths, and
      3.59:1 on the #f4f4f4 review cards. */
-  --ink: #6f6f6f; /* body copy */
+  /* #555 since 2026-10-15 (was #6f6f6f, 5.0:1): body copy now reads at
+     7.5:1 on white, which matters most on a phone in daylight. */
+  --ink: #555555; /* body copy */
   --ink-heading: #333333; /* all headings */
   /* Was #aaaaaa: 2.2:1 at 12px. The eyebrow is genuinely lighter than the
      body copy in the original design, and it can still be — but not at a
@@ -81,7 +83,8 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  /* 15px at the 16px root (was 14px). */
+  font-size: 0.9375rem;
   line-height: 1.7;
   color: var(--ink);
   background: var(--surface);
@@ -223,12 +226,14 @@ img {
 
 .section-title {
   font-family: var(--font-heading);
-  font-size: 40px;
-  line-height: 1.2;
+  /* Sentence case and 2rem since 2026-10-15, matching the new templates'
+     `.blk-title`; the theme's 40px tracked uppercase read as shouting. */
+  font-size: 2rem;
+  line-height: 1.25;
   font-weight: 800;
   color: var(--ink-heading);
-  letter-spacing: 3.5px;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   margin: 0;
 }
 
@@ -240,8 +245,7 @@ img {
     font-size: 12px;
   }
   .section-title {
-    font-size: 30px;
-    letter-spacing: 2px;
+    font-size: 1.6rem;
   }
 }
 
@@ -560,44 +564,121 @@ img {
   }
 }
 
-/* ---------- scroll-in animation ---------- */
+/* ---------- scroll-in animation: removed ----------
 
-/*
- * The original uses WOW.js with animate.css: content blocks carry `wow
- * slideInUp`, start hidden, and are given `animated` when they scroll into
- * view. The classes and timings here are the theme's own; the trigger is an
- * IntersectionObserver in BaseLayout rather than the library.
- *
- * Anything still hidden is a block whose animation never fired, so both the
- * reduced-motion query and the noscript fallback reveal them outright.
- */
-.wow {
-  visibility: hidden;
+   The original theme hid every `.wow` block (visibility: hidden) until a
+   scroll observer revealed it with a slide-in. Removed 2026-10-15: content
+   that is invisible until JavaScript runs is content a slow phone, a
+   full-page screenshot, a crawler snapshot or a fast anchor jump can miss,
+   and the observer plus the per-block animations added style and layout work
+   on every page. Everything now renders visible on first paint. */
+
+
+/* ---------- shared content blocks (2026-10-15) ----------
+   Used by the service, industry and process templates and the homepage. */
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--brand);
+  color: var(--brand-dark);
 }
 
-.animated {
-  animation-duration: 1s;
-  animation-fill-mode: both;
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background: var(--brand);
+  color: #fff;
 }
 
-.slideInUp {
-  animation-name: slideInUp;
+.blk-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--ink-heading);
+  margin: 0 0 14px;
 }
 
-@keyframes slideInUp {
-  from {
-    transform: translate3d(0, 100%, 0);
-    visibility: visible;
+@media (max-width: 767px) {
+  .blk-title {
+    font-size: 1.5rem;
   }
-  to {
-    transform: translate3d(0, 0, 0);
+}
+
+.blk-intro {
+  max-width: 760px;
+  margin: 0 0 22px;
+  font-size: 1.0625rem;
+}
+
+/* Vertical rhythm for stacked sections inside a template. */
+.stack > * + * {
+  margin-top: 56px;
+}
+
+@media (max-width: 767px) {
+  .stack > * + * {
+    margin-top: 40px;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .wow,
-  .animated {
-    visibility: visible;
-    animation: none;
+.band-tint {
+  background: var(--surface-tint);
+}
+
+.check-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.check-list li {
+  position: relative;
+  padding-left: 26px;
+}
+
+.check-list li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0.45em;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid var(--brand);
+  border-bottom: 2px solid var(--brand);
+  transform: rotate(-45deg);
+}
+
+.cols-2 {
+  display: grid;
+  gap: 28px;
+}
+
+@media (min-width: 768px) {
+  .cols-2 {
+    grid-template-columns: 1fr 1fr;
   }
+}
+
+.note {
+  font-size: 0.875rem;
+  border-left: 3px solid var(--rule);
+  padding-left: 12px;
+}
+
+/* Links inside running text are underlined (2026-10-15): colour alone gave
+   1.55:1 against the body text, under the 3:1 a link in a paragraph needs. */
+main p a:not(.btn),
+main li > p a:not(.btn) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Area lists are dense link lists: keep each link a 24px target. */
+.ar-grid a,
+.offer-areas a {
+  display: inline-block;
+  min-height: 24px;
+  padding: 2px 0;
 }

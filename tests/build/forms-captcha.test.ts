@@ -157,7 +157,11 @@ describe('comments and testimonials are not leads', () => {
 
   it('the lead forms are untouched and still post to /api/submit-lead', () => {
     const leads = accepting().filter((f) => !f.postKind);
-    expect(leads).toHaveLength(5);
+    /* 5 before 2026-10-15 (home, contact, quote page, two landing pages).
+       Since then every service, industry and location page carries the short
+       quote form beside its content, and two landing pages were added:
+       5 + 9 services + 2 industries + 7 locations + 2 landing pages. */
+    expect(leads).toHaveLength(25);
     for (const f of leads) expect(f.endpoint, f.page).toBe('/api/submit-lead');
   });
 });

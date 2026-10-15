@@ -1,16 +1,17 @@
 ---
+/**
+ * /services/<slug>/ — every service page, through the shared OfferPage
+ * template. A page whose front matter carries only the original fields
+ * renders its Markdown inside the template; one with the structured fields
+ * gets the full page. See src/components/OfferPage.astro.
+ */
 import type { InferGetStaticPropsType } from 'astro';
 import { getCollection, render } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Sidebar from '../../components/Sidebar.astro';
-import { site } from '../../data/site';
-import { pageTitle } from '../../lib/title';
-import { breadcrumbSchema } from '../../lib/schema';
+import OfferPage from '../../components/OfferPage.astro';
 import { normalizeBody } from '../../lib/normalize-body';
 
 export async function getStaticPaths() {
   const services = await getCollection('services');
-
   return services.map((service) => ({
     params: { slug: service.id },
     props: { service },
@@ -18,63 +19,16 @@ export async function getStaticPaths() {
 }
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
-
 const { service } = Astro.props as Props;
-const { title, description, image } = service.data;
+
 // `render()` is also what fills `service.rendered`, which is normalised below.
-// Keep the call even though `Content` is only the fallback.
-const { Content } = await render(service);
+await render(service);
 const body = service.rendered?.html ? normalizeBody(service.rendered.html) : null;
 ---
 
-<BaseLayout title={pageTitle(`${title}`)} description={description} image={image}>
-<script
-  slot="head"
-  type="application/ld+json"
-  set:html={JSON.stringify(
-    breadcrumbSchema([
-      { name: site.name, url: '/' },
-      { name: 'Services', url: '/services/' },
-      { name: title },
-    ])
-  )}
-  is:inline
+<OfferPage
+  data={service.data}
+  body={body}
+  parent={{ name: 'Services', url: '/services/' }}
+  formId={`service-${service.id}`}
 />
-
-  <div class="page-header">
-    <div class="container">
-      <h1 class="entry-title">{title}</h1>
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">{site.name}</a> &gt; <a href="/services/">Services</a> &gt; <span>{title}</span>
-      </nav>
-    </div>
-  </div>
-
-  <div class="section-padding">
-    <div class="container service-container content-grid">
-      <article class="entry-content">
-        {body ? <Fragment set:html={body} /> : <Content />}
-      </article>
-      <Sidebar />
-    </div>
-  </div>
-</BaseLayout>
-
-<style>
-
-
-  .content-grid {
-    display: grid;
-    gap: 40px;
-  }
-
-  @media (min-width: 992px) {
-    .content-grid {
-      grid-template-columns: minmax(0, 7.9fr) minmax(0, 2.9fr);
-      gap: 30px;
-    }
-  }
-
-  .service-container {
-  }
-</style>

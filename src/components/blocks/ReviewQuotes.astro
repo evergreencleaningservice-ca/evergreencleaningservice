@@ -1,0 +1,63 @@
+---
+/**
+ * Named Google reviews, quoted in full. Real reviews only (src/data/reviews.ts),
+ * chosen per page for relevance — never re-attributed to a city or industry
+ * the reviewer did not mention, and never summarised into a rating.
+ */
+import { reviews, relativeAge } from '../../data/reviews';
+
+interface Props {
+  names?: string[];
+  heading?: string;
+}
+const { names, heading = 'What clients say' } = Astro.props;
+const chosen = names ? reviews.filter((r) => names.includes(r.name)) : reviews;
+---
+
+<section class="blk-reviews" aria-label={heading}>
+  <h2 class="blk-title">{heading}</h2>
+  <div class="blk-review-grid">
+    {
+      chosen.map((r) => (
+        <figure class="blk-review">
+          <blockquote>
+            <p>“{r.text}”</p>
+          </blockquote>
+          <figcaption>
+            <strong>{r.name}</strong>, Google review, {relativeAge(r.date)}
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .blk-review-grid {
+    display: grid;
+    gap: 16px;
+  }
+  @media (min-width: 768px) {
+    .blk-review-grid {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+  }
+  .blk-review {
+    margin: 0;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--brand);
+    border-radius: 6px;
+    padding: 16px 18px;
+  }
+  .blk-review blockquote {
+    margin: 0 0 10px;
+  }
+  .blk-review p {
+    margin: 0;
+    color: var(--ink-heading);
+  }
+  .blk-review figcaption {
+    font-size: 0.8125rem;
+  }
+</style>

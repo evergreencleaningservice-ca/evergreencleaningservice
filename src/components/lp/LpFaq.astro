@@ -1,0 +1,21 @@
+---
+/** FAQs on a paid page, visible and in FAQPage JSON-LD (see FaqList). */
+import FaqList from '../blocks/FaqList.astro';
+
+interface Props {
+  faqs: { q: string; a: string }[];
+}
+const { faqs } = Astro.props;
+---
+
+<section class="lpx-section">
+  <div class="lpx-wrap lpx-faq">
+    <FaqList faqs={faqs} heading="Questions" />
+  </div>
+</section>
+
+<style>
+  .lpx-faq {
+    max-width: 860px;
+  }
+</style>

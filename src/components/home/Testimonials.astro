@@ -52,7 +52,7 @@ const testimonials = [
       <h2 class="section-title" id="testimonials-title">Testimonials</h2>
     </div>
 
-    <div class="card-deck wow slideInUp">
+    <div class="card-deck">
       {
         testimonials.map((item) => (
           <figure class="testimonial">
@@ -65,7 +65,7 @@ const testimonials = [
                 <span>{item.role}</span>
               </cite>
             </figcaption>
-            <h4 class="testimonial-title">{item.title}</h4>
+            <h3 class="testimonial-title">{item.title}</h3>
             <blockquote>
               <p>{item.quote}</p>
             </blockquote>

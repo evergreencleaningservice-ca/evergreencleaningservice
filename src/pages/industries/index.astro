@@ -1,0 +1,132 @@
+---
+/**
+ * /industries/ — who Evergreen cleans for.
+ *
+ * Every facility type listed is one the business itself names (sources in
+ * src/data/industries.ts). Two have their own page; the rest point at the
+ * service page that already covers them, rather than a near-duplicate.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import QuoteBand from '../../components/blocks/QuoteBand.astro';
+import TrustStrip from '../../components/blocks/TrustStrip.astro';
+import { INDUSTRIES } from '../../data/industries';
+import { site } from '../../data/site';
+import { breadcrumbSchema, collectionSchema } from '../../lib/schema';
+
+const title = 'Industries We Clean For in Toronto & the GTA | Evergreen';
+const description =
+  'Commercial cleaning for offices, clinics, property managers and condos, industrial sites, retail and public buildings across Toronto and the GTA.';
+---
+
+<BaseLayout title={title} description={description}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbSchema([{ name: site.name, url: '/' }, { name: 'Industries' }]))}
+    is:inline
+  />
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(collectionSchema({ name: 'Industries we clean for', url: '/industries/', description }))}
+    is:inline
+  />
+
+  <section class="ind-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <span aria-current="page">Industries</span>
+      </nav>
+      <h1>Who we clean for</h1>
+      <p>
+        Since 1989 Evergreen has cleaned professional offices, health, dental and medical clinics, retail
+        outlets, industrial buildings and warehouses across Toronto and the GTA. Each kind of building
+        brings its own hours, rules and priorities — this is how we approach them.
+      </p>
+    </div>
+  </section>
+
+  <div class="container section-padding stack">
+    <ul class="ind-grid">
+      {
+        INDUSTRIES.map((ind) => (
+          <li class="ind-card">
+            <h2>
+              <a href={ind.href}>{ind.name}</a>
+            </h2>
+            <p>{ind.summary}</p>
+            <ul class="check-list">
+              {ind.examples.map((e) => (
+                <li>{e}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+
+    <TrustStrip />
+
+    <QuoteBand
+      heading="Not sure which fits your building?"
+      text="Tell us what the space is and how it is used. We will walk it with you and recommend a scope."
+      location="content"
+    />
+  </div>
+</BaseLayout>
+
+<style>
+  .ind-hero {
+    background: var(--surface-tint);
+    border-bottom: 1px solid var(--rule);
+    padding: 28px 0 32px;
+  }
+  .ind-hero h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin: 10px 0 12px;
+  }
+  .ind-hero p {
+    max-width: 820px;
+    font-size: 1.0625rem;
+    margin: 0;
+  }
+  .ind-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+  @media (min-width: 700px) {
+    .ind-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .ind-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .ind-card {
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--brand);
+    border-radius: 6px;
+    padding: 18px 20px;
+    background: #fff;
+  }
+  .ind-card h2 {
+    font-size: 1.25rem;
+    margin: 0 0 8px;
+  }
+  .ind-card h2 a {
+    color: var(--ink-heading);
+  }
+  .ind-card h2 a::after {
+    content: ' →';
+    color: var(--brand);
+  }
+  .ind-card p {
+    margin: 0 0 10px;
+  }
+</style>

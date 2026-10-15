@@ -13,21 +13,23 @@ interface Props {
   /** The form's DOM id on this page, for the quote button. */
   quoteAnchor: string;
   heading?: string;
+  /** When the reply comes. Defaults to the paid pages' promise. */
+  replyPromise?: string;
 }
 
-const { quoteAnchor, heading = 'Ready for a quote?' } = Astro.props;
+const { quoteAnchor, heading = 'Ready for a quote?', replyPromise = REPLY_PROMISE } = Astro.props;
 ---
 
 <section class="lpx-final" aria-labelledby="lpx-final-h">
   <div class="lpx-wrap">
     <h2 id="lpx-final-h">{heading}</h2>
     <p>
-      Tell us where you are and what needs cleaning. We reply {REPLY_PROMISE} —
+      Tell us where you are and what needs cleaning. We reply {replyPromise} —
       no obligation, and no visit until you ask for one.
     </p>
     <div class="lpx-final-actions">
       <a class="lpx-btn lpx-btn-primary" href={nap.phoneHref} data-call data-call-location="paid_cta">Call {nap.phoneDisplay}</a>
-      <a class="lpx-btn lpx-btn-ghost" href={`#${quoteAnchor}`}>Get my free quote</a>
+      <a class="lpx-btn lpx-btn-ghost" href={`#${quoteAnchor}`} data-quote-cta data-cta-location="paid_cta">Get my free quote</a>
     </div>
   </div>
 </section>

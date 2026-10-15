@@ -1,0 +1,54 @@
+---
+/**
+ * Where we work — the verified coverage list, with links to the location
+ * pages that exist. The business has one address (Toronto); no other place
+ * named here is presented as an office.
+ */
+import { AREAS, AREA_GROUPS } from '../../data/coverage';
+import { nap } from '../../data/site';
+---
+
+<section class="section-padding band-tint" id="areas" aria-labelledby="areas-title">
+  <div class="container">
+    <h2 class="blk-title" id="areas-title">Where we work</h2>
+    <p class="blk-intro">
+      Crews are dispatched across the Greater Toronto Area from our base at {nap.addressLine.split(',')[0]},
+      Toronto.
+    </p>
+    <div class="ar-grid">
+      {
+        AREA_GROUPS.map((group) => (
+          <div>
+            <h3>{group}</h3>
+            <ul>
+              {AREAS.filter((a) => a.group === group).map((a) => (
+                <li>{a.href ? <a href={a.href}>{a.name}</a> : a.name}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+    <p class="ar-all"><a href="/locations/">All service areas →</a></p>
+  </div>
+</section>
+
+<style>
+  .ar-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+  .ar-grid h3 {
+    font-size: 1rem;
+    margin: 0 0 6px;
+  }
+  .ar-grid ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .ar-all {
+    margin: 18px 0 0;
+    font-weight: 600;
+  }
+</style>

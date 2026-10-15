@@ -162,7 +162,7 @@ describe('the homepage heading outline', () => {
     /* It was the rotating brandmark, whose accessible name was five words
        read as a comma list — not a heading and not a sentence. */
     const h1 = headings(home(), 1);
-    expect(h1).toEqual(['Professional Office &amp; Commercial Cleaning in Toronto']);
+    expect(h1).toEqual(['Office &amp; Commercial Cleaning in Toronto and the GTA']);
   });
 
   it('is present in the initial HTML, not injected by script', () => {
@@ -174,12 +174,11 @@ describe('the homepage heading outline', () => {
     expect(home()).not.toMatch(/<h1[^>]*hidden/);
   });
 
-  it('the rotating brandmark is decoration and hidden from assistive tech', () => {
-    const brandmark = home().match(/<div class="hero-brandmark"[^>]*>/)?.[0] ?? '';
-    expect(brandmark).toContain('aria-hidden="true"');
-    /* and the five screen-reader commas that used to separate the words are
-       gone with it — nothing in there is announced at all now. */
-    expect(home()).not.toMatch(/hero-word[^>]*>[^<]*<span class="screen-reader-text">,/);
+  it('the rotating brandmark is gone entirely (2026-10-15)', () => {
+    /* It was decoration (aria-hidden) that pushed the heading and both
+       actions down the first screen; the hero now opens on the H1. */
+    expect(home()).not.toContain('hero-brandmark');
+    expect(home()).not.toContain('hero-word');
   });
 
   it('no rotating word is a heading any more', () => {
@@ -188,14 +187,14 @@ describe('the homepage heading outline', () => {
         expect(h).not.toMatch(/Janitorial Services|Disinfection Cleaning/);
   });
 
-  it('keeps "Toronto Office Cleaning Services" on the page, as an H2', () => {
-    /* The phrase is the homepage's main keyword. It moved from H1 to H2 so
-       the hero could carry the single H1; it did not move off the page. */
-    expect(headings(home(), 2)).toContain('Toronto Office Cleaning Services');
+  it('keeps office cleaning and Toronto in the H1', () => {
+    /* The old H2 "Toronto Office Cleaning Services" sat in the retired About
+       essay; the intent now lives in the H1 itself. */
+    expect(headings(home(), 1)[0]).toMatch(/Office .*Cleaning in Toronto/);
   });
 
   it('keeps the local-intent wording in the title tag', () => {
-    expect(home()).toContain('<title>Office Cleaning Services Toronto - Evergreen Office Cleaning');
+    expect(home()).toMatch(/<title>Office &amp; Commercial Cleaning in Toronto &amp; GTA/);
   });
 });
 
@@ -316,12 +315,13 @@ describe('the rest of the page is untouched', () => {
     }
   });
 
-  it('all 69 sitemap URLs were built', () => {
+  /* 69 until 2026-10-15; +4 for /industries/, its two pages and /our-process/. */
+  it('all 73 sitemap URLs were built', () => {
     const locs = (xml: string) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const urls = locs(read('sitemap-index.xml')).flatMap((child) =>
       locs(read(path.basename(new URL(child).pathname)))
     );
-    expect(urls).toHaveLength(69);
+    expect(urls).toHaveLength(73);
     const missing = urls.filter((u) => !exists(new URL(u).pathname));
     expect(missing).toEqual([]);
   });

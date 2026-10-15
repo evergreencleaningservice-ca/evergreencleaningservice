@@ -1,0 +1,78 @@
+---
+/** Who Evergreen serves — the industries hub, condensed. */
+import { INDUSTRIES } from '../../data/industries';
+---
+
+<section class="section-padding band-tint" id="industries" aria-labelledby="industries-title">
+  <div class="container">
+    <h2 class="blk-title" id="industries-title">Who we clean for</h2>
+    <p class="blk-intro">
+      Professional offices, health, dental and medical clinics, managed buildings, retail, industrial
+      buildings and warehouses across Toronto and the GTA.
+    </p>
+    <ul class="ww-grid">
+      {
+        INDUSTRIES.map((ind) => (
+          <li>
+            <a href={ind.href}>
+              <strong>{ind.name}</strong>
+              <span>{ind.summary}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="ww-all"><a href="/industries/">All industries we serve →</a></p>
+  </div>
+</section>
+
+<style>
+  .ww-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+  @media (min-width: 640px) {
+    .ww-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .ww-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .ww-grid a {
+    display: block;
+    height: 100%;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 16px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .ww-grid a:hover,
+  .ww-grid a:focus-visible {
+    border-color: var(--brand);
+    text-decoration: none;
+  }
+  .ww-grid strong {
+    display: block;
+    font-family: var(--font-heading);
+    color: var(--ink-heading);
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+  }
+  .ww-grid span {
+    display: block;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  .ww-all {
+    margin: 18px 0 0;
+    font-weight: 600;
+  }
+</style>

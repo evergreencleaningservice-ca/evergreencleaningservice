@@ -27,6 +27,13 @@ interface Props {
   /**
    * Load api.js at once instead of waiting for the form to be approached.
    *
+   * TURNSTILE ONLY. reCAPTCHA (the provider in use since 2026-09-28)
+   * deliberately ignores this: its v2 checkbox is the last control in the
+   * form, so focusing the first field starts the load several fields before
+   * anyone can tick it, and loading it on arrival cost every paid click
+   * ~400ms of blocking time and ~800KB (docs/growth/performance.md). See
+   * Recaptcha.astro for the triggers it uses instead.
+   *
    * For a form that is ALREADY in the first screen, which is the paid landing
    * pages' whole layout. The deferral below exists because the site's inner
    * pages carry a quote form in the sidebar, far below the fold, on every

@@ -40,6 +40,7 @@
  */
 import SpamGuard from './SpamGuard.astro';
 import { SERVICE_OPTIONS } from '../data/services';
+import { SERVICE_LOCATION_SUGGESTIONS } from '../data/coverage';
 
 interface Props {
   /** Prefix for field ids, so two of these can share a page. */
@@ -182,6 +183,32 @@ const f = (name: string) => `${id}-${name}`;
       {SERVICE_OPTIONS.map((service) => <option value={service}>{service}</option>)}
     </select>
     <p class="qq-error" id={f('service-error')} data-qq-error="service"></p>
+  </div>
+
+  {/* SERVICE LOCATION — city or area only, and optional (2026-10-15).
+
+      Where the building is decides whether the enquiry is in the service
+      area and who walks it, so it is worth one optional box. It is NOT a
+      street address: that was asked for once and taken back out, and it
+      still is not asked for. The datalist suggests the areas the business
+      names; anything else can be typed. Stored in the existing `address`
+      column, which therefore holds a city for leads from this form. */}
+  <div class="qq-field">
+    <label class="qq-label" for={f('location')}>
+      City or area of the building <span class="qq-optional">(optional)</span>
+    </label>
+    <input
+      type="text"
+      id={f('location')}
+      name="location"
+      autocomplete="address-level2"
+      list={f('location-list')}
+      placeholder="e.g. Mississauga"
+      maxlength="80"
+    />
+    <datalist id={f('location-list')}>
+      {SERVICE_LOCATION_SUGGESTIONS.map((place) => <option value={place} />)}
+    </datalist>
   </div>
 
   {/* Revealed only when "Other" is picked, by `wireServiceOther`.

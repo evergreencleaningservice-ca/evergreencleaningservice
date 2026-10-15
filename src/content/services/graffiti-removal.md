@@ -2,6 +2,13 @@
 title: "Graffiti Removal"
 description: "Commercial graffiti removal in Toronto and the GTA — fast response on building exteriors, shutters, signage and glass, with the method matched to the surface."
 needsClientCopy: true
+related:
+  - title: "Pressure Washing"
+    href: "/services/pressure-washing/"
+  - title: "Building Maintenance & Floor Care"
+    href: "/services/building-maintenance/"
+  - title: "Property Managers & Condos"
+    href: "/industries/property-management/"
 ---
 
 ## Graffiti costs a property more the longer it stays up.

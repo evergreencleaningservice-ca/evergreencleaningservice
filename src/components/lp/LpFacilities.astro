@@ -11,20 +11,23 @@ import { FACILITY_TYPES } from '../../data/landing';
 
 interface Props {
   heading?: string;
+  note?: string;
+  items?: readonly { title: string; body: string }[];
 }
-const { heading = 'Buildings we look after' } = Astro.props;
+const {
+  heading = 'Buildings we look after',
+  note = 'If your building is not on this list, it is still worth asking — most of what we do is scheduled around a space rather than a category.',
+  items = FACILITY_TYPES,
+} = Astro.props;
 ---
 
 <section class="lpx-section" aria-labelledby="lpx-facilities-h">
   <div class="lpx-wrap">
     <h2 id="lpx-facilities-h">{heading}</h2>
-    <p class="lpx-section-note">
-      If your building is not on this list, it is still worth asking — most of what we do is
-      scheduled around a space rather than a category.
-    </p>
+    <p class="lpx-section-note">{note}</p>
     <ul class="lpx-cards lpx-cards-3">
       {
-        FACILITY_TYPES.map((f) => (
+        items.map((f) => (
           <li>
             <strong>{f.title}</strong>
             <span>{f.body}</span>

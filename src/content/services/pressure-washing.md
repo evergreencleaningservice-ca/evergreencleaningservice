@@ -2,6 +2,13 @@
 title: "Pressure Washing"
 description: "Commercial pressure washing in Toronto and the GTA — building exteriors, walkways, loading docks and parking structures, cleaned on a schedule that suits your site."
 needsClientCopy: true
+related:
+  - title: "Building Maintenance & Floor Care"
+    href: "/services/building-maintenance/"
+  - title: "Graffiti Removal"
+    href: "/services/graffiti-removal/"
+  - title: "Property Managers & Condos"
+    href: "/industries/property-management/"
 ---
 
 ## Pressure washing is the difference between a building that looks maintained and one that looks neglected.
