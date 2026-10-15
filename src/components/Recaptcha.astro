@@ -140,7 +140,6 @@ const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || recaptcha.testSiteK
            than reporting an anonymous "fill out this field". */
         var hidden = slots[i].parentNode.querySelector('.wpf-recaptcha-hidden');
         if (hidden && !hidden.value) hidden.setCustomValidity(MESSAGE);
-        if (slots[i].hasAttribute('data-eager')) { inject(); return; }
 
         var form = slots[i].closest('form') || slots[i];
         form.addEventListener('focusin', inject, { once: true });

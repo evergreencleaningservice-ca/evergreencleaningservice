@@ -53,20 +53,25 @@ CREATE INDEX IF NOT EXISTS leads_status_idx ON leads (lead_status, created_at DE
 -- conversion upload expects. Conversion names must match conversion actions
 -- created in Google Ads (see docs/growth/tracking-spec.md). Only leads with a
 -- Google click id can be uploaded; times are emitted in UTC with offset.
+--
+-- The Worker stores an ABSENT click id as '' (lead-fields.ts `safeStr`), not
+-- NULL, so every id goes through NULLIF before it is tested or exported: a
+-- bare COALESCE(gclid, gbraid, …) stops at gclid = '' and silently drops
+-- leads that carry only a gbraid or wbraid (iOS app and web-to-app clicks).
 CREATE OR REPLACE VIEW lead_offline_conversions AS
-SELECT id AS lead_id, gclid, gbraid, wbraid,
+SELECT id AS lead_id, NULLIF(gclid, '') AS gclid, NULLIF(gbraid, '') AS gbraid, NULLIF(wbraid, '') AS wbraid,
        'Evergreen - Qualified lead' AS conversion_name,
        qualified_at AS conversion_time,
        NULL::NUMERIC AS conversion_value, 'CAD' AS currency
   FROM leads
- WHERE qualified_at IS NOT NULL AND COALESCE(gclid, gbraid, wbraid, '') <> ''
+ WHERE qualified_at IS NOT NULL AND COALESCE(NULLIF(gclid, ''), NULLIF(gbraid, ''), NULLIF(wbraid, '')) IS NOT NULL
 UNION ALL
-SELECT id, gclid, gbraid, wbraid,
+SELECT id, NULLIF(gclid, ''), NULLIF(gbraid, ''), NULLIF(wbraid, ''),
        'Evergreen - Quote issued', quote_issued_at, quote_value_cad, 'CAD'
   FROM leads
- WHERE quote_issued_at IS NOT NULL AND COALESCE(gclid, gbraid, wbraid, '') <> ''
+ WHERE quote_issued_at IS NOT NULL AND COALESCE(NULLIF(gclid, ''), NULLIF(gbraid, ''), NULLIF(wbraid, '')) IS NOT NULL
 UNION ALL
-SELECT id, gclid, gbraid, wbraid,
+SELECT id, NULLIF(gclid, ''), NULLIF(gbraid, ''), NULLIF(wbraid, ''),
        'Evergreen - Customer won', won_at, won_value_cad, 'CAD'
   FROM leads
- WHERE won_at IS NOT NULL AND COALESCE(gclid, gbraid, wbraid, '') <> '';
+ WHERE won_at IS NOT NULL AND COALESCE(NULLIF(gclid, ''), NULLIF(gbraid, ''), NULLIF(wbraid, '')) IS NOT NULL;
