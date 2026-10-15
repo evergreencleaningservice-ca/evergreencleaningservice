@@ -11,6 +11,20 @@ Branch `claude/nice-mayer-r2gmzt`. This is the reviewable record of one coordina
 | [ppc-blueprint.md](ppc-blueprint.md) | Campaign and ad group structure, geo targeting, landing pages, approved claims, negatives, conversions and lead review |
 | [client-intake.md](client-intake.md) | Facts, evidence and access still needed |
 
+## Preview
+
+There is a **non-serving preview version** at https://5342ef75-evergreencleaningservice.ash-47a.workers.dev. It is Worker version `5342ef75-29e4-4ea8-818f-2dd7d34753b4`, uploaded with `wrangler versions upload` on 15 Oct 2026.
+
+Production traffic was **not** moved to it. The production pages and the Worker's active deployment were checked afterwards and are unchanged.
+
+On the preview host:
+
+- every response carries `X-Robots-Tag: noindex`
+- GTM does not load
+- leads cannot be submitted, because the domain-locked reCAPTCHA cannot render there, so the Worker refuses the submission
+
+It mirrors the third commit on this branch; later commits are docs-only.
+
 ## Current state found (Phase 1)
 
 - **Production already runs this Astro site.** On 15 Oct, `www.evergreencleaningservice.ca` served HTML byte-identical to a local build of `main` (apart from one relative date) and to staging. Production and staging are one Cloudflare Worker. Any `wrangler deploy` is a production deploy.
