@@ -1,8 +1,21 @@
 ---
+seoTitle: "Industrial & Warehouse Cleaning in Toronto | Evergreen"
 title: "Industrial Cleaning"
-description: "We are currently accepting new clients requiring industrial cleaning. Visit our website for more info and to schedule an onsite consultation & proposal."
+description: "Industrial and warehouse cleaning in Toronto and the GTA — floor scrubbing, strip and wax, high dusting and staff areas, with a free on-site consultation."
 image: "/images/warehouse-floor-scrubber-industrial.jpg"
 imageAlt: "Floor scrubber cleaning an industrial warehouse aisle"
+summary: "Cleaning for plants, factories, warehouses and industrial buildings — floors, high surfaces, staff facilities and the offices beside them, scheduled around your shifts."
+related:
+  - title: "Building Maintenance & Floor Care"
+    href: "/services/building-maintenance/"
+  - title: "Post-Construction Cleaning"
+    href: "/services/post-construction-cleaning/"
+  - title: "Commercial Cleaning"
+    href: "/services/commercial-cleaning/"
+  - title: "Vaughan & Concord"
+    href: "/locations/vaughan/"
+    text: "Distribution and manufacturing facilities."
+showAreas: true
 ---
 
 ## The value of industrial cleaning is too frequently overlooked and underappreciated among janitorial services.

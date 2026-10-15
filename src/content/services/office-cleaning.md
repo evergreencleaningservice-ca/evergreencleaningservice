@@ -2,7 +2,7 @@
 title: "Office Cleaning"
 h1: "Office Cleaning in Toronto and the GTA"
 seoTitle: "Office Cleaning Services in Toronto & the GTA | Evergreen"
-description: "Recurring office cleaning and janitorial service in Toronto and the GTA — after hours, by a consistent crew, with a free on-site walkthrough and a written proposal."
+description: "Recurring office cleaning in Toronto and the GTA — after hours, by a consistent crew, with a free on-site walkthrough and a written proposal."
 summary: "Recurring janitorial cleaning for offices of every size, done after hours by a team assigned to your building — with one account executive to call when something needs to change."
 image: "/images/office-backpack-vacuum-toronto.jpg"
 imageAlt: "Cleaner vacuuming an open-plan Toronto office"

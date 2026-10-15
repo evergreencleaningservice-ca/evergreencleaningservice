@@ -1,6 +1,6 @@
 ---
 title: "Request a Quote"
-description: "Visit our website to learn more or request a free quote. We look forward to hearing from you and appreciate your consideration."
+description: "Request a free commercial cleaning quote in Toronto and the GTA. Tell us about your building and we will arrange a walkthrough and written proposal."
 ---
 
 Name \*

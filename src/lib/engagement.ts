@@ -13,8 +13,8 @@
  *                         captcha, server error, no network. `lead-submit.ts`
  *                         pushes it through `pushFormError` below.
  *   email_click           a tap on a `mailto:` link. Here. Not an enquiry.
- *   quote_cta_click       a click on a link that leads to a quote form (the
- *                         quote page or an in-page form anchor). Here. A
+ *   quote_cta_click       a click on a link to /request-a-quote/ or on an
+ *                         in-page form anchor marked `data-quote-cta`. A
  *                         navigation, not an enquiry.
  *
  * Only `lead_form_submission` may be used as a primary conversion. The others
@@ -85,7 +85,7 @@ export function isQuoteLink(anchor: HTMLAnchorElement, win: Window = window): bo
     return false;
   }
   if (url.origin !== win.location.origin) return false;
-  return url.pathname === '/request-a-quote/' || url.pathname === '/contact-us/';
+  return url.pathname === '/request-a-quote/';
 }
 
 const BOUND = 'engagementBound';

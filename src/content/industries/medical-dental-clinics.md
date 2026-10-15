@@ -2,7 +2,7 @@
 title: "Medical and Dental Clinic Cleaning"
 h1: "Cleaning for Medical and Dental Clinics in Toronto and the GTA"
 seoTitle: "Medical & Dental Clinic Cleaning in Toronto | Evergreen"
-description: "After-hours cleaning for medical and dental clinics in Toronto and the GTA — waiting rooms, treatment areas and washrooms, cleaned with attention to cross-contamination."
+description: "After-hours cleaning for medical and dental clinics in Toronto and the GTA — waiting rooms, treatment areas and washrooms, to your clinic protocols."
 summary: "Patients judge a clinic before they see a clinician. We clean waiting rooms, treatment areas, washrooms and staff spaces after hours, working to your clinic's hygiene protocols."
 image: "/images/dental-office-cleaning-technician.jpg"
 imageAlt: "Cleaner disinfecting the exterior surfaces of a dental treatment chair"

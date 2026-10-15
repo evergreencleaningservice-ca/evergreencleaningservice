@@ -2,7 +2,7 @@
 title: "Cleaning for Property Managers and Condominiums"
 h1: "Cleaning for Property Managers, Condos and Commercial Buildings"
 seoTitle: "Property Management & Condo Cleaning in Toronto | Evergreen"
-description: "Cleaning for property managers and condominium corporations in Toronto and the GTA — common areas, lobbies and tenant spaces, plus one-off work when a building needs it quickly."
+description: "Cleaning for property managers and condos in Toronto and the GTA — common areas, lobbies, tenant spaces and one-off work at short notice."
 summary: "Recurring common-area cleaning, periodic floor and building maintenance, and one-off work at short notice — coordinated through one account executive who knows your buildings."
 image: "/images/gallery-condo-lobby-maintenance.jpg"
 imageAlt: "High-rise condominium lobby with polished floors"

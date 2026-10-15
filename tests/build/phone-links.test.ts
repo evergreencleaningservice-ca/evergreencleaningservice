@@ -164,13 +164,10 @@ describe('the locations the site actually uses', () => {
     expect(content.filter((l) => l.displayed === 'Call Now')).toHaveLength(3);
   });
 
-  it('the footer has none, on either layout', () => {
-    /* Recorded rather than asserted as desirable: the brief listed `footer`
-       as a location and the site does not have one there. Adding a telephone
-       number to the footer is a content decision, not a tracking one. This
-       test exists so that adding one later is a deliberate act that updates
-       this line, rather than a silent change to what the report covers. */
-    expect(at('footer')).toHaveLength(0);
+  it('the site footer carries one on every non-paid page, the paid footer none', () => {
+    /* Added deliberately on 2026-10-15 with the footer's contact block. The
+       landing-page shell keeps its own minimal footer with no number. */
+    expect(at('footer')).toHaveLength(112);
   });
 });
 

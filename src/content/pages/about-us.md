@@ -1,6 +1,6 @@
 ---
 title: "About Us"
-description: "Looking for commercial cleaning in Toronto. Visit our website to learn more and request a fee quotation for cleaning and disinfection."
+description: "Evergreen Office Cleaning has served Toronto and GTA businesses since 1989 — office, commercial and industrial cleaning with a dedicated account executive."
 image: "/images/toronto-skyline-modern.jpg"
 ---
 

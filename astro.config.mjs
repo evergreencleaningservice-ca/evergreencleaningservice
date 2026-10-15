@@ -7,6 +7,12 @@ export default defineConfig({
   trailingSlash: 'always',
   build: {
     format: 'directory',
+    /* Inline every stylesheet into the page (2026-10-15). The site's CSS is
+       small (four files, ~13KB compressed), but as four separate
+       render-blocking requests it cost ~600ms of first paint under mobile
+       throttling — measured with scripts/lh-masquerade.mjs. Inlined, the
+       first response carries everything needed to paint. */
+    inlineStylesheets: 'always',
   },
   // Redirects are NOT declared here. Astro's static redirects build an HTML
   // page that returns 200 with a meta refresh; the specification asks for 301s

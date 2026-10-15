@@ -36,6 +36,7 @@ const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || recaptcha.testSiteK
 ---
 
 <div class="wpf-recaptcha wpf-field">
+  <p class="wpf-recaptcha-wait">The “I’m not a robot” check appears here when you start filling in the form.</p>
   <div class="g-recaptcha" data-sitekey={siteKey}></div>
   <input
     type="text"
@@ -89,6 +90,9 @@ const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || recaptcha.testSiteK
           hidden.setCustomValidity(value ? '' : MESSAGE);
         };
         set('');
+
+        var wait = el.parentNode.querySelector('.wpf-recaptcha-wait');
+        if (wait) wait.hidden = true;
 
         try {
           el.dataset.wpfWidgetId = window.grecaptcha.render(el, {
@@ -144,13 +148,23 @@ const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || recaptcha.testSiteK
         form.addEventListener('input', inject, { once: true });
       }
 
-      if (!('IntersectionObserver' in window)) { inject(); return; }
-      var io = new IntersectionObserver(function (entries) {
-        for (var k = 0; k < entries.length; k++) {
-          if (entries[k].isIntersecting) { inject(); io.disconnect(); return; }
-        }
-      }, { rootMargin: '300px 0px' });
-      for (var m = 0; m < slots.length; m++) io.observe(slots[m]);
+      /* The viewport trigger is armed by the visitor's first scroll, not on
+         arrival. On the paid pages the form sits in the first screen; armed
+         at once, the observer fired on load and every paid click paid the
+         full reCAPTCHA cost before reading a word (measured: no change in
+         blocking time on /lp/commercial-cleaning-quote/). Someone who has
+         not scrolled reaches the checkbox only by filling the fields above
+         it, which triggers the load through focus. */
+      function observe() {
+        if (!('IntersectionObserver' in window)) { inject(); return; }
+        var io = new IntersectionObserver(function (entries) {
+          for (var k = 0; k < entries.length; k++) {
+            if (entries[k].isIntersecting) { inject(); io.disconnect(); return; }
+          }
+        }, { rootMargin: '300px 0px' });
+        for (var m = 0; m < slots.length; m++) io.observe(slots[m]);
+      }
+      window.addEventListener('scroll', observe, { once: true, passive: true });
     }
 
     if (document.readyState === 'loading') {
@@ -166,6 +180,22 @@ const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || recaptcha.testSiteK
     /* The widget is a fixed 304x78 iframe; this keeps the row from collapsing
        before it loads and the form jumping when it does. */
     min-height: 78px;
+    position: relative;
+  }
+
+  /* Sits in the reserved box until the widget renders, so the empty space
+     explains itself. Absolutely placed: hiding it moves nothing. */
+  .wpf-recaptcha-wait {
+    position: absolute;
+    inset: 0 auto auto 0;
+    max-width: 304px;
+    margin: 0;
+    padding: 10px 12px;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--ink);
+    border: 1px dashed var(--rule);
+    border-radius: 4px;
   }
 
   /* Visually hidden, but focusable enough for the browser to report its

@@ -82,6 +82,12 @@ const ogImage = new URL(ogPath, Astro.site ?? site.url).href;
         parsed the markup that references it. One preconnect buys back that
         round trip on the single most important request on the page. */}
     <link rel="preconnect" href={images.host} />
+    {/* The two faces the first screen uses, preloaded (2026-10-15), as the
+        landing pages already do. Without it the H1 paints in the fallback
+        and reflows when Raleway lands: measured CLS 0.139 on the mobile
+        service page. Same origin, so no extra connection. */}
+    <link rel="preload" href="/fonts/raleway.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/open-sans.woff2" as="font" type="font/woff2" crossorigin />
     {/*
       Weights chosen by measuring which faces actually compute on the original,
       not by reading its @font-face list. Raleway 800 carries the hero heading

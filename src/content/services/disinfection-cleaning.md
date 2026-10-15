@@ -1,10 +1,19 @@
 ---
+seoTitle: "Disinfection Cleaning Services in Toronto | Evergreen"
 title: "Disinfection Cleaning"
-description: "Evergreen Cleaning Service provides various specialized disinfection cleaning services you may be looking for your business."
+description: "Disinfection cleaning for Toronto and GTA workplaces — surfaces cleaned first, then disinfected with specialized products, one-off or on a schedule."
 # The archived featured image for this page (disinfection-cleaning-tech-e1616794679911.jpg)
 # was never downloaded into public/images, so this uses the page's own lead photo instead.
 image: "/images/door-handle-disinfection-office.jpg"
 imageAlt: "Cleaner disinfecting a glass office door handle"
+summary: "Surfaces cleaned first, then disinfected with specialized products — as a one-off or on a regular schedule, after hours or while you are open."
+related:
+  - title: "Office Cleaning"
+    href: "/services/office-cleaning/"
+  - title: "Medical & Dental Clinics"
+    href: "/industries/medical-dental-clinics/"
+  - title: "Green Clean Products"
+    href: "/green-clean-products/"
 ---
 
 ## Are You Concerned About Covid-19 In Your Office
