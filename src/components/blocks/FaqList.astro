@@ -1,0 +1,83 @@
+---
+/**
+ * Visible questions and answers, plus matching FAQPage JSON-LD.
+ *
+ * The markup is the source of the schema, never the other way round: every
+ * question in the JSON-LD is on the page, word for word, as Google requires.
+ * FAQ markup is not a promise of a rich result — Google shows FAQ results
+ * for very few sites — it is here because it accurately describes the page.
+ *
+ * <details>/<summary> is keyboard-operable and announced correctly without
+ * any script. Answers are plain text (no HTML) so the schema and the page
+ * cannot diverge.
+ */
+interface Props {
+  faqs: { q: string; a: string }[];
+  heading?: string;
+  /** Emit FAQPage JSON-LD. Off where a page already carries one. */
+  schema?: boolean;
+}
+
+const { faqs, heading = 'Frequently asked questions', schema = true } = Astro.props;
+const json = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+{
+  faqs.length > 0 && (
+    <section class="blk-faq" aria-label={heading}>
+      <h2 class="blk-title">{heading}</h2>
+      {faqs.map((f) => (
+        <details>
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+      {schema && <script type="application/ld+json" set:html={JSON.stringify(json)} is:inline />}
+    </section>
+  )
+}
+
+<style>
+  .blk-faq details {
+    border-bottom: 1px solid var(--rule);
+  }
+  .blk-faq summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 14px 32px 14px 0;
+    position: relative;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ink-heading);
+  }
+  .blk-faq summary::-webkit-details-marker {
+    display: none;
+  }
+  .blk-faq summary::after {
+    content: '+';
+    position: absolute;
+    right: 4px;
+    top: 10px;
+    font-size: 1.5rem;
+    color: var(--brand);
+  }
+  .blk-faq details[open] summary::after {
+    content: '−';
+  }
+  .blk-faq summary:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+  .blk-faq details p {
+    margin: 0 0 16px;
+  }
+</style>

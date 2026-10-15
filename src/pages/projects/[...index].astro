@@ -1,0 +1,33 @@
+---
+/**
+ * /projects/ — the case-study hub. Built ONLY when at least one case study is
+ * published; until then there is no page, no link to it and nothing in the
+ * sitemap, rather than an empty "coming soon" listing.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LinkCards from '../../components/blocks/LinkCards.astro';
+import { publishedProjects } from '../../lib/projects';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const projects = await publishedProjects();
+  return projects.length ? [{ params: { index: undefined }, props: { projects } }] : [];
+}
+
+const { projects } = Astro.props as { projects: Awaited<ReturnType<typeof publishedProjects>> };
+---
+
+<BaseLayout
+  title="Cleaning Projects in Toronto & the GTA | Evergreen"
+  description="Examples of commercial cleaning work Evergreen has completed for businesses across Toronto and the GTA."
+>
+  <div class="container section-padding">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">{site.name}</a> &gt; <span aria-current="page">Projects</span>
+    </nav>
+    <h1>Projects</h1>
+    <LinkCards
+      items={projects.map((p) => ({ title: p.data.title, href: `/projects/${p.id}/`, text: `${p.data.facilityType} · ${p.data.location}` }))}
+    />
+  </div>
+</BaseLayout>

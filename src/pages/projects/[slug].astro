@@ -1,0 +1,72 @@
+---
+/**
+ * /projects/<slug>/ — a published case study. Drafts produce no page.
+ * Content model and publish gate: src/content.config.ts, src/lib/projects.ts.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import QuoteBand from '../../components/blocks/QuoteBand.astro';
+import { publishedProjects, type Project } from '../../lib/projects';
+import { site } from '../../data/site';
+import { pageTitle } from '../../lib/title';
+import { breadcrumbSchema } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  return (await publishedProjects()).map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props as { project: Project };
+const p = project.data;
+const sections = [
+  { heading: 'What they needed', items: p.initialNeeds },
+  { heading: 'What we did', items: p.scope },
+  { heading: 'How the work was done', items: p.process },
+  { heading: 'The result', items: p.outcomes },
+].filter((s) => s.items.length);
+---
+
+<BaseLayout title={pageTitle(p.title)} description={p.description} image={p.photos[0]?.src}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      breadcrumbSchema([{ name: site.name, url: '/' }, { name: 'Projects', url: '/projects/' }, { name: p.title }])
+    )}
+    is:inline
+  />
+  <div class="container section-padding stack">
+    <div>
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <a href="/projects/">Projects</a> &gt; <span aria-current="page">{p.title}</span>
+      </nav>
+      <h1>{p.title}</h1>
+      <p><strong>{p.facilityType}</strong> · {p.location}{p.clientNameApproved && p.clientName ? ` · ${p.clientName}` : ''}</p>
+      <p>{p.description}</p>
+    </div>
+    {
+      sections.map((s) => (
+        <section aria-label={s.heading}>
+          <h2 class="blk-title">{s.heading}</h2>
+          <ul class="check-list">{s.items.map((i) => <li>{i}</li>)}</ul>
+        </section>
+      ))
+    }
+    {
+      p.photos.length > 0 && (
+        <div class="cols-2">
+          {p.photos.map((ph) => (
+            <img src={ph.src} alt={ph.alt} loading="lazy" decoding="async" style="width:100%;height:auto" />
+          ))}
+        </div>
+      )
+    }
+    {
+      p.testimonial && (
+        <blockquote class="note">
+          <p>“{p.testimonial.quote}”</p>
+          <footer>— {p.testimonial.attribution}</footer>
+        </blockquote>
+      )
+    }
+    <QuoteBand location="content" />
+  </div>
+</BaseLayout>

@@ -1,0 +1,70 @@
+---
+/**
+ * Why Evergreen — the homepage's case, from the business's own statements:
+ * the three offers its original About section made, the verified trust
+ * points, and the process. The superlatives that section also carried ("we're
+ * simply the best") are not repeated; they are claims nobody can check.
+ */
+import TrustStrip from '../blocks/TrustStrip.astro';
+import ProcessSteps from '../blocks/ProcessSteps.astro';
+
+const OFFERS = [
+  {
+    title: 'Flexible scheduling',
+    body: 'We work after hours and at weekends to keep disruption to your employees and clients to a minimum, and plan the work around your schedule.',
+  },
+  {
+    title: 'Proactive maintenance programmes',
+    body: 'Periodic floor and surface care planned into the year, using professional equipment and current techniques, to extend the life of your floors and finishes.',
+  },
+  {
+    title: 'A dedicated account executive',
+    body: 'One person who responds to your concerns, coordinates walkthroughs and inspections, and adjusts the scope as your needs change.',
+  },
+];
+---
+
+<section class="section-padding" id="why" aria-labelledby="why-title">
+  <div class="container stack">
+    <div>
+      <h2 class="blk-title" id="why-title">Why Toronto businesses choose Evergreen</h2>
+      <p class="blk-intro">
+        A clean, organised building makes a good first impression, shows that its owners care about the
+        people who use it, and lets the business get on with what it does. Since 1989 we have done that
+        for professional firms, clinics, retail outlets, industrial buildings and warehouses.
+      </p>
+      <div class="why-grid">
+        {
+          OFFERS.map((o) => (
+            <div>
+              <h3>{o.title}</h3>
+              <p>{o.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <TrustStrip />
+    <ProcessSteps heading="How it works" />
+  </div>
+</section>
+
+<style>
+  .why-grid {
+    display: grid;
+    gap: 22px;
+  }
+  @media (min-width: 768px) {
+    .why-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .why-grid h3 {
+    font-size: 1.15rem;
+    margin: 0 0 6px;
+    color: var(--brand-dark);
+  }
+  .why-grid p {
+    margin: 0;
+  }
+</style>

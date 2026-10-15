@@ -52,6 +52,8 @@
 
 import { attributionPayload } from './attribution';
 import { markLeadConfirmed } from './confirmation';
+import { pushFormError } from './engagement';
+import type { FormErrorType } from './engagement';
 
 declare global {
   interface Window {
@@ -297,6 +299,13 @@ export function wireLeadForm(form: HTMLFormElement, hooks: LeadFormHooks): void 
   const honeypots = hooks.honeypots ?? ['company_tax_id', 'company-website', 'website_trap'];
   const tokenWaitMs = hooks.tokenWaitMs ?? 6000;
 
+  /* `lead_form_error`, for lead forms only — a comment that failed is not a
+     lost enquiry. Category only; never a message or a field value. */
+  const reportFailure = (type: FormErrorType) => {
+    if (hooks.conversion === false) return;
+    pushFormError(hooks.formId, type);
+  };
+
   /* The duplicate-click guard.
      Disabling the button is not enough on its own: a form also submits on
      Enter in a text field and via requestSubmit(), neither of which goes near
@@ -319,6 +328,7 @@ export function wireLeadForm(form: HTMLFormElement, hooks: LeadFormHooks): void 
     if (!form.checkValidity()) {
       if (hooks.reportInvalid) hooks.reportInvalid(form);
       else form.reportValidity();
+      reportFailure('validation');
       return;
     }
 
@@ -328,6 +338,7 @@ export function wireLeadForm(form: HTMLFormElement, hooks: LeadFormHooks): void 
        them. */
     const problem = hooks.validate?.(form);
     if (problem) {
+      reportFailure('validation');
       hooks.onError(form, problem.message);
       if (problem.field) {
         const target = form.elements.namedItem(problem.field);
@@ -375,6 +386,7 @@ export function wireLeadForm(form: HTMLFormElement, hooks: LeadFormHooks): void 
         }),
       });
     } catch {
+      reportFailure('network');
       hooks.onError(form, MESSAGES.network);
       restore();
       return;
@@ -417,10 +429,12 @@ export function wireLeadForm(form: HTMLFormElement, hooks: LeadFormHooks): void 
     /* A rejected captcha is the one failure a visitor can act on, so it gets
        its own message and the widget is reset for another try. */
     if (res.status === 403) {
+      reportFailure('captcha');
       window.turnstile?.reset?.();
       window.grecaptcha?.reset?.();
       hooks.onError(form, MESSAGES.captcha);
     } else {
+      reportFailure('server');
       hooks.onError(form, MESSAGES.server);
     }
     restore();

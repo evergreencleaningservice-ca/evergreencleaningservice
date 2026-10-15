@@ -1,0 +1,63 @@
+---
+/**
+ * /lp/<slug>/ — data-driven PPC landing pages (src/data/landing-pages.ts).
+ *
+ * Section order, per the brief: headline with service and territory; value
+ * proposition and trust; call and quote actions (header, form, sticky bar);
+ * the short form; authentic proof (named Google reviews); benefits and scope;
+ * the quote process; FAQs; a final call to action.
+ *
+ * Indexation: noindex via LandingLayout, excluded from the sitemap, canonical
+ * to itself. These pages repeat the intent of an indexable service page and
+ * exist for paid traffic only; the organic page carries the search intent.
+ */
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import QuickQuoteForm from '../../components/QuickQuoteForm.astro';
+import LpHero from '../../components/lp/LpHero.astro';
+import LpBenefits from '../../components/lp/LpBenefits.astro';
+import LpFacilities from '../../components/lp/LpFacilities.astro';
+import LpReviews from '../../components/lp/LpReviews.astro';
+import LpAreas from '../../components/lp/LpAreas.astro';
+import LpFinalCta from '../../components/lp/LpFinalCta.astro';
+import LpSticky from '../../components/lp/LpSticky.astro';
+import LpFormNote from '../../components/lp/LpFormNote.astro';
+import LpProcess from '../../components/lp/LpProcess.astro';
+import LpFaq from '../../components/lp/LpFaq.astro';
+import { LANDING_PAGES, type LandingPage } from '../../data/landing-pages';
+
+export function getStaticPaths() {
+  return LANDING_PAGES.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props as { page: LandingPage };
+const anchor = `${page.slug}-form`;
+---
+
+<LandingLayout
+  title={page.title}
+  description={page.description}
+  callNote="Talk to an account executive"
+  quoteAnchor={anchor}
+  finePrint={page.finePrint}
+>
+  <LpHero eyebrow={page.eyebrow} heading={page.heading} sub={page.sub} image={page.image} trust={page.trust}>
+    <QuickQuoteForm
+      id={anchor}
+      formId={page.formId}
+      heading={page.formHeading}
+      submitLabel="Request my free quote"
+      replyPromise={page.replyPromise}
+    />
+    <LpFormNote />
+  </LpHero>
+
+  <LpReviews heading={page.reviewHeading} names={page.reviewers} />
+  <LpBenefits heading={page.benefitsHeading} note={page.benefitsNote} items={page.benefits} />
+  <LpFacilities heading={page.scopeHeading} note={page.scopeNote} items={page.scope} />
+  <LpProcess />
+  <LpFaq faqs={page.faqs} />
+  <LpAreas />
+  <LpFinalCta quoteAnchor={anchor} heading={page.finalHeading} replyPromise={page.replyPromise} />
+
+  <LpSticky slot="sticky" quoteAnchor={anchor} />
+</LandingLayout>

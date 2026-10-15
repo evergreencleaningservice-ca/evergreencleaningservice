@@ -52,10 +52,28 @@ const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || recaptcha.testSiteK
   /* Inline and idempotent. A page can hold two of these components; the loader
      must run once, and `grecaptcha.render()` must not be called twice on the
      same element — reCAPTCHA throws on that and takes the rest of the page's
-     scripts down with it. */
+     scripts down with it.
+
+     LOADED ON INTENT, NOT ON ARRIVAL (2026-10-15). api.js used to be injected
+     on first paint of every page carrying a form — the sidebar quote form puts
+     one on every inner page. One v2 widget costs three copies of
+     recaptcha__en.js (the page, the anchor iframe and the challenge iframe:
+     separate frames, not a coding duplicate), ~700KB on the wire and, measured
+     on the live homepage under Lighthouse's mobile throttling, ~1.4s of
+     main-thread scripting before anyone has looked at a form.
+
+     It now loads on whichever comes first:
+       - the checkbox's slot comes within 300px of the viewport, so a visible
+         checkbox is always a working checkbox; or
+       - anything inside the form is focused, pressed or typed into.
+     The slot keeps its 78px reserved height, so nothing shifts when the
+     widget arrives, and the Worker still verifies every token server-side —
+     nothing about the protection itself changed. */
   (function () {
     if (window.__wpfRecaptcha) return;
     window.__wpfRecaptcha = true;
+
+    var MESSAGE = 'Please confirm you are not a robot.';
 
     window.wpfRecaptchaLoad = function () {
       document.querySelectorAll('.g-recaptcha').forEach(function (el) {
@@ -68,7 +86,7 @@ const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || recaptcha.testSiteK
           hidden.value = value;
           /* The field is `required`, so clearing it after an expiry is what
              re-blocks the submit button without any state of our own. */
-          hidden.setCustomValidity(value ? '' : 'Please confirm you are not a robot.');
+          hidden.setCustomValidity(value ? '' : MESSAGE);
         };
         set('');
 
@@ -97,11 +115,49 @@ const siteKey = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY || recaptcha.testSiteK
       });
     };
 
-    var s = document.createElement('script');
-    s.src = 'https://www.google.com/recaptcha/api.js?onload=wpfRecaptchaLoad&render=explicit';
-    s.async = true;
-    s.defer = true;
-    document.head.appendChild(s);
+    var injected = false;
+    function inject() {
+      if (injected) return;
+      injected = true;
+      var s = document.createElement('script');
+      s.src = 'https://www.google.com/recaptcha/api.js?onload=wpfRecaptchaLoad&render=explicit';
+      s.async = true;
+      s.defer = true;
+      document.head.appendChild(s);
+    }
+    window.wpfRecaptchaInject = inject;
+
+    function arm() {
+      var slots = document.querySelectorAll('.g-recaptcha');
+      if (!slots.length) return;
+
+      for (var i = 0; i < slots.length; i++) {
+        /* Until the widget renders, a submit attempt explains itself rather
+           than reporting an anonymous "fill out this field". */
+        var hidden = slots[i].parentNode.querySelector('.wpf-recaptcha-hidden');
+        if (hidden && !hidden.value) hidden.setCustomValidity(MESSAGE);
+        if (slots[i].hasAttribute('data-eager')) { inject(); return; }
+
+        var form = slots[i].closest('form') || slots[i];
+        form.addEventListener('focusin', inject, { once: true });
+        form.addEventListener('pointerdown', inject, { once: true });
+        form.addEventListener('input', inject, { once: true });
+      }
+
+      if (!('IntersectionObserver' in window)) { inject(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        for (var k = 0; k < entries.length; k++) {
+          if (entries[k].isIntersecting) { inject(); io.disconnect(); return; }
+        }
+      }, { rootMargin: '300px 0px' });
+      for (var m = 0; m < slots.length; m++) io.observe(slots[m]);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', arm, { once: true });
+    } else {
+      arm();
+    }
   })();
 </script>
 

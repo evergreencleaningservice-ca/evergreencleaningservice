@@ -1,0 +1,73 @@
+---
+/** A grid of descriptive internal links — related services, industries, areas. */
+interface Props {
+  heading?: string;
+  items: { title: string; href: string; text?: string }[];
+  level?: 'h2' | 'h3';
+}
+const { heading, items, level = 'h2' } = Astro.props;
+const Tag = level;
+---
+
+{
+  items.length > 0 && (
+    <section class="blk-links" aria-label={heading ?? 'Related pages'}>
+      {heading && <Tag class="blk-title">{heading}</Tag>}
+      <ul>
+        {items.map((item) => (
+          <li>
+            <a href={item.href}>
+              <strong>{item.title}</strong>
+              {item.text && <span>{item.text}</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .blk-links ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  @media (min-width: 640px) {
+    .blk-links ul {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+  }
+  .blk-links a {
+    display: block;
+    height: 100%;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px 16px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .blk-links a:hover,
+  .blk-links a:focus-visible {
+    border-color: var(--brand);
+    text-decoration: none;
+  }
+  .blk-links strong {
+    display: block;
+    color: var(--brand-dark);
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+  .blk-links strong::after {
+    content: ' →';
+  }
+  .blk-links span {
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+</style>

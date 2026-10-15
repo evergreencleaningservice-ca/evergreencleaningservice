@@ -26,6 +26,20 @@
  */
 import { hours, nap, site, social } from '../data/site';
 
+/** Cities named in `areaServed`. Matches src/data/coverage.ts at city level. */
+const SERVICE_AREA_NAMES = [
+  'Toronto',
+  'Mississauga',
+  'Brampton',
+  'Oakville',
+  'Vaughan',
+  'Markham',
+  'Richmond Hill',
+  'Pickering',
+  'Ajax',
+  'Oshawa',
+];
+
 const ORG_ID = `${site.url}/#organization`;
 const SITE_ID = `${site.url}/#website`;
 
@@ -61,15 +75,7 @@ export const organizationGraph = () => ({
         opens: h.opens,
         closes: h.closes,
       })),
-      areaServed: [
-        'Toronto',
-        'Mississauga',
-        'Etobicoke',
-        'Vaughan',
-        'Markham',
-        'Brampton',
-        'Oakville',
-      ].map((name) => ({ '@type': 'City', name })),
+      areaServed: SERVICE_AREA_NAMES.map((name) => ({ '@type': 'City', name })),
       sameAs: social.map((s) => s.href),
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
@@ -88,7 +94,12 @@ export const organizationGraph = () => ({
           {
             name: 'Post-Construction Cleaning',
             description:
-              'Rough, final, and touch-up post-construction cleanup for commercial builds.',
+              'Post-construction and renovation clean-up for commercial buildouts, before handover.',
+          },
+          {
+            name: 'Building Maintenance & Floor Care',
+            description:
+              'Strip and wax, commercial carpet cleaning, high dusting, interior windows and pressure washing.',
           },
         ].map((s) => ({
           '@type': 'Offer',
@@ -177,4 +188,20 @@ export const collectionSchema = (opts: { name: string; url: string; description?
   ...(opts.description ? { description: opts.description } : {}),
   isPartOf: { '@id': SITE_ID },
   publisher: ORG,
+});
+
+/**
+ * A service (or an industry offering) on its own page. Describes only what the
+ * page shows: the name, the description, who provides it and where. No price,
+ * no rating, no review markup.
+ */
+export const serviceSchema = (opts: { name: string; description?: string; url: string; serviceType?: string }) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: opts.name,
+  serviceType: opts.serviceType ?? opts.name,
+  ...(opts.description ? { description: opts.description } : {}),
+  url: opts.url.startsWith('http') ? opts.url : `${site.url}${opts.url}`,
+  provider: ORG,
+  areaServed: SERVICE_AREA_NAMES.map((name) => ({ '@type': 'City', name })),
 });

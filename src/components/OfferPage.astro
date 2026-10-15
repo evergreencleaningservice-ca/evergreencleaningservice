@@ -1,0 +1,326 @@
+---
+/**
+ * The service and industry page template (2026-10-15).
+ *
+ * Structure, in the order a buyer needs it: what this is and where (H1 and
+ * summary), the two next steps (quote, call), then — only where the page has
+ * the facts — who it is for, the original page copy, what is included, scope
+ * notes and scheduling, how the work runs, what changes the price, real
+ * reviews, FAQs, related services and the service area, and finally the
+ * quote band. A quote form sits beside the content on a wide screen and
+ * below it on a phone.
+ *
+ * Every section is driven by front matter fields that default to empty, and
+ * an empty section renders nothing. That is the rule that keeps a missing
+ * fact from turning into a placeholder.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import QuickQuoteForm from './QuickQuoteForm.astro';
+import ProcessSteps from './blocks/ProcessSteps.astro';
+import FaqList from './blocks/FaqList.astro';
+import ReviewQuotes from './blocks/ReviewQuotes.astro';
+import QuoteBand from './blocks/QuoteBand.astro';
+import LinkCards from './blocks/LinkCards.astro';
+import TrustStrip from './blocks/TrustStrip.astro';
+import { AREAS, AREA_GROUPS } from '../data/coverage';
+import { PRICING_FACTORS } from '../data/process';
+import { nap, site } from '../data/site';
+import { pageTitle } from '../lib/title';
+import { breadcrumbSchema, serviceSchema } from '../lib/schema';
+
+interface Offer {
+  title: string;
+  description?: string;
+  image?: string;
+  h1?: string;
+  seoTitle?: string;
+  summary?: string;
+  fitHeading?: string;
+  fit: string[];
+  included: { heading: string; items: string[] }[];
+  scope: string[];
+  scheduling: string[];
+  showProcess: boolean;
+  showPricing: boolean;
+  reviews: string[];
+  faqs: { q: string; a: string }[];
+  related: { title: string; href: string; text?: string }[];
+  showAreas: boolean;
+  ctaHeading?: string;
+  ctaText?: string;
+}
+
+interface Props {
+  data: Offer;
+  /** Rendered Markdown body, already normalised. */
+  body: string | null;
+  /** 'Services' or 'Industries' — the breadcrumb parent. */
+  parent: { name: string; url: string };
+  /** The conversion identity of this page's form. */
+  formId: string;
+}
+
+const { data, body, parent, formId } = Astro.props;
+const h1 = data.h1 ?? data.title;
+const title = data.seoTitle ?? pageTitle(data.title);
+const path = Astro.url.pathname;
+---
+
+<BaseLayout title={title} description={data.description} image={data.image}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      breadcrumbSchema([
+        { name: site.name, url: '/' },
+        { name: parent.name, url: parent.url },
+        { name: data.title },
+      ])
+    )}
+    is:inline
+  />
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(serviceSchema({ name: data.title, description: data.description, url: path }))}
+    is:inline
+  />
+
+  <section class="offer-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">{site.name}</a> &gt; <a href={parent.url}>{parent.name}</a> &gt;
+        <span aria-current="page">{data.title}</span>
+      </nav>
+      <h1>{h1}</h1>
+      {data.summary && <p class="offer-summary">{data.summary}</p>}
+      <p class="offer-actions">
+        <a class="btn btn-primary btn-lg" href="#offer-quote" data-quote-cta data-cta-location="hero">Get a free quote</a>
+        <a class="btn btn-ghost btn-lg" href={nap.phoneHref} data-call-location="hero">Call {nap.phoneDisplay}</a>
+      </p>
+    </div>
+  </section>
+
+  <div class="container offer-trust">
+    <TrustStrip />
+  </div>
+
+  <div class="container offer-grid section-padding">
+    <div class="offer-main stack">
+      {
+        data.fit.length > 0 && (
+          <section aria-label={data.fitHeading ?? 'Who this is for'}>
+            <h2 class="blk-title">{data.fitHeading ?? 'Who this is for'}</h2>
+            <ul class="check-list">
+              {data.fit.map((item) => <li>{item}</li>)}
+            </ul>
+          </section>
+        )
+      }
+
+      {body && <div class="entry-content offer-body" set:html={body} />}
+
+      {
+        data.included.length > 0 && (
+          <section aria-label="What is included">
+            <h2 class="blk-title">What is included</h2>
+            <div class="offer-included">
+              {data.included.map((group) => (
+                <div>
+                  <h3>{group.heading}</h3>
+                  <ul class="check-list">
+                    {group.items.map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      {
+        (data.scope.length > 0 || data.scheduling.length > 0) && (
+          <div class="cols-2">
+            {data.scheduling.length > 0 && (
+              <section aria-label="Scheduling">
+                <h2 class="blk-title">Scheduling</h2>
+                <ul class="check-list">
+                  {data.scheduling.map((item) => <li>{item}</li>)}
+                </ul>
+              </section>
+            )}
+            {data.scope.length > 0 && (
+              <section aria-label="Scope">
+                <h2 class="blk-title">Scope and limits</h2>
+                <ul class="offer-scope">
+                  {data.scope.map((item) => <li>{item}</li>)}
+                </ul>
+              </section>
+            )}
+          </div>
+        )
+      }
+
+      {data.showProcess && <ProcessSteps heading="How it works" />}
+
+      {
+        data.showPricing && (
+          <section aria-label="What affects the price">
+            <h2 class="blk-title">What affects the price</h2>
+            <p>
+              Every quote is written after a walkthrough, because these are what change it — and none of
+              them can be judged reliably over the phone:
+            </p>
+            <ul class="check-list">
+              {PRICING_FACTORS.map((item) => <li>{item}</li>)}
+            </ul>
+          </section>
+        )
+      }
+
+      {data.reviews.length > 0 && <ReviewQuotes names={data.reviews} />}
+
+      <FaqList faqs={data.faqs} />
+
+      <LinkCards heading="Related" items={data.related} />
+
+      {
+        data.showAreas && (
+          <section aria-label="Service area">
+            <h2 class="blk-title">Where we work</h2>
+            <p>
+              Crews are dispatched across the Greater Toronto Area from our Toronto base. Pages with local
+              detail are linked.
+            </p>
+            <div class="offer-areas">
+              {AREA_GROUPS.map((group) => (
+                <div>
+                  <h3>{group}</h3>
+                  <ul>
+                    {AREAS.filter((a) => a.group === group).map((a) => (
+                      <li>{a.href ? <a href={a.href}>{a.name}</a> : a.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
+
+    <aside class="offer-aside" aria-label="Request a quote">
+      <div class="offer-form-card">
+        <QuickQuoteForm
+          id="offer-quote"
+          formId={formId}
+          heading="Get a free quote"
+          intro="A few details and we will arrange a walkthrough. No obligation."
+        />
+      </div>
+    </aside>
+  </div>
+
+  <div class="container offer-band">
+    <QuoteBand heading={data.ctaHeading} text={data.ctaText} />
+  </div>
+</BaseLayout>
+
+<style>
+  .offer-hero {
+    background: var(--surface-tint);
+    border-bottom: 1px solid var(--rule);
+    padding: 28px 0 30px;
+  }
+  .offer-hero h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 10px 0 12px;
+    max-width: 900px;
+  }
+  @media (max-width: 767px) {
+    .offer-hero h1 {
+      font-size: 1.85rem;
+    }
+  }
+  .offer-summary {
+    font-size: 1.125rem;
+    max-width: 820px;
+    margin: 0 0 18px;
+    color: var(--ink-heading);
+  }
+  .offer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0;
+  }
+  .offer-actions .btn {
+    margin: 0;
+  }
+  .offer-trust {
+    padding-top: 24px;
+  }
+  .offer-grid {
+    display: grid;
+    gap: 40px;
+  }
+  @media (min-width: 992px) {
+    .offer-grid {
+      grid-template-columns: minmax(0, 1fr) 360px;
+      align-items: start;
+    }
+    .offer-aside {
+      position: sticky;
+      top: 92px;
+    }
+  }
+  .offer-form-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--brand);
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  }
+  .offer-included {
+    display: grid;
+    gap: 24px;
+  }
+  @media (min-width: 768px) {
+    .offer-included {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .offer-included h3 {
+    font-size: 1.1rem;
+    margin: 0 0 10px;
+  }
+  .offer-scope {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .offer-scope li + li {
+    margin-top: 6px;
+  }
+  .offer-areas {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+  .offer-areas h3 {
+    font-size: 1rem;
+    margin: 0 0 6px;
+  }
+  .offer-areas ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+  .offer-band {
+    padding-bottom: 56px;
+  }
+  .offer-body :global(h2) {
+    font-size: 1.5rem;
+  }
+</style>

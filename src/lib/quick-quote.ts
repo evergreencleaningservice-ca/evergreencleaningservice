@@ -315,6 +315,8 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
          for one, so the control reads `service`. Renaming the column to
          match would orphan every row already in the table. */
       services: fieldValue(f, 'service'),
+      /* Optional city or area (not a street address) — see QuickQuoteForm. */
+      address: fieldValue(f, 'location'),
       /* Empty unless "Other" was picked — the box does not exist otherwise. */
       message: fieldValue(f, 'message'),
       page_url: location.href,

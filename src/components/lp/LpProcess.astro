@@ -1,0 +1,33 @@
+---
+/** The quote process on a paid page — the same five steps as the site. */
+import { PROCESS_STEPS } from '../../data/process';
+---
+
+<section class="lpx-section" aria-labelledby="lpx-process-h">
+  <div class="lpx-wrap">
+    <h2 id="lpx-process-h">How the quote works</h2>
+    <ol class="lpx-cards lpx-cards-3 lpx-steps">
+      {
+        PROCESS_STEPS.map((s) => (
+          <li>
+            <strong>{s.title}</strong>
+            <span>{s.body}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .lpx-steps {
+    counter-reset: lpstep;
+  }
+  .lpx-steps li {
+    counter-increment: lpstep;
+  }
+  .lpx-steps li strong::before {
+    content: counter(lpstep) '. ';
+    color: var(--brand);
+  }
+</style>

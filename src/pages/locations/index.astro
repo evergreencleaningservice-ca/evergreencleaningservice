@@ -7,6 +7,7 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { locations } from '../../data/locations';
+import { COVERAGE_SENTENCE } from '../../data/coverage';
 import { site, nap } from '../../data/site';
 import { pageTitle } from '../../lib/title';
 
@@ -27,9 +28,9 @@ const description =
   <div class="section-padding">
     <div class="container">
       <p class="loc-lead">
-        Evergreen Office Cleaning works across the Greater Toronto Area from
-        {' '}{nap.streetAddress}, {nap.addressLocality}. Each area below has its own crews and its own
-        schedule, built around the kind of space it holds.
+        Evergreen Office Cleaning works across the Greater Toronto Area from one office, at
+        {' '}{nap.streetAddress}, {nap.addressLocality}: {COVERAGE_SENTENCE}. The areas below have a page
+        with local detail; the rest are covered in exactly the same way.
       </p>
 
       <ul class="loc-list">

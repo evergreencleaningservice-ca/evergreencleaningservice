@@ -1,0 +1,24 @@
+---
+/** /industries/<slug>/ — the dedicated industry pages, same template as services. */
+import type { InferGetStaticPropsType } from 'astro';
+import { getCollection, render } from 'astro:content';
+import OfferPage from '../../components/OfferPage.astro';
+import { normalizeBody } from '../../lib/normalize-body';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('industries');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { entry } = Astro.props as Props;
+await render(entry);
+const body = entry.rendered?.html ? normalizeBody(entry.rendered.html) : null;
+---
+
+<OfferPage
+  data={entry.data}
+  body={body}
+  parent={{ name: 'Industries', url: '/industries/' }}
+  formId={`industry-${entry.id}`}
+/>

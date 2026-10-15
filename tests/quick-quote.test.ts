@@ -233,9 +233,13 @@ describe('the field set, as it reaches the endpoint', () => {
        is asserted as SENT, above, rather than quietly dropped from both
        lists — a field that is neither required nor forbidden is a field no
        test is watching. */
-    for (const key of ['business_name', 'address', 'province']) {
+    for (const key of ['business_name', 'province']) {
       expect(Object.keys(body), `${key} should not be sent`).not.toContain(key);
     }
+    /* `address` is sent again since 2026-10-15, but only ever as the optional
+       CITY OR AREA box (`location`) — never a street address. Empty here
+       because the fixture lead leaves it blank. */
+    expect(body.address ?? '').toBe('');
     for (const name of ['business-name', 'services', 'postal', 'address', 'province', 'first-name', 'last-name']) {
       expect(form.elements.namedItem(name), `${name} should not be on the form`).toBeNull();
     }

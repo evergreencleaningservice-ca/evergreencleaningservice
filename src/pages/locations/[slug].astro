@@ -16,8 +16,14 @@
  * are shown instead, unattributed to any city. Flagged in _research/gaps.md.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Reviews from '../../components/home/Reviews.astro';
+import QuickQuoteForm from '../../components/QuickQuoteForm.astro';
+import ProcessSteps from '../../components/blocks/ProcessSteps.astro';
+import FaqList from '../../components/blocks/FaqList.astro';
+import LinkCards from '../../components/blocks/LinkCards.astro';
+import QuoteBand from '../../components/blocks/QuoteBand.astro';
+import ReviewQuotes from '../../components/blocks/ReviewQuotes.astro';
 import { locations } from '../../data/locations';
+import { AREAS, COVERAGE_SENTENCE } from '../../data/coverage';
 import { site, nap } from '../../data/site';
 import { pageTitle } from '../../lib/title';
 
@@ -32,7 +38,49 @@ const { location } = Astro.props;
 /* Client-supplied copy wins where it exists; the generated H1 stays the
    fallback for the locations still on the template body. */
 const h1 = location.detail?.h1 ?? `Commercial Cleaning in ${location.name} | ${site.name}`;
-const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(location.mapQuery)}&t=&z=12&ie=UTF8&iwloc=&output=embed`;
+/* THE MAP EMBED IS GONE (2026-10-15). A map centred on Mississauga beside
+   a Toronto street address read as a Mississauga office, which this business
+   does not have; it also loaded a Google Maps iframe on every location page.
+   The page now says plainly where the crews come from. */
+const isToronto = location.slug === 'toronto-downtown' || location.slug === 'etobicoke';
+const baseNote = isToronto
+  ? `Our office is at ${nap.streetAddress}, ${nap.addressLocality}.`
+  : `We do not have an office in ${location.name}: crews travel from our Toronto base at ${nap.streetAddress} in Toronto.`;
+
+const services = [
+  { title: `Office cleaning`, href: '/services/office-cleaning/', text: 'Recurring after-hours janitorial service.' },
+  { title: `Commercial cleaning`, href: '/services/commercial-cleaning/', text: 'Retail, institutional and mixed-use premises.' },
+  { title: `Industrial & warehouse cleaning`, href: '/services/industrial-cleaning/', text: 'Plants, warehouses and distribution.' },
+  { title: `Building maintenance & floor care`, href: '/services/building-maintenance/', text: 'Strip and wax, carpet extraction, high dusting.' },
+  { title: `Post-construction cleaning`, href: '/services/post-construction-cleaning/', text: 'Clean-up before handover.' },
+  { title: `Medical & dental clinics`, href: '/industries/medical-dental-clinics/', text: 'Clinic cleaning after hours.' },
+];
+
+const nearby = AREAS.filter((a) => a.href && a.href !== `/locations/${location.slug}/`).map((a) => ({
+  title: a.name,
+  href: a.href!,
+}));
+
+const faqs = [
+  {
+    q: `Do you have an office in ${location.name}?`,
+    a: isToronto
+      ? `Our office is at ${nap.addressLine}. Crews work across the city and the wider GTA.`
+      : `No. Evergreen has one office, at ${nap.addressLine}, and crews travel to ${location.name} from there. Every client has an account executive as their direct contact.`,
+  },
+  {
+    q: `What areas around ${location.name} do you cover?`,
+    a: `We work across ${COVERAGE_SENTENCE}.`,
+  },
+  {
+    q: 'How do I get a quote?',
+    a: `Call ${nap.phoneDisplay} or send the quote form. We arrange a free on-site walkthrough and send a written proposal.`,
+  },
+  {
+    q: 'Can cleaning be done after hours?',
+    a: 'Yes. Most commercial cleaning is done in the evening, overnight or at weekends so it does not disrupt your staff or customers.',
+  },
+];
 
 /* Per-page schema. The organisation graph is global (BaseLayout); this adds the
    service-in-place record that makes the page its own entity rather than a
@@ -59,7 +107,7 @@ const schema = {
     <div class="container">
       <h1 class="entry-title">{h1}</h1>
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">{site.name}</a> &gt; <a href="/locations/">Locations</a> &gt;
+        <a href="/">{site.name}</a> &gt; <a href="/locations/">Service Areas</a> &gt;
         <span aria-current="page">{location.name}</span>
       </nav>
     </div>
@@ -100,7 +148,7 @@ const schema = {
                 </ul>
 
                 <div class="cta-block">
-                  <a class="btn btn-primary btn-lg" href="/request-a-quote/">
+                  <a class="btn btn-primary btn-lg" href="#offer-quote" data-quote-cta data-cta-location="content">
                     {location.detail.ctaLabel}
                   </a>
                   <p class="loc-direct">
@@ -111,8 +159,8 @@ const schema = {
             ) : (
               <Fragment>
                 <p class="loc-lead">
-                  Evergreen Office Cleaning has cleaned commercial space across {location.region} since{' '}
-                  {site.since}, working {location.landmarks}.
+                  Evergreen Office Cleaning provides commercial and office cleaning in {location.region} as
+                  part of its coverage across the Greater Toronto Area, which it has served since {site.since}.
                 </p>
 
                 <h2>What we clean in {location.name}</h2>
@@ -128,41 +176,35 @@ const schema = {
                 <h3>How we work</h3>
                 <p>
                   Every contract starts with an on-site walkthrough, not a phone quote — the scope of a{' '}
-                  {location.name} facility is what sets the schedule and the crew size. You get a
-                  dedicated account manager, after-hours crews where the space cannot be cleaned during
-                  business hours, and a written scope you can hold us to.
+                  {location.name} facility is what sets the schedule. You get a dedicated account
+                  executive, after-hours cleaning where the space cannot be cleaned during business hours,
+                  and a written scope.
                 </p>
                 <p>
-                  We are bonded, insured and WSIB compliant. Call{' '}
+                  We are bonded, insured and WSIB covered. Call{' '}
                   <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a> or{' '}
-                  <a href="/request-a-quote/">request a walkthrough</a>.
+                  <a href="#offer-quote" data-quote-cta data-cta-location="content">request a walkthrough</a>.
                 </p>
-
-                <a class="btn btn-primary btn-lg" href="/request-a-quote/">Request a free quote</a>
               </Fragment>
             )
           }
         </div>
 
-        <aside class="loc-map" aria-label={`Map of ${location.name}`}>
-          <iframe
-            src={mapSrc}
-            width="100%"
-            height="420"
-            style="border:0"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title={`Map of ${location.name}, Ontario`}></iframe>
+        <aside class="loc-aside" aria-label="Request a quote">
+          <div class="loc-form-card">
+            <QuickQuoteForm
+              id="offer-quote"
+              formId={`location-${location.slug}`}
+              heading={`Get a quote in ${location.name}`}
+              intro="A few details and we will arrange a walkthrough. No obligation."
+            />
+          </div>
           <div class="loc-nap">
-            <h3>{nap.name}</h3>
-            <p>
-              {nap.streetAddress}<br />
-              {nap.addressLocality}, {nap.addressRegion} {nap.postalCode}<br />
-              {nap.addressCountryName}
-            </p>
+            <h2 class="loc-nap-title">Where we work from</h2>
+            <p>{baseNote}</p>
             <p>
               <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a><br />
-              <a href={`mailto:${nap.email}`}>{nap.email}</a>
+              <a href={`mailto:${nap.email}`} data-cta-location="sidebar">{nap.email}</a>
             </p>
           </div>
         </aside>
@@ -170,7 +212,14 @@ const schema = {
     </div>
   </div>
 
-  <Reviews />
+  <div class="container stack loc-after">
+    <LinkCards heading={`Services in ${location.name}`} items={services} />
+    <ProcessSteps heading="How it works" />
+    <ReviewQuotes heading="What clients say" names={['Edward Sherman', 'Michael Katchen', 'Ping Lee']} />
+    <FaqList faqs={faqs} />
+    <LinkCards heading="Other service areas" items={nearby} />
+    <QuoteBand location="content" />
+  </div>
 </BaseLayout>
 
 <style>
@@ -245,10 +294,21 @@ const schema = {
     margin-bottom: 7px;
   }
 
-  .loc-map iframe {
-    display: block;
-    width: 100%;
-    border-radius: var(--radius);
+  .loc-form-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--brand);
+    border-radius: 6px;
+    padding: 20px;
+  }
+
+  .loc-nap-title {
+    font-size: 1.0625rem;
+    margin: 0 0 10px;
+  }
+
+  .loc-after {
+    padding-bottom: 56px;
   }
 
   .loc-nap {
@@ -258,10 +318,6 @@ const schema = {
     border-radius: var(--radius);
   }
 
-  .loc-nap h3 {
-    font-size: 1.0625rem;
-    margin: 0 0 10px;
-  }
 
   .loc-nap p {
     margin: 0 0 10px;

@@ -144,8 +144,12 @@ export function destinationNumber(anchor: HTMLAnchorElement): string {
  * that was in fact swapped would be worse than admitting the limit.
  */
 export function trackingProvider(win: Window = window): string {
-  const w = win as Window & { __ctm?: unknown };
+  const w = win as Window & { __ctm?: unknown; _googWcmGet?: unknown };
   if (w.__ctm) return 'calltrackingmetrics';
+  /* Google Ads "calls from website" (the container's `awcc` tag, live in
+     GTM-5W69BTJQ since Oct 2026) swaps in a Google forwarding number for ad
+     visitors through gstatic.com/wcm/loader.js, which defines `_googWcmGet`. */
+  if (typeof w._googWcmGet === 'function') return 'google_forwarding_number';
   return 'unknown';
 }
 
