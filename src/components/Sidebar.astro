@@ -203,6 +203,10 @@ const posts = (await getCollection('blog'))
 
   .tagcloud a {
     color: var(--ink);
+    /* 24px minimum target (WCAG 2.2), whatever the tag's font size. */
+    display: inline-block;
+    min-height: 24px;
+    padding: 3px 2px;
     /* Sizes run 8pt to 22pt, so a shared line-height would either crowd the
        large ones or strand the small ones. Unitless scales with each. */
     line-height: 1.35;

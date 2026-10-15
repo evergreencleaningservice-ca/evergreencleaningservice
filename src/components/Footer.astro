@@ -166,9 +166,20 @@ const icons: Record<string, string> = {
     }
   }
 
+  /* The widget band is white, so the dark footer's light ink and bright
+     hover green would fail contrast here (measured 1.9:1 and 1.5:1). */
   .footer-nap {
     margin: 0 0 10px;
     line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .site-footer .footer-nap a {
+    color: var(--brand-dark);
+  }
+
+  .footer-col-contact .btn {
+    color: #fff;
   }
 
   .footer-col-review {
@@ -200,9 +211,13 @@ const icons: Record<string, string> = {
 
   /* The original's menu widget: each area is a link that goes nowhere, #777
      resting, brand green and underlined on hover. */
+  /* 24px tall targets at least (WCAG 2.2 target size). */
   .site-footer .footer-areas a {
     color: inherit;
     text-decoration: none;
+    display: inline-block;
+    min-height: 24px;
+    padding: 2px 0;
   }
 
   .site-footer .footer-areas a:hover {

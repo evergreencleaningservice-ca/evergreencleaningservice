@@ -55,7 +55,7 @@ Branch `claude/nice-mayer-r2gmzt`. This is the reviewable record of one coordina
 
 | Check | Result |
 |---|---|
-| `npm test` (unit, build and worker suites) | See the final line of the PR description for the exact count |
+| `npm test` (unit, build and worker suites) | **737 passed, 0 failed** (31 files) |
 | `npm run build` (production, real reCAPTCHA key) | Passes: preflight, image repointing and the captcha-key gate |
 | Internal links (build test) | 0 broken, 0 through a redirect |
 | One H1 per page, canonical present, JSON-LD parses (build tests) | Pass |
@@ -91,3 +91,17 @@ Production and staging are the same Worker, so there is no separate production s
 - **In git:** `git revert -m 1 <merge-commit>` on `main`, then `npm run deploy`.
 - **Data:** no change in this branch writes to the database or alters a table. Migration 0009, if applied later, is additive, and its rollback statements are in the file header.
 - **URLs:** no URL was removed or renamed, so a rollback leaves no broken links. The new pages would return 404 until redeployed. None of them is in a live ad yet.
+
+## End-to-end browser checks (built site, Chromium)
+
+These were run on `/services/office-cleaning/` with the lead endpoint intercepted, so **no real lead was sent and no customer was contacted**:
+
+- Keyboard order runs: skip link → logo → phone → quote → menu. Submenus open on keyboard focus.
+- The mobile drawer opens and sets `aria-expanded="true"`.
+- An empty submit marks every required field invalid, inline, and pushes `lead_form_error` (validation).
+- `form_start` is pushed exactly once.
+- A server 500 shows a recovery message with the phone number, re-enables the button, and pushes no conversion.
+- A server 200 replaces the form with a confirmation and pushes **exactly one** `lead_form_submission`.
+- A `gclid` and UTMs from the landing URL arrive in the payload of a lead submitted from a **later** page.
+- The payload carries `form_id=service-office-cleaning` and the optional city.
+- The dataLayer contains no name, phone or email.

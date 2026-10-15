@@ -666,3 +666,19 @@ img {
   border-left: 3px solid var(--rule);
   padding-left: 12px;
 }
+
+/* Links inside running text are underlined (2026-10-15): colour alone gave
+   1.55:1 against the body text, under the 3:1 a link in a paragraph needs. */
+main p a:not(.btn),
+main li > p a:not(.btn) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Area lists are dense link lists: keep each link a 24px target. */
+.ar-grid a,
+.offer-areas a {
+  display: inline-block;
+  min-height: 24px;
+  padding: 2px 0;
+}

@@ -5,6 +5,8 @@ WordPress with the OnePress theme. The site is a fully static marketing site: pa
 pages and a news/blog archive. There is no CMS and no server runtime — `astro build` emits
 plain HTML into `dist/`.
 
+**Growth programme (Oct 2026):** see [`docs/growth/`](docs/growth/README.md) for the competitor matrix, page inventory, performance, tracking spec, PPC blueprint, client intake, and deploy/rollback.
+
 ## Running it
 
 ```bash
@@ -176,6 +178,10 @@ src/
 | `/category/blog/`, `/category/blog/page/N/` | the same list at the original category URL (this is what the nav links to) |
 | `/services/` and `/services/<slug>/` | the `services` collection |
 | `/about-us/`, `/privacy/`, `/green-clean-products/`, `/cleaning-demo-gallery/`, `/contact-us/`, `/request-a-quote/`, `/testimonials/` | one `.astro` file each, pulling a `pages` collection entry |
+| `/industries/`, `/industries/<slug>/` | hub + the `industries` collection, through `src/components/OfferPage.astro` |
+| `/our-process/` | `src/pages/our-process.astro` |
+| `/lp/<slug>/` | data-driven paid pages, `src/data/landing-pages.ts` (noindex) |
+| `/projects/<slug>/` | the `projects` collection — **only** entries passing the publish gate in `src/lib/projects.ts`; none yet |
 | `/404.html` | `src/pages/404.astro` (noindex) |
 | `/rss.xml`, `/sitemap-index.xml` | generated at build time |
 
