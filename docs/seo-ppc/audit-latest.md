@@ -25,9 +25,9 @@ Date: 2026-10-16. Auditor: automated technical SEO / PPC / CRO pass (Claude Code
 | Stray noindex on live (excluding intended tag/category archives) | 0 | n/a |
 | Staging serves `X-Robots-Tag: noindex, nofollow, noarchive` | n/a | 111 of 111 |
 | Pages with `<img>` lacking width/height | 46 pages (130 images) | same |
-| Titles over 60 characters (decoded) | 8 | same |
+| Titles over 60 characters (decoded) | 5 | same |
 | Descriptions over 160 characters | 4 | same |
-| Pages with no BreadcrumbList (excluding home) | 18 | same |
+| Pages with no BreadcrumbList (excluding home) | 17 | same |
 
 Live and staging were byte-equivalent on every checked field (title, description, H1, canonical, word count, image count). `robots.txt` is allow-all with an absolute Sitemap line on both hosts (intentional, see `public/_headers`). 38 tag/archive pages carry `follow, noindex` by design and are excluded from the sitemap.
 
