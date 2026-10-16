@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import Sidebar from '../components/Sidebar.astro';
 import { site } from '../data/site';
 import { pageTitle } from '../lib/title';
+import { stampImageSizes } from '../lib/normalize-body';
 
 interface Props {
   title: string;
@@ -46,7 +47,7 @@ const { title, description, image, contentHtml, sidebar = true } = Astro.props;
  *     lazy-loaded.
  */
 function normalizeBody(html: string): string {
-  return html
+  return stampImageSizes(html
     .replace(/(href|src)="\/wp-content\/uploads\/[^"]*?\/([^"/]+)"/g, '$1="/images/$2"')
     .replace(/href="(\/[^"?#]*)"/g, (whole, path: string) =>
       path.endsWith('/') || /\.[a-z0-9]{2,5}$/i.test(path) ? whole : `href="${path}/"`,
@@ -54,7 +55,7 @@ function normalizeBody(html: string): string {
     .replace(/href="tel:\/\//g, 'href="tel:')
     .replace(/<a\b[^>]*>\s*<\/a>/g, '')
     .replace(/<p[^>]*>\s*<\/p>/g, '')
-    .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" ');
+    .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" '));
 }
 
 const body = contentHtml ? normalizeBody(contentHtml) : null;

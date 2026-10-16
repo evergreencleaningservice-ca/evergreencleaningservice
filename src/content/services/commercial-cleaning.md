@@ -1,7 +1,7 @@
 ---
 title: "Commercial Cleaning"
 h1: "Commercial Cleaning Services in Toronto and the GTA"
-seoTitle: "Commercial Cleaning Services in Toronto & the GTA | Evergreen"
+seoTitle: "Commercial Cleaning in Toronto & the GTA | Evergreen"
 description: "Commercial cleaning for retail, institutional and mixed-use buildings in Toronto and the GTA — recurring or one-off, after hours, with a free walkthrough."
 summary: "Recurring and one-off cleaning for the commercial spaces your customers and visitors judge you by — scheduled around your opening hours and scoped on site, not over the phone."
 image: "/images/lobby-floor-scrubber-commercial.jpg"

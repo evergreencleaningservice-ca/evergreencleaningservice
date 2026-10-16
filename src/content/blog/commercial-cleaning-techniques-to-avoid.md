@@ -1,6 +1,6 @@
 ---
 title: "Commercial Cleaning Techniques To Avoid"
-description: "When it comes to cleaning many think more is a good thing and while this can be true, in some aspects more can do greater harm than good. Let us show you which techniques to avoid"
+description: "Many people think more cleaning is always better, but some techniques do more harm than good. Here are the commercial cleaning techniques to avoid."
 pubDate: 2022-11-30
 image: "/images/blog-cleaning-techniques-to-avoid-feature.jpg"
 imageAlt: "Cleaning supervisor showing a trainee the correct cloth for a delicate stone surface"

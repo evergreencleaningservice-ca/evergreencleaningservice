@@ -48,8 +48,19 @@ function intrinsicSize(file: string): [number, number] | null {
   return null;
 }
 
+/** Stamp local /images/ JPEG/PNG `<img>` tags that lack width/height with their intrinsic size. */
+export function stampImageSizes(html: string): string {
+  return html.replace(
+    /<img(?![^>]*\swidth=)([^>]*?\ssrc="\/images\/([^"/]+\.(?:jpe?g|png))")/gi,
+    (whole, _rest, file: string) => {
+      const size = intrinsicSize(decodeURIComponent(file));
+      return size ? whole.replace('<img', `<img width="${size[0]}" height="${size[1]}"`) : whole;
+    },
+  );
+}
+
 export function normalizeBody(html: string): string {
-  return html
+  const out = html
     .replace(/(href|src)="\/wp-content\/uploads\/[^"]*?\/([^"/]+)"/g, '$1="/images/$2"')
     .replace(/href="(\/[^"?#]*)"/g, (whole, path: string) =>
       path.endsWith('/') || /\.[a-z0-9]{2,5}$/i.test(path) ? whole : `href="${path}/"`
@@ -61,9 +72,6 @@ export function normalizeBody(html: string): string {
         /\bdata-call-location=/.test(attrs) ? whole : `<a${attrs} data-call-location="content">`
     )
     .replace(/<a\b[^>]*>\s*<\/a>/g, '')
-    .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" ')
-    .replace(/<img(?![^>]*\swidth=)([^>]*?\ssrc="\/images\/([^"/]+\.(?:jpe?g|png))")/gi, (whole, _rest, file: string) => {
-      const size = intrinsicSize(decodeURIComponent(file));
-      return size ? whole.replace('<img', `<img width="${size[0]}" height="${size[1]}"`) : whole;
-    });
+    .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" ');
+  return stampImageSizes(out);
 }
