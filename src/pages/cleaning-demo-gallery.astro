@@ -1,6 +1,7 @@
 ---
 import { getEntry, render } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
+import { stampImageSizes } from '../lib/normalize-body';
 
 const entry = await getEntry('pages', 'cleaning-demo-gallery');
 if (!entry) throw new Error('Missing content entry: pages/cleaning-demo-gallery');
@@ -12,9 +13,11 @@ const { Content } = await render(entry);
 // them is above the fold, and at full size they are several megabytes together.
 // This page takes the HTML into its own wrapper (instead of handing it to
 // PageLayout) so the grid rules below can reach the markup with `:global()`.
-const galleryHtml = (entry.rendered?.html ?? '').replace(
-  /<img(?![^>]*\sloading=)\s/g,
-  '<img loading="lazy" decoding="async" ',
+const galleryHtml = stampImageSizes(
+  (entry.rendered?.html ?? '').replace(
+    /<img(?![^>]*\sloading=)\s/g,
+    '<img loading="lazy" decoding="async" ',
+  ),
 );
 ---
 

@@ -26,6 +26,7 @@ import { locations } from '../../data/locations';
 import { AREAS, COVERAGE_SENTENCE } from '../../data/coverage';
 import { site, nap } from '../../data/site';
 import { pageTitle } from '../../lib/title';
+import { breadcrumbSchema } from '../../lib/schema';
 
 export function getStaticPaths() {
   return locations.map((location) => ({
@@ -102,6 +103,18 @@ const schema = {
   description={location.description}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      breadcrumbSchema([
+        { name: site.name, url: '/' },
+        { name: 'Service Areas', url: '/locations/' },
+        { name: location.name },
+      ])
+    )}
+    is:inline
+  />
 
   <div class="page-header">
     <div class="container">
