@@ -1,15 +1,16 @@
 /**
  * @vitest-environment node
  *
- * The admin, through the Worker's own `fetch`: who gets in (a Cloudflare
- * Access token, checked here with a real RS256 signature), what each route
- * asks the database, and what a published post becomes on the site.
+ * The admin, through the Worker's own `fetch`: who gets in (the emailed-code
+ * sign-in and its signed session cookie), what each route asks the database,
+ * and what a published post becomes on the site.
  *
  * Neon is replaced by a fake that records every query and answers from a
- * script, as tests/worker/submit-lead.test.ts does. No Workers runtime, no
- * Access, no B2: TESTING.md says what that leaves unproven.
+ * script, as tests/worker/submit-lead.test.ts does; Resend by a fake that
+ * keeps the code it was asked to send. No Workers runtime, no Neon, no
+ * Resend, no B2: TESTING.md says what that leaves unproven.
  */
-import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 type Row = Record<string, unknown>;
 const queries: { sql: string; values: unknown[] }[] = [];
@@ -28,30 +29,14 @@ vi.mock('@neondatabase/serverless', () => ({
 }));
 
 const worker = (await import('../../src/worker')).default;
-const { clearAccessKeys } = await import('../../src/lib/admin/access');
 const { clearFeatures, csvCell } = await import('../../src/lib/admin/api');
 const { forgetLive } = await import('../../src/lib/admin/live-posts');
+const { codeHash, safeReturn, seal, sessionCookie } = await import('../../src/lib/admin/session');
 
-const TEAM = 'evergreen.cloudflareaccess.com';
-const AUD = 'aud-tag-123';
 const WWW = 'https://www.evergreencleaningservice.ca';
 const STAGE = 'https://stage.evergreencleaningservice.ca';
-
-let keyPair: CryptoKeyPair;
-let otherPair: CryptoKeyPair;
-let jwk: JsonWebKey;
-
-const b64url = (bytes: ArrayBuffer | Uint8Array | string) =>
-  Buffer.from(typeof bytes === 'string' ? bytes : new Uint8Array(bytes as ArrayBuffer)).toString('base64url');
-
-async function token(claims: Record<string, unknown> = {}, pair = keyPair, kid = 'k1') {
-  const header = b64url(JSON.stringify({ alg: 'RS256', kid, typ: 'JWT' }));
-  const body = b64url(
-    JSON.stringify({ iss: `https://${TEAM}`, aud: [AUD], email: 'Paolo@10XiD.com', exp: Math.floor(Date.now() / 1000) + 600, ...claims })
-  );
-  const sig = await crypto.subtle.sign('RSASSA-PKCS1-v1_5', pair.privateKey, new TextEncoder().encode(`${header}.${body}`));
-  return `${header}.${body}.${b64url(sig)}`;
-}
+const SECRET = 'x'.repeat(40);
+const ADMIN = 'ethan@10xid.com';
 
 /** The files the build would hold: a shell page, an insights page, the sitemap, the 404 page. */
 const SHELL_HTML = `<!doctype html><html><head><title>EG_SHELL_TITLE - Evergreen Office Cleaning</title><meta name="description" content="EG_SHELL_DESCRIPTION"><meta name="robots" content="noindex, nofollow"><link rel="canonical" href="https://www.evergreencleaningservice.ca/eg-live-post-shell/"><meta property="og:title" content="EG_SHELL_TITLE - Evergreen Office Cleaning"><meta property="og:image" content="https://img.example/default-og.jpg"><meta name="twitter:image" content="https://img.example/default-og.jpg"><meta property="article:published_time" content="2000-01-01T00:00:00.000Z"><script type="application/ld+json">{"@type":"CleaningService"}</script><script type="application/ld+json">{"@type":"BlogPosting","@id":"https://www.evergreencleaningservice.ca/eg-live-post-shell/#article","headline":"EG_SHELL_TITLE"}</script><script type="application/ld+json">{"@type":"BreadcrumbList","itemListElement":[{"name":"EG_SHELL_TITLE"}]}</script></head><body><h1 class="entry-title" data-astro-cid-x1>EG_SHELL_TITLE</h1><article class="entry-content" data-astro-cid-x1>EG_SHELL_BODY</article><section data-post-slug="eg-live-post-shell"></section></body></html>`;
@@ -73,7 +58,15 @@ const ASSETS = {
   },
 } as unknown as Fetcher;
 
-const ENV = { ASSETS, DATABASE_URL: 'postgres://main', STAGING_DATABASE_URL: 'postgres://staging', ACCESS_TEAM_DOMAIN: TEAM, ACCESS_AUD: AUD };
+const ENV = {
+  ASSETS,
+  DATABASE_URL: 'postgres://main',
+  STAGING_DATABASE_URL: 'postgres://staging',
+  ADMIN_EMAILS: 'Ethan@10XiD.com, harjit@brandingcentres.com',
+  ADMIN_SESSION_SECRET: SECRET,
+  RESEND_API_KEY: 're_test',
+  LEAD_NOTIFY_FROM: 'leads@brandingcentres.com',
+};
 
 /** information_schema as a fully migrated database answers it. */
 const OUTCOME_COLS = ['lead_status', 'status_reason', 'quote_value_cad', 'won_value_cad', 'qualified_at', 'quote_issued_at', 'won_at', 'outcome_updated_at'];
@@ -83,85 +76,102 @@ const FEATURES: Row[] = [
   ...POST_COLS.map((c) => ({ table_name: 'admin_posts', column_name: c })),
 ];
 
+/** The session cookie a correct code sets, for ADMIN unless told otherwise. */
+const cookieFor = async (email = ADMIN, origin = WWW, env: object = ENV) =>
+  (await sessionCookie(new URL(origin), env as never, email)).split(';')[0];
+
 async function call(path: string, init: RequestInit & { origin?: string; auth?: string | null; env?: object } = {}) {
   const origin = init.origin ?? WWW;
   const headers = new Headers(init.headers);
-  const auth = init.auth === undefined ? await token() : init.auth;
-  if (auth) headers.set('cf-access-jwt-assertion', auth);
+  const auth = init.auth === undefined ? await cookieFor(ADMIN, origin) : init.auth;
+  if (auth) headers.set('cookie', auth);
   if (init.method && init.method !== 'GET' && !headers.has('origin')) headers.set('origin', origin);
   if (init.body && typeof init.body === 'string') headers.set('content-type', 'application/json');
   return worker.fetch(new Request(`${origin}${path}`, { ...init, headers }), { ...ENV, ...(init.env ?? {}) } as never, {} as never);
 }
 
-beforeAll(async () => {
-  const params = { name: 'RSASSA-PKCS1-v1_5', modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' };
-  keyPair = (await crypto.subtle.generateKey(params, true, ['sign', 'verify'])) as CryptoKeyPair;
-  otherPair = (await crypto.subtle.generateKey(params, true, ['sign', 'verify'])) as CryptoKeyPair;
-  jwk = await crypto.subtle.exportKey('jwk', keyPair.publicKey);
-});
+/** What the fake Resend was asked to send. */
+const sent: { to: string[]; subject: string; text: string; from: string }[] = [];
 
 beforeEach(() => {
   queries.length = 0;
   assetCalls.length = 0;
+  sent.length = 0;
   answer = (sql) => (sql.includes('information_schema') ? FEATURES : []);
-  clearAccessKeys();
   clearFeatures();
   forgetLive();
   vi.stubGlobal(
     'fetch',
-    vi.fn(async (url: string) => {
-      if (String(url) === `https://${TEAM}/cdn-cgi/access/certs`) return new Response(JSON.stringify({ keys: [{ ...jwk, kid: 'k1' }] }));
+    vi.fn(async (url: string, init?: RequestInit) => {
+      if (String(url) === 'https://api.resend.com/emails') {
+        sent.push(JSON.parse(String(init?.body)));
+        return new Response('{"id":"e1"}');
+      }
       return new Response('unexpected', { status: 500 });
     })
   );
 });
 
-// ---------------------------------------------------------------- access ---
+// --------------------------------------------------------------- sign-in ---
+
+const codeOf = (i = 0) => sent[i].subject.slice(0, 6);
 
 describe('who may open the admin', () => {
-  it('lets a valid Access token in and says who it is', async () => {
+  it('lets a signed-in admin in and says who it is', async () => {
     const res = await call('/api/admin/me');
     expect(res.status).toBe(200);
-    expect(await res.json()).toMatchObject({ email: 'paolo@10xid.com', database: 'main' });
+    expect(await res.json()).toMatchObject({ email: ADMIN, database: 'main' });
     expect(res.headers.get('cache-control')).toBe('no-store');
     expect(res.headers.get('x-robots-tag')).toContain('noindex');
   });
 
-  it('serves the admin pages only once signed in', async () => {
-    expect((await call('/admin/leads/', { auth: null })).status).toBe(401);
+  it('sends an admin page to sign-in without a session, and serves it with one', async () => {
+    const out = await call('/admin/leads/?status=won', { auth: null });
+    expect(out.status).toBe(302);
+    expect(out.headers.get('location')).toBe(`/admin/sign-in/?return=${encodeURIComponent('/admin/leads/?status=won')}`);
+    expect((await call('/api/admin/me', { auth: null })).status).toBe(401);
     const res = await call('/admin/leads/');
     expect(res.status).toBe(200);
     expect(await res.text()).toContain('admin page');
     expect(res.headers.get('x-frame-options')).toBe('DENY');
   });
 
-  it('stays shut when Access is not set up', async () => {
-    const res = await call('/api/admin/me', { env: { ACCESS_TEAM_DOMAIN: '', ACCESS_AUD: '' } });
-    expect(res.status).toBe(503);
-    const page = await call('/admin/', { env: { ACCESS_AUD: '' } });
-    expect(page.status).toBe(503);
-    expect(await page.text()).toContain('not set up');
+  it('serves the sign-in page to anyone', async () => {
+    expect((await call('/admin/sign-in/', { auth: null })).status).toBe(200);
   });
 
-  it('refuses no token, an expired one, the wrong audience, issuer or key', async () => {
-    const past = Math.floor(Date.now() / 1000) - 10;
-    for (const auth of [
-      null,
-      'garbage',
-      await token({ exp: past }),
-      await token({ aud: ['other'] }),
-      await token({ iss: 'https://evil.cloudflareaccess.com' }),
-      await token({}, otherPair),
-      await token({}, keyPair, 'unknown-kid'),
-      await token({ email: '' }),
-    ]) {
-      expect((await call('/api/admin/me', { auth })).status).toBe(401);
+  it('stays shut when the sign-in is not set up', async () => {
+    for (const env of [{ ADMIN_SESSION_SECRET: '' }, { ADMIN_SESSION_SECRET: 'short' }, { ADMIN_EMAILS: '' }]) {
+      expect((await call('/api/admin/me', { env })).status).toBe(503);
+      const page = await call('/admin/', { env, auth: null });
+      expect(page.status).toBe(503);
+      expect(await page.text()).toContain('not set up');
+      expect((await call('/admin/sign-in/', { env, auth: null })).status).toBe(503);
     }
   });
 
-  it('keeps to ADMIN_EMAILS when it is set', async () => {
-    expect((await call('/api/admin/me', { env: { ADMIN_EMAILS: 'someone@else.com' } })).status).toBe(403);
-    expect((await call('/api/admin/me', { env: { ADMIN_EMAILS: 'someone@else.com, paolo@10xid.com' } })).status).toBe(200);
+  it('refuses a tampered, expired, foreign or delisted session', async () => {
+    const good = await cookieFor();
+    const [name, value] = good.split('=');
+    const [body, mac] = value.split('.');
+    const forged = `${name}=${Buffer.from(JSON.stringify({ email: ADMIN, exp: Date.now() + 1e9 })).toString('base64url')}.${mac}`;
+    const expired = `${name}=${await seal(SECRET, { email: ADMIN, exp: Date.now() - 1 })}`;
+    const otherKey = `${name}=${await seal('y'.repeat(40), { email: ADMIN, exp: Date.now() + 1e6 })}`;
+    for (const auth of [`${name}=garbage`, `${name}=${body}.AAAA`, forged, expired, otherKey]) {
+      expect((await call('/api/admin/me', { auth })).status).toBe(401);
+    }
+    // Off the list is out at once, whatever the cookie says.
+    expect((await call('/api/admin/me', { env: { ADMIN_EMAILS: 'harjit@brandingcentres.com' } })).status).toBe(401);
+  });
+
+  it('sets the session cookie HttpOnly, Secure, SameSite=Strict and __Host-', async () => {
+    const c = await sessionCookie(new URL(WWW), ENV as never, ADMIN);
+    expect(c).toMatch(/^__Host-eg_admin=/);
+    expect(c).toContain('HttpOnly');
+    expect(c).toContain('Secure');
+    expect(c).toContain('SameSite=Strict');
+    expect(c).toContain('Path=/');
+    expect(c).not.toContain('Domain=');
   });
 
   it('honours the dev sign-in on localhost only', async () => {
@@ -174,11 +184,102 @@ describe('who may open the admin', () => {
   it('refuses a change from another site', async () => {
     const res = await call('/api/admin/posts', { method: 'POST', body: '{}', headers: { origin: 'https://evil.example' } });
     expect(res.status).toBe(403);
+    const signIn = await call('/api/admin/auth/start', { method: 'POST', body: `{"email":"${ADMIN}"}`, auth: null, headers: { origin: 'https://evil.example' } });
+    expect(signIn.status).toBe(403);
     expect(queries).toEqual([]);
   });
 
   it('uses the staging database on the staging host', async () => {
     expect(await (await call('/api/admin/me', { origin: STAGE })).json()).toMatchObject({ database: 'staging' });
+  });
+
+  it('only returns to a page in the admin after signing in', () => {
+    expect(safeReturn('/admin/leads/?id=4')).toBe('/admin/leads/?id=4');
+    for (const bad of ['https://evil.example/', '//evil.example/admin/', '/\\evil.example', '/insights/', '/admin/sign-in/', '', null]) {
+      expect(safeReturn(bad)).toBe('/admin/');
+    }
+  });
+});
+
+describe('signing in with an emailed code', () => {
+  const start = (email: string, env: object = {}) =>
+    call('/api/admin/auth/start', { method: 'POST', body: JSON.stringify({ email }), auth: null, env });
+  const verify = (code: string, email = ADMIN) =>
+    call('/api/admin/auth/verify', { method: 'POST', body: JSON.stringify({ email, code, return: '/admin/jobs/' }), auth: null });
+
+  it('emails a six-digit code to an allowed address and keeps only its hash', async () => {
+    answer = (sql) => (sql.includes('count(*)') ? [{ n: 0 }] : []);
+    const res = await start('  Ethan@10xid.com ');
+    expect(res.status).toBe(200);
+    expect(sent).toHaveLength(1);
+    expect(sent[0]).toMatchObject({ to: [ADMIN], from: 'leads@brandingcentres.com' });
+    expect(codeOf()).toMatch(/^\d{6}$/);
+    const insert = queries.find((q) => q.sql.startsWith('INSERT INTO admin_sign_in_codes'))!;
+    expect(insert.values[0]).toBe(ADMIN);
+    expect(insert.values[1]).toBe(await codeHash(SECRET, ADMIN, codeOf()));
+    expect(insert.values).not.toContain(codeOf());
+  });
+
+  it('answers a stranger exactly as it answers an admin, and sends nothing', async () => {
+    const res = await start('someone@else.com');
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true });
+    expect(sent).toEqual([]);
+    expect(queries).toEqual([]);
+  });
+
+  it('sends no more than five codes an hour to one address', async () => {
+    answer = (sql) => (sql.includes('count(*)') ? [{ n: 5 }] : []);
+    expect((await start(ADMIN)).status).toBe(200);
+    expect(sent).toEqual([]);
+    expect(queries.some((q) => q.sql.startsWith('INSERT'))).toBe(false);
+  });
+
+  it('signs in with the right code, once, and sets the session', async () => {
+    answer = (sql) => (sql.includes('count(*)') ? [{ n: 0 }] : []);
+    await start(ADMIN);
+    const code = codeOf();
+    const hash = await codeHash(SECRET, ADMIN, code);
+    answer = (sql) =>
+      sql.startsWith('UPDATE admin_sign_in_codes SET attempts') ? [{ id: '1', code_hash: hash }] : sql.startsWith('UPDATE admin_sign_in_codes SET used_at') ? [{ id: '1' }] : [];
+    const res = await verify(` ${code.slice(0, 3)} ${code.slice(3)} `);
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true, return: '/admin/jobs/' });
+    const cookie = res.headers.get('set-cookie')!.split(';')[0];
+    expect((await call('/api/admin/me', { auth: cookie })).status).toBe(200);
+    // The try is counted in the statement that refuses a sixth.
+    const tryQ = queries.find((q) => q.sql.startsWith('UPDATE admin_sign_in_codes SET attempts'))!;
+    expect(tryQ.sql).toContain('attempts < ?');
+    expect(tryQ.values).toContain(5);
+  });
+
+  it('refuses a wrong code, a used or exhausted one, and a code for a stranger', async () => {
+    const hash = await codeHash(SECRET, ADMIN, '123456');
+    answer = (sql) => (sql.startsWith('UPDATE admin_sign_in_codes SET attempts') ? [{ id: '1', code_hash: hash }] : []);
+    expect((await verify('654321')).status).toBe(401);
+    // Already used by a parallel request: the used_at update finds nothing.
+    expect((await verify('123456')).status).toBe(401);
+    answer = () => []; // no live code with tries left
+    expect((await verify('123456')).status).toBe(401);
+    queries.length = 0;
+    expect((await verify('123456', 'someone@else.com')).status).toBe(401);
+    expect(queries).toEqual([]);
+    expect((await verify('12345')).status).toBe(401);
+  });
+
+  it('says to apply 0011 when the codes table is missing', async () => {
+    answer = () => {
+      throw new Error('relation "admin_sign_in_codes" does not exist');
+    };
+    const res = await start(ADMIN);
+    expect(res.status).toBe(503);
+    expect((await res.json()).error).toContain('0011_admin_sign_in.sql');
+  });
+
+  it('signs out by clearing the cookie', async () => {
+    const res = await call('/api/admin/auth/sign-out', { method: 'POST' });
+    expect(res.status).toBe(200);
+    expect(res.headers.get('set-cookie')).toMatch(/^__Host-eg_admin=; .*Max-Age=0/);
   });
 });
 
@@ -285,7 +386,7 @@ describe('posts', () => {
     const draft = JSON.parse(String(insert.values[0]));
     expect(draft.job).toMatchObject({ facility: 'dental', client: 'Bright Dental', nameClient: false });
     expect(insert.values[1]).toBe(4);
-    expect(insert.values[2]).toBe('paolo@10xid.com');
+    expect(insert.values[2]).toBe(ADMIN);
   });
 
   it('opens the existing post when a job already has one', async () => {

@@ -20,8 +20,8 @@ import { serveSite } from './lib/admin/live-posts';
  *
  * POST /api/submit-lead — Section 4.1 of the overhaul specification.
  * POST /api/submit-post — comments and testimonials (not leads).
- * /admin/ and /api/admin/ — leads, jobs and the blog, behind Cloudflare
- *   Access (src/lib/admin/api.ts; HANDOFF.md section 7.6).
+ * /admin/ and /api/admin/ — leads, jobs and the blog, behind the admin's
+ *   own emailed-code sign-in (src/lib/admin/api.ts; HANDOFF.md section 7.6).
  * /<slug>/, /insights/, the sitemap and RSS — posts published from the admin,
  *   served from Neon (src/lib/admin/live-posts.ts).
  *
@@ -31,8 +31,8 @@ import { serveSite } from './lib/admin/live-posts';
  */
 
 /**
- * The admin's settings (Cloudflare Access, B2 uploads) are in `AdminEnv`;
- * see src/lib/admin/access.ts and src/lib/admin/b2.ts.
+ * The admin's settings (its sign-in, B2 uploads) are in `AdminEnv`; see
+ * src/lib/admin/session.ts and src/lib/admin/b2.ts.
  */
 export interface Env extends AdminEnv {
   ASSETS: Fetcher;

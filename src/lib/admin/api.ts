@@ -15,13 +15,24 @@
  *   POST   /api/admin/posts/<id>/publish    { version, live }: publish now, or take it off
  *   POST   /api/admin/image                 one image (multipart "file"), stored in B2
  *
- * Every request is checked against Cloudflare Access (access.ts) before
+ * Every request is checked against the admin's sign-in (session.ts) before
  * anything else, and every change must come from the admin's own pages.
  * The database is the one the hostname selects (lib/database-url.ts), so the
  * staging admin edits staging's leads and posts and never production's.
  */
 import { neon } from '@neondatabase/serverless';
-import { adminFor, sameOrigin, type AccessEnv } from './access';
+import {
+  clearCookie,
+  isConfigured,
+  resendCode,
+  safeReturn,
+  sameOrigin,
+  sessionCookie,
+  sessionFor,
+  startSignIn,
+  verifySignIn,
+  type SessionEnv,
+} from './session';
 import { IMAGE_TYPES, MAX_IMAGE_BYTES, uploadImage, uploadKey, type B2Env } from './b2';
 import { blocksToHtml } from './blocks';
 import { forgetLive, SHELL } from './live-posts';
@@ -29,7 +40,7 @@ import { draftFromLead, render, sanitizeDraft, slugify, socialSlots, thumbFor, t
 import { databaseSecretFor, databaseUrlFor, type DatabaseEnv } from '../database-url';
 import type { Sql } from '../posts-sync';
 
-export interface AdminEnv extends AccessEnv, B2Env, DatabaseEnv {
+export interface AdminEnv extends SessionEnv, B2Env, DatabaseEnv {
   ASSETS: Fetcher;
 }
 
@@ -66,7 +77,7 @@ const deniedPage = (status: number, reason: string) =>
   new Response(
     `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Admin</title><body style="font:16px system-ui,sans-serif;max-width:32rem;margin:15vh auto;padding:0 16px"><h1 style="font-size:1.4rem">Evergreen admin</h1><p>${
       status === 503
-        ? 'The admin is not set up on this address yet: it needs Cloudflare Access (ACCESS_TEAM_DOMAIN and ACCESS_AUD). See HANDOFF.md, "The admin".'
+        ? 'The admin is not set up on this address yet: it needs ADMIN_EMAILS and ADMIN_SESSION_SECRET. See HANDOFF.md, "The admin".'
         : status === 403
           ? 'This account may not open the admin. Ask for your address to be added.'
           : 'Sign in to open the admin.'
@@ -518,11 +529,61 @@ const readJson = async (request: Request): Promise<Record<string, unknown>> => {
 export const isAdminPath = (pathname: string) =>
   pathname === '/admin' || pathname.startsWith('/admin/') || pathname.startsWith('/api/admin/');
 
+/** POST /api/admin/auth/start, /verify and /sign-out. */
+async function auth(request: Request, env: AdminEnv, url: URL): Promise<Response> {
+  if (request.method !== 'POST') return json({ error: 'method not allowed' }, 405);
+  if (!sameOrigin(request)) return json({ error: 'changes must come from the admin itself' }, 403);
+  const step = url.pathname.slice('/api/admin/auth/'.length);
+  if (step === 'sign-out') {
+    const res = json({ ok: true });
+    res.headers.append('set-cookie', clearCookie(url));
+    return res;
+  }
+  if (!isConfigured(env)) return json({ error: 'admin sign-in is not set up' }, 503);
+  const dbUrl = databaseUrlFor(url.hostname, env);
+  if (!dbUrl) return json({ error: 'the database is not configured' }, 503);
+  const sql = neon(dbUrl) as unknown as Sql;
+  const body = await readJson(request);
+  try {
+    if (step === 'start') {
+      const country = (request as Request & { cf?: { country?: string } }).cf?.country ?? '';
+      await startSignIn(sql, env, body.email, country, resendCode(env));
+      // The same answer for every address, allowed or not.
+      return json({ ok: true });
+    }
+    if (step === 'verify') {
+      const email = await verifySignIn(sql, env, body.email, body.code);
+      if (!email) return json({ error: 'That code is wrong or has expired. Ask for a new one.' }, 401);
+      const res = json({ ok: true, return: safeReturn(body.return) });
+      res.headers.append('set-cookie', await sessionCookie(url, env, email));
+      return res;
+    }
+  } catch (err) {
+    console.error('admin sign-in failed', step, err);
+    if (/admin_sign_in_codes/.test(String(err))) return json({ error: 'Sign-in needs migrations/0011_admin_sign_in.sql applied to this database.' }, 503);
+    return json({ error: 'Sign-in failed. Try again in a moment.' }, 500);
+  }
+  return json({ error: 'not found' }, 404);
+}
+
 export async function handleAdmin(request: Request, env: AdminEnv): Promise<Response> {
   const url = new URL(request.url);
   const api = url.pathname.startsWith('/api/admin/');
-  const who = await adminFor(request, env);
-  if (!who.ok) return api ? json({ error: who.reason }, who.status) : deniedPage(who.status, who.reason);
+
+  // Signing in and out: the only admin paths open without a session.
+  if (url.pathname === '/admin/sign-in' || url.pathname === '/admin/sign-in/') {
+    if (!isConfigured(env)) return deniedPage(503, 'admin sign-in is not set up');
+    return withHeaders(await env.ASSETS.fetch(request));
+  }
+  if (url.pathname.startsWith('/api/admin/auth/')) return auth(request, env, url);
+
+  const who = await sessionFor(request, env);
+  if (!who.ok) {
+    if (api) return json({ error: who.reason }, who.status);
+    if (who.status === 503) return deniedPage(503, who.reason);
+    const back = safeReturn(`${url.pathname}${url.search}`);
+    return new Response(null, { status: 302, headers: { location: `/admin/sign-in/?return=${encodeURIComponent(back)}`, ...SECURITY_HEADERS } });
+  }
 
   // The admin's pages are the build's own files, served only once signed in.
   if (!api) {
