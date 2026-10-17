@@ -37,6 +37,11 @@ async function load(append = false) {
     outcomes = body.outcomes;
     notice(body.notice ?? null);
     leads = append ? [...leads, ...body.leads] : body.leads;
+    // A link to one lead (from Jobs or the post stage) that is not on this page: fetch it and put it first.
+    if (!append && open && !leads.some((l) => l.id === open)) {
+      const one = await api<LeadsResponse>(`/leads?id=${open}`).catch(() => null);
+      if (one?.leads[0]) leads = [one.leads[0], ...leads];
+    }
     more.hidden = !body.more;
     chips(body.counts);
     draw();

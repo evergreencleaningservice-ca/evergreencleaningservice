@@ -59,6 +59,8 @@ let saveState: 'saved' | 'dirty' | 'saving' | 'error' = 'saved';
 let saveError = '';
 let inflight = false;
 let again = false;
+/** Bumped by every change: a save counts as saved only if nothing changed while it was in flight. */
+let rev = 0;
 
 const keep = (p: PostDoc & { draft?: Draft }): PostDoc => {
   const { draft: _d, ...rest } = p;
@@ -378,6 +380,7 @@ function showTab(id: string) {
 const queueSave = debounce(() => void save(), 700);
 
 function changed() {
+  rev++;
   saveState = 'dirty';
   refresh();
   queueSave();
@@ -393,9 +396,12 @@ async function save(): Promise<void> {
   saveState = 'saving';
   status();
   try {
+    const sentRev = rev;
     const sent = JSON.stringify({ version: post.version, draft });
     const { post: p } = await api<{ post: PostDoc & { draft: Draft } }>(`/posts/${post.id}`, { method: 'PUT', body: sent });
     post = keep(p);
+    // Typed while this was on its way: not saved yet, and saved next.
+    if (rev !== sentRev) again = true;
     saveState = again ? 'dirty' : 'saved';
   } catch (err) {
     const e = err as ApiError;

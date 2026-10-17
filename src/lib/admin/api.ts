@@ -89,10 +89,16 @@ async function features(sql: Sql, key: string, now = Date.now()): Promise<Featur
   const rows = await sql`
     SELECT table_name, column_name FROM information_schema.columns
      WHERE table_schema = 'public'
-       AND ((table_name = 'leads' AND column_name IN ('lead_status', 'post_skipped_at')) OR (table_name = 'admin_posts' AND column_name = 'draft'))
+       AND table_name IN ('leads', 'admin_posts')
   `;
-  const has = (t: string, c: string) => rows.some((r) => r.table_name === t && r.column_name === c);
-  const f = { outcomes: has('leads', 'lead_status'), posts: has('admin_posts', 'draft'), skip: has('leads', 'post_skipped_at') };
+  const has = (t: string, cols: readonly string[]) => cols.every((c) => rows.some((r) => r.table_name === t && r.column_name === c));
+  // Every column a feature's queries name, so a migration applied only part
+  // way reads as not applied (and says so) rather than as a failed query.
+  const f = {
+    outcomes: has('leads', [...OUTCOME_COLUMNS, 'outcome_updated_at']),
+    posts: has('admin_posts', POST_COLUMNS),
+    skip: has('leads', ['post_skipped_at']),
+  };
   // Only a complete answer is kept: a database midway through its migrations is asked again.
   if (f.outcomes && f.posts && f.skip) featureCache.set(key, { at: now, f });
   return f;
@@ -108,6 +114,10 @@ const LEAD_COLUMNS = [
   'services', 'facility_type', 'facility_size', 'message', 'page_url', 'landing_page', 'referrer', 'gclid',
   'utm_source', 'utm_medium', 'utm_campaign', 'first_utm_source', 'first_utm_medium', 'first_utm_campaign',
   'marketing_consent',
+] as const;
+const POST_COLUMNS = [
+  'id', 'version', 'status', 'lead_id', 'draft', 'slug', 'published_at', 'updated_at', 'updated_by',
+  'title', 'excerpt', 'tags', 'image', 'image_alt', 'html',
 ] as const;
 const OUTCOME_COLUMNS = ['lead_status', 'status_reason', 'quote_value_cad', 'won_value_cad', 'qualified_at', 'quote_issued_at', 'won_at'] as const;
 
@@ -144,6 +154,9 @@ async function listLeads(sql: Sql, f: Features, url: URL) {
   const q = (url.searchParams.get('q') ?? '').trim().slice(0, 100);
   const like = q ? `%${q.replace(/[\\%_]/g, (c) => `\\${c}`)}%` : null;
   const before = intParam(url.searchParams.get('before'));
+  // ?id= : one lead, for a link from Jobs or the post stage to a lead that
+  // may be far down the list.
+  const only = intParam(url.searchParams.get('id'));
   const limit = 50;
   const rows = f.outcomes
     ? await sql`
@@ -154,6 +167,7 @@ async function listLeads(sql: Sql, f: Features, url: URL) {
                lead_status, status_reason, quote_value_cad, won_value_cad, qualified_at, quote_issued_at, won_at
           FROM leads
          WHERE (${before}::bigint IS NULL OR id < ${before})
+           AND (${only}::bigint IS NULL OR id = ${only})
            AND (${st}::text IS NULL OR lead_status = ${st})
            AND (${like}::text IS NULL OR full_name ILIKE ${like} OR work_email ILIKE ${like} OR phone ILIKE ${like}
                 OR business_name ILIKE ${like} OR address ILIKE ${like} OR message ILIKE ${like})
@@ -167,6 +181,7 @@ async function listLeads(sql: Sql, f: Features, url: URL) {
                marketing_consent
           FROM leads
          WHERE (${before}::bigint IS NULL OR id < ${before})
+           AND (${only}::bigint IS NULL OR id = ${only})
            AND (${like}::text IS NULL OR full_name ILIKE ${like} OR work_email ILIKE ${like} OR phone ILIKE ${like}
                 OR business_name ILIKE ${like} OR address ILIKE ${like} OR message ILIKE ${like})
          ORDER BY id DESC

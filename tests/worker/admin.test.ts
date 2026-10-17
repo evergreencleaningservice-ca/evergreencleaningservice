@@ -75,10 +75,12 @@ const ASSETS = {
 
 const ENV = { ASSETS, DATABASE_URL: 'postgres://main', STAGING_DATABASE_URL: 'postgres://staging', ACCESS_TEAM_DOMAIN: TEAM, ACCESS_AUD: AUD };
 
+/** information_schema as a fully migrated database answers it. */
+const OUTCOME_COLS = ['lead_status', 'status_reason', 'quote_value_cad', 'won_value_cad', 'qualified_at', 'quote_issued_at', 'won_at', 'outcome_updated_at'];
+const POST_COLS = ['id', 'version', 'status', 'lead_id', 'draft', 'slug', 'published_at', 'updated_at', 'updated_by', 'title', 'excerpt', 'tags', 'image', 'image_alt', 'html'];
 const FEATURES: Row[] = [
-  { table_name: 'leads', column_name: 'lead_status' },
-  { table_name: 'leads', column_name: 'post_skipped_at' },
-  { table_name: 'admin_posts', column_name: 'draft' },
+  ...[...OUTCOME_COLS, 'post_skipped_at'].map((c) => ({ table_name: 'leads', column_name: c })),
+  ...POST_COLS.map((c) => ({ table_name: 'admin_posts', column_name: c })),
 ];
 
 async function call(path: string, init: RequestInit & { origin?: string; auth?: string | null; env?: object } = {}) {
@@ -194,6 +196,24 @@ describe('leads', () => {
     expect(q.values).toContain('won');
     expect(q.values).toContain("%o'brien\\%%");
     expect(q.sql).not.toContain('brien');
+  });
+
+  it('reads a half-applied 0009 as not applied, and says so instead of failing', async () => {
+    answer = (sql) =>
+      sql.includes('information_schema') ? FEATURES.filter((r) => r.column_name !== 'won_at') : sql.includes('FROM leads WHERE') ? [] : [];
+    const res = await call('/api/admin/leads');
+    expect(res.status).toBe(200);
+    expect((await res.json()).notice).toContain('0009_lead_outcomes.sql');
+    expect(queries.find((x) => x.sql.includes('FROM leads WHERE'))!.sql).not.toContain('lead_status');
+  });
+
+  it('fetches one lead by id, for links to a lead far down the list', async () => {
+    answer = (sql) => (sql.includes('information_schema') ? FEATURES : sql.includes('FROM leads WHERE') ? [{ id: '77' }] : []);
+    const body = await (await call('/api/admin/leads?id=77')).json();
+    expect(body.leads).toEqual([{ id: 77 }]);
+    const q = queries.find((x) => x.sql.includes('FROM leads WHERE'))!;
+    expect(q.sql).toContain('id = ?');
+    expect(q.values).toContain(77);
   });
 
   it('ignores an unknown status filter', async () => {
@@ -390,7 +410,7 @@ describe('posts', () => {
   });
 
   it('says to apply 0010 when the table is missing', async () => {
-    answer = (sql) => (sql.includes('information_schema') ? FEATURES.slice(0, 1) : []);
+    answer = (sql) => (sql.includes('information_schema') ? FEATURES.filter((r) => r.table_name === 'leads') : []);
     const body = await (await call('/api/admin/posts')).json();
     expect(body.error).toContain('0010_admin_posts.sql');
   });
