@@ -1,0 +1,39 @@
+---
+/** /admin/: where things stand, and the way in to each part. */
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Overview" section="home">
+  <div class="ad-head">
+    <div>
+      <h1>Overview</h1>
+      <p class="ad-sub">Leads from the site, the jobs they became, and the blog.</p>
+    </div>
+  </div>
+  <div class="ad-cards">
+    <a class="ad-card" href="/admin/leads/?status=new">
+      <h2>New leads</h2>
+      <div class="ad-big" data-n="new">–</div>
+      <div class="ad-hint" data-n-hint="new">Not reviewed yet</div>
+    </a>
+    <a class="ad-card" href="/admin/leads/">
+      <h2>All leads</h2>
+      <div class="ad-big" data-n="all">–</div>
+      <div class="ad-hint">Every enquiry the forms have taken</div>
+    </a>
+    <a class="ad-card" href="/admin/jobs/">
+      <h2>Jobs to post</h2>
+      <div class="ad-big" data-n="jobs">–</div>
+      <div class="ad-hint">Won jobs with no blog post yet</div>
+    </a>
+    <a class="ad-card" href="/admin/blog/">
+      <h2>Blog</h2>
+      <div class="ad-big" data-n="live">–</div>
+      <div class="ad-hint" data-n-hint="drafts">Posts published from here</div>
+    </a>
+  </div>
+</AdminLayout>
+
+<script>
+  import '../../admin/overview';
+</script>

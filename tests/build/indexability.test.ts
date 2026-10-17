@@ -36,6 +36,8 @@ import {
   parseHeaders,
   ruleHost,
 } from '../../src/lib/noindex-rules';
+import { isPrivatePage } from './private-pages';
+import { shellProblems } from '../../src/lib/admin/live-posts';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const ORIGIN = `https://${PRODUCTION_HOSTS[0]}`;
@@ -169,6 +171,7 @@ describe('which pages are indexable', () => {
     const noindexed = pages.filter((page) => {
       if (
         NOINDEX_ROUTES.includes(page) ||
+        isPrivatePage(page) ||
         isBlogArchive(page) ||
         isTagArchive(page) ||
         page === '404.html'
@@ -242,6 +245,26 @@ describe('the sitemap', () => {
       const rel = new URL(url).pathname.replace(/^\//, '') + 'index.html';
       expect(pages).toContain(rel === 'index.html' ? 'index.html' : rel);
     }
+  });
+});
+
+describe('the private pages', () => {
+  it('are all noindex: the admin and the live-post template', () => {
+    const priv = pages.filter((p) => isPrivatePage(p));
+    expect(priv).toContain('eg-live-post-shell/index.html');
+    expect(priv).toContain('admin/leads/index.html');
+    expect(priv).toContain('admin/blog/create-blog/index.html');
+    for (const page of priv) expect(robotsMetaOf(read(page)), page).toMatch(/noindex/);
+  });
+
+  it('the template holds every placeholder the Worker fills in', () => {
+    expect(shellProblems(read('eg-live-post-shell/index.html'))).toEqual([]);
+  });
+
+  it('none of them is in the sitemap', () => {
+    const xml = read('sitemap-0.xml');
+    expect(xml).not.toContain('/admin/');
+    expect(xml).not.toContain('eg-live-post-shell');
   });
 });
 

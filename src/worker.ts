@@ -6,23 +6,35 @@ import { notificationPayload, notifyRecipientFor } from './lib/notification';
 import { allowedCaptchaHostnames, isProductionHost, isPublishedTestSecret } from './lib/captcha-hosts';
 import { databaseSecretFor, databaseUrlFor } from './lib/database-url';
 import { parsePosts, syncPosts, type Sql } from './lib/posts-sync';
+import { handleAdmin, isAdminPath, type AdminEnv } from './lib/admin/api';
+import { serveSite } from './lib/admin/live-posts';
 
 /**
  * The site's Worker.
  *
- * Everything on this site is static except one route. Cloudflare serves the
- * built assets first and only calls this script for a request that matches no
- * asset, so the cost of having it is a single `env.ASSETS.fetch()` on the
- * paths that fall through.
+ * Everything on this site is static except the form posts, the admin, and the
+ * posts published from the admin. Cloudflare serves the built assets first and
+ * only calls this script for a request that matches no asset, or one whose
+ * path is in wrangler.jsonc `run_worker_first`, so the cost of having it is a
+ * single `env.ASSETS.fetch()` on the paths that fall through.
  *
  * POST /api/submit-lead — Section 4.1 of the overhaul specification.
+ * POST /api/submit-post — comments and testimonials (not leads).
+ * /admin/ and /api/admin/ — leads, jobs and the blog, behind Cloudflare
+ *   Access (src/lib/admin/api.ts; HANDOFF.md section 7.6).
+ * /<slug>/, /insights/, the sitemap and RSS — posts published from the admin,
+ *   served from Neon (src/lib/admin/live-posts.ts).
  *
  * WHY A WORKER AT ALL. The PPC form posts here and redirects to /thank-you/ on
  * a 200. Before this, every form on the site posted to `action="#"` and a
  * visitor's enquiry was dropped silently; that was the launch blocker.
  */
 
-export interface Env {
+/**
+ * The admin's settings (Cloudflare Access, B2 uploads) are in `AdminEnv`;
+ * see src/lib/admin/access.ts and src/lib/admin/b2.ts.
+ */
+export interface Env extends AdminEnv {
   ASSETS: Fetcher;
   /**
    * Neon Postgres connection strings, set as Worker secrets. Which one a
@@ -447,6 +459,17 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === '/api/submit-lead') return submitLead(request, env);
     if (url.pathname === '/api/submit-post') return submitPost(request, env);
-    return env.ASSETS.fetch(request);
+    if (isAdminPath(url.pathname)) return handleAdmin(request, env);
+    // Posts published from the admin, at their addresses and on the lists.
+    return serveSite(
+      request,
+      env,
+      (dbUrl) => neon(dbUrl) as unknown as Sql,
+      (host) => ({
+        url: databaseUrlFor(host, env),
+        key: databaseSecretFor(host) === 'DATABASE_URL' ? 'main' : 'staging',
+        production: isProductionHost(host),
+      })
+    );
   },
 } satisfies ExportedHandler<Env>;

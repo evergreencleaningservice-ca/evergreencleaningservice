@@ -18,6 +18,7 @@ import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { LOCATIONS } from '../../src/lib/phone-click';
 import { nap } from '../../src/data/site';
+import { isPrivatePage } from './private-pages';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-phone');
@@ -49,7 +50,7 @@ beforeAll(() => {
       return full.endsWith('.html') ? [full] : [];
     });
 
-  const files = walk(out);
+  const files = walk(out).filter((f) => !isPrivatePage(f, out));
   pageCount = files.length;
   links = files.flatMap((file) => {
     const html = fs.readFileSync(file, 'utf8');
@@ -231,6 +232,7 @@ describe('the sitewide handler', () => {
         return full.endsWith('.html') ? [full] : [];
       });
     const without = walk(out).filter((f) => {
+      if (isPrivatePage(f, out)) return false;
       const html = fs.readFileSync(f, 'utf8');
       /* Either inlined, or pulled in as a module the bundler emitted. */
       return !html.includes('phone_click') && !/<script type="module"/.test(html);

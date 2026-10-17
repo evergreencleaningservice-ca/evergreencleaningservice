@@ -1,0 +1,34 @@
+---
+/**
+ * The template posts published from the admin are drawn in.
+ *
+ * A real post page from the real PostLayout — header, footer, sidebar,
+ * comment form, fonts and tags exactly as every repo post has them — with
+ * placeholders where the post goes. The Worker fills them in for each live
+ * post (`fillShell` in src/lib/admin/live-posts.ts) and never serves this
+ * page at its own address (wrangler.jsonc `run_worker_first`). It is noindex
+ * and out of the sitemap regardless, and tests/build/live-post-shell.test.ts
+ * checks every placeholder is here.
+ *
+ * No featured image: the Worker adds one when the post has a picture, so no
+ * placeholder image ever reaches the build's image checks.
+ */
+import type { CollectionEntry } from 'astro:content';
+import PostLayout from '../layouts/PostLayout.astro';
+import { SHELL } from '../lib/admin/live-posts';
+
+const post = {
+  id: SHELL.slug,
+  collection: 'blog',
+  data: {
+    title: SHELL.title,
+    description: SHELL.description,
+    pubDate: new Date(SHELL.date),
+    tags: [],
+  },
+} as unknown as CollectionEntry<'blog'>;
+---
+
+<PostLayout post={post} noindex>
+  <Fragment set:html={SHELL.body} />
+</PostLayout>

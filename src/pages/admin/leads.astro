@@ -1,0 +1,30 @@
+---
+/** /admin/leads/: every enquiry the site's forms have taken, newest first. */
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Leads" section="leads">
+  <div class="ad-head">
+    <div>
+      <h1>Leads</h1>
+      <p class="ad-sub">Every quote and contact form, newest first. Open one to record what happened next.</p>
+    </div>
+    <a class="ad-btn" href="/api/admin/leads.csv" data-csv download>Export CSV</a>
+  </div>
+
+  <div class="ad-toolbar">
+    <input class="ad-input" type="search" placeholder="Search name, email, phone, business, address…" data-q aria-label="Search leads" />
+    <div class="ad-chips" data-chips></div>
+  </div>
+
+  <div class="ad-list" data-list>
+    <p class="ad-empty">Loading leads…</p>
+  </div>
+  <p style="text-align:center;margin-top:16px">
+    <button class="ad-btn" type="button" data-more hidden>Load more</button>
+  </p>
+</AdminLayout>
+
+<script>
+  import '../../admin/leads';
+</script>
