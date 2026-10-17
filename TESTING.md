@@ -112,7 +112,9 @@ a tested one.
   end once (2026-10-17) — the real Worker, a local Postgres 16 with all ten
   migrations, and Chromium at 1280px and 375px: leads → won → Start post →
   edit → publish → the post live at its address, on /insights/, the sitemap
-  and RSS → socials → republish → a two-device conflict → delete. That run is
+  and RSS → socials → republish → a two-device conflict → a failed save that
+  must not let another post open → taking down a live post with no title →
+  two "Start post" requests at once making one post → delete. That run is
   not in the suite: it needs a Postgres server.
 - **The captcha providers.** `siteverify` is stubbed. Whether Cloudflare
   accepts a given key pair is a deployed-preview check.

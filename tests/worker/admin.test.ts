@@ -276,6 +276,40 @@ describe('posts', () => {
     expect(queries.some((x) => x.sql.startsWith('INSERT'))).toBe(false);
   });
 
+  it('makes one post per job even when two starts race: the second opens the first', async () => {
+    answer = (sql) => {
+      if (sql.includes('information_schema')) return FEATURES;
+      if (sql.startsWith('SELECT id FROM admin_posts WHERE lead_id') && !sql.includes('LIMIT 1')) return [];
+      if (sql.startsWith('SELECT id FROM admin_posts WHERE lead_id = ? ORDER BY')) return [];
+      if (sql.startsWith('SELECT id FROM admin_posts WHERE lead_id = ? LIMIT 1')) return [{ id: '9' }];
+      if (sql.includes('FROM leads WHERE id')) return [{ id: '4', business_name: 'Bright Dental' }];
+      if (sql.startsWith('INSERT INTO admin_posts')) return []; // the other request won
+      if (sql.includes('FROM admin_posts WHERE id')) return [ROW({ lead_id: '4' })];
+      return [];
+    };
+    const res = await call('/api/admin/posts', { method: 'POST', body: '{"fromLead":4}' });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toMatchObject({ existing: true, post: { id: 9, leadId: 4 } });
+    expect(queries.find((x) => x.sql.startsWith('INSERT INTO admin_posts'))!.sql).toContain('ON CONFLICT (lead_id) WHERE lead_id IS NOT NULL DO NOTHING');
+  });
+
+  it('says a live post is out of date when only its picture description changed', async () => {
+    const draft = { ...(ROW().draft as Row), thumb: { url: 'https://a.example/t.jpg', alt: 'New words' } };
+    // What the site holds: the same post, published with the old description.
+    const { render, socialSlots, sanitizeDraft } = await import('../../src/lib/admin/post-model');
+    const { blocksToHtml } = await import('../../src/lib/admin/blocks');
+    const d = sanitizeDraft(draft);
+    const r = render(d);
+    const live = ROW({
+      status: 'published', draft, slug: r.slug, title: r.title, excerpt: r.excerpt, tags: r.tags,
+      image: 'https://a.example/t.jpg', image_alt: 'New words', html: blocksToHtml(r.blocks, socialSlots(d)),
+    });
+    answer = (sql) => (sql.includes('information_schema') ? FEATURES : sql.includes('FROM admin_posts WHERE id') ? [live] : []);
+    expect((await (await call('/api/admin/posts/9')).json()).post.stale).toBe(false);
+    live.image_alt = 'Old words';
+    expect((await (await call('/api/admin/posts/9')).json()).post.stale).toBe(true);
+  });
+
   it('refuses a save based on an older version, and hands back the newer one', async () => {
     answer = (sql) =>
       sql.includes('information_schema') ? FEATURES : sql.startsWith('UPDATE admin_posts') ? [] : sql.includes('FROM admin_posts WHERE id') ? [ROW({ version: 5 })] : [];
@@ -342,6 +376,17 @@ describe('posts', () => {
     const res = await publish(ROW({ status: 'published', draft: { ...(ROW().draft as Row), edits: { slug: 'office-cleaning' } } }), false);
     expect(res.status).toBe(200);
     expect(queries.find((x) => x.sql.startsWith('UPDATE admin_posts SET status'))!.values[0]).toBe('draft');
+  });
+
+  it('takes a post off the site even when its title has been cleared', async () => {
+    const res = await publish(ROW({ status: 'published', draft: { ...(ROW().draft as Row), edits: { postTitle: '' } } }), false);
+    expect(res.status).toBe(200);
+  });
+
+  it('will not publish a post with no title', async () => {
+    const res = await publish(ROW({ draft: { ...(ROW().draft as Row), edits: { postTitle: '  ' } } }));
+    expect(res.status).toBe(400);
+    expect((await res.json()).error).toContain('title');
   });
 
   it('says to apply 0010 when the table is missing', async () => {

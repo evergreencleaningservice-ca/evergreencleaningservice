@@ -133,7 +133,13 @@ async function picker() {
   sel.onchange = () => {
     const [kind, id] = sel.value.split(':');
     if (!id) return;
-    saveNow().finally(() => {
+    saveNow().then(() => {
+      // Never leave with the changes unsaved: stay, and say why.
+      if (saveState !== 'saved') {
+        sel.value = '';
+        toast(`Not opened: this post could not be saved (${saveError || 'try again'}).`, true);
+        return;
+      }
       location.href = kind === 'job' ? `?job=${id}` : `?id=${id}`;
     });
   };
@@ -656,7 +662,7 @@ $('[data-paste-dialog] form').addEventListener('submit', (e) => {
 });
 
 window.addEventListener('beforeunload', (e) => {
-  if (saveState === 'dirty' || saveState === 'saving' || inflight) {
+  if (saveState !== 'saved' || inflight) {
     queueSave.flush();
     e.preventDefault();
   }

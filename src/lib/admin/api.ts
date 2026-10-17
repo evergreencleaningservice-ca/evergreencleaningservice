@@ -297,6 +297,7 @@ function staleness(r: Record<string, unknown>, draft: Draft): boolean {
     r.slug !== fresh.slug ||
     (r.excerpt ?? '') !== fresh.excerpt ||
     (r.image ?? null) !== (thumb?.url ?? null) ||
+    (r.image_alt ?? null) !== (thumb?.alt ?? null) ||
     JSON.stringify(r.tags ?? []) !== JSON.stringify(fresh.tags)
   );
 }
@@ -320,7 +321,7 @@ const postOut = (r: Record<string, unknown>) => {
 
 async function getPost(sql: Sql, id: number) {
   const rows = await sql`
-    SELECT id, version, status, lead_id, draft, slug, published_at, updated_at, updated_by, title, excerpt, tags, image, html
+    SELECT id, version, status, lead_id, draft, slug, published_at, updated_at, updated_by, title, excerpt, tags, image, image_alt, html
       FROM admin_posts WHERE id = ${id}`;
   return (rows[0] as (PostRow & Record<string, unknown>) | undefined) ?? null;
 }
@@ -335,7 +336,7 @@ async function leadFor(sql: Sql, id: number | null) {
 
 async function listPosts(sql: Sql, env: AdminEnv) {
   const rows = await sql`
-    SELECT id, version, status, lead_id, draft, slug, published_at, updated_at, updated_by, title, excerpt, tags, image, html
+    SELECT id, version, status, lead_id, draft, slug, published_at, updated_at, updated_by, title, excerpt, tags, image, image_alt, html
       FROM admin_posts ORDER BY updated_at DESC LIMIT 500`;
   const posts = rows.map((r) => {
     const p = postOut(r);
@@ -373,10 +374,18 @@ async function createPost(sql: Sql, email: string, body: Record<string, unknown>
   } else {
     draft = sanitizeDraft(body.draft);
   }
+  // One post per job, enforced by the database (admin_posts_lead_idx is
+  // unique): two "Start post" clicks at once make one post, and the second
+  // opens it.
   const rows = await sql`
     INSERT INTO admin_posts (draft, lead_id, updated_by)
     VALUES (${JSON.stringify(draft)}::jsonb, ${draft.leadId}, ${email})
-    RETURNING id, version, status, lead_id, draft, slug, published_at, updated_at, updated_by, title, excerpt, tags, image, html`;
+    ON CONFLICT (lead_id) WHERE lead_id IS NOT NULL DO NOTHING
+    RETURNING id, version, status, lead_id, draft, slug, published_at, updated_at, updated_by, title, excerpt, tags, image, image_alt, html`;
+  if (!rows[0]) {
+    const existing = await sql`SELECT id FROM admin_posts WHERE lead_id = ${draft.leadId} LIMIT 1`;
+    return json({ post: postOut((await getPost(sql, Number(existing[0].id)))!), existing: true });
+  }
   return json({ post: postOut(rows[0]) }, 201);
 }
 
@@ -388,7 +397,7 @@ async function savePost(sql: Sql, email: string, id: number, body: Record<string
     UPDATE admin_posts
        SET draft = ${JSON.stringify(draft)}::jsonb, version = version + 1, updated_at = now(), updated_by = ${email}
      WHERE id = ${id} AND version = ${version}
-     RETURNING id, version, status, lead_id, draft, slug, published_at, updated_at, updated_by, title, excerpt, tags, image, html`;
+     RETURNING id, version, status, lead_id, draft, slug, published_at, updated_at, updated_by, title, excerpt, tags, image, image_alt, html`;
   if (rows[0]) return json({ post: postOut(rows[0]) });
   const current = await getPost(sql, id);
   if (!current) return json({ error: 'no such post' }, 404);
@@ -421,8 +430,10 @@ async function publishPost(sql: Sql, env: AdminEnv, email: string, id: number, b
 
   const draft = sanitizeDraft(row.draft);
   const r = render(draft);
-  if (!r.title.trim()) return json({ error: 'The post needs a title.' }, 400);
+  // Checked only to go live: taking a post off the site must always work,
+  // however unfinished the draft is.
   if (live) {
+    if (!r.title.trim()) return json({ error: 'The post needs a title.' }, 400);
     const problem = await slugProblem(r.slug, env, origin);
     if (problem) return json({ error: problem }, 400);
     if (!r.blocks.length) return json({ error: 'The post is empty.' }, 400);
@@ -439,7 +450,7 @@ async function publishPost(sql: Sql, env: AdminEnv, email: string, id: number, b
         published_at = CASE WHEN ${live} THEN COALESCE(published_at, now()) ELSE published_at END,
         version = version + 1, updated_at = now(), updated_by = ${email}
       WHERE id = ${id} AND version = ${version}
-      RETURNING id, version, status, lead_id, draft, slug, published_at, updated_at, updated_by, title, excerpt, tags, image, html`;
+      RETURNING id, version, status, lead_id, draft, slug, published_at, updated_at, updated_by, title, excerpt, tags, image, image_alt, html`;
   } catch (err) {
     if (/admin_posts_live_slug_idx|duplicate key/.test(String(err))) {
       return json({ error: `Another live post is already at /${r.slug}/. Choose another address.` }, 409);

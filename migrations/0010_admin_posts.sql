@@ -66,7 +66,9 @@ CREATE UNIQUE INDEX IF NOT EXISTS admin_posts_live_slug_idx
   ON admin_posts (slug) WHERE status = 'published';
 CREATE INDEX IF NOT EXISTS admin_posts_published_idx
   ON admin_posts (published_at DESC) WHERE status = 'published';
-CREATE INDEX IF NOT EXISTS admin_posts_lead_idx
+-- One post per job: "Start post" inserts with ON CONFLICT on this index, so
+-- two clicks at once cannot make two posts.
+CREATE UNIQUE INDEX IF NOT EXISTS admin_posts_lead_idx
   ON admin_posts (lead_id) WHERE lead_id IS NOT NULL;
 
 -- A won job that should not get a post ("No post needed" on /admin/jobs/).
