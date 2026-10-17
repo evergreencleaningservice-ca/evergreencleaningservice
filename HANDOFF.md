@@ -483,8 +483,6 @@ Markdown; admin posts live in `admin_posts` (migrations/0010), not in `posts`,
 whose sync would delete them. **Not covered:** the homepage's news band and
 the tag archives are static and list only the repo's posts.
 
-**What has to be done before it works** (all four are outside this repo):
-
 **Signing in.** `/admin/sign-in/` takes an address; if it is on
 `ADMIN_EMAILS`, the Worker emails a six-digit code through Resend (the lead
 notifications' key and sender, `LEAD_NOTIFY_FROM`). The code works once,
@@ -497,19 +495,31 @@ Removing an address from `ADMIN_EMAILS` signs it out at once; changing the
 secret signs everyone out. It replaced Cloudflare Access, whose Zero Trust
 Free plan asks for a payment card (`src/lib/admin/session.ts`).
 
-**What has to be done before it works:**
+**Live since 2026-10-17.** What it took, all outside this repo:
 
-1. **Apply migrations 0009, 0010 and 0011** to Neon `staging`
-   (br-lucky-flower-avmh5qid), then `main` (br-small-union-av5ypk4e), after a
-   snapshot. Until then the pages load and say which migration is missing:
-   Leads still lists leads without 0009; Jobs needs 0009; the blog needs 0010;
-   signing in needs 0011. All three were applied cleanly to a local Postgres
-   16 with 0001–0008 on 2026-10-17.
+1. **Migrations 0009, 0010 and 0011**, applied 2026-10-17 as one
+   transaction (the combined file was 0009–0011 verbatim) to Neon
+   `long-firefly-62771888`, database `evergreen`: `staging`
+   (br-lucky-flower-avmh5qid) first, verified, then `main`
+   (br-small-union-av5ypk4e). Both now have `admin_posts`,
+   `admin_sign_in_codes`, the `lead_offline_conversions` view and the nine
+   added `leads` columns; lead counts were unchanged (staging 33, main 4).
+   The snapshot limit was reached, so the backup is the no-compute branch
+   **backup-main-before-admin-20261017** (br-shy-fog-avjvm29r), made from
+   `main` before any migration ran. Delete it once the admin has proved
+   itself. Applied through a Neon connection outside this session's tools;
+   recorded from that report.
 2. **The Worker secrets** `ADMIN_EMAILS` (comma-separated) and
-   `ADMIN_SESSION_SECRET` (32+ random characters). Set on 2026-10-17 for
+   `ADMIN_SESSION_SECRET` (32+ random characters), set 2026-10-17 for
    ethan@10xid.com and harjit@brandingcentres.com. Without either, every
-   admin request answers 503: the admin stays shut, never open.
-3. **Deploy** (`npm run deploy`, from `main`).
+   admin request answers 503: the admin stays shut, never open. To add an
+   admin, `wrangler secret put ADMIN_EMAILS` with the whole new list.
+3. **Deployed** 2026-10-17 from `main` at c0a576c, Worker version
+   d08a8bbc-ae79-4e3d-8b5e-d08271c3df2b. Checked live: the public pages,
+   sitemap and RSS answer 200; `/admin/leads/` redirects to sign-in;
+   `/admin/sign-in/` is noindex; `/api/admin/me` answers 401;
+   `/eg-live-post-shell/` answers 404. A real sign-in (which sends an email)
+   had not been tried at handoff.
 4. **For image uploads**, `wrangler secret put B2_KEY_ID` and `B2_APP_KEY`: a
    B2 application key limited to `img-evergreencleaningservice`, read and
    write. Uploads go under `uploads/blog/`, which `b2:sync --prune` never

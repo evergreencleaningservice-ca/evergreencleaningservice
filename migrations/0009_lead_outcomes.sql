@@ -14,8 +14,12 @@
 -- unchanged and every new column is nullable or defaulted, so this migration
 -- is safe to apply before or after the deploy that ships the code.
 --
--- STATUS. NOT YET APPLIED to Neon project long-firefly-62771888. Apply with
--- explicit approval, after a snapshot, to each branch that holds leads.
+-- STATUS. APPLIED 2026-10-17 to Neon project long-firefly-62771888, database
+-- `evergreen`, with 0009–0011 as one transaction: `staging`
+-- (br-lucky-flower-avmh5qid) first, verified, then `main`
+-- (br-small-union-av5ypk4e). The snapshot limit was reached, so the backup
+-- taken first is the no-compute branch backup-main-before-admin-20261017
+-- (br-shy-fog-avjvm29r), made from `main` before any of the three ran.
 --
 -- Rollback: every statement is additive. To undo, drop the view and the
 -- columns (data in them is lost):
