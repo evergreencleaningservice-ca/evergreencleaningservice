@@ -8,8 +8,9 @@
 -- the good ones back to Google Ads (offline conversion import, keyed on the
 -- `gclid` the site already stores) as SECONDARY or value-based conversions.
 --
--- NOTHING ON THE WEBSITE WRITES THESE COLUMNS. They are updated by a person
--- (or a CRM sync) after the lead has been handled. The Worker's INSERT is
+-- NOTHING THE PUBLIC REACHES WRITES THESE COLUMNS. They are updated by a
+-- person after the lead has been handled: from /admin/leads/ (behind
+-- Cloudflare Access; src/lib/admin/api.ts `updateLead`), or a CRM sync. The Worker's INSERT is
 -- unchanged and every new column is nullable or defaulted, so this migration
 -- is safe to apply before or after the deploy that ships the code.
 --

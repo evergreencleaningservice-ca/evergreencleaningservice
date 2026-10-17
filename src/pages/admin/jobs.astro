@@ -1,0 +1,21 @@
+---
+/**
+ * /admin/jobs/: won leads, as UiD by Rana's "Jobs to post" — each waiting for
+ * a blog post until one is started, published, or marked not needed.
+ */
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Jobs" section="jobs">
+  <div class="ad-head">
+    <div>
+      <h1>Jobs</h1>
+      <p class="ad-sub">Leads marked Won. Start a blog post about a job, or mark it as not needing one.</p>
+    </div>
+  </div>
+  <div data-jobs><p class="ad-empty">Loading jobs…</p></div>
+</AdminLayout>
+
+<script>
+  import '../../admin/jobs';
+</script>

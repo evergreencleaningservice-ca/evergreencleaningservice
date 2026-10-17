@@ -1,0 +1,105 @@
+---
+/**
+ * /admin/blog/create-blog/: "Post a blog", as UiD by Rana has it.
+ *
+ * The dropdown at the top opens a draft, a live post, or a job waiting for a
+ * post. The post is three tabs, one open at a time: The job, 1 Website post
+ * (✓ once live) and 2 Socials (how many are posted). The job is filled in
+ * once; from it the stage writes the website post and one post for each
+ * social platform, every one linking back. Anything edited keeps its words;
+ * ↺ rewrites it from the job.
+ *
+ *   ?id=<post>    open a post
+ *   ?job=<lead>   start (or reopen) the post about a won job
+ *   ?new=1        start a blank post
+ */
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Post a blog" section="blog">
+  <div class="ad-stage-top">
+    <select class="ad-select" data-picker aria-label="Open a post or a job">
+      <option value="">Loading…</option>
+    </select>
+    <a class="ad-btn" href="/admin/blog/create-blog/?new=1">+ New</a>
+    <span class="ad-status" data-status></span>
+  </div>
+
+  <div data-empty hidden class="ad-panel ad-empty">
+    <h2 style="margin-bottom:8px">Post a blog</h2>
+    <p>Open a draft or a waiting job from the list above, or <a href="/admin/blog/create-blog/?new=1">start a new post</a>.</p>
+  </div>
+
+  <div data-editor hidden>
+    <div class="ad-tabs" role="tablist" aria-label="The post">
+      <button class="ad-tab" role="tab" type="button" data-tab="job" aria-selected="true">The job</button>
+      <button class="ad-tab" role="tab" type="button" data-tab="web" aria-selected="false">1 Website post <span class="ad-tick" data-web-tick></span></button>
+      <button class="ad-tab" role="tab" type="button" data-tab="social" aria-selected="false">2 Socials <span class="ad-hint" data-social-count></span></button>
+    </div>
+
+    <div class="ad-stage">
+      <div>
+        <section role="tabpanel" data-pane="job"></section>
+        <section role="tabpanel" data-pane="web" hidden></section>
+        <section role="tabpanel" data-pane="social" hidden></section>
+      </div>
+      <aside class="ad-side">
+        <div class="ad-live is-draft" data-live></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="ad-btn ad-btn-primary" type="button" data-publish style="flex:1">Publish…</button>
+          <div class="ad-menu">
+            <button class="ad-btn" type="button" data-menu-toggle aria-haspopup="true" aria-expanded="false" title="More">⋯</button>
+            <div class="ad-menu-list" data-menu hidden>
+              <button type="button" data-act="rewrite">↺ Rewrite the post from the job</button>
+              <button type="button" data-act="paste">Paste a written post…</button>
+              <button type="button" data-act="brief">Copy brief for ChatGPT</button>
+              <button type="button" data-act="copy">Copy post</button>
+              <button type="button" data-act="preview">Preview the post</button>
+              <button type="button" class="ad-btn-danger" data-act="delete">Delete this draft…</button>
+            </div>
+          </div>
+        </div>
+        <div class="ad-panel ad-lead-box" data-lead hidden></div>
+      </aside>
+    </div>
+  </div>
+
+  <dialog class="ad-dialog" data-publish-dialog>
+    <form method="dialog" class="ad-dialog-body" data-publish-form>
+      <h2>Publish the website post</h2>
+      <label class="ad-choice"><input type="radio" name="live" value="1" checked /> <span><strong>Publish now</strong><small data-publish-where></small></span></label>
+      <label class="ad-choice"><input type="radio" name="live" value="0" /> <span><strong data-draft-label>Keep it as a draft</strong><small data-draft-hint>Saved here, not on the site.</small></span></label>
+      <p class="ad-status is-bad" data-publish-error hidden></p>
+      <div class="ad-dialog-actions">
+        <button class="ad-btn" value="cancel" type="submit" formnovalidate>Cancel</button>
+        <button class="ad-btn ad-btn-primary" value="go" type="submit" data-publish-go>Publish</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="ad-dialog" data-paste-dialog>
+    <form method="dialog" class="ad-dialog-body">
+      <h2>Paste a written post</h2>
+      <p class="ad-hint">From ChatGPT or anywhere else. A first line starting "# " becomes the title; "## " lines become headings; "- " lines a list. It replaces the post's body.</p>
+      <textarea class="ad-textarea" rows="14" data-paste-text></textarea>
+      <div class="ad-dialog-actions">
+        <button class="ad-btn" value="cancel" type="submit">Cancel</button>
+        <button class="ad-btn ad-btn-primary" value="go" type="submit">Use this text</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="ad-dialog" data-preview-dialog style="width:min(900px,calc(100vw - 32px))">
+    <form method="dialog" class="ad-dialog-body">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+        <h2>Preview</h2>
+        <button class="ad-btn" type="submit">Close</button>
+      </div>
+      <div class="ad-preview" data-preview></div>
+    </form>
+  </dialog>
+</AdminLayout>
+
+<script>
+  import '../../../admin/create-blog';
+</script>

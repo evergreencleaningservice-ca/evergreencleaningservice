@@ -1,0 +1,66 @@
+---
+/**
+ * The admin's pages: /admin/, /admin/leads/, /admin/jobs/, /admin/blog/ and
+ * /admin/blog/create-blog/.
+ *
+ * Not the site's layout: no tag manager (an admin's visits are not traffic),
+ * no header or footer, no forms. The pages are static files like every other
+ * page, but the Worker serves them only to a signed-in admin
+ * (src/lib/admin/access.ts), and they hold no data: each page's script asks
+ * /api/admin/ for it. noindex, out of the sitemap, and the build tests leave
+ * them out of the public-page checks (tests/build/private-pages.ts).
+ */
+import { site } from '../data/site';
+import '../styles/fonts.css';
+import '../styles/admin.css';
+
+interface Props {
+  title: string;
+  /** Which nav item is current. */
+  section: 'home' | 'leads' | 'jobs' | 'blog';
+}
+
+const { title, section } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const nav = [
+  { id: 'leads', href: '/admin/leads/', label: 'Leads' },
+  { id: 'jobs', href: '/admin/jobs/', label: 'Jobs' },
+  { id: 'blog', href: '/admin/blog/', label: 'Blog' },
+];
+---
+
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="same-origin" />
+    <title>{title} · Evergreen admin</title>
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <meta name="color-scheme" content="light dark" />
+  </head>
+  <body>
+    <header class="ad-top">
+      <a class="ad-mark" href="/admin/">
+        <span class="ad-mark-dot" aria-hidden="true"></span>
+        <span>Evergreen <span class="ad-mark-sub">admin</span></span>
+      </a>
+      <nav class="ad-nav" aria-label="Admin">
+        {nav.map((n) => <a href={n.href} aria-current={n.id === section ? 'page' : undefined}>{n.label}</a>)}
+      </nav>
+      <a class="ad-btn ad-btn-primary ad-new" href="/admin/blog/create-blog/?new=1">+ New post</a>
+      <div class="ad-who">
+        <span class="ad-db" data-db hidden></span>
+        <span class="ad-email" data-email></span>
+        <a class="ad-signout" href="/cdn-cgi/access/logout">Sign out</a>
+      </div>
+    </header>
+    <div class="ad-notice" data-notice hidden></div>
+    <main class="ad-main">
+      <slot />
+    </main>
+    <div class="ad-toast" data-toast role="status" aria-live="polite"></div>
+  </body>
+</html>

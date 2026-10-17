@@ -18,6 +18,7 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { isPrivatePage } from './private-pages';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-links');
@@ -61,7 +62,7 @@ beforeAll(() => {
       if (e.isDirectory()) return walk(full);
       return full.endsWith('.html') ? [path.relative(out, full)] : [];
     });
-  pages = walk(out).filter((p) => !isRedirectStub(read(p)));
+  pages = walk(out).filter((p) => !isPrivatePage(p) && !isRedirectStub(read(p)));
 }, 180_000);
 
 afterAll(() => fs.rmSync(out, { recursive: true, force: true }));

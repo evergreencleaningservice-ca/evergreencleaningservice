@@ -1,0 +1,32 @@
+---
+/** /admin/blog/: the posts written here, and the site's own for reference. */
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Blog" section="blog">
+  <div class="ad-head">
+    <div>
+      <h1>Blog</h1>
+      <p class="ad-sub">Posts written here go live the moment they are published, on their own address and at the top of News.</p>
+    </div>
+    <a class="ad-btn ad-btn-primary" href="/admin/blog/create-blog/?new=1">+ New post</a>
+  </div>
+
+  <section class="ad-panel">
+    <div class="ad-panel-head"><h2>Written here</h2></div>
+    <div class="ad-list" data-posts><p class="ad-empty">Loading posts…</p></div>
+  </section>
+
+  <section class="ad-panel">
+    <div class="ad-panel-head">
+      <h2>On the site from the repository</h2>
+      <button class="ad-btn ad-btn-sm" type="button" data-site-toggle aria-expanded="false">Show</button>
+    </div>
+    <p class="ad-hint" style="margin-top:-6px">The posts the site was built with. They are edited in the repository (src/content/blog/), not here.</p>
+    <div class="ad-list" data-site hidden></div>
+  </section>
+</AdminLayout>
+
+<script>
+  import '../../../admin/blog';
+</script>

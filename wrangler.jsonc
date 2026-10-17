@@ -3,15 +3,32 @@
   "name": "evergreencleaningservice",
   "compatibility_date": "2026-09-17",
 
-  // The site is static except for POST /api/submit-lead. Cloudflare serves a
-  // matching asset first and only calls the Worker when nothing matches, so the
-  // script costs nothing on the other 71 routes.
+  // The site is static except for the form posts, the admin (/admin/), and
+  // posts published from the admin (served from Neon at /<slug>/). Cloudflare
+  // serves a matching asset first and only calls the Worker when nothing
+  // matches or the path is in `run_worker_first` below.
   "main": "src/worker.ts",
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
     // Unknown paths render the site's own 404 page rather than a bare Cloudflare one.
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    // These paths run the Worker before any file is served:
+    //   /admin/…              the admin's pages are files, but only for a signed-in
+    //                         admin (src/lib/admin/access.ts checks Cloudflare Access)
+    //   /eg-live-post-shell/  the template live posts are drawn in; never a page itself
+    //   /insights/, the sitemap and the RSS feed get the posts published from the
+    //                         admin added to them (src/lib/admin/live-posts.ts)
+    // Every other path is still a file first, with no Worker call.
+    "run_worker_first": [
+      "/admin",
+      "/admin/*",
+      "/api/admin/*",
+      "/eg-live-post-shell/*",
+      "/insights/",
+      "/sitemap-0.xml",
+      "/rss.xml"
+    ]
   },
 
   // Lead storage is Neon Postgres, reached with @neondatabase/serverless over

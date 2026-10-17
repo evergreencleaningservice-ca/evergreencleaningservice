@@ -63,6 +63,9 @@ the phase reports rather than pretended away in a unit test.
 | `tests/build/landing-pages.test.ts` | node | Phase 10. Both paid pages from one table: the shared components, the short form, the absence of site navigation, the minimal header and legal footer, the real telephone number, no unverifiable claim, noindex and sitemap exclusion, the spam and conversion protections — and, asserted as loudly as the shared parts, that the two reporting identities stay distinct. |
 | `tests/database-url.test.ts` | node | Which Neon branch each hostname writes to: www. and the apex to `main`, everything else to `staging`, and neither ever falls back to the other. |
 | `tests/posts-sync.test.ts` | node | The blog mirror against a fake `posts` table: first sync, no-op sync, one changed post, a deleted post, every field feeding the hash, and refusing an empty or malformed list that would otherwise empty the table. |
+| `tests/admin/post-model.test.ts` | node | The blog stage's model: what a cleaning job becomes (title, address, excerpt, sections, site tags), edited fields winning over written ones, one caption per platform linking back (X kept under 280 without cutting the link), social links accepted only on their own platform, the ChatGPT brief, the thumbnail choice, sanitising a draft, and a draft from a won lead that never names the client or copies their message. |
+| `tests/admin/blocks.test.ts` | node | Blocks to the HTML served on the live site: every typed character escaped, only http(s), mailto, tel and site-path links and https images, no iframes, empty and unknown blocks dropped. |
+| `tests/worker/admin.test.ts` | node | The admin through the Worker's `fetch`: the Cloudflare Access token (signature, audience, issuer, expiry, key id, ADMIN_EMAILS, shut when unset, dev sign-in on localhost only), same-origin changes, each route's queries and parameters, CSV formula neutralising, version conflicts, publish refusing taken or reserved addresses, uploads; and live posts on the site — the filled-in page, its escaping and structured data, staging noindex, the no-slash redirect, /insights/ and the sitemap, no lookup for paths that cannot be posts, and the static site unchanged when the table is missing. |
 | `tests/worker/posts-scheduled.test.ts` | node | The Worker's scheduled handler: reads its own `/data/blog-posts.json`, syncs both branches, skips a branch with no secret, still syncs one branch when the other fails and then fails the run, and touches no database when the file is missing. |
 
 Because every lead form on the site imports `src/lib/lead-submit.ts`, a pass
@@ -102,6 +105,17 @@ a tested one.
   To send staging's notifications to a tester instead of the client, set
   `STAGING_LEAD_NOTIFY_TO`; www. and the apex keep using `LEAD_NOTIFY_TO`
   whatever it holds.
+- **The admin's outside services.** `tests/worker/admin.test.ts` checks the
+  Cloudflare Access token with a real RS256 signature against a fake key
+  server, and every admin route against a scripted fake database; Access
+  itself, Neon and B2 uploads are not reached. The admin was also run end to
+  end once (2026-10-17) — the real Worker, a local Postgres 16 with all ten
+  migrations, and Chromium at 1280px and 375px: leads → won → Start post →
+  edit → publish → the post live at its address, on /insights/, the sitemap
+  and RSS → socials → republish → a two-device conflict → a failed save that
+  must not let another post open → taking down a live post with no title →
+  two "Start post" requests at once making one post → delete. That run is
+  not in the suite: it needs a Postgres server.
 - **The captcha providers.** `siteverify` is stubbed. Whether Cloudflare
   accepts a given key pair is a deployed-preview check.
 - **Page-level fidelity against the original.** The `tests/build/*` files do

@@ -29,6 +29,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { CAPTCHA_MARKUP } from './captcha-markup';
+import { isPrivatePage } from './private-pages';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-forms');
@@ -64,7 +65,7 @@ beforeAll(() => {
   });
   if (build.status !== 0) throw new Error(`astro build failed:\n${build.stdout}\n${build.stderr}`);
 
-  forms = walk(out).flatMap((file) => {
+  forms = walk(out).filter((f) => !isPrivatePage(f, out)).flatMap((file) => {
     const html = fs.readFileSync(file, 'utf8');
     return [...html.matchAll(/<form\b([^>]*)>([\s\S]*?)<\/form>/g)].map((m) => {
       const [, attrs, body] = m;

@@ -444,6 +444,82 @@ inside a post body**, where a 2:1 crop at 300px replaces a 3:2 photo.
 In the nav, never captured by the archive. The page carries the homepage's
 summary paragraph as a placeholder. **Needs the real copy from the client.**
 
+### 7.6 The admin — leads, jobs and the blog (`/admin/`)
+
+Four pages, behind Cloudflare Access:
+
+| Page | Does |
+| --- | --- |
+| `/admin/leads/` | Every lead, newest first: search, filter by status, open one to see everything the form took, record its outcome (status, reason, quote and won values), export CSV |
+| `/admin/jobs/` | Leads marked Won. **Start post** opens the blog stage filled in from the job; **No post needed** takes it off the list |
+| `/admin/blog/` | Posts written here (live and drafts), and the repo's posts for reference |
+| `/admin/blog/create-blog/` | "Post a blog", ported from UiD by Rana (10xid-com/10xid-id-preview, `prototypes/control-room-rana`) |
+
+**The blog stage works the way Rana's does.** The job is filled in once
+(service, facility, area, how often, size, Green Clean products, after hours,
+client, notes). From it the stage writes ① the website post — title, address,
+tags, excerpt and a block-edited body — and ② one post each for LinkedIn,
+Facebook, Instagram, YouTube, TikTok and X, every one linking back. Anything
+edited keeps its words; ↺ rewrites it from the job. The ⋯ menu has Rewrite
+from the job, Paste a written post (from ChatGPT), Copy brief for ChatGPT, Copy
+post, Preview and Delete. Pasting each social post's link marks it ✓ Posted and
+fills its slot in the "Follow this job on social" row at the end of the
+website post. Drafts save to the database a moment after each change, so every
+device sees the same copy; an older copy is refused and the newer one shown.
+
+A client is never named in a post unless "Name the client" is ticked, and a
+lead's own message is never copied into a post (it is shown beside the form
+instead) — it is the client's words and usually carries a phone number.
+
+**Publishing is live at once, with no deploy.** A published post is served by
+the Worker from Neon at `/<slug>/`, inside a real post page built from
+`PostLayout` (`src/pages/eg-live-post-shell.astro`, filled in by
+`fillShell`), and is added to `/insights/`, `sitemap-0.xml` and `rss.xml`.
+Each Worker instance keeps the list of live posts for 30 seconds, so other
+visitors see a change within half a minute. A slug the build already answers
+can never be published, so an admin post can never replace a real page. The
+repo's posts stay the master copy of themselves and are still edited as
+Markdown; admin posts live in `admin_posts` (migrations/0010), not in `posts`,
+whose sync would delete them. **Not covered:** the homepage's news band and
+the tag archives are static and list only the repo's posts.
+
+**What has to be done before it works** (all four are outside this repo):
+
+1. **Apply migrations 0009 and 0010** to Neon `staging`
+   (br-lucky-flower-avmh5qid), then `main` (br-small-union-av5ypk4e), after a
+   snapshot. Until then the pages load and say which migration is missing:
+   Leads still lists leads without 0009; Jobs needs 0009; the blog needs 0010.
+   Both were applied cleanly to a local Postgres 16 with 0001–0008 on
+   2026-10-17.
+2. **Create the Cloudflare Access application.** Zero Trust → Access →
+   Applications → Add → Self-hosted. Domains: `www.evergreencleaningservice.ca`
+   with paths `admin` and `api/admin`, and the same two on
+   `stage.evergreencleaningservice.ca`. Policy: Allow, the admins' email
+   addresses. Login: one-time PIN (and Google if wanted). Copy the
+   application's **Audience (AUD) tag**.
+3. **Set the Worker secrets:**
+   `wrangler secret put ACCESS_TEAM_DOMAIN` (`<team>.cloudflareaccess.com`) and
+   `wrangler secret put ACCESS_AUD` (the tag). Optional:
+   `ADMIN_EMAILS` (comma-separated) to hold the Worker to a narrower list than
+   the Access policy. Without the first two every admin request answers 503:
+   the admin stays shut, never open. The Worker checks the Access token's
+   signature itself, so the workers.dev address (which Access does not cover)
+   is shut too.
+4. **For image uploads**, `wrangler secret put B2_KEY_ID` and `B2_APP_KEY`: a
+   B2 application key limited to `img-evergreencleaningservice`, read and
+   write. Uploads go under `uploads/blog/`, which `b2:sync --prune` never
+   touches. Without them the editor says uploads are not set up and takes an
+   image address instead.
+
+The staging address reads and writes the **staging** database, as the forms
+do; the admin shows a "Staging data" badge there. Locally, `wrangler dev` with
+`ADMIN_DEV_EMAIL` in `.dev.vars` signs in as that address on localhost only.
+
+Not ported from Rana's: connecting Instagram and YouTube accounts (to pick
+embeds from them; a pasted link works), and the shop's stock and quotes. Her
+sign-in, login.10xid.com, only accepts `*.10xid.com` hosts, so the admin uses
+Cloudflare Access instead.
+
 ---
 
 ## 8. SEO

@@ -14,9 +14,11 @@ interface Props {
   newer?: CollectionEntry<'blog'>;
   /** The next post back in time, if there is one. */
   older?: CollectionEntry<'blog'>;
+  /** Only the live-post template (src/pages/eg-live-post-shell.astro) sets this. */
+  noindex?: boolean;
 }
 
-const { post, newer, older } = Astro.props;
+const { post, newer, older, noindex = false } = Astro.props;
 const { title, description, pubDate, image, imageAlt } = post.data;
 /* Refreshed featured images ship as AVIF/WebP/JPEG siblings at 960x480. */
 const modern = image && /-feature\.jpg$/.test(image);
@@ -30,6 +32,7 @@ const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
   image={image}
   type="article"
   publishedTime={pubDate.toISOString()}
+  noindex={noindex}
 >
 <script
   slot="head"
