@@ -446,7 +446,7 @@ summary paragraph as a placeholder. **Needs the real copy from the client.**
 
 ### 7.6 The admin — leads, jobs and the blog (`/admin/`)
 
-Four pages, behind Cloudflare Access:
+Four pages, behind the admin's own sign-in (an emailed six-digit code):
 
 | Page | Does |
 | --- | --- |
@@ -485,26 +485,31 @@ the tag archives are static and list only the repo's posts.
 
 **What has to be done before it works** (all four are outside this repo):
 
-1. **Apply migrations 0009 and 0010** to Neon `staging`
+**Signing in.** `/admin/sign-in/` takes an address; if it is on
+`ADMIN_EMAILS`, the Worker emails a six-digit code through Resend (the lead
+notifications' key and sender, `LEAD_NOTIFY_FROM`). The code works once,
+within ten minutes, in five tries, and at most five are sent to an address an
+hour; only a keyed hash of it is stored (`admin_sign_in_codes`,
+migrations/0011). Any other address gets the same answer and no email. A
+correct code sets a 12-hour session cookie (signed with
+`ADMIN_SESSION_SECRET`; HttpOnly, Secure, SameSite=Strict, `__Host-`).
+Removing an address from `ADMIN_EMAILS` signs it out at once; changing the
+secret signs everyone out. It replaced Cloudflare Access, whose Zero Trust
+Free plan asks for a payment card (`src/lib/admin/session.ts`).
+
+**What has to be done before it works:**
+
+1. **Apply migrations 0009, 0010 and 0011** to Neon `staging`
    (br-lucky-flower-avmh5qid), then `main` (br-small-union-av5ypk4e), after a
    snapshot. Until then the pages load and say which migration is missing:
-   Leads still lists leads without 0009; Jobs needs 0009; the blog needs 0010.
-   Both were applied cleanly to a local Postgres 16 with 0001–0008 on
-   2026-10-17.
-2. **Create the Cloudflare Access application.** Zero Trust → Access →
-   Applications → Add → Self-hosted. Domains: `www.evergreencleaningservice.ca`
-   with paths `admin` and `api/admin`, and the same two on
-   `stage.evergreencleaningservice.ca`. Policy: Allow, the admins' email
-   addresses. Login: one-time PIN (and Google if wanted). Copy the
-   application's **Audience (AUD) tag**.
-3. **Set the Worker secrets:**
-   `wrangler secret put ACCESS_TEAM_DOMAIN` (`<team>.cloudflareaccess.com`) and
-   `wrangler secret put ACCESS_AUD` (the tag). Optional:
-   `ADMIN_EMAILS` (comma-separated) to hold the Worker to a narrower list than
-   the Access policy. Without the first two every admin request answers 503:
-   the admin stays shut, never open. The Worker checks the Access token's
-   signature itself, so the workers.dev address (which Access does not cover)
-   is shut too.
+   Leads still lists leads without 0009; Jobs needs 0009; the blog needs 0010;
+   signing in needs 0011. All three were applied cleanly to a local Postgres
+   16 with 0001–0008 on 2026-10-17.
+2. **The Worker secrets** `ADMIN_EMAILS` (comma-separated) and
+   `ADMIN_SESSION_SECRET` (32+ random characters). Set on 2026-10-17 for
+   ethan@10xid.com and harjit@brandingcentres.com. Without either, every
+   admin request answers 503: the admin stays shut, never open.
+3. **Deploy** (`npm run deploy`, from `main`).
 4. **For image uploads**, `wrangler secret put B2_KEY_ID` and `B2_APP_KEY`: a
    B2 application key limited to `img-evergreencleaningservice`, read and
    write. Uploads go under `uploads/blog/`, which `b2:sync --prune` never
@@ -517,8 +522,8 @@ do; the admin shows a "Staging data" badge there. Locally, `wrangler dev` with
 
 Not ported from Rana's: connecting Instagram and YouTube accounts (to pick
 embeds from them; a pasted link works), and the shop's stock and quotes. Her
-sign-in, login.10xid.com, only accepts `*.10xid.com` hosts, so the admin uses
-Cloudflare Access instead.
+sign-in, login.10xid.com, only accepts `*.10xid.com` hosts, so the admin signs
+people in itself.
 
 ---
 

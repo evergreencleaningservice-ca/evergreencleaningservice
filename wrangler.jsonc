@@ -15,7 +15,7 @@
     "not_found_handling": "404-page",
     // These paths run the Worker before any file is served:
     //   /admin/…              the admin's pages are files, but only for a signed-in
-    //                         admin (src/lib/admin/access.ts checks Cloudflare Access)
+    //                         admin (src/lib/admin/session.ts)
     //   /eg-live-post-shell/  the template live posts are drawn in; never a page itself
     //   /insights/, the sitemap and the RSS feed get the posts published from the
     //                         admin added to them (src/lib/admin/live-posts.ts)

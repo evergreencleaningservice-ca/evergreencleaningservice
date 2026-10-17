@@ -6,7 +6,7 @@
  * Not the site's layout: no tag manager (an admin's visits are not traffic),
  * no header or footer, no forms. The pages are static files like every other
  * page, but the Worker serves them only to a signed-in admin
- * (src/lib/admin/access.ts), and they hold no data: each page's script asks
+ * (src/lib/admin/session.ts), and they hold no data: each page's script asks
  * /api/admin/ for it. noindex, out of the sitemap, and the build tests leave
  * them out of the public-page checks (tests/build/private-pages.ts).
  */
@@ -17,10 +17,11 @@ import '../styles/admin.css';
 interface Props {
   title: string;
   /** Which nav item is current. */
-  section: 'home' | 'leads' | 'jobs' | 'blog';
+  section: 'home' | 'leads' | 'jobs' | 'blog' | 'sign-in';
 }
 
 const { title, section } = Astro.props;
+const bare = section === 'sign-in';
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const nav = [
   { id: 'leads', href: '/admin/leads/', label: 'Leads' },
@@ -47,6 +48,7 @@ const nav = [
         <span class="ad-mark-dot" aria-hidden="true"></span>
         <span>Evergreen <span class="ad-mark-sub">admin</span></span>
       </a>
+      {!bare && (<>
       <nav class="ad-nav" aria-label="Admin">
         {nav.map((n) => <a href={n.href} aria-current={n.id === section ? 'page' : undefined}>{n.label}</a>)}
       </nav>
@@ -54,8 +56,9 @@ const nav = [
       <div class="ad-who">
         <span class="ad-db" data-db hidden></span>
         <span class="ad-email" data-email></span>
-        <a class="ad-signout" href="/cdn-cgi/access/logout">Sign out</a>
+        <button class="ad-signout" type="button" data-signout>Sign out</button>
       </div>
+      </>)}
     </header>
     <div class="ad-notice" data-notice hidden></div>
     <main class="ad-main">

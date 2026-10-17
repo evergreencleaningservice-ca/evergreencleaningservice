@@ -29,18 +29,22 @@ export async function api<T = Record<string, unknown>>(path: string, init: Reque
   } catch {
     throw new ApiError('No connection. Check the network and try again.', 0, {});
   }
-  // Access answers an expired sign-in with a redirect to its login page.
-  if (res.type === 'opaqueredirect') {
-    location.reload();
-    throw new ApiError('Signing in again…', 401, {});
-  }
   const body = (await res.json().catch(() => ({}))) as Record<string, unknown>;
   if (!res.ok) {
-    if (res.status === 401) location.reload();
+    // The session ended (twelve hours, or the address came off the list): sign in again, then come back.
+    if (res.status === 401 && !path.startsWith('/auth/')) location.href = signInUrl();
     throw new ApiError(String(body.error ?? `The request failed (${res.status}).`), res.status, body);
   }
   return body as T;
 }
+
+export const signInUrl = () => `/admin/sign-in/?return=${encodeURIComponent(location.pathname + location.search)}`;
+
+// Every admin page imports this file, so the header's Sign out works on every page.
+document.querySelector('[data-signout]')?.addEventListener('click', async () => {
+  await fetch('/api/admin/auth/sign-out', { method: 'POST', credentials: 'same-origin' }).catch(() => null);
+  location.href = '/admin/sign-in/';
+});
 
 const TZ = 'America/Toronto';
 

@@ -1,0 +1,35 @@
+---
+/**
+ * /admin/sign-in/: an emailed six-digit code, the only admin page open
+ * without a session (src/lib/admin/session.ts).
+ */
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Sign in" section="sign-in">
+  <div class="ad-signin">
+    <section class="ad-panel">
+      <h1 style="margin-bottom:6px">Sign in</h1>
+      <form data-step="email">
+        <p class="ad-sub" style="margin-bottom:16px">We'll email you a six-digit code.</p>
+        <label class="ad-field"><span class="ad-label">Email</span>
+          <input class="ad-input" type="email" name="email" autocomplete="email" required autofocus />
+        </label>
+        <button class="ad-btn ad-btn-primary" type="submit" style="width:100%">Email me a code</button>
+      </form>
+      <form data-step="code" hidden>
+        <p class="ad-sub" style="margin-bottom:16px">If <strong data-to></strong> may sign in, a code is on its way. It works for 10 minutes.</p>
+        <label class="ad-field"><span class="ad-label">Code</span>
+          <input class="ad-input ad-code" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9 ]{6,7}" maxlength="7" required />
+        </label>
+        <button class="ad-btn ad-btn-primary" type="submit" style="width:100%">Sign in</button>
+        <p style="margin:14px 0 0;text-align:center"><button class="ad-redo" type="button" data-again>Use another address, or send a new code</button></p>
+      </form>
+      <p class="ad-status is-bad" data-error hidden style="margin:12px 0 0"></p>
+    </section>
+  </div>
+</AdminLayout>
+
+<script>
+  import '../../admin/sign-in';
+</script>
