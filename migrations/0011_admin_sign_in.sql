@@ -12,9 +12,12 @@
 -- code. A code allows five tries and is used once. Rows are not needed after
 -- they expire; the Worker deletes them a day later.
 --
--- STATUS. NOT YET APPLIED. Apply with 0009 and 0010, after a snapshot, to
--- `staging` (br-lucky-flower-avmh5qid) first and then `main`
--- (br-small-union-av5ypk4e).
+-- STATUS. APPLIED 2026-10-17 to Neon project long-firefly-62771888, database
+-- `evergreen`, with 0009–0011 as one transaction: `staging`
+-- (br-lucky-flower-avmh5qid) first, verified, then `main`
+-- (br-small-union-av5ypk4e). The snapshot limit was reached, so the backup
+-- taken first is the no-compute branch backup-main-before-admin-20261017
+-- (br-shy-fog-avjvm29r), made from `main` before any of the three ran.
 --
 -- Rollback: DROP TABLE IF EXISTS admin_sign_in_codes;
 
