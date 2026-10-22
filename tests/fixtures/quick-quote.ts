@@ -15,7 +15,7 @@
  * still a description of the component.
  */
 
-import { SERVICE_OPTIONS, SERVICE_OTHER } from '../../src/data/services';
+import { SERVICE_OPTIONS } from '../../src/data/services';
 
 export interface FieldSpec {
   name: string;
@@ -31,60 +31,42 @@ export interface FieldSpec {
 }
 
 /**
- * Every visible control, in document order.
+ * Every visible control, in document order, except the service checkboxes
+ * (eight of one name, listed in `SERVICE_OPTIONS`).
  *
- * SEVEN fields, TWO of which are one either/or pair, and FOUR required —
- * against eighteen and nine on the form this replaces. `phone` and `email` are
- * deliberately `required: false`: the rule is "one of the two", which HTML
- * cannot state, so it lives in `contactMethodProblem` and is tested there.
- */
-/**
- * The reference design's field set, adopted wholesale.
- *
- * WHAT CHANGED AND WHY IT IS WORTH READING. This form was deliberately short
- * — first name, business name, phone OR email, postal code, one service
- * select — because it is what cold paid traffic sees and every field is a
- * place to give up. That is now replaced by the client's chosen reference:
- * four fields, ALL REQUIRED.
-
- * A street address and a province were asked for on one revision in between
- * and taken back out: where the building is is a question the account
- * executive asks on the call, not a condition of making contact. First and
- * last name were two boxes for one revision and are now one, which is what
- * the database always stored anyway.
- *
- * It asks more and it will convert somewhat worse; that is a business
- * decision the client made with the trade-off in front of them, not an
- * oversight. What it buys is a lead that can be dispatched without a
- * qualifying call.
- *
- * Gone: `business-name`, `postal`, the `services` select, and the `address`
- * and `province` boxes that briefly replaced the postal one. Their columns
- * survive in the database — earlier leads answered them, and `address` is
- * still filled by the contact form on /contact-us/.
- *
- * Note every field now has its OWN error key. The old form shared one
- * `contact` slot between phone and email, because the rule was "either of
- * these"; with both required there is a separate thing to say about each.
+ * The original site's WPForms form 1381, as the client asked for it back
+ * (2026-10-22): Name, Name of Business, a four-box address, Email, Phone, the
+ * services checklist and Additional comments. Every box but the checklist
+ * and the comments is required.
  */
 export const FIELDS: FieldSpec[] = [
+  { name: 'name', tag: 'input', type: 'text', required: true, autocomplete: 'name', errorKey: 'name' },
   {
-    name: 'name',
+    name: 'business-name',
     tag: 'input',
     type: 'text',
     required: true,
-    autocomplete: 'name',
-    errorKey: 'name',
+    autocomplete: 'organization',
+    errorKey: 'business-name',
   },
   {
-    name: 'phone',
+    name: 'address1',
     tag: 'input',
-    type: 'tel',
+    type: 'text',
     required: true,
-    autocomplete: 'tel',
-    inputmode: 'tel',
-    errorKey: 'phone',
+    autocomplete: 'address-line1',
+    errorKey: 'address1',
   },
+  { name: 'city', tag: 'input', type: 'text', required: true, autocomplete: 'address-level2', errorKey: 'city' },
+  {
+    name: 'province',
+    tag: 'input',
+    type: 'text',
+    required: true,
+    autocomplete: 'address-level1',
+    errorKey: 'province',
+  },
+  { name: 'postal', tag: 'input', type: 'text', required: true, autocomplete: 'postal-code', errorKey: 'postal' },
   {
     name: 'email',
     tag: 'input',
@@ -94,49 +76,16 @@ export const FIELDS: FieldSpec[] = [
     inputmode: 'email',
     errorKey: 'email',
   },
-  { name: 'service', tag: 'select', required: true, errorKey: 'service' },
-  /**
-   * Optional city or area of the building (2026-10-15) — the one optional
-   * question, and deliberately not a street address. No error slot: it can
-   * only be left blank, which is allowed.
-   */
-  { name: 'location', tag: 'input', type: 'text', required: false, autocomplete: 'address-level2' },
-  /**
-   * `required: false` AS RENDERED, and that is the assertion, not an
-   * oversight. The box is hidden until "Other" is picked, and a hidden
-   * control that is `required` fails validation where nobody can see it.
-   * `wireServiceOther` adds the attribute at the moment it reveals the box
-   * and removes it again when it hides it, so the served markup must ship
-   * WITHOUT it. A build test that demanded `required` here would be
-   * demanding the bug.
-   */
-  { name: 'message', tag: 'textarea', required: false, errorKey: 'message' },
+  { name: 'phone', tag: 'input', type: 'tel', required: true, autocomplete: 'tel', inputmode: 'tel', errorKey: 'phone' },
+  { name: 'message', tag: 'textarea', required: false },
 ];
 
 /**
- * Names the form must never ask for.
- *
- * MUCH SHORTER THAN IT WAS. This list began as "everything the eighteen-field
- * form asked that the short form refused", and `last-name`, `address1`,
- * `city`, `state` and `province` were on it — the short form existed to not
- * ask those. The client has since chosen the reference design, which asks for
- * a surname, a street address and a province, so keeping them banned would be
- * testing a decision that was reversed.
- *
- * What stays banned is what NOTHING on the site asks for and nothing should
- * start asking for without a deliberate change: the split address lines, and
- * the qualification questions (square footage, frequency) that belong in the
- * account executive's first call rather than in front of a stranger.
+ * Names the form must never ask for: the qualification questions (square
+ * footage, frequency) that belong in the account executive's first call, and
+ * the second address line the original never had.
  */
-export const BANNED_FIELDS = [
-  'address1',
-  'address2',
-  'street',
-  'size',
-  'facility_size',
-  'frequency',
-  'square-feet',
-] as const;
+export const BANNED_FIELDS = ['address2', 'street', 'size', 'facility_size', 'frequency', 'square-feet'] as const;
 
 export const REQUIRED_COUNT = FIELDS.filter((f) => f.required).length;
 
@@ -154,41 +103,41 @@ export function quickQuoteMarkup({
   honeypot = '',
   id = 'quote',
 }: { token?: string | null; honeypot?: string; id?: string } = {}): string {
-  const err = (key: string) => `<p class="qq-error" id="${id}-${key}-error" data-qq-error="${key}"></p>`;
+  const input = (spec: FieldSpec) =>
+    spec.tag === 'textarea'
+      ? `<label for="${id}-${spec.name}">${spec.name}</label>
+         <textarea id="${id}-${spec.name}" name="${spec.name}" rows="5"></textarea>`
+      : `<label for="${id}-${spec.name}">${spec.name}</label>
+         <input type="${spec.type}" id="${id}-${spec.name}" name="${spec.name}"
+                ${spec.autocomplete ? `autocomplete="${spec.autocomplete}"` : ''}
+                ${spec.inputmode ? `inputmode="${spec.inputmode}"` : ''}
+                ${spec.name === 'province' ? 'value="Ontario"' : ''}
+                ${spec.required ? 'required' : ''} aria-describedby="${id}-${spec.name}-error" />
+         <p class="qq-error" id="${id}-${spec.name}-error" data-qq-error="${spec.name}"></p>`;
+
+  const before = FIELDS.filter((f) => f.name !== 'message');
+  const comments = FIELDS.find((f) => f.name === 'message')!;
+
   return `
     <form class="qq" id="${id}" method="post" action="#" novalidate
           data-endpoint="/api/submit-lead" data-form-id="quick-quote" data-quick-quote
           aria-label="Request a quote">
       <div class="qq-summary" data-qq-summary role="alert" aria-live="assertive" tabindex="-1"></div>
 
-      <label for="${id}-name">Full name</label>
-      <input type="text" id="${id}-name" name="name" autocomplete="name" required
-             aria-describedby="${id}-name-error" />
-      ${err('name')}
+      ${before.map(input).join('\n')}
 
-      <label for="${id}-phone">Mobile phone</label>
-      <input type="tel" id="${id}-phone" name="phone" inputmode="tel" autocomplete="tel" required
-             aria-describedby="${id}-phone-error" />
-      ${err('phone')}
+      <fieldset>
+        <legend>I'm interested a quote for these services</legend>
+        <ul>
+          ${SERVICE_OPTIONS.map(
+            (s, i) =>
+              `<li><input type="checkbox" id="${id}-service-${i}" name="services" value="${s}" />` +
+              `<label for="${id}-service-${i}">${s}</label></li>`
+          ).join('')}
+        </ul>
+      </fieldset>
 
-      <label for="${id}-email">Email</label>
-      <input type="email" id="${id}-email" name="email" inputmode="email" autocomplete="email" required
-             aria-describedby="${id}-email-error" />
-      ${err('email')}
-
-      <label for="${id}-service">Cleaning needs</label>
-      <select id="${id}-service" name="service" required aria-describedby="${id}-service-error">
-        <option value="" disabled selected>Select the service you need</option>
-        ${SERVICE_OPTIONS.map((s) => `<option value="${s}">${s}</option>`).join('')}
-      </select>
-      ${err('service')}
-
-      <div class="qq-field" data-qq-other hidden>
-        <label for="${id}-message">Tell us what you need</label>
-        <textarea id="${id}-message" name="message" rows="3"
-                  aria-describedby="${id}-message-error"></textarea>
-        ${err('message')}
-      </div>
+      ${input(comments)}
 
       <div class="qq-hp" aria-hidden="true">
         <label for="${id}-hp">Company website</label>
@@ -221,28 +170,26 @@ export function fill(
 }
 
 /**
- * A complete submission. Every field on the reference form is required, so
- * there is no longer a "minimum" that omits one — this IS the minimum.
- *
- * `VALID_PHONE_ONLY` and `VALID_EMAIL_ONLY` are gone with the rule they
- * existed for: the form used to take a phone OR an email and those two
- * constants were the two shapes that satisfied it. Both are now required.
+ * A complete submission: every required box filled. The services checklist
+ * and the comments are optional and are ticked/typed with `tick` and `fill`
+ * where a test needs them.
  */
 export const VALID_LEAD = {
   name: 'Dana Okonkwo',
-  phone: '416 555 0142',
+  'business-name': 'Placeholder Holdings',
+  address1: '716 Gordon Baker Rd., Ste. 201',
+  city: 'North York',
+  province: 'Ontario',
+  postal: 'm2h 3b4',
   email: 'dana@placeholder-holdings.example',
-  service: 'Office Cleaning',
+  phone: '416 555 0142',
 };
 
-/**
- * The other branch: "Other" picked, so the free-text box is revealed and
- * required, and the detail is part of a complete submission.
- */
-export const VALID_LEAD_OTHER = {
-  name: 'Dana Okonkwo',
-  phone: '416 555 0142',
-  email: 'dana@placeholder-holdings.example',
-  service: SERVICE_OTHER,
-  message: 'Pressure washing the loading dock, quarterly.',
-};
+/** Tick service checkboxes by their value. */
+export function tick(form: HTMLFormElement, services: string[]): void {
+  for (const service of services) {
+    const box = form.querySelector<HTMLInputElement>(`input[name="services"][value="${service}"]`);
+    if (!box) throw new Error(`fixture has no service "${service}"`);
+    box.checked = true;
+  }
+}

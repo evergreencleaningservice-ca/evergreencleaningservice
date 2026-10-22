@@ -1,72 +1,38 @@
 /**
  * The quote form's service list.
  *
- * SUPPLIED BY THE CLIENT, and that supersedes the archaeology. The list was
- * first rebuilt from the original site's WPForms form **1381** — the
- * checklist headed "I'm interested a quote for these services", eight
- * options recovered verbatim. The client has since given their own list of
- * six plus "Other", and a list the business states today beats one recovered
- * from what its old website happened to be serving.
+ * THE ORIGINAL SITE'S OWN EIGHT, back again (2026-10-22). The client asked for
+ * the form to look and work exactly like the original WPForms form **1381** —
+ * the checklist headed "I'm interested a quote for these services" — matching
+ * the notification email they were used to receiving from it. That supersedes
+ * the six-plus-Other list the client supplied earlier, which had added
+ * Industrial, Warehouse and Condo Common Area Cleaning and dropped four of
+ * these.
  *
- * The order is theirs too, not alphabetised and not reordered to match the
- * old one: Commercial Cleaning leads, where the original opened with Office
- * Cleaning.
+ * It is a set of CHECKBOXES again, not a select: a visitor can ask about
+ * office cleaning and carpet cleaning in one enquiry, which is exactly what
+ * real leads did. The `services` column is TEXT and stores the ticked options
+ * joined with ", ", the same shape it held before the select.
  *
- * WHAT CHANGED AGAINST THE ORIGINAL EIGHT:
- *
- *   kept     Commercial Cleaning, Office Cleaning, Janitorial Services
- *   added    Industrial Cleaning, Warehouse Cleaning,
- *            Condo Common Area Cleaning
- *   dropped  Property Management and Building Maintenance,
- *            Commercial Carpet Cleaning, Floor Services / Finishing,
- *            Reno Construction Clean-up
- *
- * DROPPED FROM THE FORM IS NOT DROPPED FROM THE SITE. Building maintenance
- * still has its own service page, its navigation entry and its homepage
- * card, and carpet and floor work is still described inside the service
- * pages. This list is what a visitor can ASK FOR in one click; it is not the
- * catalogue of what the business does, and shortening it does not shorten
- * that.
- *
- * Leads already in the database carry the old strings — one row answers
- * "Commercial Carpet Cleaning". Nothing rewrites them: they are what those
- * visitors actually chose, and a value no longer offered is still a true
- * record of an enquiry.
- *
- * WHAT CHANGED FROM THE ORIGINAL'S SHAPE: it was a checklist of checkboxes
- * and is now a single select. The client asked for "the dropdown where the
- * client would select which cleaning service they want" — one answer, not a
- * set. The `services` column is TEXT and held a joined list before, so a
- * single value stores without a migration; rows written either way stay
- * readable.
- *
- * "Other" IS THE LAST OPTION AND IS NOT A FALLBACK. It was on the original
- * list too, and selecting it reveals a free-text box so the visitor can say
- * what they actually need. That box is the only reason the list can stay
- * this short without turning a mismatch into an abandoned form.
+ * Leads already in the database carry whatever list was live when they were
+ * sent. Nothing rewrites them.
  */
 
-/** The six named services, in the client's order. */
+/** The original's seven named services, in its order. */
 export const QUOTE_SERVICES = [
-  'Commercial Cleaning',
   'Office Cleaning',
-  'Industrial Cleaning',
+  'Commercial Cleaning',
+  'Property Management and Building Maintenance',
   'Janitorial Services',
-  'Warehouse Cleaning',
-  'Condo Common Area Cleaning',
+  'Commercial Carpet Cleaning',
+  'Floor Services / Finishing',
+  'Reno Construction Clean-up',
 ] as const;
 
-/**
- * The eighth option, and the one with behaviour attached.
- *
- * Exported as a constant rather than written as a literal in each of the four
- * places that need it — the markup, the reveal script, the validator and the
- * tests. A string compared by value in four files is a string that gets
- * changed in three of them.
- */
+/** The eighth option. Anything it stands for goes in "Additional comments". */
 export const SERVICE_OTHER = 'Other';
 
-/** Every option the select offers, in order. */
+/** Every checkbox the form offers, in order. */
 export const SERVICE_OPTIONS = [...QUOTE_SERVICES, SERVICE_OTHER] as const;
 
 export type ServiceOption = (typeof SERVICE_OPTIONS)[number];
