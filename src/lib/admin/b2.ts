@@ -10,9 +10,11 @@
  *   wrangler secret put B2_KEY_ID
  *   wrangler secret put B2_APP_KEY
  *
- * An application key restricted to this one bucket is enough (read and write
- * files). Without the two secrets the upload answers 503 and the editor says
- * to paste an image address instead.
+ * The key needs only `writeFiles`, restricted to this bucket and to the name
+ * prefix `uploads/blog/` (the one set, evergreen-admin-uploads, is exactly
+ * that; HANDOFF.md 7.6). A bucket-restricted key's authorization names its
+ * bucket, so no listBuckets is needed. Without the two secrets the upload
+ * answers 503 and the editor says to paste an image address instead.
  */
 import { images } from '../../data/site';
 
