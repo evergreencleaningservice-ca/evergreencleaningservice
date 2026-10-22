@@ -27,6 +27,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { BANNED_FIELDS, FIELDS, REQUIRED_COUNT } from '../fixtures/quick-quote';
+import { SERVICE_OPTIONS } from '../../src/data/services';
 import { CAPTCHA_FIELD, CAPTCHA_MARKUP, questionRequiredCount } from './captcha-markup';
 
 const repo = path.resolve(import.meta.dirname, '../..');
@@ -82,11 +83,9 @@ describe('the duplicate form is gone', () => {
     expect(leadForms).toHaveLength(1);
   });
 
-  it('is the short form, and the long one is not on this page', () => {
+  it('is the shared quote form, rendered once', () => {
     expect(quote).toContain('data-quick-quote');
     expect(quote).not.toContain('quote-form-1381');
-    /* The long form's tell: a street address field. */
-    expect(control(quote, 'address1')).toBeNull();
   });
 
   it('carries one form_id, so the two cannot be confused in reporting', () => {
@@ -124,56 +123,31 @@ describe('the rendered form matches the contract the unit suite tests', () => {
     }
   });
 
-  it('asks four required questions', () => {
-    /* Four, then seven when the reference design's address and province
-       boxes went in, five when they came back out, and four once the two
-       name boxes became one. Pinned rather than
-       loosened: a field quietly becoming required is a conversion cost
-       somebody should have to state out loud. */
+  it('asks eight required questions', () => {
+    /* The original site's form 1381: name, business, four address boxes,
+       email and phone. Pinned rather than loosened: a field quietly
+       becoming required is a conversion cost somebody should have to state
+       out loud. */
     const required = questionRequiredCount(form());
     expect(required).toBe(REQUIRED_COUNT);
-    expect(required).toBe(4);
+    expect(required).toBe(8);
   });
 
   it.each(BANNED_FIELDS)('does not ask for %s', (name) => {
     expect(control(quote, name)).toBeNull();
   });
 
-  it('asks four questions on arrival, and a fifth only if "Other" is picked', () => {
-    /* FIVE entries in the contract, FOUR of them on screen when the page
-       loads. `message` ships inside `[data-qq-other] hidden` and appears
-       only when the service select says "Other", so counting it as a fifth
-       question would misstate what a visitor is actually asked for — and
-       the count of questions is the number this test exists to hold down. */
-    /* Six since 2026-10-15: the optional city-or-area box is the fifth
-       visible question; all four required ones are unchanged. */
-    expect(FIELDS).toHaveLength(6);
-    expect(FIELDS.filter((f) => f.name !== 'message')).toHaveLength(5);
-    expect(FIELDS.filter((f) => f.required)).toHaveLength(4);
-
-    /* Matched loosely on the attributes, not on the full opening tag:
-       Astro appends a scoped class, so a literal tag match pins the
-       bundler's output rather than the contract. */
-    const otherBox = form().match(/<div[^>]*\bdata-qq-other\b[^>]*>/)?.[0] ?? '';
-    expect(otherBox, 'the free-text box must be present').not.toBe('');
-    expect(otherBox, 'the free-text box must ship hidden').toContain('hidden');
-    /* And the page agrees: every contract field is present, and the only
-       extra controls are the honeypot, the captcha token, the optional
-       marketing-consent box and the button.
-
-       `marketing-consent` is excluded rather than added to FIELDS because it
-       is not one of the seven QUESTIONS — it asks nothing about the enquiry,
-       it is optional, it has no error slot, and nothing about the quote
-       depends on it. Counting it here would quietly turn "seven questions"
-       into eight, which is the number this test exists to hold down. Its own
-       rules live in "the marketing consent box" below. */
+  it('asks exactly the contract fields, the services checklist, and nothing else', () => {
+    /* The only extra controls are the honeypot, the captcha token and the
+       eight service checkboxes, which share one name. */
     const named = [...form().matchAll(/<(?:input|select|textarea)\b[^>]*\bname="([^"]+)"/g)].map(
       (m) => m[1]
     );
-    const EXTRAS = ['company-website', CAPTCHA_FIELD, 'marketing-consent'];
+    const EXTRAS = ['company-website', CAPTCHA_FIELD, 'services'];
     expect(named.filter((n) => !EXTRAS.includes(n)).sort()).toEqual(
       FIELDS.map((f) => f.name).sort()
     );
+    expect(named.filter((n) => n === 'services')).toHaveLength(SERVICE_OPTIONS.length);
   });
 });
 
@@ -229,14 +203,19 @@ describe('every field is labelled', () => {
     }
   });
 
-  it('marks exactly one field optional — the city or area', () => {
-    /* "Anything we should know? (Optional)" is still gone. Since 2026-10-15
-       the one optional question is where the building is, and it says so. */
+  it("uses the original form's labels", () => {
     const f = quickQuoteForm();
-    expect(f).not.toMatch(/Anything we should know/i);
-    expect([...f.matchAll(/qq-optional/g)]).toHaveLength(1);
-    expect(f).toMatch(/City or area of the building/);
-    expect(f).toMatch(/Cleaning needs/i);
+    for (const label of [
+      'Name',
+      'Name of Business',
+      'Address',
+      'Email',
+      'Phone',
+      'Additional comments',
+    ]) {
+      expect(f, label).toContain(label);
+    }
+    expect(f).toMatch(/I(?:'|&#39;)m interested a quote for these services/);
   });
 });
 

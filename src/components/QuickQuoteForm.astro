@@ -1,42 +1,30 @@
 ---
 /**
- * The short lead form — the primary quote experience, and the one cold paid
- * traffic sees.
+ * The quote form — every quote form on the site, the landing pages and the
+ * homepage included.
  *
- * WHY IT EXISTS. The form it replaces asks for eighteen fields and requires
- * nine of them, including a complete street address and a last name, before
- * it will accept an enquiry from someone who has not yet decided to buy
- * anything. Measured on the built page: 1,363px tall at 390px wide, on a page
- * 4,376px tall. Everything it asks that is not "who are you and how do I call
- * you back" is a question the account executive can ask on the phone, and
- * every one of them is a place to give up.
+ * WHAT IT ASKS (2026-10-22). The client asked for the form to look and work
+ * exactly like the original site's WPForms form **1381**, the one whose
+ * notification email they read every lead in. Its fields, in its order:
  *
- * WHAT IT ASKS. Four fields, all required:
+ *   Name *                one box; the email shows the whole name on one line
+ *   Name of Business *
+ *   Address *             street & unit #, city, province (Ontario), postal
+ *                         code. Country is not asked: the email prints "CA".
+ *   Email *
+ *   Phone *
+ *   I'm interested a quote for these services   checkboxes, not required
+ *   Additional comments                          not required
  *
- *   full name       one box. It was first + last for one revision; the
- *                   database only ever stored the two joined.
- *   mobile phone    both required. An earlier revision took either one and
- *                   left the other optional, which is the rule HTML cannot
- *   email           state — the client chose the reference design, which
- *                   asks for both, so the browser now states it itself.
- *   cleaning needs  a SELECT of the original site's own service list, with
- *                   "Other" revealing a free-text box.
- *
- * NO street address. NO province. NO square footage, frequency or preferred
- * schedule. Those are qualification, and qualification happens after a lead
- * exists, not as a condition of creating one. Address and province were each
- * asked for on one revision in between and taken back out.
- *
- * THIS COMMENT DESCRIBED A FORM THAT NO LONGER EXISTED. It still listed a
- * business name, a "postal or city" box and an optional message, and
- * explained at length a "phone OR email" rule that was removed several
- * revisions ago along with the function that enforced it. Left as it was, the
- * most authoritative-looking description of this component was also the least
- * accurate thing in the file.
+ * This replaces the short form (name, phone, email, one service select, an
+ * optional city). It asks more and will convert somewhat worse; the client
+ * chose a lead that arrives with its address and business over a shorter
+ * form.
  *
  * Everything behind the form is unchanged: the same endpoint, the same
- * honeypot, the same Turnstile, the same single `lead_form_submission` after
- * a 2xx, the same attribution merged invisibly by `lead-submit.ts`.
+ * honeypot, the same captcha, the same single `lead_form_submission` after a
+ * 2xx, the same attribution merged invisibly by `lead-submit.ts`, and the
+ * same inline error messages from `quick-quote.ts`.
  */
 import SpamGuard from './SpamGuard.astro';
 import { SERVICE_OPTIONS } from '../data/services';
@@ -107,7 +95,7 @@ const f = (name: string) => `${id}-${name}`;
   <div class="qq-summary" data-qq-summary role="alert" aria-live="assertive" tabindex="-1"></div>
 
   <div class="qq-field">
-    <label class="qq-label" for={f('name')}>Full name <span class="qq-req">*</span></label>
+    <label class="qq-label" for={f('name')}>Name <span class="qq-req">*</span></label>
     <input
       type="text"
       id={f('name')}
@@ -121,117 +109,142 @@ const f = (name: string) => `${id}-${name}`;
     <p class="qq-error" id={f('name-error')} data-qq-error="name"></p>
   </div>
 
-  <div class="qq-row">
-    <div class="qq-field">
-      <label class="qq-label" for={f('phone')}>Mobile phone <span class="qq-req">*</span></label>
-      <input
-        type="tel"
-        id={f('phone')}
-        name="phone"
-        inputmode="tel"
-        autocomplete="tel"
-        {/* A FORMAT MASK, NOT AN EXAMPLE NUMBER. An earlier attempt used a
-            plausible-looking 416 number and `landing-pages.test.ts` caught
-            it: these pages must show exactly one telephone number, the real
-            one, so a second set of digits on screen is a number a visitor
-            could read as the client's. The reference masks it the same way. */}
-        placeholder="+1 XXX XXX XXXX"
-        required
-        aria-describedby={f('phone-error')}
-      />
-      <p class="qq-error" id={f('phone-error')} data-qq-error="phone"></p>
-    </div>
-
-    <div class="qq-field">
-      <label class="qq-label" for={f('email')}>Email <span class="qq-req">*</span></label>
-      <input
-        type="email"
-        id={f('email')}
-        name="email"
-        inputmode="email"
-        autocomplete="email"
-        spellcheck="false"
-        placeholder="jane@yourcompany.com"
-        required
-        aria-describedby={f('email-error')}
-      />
-      <p class="qq-error" id={f('email-error')} data-qq-error="email"></p>
-    </div>
-  </div>
-
-  {/* CLEANING NEEDS IS A SELECT, NOT A TEXTAREA.
-
-      It was a free-text box asking the visitor to "describe your facility
-      type and the main cleaning challenges you'd like us to solve" — a small
-      essay, demanded of someone who has not yet decided to buy anything, in
-      the last field before the button. The client asked for the original
-      site's own dropdown back, which is both less work for the visitor and
-      better data: a picked option is comparable across leads in a way that
-      prose never is.
-
-      The empty first option is `disabled` as well as valueless, so it can be
-      shown but not chosen. That is what makes `required` mean something on a
-      select: without it the first real service would be pre-selected and
-      every visitor who ignored the field would silently report wanting
-      whatever happened to be listed first. */}
   <div class="qq-field">
-    <label class="qq-label" for={f('service')}>
-      Cleaning needs <span class="qq-req">*</span>
-    </label>
-    <select id={f('service')} name="service" required aria-describedby={f('service-error')}>
-      <option value="" disabled selected>Select the service you need</option>
-      {SERVICE_OPTIONS.map((service) => <option value={service}>{service}</option>)}
-    </select>
-    <p class="qq-error" id={f('service-error')} data-qq-error="service"></p>
-  </div>
-
-  {/* SERVICE LOCATION — city or area only, and optional (2026-10-15).
-
-      Where the building is decides whether the enquiry is in the service
-      area and who walks it, so it is worth one optional box. It is NOT a
-      street address: that was asked for once and taken back out, and it
-      still is not asked for. The datalist suggests the areas the business
-      names; anything else can be typed. Stored in the existing `address`
-      column, which therefore holds a city for leads from this form. */}
-  <div class="qq-field">
-    <label class="qq-label" for={f('location')}>
-      City or area of the building <span class="qq-optional">(optional)</span>
+    <label class="qq-label" for={f('business-name')}>
+      Name of Business <span class="qq-req">*</span>
     </label>
     <input
       type="text"
-      id={f('location')}
-      name="location"
-      autocomplete="address-level2"
-      list={f('location-list')}
-      placeholder="e.g. Mississauga"
-      maxlength="80"
+      id={f('business-name')}
+      name="business-name"
+      autocomplete="organization"
+      required
+      aria-describedby={f('business-name-error')}
     />
-    <datalist id={f('location-list')}>
-      {SERVICE_LOCATION_SUGGESTIONS.map((place) => <option value={place} />)}
-    </datalist>
+    <p class="qq-error" id={f('business-name-error')} data-qq-error="business-name"></p>
   </div>
 
-  {/* Revealed only when "Other" is picked, by `wireServiceOther`.
+  {/* The address is four boxes on screen and one thing in the email: street,
+      "city, province", postal code, then "CA", each on its own line, the
+      way the original's notification printed it. Composed in `quick-quote.ts`. */}
+  <fieldset class="qq-field qq-group">
+    <legend class="qq-label">Address <span class="qq-req">*</span></legend>
 
-      `hidden` IS SET IN THE MARKUP AND THE FIELD IS NOT `required` HERE.
-      Both matter, and they are the same mistake twice if either is dropped:
-      a hidden control that is `required` fails `checkValidity()` where
-      nobody can see it, and `reportInvalidFields` would then mark an
-      invisible field and refuse the visitor with a message pointing at
-      nothing. The reveal adds `required` at the moment it makes the box
-      visible and takes it away again when it hides it, so the two can never
-      disagree. */}
-  <div class="qq-field" data-qq-other hidden>
-    <label class="qq-label" for={f('message')}>
-      Tell us what you need <span class="qq-req">*</span>
-    </label>
-    <textarea
-      id={f('message')}
-      name="message"
-      rows="3"
-      placeholder="Describe the cleaning you're looking for."
-      aria-describedby={f('message-error')}></textarea>
-    <p class="qq-error" id={f('message-error')} data-qq-error="message"></p>
+    <div class="qq-field">
+      <label class="qq-sublabel" for={f('address1')}>Street address &amp; unit #</label>
+      <input
+        type="text"
+        id={f('address1')}
+        name="address1"
+        autocomplete="address-line1"
+        required
+        aria-describedby={f('address1-error')}
+      />
+      <p class="qq-error" id={f('address1-error')} data-qq-error="address1"></p>
+    </div>
+
+    <div class="qq-row">
+      <div class="qq-field">
+        <label class="qq-sublabel" for={f('city')}>City</label>
+        <input
+          type="text"
+          id={f('city')}
+          name="city"
+          autocomplete="address-level2"
+          list={f('city-list')}
+          required
+          aria-describedby={f('city-error')}
+        />
+        <datalist id={f('city-list')}>
+          {SERVICE_LOCATION_SUGGESTIONS.map((place) => <option value={place} />)}
+        </datalist>
+        <p class="qq-error" id={f('city-error')} data-qq-error="city"></p>
+      </div>
+
+      <div class="qq-field">
+        <label class="qq-sublabel" for={f('province')}>Province</label>
+        <input
+          type="text"
+          id={f('province')}
+          name="province"
+          value="Ontario"
+          autocomplete="address-level1"
+          required
+          aria-describedby={f('province-error')}
+        />
+        <p class="qq-error" id={f('province-error')} data-qq-error="province"></p>
+      </div>
+    </div>
+
+    <div class="qq-field">
+      <label class="qq-sublabel" for={f('postal')}>Postal code</label>
+      <input
+        type="text"
+        id={f('postal')}
+        name="postal"
+        autocomplete="postal-code"
+        autocapitalize="characters"
+        maxlength="10"
+        required
+        aria-describedby={f('postal-error')}
+      />
+      <p class="qq-error" id={f('postal-error')} data-qq-error="postal"></p>
+    </div>
+  </fieldset>
+
+  <div class="qq-field">
+    <label class="qq-label" for={f('email')}>Email <span class="qq-req">*</span></label>
+    <input
+      type="email"
+      id={f('email')}
+      name="email"
+      inputmode="email"
+      autocomplete="email"
+      spellcheck="false"
+      placeholder="jane@yourcompany.com"
+      required
+      aria-describedby={f('email-error')}
+    />
+    <p class="qq-error" id={f('email-error')} data-qq-error="email"></p>
+  </div>
+
+  <div class="qq-field">
+    <label class="qq-label" for={f('phone')}>Phone <span class="qq-req">*</span></label>
+    <input
+      type="tel"
+      id={f('phone')}
+      name="phone"
+      inputmode="tel"
+      autocomplete="tel"
+      {/* A FORMAT MASK, NOT AN EXAMPLE NUMBER. An earlier attempt used a
+          plausible-looking 416 number and `landing-pages.test.ts` caught
+          it: these pages must show exactly one telephone number, the real
+          one, so a second set of digits on screen is a number a visitor
+          could read as the client's. */}
+      placeholder="+1 XXX XXX XXXX"
+      required
+      aria-describedby={f('phone-error')}
+    />
+    <p class="qq-error" id={f('phone-error')} data-qq-error="phone"></p>
+  </div>
+
+  <fieldset class="qq-field qq-group">
+    <legend class="qq-label">I'm interested a quote for these services</legend>
+    <ul class="qq-choices">
+      {
+        SERVICE_OPTIONS.map((service, i) => (
+          <li>
+            <input type="checkbox" id={f(`service-${i}`)} name="services" value={service} />
+            <label for={f(`service-${i}`)}>{service}</label>
+          </li>
+        ))
+      }
+    </ul>
+  </fieldset>
+
+  <div class="qq-field">
+    <label class="qq-label" for={f('message')}>Additional comments</label>
+    <textarea id={f('message')} name="message" rows="5" maxlength="4000"></textarea>
   </div>
 
 
@@ -250,8 +263,7 @@ const f = (name: string) => `${id}-${name}`;
 <script>
   /* Wired here rather than by `FormRuntime`, which binds every
      `form[data-endpoint]` with the browser's own validation bubbles. This
-     form renders its own inline messages and needs the cross-field
-     "phone or email" rule, so it brings its own wiring — and `FormRuntime`
+     form renders its own inline messages, so it brings its own wiring — and `FormRuntime`
      skips it, because `wireLeadForm` refuses a form it has already bound and
      this script runs first. */
   import { wireQuickQuote } from '../lib/quick-quote';
@@ -319,11 +331,47 @@ const f = (name: string) => `${id}-${name}`;
     min-width: 0;
   }
 
-  .qq-contact {
-    margin: 0 0 6px;
+  .qq-group {
     padding: 0;
     border: 0;
-    min-width: 0;
+  }
+
+  .qq-group .qq-field {
+    margin-bottom: 4px;
+  }
+
+  /* Two columns only where each has room for "Commercial Carpet Cleaning"
+     on one line — sized by the form's own width, not the viewport's, because
+     the landing pages put the form in a narrow column on a wide screen. */
+  .qq-choices {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 8px 18px;
+    margin: 4px 0 6px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .qq-choices li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+  }
+
+  /* 20px boxes in the brand green: big enough to hit with a thumb, and the
+     label is part of the target too. */
+  .qq-choices input {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin: 1px 0 0;
+    accent-color: var(--brand);
+  }
+
+  .qq-choices label {
+    color: var(--ink-heading);
+    cursor: pointer;
   }
 
   .qq-label {

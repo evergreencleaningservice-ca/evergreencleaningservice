@@ -32,7 +32,6 @@
  */
 
 import { fieldValue, wireLeadForm } from './lead-submit';
-import { SERVICE_OTHER } from '../data/services';
 
 /**
  * Errors are written into `[data-qq-error="<the field's own name>"]`.
@@ -66,15 +65,19 @@ function messageFor(name: string, el: HTMLInputElement | HTMLSelectElement): str
       case 'name':
         return 'Please add your name.';
       case 'phone':
-        return 'Please add a mobile phone number.';
+        return 'Please add a phone number.';
       case 'email':
         return 'Please add an email address.';
-      case 'service':
-        return 'Please choose the service you need.';
-      case 'message':
-        /* Only reachable with "Other" picked — the box does not exist
-           otherwise, and is not `required` while it is hidden. */
-        return 'Please tell us what you need cleaned.';
+      case 'business-name':
+        return 'Please add the name of the business.';
+      case 'address1':
+        return 'Please add the street address.';
+      case 'city':
+        return 'Please add the city.';
+      case 'province':
+        return 'Please add the province.';
+      case 'postal':
+        return 'Please add the postal code.';
       case 'g-recaptcha-hidden':
         /* The reCAPTCHA checkbox's token field, empty until it is ticked.
            Without this case the visitor read "This one is needed." about a
@@ -161,56 +164,24 @@ export function reportInvalidFields(form: HTMLFormElement): void {
    would reasonably assume the site still accepts one or the other. */
 
 /**
- * Show the free-text box when "Other" is picked, and hide it again otherwise.
- *
- * THE `hidden` AND `required` ATTRIBUTES ARE MOVED TOGETHER, ALWAYS. A hidden
- * control that is still `required` fails `checkValidity()` somewhere the
- * visitor cannot see, and `reportInvalidFields` would then write a message
- * into a slot inside a hidden container and send focus to an invisible box —
- * the silent refusal this file already carries one long comment about. So the
- * two attributes are set in the same statement and never separately.
- *
- * The value is cleared on hide. Someone who types a note under "Other", then
- * changes their mind and picks "Office Cleaning", has not asked us to keep
- * the note — and sending it anyway would put text in the lead that the
- * visitor believes they removed.
- *
- * Focus moves to the box on reveal. It appeared because of a deliberate
- * choice the visitor just made, so it is the thing they are about to use;
- * not moving focus leaves a keyboard user tabbing forwards into a field that
- * was not there a moment ago.
- *
- * Exported and separately tested because it is the one piece of this form
- * that changes the shape of the form itself.
+ * The address as the notification email prints it: street, then
+ * "city, province", then the postal code, one per line. Stored the same way,
+ * so the admin and the email show one thing.
  */
-export function wireServiceOther(form: HTMLFormElement, otherValue = 'Other'): void {
-  const select = form.elements.namedItem('service') as HTMLSelectElement | null;
-  const box = form.querySelector<HTMLElement>('[data-qq-other]');
-  const field = form.elements.namedItem('message') as HTMLTextAreaElement | null;
-  if (!select || !box || !field) return;
-
-  const apply = () => {
-    const wanted = select.value === otherValue;
-    box.hidden = !wanted;
-    field.required = wanted;
-    if (!wanted) {
-      field.value = '';
-      field.removeAttribute('aria-invalid');
-      const slot = errorSlot(form, 'message');
-      if (slot) slot.textContent = '';
-    }
-  };
-
-  select.addEventListener('change', () => {
-    const revealing = select.value === otherValue && box.hidden;
-    apply();
-    if (revealing) field.focus();
-  });
-
-  /* Run once on wiring, so a select restored by the browser's back/forward
-     cache with "Other" already chosen shows its box without being touched. */
-  apply();
+export function composeAddress(form: HTMLFormElement): string {
+  const cityLine = [fieldValue(form, 'city'), fieldValue(form, 'province')]
+    .filter(Boolean)
+    .join(', ');
+  return [fieldValue(form, 'address1'), cityLine, fieldValue(form, 'postal').toUpperCase()]
+    .filter(Boolean)
+    .join('\n');
 }
+
+/** Every ticked service, in the form's order, joined with ", ". */
+export const checkedServices = (form: HTMLFormElement): string =>
+  Array.from(form.querySelectorAll<HTMLInputElement>('input[name="services"]:checked'))
+    .map((el) => el.value)
+    .join(', ');
 
 export interface QuickQuoteOptions {
   /** Small numbers in tests; the real one is the module default. */
@@ -252,8 +223,6 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
     const el = event.target as HTMLElement | null;
     if (event.key === 'Enter' && el?.closest('.qq-hp')) event.preventDefault();
   });
-
-  wireServiceOther(form, SERVICE_OTHER);
 
   /* Read before the form is replaced, and from the markup rather than typed
      here, so a page that promises a specific time says the same thing after
@@ -301,23 +270,14 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
     payload: (f) => ({
       form_id: f.dataset.formId ?? 'quick-quote',
       name: fieldValue(f, 'name'),
-      phone: fieldValue(f, 'phone'),
+      business_name: fieldValue(f, 'business-name'),
+      address: composeAddress(f),
+      province: fieldValue(f, 'province'),
       email: fieldValue(f, 'email'),
-      /* NO ADDRESS AND NO PROVINCE. Both were asked for briefly and then
-         taken back out: where the building is is a question the account
-         executive asks on the call, not a condition of making contact. Their
-         columns stay in the database — `address` is still filled by the
-         contact form on /contact-us/, and `province` holds what the few leads
-         taken while it was asked actually answered. */
-      /* `service` ON THE PAGE, `services` ON THE WIRE, and the mismatch is
-         deliberate. The column is `services` because the original site's
-         field was a checklist of eight and stored a joined list; this asks
-         for one, so the control reads `service`. Renaming the column to
-         match would orphan every row already in the table. */
-      services: fieldValue(f, 'service'),
-      /* Optional city or area (not a street address) — see QuickQuoteForm. */
-      address: fieldValue(f, 'location'),
-      /* Empty unless "Other" was picked — the box does not exist otherwise. */
+      phone: fieldValue(f, 'phone'),
+      /* The ticked boxes, joined — the shape the `services` column held
+         when the original site's form was a checklist. */
+      services: checkedServices(f),
       message: fieldValue(f, 'message'),
       page_url: location.href,
     }),

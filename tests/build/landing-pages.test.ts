@@ -197,32 +197,29 @@ describe('conversion identities', () => {
   });
 });
 
-/* --- 3. both use the Phase 9 short form ----------------------------------- */
+/* --- 3. both use the shared quote form ------------------------------------- */
 
-describe('the short form', () => {
+describe('the quote form', () => {
   it.each(PAGES)('$name renders exactly one lead form', ({ name }) => {
     const forms = (html[name].match(/<form\b[^>]*>/gi) ?? []).filter((t) => /data-endpoint=/.test(t));
     expect(forms).toHaveLength(1);
   });
 
-  it.each(PAGES)('$name asks four questions, all required', ({ name }) => {
+  it.each(PAGES)('$name asks the original form\'s eight required questions', ({ name }) => {
     const form = leadForm(name);
     for (const spec of FIELDS) {
       const tag = control(form, spec.name);
       expect(tag, `${name}: missing ${spec.name}`).not.toBeNull();
       expect(new RegExp(`\\brequired(?=[\\s/>=])`, 'i').test(tag!)).toBe(spec.required);
     }
-    /* Four. It was four, briefly seven with the reference design's address
-       and province boxes, five when those came out, and four again once the
-       two name boxes became one. The message stayed required throughout. */
-    expect(questionRequiredCount(form)).toBe(4);
+    /* Eight since 2026-10-22, when the client asked for the original site's
+       form back: name, business, four address boxes, email and phone. */
+    expect(questionRequiredCount(form)).toBe(8);
   });
 
   it.each(PAGES)('$name asks for none of the fields nothing on this site asks for', ({ name }) => {
-    /* `last-name`, `city`, `state` and `province` came OFF this list when the
-       reference field set was adopted — the form asks for them now. What is
-       left is split address lines and the qualification questions that belong
-       in the account executive's first call. */
+    /* What is left is a second address line and the qualification
+       questions that belong in the account executive's first call. */
     for (const banned of [...BANNED_FIELDS, 'fullName', 'workEmail', 'facilityType', 'facilitySize']) {
       expect(control(html[name], banned), `${name} still asks for ${banned}`).toBeNull();
     }

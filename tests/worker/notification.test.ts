@@ -24,8 +24,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   CORE_FIELDS,
+  LOGO_URL,
   NOT_SUPPLIED,
   formatSentAt,
+  notificationHtml,
   notificationPayload,
   notificationText,
   notifyRecipientFor,
@@ -54,7 +56,7 @@ describe('reply_to is present only when there is an address to reply to', () => 
 
     /* Not '', not null, not undefined, not a placeholder. Absent. */
     expect('reply_to' in payload).toBe(false);
-    expect(Object.keys(payload).sort()).toEqual(['from', 'subject', 'text', 'to']);
+    expect(Object.keys(payload).sort()).toEqual(['from', 'html', 'subject', 'text', 'to']);
   });
 
   it('survives the JSON round trip without reappearing', () => {
@@ -135,7 +137,7 @@ describe('the payload is always well formed', () => {
     /* Every key Resend is given is one it accepts, and no key holds a value
        of the wrong kind. */
     for (const [key, value] of Object.entries(payload)) {
-      expect(['from', 'to', 'subject', 'text', 'reply_to']).toContain(key);
+      expect(['from', 'to', 'subject', 'text', 'html', 'reply_to']).toContain(key);
       expect(value).not.toBeNull();
       expect(value).not.toBeUndefined();
       if (key === 'to') expect(Array.isArray(value)).toBe(true);
@@ -153,11 +155,13 @@ describe('the message body', () => {
   it('is exactly the requested shape for a quote-form lead', () => {
     const text = notificationText(
       lead({
-        name: 'test',
-        phone: '6471112233',
-        email: 'test@test.com',
-        address: '',
-        services: 'Office Cleaning',
+        name: 'Kerry Ann Cunningham',
+        business_name: 'Festival Management Committee',
+        address: '716 Gordon Baker Rd., Ste. 201\nNorth York, Ontario\nM2H 3B4',
+        email: 'kerryann@placeholder.example',
+        phone: '6475550147',
+        services: 'Office Cleaning, Commercial Carpet Cleaning',
+        message: 'Hello,\nKitchen: sweep & mop.',
         form_id: 'lp-commercial-cleaning-quote',
         page_url: 'https://stage.evergreencleaningservice.ca/lp/commercial-cleaning-quote/',
         landing_page: '/lp/commercial-cleaning-quote/',
@@ -169,10 +173,21 @@ describe('the message body', () => {
 
     expect(text).toBe(
       [
-        'Name: test',
-        'Phone: 6471112233',
-        'Email: test@test.com',
-        'Service: Office Cleaning',
+        'Name: Kerry Ann Cunningham',
+        'Name of Business: Festival Management Committee',
+        'Address:',
+        '716 Gordon Baker Rd., Ste. 201',
+        'North York, Ontario',
+        'M2H 3B4',
+        'CA',
+        'Email: kerryann@placeholder.example',
+        'Phone: 6475550147',
+        "I'm interested a quote for these services:",
+        'Office Cleaning',
+        'Commercial Carpet Cleaning',
+        'Additional comments:',
+        'Hello,',
+        'Kitchen: sweep & mop.',
         '',
         'Page URL: https://stage.evergreencleaningservice.ca/lp/commercial-cleaning-quote/',
         'Time Sent: September 30, 2026 at 10:50 AM EDT',
@@ -199,17 +214,17 @@ describe('the message body', () => {
     }
   });
 
-  it('shows Address and Details only when the visitor filled them in', () => {
+  it('shows Address and Additional comments only when the visitor filled them in', () => {
     const empty = notificationText(lead({ phone: '416 555 0142', address: '' }), SENT);
     expect(empty).not.toContain('Address:');
-    expect(empty).not.toContain('Details:');
+    expect(empty).not.toContain('Additional comments:');
 
     const filledIn = notificationText(
       lead({ phone: '416 555 0142', address: '100 King St W', message: 'Two floors, nightly.' }),
       SENT
     );
-    expect(filledIn).toContain('Address: 100 King St W');
-    expect(filledIn).toContain('Details: Two floors, nightly.');
+    expect(filledIn).toContain('Address:\n100 King St W\nCA');
+    expect(filledIn).toContain('Additional comments: Two floors, nightly.');
   });
 
   it('shows (not supplied) for a missing email on a phone-only lead', () => {
@@ -217,7 +232,7 @@ describe('the message body', () => {
 
     expect(text).toContain('Phone: 416 555 0142');
     expect(text).toContain(`Email: ${NOT_SUPPLIED}`);
-    expect(text).toContain('Service: Office cleaning & janitorial');
+    expect(text).toContain("I'm interested a quote for these services: Office cleaning & janitorial");
   });
 
   it('shows (not supplied) for a missing phone on an email-only lead', () => {
@@ -230,7 +245,7 @@ describe('the message body', () => {
   it('lists every core field, the page and the time even when the lead is nearly empty', () => {
     const text = notificationText(normalizeLead({ name: 'Dana' }) as unknown as Record<string, string>, SENT);
     for (const [, label] of CORE_FIELDS) expect(text).toContain(`${label}:`);
-    expect(CORE_FIELDS).toHaveLength(4);
+    expect(CORE_FIELDS).toHaveLength(3);
     expect(text).toContain(`Page URL: ${NOT_SUPPLIED}`);
     expect(text).toContain('Time Sent: ');
   });
@@ -497,5 +512,64 @@ describe('the Worker sends each host to its own recipient', () => {
     expect(res.status).toBe(200);
     expect(sent).toHaveLength(0);
     expect(warn.mock.calls.flat().join(' ')).toContain('LEAD_NOTIFY_TO');
+  });
+});
+
+/* --- the HTML email, after the original site's ---------------------------- */
+
+describe('the HTML body', () => {
+  const SENT = new Date('2026-09-30T14:50:14Z');
+  const full = lead({
+    name: 'Kerry Ann Cunningham',
+    business_name: 'Festival Management Committee',
+    address: '716 Gordon Baker Rd., Ste. 201\nNorth York, Ontario\nM2H 3B4',
+    email: 'kerryann@placeholder.example',
+    phone: '6475550147',
+    services: 'Office Cleaning, Commercial Carpet Cleaning',
+    message: 'Hello,\nKitchen: sweep & mop.',
+  });
+
+  it('opens with the logo from the image host', () => {
+    const html = notificationHtml(full, SENT);
+    expect(html).toContain(`<img src="${LOGO_URL}"`);
+    expect(LOGO_URL).toMatch(/^https:\/\/img\.evergreencleaningservice\.ca\/images\//);
+  });
+
+  it("lists the fields in the original's order, with its labels", () => {
+    const html = notificationHtml(full, SENT);
+    const order = [
+      '>Name<',
+      '>Name of Business<',
+      '>Address<',
+      '>Email<',
+      '>Phone<',
+      '>I&#39;m interested a quote for these services<',
+      '>Additional comments<',
+    ].map((label) => html.indexOf(label));
+    expect(order.every((i) => i > -1)).toBe(true);
+    expect([...order].sort((a, b) => a - b)).toEqual(order);
+  });
+
+  it('links the email and the address, and prints the address with CA under it', () => {
+    const html = notificationHtml(full, SENT);
+    expect(html).toContain('href="mailto:kerryann@placeholder.example"');
+    expect(html).toContain('https://www.google.com/maps/search/?api=1&amp;query=');
+    expect(html).toContain('716 Gordon Baker Rd., Ste. 201<br>North York, Ontario<br>M2H 3B4<br>CA');
+    expect(html).toContain('Office Cleaning<br>Commercial Carpet Cleaning');
+    expect(html).toContain('Hello,<br>Kitchen: sweep &amp; mop.');
+  });
+
+  it('escapes whatever a visitor typed', () => {
+    const html = notificationHtml(lead({ name: '<script>alert(1)</script>', message: '"><img src=x>' }), SENT);
+    expect(html).not.toContain('<script>');
+    expect(html).not.toContain('<img src=x>');
+    expect(html).toContain('&lt;script&gt;');
+  });
+
+  it('leaves out blocks the visitor did not fill', () => {
+    const html = notificationHtml(lead({ phone: '416 555 0142', address: '', message: '' }), SENT);
+    expect(html).not.toContain('>Address<');
+    expect(html).not.toContain('>Additional comments<');
+    expect(html).toContain(NOT_SUPPLIED);
   });
 });

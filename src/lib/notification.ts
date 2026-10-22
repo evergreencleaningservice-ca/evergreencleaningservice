@@ -26,6 +26,7 @@
 
 import { looksLikeEmail } from './lead-fields';
 import { isProductionHost } from './captcha-hosts';
+import { images } from '../data/site';
 
 /**
  * Who a lead's notification goes to, by the hostname it arrived on.
@@ -69,42 +70,57 @@ export interface ResendPayload {
   from: string;
   to: string[];
   subject: string;
+  /** The plain-text copy, for clients that do not render HTML. */
   text: string;
+  html: string;
   /** Present only when the lead carries a usable address. */
   reply_to?: string;
 }
 
 /**
- * What the email shows, and nothing else.
+ * What the email shows, in the order it shows it.
  *
- * The client asked for a short message: who, how to reach them, what it is
- * about, where they asked from and when. Everything else the endpoint stores
- * — attribution, form_id, landing page, referrer, touch times — stays in the
- * database and out of the email.
+ * THE ORIGINAL SITE'S NOTIFICATION, rebuilt (2026-10-22). The client reads
+ * every lead in this email and asked for it to look like the one WPForms sent
+ * from the old site: the logo, then one block per field — Name, Name of
+ * Business, Address, Email, Phone, the services ticked, Additional comments.
+ * Everything else the endpoint stores — attribution, form_id, landing page,
+ * referrer, touch times — stays in the database and out of the email.
  *
- * CORE_FIELDS are always listed, with `(not supplied)` where a value is
- * absent, because there is a real difference between "this visitor gave no
- * email" and "the email was lost somewhere between the form and here". The
- * first is a lead to phone; the second is a bug.
- *
- * OPTIONAL_FIELDS are listed only when the visitor filled them in. The quote
- * form never asks for either, so printing them would put two
- * "(not supplied)" lines on every quote lead; but the contact form does ask,
- * and a message the visitor typed must not be left out of the email.
+ * `always` fields are listed with `(not supplied)` where a value is absent,
+ * because there is a real difference between "this visitor gave no email" and
+ * "the email was lost somewhere between the form and here". The first is a
+ * lead to phone; the second is a bug. The rest appear only when filled in, so
+ * a lead from a form that does not ask for them carries no empty blocks.
  */
-export const CORE_FIELDS: readonly (readonly [string, string])[] = [
-  ['full_name', 'Name'],
-  ['phone', 'Phone'],
-  ['work_email', 'Email'],
-  ['services', 'Service'],
-] as const;
+export interface NotificationField {
+  key: string;
+  label: string;
+  always: boolean;
+}
 
-export const OPTIONAL_FIELDS: readonly (readonly [string, string])[] = [
-  ['address', 'Address'],
-  ['message', 'Details'],
-] as const;
+export const NOTIFICATION_FIELDS: readonly NotificationField[] = [
+  { key: 'full_name', label: 'Name', always: true },
+  { key: 'business_name', label: 'Name of Business', always: false },
+  { key: 'address', label: 'Address', always: false },
+  { key: 'work_email', label: 'Email', always: true },
+  { key: 'phone', label: 'Phone', always: true },
+  { key: 'services', label: "I'm interested a quote for these services", always: false },
+  { key: 'message', label: 'Additional comments', always: false },
+];
+
+/** The fields listed on every lead, filled or not. */
+export const CORE_FIELDS: readonly (readonly [string, string])[] = NOTIFICATION_FIELDS.filter(
+  (f) => f.always
+).map((f) => [f.key, f.label] as const);
 
 export const NOT_SUPPLIED = '(not supplied)';
+
+/**
+ * The logo at the top of the email. Absolute, from the image host, because a
+ * mail client has no page to resolve a relative URL against.
+ */
+export const LOGO_URL = `${images.host}/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg`;
 
 const filled = (v: unknown): boolean => typeof v === 'string' && v.trim() !== '';
 
@@ -120,22 +136,118 @@ export const formatSentAt = (at: Date): string =>
     timeZoneName: 'short',
   }).format(at);
 
-/** The message body: the core fields, any optional field filled in, then the page and the time. */
+/**
+ * One field's value as lines, the way the original printed it: the address
+ * with "CA" under it, one service per line, comments as typed.
+ */
+export function fieldLines(key: string, value: string): string[] {
+  const lines = value
+    .trim()
+    .split(/\r?\n/)
+    .map((line) => line.trim());
+  if (key === 'address') return [...lines.filter(Boolean), 'CA'];
+  if (key === 'services')
+    return value
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
+  if (key === 'message') return lines;
+  return [value.trim()];
+}
+
+/** The fields this lead's email lists, with their lines. */
+function shownFields(lead: Record<string, string>): { key: string; label: string; lines: string[] }[] {
+  return NOTIFICATION_FIELDS.filter((f) => f.always || filled(lead[f.key])).map((f) => ({
+    key: f.key,
+    label: f.label,
+    lines: filled(lead[f.key]) ? fieldLines(f.key, lead[f.key]) : [NOT_SUPPLIED],
+  }));
+}
+
+/** The plain-text body: each field, then the page and the time. */
 export function notificationText(lead: Record<string, string>, sentAt: Date = new Date()): string {
-  const core = CORE_FIELDS.map(
-    ([key, label]) => `${label}: ${filled(lead[key]) ? lead[key] : NOT_SUPPLIED}`
-  );
-  const optional = OPTIONAL_FIELDS.filter(([key]) => filled(lead[key])).map(
-    ([key, label]) => `${label}: ${lead[key]}`
+  const blocks = shownFields(lead).map(({ label, lines }) =>
+    lines.length === 1 ? `${label}: ${lines[0]}` : `${label}:\n${lines.join('\n')}`
   );
 
   return [
-    ...core,
-    ...optional,
+    ...blocks,
     '',
     `Page URL: ${filled(lead.page_url) ? lead.page_url : NOT_SUPPLIED}`,
     `Time Sent: ${formatSentAt(sentAt)}`,
   ].join('\n');
+}
+
+/** Escape for HTML text and attribute values. Every value here came from a stranger. */
+export const escapeHtml = (v: string): string =>
+  v
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+/* The original's link colour, WPForms's own orange. */
+const LINK = 'color:#e27730;text-decoration:underline;';
+const FONT = 'font-family:Helvetica,Arial,sans-serif;';
+
+/** A field's value as HTML: the email a mailto link, the address a map link. */
+function valueHtml(key: string, lines: string[], raw: string): string {
+  const text = lines.map(escapeHtml).join('<br>');
+  if (!filled(raw)) return text;
+  if (key === 'work_email' && looksLikeEmail(raw.trim())) {
+    return `<a href="mailto:${escapeHtml(raw.trim())}" style="${LINK}">${text}</a>`;
+  }
+  if (key === 'address') {
+    const query = encodeURIComponent(lines.join(', '));
+    return `<a href="https://www.google.com/maps/search/?api=1&amp;query=${query}" style="${LINK}">${text}</a>`;
+  }
+  return text;
+}
+
+/**
+ * The HTML body, after the original: a grey page, the logo on a white panel,
+ * then a white card with one block per field divided by hairlines. Tables and
+ * inline styles, because that is what mail clients render.
+ */
+export function notificationHtml(lead: Record<string, string>, sentAt: Date = new Date()): string {
+  const fields = shownFields(lead);
+  const rows = fields
+    .map(({ key, label, lines }, i) => {
+      const rule = i < fields.length - 1 ? 'border-bottom:1px solid #dddddd;' : '';
+      return (
+        `<tr><td style="padding:18px 0;${rule}">` +
+        `<p style="margin:0 0 8px;${FONT}font-size:15px;font-weight:bold;color:#333333;">${escapeHtml(label)}</p>` +
+        `<p style="margin:0;${FONT}font-size:15px;line-height:1.5;color:#555555;">${valueHtml(key, lines, lead[key] ?? '')}</p>` +
+        '</td></tr>'
+      );
+    })
+    .join('');
+
+  const page = filled(lead.page_url)
+    ? `<a href="${escapeHtml(lead.page_url)}" style="color:#888888;">${escapeHtml(lead.page_url)}</a>`
+    : NOT_SUPPLIED;
+
+  return (
+    '<!doctype html><html><head><meta charset="utf-8">' +
+    '<meta name="viewport" content="width=device-width,initial-scale=1"></head>' +
+    '<body style="margin:0;padding:0;background:#e9eaec;">' +
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e9eaec;">' +
+    '<tr><td align="center" style="padding:24px 12px;">' +
+    '<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;">' +
+    '<tr><td align="center" style="background:#ffffff;padding:28px 24px;">' +
+    `<img src="${LOGO_URL}" width="420" alt="Evergreen Commercial Cleaning &amp; Janitorial" ` +
+    'style="display:block;width:100%;max-width:420px;height:auto;border:0;">' +
+    '</td></tr>' +
+    '<tr><td style="height:20px;line-height:20px;font-size:0;">&nbsp;</td></tr>' +
+    '<tr><td style="background:#ffffff;border:1px solid #dddddd;border-top:3px solid #cccccc;padding:12px 30px;">' +
+    `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${rows}</table>` +
+    '</td></tr>' +
+    `<tr><td style="padding:16px 4px 0;${FONT}font-size:12px;line-height:1.6;color:#888888;">` +
+    `Sent from ${page}<br>${escapeHtml(formatSentAt(sentAt))}` +
+    '</td></tr>' +
+    '</table></td></tr></table></body></html>'
+  );
 }
 
 /**
@@ -156,6 +268,7 @@ export function notificationPayload(
     to: recipientList(to),
     subject: `New proposal request — ${lead.full_name}`,
     text: notificationText(lead, sentAt),
+    html: notificationHtml(lead, sentAt),
   };
 
   const email = (lead.work_email ?? '').trim();
