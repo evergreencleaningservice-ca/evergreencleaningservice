@@ -520,10 +520,23 @@ Free plan asks for a payment card (`src/lib/admin/session.ts`).
    `/admin/sign-in/` is noindex; `/api/admin/me` answers 401;
    `/eg-live-post-shell/` answers 404. A real sign-in (which sends an email)
    had not been tried at handoff.
-4. **For image uploads**, `wrangler secret put B2_KEY_ID` and `B2_APP_KEY`: a
-   B2 application key limited to `img-evergreencleaningservice`, read and
-   write. Uploads go under `uploads/blog/`, which `b2:sync --prune` never
-   touches. Without them the editor says uploads are not set up and takes an
+4. **Image uploads**, set up 2026-10-22. The Worker secrets `B2_KEY_ID` and
+   `B2_APP_KEY` hold the B2 application key **evergreen-admin-uploads**:
+   bucket `img-evergreencleaningservice` only, name prefix `uploads/blog/`
+   only, capability `writeFiles` only. It cannot read, list, share or delete
+   anything, nor write under `images/` (each refused with 401 when tested).
+   The admin needs nothing more: the public image host serves the files, and
+   the admin never lists or removes them. Uploads go under `uploads/blog/`,
+   which `b2:sync --prune` never touches. Checked with one test upload,
+   through `src/lib/admin/b2.ts`, served from `img.evergreencleaningservice.ca`
+   as image/png, then deleted and purged from the edge cache; `uploads/` was
+   left empty and `images/` at its 988 objects. A signed-in upload from the
+   admin page itself had not been tried at handoff (signing in sends an
+   email). Never put the deploy's own B2 key (the `b2:sync` one) on the
+   Worker: it is unrestricted across every bucket on the account, other
+   clients' included, with key and delete rights. To replace the upload key,
+   create another with the same three limits and `wrangler secret put` both
+   values; without them the editor says uploads are not set up and takes an
    image address instead.
 
 The staging address reads and writes the **staging** database, as the forms
