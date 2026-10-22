@@ -94,6 +94,7 @@ const f = (name: string) => `${id}-${name}`;
       visitor is about to correct. */}
   <div class="qq-summary" data-qq-summary role="alert" aria-live="assertive" tabindex="-1"></div>
 
+  <div class="qq-row">
   <div class="qq-field">
     <label class="qq-label" for={f('name')}>Name <span class="qq-req">*</span></label>
     <input
@@ -123,6 +124,7 @@ const f = (name: string) => `${id}-${name}`;
     />
     <p class="qq-error" id={f('business-name-error')} data-qq-error="business-name"></p>
   </div>
+  </div>
 
   {/* The address is four boxes on screen and one thing in the email: street,
       "city, province", postal code, then "CA", each on its own line, the
@@ -143,7 +145,7 @@ const f = (name: string) => `${id}-${name}`;
       <p class="qq-error" id={f('address1-error')} data-qq-error="address1"></p>
     </div>
 
-    <div class="qq-row">
+    <div class="qq-row qq-row-3">
       <div class="qq-field">
         <label class="qq-sublabel" for={f('city')}>City</label>
         <input
@@ -174,24 +176,25 @@ const f = (name: string) => `${id}-${name}`;
         />
         <p class="qq-error" id={f('province-error')} data-qq-error="province"></p>
       </div>
-    </div>
 
-    <div class="qq-field">
-      <label class="qq-sublabel" for={f('postal')}>Postal code</label>
-      <input
-        type="text"
-        id={f('postal')}
-        name="postal"
-        autocomplete="postal-code"
-        autocapitalize="characters"
-        maxlength="10"
-        required
-        aria-describedby={f('postal-error')}
-      />
-      <p class="qq-error" id={f('postal-error')} data-qq-error="postal"></p>
+      <div class="qq-field">
+        <label class="qq-sublabel" for={f('postal')}>Postal code</label>
+        <input
+          type="text"
+          id={f('postal')}
+          name="postal"
+          autocomplete="postal-code"
+          autocapitalize="characters"
+          maxlength="10"
+          required
+          aria-describedby={f('postal-error')}
+        />
+        <p class="qq-error" id={f('postal-error')} data-qq-error="postal"></p>
+      </div>
     </div>
   </fieldset>
 
+  <div class="qq-row">
   <div class="qq-field">
     <label class="qq-label" for={f('email')}>Email <span class="qq-req">*</span></label>
     <input
@@ -201,7 +204,7 @@ const f = (name: string) => `${id}-${name}`;
       inputmode="email"
       autocomplete="email"
       spellcheck="false"
-      placeholder="jane@yourcompany.com"
+      placeholder="you@work.com"
       required
       aria-describedby={f('email-error')}
     />
@@ -227,6 +230,7 @@ const f = (name: string) => `${id}-${name}`;
     />
     <p class="qq-error" id={f('phone-error')} data-qq-error="phone"></p>
   </div>
+  </div>
 
   <fieldset class="qq-field qq-group">
     <legend class="qq-label">I'm interested a quote for these services</legend>
@@ -244,7 +248,7 @@ const f = (name: string) => `${id}-${name}`;
 
   <div class="qq-field">
     <label class="qq-label" for={f('message')}>Additional comments</label>
-    <textarea id={f('message')} name="message" rows="5" maxlength="4000"></textarea>
+    <textarea id={f('message')} name="message" rows="3" maxlength="4000"></textarea>
   </div>
 
 
@@ -274,8 +278,12 @@ const f = (name: string) => `${id}-${name}`;
 </script>
 
 <style>
+  /* A size container, so the rows below go side by side when the FORM is
+     wide enough rather than the viewport: the landing pages put it in a
+     narrow column on a wide screen. */
   .qq {
     margin: 0;
+    container-type: inline-size;
   }
 
   .qq-heading {
@@ -315,39 +323,48 @@ const f = (name: string) => `${id}-${name}`;
     outline-offset: 2px;
   }
 
+  /* Related fields share a line — name and business, city/province/postal,
+     email and phone — which is most of what keeps an eight-question form
+     short on screen, a phone included. They stack below 290px. */
   .qq-row {
     display: grid;
-    gap: 0 18px;
+    gap: 0 12px;
   }
 
-  @media (min-width: 560px) {
+  @container (min-width: 290px) {
     .qq-row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .qq-row-3 {
+      grid-template-columns: 1.3fr 1fr 0.9fr;
+    }
+  }
+
+  @container (min-width: 400px) {
+    .qq-choices {
       grid-template-columns: 1fr 1fr;
     }
   }
 
   .qq-field {
-    margin: 0 0 14px;
+    margin: 0 0 10px;
     min-width: 0;
   }
 
   .qq-group {
+    margin: 0;
     padding: 0;
     border: 0;
   }
 
-  .qq-group .qq-field {
-    margin-bottom: 4px;
-  }
-
-  /* Two columns only where each has room for "Commercial Carpet Cleaning"
-     on one line — sized by the form's own width, not the viewport's, because
-     the landing pages put the form in a narrow column on a wide screen. */
+  /* One column, two from 400px (in the container query above): on a phone
+     two columns wrap most names onto two or three lines and save nothing.
+     Never three. */
   .qq-choices {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 8px 18px;
-    margin: 4px 0 6px;
+    gap: 6px 14px;
+    margin: 2px 0 12px;
     padding: 0;
     list-style: none;
   }
@@ -355,16 +372,16 @@ const f = (name: string) => `${id}-${name}`;
   .qq-choices li {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    line-height: 1.4;
+    gap: 8px;
+    font-size: 15px;
+    line-height: 1.35;
   }
 
-  /* 20px boxes in the brand green: big enough to hit with a thumb, and the
-     label is part of the target too. */
+  /* 18px boxes in the brand green; the label is part of the target too. */
   .qq-choices input {
     flex: none;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     margin: 1px 0 0;
     accent-color: var(--brand);
   }
@@ -377,7 +394,7 @@ const f = (name: string) => `${id}-${name}`;
   .qq-label {
     display: block;
     padding: 0;
-    margin: 0 0 5px;
+    margin: 0 0 4px;
     font-family: var(--font-heading);
     font-size: 13px;
     font-weight: 700;
@@ -387,7 +404,7 @@ const f = (name: string) => `${id}-${name}`;
 
   .qq-sublabel {
     display: block;
-    margin: 0 0 5px;
+    margin: 0 0 3px;
     font-size: 13px;
     font-weight: 600;
     color: var(--ink);
@@ -420,9 +437,9 @@ const f = (name: string) => `${id}-${name}`;
   .qq textarea {
     width: 100%;
     max-width: 100%;
-    /* 48px: comfortably over the 24px minimum, and the size a thumb expects. */
-    min-height: 48px;
-    padding: 13px 14px;
+    /* 42px: compact, and still well over the 24px minimum target. */
+    min-height: 42px;
+    padding: 9px 12px;
     /* FILLED, NOT OUTLINED. The field is described by its own tint rather
        than by a rule around it, so a column of inputs reads as a stack of
        targets instead of a stack of boxes.
@@ -483,7 +500,7 @@ const f = (name: string) => `${id}-${name}`;
   }
 
   .qq textarea {
-    min-height: 84px;
+    min-height: 72px;
     resize: vertical;
     line-height: 1.5;
   }
@@ -501,13 +518,19 @@ const f = (name: string) => `${id}-${name}`;
     background: #fffafa;
   }
 
-  /* Reserved height, again: the message appears into space already held. */
+  /* No space is held for a message that is not there: across eight fields
+     the reserved lines added up to a screen's worth of blank. A message
+     pushes the fields below it down when it appears, and the summary at the
+     top lists every problem at once. */
   .qq-error {
-    min-height: 1.15rem;
     margin: 3px 0 0;
     font-size: 12.5px;
     line-height: 1.15rem;
     color: #a94442;
+  }
+
+  .qq-error:empty {
+    display: none;
   }
 
   .qq-hp {
@@ -521,13 +544,13 @@ const f = (name: string) => `${id}-${name}`;
 
   .qq-submit {
     width: 100%;
-    min-height: 52px;
-    margin-top: 6px;
+    min-height: 48px;
+    margin-top: 4px;
     border: 0;
     border-radius: var(--radius);
     background: var(--brand);
     color: #fff;
-    padding: 15px 22px;
+    padding: 12px 22px;
     font-family: var(--font-heading);
     font-size: 1rem;
     font-weight: 700;

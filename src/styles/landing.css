@@ -126,7 +126,7 @@
    *   1fr / 1fr     equal halves, 533px each — too wide; a four-field form
    *                 stretched across 533px looks padded out, and the long
    *                 fields made the card taller than the copy beside it
-   *   1fr / 430px   here. Wide enough that "jane@yourcompany.com" and the
+   *   1fr / 430px   here. Wide enough that "you@work.com" and the
    *                 phone mask both sit on one line in the paired row
    *                 (measured, not guessed — see the note below), narrow
    *                 enough to read as a form rather than a second panel.
