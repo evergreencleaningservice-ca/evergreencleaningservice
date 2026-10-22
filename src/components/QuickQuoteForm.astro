@@ -204,7 +204,6 @@ const f = (name: string) => `${id}-${name}`;
       inputmode="email"
       autocomplete="email"
       spellcheck="false"
-      placeholder="you@work.com"
       required
       aria-describedby={f('email-error')}
     />
@@ -224,7 +223,7 @@ const f = (name: string) => `${id}-${name}`;
           it: these pages must show exactly one telephone number, the real
           one, so a second set of digits on screen is a number a visitor
           could read as the client's. */}
-      placeholder="+1 XXX XXX XXXX"
+      placeholder="(XXX) XXX-XXXX"
       required
       aria-describedby={f('phone-error')}
     />
@@ -325,19 +324,31 @@ const f = (name: string) => `${id}-${name}`;
 
   /* Related fields share a line — name and business, city/province/postal,
      email and phone — which is most of what keeps an eight-question form
-     short on screen, a phone included. They stack below 290px. */
+     short on screen, a phone included. They stack below 260px. Between 260
+     and 340px — a 360px phone — the address row puts the city on a line of
+     its own, with province and postal code paired under it. */
   .qq-row {
     display: grid;
     gap: 0 12px;
   }
 
-  @container (min-width: 290px) {
+  @container (min-width: 260px) {
     .qq-row {
       grid-template-columns: 1fr 1fr;
     }
 
+    .qq-row-3 > :first-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @container (min-width: 340px) {
     .qq-row-3 {
       grid-template-columns: 1.3fr 1fr 0.9fr;
+    }
+
+    .qq-row-3 > :first-child {
+      grid-column: auto;
     }
   }
 

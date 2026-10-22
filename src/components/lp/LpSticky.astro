@@ -11,6 +11,14 @@
  *
  * Hidden entirely at 768px and up, where the header's call button and the form
  * are both already on screen.
+ *
+ * Tucked away while the visitor is typing in the form (2026-10-22), by a
+ * `:has(:focus-within)` rule in landing.css: with the keyboard open, a 56px
+ * bar takes a large share of what is left of the screen and covers the
+ * fields below the one being filled. It comes back when focus leaves the
+ * form. Hiding it whenever the form was merely on screen was tried and
+ * dropped: the quote pages show the form in the first screen, and the call
+ * button would have vanished on arrival.
  */
 import { nap } from '../../data/site';
 

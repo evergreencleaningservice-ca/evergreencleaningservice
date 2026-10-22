@@ -412,6 +412,8 @@ describe('errors are announced, not just coloured', () => {
     expect(errorFor('phone')).toContain('phone');
     expect(errorFor('email')).toContain('email');
     expect(summary()).toContain('5 things need a moment');
+    /* A count, not a list: each message is already under its own box. */
+    expect(summary()).not.toContain('Please add');
   });
 
   it('an unticked reCAPTCHA box is named in words, and nothing is sent', async () => {

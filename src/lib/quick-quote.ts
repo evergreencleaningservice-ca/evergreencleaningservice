@@ -129,6 +129,10 @@ export function reportInvalidFields(form: HTMLFormElement): void {
   clearErrors(form);
 
   const problems: string[] = [];
+  /* Problems with no message slot of their own on screen — the reCAPTCHA
+     tick is the one today. The summary spells these out; the rest are
+     already written under their own boxes. */
+  const unplaced: string[] = [];
   let first: HTMLElement | null = null;
 
   for (const el of Array.from(form.elements)) {
@@ -140,15 +144,19 @@ export function reportInvalidFields(form: HTMLFormElement): void {
     const message = messageFor(field.name, field);
     const marked = markInvalid(form, field.name, message);
     problems.push(message);
+    if (!errorSlot(form, field.name)) unplaced.push(message);
     if (!first) first = marked;
   }
 
   const summary = summarySlot(form);
   if (summary && problems.length) {
+    /* With several problems, a count rather than a list: on a phone the list
+       repeated every message already under its box and filled the screen.
+       Anything that has no box to sit under is still named. */
     summary.textContent =
       problems.length === 1
         ? problems[0]
-        : `${problems.length} things need a moment: ${problems.join(' ')}`;
+        : [`${problems.length} things need a moment.`, ...unplaced].join(' ');
     /* Focus the summary rather than the field, so a screen reader reads the
        whole list before the visitor lands in the first box. */
     summary.focus();
