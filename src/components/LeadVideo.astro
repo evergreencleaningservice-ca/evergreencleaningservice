@@ -34,11 +34,13 @@
  * original's open panel shows its sound button still offering to turn sound
  * on, so this is a deliberate departure, asked for.
  *
- * THE CLIP is the client's own, supplied from their Lead Net dashboard and
- * committed at `public/video/lead-net.mp4`: 720x540, H.264 and AAC, 42.2s,
- * with its moov atom ahead of the data so it starts without the whole file.
- * Note it is 4:3 landscape while the widget shows portrait — see the note on
- * `.leadnet-stage`. If the file is ever missing the component renders nothing
+ * THE CLIP is the client's own, committed at `public/video/lead-net.mp4`:
+ * 720x1280 portrait, H.264 and AAC, 32.6s, with its moov atom ahead of the
+ * data so it starts without the whole file. Replaced 2026-10-22 with a new
+ * avatar video the client supplied (re-encoded from 11.6 MB to 2.5 MB); the
+ * first clip was 720x540 landscape.
+ *
+ * If the file is ever missing the component renders nothing
  * at all, rather than putting an empty black box in the corner of every page.
  */
 import { existsSync } from 'node:fs';
@@ -274,15 +276,19 @@ const hasPoster = inPublic(poster);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
 
-  /* The clip is 4:3 landscape, and the orb fits it rather than cropping it —
-     in the original it sits in a letterboxed band with black above and below,
-     which is what `contain` on a black orb gives. */
+  /* The clip is portrait and full-length, so the orb crops it to the
+     presenter's head and shoulders: cover from the top of the frame, then
+     zoom in on the face, which sits about 44% of the way down that square.
+     `contain` would leave a thin vertical strip in a black circle. The orb's
+     own `overflow: hidden` clips the zoom to the circle. */
   .leadnet-thumb {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    border-radius: 50%;
+    object-fit: cover;
+    object-position: 50% 0%;
+    transform: scale(1.7);
+    transform-origin: 50% 44%;
   }
 
   /* Sits over the orb's upper-left corner, 6px left and 4px above it.
@@ -398,11 +404,10 @@ const hasPoster = inPublic(poster);
     display: block;
   }
 
-  /* The panel, unlike the orb, crops. In the original the picture area is
-     320x477 — portrait — while the clip is 720x540 landscape, so the widget is
-     taking a tall slice out of the middle of the frame. Fixing the box to that
-     ratio and covering it reproduces what the original shows, and holds the
-     panel's height steady before the clip has loaded. */
+  /* The picture area is 320x477, the original widget's. The clip is 9:16,
+     a little taller than that, so covering the box trims a sliver from the
+     top and bottom, and the fixed ratio holds the panel's height steady before
+     the clip has loaded. */
   .leadnet-stage {
     position: relative;
     line-height: 0;
@@ -533,15 +538,13 @@ const hasPoster = inPublic(poster);
 
     // --- cropping the clip's baked-in letterbox ---
     //
-    // The client's clip is widescreen footage inside a 4:3 container, so it
-    // carries black bars top and bottom. The panel crops to portrait, and
-    // those bars survive the crop — they show as black bands above and below
-    // the picture, which the original widget does not have.
+    // The first clip was widescreen footage inside a 4:3 container, with
+    // black bars top and bottom that survived the panel's portrait crop. The
+    // current clip has none, so this finds nothing and leaves it alone; it
+    // stays for a replacement clip that does.
     //
     // The bar height is a property of the clip, not something to hard-code:
-    // read it off the first frame instead, so this keeps working if the clip
-    // is ever replaced. The orb is deliberately left alone — the original's
-    // orb shows the bars too.
+    // read it off the first frame instead.
     let cropped = false;
 
     const findPicture = (el: HTMLVideoElement) => {
