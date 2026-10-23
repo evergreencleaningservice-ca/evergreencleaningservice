@@ -1,0 +1,37 @@
+{
+ "agrici_commit": "6be93f45064ffbadced572b5d5c95f55fd263af0",
+ "agrici_scripts_run": [
+  "sitemap_discovery.py",
+  "url_safety.safe_requests_get",
+  "parse_html.parse_html"
+ ],
+ "blocked_by_robots": 0,
+ "fetch_errors": 0,
+ "findings": {
+  "h1_not_exactly_one": 0,
+  "images_missing_alt": 502,
+  "missing_canonical": 0,
+  "missing_meta_description": 0,
+  "missing_title": 0,
+  "noindex_pages": 76,
+  "pages_without_schema": 0
+ },
+ "frontier_empty": true,
+ "html_pages": 221,
+ "non_200": 0,
+ "pages_fetched": 221,
+ "pages_sha256": "fd35568f244b18cb153b18eaa5e3aac6327120dc4c14edd027a973328987e439",
+ "robots_status": {
+  "stage.evergreencleaningservice.ca": 200,
+  "www.evergreencleaningservice.ca": 200
+ },
+ "run_at": "2026-10-23T21:19:12.584949+00:00",
+ "safety_ceiling": 20000,
+ "site_id": "0015",
+ "sitemap_urls": 73,
+ "start_urls": [
+  "https://stage.evergreencleaningservice.ca/",
+  "https://www.evergreencleaningservice.ca/"
+ ],
+ "urls_discovered": 221
+}
