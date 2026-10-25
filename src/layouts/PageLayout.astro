@@ -22,9 +22,11 @@ interface Props {
    * below the copy that came from the archive.
    */
   contentHtml?: string;
+  /** Emit `noindex, nofollow` (utility pages such as site search). */
+  noindex?: boolean;
 }
 
-const { title, description, image, contentHtml, sidebar = true } = Astro.props;
+const { title, description, image, contentHtml, noindex = false, sidebar = true } = Astro.props;
 
 /**
  * The page bodies are Markdown generated from the archived WordPress HTML, so
@@ -64,6 +66,7 @@ const body = contentHtml ? normalizeBody(contentHtml) : null;
   title={pageTitle(`${title}`)}
   description={description || undefined}
   image={image}
+  noindex={noindex}
 >
   <div class="page-header">
     <div class="container">

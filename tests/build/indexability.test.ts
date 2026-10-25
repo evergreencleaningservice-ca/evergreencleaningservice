@@ -55,6 +55,8 @@ const NOINDEX_ROUTES = [
   'lp/office-cleaning/index.html',
   'lp/post-construction-cleaning/index.html',
   'thank-you/index.html',
+  /* Site-search utility page: no content of its own, kept out of the index. */
+  'search/index.html',
 ];
 
 /** The blog archive is `follow, noindex`, which is a different decision. */
@@ -230,7 +232,7 @@ describe('the sitemap', () => {
   });
 
   it('excludes everything that is noindexed', () => {
-    expect(urls().filter((u) => /\/(lp|thank-you|category\/blog)\//.test(u))).toEqual([]);
+    expect(urls().filter((u) => /\/(lp|thank-you|search|category\/blog)\//.test(u))).toEqual([]);
   });
 
   it('includes the pages that carry the business', () => {

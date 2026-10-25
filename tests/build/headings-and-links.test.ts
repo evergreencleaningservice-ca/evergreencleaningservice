@@ -322,7 +322,7 @@ describe('the rest of the page is untouched', () => {
     const urls = locs(read('sitemap-index.xml')).flatMap((child) =>
       locs(read(path.basename(new URL(child).pathname)))
     );
-    expect(urls).toHaveLength(73);
+    expect(urls).toHaveLength(72);
     const missing = urls.filter((u) => !exists(new URL(u).pathname));
     expect(missing).toEqual([]);
   });

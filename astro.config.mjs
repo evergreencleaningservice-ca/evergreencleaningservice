@@ -41,11 +41,12 @@ export default defineConfig({
        *                    the same 38 articles the indexable /insights/
        *                    already covers.
        *   /admin/*         the admin, behind Cloudflare Access.
+       *   /search/         site-search utility page (no content of its own), noindex.
        *   /eg-live-post-shell/  the template live posts are drawn in
        *                    (src/lib/admin/live-posts.ts); never served itself.
        *                    The live posts are added to the sitemap by the Worker.
        */
-      filter: (page) => !/\/(category\/blog|lp|thank-you|tag|admin|eg-live-post-shell)\//.test(page),
+      filter: (page) => !/\/(category\/blog|lp|thank-you|tag|admin|eg-live-post-shell|search)\//.test(page),
     }),
   ],
 });

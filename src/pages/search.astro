@@ -20,7 +20,7 @@ const posts = (await getCollection('blog'))
   }));
 ---
 
-<PageLayout title="Search" description="Search the Evergreen Office Cleaning news archive.">
+<PageLayout title="Search" description="Search the Evergreen Office Cleaning news archive." noindex>
   <form class="search-page-form" role="search" method="get" action="/search/">
     <label for="q">Search for:</label>
     <input type="search" id="q" name="q" autocomplete="off" />
