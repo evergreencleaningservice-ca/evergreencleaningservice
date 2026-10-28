@@ -1,6 +1,6 @@
 # Evergreen Office Cleaning — SEO audit and Jan-Pro comparison (28 Oct 2026)
 
-Prepared by 10XiD. Report for Paolo: https://claude.ai/artifact/Lp4u4E4Q95dmH6mR5WEtpN
+Prepared by 10XiD. Report for Paolo: https://claude.ai/artifact/Lp4u4E4Q95dmH6mR5WEtpN (exported here as `Jan-Pro-vs-Evergreen-Report-2026-10-28.pdf` / `.md`, final revision of 28 Oct 2026)
 
 ## Start here
 
