@@ -1,0 +1,170 @@
+{
+ "category": "Content Quality",
+ "score": 43,
+ "subscores": {
+  "eeat": 41,
+  "experience": 30,
+  "expertise": 40,
+  "authoritativeness": 35,
+  "trustworthiness": 55,
+  "ai_citation_readiness": 45
+ },
+ "metadata_template": {
+  "site_risk": "low",
+  "templated_ratio": 0.0,
+  "shared_cta_phrases": {},
+  "secondary_flags": {
+   "brand_suffix_in_description": 7,
+   "description_echoes_title": 2
+  }
+ },
+ "findings": [
+  {
+   "id": "content-location-doorway",
+   "severity": "high",
+   "title": "Location pages are 94-97% boilerplate",
+   "urls": [
+    "/locations/brampton/",
+    "/locations/etobicoke/",
+    "/locations/markham/",
+    "/locations/oakville/",
+    "/locations/toronto-downtown/"
+   ],
+   "evidence": "21-42 unique words per page after city normalization; pairwise 6-gram Jaccard 0.76-0.88",
+   "fix": "Add 250-400 words of local substance per page or consolidate into /locations/ with 301s"
+  },
+  {
+   "id": "content-proof-ai-images",
+   "severity": "high",
+   "title": "Site imagery appears AI-generated and is presented as cleaning results",
+   "urls": [
+    "/",
+    "/cleaning-demo-gallery/",
+    "/industries/medical-dental-clinics/"
+   ],
+   "evidence": "Recurring identical models, CN Tower in every interior, cleaner in clinical scrubs; gallery alt text says 'cleaning results'",
+   "fix": "Replace with real crew and site photos; retitle or remove the gallery"
+  },
+  {
+   "id": "content-reviews-empty",
+   "severity": "high",
+   "title": "/reviews/ contains no reviews",
+   "urls": [
+    "/reviews/"
+   ],
+   "evidence": "35 words; form only; meta promises 'real Google reviews'",
+   "fix": "Embed dated Google reviews and attributed testimonials"
+  },
+  {
+   "id": "content-about-thin",
+   "severity": "high",
+   "title": "About page thin and anonymous",
+   "urls": [
+    "/about-us/"
+   ],
+   "evidence": "170 words; no owner, team, photos, or WSIB/insurance evidence",
+   "fix": "600-900 words with named people, history, verifiable numbers, credentials"
+  },
+  {
+   "id": "content-blog-stale-unattributed",
+   "severity": "high",
+   "title": "Blog stale, undated and unattributed",
+   "urls": [
+    "/insights/"
+   ],
+   "evidence": "38 posts, newest 2023-03-31; no visible date or byline; JSON-LD author is the Organization; dateModified = datePublished",
+   "fix": "Visible dates, named Person author, refresh/consolidate per plan"
+  },
+  {
+   "id": "content-covid-outdated",
+   "severity": "medium",
+   "title": "9 COVID-era posts plus a COVID-framed money page",
+   "urls": [
+    "/services/disinfection-cleaning/",
+    "/be-safe-from-coronavirus-work/",
+    "/clean-and-disinfect-public-areas-during-covid-19/",
+    "/coronavirus-bringing-more-urgency-cleaning/",
+    "/cleaning-protocols-for-daycares-and-schools/",
+    "/does-hand-sanitization-actually-help-prevent-illnesses/",
+    "/keep-your-office-at-home-clean/",
+    "/the-return-of-employees-post-covid-19-is-your-office-ready/",
+    "/key-office-areas-to-have-cleaned-and-disinfected/",
+    "/covid-19-commercial-cleaning-expectations-examined/"
+   ],
+   "fix": "Rewrite disinfection page; 301/merge posts per plan"
+  },
+  {
+   "id": "content-competitor-link",
+   "severity": "medium",
+   "title": "Blog links to a Toronto competitor with a keyword anchor",
+   "urls": [
+    "/ask-the-office-cleaners-cleaning-break-rooms/"
+   ],
+   "evidence": "href=https://www.greencleanofficemaintenance.com/ anchor 'Toronto office cleaners'",
+   "fix": "Remove link"
+  },
+  {
+   "id": "content-blog-no-service-links",
+   "severity": "medium",
+   "title": "Blog posts do not link to money pages",
+   "evidence": "26/38 posts link to no service, industry or location page; 8 link only to the /services/ hub; top targets are /contact-us/ (27) and /about-us/ (21)",
+   "fix": "2-3 contextual links per post to the matching service or industry page"
+  },
+  {
+   "id": "content-legacy-service-pages",
+   "severity": "medium",
+   "title": "Legacy service pages thin, inconsistent or erroneous",
+   "urls": [
+    "/services/disinfection-cleaning/",
+    "/services/emergency-cleaning/",
+    "/services/industrial-cleaning/",
+    "/services/graffiti-removal/",
+    "/services/pressure-washing/"
+   ],
+   "evidence": "167-310 unique words; typos 'psychically'; 22-place service area contradicts 10-city schema; industrial page lists retail, banks, golf clubs",
+   "fix": "Rebuild on the office-cleaning template with FAQs, scope, price factors"
+  },
+  {
+   "id": "content-gaps-industries-services",
+   "severity": "medium",
+   "title": "Industry and service coverage gap vs Jan-Pro",
+   "evidence": "2 industry pages vs 16; missing janitorial, carpet, floor care, day porter, window, dental, retail, education, industrial, government, banks",
+   "fix": "Build priority pages per section 6"
+  },
+  {
+   "id": "content-no-pricing-figures",
+   "severity": "low",
+   "title": "Price factors but no ranges",
+   "fix": "Publish a Toronto pricing guide with honest ranges"
+  },
+  {
+   "id": "content-blog-structure",
+   "severity": "low",
+   "title": "Blog has zero list markup; 10 posts have no H2; all under 1,500 words",
+   "fix": "Convert checklists to lists and tables; fix heading hierarchy"
+  },
+  {
+   "id": "content-unsupported-claims",
+   "severity": "low",
+   "title": "Unsupported 'certified' and 'health-grade' claims; WSIB/insurance asserted without evidence",
+   "urls": [
+    "/locations/mississauga/"
+   ],
+   "fix": "Evidence or remove"
+  },
+  {
+   "id": "content-search-indexable",
+   "severity": "low",
+   "title": "/search/ in sitemap and indexable",
+   "urls": [
+    "/search/"
+   ],
+   "fix": "noindex and remove from sitemap"
+  }
+ ],
+ "strengths": [
+  "Rebuilt core pages (office, commercial, building maintenance, post-construction, 2 industries, our-process) have intent-matched H1s, scope and limits, price-factor lists and 3-7 FAQs with FAQPage schema; they beat Jan-Pro on FAQs, readability and transparency",
+  "Consistent, specific trust facts: since 1989, full NAP and hours, WSIB/bonded/insured, single-office honesty on location pages",
+  "Readable copy (FK grade about 8-9) and hand-written, non-templated metadata (templated_ratio 0.0)"
+ ]
+}

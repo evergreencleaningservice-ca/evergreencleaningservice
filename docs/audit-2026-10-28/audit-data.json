@@ -1,0 +1,608 @@
+{
+  "summary": {
+    "health_score": 66,
+    "business_type": "local service-area business (B2B commercial, office and janitorial cleaning; one Toronto office at 243 Queen St W serving the GTA since 1989; audited by 10XiD on 2026-10-28; score = Technical 84 x 22% + Content 43 x 23% + On-Page 68 x 20% + Schema 74 x 10% + Performance 80 x 10% + AI Readiness 60 x 10% + Images 61 x 5% = 66.42)",
+    "top_findings": [
+      {
+        "title": "Nothing is measurable: no GA4, no GTM funnel triggers, no Search Console access, Ads conversion settings unverified, staging hits reach the live Ads tag",
+        "severity": "Critical",
+        "description": "Programme prerequisite rather than a ranking penalty. Only one Google Ads conversion is recorded; organic leads, phone taps, form starts and failures are invisible, so no other fix can be judged. Evidence: docs/growth/tracking-spec.md A1-A6; FLOW-ANALYSIS.md section 4a.",
+        "recommendation": "Verify sc-domain:evergreencleaningservice.ca, create GA4 and wire it in GTM-5W69BTJQ as one Google tag, add Custom Event triggers for form_start, lead_form_error, phone_click, email_click, quote_cta_click, add the staging blocking trigger, confirm Ads conversion settings, obtain GBP manager access, confirm migration 0009 is live and start weekly lead dispositions."
+      },
+      {
+        "title": "Location pages fail the uniqueness gate: 0 of 7 pass 60%; Brampton, Etobicoke, Markham, Oakville and Toronto-downtown are 4-6% unique after city normalisation",
+        "severity": "Critical",
+        "description": "Pairwise 6-gram Jaccard 0.76-0.88; 21-42 unique words per page; scaled near-duplicate (doorway) pattern. Evidence: https://www.evergreencleaningservice.ca/locations/brampton/ and siblings; findings/sitemap.md section 4; findings/content.md section 4; PROGRAMMATIC-PLAN.md section 2.3.",
+        "recommendation": "Add LocationEvidence fields and rewrite the four thinnest pages with 250-400 words of verifiable local substance; lift Toronto, Mississauga and Vaughan past 60%; drop the brand suffix from the H1s; add BreadcrumbList; noindex any page with no GSC impressions until it passes; no new city page until it passes the gate with 3 verifiable facts."
+      },
+      {
+        "title": "Google Business Profile is thin and at risk: shared serviced-office address, 10 reviews (JAN-PRO GTA 786), 2 photos, no posts, absent from all four local-pack samples",
+        "severity": "Critical",
+        "description": "Address line 'Floor 1 - Green Offices Toronto Inc.' may be treated as non-staffed (suspension risk). About 2 reviews in the last 12 months; one generic owner reply 5 years ago. Evidence: Google Maps cid 15602716773318351983; findings/local.md sections 1, 3, 5.",
+        "recommendation": "Confirm staffed premises or convert to a service-area business; launch a 4-6 reviews/month programme via the g.page review link in post-service emails and account-executive check-ins; reply within 48 h; add 25+ real photos, weekly posts, services, Q&A and secondary categories."
+      },
+      {
+        "title": "Proof and E-E-A-T have collapsed (Content Quality 43/100): AI-looking imagery captioned as 'cleaning results', /reviews/ has no reviews, About is 170 anonymous words, blog unposted since 2023-03-31 with no dates or authors",
+        "severity": "High",
+        "description": "Every sampled image shows AI-generation tells (recurring identical models, CN Tower behind every interior, cleaner in clinical scrubs); dateModified equals datePublished on all 38 posts; a followed link points to a Toronto competitor. Evidence: https://www.evergreencleaningservice.ca/cleaning-demo-gallery/, /reviews/, /about-us/, /insights/; findings/content.md section 3.",
+        "recommendation": "Real crew and site photos (half-day shoot); rebuild /reviews/ with dated Google reviews; 600-900 word About page naming the owner and team with WSIB/insurance evidence; visible dates and a named Person author on every post; consolidate 38 posts to about 22; remove the competitor link."
+      },
+      {
+        "title": "Split entity and stale citations: 'Evergreen Office Cleaning' vs 'Evergreen Cleaning Service(s)', old address on MapQuest, old phone on WhatsYourHours, 1989 vs 1990, name collision with evergreencleaningservices.org",
+        "severity": "High",
+        "description": "Schema/footer use the new name; the domain, Facebook/LinkedIn/X slugs and testimonials use the old one; no alternateName or 'formerly' statement. Evidence: findings/geo.md section 5; findings/local.md section 2; findings/backlinks.md section 4.",
+        "recommendation": "Add alternateName, foundingDate 1989 and Person nodes to schema; add a visible 'formerly Evergreen Cleaning Service' sentence on home and About; correct MapQuest, WhatsYourHours, Fyple, Chamber of Commerce and Canadian Business Directory; align social display names; use differentiators (since 1989, WSIB) in the GBP description."
+      }
+    ],
+    "quick_wins": [
+      "noindex, follow on /search/ and remove it from the sitemap; drop /insights/page/2-4/ from the sitemap; add real <lastmod> via the @astrojs/sitemap serialize hook (about 1 hour; findings/technical.md #2-3, findings/sitemap.md 2.1)",
+      "Ship the security-header block in public/_headers: HSTS (no preload yet), X-Content-Type-Options nosniff, Referrer-Policy strict-origin-when-cross-origin, Permissions-Policy, X-Frame-Options SAMEORIGIN, CSP report-only first (30 minutes plus CSP tuning; findings/technical.md #1)",
+      "Remove the competitor link in /ask-the-office-cleaners-cleaning-break-rooms/; fix 'psychically' and the COVID framing on /services/disinfection-cleaning/; drop '| Evergreen Office Cleaning' from the 7 location H1s; retitle /services/ so it stops competing with /services/commercial-cleaning/ (about 2 hours; findings/content.md, findings/sxo.md section 7)",
+      "Schema entity pass: alternateName, foundingDate 1989, geo set to the GBP pin 43.65019 / -79.38856, hasMap, ImageObject logo, contactPoint; BreadcrumbList on the 7 templates that lack it (2-4 hours; findings/schema.md sections 4-5a; findings/local.md section 4)",
+      "Image and media hygiene: alt text on the 19 empty-alt images (hero, 3 home cards, 13 thumbnails), og:image:width/height/alt and twitter:image:alt in the layout, stop the 2.5 MB /video/lead-net.mp4 auto-download and give /video/* a 30-day cache header (about 3 hours; findings/images.md sections 4 and 7; findings/performance.md fix 2)"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 84,
+      "what_works": [
+        "Closed, clean crawl graph: 111/111 URLs return 200, 0 broken or redirecting internal link targets, 0 duplicate titles or descriptions, exactly one H1 and a self-referencing canonical on every page",
+        "Indexation hygiene: sitemap lists only 200, indexable, canonical URLs; 38 tag/category archives, /thank-you/, 404 and all 4 /lp/* paid pages are noindex and out of the sitemap; real 404s with no soft-404s; 154 legacy WordPress redirects all 301 in one hop",
+        "Fully server-rendered Astro build: 0 words appear only after JS; HTML about 26 KB Brotli from the Cloudflare edge; HTTP/2 with h3 advertised; immutable fingerprinted assets; preloaded self-hosted fonts; inlined CSS",
+        "Correct host and protocol redirects (apex to www, http to https, 301, 1 hop); consistent trailing slashes; lang en-CA with og:locale en_CA; hreflang correctly absent on a single-language site"
+      ],
+      "findings": [
+        {
+          "title": "No security headers on any HTML response",
+          "severity": "High",
+          "description": "No Strict-Transport-Security, Content-Security-Policy, X-Content-Type-Options, Referrer-Policy, X-Frame-Options or Permissions-Policy on HTML (img.* host and /admin/ routes do send them). Evidence: curl -D - https://www.evergreencleaningservice.ca/. Not a direct ranking factor; a trust and best-practice gap.",
+          "recommendation": "Add a /* block to public/_headers with HSTS (no preload until all subdomains are confirmed HTTPS), nosniff, strict-origin-when-cross-origin, Permissions-Policy and SAMEORIGIN; add a report-only CSP allowing GTM, Google Ads, doubleclick, gstatic, Cloudflare Insights, Trustindex and img.*, then enforce."
+        },
+        {
+          "title": "/search/ is indexable, listed in the sitemap and an orphan",
+          "severity": "Medium",
+          "description": "https://www.evergreencleaningservice.ca/search/ has no robots meta, 0 internal inlinks, 1 word of content and sits in sitemap-0.xml.",
+          "recommendation": "Add meta robots noindex, follow on the search template and exclude /search/ in the astro.config.mjs sitemap filter."
+        },
+        {
+          "title": "Sitemap has no <lastmod>; pagination pages included; single flat file",
+          "severity": "Medium",
+          "description": "0 of 73 URLs in https://www.evergreencleaningservice.ca/sitemap-0.xml carry lastmod, while the Worker's injectSitemap adds lastmod only for admin posts; /insights/page/2-4/ are listed; no type split for Search Console diagnostics.",
+          "recommendation": "Set lastmod from real content dates (git date of the page's data file, post pubDate/updatedDate) in the serialize hook, never build time; remove pagination from the sitemap but keep it crawlable; split into pages, services, industries, locations and insights sitemaps under the index and point the Worker's LIST_PATHS at sitemap-insights.xml."
+        },
+        {
+          "title": "Slash-less URLs redirect with 307, not 301",
+          "severity": "Medium",
+          "description": "curl -I https://www.evergreencleaningservice.ca/about-us returns HTTP/2 307 to /about-us/ (Cloudflare Workers static-assets html_handling). All internal links are slashed, so the impact is limited to external and legacy links.",
+          "recommendation": "Add explicit 301/308 rules for known legacy slash-less URLs in _redirects or the Worker, or adjust the Cloudflare html_handling setting."
+        },
+        {
+          "title": "Core Web Vitals not verified with Lighthouse/PSI or CrUX",
+          "severity": "Medium",
+          "description": "PageSpeed Insights API returned HTTP 429 (quota, no key) and CrUX HTTP 403 (anonymous). Only lab data exists (findings/performance.md).",
+          "recommendation": "Re-run PSI with PSI_API_KEY for / and /services/office-cleaning/ on mobile; read CrUX once Search Console is verified."
+        },
+        {
+          "title": "Third-party script weight on every page",
+          "severity": "Medium",
+          "description": "gtm.js (GTM-5W69BTJQ) 157 KB plus gtag/js for Google Ads AW-18472921801 168 KB plus doubleclick, googleadservices, call tracking and Cloudflare Insights: about 610 KB over 30 requests on https://www.evergreencleaningservice.ca/. GTM and gtag are over half of the transfer.",
+          "recommendation": "See Performance: consolidate to one Google tag and consider loading GTM after first interaction or on an idle timer, with the ads owner deciding the measurement trade-off."
+        },
+        {
+          "title": "Title and description length",
+          "severity": "Low",
+          "description": "5 titles over 60 chars (/locations/mississauga/ 72, /locations/vaughan/ 69, /services/commercial-cleaning/ 61, two posts 61); several legacy titles lack geo or B2B intent (/services/graffiti-removal/ 'Graffiti Removal - Evergreen Office Cleaning', /insights/ 'News - ...'); 13 descriptions over about 160 chars (/services/pressure-washing/ 166).",
+          "recommendation": "Trim titles to 50-60 keeping 'Toronto' in service titles; trim descriptions to 150-158 and add a CTA verb."
+        },
+        {
+          "title": "Images without width/height and heavy tag-page linking",
+          "severity": "Low",
+          "description": "130 of 503 <img> tags lack explicit dimensions (lab CLS 0.017); 49 of 73 pages link to all 26 noindex tag pages; Trustindex widget emits repeated inline SVG <title> elements on the homepage.",
+          "recommendation": "Add dimensions (see Images); cap the sidebar tag list to 5-8; aria-hidden or remove the SVG titles."
+        },
+        {
+          "title": "IndexNow not set up; /llms.txt 404; robots.txt allows all AI crawlers",
+          "severity": "Low",
+          "description": "https://www.evergreencleaningservice.ca/robots.txt is User-agent: * / Allow: /; no IndexNow key probed; /llms.txt returns 404.",
+          "recommendation": "Decide the AI crawler policy deliberately; add a Bing Webmaster Tools property and IndexNow key; optionally publish a curated llms.txt."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 43,
+      "what_works": [
+        "Rebuilt core pages (/services/office-cleaning/, /services/commercial-cleaning/, /services/building-maintenance/, /services/post-construction-cleaning/, both industry pages, /our-process/) have intent-matched H1s, scope and limits, price-factor lists and 3-7 FAQs with FAQPage schema; they beat JAN-PRO on FAQs, readability (grade 7.7-8.6 vs 12.1-12.4) and transparency",
+        "Consistent, specific trust facts: since 1989, full NAP and hours, WSIB covered, bonded and insured, honest single-office statements on every location page, strong scope sentences on the clinic page",
+        "Readable copy (Flesch-Kincaid grade about 8-9) and hand-written, non-templated metadata (templated ratio 0.0, no duplicate titles or descriptions)"
+      ],
+      "findings": [
+        {
+          "title": "Location pages are 94-97% boilerplate",
+          "severity": "High",
+          "description": "https://www.evergreencleaningservice.ca/locations/brampton/, /etobicoke/, /markham/, /oakville/ and /toronto-downtown/ have 21-42 unique words after city normalisation; pairwise 6-gram Jaccard 0.76-0.88; Mississauga and Vaughan about 72% boilerplate. Only one facility-type sentence, an 'office in X?' FAQ and the H1 differ.",
+          "recommendation": "Add 250-400 words of genuinely local substance per page (named districts, building types actually served, a local client quote, dispatch logistics from Queen St W, a local photo) or consolidate the five near-identical pages into /locations/ with 301s. Do not add pages for the remaining areaServed cities on the current template."
+        },
+        {
+          "title": "Site imagery appears AI-generated and is presented as cleaning results",
+          "severity": "High",
+          "description": "Every sampled image (hero, gallery, dental, night crew, condo lobby, blog features) shows AI tells: recurring identical models, the CN Tower behind every interior, a cleaner in clinical scrubs; metadata stripped. https://www.evergreencleaningservice.ca/cleaning-demo-gallery/ is 13 images and 3 words with alt text 'cleaning results' and typos in its meta.",
+          "recommendation": "Replace with real crew and site photos at minimum on the home hero, gallery and clinic page; if any generated image stays, do not caption it as results; retitle or remove the gallery until real photos exist."
+        },
+        {
+          "title": "/reviews/ contains no reviews",
+          "severity": "High",
+          "description": "https://www.evergreencleaningservice.ca/reviews/ is titled 'Testimonials', its meta promises 'real Google reviews', and the page is a 35-word submission form with zero reviews.",
+          "recommendation": "Embed the actual Google reviews with dates and the testimonials with company names (with permission); keep the form below; request new reviews, since the newest shown are about 5 years old."
+        },
+        {
+          "title": "About page thin and anonymous",
+          "severity": "High",
+          "description": "https://www.evergreencleaningservice.ca/about-us/ is 170 words with no owner or founder name (reviews mention 'Art'), no team, no photos, no WSIB or insurance evidence and no history beyond 'since 1989'. Weakest E-E-A-T page.",
+          "recommendation": "Rebuild to 600-900 words: name the owner, operations lead and account executives with photos; company history 1989 to today including the rename; verifiable numbers; WSIB clearance process, insurer and liability limit; Person and AboutPage schema."
+        },
+        {
+          "title": "Blog stale, undated and unattributed",
+          "severity": "High",
+          "description": "38 posts under https://www.evergreencleaningservice.ca/insights/, newest 2023-03-31; no visible date or byline; BlogPosting author is the Organization; dateModified equals datePublished on every post; zero list markup; 26 of 38 posts link to no service, industry or location page.",
+          "recommendation": "Visible publish and last-reviewed dates, a named Person author with bio, real lists and tables, 2-3 contextual links per post to money pages, Canadian sources; prune, merge and refresh to about 22 URLs per the plan in findings/content.md section 7 after checking GSC clicks and backlinks."
+        },
+        {
+          "title": "9 COVID-era posts plus a COVID-framed money page",
+          "severity": "Medium",
+          "description": "https://www.evergreencleaningservice.ca/services/disinfection-cleaning/ still reads 'Are You Concerned About Covid-19 In Your Office' with typos ('psychically', 'everything is clean with plain detergent'); 9 posts from 2020-2022 carry outbreak framing.",
+          "recommendation": "Rewrite the disinfection page as electrostatic/touch-point disinfection on the office-cleaning template; 301 or merge the COVID posts into it; 410 only where there is no traffic and no links."
+        },
+        {
+          "title": "Blog links to a Toronto competitor with a keyword anchor",
+          "severity": "Medium",
+          "description": "https://www.evergreencleaningservice.ca/ask-the-office-cleaners-cleaning-break-rooms/ links to https://www.greencleanofficemaintenance.com/ with the followed anchor 'Toronto office cleaners'.",
+          "recommendation": "Remove the link."
+        },
+        {
+          "title": "Legacy service pages thin, inconsistent or erroneous",
+          "severity": "Medium",
+          "description": "/services/graffiti-removal/ 167 unique words, /services/pressure-washing/ 200, /services/industrial-cleaning/ 234 (lists retail, banks, golf clubs, campgrounds, casinos), /services/emergency-cleaning/ 310 with a 22-place service area that contradicts the 10-city schema and /locations/ list.",
+          "recommendation": "Rebuild on the office-cleaning template with FAQs, scope and price factors; use the 10-city service-area list everywhere; back or remove 'airports, casinos, hospitals' claims."
+        },
+        {
+          "title": "Industry and service coverage gap vs JAN-PRO",
+          "severity": "Medium",
+          "description": "2 industry pages vs JAN-PRO's 16 (25 URLs in its industries sitemap); no janitorial, carpet, floor care, day porter, window, dental-only, retail, education, warehouse, government or bank pages; the /industries/ hub lists 7 segments and links 2. /industries/property-management/ vs /services/building-maintenance/ TF-IDF similarity 0.58.",
+          "recommendation": "Build per the 12-page priority list in findings/clusters.md section 7 and the six briefs in briefs/, evidence-gated; differentiate building maintenance (periodic floor and surface programme) from property management (portfolio, tenant, condo relationship)."
+        },
+        {
+          "title": "Price factors but no ranges; blog structure; unsupported claims; thin hubs",
+          "severity": "Low",
+          "description": "No price figure anywhere while competitors anchor $225-$500/month; the blog has zero ul/ol and 10 posts jump H1 to H3; 'certified' and 'health-grade sanitization' on /locations/mississauga/ are unsupported; /services/ (178 unique words), /industries/ (104) and /locations/ (46) are card-only hubs.",
+          "recommendation": "Publish a Toronto pricing guide with honest ranges once the client approves (intake A7); convert checklists to lists and tables; evidence or remove claims; add 100-200 word intros and selection guidance to each hub."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 68,
+      "what_works": [
+        "Titles and descriptions present on 111/111 pages with 0 duplicates and 0 templated pairs; the two deep-dived pages score 85 and 88 on on-page fundamentals (56-57 char keyword-first titles, matching H1, self-canonical, complete OG/Twitter)",
+        "Exactly one H1 on every page; core service and industry pages target '[service] in Toronto and the GTA' in both title and H1 with a clean H2/H3 outline that reads like a buyer's checklist (who it is for, inclusions, scope and limits, price factors, FAQ)",
+        "Page types match the SERP for most queries: service, vertical and city pages exist where the SERP rewards them; no two service pages share a primary keyword (office vs commercial overlap only 3)",
+        "Closed internal-link graph with 0 broken links; hubs link all spokes; every service page links all 7 location pages; descriptive anchors on service, industry and location links; consistent 'free quote / walkthrough' CTA wording"
+      ],
+      "findings": [
+        {
+          "title": "Toronto head-term cannibalisation across four URLs",
+          "severity": "High",
+          "description": "https://www.evergreencleaningservice.ca/, /services/ (title 'Commercial Cleaning Services in Toronto'), /services/commercial-cleaning/ and /locations/toronto-downtown/ all target 'commercial cleaning toronto'; the downtown H1 also carries '| Evergreen Office Cleaning'. SERP for this query is 8/9 homepages.",
+          "recommendation": "Homepage owns 'commercial cleaning toronto / services toronto'; retitle /services/ to 'All Cleaning Services | Evergreen' with a non-competing H1; grow /services/commercial-cleaning/ into the pillar 'Commercial Cleaning & Janitorial Services in Toronto' (2,500-3,000 words); downtown page targets 'office cleaning downtown Toronto'."
+        },
+        {
+          "title": "No janitorial services page; homepage 'Janitorial Services' card links to office cleaning",
+          "severity": "High",
+          "description": "'janitorial services toronto' is a distinct high-intent SERP (janitorial-branded homepages and service pages). findings/sxo.md and briefs/janitorial-services.md propose /services/janitorial-services/; findings/clusters.md measures 4-5 SERP overlap with office and commercial and recommends janitorial as the pillar's secondary target first.",
+          "recommendation": "Fold the janitorial brief into the commercial-cleaning pillar now, repoint the homepage card, and decide on a standalone page after 60 days of Search Console query data."
+        },
+        {
+          "title": "Location H1s are the title string with brand suffix; no CTA or phone in the fold",
+          "severity": "Medium",
+          "description": "https://www.evergreencleaningservice.ca/locations/toronto-downtown/ renders a 4-line ALL-CAPS H1 'COMMERCIAL CLEANING IN DOWNTOWN TORONTO | EVERGREEN OFFICE CLEANING'; all 7 location pages carry the suffix; the only template without a hero CTA.",
+          "recommendation": "Title-case H1 without the suffix ('Commercial Cleaning in Downtown Toronto'); hero CTAs and phone in the fold; later rename /locations/toronto-downtown/ to /locations/toronto/ with a 301."
+        },
+        {
+          "title": "Legacy H1s are bare labels; /insights/ is 'News'; /reviews/ mismatches its intent",
+          "severity": "Medium",
+          "description": "'Disinfection Cleaning', 'Industrial Cleaning', 'Pressure Washing', 'Graffiti Removal' lack the geo modifier their titles carry; https://www.evergreencleaningservice.ca/insights/ H1 is 'News'; /reviews/ promises reviews and delivers a form; /services/industrial-cleaning/ body lists retail, banks and golf clubs.",
+          "recommendation": "Add 'in Toronto' to legacy H1s; rename the blog hub 'Commercial Cleaning Insights'; fix /reviews/ and the industrial audience list."
+        },
+        {
+          "title": "Target phrases never verbatim; card-style rather than contextual internal links; blog under-linked",
+          "severity": "Medium",
+          "description": "'office cleaning toronto' and 'commercial cleaning toronto' appear 0 times verbatim in body copy on the pages that target them; related links are cards, not in-sentence anchors (JAN-PRO's pattern); 26 of 38 posts link to no money page and most posts have exactly 1 inlink; 3 image-only blog teaser links on the homepage have no anchor text.",
+          "recommendation": "One natural sentence per phrase; in-sentence anchors per the matrix in findings/clusters.md section 6 ('strip, seal and wax' to building maintenance); 2-3 contextual links per post; post titles as teaser link text."
+        },
+        {
+          "title": "Blog topic clashes",
+          "severity": "Medium",
+          "description": "4 seasonal checklists, 5 COVID posts, 2 germ-hotspot posts, 3 air-quality posts, 3 cleaning-method posts, 2 hand-hygiene posts, 2 choosing-a-cleaner posts; /benefits-of-regular-commercial-cleaning-services/ competes with the pillar.",
+          "recommendation": "Consolidate to about 21 posts per findings/clusters.md section 5; check GSC clicks and backlinks before any 301."
+        },
+        {
+          "title": "Title/description length and missing twitter:site",
+          "severity": "Low",
+          "description": "5 titles over 60 chars, 13 descriptions over 160, no CTA verb on the two best pages, no twitter:site (@EvergreenClean8); footer column H2s dilute the outline.",
+          "recommendation": "Use the rewrites in findings/page-home.md section 8 and findings/page-office-cleaning.md section 8; demote footer headings."
+        }
+      ]
+    },
+    {
+      "name": "Schema & Structured Data",
+      "score": 74,
+      "what_works": [
+        "One CleaningService entity (#organization) on every page with full NAP, GeoCoordinates, 7-day OpeningHoursSpecification, 10 City areaServed, hasOfferCatalog and sameAs; no duplicate Organization node; consistent @id graph; all 38 JSON-LD blocks parse",
+        "Service + BreadcrumbList + FAQPage on service and industry pages with FAQ text matching the visible page; BlogPosting and CollectionPage reference the organisation by @id",
+        "Policy-safe: no aggregateRating, no per-city LocalBusiness nodes (the Mississauga FAQ states there is no office there), no deprecated HowTo; FAQPage correctly treated as legacy after Google retired FAQ rich results on 2026-05-07",
+        "Ahead of JAN-PRO on local-business data; JAN-PRO's markup has &amp; inside JSON strings and string breadcrumb positions"
+      ],
+      "findings": [
+        {
+          "title": "Name inconsistency with no alternateName",
+          "severity": "Medium",
+          "description": "Schema name is 'Evergreen Office Cleaning' everywhere, but the logo alt, social slugs, reviewer text and domain say 'Evergreen Cleaning Service'; no alternateName, legalName or foundingDate although 1989 is claimed six times on the homepage.",
+          "recommendation": "Add alternateName ['Evergreen Cleaning Service', 'Evergreen Cleaning Services'], legalName if different and foundingDate '1989' to the site-wide CleaningService node (ready-to-paste JSON in findings/schema.md 5a)."
+        },
+        {
+          "title": "BreadcrumbList missing on 7 templates",
+          "severity": "Medium",
+          "description": "Absent on https://www.evergreencleaningservice.ca/services/, /locations/, /locations/mississauga/ (and other city pages), /about-us/, /reviews/, /contact-us/, /request-a-quote/.",
+          "recommendation": "Add BreadcrumbList per findings/schema.md 5c; on posts route the breadcrumb through /insights/ instead of the noindex /category/blog/."
+        },
+        {
+          "title": "Blog dates are CMS placeholders and not visible on page",
+          "severity": "Medium",
+          "description": "dateModified equals datePublished and both end in T00:00:00.000Z on every post (e.g. https://www.evergreencleaningservice.ca/cleaning-check-list-dental-clinics/); no <time> or byline on the page; author is the Organization.",
+          "recommendation": "Real ISO 8601 timestamps with the Toronto offset, a visible 'Published / Updated' line, a named Person author; update dateModified only on substantive edits."
+        },
+        {
+          "title": "Logo, image and geo quality",
+          "severity": "Low",
+          "description": "logo is a plain string pointing at an 884x265 banner JPEG and image is the same banner; GeoCoordinates 43.6503, -79.3892 are about 53 m from the GBP pin at 4 decimals; BlogPosting image is 960x480.",
+          "recommendation": "ImageObject logo (square PNG at least 112 px), real photo image arrays in 16:9, 4:3 and 1:1 at 1200 px or wider, geo 43.65019 / -79.38856, hasMap with the Maps URL."
+        },
+        {
+          "title": "Entity graph gaps",
+          "severity": "Low",
+          "description": "areaServed list repeated on every Service node with no containedInPlace; hasOfferCatalog items have no url and are not tied to page-level Service nodes (which lack @id); 'Industrial & Warehouse Floor Scrubbing' has no page; no WebPage nodes with dateModified; no contactPoint, knowsAbout, audience, availableChannel or AboutPage/ContactPage; SearchAction has no Google benefit since 2024.",
+          "recommendation": "Give each page-level Service an @id (.../#service) and reference it from the catalog with url; add WebPage nodes with dateModified and primaryImageOfPage; add contactPoint, BusinessAudience and a ServiceChannel pointing at /request-a-quote/; keep or drop SearchAction; validate in the Rich Results Test and validator.schema.org before shipping."
+        }
+      ]
+    },
+    {
+      "name": "Performance",
+      "score": 80,
+      "what_works": [
+        "The 15 Oct optimisation landed: reCAPTCHA loads only on form intent (0 requests before focus, 11 after), 0 render-blocking resources with CSS inlined, /_astro/* immutable 1-year cache, fonts 30 days, mobile page weight 0.49-0.70 MB, CLS 0 on home, service and paid pages",
+        "Mobile LCP under 1.7 s in the lab on every page; text-LCP service and location pages at about 0.6 s; desktop LCP under 0.6 s and TBT under 40 ms everywhere; hero is a 23 KB art-directed AVIF with fetchpriority high",
+        "Versus jan-pro.ca/en/ (the Toronto competitor): about a quarter of the mobile TBT (442 vs 2,009 ms), a third of the requests, half the weight, no render-blocking files"
+      ],
+      "findings": [
+        {
+          "title": "Google tag stack costs 440-590 ms of mobile TBT and 0.3-0.55 s of mobile LCP on every page",
+          "severity": "High",
+          "description": "gtm.js (GTM-5W69BTJQ) 153 KB plus gtag/js?id=AW-18472921801 164 KB plus doubleclick and call-tracking. Blocking googletagmanager hosts takes homepage TBT from 531-886 ms to 0-4 ms (measured). Browserless Lighthouse mobile: homepage 63 (LCP 4.6 s, TBT 840 ms), office page 84 (TBT 500 ms). The site's own JS contributes essentially nothing. Lab data only: PSI 429, CrUX 403, INP not measured.",
+          "recommendation": "Audit the container for unused tags; send GA4 and Ads through one Google tag; consider loading GTM after first interaction or a 3-4 s idle timer (the call-tracking number swap and non-interacting page views are the trade-off, so the ads owner decides); not Partytown because call tracking needs document access; re-run PSI with an API key."
+        },
+        {
+          "title": "2.5 MB video downloaded on every page view",
+          "severity": "High",
+          "description": "https://www.evergreencleaningservice.ca/video/lead-net.mp4 (2,533,009 bytes, Cache-Control max-age=0, must-revalidate) starts downloading about 3 s after load on every page that renders the chat/video bubble; the code comment in src/components/LeadVideo.astro says '40KB+'. Desktop page weight 3.1 MB vs 0.64 MB without it.",
+          "recommendation": "Load the video on click of the bubble or compress it under 500 KB with a poster image; add /video/* with Cache-Control public, max-age=2592000 to public/_headers; fix the comment."
+        },
+        {
+          "title": "Homepage hero LCP path and paid-page hero source",
+          "severity": "Medium",
+          "description": "The 24 KB mobile hero takes 1.1-1.4 s to load under throttling: a new TLS connection to img.evergreencleaningservice.ca plus bandwidth contention with the tags; the image request is issued about 200 ms after the HTML starts. /lp/office-cleaning/ loads the 1600w AVIF (45 KB) on a 390 px viewport.",
+          "recommendation": "Add <link rel=preload as=image imagesrcset fetchpriority=high> at the top of head; consider serving images through the www origin; use the 640x800 mobile source on the paid page."
+        },
+        {
+          "title": "Font-swap layout shift on location pages",
+          "severity": "Medium",
+          "description": "CLS 0.033-0.034 on mobile https://www.evergreencleaningservice.ca/locations/mississauga/ (P.loc-lead, an H2 and UL.loc-detail shift); blocking /fonts/ removed it in 2 of 2 runs.",
+          "recommendation": "Metric-matched fallback fonts (size-adjust, ascent-override) for Open Sans and Raleway, or font-display optional for body text."
+        },
+        {
+          "title": "Italic font, image cache lifetime, redundant beacon",
+          "severity": "Low",
+          "description": "open-sans-italic.woff2 (50 KB) is fetched at VeryHigh priority on every page; img.evergreencleaningservice.ca serves max-age=86400; Cloudflare Web Analytics (11 KB) duplicates GA4 once it exists; a DoubleClick third-party cookie drops Lighthouse best-practices to 77.",
+          "recommendation": "Subset or lazy-load the italic; raise the B2 image cache to 2592000 in scripts/b2-sync.mjs; drop the beacon after GA4 is live."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 61,
+      "what_works": [
+        "0 missing alt attributes and 20 well-written descriptive alts (45-90 chars) on body photos",
+        "Hero, logo, cards and post feature images are exemplary: AVIF/WebP picture elements, srcset and sizes, fetchpriority high, 23-45 KB LCP image, Cloudflare-fronted B2 CDN with preconnect",
+        "21/21 pages have og:image and twitter:card summary_large_image, all exactly 1200x630 JPEG at 63-149 KB, page-specific on services, industries and posts; nothing over 200 KB; complete favicon set; descriptive hyphenated filenames"
+      ],
+      "findings": [
+        {
+          "title": "8 of 21 money pages have no photograph at all",
+          "severity": "High",
+          "description": "https://www.evergreencleaningservice.ca/services/building-maintenance/, /services/graffiti-removal/, /services/post-construction-cleaning/, /services/pressure-washing/, /industries/property-management/, /locations/toronto-downtown/, /locations/mississauga/ and /about-us/ render only the header logo (no img, no CSS backgrounds). Their existing OG photos are not used on the page. Specialist labelled Critical; High under the skill's definitions.",
+          "recommendation": "Add at least the page's OG photo as an in-page figure with a descriptive, location-aware alt; ideally a real service-specific photo per page from the photoshoot."
+        },
+        {
+          "title": "Body photos are unoptimised plain JPEGs",
+          "severity": "High",
+          "description": "16 unique 1200x800 JPEGs in 36 placements inside <p> tags with no picture, srcset, sizes, width or height; 75-127 KB each; about 1.2 MB of the 1.64 MB unique image payload, even though -768.avif variants already exist on the CDN for some (e.g. office-backpack-vacuum-toronto.jpg 116 KB on https://www.evergreencleaningservice.ca/services/office-cleaning/). Specialist labelled Critical; High under the skill's definitions.",
+          "recommendation": "Build one ResponsiveImage component (AVIF+WebP+JPEG, 480/800/1200/1600w, sizes '(min-width: 992px) 790px, 100vw', width 1200 height 800, decoding async, lazy only below the fold) and use it for every body image; estimated saving 1.2 MB (72%)."
+        },
+        {
+          "title": "Empty alt on 19 meaningful images including the homepage LCP hero",
+          "severity": "High",
+          "description": "The home hero, the 3 home service-card photos, 13 blog thumbnails (home and /insights/) and 2 legacy logos carry alt=''; /services/emergency-cleaning/ uses the keyword-only alt 'emergency office cleaning'.",
+          "recommendation": "Apply the rewrite list in findings/images.md section 4 (e.g. 'Evergreen cleaners vacuuming and wiping desks in a Toronto office with the CN Tower skyline behind')."
+        },
+        {
+          "title": "Missing dimensions and upscaled thumbnails",
+          "severity": "High",
+          "description": "23 placements lack width/height; CLS 0.075 measured on mobile https://www.evergreencleaningservice.ca/how-to-decide-on-a-cleaning-company/ when a lazy, dimensionless JPEG entered view; emergency and industrial pages have a lazy dimensionless JPEG as desktop LCP; 13 blog thumbnails are 300x150 WordPress crops upscaled 3.6x on phones.",
+          "recommendation": "Add dimensions or aspect-ratio 3/2; no loading=lazy on first-viewport images; serve the existing 960x480 feature set for thumbnails via the same component."
+        },
+        {
+          "title": "Generic OG image on 7 pages; no og:image dimensions or alt",
+          "severity": "High",
+          "description": "evergreen-modern-commercial-cleaning-hero-og.jpg is reused on /, /services/graffiti-removal/, /services/post-construction-cleaning/, /services/pressure-washing/, /locations/toronto-downtown/, /locations/mississauga/ and /insights/; 0 of 21 pages declare og:image:width, og:image:height, og:image:alt or twitter:image:alt (JAN-PRO declares all four).",
+          "recommendation": "Page-specific OG cards per findings/image-plan.md section 4 (home, 7 locations, about first); add the four meta tags in the shared layout."
+        },
+        {
+          "title": "AI-generated photography without provenance metadata; legacy logos in posts",
+          "severity": "Medium",
+          "description": "No EXIF, XMP, IPTC or C2PA on any file; the same CN Tower skyline and identical green polos appear in nearly every 'job site' photo; no real crew, van or before/after photo on any of the 21 pages. Four posts still embed WordPress-era logo banners (one filename typo 'torotno').",
+          "recommendation": "Inject IPTC DigitalSourceType=trainedAlgorithmicMedia on generated files at build time; add genuine photos to About, Locations and the gallery; remove the legacy logo banners."
+        },
+        {
+          "title": "Schema image quality and minor items",
+          "severity": "Low",
+          "description": "Organization image is the 884x265 logo banner; BlogPosting image is 960x480 (Google wants 1200 px or wider in 16:9, 4:3 and 1:1); post feature images are not 2x-ready on desktop and lack fetchpriority; no SVG favicon or web manifest; first home card is lazy at 809 px on an 844 px viewport.",
+          "recommendation": "ImageObject arrays per findings/image-plan.md section 5; add a 1600w candidate and fetchpriority to post heroes; add an SVG icon and manifest; eager-load the first card."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 60,
+      "what_works": [
+        "Technical accessibility 90/100: server-rendered, robots.txt allows all; identical 200 responses to GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Googlebot, Bingbot, CCBot and Applebot-Extended (spoofed UA test; Cloudflare verified-bot rules untested)",
+        "Structural readability 75/100: clean H2/H3 hierarchy, lists for inclusions and price factors, FAQPage on 14 pages with 15-54 word answers, strong scope statements",
+        "Quotable specifics already exist on the office page ('Busy offices are usually cleaned every weeknight', 'Armstrong Manufacturing's ProSeries Green line ... UL Environment (ECOLOGO)'); Evergreen ranked #1 and #3 with a Bing Places listing on the one branded Bing SERP that loaded"
+      ],
+      "findings": [
+        {
+          "title": "Authority and brand 30/100: split entity, conflicting directory NAP, no named person, no Wikipedia/Wikidata entity, name collision",
+          "severity": "High",
+          "description": "Testimonials say 'Evergreen Cleaning Service(s)' while schema and footer say 'Evergreen Office Cleaning'; no alternateName, no 'formerly' statement; MapQuest, WhatsYourHours, Fyple, Chamber of Commerce and Canadian Business Directory carry old data; a separate 'Evergreen Cleaning Services' (evergreencleaningservices.org, 647-831-2284) appears beside the brand on Bing. Evidence: findings/geo.md section 5.",
+          "recommendation": "Unify the entity in schema, on the page and across directories; rename social display names consistently; add GBP and Bing Places URLs to sameAs."
+        },
+        {
+          "title": "Citability 62/100: almost no quantified facts, no definitional entity sentence, About page 25/100",
+          "severity": "High",
+          "description": "No prices, frequencies by square footage, response times, client or building counts; 'how much does office cleaning cost in Toronto' is answered only with 'after a walkthrough'; the clinic page does not cite Ontario IPAC/PIDAC (jan-pro.ca markets 'IPAC-compliant'); no owner or account executive is named ('Art' appears only in a review).",
+          "recommendation": "Open each page with a definitional 40-60 word answer; add hard numbers once confirmed; name the owner with a bio and Person schema; add an indicative price-range answer; cite IPAC/PIDAC on the clinic page."
+        },
+        {
+          "title": "Freshness and uniqueness",
+          "severity": "Medium",
+          "description": "Blog posts dated 2020-2023 with the organisation as author; no dateModified on service pages; the five-step 'How it works' and price-factor blocks repeat word-for-word across the home, office and medical pages.",
+          "recommendation": "Visible 'last updated' dates and dateModified on service pages; keep shared blocks below a unique answer-first lead on each page."
+        },
+        {
+          "title": "Off-site footprint thin; discovery files absent",
+          "severity": "Low",
+          "description": "No YouTube presence found; HomeStars, BBB, Clutch and Yelp unverified; /llms.txt 404 (jan-pro.ca publishes one; Google says it does not use the file); no Content-Signal; Cloudflare AI Crawl Control settings unverified. Live AI answers could not be tested (Google 429, Perplexity 403, Copilot empty shell); multi-modal audit and Reddit/YouTube/press sweeps not run.",
+          "recommendation": "Grow reviews and claim profiles under the new name; short process videos on YouTube; Bing Webmaster Tools and IndexNow; a curated llms.txt last; confirm verified search crawlers are not challenged in Cloudflare; run a monthly manual prompt log in ChatGPT, Perplexity, Copilot and Google AI Mode."
+        }
+      ]
+    },
+    {
+      "name": "Local SEO & Reviews",
+      "score": 46,
+      "what_works": [
+        "GBP name 'Evergreen Office Cleaning' matches the site; primary category 'Janitorial service' is correct; phone, website and hours match; rating 5.0; the site's review link https://g.page/r/CW9cqxQ9_IfYEBM/review resolves to the same place",
+        "Core NAP on site, footer and JSON-LD matches GBP; click-to-call tel link; 'Review us on Google' link in the footer",
+        "Honest service-area copy ('We do not have an office in X; crews travel from 243 Queen St W'), no fake per-city pins or map embeds"
+      ],
+      "findings": [
+        {
+          "title": "Shared serviced-office address with suspension risk",
+          "severity": "Critical",
+          "description": "GBP address line reads 'Floor 1 - Green Offices Toronto Inc.' and the Street View photo shows Gianni's Gelato at 243 Queen St W; GBP guidelines may treat the listing as non-staffed. Evidence: Google Maps cid 15602716773318351983; findings/local.md section 1.",
+          "recommendation": "Confirm a staffed, signed premises; otherwise convert the profile to a service-area business (hide the address, set the 10-city service area) and align footer wording."
+        },
+        {
+          "title": "Review volume and recency far below competitors",
+          "severity": "Critical",
+          "description": "5.0 from 10 reviews, about 2 in the last 12 months, 1 generic owner reply 5 years ago; JAN-PRO's three GTA profiles hold 786 reviews (4.88 weighted); the homepage Trustindex quotes are from 2021-2022; competitors in the SERP show 53-140 reviews.",
+          "recommendation": "Review programme of 4-6 per month (QR/short link in post-service emails and account-executive check-ins), replies within 48 h, service and area keywords requested naturally; refresh homepage quotes as new reviews land."
+        },
+        {
+          "title": "Citation inconsistency across aggregators",
+          "severity": "Critical",
+          "description": "Old name on chamberofcommerce.com, fyple.ca (two duplicates, 'since 1990'), whatsyourhours.com (old 416-281 phone) and canadianbusinessdirectory.ca; MapQuest lists 130 Broadlands Blvd (https://www.mapquest.com/ca/ontario/evergreen-cleaning-service-454587596).",
+          "recommendation": "Correct every listing to 'Evergreen Office Cleaning, 243 Queen St W (or SAB), (416) 803-4880, evergreencleaningservice.ca'; settle one founding year."
+        },
+        {
+          "title": "GBP content and directory presence",
+          "severity": "High",
+          "description": "Only 2 photos, no posts, Q&A/attributes/services not visible; Yelp, HomeStars, BBB (no Toronto profile under either name), YellowPages.ca, Canada411, Cylex, Bing Places and Apple Business Connect unverified or absent; Evergreen did not appear in the first 6-8 results of any of four Google Maps samples (office cleaning toronto, commercial cleaning toronto, janitorial services toronto, office cleaning mississauga).",
+          "recommendation": "25+ real photos, weekly posts, services list, seeded Q&A, secondary categories, UTM'd quote link; claim and complete the Tier-1 directories under the new name and add them to sameAs."
+        },
+        {
+          "title": "On-site local gaps",
+          "severity": "Medium",
+          "description": "/reviews/ is a form; no live rating or count on money pages; no map or directions on /contact-us/ and /contact/ 404s; 6 stated service areas (North York, Scarborough, Richmond Hill, Pickering, Ajax, Oshawa) have no page and are unlinked text on /locations/; schema geo is 53 m from the pin at 4 decimals with no hasMap or foundingDate; a different 'Evergreen Cleaning Services' competes on brand searches.",
+          "recommendation": "Real reviews page; show the rating once permitted; directions block; link every area name on the hub; build North York, Scarborough and Richmond Hill only after intake C5 with 3+ real local facts each, one combined Durham page at most; geo 43.65019 / -79.38856; consistent brand with differentiators in the GBP description."
+        }
+      ]
+    },
+    {
+      "name": "Search Experience (SXO)",
+      "score": 58,
+      "what_works": [
+        "Page types match the SERP for most queries; /industries/property-management/ (1,179 words) faces 454-573 word competitors, the most winnable SERP",
+        "On the page itself Evergreen's office page (persona score 73) beats JAN-PRO's office page (63) and quote page (50): scope, limits, FAQ and the after-hours line 'the team that holds your keys is the same team every visit'",
+        "H1 and both CTAs above the fold on mobile; lab LCP 0.94 s; the paid landing page pattern (big phone, specific offer, sticky Call/Quote bar) is the best page on the site"
+      ],
+      "findings": [
+        {
+          "title": "Proof far below ranking competitors",
+          "severity": "High",
+          "description": "MCA 140 Google reviews, Dust 'til Dawn 83 with AggregateRating, Impact '53+', JAN-PRO '4.8 stars, 700+ Toronto clients', CIMS certification on Impact and Everest; Evergreen shows 4 reviews dated 5-6 years ago, no case studies, no real crew photos, no certification beyond WSIB/bonded/insured. Persona Proof scores 1-3 of 5 everywhere; the clinic page has no testimonial at all.",
+          "recommendation": "Reviews programme, 2-4 case studies (intake B4), real photos (B5), a dental testimonial on the clinic page; evaluate CIMS."
+        },
+        {
+          "title": "No price guidance anywhere",
+          "severity": "Medium",
+          "description": "Price scores 0-2 of 5 for every persona on every page. Competitors anchor $225-$250/month (Arelli listicle), 'from $250 per month' (ServiceMaster), 'fixed monthly rates' (We Clean It), 'from CAD $400' (Clean Papi); HomeStars quotes $0.10-0.25/sq ft/month and $30-60/hr. Evergreen has no page for the cost question.",
+          "recommendation": "Client-confirmed price-guidance block on office, commercial, clinic and city pages; publish 'How much does office cleaning cost in Toronto? (2026)'."
+        },
+        {
+          "title": "No after-hours security protocol block; Mississauga and post-construction page gaps",
+          "severity": "Medium",
+          "description": "No key/fob log, alarm handling, ID or confidentiality statement (the decision-stage trust question); https://www.evergreencleaningservice.ca/locations/mississauga/ renders the H1 above the breadcrumb, has no BreadcrumbList and over-claims 'health-grade sanitization adhering strictly to clinical hygiene standards'; the post-construction H1 lacks 'Toronto', phases and a price basis while the SERP is 9/9 dedicated pages with price anchors.",
+          "recommendation": "After-hours access block on home, office, clinic and PM pages (intake B1/B2); fix the Mississauga order, schema and claim; add geo, phases, price basis and before/after photos to post-construction."
+        },
+        {
+          "title": "Mobile usability and overlays",
+          "severity": "Medium",
+          "description": "Body copy 13.1 px/12.6 px on mobile (JAN-PRO 18 px); header phone and hamburger 40x44, CTAs 42 px, footer links 28 px, social icons 24x24, checkboxes 18 px; the leadnet chat bubble covers the trust strip and the quote form's Phone field and shows a black circle while loading; mobile menu has no overlay or close-on-tap; logo JPG with an off-white box; LP star rating 3.25:1 contrast.",
+          "recommendation": "16 px body, 44 px targets, site-wide fixed bottom Call/Quote bar as on the LP, defer or reposition the bubble on mobile, transparent logo, darker star colour."
+        },
+        {
+          "title": "SERP features not observable",
+          "severity": "Info",
+          "description": "All SERPs came from a US-origin index without Toronto personalisation; no local pack, ads, AI Overview or People Also Ask was seen; Evergreen appeared in 0 of 42 top-10 sets; a third party places it near position 27 for 'commercial cleaning service toronto' (unverified).",
+          "recommendation": "Set up Toronto-geolocated rank tracking for the 40-keyword set before judging any KPI."
+        }
+      ]
+    },
+    {
+      "name": "Authority & Backlinks",
+      "score": 12,
+      "what_works": [
+        "Clean, complete redirect map: every probed legacy URL (/commercial-cleaning-toronto-gta/, /office-cleaning-and-janitorial-toronto/, /property-management-and-building-maintenance/, /disinfection-cleaning/, /testimonials/, /blog/*, /feed/, /author/admin/) returns a single-hop 301 to a 200 page",
+        "Harmonic-centrality rank 15.3M of 135.0M (top 11.3%) shows at least one inbound path from a well-connected domain; real Facebook, X and LinkedIn profiles referenced in sameAs"
+      ],
+      "findings": [
+        {
+          "title": "Link equity at the Common Crawl graph floor (score is a low-confidence estimate; Backlink Health Score INSUFFICIENT DATA)",
+          "severity": "High",
+          "description": "PageRank rank 53.2M of 135.0M (value 3.84e-9 vs floor 3.79e-9); 3 hosts; 64 captured URLs; first Wayback capture 2019-08-17. jan-pro.com PageRank rank 204K (34x floor) with 26 hosts; jan-pro.ca rank 3.3M. No Moz, DataForSEO, Bing or Open PageRank credentials; the mention sweep and inbound-edge scan did not complete (raw/backlinks/edges_hits.txt is incomplete, not 'no links').",
+          "recommendation": "Realistic SMB plan: supplier listing (Armstrong ProSeries Green), client testimonial and vendor-page links, BOMA Toronto / Toronto Board of Trade / BIA directories only with true memberships, BBB profile, HomeStars/Yelp/YellowPages/Canpages, local trade press with a data piece, partner vendors; reclaim old-brand mentions; finish the edge scan and get an Open PageRank key for a baseline; no bought directory blasts or PBNs."
+        },
+        {
+          "title": "Old brand split and name collisions hinder citation matching",
+          "severity": "Medium",
+          "description": "Facebook, LinkedIn and X handles, testimonials and the domain still say 'Evergreen Cleaning Service'; BBB search returns Evergreen Carpet Cleaning (Mississauga) and Evergreen Cleaning Services (North York), likely different businesses.",
+          "recommendation": "Add 'formerly Evergreen Cleaning Service' where true; use one NAP and both names consistently; run the mention sweep once a working search tool is available."
+        }
+      ]
+    },
+    {
+      "name": "Agent Readiness",
+      "score": 82,
+      "what_works": [
+        "Lighthouse Agentic Browsing 2/2 (mobile and desktop) and 12 of 13 agent-critical checks passed; JAN-PRO 1/2 and 5/11",
+        "Content in server HTML; labelled landmarks (nav Primary and Breadcrumb, skip link, named form); 0 unnamed interactive elements in the accessibility tree on all four pages tested; label for=, fieldset/legend, full autocomplete tokens, inputmode; role=alert aria-live=assertive error summary with per-field aria-describedby; focused role=status thank-you; tel and mailto fallbacks with stated hours",
+        "Quote-intent structured data (CleaningService with hours, areaServed and catalog; Service on the office page); JAN-PRO has none on its quote path and hides its form until scroll"
+      ],
+      "findings": [
+        {
+          "title": "reCAPTCHA v2 checkbox is the one hard stop for an agent completing a quote",
+          "severity": "High",
+          "description": "On https://www.evergreencleaningservice.ca/request-a-quote/ the widget loads on form intent inside a cross-origin iframe and a risk-based image challenge may follow; every other field could be filled by accessible name. The 22 Oct 2026 revert (commit 5246207) restored 8 required fields including a full street address.",
+          "recommendation": "Keep phone and mailto prominent; consider score-based protection (reCAPTCHA v3 or Turnstile managed) for the hot path; offer a callback alternative if spam controls allow; decide the form length with the client (ACTION-PLAN.md decision D-A)."
+        },
+        {
+          "title": "Form semantics and schema for the quote task",
+          "severity": "Medium",
+          "description": "Service checkboxes do not match site service names (no Industrial & Warehouse or Post-Construction; 'Reno Construction Clean-up'); no facility type, size or frequency fields; required state only via '*' with no aria-required and no cue on City/Province/Postal; Service lacks availableChannel, offers and potentialAction; areaServed granularity differs from the form datalist; 'as soon as possible' (in page) conflicts with 'within 2 hours' (/thank-you/).",
+          "recommendation": "Align checkbox names, add optional facility fields, aria-required true, a ServiceChannel pointing at /request-a-quote/, consistent areaServed, and one machine-readable response-time statement."
+        },
+        {
+          "title": "Honeypot fakes success; discovery files absent",
+          "severity": "Low",
+          "description": "onHoneypot in src/lib/quick-quote.ts returns the success message for any filled trap field, so a DOM-filling agent loses the lead silently; no /llms.txt, ai-catalog.json, WebMCP annotations or Markdown delivery (absent on both sites; no ranking claim). Agent user-agent matrix, Web Bot Auth and live submission were not run.",
+          "recommendation": "Return a neutral 'please call' message on honeypot hits; optional llms.txt (adds one counted Lighthouse audit); tidy the home h3 'WE ARE ACCEPTING NEW CLEANING CLIENTS.' and footer H2s."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "C1 Access and measurement first: verify Search Console (sc-domain), create GA4 and add it to GTM-5W69BTJQ as one Google tag, add Custom Event triggers for form_start, lead_form_error, phone_click, email_click and quote_cta_click, add the site_environment=staging blocking trigger, confirm the Ads lead_form_submission and call conversion settings, obtain GBP manager access (Both; metric: GSC and GA4 reporting within 14 days, Ads 'Recording conversions')",
+          "C2 Confirm migration 0009 (lead_status, lead_offline_conversions) is live on Neon main as HANDOFF.md records (applied 2026-10-17), start the weekly lead review in /admin/leads/, create the three Secondary offline conversion actions (Both; metric: every lead has a status within 7 days, first upload accepted)",
+          "Request written client decisions: D-A quote form (22 Oct revert to 8 required fields incl. street address and visible reCAPTCHA v2; recommended: shorten to Name, Business, Email, Phone, Service and judge on 30 days of GA4 funnel data), D-B GBP address, D-C brand name and founding year (Client)",
+          "C4 Apply the GBP address decision; C5 issue review-programme assets (short link, QR, post-service email line) and reply to the two newest reviews (Both; metric: 4-6 new reviews per month)",
+          "M1 noindex /search/ and exclude it from the sitemap; M2 first step: real lastmod and drop /insights/page/2-4/ from the sitemap (10XiD; metric: /search/ excluded in GSC)",
+          "H1 Security headers in public/_headers with a report-only CSP (10XiD; metric: headers present, 0 CSP violations after two weeks)",
+          "H7/H8/H9 first steps: remove the competitor link in the break-rooms post; fix 'psychically' and the COVID lines on /services/disinfection-cleaning/; retitle /services/ and drop '| Evergreen Office Cleaning' from the 7 location H1s (10XiD)",
+          "H3 Video: load /video/lead-net.mp4 on click, 30-day cache header, keep the bubble off form fields on mobile (10XiD; metric: desktop transfer 3.1 MB to about 0.65 MB)",
+          "H11 Alt text on the 19 empty-alt images and og:image:width/height/alt + twitter:image:alt in the layout; H12 first step: alternateName, foundingDate 1989, geo 43.65019/-79.38856, hasMap, BreadcrumbList on the 7 templates (10XiD; metric: 0 validator errors)",
+          "L9 Confirm drift/baseline-2026-10-28.json as the reference for every deploy (10XiD)"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "H2 Container audit with the ads owner: one Google tag for GA4 and Ads, decision on deferring GTM to first interaction or idle, drop the Cloudflare beacon; M4 PSI re-run with an API key on /, /services/office-cleaning/, /locations/mississauga/, /lp/office-cleaning/ (Both; metric: PSI mobile 85+, TBT under 200 ms)",
+          "H4 Rebuild /reviews/ with dated Google reviews and attributed testimonials; refresh the 2021-2022 homepage quotes as new reviews land; show the live rating once intake B3 permits (Both; metric: 10+ dated reviews on page, GSC CTR up at stable position)",
+          "H5 Rebuild /about-us/ with named owner and team, photos, 1989-to-today history including the rename, WSIB and insurance evidence, AboutPage and Person schema, 'formerly Evergreen Cleaning Service' sentence (Both; metric: 600+ words with named people)",
+          "H6 Half-day photoshoot per findings/image-plan.md section 3; place real photos on the 8 image-less money pages; retitle or remove /cleaning-demo-gallery/; label any remaining generated file with IPTC DigitalSourceType (Both; metric: 0 pages without a content image)",
+          "H10 ResponsiveImage component for the 16 body JPEGs, swap the 300x150 thumbnails for the 960x480 feature set, remove the 4 legacy logo banners (10XiD; metric: unique image payload 1.64 MB to about 0.46 MB, CLS 0.01 or lower on all posts)",
+          "H12 remainder: @id on page-level Service nodes, catalog items with url, WebPage nodes with dateModified, Service.availableChannel to /request-a-quote/, BusinessAudience; validate in the Rich Results Test (10XiD)",
+          "H13 GBP build-out (25+ photos, weekly posts, services, Q&A, secondary categories, UTM'd quote link) and Tier-1 directory claims (Yelp, HomeStars, BBB, YellowPages.ca, Canada411, Cylex, Bing Places, Apple Business Connect, ThreeBestRated); C6 citation corrections on MapQuest, WhatsYourHours, Fyple, Chamber, Canadian Business Directory (Both; metric: present in the Toronto-IP local pack for one head term, 8+ profiles with matching NAP)",
+          "C3 Location pages: add LocationEvidence fields, rewrite Markham, Etobicoke, Brampton and Oakville with client facts, wire scripts/location-gate.mjs into the build; noindex any page with no GSC impressions until it passes (Both; metric: 60%+ unique text per page)",
+          "M3 307 to 301 for slash-less URLs; M2 type-split sitemaps with lastmod and the Worker pointed at sitemap-insights.xml; M9 Mississauga breadcrumb order, BreadcrumbList and over-claim removal, post-construction H1 geo and phases; M11 hub intros and linked area names; M13 form semantics (checkbox names, aria-required, response-time wording, honeypot message) (10XiD)",
+          "D-A implemented per the client's decision with the funnel measured from day one (10XiD; metric: form_start to lead_form_submission rate per form_id)"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "H9 Grow /services/commercial-cleaning/ into the pillar 'Commercial Cleaning & Janitorial Services in Toronto' (2,500-3,000 words, janitorial H2 from briefs/janitorial-services.md); repoint the homepage Janitorial card; decide on a standalone janitorial page after 60 days of GSC data (10XiD; metric: one URL takes 80%+ of clicks for 'commercial cleaning toronto' variants)",
+          "M5 first wave, evidence-gated: office-cleaning improvement (brief 5), medical-dental improvement with dental H2 and RCDSO/IPAC/PHO citations (brief 6), /services/floor-stripping-waxing/ (brief 2), warehouses and logistics (brief 3, or a rewrite of /services/industrial-cleaning/ per decision D-G) (Both; metric: each page indexed within 14 days and earning impressions within 60)",
+          "H7 Execute the blog consolidation after the GSC click and backlink check: 38 posts to about 22, every retained post with date, named author, lists and 2-3 money-page links; H8 rebuild /services/disinfection-cleaning/ as the 301 target for the COVID cluster (10XiD)",
+          "M6 Price-guidance block and /office-cleaning-cost-toronto/ guide after decision D-D; M7 after-hours access block and written guarantee after decision D-E; M14 definitional opening sentences and quotable facts on every money page (Both; metric: impressions for cost-intent queries, persona Price and AH-Trust scores rise)",
+          "M8 Rebuild the legacy service pages (emergency, industrial, graffiti, pressure washing) on the office template with one 10-city service area; M10 differentiate property management from building maintenance and add the portfolio/multi-site section (10XiD)",
+          "M12 Mobile usability pass: 16 px body, 44 px targets, site-wide fixed bottom Call/Quote bar, menu overlay, transparent logo (10XiD; metric: 0 targets under 24 px, GA4 phone_click rate up)",
+          "M15 Draft /franchise-vs-local-commercial-cleaning-company-toronto/ for a legal glance per competitor-pages/RECOMMENDATIONS.md; M16 begin supplier, association and directory outreach; publish the first case study through the /projects/ gate (Both)",
+          "C3 Lift Toronto-downtown, Mississauga and Vaughan past 60% with districts, travel, proof and local FAQs; rename /locations/toronto-downtown/ to /locations/toronto/ with a 301 (Both)",
+          "L1-L4 Metadata trims, verbatim phrase sentences, contextual in-sentence links per the matrix in findings/clusters.md section 6, tag-sidebar cap, breadcrumb via /insights/, heading clean-up (10XiD)"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Weekly: Toronto-geolocated rank and local-pack checks for the 40-keyword set in SEO-PLAN.md section 8; GSC coverage and crawl stats (no 307 chains, no 'Crawled - currently not indexed' growth); lead dispositions in /admin/leads/ and the offline conversion upload; review replies within 48 h",
+          "Monthly: GA4 funnel by form_id and landing page; GBP Performance export (calls, website clicks, directions, search terms); citation spot-check; AI prompt log of 10 fixed prompts in ChatGPT, Perplexity, Copilot and Google AI Mode; CrUX field data once available; drift/scripts/diff_baselines.py after each deploy",
+          "Quarterly: re-measure location-page uniqueness; content-decay review (refresh pages with falling impressions, update dateModified only on real edits); comparison-page source re-verification; link and mention sweep; evidence-based decisions on North York, Scarborough and Richmond Hill pages, a standalone janitorial page, a dental-only page and service-by-city children (ceiling 14 indexable location URLs)",
+          "Programme KPIs: reviews 10 to 25+ at 90 days and 60+ at 12 months; Evergreen in the Toronto-IP pack for at least one head term by month 3; organic qualified leads tracked by page from month 1; named in 2+ curated Toronto lists and cited for 3 of 10 AI prompts by month 12; re-audit SEO Health Score target 80+ (Content 65+, Images 85+, Schema 85+, Local 65+)",
+          "Deferred by evidence: French version (not now; revisit on a francophone institutional client or FR impressions in GSC), llms.txt and Content-Signal (cheap, do last), service-by-city pages (year two, GSC-triggered)"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

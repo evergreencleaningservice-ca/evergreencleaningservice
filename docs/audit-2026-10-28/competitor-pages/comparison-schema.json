@@ -1,0 +1,169 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.evergreencleaningservice.ca/franchise-vs-local-commercial-cleaning-company-toronto/#article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.evergreencleaningservice.ca/franchise-vs-local-commercial-cleaning-company-toronto/"
+      },
+      "headline": "Franchise vs local commercial cleaning company in Toronto: what to ask before you sign",
+      "alternativeHeadline": "Franchise vs Local Commercial Cleaning in Toronto (2026)",
+      "description": "Franchise brands like JAN-PRO, Coverall and Anago vs a local Toronto cleaning company: who does the work, who you call, WSIB, guarantees and the questions to ask.",
+      "inLanguage": "en-CA",
+      "datePublished": "REPLACE_PUBLISH_DATE_ISO8601",
+      "dateModified": "REPLACE_LAST_REVIEWED_DATE_ISO8601",
+      "image": "https://www.evergreencleaningservice.ca/REPLACE_FEATURE_IMAGE_PATH",
+      "author": {
+        "@type": "Person",
+        "name": "REPLACE_AUTHOR_NAME",
+        "jobTitle": "REPLACE_AUTHOR_ROLE",
+        "worksFor": { "@id": "https://www.evergreencleaningservice.ca/#organization" },
+        "url": "https://www.evergreencleaningservice.ca/about-us/"
+      },
+      "publisher": { "@id": "https://www.evergreencleaningservice.ca/#organization" },
+      "isPartOf": { "@id": "https://www.evergreencleaningservice.ca/#website" },
+      "about": [
+        { "@type": "Thing", "name": "Commercial cleaning franchise vs local cleaning company" },
+        { "@type": "Service", "name": "Office cleaning", "url": "https://www.evergreencleaningservice.ca/services/office-cleaning/" }
+      ],
+      "mentions": [
+        {
+          "@type": "Organization",
+          "name": "JAN-PRO Canada",
+          "url": "https://jan-pro.ca/en/",
+          "sameAs": ["https://jan-pro.com/"]
+        },
+        { "@type": "Organization", "name": "Coverall", "url": "https://www.coverall.com/" },
+        { "@type": "Organization", "name": "Anago Cleaning Systems", "url": "https://anagocleaning.com/" },
+        { "@type": "Organization", "name": "ServiceMaster Clean", "url": "https://www.servicemasterclean.com/" }
+      ],
+      "citation": [
+        "https://jan-pro.ca/en/how-jan-pro-canada-works/",
+        "https://jan-pro.ca/en/office/toronto-west/",
+        "https://jan-pro.ca/en/office/toronto-east/",
+        "https://jan-pro.ca/en/why-choose-jan-pro/",
+        "https://jan-pro.ca/en/industry/office-cleaning-services/",
+        "https://jan-pro.ca/en/get-an-estimate/",
+        "https://jan-pro.ca/en/national-coverage/",
+        "https://jan-pro.ca/en/who-is-jan-pro/",
+        "https://jan-pro.com/how-we-quote/",
+        "https://jan-pro.com/choosing-jan-pro/",
+        "https://jan-pro.com/choosing-jan-pro/customized-cleaning/",
+        "https://jan-pro.com/franchising/",
+        "https://jan-pro.com/commercial-cleaning-services/",
+        "https://jan-pro.com/who-we-clean/green-cleaning/",
+        "https://jan-pro.com/faq/"
+      ],
+      "keywords": [
+        "commercial cleaning franchise vs local company",
+        "franchise vs independent cleaning company",
+        "office cleaning company Toronto",
+        "questions to ask a commercial cleaning company"
+      ],
+      "wordCount": "REPLACE_FINAL_WORD_COUNT"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.evergreencleaningservice.ca/franchise-vs-local-commercial-cleaning-company-toronto/#faq",
+      "isPartOf": { "@id": "https://www.evergreencleaningservice.ca/franchise-vs-local-commercial-cleaning-company-toronto/" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is JAN-PRO a franchise, and who actually cleans my office?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. JAN-PRO Canada describes a three-tier franchise: JAN-PRO Canada franchises regional offices, which in turn franchise local Certified Business Owners (unit franchisees). JAN-PRO states that CBOs and their own staff perform the work and that there is no subcontracting, and every jan-pro.ca page notes that services are provided by independently owned and operated JAN-PRO unit franchisees (read 2026-10-28)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a franchise cleaning company and a local cleaning company?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In a franchise, a brand licenses its systems, training and guarantee to independent operators who do the cleaning and hold their own insurance and WSIB coverage. In a local company, one business employs the crew, holds the WSIB account and insurance, and its owner is the final decision-maker. Neither structure is automatically better; it decides who you call and whose paperwork you should check."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it matter whether my cleaners are employees or franchisees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For the quality of the floor, not necessarily. For your risk, yes: ask whose WSIB clearance certificate and whose certificate of insurance cover the people who enter your building, and obtain both in the name of that entity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does office cleaning cost in Toronto?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No commercial cleaner publishes a Toronto rate card. JAN-PRO Canada publishes a national starting point of $250 a month (as of 2026-10-28); Evergreen quotes after a free on-site walkthrough. Price moves with square footage and layout, cleaning frequency, scope, facility type, service hours and who supplies consumables, so compare quotes on identical scope and frequency."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I ask for before signing a commercial cleaning contract?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A written task-and-frequency scope, a current WSIB clearance certificate, a certificate of insurance naming your organisation, the name and role of your day-to-day contact, the plan for covering absences, the guarantee in writing, safety data sheets for the products used, and the notice period and price-change terms."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a one-office local company cover several GTA sites?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Evergreen dispatches crews from one Toronto office across Toronto, Peel, Halton, York Region and Durham. A franchise network such as JAN-PRO offers a national accounts programme with centralized billing across provinces. Match the vendor to your footprint: a handful of GTA sites suits a local company; a multi-province estate suits a network."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do franchise cleaners offer a guarantee, and what is Evergreen's?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JAN-PRO Canada publishes a 100% satisfaction guarantee: regularly scheduled services completed on time, service issues resolved within one business day, and a complimentary cleaning if either promise is missed (read 2026-10-28). Evergreen's commitment is a written scope, scheduled inspections and a dedicated account executive. REPLACE_EVERGREEN_GUARANTEE_TEXT"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is a cleaning company publishing this comparison?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because buyers ask us these questions. Evergreen Office Cleaning competes with the franchise brands named here. Every statement about another company is quoted from its public pages with the date we read it, and we will correct anything a company tells us is out of date."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.evergreencleaningservice.ca/franchise-vs-local-commercial-cleaning-company-toronto/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.evergreencleaningservice.ca/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Insights",
+          "item": "https://www.evergreencleaningservice.ca/insights/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Franchise vs local commercial cleaning company in Toronto",
+          "item": "https://www.evergreencleaningservice.ca/franchise-vs-local-commercial-cleaning-company-toronto/"
+        }
+      ]
+    }
+  ],
+  "_notes": {
+    "why_no_ItemList": "No roundup/alternatives page is recommended, so ItemList is deliberately omitted. If a genuine roundup is ever built, add an ItemList whose ListItems name real, verified companies with their own URLs — never a ranked list with invented positions.",
+    "why_no_Product_or_aggregateRating": "This is a service business and Google's review-snippet policy forbids self-serving or fabricated ratings; the site's src/lib/schema.ts already excludes aggregateRating until a verified Google Business Profile figure exists. Do not add Product, Review or AggregateRating to this page.",
+    "placeholders": "Replace every REPLACE_ value before publishing; remove this _notes object (it is not schema.org vocabulary) or keep it out of the emitted JSON-LD.",
+    "implementation_hint": "src/lib/schema.ts already has articleSchema() (Organization author) and the FAQ/breadcrumb patterns used by FaqList.astro; extend articleSchema with an optional Person author and citation/mentions arrays rather than hand-writing this block in the template."
+  }
+}
