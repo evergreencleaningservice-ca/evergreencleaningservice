@@ -57,7 +57,7 @@ export const LANDING_PAGES: LandingPage[] = [
     eyebrow: 'Office cleaning — Toronto & the GTA',
     heading: 'After-hours office cleaning, by the same crew every visit.',
     sub: 'Nightly, weekly or a few times a week — scoped at a free walkthrough, written into a proposal, and run by one account executive you can call.',
-    image: 'evergreen-modern-commercial-cleaning-hero',
+    image: 'ride-on-floor-scrubber-corridor-hero',
     trust: TRUST_POINTS,
     replyPromise: REPLY_PROMISE,
     finePrint: FINE_PRINT,
@@ -100,7 +100,7 @@ export const LANDING_PAGES: LandingPage[] = [
     eyebrow: 'Post-construction cleaning — Toronto & the GTA',
     heading: 'Post-construction cleaning, ready for handover.',
     sub: 'Debris, dust and detail cleaning for commercial buildouts and renovations — planned around your trades and your handover or opening date.',
-    image: 'evergreen-modern-commercial-cleaning-hero',
+    image: 'ride-on-floor-scrubber-corridor-hero',
     trust: [
       'Serving Toronto since 1989',
       'WSIB covered and bonded',
