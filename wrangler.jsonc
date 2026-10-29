@@ -14,6 +14,12 @@
     // Unknown paths render the site's own 404 page rather than a bare Cloudflare one.
     "not_found_handling": "404-page",
     // These paths run the Worker before any file is served:
+    //   /api/…                every form post and the admin's API. ONCE THIS LIST
+    //                         EXISTS, A PATH NOT ON IT NEVER REACHES THE WORKER:
+    //                         the asset layer answers it, and a POST gets a bare
+    //                         405. /api/submit-lead was left off when the list was
+    //                         added on 2026-10-17, and every quote form on the site
+    //                         failed with 405 until 2026-10-29.
     //   /admin/…              the admin's pages are files, but only for a signed-in
     //                         admin (src/lib/admin/session.ts)
     //   /eg-live-post-shell/  the template live posts are drawn in; never a page itself
@@ -21,9 +27,9 @@
     //                         admin added to them (src/lib/admin/live-posts.ts)
     // Every other path is still a file first, with no Worker call.
     "run_worker_first": [
+      "/api/*",
       "/admin",
       "/admin/*",
-      "/api/admin/*",
       "/eg-live-post-shell/*",
       "/insights/",
       "/sitemap-0.xml",
