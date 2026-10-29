@@ -24,9 +24,13 @@
  *  7. Images with no `width`/`height` reserve no space until they load, which
  *     shifts the copy below them. Local `/images/` JPEG/PNG files are stamped
  *     with their intrinsic size so the browser can reserve the box.
+ *  8. A photo with 480/768/1200px AVIF, WebP and JPEG siblings becomes a
+ *     <picture> that offers them, instead of the full 1200px JPEG for every
+ *     screen (src/lib/responsive-images.mjs; SEO audit H10).
  */
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { responsiveImagesHtml } from './responsive-images.mjs';
 
 function intrinsicSize(file: string): [number, number] | null {
   try {
@@ -49,7 +53,7 @@ function intrinsicSize(file: string): [number, number] | null {
 }
 
 export function normalizeBody(html: string): string {
-  return html
+  return responsiveImagesHtml(html
     .replace(/(href|src)="\/wp-content\/uploads\/[^"]*?\/([^"/]+)"/g, '$1="/images/$2"')
     .replace(/href="(\/[^"?#]*)"/g, (whole, path: string) =>
       path.endsWith('/') || /\.[a-z0-9]{2,5}$/i.test(path) ? whole : `href="${path}/"`
@@ -62,8 +66,8 @@ export function normalizeBody(html: string): string {
     )
     .replace(/<a\b[^>]*>\s*<\/a>/g, '')
     .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" ')
-    .replace(/<img(?![^>]*\swidth=)([^>]*?\ssrc="\/images\/([^"/]+\.(?:jpe?g|png))")/gi, (whole, _rest, file: string) => {
+    .replace(/<img\b(?![^>]*\swidth=)([^>]*?\ssrc="\/images\/([^"/]+\.(?:jpe?g|png))")/gi, (whole, _rest, file: string) => {
       const size = intrinsicSize(decodeURIComponent(file));
       return size ? whole.replace('<img', `<img width="${size[0]}" height="${size[1]}"`) : whole;
-    });
+    }));
 }

@@ -1,0 +1,63 @@
+---
+/**
+ * One photograph in the body of a page (SEO audit H6, 29 Oct 2026).
+ *
+ * Eight money pages (service, industry and location pages, and About) had no
+ * photograph at all — only the header logo — although each already had a
+ * social-sharing photo. This shows a page's photo in the page itself, with the
+ * same responsive AVIF/WebP/JPEG set the Markdown images get
+ * (src/lib/responsive-images.mjs). Interim, as the audit says: real
+ * photos of the client's own crews should replace these when they exist.
+ *
+ * The alt text describes the picture. It never names the page's city: these
+ * are stock photographs, not pictures taken there.
+ */
+import { jpegSize, responsiveSet } from '../../lib/responsive-images.mjs';
+import path from 'node:path';
+
+interface Props {
+  /** `/images/<name>.jpg` */
+  src: string;
+  alt: string;
+  /** Below-the-fold photos are lazy; the first thing on a page is not. */
+  eager?: boolean;
+}
+
+const { src, alt, eager = false } = Astro.props;
+const set = responsiveSet(src);
+const size = jpegSize(path.join(process.cwd(), 'public', src)) ?? { width: 1200, height: 800 };
+const SIZES = '(min-width: 1200px) 730px, (min-width: 992px) 560px, 100vw';
+---
+
+<figure class="page-photo">
+  <picture>
+    {set && <source type="image/avif" srcset={set.avif} sizes={SIZES} />}
+    {set && <source type="image/webp" srcset={set.webp} sizes={SIZES} />}
+    <img
+      src={set ? `/images/${set.base}-768.jpg` : src}
+      srcset={set ? set.jpg : undefined}
+      sizes={set ? SIZES : undefined}
+      alt={alt}
+      width={size.width}
+      height={size.height}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  </picture>
+</figure>
+
+<style>
+  .page-photo {
+    margin: 0 0 28px;
+  }
+
+  .page-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 6px;
+    background: var(--surface-alt);
+  }
+</style>

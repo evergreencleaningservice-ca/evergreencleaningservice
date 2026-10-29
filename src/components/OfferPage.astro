@@ -27,6 +27,7 @@ import { PRICING_FACTORS } from '../data/process';
 import { nap, site } from '../data/site';
 import { pageTitle } from '../lib/title';
 import { breadcrumbSchema, serviceSchema } from '../lib/schema';
+import PagePhoto from './blocks/PagePhoto.astro';
 
 interface Offer {
   title: string;
@@ -126,6 +127,11 @@ const RELATED_TEXT: Record<string, string> = {
 
   <div class="container offer-grid section-padding">
     <div class="offer-main stack">
+      {/* The page's own photo (its social-sharing image), when the body has
+          none of its own: these pages showed no photograph at all (SEO audit H6). */}
+      {data.image && !(body ?? '').includes('<img') && (
+        <PagePhoto src={data.image} alt={data.imageAlt ?? data.title} />
+      )}
       {
         data.fit.length > 0 && (
           <section aria-label={data.fitHeading ?? 'Who this is for'}>
