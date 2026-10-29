@@ -22,15 +22,20 @@ import { reviews } from '../../data/reviews';
 
 interface Props {
   heading?: string;
-  /** Reviewer names to show, in order. Defaults to the first three. */
+  /** Reviewer names to show, in order. Defaults to the three this page has always shown. */
   names?: readonly string[];
 }
 
-const { heading = 'What Toronto businesses say', names } = Astro.props;
+/* Named, not "the first three": newer reviews were added to the top of
+   src/data/reviews.ts on 2026-10-29, and /lp/commercial-cleaning/ (whose copy
+   the client's Google Ads document fixes) must not change because of it. */
+const DEFAULT_NAMES = ['Mark Post', 'Edward Sherman', 'Michael Katchen'] as const;
+
+const { heading = 'What Toronto businesses say', names = DEFAULT_NAMES } = Astro.props;
 
 const picked = names
-  ? names.map((n) => reviews.find((r) => r.name === n)).filter((r): r is NonNullable<typeof r> => Boolean(r))
-  : reviews.slice(0, 3);
+  .map((n) => reviews.find((r) => r.name === n))
+  .filter((r): r is NonNullable<typeof r> => Boolean(r));
 ---
 
 <section class="lpx-section" aria-labelledby="lpx-reviews-h">

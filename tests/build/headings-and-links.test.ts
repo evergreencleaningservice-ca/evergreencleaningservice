@@ -329,3 +329,52 @@ describe('the rest of the page is untouched', () => {
     expect(missing).toEqual([]);
   });
 });
+
+/**
+ * The location pages' uniqueness gate (SEO audit, 28 Oct 2026, Critical).
+ *
+ * Measured as the audit measures it: the text of <main> without its forms,
+ * with the page's own city name replaced by a placeholder, cut into 6-word
+ * shingles. A page's score is the share of its shingles that appear on no
+ * other location page. The pages were 4-8% unique (29% for the two with
+ * client copy) and failed the 60% bar. src/data/location-local.ts is what
+ * lifted them; this keeps a new location page from going back to "one
+ * template with the city swapped".
+ */
+describe('location pages are each their own page', () => {
+  const CITY: Record<string, string[]> = {
+    'toronto-downtown': ['downtown toronto', 'toronto downtown'],
+    'vaughan': ['vaughan & concord', 'vaughan'],
+  };
+
+  const words = (slug: string): string[] => {
+    const html = read(`locations/${slug}/index.html`);
+    const main = html.match(/<main[^>]*>([\s\S]*)<\/main>/)?.[1] ?? '';
+    let text = main
+      .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<form[\s\S]*?<\/form>/g, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&#39;|&rsquo;|’/g, "'")
+      .toLowerCase();
+    for (const name of CITY[slug] ?? [slug]) text = text.split(name).join(' city ');
+    return text.match(/[a-z0-9']+/g) ?? [];
+  };
+
+  const shingles = (w: string[]) => w.slice(0, -5).map((_, i) => w.slice(i, i + 6).join(' '));
+
+  it('every location page is at least 60% unique', () => {
+    const slugs = fs.readdirSync(path.join(out, 'locations'), { withFileTypes: true })
+      .filter((d) => d.isDirectory())
+      .map((d) => d.name);
+    expect(slugs.length).toBeGreaterThanOrEqual(7);
+
+    const all = Object.fromEntries(slugs.map((s) => [s, shingles(words(s))]));
+    const scores = slugs.map((s) => {
+      const others = new Set(slugs.filter((o) => o !== s).flatMap((o) => all[o]));
+      const unique = all[s].filter((sh) => !others.has(sh)).length / all[s].length;
+      return [s, Math.round(unique * 100)] as const;
+    });
+    const failing = scores.filter(([, pct]) => pct < 60);
+    expect(failing, JSON.stringify(scores)).toEqual([]);
+  });
+});
