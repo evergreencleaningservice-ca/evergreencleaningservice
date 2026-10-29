@@ -26,11 +26,19 @@ We only read the container. We did not open it in GTM or change it, and we did n
   - Commands go on the production hostnames only.
   - `send_to` keeps them out of Google Ads; the Ads conversion is still the container's tag.
 - **If anyone wires GA4 event tags into `GTM-5W69BTJQ`, remove the `sendGa4` calls first**, or every event is counted twice.
+- **GA4 property settings, done 29 Oct 2026** (by the account owner; reported, and checked from the live tag where that was possible):
+  - Event-scoped custom dimensions `form_id`, `link_location` and `error_type`.
+  - Enhanced measurement → **Form interactions off**, so GA4's automatic `form_start` / `form_submit` do not duplicate the site's own `form_start`.
+  - **`generate_lead` created as a key event** in advance. It is fed by the site's instrumentation above, not by a page-view or `/thank-you/` rule.
+  - Google Ads conversion settings left unchanged.
+- **Verified on 29 Oct 2026** against the live site, with every outgoing Google hit intercepted (answered locally, so nothing reached GA4 or Ads):
+  - One page view sends exactly one GA4 `page_view`. Focusing the quote form sends exactly one `form_start`. There is no automatic duplicate.
+  - The container still holds the Ads lead conversion (`AW-18472921801` / `gu9jCLqh74sdEMnVyehE`) on `lead_form_submission` and the call-tracking tag (`_klRCNWT7IsdEMnVyehE`). It has no GA4 tag and no `site_environment` blocking trigger. The one `generate_lead` string in `gtm.js` is the tag library's built-in event-name table, not a tag.
+  - Staging (`stage.evergreencleaningservice.ca`) loads the container and sends GA4 `page_view` and Ads remarketing hits. The site's own `sendGa4` events do not fire there.
 - Still open:
-  - **Staging page views reach GA4** (and Ads) through the Google tag, because the container has no `site_environment equals staging` blocking trigger (A6).
-  - In GA4, mark `generate_lead` as the key event once it has been received.
-  - Register `form_id`, `link_location` and `error_type` as event-scoped custom dimensions.
-
+  - **Confirm the first genuine quote request appears in GA4 as `generate_lead` and counts as a key event.** As of 29 Oct 2026 no lead has arrived since the form fix (the last row in `leads` is 2026-10-17 02:17 UTC). Do not submit a test lead to check this.
+  - **Exclude staging from GA4 and Google Ads**: add the `site_environment equals staging` blocking trigger in `GTM-5W69BTJQ` (A6), and add it as an exception on the Google tag and both Ads tags. This needs a login with container access.
+  - **User-provided data.** The Google tag `GT-PBCTCTX6` has automatic detection of user-provided data switched on: email, phone and address (`__ogt_1p_data_v2`, set by "Allow user-provided data capabilities"). Confirm whether enhanced conversions are actually in use in the Ads account. If they are, the privacy policy should say that a hashed email or phone number may be shared with Google to match an enquiry to an ad click.
 ---
 
 ## 1. Events the site pushes
@@ -90,19 +98,19 @@ It also adds a view, `lead_offline_conversions`, with one row per stage reached.
 
 ## 3. Account-side setup still needed
 
-These are not done and not verifiable from here.
+Status as of 29 Oct 2026. Rows not marked done are not done, and are not verifiable from here.
 
 | # | Where | Action | Why |
 |---|---|---|---|
 | A1 | Google Ads | Confirm the `lead_form_submission` conversion action (label `gu9jCLqh…`) is **Primary**, counts **One**, has a sensible click-through window, and appears in the bidding goal. | It is the only lead conversion. |
 | A2 | Google Ads | Confirm the "calls from website" action (`_klRCNWT…`) has a minimum call length that represents a real enquiry, for example 60 s. Decide whether it is Primary. | A connected call is a stronger signal than a tap. |
 | A3 | Google Ads | Create three offline conversion actions named exactly `Evergreen - Qualified lead`, `Evergreen - Quote issued` and `Evergreen - Customer won`. Start them as **Secondary**. Upload from the `lead_offline_conversions` view weekly. | This lets you judge, and later bid on, lead quality. Do not switch them to Primary before there are enough uploads to be meaningful. |
-| A4 | GTM | Add Custom Event triggers for `form_start`, `lead_form_error`, `phone_click`, `email_click` and `quote_cta_click`. Send them to GA4 (once a GA4 tag exists) as events. **Do not** attach them to Ads conversion tags as Primary. | Funnel visibility. |
-| A5 | GTM / GA4 | Decide whether a GA4 property should be wired. The container has none, although the old container had `G-R27QW21PMT`. Without it, none of the funnel events are visible anywhere. | There are no analytics today beyond Google Ads. |
-| A6 | GTM | Add a blocking trigger: `site_environment equals staging`. | Staging page views currently reach the live Ads tag. |
-| A7 | GTM | Consider enhanced conversions for leads. The site does not push hashed user data today, and adding it needs a privacy and consent decision first. | It could improve match rates. |
+| A4 | GTM → **site** | **Done another way, 29 Oct 2026.** The five events (and the lead as `generate_lead`) go to GA4 from the site itself (`src/lib/ga4.ts`), because no available login can edit the container. If the container is ever wired for these, remove the site-side calls first. | Funnel visibility. |
+| A5 | GA4 | **Done, 29 Oct 2026.** New property `G-C0JHHPLFPJ`, attached to the Google tag `GT-PBCTCTX6`. Custom dimensions, Form interactions off and the `generate_lead` key event are set; see the update at the top. `G-R27QW21PMT` from the old container is not used. | Analytics beyond Google Ads. |
+| A6 | GTM | **Still open; needs container access.** Add a blocking trigger, `site_environment equals staging`, and add it as an exception on the Google tag and the Ads tags. Verified 29 Oct 2026 that staging still sends GA4 page views and Ads hits. | Staging page views reach GA4 and the live Ads tag. |
+| A7 | GTM / Ads | Consider enhanced conversions for leads. The site does not push hashed user data. **Found 29 Oct 2026:** the Google tag `GT-PBCTCTX6` has automatic detection of user-provided data switched on, so confirm in the Ads account whether enhanced conversions are active. Either way it needs a privacy decision. | It could improve match rates. |
 | A8 | Microsoft Ads | The UET tag `187178776` from the old container is not in the new one. Re-add it or retire Microsoft Ads. | Microsoft campaigns record nothing right now. |
-| A9 | Privacy | `/privacy/` still describes the old WordPress site. It should describe Google Ads tags, call tracking, session attribution storage and the lead form before any further tags are added. | PIPEDA transparency. Not legal advice. |
+| A9 | Privacy | **Done, 29 Oct 2026.** `/privacy/` now describes the forms, reCAPTCHA, Tag Manager, Ads and Analytics, Cloudflare's statistics, the session attribution note and the providers. Open point: user-provided data (see the update at the top). | PIPEDA transparency. Not legal advice. |
 
 ## 4. How to verify (after deploy)
 

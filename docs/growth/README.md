@@ -1,4 +1,41 @@
-# Evergreen growth programme: implementation record (15 Oct 2026)
+# Evergreen growth programme
+
+## Project status, 29 Oct 2026
+
+The 15 Oct implementation record follows below; this section is the current state.
+
+**Live on production** (each merged to `main` and deployed with `npm run deploy`):
+
+| PR | What | Notes |
+|---|---|---|
+| #35 | **Quote forms fixed.** `/api/*` was missing from `run_worker_first`, so every form POST got a Cloudflare 405 from 17 Oct to 29 Oct. | No leads were received in that window. `tests/tooling/worker-routes.test.ts` now guards it. |
+| #36, #37 | SEO audit (28 Oct) Phase 1, except C1: sitemap and `/search/`, security headers with a report-only CSP, content fixes, the video bubble, alt text and OG image metadata, the schema entity pass | CSP violations go to `/api/csp-report` (Worker log). Switch to enforcing after two clean weeks, around 12 Nov. |
+| #38 | Layout audit at 360–3440 px: margins, phone type size, grids, forms, header, footer | Report in the session; no open defects. |
+| #39 | GA4 events via the Google tag; the privacy policy rewritten | See tracking-spec.md. |
+
+**Measurement:**
+
+| Item | State |
+|---|---|
+| GA4 property `G-C0JHHPLFPJ` ("Website" stream) | **Done.** Attached to Google tag `GT-PBCTCTX6` (with Ads `AW-18472921801`). Page views and the site's events are verified arriving. |
+| Custom dimensions `form_id`, `link_location`, `error_type` | **Done** (account owner, 29 Oct). |
+| Enhanced measurement → Form interactions | **Off** (account owner, 29 Oct). Verified: one `form_start` per form, no duplicate. |
+| `generate_lead` key event | **Created** (account owner, 29 Oct). **Not yet confirmed**: no genuine lead since the form fix. Check the first one in GA4 Realtime or Events. Do not submit a test lead. |
+| Google Ads conversions | **Unchanged.** Verified: lead conversion `gu9jCLqh74sdEMnVyehE` on `lead_form_submission`, and call tracking. |
+| Staging excluded from GA4 and Ads | **Open.** Needs a login with access to `GTM-5W69BTJQ` (`ads@brandingcentres.com` has none). See tracking-spec A6. |
+| User-provided data on the Google tag | **To confirm.** Automatic detection is on; check whether Ads enhanced conversions use it, then add a line to `/privacy/` if so. |
+| Search Console | **Not started** (C1). DNS is on Cloudflare, so a domain property can be verified from here. |
+
+**Waiting on the client** (drafts in the session's review kit):
+
+- Three answers: is 243 Queen St W a staffed, signed office (C4); is the founding year 1989; may we send review requests (C5).
+- Two invitations for `Paolo@10XiD.com`: Google Business Profile Manager, and Google Ads Admin.
+- After the Ads invitation: the three secondary offline conversion actions (C2, tracking-spec A3), and checking A1 and A2.
+- The baseline file `drift/baseline-2026-10-28.json` for L9 is not in the repo.
+
+---
+
+# Implementation record (15 Oct 2026)
 
 Branch `claude/nice-mayer-r2gmzt`. This is the reviewable record of one coordinated change. It covers the six phases of the brief, implemented together.
 

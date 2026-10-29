@@ -1,3 +1,5 @@
+> **Superseded in part, 29 Oct 2026.** GA4 is now the property `G-C0JHHPLFPJ`, attached to the Google tag `GT-PBCTCTX6`. It is **not** the `G-R27QW21PMT` named below. The site sends its GA4 events itself (`src/lib/ga4.ts`). The current state is in [growth/tracking-spec.md](growth/tracking-spec.md). Read that before acting on this document.
+
 # GTM implementation specification — Evergreen Office Cleaning
 
 > **30 Sep 2026: the site now loads a new container, `GTM-5W69BTJQ`.**
