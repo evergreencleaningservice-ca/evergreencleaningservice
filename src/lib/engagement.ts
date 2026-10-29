@@ -26,6 +26,8 @@
  * value is ever read, so nothing a visitor typed can reach the dataLayer.
  */
 
+import { sendGa4 } from './ga4';
+
 export const FORM_START_EVENT = 'form_start';
 export const FORM_ERROR_EVENT = 'lead_form_error';
 export const EMAIL_EVENT = 'email_click';
@@ -55,6 +57,8 @@ const push = (win: Window, event: Record<string, unknown>) => {
   const w = win as DataLayerWindow;
   w.dataLayer = w.dataLayer || [];
   w.dataLayer.push(event);
+  /* And to GA4 under the same name (src/lib/ga4.ts). */
+  sendGa4(String(event.event), event, win);
 };
 
 /** A form id is site-chosen, but it is still trimmed and bounded. */

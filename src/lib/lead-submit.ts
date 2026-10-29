@@ -53,6 +53,7 @@
 import { attributionPayload } from './attribution';
 import { markLeadConfirmed } from './confirmation';
 import { pushFormError } from './engagement';
+import { GA4_LEAD_EVENT, sendGa4 } from './ga4';
 import type { FormErrorType } from './engagement';
 
 declare global {
@@ -162,6 +163,8 @@ export function pushLeadEvent(
   window.dataLayer = window.dataLayer || [];
 
   const event: Record<string, unknown> = { event: LEAD_EVENT, ...sanitizeEventParams(params) };
+  /* The same sanitised parameters, to GA4 as `generate_lead` (src/lib/ga4.ts). */
+  sendGa4(GA4_LEAD_EVENT, event);
 
   if (!onDelivered) {
     window.dataLayer.push(event);

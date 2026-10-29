@@ -34,6 +34,8 @@
  */
 
 /** The single event name. Settled here so the container can be built once. */
+import { sendGa4 } from './ga4';
+
 export const PHONE_EVENT = 'phone_click';
 
 /**
@@ -224,7 +226,10 @@ export function wirePhoneClicks(doc: Document = document, win: Window = window):
 
       const w = win as Window & { dataLayer?: Record<string, unknown>[] };
       w.dataLayer = w.dataLayer || [];
-      w.dataLayer.push(phoneClickEvent(anchor, win));
+      const pushed = phoneClickEvent(anchor, win);
+      w.dataLayer.push(pushed);
+      /* And to GA4 under the same name (src/lib/ga4.ts). */
+      sendGa4(PHONE_EVENT, pushed, win);
 
     /* No preventDefault, no return false, no delay. The call is the point;
        the measurement is not allowed to get in its way. */
