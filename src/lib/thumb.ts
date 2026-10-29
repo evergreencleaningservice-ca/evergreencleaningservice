@@ -42,3 +42,29 @@ export function thumb(image: string | undefined): string | undefined {
   }
   return image;
 }
+
+/**
+ * The same list thumbnail, responsive (SEO audit H10, 29 Oct 2026).
+ *
+ * The 300x150 crop is drawn full width on a phone, about 3.6x its size, so it
+ * looked soft. Refreshed posts have a 960x480 feature image beside the crop,
+ * as JPEG, AVIF and WebP, which this offers alongside it. Posts without one
+ * keep the plain crop.
+ */
+export function thumbSet(image: string | undefined):
+  | { src: string; jpg: string; avif: string; webp: string }
+  | null {
+  const small = thumb(image);
+  if (!small) return null;
+  const m = small.match(/^\/images\/(.+)-300x150\.jpg$/);
+  if (!m) return null;
+  const stem = m[1];
+  const has = (f: string) => listing().has(f);
+  if (!has(`${stem}.jpg`) || !has(`${stem}.avif`) || !has(`${stem}.webp`)) return null;
+  return {
+    src: small,
+    jpg: `/images/${stem}-300x150.jpg 300w, /images/${stem}.jpg 960w`,
+    avif: `/images/${stem}.avif 960w`,
+    webp: `/images/${stem}.webp 960w`,
+  };
+}

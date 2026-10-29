@@ -24,6 +24,7 @@ import QuoteBand from '../../components/blocks/QuoteBand.astro';
 import ReviewQuotes from '../../components/blocks/ReviewQuotes.astro';
 import { locations } from '../../data/locations';
 import { LOCATION_LOCAL } from '../../data/location-local';
+import PagePhoto from '../../components/blocks/PagePhoto.astro';
 import { AREAS } from '../../data/coverage';
 import { site, nap } from '../../data/site';
 import { pageTitle } from '../../lib/title';
@@ -125,6 +126,7 @@ const schema = {
     <div class="container">
       <div class="loc-grid location-page">
         <div class="loc-main">
+          {local && <PagePhoto src={local.photo.src} alt={local.photo.alt} eager />}
           {
             location.detail ? (
               <Fragment>

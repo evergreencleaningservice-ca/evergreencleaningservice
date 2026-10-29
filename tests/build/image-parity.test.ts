@@ -103,7 +103,10 @@ const REDIRECTED = new Set([
  * no image request. A page that swaps a picture of a control for the control
  * is not a page that lost a picture.
  */
-const NO_BODY_IMAGE = new Set(['/about-us/']);
+/* Empty since 2026-10-29: /about-us/ was the one deliberately image-free page,
+   and the SEO audit (H6) counted it among the money pages with no photograph,
+   so it now carries one. */
+const NO_BODY_IMAGE = new Set<string>([]);
 
 /**
  * The floor under the whole site, measured rather than guessed.
@@ -186,7 +189,7 @@ describe('body images carried over from the original', () => {
     for (const route of NO_BODY_IMAGE) {
       expect(built.get(route)?.size, `${route} is listed as image-free`).toBe(0);
     }
-    expect(NO_BODY_IMAGE.size).toBe(1);
+    expect(NO_BODY_IMAGE.size).toBe(0);
   });
 
   it('keeps at least as many body images as the refresh shipped with', () => {
