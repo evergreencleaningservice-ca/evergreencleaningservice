@@ -3,7 +3,8 @@
  * The GTA sub-location pages — Section 2.3 of the overhaul specification.
  *
  * Page anatomy, as specified:
- *   Dynamic H1   "[Service] in [City/Region] | Evergreen Office Cleaning"
+ *   Dynamic H1   "[Service] in [City/Region]" — the brand suffix came off on
+ *                2026-10-29 (SEO audit H9); it belongs in the <title>, not the H1
  *   Unique focus  each page's own service radius, from src/data/locations.ts
  *   Facility types served
  *   Google Maps embed centred on the municipal zone
@@ -26,6 +27,7 @@ import { locations } from '../../data/locations';
 import { AREAS, COVERAGE_SENTENCE } from '../../data/coverage';
 import { site, nap } from '../../data/site';
 import { pageTitle } from '../../lib/title';
+import { breadcrumbSchema } from '../../lib/schema';
 
 export function getStaticPaths() {
   return locations.map((location) => ({
@@ -37,7 +39,7 @@ export function getStaticPaths() {
 const { location } = Astro.props;
 /* Client-supplied copy wins where it exists; the generated H1 stays the
    fallback for the locations still on the template body. */
-const h1 = location.detail?.h1 ?? `Commercial Cleaning in ${location.name} | ${site.name}`;
+const h1 = location.detail?.h1 ?? `Commercial Cleaning in ${location.name}`;
 /* THE MAP EMBED IS GONE (2026-10-15). A map centred on Mississauga beside
    a Toronto street address read as a Mississauga office, which this business
    does not have; it also loaded a Google Maps iframe on every location page.
@@ -102,6 +104,16 @@ const schema = {
   description={location.description}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbSchema([
+      { name: site.name, url: '/' },
+      { name: 'Service Areas', url: '/locations/' },
+      { name: location.name },
+    ]))}
+    is:inline
+  />
 
   <div class="page-header">
     <div class="container">

@@ -8,6 +8,7 @@ import { databaseSecretFor, databaseUrlFor } from './lib/database-url';
 import { parsePosts, syncPosts, type Sql } from './lib/posts-sync';
 import { handleAdmin, isAdminPath, type AdminEnv } from './lib/admin/api';
 import { serveSite } from './lib/admin/live-posts';
+import { cspReport } from './lib/csp-report';
 
 /**
  * The site's Worker.
@@ -459,6 +460,7 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === '/api/submit-lead') return submitLead(request, env);
     if (url.pathname === '/api/submit-post') return submitPost(request, env);
+    if (url.pathname === '/api/csp-report') return cspReport(request);
     if (isAdminPath(url.pathname)) return handleAdmin(request, env);
     // Posts published from the admin, at their addresses and on the lists.
     return serveSite(

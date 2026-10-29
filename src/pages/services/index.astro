@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import { site, nav } from '../../data/site';
+import { breadcrumbSchema } from '../../lib/schema';
 
 /*
  * The original /services/ URL was an empty WordPress page archive (no content of
@@ -26,13 +27,19 @@ const services = (await getCollection('services')).sort(
 ---
 
 <BaseLayout
-  title="Commercial Cleaning Services in Toronto"
+  title="All Cleaning Services | Evergreen Office Cleaning"
   description="Office, commercial, industrial, post-construction, disinfection and emergency cleaning, building maintenance, pressure washing and graffiti removal in the GTA."
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbSchema([{ name: site.name, url: '/' }, { name: 'Services' }]))}
+    is:inline
+  />
   <div class="page-header">
     <div class="container">
       <p class="section-subtitle">{site.name}</p>
-      <h1 class="entry-title">Our Commercial Cleaning Services</h1>
+      <h1 class="entry-title">All Our Cleaning Services</h1>
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="/">{site.name}</a> &gt; <span>Services</span>
       </nav>

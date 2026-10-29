@@ -37,4 +37,4 @@ The health and safety of your employees depend on your ability to provide a clea
 
 Get a commercial cleaning quote today by [contacting us](/contact-us/)!
 
-![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

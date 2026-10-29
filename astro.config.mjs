@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { lastmodFor } from './src/lib/sitemap-lastmod.mjs';
 
 export default defineConfig({
   site: 'https://www.evergreencleaningservice.ca',
@@ -44,8 +45,20 @@ export default defineConfig({
        *   /eg-live-post-shell/  the template live posts are drawn in
        *                    (src/lib/admin/live-posts.ts); never served itself.
        *                    The live posts are added to the sitemap by the Worker.
+       *   /search/         "follow, noindex" (2026-10-29, SEO audit M1): one
+       *                    word of content until someone types a query, and
+       *                    nothing links to it.
+       *   /insights/page/N/  the archive's later pages (M2). They stay
+       *                    crawlable and linked from /insights/; they are just
+       *                    not pages anyone should land on from a search.
        */
-      filter: (page) => !/\/(category\/blog|lp|thank-you|tag|admin|eg-live-post-shell)\//.test(page),
+      filter: (page) =>
+        !/\/(category\/blog|lp|thank-you|tag|admin|eg-live-post-shell|search|insights\/page\/\d+)\//.test(page),
+      /* Real content dates, never the build time — src/lib/sitemap-lastmod.mjs. */
+      serialize: (item) => {
+        const lastmod = lastmodFor(item.url);
+        return lastmod ? { ...item, lastmod } : item;
+      },
     }),
   ],
 });

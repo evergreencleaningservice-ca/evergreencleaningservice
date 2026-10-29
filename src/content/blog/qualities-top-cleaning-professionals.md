@@ -30,4 +30,4 @@ Because of this, every cleaning professional must be effective at working togeth
 
 As you can tell, the work of a cleaning professional isn’t always as it is perceived to be. The truth is, you need to be well-trained, humble, and you need to be an effective all-around team player in order to succeed. If you are looking to hire a [professional cleaner](/services/commercial-cleaning/) to maintain your commercial property, [contact us](/contact-us/) today and we can connect you with our highly trained staff.
 
-![](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![Evergreen Office Cleaning logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

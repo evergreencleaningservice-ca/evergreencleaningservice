@@ -28,7 +28,7 @@ type Entry = {
   id?: string;
   slug?: string;
   body?: string;
-  data: { title: string; description?: string; pubDate: Date | string; image?: string };
+  data: { title: string; description?: string; pubDate: Date | string; image?: string; imageAlt?: string };
 };
 
 interface Props {
@@ -56,7 +56,7 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
             <a href={`/${toSlug(post)}/`} tabindex="-1" aria-hidden="true">
               <img
                 src={thumb(post.data.image)}
-                alt=""
+                alt={post.data.imageAlt ?? post.data.title}
                 width="300"
                 height="150"
                 loading={i < eager ? 'eager' : 'lazy'}

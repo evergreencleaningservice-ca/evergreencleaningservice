@@ -184,10 +184,11 @@ export const images = {
  *     records (SiteGround), so it accepts mail — but that does not prove this
  *     local-part is a real mailbox. If it bounces, every contact route on the
  *     site is dead. Send a test message to it before the domain is cut over.
- *  2. The coordinates below are the spec's. 43.6503, -79.3892 is the generic
- *     centroid for "Toronto" rather than the pin for 243 Queen St W., which is
- *     nearer 43.6496, -79.3925. Left as specified; worth correcting with the
- *     client, since the geo is what a local pack reads.
+ *  2. The coordinates were the spec's 43.6503, -79.3892, about 53 m from
+ *     the business's own Google Business Profile pin. Since 2026-10-29 (SEO
+ *     audit H12) they are that pin, 43.65019, -79.38856, so the JSON-LD and
+ *     the listing a local pack reads put the business in the same place.
+ *     `mapUrl` is the same listing, by its Maps id.
  */
 export const nap = {
   name: 'Evergreen Office Cleaning',
@@ -204,8 +205,16 @@ export const nap = {
   phoneHref: 'tel:+14168034880',
   phoneSchema: '+1-416-803-4880',
   email: 'info@evergreencleaningservice.ca',
-  latitude: 43.6503,
-  longitude: -79.3892,
+  latitude: 43.65019,
+  longitude: -79.38856,
+  mapUrl: 'https://maps.google.com/?cid=15602716773318351983',
+  /**
+   * Other names the business is known by. The site, the schema and the
+   * Google listing say "Evergreen Office Cleaning"; the domain, the old logo,
+   * the social profiles and reviewers say "Evergreen Cleaning Service(s)".
+   * Naming both lets a search engine join them into one business.
+   */
+  alternateNames: ['Evergreen Cleaning Service', 'Evergreen Cleaning Services'],
   priceRange: '$$',
 } as const;
 

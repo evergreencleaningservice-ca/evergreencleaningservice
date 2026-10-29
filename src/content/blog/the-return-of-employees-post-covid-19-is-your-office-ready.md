@@ -37,4 +37,4 @@ Additionally, you may also need to install automated doors or elevators while ge
 
 If you need help with prepping the office for the return of your employees, we are here to help. Simply get in touch with [Evergreen Cleaning Services](/services/) by calling [+1 (416) 803-4880](tel:+14168034880) today. We offer commercial cleaning services in Toronto, ON, and, we have a team of seasoned team of experts who will make your office space ready for the return of your employees in no time.
 
-![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

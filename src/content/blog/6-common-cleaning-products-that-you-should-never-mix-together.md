@@ -49,4 +49,4 @@ _**Stay safe when you’re cleaning or stay super safe and leave the cleaning to
 
 ##### [CONTACT US](/contact-us/) today for all of your cleaning needs!
 
-![logo](/images/cropped-evergreen-cleaning-torotno-site-logo-banner.jpg)
+![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-torotno-site-logo-banner.jpg)

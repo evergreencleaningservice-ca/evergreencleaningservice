@@ -41,4 +41,4 @@ It is important to have some of the essentials cleaning products in your office 
 
 Hiring professional [commercial cleaning services](/) is one of the best ways for keeping your office looking great at all times. Call us today to learn how we can help improve the cleanliness of your office space.
 
-![](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![Evergreen Office Cleaning logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

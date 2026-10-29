@@ -66,4 +66,4 @@ Changes in weather can also change the traction on outdoor surfaces significantl
 • Go for moisture-absorbent mats with slanted edges in entrances.  
 • Go for appropriate mats or rugs in kitchen areas
 
-![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

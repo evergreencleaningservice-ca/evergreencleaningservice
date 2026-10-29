@@ -15,7 +15,7 @@ related:
 
 We recognize that your need for emergency cleaning services may occur without notice or warning. With commercial cleaning experience going back to 1989, Evergreen Cleaning Service is prepared to deal with the unexpected and restore your space to its ideal clean and full functionality.
 
-![emergency office cleaning](/images/flooded-office-water-extraction.jpg)
+![Technician extracting water from a flooded office carpet](/images/flooded-office-water-extraction.jpg)
 
 Have you experienced flooding or water damage? Need to cleanup a rented space following a special event? Preparing a space for new tenants? Dealing with damage resulting from fire or smoke? Confronted with an unpleasant odour or stain? Our experienced and highly trained cleaning services workers always arrive fully equipped with the tools and materials necessary to handle any situation encountered. Our professionals are able to assess your situation quickly, and apply our expertise to minimize downtime and ease your concerns.
 

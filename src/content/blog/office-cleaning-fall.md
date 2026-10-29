@@ -39,4 +39,4 @@ When you require your autumn cleaning, you can count on Evergreen Cleaning to de
 
 [Contact us](/contact-us/) today to book your fall deep office clean!
 
-![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

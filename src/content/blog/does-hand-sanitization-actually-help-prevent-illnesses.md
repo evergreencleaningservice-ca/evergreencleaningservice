@@ -39,4 +39,4 @@ When you use our service, you will not need to worry about how effective hand sa
 
 [Contact us](/contact-us/) today so we can help you with all of your commercial and janitorial cleaning requirements.
 
-![](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![Evergreen Office Cleaning logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

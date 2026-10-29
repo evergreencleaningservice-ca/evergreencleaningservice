@@ -66,7 +66,7 @@ const title = data.seoTitle ?? pageTitle(data.title);
 const path = Astro.url.pathname;
 ---
 
-<BaseLayout title={title} description={data.description} image={data.image}>
+<BaseLayout title={title} description={data.description} image={data.image} imageAlt={data.imageAlt}>
   <script
     slot="head"
     type="application/ld+json"

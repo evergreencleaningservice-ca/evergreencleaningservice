@@ -53,4 +53,4 @@ It is also worth noting that modern cleaning methods/techniques provide the conv
 
 For all of your commercial cleaning needs in the GTA, [contact](/contact-us/) the pros at [Evergreen Commercial Cleaning](/about-us/) today!
 
-![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

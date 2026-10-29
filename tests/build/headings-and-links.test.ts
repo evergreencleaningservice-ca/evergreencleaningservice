@@ -316,13 +316,15 @@ describe('the rest of the page is untouched', () => {
     }
   });
 
-  /* 69 until 2026-10-15; +4 for /industries/, its two pages and /our-process/. */
-  it('all 73 sitemap URLs were built', () => {
+  /* 69 until 2026-10-15; +4 for /industries/, its two pages and /our-process/.
+     Back to 69 on 2026-10-29: /search/ and /insights/page/2-4/ left the
+     sitemap (SEO audit M1, M2). */
+  it('all 69 sitemap URLs were built', () => {
     const locs = (xml: string) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const urls = locs(read('sitemap-index.xml')).flatMap((child) =>
       locs(read(path.basename(new URL(child).pathname)))
     );
-    expect(urls).toHaveLength(73);
+    expect(urls).toHaveLength(69);
     const missing = urls.filter((u) => !exists(new URL(u).pathname));
     expect(missing).toEqual([]);
   });
