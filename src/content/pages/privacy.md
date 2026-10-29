@@ -1,56 +1,69 @@
 ---
-title: "Privacy"
-description: "This Privacy Policy describes our policies and procedures on the collection, use and disclosure of your information."
+title: "Privacy Policy"
+description: "How Evergreen Office Cleaning collects, uses and protects the personal information you give us through this website."
 ---
+
+_Last updated: October 29, 2026_
+
+This policy explains what personal information Evergreen Office Cleaning collects through www.evergreencleaningservice.ca, why we collect it, and what you can ask us to do with it. It applies to this website only.
 
 ## Who we are
 
-Our website address is: [](/)[](/)[www.evergreencleaningservice.ca](/)
+Evergreen Office Cleaning, 243 Queen St W., Toronto, ON M5V 1Z4. You can reach us about anything in this policy at [info@evergreencleaningservice.ca](mailto:info@evergreencleaningservice.ca) or (416) 803-4880.
 
-## What personal data we collect and why we collect it
+## What we collect and why
 
-### Comments
+### Quote and contact forms
 
-When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor’s IP address and browser user agent string to help spam detection.
+When you ask for a quote or send us a message, we collect what you type into the form: your name, your business's name and address, your email address and phone number, the services you are interested in and any comments. We use it to reply to you, arrange a walkthrough and prepare a quote, and we keep it as a record of your enquiry.
 
-<p>An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p>
+With the form we also record how you reached the site, for example the page you arrived on and, if you came from one of our ads, the ad click identifier. We use this to understand which of our advertising brings in enquiries.
 
-### Media
+### Blog comments and testimonials
 
-If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.
+If you leave a comment on a blog post or send us a testimonial, we collect your name, email address and message. Nothing you send this way is published automatically: we read every submission first.
 
-### Contact forms
+### Spam protection
 
-### Cookies
+Our forms are protected by Google reCAPTCHA, which checks that a person, not an automated program, is filling them in. reCAPTCHA collects information about your device and how you use the page, under [Google's Privacy Policy](https://policies.google.com/privacy) and [Terms of Service](https://policies.google.com/terms).
 
-If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.
+### Cookies, advertising and analytics
 
-If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.
+We use Google Tag Manager to run Google Ads conversion tracking, which tells us when someone who clicked one of our ads goes on to send an enquiry or call us. Google sets cookies to do this. We may also use Google Analytics to understand how visitors use the site. You can control ad personalization in [Google's Ad Settings](https://adssettings.google.com/) and block cookies in your browser's settings.
 
-When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select “Remember Me”, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.
+Cloudflare, which hosts the site, provides us with visit statistics that do not use cookies.
 
-If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.
+While you browse, the site keeps a note in your browser of how you arrived (for example, the ad you clicked) so that it can be attached to an enquiry if you send one. It is cleared when you close the browser tab.
 
-### Embedded content from other websites
+### Embedded content
 
-Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.
+Some posts include embedded content, such as videos, from other websites. That content behaves as if you had visited the other website directly, and that website may collect information about you under its own policy.
 
-These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.
+## Who we share it with
 
-### Analytics
+We do not sell or rent your personal information. We share it only with service providers who help us run the site and respond to you, and only as far as they need it to do that:
 
-## Who we share your data with
+- **Cloudflare**, which hosts the website;
+- **Neon**, which hosts the database where form submissions are stored;
+- **Resend**, which delivers form submissions to our team by email;
+- **Google**, for reCAPTCHA, Tag Manager, Ads and Analytics.
 
-## How long we retain your data
+We may also disclose information where the law requires it.
 
-If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.
+## Where your information is stored
 
-For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.
+Some of these providers store or process information outside Canada, including in the United States, where it may be accessible to authorities under local law.
 
-## What rights you have over your data
+## How long we keep it
 
-If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.
+We keep enquiries and submissions for as long as we need them to respond to you, to provide our services and to keep our business records. You can ask us to delete your information at any time (see below).
 
-## Where we send your data
+## Your rights
 
-Visitor comments may be checked through an automated spam detection service.
+You can ask us to see the personal information we hold about you, to correct it, or to delete it, and you can withdraw your consent to our using it. Email [info@evergreencleaningservice.ca](mailto:info@evergreencleaningservice.ca) and we will respond within 30 days. We may need to keep some information where the law requires us to.
+
+If you are not satisfied with our response, you can contact the [Office of the Privacy Commissioner of Canada](https://www.priv.gc.ca/).
+
+## Changes to this policy
+
+If we change this policy, we will post the new version on this page and update the date at the top.

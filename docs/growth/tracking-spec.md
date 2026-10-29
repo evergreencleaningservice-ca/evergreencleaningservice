@@ -15,6 +15,22 @@ The container has no triggers for `phone_click`, `form_start`, `lead_form_error`
 
 We only read the container. We did not open it in GTM or change it, and we did not access Google Ads or GA4. **Nobody here has verified that the Ads conversion actions are set as Primary, have the intended counting settings, or record correctly.**
 
+**Update, 29 Oct 2026: GA4 is live.**
+
+- GA4 property "Evergreen Office Cleaning", web stream "Website", measurement ID **`G-C0JHHPLFPJ`**.
+- It was attached as a second destination of the Google tag `GT-PBCTCTX6`, the tag that also carries Google Ads `AW-18472921801`. The Ads account is named "Green Clean Office Maintenance" but it is Evergreen's. Because the container loads that tag on every page, **page views reach GA4 with no container change**. Do not add a separate GA4 Google tag in GTM, or page views will be counted twice.
+- The login that manages the Google tag (`ads@brandingcentres.com`) has **no access to `GTM-5W69BTJQ`**. So the site sends its six events to GA4 itself. `src/lib/ga4.ts` queues a `gtag('event', …, { send_to: 'G-C0JHHPLFPJ' })` command alongside each dataLayer push:
+  - `lead_form_submission` goes to GA4 as **`generate_lead`**.
+  - `phone_click`, `form_start`, `lead_form_error`, `email_click` and `quote_cta_click` keep their names.
+  - The parameters are the same sanitised ones the dataLayer carries.
+  - Commands go on the production hostnames only.
+  - `send_to` keeps them out of Google Ads; the Ads conversion is still the container's tag.
+- **If anyone wires GA4 event tags into `GTM-5W69BTJQ`, remove the `sendGa4` calls first**, or every event is counted twice.
+- Still open:
+  - **Staging page views reach GA4** (and Ads) through the Google tag, because the container has no `site_environment equals staging` blocking trigger (A6).
+  - In GA4, mark `generate_lead` as the key event once it has been received.
+  - Register `form_id`, `link_location` and `error_type` as event-scoped custom dimensions.
+
 ---
 
 ## 1. Events the site pushes
