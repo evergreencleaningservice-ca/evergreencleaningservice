@@ -22,7 +22,7 @@ interface Props {
   sub: string;
   /**
    * Base name of an image set in /images/, e.g.
-   * `evergreen-modern-commercial-cleaning-hero`, which resolves to the
+   * `ride-on-floor-scrubber-corridor-hero`, which resolves to the
    * `-480/-768/-1000/-1600` AVIF, WebP and JPEG siblings. Omit it and the
    * hero keeps the plain gradient it had.
    */
@@ -38,7 +38,7 @@ const { eyebrow, heading, sub, image, imageAlt, trust = TRUST_POINTS } = Astro.p
 
 /* Matches the homepage hero's set, because it is the same set. */
 const WIDTHS = [480, 768, 1000, 1600] as const;
-const NATURAL = { width: 1942, height: 809 };
+const NATURAL = { width: 1600, height: 667 };
 
 const srcset = (base: string, ext: string) =>
   WIDTHS.map((w) => `/images/${base}-${w}.${ext} ${w}w`).join(', ');
