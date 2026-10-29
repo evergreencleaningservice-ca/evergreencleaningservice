@@ -53,7 +53,11 @@
  *
  *   ffmpeg -ss 0 -t 6 -i lead-net.mp4 -an -vf "crop=424:424:148:105,scale=160:160,fps=24" \
  *     -c:v libx264 -profile:v main -pix_fmt yuv420p -crf 30 -preset veryslow -movflags +faststart lead-net-orb.mp4
- *   ffmpeg -ss 1 -i lead-net.mp4 -frames:v 1 -vf scale=640:-2 -q:v 5 lead-net.jpg
+ *   ffmpeg -ss 1 -i lead-net.mp4 -frames:v 1 -vf scale=640:-2 -q:v 5 lead-net-poster.jpg
+ *
+ * The poster lives in public/images/, not beside the clip: production builds
+ * refuse an image file in dist (bin/check-images.mjs), so it is served from
+ * the image bucket like every other picture.
  *
  * A replacement clip needs both re-cut, or the orb shows the old presenter.
  * /video/* carries a 30-day cache (public/_headers).
@@ -83,7 +87,7 @@ interface Props {
 const {
   sources = ['/video/lead-net.mp4'],
   orb = '/video/lead-net-orb.mp4',
-  poster = '/video/lead-net.jpg',
+  poster = '/images/lead-net-poster.jpg',
   ctaHref = '/request-a-quote/',
   ctaLabel = 'Request a Free Quote',
   caption = 'Request below',
