@@ -64,6 +64,25 @@ const { data, body, parent, formId } = Astro.props;
 const h1 = data.h1 ?? data.title;
 const title = data.seoTitle ?? pageTitle(data.title);
 const path = Astro.url.pathname;
+
+/* A line for every related link that does not bring its own. Mixed cards,
+   two with a description beside two without, looked half-empty; these are
+   the descriptions the homepage and location pages already use. */
+const RELATED_TEXT: Record<string, string> = {
+  '/services/office-cleaning/': 'Recurring after-hours janitorial service.',
+  '/services/commercial-cleaning/': 'Retail, institutional, hospitality and mixed-use buildings.',
+  '/services/industrial-cleaning/': 'Plant and warehouse floors, high dusting and staff facilities.',
+  '/services/building-maintenance/': 'Strip and wax, carpet extraction, high dusting.',
+  '/services/post-construction-cleaning/': 'Clean-up after a renovation or fit-out, before handover.',
+  '/services/disinfection-cleaning/': 'Clean first, then disinfect the surfaces people touch.',
+  '/services/emergency-cleaning/': 'Floods, water damage and messes that cannot wait.',
+  '/services/pressure-washing/': 'Entrances, walkways, loading docks and exteriors.',
+  '/services/graffiti-removal/': 'Removal matched to the surface it is on.',
+  '/industries/medical-dental-clinics/': 'Waiting rooms, treatment areas and washrooms.',
+  '/industries/property-management/': 'Common areas, lobbies, tenant spaces and short-notice work.',
+  '/industries/': 'Offices, clinics, warehouses, retail and more.',
+  '/green-clean-products/': 'The approved green cleaning products our crews use.',
+};
 ---
 
 <BaseLayout title={title} description={data.description} image={data.image} imageAlt={data.imageAlt}>
@@ -89,7 +108,7 @@ const path = Astro.url.pathname;
   <section class="offer-hero">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">{site.name}</a> &gt; <a href={parent.url}>{parent.name}</a> &gt;
+        <a href="/">{site.name}</a> &gt; <a href={parent.url}>{parent.name}</a> &gt;{' '}
         <span aria-current="page">{data.title}</span>
       </nav>
       <h1>{h1}</h1>
@@ -182,7 +201,7 @@ const path = Astro.url.pathname;
 
       <FaqList faqs={data.faqs} />
 
-      <LinkCards heading="Related" items={data.related} />
+      <LinkCards heading="Related" items={data.related.map((r) => ({ ...r, text: r.text ?? RELATED_TEXT[r.href] }))} />
 
       {
         data.showAreas && (

@@ -91,21 +91,30 @@ const description =
     font-size: 1.0625rem;
     margin: 0;
   }
+  /* Flex rather than grid, so a last row that is not full is centred
+     instead of leaving one card stranded at the left (seven items in rows of
+     two or three). The item widths are the columns the grid had. */
   .ind-grid {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 18px;
   }
+  .ind-grid > li {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
   @media (min-width: 700px) {
-    .ind-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .ind-grid > li {
+      flex-basis: calc((100% - 1 * 18px) / 2);
     }
   }
   @media (min-width: 1100px) {
-    .ind-grid {
-      grid-template-columns: repeat(3, 1fr);
+    .ind-grid > li {
+      flex-basis: calc((100% - 2 * 18px) / 3);
     }
   }
   .ind-card {
@@ -123,7 +132,7 @@ const description =
     color: var(--ink-heading);
   }
   .ind-card h2 a::after {
-    content: ' →';
+    content: '\00a0→'; /* no-break space: the arrow never wraps alone */
     color: var(--brand);
   }
   .ind-card p {

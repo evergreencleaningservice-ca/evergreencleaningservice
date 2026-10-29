@@ -47,7 +47,7 @@ const description =
               <a href={`/locations/${location.slug}/`}>
                 <h2>{location.name}</h2>
                 <p>{location.focus}</p>
-                <span class="loc-more">Commercial cleaning in {location.name} &rarr;</span>
+                <span class="loc-more">Commercial cleaning in {location.name}&nbsp;&rarr;</span>
               </a>
             </li>
           ))
@@ -65,23 +65,30 @@ const description =
     margin: 0 0 36px;
   }
 
+  /* Flex rather than grid, so a last row that is not full is centred
+     instead of leaving one card stranded at the left (seven items in rows of
+     two or three). The item widths are the columns the grid had. */
   .loc-list {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 24px;
   }
-
+  .loc-list > li {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
   @media (min-width: 768px) {
-    .loc-list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .loc-list > li {
+      flex-basis: calc((100% - 1 * 24px) / 2);
     }
   }
-
   @media (min-width: 992px) {
-    .loc-list {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    .loc-list > li {
+      flex-basis: calc((100% - 2 * 24px) / 3);
     }
   }
 
@@ -113,12 +120,12 @@ const description =
     margin: 0 0 14px;
   }
 
+  /* Sentence case: in letter-spaced capitals "Commercial cleaning in
+     Downtown Toronto" broke over two ragged lines in every card. */
   .loc-more {
     font-family: var(--font-heading);
-    font-size: 0.8125rem;
+    font-size: 0.9375rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
     color: var(--brand);
   }
 </style>

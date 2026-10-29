@@ -33,17 +33,32 @@ const Tag = level;
 </section>
 
 <style>
+  /* Five steps. In a grid they split 3+2 with an empty sixth slot; as a
+     centred flex row the last two sit in the middle, and where the column is
+     wide enough (a full-width page) all five share one row. */
   .blk-steps {
     list-style: none;
     counter-reset: step;
     margin: 0;
     padding: 0;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 16px;
+    container-type: inline-size;
+  }
+  .blk-steps li {
+    flex: 0 0 100%;
+    min-width: 0;
   }
   @media (min-width: 768px) {
-    .blk-steps {
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    .blk-steps li {
+      flex-basis: calc((100% - 2 * 16px) / 3);
+    }
+  }
+  @container (min-width: 1000px) {
+    .blk-steps li {
+      flex-basis: calc((100% - 4 * 16px) / 5);
     }
   }
   .blk-steps li {

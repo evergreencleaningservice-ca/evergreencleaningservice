@@ -104,8 +104,27 @@ const MORE = [
       grid-template-columns: repeat(3, 1fr);
     }
   }
+  /* Seven services: as a centred flex row the seventh sits in the middle of
+     its row instead of alone at the left. Widths match the grid it was. */
   .hs-more {
     margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hs-more > li {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+  @media (min-width: 768px) {
+    .hs-more > li {
+      flex-basis: calc((100% - 18px) / 2);
+    }
+  }
+  @media (min-width: 1100px) {
+    .hs-more > li {
+      flex-basis: calc((100% - 2 * 18px) / 3);
+    }
   }
   .hs-primary a,
   .hs-more a {
@@ -154,7 +173,7 @@ const MORE = [
   }
   .hs-primary strong::after,
   .hs-more strong::after {
-    content: ' →';
+    content: '\00a0→'; /* no-break space: the arrow never wraps alone */
   }
   .hs-primary span span,
   .hs-more span {

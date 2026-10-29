@@ -57,6 +57,16 @@ const {
     gap: 10px;
     align-items: center;
   }
+  /* The hours line under the buttons is long, and as the `auto` column it
+     set the column's width: the heading was squeezed onto three lines while
+     the buttons sat at the left of a wide, half-empty column. Capped, the
+     hours wrap under the buttons and the heading gets the room. */
+  @media (min-width: 900px) {
+    .blk-quoteband-actions {
+      max-width: 25rem;
+      justify-self: end;
+    }
+  }
   .blk-quoteband-actions .btn {
     margin: 0;
   }

@@ -221,14 +221,15 @@
   max-width: 54ch;
 }
 
-/* The four trust points, compact enough to sit above the form on a phone. */
+/* The trust points, one per line. They used to wrap as a flowing row, which
+   paired the two short ones and left the long offer lines alone, so the list
+   read as ragged rather than as a list. */
 .lpx-trust {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 18px;
+  display: grid;
+  gap: 7px;
 }
 
 .lpx-trust li {

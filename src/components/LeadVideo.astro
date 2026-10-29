@@ -558,6 +558,25 @@ const orbIsCropped = orbSrc !== src;
       bottom: 12px;
     }
   }
+
+  /* On a phone the "Click to open" pill sat across the middle of the screen,
+     over two or three lines of whatever was there. The orb alone says the
+     same thing in a quarter of the space; its button keeps its accessible
+     name from the hidden text. */
+  @media (max-width: 767px) {
+    .leadnet-hint {
+      display: none;
+    }
+
+    .leadnet-orb {
+      width: 64px;
+      height: 64px;
+    }
+
+    .leadnet-dismiss {
+      right: 46px;
+    }
+  }
 </style>
 
 <script>
@@ -751,29 +770,38 @@ const orbIsCropped = orbSrc !== src;
       else window.addEventListener('load', reveal, { once: true });
     }
 
-    // --- stepping aside for a quote form, on a phone ---
-    // The bubble sits in the bottom corner, which on a narrow screen is where
-    // a form's fields scroll past: it covered the Phone field. While any
-    // lead form is on screen it fades out, and it comes back when the form
-    // has scrolled away. An open panel is left alone: the visitor asked for it.
-    const narrow = window.matchMedia('(max-width: 767.98px)');
-    const forms = document.querySelectorAll('form[data-endpoint]');
-    if ('IntersectionObserver' in window && forms.length) {
-      const onScreen = new Set<Element>();
-      const sync = () =>
-        panel.classList.toggle(
-          'is-tucked',
-          narrow.matches && onScreen.size > 0 && !panel.classList.contains('is-open')
-        );
-      const io = new IntersectionObserver((entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) onScreen.add(e.target);
-          else onScreen.delete(e.target);
+    // --- stepping aside for a quote form ---
+    // The bubble sits in the bottom corner, which is where a form's fields
+    // scroll past: it covered the Phone field on a phone and the street
+    // address on a desktop. Whenever it would sit on top of a lead form it
+    // fades out, and it comes back once the form has moved out from under it.
+    // An open panel is left alone: the visitor asked for it.
+    const forms = [...document.querySelectorAll<HTMLElement>('form[data-endpoint]')];
+    const bubble = panel.querySelector<HTMLElement>('.leadnet-bubble')!;
+    if (forms.length) {
+      let queued = false;
+      const sync = () => {
+        queued = false;
+        if (panel.hidden || panel.classList.contains('is-open')) return;
+        // Measured in its resting place, whether or not it is tucked now.
+        const b = bubble.getBoundingClientRect();
+        const lift = panel.classList.contains('is-tucked') ? 16 : 0;
+        const over = forms.some((f) => {
+          const r = f.getBoundingClientRect();
+          return r.left < b.right && r.right > b.left && r.top < b.bottom - lift && r.bottom > b.top - lift;
+        });
+        panel.classList.toggle('is-tucked', over);
+      };
+      const queue = () => {
+        if (!queued) {
+          queued = true;
+          requestAnimationFrame(sync);
         }
-        sync();
-      });
-      forms.forEach((f) => io.observe(f));
-      narrow.addEventListener('change', sync);
+      };
+      window.addEventListener('scroll', queue, { passive: true });
+      window.addEventListener('resize', queue);
+      panel.addEventListener('transitionend', queue);
+      queue();
     }
   }
 </script>

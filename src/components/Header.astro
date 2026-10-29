@@ -127,6 +127,13 @@ const isCurrent = (href?: string) =>
     width: auto;
   }
 
+  /* The logo file is a JPEG on an off-white ground, which showed as a box
+     on the white header. Multiplying it onto the white drops the ground and
+     leaves the green artwork exactly as it is. */
+  .site-logo img {
+    mix-blend-mode: multiply;
+  }
+
   .site-nav {
     order: 2;
     margin-left: auto;
@@ -210,6 +217,19 @@ const isCurrent = (href?: string) =>
   .menu-toggle-bar::after {
     top: 8px;
     right: 0;
+  }
+
+  /* An open menu shows a close cross rather than the same three bars. */
+  .menu-toggle[aria-expanded='true'] .menu-toggle-bar {
+    background: transparent;
+  }
+  .menu-toggle[aria-expanded='true'] .menu-toggle-bar::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+  .menu-toggle[aria-expanded='true'] .menu-toggle-bar::after {
+    top: 0;
+    transform: rotate(-45deg);
   }
 
   .onepress-menu {
@@ -332,10 +352,18 @@ const isCurrent = (href?: string) =>
       display: none;
     }
 
+    /* The spread shadow dims the page under the open drawer, so the menu
+       reads as on top of the page rather than running into it; the clip keeps
+       it off the header bar above. */
     .site-nav.is-open {
       display: block;
       max-height: calc(100vh - 60px);
       overflow-y: auto;
+      border-top: 1px solid var(--rule);
+      box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.12),
+        0 0 0 100vmax rgba(17, 17, 17, 0.35);
+      clip-path: inset(0 0 -100vmax 0);
     }
 
     .onepress-menu {

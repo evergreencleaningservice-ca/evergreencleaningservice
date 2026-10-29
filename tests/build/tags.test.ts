@@ -197,10 +197,13 @@ describe('the sidebar cloud', () => {
     expect(count(html, /href="\/tag\/[a-z0-9-]+\/"/g)).toBe(26);
   });
 
-  it('carries the original’s measured font sizes inline', () => {
+  /* The original's 8pt-22pt range, mapped onto 12px-19px since 2026-10-29:
+     the ranking is the same, but the smallest tags are readable and the
+     largest no longer break over two lines of the sidebar. */
+  it('keeps the original’s ranking, within a readable range', () => {
     const html = page();
-    expect(html).toContain('href="/tag/commercial-cleaning/" style="font-size: 22pt"');
-    expect(html).toContain('href="/tag/winter/" style="font-size: 8pt"');
+    expect(html).toContain('href="/tag/commercial-cleaning/" style="font-size: 19.0px"');
+    expect(html).toContain('href="/tag/winter/" style="font-size: 12.0px"');
   });
 
   it('speaks the post count, because 8pt means nothing to a screen reader', () => {

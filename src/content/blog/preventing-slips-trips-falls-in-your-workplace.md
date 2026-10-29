@@ -31,12 +31,14 @@ In most cases, slip and trip accidents happen due to the loss of grip between th
 
 ### Preventing Slip, Trip, and Fall
 
-The best way to deal with a challenge is to eliminate that which causes the problem. Ensuring proper arrangement and [seeking janitorial services](/services/commercial-cleaning/) can be a good starting point in preventing slip, trip, and fall accidents.  
+The best way to deal with a challenge is to eliminate that which causes the problem. Ensuring proper arrangement and [seeking janitorial services](/services/commercial-cleaning/) can be a good starting point in preventing slip, trip, and fall accidents.
+
 Below are some detailed courses of action that will help you put an end to slips, trips, and falls at your workplace.
 
 ### Proper Warnings and Signs
 
-Putting in place warnings and signs with symbols that are in line with the [Criteria for Safety Symbols](https://en.wikipedia.org/wiki/Safety_sign), is a great way to try and prevent slips, trips, and falls at your workplace. Adding barricades at selected sections and secluding hazardous sections or areas with ongoing processes is also advisable.  
+Putting in place warnings and signs with symbols that are in line with the [Criteria for Safety Symbols](https://en.wikipedia.org/wiki/Safety_sign), is a great way to try and prevent slips, trips, and falls at your workplace. Adding barricades at selected sections and secluding hazardous sections or areas with ongoing processes is also advisable.
+
 Keep in mind that signs can be a good way of reminding employees to rid the area of any waste. It follows that there should be adequate provision of trash cans in the workplace, which should be strategically placed at waste-generation spots. This helps prevent littering and spillage on the floor which are common causes of slips, trips, and falls.
 
 ![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)

@@ -14,22 +14,23 @@ Many people take spring cleaning very seriously. While it makes perfect sense to
 ### 1\. Prepare the Main Entrance
 
 Preparing the main entrance for snow, ice, and salt in advance will make cleaning the same much easier during winter. To do this, you will need:  
-Wet floor signs  
-Secured floor mats  
-Extra absorbent mats (for the worst days)  
-A snow guard just under the door  
-A dedicated bucket and mop  
-A snow shovel just outside the door  
-Salt (for the walkway and parking lot)  
-Storage for boots
+
+- Wet floor signs
+- Secured floor mats
+- Extra absorbent mats (for the worst days)
+- A snow guard just under the door
+- A dedicated bucket and mop
+- A snow shovel just outside the door
+- Salt (for the walkway and parking lot)
+- Storage for boots
 
 This part of the business will get lots of traffic hence should be actively monitored once the snow arrives. Create a system/routine to ensure the entrance is always clean. This can only be done by:
 
-Ensuring the floor mats are completely dry before staff and customers start to arrive  
-Placing a ‘wet floor’ sign at the entrance  
-Add the extra-absorbent pads during the worst days  
-Have the floor mopped dry once people stop coming  
-Have the floor mats washed and dried at the end of each day.
+- Ensuring the floor mats are completely dry before staff and customers start to arrive
+- Placing a ‘wet floor’ sign at the entrance
+- Add the extra-absorbent pads during the worst days
+- Have the floor mopped dry once people stop coming
+- Have the floor mats washed and dried at the end of each day.
 
 All this might be too much for your employees to manage in addition to their regular duties. Having a cleaning company do this for you, either daily or weekly, would be a more practical way to manage your premises and keep everyone working on what they do best. As long as the entrance is clean, you can then be assured of minimal damage to your mats and floor in other parts of the office.
 
@@ -43,13 +44,14 @@ Simply having the floor washed with water won’t clear up all the salt. A salt 
 
 ### 3\. The Air Quality
 
-As mentioned before, winter causes the air around (including indoors) to dry up, resulting in all forms of irritation and allergies. The dry air can make staff members and even employees with asthma, allergies, and sinus conditions to have an awful and uncomfortable time while on the premise.  
+As mentioned before, winter causes the air around (including indoors) to dry up, resulting in all forms of irritation and allergies. The dry air can make staff members and even employees with asthma, allergies, and sinus conditions to have an awful and uncomfortable time while on the premise.
+
 The degraded air quality increases the risk of everyone catching the flu. With just a few (or none) of the employees choosing to go out for lunch, the risk of spreading illnesses becomes even greater. Working to improve indoor air quality by ensuring there’s proper air circulation is an excellent idea. It would also be advisable to have all surfaces, door handles, switches, bathrooms, and elevators sanitized daily. Simply having the HVAC systems working optimally might not be enough to guarantee air quality. Here are a few tips on how to improve your workplace air quality this winter.
 
-Use [HEPA filters](https://en.wikipedia.org/wiki/HEPA) when vacuuming: HEPA filters help ensure germs and dust aren’t spread all over the place as you vacuum. This thus reduces allergens in the air.  
-Wipe down all hard surfaces: Dust can hide on ceiling fan blades, mirrors, window frames, and even under your chair frames. Having all these vacuumed and wiped clean will reduce the amount of dust in the space.  
-Clean the air ducts: Dust and debris can build up in air ducts too. Have these cleaned regularly to prevent this.  
-Run a humidifier: Humidity levels can drop too low in the worst days. Running the humidifier, however, corrects this making air comfortable once again.
+- Use [HEPA filters](https://en.wikipedia.org/wiki/HEPA) when vacuuming: HEPA filters help ensure germs and dust aren’t spread all over the place as you vacuum. This thus reduces allergens in the air.
+- Wipe down all hard surfaces: Dust can hide on ceiling fan blades, mirrors, window frames, and even under your chair frames. Having all these vacuumed and wiped clean will reduce the amount of dust in the space.
+- Clean the air ducts: Dust and debris can build up in air ducts too. Have these cleaned regularly to prevent this.
+- Run a humidifier: Humidity levels can drop too low in the worst days. Running the humidifier, however, corrects this making air comfortable once again.
 
 ### 4\. Hire A Professional Cleaning Expert
 
