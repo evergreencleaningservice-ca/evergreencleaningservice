@@ -86,6 +86,17 @@ const srcset = (base: string, ext: string) =>
     overflow: hidden;
   }
 
+  /* On a wide screen the hero was only as tall as its text, so the 2.4:1
+     photo was cropped to a 5:1 strip and the crew lost their heads. From
+     1600px it grows with the width (to a cap), with the text centred in it. */
+  @media (min-width: 1600px) {
+    .hero {
+      display: flex;
+      align-items: center;
+      min-height: min(30vw, 820px);
+    }
+  }
+
   .hero-slides,
   .hero-overlay {
     position: absolute;

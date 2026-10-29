@@ -516,11 +516,15 @@ describe('spam, attribution and conversion protections', () => {
 /* --- 9. the sticky bar cannot cover the form ------------------------------ */
 
 describe('the mobile sticky bar', () => {
-  it.each(PAGES)('$name reserves page padding at least as tall as the bar', ({ name }) => {
+  /* Since 2026-10-29 the room is the footer's own padding rather than the
+     body's, so it is grey footer under the bar, not a white strip: the
+     footer's normal 28px plus at least the bar's height. */
+  it.each(PAGES)('$name reserves footer padding at least as tall as the bar', ({ name }) => {
     expect(html[name]).toContain('lpx-sticky');
     const css = builtCss();
 
-    const reserved = Number(css.match(/body\.lp\{[^}]*padding-bottom:(\d+)px/)?.[1] ?? 0);
+    const padded = Number(css.match(/body\.lp:has\(\.lpx-sticky\) \.lp-footer\{[^}]*padding-bottom:(\d+)px/)?.[1] ?? 0);
+    const reserved = padded - 28;
     const barHeight = Number(css.match(/\.lpx-sticky a\{[^}]*min-height:(\d+)px/)?.[1] ?? 0);
     expect(barHeight).toBeGreaterThan(0);
     expect(reserved).toBeGreaterThanOrEqual(barHeight);

@@ -25,17 +25,10 @@ html {
   scroll-behavior: smooth;
 }
 
-@media (max-width: 991px) {
-  html {
-    font-size: 15px;
-  }
-}
-
-@media (max-width: 767px) {
-  html {
-    font-size: 14px;
-  }
-}
+/* The root no longer steps down on smaller screens (2026-10-29). It went
+   to 15px under 992px and 14px under 768px, which set body copy at 13.1px on
+   a phone — smaller than on a desktop, the opposite of what a phone held at
+   arm's length needs. Every rem on the site now means the same 16px. */
 
 :root {
   /* Was #4d8c2b. White text on it measured 4.12:1 at the hero button's
@@ -80,6 +73,23 @@ html {
   box-sizing: inherit;
 }
 
+/* The page fills the window, so a short page (the thank-you page, the 404)
+   keeps its footer at the bottom instead of leaving white space under it. */
+.site {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1 0 auto;
+}
+
+/* A phone number never breaks across lines: "(416) 803-" / "4880". */
+a[href^='tel:'] {
+  white-space: nowrap;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -104,11 +114,31 @@ h6 {
   margin: 0 0 0.9375rem;
 }
 
+/* Evens out the lines of a wrapped heading, so one word is not left alone on
+   the last line ("…Choose / Evergreen:"). Big headings only: on small card
+   titles it wrapped lines that fitted, so titles in a row of cards started
+   their text at different heights. Ignored by older browsers. */
+h1,
+h2 {
+  text-wrap: balance;
+}
+
 h1 {
   font-size: 2.25rem;
 }
 h2 {
   font-size: 2rem;
+}
+
+/* With the root at 16px on every screen, the base sizes are scaled for a
+   phone here rather than by shrinking every rem on the site. */
+@media (max-width: 767px) {
+  h1 {
+    font-size: 1.875rem;
+  }
+  h2 {
+    font-size: 1.625rem;
+  }
 }
 h3 {
   font-size: 1.25rem;
@@ -176,8 +206,12 @@ img {
   }
 }
 
+/* Vertical only. As `padding: … 0` it also zeroed the side padding of any
+   element that was a `.container` too (`container section-padding`), so the
+   service, industry and process pages ran their body text to the screen edge
+   on a phone and 15px wider than the header and footer on a desktop. */
 .section-padding {
-  padding: var(--section-padding) 0;
+  padding-block: var(--section-padding);
 }
 
 .section-alt {
@@ -318,9 +352,16 @@ img {
     gap: 0;
   }
 
-  .content-grid > :first-child {
+  /* Not on a full-width page: there is no sidebar for the rule to divide
+     from, and on /request-a-quote/ it drew a line beside an empty column. */
+  .content-grid:not(.is-full) > :first-child {
     padding-right: 39px;
     border-right: 1px solid #e9e9e9;
+  }
+
+  /* The sidebar's search box and lists sat flush against that rule. */
+  .content-grid:not(.is-full) > :first-child + * {
+    padding-left: 30px;
   }
 }
 
@@ -328,8 +369,11 @@ img {
   display: block;
 }
 
+/* The one full-width page is /request-a-quote/, whose form and aside sit
+   side by side and need the whole container; 860px left a third of the row
+   empty. A prose page that goes full width should set its own measure. */
 .content-grid.is-full .entry-content {
-  max-width: 860px;
+  max-width: none;
 }
 
 /* ---------- buttons ---------- */
@@ -409,15 +453,20 @@ img {
   position: relative;
 }
 
+/* Sentence case since 2026-10-29. The theme's 24px letter-spaced capitals
+   read well for "About Us" and badly for "Commercial Cleaning & Office
+   Janitorial Services in Mississauga", which ran to three shouting lines on a
+   phone; the service, industry and process pages already used sentence-case
+   titles, so the site now has one heading style. */
 .page-header .entry-title {
   font-family: var(--font-heading);
-  font-size: 24px;
-  line-height: 1.3;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-size: clamp(1.625rem, 1.25rem + 1.2vw, 2.25rem);
+  line-height: 1.2;
+  font-weight: 700;
   color: var(--brand);
-  margin: 0;
+  margin: 0 auto;
+  max-width: 28ch;
+  text-wrap: balance;
 }
 
 .breadcrumbs {
@@ -488,6 +537,21 @@ img {
   margin: 0 0 0.9375rem;
 }
 
+/* The imported posts use h5 and h6 as ordinary subheadings, and with no size
+   of their own they fell back to the browser's 0.83em, smaller than the body
+   text under them. They step down from h4 but never below the body size. */
+.entry-content h5 {
+  font-size: 1rem;
+  line-height: 1.2;
+  margin: 0 0 0.9375rem;
+}
+
+.entry-content h6 {
+  font-size: 0.9375rem;
+  line-height: 1.2;
+  margin: 0 0 0.9375rem;
+}
+
 .entry-content ul,
 .entry-content ol {
   margin: 0 0 0.9375rem;
@@ -495,6 +559,12 @@ img {
 }
 
 
+
+/* The WordPress-era logo banner at the foot of many posts was stretched to
+   the full column width, soft and blocky. It is shown at its own size. */
+.entry-content img[src*='logo-banner'] {
+  max-width: min(100%, 280px);
+}
 
 .entry-content img {
   margin: 1.5em 0;
@@ -625,6 +695,14 @@ img {
   background: var(--surface-tint);
 }
 
+/* Two tinted sections in a row read as one band, and each brought its own
+   top and bottom padding, so the join was a 140-160px empty stretch (home:
+   Where we work → Testimonials → Get in touch). The second drops its top
+   padding; the first one's bottom padding is the gap. */
+:is(.band-tint, .section-alt) + :is(.band-tint, .section-alt) {
+  padding-top: 0;
+}
+
 .check-list {
   list-style: none;
   margin: 0;
@@ -650,14 +728,22 @@ img {
   transform: rotate(-45deg);
 }
 
+/* Stacked on a phone, the gap between the two columns has to match the
+   spacing inside them, or the join reads as a break in the list (it was
+   about 60px against 15px between the other items). */
 .cols-2 {
   display: grid;
-  gap: 28px;
+  gap: 15px;
+}
+
+.cols-2 > * > :last-child {
+  margin-bottom: 0;
 }
 
 @media (min-width: 768px) {
   .cols-2 {
     grid-template-columns: 1fr 1fr;
+    gap: 28px;
   }
 }
 
@@ -675,10 +761,19 @@ main li > p a:not(.btn) {
   text-underline-offset: 2px;
 }
 
-/* Area lists are dense link lists: keep each link a 24px target. */
+/* Area lists are dense link lists: keep each link a 24px target. The plain
+   (unlinked) areas get the same row height, so a list mixing the two is
+   evenly spaced instead of tight between the plain names. */
 .ar-grid a,
 .offer-areas a {
   display: inline-block;
   min-height: 24px;
+  line-height: 24px;
+  vertical-align: top;
+}
+
+.ar-grid li,
+.offer-areas li {
+  line-height: 24px;
   padding: 2px 0;
 }

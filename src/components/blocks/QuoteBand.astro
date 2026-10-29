@@ -22,7 +22,7 @@ const {
   <div class="blk-quoteband-actions">
     <a class="btn btn-primary btn-lg" href="/request-a-quote/" data-cta-location={location}>Request a quote</a>
     <a class="btn btn-ghost btn-lg" href={nap.phoneHref} data-call-location="content">Call {nap.phoneDisplay}</a>
-    <p class="blk-quoteband-hours">{hoursNote}</p>
+    <p class="blk-quoteband-hours">{hoursNote.replace(/–/g, "\u2060–\u2060")}</p>
   </div>
 </section>
 
@@ -56,6 +56,16 @@ const {
     flex-wrap: wrap;
     gap: 10px;
     align-items: center;
+  }
+  /* The hours line under the buttons is long, and as the `auto` column it
+     set the column's width: the heading was squeezed onto three lines while
+     the buttons sat at the left of a wide, half-empty column. Capped, the
+     hours wrap under the buttons and the heading gets the room. */
+  @media (min-width: 900px) {
+    .blk-quoteband-actions {
+      max-width: 25rem;
+      justify-self: end;
+    }
   }
   .blk-quoteband-actions .btn {
     margin: 0;

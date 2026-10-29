@@ -288,7 +288,8 @@ describe('the sidebar carries help, not a second form', () => {
 
   it('publishes hours that agree with the structured data', async () => {
     const { hours, hoursNote } = await import('../../src/data/site');
-    expect(quote).toContain(hoursNote);
+    /* Word joiners keep "8am–8pm" from breaking at the dash on screen. */
+    expect(quote.replace(/\u2060/g, '')).toContain(hoursNote);
     /* 07:00 → 7am, 22:00 → 10pm: the note is the same fact in words. */
     expect(hours[0].opens).toBe('07:00');
     expect(hours[0].closes).toBe('22:00');

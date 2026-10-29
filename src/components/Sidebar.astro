@@ -32,6 +32,11 @@ import { tags } from '../data/tags';
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 5);
+
+/* WordPress sizes the cloud 8pt to 22pt (10.7px to 29px). At the bottom that
+   is unreadable and at the top a two-word tag breaks over two lines of a
+   280px sidebar, so the same ranking is mapped onto 12px to 19px. */
+const cloudSize = (pt: number) => (12 + ((Math.min(Math.max(pt, 8), 22) - 8) / 14) * 7).toFixed(1);
 ---
 
 <aside id="secondary" class="sidebar" aria-label="Sidebar">
@@ -78,7 +83,7 @@ const posts = (await getCollection('blog'))
         tags.map((tag) => (
           <a
             href={`/tag/${tag.slug}/`}
-            style={`font-size: ${tag.size}pt`}
+            style={`font-size: ${cloudSize(tag.size)}px`}
             aria-label={`${tag.name} (${tag.count} ${tag.count === 1 ? 'item' : 'items'})`}
           >
             {tag.name}
@@ -210,6 +215,7 @@ const posts = (await getCollection('blog'))
     /* Sizes run 8pt to 22pt, so a shared line-height would either crowd the
        large ones or strand the small ones. Unitless scales with each. */
     line-height: 1.35;
+    white-space: nowrap;
   }
 
   .tagcloud a:hover,

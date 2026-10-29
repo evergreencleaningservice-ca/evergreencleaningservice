@@ -44,7 +44,9 @@ const icons: Record<string, string> = {
         <p class="footer-nap">
           <a href={nap.phoneHref} data-call-location="footer">{nap.phoneDisplay}</a><br />
           <a href={`mailto:${nap.email}`} data-cta-location="footer">{nap.email}</a><br />
-          <span>{hoursNote}</span>
+          {/* Word joiners round each dash, so "8am–8pm" never breaks as
+              "8am–" / "8pm". */}
+          <span>{hoursNote.replace(/–/g, '\u2060–\u2060')}</span>
         </p>
         <p><a class="btn btn-primary" href="/request-a-quote/" data-cta-location="footer">Request a quote</a></p>
       </div>
@@ -62,7 +64,10 @@ const icons: Record<string, string> = {
         </ul>
       </div>
 
+      {/* A heading like its neighbours', so the badge lines up with their
+          lists instead of floating level with their headings. */}
       <div class="footer-col footer-col-review">
+        <h2 class="footer-areas-title">Reviews</h2>
         <GoogleReviewLink />
       </div>
 
@@ -121,7 +126,7 @@ const icons: Record<string, string> = {
         </a>
       </div>
       <p>
-        Copyright &copy; {year} {site.name} ~ <a href="/privacy/">Privacy Policy</a>
+        Copyright &copy; {year} {site.name} ~ <a href="/privacy/" class="nowrap">Privacy Policy</a>
       </p>
     </div>
   </div>
@@ -150,7 +155,7 @@ const icons: Record<string, string> = {
   .footer-widgets-grid {
     display: grid;
     gap: 30px;
-    align-items: center;
+    align-items: start;
   }
 
   @media (min-width: 768px) {
@@ -180,11 +185,13 @@ const icons: Record<string, string> = {
 
   .footer-col-contact .btn {
     color: #fff;
+    text-decoration: none;
   }
 
   .footer-col-review {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .footer-areas-title {
@@ -225,21 +232,8 @@ const icons: Record<string, string> = {
     text-decoration: underline;
   }
 
-  @media (max-width: 767px) {
-    .footer-areas-title {
-    margin: 0 0 12px;
-    font-family: var(--font-heading);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-    color: var(--ink-heading);
-  }
-
-  .footer-areas {
-      text-align: center;
-    }
-  }
+  /* On a phone the columns stack and stay left-aligned. The lists used to be
+     centred under left-aligned headings, which looked like two layouts. */
 
   /* --- connect band: the footer's own dark background --- */
   .footer-connect {
@@ -292,6 +286,10 @@ const icons: Record<string, string> = {
   }
 
   /* --- copyright band --- */
+  .site-info .nowrap {
+    white-space: nowrap;
+  }
+
   .site-info {
     position: relative;
     background: var(--surface-dark);

@@ -32,6 +32,13 @@ const { tone = 'light' } = Astro.props;
     display: grid;
     gap: 14px;
   }
+
+  /* Space above it whenever something comes before it. Its own `margin: 0`
+     outranked the layout's spacing (`.stack > * + *`), so on the home,
+     industries and process pages it sat directly under the content above. */
+  :global(*) + .blk-trust {
+    margin-top: 40px;
+  }
   @media (min-width: 640px) {
     .blk-trust {
       grid-template-columns: repeat(2, 1fr);

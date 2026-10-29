@@ -119,7 +119,7 @@ const schema = {
     <div class="container">
       <h1 class="entry-title">{h1}</h1>
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">{site.name}</a> &gt; <a href="/locations/">Service Areas</a> &gt;
+        <a href="/">{site.name}</a> &gt; <a href="/locations/">Service Areas</a> &gt;{' '}
         <span aria-current="page">{location.name}</span>
       </nav>
     </div>
@@ -200,6 +200,17 @@ const schema = {
               </Fragment>
             )
           }
+          {/* Under the text rather than under the form (2026-10-29): beside a
+              tall quote form the text column ended a screen early, leaving a
+              block of white; here it lengthens the short column instead. */}
+          <div class="loc-nap">
+            <h2 class="loc-nap-title">Where we work from</h2>
+            <p>{baseNote}</p>
+            <p>
+              <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a><br />
+              <a href={`mailto:${nap.email}`} data-cta-location="sidebar">{nap.email}</a>
+            </p>
+          </div>
         </div>
 
         <aside class="loc-aside" aria-label="Request a quote">
@@ -210,14 +221,6 @@ const schema = {
               heading={`Get a quote in ${location.name}`}
               intro="A few details and we will arrange a walkthrough. No obligation."
             />
-          </div>
-          <div class="loc-nap">
-            <h2 class="loc-nap-title">Where we work from</h2>
-            <p>{baseNote}</p>
-            <p>
-              <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a><br />
-              <a href={`mailto:${nap.email}`} data-cta-location="sidebar">{nap.email}</a>
-            </p>
           </div>
         </aside>
       </div>
@@ -251,8 +254,11 @@ const schema = {
     line-height: 1.6;
   }
 
+  /* Fluid, and bold like the subtitle above it: a fixed 2rem in the light
+     600 weight was the largest and thinnest heading on a phone. */
   .loc-main h2 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+    font-weight: 700;
     line-height: 1.2;
     margin: 30px 0 15px;
   }
@@ -318,8 +324,9 @@ const schema = {
     color: var(--brand-dark);
   }
 
-  .loc-nap-title {
+  .loc-main .loc-nap-title {
     font-size: 1.0625rem;
+    font-weight: 700;
     margin: 0 0 10px;
   }
 
@@ -328,7 +335,7 @@ const schema = {
   }
 
   .loc-nap {
-    margin-top: 20px;
+    margin-top: 30px;
     padding: 20px;
     background: var(--surface-alt);
     border-radius: var(--radius);

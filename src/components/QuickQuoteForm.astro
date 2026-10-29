@@ -325,7 +325,7 @@ const f = (name: string) => `${id}-${name}`;
   /* Related fields share a line — name and business, city/province/postal,
      email and phone — which is most of what keeps an eight-question form
      short on screen, a phone included. They stack below 260px. Between 260
-     and 340px — a 360px phone — the address row puts the city on a line of
+     and 400px — any phone — the address row puts the city on a line of
      its own, with province and postal code paired under it. */
   .qq-row {
     display: grid;
@@ -342,7 +342,10 @@ const f = (name: string) => `${id}-${name}`;
     }
   }
 
-  @container (min-width: 340px) {
+  /* 400px, not 340: at 340-399 (a phone) the postal code box came out about
+     95px wide. Below 400 the city has its own line, province and postal
+     code share the next. */
+  @container (min-width: 400px) {
     .qq-row-3 {
       grid-template-columns: 1.3fr 1fr 0.9fr;
     }

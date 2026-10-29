@@ -85,7 +85,9 @@ const testimonials = [
     gap: 30px;
   }
 
-  @media (min-width: 576px) {
+  /* Side by side from 992px rather than the theme's 576: at 768 three cards
+     in a row were about 210px wide, and every name, title and heading wrapped. */
+  @media (min-width: 992px) {
     .card-deck {
       flex-flow: row wrap;
       gap: 0;

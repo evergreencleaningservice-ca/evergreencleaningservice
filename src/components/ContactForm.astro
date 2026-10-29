@@ -185,12 +185,13 @@ const f = (name: string) => `${id}-${name}`;
     min-width: 0; /* a fieldset will not shrink below its content without this */
   }
 
-  /* Measured: 11px, 600, uppercase, 2px tracking, #777. */
+  /* Measured: 11px, 600, uppercase, 2px tracking, #777. Now 12px: at 11px
+     with that tracking it was the smallest text on the site. */
   .wpf-label {
     display: block;
     padding: 0;
     font-family: var(--font-heading);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -198,17 +199,26 @@ const f = (name: string) => `${id}-${name}`;
     margin-bottom: 4px;
   }
 
-  /* The same, but under its input — which is what WPForms's "sublabel after"
-     means, and what the port had above the field instead. */
+  /* WPForms's "sublabel after" puts these under their inputs, and the port
+     copied that. Stacked, a label under one box sat directly above the next
+     box, so "City" read as the label of the box below it. They are now drawn
+     above their own box (`.wpf-col` reverses the order on screen; the markup,
+     and the order a screen reader meets them in, is unchanged), in a size
+     and weight that reads as secondary to the field's main label. */
+  .wpf-col {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+
   .wpf-sub {
     display: block;
     font-family: var(--font-heading);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0.3px;
     color: var(--ink);
-    margin-top: 4px;
+    margin: 0 0 4px;
   }
 
   .wpf-req {

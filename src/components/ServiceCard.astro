@@ -4,6 +4,8 @@
  * Pass a services collection entry: <ServiceCard service={service} loading="eager" />
  */
 import type { CollectionEntry } from 'astro:content';
+import { existsSync } from 'node:fs';
+import path from 'node:path';
 
 interface Props {
   service: CollectionEntry<'services'>;
@@ -15,17 +17,52 @@ const { service, loading = 'lazy' } = Astro.props;
 const { title, description, image, imageAlt } = service.data;
 
 const href = `/services/${service.id}/`;
+
+/* A photo with -480/-768 siblings in public/images is served responsively;
+   the full 1200x800 JPEG was being sent to a 360px-wide card. */
+const base = image?.match(/^\/images\/(.+)\.jpg$/)?.[1];
+const sized = !!base && existsSync(path.join(process.cwd(), 'public/images', `${base}-480.avif`));
+const set = (ext: string) => `/images/${base}-480.${ext} 480w, /images/${base}-768.${ext} 768w`;
+const SIZES = '(min-width: 992px) 300px, (min-width: 768px) 50vw, 100vw';
 ---
 
 <article class="service-card">
   {
-    image && (
+    image ? (
       <a class="service-card-thumb" href={href} tabindex="-1" aria-hidden="true">
         <picture>
-          {/-card\.jpg$/.test(image) && <source type="image/avif" srcset={image.replace(/\.jpg$/, '.avif')} />}
-          {/-card\.jpg$/.test(image) && <source type="image/webp" srcset={image.replace(/\.jpg$/, '.webp')} />}
-          <img src={image} alt={imageAlt ?? title} width="640" height="400" loading={loading} decoding="async" />
+          {sized && <source type="image/avif" srcset={set('avif')} sizes={SIZES} />}
+          {sized && <source type="image/webp" srcset={set('webp')} sizes={SIZES} />}
+          {!sized && /-card\.jpg$/.test(image) && <source type="image/avif" srcset={image.replace(/\.jpg$/, '.avif')} />}
+          {!sized && /-card\.jpg$/.test(image) && <source type="image/webp" srcset={image.replace(/\.jpg$/, '.webp')} />}
+          <img
+            src={sized ? `/images/${base}-480.jpg` : image}
+            srcset={sized ? set('jpg') : undefined}
+            sizes={sized ? SIZES : undefined}
+            alt={imageAlt ?? title}
+            width="640"
+            height="400"
+            loading={loading}
+            decoding="async"
+          />
         </picture>
+      </a>
+    ) : (
+      /* No photo of this service exists yet (pressure washing, graffiti
+         removal). A tinted panel the size of a photo keeps the row even;
+         without it the card was a tall empty white box beside its neighbours.
+         An unrelated photo would be worse than none. */
+      <a class="service-card-thumb is-placeholder" href={href} tabindex="-1" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="44" height="44">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 21c4.5-2.2 7-5.8 7-10.5V5.5L12 3 5 5.5v5C5 15.2 7.5 18.8 12 21Zm-3-9 2 2 4-4"
+          />
+        </svg>
       </a>
     )
   }
@@ -60,6 +97,14 @@ const href = `/services/${service.id}/`;
   .service-card-thumb {
     display: block;
     background: var(--surface-alt);
+  }
+
+  .service-card-thumb.is-placeholder {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 8 / 5;
+    background: linear-gradient(135deg, #eef5ea 0%, #dcebd3 100%);
+    color: var(--brand);
   }
 
   .service-card-thumb img {

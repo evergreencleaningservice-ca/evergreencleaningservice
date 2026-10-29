@@ -59,7 +59,7 @@ const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
     <div class="container post-container content-grid">
       <div class="post-main">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">{site.name}</a> &gt; <a href="/insights/">News</a> &gt;
+        <a href="/">{site.name}</a> &gt; <a href="/insights/">News</a> &gt;{' '}
         <a href="/category/blog/">Blog</a> &gt; <span aria-current="page">{title}</span>
       </nav>
 
@@ -109,11 +109,12 @@ const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
 <style>
   .entry-header .entry-title {
     font-family: var(--font-heading);
-    font-size: 2rem;
+    font-size: clamp(1.625rem, 1.3rem + 1vw, 2rem);
     line-height: 1.2;
     font-weight: 600;
     color: var(--ink-heading);
-    margin: 0 0 0.5rem;
+    /* 8px left the title touching the photo below it. */
+    margin: 0 0 1.25rem;
   }
 
   .breadcrumbs {

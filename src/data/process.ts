@@ -42,7 +42,7 @@ export const PROCESS_STEPS: Step[] = [
     body: 'Call (416) 803-4880 or send the short quote form. We ask what kind of building it is, where it is and what you need cleaned.',
   },
   {
-    title: 'Free on-site walkthrough',
+    title: 'Free on\u2011site walkthrough', // non-breaking hyphen: never "on-" / "site"
     body: 'We set up a time to walk the building with you and go over your requirements in detail, rather than pricing the work down the phone.',
   },
   {

@@ -119,6 +119,19 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
         }
       </div>
 
+      {/* Added 2026-10-29. The track hides its scrollbar, so on a desktop the
+          only way to the fourth review was to wait for the timer. The
+          original widget showed no arrows; these are the affordance the
+          hidden scrollbar took away. Hidden by the script when every review
+          already fits. */}
+      <div class="ti-nav" hidden>
+        <button class="ti-arrow" type="button" data-dir="-1" aria-label="Previous review">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m15 5-7 7 7 7" /></svg>
+        </button>
+        <button class="ti-arrow" type="button" data-dir="1" aria-label="Next review">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7" /></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -159,6 +172,51 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
 
   .ti-track::-webkit-scrollbar {
     display: none;
+  }
+
+  .ti-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .ti-nav[hidden] {
+    display: none;
+  }
+
+  .ti-arrow {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--rule);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--brand-dark);
+    cursor: pointer;
+  }
+
+  .ti-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ti-arrow:hover:not(:disabled),
+  .ti-arrow:focus-visible {
+    border-color: var(--brand);
+    color: var(--brand);
+  }
+
+  .ti-arrow:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .ti-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
   }
 
   @media (min-width: 768px) {
@@ -384,6 +442,27 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
         behavior: still.matches ? 'auto' : 'smooth',
       });
     };
+
+    // --- arrows ---
+    // Shown only when something is out of view, and disabled at either end.
+    const nav = slider.querySelector<HTMLElement>('.ti-nav');
+    const arrows = [...slider.querySelectorAll<HTMLButtonElement>('.ti-arrow')];
+    const syncArrows = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      if (nav) nav.hidden = max <= 1;
+      for (const a of arrows) {
+        a.disabled = a.dataset.dir === '-1' ? track.scrollLeft <= 1 : track.scrollLeft >= max - 1;
+      }
+    };
+    for (const a of arrows) {
+      a.addEventListener('click', () => {
+        dir = Number(a.dataset.dir);
+        step();
+      });
+    }
+    track.addEventListener('scroll', () => requestAnimationFrame(syncArrows), { passive: true });
+    window.addEventListener('resize', syncArrows);
+    syncArrows();
 
     // The original has no visible arrows; it moves on its own timer, on a
     // swipe, and on the arrow keys while it is on screen. Keeping the arrow

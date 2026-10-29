@@ -7,13 +7,17 @@ interface Props {
 }
 const { heading, items, level = 'h2' } = Astro.props;
 const Tag = level;
+/* Columns that divide the set evenly where they can: four as 4 (or 2 x 2
+   on a narrower column), six as 3 + 3, and anything else in rows of three
+   with the short last row centred. */
+const cols = items.length === 4 ? 4 : Math.min(3, items.length);
 ---
 
 {
   items.length > 0 && (
     <section class="blk-links" aria-label={heading ?? 'Related pages'}>
       {heading && <Tag class="blk-title">{heading}</Tag>}
-      <ul>
+      <ul style={`--cols: ${cols}`}>
         {items.map((item) => (
           <li>
             <a href={item.href}>
@@ -32,12 +36,24 @@ const Tag = level;
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
+    container-type: inline-size;
   }
-  @media (min-width: 640px) {
-    .blk-links ul {
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  .blk-links li {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+  @container (min-width: 480px) {
+    .blk-links li {
+      flex-basis: calc((100% - 12px) / 2);
+    }
+  }
+  @container (min-width: 760px) {
+    .blk-links li {
+      flex-basis: calc((100% - (var(--cols) - 1) * 12px) / var(--cols));
     }
   }
   .blk-links a {
@@ -63,7 +79,7 @@ const Tag = level;
     margin-bottom: 2px;
   }
   .blk-links strong::after {
-    content: ' →';
+    content: '\00a0→'; /* no-break space: the arrow never wraps alone */
   }
   .blk-links span {
     display: block;
