@@ -5,7 +5,7 @@
  * Deliberately not BaseLayout. The isolation rules are the point of the
  * template, and inheriting the site shell would defeat every one of them:
  *
- *   no global navigation   the header here is a logo and a call button, nothing
+ *   no global navigation   the header here is a logo (to the homepage) and a call button, nothing
  *                          else. No menu, no services dropdown, no search.
  *   no external links      the footer carries copyright, privacy and terms and
  *                          nothing else — no social profiles, no blog links.
@@ -108,10 +108,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 
     <header class="lp-header">
       <div class="lp-header-inner">
-        {/* Self-link. It used to be hardcoded to /lp/commercial-cleaning/,
-            which on any other landing page is an escape hatch to a different
-            offer — the one thing this layout exists to prevent. */}
-        <a class="lp-logo" href={Astro.url.pathname}>
+        {/* The logo goes to the homepage, as visitors expect a logo to (owner's
+            call, 29 Oct 2026). It is the one way off the page to the main
+            site; it never points at a different landing page's offer. */}
+        <a class="lp-logo" href="/">
           {/* `width`/`height` are the SOURCE's intrinsic dimensions, 884x265,
               not the rendered size. They were declared 220x52 — a ratio of
               4.23 against the file's real 3.34 — so the browser reserved 52px
