@@ -25,9 +25,13 @@ for(const photo of photos){
  const input=path.join(sources,photo.stockId+'.jpg');
  const sourceMeta=await sharp(input).metadata();
  if(!sourceMeta.width||!sourceMeta.height)throw new Error(`Unreadable source ${photo.stockId}`);
+ // The pipeline auto-orients (.rotate()) before .extract(), so the crop is in
+ // the oriented frame; EXIF orientations 5-8 swap the stored width and height.
+ const turned=(sourceMeta.orientation??1)>=5;
+ const srcW=turned?sourceMeta.height:sourceMeta.width,srcH=turned?sourceMeta.width:sourceMeta.height;
  const [x,y,w,h]=photo.crop;
- const left=Math.round(x*sourceMeta.width),top=Math.round(y*sourceMeta.height);
- const crop={left,top,width:Math.min(Math.round(w*sourceMeta.width),sourceMeta.width-left),height:Math.min(Math.round(h*sourceMeta.height),sourceMeta.height-top)};
+ const left=Math.round(x*srcW),top=Math.round(y*srcH);
+ const crop={left,top,width:Math.min(Math.round(w*srcW),srcW-left),height:Math.min(Math.round(h*srcH),srcH-top)};
  const stem=photo.asset.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
  const pattern=new RegExp(`^${stem}(?:-(?:[0-9]+|[0-9]+x[0-9]+|mobile-[0-9]+x[0-9]+|og))?\\.(jpg|jpeg|webp|avif|png)$`,'i');
  const targets=names.filter(n=>pattern.test(n));
