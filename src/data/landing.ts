@@ -78,8 +78,8 @@ export const FACILITY_TYPES = [
   { title: 'Medical and dental clinics', body: 'Treatment rooms, waiting areas and washrooms.', image: 'gallery-medical-clinic-cleaning' },
   { title: 'Industrial and warehouse', body: 'Production floors, loading areas and staff facilities.', image: 'warehouse-floor-scrubber-industrial' },
   { title: 'Retail and showrooms', body: 'Sales floors, glass, entrances and back of house.', image: 'gallery-retail-store-cleaning' },
-  { title: 'Post-construction', body: 'Renovation and build-out clean-up before handover.', image: 'post-construction-cleanup-vacuum' },
-  { title: 'Building maintenance', body: 'Carpet, hard floors, pressure washing and periodic work.', image: 'carpet-extraction-boardroom-toronto' },
+  { title: 'Post-construction', body: 'Renovation and build-out clean-up before handover.', image: 'gallery-industrial-cleaning-toronto' },
+  { title: 'Building maintenance', body: 'Carpet, hard floors, pressure washing and periodic work.', image: 'gallery-office-cleaning-services' },
 ] as const;
 
 /** The reply promise, written once. */
