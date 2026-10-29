@@ -22,17 +22,28 @@ The 15 Oct implementation record follows below; this section is the current stat
 | Enhanced measurement → Form interactions | **Off** (account owner, 29 Oct). Verified: one `form_start` per form, no duplicate. |
 | `generate_lead` key event | **Created** (account owner, 29 Oct). **Not yet confirmed**: no genuine lead since the form fix. Check the first one in GA4 Realtime or Events. Do not submit a test lead. |
 | Google Ads conversions | **Unchanged.** Verified: lead conversion `gu9jCLqh74sdEMnVyehE` on `lead_form_submission`, and call tracking. |
-| Staging excluded from GA4 and Ads | **Open.** Needs a login with access to `GTM-5W69BTJQ` (`ads@brandingcentres.com` has none). See tracking-spec A6. |
+| Staging excluded from GA4 and Ads | **Done, 29 Oct.** The staging domain was removed. |
 | User-provided data on the Google tag | **To confirm.** Automatic detection is on; check whether Ads enhanced conversions use it, then add a line to `/privacy/` if so. |
 | Search Console | **Done, 29 Oct.** Domain property `sc-domain:evergreencleaningservice.ca` is verified for `ads@brandingcentres.com`, by the existing `google-site-verification` TXT record. `sitemap-index.xml` submitted (Success); `sitemap-0.xml` has been read since 10 Oct. The 2021 WordPress `sitemap_index.xml` 301s to the new index. Linked to GA4 (property `561394338`, stream "Website"). |
 
-**Waiting on the client** (drafts in the session's review kit):
+**Client decisions, confirmed 29 Oct 2026:**
 
-- Three answers: is 243 Queen St W a staffed, signed office (C4); is the founding year 1989; may we send review requests (C5).
-- Two invitations for `Paolo@10XiD.com`: Google Business Profile Manager, and Google Ads Admin.
-- After the Ads invitation: the three secondary offline conversion actions (C2, tracking-spec A3), and checking A1 and A2.
+- **Address (C4).** 243 Queen St W is correct and stays on the Google Business Profile as it is, so there is no switch to a service-area business. The site, the schema and the footer already use it.
+- **Name and founding year (D-C).** "Evergreen Office Cleaning", founded **1989**. The site and schema already match. "Evergreen Cleaning Service(s)" is in the schema's `alternateName`.
+- **Review requests (C5).** Approved. The kit (QR code, short link, post-service email line) is ready for the client's team to use. Every Google review has been replied to as of 29 Oct.
+
+**Done from the Ads and Business Profile logins, 29 Oct 2026** (by the account owner; not checked from here):
+
+- Google Ads: the lead and call conversion settings were reviewed (A1, A2). The three Secondary offline conversion actions were created (A3): `Evergreen - Qualified lead`, `Evergreen - Quote issued`, `Evergreen - Customer won`.
+- Staging: `stage.evergreencleaningservice.ca` was removed (no DNS record), which ends the staging hits to GA4 and Ads (A6). GA4 and Ads data from before 29 Oct includes some staging visits.
+
+**Still open:**
+
+- The weekly lead review in `/admin/leads/` and the weekly offline-conversion upload (C2 routine).
+- Correct the directory citations to the confirmed details (Phase 2, C6): "Evergreen Office Cleaning, 243 Queen St W, (416) 803-4880, since 1989".
 - The baseline file `drift/baseline-2026-10-28.json` for L9 is not in the repo.
-
+- Switch the CSP from report-only to enforcing after two clean weeks (around 12 Nov).
+- Confirm the first genuine `generate_lead` in GA4.
 ---
 
 # Implementation record (15 Oct 2026)
