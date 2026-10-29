@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { service, loading = 'lazy' } = Astro.props;
-const { title, description, image } = service.data;
+const { title, description, image, imageAlt } = service.data;
 
 const href = `/services/${service.id}/`;
 ---
@@ -24,7 +24,7 @@ const href = `/services/${service.id}/`;
         <picture>
           {/-card\.jpg$/.test(image) && <source type="image/avif" srcset={image.replace(/\.jpg$/, '.avif')} />}
           {/-card\.jpg$/.test(image) && <source type="image/webp" srcset={image.replace(/\.jpg$/, '.webp')} />}
-          <img src={image} alt="" width="640" height="400" loading={loading} decoding="async" />
+          <img src={image} alt={imageAlt ?? title} width="640" height="400" loading={loading} decoding="async" />
         </picture>
       </a>
     )

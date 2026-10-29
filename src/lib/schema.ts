@@ -50,6 +50,8 @@ export const organizationGraph = () => ({
       '@type': 'CleaningService',
       '@id': ORG_ID,
       name: nap.name,
+      alternateName: [...nap.alternateNames],
+      foundingDate: String(site.since),
       url: `${site.url}/`,
       logo: `${site.url}${site.logo}`,
       image: `${site.url}${site.logo}`,
@@ -69,6 +71,7 @@ export const organizationGraph = () => ({
         latitude: nap.latitude,
         longitude: nap.longitude,
       },
+      hasMap: nap.mapUrl,
       openingHoursSpecification: hours.map((h) => ({
         '@type': 'OpeningHoursSpecification',
         dayOfWeek: [...h.days],

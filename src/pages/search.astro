@@ -21,6 +21,9 @@ const posts = (await getCollection('blog'))
 ---
 
 <PageLayout title="Search" description="Search the Evergreen Office Cleaning news archive.">
+  {/* Crawl through, do not index: an empty results page with one word of
+      content. Out of the sitemap too (astro.config.mjs). */}
+  <meta slot="head" name="robots" content="follow, noindex" />
   <form class="search-page-form" role="search" method="get" action="/search/">
     <label for="q">Search for:</label>
     <input type="search" id="q" name="q" autocomplete="off" />

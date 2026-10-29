@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { post, loading = 'lazy' } = Astro.props;
-const { title, description, pubDate, image } = post.data;
+const { title, description, pubDate, image, imageAlt } = post.data;
 
 const href = `/${post.id}/`;
 // Every post in the archive had a thumbnail, but a handful of those files are
@@ -40,7 +40,7 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
   >
     <img
       src={thumb}
-      alt=""
+      alt={isFallback ? `${site.name} logo` : (imageAlt ?? title)}
       loading={loading}
       decoding="async"
       width={isFallback ? 884 : 600}

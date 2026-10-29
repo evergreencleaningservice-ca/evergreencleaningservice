@@ -149,8 +149,11 @@ describe('alt attributes', () => {
     expect(missing).toEqual([]);
   });
 
-  it('the hero is decorative, because the heading says the same thing', () => {
-    expect(hero()).toMatch(/<img\b[^>]*\salt(=""|\s|>)/);
+  /* Decorative (alt="") until 2026-10-29. The SEO audit (H11) counted it
+     among 19 meaningful images with no description: it is the homepage's
+     main image, and the heading beside it does not say what is in it. */
+  it('the hero is described', () => {
+    expect(hero()).toMatch(/<img\b[^>]*\salt="[^"]{20,}"/);
   });
 
   it('no alt text is a filename in disguise', () => {

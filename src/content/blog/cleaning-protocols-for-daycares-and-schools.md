@@ -50,4 +50,4 @@ The pandemic has truly brought into stark relief just how important regular clea
 
 Therefore, in order to keep fighting against the spread of the coronavirus, our cleaning teams remain dedicated to ensuring that all surfaces with which others are likely to come into contact are treated with safe, yet effective chemicals designed to provide the disinfection results the public health crisis demands.
 
-![](/images/evergreen-cleaning-toronto-logo-banner.jpg)
+![Evergreen Office Cleaning logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

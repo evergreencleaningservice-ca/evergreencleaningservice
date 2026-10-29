@@ -10,12 +10,19 @@ import { locations } from '../../data/locations';
 import { COVERAGE_SENTENCE } from '../../data/coverage';
 import { site, nap } from '../../data/site';
 import { pageTitle } from '../../lib/title';
+import { breadcrumbSchema } from '../../lib/schema';
 
 const description =
   'Commercial and office cleaning across the Greater Toronto Area — downtown Toronto, Mississauga, Etobicoke, Vaughan, Markham, Brampton and Oakville.';
 ---
 
 <BaseLayout title={pageTitle(`Service Areas Across the GTA`)} description={description}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbSchema([{ name: site.name, url: '/' }, { name: 'Locations' }]))}
+    is:inline
+  />
   <div class="page-header">
     <div class="container">
       <h1 class="entry-title">Service Areas</h1>

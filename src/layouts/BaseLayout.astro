@@ -13,6 +13,8 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  /** Describes `image`; becomes og:image:alt and twitter:image:alt. */
+  imageAlt?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
   noindex?: boolean;
@@ -22,6 +24,7 @@ const {
   title,
   description = site.description,
   image,
+  imageAlt,
   type = 'website',
   publishedTime,
   noindex = false,
@@ -33,6 +36,12 @@ const ogPath = image
   ? image.replace(/(-\d+x\d+)?\.(jpe?g|png|webp|avif)$/i, '-og.jpg')
   : '/images/evergreen-modern-commercial-cleaning-hero-og.jpg';
 const ogImage = new URL(ogPath, Astro.site ?? site.url).href;
+/* Every -og.jpg is 1200x630 (tests/build/og-images.test.ts holds them to it);
+   saying so lets a platform lay the card out before it has fetched the
+   picture. The alt is the page's own image description where it has one, the
+   page title where it does not, and the default image's description. */
+const DEFAULT_OG_ALT = 'Cleaners in green uniforms vacuuming and wiping desks in an open-plan Toronto office';
+const ogAlt = imageAlt ?? (image ? title : DEFAULT_OG_ALT);
 ---
 
 <!doctype html>
@@ -64,6 +73,9 @@ const ogImage = new URL(ogPath, Astro.site ?? site.url).href;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content="en_CA" />
     {publishedTime && <meta property="article:published_time" content={publishedTime} />}
@@ -72,6 +84,7 @@ const ogImage = new URL(ogPath, Astro.site ?? site.url).href;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogAlt} />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />

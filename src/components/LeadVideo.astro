@@ -42,6 +42,24 @@
  *
  * If the file is ever missing the component renders nothing
  * at all, rather than putting an empty black box in the corner of every page.
+ *
+ * WHAT DOWNLOADS, AND WHEN (2026-10-29, SEO audit H3). The orb used to loop
+ * the full 2.5 MB clip, so every page that showed the bubble downloaded all
+ * of it about three seconds after load — 3.1 MB of a desktop page instead of
+ * 0.65 MB. The orb now loops `lead-net-orb.mp4`: six silent seconds of the
+ * same clip, cropped to the presenter's face at 160x160, 18 KB. The full
+ * clip is fetched only when someone opens the panel. Both files are cut from
+ * `lead-net.mp4` with:
+ *
+ *   ffmpeg -ss 0 -t 6 -i lead-net.mp4 -an -vf "crop=424:424:148:105,scale=160:160,fps=24" \
+ *     -c:v libx264 -profile:v main -pix_fmt yuv420p -crf 30 -preset veryslow -movflags +faststart lead-net-orb.mp4
+ *   ffmpeg -ss 1 -i lead-net.mp4 -frames:v 1 -vf scale=640:-2 -q:v 5 lead-net.jpg
+ *
+ * A replacement clip needs both re-cut, or the orb shows the old presenter.
+ * /video/* carries a 30-day cache (public/_headers).
+ *
+ * On a phone the bubble also steps aside while a quote form is on screen: it
+ * sat over the Phone field and the trust points beside it.
  */
 import { existsSync } from 'node:fs';
 import path from 'node:path';
@@ -49,6 +67,8 @@ import path from 'node:path';
 interface Props {
   /** Public paths to try, in order. The first one present is used. */
   sources?: string[];
+  /** The orb's short silent loop. Falls back to the full clip if missing. */
+  orb?: string;
   /** Public path to a poster frame. */
   poster?: string;
   ctaHref?: string;
@@ -62,6 +82,7 @@ interface Props {
 
 const {
   sources = ['/video/lead-net.mp4'],
+  orb = '/video/lead-net-orb.mp4',
   poster = '/video/lead-net.jpg',
   ctaHref = '/request-a-quote/',
   ctaLabel = 'Request a Free Quote',
@@ -76,6 +97,9 @@ const publicDir = path.join(process.cwd(), 'public');
 const inPublic = (p: string) => existsSync(path.join(publicDir, p));
 const src = sources.find(inPublic);
 const hasPoster = inPublic(poster);
+const orbSrc = inPublic(orb) ? orb : src;
+/* A pre-cropped orb clip needs none of the zoom the full clip does. */
+const orbIsCropped = orbSrc !== src;
 ---
 
 {
@@ -91,7 +115,14 @@ const hasPoster = inPublic(poster);
         <button class="leadnet-open" type="button">
           <span class="leadnet-hint">{hint}</span>
           <span class="leadnet-orb">
-            <video class="leadnet-thumb" src={src} poster={hasPoster ? poster : undefined} muted loop playsinline preload="none" />
+            <video
+              class:list={['leadnet-thumb', orbIsCropped && 'is-cropped']}
+              src={orbSrc}
+              muted
+              loop
+              playsinline
+              preload="none"
+            />
           </span>
           <span class="screen-reader-text">Open the video message</span>
         </button>
@@ -164,10 +195,13 @@ const hasPoster = inPublic(poster);
         </div>
 
         <div class="leadnet-stage">
+          {/* The poster is set on open (`data-poster`), not here: as an
+              attribute, the browser fetches it on page load for a panel
+              nobody has opened. */}
           <video
             class="leadnet-video"
             src={src}
-            poster={hasPoster ? poster : undefined}
+            data-poster={hasPoster ? poster : undefined}
             muted
             playsinline
             preload="none"
@@ -227,6 +261,18 @@ const hasPoster = inPublic(poster);
   .leadnet.is-in {
     transform: none;
     opacity: 1;
+  }
+
+  /* Out of the way while a quote form is on a phone's screen — see the script. */
+  .leadnet.is-in.is-tucked {
+    transform: translateY(16px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 0.35s ease-out,
+      opacity 0.35s ease-out,
+      visibility 0s linear 0.35s;
   }
 
   /* ---------- collapsed ---------- */
@@ -289,6 +335,12 @@ const hasPoster = inPublic(poster);
     object-position: 50% 0%;
     transform: scale(1.7);
     transform-origin: 50% 44%;
+  }
+
+  /* `lead-net-orb.mp4` is already cut to the face. */
+  .leadnet-thumb.is-cropped {
+    object-position: 50% 50%;
+    transform: none;
   }
 
   /* Sits over the orb's upper-left corner, 6px left and 4px above it.
@@ -597,19 +649,21 @@ const hasPoster = inPublic(poster);
       video.style.top = `${100 * (0.5 - middle / found.picture)}%`;
     };
 
-    // The orb's clip loads first, so measure from whichever has a frame.
-    thumb.addEventListener('loadeddata', () => fitToPicture(thumb));
+    // Measured from the panel's own clip. The orb used to play the same file
+    // and was measured first; it now plays a separate, pre-cropped loop whose
+    // frame says nothing about the full clip's bars.
     video.addEventListener('loadeddata', () => fitToPicture(video));
     // A clip that opens on a fade from black gives nothing to measure at the
     // first frame, so try once more a second in, by which time it has a picture.
-    thumb.addEventListener('timeupdate', function retry() {
-      if (thumb.currentTime < 1) return;
-      thumb.removeEventListener('timeupdate', retry);
-      fitToPicture(thumb);
+    video.addEventListener('timeupdate', function retry() {
+      if (video.currentTime < 1) return;
+      video.removeEventListener('timeupdate', retry);
+      fitToPicture(video);
     });
 
     // --- open and close ---
     panel.querySelector('.leadnet-open')!.addEventListener('click', () => {
+      if (video.dataset.poster && !video.poster) video.poster = video.dataset.poster;
       panel.classList.add('is-open');
       thumb.pause();
       video.currentTime = 0;
@@ -672,11 +726,10 @@ const hasPoster = inPublic(poster);
       /* private browsing — treat as not dismissed */
     }
 
-    // The orb's clip is `preload="none"`: it is a 40KB+ download that
-    // nothing on the first screen needs, so it used to compete with the hero
-    // image and the page's own scripts on every page view. The countdown now
-    // starts after the page has finished loading, and the clip is fetched
-    // only when the bubble actually appears (`nudge` asks it to play).
+    // The orb's loop is `preload="none"`: an 18 KB download that nothing on
+    // the first screen needs. The countdown starts after the page has
+    // finished loading, and the loop is fetched only when the bubble actually
+    // appears (`nudge` asks it to play). The full clip waits for a click.
     if (!dismissed) {
       const delay = Number(panel.dataset.delay ?? 0);
       const reveal = () =>
@@ -692,6 +745,31 @@ const hasPoster = inPublic(poster);
         );
       if (document.readyState === 'complete') reveal();
       else window.addEventListener('load', reveal, { once: true });
+    }
+
+    // --- stepping aside for a quote form, on a phone ---
+    // The bubble sits in the bottom corner, which on a narrow screen is where
+    // a form's fields scroll past: it covered the Phone field. While any
+    // lead form is on screen it fades out, and it comes back when the form
+    // has scrolled away. An open panel is left alone: the visitor asked for it.
+    const narrow = window.matchMedia('(max-width: 767.98px)');
+    const forms = document.querySelectorAll('form[data-endpoint]');
+    if ('IntersectionObserver' in window && forms.length) {
+      const onScreen = new Set<Element>();
+      const sync = () =>
+        panel.classList.toggle(
+          'is-tucked',
+          narrow.matches && onScreen.size > 0 && !panel.classList.contains('is-open')
+        );
+      const io = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) onScreen.add(e.target);
+          else onScreen.delete(e.target);
+        }
+        sync();
+      });
+      forms.forEach((f) => io.observe(f));
+      narrow.addEventListener('change', sync);
     }
   }
 </script>

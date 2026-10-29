@@ -41,4 +41,4 @@ We understand that the health and safety of everyone who uses your office are am
 
 We are a local Canadian company that specializes in providing quality and eco-friendly office cleaning and disinfection services, and janitorial services to the GTA. [Contact us](/contact-us/) today for all of your cleaning needs!
 
-![](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)
+![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

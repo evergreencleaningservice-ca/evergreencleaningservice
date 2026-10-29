@@ -3,11 +3,13 @@ import BaseLayout from './BaseLayout.astro';
 import Sidebar from '../components/Sidebar.astro';
 import { site } from '../data/site';
 import { pageTitle } from '../lib/title';
+import { breadcrumbSchema } from '../lib/schema';
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   /**
    * Inner pages carry the original's sidebar; set false for a full-width page.
    */
@@ -24,7 +26,7 @@ interface Props {
   contentHtml?: string;
 }
 
-const { title, description, image, contentHtml, sidebar = true } = Astro.props;
+const { title, description, image, imageAlt, contentHtml, sidebar = true } = Astro.props;
 
 /**
  * The page bodies are Markdown generated from the archived WordPress HTML, so
@@ -64,7 +66,16 @@ const body = contentHtml ? normalizeBody(contentHtml) : null;
   title={pageTitle(`${title}`)}
   description={description || undefined}
   image={image}
+  imageAlt={imageAlt}
 >
+  <slot name="head" slot="head" />
+  {/* The trail drawn below, in machine-readable form (SEO audit H12). */}
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbSchema([{ name: site.name, url: '/' }, { name: title }]))}
+    is:inline
+  />
   <div class="page-header">
     <div class="container">
       <h1 class="entry-title">{title}</h1>

@@ -57,6 +57,10 @@ const NOINDEX_ROUTES = [
   'thank-you/index.html',
 ];
 
+/* 2026-10-29, SEO audit M1: an empty results page. "follow, noindex", not
+   "noindex, nofollow" — crawlers may still follow it through to the posts. */
+const FOLLOW_NOINDEX_ROUTES = ['search/index.html'];
+
 /** The blog archive is `follow, noindex`, which is a different decision. */
 const isBlogArchive = (page: string) => page.startsWith('category/blog/');
 
@@ -171,6 +175,7 @@ describe('which pages are indexable', () => {
     const noindexed = pages.filter((page) => {
       if (
         NOINDEX_ROUTES.includes(page) ||
+        FOLLOW_NOINDEX_ROUTES.includes(page) ||
         isPrivatePage(page) ||
         isBlogArchive(page) ||
         isTagArchive(page) ||
@@ -187,6 +192,9 @@ describe('which pages are indexable', () => {
   it('the landing pages and the thank-you page still are', () => {
     for (const route of NOINDEX_ROUTES) {
       expect(robotsMetaOf(read(route))).toBe('noindex, nofollow');
+    }
+    for (const route of FOLLOW_NOINDEX_ROUTES) {
+      expect(robotsMetaOf(read(route))).toBe('follow, noindex');
     }
   });
 
