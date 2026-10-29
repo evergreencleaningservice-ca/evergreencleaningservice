@@ -22,7 +22,7 @@
  *   excerpt  15px, #777 — WordPress's first 30 words, not the description
  */
 import { excerpt } from '../lib/excerpt';
-import { thumb } from '../lib/thumb';
+import { thumb, thumbSet } from '../lib/thumb';
 
 type Entry = {
   id?: string;
@@ -54,14 +54,29 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
         {post.data.image && (
           <div class="list-article-thumb">
             <a href={`/${toSlug(post)}/`} tabindex="-1" aria-hidden="true">
-              <img
-                src={thumb(post.data.image)}
-                alt={post.data.imageAlt ?? post.data.title}
-                width="300"
-                height="150"
-                loading={i < eager ? 'eager' : 'lazy'}
-                decoding="async"
-              />
+              {(() => {
+                /* 300px wide beside the text from 768px; the full column width
+                   (about 3.6x the crop) on a phone, where the 960px feature
+                   image is offered instead (src/lib/thumb.ts). */
+                const set = thumbSet(post.data.image);
+                const sizes = '(min-width: 768px) 300px, 100vw';
+                return (
+                  <picture>
+                    {set && <source type="image/avif" srcset={set.avif} sizes={sizes} />}
+                    {set && <source type="image/webp" srcset={set.webp} sizes={sizes} />}
+                    <img
+                      src={thumb(post.data.image)}
+                      srcset={set?.jpg}
+                      sizes={set ? sizes : undefined}
+                      alt={post.data.imageAlt ?? post.data.title}
+                      width="300"
+                      height="150"
+                      loading={i < eager ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
+                  </picture>
+                );
+              })()}
             </a>
           </div>
         )}
@@ -112,6 +127,10 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
   .list-article-thumb {
     float: left;
     margin-right: 30px;
+  }
+
+  .list-article-thumb picture {
+    display: block;
   }
 
   .list-article-thumb img {

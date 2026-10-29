@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar.astro';
 import { site } from '../data/site';
 import { pageTitle } from '../lib/title';
 import { breadcrumbSchema } from '../lib/schema';
+import { normalizeBody as normalizeShared } from '../lib/normalize-body';
 
 interface Props {
   title: string;
@@ -59,7 +60,8 @@ function normalizeBody(html: string): string {
     .replace(/<img(?![^>]*\sloading=)\s/g, '<img loading="lazy" decoding="async" ');
 }
 
-const body = contentHtml ? normalizeBody(contentHtml) : null;
+/* Then the shared pass: image sizes and the responsive photo set. */
+const body = contentHtml ? normalizeShared(normalizeBody(contentHtml)) : null;
 ---
 
 <BaseLayout

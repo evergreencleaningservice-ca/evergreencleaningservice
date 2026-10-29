@@ -10,6 +10,8 @@ image: "/images/toronto-skyline-modern.jpg"
 
 #### We’ve been cleaning Toronto and GTA since 1989.
 
+![Cleaning crew in green uniforms vacuuming and wiping desks in an open-plan office](/images/gallery-office-cleaning-team.jpg)
+
 Whether you need [office cleaning](/services/office-cleaning/), [commercial cleaning services](/), or [industrial cleaning](/services/industrial-cleaning/), our expertise, built since 1989, can help your business make a bold statement and that first impression.
 
 Give your customers, employees, and visitors the opportunity to enjoy the same pride in your space that you feel. Take advantage of our free estimate and consultation to introduce you to the Evergreen Cleaning way of completing your vision for your commercial, industrial, or office environment.
