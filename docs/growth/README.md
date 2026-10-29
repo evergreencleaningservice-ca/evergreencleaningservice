@@ -17,14 +17,14 @@ The 15 Oct implementation record follows below; this section is the current stat
 
 | Item | State |
 |---|---|
-| GA4 property `G-C0JHHPLFPJ` ("Website" stream) | **Done.** Attached to Google tag `GT-PBCTCTX6` (with Ads `AW-18472921801`). Page views and the site's events are verified arriving. |
+| GA4 property `G-C0JHHPLFPJ` ("Website" stream; account `413966610`, property `561394338`) | **Done.** Attached to Google tag `GT-PBCTCTX6` (with Ads `AW-18472921801`). Page views and the site's events are verified arriving. |
 | Custom dimensions `form_id`, `link_location`, `error_type` | **Done** (account owner, 29 Oct). |
 | Enhanced measurement → Form interactions | **Off** (account owner, 29 Oct). Verified: one `form_start` per form, no duplicate. |
 | `generate_lead` key event | **Created** (account owner, 29 Oct). **Not yet confirmed**: no genuine lead since the form fix. Check the first one in GA4 Realtime or Events. Do not submit a test lead. |
 | Google Ads conversions | **Unchanged.** Verified: lead conversion `gu9jCLqh74sdEMnVyehE` on `lead_form_submission`, and call tracking. |
 | Staging excluded from GA4 and Ads | **Open.** Needs a login with access to `GTM-5W69BTJQ` (`ads@brandingcentres.com` has none). See tracking-spec A6. |
 | User-provided data on the Google tag | **To confirm.** Automatic detection is on; check whether Ads enhanced conversions use it, then add a line to `/privacy/` if so. |
-| Search Console | **Not started** (C1). DNS is on Cloudflare, so a domain property can be verified from here. |
+| Search Console | **Done, 29 Oct.** Domain property `sc-domain:evergreencleaningservice.ca` is verified for `ads@brandingcentres.com`, by the existing `google-site-verification` TXT record. `sitemap-index.xml` submitted (Success); `sitemap-0.xml` has been read since 10 Oct. The 2021 WordPress `sitemap_index.xml` 301s to the new index. Linked to GA4 (property `561394338`, stream "Website"). |
 
 **Waiting on the client** (drafts in the session's review kit):
 

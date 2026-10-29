@@ -17,7 +17,7 @@ We only read the container. We did not open it in GTM or change it, and we did n
 
 **Update, 29 Oct 2026: GA4 is live.**
 
-- GA4 property "Evergreen Office Cleaning", web stream "Website", measurement ID **`G-C0JHHPLFPJ`**.
+- GA4 property "Evergreen Office Cleaning" (account `413966610`, property `561394338`), web stream "Website" (stream ID `16231230875`), measurement ID **`G-C0JHHPLFPJ`**. It is linked to Search Console (`sc-domain:evergreencleaningservice.ca`).
 - It was attached as a second destination of the Google tag `GT-PBCTCTX6`, the tag that also carries Google Ads `AW-18472921801`. The Ads account is named "Green Clean Office Maintenance" but it is Evergreen's. Because the container loads that tag on every page, **page views reach GA4 with no container change**. Do not add a separate GA4 Google tag in GTM, or page views will be counted twice.
 - The login that manages the Google tag (`ads@brandingcentres.com`) has **no access to `GTM-5W69BTJQ`**. So the site sends its six events to GA4 itself. `src/lib/ga4.ts` queues a `gtag('event', …, { send_to: 'G-C0JHHPLFPJ' })` command alongside each dataLayer push:
   - `lead_form_submission` goes to GA4 as **`generate_lead`**.
