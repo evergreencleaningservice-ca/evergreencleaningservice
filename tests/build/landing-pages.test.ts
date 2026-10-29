@@ -275,8 +275,8 @@ describe('isolation from the rest of the site', () => {
     expect(h).not.toContain('search-form');
   });
 
-  it.each(PAGES)('$name offers only itself and the privacy policy as links away', ({ name, url }) => {
-    expect(new Set(offPageLinks(name))).toEqual(new Set([url, '/privacy/']));
+  it.each(PAGES)('$name offers only the homepage (its logo) and the privacy policy as links away', ({ name }) => {
+    expect(new Set(offPageLinks(name))).toEqual(new Set(['/', '/privacy/']));
   });
 
   it.each(PAGES)('$name has no Terms link, because there is no terms page', ({ name }) => {
