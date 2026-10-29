@@ -126,10 +126,13 @@
    *   1fr / 1fr     equal halves, 533px each — too wide; a four-field form
    *                 stretched across 533px looks padded out, and the long
    *                 fields made the card taller than the copy beside it
-   *   1fr / 430px   here. Wide enough that the email box and the
+   *   1fr / 430px   wide enough that the email box and the
    *                 phone mask both sit on one line in the paired row
    *                 (measured, not guessed — see the note below), narrow
    *                 enough to read as a form rather than a second panel.
+   *   1fr / 480px   here, since 2026-10-29: the extra 50px puts the services
+   *                 checklist in two columns, which takes more height off
+   *                 the card than anything else (see `.lpx-form-card` below).
    *
    * `minmax(0, 430px)` rather than a flat `430px`: below about 1010px of
    * wrap the track has to be allowed to give way, and a fixed width would
@@ -141,7 +144,7 @@
    * against each other's middles, which is what reads as "beside".
    */
   .lpx-hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 430px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
     gap: 44px;
     align-items: center;
   }
@@ -205,8 +208,15 @@
    * places sitewide, almost all of them body copy on white where it is
    * fine. Darkening the token to fix one line on two pages would restyle
    * the whole site as a side effect.
+   *
+   * 2026-10-29: #4f4f4f passed the measurement and still read as grey and
+   * thin against the busy photograph — the one light line between a dark
+   * heading and dark trust points. It now takes the heading's own ink at a
+   * medium weight, so the whole pitch reads as one dark block (about 10:1
+   * on the scrim's #cccccc floor).
    */
-  color: #4f4f4f;
+  color: #333333;
+  font-weight: 500;
   margin: 0 0 18px;
   max-width: 54ch;
 }
@@ -271,6 +281,66 @@
 @media (min-width: 560px) {
   .lpx-form-card {
     padding: 26px 24px 22px;
+  }
+}
+
+/**
+ * A SHORTER FORM ON DESKTOP. On a phone the form is the screen and its
+ * spacing is right; beside the pitch it stood 913px tall, nearly twice the
+ * copy next to it. The same fields, tightened: 36px boxes, less space
+ * between them, a two-row comments box, and the services checklist in two
+ * columns — the column is 480px rather than 430px so the form clears the
+ * 400px container width at which `QuickQuoteForm` pairs the checkboxes.
+ *
+ * Scoped to `.lpx-form-card`, so the homepage and /request-a-quote/ forms
+ * are untouched, and to desktop, so the phone layout is exactly as it was.
+ *
+ * The box sizes go in through the custom properties `QuickQuoteForm` reads.
+ * Everything else is selected through `.lpx-hero`, one class deeper than the
+ * component's own attribute-scoped rules, so it wins on specificity rather
+ * than on which stylesheet happens to load last.
+ */
+@media (min-width: 941px) {
+  .lpx-form-card {
+    padding: 20px 22px 16px;
+    --qq-input-height: 36px;
+    --qq-input-padding: 6px 12px;
+    --qq-textarea-height: 56px;
+  }
+
+  .lpx-hero .lpx-form-card .qq-heading {
+    font-size: 1.3125rem;
+    margin: 0 0 10px;
+  }
+
+  .lpx-hero .lpx-form-card .qq-field {
+    margin: 0 0 8px;
+  }
+
+  .lpx-hero .lpx-form-card .qq-group {
+    margin: 0;
+  }
+
+  .lpx-hero .lpx-form-card .qq-label {
+    margin: 0 0 3px;
+  }
+
+  .lpx-hero .lpx-form-card .qq-choices {
+    gap: 4px 12px;
+    margin: 2px 0 8px;
+  }
+
+  .lpx-hero .lpx-form-card .qq .qq-choices li {
+    font-size: 14px;
+  }
+
+  .lpx-hero .lpx-form-card .qq-submit {
+    min-height: 44px;
+  }
+
+  .lpx-hero .lpx-form-card .lpx-form-note {
+    margin-top: 10px;
+    font-size: 0.8125rem;
   }
 }
 
@@ -344,6 +414,32 @@
   font-size: 0.9375rem;
   line-height: 1.55;
   color: var(--ink);
+}
+
+/* The photo variant of the cards ("Services we offer"). The photo runs to the
+   card's edges; the text keeps the card's padding. */
+.lpx-cards-photo li {
+  padding: 0 0 16px;
+  overflow: hidden;
+}
+
+.lpx-cards-photo picture {
+  display: block;
+  margin: 0 0 14px;
+  background: #f6f8f5;
+}
+
+.lpx-cards-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.lpx-cards-photo strong,
+.lpx-cards-photo span {
+  padding: 0 18px;
 }
 
 /* ---------- reviews ---------- */

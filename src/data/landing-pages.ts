@@ -105,7 +105,7 @@ export const LANDING_PAGES: LandingPage[] = [
       'Serving Toronto since 1989',
       'WSIB covered and bonded',
       'Quoted per project after a site visit',
-      'No obligation',
+      'No obligation quote',
     ],
     replyPromise: 'as soon as possible',
     formHeading: 'Get your post-construction quote',

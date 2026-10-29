@@ -47,6 +47,12 @@
  *   more towns. The copy is shared with the sibling page, in
  *   `src/data/landing.ts`.
  *
+ *   2026-10-29: the headline no longer asks for the quote. "Get a commercial
+ *   cleaning quote for your building" read as pushy, as if the whole page
+ *   existed to extract a quote; the form beside it already asks. The hero
+ *   now says what the business does, and a "Services we offer" section with
+ *   photographs sits directly under it.
+ *
  *   And an accessibility defect is fixed: the review cards put `aria-label`
  *   on a `<p>`, which is prohibited — a paragraph has no accessible name to
  *   set — and cost this page 4 Lighthouse accessibility points. `LpReviews`
@@ -84,7 +90,7 @@ const REVIEWERS = ['Mark Post', 'Edward Sherman', 'Michael Katchen'] as const;
  * detector that found the sibling was case-sensitive and skipped straight
  * past it. `npm run launch:check` now matches case-insensitively.
  */
-const EYEBROW = 'Free quote — Toronto & the GTA';
+const EYEBROW = 'Commercial cleaning — Toronto & the GTA';
 ---
 
 <LandingLayout
@@ -96,8 +102,8 @@ const EYEBROW = 'Free quote — Toronto & the GTA';
 >
   <LpHero
     eyebrow={EYEBROW}
-    heading="Get a commercial cleaning quote for your building."
-    sub="Tell us where you are and what needs cleaning. We walk the space, write the scope, and price it to your hours — serving Toronto since 1989."
+    heading="Commercial cleaning for offices, clinics and workplaces across the GTA."
+    sub="Cleaned after hours by the same crew every visit, with one account executive you can call. We walk your space, write the scope, and schedule the work around your hours."
     image="evergreen-modern-commercial-cleaning-hero"
   >
     <QuickQuoteForm
@@ -111,9 +117,13 @@ const EYEBROW = 'Free quote — Toronto & the GTA';
     <LpFormNote />
   </LpHero>
 
+  <LpFacilities
+    photos
+    heading="Services we offer"
+    note="Recurring janitorial contracts and one-off specialty work, scheduled around your business."
+  />
   <LpReviews heading="What GTA facility managers say" names={REVIEWERS} />
   <LpBenefits heading="What the quote covers" />
-  <LpFacilities />
   <LpAreas />
   <LpFinalCta quoteAnchor={FORM_ANCHOR} heading="Get your quote" />
 
