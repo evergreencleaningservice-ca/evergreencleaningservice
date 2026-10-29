@@ -39,7 +39,7 @@ We have changed the way we think about cleaning, and that includes developing ne
 
 Our newly made improvements will demonstrate our commitment to a healthier world while allowing us to do our part in beating the pandemic!
 
-![sanitizing station](/images/workplace-sanitization-station.jpg)
+![Hands held under a wall-mounted automatic sanitizer dispenser](/images/automatic-sanitizer-dispenser.jpg)
 
 ### Quick Tip
 

@@ -11,7 +11,7 @@ tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "office"
 
 A staffing company conducted a survey recently which showed that 57% of co-workers and clients admitted that they judge a company based on the cleanliness of its workplace. Out of those who admitted to it, 55% of them reported that they had a bad impression of a company that did not have a clean office. Make sure that you don’t provide a negative impression to staff and visitors. The following are some useful tips and tricks to help keep your office clean.
 
-![Cleaner wiping office desks in a Toronto office](/images/spring-office-desk-cleaning-toronto.jpg)
+![Overhead view of a cleaner in blue gloves wiping a white office desk](/images/overhead-desk-wipe-down.jpg)
 
 ### Divide your workplace into several Zones
 

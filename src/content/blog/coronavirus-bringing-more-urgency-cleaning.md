@@ -26,7 +26,7 @@ Due to the virus, it is more important than ever before for cleaning staff to ut
 
 #### Cleaning is only one of the aspects of curbing the spreading of the virus.
 
-![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
+![Gloved cleaner spraying a table and wiping it with a blue microfibre cloth](/images/gloved-spray-wipe-table.jpg)
 
 The CDC recommends spraying various surfaces with either household bleach that has been diluted or with cleaning products that feature a minimum of 70% alcohol. The [US Environmental Protection Agency](https://www.epa.gov/coronavirus) has offered up a list of different antimicrobial chemicals that have been proven to effectively get rid of germs that can lead to viral respiratory illnesses. For some workplaces, the crews use an electrostatically-charged mist to spray these cleaners in order to get better adhesion to the various surfaces that need to be disinfected.
 

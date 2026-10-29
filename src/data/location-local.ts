@@ -41,7 +41,7 @@ export type LocationLocal = {
 export const LOCATION_LOCAL: Record<string, LocationLocal> = {
   'toronto-downtown': {
     review: 'Edward Sherman',
-    photo: { src: '/images/night-janitorial-crew-office-toronto.jpg', alt: 'Evening cleaning crew vacuuming and wiping desks in an open-plan office with the city skyline outside' },
+    photo: { src: '/images/toronto-financial-district-towers.jpg', alt: 'Gold and blue glass office towers seen from street level against a clear sky' },
     areasIntro:
       'Downtown is where our office is. We cover the core from the waterfront to Bloor Street and from Bathurst to the Don Valley, including:',
     areas: [
@@ -175,7 +175,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
 
   brampton: {
     review: 'Ping Lee',
-    photo: { src: '/images/lobby-floor-scrubber-commercial.jpg', alt: 'Cleaner running a walk-behind floor scrubber across a polished office lobby' },
+    photo: { src: '/images/warehouse-aisle-scrubber-closeup.jpg', alt: 'Walk-behind floor scrubber on a concrete warehouse floor beside steel racking' },
     areasIntro:
       'Brampton’s commercial space is mostly industrial and logistics, with offices and retail in its older centres. We cover:',
     areas: [
@@ -259,7 +259,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
 
   markham: {
     review: 'av-ev',
-    photo: { src: '/images/janitorial-cart-preparation-supplies.jpg', alt: 'Two cleaners preparing a stocked janitorial cart in an office corridor' },
+    photo: { src: '/images/overhead-desk-wipe-down.jpg', alt: 'Overhead view of a cleaner in blue gloves wiping a white office desk' },
     areasIntro:
       'Markham’s commercial space runs along Highway 7 and the Highway 404 and 407 corridors. We cover:',
     areas: [
@@ -301,7 +301,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
 
   oakville: {
     review: 'Mark Post',
-    photo: { src: '/images/eco-friendly-cleaning-spray-microfibre.jpg', alt: 'Spray bottle and microfibre cloths used for surface cleaning' },
+    photo: { src: '/images/spray-bottle-microfibre-cloth.jpg', alt: 'Glass spray bottle and a microfibre cloth on a wooden desk' },
     areasIntro:
       'Oakville’s commercial space is split between its historic downtown, a modern uptown and business parks along the highways. We cover:',
     areas: [

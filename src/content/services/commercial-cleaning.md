@@ -4,8 +4,8 @@ h1: "Commercial Cleaning Services in Toronto and the GTA"
 seoTitle: "Commercial Cleaning Services in Toronto & the GTA | Evergreen"
 description: "Commercial cleaning for retail, institutional and mixed-use buildings in Toronto and the GTA — recurring or one-off, after hours, with a free walkthrough."
 summary: "Recurring and one-off cleaning for the commercial spaces your customers and visitors judge you by — scheduled around your opening hours and scoped on site, not over the phone."
-image: "/images/lobby-floor-scrubber-commercial.jpg"
-imageAlt: "Evergreen technician scrubbing a commercial lobby floor"
+image: "/images/retail-store-auto-scrubber.jpg"
+imageAlt: "Cleaner pushing an auto scrubber along the tiled aisle of a grocery store"
 fitHeading: "Commercial spaces we clean"
 fit:
   - "Retail stores, outlet malls and showrooms"
@@ -79,7 +79,7 @@ showAreas: true
 
 Customers and clients form an opinion of a business the moment they walk in, and online reviews mean they can share that opinion straight away. Cleanliness is frequently a significant part of what they say. That is why commercial cleaning has become an integral part of how a business presents itself.
 
-![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
+![Cleaner pushing an auto scrubber along the tiled aisle of a grocery store](/images/retail-store-auto-scrubber.jpg)
 
 ## Cleaning that respects how you run
 

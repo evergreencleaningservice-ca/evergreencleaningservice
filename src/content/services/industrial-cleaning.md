@@ -2,8 +2,8 @@
 seoTitle: "Industrial & Warehouse Cleaning in Toronto | Evergreen"
 title: "Industrial Cleaning"
 description: "Industrial and warehouse cleaning in Toronto and the GTA — floor scrubbing, strip and wax, high dusting and staff areas, with a free on-site consultation."
-image: "/images/warehouse-floor-scrubber-industrial.jpg"
-imageAlt: "Floor scrubber cleaning an industrial warehouse aisle"
+image: "/images/warehouse-aisle-auto-scrubber.jpg"
+imageAlt: "Walk-behind floor scrubber on a sealed concrete aisle between empty warehouse racks"
 summary: "Cleaning for plants, factories, warehouses and industrial buildings — floors, high surfaces, staff facilities and the offices beside them, scheduled around your shifts."
 related:
   - title: "Building Maintenance & Floor Care"
@@ -22,7 +22,7 @@ showAreas: true
 
 Industrial spaces tend to accumulate dust, dirt, and clutter rather quickly, and combined with what is often a lack of natural light, can make work-spaces unsafe, unhealthy, and unappealing for employees.
 
-![Floor scrubber cleaning a large warehouse floor](/images/warehouse-floor-scrubber-industrial.jpg)
+![Walk-behind floor scrubber on a sealed concrete aisle between empty warehouse racks](/images/warehouse-aisle-auto-scrubber.jpg)
 
 At Evergreen Cleaning Service we recognize that a clean and regularly maintained plant, factory, warehouse, industrial building or facility, can impact worker safety and productivity. To your business partners and customers, a neat and well-presented space acts as a signal of the efficient and organized operation you want to project.
 

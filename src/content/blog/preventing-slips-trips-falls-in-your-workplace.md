@@ -2,8 +2,8 @@
 title: "Preventing Slips, Trips, and Falls in Your Workplace"
 description: "Are slips, trips or falls common in your workplace? Here we highlight information on preventing slips and falls in your place of work."
 pubDate: 2021-03-31
-image: "/images/blog-slip-trip-fall-prevention-feature.jpg"
-imageAlt: "Professional cleaner removing water from a winter entrance to prevent workplace slips"
+image: "/images/icy-entrance-walkway-feature.jpg"
+imageAlt: "Snow and ice on the walkway outside a building’s glass entrance doors"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
@@ -41,7 +41,7 @@ Putting in place warnings and signs with symbols that are in line with the [Crit
 
 Keep in mind that signs can be a good way of reminding employees to rid the area of any waste. It follows that there should be adequate provision of trash cans in the workplace, which should be strategically placed at waste-generation spots. This helps prevent littering and spillage on the floor which are common causes of slips, trips, and falls.
 
-![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
+![Janitorial cart with a wet-floor sign in a glass-walled corridor](/images/janitorial-cart-wet-floor-sign.jpg)
 
 ### Proper Lighting
 

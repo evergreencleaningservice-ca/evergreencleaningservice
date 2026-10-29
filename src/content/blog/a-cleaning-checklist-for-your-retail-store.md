@@ -2,8 +2,8 @@
 title: "A Cleaning Checklist For Your Retail Store"
 description: "Does your storefront need cleaning? Need to refresh your business? Here we discuss what areas of your store will benefit from a good clean!"
 pubDate: 2022-10-27
-image: "/images/blog-retail-store-cleaning-checklist-feature.jpg"
-imageAlt: "Professional cleaner wiping a checkout counter in a bright contemporary retail store"
+image: "/images/janitor-cart-storefront-feature.jpg"
+imageAlt: "Janitorial cart with mop bucket and wet-floor sign outside a shop front"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "retail"]
 ---
 
@@ -71,7 +71,7 @@ When you get [Evergreen Cleaning](/about-us/)‘s professional cleaning services
 
 – Sweep the walkway
 
-![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
+![Cleaner pushing an auto scrubber along the tiled aisle of a grocery store](/images/retail-store-auto-scrubber.jpg)
 
 As you can see, there is a lot that needs to get done when it comes to keeping a retail store clean. A lot of stores have even more that’s required. It depends on how much volume a store gets and the types of products they sell. You can call the professionals at Evergreen to ensure that you get all of the cleanings you need to do without allocating your valuable time to it. That way you can better focus your efforts on more important things that generate revenue for your business.
 

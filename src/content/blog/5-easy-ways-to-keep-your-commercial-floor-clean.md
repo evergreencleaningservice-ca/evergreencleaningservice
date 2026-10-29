@@ -2,8 +2,8 @@
 title: "5 Easy Ways to Keep Your Commercial Floor Clean"
 description: "Do your floors sparkle? Here we discuss the benefits of clean commercial floors and how to ensure they stay that way."
 pubDate: 2021-11-24
-image: "/images/blog-commercial-floor-care-feature.jpg"
-imageAlt: "Commercial cleaner using an auto scrubber on a polished modern lobby floor"
+image: "/images/scrubber-polished-floor-closeup-feature.jpg"
+imageAlt: "Auto scrubber cleaning a polished floor beside a worker in shoe covers"
 ---
 
 ## Sparkling Clean Floors

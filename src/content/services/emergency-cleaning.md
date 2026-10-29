@@ -2,7 +2,8 @@
 seoTitle: "Emergency Commercial Cleaning in Toronto | Evergreen"
 title: "Emergency Cleaning Services"
 description: "Emergency commercial cleaning in Toronto and the GTA — flooding and water damage, post-event and tenant-ready clean-ups. Call (416) 803-4880."
-image: "/images/flooded-office-water-extraction.jpg"
+image: "/images/air-movers-drying-corridor-carpet.jpg"
+imageAlt: "Orange air movers drying the carpet of an office elevator corridor after water damage"
 summary: "Flooding, water damage, a space to turn around after an event or before a new tenant — we assess quickly and arrive equipped for the job."
 related:
   - title: "Property Managers & Condos"
@@ -15,7 +16,7 @@ related:
 
 We recognize that your need for emergency cleaning services may occur without notice or warning. With commercial cleaning experience going back to 1989, Evergreen Cleaning Service is prepared to deal with the unexpected and restore your space to its ideal clean and full functionality.
 
-![Technician extracting water from a flooded office carpet](/images/flooded-office-water-extraction.jpg)
+![Orange air movers drying the carpet of an office elevator corridor after water damage](/images/air-movers-drying-corridor-carpet.jpg)
 
 Have you experienced flooding or water damage? Need to cleanup a rented space following a special event? Preparing a space for new tenants? Dealing with damage resulting from fire or smoke? Confronted with an unpleasant odour or stain? Our experienced and highly trained cleaning services workers always arrive fully equipped with the tools and materials necessary to handle any situation encountered. Our professionals are able to assess your situation quickly, and apply our expertise to minimize downtime and ease your concerns.
 

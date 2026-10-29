@@ -11,6 +11,7 @@ import { COVERAGE_SENTENCE } from '../../data/coverage';
 import { site, nap } from '../../data/site';
 import { pageTitle } from '../../lib/title';
 import { breadcrumbSchema } from '../../lib/schema';
+import PagePhoto from '../../components/blocks/PagePhoto.astro';
 
 const description =
   'Commercial and office cleaning across the Greater Toronto Area — downtown Toronto, Mississauga, Etobicoke, Vaughan, Markham, Brampton and Oakville.';
@@ -34,6 +35,7 @@ const description =
 
   <div class="section-padding">
     <div class="container">
+      <PagePhoto src="/images/toronto-skyline-waterfront.jpg" alt="City skyline and the CN Tower across the lake at sunset" eager wide />
       <p class="loc-lead">
         Evergreen Office Cleaning works across the Greater Toronto Area from one office, at
         {' '}{nap.streetAddress}, {nap.addressLocality}: {COVERAGE_SENTENCE}. The areas below have a page

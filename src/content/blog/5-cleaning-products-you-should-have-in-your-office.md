@@ -31,7 +31,7 @@ It is important to have spot removers, such as Shout, in your office. [Stain rem
 
 Use white vinegar to disinfect, shine your windows, and clean stubborn spots in your office. It is simple, cheap, and effective. Also, use white vinegar to clean your coffee machine. How? Run the white vinegar through one cycle. Then, use water to rinse your coffee machine on the next cycle. Keep a cheap bottle of white vinegar under the sink in your break room.
 
-![Labelled spray bottle and microfibre cloths used for surface cleaning](/images/eco-friendly-cleaning-spray-microfibre.jpg)
+![Glass spray bottle and a microfibre cloth on a wooden desk](/images/spray-bottle-microfibre-cloth.jpg)
 
 ### Air Freshener
 

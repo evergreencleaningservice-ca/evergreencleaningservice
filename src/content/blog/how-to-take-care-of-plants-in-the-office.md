@@ -2,8 +2,8 @@
 title: "How To Take Care of Plants in The Office"
 description: "Like the look of plants in the office? Here we discuss the benefits of having them and how to care for them."
 pubDate: 2021-06-30
-image: "/images/blog-office-plant-care-feature.jpg"
-imageAlt: "Office cleaner gently wiping the leaves of a healthy indoor plant"
+image: "/images/office-plant-watering-feature.jpg"
+imageAlt: "Office worker watering a potted jade plant on a white desk"
 tags: ["janitorial-services", "office", "plants"]
 ---
 

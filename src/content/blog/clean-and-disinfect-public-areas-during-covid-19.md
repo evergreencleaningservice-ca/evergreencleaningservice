@@ -2,8 +2,8 @@
 title: "How To Clean And Disinfect Public Areas During COVID-19"
 description: "Guidance on how to clean and disinfect public settings during the Covid-19 pandemic. All of us can help stop the spread right now."
 pubDate: 2020-05-27
-image: "/images/blog-public-area-disinfection-feature.jpg"
-imageAlt: "Commercial cleaners disinfecting an elevator panel and glass handrail in a public lobby"
+image: "/images/handrail-disinfection-feature.jpg"
+imageAlt: "Cleaner in orange gloves wiping a steel handrail beside a glass balustrade"
 tags: ["commercial-cleaning", "coronavirus", "janitorial-services", "office"]
 ---
 

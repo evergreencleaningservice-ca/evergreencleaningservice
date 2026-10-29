@@ -42,7 +42,7 @@ Any appliance that deals with food will automatically be used by many people. So
 
 Most people automatically think about bathroom doors and handles when thinking about cleaning doors. However, all door handles need to be cleaned as well as all keypads and fingerprint scanners. Remember, these will be touched and handled just as often as the handles in the bathroom. Also, keep in mind that the building’s exterior handles would also be touched by clients, visitors and delivery persons. You should also clean the handles on storage cupboards, drawers, closets etc.
 
-![Cleaner disinfecting an office door handle](/images/touchpoint-disinfection-door-handle.jpg)
+![Gloved cleaner spraying disinfectant and wiping a lever door handle](/images/door-handle-wipe-spray.jpg)
 
 #### Conference Rooms
 

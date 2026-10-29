@@ -4,8 +4,8 @@ h1: "Post-Construction Cleaning for Commercial Buildouts"
 seoTitle: "Post-Construction Cleaning in Toronto & the GTA | Evergreen"
 description: "Post-construction cleaning for commercial spaces in Toronto and the GTA — dust, debris and detail cleaning before handover, around your trades."
 summary: "Clean-up after a renovation, fit-out or new build — from the first debris pass to a detailed final clean before the space is handed over or reopened."
-image: "/images/post-construction-cleanup-vacuum.jpg"
-imageAlt: "Cleaner vacuuming construction dust in a newly fitted-out office"
+image: "/images/floor-machine-empty-concrete-floor.jpg"
+imageAlt: "Floor machine on the bare concrete floor of an empty building awaiting fit-out"
 needsClientCopy: true
 fitHeading: "Who it is for"
 fit:

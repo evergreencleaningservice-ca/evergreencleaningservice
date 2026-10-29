@@ -47,7 +47,7 @@ Some machines may prove easier to maintain than others, but at the end of the da
 
 It’s also well worth noting that the cleaning robots would still regularly require disinfection after each cleaning session. Though the robots can’t directly spread viruses, they can store them on their surface and spread them indirectly.
 
-![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
+![Ride-on floor scrubber parked in a bright corridor with a freshly polished floor](/images/ride-on-floor-scrubber-corridor.jpg)
 
 ### Lack Of Thoroughness with Automated Vacuums
 

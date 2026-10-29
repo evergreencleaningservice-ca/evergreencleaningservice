@@ -2,8 +2,8 @@
 title: "Keep Yourself Safe From Coronavirus At Work"
 description: "Still working outside your home during the coronavirus outbreak? Take a look at what you can do to decrease the risk of contracting the virus and stay safe."
 pubDate: 2020-03-31
-image: "/images/blog-coronavirus-workplace-safety-feature.jpg"
-imageAlt: "Professional cleaner disinfecting shared conference-room surfaces after office hours"
+image: "/images/ppe-door-handle-disinfection-feature.jpg"
+imageAlt: "Worker in protective coveralls disinfecting a door handle behind caution tape"
 tags: ["commercial-office-cleaning", "coronavirus"]
 ---
 

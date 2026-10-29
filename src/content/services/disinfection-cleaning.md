@@ -4,8 +4,8 @@ title: "Disinfection Cleaning"
 description: "Disinfection cleaning for Toronto and GTA workplaces — surfaces cleaned first, then disinfected with specialized products, one-off or on a schedule."
 # The archived featured image for this page (disinfection-cleaning-tech-e1616794679911.jpg)
 # was never downloaded into public/images, so this uses the page's own lead photo instead.
-image: "/images/door-handle-disinfection-office.jpg"
-imageAlt: "Cleaner disinfecting a glass office door handle"
+image: "/images/door-handle-wipe-spray.jpg"
+imageAlt: "Gloved cleaner spraying disinfectant and wiping a lever door handle"
 summary: "Surfaces cleaned first, then disinfected with specialized products — as a one-off or on a regular schedule, after hours or while you are open."
 related:
   - title: "Office Cleaning"
@@ -24,7 +24,7 @@ If you want to prevent bacteria and germs from spreading within your office, Eve
 
 **_You’ll have peace of mind knowing your office will be as clean as possible._**
 
-![Cleaner spraying and wiping a glass office door handle](/images/door-handle-disinfection-office.jpg)
+![Gloved cleaner spraying disinfectant and wiping a lever door handle](/images/door-handle-wipe-spray.jpg)
 
 Colds, flu and other viruses spread through coughs, sneezes and close contact — and through the surfaces everyone touches: door handles, light switches, shared desks and kitchen counters.
 
@@ -33,7 +33,7 @@ Colds, flu and other viruses spread through coughs, sneezes and close contact �
   
 Before we disinfect, we’ll need to clean all surfaces, objects and contents. If this is not done initially, then the disinfectant we use will not be able to penetrate grime and dirt. In turn, surfaces won’t be thoroughly disinfected.
 
-![Cleaner in protective gloves disinfecting a commercial workspace](/images/commercial-disinfection-service.jpg)
+![Gloved cleaner spraying a table and wiping it with a blue microfibre cloth](/images/gloved-spray-wipe-table.jpg)
 
 **_Quite simply, everything is cleaned with detergent first to remove surface residue, and then disinfected. We use specialized products for disinfection cleaning._**
 
