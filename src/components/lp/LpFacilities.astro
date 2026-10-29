@@ -6,29 +6,57 @@
  * type" a required select, which is a question the account executive asks on
  * the walkthrough. Saying what we clean is the page's job; asking is not the
  * form's.
+ *
+ * `photos` puts each card's photograph above its text. The quote page asked
+ * for it (2026-10-29): apart from the hero there was nothing on the page to
+ * look at. The photos are the site's own image sets, already on the image
+ * host, and carry empty alt text for the reason the homepage's service cards
+ * do — the title beside each one says everything the picture would.
  */
 import { FACILITY_TYPES } from '../../data/landing';
 
 interface Props {
   heading?: string;
   note?: string;
-  items?: readonly { title: string; body: string }[];
+  items?: readonly { title: string; body: string; image?: string }[];
+  photos?: boolean;
 }
 const {
   heading = 'Buildings we look after',
   note = 'If your building is not on this list, it is still worth asking — most of what we do is scheduled around a space rather than a category.',
   items = FACILITY_TYPES,
+  photos = false,
 } = Astro.props;
+
+const SIZES = '(min-width: 941px) 340px, (min-width: 620px) 50vw, 100vw';
+const srcset = (base: string, ext: string) =>
+  [480, 768].map((w) => `/images/${base}-${w}.${ext} ${w}w`).join(', ');
 ---
 
 <section class="lpx-section" aria-labelledby="lpx-facilities-h">
   <div class="lpx-wrap">
     <h2 id="lpx-facilities-h">{heading}</h2>
     <p class="lpx-section-note">{note}</p>
-    <ul class="lpx-cards lpx-cards-3">
+    <ul class:list={['lpx-cards lpx-cards-3', photos && 'lpx-cards-photo']}>
       {
         items.map((f) => (
           <li>
+            {photos && f.image && (
+              <picture>
+                <source type="image/avif" srcset={srcset(f.image, 'avif')} sizes={SIZES} />
+                <source type="image/webp" srcset={srcset(f.image, 'webp')} sizes={SIZES} />
+                <img
+                  src={`/images/${f.image}-480.jpg`}
+                  srcset={srcset(f.image, 'jpg')}
+                  sizes={SIZES}
+                  alt=""
+                  width="480"
+                  height="320"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            )}
             <strong>{f.title}</strong>
             <span>{f.body}</span>
           </li>

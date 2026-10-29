@@ -66,14 +66,20 @@ export const BENEFITS = [
   },
 ] as const;
 
-/** The property types the business cleans, in the words the service pages use. */
+/**
+ * The property types the business cleans, in the words the service pages use.
+ *
+ * `image` is the base name of a photo set in /images/ (-480 and -768, AVIF,
+ * WebP and JPEG), all already on the image host. `LpFacilities` shows them
+ * only when a page asks for its photo variant; elsewhere these stay text cards.
+ */
 export const FACILITY_TYPES = [
-  { title: 'Offices', body: 'Corporate floors, professional suites and multi-tenant buildings.' },
-  { title: 'Medical and dental clinics', body: 'Treatment rooms, waiting areas and washrooms.' },
-  { title: 'Industrial and warehouse', body: 'Production floors, loading areas and staff facilities.' },
-  { title: 'Retail and showrooms', body: 'Sales floors, glass, entrances and back of house.' },
-  { title: 'Post-construction', body: 'Renovation and build-out clean-up before handover.' },
-  { title: 'Building maintenance', body: 'Carpet, hard floors, pressure washing and periodic work.' },
+  { title: 'Offices', body: 'Corporate floors, professional suites and multi-tenant buildings.', image: 'office-backpack-vacuum-toronto' },
+  { title: 'Medical and dental clinics', body: 'Treatment rooms, waiting areas and washrooms.', image: 'gallery-medical-clinic-cleaning' },
+  { title: 'Industrial and warehouse', body: 'Production floors, loading areas and staff facilities.', image: 'warehouse-floor-scrubber-industrial' },
+  { title: 'Retail and showrooms', body: 'Sales floors, glass, entrances and back of house.', image: 'gallery-retail-store-cleaning' },
+  { title: 'Post-construction', body: 'Renovation and build-out clean-up before handover.', image: 'post-construction-cleanup-vacuum' },
+  { title: 'Building maintenance', body: 'Carpet, hard floors, pressure washing and periodic work.', image: 'carpet-extraction-boardroom-toronto' },
 ] as const;
 
 /** The reply promise, written once. */
@@ -87,7 +93,7 @@ export const TRUST_POINTS = [
   'Serving Toronto since 1989',
   'WSIB covered and bonded',
   `We reply ${REPLY_PROMISE}`,
-  'No obligation',
+  'No obligation quote',
   'First month free on a signed recurring contract',
   'From $30/hr, supplies and equipment included',
   "Cancel anytime with 30 days' notice",

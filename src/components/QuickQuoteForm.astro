@@ -448,9 +448,11 @@ const f = (name: string) => `${id}-${name}`;
   .qq textarea {
     width: 100%;
     max-width: 100%;
-    /* 42px: compact, and still well over the 24px minimum target. */
-    min-height: 42px;
-    padding: 9px 12px;
+    /* 42px: compact, and still well over the 24px minimum target. The
+       custom properties let a page set a tighter size (the landing pages do
+       on desktop) without out-shouting this component's scoped selectors. */
+    min-height: var(--qq-input-height, 42px);
+    padding: var(--qq-input-padding, 9px 12px);
     /* FILLED, NOT OUTLINED. The field is described by its own tint rather
        than by a rule around it, so a column of inputs reads as a stack of
        targets instead of a stack of boxes.
@@ -511,7 +513,8 @@ const f = (name: string) => `${id}-${name}`;
   }
 
   .qq textarea {
-    min-height: 72px;
+    height: var(--qq-textarea-height, auto);
+    min-height: var(--qq-textarea-height, 72px);
     resize: vertical;
     line-height: 1.5;
   }
