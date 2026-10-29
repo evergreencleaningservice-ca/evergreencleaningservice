@@ -24,6 +24,32 @@ export interface Review {
 }
 
 export const reviews: Review[] = [
+  /* Added 2026-10-29 from the Google Business Profile's own review list,
+     newest first: the archive's four were all from 2020-2021. Text is
+     verbatim. Google shows only a relative age ("8 weeks ago"), so the two
+     dates without an exact day are approximate and only feed the card's
+     "N months ago". */
+  {
+    name: 'Christopher Perera',
+    date: '2026-09-03',
+    rating: 5,
+    verified: true,
+    text: 'Very reliable. Great service',
+  },
+  {
+    name: 'Andy Handy',
+    date: '2026-01-15',
+    rating: 5,
+    verified: true,
+    text: 'Excellent service at a very good price.',
+  },
+  {
+    name: 'av-ev',
+    date: '2025-07-04',
+    rating: 5,
+    verified: true,
+    text: 'They do the regular maintenance of our office space. Great company, very professional and quality services. Highly recommend.',
+  },
   {
     name: 'Mark Post',
     date: '2021-05-31',

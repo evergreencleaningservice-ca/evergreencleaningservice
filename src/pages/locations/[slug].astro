@@ -18,13 +18,13 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import QuickQuoteForm from '../../components/QuickQuoteForm.astro';
-import ProcessSteps from '../../components/blocks/ProcessSteps.astro';
 import FaqList from '../../components/blocks/FaqList.astro';
 import LinkCards from '../../components/blocks/LinkCards.astro';
 import QuoteBand from '../../components/blocks/QuoteBand.astro';
 import ReviewQuotes from '../../components/blocks/ReviewQuotes.astro';
 import { locations } from '../../data/locations';
-import { AREAS, COVERAGE_SENTENCE } from '../../data/coverage';
+import { LOCATION_LOCAL } from '../../data/location-local';
+import { AREAS } from '../../data/coverage';
 import { site, nap } from '../../data/site';
 import { pageTitle } from '../../lib/title';
 import { breadcrumbSchema } from '../../lib/schema';
@@ -37,6 +37,8 @@ export function getStaticPaths() {
 }
 
 const { location } = Astro.props;
+/* What is local about this page: src/data/location-local.ts. */
+const local = LOCATION_LOCAL[location.slug];
 /* Client-supplied copy wins where it exists; the generated H1 stays the
    fallback for the locations still on the template body. */
 const h1 = location.detail?.h1 ?? `Commercial Cleaning in ${location.name}`;
@@ -64,24 +66,18 @@ const nearby = AREAS.filter((a) => a.href && a.href !== `/locations/${location.s
 }));
 
 const faqs = [
+  /* The local questions first: they are what this page answers that the
+     other six do not. */
+  ...(local?.faqs ?? []),
   {
     q: `Do you have an office in ${location.name}?`,
     a: isToronto
-      ? `Our office is at ${nap.addressLine}. Crews work across the city and the wider GTA.`
-      : `No. Evergreen has one office, at ${nap.addressLine}, and crews travel to ${location.name} from there. Every client has an account executive as their direct contact.`,
+      ? `Yes, in the city: ${nap.addressLine}.`
+      : `No. Crews come to ${location.name} from our one office, at ${nap.streetAddress} in Toronto.`,
   },
-  {
-    q: `What areas around ${location.name} do you cover?`,
-    a: `We work across ${COVERAGE_SENTENCE}.`,
-  },
-  {
-    q: 'How do I get a quote?',
-    a: `Call ${nap.phoneDisplay} or send the quote form. We arrange a free on-site walkthrough and send a written proposal.`,
-  },
-  {
-    q: 'Can cleaning be done after hours?',
-    a: 'Yes. Most commercial cleaning is done in the evening, overnight or at weekends so it does not disrupt your staff or customers.',
-  },
+  /* "How do I get a quote?" and "Can cleaning be done after hours?" were the
+     same on all seven pages; the quote form beside the text and the local
+     scheduling notes answer both. */
 ];
 
 /* Per-page schema. The organisation graph is global (BaseLayout); this adds the
@@ -185,19 +181,41 @@ const schema = {
                   ))}
                 </ul>
 
-                <h3>How we work</h3>
-                <p>
-                  Every contract starts with an on-site walkthrough, not a phone quote — the scope of a{' '}
-                  {location.name} facility is what sets the schedule. You get a dedicated account
-                  executive, after-hours cleaning where the space cannot be cleaned during business hours,
-                  and a written scope.
-                </p>
+                {/* The generic "How we work" paragraph that used to sit here was the
+                    same on five pages; scheduling is now covered locally in
+                    "Working in …" below, and the process has its own page. */}
                 <p>
                   We are bonded, insured and WSIB covered. Call{' '}
                   <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a> or{' '}
                   <a href="#offer-quote" data-quote-cta data-cta-location="content">request a walkthrough</a>.
                 </p>
               </Fragment>
+            )
+          }
+          {
+            local && (
+              <section class="loc-local" aria-labelledby="loc-local-h">
+                <hr />
+                <h2 id="loc-local-h">Working in {location.name}</h2>
+                <p>{local.areasIntro}</p>
+                <ul class="loc-areas">
+                  {local.areas.map((a) => (
+                    <li>{a}</li>
+                  ))}
+                </ul>
+                <h3>The buildings, and what they need</h3>
+                <ul class="loc-detail">
+                  {local.buildings.map((b) => (
+                    <li>
+                      <strong>{b.title}.</strong> {b.body}
+                    </li>
+                  ))}
+                </ul>
+                <h3>Getting there and scheduling</h3>
+                {local.access.map((p) => (
+                  <p>{p}</p>
+                ))}
+              </section>
             )
           }
           {/* Under the text rather than under the form (2026-10-29): beside a
@@ -228,9 +246,19 @@ const schema = {
   </div>
 
   <div class="container stack loc-after">
-    <LinkCards heading={`Services in ${location.name}`} items={services} />
-    <ProcessSteps heading="How it works" />
-    <ReviewQuotes heading="What clients say" names={['Edward Sherman', 'Michael Katchen', 'Ping Lee']} />
+    {/* Titles only: the same six descriptions on seven pages were repeated text. */}
+    <LinkCards heading={`Services in ${location.name}`} items={services.map(({ title, href }) => ({ title, href }))} />
+    {/* The five process steps were the same on all seven pages, the largest
+        block of repeated text the audit's uniqueness check found. They live on
+        /our-process/, and every location page links there instead. */}
+    <p class="loc-process-link">
+      Every contract starts with a free walkthrough and a written scope.{' '}
+      <a href="/our-process/">See how we work, step by step&nbsp;→</a>
+    </p>
+    {/* One review per page, a different one on each (location-local.ts), so
+        the seven pages do not repeat the same three. Not a review from this
+        city: the site does not attribute reviews to places. */}
+    <ReviewQuotes heading="What a client says" names={local ? [local.review] : ['Edward Sherman', 'Michael Katchen', 'Ping Lee']} />
     <FaqList faqs={faqs} />
     <LinkCards heading="Other service areas" items={nearby} />
     <QuoteBand location="content" />
@@ -282,6 +310,22 @@ const schema = {
     border: 0;
     border-top: 1px solid var(--rule);
     margin: 30px 0;
+  }
+
+  .loc-areas {
+    columns: 2 240px;
+    column-gap: 30px;
+    margin: 0 0 22px;
+    padding-left: 20px;
+  }
+
+  .loc-areas li {
+    break-inside: avoid;
+    margin-bottom: 6px;
+  }
+
+  .loc-process-link {
+    font-size: 1.0625rem;
   }
 
   .loc-detail {
