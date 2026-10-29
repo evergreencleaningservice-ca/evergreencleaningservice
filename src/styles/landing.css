@@ -695,3 +695,31 @@ body:has(.qq:focus-within) .lpx-sticky {
   background: var(--ink-heading);
   color: #fff;
 }
+
+/* ---------- the five quote steps ---------- */
+
+/* Five steps in the three-column card grid split 3 + 2 with an empty sixth
+   slot. As a centred flex row they sit five across on a desktop, and on a
+   tablet the odd one out is centred rather than stranded at the left. */
+.lpx-steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.lpx-steps > li {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+@media (min-width: 620px) {
+  .lpx-steps > li {
+    flex-basis: calc((100% - 16px) / 2);
+  }
+}
+
+@media (min-width: 941px) {
+  .lpx-steps > li {
+    flex-basis: calc((100% - 4 * 16px) / 5);
+  }
+}

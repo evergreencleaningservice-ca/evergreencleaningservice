@@ -183,13 +183,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
   /* The landing page opts out of the site's own chrome entirely. */
   body.lp {
     background: #fff;
-    /* room for the sticky bar so it never covers the submit button */
-    padding-bottom: 76px;
   }
 
-  @media (min-width: 768px) {
-    body.lp {
-      padding-bottom: 0;
+  /* Room for the phone's sticky call bar, so it never covers the footer's
+     last line. It used to be padding on the body: a white strip under the
+     grey footer, and on the thank-you page, which has no bar, for nothing.
+     Now the footer itself runs on under the bar, and only where there is
+     one. */
+  @media (max-width: 767px) {
+    body.lp:has(.lpx-sticky) .lp-footer {
+      padding-bottom: calc(28px + 76px);
     }
   }
 

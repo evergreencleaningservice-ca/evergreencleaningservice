@@ -22,7 +22,7 @@ const {
   <div class="blk-quoteband-actions">
     <a class="btn btn-primary btn-lg" href="/request-a-quote/" data-cta-location={location}>Request a quote</a>
     <a class="btn btn-ghost btn-lg" href={nap.phoneHref} data-call-location="content">Call {nap.phoneDisplay}</a>
-    <p class="blk-quoteband-hours">{hoursNote}</p>
+    <p class="blk-quoteband-hours">{hoursNote.replace(/–/g, "\u2060–\u2060")}</p>
   </div>
 </section>
 

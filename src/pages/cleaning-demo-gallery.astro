@@ -34,15 +34,33 @@ const galleryHtml = (entry.rendered?.html ?? '').replace(
 </PageLayout>
 
 <style>
+  /* A centred flex row rather than a grid, so the thirteenth photo sits in
+     the middle of its row instead of alone at the left. */
   .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
+    container-type: inline-size;
   }
 
   /* The photographs arrive wrapped in paragraphs from Markdown. */
   .gallery-grid :global(p) {
     margin: 0;
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+
+  @container (min-width: 480px) {
+    .gallery-grid :global(p) {
+      flex-basis: calc((100% - 20px) / 2);
+    }
+  }
+
+  @container (min-width: 720px) {
+    .gallery-grid :global(p) {
+      flex-basis: calc((100% - 2 * 20px) / 3);
+    }
   }
 
   .gallery-grid :global(img) {

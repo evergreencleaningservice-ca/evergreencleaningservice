@@ -48,7 +48,7 @@ const services = (await getCollection('services')).sort(
 
   <div class="section-padding">
     <div class="container">
-      <div class="grid grid-3">
+      <div class="svc-grid">
         {
           services.map((service, index) => (
             <ServiceCard service={service} loading={index < 3 ? 'eager' : 'lazy'} />
@@ -67,5 +67,31 @@ const services = (await getCollection('services')).sort(
   .page-header .entry-title {
     max-width: 900px;
     margin: 0 auto;
+  }
+
+  /* Nine cards: two across on a tablet left the ninth alone at the left.
+     A centred flex row centres it. Column widths are the theme's. */
+  .svc-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .svc-grid > :global(*) {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+
+  @media (min-width: 576px) {
+    .svc-grid > :global(*) {
+      flex-basis: calc((100% - 30px) / 2);
+    }
+  }
+
+  @media (min-width: 992px) {
+    .svc-grid > :global(*) {
+      flex-basis: calc((100% - 2 * 30px) / 3);
+    }
   }
 </style>
