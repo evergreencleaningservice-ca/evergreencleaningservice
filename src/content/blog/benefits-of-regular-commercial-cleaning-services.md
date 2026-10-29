@@ -13,7 +13,7 @@ Incomplete cleaning services and those that perform their duties semi-regularly 
 
 **Here is what you can expect from the reliable cleaning services from Evergreen Cleaning.** 
 
-![Cleaner vacuuming an open-plan office with a backpack vacuum](/images/office-backpack-vacuum-toronto.jpg)
+![Vacuum cleaner being used on an office floor](/images/office-backpack-vacuum-toronto.jpg)
 
 ### Impress Your Guests and Clients
 
@@ -43,7 +43,7 @@ Break rooms
 
 By keeping these elements of the business completely clean, you can avoid the risk of spreading disease. This will also reduce the number of days your employees will be sick.
 
-![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
+![Close-up of a floor machine cleaning a commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 ### Promote Employee Satisfaction and Productivity
 

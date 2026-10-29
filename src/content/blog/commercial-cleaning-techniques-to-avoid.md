@@ -59,7 +59,7 @@ There are also a lot of people that believe that wood surfaces should be frequen
 
 To get a better effect, you’ll want to clean the wooden surfaces with regular dusting using a gentle cloth. Try to give the wood a solid polish every two to four months. You can go even longer if the wood isn’t frequently used.
 
-![Janitorial cart stocked with cloths, sprays and supplies](/images/janitorial-cart-preparation-supplies.jpg)
+![Janitorial cart with mop bucket and warning sign](/images/janitorial-cart-preparation-supplies.jpg)
 
 The cleanliness of your home or office can impact the quality of life of everyone that uses it. Cleaning is a serious task. It can dictate the overall health and wellness of all occupants. Don’t go for the first cleaning method you hear on the internet or from word of mouth. Stick to using tried and true cleaning methods from professionals. It’s always a good idea to hand the reigns off to [professional cleaners](/contact-us/) that know what they are doing.
 

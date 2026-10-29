@@ -11,7 +11,7 @@ tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services
 
 According to statistics, most slips, trips, and falls occur on the same level compared to tripping from an elevated space. With the right measures, these incidences can be prevented. What’s important is putting in the effort for proper preparation and setting ground rules for total order on the floor. What matters is having policies and taking initiatives to maintain high-level safety and hygiene. This article highlights information on preventing slips and falls in your place of work.
 
-![Building entrance floor being cleaned of winter slush](/images/winter-entrance-floor-care-slush.jpg)
+![Wet and muddy entrance mat in winter](/images/winter-entrance-floor-care-slush.jpg)
 
 ### Main Causes of Slips, Trips, and Falls
 
@@ -41,7 +41,7 @@ Putting in place warnings and signs with symbols that are in line with the [Crit
 
 Keep in mind that signs can be a good way of reminding employees to rid the area of any waste. It follows that there should be adequate provision of trash cans in the workplace, which should be strategically placed at waste-generation spots. This helps prevent littering and spillage on the floor which are common causes of slips, trips, and falls.
 
-![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
+![Close-up of a floor machine cleaning a commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 ### Proper Lighting
 

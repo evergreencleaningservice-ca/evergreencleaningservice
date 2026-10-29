@@ -41,7 +41,7 @@ export type LocationLocal = {
 export const LOCATION_LOCAL: Record<string, LocationLocal> = {
   'toronto-downtown': {
     review: 'Edward Sherman',
-    photo: { src: '/images/night-janitorial-crew-office-toronto.jpg', alt: 'Evening cleaning crew vacuuming and wiping desks in an open-plan office with the city skyline outside' },
+    photo: { src: '/images/night-janitorial-crew-office-toronto.jpg', alt: 'Industrial scrubber cleaning an office corridor' },
     areasIntro:
       'Downtown is where our office is. We cover the core from the waterfront to Bloor Street and from Bathurst to the Don Valley, including:',
     areas: [
@@ -87,7 +87,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
 
   etobicoke: {
     review: 'Christopher Perera',
-    photo: { src: '/images/gallery-industrial-cleaning-toronto.jpg', alt: 'Cleaning crew scrubbing and mopping the floor of a light-industrial facility' },
+    photo: { src: '/images/gallery-industrial-cleaning-toronto.jpg', alt: 'Floor polishing machine in an industrial building' },
     areasIntro:
       'Etobicoke runs from the lake to the airport, and its business areas are very different from one end to the other. We cover:',
     areas: [
@@ -133,7 +133,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
 
   mississauga: {
     review: 'Michael Katchen',
-    photo: { src: '/images/high-dusting-warehouse-lift.jpg', alt: 'Cleaner on a scissor lift high-dusting the roof structure of a distribution warehouse' },
+    photo: { src: '/images/high-dusting-warehouse-lift.jpg', alt: 'Worker on a lifting platform cleaning a ceiling' },
     areasIntro:
       'Mississauga’s commercial space is spread across several distinct business districts. We cover:',
     areas: [
@@ -175,7 +175,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
 
   brampton: {
     review: 'Ping Lee',
-    photo: { src: '/images/lobby-floor-scrubber-commercial.jpg', alt: 'Cleaner running a walk-behind floor scrubber across a polished office lobby' },
+    photo: { src: '/images/lobby-floor-scrubber-commercial.jpg', alt: 'Close-up of a floor machine cleaning a commercial lobby' },
     areasIntro:
       'Brampton’s commercial space is mostly industrial and logistics, with offices and retail in its older centres. We cover:',
     areas: [
@@ -217,7 +217,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
 
   vaughan: {
     review: 'Andy Handy',
-    photo: { src: '/images/warehouse-floor-scrubber-industrial.jpg', alt: 'Cleaner running a floor scrubber down a warehouse aisle between racking' },
+    photo: { src: '/images/warehouse-floor-scrubber-industrial.jpg', alt: 'Floor scrubber in a warehouse aisle' },
     areasIntro:
       'Vaughan combines a new downtown with one of the GTA’s largest industrial areas. We cover:',
     areas: [
@@ -259,7 +259,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
 
   markham: {
     review: 'av-ev',
-    photo: { src: '/images/janitorial-cart-preparation-supplies.jpg', alt: 'Two cleaners preparing a stocked janitorial cart in an office corridor' },
+    photo: { src: '/images/janitorial-cart-preparation-supplies.jpg', alt: 'Janitorial cart with mop bucket and warning sign' },
     areasIntro:
       'Markham’s commercial space runs along Highway 7 and the Highway 404 and 407 corridors. We cover:',
     areas: [

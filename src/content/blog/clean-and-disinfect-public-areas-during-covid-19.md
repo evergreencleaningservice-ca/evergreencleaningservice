@@ -15,7 +15,7 @@ Surfaces that are touched with hands frequently are the most likely ones to be c
 
 It is not known yet how long the virus that causes COVID-19 can live on a surface. However, it is suggested by early evidence that it can live on surfaces and objects from a couple of hours to a few days.
 
-![Cleaner spraying and wiping a glass office door handle](/images/door-handle-disinfection-office.jpg)
+![Gloved hands wiping a door handle with disinfectant](/images/door-handle-disinfection-office.jpg)
 
 #### Select a product that cleans and also disinfects
 
@@ -27,7 +27,7 @@ Disinfecting products use chemicals to kill germs on surfaces
 
 Only use approved hard-surface disinfectant with a [DIN (Drug Identification Number)](https://en.wikipedia.org/wiki/Drug_Identification_Number). These are 8-digit numbers provided by [Health Canada](https://www.canada.ca/en/health-canada.html). The DIN confirms that the disinfectant product has been approved and is safe to use in Canada.
 
-![Evening janitorial crew cleaning a Toronto office](/images/night-janitorial-crew-office-toronto.jpg)
+![Industrial scrubber cleaning an office corridor](/images/night-janitorial-crew-office-toronto.jpg)
 
 #### Developing a cleaning procedure
 

@@ -1,0 +1,3255 @@
+{
+  "licensedPhotos": 37,
+  "pendingPhotos": 52,
+  "appliedToWorkingTree": true,
+  "files": [
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-1000.avif",
+      "width": 1000,
+      "height": 417,
+      "bytes": 13546
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-1000.jpg",
+      "width": 1000,
+      "height": 417,
+      "bytes": 37184
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-1000.webp",
+      "width": 1000,
+      "height": 417,
+      "bytes": 19914
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-1600.avif",
+      "width": 1600,
+      "height": 667,
+      "bytes": 25542
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-1600.jpg",
+      "width": 1600,
+      "height": 667,
+      "bytes": 77559
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-1600.webp",
+      "width": 1600,
+      "height": 667,
+      "bytes": 37994
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-480.avif",
+      "width": 480,
+      "height": 200,
+      "bytes": 4977
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-480.jpg",
+      "width": 480,
+      "height": 200,
+      "bytes": 12794
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-480.webp",
+      "width": 480,
+      "height": 200,
+      "bytes": 7666
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-768.avif",
+      "width": 768,
+      "height": 320,
+      "bytes": 9366
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-768.jpg",
+      "width": 768,
+      "height": 320,
+      "bytes": 24908
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-768.webp",
+      "width": 768,
+      "height": 320,
+      "bytes": 13884
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-mobile-640x800.avif",
+      "width": 640,
+      "height": 800,
+      "bytes": 14126
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-mobile-640x800.jpg",
+      "width": 640,
+      "height": 800,
+      "bytes": 39601
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-mobile-640x800.webp",
+      "width": 640,
+      "height": 800,
+      "bytes": 20910
+    },
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "filename": "evergreen-modern-commercial-cleaning-hero-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 53876
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 66948
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 172891
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 138548
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 9326
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 11208
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 27784
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 21016
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 27822
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 71348
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 57204
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 137538
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "filename": "toronto-skyline-modern.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 172891
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 37036
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 126450
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 71632
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 9939
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 9105
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 28352
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 19386
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 19496
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 62817
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 39106
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 105682
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "filename": "warehouse-floor-scrubber-industrial.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 126450
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 23994
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 80458
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 35792
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 6529
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 6122
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 18153
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 9426
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 12509
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 39450
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 18930
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 62714
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "filename": "gallery-industrial-cleaning-toronto.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 80458
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 18288
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 64258
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 30648
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 8414
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 5812
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 17577
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 9506
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 10167
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 34018
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 17276
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 58413
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "filename": "gallery-office-cleaning-services.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 64258
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 26851
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 95921
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 43900
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 10833
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 8551
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 25993
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 15418
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 15567
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 51255
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 26666
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 80917
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "filename": "gallery-toronto-office-janitorial.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 95921
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 35239
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 105577
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 58688
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 9926
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 10365
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 26384
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 17760
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 19496
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 54210
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 33072
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 84621
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "filename": "gallery-retail-store-cleaning.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 105577
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 25229
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 83480
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 39588
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 7077
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 6693
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 18679
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 9930
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 12808
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 39846
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 20054
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 64619
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "filename": "gallery-commercial-lobby-cleaning.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 83480
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 36984
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 107202
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 67996
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 8830
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 7944
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 22234
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 13754
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 16454
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 48271
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 30922
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 89219
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "filename": "gallery-office-cleaning-team.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 107202
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 25694
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 82151
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 43524
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 8054
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 7271
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 20067
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 12068
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 13997
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 41708
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 23586
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 68684
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "filename": "gallery-corporate-office-cleaning.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 82151
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 43410
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 125987
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 84128
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 8528
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 7523
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 22973
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 14518
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 18315
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 54316
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 34644
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 96508
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "filename": "gallery-lobby-floor-care.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 125987
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 10848
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 36731
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 16372
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 5051
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 3921
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 10723
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 5450
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 6468
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 19978
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 9438
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 32143
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "filename": "gallery-dental-clinic-cleaning.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 36731
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 28305
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 80982
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 42892
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 7812
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 7462
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 19345
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 11324
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 14665
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 39921
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 22706
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 67236
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "filename": "gallery-office-detail-cleaning.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 80982
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 24089
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 77453
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 39952
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 8782
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 6996
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 20003
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 11260
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 13146
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 40046
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 22046
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 68166
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "filename": "gallery-medical-clinic-cleaning.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 77453
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 33348
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 94406
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 50434
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 7182
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 8216
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 20844
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 13188
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 16991
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 45785
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 26414
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 69410
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "filename": "gallery-large-warehouse-clean-wax.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 94406
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 25474
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 86713
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 42954
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 8088
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 6626
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 20111
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 10844
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 13137
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 42351
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 21564
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 73495
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "filename": "gallery-condo-lobby-maintenance.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 86713
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 17782
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 62497
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 30768
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 6446
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 5322
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 15779
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 8266
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 10006
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 32132
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 16416
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 49612
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "filename": "green-cleaning-products-unlabeled.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 62497
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 36275
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 106124
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 59930
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 8521
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 8752
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 23641
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 14716
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 17985
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 51644
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 30558
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 85764
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "filename": "high-dusting-warehouse-lift.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 106124
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 14774
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 51607
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 21246
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 6068
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 5261
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 14415
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 6984
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 8844
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 27731
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 12240
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 41919
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "filename": "door-handle-disinfection-office.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 51607
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 20363
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 69364
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 32220
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 7835
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 6494
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 18595
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 9686
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 11279
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 36090
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 17492
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 58909
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "filename": "commercial-disinfection-service.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 69364
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 30980
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 93807
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 47000
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 9808
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 8304
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 23911
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 14180
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 16568
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 47970
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 26322
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 80631
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "filename": "night-janitorial-crew-office-toronto.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 93807
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 26055
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 80225
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 39042
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 9158
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 8025
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 21904
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 12860
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 14812
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 42814
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 22824
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 68147
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "filename": "office-backpack-vacuum-toronto.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 80225
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 43050
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 127973
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 81192
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 7632
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 6669
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 22046
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 12314
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 16899
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 53729
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 31916
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 97746
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "filename": "flooded-office-water-extraction.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 127973
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 86508
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 218462
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 174526
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 13529
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 17428
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 41443
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 34242
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 40362
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 97627
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 80158
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 175398
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "filename": "gta-office-building-exterior-plaza.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 218462
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 28186
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 92842
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 46634
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 10490
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 9434
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 25587
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 16042
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 16487
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 49402
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 28318
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 76801
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "filename": "lobby-floor-scrubber-commercial.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 92842
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 16713
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 57611
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 29478
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 7193
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 5587
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 15887
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 9298
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 9817
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 30658
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 16758
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 51496
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "filename": "dental-office-cleaning-technician.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 57611
+    },
+    {
+      "asset": "blog-dental-clinic-cleaning-checklist-feature",
+      "stockId": "1407070070",
+      "filename": "blog-dental-clinic-cleaning-checklist-feature-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 8029
+    },
+    {
+      "asset": "blog-dental-clinic-cleaning-checklist-feature",
+      "stockId": "1407070070",
+      "filename": "blog-dental-clinic-cleaning-checklist-feature-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 56943
+    },
+    {
+      "asset": "blog-dental-clinic-cleaning-checklist-feature",
+      "stockId": "1407070070",
+      "filename": "blog-dental-clinic-cleaning-checklist-feature.avif",
+      "width": 960,
+      "height": 480,
+      "bytes": 13017
+    },
+    {
+      "asset": "blog-dental-clinic-cleaning-checklist-feature",
+      "stockId": "1407070070",
+      "filename": "blog-dental-clinic-cleaning-checklist-feature.jpg",
+      "width": 960,
+      "height": 480,
+      "bytes": 39605
+    },
+    {
+      "asset": "blog-dental-clinic-cleaning-checklist-feature",
+      "stockId": "1407070070",
+      "filename": "blog-dental-clinic-cleaning-checklist-feature.webp",
+      "width": 960,
+      "height": 480,
+      "bytes": 19772
+    },
+    {
+      "asset": "blog-winter-workplace-cleaning-checklist-feature",
+      "stockId": "2020787312",
+      "filename": "blog-winter-workplace-cleaning-checklist-feature-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 7599
+    },
+    {
+      "asset": "blog-winter-workplace-cleaning-checklist-feature",
+      "stockId": "2020787312",
+      "filename": "blog-winter-workplace-cleaning-checklist-feature-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 99337
+    },
+    {
+      "asset": "blog-winter-workplace-cleaning-checklist-feature",
+      "stockId": "2020787312",
+      "filename": "blog-winter-workplace-cleaning-checklist-feature.avif",
+      "width": 960,
+      "height": 480,
+      "bytes": 23685
+    },
+    {
+      "asset": "blog-winter-workplace-cleaning-checklist-feature",
+      "stockId": "2020787312",
+      "filename": "blog-winter-workplace-cleaning-checklist-feature.jpg",
+      "width": 960,
+      "height": 480,
+      "bytes": 61632
+    },
+    {
+      "asset": "blog-winter-workplace-cleaning-checklist-feature",
+      "stockId": "2020787312",
+      "filename": "blog-winter-workplace-cleaning-checklist-feature.webp",
+      "width": 960,
+      "height": 480,
+      "bytes": 42440
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 66980
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 170832
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 139716
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 9246
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 10659
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 30590
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 25360
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 29075
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 75320
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 62758
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 141095
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "filename": "winter-entrance-floor-care-slush.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 170832
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 7584
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 26503
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 13836
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 2557
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 2246
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 6435
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 3668
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 4221
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 13313
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 7322
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 20074
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "filename": "fall-high-dusting-office-ceiling.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 26503
+    },
+    {
+      "asset": "blog-hand-sanitizer-effectiveness-feature",
+      "stockId": "173845333",
+      "filename": "blog-hand-sanitizer-effectiveness-feature-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 6214
+    },
+    {
+      "asset": "blog-hand-sanitizer-effectiveness-feature",
+      "stockId": "173845333",
+      "filename": "blog-hand-sanitizer-effectiveness-feature-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 64451
+    },
+    {
+      "asset": "blog-hand-sanitizer-effectiveness-feature",
+      "stockId": "173845333",
+      "filename": "blog-hand-sanitizer-effectiveness-feature.avif",
+      "width": 960,
+      "height": 480,
+      "bytes": 14981
+    },
+    {
+      "asset": "blog-hand-sanitizer-effectiveness-feature",
+      "stockId": "173845333",
+      "filename": "blog-hand-sanitizer-effectiveness-feature.jpg",
+      "width": 960,
+      "height": 480,
+      "bytes": 41689
+    },
+    {
+      "asset": "blog-hand-sanitizer-effectiveness-feature",
+      "stockId": "173845333",
+      "filename": "blog-hand-sanitizer-effectiveness-feature.webp",
+      "width": 960,
+      "height": 480,
+      "bytes": 24916
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 40751
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 116401
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 73382
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 9824
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 10238
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 25606
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 17470
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 21308
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 55376
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 36484
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 96799
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "filename": "office-worker-sanitizing-surfaces.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 116401
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 12279
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 46863
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 19334
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 5231
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 3979
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 12199
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 5946
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 7062
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 24073
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 10620
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 39697
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "filename": "retail-hand-sanitizer-use.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 46863
+    },
+    {
+      "asset": "blog-clean-office-air-feature",
+      "stockId": "1337152223",
+      "filename": "blog-clean-office-air-feature-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 5702
+    },
+    {
+      "asset": "blog-clean-office-air-feature",
+      "stockId": "1337152223",
+      "filename": "blog-clean-office-air-feature-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 48739
+    },
+    {
+      "asset": "blog-clean-office-air-feature",
+      "stockId": "1337152223",
+      "filename": "blog-clean-office-air-feature.avif",
+      "width": 960,
+      "height": 480,
+      "bytes": 10728
+    },
+    {
+      "asset": "blog-clean-office-air-feature",
+      "stockId": "1337152223",
+      "filename": "blog-clean-office-air-feature.jpg",
+      "width": 960,
+      "height": 480,
+      "bytes": 32601
+    },
+    {
+      "asset": "blog-clean-office-air-feature",
+      "stockId": "1337152223",
+      "filename": "blog-clean-office-air-feature.webp",
+      "width": 960,
+      "height": 480,
+      "bytes": 16918
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies-1200.avif",
+      "width": 1200,
+      "height": 800,
+      "bytes": 35002
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies-1200.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 100310
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 58146
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 9054
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies-480.avif",
+      "width": 480,
+      "height": 320,
+      "bytes": 9223
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 23720
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies-480.webp",
+      "width": 480,
+      "height": 320,
+      "bytes": 15638
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies-768.avif",
+      "width": 768,
+      "height": 512,
+      "bytes": 18294
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies-768.jpg",
+      "width": 768,
+      "height": 512,
+      "bytes": 49951
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies-768.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 31284
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 83178
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "filename": "janitorial-cart-preparation-supplies.jpg",
+      "width": 1200,
+      "height": 800,
+      "bytes": 100310
+    },
+    {
+      "asset": "blog-office-fridge-cleaning-feature",
+      "stockId": "1346596233",
+      "filename": "blog-office-fridge-cleaning-feature-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 5847
+    },
+    {
+      "asset": "blog-office-fridge-cleaning-feature",
+      "stockId": "1346596233",
+      "filename": "blog-office-fridge-cleaning-feature-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 40197
+    },
+    {
+      "asset": "blog-office-fridge-cleaning-feature",
+      "stockId": "1346596233",
+      "filename": "blog-office-fridge-cleaning-feature.avif",
+      "width": 960,
+      "height": 480,
+      "bytes": 9461
+    },
+    {
+      "asset": "blog-office-fridge-cleaning-feature",
+      "stockId": "1346596233",
+      "filename": "blog-office-fridge-cleaning-feature.jpg",
+      "width": 960,
+      "height": 480,
+      "bytes": 27502
+    },
+    {
+      "asset": "blog-office-fridge-cleaning-feature",
+      "stockId": "1346596233",
+      "filename": "blog-office-fridge-cleaning-feature.webp",
+      "width": 960,
+      "height": 480,
+      "bytes": 12954
+    },
+    {
+      "asset": "blog-office-plant-care-feature",
+      "stockId": "1174414123",
+      "filename": "blog-office-plant-care-feature-300x150.jpg",
+      "width": 300,
+      "height": 150,
+      "bytes": 6923
+    },
+    {
+      "asset": "blog-office-plant-care-feature",
+      "stockId": "1174414123",
+      "filename": "blog-office-plant-care-feature-og.jpg",
+      "width": 1200,
+      "height": 630,
+      "bytes": 48172
+    },
+    {
+      "asset": "blog-office-plant-care-feature",
+      "stockId": "1174414123",
+      "filename": "blog-office-plant-care-feature.avif",
+      "width": 960,
+      "height": 480,
+      "bytes": 11833
+    },
+    {
+      "asset": "blog-office-plant-care-feature",
+      "stockId": "1174414123",
+      "filename": "blog-office-plant-care-feature.jpg",
+      "width": 960,
+      "height": 480,
+      "bytes": 34211
+    },
+    {
+      "asset": "blog-office-plant-care-feature",
+      "stockId": "1174414123",
+      "filename": "blog-office-plant-care-feature.webp",
+      "width": 960,
+      "height": 480,
+      "bytes": 18350
+    }
+  ]
+}

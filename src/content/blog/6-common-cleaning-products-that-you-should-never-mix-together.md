@@ -13,7 +13,7 @@ It can be very easy to become frustrated when you have a tough cleaning job that
 
 However, the scary truth is there are certain products that when they are used alone are safe, but when they are mixed together with other products can cause unsafe chemical reactions or fumes. Even if the cleaning product combination is not toxic or dangerous, you never know for sure what effect two products may have when combined on a fabric or surface.
 
-![Janitorial cart stocked with cloths, sprays and supplies](/images/janitorial-cart-preparation-supplies.jpg)
+![Janitorial cart with mop bucket and warning sign](/images/janitorial-cart-preparation-supplies.jpg)
 
 ### Always make sure you read the ingredient and warning labels on the cleaning products you use – and never mix the following together:
 

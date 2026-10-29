@@ -29,6 +29,6 @@ For more information visit Armstrong Manufacturing   armstrongmanufacturing.co
 
 In April of 2013 changes occurred between Environment Canada and Ecologo. UL Environment is now handling the certification of sustainable products. Green Certified Products will now display the newly updated ECOLOGO symbol. This is your reassurance of a truly sustainable, “GREEN” product!
 
-![pro series green products](/images/green-cleaning-products-unlabeled.jpg)
+![Reusable spray bottle and cleaning cloth](/images/green-cleaning-products-unlabeled.jpg)
 
-Pro Series Green Products
+Illustrative stock photograph of a reusable spray bottle and cleaning cloth; not a photograph of the certified products described above.

@@ -55,7 +55,7 @@ Dusting should be done as often as needed depending on the measure of dust that 
 
 Divide the room into 2 sections, everything that is above eye level or below knee level should be dusted once every week. Everything in between this margin, should be dusted every week.
 
-![Cleaner high-dusting an office ceiling and vents](/images/fall-high-dusting-office-ceiling.jpg)
+![Extendable duster cleaning a ceiling corner](/images/fall-high-dusting-office-ceiling.jpg)
 
 ### Proper Dusting Protocol
 

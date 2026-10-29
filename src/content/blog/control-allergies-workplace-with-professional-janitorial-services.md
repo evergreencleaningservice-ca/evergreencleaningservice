@@ -11,7 +11,7 @@ Allergies are undoubtedly one of the most irritating things in the workplace tha
 
 That’s why some of the most successful companies in the world put extra effort to ascertain a healthy work environment for their employees. Ask any seasoned manager or business owner, and they will explain why it’s essential to maintain a healthy workplace.
 
-![Cleaner vacuuming an open-plan office with a backpack vacuum](/images/office-backpack-vacuum-toronto.jpg)
+![Vacuum cleaner being used on an office floor](/images/office-backpack-vacuum-toronto.jpg)
 
 This is one of the primary reasons why businesses use [janitorial services](/services/). These services help control allergies by ensuring that no allergens are present in the workplace. There are many common allergens that a professional janitorial service will eliminate.
 

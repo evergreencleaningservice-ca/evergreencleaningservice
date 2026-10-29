@@ -11,7 +11,7 @@ tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services
 
 Your office, warehouse, or store is prone to suffering from poor air quality. Apart from foul smells and allergens, there are many other contaminants that can lead to poor air quality, each of which can significantly affect your business, customers, employees, and yourself. Fortunately, with proper cleaning techniques, you can improve the air quality of your commercial space and keep the negative effects at bay. The following are some important elements of poor air quality that you need to look out for and how to effectively deal with them.
 
-![Technician high-dusting warehouse ceilings from a lift](/images/high-dusting-warehouse-lift.jpg)
+![Worker on a lifting platform cleaning a ceiling](/images/high-dusting-warehouse-lift.jpg)
 
 ### Elements of Poor Air Quality
 
@@ -29,7 +29,7 @@ _**Humidity**_: In case you always get a general feeling of heaviness in your wo
 
 _**Dirt and debris**_: Dirt and debris in certain workplaces, more specifically the industrial sector, can spread through the air posing health risks to people.  But you can avoid this risk through professional cleaning services.
 
-![Cleaner high-dusting an office ceiling and vents](/images/fall-high-dusting-office-ceiling.jpg)
+![Extendable duster cleaning a ceiling corner](/images/fall-high-dusting-office-ceiling.jpg)
 
 ### How to Clean Up Your Air Quality
 

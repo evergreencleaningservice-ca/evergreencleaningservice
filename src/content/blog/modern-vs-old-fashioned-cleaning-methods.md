@@ -13,7 +13,7 @@ Everything changes at some point, and so are cleaning methods. Although some of 
 
 Modern cleaning habits haven’t, however, made old-fashioned cleaning methods obsolete. Most cleaning tactics used hundreds of years ago are still relevant, effective, and practiced to this date. A good example is using hot water to dissolve grease and clean tough stains. In other words, all modern technology has done is make these methods more efficient. Here is a brief outline and comparison between modern and old-fashioned cleaning methods and how these methods have improved over time.
 
-![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
+![Close-up of a floor machine cleaning a commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 ### Floor Cleaning: Now and Then
 

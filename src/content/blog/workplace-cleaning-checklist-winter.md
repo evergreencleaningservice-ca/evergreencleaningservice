@@ -3,13 +3,13 @@ title: "Workplace Cleaning Checklist for Winter"
 description: "Don't wait for spring! Keep the office clean all winter with this easy checklist that will ensure you or your cleaners aren't misssing a single thing."
 pubDate: 2020-02-24
 image: "/images/blog-winter-workplace-cleaning-checklist-feature.jpg"
-imageAlt: "Professional cleaner extracting salty slush from a commercial entrance mat after snowfall"
+imageAlt: "Salt and melting ice at an office entrance"
 tags: ["commercial-cleaning", "entrance", "winter"]
 ---
 
 Many people take spring cleaning very seriously. While it makes perfect sense to clean after the winter, it would be even better if you had the workplace cleaned during the winter season. Winter cleaning involves managing snow, ice, and salt in your office. In addition to this, the temperature and humidity of the season affects air quality in most buildings. This is one of the reasons most of your employees (and even customers) may be uncomfortable indoors, with some catching flu or cold. All this can be avoided if you have the business cleaned routinely throughout the season. Here is a checklist to help you get started.
 
-![Building entrance floor being cleaned of winter slush](/images/winter-entrance-floor-care-slush.jpg)
+![Wet and muddy entrance mat in winter](/images/winter-entrance-floor-care-slush.jpg)
 
 ### 1\. Prepare the Main Entrance
 
@@ -40,7 +40,7 @@ You need to start dealing with the salt menace as soon as winter begins. Salt st
 
 Simply having the floor washed with water won’t clear up all the salt. A salt neutralizer cleaner is what you need to get rid of the white ‘grains’ for good. These cleaners are not only useful in dissolving all the salt (due to their high pH) but also get rid of grime on the floor as well. You, however, ought to be careful when using these cleaners on your carpets and floor. That said, ensure the cleaner is diluted as per the manufacturer’s directions before using it on your floor.
 
-![Cleaner high-dusting an office ceiling and vents](/images/fall-high-dusting-office-ceiling.jpg)
+![Extendable duster cleaning a ceiling corner](/images/fall-high-dusting-office-ceiling.jpg)
 
 ### 3\. The Air Quality
 

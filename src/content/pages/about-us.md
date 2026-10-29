@@ -2,6 +2,7 @@
 title: "About Us"
 description: "Evergreen Office Cleaning has served Toronto and GTA businesses since 1989 — office, commercial and industrial cleaning with a dedicated account executive."
 image: "/images/toronto-skyline-modern.jpg"
+imageAlt: "Toronto skyline at sunset"
 ---
 
 ## We are Evergreen Office Cleaning
@@ -10,7 +11,7 @@ image: "/images/toronto-skyline-modern.jpg"
 
 #### We’ve been cleaning Toronto and GTA since 1989.
 
-![Cleaning crew in green uniforms vacuuming and wiping desks in an open-plan office](/images/gallery-office-cleaning-team.jpg)
+![Janitorial cart beside a commercial entrance](/images/gallery-office-cleaning-team.jpg)
 
 Whether you need [office cleaning](/services/office-cleaning/), [commercial cleaning services](/), or [industrial cleaning](/services/industrial-cleaning/), our expertise, built since 1989, can help your business make a bold statement and that first impression.
 

@@ -11,7 +11,7 @@ tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitor
 
 As summer is slowly drawing to a close, your office will once again become a hub of hard work. Before all of your employees return from their vacations, why not use this time to have the office deep cleaned professionally? With fewer people in the building, it’s much easier to address hidden and often missed areas. Below is a carefully compiled list of locations that require specialized attention.
 
-![Janitorial cart stocked with cloths, sprays and supplies](/images/janitorial-cart-preparation-supplies.jpg)
+![Janitorial cart with mop bucket and warning sign](/images/janitorial-cart-preparation-supplies.jpg)
 
 ### Lobby Or Reception Areas
 
