@@ -5,7 +5,7 @@ seoTitle: "Medical & Dental Clinic Cleaning in Toronto | Evergreen"
 description: "After-hours cleaning for medical and dental clinics in Toronto and the GTA — waiting rooms, treatment areas and washrooms, to your clinic protocols."
 summary: "Patients judge a clinic before they see a clinician. We clean waiting rooms, treatment areas, washrooms and staff spaces after hours, working to your clinic's hygiene protocols."
 image: "/images/dental-office-cleaning-technician.jpg"
-imageAlt: "Cleaner disinfecting the exterior surfaces of a dental treatment chair"
+imageAlt: "Gloved hands cleaning a dental chair with spray and cloth"
 fitHeading: "Clinics we clean"
 fit:
   - "Dental offices and dental specialists"
@@ -65,4 +65,4 @@ Patients notice the waiting room, the washroom and the chair before they meet th
 
 Evergreen has cleaned health, dental and medical clinics in Toronto and the GTA for years, alongside hospitals, labs and other medical facilities. The work follows the principle behind all of our disinfection cleaning: surfaces are cleaned first, so that the disinfectant can do its job, and the products are chosen with the people who use the space in mind.
 
-![Cleaner disinfecting a dental treatment chair](/images/dental-office-cleaning-technician.jpg)
+![Gloved hands cleaning a dental chair with spray and cloth](/images/dental-office-cleaning-technician.jpg)

@@ -3,7 +3,7 @@ title: "Does Hand Sanitization Actually Help to Prevent Illnesses?"
 description: "Ever wondered if hand sanitizer is really a good substitute for hand washing? Read here for hand sanitizer basics."
 pubDate: 2021-01-31
 image: "/images/blog-hand-sanitizer-effectiveness-feature.jpg"
-imageAlt: "Office employee using a hand-sanitizer dispenser at a bright workplace entrance"
+imageAlt: "Hands under an automatic hand sanitizer dispenser"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "coronavirus", "janitorial-services"]
 ---
 
@@ -15,9 +15,9 @@ Is hand sanitization a confusing subject for you? Do you question whether hand s
 
 The following is everything important that you need to know regarding hand sanitizers.
 
-![hand sanitizing woman](/images/office-worker-sanitizing-surfaces.jpg)
+![Hands cleaning and disinfecting a laptop](/images/office-worker-sanitizing-surfaces.jpg)
 
-![hand sanitizing woman](/images/office-worker-sanitizing-surfaces.jpg)
+![Hands cleaning and disinfecting a laptop](/images/office-worker-sanitizing-surfaces.jpg)
 
 ### What You Need to Know About Hand Sanitizers
 
@@ -29,7 +29,7 @@ When discussing the effectiveness of hand sanitization, there are a number of â€
 
 The truth is that all of the surfaces surrounding us are covered with germs and bacteria. As has been proven by experts, most viruses and bacteria are harmless. However, to protect yourself against harmful ones, cautionary measures need to be taken by washing our hands throughout the day or after we use anything that the public can access, like washrooms, transportation, and others. It is especially important t do this during the flu season and the winter.
 
-![hand sanitizer in a store](/images/retail-hand-sanitizer-use.jpg)
+![Hands using an automatic sanitizer dispenser](/images/retail-hand-sanitizer-use.jpg)
 
 ### In Commercial Settings Is Hand Sanitization Sufficient?
 

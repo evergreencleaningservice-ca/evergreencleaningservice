@@ -14,7 +14,7 @@ But as you already know, ensuring that your commercial floors remain sparkling c
 
 To help you avoid this situation; we have provided our top three tips on how to keep your office building clean and tidy.
 
-![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
+![Close-up of a floor machine cleaning a commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 ### Set up more garbage cans
 

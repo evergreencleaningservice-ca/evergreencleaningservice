@@ -19,7 +19,7 @@ Regardless of how much innovation takes place within the cleaning industry, ther
 
 There are many differences between the level of cleaning that robots and humans can do, but it is possible for the two to work seamlessly together. Below, we will discuss these nuances in further detail.
 
-![Floor scrubber cleaning a large warehouse floor](/images/warehouse-floor-scrubber-industrial.jpg)
+![Floor scrubber in a warehouse aisle](/images/warehouse-floor-scrubber-industrial.jpg)
 
 ### Interacting With Consumers
 
@@ -47,7 +47,7 @@ Some machines may prove easier to maintain than others, but at the end of the da
 
 It’s also well worth noting that the cleaning robots would still regularly require disinfection after each cleaning session. Though the robots can’t directly spread viruses, they can store them on their surface and spread them indirectly.
 
-![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
+![Close-up of a floor machine cleaning a commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 ### Lack Of Thoroughness with Automated Vacuums
 

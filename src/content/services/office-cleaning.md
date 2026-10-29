@@ -5,7 +5,7 @@ seoTitle: "Office Cleaning Services in Toronto & the GTA | Evergreen"
 description: "Recurring office cleaning in Toronto and the GTA — after hours, by a consistent crew, with a free on-site walkthrough and a written proposal."
 summary: "Recurring janitorial cleaning for offices of every size, done after hours by a team assigned to your building — with one account executive to call when something needs to change."
 image: "/images/office-backpack-vacuum-toronto.jpg"
-imageAlt: "Cleaner vacuuming an open-plan Toronto office"
+imageAlt: "Vacuum cleaner being used on an office floor"
 fitHeading: "Who it is for"
 fit:
   - "Corporate offices and head-office suites"
@@ -90,7 +90,7 @@ ctaText: "Tell us about your office and we will arrange a time to walk it with y
 
 For your employees, a clean office is a healthier, more comfortable place to work — one that supports productivity and keeps absenteeism down. For clients and visitors, it is the first impression: a clean space is like a friendly handshake that tells people this is a business that has its house in order.
 
-![Cleaner vacuuming an open-plan office with a backpack vacuum](/images/office-backpack-vacuum-toronto.jpg)
+![Vacuum cleaner being used on an office floor](/images/office-backpack-vacuum-toronto.jpg)
 
 Evergreen has been cleaning offices in Toronto since 1989, providing the kind of detailed, floor-to-ceiling clean that the people you want to attract — staff, customers and clients — notice.
 
@@ -98,4 +98,4 @@ Evergreen has been cleaning offices in Toronto since 1989, providing the kind of
 
 Offices hold valuable equipment and confidential material. Our office cleaning staff are trained to respect both your organisation's privacy and its cleanliness, and the team that holds your keys is the same team every visit. We have been trusted in a wide range of facilities, from medical offices and labs to government buildings and police stations, as well as conventional office buildings.
 
-![Evening janitorial crew cleaning a Toronto office](/images/night-janitorial-crew-office-toronto.jpg)
+![Industrial scrubber cleaning an office corridor](/images/night-janitorial-crew-office-toronto.jpg)

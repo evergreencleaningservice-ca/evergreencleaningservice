@@ -24,7 +24,7 @@ Offices contain workplaces, washrooms, as well as other high touch points that a
 
 As previously mentioned, places such as high touch point areas, workplaces, and washrooms will continue to get dirty throughout the day. When you have day cleaners that will help to ensure that high-traffic areas stay clean during the day. If you have had an air conditioning unit malfunction that caused your conference room to flood or had an employee spill coffee on your carpet, having day cleaners has the advantage of them cleaning up these areas fairly quickly. Garbage cans will also be emptied throughout the day regularly.
 
-![Janitorial cart stocked with cloths, sprays and supplies](/images/janitorial-cart-preparation-supplies.jpg)
+![Janitorial cart with mop bucket and warning sign](/images/janitorial-cart-preparation-supplies.jpg)
 
 ### Benefits of Night Office Cleaning
 

@@ -3,7 +3,7 @@ title: "5 Tips for Maintaining Clean Office Air"
 description: "How good is the air quality in your office space? Here we discuss some tips to assist in keeping the air fresh and comfortable."
 pubDate: 2022-05-25
 image: "/images/blog-clean-office-air-feature.jpg"
-imageAlt: "Professional cleaner using a HEPA vacuum attachment to clean a ceiling vent in a bright office"
+imageAlt: "Hands cleaning an air return vent"
 tags: ["air-quality", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 

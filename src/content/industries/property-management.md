@@ -5,7 +5,7 @@ seoTitle: "Property Management & Condo Cleaning in Toronto | Evergreen"
 description: "Cleaning for property managers and condos in Toronto and the GTA — common areas, lobbies, tenant spaces and one-off work at short notice."
 summary: "Recurring common-area cleaning, periodic floor and building maintenance, and one-off work at short notice — coordinated through one account executive who knows your buildings."
 image: "/images/gallery-condo-lobby-maintenance.jpg"
-imageAlt: "High-rise condominium lobby with polished floors"
+imageAlt: "Empty corridor in a modern building"
 fitHeading: "Buildings we look after"
 fit:
   - "Condominium common areas — lobbies, corridors, amenity rooms and elevators"

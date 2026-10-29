@@ -71,7 +71,7 @@ When you get [Evergreen Cleaning](/about-us/)‘s professional cleaning services
 
 – Sweep the walkway
 
-![Auto floor scrubber cleaning a polished commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
+![Close-up of a floor machine cleaning a commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
 As you can see, there is a lot that needs to get done when it comes to keeping a retail store clean. A lot of stores have even more that’s required. It depends on how much volume a store gets and the types of products they sell. You can call the professionals at Evergreen to ensure that you get all of the cleanings you need to do without allocating your valuable time to it. That way you can better focus your efforts on more important things that generate revenue for your business.
 

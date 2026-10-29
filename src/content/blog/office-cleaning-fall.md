@@ -29,7 +29,7 @@ The days get gradually shorter and shorter as the winter approaches. Thus, you w
 
 During the summer, you’re likely spending a lot of time outdoors. This, along with pollen, can mean that your office can become very messy. It can be very difficult to worry about cleaning during the summer months when your staff is busy. It’s also likely you had your windows open the season which can allow more pollen to enter the workspace. As soon as the summer months are over, it’s time to tackle the mess you’ve been allowing to build up.
 
-![Cleaner vacuuming an open-plan office with a backpack vacuum](/images/office-backpack-vacuum-toronto.jpg)
+![Vacuum cleaner being used on an office floor](/images/office-backpack-vacuum-toronto.jpg)
 
 ### Pests Invade
 

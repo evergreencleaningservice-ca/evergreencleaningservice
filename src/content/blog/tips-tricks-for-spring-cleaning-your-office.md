@@ -25,7 +25,7 @@ According to experts, we have a long way to go to achieving a paperless office. 
 
 The only things you should keep within arm’s length are the items you use on a regular basis. Keep away coffee mugs, boxes of pens, and stacks of paper. Eliminate all visual clutter and just keep the essentials within your reach instead. The only items you should have on your workstation are things like a lamp, a notepad, your computer, a pen holder, and a framed family photograph. Create a separate zone for your paperwork, personal items, and other supplies.
 
-![Cleaner vacuuming an open-plan office with a backpack vacuum](/images/office-backpack-vacuum-toronto.jpg)
+![Vacuum cleaner being used on an office floor](/images/office-backpack-vacuum-toronto.jpg)
 
 ### Sort out your Catch-all drawers
 

@@ -47,7 +47,7 @@ Hospital-grade cleaning
 
 Post-construction cleaning
 
-![Evening janitorial crew cleaning a Toronto office](/images/night-janitorial-crew-office-toronto.jpg)
+![Industrial scrubber cleaning an office corridor](/images/night-janitorial-crew-office-toronto.jpg)
 
 ### We Implement a Systematic Approach
 

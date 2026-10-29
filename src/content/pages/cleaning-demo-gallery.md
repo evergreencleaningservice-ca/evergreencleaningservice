@@ -1,32 +1,35 @@
 ---
-title: "Cleaning Demo Gallery"
-description: "Here you'll find images of clean work spaces, sparkling floors, clean windows, fresh smalling carpeting, and glistening chorome fixtures."
+title: "Cleaning Services Photo Gallery"
+description: "Illustrative photographs of commercial cleaning equipment, workspaces and cleaning methods."
 image: "/images/warehouse-floor-scrubber-industrial.jpg"
-imageAlt: "Warehouse floor being scrubbed by an Evergreen technician"
+imageAlt: "Floor scrubber in a warehouse aisle"
 ---
 
-![Toronto locker facility with clean floors](/images/gallery-industrial-cleaning-toronto.jpg)
+These licensed stock photographs illustrate cleaning equipment, workspaces and cleaning methods. They do not depict Evergreen employees or completed client projects.
 
-![office cleaning results](/images/gallery-office-cleaning-services.jpg)
 
-![Toronto office space cleaning results](/images/gallery-toronto-office-janitorial.jpg)
+![Floor polishing machine in an industrial building](/images/gallery-industrial-cleaning-toronto.jpg)
 
-![clean retail shop](/images/gallery-retail-store-cleaning.jpg)
+![Close-up of a vacuum cleaning a carpet](/images/gallery-office-cleaning-services.jpg)
 
-![business lobby area with clean mirror walls](/images/gallery-commercial-lobby-cleaning.jpg)
+![Close-up of a mop cleaning office floors](/images/gallery-toronto-office-janitorial.jpg)
 
-![Toronto business lobby cleaning demo](/images/gallery-office-cleaning-team.jpg)
+![Floor scrubber cleaning a supermarket aisle](/images/gallery-retail-store-cleaning.jpg)
 
-![cleaned office space](/images/gallery-corporate-office-cleaning.jpg)
+![Cleaning machine in a commercial corridor](/images/gallery-commercial-lobby-cleaning.jpg)
 
-![clean lobby](/images/gallery-lobby-floor-care.jpg)
+![Janitorial cart beside a commercial entrance](/images/gallery-office-cleaning-team.jpg)
 
-![dentists office](/images/gallery-dental-clinic-cleaning.jpg)
+![Desk and laptop in an empty coworking office](/images/gallery-corporate-office-cleaning.jpg)
 
-![toronto office cleaning demo](/images/gallery-office-detail-cleaning.jpg)
+![Bright commercial hall with reflective tile flooring](/images/gallery-lobby-floor-care.jpg)
 
-![medical cleaning](/images/gallery-medical-clinic-cleaning.jpg)
+![Gloved hands disinfecting a dental light](/images/gallery-dental-clinic-cleaning.jpg)
 
-![Commercial Cleaning](/images/gallery-large-warehouse-clean-wax.jpg)
+![Hands wiping a white office desk](/images/gallery-office-detail-cleaning.jpg)
 
-![highrise condo lobby cleaning](/images/gallery-condo-lobby-maintenance.jpg)
+![Gloved hands cleaning a clinic handrail](/images/gallery-medical-clinic-cleaning.jpg)
+
+![Walk-behind scrubber on a warehouse floor](/images/gallery-large-warehouse-clean-wax.jpg)
+
+![Empty corridor in a modern building](/images/gallery-condo-lobby-maintenance.jpg)

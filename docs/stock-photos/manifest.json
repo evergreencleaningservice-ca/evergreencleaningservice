@@ -1,0 +1,1264 @@
+{
+  "date": "2026-10-29",
+  "sourceCommit": "210174f48049a13694199032cf87f9d28511e608",
+  "distinctPhotos": 89,
+  "licensedPhotos": 37,
+  "pendingPhotos": 52,
+  "productionChanged": false,
+  "photos": [
+    {
+      "asset": "evergreen-modern-commercial-cleaning-hero",
+      "stockId": "1347119864",
+      "stockUrl": "https://www.istockphoto.com/photo/close-up-of-disinfecting-a-wooden-desk-to-limit-the-spread-of-covid-19-gm1347119864-424694214",
+      "alt": "Gloved hands spraying and wiping a wooden office desk",
+      "cropNote": "Wide crop; keep hands and cloth visible; dark gradient behind headline",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "toronto-skyline-modern",
+      "stockId": "2153460773",
+      "stockUrl": "https://www.istockphoto.com/photo/downtown-toronto-city-skyline-cityscape-of-canada-gm2153460773-574395652",
+      "alt": "Toronto skyline at sunset",
+      "cropNote": "No people; verify commercial licence rather than editorial-only use",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "warehouse-floor-scrubber-industrial",
+      "stockId": "486704898",
+      "stockUrl": "https://www.istockphoto.com/photo/cleaning-warehouse-gm486704898-73449427",
+      "alt": "Floor scrubber in a warehouse aisle",
+      "cropNote": "Equipment only",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "gallery-industrial-cleaning-toronto",
+      "stockId": "1335074658",
+      "stockUrl": "https://www.istockphoto.com/photo/floor-polishing-machine-inside-a-large-industrial-building-not-people-gm1335074658-416958835",
+      "alt": "Floor polishing machine in an industrial building",
+      "cropNote": "Equipment only; illustrative stock",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "gallery-office-cleaning-services",
+      "stockId": "1417833187",
+      "stockUrl": "https://www.istockphoto.com/photo/professional-cleaner-vacuuming-a-carpet-gm1417833187-464772478",
+      "alt": "Close-up of a vacuum cleaning a carpet",
+      "cropNote": "Crop to equipment and lower body",
+      "licensed": true,
+      "crop": [
+        0,
+        0.28,
+        1,
+        0.72
+      ]
+    },
+    {
+      "asset": "gallery-toronto-office-janitorial",
+      "stockId": "2273701243",
+      "stockUrl": "https://www.istockphoto.com/photo/close-up-of-black-female-cleaner-mopping-office-floors-gm2273701243-686057437",
+      "alt": "Close-up of a mop cleaning office floors",
+      "cropNote": "Lower body only",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "gallery-retail-store-cleaning",
+      "stockId": "2189472079",
+      "stockUrl": "https://www.istockphoto.com/photo/cleaning-lady-using-a-floor-scrubber-machine-in-a-supermarket-gm2189472079-607925916",
+      "alt": "Floor scrubber cleaning a supermarket aisle",
+      "cropNote": "Rear or lower-body crop",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "gallery-commercial-lobby-cleaning",
+      "stockId": "1792459211",
+      "stockUrl": "https://www.istockphoto.com/photo/cleaning-machine-in-the-corridor-gm1792459211-547839677",
+      "alt": "Cleaning machine in a commercial corridor",
+      "cropNote": "Equipment only",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "gallery-office-cleaning-team",
+      "stockId": "2178352632",
+      "stockUrl": "https://www.istockphoto.com/photo/a-yellow-cleaning-cart-with-a-yellow-bucket-and-a-blue-mop-gm2178352632-597699222",
+      "alt": "Janitorial cart beside a commercial entrance",
+      "cropNote": "Replace team depiction with equipment; illustrative stock",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "gallery-corporate-office-cleaning",
+      "stockId": "1400152768",
+      "stockUrl": "https://www.istockphoto.com/photo/interior-of-modern-coworking-office-with-big-window-gm1400152768-453819977",
+      "alt": "Desk and laptop in an empty coworking office",
+      "cropNote": "No people",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "gallery-lobby-floor-care",
+      "stockId": "2287471137",
+      "stockUrl": "https://www.istockphoto.com/photo/spacious-empty-modern-hall-with-large-glass-curtain-wall-reflective-tile-floor-gm2287471137-699305128",
+      "alt": "Bright commercial hall with reflective tile flooring",
+      "cropNote": "No people; photographic preview checked",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "gallery-dental-clinic-cleaning",
+      "stockId": "2203408212",
+      "stockUrl": "https://www.istockphoto.com/photo/dentist-carefully-disinfecting-dental-light-in-modern-clinic-gm2203408212-620944430",
+      "alt": "Gloved hands disinfecting a dental light",
+      "cropNote": "Hands and equipment crop",
+      "licensed": true,
+      "crop": [
+        0.2,
+        0.04,
+        0.8,
+        0.92
+      ]
+    },
+    {
+      "asset": "gallery-office-detail-cleaning",
+      "stockId": "1146965007",
+      "stockUrl": "https://www.istockphoto.com/photo/janitor-cleaning-white-desk-in-office-gm1146965007-309227201",
+      "alt": "Hands wiping a white office desk",
+      "cropNote": "Crop out face",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "gallery-medical-clinic-cleaning",
+      "stockId": "1443933711",
+      "stockUrl": "https://www.istockphoto.com/photo/close-up-on-a-cleaner-working-at-a-hospital-and-cleaning-a-handrail-gm1443933711-482764122",
+      "alt": "Gloved hands cleaning a clinic handrail",
+      "cropNote": "Hands and railing crop",
+      "licensed": true,
+      "crop": [
+        0,
+        0.09,
+        1,
+        0.91
+      ]
+    },
+    {
+      "asset": "gallery-large-warehouse-clean-wax",
+      "stockId": "924624990",
+      "stockUrl": "https://www.istockphoto.com/photo/cleaning-floor-warehouse-gm924624990-253748523",
+      "alt": "Walk-behind scrubber on a warehouse floor",
+      "cropNote": "Equipment only; no claim that stock shows Evergreen work",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "gallery-condo-lobby-maintenance",
+      "stockId": "1448272528",
+      "stockUrl": "https://www.istockphoto.com/photo/empty-corridor-in-the-modern-office-building-gm1448272528-485842630",
+      "alt": "Empty corridor in a modern building",
+      "cropNote": "No people",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "green-cleaning-products-unlabeled",
+      "stockId": "2241659597",
+      "stockUrl": "https://www.istockphoto.com/photo/spray-bottle-and-cleaning-cloth-on-wooden-table-gm2241659597-656139661",
+      "alt": "Reusable spray bottle and cleaning cloth",
+      "cropNote": "Do not identify generic stock as ProSeries or ECOLOGO certified",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "high-dusting-warehouse-lift",
+      "stockId": "2212654749",
+      "stockUrl": "https://www.istockphoto.com/photo/high-altitude-work-gm2212654749-629577964",
+      "alt": "Worker on a lifting platform cleaning a ceiling",
+      "cropNote": "Wide rear view; keep face small or outside crop",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "door-handle-disinfection-office",
+      "stockId": "1213533027",
+      "stockUrl": "https://www.istockphoto.com/photo/woman-cleaning-a-door-handle-with-a-disinfection-spray-and-disposable-wipe-gm1213533027-352723520",
+      "alt": "Gloved hands wiping a door handle with disinfectant",
+      "cropNote": "Hands and handle only",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "commercial-disinfection-service",
+      "stockId": "1337341798",
+      "stockUrl": "https://www.istockphoto.com/photo/closeup-shot-of-an-unrecognisable-worker-in-a-protective-suit-cleaning-a-doorknob-in-gm1337341798-418264556",
+      "alt": "Protected worker cleaning a doorknob",
+      "cropNote": "Close crop to gloved hands; no medical efficacy claims",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "night-janitorial-crew-office-toronto",
+      "stockId": "2273701949",
+      "stockUrl": "https://www.istockphoto.com/photo/professional-cleaner-cleaning-office-corridor-floors-with-industrial-scrubbing-gm2273701949-686057473",
+      "alt": "Industrial scrubber cleaning an office corridor",
+      "cropNote": "Crop to equipment and lower body; do not claim photo was taken at night or in Toronto",
+      "licensed": true,
+      "crop": [
+        0.15,
+        0.3,
+        0.85,
+        0.7
+      ]
+    },
+    {
+      "asset": "office-backpack-vacuum-toronto",
+      "stockId": "1350786822",
+      "stockUrl": "https://www.istockphoto.com/photo/janitor-hoovering-floor-in-office-gm1350786822-426759877",
+      "alt": "Vacuum cleaner being used on an office floor",
+      "cropNote": "Keep lower body and vacuum; remove backpack-specific alt text",
+      "licensed": true,
+      "crop": [
+        0,
+        0.15,
+        1,
+        0.85
+      ]
+    },
+    {
+      "asset": "flooded-office-water-extraction",
+      "stockId": "2219464877",
+      "stockUrl": "https://www.istockphoto.com/photo/hotel-corridor-with-air-movers-drying-wet-carpet-gm2219464877-635954358",
+      "alt": "Air movers drying wet carpet in a corridor",
+      "cropNote": "Equipment only; remove office water-extraction action from alt text",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "gta-office-building-exterior-plaza",
+      "stockId": "2217204941",
+      "stockUrl": "https://www.istockphoto.com/photo/toronto-canada-corporate-business-skyscrapers-gm2217204941-633806306",
+      "alt": "Office skyscrapers in downtown Toronto",
+      "cropNote": "No people; verify commercial licence",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "lobby-floor-scrubber-commercial",
+      "stockId": "1862792700",
+      "stockUrl": "https://www.istockphoto.com/photo/female-worker-cleaning-office-lobby-floor-with-machine-gm1862792700-552599008",
+      "alt": "Close-up of a floor machine cleaning a commercial lobby",
+      "cropNote": "Equipment and lower body only",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "dental-office-cleaning-technician",
+      "stockId": "2279025270",
+      "stockUrl": "https://www.istockphoto.com/photo/hands-cleaning-dental-chair-with-spray-and-cloth-indoors-gm2279025270-691114847",
+      "alt": "Gloved hands cleaning a dental chair with spray and cloth",
+      "cropNote": "Hands and chair only",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-dental-clinic-cleaning-checklist-feature",
+      "stockId": "1407070070",
+      "stockUrl": "https://www.istockphoto.com/photo/professional-dentist-cleaning-workplace-with-antiseptic-in-clinic-closeup-gm1407070070-458401230",
+      "alt": "Close-up of cleaning a dental workspace",
+      "cropNote": "Hands and surface crop",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-winter-workplace-cleaning-checklist-feature",
+      "stockId": "2020787312",
+      "stockUrl": "https://www.istockphoto.com/photo/melting-salt-and-ice-in-front-of-entrance-gate-office-building-gm2020787312-561401494",
+      "alt": "Salt and melting ice at an office entrance",
+      "cropNote": "No faces",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "winter-entrance-floor-care-slush",
+      "stockId": "1450111368",
+      "stockUrl": "https://www.istockphoto.com/photo/muddy-rubber-doormat-mounted-on-tiled-floor-at-house-entrance-gm1450111368-487118433",
+      "alt": "Wet and muddy entrance mat in winter",
+      "cropNote": "No people; illustrative maintenance issue",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "fall-high-dusting-office-ceiling",
+      "stockId": "2251216042",
+      "stockUrl": "https://www.istockphoto.com/photo/a-gray-duster-with-an-extendable-handle-is-being-used-to-clean-the-corner-of-a-white-gm2251216042-664793748",
+      "alt": "Extendable duster cleaning a ceiling corner",
+      "cropNote": "Equipment close-up",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-hand-sanitizer-effectiveness-feature",
+      "stockId": "173845333",
+      "stockUrl": "https://www.istockphoto.com/photo/hand-sanitizer-dispenser-and-two-female-hands-gm173845333-9576931",
+      "alt": "Hands under an automatic hand sanitizer dispenser",
+      "cropNote": "Hands only",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "office-worker-sanitizing-surfaces",
+      "stockId": "1217403919",
+      "stockUrl": "https://www.istockphoto.com/photo/woman-disinfecting-her-laptop-during-corona-virus-epidemic-gm1217403919-355353647",
+      "alt": "Hands cleaning and disinfecting a laptop",
+      "cropNote": "Hands and device only",
+      "licensed": true,
+      "crop": [
+        0,
+        0.08,
+        1,
+        0.92
+      ]
+    },
+    {
+      "asset": "retail-hand-sanitizer-use",
+      "stockId": "1217359663",
+      "stockUrl": "https://www.istockphoto.com/photo/closeup-asian-woman-hand-using-wash-hand-sanitizer-gel-dispenser-automatic-machine-gm1217359663-355316870",
+      "alt": "Hands using an automatic sanitizer dispenser",
+      "cropNote": "Hands only; avoid claiming stock location is a retail client",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-clean-office-air-feature",
+      "stockId": "1337152223",
+      "stockUrl": "https://www.istockphoto.com/photo/cleaning-a-air-return-vent-gm1337152223-418141288",
+      "alt": "Hands cleaning an air return vent",
+      "cropNote": "Crop to vent, hands and ladder",
+      "licensed": true,
+      "crop": [
+        0.39,
+        0,
+        0.61,
+        0.57
+      ]
+    },
+    {
+      "asset": "eco-friendly-surface-cleaning-green-cloths",
+      "stockId": "173231671",
+      "stockUrl": "https://www.istockphoto.com/photo/hands-cleaving-a-white-surface-with-a-cloth-and-spray-gm173231671-20315071",
+      "alt": "Hands wiping a white surface with cloth and spray",
+      "cropNote": "No face; do not infer environmental certification",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "eco-friendly-cleaning-spray-microfibre",
+      "stockId": "2196939201",
+      "stockUrl": "https://www.istockphoto.com/photo/cleaner-product-for-furniture-and-glass-in-living-room-gm2196939201-614928563",
+      "alt": "Spray bottle and green microfiber cloth",
+      "cropNote": "No people; generic supplies",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-cleaning-products-never-mix-feature",
+      "stockId": "2286083286",
+      "stockUrl": "https://www.istockphoto.com/photo/top-view-of-household-cleaning-supplies-including-a-spray-bottle-dishwashing-liquid-gm2286083286-697911132",
+      "alt": "Cleaning bottles, sponges and microfiber cloths",
+      "cropNote": "Overhead crop; no mixing demonstrated",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "janitorial-cart-preparation-supplies",
+      "stockId": "1438954001",
+      "stockUrl": "https://www.istockphoto.com/photo/janitorial-and-mop-bucket-on-cleaning-in-process-with-copy-space-indoor-gm1438954001-479335464",
+      "alt": "Janitorial cart with mop bucket and warning sign",
+      "cropNote": "Equipment only",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-choosing-cleaning-company-feature",
+      "stockId": "1979777150",
+      "stockUrl": "https://www.istockphoto.com/photo/successful-deal-in-the-office-gm1979777150-558947885",
+      "alt": "Close-up of a business agreement handshake",
+      "cropNote": "Hands-only crop",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "cleaning-quality-inspection-clipboard",
+      "stockId": "1474136803",
+      "stockUrl": "https://www.istockphoto.com/photo/young-beautiful-professional-cleaning-woman-in-an-apron-from-a-cleaning-company-gm1474136803-504084454",
+      "alt": "Cleaner checking completed work on a checklist",
+      "cropNote": "Crop to clipboard, hands and apron; exclude face",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-end-of-summer-cleaning-feature",
+      "stockId": "2275343998",
+      "stockUrl": "https://www.istockphoto.com/photo/cleaning-window-chambermaid-with-rag-and-detergent-indoors-closeup-space-for-text-gm2275343998-687617645",
+      "alt": "Close-up of cleaning a window with cloth and spray",
+      "cropNote": "Hands and window only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "summer-office-window-cleaning",
+      "stockId": "2257922659",
+      "stockUrl": "https://www.istockphoto.com/photo/man-cleaning-windows-gm2257922659-670960682",
+      "alt": "Squeegee cleaning a window",
+      "cropNote": "Crop to hands and glass",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-modern-versus-old-cleaning-feature",
+      "stockId": "2240778593",
+      "stockUrl": "https://www.istockphoto.com/photo/scrubber-dryer-on-a-tile-floor-professional-equipment-gm2240778593-655399336",
+      "alt": "Commercial scrubber dryer on a tile floor",
+      "cropNote": "Equipment only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-commercial-cleaning-air-quality-feature",
+      "stockId": "1337152479",
+      "stockUrl": "https://www.istockphoto.com/photo/dusting-a-fan-gm1337152479-418141575",
+      "alt": "Duster removing dust from a fan",
+      "cropNote": "Equipment detail; illustration of dust control",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-office-germ-hotspots-feature",
+      "stockId": "1213273186",
+      "stockUrl": "https://www.istockphoto.com/photo/woman-cleaning-keyboard-gm1213273186-352540715",
+      "alt": "Hands cleaning a computer keyboard",
+      "cropNote": "Hands and keyboard only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "spring-office-desk-cleaning-toronto",
+      "stockId": "1170175707",
+      "stockUrl": "https://www.istockphoto.com/photo/hand-of-a-woman-wiping-work-desk-close-up-gm1170175707-323723116",
+      "alt": "Close-up of a hand wiping a work desk",
+      "cropNote": "Hands only; no Toronto claim",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "touchpoint-disinfection-door-handle",
+      "stockId": "1214280186",
+      "stockUrl": "https://www.istockphoto.com/photo/female-worker-cleaning-door-handle-gm1214280186-353222809",
+      "alt": "Hands cleaning a door handle with spray and wipe",
+      "cropNote": "Hands and handle crop",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-commercial-deep-cleaning-feature",
+      "stockId": "2194001174",
+      "stockUrl": "https://www.istockphoto.com/photo/professional-floor-cleaning-using-buffing-machines-in-an-indoor-setting-gm2194001174-612199973",
+      "alt": "Floor buffing machines in use indoors",
+      "cropNote": "Crop to machines and lower bodies",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-workplace-allergy-control-feature",
+      "stockId": "1344576944",
+      "stockUrl": "https://www.istockphoto.com/photo/vacuum-cleaner-on-carpet-gm1344576944-422885979",
+      "alt": "Vacuum cleaner head on carpet",
+      "cropNote": "Equipment only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "carpet-extraction-boardroom-toronto",
+      "stockId": "2158135718",
+      "stockUrl": "https://www.istockphoto.com/photo/using-extractor-to-wash-off-the-carpet-from-dust-and-stains-extractor-washing-of-gm2158135718-578785834",
+      "alt": "Carpet extraction tool removing dirt and stains",
+      "cropNote": "Close crop; remove boardroom and Toronto claims",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-cleanable-office-layout-feature",
+      "stockId": "2022287454",
+      "stockUrl": "https://www.istockphoto.com/photo/view-of-a-comfortable-workplace-in-a-modern-office-gm2022287454-561489433",
+      "alt": "Potted plant beside office workstations",
+      "cropNote": "No people; photographic preview checked",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "modern-office-layout-cleaning",
+      "stockId": "2184630910",
+      "stockUrl": "https://www.istockphoto.com/photo/modern-office-interior-gm2184630910-603446555",
+      "alt": "Modern office corridor with a green plant",
+      "cropNote": "No people; photographic preview checked",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-cleaning-techniques-to-avoid-feature",
+      "stockId": "2289287500",
+      "stockUrl": "https://www.istockphoto.com/photo/blue-microfiber-cloth-and-detergent-spray-bottle-on-modern-white-countertop-near-gm2289287500-701134860",
+      "alt": "Microfiber cloth and spray bottle beside a sink",
+      "cropNote": "Supplies only; generic work-surface illustration",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-break-room-cleaning-feature",
+      "stockId": "1432590798",
+      "stockUrl": "https://www.istockphoto.com/photo/cleaning-kitchen-counter-with-spray-bottled-soap-and-microfiber-towel-gm1432590798-474786759",
+      "alt": "Gloved hands cleaning a kitchen counter",
+      "cropNote": "Hands and counter only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-hand-washing-importance-feature",
+      "stockId": "2268846224",
+      "stockUrl": "https://www.istockphoto.com/photo/healthcare-worker-washing-hands-at-hospital-sink-gm2268846224-681419695",
+      "alt": "Hands washing at a clinical sink",
+      "cropNote": "Hands-only crop",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "commercial-handwashing-hygiene",
+      "stockId": "2282494312",
+      "stockUrl": "https://www.istockphoto.com/photo/a-woman-washes-her-hands-with-liquid-soap-gm2282494312-694351739",
+      "alt": "Hands washing with liquid soap",
+      "cropNote": "Hands only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-top-cleaning-professional-qualities-feature",
+      "stockId": "2285147036",
+      "stockUrl": "https://www.istockphoto.com/photo/professional-floor-scrubber-sits-idle-in-clean-modern-space-gm2285147036-696975854",
+      "alt": "Professional floor scrubber ready for use",
+      "cropNote": "Equipment only; replace portrait with tools of the trade",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-commercial-cleaning-expectations-feature",
+      "stockId": "1456507496",
+      "stockUrl": "https://www.istockphoto.com/photo/cleaning-equipment-in-hallway-gm1456507496-491519633",
+      "alt": "Cleaning equipment in a hallway",
+      "cropNote": "Equipment only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "workplace-sanitization-station",
+      "stockId": "2281140304",
+      "stockUrl": "https://www.istockphoto.com/photo/hand-sanitization-station-gm2281140304-693045427",
+      "alt": "Hand sanitization station",
+      "cropNote": "No faces",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-office-dusting-method-feature",
+      "stockId": "530206372",
+      "stockUrl": "https://www.istockphoto.com/photo/the-dust-didnt-stand-a-chance-gm530206372-93385303",
+      "alt": "Duster reaching a ceiling",
+      "cropNote": "Cropped arm and tool",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "dust-on-office-desk-detail",
+      "stockId": "2206548029",
+      "stockUrl": "https://www.istockphoto.com/photo/keyboard-in-dust-gm2206548029-623855164",
+      "alt": "Dust on a computer keyboard",
+      "cropNote": "Detail shot; adjust desk-specific alt text",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-home-office-cleaning-feature",
+      "stockId": "1215345707",
+      "stockUrl": "https://www.istockphoto.com/photo/wiping-the-keyboard-with-a-napkin-gm1215345707-353951716",
+      "alt": "Hands wiping a keyboard on a home office desk",
+      "cropNote": "Overhead crop without face",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-urgent-infection-cleaning-feature",
+      "stockId": "1294313896",
+      "stockUrl": "https://www.istockphoto.com/photo/hands-of-a-janitor-cleaning-the-bathroom-gm1294313896-388353088",
+      "alt": "Gloved hands cleaning a washroom faucet",
+      "cropNote": "Hands and faucet only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-office-relocation-cleaning-feature",
+      "stockId": "1575792691",
+      "stockUrl": "https://www.istockphoto.com/photo/empty-office-with-chairs-cardboard-boxes-plants-computers-and-other-office-gm1575792691-528301059",
+      "alt": "Office furniture and boxes ready for relocation",
+      "cropNote": "No people",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "office-relocation-cleanup",
+      "stockId": "2295747478",
+      "stockUrl": "https://www.istockphoto.com/photo/man-carrying-old-carpet-towards-dumpster-during-home-renovation-gm2295747478-707599217",
+      "alt": "Worker removing rolled carpet during renovation",
+      "cropNote": "Crop to hands, carpet and lower body",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-commercial-floor-care-feature",
+      "stockId": "1976604951",
+      "stockUrl": "https://www.istockphoto.com/photo/floor-cleaning-machine-brush-head-close-up-gm1976604951-558759713",
+      "alt": "Close-up of a floor-cleaning machine brush head",
+      "cropNote": "Equipment detail",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "marble-floor-restoration-buffing",
+      "stockId": "2098028629",
+      "stockUrl": "https://www.istockphoto.com/photo/janitor-use-floor-scrubber-machine-on-the-floor-hallway-office-building-or-walkway-gm2098028629-566216173",
+      "alt": "Floor machine cleaning a tiled corridor",
+      "cropNote": "Machine and lower-body crop; do not call floor marble without evidence",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-retail-store-cleaning-checklist-feature",
+      "stockId": "2220307421",
+      "stockUrl": "https://www.istockphoto.com/photo/industrial-floor-scrubber-cleaning-commercial-entrance-gm2220307421-636743051",
+      "alt": "Floor scrubber cleaning a commercial entrance",
+      "cropNote": "Machine close-up",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "car-dealership-showroom-floor-mopping",
+      "stockId": "2205225462",
+      "stockUrl": "https://www.istockphoto.com/photo/cleaning-lady-is-using-scrubber-dryer-machine-in-supermarket-gm2205225462-622628441",
+      "alt": "Scrubber dryer cleaning a supermarket floor",
+      "cropNote": "Rear or lower-body crop; remove dealership-specific alt text",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "common-areas-glass-railing-cleaning",
+      "stockId": "1289433415",
+      "stockUrl": "https://www.istockphoto.com/photo/woman-sanitizes-handrail-during-covid-19-gm1289433415-385116270",
+      "alt": "Gloved hands wiping a common-area handrail",
+      "cropNote": "Hands and railing crop",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-office-return-readiness-feature",
+      "stockId": "1226819943",
+      "stockUrl": "https://www.istockphoto.com/photo/medical-professional-using-a-touchless-sanitizer-dispenser-gm1226819943-361593910",
+      "alt": "Hands using a touchless sanitizer dispenser",
+      "cropNote": "Hands and dispenser crop",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "contactless-office-greeting",
+      "stockId": "1223071402",
+      "stockUrl": "https://www.istockphoto.com/photo/business-people-greeting-during-covid-19-pandemic-stock-photo-gm1223071402-359135293",
+      "alt": "Colleagues greeting with an elbow bump",
+      "cropNote": "Tight crop to elbows and forearms",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "healthy-post-pandemic-office-cleaning",
+      "stockId": "1199083415",
+      "stockUrl": "https://www.istockphoto.com/photo/hand-sanitizer-gm1199083415-342926635",
+      "alt": "Wall-mounted soap dispenser in a washroom",
+      "cropNote": "Equipment only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-office-fridge-cleaning-feature",
+      "stockId": "1346596233",
+      "stockUrl": "https://www.istockphoto.com/photo/hand-in-glovews-cleaning-fridge-inside-detegent-and-cloth-for-cleaning-refrigerator-gm1346596233-424326571",
+      "alt": "Gloved hands cleaning inside a refrigerator",
+      "cropNote": "Hands and fridge only",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-coronavirus-workplace-safety-feature",
+      "stockId": "1220915177",
+      "stockUrl": "https://www.istockphoto.com/photo/hands-hygiene-gm1220915177-357682405",
+      "alt": "Hands using an automatic disinfectant dispenser",
+      "cropNote": "Hands only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-regular-commercial-cleaning-feature",
+      "stockId": "962147874",
+      "stockUrl": "https://www.istockphoto.com/photo/scrubber-machine-for-cleaning-warehouse-floor-gm962147874-262765051",
+      "alt": "Walk-behind scrubber for warehouse floors",
+      "cropNote": "Equipment only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-daycare-school-cleaning-feature",
+      "stockId": "1303960358",
+      "stockUrl": "https://www.istockphoto.com/photo/close-up-on-cleaning-products-at-a-school-classroom-gm1303960358-395262174",
+      "alt": "Cleaning products on a classroom desk",
+      "cropNote": "Supplies only; no identifiable children",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-key-office-disinfection-areas-feature",
+      "stockId": "905536792",
+      "stockUrl": "https://www.istockphoto.com/photo/close-up-of-a-janitor-cleaning-computer-screen-gm905536792-249684961",
+      "alt": "Gloved hands cleaning a computer screen",
+      "cropNote": "Hands and screen only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-fall-office-cleaning-feature",
+      "stockId": "2264927817",
+      "stockUrl": "https://www.istockphoto.com/photo/woman-hand-holding-long-telescopic-duster-to-clean-white-ceiling-lamp-hard-to-reach-gm2264927817-677635999",
+      "alt": "Hand using a telescopic duster on a ceiling lamp",
+      "cropNote": "Arm and equipment crop",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "office-window-cleaning-toronto",
+      "stockId": "2275343804",
+      "stockUrl": "https://www.istockphoto.com/photo/cleaning-window-chambermaid-with-rag-and-detergent-indoors-gm2275343804-687617614",
+      "alt": "Close-up of cleaning a window",
+      "cropNote": "Hands and glass crop; no Toronto claim",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-slip-trip-fall-prevention-feature",
+      "stockId": "1967022764",
+      "stockUrl": "https://www.istockphoto.com/photo/caution-wet-floor-sign-at-glass-doors-to-building-entrance-gm1967022764-558185479",
+      "alt": "Wet floor warning sign at a building entrance",
+      "cropNote": "No faces",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-office-cleaning-products-feature",
+      "stockId": "1248806568",
+      "stockUrl": "https://www.istockphoto.com/photo/all-purpose-cleaner-disinfectant-spray-bottle-with-towel-to-clean-surfaces-at-home-gm1248806568-363819259",
+      "alt": "Surface-cleaning spray and towel",
+      "cropNote": "Supplies only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-office-plant-care-feature",
+      "stockId": "1174414123",
+      "stockUrl": "https://www.istockphoto.com/photo/woman-worker-water-green-plant-in-office-gm1174414123-326620871",
+      "alt": "Hands watering a potted office plant",
+      "cropNote": "Hands and plant crop",
+      "licensed": true,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "office-plants-clean-workplace",
+      "stockId": "1411358272",
+      "stockUrl": "https://www.istockphoto.com/photo/front-desk-seating-area-in-modern-office-with-comfortable-sofa-and-green-plants-gm1411358272-461222455",
+      "alt": "Office seating area with green plants",
+      "cropNote": "No people; photographic preview checked",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-spring-office-cleaning-feature",
+      "stockId": "2186632413",
+      "stockUrl": "https://www.istockphoto.com/photo/unrecognizable-woman-housekeeper-cleaning-gm2186632413-605273553",
+      "alt": "Hands wiping a white work surface",
+      "cropNote": "Crop excludes face",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-day-versus-night-cleaning-feature",
+      "stockId": "2160722297",
+      "stockUrl": "https://www.istockphoto.com/photo/a-yellow-cleaning-cart-with-a-yellow-trash-bag-and-a-yellow-bucket-gm2160722297-581233291",
+      "alt": "Janitorial cart stocked for cleaning",
+      "cropNote": "Equipment only; do not imply stock establishes night-time work",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-robotic-versus-manual-cleaning-feature",
+      "stockId": "2253904000",
+      "stockUrl": "https://www.istockphoto.com/photo/smart-robot-vacuum-cleaning-autonomously-gm2253904000-667251597",
+      "alt": "Autonomous robotic vacuum cleaner",
+      "cropNote": "Equipment only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "blog-public-area-disinfection-feature",
+      "stockId": "1217403910",
+      "stockUrl": "https://www.istockphoto.com/photo/woman-disinfecting-door-handle-during-covid-19-pandemic-gm1217403910-355353646",
+      "alt": "Hands disinfecting a door handle",
+      "cropNote": "Hands and handle only",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "asset": "post-construction-cleanup-vacuum",
+      "stockId": "2162227486",
+      "stockUrl": "https://www.istockphoto.com/photo/construction-worker-vacuuming-concrete-floor-before-applying-epoxy-gm2162227486-582632714",
+      "alt": "Construction vacuum cleaning a concrete floor",
+      "cropNote": "Crop to vacuum, hands and lower body",
+      "licensed": false,
+      "crop": [
+        0,
+        0,
+        1,
+        1
+      ]
+    }
+  ],
+  "preparedAgainstCommit": "1379effb6747417789021660e585ccba397a060d",
+  "validation": {
+    "imageLandingAndParityTests": 117,
+    "testFilesPassed": 4,
+    "previewBuildPages": 124,
+    "imageHostCheck": "passed",
+    "visualReview": "37 source photos, desktop/mobile hero and face-avoiding crops reviewed; no deployed responsive page review performed"
+  }
+}
