@@ -83,7 +83,9 @@ export const locations: Location[] = [
     landmarks: 'the Financial District, King West, the Entertainment District and the St. Lawrence area',
     mapQuery: 'Downtown Toronto, Ontario, Canada',
     description:
-      'Commercial and office cleaning in downtown Toronto — offices, multi-tenant buildings, clinics and retail, cleaned after hours by a WSIB-covered crew.',
+      'Office and commercial cleaning in downtown Toronto: offices, multi-tenant buildings, clinics and retail, cleaned after hours. WSIB covered.',
+    title: 'Office & Commercial Cleaning in Downtown Toronto | Evergreen',
+    h1: 'Office & Commercial Cleaning in Downtown Toronto',
     needsClientReview: true,
   },
   {

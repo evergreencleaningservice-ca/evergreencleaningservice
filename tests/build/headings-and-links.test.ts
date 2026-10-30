@@ -454,6 +454,7 @@ describe('the location pages people search as "office cleaning <city>"', () => {
     ['etobicoke', 'Etobicoke'],
     ['markham', 'Markham'],
     ['oakville', 'Oakville'],
+    ['toronto-downtown', 'Downtown Toronto'],
   ])('%s leads with office cleaning in its title, H1 and an office section', (slug, place) => {
     const html = read(`locations/${slug}/index.html`);
     expect(html).toMatch(/<title>Office &amp; Commercial Cleaning in /);

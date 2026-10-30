@@ -231,25 +231,26 @@ export const nap = {
  * Change one and change the other — they are checked against each other in
  * tests/unit/site-hours.test.ts.
  */
+/* Since 30 Oct 2026 these follow the Google Business Profile exactly, by
+   the client's decision: Monday to Friday 7am–6pm, closed at weekends. The
+   site had said 7am–10pm and weekends 8am–8pm, which disagreed with the
+   listing. These are office hours; cleaning itself is still done after
+   hours and at weekends, as the service pages say. Closed days are left out
+   of the structured data, which is how schema.org marks them. */
 export const hours = [
   {
     days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
     opens: '07:00',
-    closes: '22:00',
-  },
-  {
-    days: ['Saturday', 'Sunday'],
-    opens: '08:00',
-    closes: '20:00',
+    closes: '18:00',
   },
 ] as const;
 
 /** The same hours, for a human, beside the click-to-call. */
-export const hoursNote = 'Monday to Friday 7am–10pm · Weekends 8am–8pm';
+export const hoursNote = 'Office hours: Monday to Friday 7am–6pm';
 
 export const social = [
   { name: 'Facebook', href: 'https://www.facebook.com/Evergreen-Cleaning-Service-104007224426820' },
-  { name: 'Twitter', href: 'https://twitter.com/EvergreenClean8/' },
+  { name: 'Twitter', href: 'https://x.com/EvergreenClean8' },
   { name: 'LinkedIn', href: 'https://www.linkedin.com/company/evergreen-cleaning-service-toronto/' },
 ] as const;
 
