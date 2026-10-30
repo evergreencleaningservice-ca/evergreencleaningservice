@@ -348,10 +348,10 @@ const webPage = webPageSchema({
     }
   }
   /* The form stays in view beside the long text column, but only where the
-     whole form fits on screen (about 1,015px plus the 92px header). On a
-     laptop a pinned form taller than the window hid its submit button until
-     the end of the page (Codex review on #64, 30 Oct 2026). */
-  @media screen and (min-width: 941px) and (min-height: 1140px) {
+     whole form fits on screen (the card is about 840px plus the 92px
+     header). On a laptop a pinned form taller than the window hid its
+     submit button until the end of the page (Codex review on #64). */
+  @media screen and (min-width: 941px) and (min-height: 1000px) {
     .loc-aside {
       position: sticky;
       top: 92px;

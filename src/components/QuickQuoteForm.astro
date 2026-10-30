@@ -248,7 +248,7 @@ const f = (name: string) => `${id}-${name}`;
 
   <div class="qq-field">
     <label class="qq-label" for={f('message')}>Additional comments</label>
-    <textarea id={f('message')} name="message" rows="3" maxlength="4000"></textarea>
+    <textarea id={f('message')} name="message" rows="2" maxlength="4000"></textarea>
   </div>
 
 
@@ -343,27 +343,28 @@ const f = (name: string) => `${id}-${name}`;
     }
   }
 
-  /* 400px, not 340: at 340-399 (a phone) the postal code box came out about
-     95px wide. Below 400 the city has its own line, province and postal
-     code share the next. */
-  @container (min-width: 400px) {
+  /* City, province and postal code on one line from 300px (30 Oct 2026,
+     "the forms are too long"): in the service pages' 318px sidebar form the
+     postal code box is about 87px, enough for "M5V 1Z4". It was 400px, which
+     put the city on a line of its own in every sidebar form. */
+  @container (min-width: 300px) {
     .qq-row-3 {
-      grid-template-columns: 1.3fr 1fr 0.9fr;
+      grid-template-columns: 1.25fr 1fr 0.95fr;
     }
 
     .qq-row-3 > :first-child {
       grid-column: auto;
     }
-  }
 
-  @container (min-width: 400px) {
+    /* Two columns of services from 300px too: eight one-line rows were the
+       tallest part of the form. */
     .qq-choices {
       grid-template-columns: 1fr 1fr;
     }
   }
 
   .qq-field {
-    margin: 0 0 10px;
+    margin: 0 0 8px;
     min-width: 0;
   }
 
@@ -378,8 +379,8 @@ const f = (name: string) => `${id}-${name}`;
      Never three. */
   .qq-choices {
     display: grid;
-    gap: 6px 14px;
-    margin: 2px 0 12px;
+    gap: 6px 12px;
+    margin: 2px 0 10px;
     padding: 0;
     list-style: none;
   }
@@ -388,8 +389,8 @@ const f = (name: string) => `${id}-${name}`;
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    font-size: 15px;
-    line-height: 1.35;
+    font-size: 14px;
+    line-height: 1.3;
   }
 
   /* 18px boxes in the brand green; the label is part of the target too. */
@@ -452,11 +453,11 @@ const f = (name: string) => `${id}-${name}`;
   .qq textarea {
     width: 100%;
     max-width: 100%;
-    /* 42px: compact, and still well over the 24px minimum target. The
+    /* 38px (42px until 30 Oct 2026): compact, and still well over the 24px minimum target. The
        custom properties let a page set a tighter size (the landing pages do
        on desktop) without out-shouting this component's scoped selectors. */
-    min-height: var(--qq-input-height, 42px);
-    padding: var(--qq-input-padding, 9px 12px);
+    min-height: var(--qq-input-height, 38px);
+    padding: var(--qq-input-padding, 7px 10px);
     /* FILLED, NOT OUTLINED. The field is described by its own tint rather
        than by a rule around it, so a column of inputs reads as a stack of
        targets instead of a stack of boxes.
@@ -523,7 +524,7 @@ const f = (name: string) => `${id}-${name}`;
 
   .qq textarea {
     height: var(--qq-textarea-height, auto);
-    min-height: var(--qq-textarea-height, 72px);
+    min-height: var(--qq-textarea-height, 60px);
     resize: vertical;
     line-height: 1.5;
   }
