@@ -35,7 +35,15 @@ export const SHELL = {
   description: 'EG_SHELL_DESCRIPTION',
   body: 'EG_SHELL_BODY',
   date: '2000-01-01T00:00:00.000Z',
+  /* The visible date under the title (PostLayout) renders the same date as a
+     day and as words; both are placeholders too. */
+  day: '2000-01-01',
+  dateLabel: 'January 1, 2000',
 } as const;
+
+/** The visible date, worded as PostLayout words it. */
+export const dateLabel = (d: Date) =>
+  d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 
 export interface LivePost {
   slug: string;
@@ -161,8 +169,7 @@ export function fillShell(shell: string, post: LivePost): string {
   const article = { ...articleSchema({ title: post.title, description, pubDate, slug: post.slug }), ...(post.image ? { image: post.image } : {}) };
   const crumbs = breadcrumbSchema([
     { name: site.name, url: '/' },
-    { name: 'News', url: '/insights/' },
-    { name: 'Blog', url: '/category/blog/' },
+    { name: 'Insights', url: '/insights/' },
     { name: post.title },
   ]);
 
@@ -196,6 +203,8 @@ export function fillShell(shell: string, post: LivePost): string {
     [SHELL.title, esc(post.title)],
     [SHELL.description, esc(description)],
     [SHELL.date, pubDate.toISOString()],
+    [SHELL.day, pubDate.toISOString().slice(0, 10)],
+    [SHELL.dateLabel, dateLabel(pubDate)],
     [SHELL.slug, post.slug],
     [SHELL.body, post.html],
   ]);

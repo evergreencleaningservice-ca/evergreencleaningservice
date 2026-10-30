@@ -59,6 +59,8 @@ ctaHeading: "Have a handover date?"
 ctaText: "Tell us the size of the space and the date, and we will arrange a site visit and a written quote."
 ---
 
+Post-construction cleaning is the removal of debris and construction dust from a commercial space after a renovation, fit-out or new build, in stages, until it is ready to hand over or reopen.
+
 ## A finished build is not a finished space until the dust is gone
 
 Construction dust settles for days after the trades leave. It works into carpet, sits on ledges and light fixtures, and comes back after the first clean. Getting a commercial space ready for handover takes more than a sweep — it takes a sequence, planned around the build.

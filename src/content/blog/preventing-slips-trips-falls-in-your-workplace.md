@@ -11,6 +11,15 @@ tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services
 
 According to statistics, most slips, trips, and falls occur on the same level compared to tripping from an elevated space. With the right measures, these incidences can be prevented. What’s important is putting in the effort for proper preparation and setting ground rules for total order on the floor. What matters is having policies and taking initiatives to maintain high-level safety and hygiene. This article highlights information on preventing slips and falls in your place of work.
 
+**At a glance:**
+
+- Main Causes of Slips, Trips, and Falls
+- Preventing Slip, Trip, and Fall
+- Proper Warnings and Signs
+- Proper Lighting
+- Stairways and Handrail Maintenance
+- Clean Slippery or Wet Floors
+
 ![Wet and muddy entrance mat in winter](/images/winter-entrance-floor-care-slush.jpg)
 
 ### Main Causes of Slips, Trips, and Falls

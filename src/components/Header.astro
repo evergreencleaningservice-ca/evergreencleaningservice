@@ -357,6 +357,13 @@ const isCurrent = (href?: string) =>
        it off the header bar above. */
     .site-nav.is-open {
       display: block;
+      /* Dim the page behind the open menu (SEO audit M12, "menu overlay"),
+         so it reads as a layer over the page rather than part of it. The
+         shadow is clipped at the drawer's top edge, so the header bar and
+         its close button stay undimmed. A tap on the dimmed page closes it
+         (see the script below). */
+      box-shadow: 0 0 0 100vmax rgba(17, 17, 17, 0.45);
+      clip-path: inset(0 -100vmax -100vmax -100vmax);
       max-height: calc(100vh - 60px);
       overflow-y: auto;
       border-top: 1px solid var(--rule);
@@ -469,9 +476,26 @@ const isCurrent = (href?: string) =>
   const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
   const navEl = document.querySelector<HTMLElement>('.site-nav');
 
+  const setOpen = (open: boolean) => {
+    navEl?.classList.toggle('is-open', open);
+    toggle?.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+
   toggle?.addEventListener('click', () => {
-    const open = navEl?.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    setOpen(!navEl?.classList.contains('is-open'));
+  });
+
+  /* The open menu dims the page behind it; a tap anywhere outside the header
+     closes it, and so does Escape, which returns focus to the toggle. */
+  document.addEventListener('click', (event) => {
+    if (!navEl?.classList.contains('is-open')) return;
+    if ((event.target as Element | null)?.closest('.site-header')) return;
+    setOpen(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !navEl?.classList.contains('is-open')) return;
+    setOpen(false);
+    toggle?.focus();
   });
 
   // Mobile: tap a parent item to reveal its submenu instead of navigating.

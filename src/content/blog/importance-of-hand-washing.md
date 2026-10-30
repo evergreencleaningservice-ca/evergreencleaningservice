@@ -33,4 +33,6 @@ While handwashing is one of the most important things to keep people in an offic
 
 If you are looking to keep your office clean and everyone in it healthy, you can contract professional services from [Evergreen Cleaning](/about-us/). Evergreen Cleaning helps to keep your office free of germs and spotless. When you hire Evergreen, you are getting a company that prides itself on providing the highest level of service. We guarantee a comprehensive cleaning of everything from your lobbies to your washrooms. With regular cleaning, you can keep your office hygienic and keep your employees and customers healthy.
 
-#### [Contact us](/request-a-quote/) to get a free assessment of your office/workspace.
+[Contact us](/request-a-quote/) to get a free assessment of your office/workspace.
+
+If you would rather leave it to a professional crew, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) and [office cleaning](/services/office-cleaning/) services cover it for workplaces across Toronto and the GTA.

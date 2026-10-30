@@ -7,6 +7,7 @@ import SubmissionRuntime from '../components/SubmissionRuntime.astro';
 import { site } from '../data/site';
 import { pageTitle } from '../lib/title';
 import { articleSchema, breadcrumbSchema } from '../lib/schema';
+import { tags as TAGS } from '../data/tags';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -20,6 +21,12 @@ interface Props {
 
 const { post, newer, older, noindex = false } = Astro.props;
 const { title, description, pubDate, image, imageAlt } = post.data;
+/* The post's own topics, linked to their archives. The sidebar cloud shows
+   only topics with two or more posts (SEO audit L1-L4), so this is where a
+   one-post topic's archive is linked from. */
+const postTags = ((post.data as { tags?: string[] }).tags ?? [])
+  .map((slug) => TAGS.find((t) => t.slug === slug))
+  .filter((t): t is (typeof TAGS)[number] => Boolean(t));
 /* Refreshed featured images ship as AVIF/WebP/JPEG siblings at 960x480. */
 const modern = image && /-feature\.jpg$/.test(image);
 const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
@@ -47,8 +54,7 @@ const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
   set:html={JSON.stringify(
     breadcrumbSchema([
       { name: site.name, url: '/' },
-      { name: 'News', url: '/insights/' },
-      { name: 'Blog', url: '/category/blog/' },
+      { name: 'Insights', url: '/insights/' },
       { name: title },
     ])
   )}
@@ -59,16 +65,20 @@ const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
     <div class="container post-container content-grid">
       <div class="post-main">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">{site.name}</a> &gt; <a href="/insights/">News</a> &gt;{' '}
-        <a href="/category/blog/">Blog</a> &gt; <span aria-current="page">{title}</span>
+        <a href="/">{site.name}</a> &gt; <a href="/insights/">Insights</a> &gt;{' '}
+        <span aria-current="page">{title}</span>
       </nav>
 
-      {/* The original prints no date on a post — there is no `.entry-meta` on
-          the page at all. The date stays in the head as `article:published_time`
-          and in the JSON-LD, where the original also keeps it, but it is not
-          shown. */}
+      {/* The original printed no date on a post. Since 30 Oct 2026 the
+          publish date is shown under the title (SEO audit, "blog stale,
+          undated and unattributed"), so a reader can judge how current the
+          advice is; it matches `article:published_time` and the JSON-LD. */}
       <header class="entry-header">
         <h1 class="entry-title">{title}</h1>
+        <p class="post-date">
+          Published <time datetime={pubDate.toISOString().slice(0, 10)}>{pubDate.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</time>
+          {' '}by {site.name}
+        </p>
       </header>
       {
         image && (
@@ -91,6 +101,19 @@ const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
       <article class="entry-content">
         <slot />
       </article>
+      {
+        postTags.length > 0 && (
+          <p class="post-topics">
+            Topics:{' '}
+            {postTags.map((t, i) => (
+              <Fragment>
+                {i > 0 && ', '}
+                <a href={`/tag/${t.slug}/`} rel="tag">{t.name}</a>
+              </Fragment>
+            ))}
+          </p>
+        )
+      }
 
       {/* The original has no previous/next navigation on a post — the article
           runs straight into the comment form. A pair of links here was an
@@ -107,6 +130,22 @@ const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
 </BaseLayout>
 
 <style>
+  .post-topics {
+    margin: 0 0 30px;
+    font-size: 0.875rem;
+  }
+
+  .post-topics a {
+    display: inline-block;
+    padding-block: 2px;
+  }
+
+  .post-date {
+    margin: -6px 0 18px;
+    font-size: 0.875rem;
+    color: var(--ink-muted);
+  }
+
   .entry-header .entry-title {
     font-family: var(--font-heading);
     font-size: clamp(1.625rem, 1.3rem + 1vw, 2rem);

@@ -37,6 +37,11 @@ const posts = (await getCollection('blog'))
    is unreadable and at the top a two-word tag breaks over two lines of a
    280px sidebar, so the same ranking is mapped onto 12px to 19px. */
 const cloudSize = (pt: number) => (12 + ((Math.min(Math.max(pt, 8), 22) - 8) / 14) * 7).toFixed(1);
+/* Capped on 2026-10-30 (SEO audit L1-L4, "tag-sidebar cap"): only the topics
+   with two or more posts. A one-post tag's archive is that one post again, and
+   26 links on every inner page spread the sidebar's links thin. The one-post
+   archives still exist and are linked from their posts. */
+const cloud = tags.filter((tag) => tag.count >= 2);
 ---
 
 <aside id="secondary" class="sidebar" aria-label="Sidebar">
@@ -80,7 +85,7 @@ const cloudSize = (pt: number) => (12 + ((Math.min(Math.max(pt, 8), 22) - 8) / 1
         reader, so the count is spoken instead. */}
     <div class="tagcloud">
       {
-        tags.map((tag) => (
+        cloud.map((tag) => (
           <a
             href={`/tag/${tag.slug}/`}
             style={`font-size: ${cloudSize(tag.size)}px`}

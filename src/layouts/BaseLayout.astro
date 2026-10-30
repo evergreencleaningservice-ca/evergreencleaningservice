@@ -42,6 +42,7 @@ const ogImage = new URL(ogPath, Astro.site ?? site.url).href;
    page title where it does not, and the default image's description. */
 const DEFAULT_OG_ALT = 'Cleaners in green uniforms vacuuming and wiping desks in an open-plan Toronto office';
 const ogAlt = imageAlt ?? (image ? title : DEFAULT_OG_ALT);
+import MobileActionBar from '../components/MobileActionBar.astro';
 ---
 
 <!doctype html>
@@ -137,6 +138,7 @@ const ogAlt = imageAlt ?? (image ? title : DEFAULT_OG_ALT);
         nothing until the client's clip is in public/video/ — see the note in
         the component. */}
     <LeadVideo />
+    <MobileActionBar />
 
 
     <PhoneTracking />

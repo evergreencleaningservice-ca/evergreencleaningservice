@@ -144,8 +144,10 @@ describe('every page has exactly one meaningful H1', () => {
   });
 
   it('the news archive no longer says "News, News"', () => {
+    /* One H1 per page. Renamed from "News" on 2026-10-30 (SEO audit L1-L4:
+       the blog hub is "Commercial Cleaning Insights"). */
     for (const page of pages.filter((p) => p.startsWith('insights/'))) {
-      expect(headings(read(page), 1)).toEqual(['News']);
+      expect(headings(read(page), 1)).toEqual(['Commercial Cleaning Insights']);
     }
   });
 
@@ -327,13 +329,14 @@ describe('the rest of the page is untouched', () => {
 
   /* 69 until 2026-10-15; +4 for /industries/, its two pages and /our-process/.
      Back to 69 on 2026-10-29: /search/ and /insights/page/2-4/ left the
-     sitemap (SEO audit M1, M2). */
-  it('all 69 sitemap URLs were built', () => {
+     sitemap (SEO audit M1, M2). 70 since 2026-10-30: floor stripping and
+     waxing (M5). */
+  it('all 70 sitemap URLs were built', () => {
     const locs = (xml: string) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const urls = locs(read('sitemap-index.xml')).flatMap((child) =>
       locs(read(path.basename(new URL(child).pathname)))
     );
-    expect(urls).toHaveLength(69);
+    expect(urls).toHaveLength(70);
     const missing = urls.filter((u) => !exists(new URL(u).pathname));
     expect(missing).toEqual([]);
   });

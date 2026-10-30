@@ -1,6 +1,6 @@
 ---
 title: "Commercial Cleaning Techniques To Avoid"
-description: "When it comes to cleaning many think more is a good thing and while this can be true, in some aspects more can do greater harm than good. Let us show you which techniques to avoid"
+description: "More cleaning product is not always better, and some popular cleaning tricks do more harm than good. Here are the cleaning techniques to avoid."
 pubDate: 2022-11-30
 image: "/images/blog-cleaning-techniques-to-avoid-feature.jpg"
 imageAlt: "Cleaning supervisor showing a trainee the correct cloth for a delicate stone surface"
@@ -10,6 +10,16 @@ tags: ["cleaning", "cleaning-products", "commercial-cleaning", "commercial-offic
 ## Some techniques that do more harm than help…
 
 Pretty much everyone wants and needs a clean and organized space. However, no one wants to be the one cleaning it. This is exactly why so many people look for top tips and tricks to try to make the task of cleaning a lot easier.
+
+**At a glance:**
+
+- Use More Product
+- Microwaving Your Sponges
+- Using Toothpaste on Your Silverware
+- Clean Everything with Vinegar
+- Using Bleach to Get Rid Of Rust
+- Pouring Soda In Your Toilets
+- Polishing Wood Surfaces Too Much
 
 Unfortunately, a lot of the cleaning tips and tricks out there aren’t practical or effective. Many of them might sound good, but they are ineffective, to say the least. Some might even do more harm than help.
 
@@ -62,3 +72,5 @@ To get a better effect, you’ll want to clean the wooden surfaces with regular 
 ![Janitorial cart with mop bucket and warning sign](/images/janitorial-cart-preparation-supplies.jpg)
 
 The cleanliness of your home or office can impact the quality of life of everyone that uses it. Cleaning is a serious task. It can dictate the overall health and wellness of all occupants. Don’t go for the first cleaning method you hear on the internet or from word of mouth. Stick to using tried and true cleaning methods from professionals. It’s always a good idea to hand the reigns off to [professional cleaners](/contact-us/) that know what they are doing.
+
+If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

@@ -16,7 +16,7 @@ Below is a [commercial cleaning services](/) checklist for cleaning schools and 
 ![Cleaner disinfecting an office door handle](/images/touchpoint-disinfection-door-handle.jpg)
 
  
-#### When it comes to schools, daily cleaning is key.
+### When it comes to schools, daily cleaning is key.
 
 This helps prevent students from spreading germs to each other and to teachers and staff. In the age of COVID-19, this requires the use of [CDC-recommended chemicals](https://www.cdc.gov/infectioncontrol/guidelines/disinfection/disinfection-methods/chemical.html) and equipment so that disinfection can happen indoors, as well as outdoor on surfaces likely to receive a great deal of contact.
 
@@ -30,7 +30,7 @@ In terms of outdoor cleaning services, tables, railings, benches, playground equ
 
 Lobby cleaning should encompass surfaces such as entrance glass, door frames and handles, floor mats, stairways, and more.
 
-#### Bathrooms need a great deal of attention as well, which should include cleaning of garbage cans, walls, cubicle walls, toilets, soap dispensers, towel dispensers, floors, sinks, and more.
+Bathrooms need a great deal of attention as well, which should include cleaning of garbage cans, walls, cubicle walls, toilets, soap dispensers, towel dispensers, floors, sinks, and more.
 
 ![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
@@ -42,7 +42,7 @@ When it comes to corridors, all lockers should be cleaned if they are in use, as
 
 The entire school should receive cleaning of vents and light switches on a daily basis. The HVAC system should also be cleaned on a regular schedule, according to your building preference.
 
-#### By adhering to this commercial cleaning checklist, it is possible to rest assured that schools and daycare facilities are fully disinfected and as clean as they can be.
+By adhering to this commercial cleaning checklist, it is possible to rest assured that schools and daycare facilities are fully disinfected and as clean as they can be.
 
 Evergreen Clean utilizes the latest non-toxic, environmentally sound cleaning products endorsed by the CDC. Because we understand the fact that children of all ages touch surfaces often and are prone to touching their mouths and faces far more frequently than adults, we strive to offer comprehensive cleaning services at every facility we serve.
 

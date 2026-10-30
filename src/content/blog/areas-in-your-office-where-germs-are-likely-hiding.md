@@ -10,6 +10,18 @@ imageAlt: "Gloved cleaner disinfecting a shared office keyboard and other high-t
 
 The average office worker is exposed to approximately 10 million bacteria every day. There are also common parts of the workplace where there are high concentration of germs that can be easily passed on from one worker to the next.
 
+**At a glance:**
+
+- Photocopiers and Printers
+- Coffee Maker
+- Water Cooler
+- Refrigerators In The Office
+- Keypads & Door Handles
+- Conference Rooms
+- Blinds & Windowsills
+- Hallways & Stairways
+- Staff Desks & Work Areas
+
 Unfortunately, missing some surfaces in the office that have bacteria and flu viruses is quite easy. Now, due to Covid-19, it is even more critical that these areas are not overlooked, especially if they are handled by lots of people and have a lot of traffic on most days.
 
 ![Cleaner wiping office desks in a Toronto office](/images/spring-office-desk-cleaning-toronto.jpg)

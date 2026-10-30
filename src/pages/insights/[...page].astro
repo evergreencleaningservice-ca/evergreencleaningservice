@@ -55,7 +55,7 @@ const listDescription = pageDescription(
 ---
 
 <BaseLayout
-  title={pageTitle(`News${pageSuffix}`)}
+  title={pageTitle(`Commercial Cleaning Insights${pageSuffix}`)}
   description={listDescription}
 >
   <script
@@ -69,14 +69,14 @@ const listDescription = pageDescription(
   <script
     slot="head"
     type="application/ld+json"
-    set:html={JSON.stringify(breadcrumbSchema([{ name: site.name, url: '/' }, { name: 'News' }]))}
+    set:html={JSON.stringify(breadcrumbSchema([{ name: site.name, url: '/' }, { name: 'Insights' }]))}
     is:inline
   />
   <div class="page-header">
     <div class="container">
-      <h1 class="entry-title">News</h1>
+      <h1 class="entry-title">Commercial Cleaning Insights</h1>
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">{site.name}</a> &gt; <span>News</span>
+        <a href="/">{site.name}</a> &gt; <span>Insights</span>
       </nav>
     </div>
   </div>

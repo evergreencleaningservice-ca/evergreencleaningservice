@@ -777,3 +777,30 @@ main li > p a:not(.btn) {
   line-height: 24px;
   padding: 2px 0;
 }
+
+/* ---------- phones (SEO audit M12, 30 Oct 2026) ----------
+   The audit's mobile pass: body copy at 16px rather than 15, and no tap
+   target under 24px. Desktop keeps the original's 15px. */
+@media (max-width: 767px) {
+  body,
+  .entry-content,
+  .entry-content p,
+  .entry-content li {
+    font-size: 1rem;
+  }
+
+  /* Inline links in a breadcrumb, a tag cloud or a card footer are short
+     words; padding gives each a 24px-high target without moving the text. */
+  .breadcrumbs a,
+  .tagcloud a,
+  .post-card-more {
+    display: inline-block;
+    padding-block: 4px;
+  }
+
+  .tagcloud a {
+    min-width: 24px;
+    padding-inline: 4px;
+    text-align: center;
+  }
+}

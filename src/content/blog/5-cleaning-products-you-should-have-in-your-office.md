@@ -11,6 +11,14 @@ tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services
 
 You need to have basic and essential cleaning products, such as disinfecting wipes or glass cleaner, for everyday cleaning in your office. You also need cleaning products for daily emergencies in your office.
 
+**At a glance:**
+
+- Glass Cleaner
+- Disinfecting Wipes
+- Spot Remover
+- White Vinegar
+- Air Freshener
+
 The following are five cleaning products that we recommend you keep handy in any office, commercial and industrial work setting.
 
 ### Glass Cleaner
@@ -40,3 +48,5 @@ Your office environment should be inviting, no matter the type of business you a
 It is important to have some of the essentials cleaning products in your office whether you hire [professional cleaning](/about-us/) staff to come in regularly or not. The cleaning products will come in handy during everyday emergencies. Don’t get caught unprepared!
 
 Hiring professional [commercial cleaning services](/) is one of the best ways for keeping your office looking great at all times. Call us today to learn how we can help improve the cleanliness of your office space.
+
+If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

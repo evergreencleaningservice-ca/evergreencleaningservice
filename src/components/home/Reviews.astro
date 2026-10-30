@@ -335,6 +335,8 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
 
   .ti-more {
     display: block;
+    /* 24px tall at least, the WCAG 2.2 minimum target (SEO audit M12). */
+    min-height: 24px;
     margin: 6px 0 0;
     padding: 0;
     border: 0;

@@ -10,6 +10,14 @@ imageAlt: "Facility manager touring an office with a professional cleaning super
 
 You can’t run a successful business without having the proper cleaning strategy in place. And for the most part, companies are going to look at [professional cleaning services](/services/) as rather than hiring an in-house janitor. This is because a professional cleaning service won’t have a problem coming in after your staff has left, making it much easier to clean the entire space.
 
+**At a glance:**
+
+- Compare Cleaning Price Rates
+- Insured by WSIB
+- Read The Fine Print
+- Take Experience Into Account
+- Ask For References
+
 ![Supervisor checking a cleaned office against a checklist](/images/cleaning-quality-inspection-clipboard.jpg)
 
 In most area’s there are a multitude of cleaning companies to choose from, it’s critical to choose one that’s right for your business.

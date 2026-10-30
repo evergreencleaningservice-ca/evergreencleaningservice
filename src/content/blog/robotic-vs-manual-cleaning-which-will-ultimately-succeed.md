@@ -11,6 +11,15 @@ tags: ["ai", "cleaning", "commercial-cleaning", "commercial-office-cleaning", "m
 
 Technology is constantly changing and evolving, especially when it comes to certain industries. AI (artificial intelligence) and robotics technology have pioneered some amazing pieces of modern equipment used by businesses to help speed up growth, sustainability, and profitability.
 
+**At a glance:**
+
+- Interacting With Consumers
+- Robots Are Immune to Disease
+- Robots Need A Lot Of Maintenance
+- Lack Of Thoroughness with Automated Vacuums
+- Cleaning Businesses After Hours
+- Data Gathering
+
 Many people, however, are concerned that robots and AI will eventually replace the jobs that currently humans perform. In fact, many people contend that these innovations in technology could potentially cause more harm across different industry sectors.
 
 One of the best examples of this dilemma is the cleaning industry. If commercial cleaning companies are reducing manpower and opting for robots to perform mundane cleaning tasks, is there still room for human employees? Another common worry is that if manufacturers keep bringing new technology to the table, it may displace many humans within the industry as they’re deemed dispensable.
@@ -68,3 +77,5 @@ Having said that, humans are still necessary in order to actually interpret the 
 As innovative as robots and AI technology are, they will never replace the need for human cleaning employees. Leveraging some form of technology for cleaning can help make the business run smoother and more efficiently, but humans will always remain a necessity. In truth, the two can work together to create a consumer experience that allows a business plenty of growth for the future.
 
 Do you have commercial cleaning needs that require special attention? At [Evergreen](/about-us/), we can work with you every step of the way to create a cleaning program that fits your needs and is sure to surpass your expectations. We ensure all of our clients are satisfied, will you join them and discover what it means to have a clean commercial space? [Contact us](/contact-us/) today!
+
+If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

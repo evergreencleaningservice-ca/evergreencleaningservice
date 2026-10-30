@@ -76,9 +76,10 @@ describe('every rendered tel: link', () => {
        rather than a lower bound: a count that FALLS is a page that stopped
        building, which is exactly what this is here to catch. */
     /* 117 since 2026-10-15: +3 industry pages, /our-process/ and two
-       data-driven landing pages. */
-    expect(pageCount).toBe(117);
-    expect(new Set(links.map((l) => l.page)).size).toBe(117);
+       data-driven landing pages. 118 since 2026-10-30: the floor stripping
+       and waxing page (SEO audit M5). */
+    expect(pageCount).toBe(118);
+    expect(new Set(links.map((l) => l.page)).size).toBe(118);
     expect(links.length).toBeGreaterThanOrEqual(290);
   });
 
@@ -113,9 +114,9 @@ describe('the locations the site actually uses', () => {
   const at = (loc: string) => links.filter((l) => l.location === loc);
 
   it('the site header carries one on every non-paid page', () => {
-    /* 112 = 117 pages less the five on the landing-page shell, which have
+    /* 113 = 118 pages less the five on the landing-page shell, which have
        their own header. */
-    expect(at('header')).toHaveLength(112);
+    expect(at('header')).toHaveLength(113);
   });
 
   it('the mobile drawer carries its own, separately reported link', () => {
@@ -123,12 +124,13 @@ describe('the locations the site actually uses', () => {
        menu at every width (`header`), and the open drawer lists the number
        again as its last item (`mobile_navigation`). Two elements, each with
        one fixed answer. */
-    expect(at('mobile_navigation')).toHaveLength(112);
+    expect(at('mobile_navigation')).toHaveLength(113);
   });
 
   it.each([
-    /* home + 9 service pages + 2 industry pages */
-    ['hero', 12],
+    /* home + 10 service pages + 2 industry pages + 7 location pages (their
+       hero call button, SEO audit Phase 3) */
+    ['hero', 20],
     ['quote_sidebar', 1],
     ['paid_header', 5],
     ['paid_sticky', 4],
@@ -159,16 +161,16 @@ describe('the locations the site actually uses', () => {
   it('body prose is labelled content, including links from Markdown', () => {
     const content = at('content');
     expect(content.length).toBeGreaterThanOrEqual(29);
-    /* The service pages whose Markdown was not rewritten on 2026-10-15
-       (disinfection, emergency, industrial) still carry a bare "Call Now"
-       link. They have no component, so `normalizeBody` stamps them. */
-    expect(content.filter((l) => l.displayed === 'Call Now')).toHaveLength(3);
+    /* The last three bare "Call Now" links (disinfection, emergency,
+       industrial) went when those pages moved onto the office template in
+       Phase 3; the template's own call buttons carry their location. */
+    expect(content.filter((l) => l.displayed === 'Call Now')).toHaveLength(0);
   });
 
   it('the site footer carries one on every non-paid page, the paid footer none', () => {
     /* Added deliberately on 2026-10-15 with the footer's contact block. The
        landing-page shell keeps its own minimal footer with no number. */
-    expect(at('footer')).toHaveLength(112);
+    expect(at('footer')).toHaveLength(113);
   });
 });
 

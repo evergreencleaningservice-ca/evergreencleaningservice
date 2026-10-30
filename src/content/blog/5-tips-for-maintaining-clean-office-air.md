@@ -11,6 +11,14 @@ tags: ["air-quality", "cleaning-products", "commercial-cleaning", "commercial-of
 
 If you find yourself sneezing first thing when you walk into your office, automatically you know that the air is stuffy. This means that the air in your office is not clean. Air quality is important, as it helps maintain a healthy mind, soul, and body throughout the day. On the other hand, poor air quality can be caused by germs, dust, humidity, mold, and even poor ventilation. This is bad and can affect the health of everyone within the office, including customers.
 
+**At a glance:**
+
+- Consider Using Microfiber Cloths
+- Maintain A High Level of Cleanness
+- Eco-Friendly Cleaning Products
+- Air Purifiers
+- Vacuum
+
 Therefore, the million-dollar question is how can you keep your office air clean? Well, here are a few tips collected from experts that will surely help you maintain clean air within your office.
 
 ![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
@@ -40,3 +48,5 @@ It is a known fact that air purifiers are a great addition to improving the air 
 Did you know that regular vacuums can release the dust collected back into the air? This is possible if the filter is compromised or has a poor-quality filter. This is why it is wise to use filter backpack vacuums that come with four filters. These vacuums are efficient at collecting dust particles.
 
 In conclusion, these are but a few ways to improve and maintain the quality of air in an office. Nevertheless, hiring a professional office cleaning company like us at [Evergreen Cleaning](/about-us/) is the best way to ensure the air quality of your office is at its utmost standard. If you are looking for the best commercial cleaning services, [contact us](/contact-us/) today. At Evergreen Cleaning, we value our clients and offer services tailored to our client’s needs.
+
+If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [building maintenance and floor care](/services/building-maintenance/) services cover it for workplaces across Toronto and the GTA.

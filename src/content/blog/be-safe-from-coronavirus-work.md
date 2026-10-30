@@ -11,6 +11,12 @@ tags: ["commercial-office-cleaning", "coronavirus"]
 
 As COVID-19 continues to spread across the globe, it is more important than ever to practice good hygiene. Below, we will go over some tips you can use to keep yourself safe.
 
+**At a glance:**
+
+- Washing your hands properly
+- Cover your coughs
+- Stay at home if you are unwell
+
 The new Coronavirus is a very highly contagious respiratory illness that is currently spreading at a rapid rate across the world. Many scientists have estimated that it is nearly two times as infectious as the seasonal flu. This alone has caused significant panic to set in and it has even led to panic-buying with toilet paper practically flying off the shelves at retailers across Canada. The viruses’ symptoms aren’t always present or noticeable. In fact, symptoms can be something as simple as a mild cough. However, for those that are older or with pre-existing health conditions, COVID-19 has proven to be very dangerous and it can even lead to death.
 
 
@@ -56,3 +62,5 @@ Similarly, you can try to acquire general healthy workplace hygiene practice pos
 Give out face masks and paper tissues if people develop sneezing or coughing at the workplace. You also want bins that have closed tops for disposal.
 
 ### Stay healthy, stay safe!
+
+If you would rather leave it to a professional crew, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) and [office cleaning](/services/office-cleaning/) services cover it for workplaces across Toronto and the GTA.
