@@ -101,7 +101,7 @@ export const locations: Location[] = [
     mapQuery: 'Mississauga, Ontario, Canada',
     description:
       'Trusted commercial cleaning and office janitorial services in Mississauga and the Airport Corporate Centre. WSIB insured, bonded, and reliable. Request a quote.',
-    title: 'Commercial Cleaning & Janitorial Services Mississauga | Evergreen',
+    title: 'Commercial Cleaning & Janitorial Mississauga | Evergreen',
     detail: {
       h1: 'Commercial Cleaning & Office Janitorial Services in Mississauga',
       subtitle: 'Reliable, Professional Facility Maintenance for Mississauga Businesses',
