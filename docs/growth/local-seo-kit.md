@@ -141,13 +141,13 @@ Tell us when any of these change and the website's links and structured data wil
 
 **What is already handled on the website:** every old address that may carry a link 301s to a live page: the bare domain and `http://`, the old `/blog/<slug>/` posts, `/feed/`, both WordPress sitemaps, the legacy service URLs, tags and `/wp-content/uploads/` images (spot-checked live, 30 Oct 2026). Nothing to do there.
 
-**Spam links:** a handful of scraper pages link with anchors like "high quality dofollow backlinks … pbn network service evergreencleaningservice.ca" and unrelated `.xyz` domain names. Evergreen did not cause these and Google ignores them. **Do not disavow** unless Search Console shows a manual action (Security & Manual actions > Manual actions).
+**Spam links:** a handful of scraper pages link with anchors like "high quality dofollow backlinks … pbn network service evergreencleaningservice.ca" and unrelated `.xyz` domain names. Evergreen did not cause these and Google ignores them. **Do not disavow** this handful. Disavow only if Search Console shows a manual action (Security & Manual actions > Manual actions), or if a considerable number of artificial links builds up that is likely to cause one, which is Google's own threshold.
 
 **Links worth earning, after the directories above.** Use the business name or "Evergreen Office Cleaning" as the link text, not keywords.
 
 | # | Source | How |
 |---|---|---|
-| 1 | BIA member directories (Queen Street West, Downtown Yonge, Bloor-Yorkville, the areas with location pages) | Free for businesses in or serving the BIA; ask the BIA office. |
+| 1 | The member directory of the BIA whose boundary contains the office at 243 Queen St W (confirm which on the City of Toronto's BIA map) | Members are the property owners and commercial tenants inside a BIA's boundary, so only that one BIA applies; serving an area does not qualify. Ask the BIA office. |
 | 2 | BOMA Toronto (Building Owners and Managers Association) | Associate (supplier) membership lists you in their directory. |
 | 3 | BSCA (Building Service Contractors Association) and ISSA | Trade-body member directories. |
 | 4 | Property managers' approved-vendor pages | Ask current property-management clients. |
