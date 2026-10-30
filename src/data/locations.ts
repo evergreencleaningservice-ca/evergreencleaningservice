@@ -41,6 +41,8 @@ export type Location = {
   needsClientReview?: boolean;
   /** Explicit title tag, where the client has specified one */
   title?: string;
+  /** Overrides the template's generated H1 on a page with no `detail` */
+  h1?: string;
   /**
    * Long-form client-supplied copy. Where present the page renders this
    * instead of the generic body built from `focus`/`facilities`/`landmarks`,
@@ -89,21 +91,24 @@ export const locations: Location[] = [
     name: 'Mississauga',
     region: 'Mississauga',
     focus:
-      'Logistics hubs, corporate business parks near Pearson Airport, and flex offices.',
+      'Offices in the business parks and City Centre, professional and medical offices, logistics hubs and flex space.',
     facilities: [
+      'Corporate offices and business parks',
+      'Professional and medical offices',
       'Logistics and distribution hubs',
-      'Corporate business parks near Pearson Airport',
       'Flex office and co-working space',
-      'Airport-corridor hotels and conference space',
       'Light manufacturing with attached offices',
     ],
-    landmarks: 'the Airport Corporate Centre, Meadowvale Business Park, Sheridan Park and the Dixie–Britannia corridor',
+    landmarks: 'Meadowvale Business Park, the City Centre, the Airport Corporate Centre and Sheridan Park',
     mapQuery: 'Mississauga, Ontario, Canada',
+    /* "Office" first since 2026-10-30: in Search Console "office cleaning
+       mississauga" outnumbers "commercial cleaning mississauga", and
+       searchers name Meadowvale, Lisgar and East Credit. */
     description:
-      'Trusted commercial cleaning and office janitorial services in Mississauga and the Airport Corporate Centre. WSIB insured, bonded, and reliable. Request a quote.',
-    title: 'Commercial Cleaning & Office Janitorial Services Mississauga | Evergreen',
+      'Office and commercial cleaning in Mississauga: Meadowvale, Lisgar, East Credit, City Centre and the airport area. After hours, WSIB covered.',
+    title: 'Office & Commercial Cleaning in Mississauga | Evergreen',
     detail: {
-      h1: 'Commercial Cleaning & Office Janitorial Services in Mississauga',
+      h1: 'Office & Commercial Cleaning in Mississauga',
       subtitle: 'Reliable, Professional Facility Maintenance for Mississauga Businesses',
       intro: [
         'From corporate headquarters along the Hurontario corridor and the Airport Corporate Centre to high-traffic industrial complexes in Meadowvale, Evergreen Cleaning Service provides comprehensive commercial cleaning and janitorial solutions tailored to your operational schedule.',
@@ -179,10 +184,10 @@ export const locations: Location[] = [
     landmarks: 'the Highway 400 distribution corridor, Concord, Woodbridge and the Vaughan Metropolitan Centre',
     mapQuery: 'Vaughan, Ontario, Canada',
     description:
-      'Professional commercial cleaning and janitorial services in Vaughan, Concord, and Woodbridge. Reliable, WSIB insured, and bonded. Get a quote today.',
-    title: 'Commercial Office Cleaning & Janitorial Vaughan & Concord | Evergreen',
+      'Office and commercial cleaning in Vaughan: the VMC, Concord, Woodbridge and Maple. Offices, showrooms and warehouses, cleaned after hours. WSIB covered.',
+    title: 'Office & Commercial Cleaning in Vaughan & Concord | Evergreen',
     detail: {
-      h1: 'Commercial Cleaning & Building Maintenance in Vaughan & Concord',
+      h1: 'Office & Commercial Cleaning in Vaughan and Concord',
       subtitle: 'Keep Your Vaughan Commercial Property Spotless, Professional, and Safe',
       intro: [
         'As Vaughan continues rapid corporate expansion across the Vaughan Metropolitan Centre (VMC) and industrial sectors in Concord and Woodbridge, maintaining an exceptional physical workspace is critical. Evergreen Cleaning Service provides top-tier commercial office cleaning and building maintenance designed for modern businesses.',
@@ -203,8 +208,8 @@ export const locations: Location[] = [
           body: 'Hot water extraction carpet cleaning and hard-surface floor strip, seal, and wax.',
         },
         {
-          label: 'Emergency Clean-Up Services',
-          body: 'Rapid dispatch for unexpected spills, water events, or last-minute property inspections.',
+          label: 'Short-Notice Clean-Ups',
+          body: 'Spills, water damage or an inspection at short notice: call and we will tell you when a crew can be there.',
         },
       ],
       reasonsTitle: 'The Evergreen Difference for Vaughan Facilities:',
@@ -250,18 +255,20 @@ export const locations: Location[] = [
     /* Rewritten 2026-10-15 to the client's own facility list; the earlier
        corridor-by-corridor detail was unverified. */
     focus:
-      'Warehouses, industrial buildings and the offices attached to them, on schedules built around shifts.',
+      'Offices and clinics, warehouses, industrial buildings and the offices attached to them, on schedules built around shifts.',
     facilities: [
+      'Offices and multi-tenant business buildings',
+      'Medical and dental clinics',
       'Warehouses and distribution facilities',
       'Industrial buildings and plants',
-      'Offices and multi-tenant business buildings',
       'Retail stores and showrooms',
-      'Medical and dental clinics',
     ],
     landmarks: 'the Airport Road and Highway 407 logistics corridors, Bramalea and the Steeles Avenue industrial belt',
     mapQuery: 'Brampton, Ontario, Canada',
     description:
-      'Commercial and industrial cleaning in Brampton — warehouses, industrial buildings and the offices attached to them, on schedules built around shifts.',
+      'Office and commercial cleaning in Brampton: offices, clinics, warehouses and industrial buildings, cleaned after hours or around shifts. WSIB covered.',
+    title: 'Office & Commercial Cleaning in Brampton | Evergreen',
+    h1: 'Office & Commercial Cleaning in Brampton',
     needsClientReview: true,
   },
   {

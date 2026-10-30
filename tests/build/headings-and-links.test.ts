@@ -374,7 +374,7 @@ describe('the rest of the page is untouched', () => {
 describe('location pages are each their own page', () => {
   const CITY: Record<string, string[]> = {
     'toronto-downtown': ['downtown toronto', 'toronto downtown'],
-    'vaughan': ['vaughan & concord', 'vaughan'],
+    'vaughan': ['vaughan & concord', 'vaughan and concord', 'vaughan'],
   };
 
   const words = (slug: string): string[] => {
@@ -436,5 +436,29 @@ describe('the blog consolidation (SEO audit H7, 30 Oct 2026)', () => {
     const html = read('how-to-properly-dust-office-building/index.html');
     expect(html).not.toContain('Updated <time');
     expect(html).not.toContain('article:modified_time');
+  });
+});
+
+describe('the location pages people search as "office cleaning <city>"', () => {
+  /* Search Console, Oct 2026: in Mississauga, Vaughan and Brampton "office
+     cleaning" outnumbers "commercial cleaning", and Mississauga searchers
+     name their neighbourhood. */
+  it.each([
+    ['mississauga', 'Mississauga'],
+    ['vaughan', 'Vaughan and Concord'],
+    ['brampton', 'Brampton'],
+  ])('%s leads with office cleaning in its title, H1 and an office section', (slug, place) => {
+    const html = read(`locations/${slug}/index.html`);
+    expect(html).toMatch(/<title>Office &amp; Commercial Cleaning in /);
+    expect(headings(html, 1)).toEqual([`Office &amp; Commercial Cleaning in ${place}`]);
+    expect(html).toMatch(/<h2 id="loc-office-h"[^>]*>Office cleaning in /);
+    expect(html).toContain('href="/services/office-cleaning/">office cleaning</a>');
+  });
+
+  it('names the Mississauga neighbourhoods searchers use', () => {
+    const html = read('locations/mississauga/index.html');
+    for (const place of ['Meadowvale', 'Lisgar', 'East Credit', 'Streetsville', 'Erin Mills', 'Malton']) {
+      expect(html, place).toContain(place);
+    }
   });
 });
