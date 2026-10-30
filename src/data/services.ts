@@ -18,15 +18,26 @@
  * sent. Nothing rewrites them.
  */
 
-/** The original's seven named services, in its order. */
+/**
+ * Seven named services, in the site's own words (30 Oct 2026, SEO audit M13).
+ *
+ * The 22 Oct list was the original WordPress form's: "Reno Construction
+ * Clean-up", "Floor Services / Finishing" and "Commercial Carpet Cleaning"
+ * named no page on this site, and Industrial & Warehouse and Post-Construction
+ * were missing. The client asked for whatever serves the site's SEO best, so
+ * each box now uses the name of the service page it maps to; carpet and
+ * floor work, which share one page, share one box. Still eight boxes, so the
+ * form keeps its height. The column stays free text, so earlier leads keep
+ * the names they were sent with.
+ */
 export const QUOTE_SERVICES = [
   'Office Cleaning',
   'Commercial Cleaning',
-  'Property Management and Building Maintenance',
   'Janitorial Services',
-  'Commercial Carpet Cleaning',
-  'Floor Services / Finishing',
-  'Reno Construction Clean-up',
+  'Industrial & Warehouse Cleaning',
+  'Post-Construction Cleaning',
+  'Property Management and Building Maintenance',
+  'Carpet & Floor Care',
 ] as const;
 
 /** The eighth option. Anything it stands for goes in "Additional comments". */

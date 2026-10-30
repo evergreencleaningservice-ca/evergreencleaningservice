@@ -114,11 +114,13 @@ const schema = {
 
   <div class="page-header">
     <div class="container">
-      <h1 class="entry-title">{h1}</h1>
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
+      {/* The trail above the H1, as on the service and industry pages (SEO
+          audit M9), so it reads in the order it is announced. */}
+      <nav class="breadcrumbs loc-crumbs" aria-label="Breadcrumb">
         <a href="/">{site.name}</a> &gt; <a href="/locations/">Service Areas</a> &gt;{' '}
         <span aria-current="page">{location.name}</span>
       </nav>
+      <h1 class="entry-title">{h1}</h1>
     </div>
   </div>
 
@@ -268,6 +270,10 @@ const schema = {
 </BaseLayout>
 
 <style>
+  .loc-crumbs {
+    margin: 0 0 8px;
+  }
+
   .loc-grid {
     display: grid;
     gap: 40px;

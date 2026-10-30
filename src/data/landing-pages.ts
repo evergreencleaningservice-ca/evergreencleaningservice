@@ -107,7 +107,7 @@ export const LANDING_PAGES: LandingPage[] = [
       'Quoted per project after a site visit',
       'No obligation quote',
     ],
-    replyPromise: 'as soon as possible',
+    replyPromise: REPLY_PROMISE,
     formHeading: 'Get your post-construction quote',
     reviewHeading: 'What clients say',
     reviewers: ['Michael Katchen', 'Ping Lee', 'Mark Post'],

@@ -28,6 +28,7 @@
  */
 import SpamGuard from './SpamGuard.astro';
 import { SERVICE_OPTIONS } from '../data/services';
+import { REPLY_PROMISE } from '../data/landing';
 import { SERVICE_LOCATION_SUGGESTIONS } from '../data/coverage';
 
 interface Props {
@@ -53,8 +54,9 @@ interface Props {
   /** Load the captcha at once — for a form inside the first screen. */
   eagerCaptcha?: boolean;
   /**
-   * When the success message says a reply will come, e.g. "within 2 hours".
-   * Omit and it says "as soon as possible", the site-wide promise.
+   * When the success message says a reply will come. Omit it and the form
+   * uses REPLY_PROMISE, "within 2 hours", the one promise the site and the
+   * Google Ads make (client, 30 Oct 2026).
    */
   replyPromise?: string;
 }
@@ -66,7 +68,7 @@ const {
   formId = 'quick-quote',
   submitLabel = 'Get my free quote',
   eagerCaptcha = false,
-  replyPromise,
+  replyPromise = REPLY_PROMISE,
 } = Astro.props;
 const f = (name: string) => `${id}-${name}`;
 

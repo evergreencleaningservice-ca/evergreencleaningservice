@@ -177,12 +177,12 @@ describe('the field set, as it reaches the endpoint', () => {
   it('sends every ticked service, in the form\'s order, and the comments', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
     const form = ready({ ...VALID_LEAD, message: 'Kitchen: sweep & mop.\nSecond floor.' });
-    tick(form, ['Commercial Carpet Cleaning', 'Office Cleaning']);
+    tick(form, ['Carpet & Floor Care', 'Office Cleaning']);
 
     await submit(form);
 
     const body = sentBody(fetchSpy);
-    expect(body.services).toBe('Office Cleaning, Commercial Carpet Cleaning');
+    expect(body.services).toBe('Office Cleaning, Carpet & Floor Care');
     expect(body.message).toBe('Kitchen: sweep & mop.\nSecond floor.');
   });
 
@@ -540,7 +540,7 @@ describe('success is announced, and the visitor keeps their place', () => {
     await submit(form);
 
     const text = confirmation()!.textContent ?? '';
-    expect(text).toContain('as soon as possible');
+    expect(text).toContain('within 2 hours');
     expect(confirmation()!.querySelector('a')?.getAttribute('href')).toBe('tel:+14168034880');
   });
 
@@ -548,15 +548,15 @@ describe('success is announced, and the visitor keeps their place', () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
     document.body.innerHTML = quickQuoteMarkup();
     const form = document.querySelector<HTMLFormElement>('form[data-quick-quote]')!;
-    form.dataset.replyPromise = 'within 2 hours';
+    form.dataset.replyPromise = 'within one business day';
     wireQuickQuote(form, { tokenWaitMs: 50, tagDeliveryTimeoutMs: 50 });
     fill(form, VALID_LEAD);
 
     await submit(form);
 
     const text = confirmation()!.textContent ?? '';
-    expect(text).toContain('An account executive will reply within 2 hours.');
-    expect(text).not.toContain('as soon as possible');
+    expect(text).toContain('An account executive will reply within one business day.');
+    expect(text).not.toContain('within 2 hours');
   });
 });
 
