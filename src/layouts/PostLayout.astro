@@ -32,6 +32,12 @@ const postTags = ((post.data as { tags?: string[] }).tags ?? [])
 /* Refreshed featured images ship as AVIF/WebP/JPEG siblings at 960x480. */
 const modern = image && /-feature\.jpg$/.test(image);
 const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
+/* 480 and 720 wide variants as well (scripts/feature-variants.mjs, SEO audit
+   30 Oct 2026): a phone shows the image about 380px wide, so the 960 file was
+   more than it needed, and it is usually the page's largest paint. */
+const widths = (ext: string) =>
+  `${image!.replace(/\.jpg$/, `-480.${ext}`)} 480w, ${image!.replace(/\.jpg$/, `-720.${ext}`)} 720w, ${sibling(ext)} 960w`;
+const SIZES = '(min-width: 992px) 720px, calc(100vw - 32px)';
 
 ---
 
@@ -92,10 +98,13 @@ const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
         image && (
           <div class="post-featured">
             <picture>
-              {modern && <source type="image/avif" srcset={sibling('avif')} />}
-              {modern && <source type="image/webp" srcset={sibling('webp')} />}
+              {modern && <source type="image/avif" srcset={widths('avif')} sizes={SIZES} />}
+              {modern && <source type="image/webp" srcset={widths('webp')} sizes={SIZES} />}
               <img
                 src={image}
+                srcset={modern ? widths('jpg') : undefined}
+                sizes={modern ? SIZES : undefined}
+                fetchpriority="high"
                 alt={imageAlt ?? ''}
                 width={modern ? 960 : 1200}
                 height={modern ? 480 : 600}

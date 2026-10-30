@@ -142,6 +142,7 @@ export const organizationGraph = () => ({
 });
 
 const ORG = { '@id': ORG_ID };
+const ORG_INLINE = { '@type': 'Organization', '@id': ORG_ID, name: nap.name, url: `${site.url}/` };
 
 /**
  * Breadcrumbs.
@@ -190,8 +191,11 @@ export const articleSchema = (post: {
   datePublished: post.pubDate.toISOString(),
   dateModified: (post.updatedDate ?? post.pubDate).toISOString(),
   ...(post.image ? { image: `${site.url}${post.image}` } : {}),
-  author: ORG,
-  publisher: ORG,
+  /* Name, URL and logo written out as well as the @id (SEO audit, 30 Oct
+     2026): Google's article guidance reads `author.name` and the publisher's
+     logo from the article itself rather than following the reference. */
+  author: ORG_INLINE,
+  publisher: { ...ORG_INLINE, logo: { '@type': 'ImageObject', url: `${site.url}${site.logo}` } },
   isPartOf: { '@id': SITE_ID },
 });
 
