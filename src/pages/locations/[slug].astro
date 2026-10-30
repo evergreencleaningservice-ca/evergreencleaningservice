@@ -346,6 +346,19 @@ const webPage = webPageSchema({
     .loc-grid {
       grid-template-columns: minmax(0, 1fr) 380px;
     }
+    /* The form stays in view beside the long text column, as on the service
+       pages, instead of ending a screen in and leaving the column empty. */
+    .loc-aside {
+      position: sticky;
+      top: 92px;
+      align-self: start;
+    }
+  }
+
+  /* A readable measure for the text column (30 Oct 2026). */
+  .loc-main p,
+  .loc-main ul {
+    max-width: 80ch;
   }
 
   .loc-lead {

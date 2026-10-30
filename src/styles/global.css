@@ -205,6 +205,14 @@ img {
     width: 1140px;
   }
 }
+/* One more step for large monitors (30 Oct 2026): at 1140px the site used
+   44% of a 2560px screen. 1320px is the next step of the same Bootstrap
+   scale; long text keeps its own measure (see `.entry-content` below). */
+@media (min-width: 1400px) {
+  .container {
+    width: 1320px;
+  }
+}
 
 /* Vertical only. As `padding: … 0` it also zeroed the side padding of any
    element that was a `.container` too (`container section-padding`), so the
@@ -240,9 +248,12 @@ img {
   color: rgba(255, 255, 255, 0.9);
 }
 
+/* Left-aligned since 30 Oct 2026, like every other section heading on the
+   site (`.blk-title`): the homepage alternated centred and left-aligned
+   headings section by section, which read as two designs stitched together. */
 .section-title-area {
-  text-align: center;
-  margin-bottom: 60px;
+  text-align: left;
+  margin-bottom: 22px;
 }
 
 /* Eyebrow above the section title. */
@@ -262,7 +273,7 @@ img {
   font-family: var(--font-heading);
   /* Sentence case and 2rem since 2026-10-15, matching the new templates'
      `.blk-title`; the theme's 40px tracked uppercase read as shouting. */
-  font-size: 2rem;
+  font-size: 1.75rem; /* the same size as `.blk-title` */
   line-height: 1.25;
   font-weight: 800;
   color: var(--ink-heading);
@@ -279,7 +290,7 @@ img {
     font-size: 12px;
   }
   .section-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -556,6 +567,24 @@ img {
 .entry-content ol {
   margin: 0 0 0.9375rem;
   padding-left: 1.4em;
+}
+
+/* A readable measure for running text (30 Oct 2026): the content column ran
+   paragraphs past 100 characters a line on a laptop and further on a large
+   monitor. Images, tables and grids keep the full column. */
+.entry-content p,
+.entry-content ul,
+.entry-content ol,
+.entry-content blockquote {
+  max-width: 80ch;
+}
+
+/* The same measure where full-width blocks hold running text: FAQ answers,
+   a single review quote and the homepage's post excerpts ran to 1,290px. */
+.blk-faq details p,
+.blk-review blockquote p,
+.entry-excerpt p {
+  max-width: 80ch;
 }
 
 
