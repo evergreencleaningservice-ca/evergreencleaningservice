@@ -36,6 +36,12 @@ export type LocationLocal = {
   buildings: { title: string; body: string }[];
   access: string[];
   faqs: { q: string; a: string }[];
+  /**
+   * "Office cleaning in <city>", where searchers in that city mostly ask for
+   * office cleaning (Search Console, Oct 2026). Paragraphs of trusted HTML,
+   * so they can link to the service pages.
+   */
+  office?: string[];
 };
 
 export const LOCATION_LOCAL: Record<string, LocationLocal> = {
@@ -134,41 +140,58 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
   mississauga: {
     review: 'Michael Katchen',
     photo: { src: '/images/high-dusting-warehouse-lift.jpg', alt: 'Worker on a lifting platform cleaning a ceiling' },
-    areasIntro:
-      'Mississauga’s commercial space is spread across several distinct business districts. We cover:',
+    office: [
+      'Mississauga’s office space runs from head offices in the business parks and single floors in the City Centre towers to the professional and medical suites in its neighbourhood plazas. Whichever yours is, we clean it the same way: after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
+      'A routine visit covers desks and workstations, kitchens and break rooms, washrooms, floors and glass, and the touch points everyone shares: door handles, light switches, elevator buttons. It can run every night, a few evenings a week or weekly. Carpet extraction, floor refinishing and window cleaning are planned through the year on the same contract. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+    ],
+    areasIntro: 'We clean offices and commercial buildings across Mississauga, including:',
     areas: [
-      'The Airport Corporate Centre and the Pearson airport employment area',
-      'Mississauga City Centre around Square One',
-      'Meadowvale Business Park and Heartland',
-      'Sheridan Park and the Southdown industrial area',
+      'Meadowvale and Lisgar: the Meadowvale Business Park office campuses and the plazas along Derry Road, Argentia Road and Winston Churchill Boulevard',
+      'East Credit and Heartland: offices, retail and light industrial space around Mavis Road and Britannia Road',
+      'Mississauga City Centre and Cooksville: office towers and retail around Square One and along Hurontario Street',
+      'Erin Mills, Churchill Meadows and Streetsville: professional and medical offices, plazas and the Queen Street South main street',
+      'Malton and the Airport Corporate Centre: corporate offices, logistics and industrial buildings around Pearson',
+      'Sheridan Park, Southdown and Clarkson: research campuses and industrial space in the south-west',
       'Port Credit and the Lakeshore Road corridor',
     ],
     buildings: [
       {
-        title: 'Distribution centres near the airport',
-        body: 'Large single-storey warehouses with high racking, dock doors and long concrete floors: machine scrubbing, high dusting and staff facilities, scheduled around 24-hour operations.',
+        title: 'Office campuses in the business parks',
+        body: 'The low-rise office buildings of Meadowvale, the Airport Corporate Centre and Heartland are cleaned after hours like any office, with large parking lots that make equipment and crew access easy.',
       },
       {
-        title: 'Suburban office parks',
-        body: 'The low-rise office buildings in the business parks are cleaned after hours like any office, with large parking lots that make equipment and crew access easy.',
+        title: 'Professional and medical offices in the plazas',
+        body: 'Dental, medical and professional suites in the neighbourhood plazas of Lisgar, Erin Mills, East Credit and Streetsville: a reception, treatment or meeting rooms and a washroom, cleaned after closing.',
       },
       {
         title: 'City Centre office and retail',
         body: 'Office floors and street-level retail around Square One, where cleaning is coordinated with building management much as it is downtown.',
       },
+      {
+        title: 'Distribution centres near the airport',
+        body: 'Large single-storey warehouses with high racking, dock doors and long concrete floors: machine scrubbing, high dusting and staff facilities, scheduled around 24-hour operations.',
+      },
     ],
     access: [
-      'From Queen Street West it is 25 to 40 km: the Gardiner and the QEW for the south and City Centre, Highway 401 and Highway 427 for the airport area. Expect 30 to 45 minutes in the evening.',
+      'From Queen Street West it is 25 to 45 km: the Gardiner and the QEW for Port Credit and the south, Highway 401 and Highway 403 for the City Centre, Meadowvale and Lisgar, and Highway 427 for the airport area. Expect 30 to 50 minutes in the evening.',
       'Because of the drive, Mississauga visits are planned as regular evening or overnight routes rather than called in at short notice. Urgent requests still go through your account executive.',
     ],
     faqs: [
+      {
+        q: 'Do you clean offices in Meadowvale, Lisgar and East Credit?',
+        a: 'Yes. Meadowvale, Lisgar, East Credit and the rest of Mississauga are all in our service area, and offices there are cleaned after hours like anywhere else we work.',
+      },
+      {
+        q: 'How often can our Mississauga office be cleaned?',
+        a: 'As often as you need: every night, a few evenings a week, or weekly. The walkthrough sets the frequency, and the written scope says what is done on each visit.',
+      },
       {
         q: 'Can you clean a warehouse that runs 24 hours?',
         a: 'Yes. Cleaning is scheduled zone by zone around shift changes and dock activity, agreed at the walkthrough.',
       },
       {
         q: 'Do you cover both the airport area and Port Credit?',
-        a: 'Yes. We cover Mississauga from the airport employment area down to the lake.',
+        a: 'Yes. We cover Mississauga from Malton and the airport employment area down to the lake.',
       },
     ],
   },
@@ -176,6 +199,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
   brampton: {
     review: 'Ping Lee',
     photo: { src: '/images/lobby-floor-scrubber-commercial.jpg', alt: 'Close-up of a floor machine cleaning a commercial lobby' },
+    office: [
+      'Brampton’s offices range from professional offices and clinics in downtown Brampton and the plazas along Queen Street and Bovaird Drive to the business parks in the south end and the offices attached to its plants and warehouses. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
+      'A routine visit covers desks, kitchens and lunchrooms, washrooms, floors and the shared touch points, every night, a few evenings a week or weekly. Where an office sits in front of a warehouse, the two go on one contract with their own schedules. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+    ],
     areasIntro:
       'Brampton’s commercial space is mostly industrial and logistics, with offices and retail in its older centres. We cover:',
     areas: [
@@ -209,6 +236,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
         a: 'Yes. The walkthrough sets when each area can be cleaned without getting in the way of production or shipping.',
       },
       {
+        q: 'Do you clean small offices in Brampton?',
+        a: 'Yes. A single suite or a small professional office is cleaned after hours from a written scope, as often as you need it, the same as a larger building.',
+      },
+      {
         q: 'Can you handle both the warehouse floor and the offices?',
         a: 'Yes. They are usually two parts of one written scope: regular janitorial cleaning for the offices and staff areas, and scheduled floor care for the warehouse.',
       },
@@ -218,6 +249,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
   vaughan: {
     review: 'Andy Handy',
     photo: { src: '/images/warehouse-floor-scrubber-industrial.jpg', alt: 'Floor scrubber in a warehouse aisle' },
+    office: [
+      'Vaughan’s office space is a mix of new towers in the Vaughan Metropolitan Centre, head offices in the business parks along Highway 400 and Highway 7, and offices at the front of industrial units in Concord and Woodbridge. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
+      'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly, with carpet and hard-floor care planned through the year. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+    ],
     areasIntro:
       'Vaughan combines a new downtown with one of the GTA’s largest industrial areas. We cover:',
     areas: [
@@ -249,6 +284,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
       {
         q: 'Do you cover Concord and Woodbridge as well as the VMC?',
         a: 'Yes. Concord, Woodbridge and the VMC are all inside our service area.',
+      },
+      {
+        q: 'Do you clean the office at the front of an industrial unit?',
+        a: 'Yes. Many Concord and Woodbridge units have an office at the front and warehouse space behind; both can go on one contract, with the office cleaned after hours and the warehouse floor on its own schedule.',
       },
       {
         q: 'Can our showroom be cleaned before we open?',

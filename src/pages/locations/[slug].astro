@@ -43,7 +43,7 @@ const { location } = Astro.props;
 const local = LOCATION_LOCAL[location.slug];
 /* Client-supplied copy wins where it exists; the generated H1 stays the
    fallback for the locations still on the template body. */
-const h1 = location.detail?.h1 ?? `Commercial Cleaning in ${location.name}`;
+const h1 = location.detail?.h1 ?? location.h1 ?? `Commercial Cleaning in ${location.name}`;
 /* THE MAP EMBED IS GONE (2026-10-15). A map centred on Mississauga beside
    a Toronto street address read as a Mississauga office, which this business
    does not have; it also loaded a Google Maps iframe on every location page.
@@ -213,6 +213,17 @@ const webPage = webPageSchema({
                   <a href="#offer-quote" data-quote-cta data-cta-location="content">request a walkthrough</a>.
                 </p>
               </Fragment>
+            )
+          }
+          {
+            local?.office && (
+              <section class="loc-office" aria-labelledby="loc-office-h">
+                <hr />
+                <h2 id="loc-office-h">Office cleaning in {location.name}</h2>
+                {local.office.map((p) => (
+                  <p set:html={p} />
+                ))}
+              </section>
             )
           }
           {
