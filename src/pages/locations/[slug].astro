@@ -28,7 +28,8 @@ import PagePhoto from '../../components/blocks/PagePhoto.astro';
 import { AREAS } from '../../data/coverage';
 import { site, nap } from '../../data/site';
 import { pageTitle } from '../../lib/title';
-import { breadcrumbSchema } from '../../lib/schema';
+import { breadcrumbSchema, webPageSchema } from '../../lib/schema';
+import { lastmodFor } from '../../lib/sitemap-lastmod.mjs';
 
 export function getStaticPaths() {
   return locations.map((location) => ({
@@ -93,7 +94,17 @@ const schema = {
   name: `Commercial Cleaning in ${location.name}`,
   description: location.description,
   url: `${site.url}/locations/${location.slug}/`,
+  '@id': `${site.url}/locations/${location.slug}/#service`,
 };
+const pageUrl = `${site.url}/locations/${location.slug}/`;
+const webPage = webPageSchema({
+  name: location.title ?? pageTitle(`Commercial Cleaning in ${location.name}`),
+  url: pageUrl,
+  description: location.description,
+  image: local?.photo.src,
+  dateModified: lastmodFor(pageUrl),
+  mainEntityId: `${pageUrl}#service`,
+});
 ---
 
 <BaseLayout
@@ -101,6 +112,7 @@ const schema = {
   description={location.description}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(webPage)} is:inline />
   <script
     slot="head"
     type="application/ld+json"

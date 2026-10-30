@@ -189,6 +189,40 @@ export const articleSchema = (post: {
   isPartOf: { '@id': SITE_ID },
 });
 
+/**
+ * The page a Service or location sits on (SEO audit H12, 28 Oct 2026).
+ *
+ * `dateModified` is the last commit to the files the page is built from, the
+ * same date the sitemap's lastmod uses (src/lib/sitemap-lastmod.mjs). It is
+ * left out when it cannot be known, rather than set to the build time, which
+ * would claim every page changed on every deploy.
+ */
+export const webPageSchema = (opts: {
+  name: string;
+  url: string;
+  description?: string;
+  image?: string;
+  dateModified?: string;
+  mainEntityId?: string;
+}) => {
+  const url = opts.url.startsWith('http') ? opts.url : `${site.url}${opts.url}`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': url,
+    url,
+    name: opts.name,
+    ...(opts.description ? { description: opts.description } : {}),
+    ...(opts.image
+      ? { primaryImageOfPage: { '@type': 'ImageObject', url: opts.image.startsWith('http') ? opts.image : `${site.url}${opts.image}` } }
+      : {}),
+    ...(opts.dateModified ? { dateModified: opts.dateModified } : {}),
+    ...(opts.mainEntityId ? { mainEntity: { '@id': opts.mainEntityId } } : {}),
+    isPartOf: { '@id': SITE_ID },
+    publisher: ORG,
+  };
+};
+
 /** A listing page — the archives and the news index. */
 export const collectionSchema = (opts: { name: string; url: string; description?: string }) => ({
   '@context': 'https://schema.org',

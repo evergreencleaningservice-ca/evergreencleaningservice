@@ -26,7 +26,8 @@ import { AREAS, AREA_GROUPS } from '../data/coverage';
 import { PRICING_FACTORS } from '../data/process';
 import { nap, site } from '../data/site';
 import { pageTitle } from '../lib/title';
-import { breadcrumbSchema, serviceSchema } from '../lib/schema';
+import { breadcrumbSchema, serviceSchema, webPageSchema } from '../lib/schema';
+import { lastmodFor } from '../lib/sitemap-lastmod.mjs';
 import PagePhoto from './blocks/PagePhoto.astro';
 
 interface Offer {
@@ -103,6 +104,21 @@ const RELATED_TEXT: Record<string, string> = {
     slot="head"
     type="application/ld+json"
     set:html={JSON.stringify(serviceSchema({ name: data.title, description: data.description, url: path }))}
+    is:inline
+  />
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(
+      webPageSchema({
+        name: title,
+        url: path,
+        description: data.description,
+        image: data.image,
+        dateModified: lastmodFor(`${site.url}${path}`),
+        mainEntityId: `${site.url}${path}#service`,
+      }),
+    )}
     is:inline
   />
 
