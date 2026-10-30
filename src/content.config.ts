@@ -12,6 +12,9 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     pubDate: z.coerce.date(),
+    /** When the post was last materially revised, e.g. when other posts were
+        merged into it (SEO audit H7). Omitted when it never was. */
+    updatedDate: z.coerce.date().optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
     /**

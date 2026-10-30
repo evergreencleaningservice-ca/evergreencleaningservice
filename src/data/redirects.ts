@@ -165,15 +165,20 @@ export const legacyRedirects: Redirect[] = [
  * were doing it.
  *
  * Static rules do not depend on that ordering, and the page count is finite
- * and known, so they are generated from it. `LAST_NEWS_PAGE` tracks
- * `pageSize: 10` in src/pages/insights/[...page].astro — raise it when the
- * post count crosses a multiple of ten.
+ * and known, so they are generated from it. The old blog had four pages.
+ * `LAST_NEWS_PAGE` tracks `pageSize: 10` in src/pages/insights/[...page].astro
+ * — change it when the post count crosses a multiple of ten. An old page past
+ * the last one goes to the first.
  */
-const LAST_NEWS_PAGE = 4;
+const OLD_NEWS_PAGES = 4;
+const LAST_NEWS_PAGE = 3;
 
 export const newsPageRedirects: Redirect[] = Array.from(
-  { length: LAST_NEWS_PAGE - 1 },
-  (_, i) => ({ from: `/blog/page/${i + 2}/`, to: `/insights/page/${i + 2}/` })
+  { length: OLD_NEWS_PAGES - 1 },
+  (_, i) => ({
+    from: `/blog/page/${i + 2}/`,
+    to: i + 2 <= LAST_NEWS_PAGE ? `/insights/page/${i + 2}/` : '/insights/',
+  })
 );
 
 /**
@@ -223,6 +228,63 @@ export const emptyTagRedirects: Redirect[] = emptyTagSlugs.map((slug) => ({
   from: `/tag/${slug}/`,
   to: '/category/blog/',
 }));
+
+/**
+ * Blog posts retired by the consolidation of 30 Oct 2026 (SEO audit H7: 38
+ * posts to 23). Search Console showed no clicks and no external links to any
+ * of them (16 months of data, 9-28 Oct populated, exported 30 Oct), so each
+ * goes to the page that now covers its topic: the five COVID-era posts to the
+ * rebuilt disinfection page, the post that competed with the commercial
+ * cleaning pillar to the pillar, and the rest to the post they were merged
+ * into. The old `/blog/<slug>/` spelling of each goes straight there too,
+ * rather than through the `/blog/*` wildcard and a second hop.
+ */
+const retiredPosts: Record<string, string> = {
+  'be-safe-from-coronavirus-work': '/services/disinfection-cleaning/',
+  'clean-and-disinfect-public-areas-during-covid-19': '/services/disinfection-cleaning/',
+  'coronavirus-bringing-more-urgency-cleaning': '/services/disinfection-cleaning/',
+  'the-return-of-employees-post-covid-19-is-your-office-ready': '/services/disinfection-cleaning/',
+  'covid-19-commercial-cleaning-expectations-examined': '/services/disinfection-cleaning/',
+  'benefits-of-regular-commercial-cleaning-services': '/services/commercial-cleaning/',
+  'key-office-areas-to-have-cleaned-and-disinfected': '/areas-in-your-office-where-germs-are-likely-hiding/',
+  '5-tips-for-maintaining-clean-office-air': '/commercial-cleaning-air-quality/',
+  'control-allergies-workplace-with-professional-janitorial-services': '/commercial-cleaning-air-quality/',
+  'modern-vs-old-fashioned-cleaning-methods': '/robotic-vs-manual-cleaning-which-will-ultimately-succeed/',
+  'does-hand-sanitization-actually-help-prevent-illnesses': '/importance-of-hand-washing/',
+  'qualities-top-cleaning-professionals': '/how-to-decide-on-a-cleaning-company/',
+  'workplace-cleaning-checklist-winter': '/seasonal-office-cleaning-checklist/',
+  'tips-tricks-for-spring-cleaning-your-office': '/seasonal-office-cleaning-checklist/',
+  'end-of-summer-cleaning': '/seasonal-office-cleaning-checklist/',
+  'office-cleaning-fall': '/seasonal-office-cleaning-checklist/',
+};
+
+export const retiredPostSlugs = Object.keys(retiredPosts);
+
+/**
+ * Archive pages the consolidation removed: with 23 posts instead of 38, the
+ * last page of these lists no longer exists. Each goes to its first page.
+ */
+export const removedArchivePageRedirects: Redirect[] = [
+  ['/insights/page/4/', '/insights/'],
+  ['/category/blog/page/4/', '/category/blog/'],
+  ['/tag/commercial-cleaning/page/3/', '/tag/commercial-cleaning/'],
+  ['/tag/commercial-office-cleaning/page/3/', '/tag/commercial-office-cleaning/'],
+  ['/tag/janitorial-services/page/3/', '/tag/janitorial-services/'],
+  ['/tag/office/page/2/', '/tag/office/'],
+].map(([from, to]) => ({ from, to }));
+
+/** The two tags the consolidation left with no posts. */
+export const retiredTagRedirects: Redirect[] = ['coronavirus', 'covid-19'].map((slug) => ({
+  from: `/tag/${slug}/`,
+  to: '/services/disinfection-cleaning/',
+}));
+
+export const retiredPostRedirects: Redirect[] = Object.entries(retiredPosts).flatMap(
+  ([slug, to]) => [
+    { from: `/${slug}/`, to },
+    { from: `/blog/${slug}/`, to },
+  ]
+);
 
 /**
  * The image addresses, one rule each.

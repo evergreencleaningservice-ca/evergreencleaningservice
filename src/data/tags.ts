@@ -21,6 +21,12 @@
  * re-runs that reconciliation against the built site, so the two can never
  * drift apart quietly.
  *
+ * THE COUNTS CHANGED ON 30 OCT 2026, when the blog was consolidated from 38
+ * posts to 23 (SEO audit H7). They are now this site's own counts, not the
+ * original's. `coronavirus` and `covid-19` were left with no posts and are
+ * gone; their archives redirect (`retiredTagRedirects` in
+ * src/data/redirects.ts). The sizes are still the original's.
+ *
  * NINE TAGS ARE DELIBERATELY ABSENT. WordPress's theme-unit-test import left
  * `alignment`, `captions`, `content`, `css`, `image` and `markup` behind with
  * zero posts each. The original's own cloud excludes them, because an empty
@@ -63,26 +69,24 @@ export const tags: Tag[] = [
   { slug: 'air-quality', name: 'air quality', count: 1, size: 8 },
   { slug: 'allergies', name: 'allergies', count: 1, size: 8 },
   { slug: 'breakroom', name: 'breakroom', count: 1, size: 8 },
-  { slug: 'cleaning', name: 'cleaning', count: 14, size: 18.440677966102 },
+  { slug: 'cleaning', name: 'cleaning', count: 11, size: 18.440677966102 },
   { slug: 'cleaning-products', name: 'cleaning products', count: 4, size: 12.745762711864 },
-  { slug: 'commercial-cleaning', name: 'commercial cleaning', count: 29, size: 22 },
+  { slug: 'commercial-cleaning', name: 'commercial cleaning', count: 17, size: 22 },
   {
     slug: 'commercial-office-cleaning',
     name: 'Commercial office cleaning',
-    count: 25,
+    count: 17,
     size: 21.169491525424,
   },
-  { slug: 'coronavirus', name: 'Coronavirus', count: 5, size: 13.694915254237 },
-  { slug: 'covid-19', name: 'Covid-19', count: 2, size: 10.135593220339 },
   { slug: 'daycares', name: 'daycares', count: 1, size: 8 },
   { slug: 'dental-office', name: 'dental office', count: 1, size: 8 },
   { slug: 'dust', name: 'Dust', count: 1, size: 8 },
   { slug: 'dusting', name: 'Dusting', count: 1, size: 8 },
   { slug: 'entrance', name: 'entrance', count: 1, size: 8 },
-  { slug: 'janitorial-services', name: 'janitorial services', count: 21, size: 20.338983050847 },
+  { slug: 'janitorial-services', name: 'janitorial services', count: 14, size: 20.338983050847 },
   { slug: 'manual-cleaning', name: 'Manual cleaning', count: 1, size: 8 },
   { slug: 'moving', name: 'moving', count: 1, size: 8 },
-  { slug: 'office', name: 'office', count: 14, size: 18.440677966102 },
+  { slug: 'office', name: 'office', count: 9, size: 18.440677966102 },
   { slug: 'plants', name: 'plants', count: 1, size: 8 },
   { slug: 'refrigerator', name: 'refrigerator', count: 1, size: 8 },
   { slug: 'relocating', name: 'relocating', count: 1, size: 8 },

@@ -56,8 +56,9 @@ beforeAll(() => {
 afterAll(() => fs.rmSync(out, { recursive: true, force: true }));
 
 describe('the tag registry matches the original', () => {
-  it('carries the 26 tags the original clouds, and no empty ones', () => {
-    expect(tags).toHaveLength(26);
+  it('carries the 26 tags the original clouds, less the two the consolidation emptied', () => {
+    expect(tags).toHaveLength(24);
+    expect(tags.map((t) => t.slug)).not.toContain('coronavirus');
     for (const tag of tags) expect(tag.count, tag.slug).toBeGreaterThan(0);
   });
 
@@ -93,8 +94,9 @@ describe('every post’s tags are real', () => {
   const dir = path.join(repo, 'src/content/blog');
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md'));
 
-  it('covers all 38 posts', () => {
-    expect(files).toHaveLength(38);
+  it('covers all 23 posts', () => {
+    /* 38 until the consolidation of 30 Oct 2026 (SEO audit H7). */
+    expect(files).toHaveLength(23);
   });
 
   it('uses no tag slug that is not in the registry', () => {
@@ -136,7 +138,7 @@ describe('the reconciliation — our counts equal the original’s', () => {
 
   it('pages at ten, like the original', () => {
     expect(count(read('tag', 'cleaning', 'index.html'), /<article/g)).toBe(10);
-    expect(count(read('tag', 'cleaning', 'page', '2', 'index.html'), /<article/g)).toBe(4);
+    expect(count(read('tag', 'cleaning', 'page', '2', 'index.html'), /<article/g)).toBe(1);
   });
 
   it('builds no archive for a tag with no posts', () => {
@@ -214,8 +216,8 @@ describe('the sidebar cloud', () => {
 
   it('speaks the post count, because 8pt means nothing to a screen reader', () => {
     const html = page();
-    expect(html).toContain('aria-label="commercial cleaning (29 items)"');
-    expect(html).toContain('aria-label="Covid-19 (2 items)"');
+    expect(html).toContain('aria-label="commercial cleaning (17 items)"');
+    expect(html).toContain('aria-label="cleaning products (4 items)"');
   });
 
   it('every link in the cloud resolves to a page that was built', () => {
@@ -260,8 +262,8 @@ describe('no /tag/* wildcard, because it shadowed every archive', () => {
     expect(shadowed, 'this rule would hide a real archive').toEqual([]);
   });
 
-  it('leaves the 26 archives as plain assets', () => {
+  it('leaves the 24 archives as plain assets', () => {
     expect(exists('tag', 'cleaning', 'index.html')).toBe(true);
-    expect(exists('tag', 'commercial-cleaning', 'page', '3', 'index.html')).toBe(true);
+    expect(exists('tag', 'commercial-cleaning', 'page', '2', 'index.html')).toBe(true);
   });
 });

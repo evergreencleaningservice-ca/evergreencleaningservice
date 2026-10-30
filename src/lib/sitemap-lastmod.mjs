@@ -7,8 +7,8 @@
  * changed on every deploy, which is the same as saying nothing. So each URL
  * gets the date its content last changed:
  *
- *   a blog post      its `pubDate` (posts carry no separate updated date)
- *   /insights/       the newest post's `pubDate`
+ *   a blog post      its `updatedDate`, or its `pubDate` if it has none
+ *   /insights/       the newest of those
  *   everything else  the last commit touching the files the page is made
  *                    from — its content file, its page template, or the
  *                    data file it reads (`SOURCES` below)
@@ -55,14 +55,16 @@ const lastCommit = (/** @type {string[]} */ files) => {
   return date;
 };
 
-/** Every post's pubDate, keyed by slug. */
+/** Every post's updatedDate, or pubDate if it has none, keyed by slug. */
 const postDates = new Map(
   fs
     .readdirSync(BLOG)
     .filter((f) => f.endsWith('.md'))
     .map((f) => {
       const front = fs.readFileSync(path.join(BLOG, f), 'utf8').split('\n---')[0];
-      const m = front.match(/^pubDate:\s*['"]?([\d-]+(?:T[\d:.]+Z?)?)/m);
+      const m =
+        front.match(/^updatedDate:\s*['"]?([\d-]+(?:T[\d:.]+Z?)?)/m) ??
+        front.match(/^pubDate:\s*['"]?([\d-]+(?:T[\d:.]+Z?)?)/m);
       return [f.replace(/\.md$/, ''), m ? new Date(m[1]).toISOString() : undefined];
     }),
 );
