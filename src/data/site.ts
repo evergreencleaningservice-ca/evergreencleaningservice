@@ -215,7 +215,8 @@ export const nap = {
    * Naming both lets a search engine join them into one business.
    */
   alternateNames: ['Evergreen Cleaning Service', 'Evergreen Cleaning Services'],
-  priceRange: '$$',
+  /* No priceRange: the client has not confirmed price guidance (decision
+     D-D), and "$$" was a guess. */
 } as const;
 
 /**
@@ -285,7 +286,7 @@ export const footerAreas = [
  */
 export const serviceAreas = {
   first: 'Toronto,',
-  rest: 'East York, Etobicoke, North York, Scarborough, York, Mississauga, Vaughan, Brampton, Markham, Oakville, Richmond Hill',
+  rest: 'East York, Etobicoke, North York, Scarborough, York, Mississauga, Vaughan, Brampton, Markham, Oakville, Richmond Hill, Pickering, Ajax, Oshawa',
 } as const;
 
 export type NavItem = {

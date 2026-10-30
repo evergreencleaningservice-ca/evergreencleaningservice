@@ -1,6 +1,6 @@
 ---
 title: "Preventing Slips, Trips, and Falls in Your Workplace"
-description: "Are slips, trips or falls common in your workplace? Here we highlight information on preventing slips and falls in your place of work."
+description: "The main causes of slips, trips and falls at work, and how to prevent them with warning signs, lighting, handrails and dry, clean floors."
 pubDate: 2021-03-31
 image: "/images/blog-slip-trip-fall-prevention-feature.jpg"
 imageAlt: "Professional cleaner removing water from a winter entrance to prevent workplace slips"

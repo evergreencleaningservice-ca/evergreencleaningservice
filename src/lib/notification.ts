@@ -105,7 +105,7 @@ export const NOTIFICATION_FIELDS: readonly NotificationField[] = [
   { key: 'address', label: 'Address', always: false },
   { key: 'work_email', label: 'Email', always: true },
   { key: 'phone', label: 'Phone', always: true },
-  { key: 'services', label: "I'm interested a quote for these services", always: false },
+  { key: 'services', label: "I'm interested in a quote for these services", always: false },
   { key: 'message', label: 'Additional comments', always: false },
 ];
 

@@ -3,11 +3,13 @@ title: "Contact Us"
 description: "Contact us for more information or to request a free quote. We'd love to hear from you and look forward to any question you may have for us."
 ---
 
-## Evergreen Cleaning Service
+## Evergreen Office Cleaning
+
+Formerly Evergreen Cleaning Service.
 
 ### Address:
 
-[243 Queen St. W., Toronto ON. M5V 1Z4](https://goo.gl/maps/7EkA9n477ekAmhaj7)
+[243 Queen St W., Toronto, ON M5V 1Z4](https://maps.google.com/?cid=15602716773318351983)
 
 ### Phone:
 

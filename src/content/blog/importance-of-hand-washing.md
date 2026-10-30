@@ -46,6 +46,6 @@ Clean hands only stay clean as long as the things they touch are. In a busy work
 
 ![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
-If you are looking to keep your office clean and the people in it healthy, [Evergreen Cleaning](/about-us/) cleans everything from lobbies to washrooms on a schedule set for your building. [Contact us](/request-a-quote/) to book a free walkthrough.
+If you are looking to keep your office clean and the people in it healthy, [Evergreen Office Cleaning](/about-us/) cleans everything from lobbies to washrooms on a schedule set for your building. [Contact us](/request-a-quote/) to book a free walkthrough.
 
 If you would rather leave it to a professional crew, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) and [office cleaning](/services/office-cleaning/) services cover it for workplaces across Toronto and the GTA.

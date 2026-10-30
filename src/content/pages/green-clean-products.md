@@ -1,6 +1,6 @@
 ---
 title: "Green Clean Products"
-description: "Evergreen uses an approved line of cleaning products that meet or exceed industry standards including a professional green cleaning products."
+description: "Evergreen uses an approved line of professional green cleaning products that meet or exceed industry standards. Here is what we use and why."
 ---
 
 ## Concerned about green cleaning and interested in the use of eco-friendly products? So are we.
@@ -32,3 +32,5 @@ In April of 2013 changes occurred between Environment Canada and Ecologo. UL Env
 ![Reusable spray bottle and cleaning cloth](/images/green-cleaning-products-unlabeled.jpg)
 
 Illustrative stock photograph of a reusable spray bottle and cleaning cloth; not a photograph of the certified products described above.
+
+For staff who tidy up between our visits, see the [cleaning products worth keeping in the office](/5-cleaning-products-you-should-have-in-your-office/) and the [combinations you should never mix](/6-common-cleaning-products-that-you-should-never-mix-together/).

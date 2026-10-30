@@ -372,6 +372,14 @@ const orbIsCropped = orbSrc !== src;
     height: 11px;
   }
 
+  /* The visible badge stays 26px; this widens what a finger can hit to 44px
+     (SEO audit, 30 Oct 2026: the 26px target was easy to miss on a phone). */
+  .leadnet-dismiss::after {
+    content: '';
+    position: absolute;
+    inset: -9px;
+  }
+
   .leadnet-dismiss:hover {
     background: #6f6f6f;
   }
@@ -568,13 +576,16 @@ const orbIsCropped = orbSrc !== src;
       display: none;
     }
 
+    /* 52px since 30 Oct 2026: at 64px it sat over the ends of lines of body
+       text on every page (SEO audit). It also steps aside while the visitor
+       scrolls down to read; see the script. */
     .leadnet-orb {
-      width: 64px;
-      height: 64px;
+      width: 52px;
+      height: 52px;
     }
 
     .leadnet-dismiss {
-      right: 46px;
+      right: 34px;
     }
   }
 </style>
@@ -770,38 +781,50 @@ const orbIsCropped = orbSrc !== src;
       else window.addEventListener('load', reveal, { once: true });
     }
 
-    // --- stepping aside for a quote form ---
+    // --- stepping aside ---
     // The bubble sits in the bottom corner, which is where a form's fields
     // scroll past: it covered the Phone field on a phone and the street
     // address on a desktop. Whenever it would sit on top of a lead form it
     // fades out, and it comes back once the form has moved out from under it.
-    // An open panel is left alone: the visitor asked for it.
+    //
+    // On a phone it also steps aside while the visitor scrolls DOWN, which is
+    // reading: the bottom corner is over the ends of lines of text there
+    // (SEO audit, 30 Oct 2026). It comes back when they scroll up or reach
+    // the end of the page. An open panel is left alone: the visitor asked
+    // for it.
     const forms = [...document.querySelectorAll<HTMLElement>('form[data-endpoint]')];
     const bubble = panel.querySelector<HTMLElement>('.leadnet-bubble')!;
-    if (forms.length) {
-      let queued = false;
-      const sync = () => {
-        queued = false;
-        if (panel.hidden || panel.classList.contains('is-open')) return;
-        // Measured in its resting place, whether or not it is tucked now.
-        const b = bubble.getBoundingClientRect();
-        const lift = panel.classList.contains('is-tucked') ? 16 : 0;
-        const over = forms.some((f) => {
-          const r = f.getBoundingClientRect();
-          return r.left < b.right && r.right > b.left && r.top < b.bottom - lift && r.bottom > b.top - lift;
-        });
-        panel.classList.toggle('is-tucked', over);
-      };
-      const queue = () => {
-        if (!queued) {
-          queued = true;
-          requestAnimationFrame(sync);
-        }
-      };
-      window.addEventListener('scroll', queue, { passive: true });
-      window.addEventListener('resize', queue);
-      panel.addEventListener('transitionend', queue);
-      queue();
-    }
+    const phone = window.matchMedia('(max-width: 767px)');
+    let lastY = window.scrollY;
+    let reading = false;
+    let queued = false;
+    const sync = () => {
+      queued = false;
+      const y = window.scrollY;
+      if (Math.abs(y - lastY) > 4) {
+        const atEnd = window.innerHeight + y >= document.documentElement.scrollHeight - 8;
+        reading = phone.matches && y > lastY && !atEnd;
+        lastY = y;
+      }
+      if (panel.hidden || panel.classList.contains('is-open')) return;
+      // Measured in its resting place, whether or not it is tucked now.
+      const b = bubble.getBoundingClientRect();
+      const lift = panel.classList.contains('is-tucked') ? 16 : 0;
+      const over = forms.some((f) => {
+        const r = f.getBoundingClientRect();
+        return r.left < b.right && r.right > b.left && r.top < b.bottom - lift && r.bottom > b.top - lift;
+      });
+      panel.classList.toggle('is-tucked', over || reading);
+    };
+    const queue = () => {
+      if (!queued) {
+        queued = true;
+        requestAnimationFrame(sync);
+      }
+    };
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    panel.addEventListener('transitionend', queue);
+    queue();
   }
 </script>

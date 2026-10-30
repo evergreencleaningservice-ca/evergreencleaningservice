@@ -182,7 +182,7 @@ describe('the message body', () => {
         'CA',
         'Email: kerryann@placeholder.example',
         'Phone: 6475550147',
-        "I'm interested a quote for these services:",
+        "I'm interested in a quote for these services:",
         'Office Cleaning',
         'Commercial Carpet Cleaning',
         'Additional comments:',
@@ -232,7 +232,7 @@ describe('the message body', () => {
 
     expect(text).toContain('Phone: 416 555 0142');
     expect(text).toContain(`Email: ${NOT_SUPPLIED}`);
-    expect(text).toContain("I'm interested a quote for these services: Office cleaning & janitorial");
+    expect(text).toContain("I'm interested in a quote for these services: Office cleaning & janitorial");
   });
 
   it('shows (not supplied) for a missing phone on an email-only lead', () => {
@@ -543,7 +543,7 @@ describe('the HTML body', () => {
       '>Address<',
       '>Email<',
       '>Phone<',
-      '>I&#39;m interested a quote for these services<',
+      '>I&#39;m interested in a quote for these services<',
       '>Additional comments<',
     ].map((label) => html.indexOf(label));
     expect(order.every((i) => i > -1)).toBe(true);

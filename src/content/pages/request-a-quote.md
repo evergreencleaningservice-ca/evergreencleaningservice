@@ -15,7 +15,7 @@ Email \*
 
 Phone \*
 
-I'm interested a quote for these services
+I'm interested in a quote for these services
 
 -   Commercial Cleaning
 -   Office Cleaning

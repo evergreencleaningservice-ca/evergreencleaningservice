@@ -7,7 +7,8 @@
  *   CORE       the contact section's service-area line (`serviceAreas` in
  *              site.ts): Toronto, East York, Etobicoke, North York,
  *              Scarborough, York, Mississauga, Vaughan, Brampton, Markham,
- *              Oakville, Richmond Hill.
+ *              Oakville, Richmond Hill, and since 30 Oct 2026 the EAST
+ *              three as well, so the line matches the rest of the site.
  *   EAST       Pickering, Ajax and Oshawa — added by the client's own Google
  *              Ads copy document (2026-09-30, `SERVICE_AREA_LINE` in
  *              landing.ts).

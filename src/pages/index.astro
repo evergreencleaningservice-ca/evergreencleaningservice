@@ -18,9 +18,14 @@ import Testimonials from '../components/home/Testimonials.astro';
 import Contact from '../components/home/Contact.astro';
 import News from '../components/home/News.astro';
 
-const title = 'Office & Commercial Cleaning in Toronto & GTA | Evergreen';
+/* 30 Oct 2026 (SEO audit): the homepage was taking the "office cleaning
+   services" queries from /services/office-cleaning/, at positions 7-12 with
+   almost no clicks. The title now leads with the company and the year, and
+   leaves "office cleaning services" to the service page; the description
+   gives a reason to click (the reply promise the client confirmed). */
+const title = 'Commercial Cleaning Company in Toronto Since 1989 | Evergreen';
 const description =
-  'Office, commercial and industrial cleaning across Toronto and the GTA since 1989 — after hours, by a consistent crew, with a free on-site walkthrough.';
+  'Office and commercial cleaning across Toronto and the GTA since 1989: the same crew every visit, after hours, WSIB covered. We reply within 2 hours.';
 ---
 
 <BaseLayout title={title} description={description}>

@@ -39,11 +39,11 @@ export interface Step {
 export const PROCESS_STEPS: Step[] = [
   {
     title: 'Tell us about the space',
-    body: 'Call (416) 803-4880 or send the short quote form. We ask what kind of building it is, where it is and what you need cleaned.',
+    body: 'Call (416) 803-4880 or send the short quote form, and we reply within 2 hours. We ask what kind of building it is, where it is and what you need cleaned.',
   },
   {
     title: 'Free on\u2011site walkthrough', // non-breaking hyphen: never "on-" / "site"
-    body: 'We set up a time to walk the building with you and go over your requirements in detail, rather than pricing the work down the phone.',
+    body: 'When you are ready, we set up a time to walk the building with you and go over your requirements in detail, rather than pricing the work down the phone.',
   },
   {
     title: 'A written proposal',
@@ -63,7 +63,7 @@ export const PROCESS_STEPS: Step[] = [
 export const TRUST_FACTS = [
   { title: 'Serving Toronto since 1989', body: 'Commercial cleaning in Toronto and the GTA for more than three decades.' },
   { title: 'WSIB covered, bonded and insured', body: 'Background-screened staff, covered by liability insurance and WSIB Ontario.' },
-  { title: 'One account executive', body: 'A direct contact who coordinates walkthroughs, inspections and changes.' },
+  { title: 'A reply within 2 hours', body: 'From your account executive, who then coordinates the walkthrough, inspections and changes.' },
   { title: 'After hours and weekends', body: 'Cleaning scheduled around your business, not the other way round.' },
 ] as const;
 

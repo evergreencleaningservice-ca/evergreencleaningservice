@@ -34,7 +34,7 @@ If you walk into your office and the air feels heavy, smells stale or sets off s
 
 ### Dust With Microfibre, Top to Bottom
 
-Dusting with a feather duster or a dry cotton cloth moves dust into the air rather than removing it. Microfibre cloths trap it. Work from the top of the room down (high ledges, light fixtures and vents first, then desks, then floors) so anything that falls is picked up last. Colour-coding cloths by area also keeps dirt from washrooms out of kitchens and offices.
+Dusting with a feather duster or a dry cotton cloth moves dust into the air rather than removing it. Microfibre cloths trap it. Work from the top of the room down (high ledges, light fixtures and vents first, then desks, then floors) so anything that falls is picked up last. Colour-coding cloths by area also keeps dirt from washrooms out of kitchens and offices. Our guide to [dusting an office building](/how-to-properly-dust-office-building/) goes through it step by step.
 
 ![Extendable duster cleaning a ceiling corner](/images/fall-high-dusting-office-ceiling.jpg)
 

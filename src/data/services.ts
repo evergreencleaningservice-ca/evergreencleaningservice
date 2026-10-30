@@ -3,7 +3,7 @@
  *
  * THE ORIGINAL SITE'S OWN EIGHT, back again (2026-10-22). The client asked for
  * the form to look and work exactly like the original WPForms form **1381** —
- * the checklist headed "I'm interested a quote for these services" — matching
+ * the checklist headed "I'm interested in a quote for these services" — matching
  * the notification email they were used to receiving from it. That supersedes
  * the six-plus-Other list the client supplied earlier, which had added
  * Industrial, Warehouse and Condo Common Area Cleaning and dropped four of

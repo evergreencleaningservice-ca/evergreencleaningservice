@@ -202,8 +202,12 @@ describe('the homepage heading outline', () => {
     expect(headings(home(), 1)[0]).toMatch(/Office .*Cleaning in Toronto/);
   });
 
-  it('keeps the local-intent wording in the title tag', () => {
-    expect(home()).toMatch(/<title>Office &amp; Commercial Cleaning in Toronto &amp; GTA/);
+  it('keeps the local-intent wording in the title tag, and leaves "office cleaning services" to the service page', () => {
+    /* 30 Oct 2026: the homepage was outranking /services/office-cleaning/
+       for that page's own queries (SEO audit). */
+    expect(home()).toMatch(/<title>Commercial Cleaning Company in Toronto Since 1989/);
+    expect(home()).not.toMatch(/<title>[^<]*Office Cleaning Services/);
+    expect(read('services/office-cleaning/index.html')).toMatch(/<title>Office Cleaning Services in Toronto/);
   });
 });
 
@@ -463,5 +467,30 @@ describe('the location pages people search as "office cleaning <city>"', () => {
     for (const place of ['Meadowvale', 'Lisgar', 'East Credit', 'Streetsville', 'Erin Mills', 'Malton']) {
       expect(html, place).toContain(place);
     }
+  });
+});
+
+describe('the audit fixes of 30 Oct 2026', () => {
+  const graphOf = (html: string) =>
+    [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+      .map((m) => JSON.parse(m[1]))
+      .flatMap((d) => d['@graph'] ?? [d]);
+
+  it('types the business as a real schema.org LocalBusiness subtype, with no guessed price range', () => {
+    const org = graphOf(read('index.html')).find((n) => String(n['@id']).endsWith('/#organization'));
+    expect(org['@type']).toBe('ProfessionalService');
+    expect(org).not.toHaveProperty('priceRange');
+  });
+
+  it('says the reply promise where people land, and never "no site visit"', () => {
+    for (const page of ['index.html', 'services/office-cleaning/index.html', 'locations/mississauga/index.html']) {
+      expect(read(page), page).toMatch(/reply within 2 hours/i);
+    }
+    for (const page of pages) expect(read(page), page).not.toContain('No site visit');
+  });
+
+  it('only the downtown page says the office is in its area', () => {
+    expect(read('locations/etobicoke/index.html')).toContain('No. Etobicoke is in the City of Toronto');
+    expect(read('locations/toronto-downtown/index.html')).toMatch(/Do you have an office in Downtown Toronto\?<\/summary><p[^>]*>Yes: /);
   });
 });

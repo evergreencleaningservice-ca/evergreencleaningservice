@@ -61,7 +61,11 @@ export const organizationGraph = () => ({
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'CleaningService',
+      /* ProfessionalService, a LocalBusiness subtype. It was `CleaningService`
+         (inherited from the old Rank Math output), which is not a schema.org
+         type, so every property on this node went unvalidated (SEO audit,
+         30 Oct 2026). */
+      '@type': 'ProfessionalService',
       '@id': ORG_ID,
       name: nap.name,
       alternateName: [...nap.alternateNames],
@@ -71,7 +75,6 @@ export const organizationGraph = () => ({
       image: `${site.url}${site.logo}`,
       telephone: nap.phoneSchema,
       email: nap.email,
-      priceRange: nap.priceRange,
       address: {
         '@type': 'PostalAddress',
         streetAddress: nap.streetAddress,

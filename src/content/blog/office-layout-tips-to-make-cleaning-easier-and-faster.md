@@ -63,6 +63,6 @@ You have to invest in high-quality storage solutions for this to happen. You ide
 
 Changing the office layout might make the office a lot easier to keep clean and maintain. Use the tips outlined above and you could change the layout of your office to make the cleaning tasks a lot easier. It also helps to improve the productivity of your employees across the board.
 
-_**If you’re looking for a reliable commercial cleaning service in the GTA, [get in touch](/contact-us/) with [Evergreen Cleaning](/about-us/) today!**_
+_**If you’re looking for a reliable commercial cleaning service in the GTA, [get in touch](/contact-us/) with [Evergreen Office Cleaning](/about-us/) today!**_
 
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

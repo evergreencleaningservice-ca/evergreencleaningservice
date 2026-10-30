@@ -64,7 +64,7 @@ All of your hardwood, ceramic or tile floors need to be swept, mopped, and also 
 
 Hopefully, this cleaning checklist will help you keep your dental clinic neat and clean for your patients and staff.
 
-_**If you are searching for a [commercial cleaning service](/about-us/) in the GTA to handle these tasks for you don’t hesitate to [contact us](/contact-us/) at Evergreen Cleaning.**_ 
+_**If you are searching for a [commercial cleaning service](/about-us/) in the GTA to handle these tasks for you don’t hesitate to [contact us](/contact-us/) at Evergreen Office Cleaning.**_ 
 
 _**We would love to help!**_
 

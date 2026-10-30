@@ -256,7 +256,7 @@ const RELATED_TEXT: Record<string, string> = {
           id="offer-quote"
           formId={formId}
           heading="Get a free quote"
-          intro="A few details and we will arrange a walkthrough. No obligation."
+          intro="We reply within 2 hours, then arrange a free walkthrough when it suits you. No obligation."
         />
       </div>
     </aside>
@@ -303,9 +303,16 @@ const RELATED_TEXT: Record<string, string> = {
   .offer-trust {
     padding-top: 24px;
   }
+  /* One `minmax(0, 1fr)` track below 992px: an implicit track has a
+     min-content floor, and a long unbroken line in the commercial cleaning
+     checklist pushed it to 333px on a 320px phone (SEO audit, 30 Oct 2026). */
   .offer-grid {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 40px;
+  }
+  .offer-grid > * {
+    min-width: 0;
   }
   @media (min-width: 992px) {
     .offer-grid {

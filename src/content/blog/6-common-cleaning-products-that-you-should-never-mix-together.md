@@ -1,6 +1,6 @@
 ---
 title: "6 Common Cleaning Products That You Should Never Mix Together"
-description: "Cleaning product do's and don't can be confusing. Let us help set you you on the right path with the right tools for the job."
+description: "Six cleaning-product combinations never to mix, from bleach with vinegar, ammonia or rubbing alcohol to two drain cleaners, and why each is unsafe."
 pubDate: 2021-07-30
 image: "/images/blog-cleaning-products-never-mix-feature.jpg"
 imageAlt: "Gloved cleaner safely separating unbranded cleaning products in a janitorial supply room"
@@ -28,13 +28,13 @@ Always make sure you read the ingredient and warning labels on the cleaning prod
 
 ### Vinegar + Bleach
 
-This combination might sound like it would be a very powerful disinfectant. However, you should never mix them. Chlorine gas is produced when they are combined. Even at a low level, this can cause water, burning eyes, breathing problems, and coughing.
+This combination might sound like it would be a very powerful disinfectant. However, you should never mix them. Chlorine gas is produced when they are combined. Even at a low level, it can cause watery, burning eyes, breathing problems and coughing.
 
 ### Vinegar + Baking Soda
 
 On their own, these pantry staples can be very handy. Both vinegar and baking soda can help to clean all over your house. Just make sure you avoid any DIY cleaning recipes that include this combination.
 
-Vinegar is acidic and baking soda is basic. When they are combined, you mainly get sodium acetate and water. However, it is really mostly water. Baking soda also foams up when combined. The combination can explode when stored inside a closed container.
+Vinegar is acidic and baking soda is basic. When they are combined, you mainly get sodium acetate and water. However, it is really mostly water. Baking soda also foams up when combined. In a closed container, the gas it gives off builds up pressure and can burst the container.
 
 ### Ammonia + Bleach
 
@@ -44,7 +44,7 @@ Vinegar is acidic and baking soda is basic. When they are combined, you mainly g
 
 ### Two Drain Cleaners
 
-We don’t ever recommend that two drain cleaners ever be mixed together or to use one directly after another one. They are very powerful formulas, and if combined might even explode. Follow the directions on the package and only use one product. Each treatment typically needs half a bottle. If that doesn’t work, don’t use a different product. Call a plumber instead.
+Never mix two drain cleaners, or use one straight after another. They are strong formulas, and combined they can react violently, splashing or releasing heat and fumes. Follow the directions on the package and only use one product. If it does not clear the drain, do not try a different product on top of it: call a plumber instead.
 
 ### Vinegar + Hydrogen Peroxide
 
@@ -52,9 +52,9 @@ You might have heard that countertops or fruits should be sprayed with alternati
 
 ### Rubbing Alcohol + Bleach
 
-You have probably heard of chloroform. It is the stuff used in movies by kidnappers to knock their victims out. It may not cause you to pass out, however, the combination can be toxic and irritating. Bleach should never be mixed with anything other than plain water. Other products like toilet bowl cleaners and window cleaners can contain ingredients like ammonia or acids and should never be combined with bleach.
+Mixed together, they can produce chloroform and other toxic compounds that irritate the eyes, nose and lungs. Bleach should never be mixed with anything other than plain water. Other products like toilet bowl cleaners and window cleaners can contain ingredients like ammonia or acids and should never be combined with bleach.
 
-_**Stay safe when you’re cleaning or stay super safe and leave the cleaning to the pros at Evergreen Commercial Cleaning.**_ 
+_**Stay safe when you’re cleaning or stay super safe and leave the cleaning to the pros at Evergreen Office Cleaning.**_ 
 
 #### [CONTACT US](/contact-us/) today for all of your cleaning needs!
 
