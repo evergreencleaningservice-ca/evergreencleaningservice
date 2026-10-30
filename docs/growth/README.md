@@ -12,7 +12,7 @@ The 15 Oct implementation record follows below; this section is the current stat
 | #36, #37 | SEO audit (28 Oct) Phase 1, except C1: sitemap and `/search/`, security headers with a report-only CSP, content fixes, the video bubble, alt text and OG image metadata, the schema entity pass | CSP violations go to `/api/csp-report` (Worker log). Switch to enforcing after two clean weeks, around 12 Nov. |
 | #38 | Layout audit at 360–3440 px: margins, phone type size, grids, forms, header, footer | Report in the session; no open defects. |
 | #39 | GA4 events via the Google tag; the privacy policy rewritten | See tracking-spec.md. |
-| this branch | SEO audit Phase 2, the parts that need no client input: `/reviews/` shows every Google review with its date (H4); the WordPress logo banners are gone from 34 posts (H10); Service `@id`s, catalog URLs, `contactPoint`, `BusinessAudience` and a `ServiceChannel` to `/request-a-quote/` (H12); slash-less URLs 301 instead of 307 (M3); the sitemap split into `sitemap-pages-0.xml` and `sitemap-insights-0.xml`, with `sitemap-0.xml` 301ing to the pages one (M2); the Mississauga over-claim removed and post-construction given a geo H1 and phases (M9); a `/services/` intro and linked area names on `/locations/` (M11); browser image cache 30 days | Waiting on the client or an account owner: H2 container audit (GTM access), H5 About page (named people), H6 photoshoot, H13 and C6 listings, C3 rewrites with client facts, D-A form fields and the M13 checkbox names, one reply-time promise for the site and the ads. |
+| this branch | SEO audit Phase 2, the parts that need no client input: `/reviews/` shows every Google review with its date (H4); the WordPress logo banners are gone from 34 posts (H10); Service `@id`s, catalog URLs, `contactPoint`, `BusinessAudience` and a `ServiceChannel` to `/request-a-quote/` (H12); slash-less URLs 301 instead of 307 (M3); the sitemap split into `sitemap-pages-0.xml` and `sitemap-insights-0.xml`, with `sitemap-0.xml` 301ing to the pages one (M2); the Mississauga over-claim removed and post-construction given a geo H1 and phases (M9); a `/services/` intro and linked area names on `/locations/` (M11); browser image cache 30 days | Waiting on the client or an account owner: H2 container audit (GTM access), H5 About page (named people), H6 photoshoot, H13 and C6 listings, C3 rewrites with client facts, D-A form fields. |
 
 **Measurement:**
 
@@ -37,6 +37,8 @@ The 15 Oct implementation record follows below; this section is the current stat
 
 - Google Ads: the lead and call conversion settings were reviewed (A1, A2). The three Secondary offline conversion actions were created (A3): `Evergreen - Qualified lead`, `Evergreen - Quote issued`, `Evergreen - Customer won`.
 - Staging: `stage.evergreencleaningservice.ca` was removed (no DNS record), which ends the staging hits to GA4 and Ads (A6). GA4 and Ads data from before 29 Oct includes some staging visits.
+
+**Client decisions, 30 Oct 2026:** the reply promise is "within 2 hours" everywhere, the site's forms as well as the ads; for the other Phase 2 calls, do what serves the site's SEO. So the quote form's checkboxes now use the service pages' names (M13), and the location pages carry the breadcrumb above the H1 (M9).
 
 **Still open:**
 

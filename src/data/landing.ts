@@ -41,7 +41,9 @@
  *   than three times in three wordings. Its history: "within 2 business
  *   hours" from Phase 3; "as soon as possible" from earlier on 2026-09-30,
  *   when the client asked for no time to be named; then "within 2 hours" the
- *   same day, from the Google Ads copy document below. "Same-day walkthrough" —
+ *   same day, from the Google Ads copy document below. On 30 Oct 2026 the
+ *   client made "within 2 hours" the promise everywhere: the site's own
+ *   quote page and every form, not just the landing pages. "Same-day walkthrough" —
  *   which the quote page's submit button used to promise — is gone, because
  *   nobody has committed to it.
  */

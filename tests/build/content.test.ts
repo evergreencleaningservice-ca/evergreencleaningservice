@@ -206,8 +206,9 @@ describe('nothing was invented', () => {
   });
 
   it('no page promises a response time the original did not make', () => {
-    /* The only timed promise is the landing pages' "within 2 hours", which
-       the client set for the Google Ads. Any other would be invented. */
+    /* The only timed promise is "within 2 hours", which the client set for
+       the Google Ads and, on 30 Oct 2026, for the whole site. Any other
+       would be invented. */
     expect(find(/\b(15|30|60)[- ]minute (response|callback)/i)).toEqual([]);
     expect(find(/\b24\/7\b/)).toEqual([]);
   });
