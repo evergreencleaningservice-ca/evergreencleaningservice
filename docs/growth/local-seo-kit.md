@@ -22,17 +22,17 @@ info@evergreencleaningservice.ca
 `Evergreen Office Cleaning`. No keywords or city added to the name; Google suspends listings for that.
 
 ### Categories
-Primary category is the single biggest factor for the map results.
+Primary category is the single biggest factor for the map results. Pick only from what Google offers as you type; "Commercial cleaning service" is not offered in Canada (checked 30 Oct 2026).
 
 | | Category | Why |
 |---|---|---|
-| Primary | **Commercial cleaning service** | Matches what people search ("commercial cleaning Toronto", "office cleaning") better than "Janitorial service". |
-| Secondary | Janitorial service | The current primary; keep it as a secondary. |
-| Secondary | Office cleaning service | Add if Google offers it when you type it. |
-| Secondary | Floor refinishing service | Floor stripping and waxing is a listed service. |
+| Primary | **Janitorial service** (keep) | The closest category Google offers to commercial and office cleaning. |
+| Secondary | Carpet cleaning service | Carpet extraction is a listed service. |
+| Secondary | Window cleaning service | Interior glass and window cleaning are listed services. |
 | Secondary | Pressure washing service | Listed service. |
+| Secondary | Floor refinishing service | Floor stripping and waxing is a listed service; add only if Google offers it. |
 
-Change the primary once and leave it: switching back and forth resets ranking signals.
+"Office cleaning" and "Commercial cleaning" go in the **Services** list below, not the categories: that is where Google reads them for those searches. Do not pick "House cleaning service" or "Cleaners" (dry cleaning): they would put the listing in the wrong searches.
 
 ### Business description (750 characters max; this is 720)
 

@@ -62,9 +62,11 @@ describe('the grammatical errors are gone from every page', () => {
     ['"cans ad make sure"', /cans ad make sure/i, null],
     ['"most populated area’s"', /populated area[’']s/i, null],
     ['"when outsource their"', /when outsource their/i, null],
-    ['"make a a bold statement"', /make a a bold/i, /make a bold statement/i],
+    /* The About page was rewritten on 30 Oct 2026 (SEO audit); these two
+       sentences are gone rather than corrected. */
+    ['"make a a bold statement"', /make a a bold/i, null],
     ['"medial clinics"', /medial clinic/i, /medical clinic/i],
-    ['"if you’re ever have an emergency"', /ever have an emergency/i, /ever in an emergency/i],
+    ['"if you’re ever have an emergency"', /ever have an emergency/i, null],
     ['"There staff are professional"', /There staff are/i, /Their staff are/i],
   ])('%s is corrected', (_label, wrong, right) => {
     expect(find(wrong)).toEqual([]);
