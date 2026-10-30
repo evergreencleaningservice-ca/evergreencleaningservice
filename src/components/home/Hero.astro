@@ -130,7 +130,6 @@ const srcset = (base: string, ext: string) =>
     position: relative;
     padding-top: 72px;
     padding-bottom: 72px;
-    max-width: 1140px;
   }
 
   .hero-eyebrow {
@@ -152,6 +151,14 @@ const srcset = (base: string, ext: string) =>
     line-height: 1.15;
     margin: 0 0 16px;
     max-width: 760px;
+  }
+
+  /* Larger on large monitors, where 48px read small (30 Oct 2026). */
+  @media (min-width: 1800px) {
+    .hero-title {
+      font-size: 3.5rem;
+      max-width: 880px;
+    }
   }
 
   .hero-sub {

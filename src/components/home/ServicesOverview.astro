@@ -38,6 +38,7 @@ const MORE = [
   { title: 'Disinfection Cleaning', href: '/services/disinfection-cleaning/', text: 'Clean first, then disinfect the surfaces people touch.' },
   { title: 'Emergency Cleaning', href: '/services/emergency-cleaning/', text: 'Floods, water damage and messes that cannot wait.' },
   { title: 'Pressure Washing', href: '/services/pressure-washing/', text: 'Entrances, walkways, loading docks and exteriors.' },
+  { title: 'Floor Stripping & Waxing', href: '/services/floor-stripping-waxing/', text: 'Hard floors stripped, sealed and refinished after hours.' },
   { title: 'Graffiti Removal', href: '/services/graffiti-removal/', text: 'Removal matched to the surface it is on.' },
 ];
 ---
@@ -105,8 +106,10 @@ const MORE = [
       grid-template-columns: repeat(3, 1fr);
     }
   }
-  /* Seven services: as a centred flex row the seventh sits in the middle of
-     its row instead of alone at the left. Widths match the grid it was. */
+  /* Eight services since 30 Oct 2026 (floor stripping and waxing added):
+     two rows of four on a desktop and four rows of two on a tablet, so no
+     card sits alone in a row. Still a centred flex row, so a ninth would sit
+     in the middle rather than at the left. */
   .hs-more {
     margin-top: 18px;
     display: flex;
@@ -124,7 +127,7 @@ const MORE = [
   }
   @media (min-width: 1100px) {
     .hs-more > li {
-      flex-basis: calc((100% - 2 * 18px) / 3);
+      flex-basis: calc((100% - 3 * 18px) / 4);
     }
   }
   .hs-primary a,
