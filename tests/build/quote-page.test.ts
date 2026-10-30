@@ -291,11 +291,13 @@ describe('the sidebar carries help, not a second form', () => {
     const { hours, hoursNote } = await import('../../src/data/site');
     /* Word joiners keep "8am–8pm" from breaking at the dash on screen. */
     expect(quote.replace(/\u2060/g, '')).toContain(hoursNote);
-    /* 07:00 → 7am, 22:00 → 10pm: the note is the same fact in words. */
+    /* 07:00 → 7am, 18:00 → 6pm: the note is the same fact in words, and
+       both match the Google Business Profile (30 Oct 2026). Weekends are
+       closed, so there is no second group. */
+    expect(hours).toHaveLength(1);
     expect(hours[0].opens).toBe('07:00');
-    expect(hours[0].closes).toBe('22:00');
-    expect(hoursNote).toContain('7am–10pm');
-    expect(hoursNote).toContain('8am–8pm');
+    expect(hours[0].closes).toBe('18:00');
+    expect(hoursNote).toContain('Monday to Friday 7am–6pm');
   });
 });
 

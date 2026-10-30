@@ -48,6 +48,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
   'toronto-downtown': {
     review: 'Edward Sherman',
     photo: { src: '/images/night-janitorial-crew-office-toronto.jpg', alt: 'Industrial scrubber cleaning an office corridor' },
+    office: [
+      'Downtown office space runs from single floors in the Financial District towers to professional offices in King West and the converted warehouses around the Entertainment District. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough, and coordinate with building management on access and security.',
+      'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly. Our office is downtown, so extra visits are easy to arrange. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+    ],
     areasIntro:
       'Downtown is where our office is. We cover the core from the waterfront to Bloor Street and from Bathurst to the Don Valley, including:',
     areas: [

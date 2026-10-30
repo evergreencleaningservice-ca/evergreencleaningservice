@@ -96,7 +96,8 @@ export const organizationGraph = () => ({
         closes: h.closes,
       })),
       areaServed: SERVICE_AREA_NAMES.map((name) => ({ '@type': 'City', name })),
-      sameAs: social.map((s) => s.href),
+      /* The Google Business Profile first, then the social profiles. */
+      sameAs: [nap.mapUrl, ...social.map((s) => s.href)],
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'sales',

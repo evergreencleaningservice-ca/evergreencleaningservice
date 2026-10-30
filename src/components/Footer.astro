@@ -44,8 +44,8 @@ const icons: Record<string, string> = {
         <p class="footer-nap">
           <a href={nap.phoneHref} data-call-location="footer">{nap.phoneDisplay}</a><br />
           <a href={`mailto:${nap.email}`} data-cta-location="footer">{nap.email}</a><br />
-          {/* Word joiners round each dash, so "8am–8pm" never breaks as
-              "8am–" / "8pm". */}
+          {/* Word joiners round each dash, so "7am–6pm" never breaks as
+              "7am–" / "6pm". */}
           <span>{hoursNote.replace(/–/g, '\u2060–\u2060')}</span>
         </p>
         <p><a class="btn btn-primary" href="/request-a-quote/" data-cta-location="footer">Request a quote</a></p>
