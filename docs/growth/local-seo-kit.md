@@ -135,7 +135,32 @@ Tell us when any of these change and the website's links and structured data wil
 
 ---
 
-## 4. Still to confirm with the client
+## 4. Links from other sites
+
+**Where things stand (Moz, crawled 20 Oct 2026):** Domain Authority 52, 275 linking sites, spam score 1%. The 52 overstates it. 49 of the 50 strongest linking sites are Google redirect addresses (google.de, google.it and so on), which Google ignores, and 94% of anchors are the bare URL, the mark of scraper and "website worth" pages. Real sites that chose to link are probably in single digits to low tens. Measure progress by that count, not by DA.
+
+**What is already handled on the website:** every old address that may carry a link 301s to a live page: the bare domain and `http://`, the old `/blog/<slug>/` posts, `/feed/`, both WordPress sitemaps, the legacy service URLs, tags and `/wp-content/uploads/` images (spot-checked live, 30 Oct 2026). Nothing to do there.
+
+**Spam links:** a handful of scraper pages link with anchors like "high quality dofollow backlinks … pbn network service evergreencleaningservice.ca" and unrelated `.xyz` domain names. Evergreen did not cause these and Google ignores them. **Do not disavow** unless Search Console shows a manual action (Security & Manual actions > Manual actions).
+
+**Links worth earning, after the directories above.** Use the business name or "Evergreen Office Cleaning" as the link text, not keywords.
+
+| # | Source | How |
+|---|---|---|
+| 1 | BIA member directories (Queen Street West, Downtown Yonge, Bloor-Yorkville, the areas with location pages) | Free for businesses in or serving the BIA; ask the BIA office. |
+| 2 | BOMA Toronto (Building Owners and Managers Association) | Associate (supplier) membership lists you in their directory. |
+| 3 | BSCA (Building Service Contractors Association) and ISSA | Trade-body member directories. |
+| 4 | Property managers' approved-vendor pages | Ask current property-management clients. |
+| 5 | Client case studies or testimonials on clients' own sites | Offer a short write-up they can post with a link back. |
+| 6 | Suppliers' "partners" or "customers" pages | Ask the chemical and equipment suppliers. |
+| 7 | Community sponsorships and charity cleanups | Sponsor pages and local news link to sponsors. |
+| 8 | Guest guides on Toronto property-management or facilities blogs | Office hygiene and seasonal checklists; the site's own posts are the starting point. |
+
+Do not buy links or join link schemes, whatever the offer.
+
+---
+
+## 5. Still to confirm with the client
 
 1. The line "Floor 1 · Green Offices Toronto Inc." under the address on the Google listing. Is 243 Queen St W a shared office? Google is strict about shared and virtual addresses, so the listing must reflect how the office is actually used.
 2. Whether customers ever visit the office (decides "hide address" above).
