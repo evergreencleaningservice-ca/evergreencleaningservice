@@ -94,6 +94,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
   etobicoke: {
     review: 'Christopher Perera',
     photo: { src: '/images/gallery-industrial-cleaning-toronto.jpg', alt: 'Floor polishing machine in an industrial building' },
+    office: [
+      'Etobicoke’s offices range from the buildings around Islington and Kipling stations to professional offices and clinics in the plazas along The Queensway, Bloor and Dixon, and the offices attached to industrial units in the south and north ends. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
+      'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly. Etobicoke is close to our Queen Street West office, so an extra visit is easy to arrange. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+    ],
     areasIntro:
       'Etobicoke runs from the lake to the airport, and its business areas are very different from one end to the other. We cover:',
     areas: [
@@ -126,6 +130,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
       'Industrial buildings are cleaned around their shift changes rather than in the middle of them.',
     ],
     faqs: [
+      {
+        q: 'How often can our Etobicoke office be cleaned?',
+        a: 'Every night, a few evenings a week or weekly, whichever suits the office. The written scope agreed at the walkthrough says what is done on each visit.',
+      },
       {
         q: 'We run a plant in South Etobicoke. Can you clean around our shifts?',
         a: 'Yes. The schedule is set at the walkthrough around when the floor is quiet: between shifts, overnight or at weekends.',
@@ -299,6 +307,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
   markham: {
     review: 'av-ev',
     photo: { src: '/images/janitorial-cart-preparation-supplies.jpg', alt: 'Janitorial cart with mop bucket and warning sign' },
+    office: [
+      'Markham’s offices range from corporate and technology offices along Highway 7 and the 404 and 407 corridor to multi-tenant buildings in Markham Centre, clinics and professional suites in the plazas, and offices at the front of business-park units. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
+      'A routine visit covers open-plan floors and workstations, kitchens, meeting rooms, washrooms, glass and the touch points everyone shares, every night, a few evenings a week or weekly, with carpet and floor care planned through the year. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+    ],
     areasIntro:
       'Markham’s commercial space runs along Highway 7 and the Highway 404 and 407 corridors. We cover:',
     areas: [
@@ -328,6 +340,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     ],
     faqs: [
       {
+        q: 'Do you clean office space in Markham Centre and along Highway 7?',
+        a: 'Yes. Markham Centre, the Highway 7 corridor and the business parks along Highway 404 and 407 are all in our service area, and offices there are cleaned after hours.',
+      },
+      {
         q: 'We are in a business park with offices and a warehouse. Can you do both?',
         a: 'Yes. They go into one written scope, with recurring cleaning for the office side and scheduled floor care for the back.',
       },
@@ -341,6 +357,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
   oakville: {
     review: 'Mark Post',
     photo: { src: '/images/eco-friendly-cleaning-spray-microfibre.jpg', alt: 'Spray bottle and microfibre cloths used for surface cleaning' },
+    office: [
+      'Oakville’s offices range from law, financial and medical offices in downtown storefronts along Lakeshore Road to head offices in Winston Park and the business parks along the QEW and Highway 403, and the offices in front of the units on Speers Road. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
+      'A routine visit covers reception, boardrooms and workstations, kitchens, washrooms, floors, glass and the shared touch points, every night, a few evenings a week or weekly. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+    ],
     areasIntro:
       'Oakville’s commercial space is split between its historic downtown, a modern uptown and business parks along the highways. We cover:',
     areas: [
@@ -369,6 +389,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
       'Oakville visits are booked as a regular evening route rather than at short notice; anything urgent goes to your account executive, who arranges it.',
     ],
     faqs: [
+      {
+        q: 'How often can our Oakville office be cleaned?',
+        a: 'As often as you need: nightly, a few evenings a week or weekly. The walkthrough sets the frequency, and the written scope lists what is done each visit.',
+      },
       {
         q: 'Can you keep our client-facing areas presentation-ready?',
         a: 'Yes. Reception, boardrooms and washrooms can be given extra attention in the written scope, so they are right every morning.',
