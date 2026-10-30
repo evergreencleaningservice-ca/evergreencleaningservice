@@ -346,8 +346,12 @@ const webPage = webPageSchema({
     .loc-grid {
       grid-template-columns: minmax(0, 1fr) 380px;
     }
-    /* The form stays in view beside the long text column, as on the service
-       pages, instead of ending a screen in and leaving the column empty. */
+  }
+  /* The form stays in view beside the long text column, but only where the
+     whole form fits on screen (about 1,015px plus the 92px header). On a
+     laptop a pinned form taller than the window hid its submit button until
+     the end of the page (Codex review on #64, 30 Oct 2026). */
+  @media screen and (min-width: 941px) and (min-height: 1140px) {
     .loc-aside {
       position: sticky;
       top: 92px;
