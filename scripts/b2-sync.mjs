@@ -36,11 +36,16 @@ if (!KEY_ID || !APP_KEY) {
 const LOCAL = path.resolve('public', 'images');
 const PREFIX = 'images/'; // bucket keys mirror the site paths, minus the leading slash
 
-/* One day in the browser, one year at the Cloudflare edge. The long edge TTL is
-   what makes this cheap — B2 is hit once per object per year — and it stays
-   correctable because a purge clears the edge, which `immutable` or a long
-   browser max-age would not. */
-const CACHE_CONTROL = 'public, max-age=86400, s-maxage=31536000';
+/* 30 days in the browser, one year at the Cloudflare edge. The long edge TTL
+   is what makes this cheap — B2 is hit once per object per year. The browser
+   max-age was one day until the SEO audit (28 Oct 2026, "image cache
+   lifetime") asked for 30 days, so repeat visitors stop re-checking every
+   photo. The cost: a photo replaced under the same file name can stay stale
+   in a returning visitor's browser for up to 30 days (a purge only clears
+   the edge), so a changed photo should get a new file name. The header is
+   set at upload, so it reaches existing objects only as they are re-uploaded;
+   no `immutable`, so a reload still revalidates. */
+const CACHE_CONTROL = 'public, max-age=2592000, s-maxage=31536000';
 
 const TYPES = {
   '.jpg': 'image/jpeg',

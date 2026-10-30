@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { lastmodFor } from './src/lib/sitemap-lastmod.mjs';
+import { isInsightsUrl, lastmodFor } from './src/lib/sitemap-lastmod.mjs';
 
 export default defineConfig({
   site: 'https://www.evergreencleaningservice.ca',
@@ -54,6 +54,14 @@ export default defineConfig({
        */
       filter: (page) =>
         !/\/(category\/blog|lp|thank-you|tag|admin|eg-live-post-shell|search|insights\/page\/\d+)\//.test(page),
+      /* Two sitemaps by type (SEO audit M2): sitemap-insights-0.xml for the posts
+         and /insights/, sitemap-pages-0.xml for everything else. Search
+         Console then reports indexing for each type on its own. The Worker
+         adds admin-published posts to the insights one (LIST_PATHS in
+         src/lib/admin/live-posts.ts). */
+      chunks: {
+        insights: (item) => (isInsightsUrl(item.url) ? item : undefined),
+      },
       /* Real content dates, never the build time — src/lib/sitemap-lastmod.mjs. */
       serialize: (item) => {
         const lastmod = lastmodFor(item.url);

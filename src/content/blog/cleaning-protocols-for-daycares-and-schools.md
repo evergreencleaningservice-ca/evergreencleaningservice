@@ -49,5 +49,3 @@ Evergreen Clean utilizes the latest non-toxic, environmentally sound cleaning pr
 The pandemic has truly brought into stark relief just how important regular cleaning and disinfection work is, particularly in buildings that serve young people. Parents need to be able to have confidence in the safety of the place they send their kids to learn and socialize each and every day. Because the health of everyone can be affected by an outbreak among children, this is an issue of critical importance for our entire society.
 
 Therefore, in order to keep fighting against the spread of the coronavirus, our cleaning teams remain dedicated to ensuring that all surfaces with which others are likely to come into contact are treated with safe, yet effective chemicals designed to provide the disinfection results the public health crisis demands.
-
-![Evergreen Office Cleaning logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

@@ -19,7 +19,6 @@ A lot of people don’t realize how many germs can transfer after a firm handsha
 
 ![handwashing](/images/commercial-handwashing-hygiene.jpg)
 
-
 ### There’s A Right Way to Wash Your Hands
 
 There are a bunch of differing opinions on how long you should wash your hands. The Mayo Clinic recommends that you wash your hands with soap and warm water. To effectively wash your hands, you need to scrub the entire surface from your wrists to the tips of your fingers. It’s important to get underneath the fingernails and in between your fingers too. That way everything gets cleaned. Once you wipe your hands dry, it’s best to avoid touching the faucet. Rather, you want to use either your elbow or a clean towel to shut the water off. Otherwise, you will only transfer more germs back to your hands after cleaning them.
@@ -35,5 +34,3 @@ While handwashing is one of the most important things to keep people in an offic
 If you are looking to keep your office clean and everyone in it healthy, you can contract professional services from [Evergreen Cleaning](/about-us/). Evergreen Cleaning helps to keep your office free of germs and spotless. When you hire Evergreen, you are getting a company that prides itself on providing the highest level of service. We guarantee a comprehensive cleaning of everything from your lobbies to your washrooms. With regular cleaning, you can keep your office hygienic and keep your employees and customers healthy.
 
 #### [Contact us](/request-a-quote/) to get a free assessment of your office/workspace.
-
-![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

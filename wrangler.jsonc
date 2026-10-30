@@ -32,7 +32,7 @@
       "/admin/*",
       "/eg-live-post-shell/*",
       "/insights/",
-      "/sitemap-0.xml",
+      "/sitemap-insights-0.xml",
       "/rss.xml"
     ]
   },

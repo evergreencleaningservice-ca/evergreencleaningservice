@@ -40,6 +40,19 @@ const SERVICE_AREA_NAMES = [
   'Oshawa',
 ];
 
+/** The service pages, for the organisation's catalog. */
+const CATALOG = [
+  { name: 'Office Cleaning', path: '/services/office-cleaning/' },
+  { name: 'Commercial Cleaning', path: '/services/commercial-cleaning/' },
+  { name: 'Industrial & Warehouse Cleaning', path: '/services/industrial-cleaning/' },
+  { name: 'Post-Construction Cleaning', path: '/services/post-construction-cleaning/' },
+  { name: 'Building Maintenance', path: '/services/building-maintenance/' },
+  { name: 'Disinfection Cleaning', path: '/services/disinfection-cleaning/' },
+  { name: 'Emergency Cleaning', path: '/services/emergency-cleaning/' },
+  { name: 'Pressure Washing', path: '/services/pressure-washing/' },
+  { name: 'Graffiti Removal', path: '/services/graffiti-removal/' },
+];
+
 const ORG_ID = `${site.url}/#organization`;
 const SITE_ID = `${site.url}/#website`;
 
@@ -80,33 +93,28 @@ export const organizationGraph = () => ({
       })),
       areaServed: SERVICE_AREA_NAMES.map((name) => ({ '@type': 'City', name })),
       sameAs: social.map((s) => s.href),
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        telephone: nap.phoneSchema,
+        email: nap.email,
+        url: `${site.url}/request-a-quote/`,
+        areaServed: 'CA-ON',
+        availableLanguage: 'English',
+      },
+      /* Each catalog item points at its page's own Service node by `@id`, so
+         the catalog and the pages are one graph (SEO audit H12, 28 Oct). */
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Commercial Cleaning Services',
-        itemListElement: [
-          {
-            name: 'Office Cleaning & Janitorial',
-            description:
-              'Daily and weekly janitorial contracts for corporate offices and multi-tenant buildings in Toronto and the GTA.',
-          },
-          {
-            name: 'Industrial & Warehouse Floor Scrubbing',
-            description:
-              'Heavy industrial cleaning, strip & wax, and machine floor scrubbing for distribution centres.',
-          },
-          {
-            name: 'Post-Construction Cleaning',
-            description:
-              'Post-construction and renovation clean-up for commercial buildouts, before handover.',
-          },
-          {
-            name: 'Building Maintenance & Floor Care',
-            description:
-              'Strip and wax, commercial carpet cleaning, high dusting, interior windows and pressure washing.',
-          },
-        ].map((s) => ({
+        itemListElement: CATALOG.map((s) => ({
           '@type': 'Offer',
-          itemOffered: { '@type': 'Service', ...s },
+          itemOffered: {
+            '@type': 'Service',
+            '@id': `${site.url}${s.path}#service`,
+            name: s.name,
+            url: `${site.url}${s.path}`,
+          },
         })),
       },
     },
@@ -198,13 +206,25 @@ export const collectionSchema = (opts: { name: string; url: string; description?
  * page shows: the name, the description, who provides it and where. No price,
  * no rating, no review markup.
  */
-export const serviceSchema = (opts: { name: string; description?: string; url: string; serviceType?: string }) => ({
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: opts.name,
-  serviceType: opts.serviceType ?? opts.name,
-  ...(opts.description ? { description: opts.description } : {}),
-  url: opts.url.startsWith('http') ? opts.url : `${site.url}${opts.url}`,
-  provider: ORG,
-  areaServed: SERVICE_AREA_NAMES.map((name) => ({ '@type': 'City', name })),
-});
+export const serviceSchema = (opts: { name: string; description?: string; url: string; serviceType?: string }) => {
+  const url = opts.url.startsWith('http') ? opts.url : `${site.url}${opts.url}`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    /* The same `@id` the organisation's catalog points at. */
+    '@id': `${url}#service`,
+    name: opts.name,
+    serviceType: opts.serviceType ?? opts.name,
+    ...(opts.description ? { description: opts.description } : {}),
+    url,
+    provider: ORG,
+    areaServed: SERVICE_AREA_NAMES.map((name) => ({ '@type': 'City', name })),
+    /* Who it is for and how to ask for it (SEO audit H12 and M13). */
+    audience: { '@type': 'BusinessAudience', audienceType: 'Businesses and property managers' },
+    availableChannel: {
+      '@type': 'ServiceChannel',
+      serviceUrl: `${site.url}/request-a-quote/`,
+      servicePhone: { '@type': 'ContactPoint', telephone: nap.phoneSchema, contactType: 'sales' },
+    },
+  };
+};

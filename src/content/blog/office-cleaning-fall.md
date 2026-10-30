@@ -38,5 +38,3 @@ As the weather takes a turn for the worse, you will notice that pests become muc
 When you require your autumn cleaning, you can count on Evergreen Cleaning to deliver. [Evergreen Cleaning](/about-us/) is one of Toronto’s best and longest-servicing office cleaning company. They have been serving clients within the region since 1989.
 
 [Contact us](/contact-us/) today to book your fall deep office clean!
-
-![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

@@ -40,5 +40,3 @@ It is a known fact that air purifiers are a great addition to improving the air 
 Did you know that regular vacuums can release the dust collected back into the air? This is possible if the filter is compromised or has a poor-quality filter. This is why it is wise to use filter backpack vacuums that come with four filters. These vacuums are efficient at collecting dust particles.
 
 In conclusion, these are but a few ways to improve and maintain the quality of air in an office. Nevertheless, hiring a professional office cleaning company like us at [Evergreen Cleaning](/about-us/) is the best way to ensure the air quality of your office is at its utmost standard. If you are looking for the best commercial cleaning services, [contact us](/contact-us/) today. At Evergreen Cleaning, we value our clients and offer services tailored to our client’s needs.
-
-![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

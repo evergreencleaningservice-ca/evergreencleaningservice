@@ -3,6 +3,8 @@ import { getEntry } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
 import SpamGuard from '../components/SpamGuard.astro';
 import SubmissionRuntime from '../components/SubmissionRuntime.astro';
+import GoogleReviewLink from '../components/GoogleReviewLink.astro';
+import { relativeAge, reviews } from '../data/reviews';
 
 const entry = await getEntry('pages', 'reviews');
 if (!entry) throw new Error('Missing content entry: pages/reviews');
@@ -26,6 +28,16 @@ if (cutAt === -1) {
 }
 const introHtml = rawBody.slice(0, cutAt);
 
+/* SEO audit H4 (28 Oct 2026): the page promised reviews and showed only a
+   form. It now leads with every Google review on file, newest first, each
+   with its date. The age is shown the way Google shows it ("2 months ago"),
+   because two of the newest dates are only known to the month; the exact
+   ISO date still goes in `datetime`. No aggregate rating or count is shown:
+   the content tests hold every page to that until the client confirms one. */
+const cards = [...reviews]
+  .sort((a, b) => b.date.localeCompare(a.date))
+  .map((r) => ({ ...r, age: relativeAge(r.date) }));
+
 /*
  * TODO — the submit endpoint is not wired up yet.
  *
@@ -44,8 +56,39 @@ const introHtml = rawBody.slice(0, cutAt);
   description={entry.data.description}
   image={entry.data.image}
   imageAlt={entry.data.imageAlt}
-  contentHtml={introHtml}
 >
+  <section class="rv" aria-labelledby="rv-title">
+    <h2 id="rv-title">What clients say on Google</h2>
+    <ul class="rv-list">
+      {
+        cards.map((r) => (
+          <li class="rv-card">
+            <figure>
+              <p class="rv-stars" aria-label={`${r.rating} out of 5 stars`}>
+                {'★'.repeat(r.rating)}
+              </p>
+              <blockquote>
+                <p>{r.text}</p>
+              </blockquote>
+              <figcaption>
+                <span class="rv-name">{r.name}</span>
+                <span class="rv-meta">
+                  Google review, <time datetime={r.date}>{r.age}</time>
+                </span>
+              </figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="rv-cta">
+      <GoogleReviewLink />
+    </div>
+  </section>
+
+  <h2 class="rv-form-title">Send us a testimonial</h2>
+  <Fragment set:html={introHtml} />
+
   <p class="form-note">Fields marked <span class="req">*</span> are required.</p>
 
   {/* See the TODO in this file's frontmatter: action="#" is a placeholder. */}
@@ -138,6 +181,72 @@ const introHtml = rawBody.slice(0, cutAt);
 </PageLayout>
 
 <style>
+  .rv h2,
+  .rv-form-title {
+    margin: 0 0 1.25rem;
+  }
+
+  .rv-list {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .rv-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .rv-card figure {
+    height: 100%;
+    margin: 0;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--line, #e3e6e9);
+    border-radius: 6px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .rv-stars {
+    margin: 0;
+    color: #f4b400;
+    letter-spacing: 0.1em;
+    font-size: 1rem;
+  }
+
+  .rv-card blockquote {
+    margin: 0;
+    flex: 1;
+  }
+
+  .rv-card blockquote p {
+    margin: 0;
+  }
+
+  .rv-card figcaption {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+  }
+
+  .rv-name {
+    font-weight: 700;
+    color: var(--ink-heading);
+  }
+
+  .rv-meta {
+    color: var(--ink-soft);
+  }
+
+  .rv-cta {
+    margin-bottom: 3rem;
+  }
+
   .form-note {
     font-size: 0.9rem;
     color: var(--ink-soft);

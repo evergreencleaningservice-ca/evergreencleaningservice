@@ -96,3 +96,12 @@ export function lastmodFor(/** @type {string} */ url) {
   if (p === '/insights/') return newestPost;
   return lastCommit(SOURCES(p));
 }
+
+/**
+ * Whether a sitemap URL belongs in the insights sitemap: a blog post or the
+ * /insights/ hub (SEO audit M2, 28 Oct 2026). Everything else goes in pages.
+ */
+export function isInsightsUrl(/** @type {string} */ url) {
+  const p = new URL(url).pathname;
+  return p === '/insights/' || postDates.has(p.replace(/^\/|\/$/g, ''));
+}

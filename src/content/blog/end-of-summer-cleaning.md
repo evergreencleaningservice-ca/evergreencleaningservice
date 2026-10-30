@@ -36,5 +36,3 @@ Did you maintain high disinfecting standards throughout the entirety of summer v
 The health and safety of your employees depend on your ability to provide a clean and virus-free environment. At [Evergreen Cleaning](/about-us/), we can help you deep clean your office and your flooring for reasonable rates in Toronto and the surrounding areas! We can sanitize and disinfect buildings of any size, and our services utilize eco-friendly options.
 
 Get a commercial cleaning quote today by [contacting us](/contact-us/)!
-
-![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

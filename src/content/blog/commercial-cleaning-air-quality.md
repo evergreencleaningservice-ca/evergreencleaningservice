@@ -56,5 +56,3 @@ If you fail to properly clean your HVAC system, you will end up sending dust and
 While you can boost your air quality on your own, professionals will complete it much faster and do a much better and thorough job. We have the know-how and proper tools to effectively handle air quality issues, including dust, mold, germs, and debris. Leave the dusting, vacuuming, cleaning, and other niche cleaning tasks to us.
 
 [Contact us](/contact-us/) at [Evergreen Commercial Cleaning & Janitorial](/about-us/) to schedule a professional cleaning session for your property and improve your air quality.
-
-![Evergreen Office Cleaning logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

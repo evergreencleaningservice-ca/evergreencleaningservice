@@ -42,5 +42,3 @@ One idea when comes to caring for plants at the office, is that each employee co
 Select a particular area for your plant. Once a particular area is assigned for every plant, ensure that they are kept in this area all of the time. If they are moved too frequently, this can cause them to wilt and die. Always allow the plants enough time to adapt to the new environment so that they can thrive.
 
 Finally, enjoy plants but don’t have a green thumb?  Here at Evergreen Cleaning Services we are happy to make tending to your plants part of our routine cleaning procedures.  [Contact us](/contact-us/) today for all of your commercial cleaning and janitorial needs.
-
-![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

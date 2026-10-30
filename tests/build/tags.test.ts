@@ -176,7 +176,7 @@ describe('an archive page matches the original’s', () => {
   it('stays out of the sitemap, being noindex', () => {
     /* Submitting a noindex URL is a contradiction Search Console reports as
        an error. 34 tag pages leaked in before the filter was widened. */
-    const sitemap = read('sitemap-0.xml');
+    const sitemap = read('sitemap-pages-0.xml') + read('sitemap-insights-0.xml');
     expect(count(sitemap, /<loc>[^<]*\/tag\/[^<]*<\/loc>/g)).toBe(0);
   });
 });

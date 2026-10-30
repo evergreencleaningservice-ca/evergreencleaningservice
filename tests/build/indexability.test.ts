@@ -248,6 +248,17 @@ describe('the sitemap', () => {
     }
   });
 
+  it('is split by type: posts and /insights/ apart from every other page (M2)', () => {
+    const index = locs(read('sitemap-index.xml'));
+    expect(index).toEqual([`${ORIGIN}/sitemap-insights-0.xml`, `${ORIGIN}/sitemap-pages-0.xml`]);
+    const insights = locs(read('sitemap-insights-0.xml'));
+    expect(insights).toContain(`${ORIGIN}/insights/`);
+    expect(insights.filter((u) => /\/(services|locations|industries|about-us)\//.test(u))).toEqual([]);
+    const pagesMap = locs(read('sitemap-pages-0.xml'));
+    expect(pagesMap).toContain(`${ORIGIN}/`);
+    expect(pagesMap).not.toContain(`${ORIGIN}/insights/`);
+  });
+
   it('every sitemapped URL was actually built', () => {
     for (const url of urls()) {
       const rel = new URL(url).pathname.replace(/^\//, '') + 'index.html';
@@ -270,7 +281,7 @@ describe('the private pages', () => {
   });
 
   it('none of them is in the sitemap', () => {
-    const xml = read('sitemap-0.xml');
+    const xml = read('sitemap-pages-0.xml') + read('sitemap-insights-0.xml');
     expect(xml).not.toContain('/admin/');
     expect(xml).not.toContain('eg-live-post-shell');
   });
@@ -421,6 +432,6 @@ describe('the blog mirror file', () => {
   });
 
   it('is not in the sitemap', () => {
-    expect(read('sitemap-0.xml')).not.toContain('blog-posts.json');
+    expect(read('sitemap-pages-0.xml') + read('sitemap-insights-0.xml')).not.toContain('blog-posts.json');
   });
 });

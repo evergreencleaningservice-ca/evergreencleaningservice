@@ -26,5 +26,3 @@ It’s not necessary for an office to be cluttered with papers. Instead, you may
 If your schedule is jam-packed, you may not have any time left over for cleaning. If this is the case for you, it is a good idea to work with a cleaning service. You can schedule periodic cleanings so that your office stays tidy even when you can’t clean it yourself. You don’t necessarily have to hire cleaners year-round; you can opt to bring them in during your busy season and clean your office on your own the rest of the year. Working with a cleaning company will allow you to maintain your office even when you have deadlines to meet.
 
 _**If you are searching for dependable cleaners in the Toronto area, you may want to take a closer look at [Evergreen Cleaning](/about-us/). We have extensive experience with office cleaning. If you reach out to us, we will be happy to tell you more about our services. If you can’t keep up with your office on your own, hiring cleaners is the smartest thing that you can do.**_
-
-![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

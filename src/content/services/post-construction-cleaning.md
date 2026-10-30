@@ -1,6 +1,6 @@
 ---
 title: "Post-Construction Cleaning"
-h1: "Post-Construction Cleaning for Commercial Buildouts"
+h1: "Post-Construction Cleaning for Commercial Buildouts in Toronto & the GTA"
 seoTitle: "Post-Construction Cleaning in Toronto & the GTA | Evergreen"
 description: "Post-construction cleaning for commercial spaces in Toronto and the GTA — dust, debris and detail cleaning before handover, around your trades."
 summary: "Clean-up after a renovation, fit-out or new build — from the first debris pass to a detailed final clean before the space is handed over or reopened."
@@ -14,13 +14,13 @@ fit:
   - "Tenants taking possession after a fit-out"
   - "Businesses reopening after a renovation"
 included:
-  - heading: "During and after the build"
+  - heading: "Phase 1: rough clean, while the trades finish"
     items:
       - "Debris removal and a first pass while trades finish"
       - "Construction dust removed from ledges, fixtures, vents and frames"
       - "Washrooms and kitchens cleaned and sanitized"
       - "Interior glass, frames and tracks"
-  - heading: "Before handover"
+  - heading: "Phase 2: final clean, before handover"
     items:
       - "Detailed final clean of every surface"
       - "Floors cleaned to their finish — sweep, scrub, and floor care where required"
