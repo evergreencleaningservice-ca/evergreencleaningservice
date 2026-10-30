@@ -319,6 +319,11 @@ const RELATED_TEXT: Record<string, string> = {
       grid-template-columns: minmax(0, 1fr) 360px;
       align-items: start;
     }
+  }
+  /* Sticky only where the whole form fits on screen (about 1,015px tall plus
+     the 92px header): on a 768-1080px tall laptop a pinned form left its
+     lower fields and submit button off-screen until the end of the page. */
+  @media (min-width: 992px) and (min-height: 1140px) {
     .offer-aside {
       position: sticky;
       top: 92px;
