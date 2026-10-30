@@ -3,7 +3,7 @@ title: "Day Or Night – Which Is the Best Routine For Your Office?"
 description: "Day or night office cleaning? The benefits of each, from faster response during the day to fewer disruptions after hours, to help you choose."
 pubDate: 2021-05-31
 image: "/images/blog-day-versus-night-cleaning-feature.jpg"
-imageAlt: "Day porter and evening cleaner working at different times in a modern office"
+imageAlt: "Cleaning cart and mop bucket in a tiled hallway"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 

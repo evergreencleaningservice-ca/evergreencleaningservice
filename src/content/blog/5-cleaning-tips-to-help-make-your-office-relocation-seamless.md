@@ -3,7 +3,7 @@ title: "5 Cleaning Tips to Help Make Your Office Relocation Seamless"
 description: "Relocating your offices turning into a nightmare? Here we discuss a few ideas to make moving the office as painless as possible."
 pubDate: 2022-06-29
 image: "/images/blog-office-relocation-cleaning-feature.jpg"
-imageAlt: "Professional cleaner preparing a bright office with packed moving boxes for a seamless relocation"
+imageAlt: "Moving boxes beside wrapped furniture"
 tags: ["cleaning", "moving", "office", "relocating"]
 ---
 
@@ -37,7 +37,7 @@ If the logistics allow, it is best to relocate your office furniture, equipment,
 
 The dedicated area allows you to keep things organized, streamlining the process to ensure your business operations experience fewer disruptions as the moving date draws closer. The designated spot for your office items also presents an opportunity to inventory, coordinate logistics, and evaluate other elements as you sort and pack.
 
-![moving the office](/images/office-relocation-cleanup.jpg)
+![Moving boxes and a potted plant in a bright room](/images/office-relocation-cleanup.jpg)
 
 ### Clean From Top to Bottom
 
@@ -59,7 +59,7 @@ Start with the kitchen, then finish with the bathroom. Sweep and wipe all the su
 
 As for the bathroom, scrub the sinks and toilets, dust and wipe the cabinets, and mop the floor. Ensure you remove the water spots, scum, and smudges on the walls. Also, remember to clean the mirrors to leave them glistening.
 
-![moving the office](/images/office-relocation-cleanup.jpg)
+![Moving boxes and a potted plant in a bright room](/images/office-relocation-cleanup.jpg)
 
 ### Final Thoughts
 

@@ -4,7 +4,7 @@ description: "How cleaning improves the air in an office or commercial building:
 pubDate: 2020-08-31
 updatedDate: 2026-10-30
 image: "/images/blog-commercial-cleaning-air-quality-feature.jpg"
-imageAlt: "Cleaner replacing an office air filter while a second worker uses a sealed HEPA vacuum"
+imageAlt: "Gloved hands cleaning a wall-mounted air conditioner"
 tags: ["air-quality", "allergies", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 
@@ -46,7 +46,7 @@ Many vacuums blow the finest particles straight back out of the exhaust. A seale
 
 Carpet fibres trap dust, pollen and dander, and every footstep releases some of it again. Regular vacuuming keeps the surface down; periodic hot-water extraction removes what has worked into the pile. If staff have allergies, ask them which, and tell your cleaning company: it changes what they focus on.
 
-![Boardroom carpet being cleaned with an extraction wand](/images/carpet-extraction-boardroom-toronto.jpg)
+![Carpet cleaning tool being used on a carpet](/images/carpet-extraction-boardroom-toronto.jpg)
 
 ### Choose Low-Residue Products
 

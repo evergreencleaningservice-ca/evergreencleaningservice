@@ -4,7 +4,7 @@ description: "A cleaning and disinfection checklist for daycares and schools: cl
 pubDate: 2020-09-29
 updatedDate: 2026-10-30
 image: "/images/blog-daycare-school-cleaning-feature.jpg"
-imageAlt: "Professional cleaner wiping child-height tables in a bright daycare classroom after hours"
+imageAlt: "School supplies, gloves and a mask on a desk"
 tags: ["commercial-cleaning", "daycares", "janitorial-services", "schools"]
 ---
 
@@ -22,7 +22,7 @@ Children touch everything, and they touch their faces far more often than adults
 - Outdoor areas
 - Building-wide touch points
 
-![Cleaner disinfecting an office door handle](/images/touchpoint-disinfection-door-handle.jpg)
+![Gloved hands wiping a door handle](/images/touchpoint-disinfection-door-handle.jpg)
 
 ### Clean First, Then Disinfect
 
@@ -36,7 +36,7 @@ Chairs, desks and tables (at child height as well as adult), door handles, close
 
 Toilets, sinks, taps, soap and towel dispensers, cubicle walls and doors, garbage cans, walls around fixtures, and floors. Washrooms need cleaning every day and checking through the day.
 
-![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
+![Gloved hand wiping a white surface with a green cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### Kitchens and Cafeterias
 

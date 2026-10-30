@@ -3,7 +3,7 @@ title: "6 Common Cleaning Products That You Should Never Mix Together"
 description: "Six cleaning-product combinations never to mix, from bleach with vinegar, ammonia or rubbing alcohol to two drain cleaners, and why each is unsafe."
 pubDate: 2021-07-30
 image: "/images/blog-cleaning-products-never-mix-feature.jpg"
-imageAlt: "Gloved cleaner safely separating unbranded cleaning products in a janitorial supply room"
+imageAlt: "Cleaning spray, gloves, cloth and window squeegee"
 tags: ["cleaning-products", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
@@ -40,7 +40,7 @@ Vinegar is acidic and baking soda is basic. When they are combined, you mainly g
 
 [Chloramine](https://en.wikipedia.org/wiki/Chloramines), which is a toxic gas, is produced when ammonia and bleach are combined. The same symptoms are caused as with vinegar and bleach – in addition to chest pain and shortness of breath. Ammonia is contained in many window and glass cleaners, so never mix them with bleach.
 
-![Labelled spray bottle and microfibre cloths used for surface cleaning](/images/eco-friendly-cleaning-spray-microfibre.jpg)
+![Cleaning spray bottle and folded microfibre cloths](/images/eco-friendly-cleaning-spray-microfibre.jpg)
 
 ### Two Drain Cleaners
 

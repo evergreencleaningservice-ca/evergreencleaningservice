@@ -3,7 +3,7 @@ title: "Ask the Office Cleaners: Cleaning Break Rooms"
 description: "How office cleaners clean a break room: the sofa and upholstery, wooden benches, chairs and tables, and the carpet that takes the spills."
 pubDate: 2023-03-31
 image: "/images/blog-break-room-cleaning-feature.jpg"
-imageAlt: "Professional cleaner wiping a modern office break-room counter beside an organized refrigerator"
+imageAlt: "Gloved hand wiping an espresso machine"
 tags: ["breakroom", "cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 
@@ -11,7 +11,7 @@ tags: ["breakroom", "cleaning", "commercial-cleaning", "commercial-office-cleani
 
 Like many amazing employers, you’ve set up the best office break room you could possibly imagine. A fairly decent space for a quick snack, a much-needed lunch break, or just a place for your people to catch their breath in the course of their busy schedules. Break rooms are amazing. They’re extremely flexible and can be used for a wide range of purposes, from quiet solo work and informal meetings, to fun office gatherings and after-hours socials. However, being a multipurpose space, they tend to get untidy really quickly. Simple tasks like applying jam on toast lead to sticky spots and crumbs everywhere.  Pizza lovers leave greasy fingerprints on every surface they can find. Mind you – there is a limit to how many times you can flip those sofa cushions. At Evergreen Office Cleaning, we’ve seen some really messy and mucky spaces – so let’s ask a team of professional Toronto office cleaners how they go about cleaning office break rooms.
 
-![Labelled spray bottle and microfibre cloths used for surface cleaning](/images/eco-friendly-cleaning-spray-microfibre.jpg)
+![Cleaning spray bottle and folded microfibre cloths](/images/eco-friendly-cleaning-spray-microfibre.jpg)
 
 ## How do you clean the office break room sofa?
 

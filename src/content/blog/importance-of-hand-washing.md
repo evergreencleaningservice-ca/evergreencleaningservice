@@ -4,7 +4,7 @@ description: "Why hand-washing matters in a shared office, how to wash properly,
 pubDate: 2022-08-02
 updatedDate: 2026-10-30
 image: "/images/blog-hand-washing-importance-feature.jpg"
-imageAlt: "Office worker thoroughly washing their hands with soap at a workplace sink"
+imageAlt: "Hands washing with a bar of soap"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 
@@ -24,7 +24,7 @@ In an office you are constantly touching things other people have touched: door 
 
 Before and after eating, after using the washroom, after sneezing, coughing or blowing your nose, and after handling anything shared by the public, such as transit, door handles or deliveries.
 
-![handwashing](/images/commercial-handwashing-hygiene.jpg)
+![Hands using a soap dispenser beside a sink](/images/commercial-handwashing-hygiene.jpg)
 
 ### How to Wash Properly
 
@@ -44,7 +44,7 @@ Make it easy and visible. Keep washrooms and kitchens stocked with soap and pape
 
 Clean hands only stay clean as long as the things they touch are. In a busy workplace, sanitizer alone is not enough: shared surfaces need regular cleaning and disinfecting. Keyboards, mice, phones, printers, kitchen counters and appliance handles, washroom fixtures and door handles carry the most germs, and they belong in every routine visit.
 
-![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
+![Gloved hand wiping a white surface with a green cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 If you are looking to keep your office clean and the people in it healthy, [Evergreen Office Cleaning](/about-us/) cleans everything from lobbies to washrooms on a schedule set for your building. [Contact us](/request-a-quote/) to book a free walkthrough.
 

@@ -3,7 +3,7 @@ title: "Seasonal Office Cleaning Checklist for Toronto"
 description: "What to clean in an office each season in Toronto: winter salt and entrances, a spring deep clean and declutter, end-of-summer catch-up, and fall windows, air and pests."
 pubDate: 2026-10-30
 image: "/images/blog-spring-office-cleaning-feature.jpg"
-imageAlt: "Professional cleaners washing windows and cleaning beneath furniture in a sunlit spring office"
+imageAlt: "Gloved hand wiping a table beside a laptop"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "entrance", "janitorial-services", "office", "winter"]
 ---
 
@@ -55,7 +55,7 @@ It is also the time to clear the clutter that makes cleaning harder. A few habit
 
 Clear surfaces can be wiped properly, and a tidy office is quicker to clean.
 
-![Cleaner wiping office desks in a Toronto office](/images/spring-office-desk-cleaning-toronto.jpg)
+![Gloved hand wiping a desk beside a laptop](/images/spring-office-desk-cleaning-toronto.jpg)
 
 ## End of Summer: Catch Up While It Is Quiet
 
@@ -66,7 +66,7 @@ Late summer, with people on holiday, is the easiest time to deep clean, because 
 - **Shared equipment.** Printers, copiers, keyboards, monitors and phones, plus desktops, drawer fronts, handrails and door handles.
 - **The kitchen.** Fridges, microwaves, coffee makers and the cupboards behind them.
 
-![Cleaner washing an office window with a squeegee](/images/summer-office-window-cleaning.jpg)
+![Hand wiping window glass with a green cloth](/images/summer-office-window-cleaning.jpg)
 
 ## Fall: Windows, Air and Pests
 
@@ -79,7 +79,7 @@ Fall cleaning matters as much as spring cleaning:
 
 Fall is also the time to get the entrance ready for winter again.
 
-![Cleaner washing office windows with a pole in Toronto](/images/office-window-cleaning-toronto.jpg)
+![Gloved hand wiping window glass with a blue cloth](/images/office-window-cleaning-toronto.jpg)
 
 ## Let a Crew Plan It
 

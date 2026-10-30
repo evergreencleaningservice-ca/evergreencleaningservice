@@ -3,7 +3,7 @@ title: "A Cleaning Checklist For Your Retail Store"
 description: "Does your storefront need cleaning? Need to refresh your business? Here we discuss what areas of your store will benefit from a good clean!"
 pubDate: 2022-10-27
 image: "/images/blog-retail-store-cleaning-checklist-feature.jpg"
-imageAlt: "Professional cleaner wiping a checkout counter in a bright contemporary retail store"
+imageAlt: "Floor wiper cleaning tiled flooring"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "retail"]
 ---
 
@@ -22,7 +22,7 @@ It takes a lot of work to run a retail storefront. Not only do you have to worry
 
 When you get [Evergreen Office Cleaning](/about-us/)‘s professional cleaning services, it allows you to re-focus your energy on day-to-day tasks that you need to complete. It will enable you to focus on revenue-producing activities without having to worry about the tedious cleaning process. You can have peace of mind knowing that your storefront will be clean, and you can continue to handle what you need to do without worrying about it. We will assess all of your store’s needs and figure out the proper cleaning schedule to stick to. Whether you need janitorial services to clean your store before it opens or if you need it after closing time, you can get what you need to be handled by Evergreen’s professional staff. Are you looking at doing the cleaning yourself? If so, here is a comprehensive checklist that you can use.
 
-![Cleaner mopping a bright retail showroom floor](/images/car-dealership-showroom-floor-mopping.jpg)
+![Cleaner mopping beside a wet floor warning sign](/images/car-dealership-showroom-floor-mopping.jpg)
 
 ## Retail Storefront Checklist:
 
@@ -44,7 +44,7 @@ When you get [Evergreen Office Cleaning](/about-us/)‘s professional cleaning s
 
 – Get rid of the trash out of the trashcans
 
-![Cleaner wiping a glass railing in a building common area](/images/common-areas-glass-railing-cleaning.jpg)
+![Gloved hands wiping a stair handrail](/images/common-areas-glass-railing-cleaning.jpg)
 
 ## Retail Store Break room Cleaning Checklist:
 
