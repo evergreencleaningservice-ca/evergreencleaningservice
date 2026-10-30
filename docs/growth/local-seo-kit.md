@@ -148,13 +148,14 @@ Tell us when any of these change and the website's links and structured data wil
 | # | Source | How |
 |---|---|---|
 | 1 | The member directory of the BIA whose boundary contains the office at 243 Queen St W (confirm which on the City of Toronto's BIA map) | Members are the property owners and commercial tenants inside a BIA's boundary, so only that one BIA applies; serving an area does not qualify. Ask the BIA office. |
-| 2 | BOMA Toronto (Building Owners and Managers Association) | Associate (supplier) membership lists you in their directory. |
-| 3 | BSCA (Building Service Contractors Association) and ISSA | Trade-body member directories. |
-| 4 | Property managers' approved-vendor pages | Ask current property-management clients. |
-| 5 | Client case studies or testimonials on clients' own sites | Offer a short write-up they can post with a link back. |
-| 6 | Suppliers' "partners" or "customers" pages | Ask the chemical and equipment suppliers. |
-| 7 | Community sponsorships and charity cleanups | Sponsor pages and local news link to sponsors. |
-| 8 | Guest guides on Toronto property-management or facilities blogs | Office hygiene and seasonal checklists; the site's own posts are the starting point. |
+| 2 | BSCA (Building Service Contractors Association) and ISSA | Trade-body member directories, if the listing is public and links to the website. |
+| 3 | Property managers' approved-vendor pages | Ask current property-management clients. |
+| 4 | Client case studies or testimonials on clients' own sites | Offer a short write-up they can post with a link back. |
+| 5 | Suppliers' "partners" or "customers" pages | Ask the chemical and equipment suppliers. |
+| 6 | Community sponsorships and charity cleanups | Sponsor pages and local news link to sponsors. |
+| 7 | Guest guides on Toronto property-management or facilities blogs | Office hygiene and seasonal checklists; the site's own posts are the starting point. |
+
+Before paying for any membership for the sake of a link, open its directory logged out and check the listing is visible and links to the website. **BOMA Toronto** fails that test: its member directory is behind a login, and the supplier tier is the $2,799 Allied membership (checked 30 Oct 2026). Join it for networking with property managers if that is worth the fee, not for a link.
 
 Do not buy links or join link schemes, whatever the offer.
 
