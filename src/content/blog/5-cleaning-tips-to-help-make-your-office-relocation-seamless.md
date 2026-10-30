@@ -11,6 +11,14 @@ tags: ["cleaning", "moving", "office", "relocating"]
 
 When moving to a new commercial space, you will have many things to do. You have lots of sorting and packing while also determining the various elements to coordinate for a smoother move. You also must plan for clean-up to ensure the place is ready for the next tenant.
 
+**At a glance:**
+
+- Pack Up Everything Before Cleaning
+- Identify A Designated Area for Your Packed Boxes
+- Clean From Top to Bottom
+- Give Special Attention to Windows
+- Tackle The Bathrooms and Kitchen Last
+
 Moving office can be daunting when you consider the different processes to cover when preparing to relocate. You also must assess the new place to help you plan how you will settle in to minimize the downtime.
 
 Here we discuss a few steps to help reduce stress and ensure you stay organized, thus saving time and energy.
@@ -58,3 +66,5 @@ As for the bathroom, scrub the sinks and toilets, dust and wipe the cabinets, an
 You can handle the cleaning when moving out of your current commercial space or opt to hire professionals to handle the job. Hiring professional cleaners is the best option, especially if time is an issue. You will have a team of cleaning specialists taking care of the job for you to focus on settling in and resuming business operations.
 
 At [Evergreen Cleaning](/about-us/), we are the [pros to call](/reviews/) when you need your commercial spaces spruced up when moving in or out. We are here to help make the relocation process as seamless as possible. [Contact us](/contact-us/) today for a free quote and to know more about our services.
+
+If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [emergency cleaning](/services/emergency-cleaning/) services cover it for workplaces across Toronto and the GTA.

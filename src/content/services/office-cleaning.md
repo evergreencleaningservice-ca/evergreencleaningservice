@@ -86,6 +86,8 @@ ctaHeading: "Book a free office walkthrough"
 ctaText: "Tell us about your office and we will arrange a time to walk it with you and send a written proposal. No obligation."
 ---
 
+Office cleaning is the recurring cleaning of a workplace's desks, floors, washrooms, kitchens and shared areas, usually done after staff leave. Evergreen Office Cleaning has done it for Toronto and GTA businesses since 1989, with a crew assigned to each building and one account executive per client.
+
 ## A clean office does two jobs
 
 For your employees, a clean office is a healthier, more comfortable place to work — one that supports productivity and keeps absenteeism down. For clients and visitors, it is the first impression: a clean space is like a friendly handshake that tells people this is a business that has its house in order.

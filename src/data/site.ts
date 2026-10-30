@@ -315,6 +315,7 @@ export const nav: NavItem[] = [
       { label: 'Commercial Cleaning', href: '/services/commercial-cleaning/' },
       { label: 'Post-Construction Cleaning', href: '/services/post-construction-cleaning/' },
       { label: 'Building Maintenance & Floor Care', href: '/services/building-maintenance/' },
+      { label: 'Floor Stripping & Waxing', href: '/services/floor-stripping-waxing/' },
       { label: 'Industrial & Warehouse Cleaning', href: '/services/industrial-cleaning/' },
       { label: 'Disinfection Cleaning', href: '/services/disinfection-cleaning/' },
       { label: 'Emergency Cleaning', href: '/services/emergency-cleaning/' },

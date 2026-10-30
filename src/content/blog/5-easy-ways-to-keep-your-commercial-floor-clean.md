@@ -10,6 +10,14 @@ imageAlt: "Commercial cleaner using an auto scrubber on a polished modern lobby 
 
 Keeping your office building clean, tidy, and disinfected is a key component of creating a good impression on new clients, business partners, and employees. This is one of the first things that indicate to your customers and partners that your company cares about its reputation and brand image.
 
+**At a glance:**
+
+- Set up more garbage cans
+- Invest in dirt trapping rugs
+- Perform regular floor checks
+- Seek the services of a commercial cleaner
+- Strip and wax your floors
+
 But as you already know, ensuring that your commercial floors remain sparkling clean and stain-free is no easy task. Given the amount of foot traffic that commercial buildings normally receive on any given day, it is easy for road grime and grease stain to build up on your floors leaving a bad impression. When this dirt isn’t properly addressed, it can become a permanent part of the floor ruining your flooring material and not to mention company reputation.
 
 To help you avoid this situation; we have provided our top three tips on how to keep your office building clean and tidy.

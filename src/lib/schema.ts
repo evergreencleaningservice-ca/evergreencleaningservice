@@ -47,6 +47,7 @@ const CATALOG = [
   { name: 'Industrial & Warehouse Cleaning', path: '/services/industrial-cleaning/' },
   { name: 'Post-Construction Cleaning', path: '/services/post-construction-cleaning/' },
   { name: 'Building Maintenance', path: '/services/building-maintenance/' },
+  { name: 'Floor Stripping & Waxing', path: '/services/floor-stripping-waxing/' },
   { name: 'Disinfection Cleaning', path: '/services/disinfection-cleaning/' },
   { name: 'Emergency Cleaning', path: '/services/emergency-cleaning/' },
   { name: 'Pressure Washing', path: '/services/pressure-washing/' },

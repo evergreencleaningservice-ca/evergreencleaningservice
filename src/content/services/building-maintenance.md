@@ -48,6 +48,9 @@ faqs:
   - q: "Can you handle a one-off job at short notice?"
     a: "Yes. One-off work — a floor before an inspection, a unit before a new tenant, an entrance after a winter — can be booked on its own. Call (416) 803-4880 to check availability."
 related:
+  - title: "Floor Stripping & Waxing"
+    href: "/services/floor-stripping-waxing/"
+    text: "Strip, seal, wax and burnish, in detail."
   - title: "Property Managers & Condos"
     href: "/industries/property-management/"
     text: "How we work with managed buildings."
@@ -61,6 +64,8 @@ related:
     href: "/services/office-cleaning/"
 showAreas: true
 ---
+
+Building maintenance cleaning is the periodic work that routine cleaning does not cover: stripping and waxing hard floors, extracting carpets, high dusting, interior glass and exterior pressure washing, planned through the year or booked when a surface needs it.
 
 ## Maintenance is what keeps a building looking cared for
 

@@ -11,6 +11,13 @@ tags: ["cleaning", "cleaning-products", "commercial-cleaning", "commercial-offic
 
 Everything changes at some point, and so are cleaning methods. Although some of us still value manual cleaning methods, the latest technological advances have greatly affected/improved our cleaning techniques. Although the main goal is to get rid of dust, dirt, and grime, cleaning methods have since evolved, especially in the commercial industry, hence more effective and efficient.
 
+**At a glance:**
+
+- Floor Cleaning: Now and Then
+- Cleaning with Soap: Then And Now
+- Cleaning Surfaces: Now Vs. Then
+- Which Is Better? Modern Vs. Traditional Cleaning Methods/Products
+
 Modern cleaning habits haven’t, however, made old-fashioned cleaning methods obsolete. Most cleaning tactics used hundreds of years ago are still relevant, effective, and practiced to this date. A good example is using hot water to dissolve grease and clean tough stains. In other words, all modern technology has done is make these methods more efficient. Here is a brief outline and comparison between modern and old-fashioned cleaning methods and how these methods have improved over time.
 
 ![Close-up of a floor machine cleaning a commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
@@ -52,3 +59,5 @@ Both modern and traditional cleaning methods/products are, without a doubt, effe
 It is also worth noting that modern cleaning methods/techniques provide the convenience we need today. They are considerably safer and more economical in the long run. That said, it is safe to say a cleaning method/product is deemed successful or effective for as long as it is effective. Most people will however be inclined to use more practical cleaning methods, especially those that require minimal effort for the same or better result. The main idea here is to find what works best for you. Although traditional cleaning methods may seem satisfactory, you can still switch to the more efficient and modern methods for improved efficiency.
 
 For all of your commercial cleaning needs in the GTA, [contact](/contact-us/) the pros at [Evergreen Commercial Cleaning](/about-us/) today!
+
+If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

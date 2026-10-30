@@ -11,6 +11,13 @@ tags: ["janitorial-services", "office", "plants"]
 
 One great way to add nature into your life is to get office plants. With that said, many employers forget that plants in the office can easily get brown, their leaves can droop and even start to fall. This will create a large mess, but that shouldn’t stop you from bringing plants into the office. All it means is that you need to take care of them properly.
 
+**At a glance:**
+
+- Higher Productivity Rates
+- Lowers Stress
+- Lower Rates of Absenteeism and Sick Leave
+- Taking Care of Plants in The Office
+
 ![office plants](/images/office-plants-clean-workplace.jpg)
 
 Here are a few reasons why it is a good idea to have plants in the office as well as how you can take care of them.
@@ -42,3 +49,5 @@ One idea when comes to caring for plants at the office, is that each employee co
 Select a particular area for your plant. Once a particular area is assigned for every plant, ensure that they are kept in this area all of the time. If they are moved too frequently, this can cause them to wilt and die. Always allow the plants enough time to adapt to the new environment so that they can thrive.
 
 Finally, enjoy plants but don’t have a green thumb?  Here at Evergreen Cleaning Services we are happy to make tending to your plants part of our routine cleaning procedures.  [Contact us](/contact-us/) today for all of your commercial cleaning and janitorial needs.
+
+If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

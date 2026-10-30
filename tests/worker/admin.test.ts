@@ -39,7 +39,7 @@ const SECRET = 'x'.repeat(40);
 const ADMIN = 'ethan@10xid.com';
 
 /** The files the build would hold: a shell page, an insights page, the sitemap, the 404 page. */
-const SHELL_HTML = `<!doctype html><html><head><title>EG_SHELL_TITLE - Evergreen Office Cleaning</title><meta name="description" content="EG_SHELL_DESCRIPTION"><meta name="robots" content="noindex, nofollow"><link rel="canonical" href="https://www.evergreencleaningservice.ca/eg-live-post-shell/"><meta property="og:title" content="EG_SHELL_TITLE - Evergreen Office Cleaning"><meta property="og:image" content="https://img.example/default-og.jpg"><meta name="twitter:image" content="https://img.example/default-og.jpg"><meta property="article:published_time" content="2000-01-01T00:00:00.000Z"><script type="application/ld+json">{"@type":"CleaningService"}</script><script type="application/ld+json">{"@type":"BlogPosting","@id":"https://www.evergreencleaningservice.ca/eg-live-post-shell/#article","headline":"EG_SHELL_TITLE"}</script><script type="application/ld+json">{"@type":"BreadcrumbList","itemListElement":[{"name":"EG_SHELL_TITLE"}]}</script></head><body><h1 class="entry-title" data-astro-cid-x1>EG_SHELL_TITLE</h1><article class="entry-content" data-astro-cid-x1>EG_SHELL_BODY</article><section data-post-slug="eg-live-post-shell"></section></body></html>`;
+const SHELL_HTML = `<!doctype html><html><head><title>EG_SHELL_TITLE - Evergreen Office Cleaning</title><meta name="description" content="EG_SHELL_DESCRIPTION"><meta name="robots" content="noindex, nofollow"><link rel="canonical" href="https://www.evergreencleaningservice.ca/eg-live-post-shell/"><meta property="og:title" content="EG_SHELL_TITLE - Evergreen Office Cleaning"><meta property="og:image" content="https://img.example/default-og.jpg"><meta name="twitter:image" content="https://img.example/default-og.jpg"><meta property="article:published_time" content="2000-01-01T00:00:00.000Z"><script type="application/ld+json">{"@type":"CleaningService"}</script><script type="application/ld+json">{"@type":"BlogPosting","@id":"https://www.evergreencleaningservice.ca/eg-live-post-shell/#article","headline":"EG_SHELL_TITLE"}</script><script type="application/ld+json">{"@type":"BreadcrumbList","itemListElement":[{"name":"EG_SHELL_TITLE"}]}</script></head><body><h1 class="entry-title" data-astro-cid-x1>EG_SHELL_TITLE</h1><p class="post-date" data-astro-cid-x1>Published <time datetime="2000-01-01" data-astro-cid-x1>January 1, 2000</time> by Evergreen Office Cleaning</p><article class="entry-content" data-astro-cid-x1>EG_SHELL_BODY</article><section data-post-slug="eg-live-post-shell"></section></body></html>`;
 const INSIGHTS_HTML = `<div class="post-list is-flush" data-astro-cid-oxe><article class="list-article" data-astro-cid-oxe><h2>Old post</h2></article></div>`;
 
 const assetCalls: string[] = [];
@@ -569,6 +569,9 @@ describe('posts published from the admin, on the site', () => {
     expect(html).toContain('https://www.evergreencleaningservice.ca/clean-teeth/');
     expect(html).toContain('data-post-slug="clean-teeth"');
     expect(html).toContain('content="2026-10-17T12:00:00.000Z"');
+    /* The visible date under the title is the post's, not the template's. */
+    expect(html).toContain('<time datetime="2026-10-17" data-astro-cid-x1>October 17, 2026</time>');
+    expect(html).not.toContain('2000-01-01');
     expect(html).not.toContain('noindex');
     expect(html).not.toContain('eg-live-post-shell');
     expect(html).toContain('<div class="post-featured" data-astro-cid-x1><picture data-astro-cid-x1><img src="https://img.evergreencleaningservice.ca/uploads/blog/a.jpg" alt="Lobby"');

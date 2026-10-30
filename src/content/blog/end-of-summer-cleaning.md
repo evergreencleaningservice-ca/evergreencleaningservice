@@ -11,6 +11,12 @@ tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitor
 
 As summer is slowly drawing to a close, your office will once again become a hub of hard work. Before all of your employees return from their vacations, why not use this time to have the office deep cleaned professionally? With fewer people in the building, it’s much easier to address hidden and often missed areas. Below is a carefully compiled list of locations that require specialized attention.
 
+**At a glance:**
+
+- Lobby Or Reception Areas
+- Public Restrooms
+- Commonly Used Office Equipment and Tools
+
 ![Janitorial cart with mop bucket and warning sign](/images/janitorial-cart-preparation-supplies.jpg)
 
 ### Lobby Or Reception Areas
@@ -36,3 +42,5 @@ Did you maintain high disinfecting standards throughout the entirety of summer v
 The health and safety of your employees depend on your ability to provide a clean and virus-free environment. At [Evergreen Cleaning](/about-us/), we can help you deep clean your office and your flooring for reasonable rates in Toronto and the surrounding areas! We can sanitize and disinfect buildings of any size, and our services utilize eco-friendly options.
 
 Get a commercial cleaning quote today by [contacting us](/contact-us/)!
+
+If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [building maintenance and floor care](/services/building-maintenance/) services cover it for workplaces across Toronto and the GTA.

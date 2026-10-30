@@ -11,6 +11,12 @@ tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "office"
 
 With the summer vacation season over and fall being in full swing, there is no better time than now to get your office space professionally cleaned. Use this opportunity while things at the office are somewhat slower and it is less crowded to make the space as clean as possible for your employees and guests. With that being said, here are some of the most crucial areas you need to have cleaned within your office.
 
+**At a glance:**
+
+- Reception/Lobby
+- Washrooms
+- All Common and Frequently Used Items
+
 ![Vacuum cleaner being used on an office floor](/images/office-backpack-vacuum-toronto.jpg)
 
 ### Reception/Lobby
@@ -40,3 +46,5 @@ Kitchen area
 We understand that the health and safety of everyone who uses your office are among your top priorities. This is why we are fully prepared to help you with your office cleaning needs. From professional carpet cleaning to a thorough and deep office clean, the cleaning experts at [Evergreen Cleaning](/about-us/) have you covered.
 
 We are a local Canadian company that specializes in providing quality and eco-friendly office cleaning and disinfection services, and janitorial services to the GTA. [Contact us](/contact-us/) today for all of your cleaning needs!
+
+If you would rather leave it to a professional crew, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) and [office cleaning](/services/office-cleaning/) services cover it for workplaces across Toronto and the GTA.

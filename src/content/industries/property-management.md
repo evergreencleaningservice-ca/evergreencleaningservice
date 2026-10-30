@@ -60,6 +60,8 @@ ctaHeading: "Walk a building with us"
 ctaText: "Tell us about the property and we will arrange a walkthrough and a written proposal for it."
 ---
 
+Property management cleaning is the recurring cleaning of a managed building's common areas and tenant spaces, plus the one-off work that leases, inspections and boards create, arranged through one contact across every building in a portfolio.
+
 ## Buildings do not wait for a convenient time
 
 Property managers work to deadlines set by tenants, boards and inspections, and the cleaning has to fit around them. Evergreen looks after common areas and tenant spaces on a recurring schedule, and handles the one-off jobs — a suite before a move-in, a lobby before an inspection — when they come up.

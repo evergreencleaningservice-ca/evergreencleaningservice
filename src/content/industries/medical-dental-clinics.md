@@ -59,10 +59,19 @@ ctaHeading: "Arrange a walkthrough of your clinic"
 ctaText: "We will walk the clinic with you, agree what is in scope room by room, and send a written proposal."
 ---
 
+Clinic cleaning is the after-hours cleaning of medical and dental offices (waiting rooms, treatment rooms, washrooms and staff areas) done to the clinic's own infection prevention and control (IPAC) procedures, with care to avoid carrying contamination from one room to the next.
+
 ## A clinic is judged before anyone is treated
 
 Patients notice the waiting room, the washroom and the chair before they meet the dentist or doctor. A clinic that looks spotless tells them the parts they cannot see are looked after too — and one that does not raises the opposite question.
 
-Evergreen has cleaned health, dental and medical clinics in Toronto and the GTA for years, alongside hospitals, labs and other medical facilities. The work follows the principle behind all of our disinfection cleaning: surfaces are cleaned first, so that the disinfectant can do its job, and the products are chosen with the people who use the space in mind.
+Evergreen has cleaned health, dental and medical clinics in Toronto and the GTA for years. The work follows the principle behind all of our disinfection cleaning: surfaces are cleaned first, so that the disinfectant can do its job, and the products are chosen with the people who use the space in mind.
 
 ![Gloved hands cleaning a dental chair with spray and cloth](/images/dental-office-cleaning-technician.jpg)
+
+## Dental offices: the cleaning around the chair
+
+Dental offices in Ontario work to the Royal College of Dental Surgeons of Ontario's [Standard of Practice for Infection Prevention and Control in the Dental Office](https://www.rcdso.org/professional-practice-resources/courses-and-resources/infection-prevention-and-control), and the province's general guidance on cleaning health care settings is Public Health Ontario's [Best Practices for Environmental Cleaning for Prevention and Control of Infections in All Health Care Settings](https://www.publichealthontario.ca/en/Health-Topics/Infection-Prevention-Control/Environmental-Cleaning) (3rd edition). Both rest on the same habits: surfaces are cleaned before they are disinfected, work moves from cleaner areas to dirtier ones and from high surfaces to low, and the surfaces people touch most get the most attention.
+
+In a dental office, the work divides cleanly. Your team disinfects the operatory and reprocesses instruments between patients, as the College's standard requires. Our crews do the environmental cleaning after hours: the floors, counters, sinks, chairs and touch points of the operatories, and the reception, waiting room, washrooms, sterilization-area floors and staff rooms around them. The walkthrough goes through your IPAC procedures, and the written scope says which surfaces are ours and which are your staff's, so nothing is assumed and nothing is done twice.
+

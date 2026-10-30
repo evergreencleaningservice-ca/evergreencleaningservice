@@ -152,7 +152,7 @@ describe('an archive page matches the original’s', () => {
     const html = read('tag', 'cleaning', 'index.html');
     expect(html).toContain('<title>cleaning Archives - Evergreen Office Cleaning</title>');
     expect(html).toMatch(/<h1[^>]*>Tag: <span[^>]*>cleaning<\/span><\/h1>/);
-    expect(html).toContain('>News</a>');
+    expect(html).toContain('>Insights</a>');
   });
 
   it('keeps the original’s casing in the heading', () => {
@@ -189,12 +189,16 @@ describe('the sidebar cloud', () => {
     expect(page(), 'the original has no Request Quote widget').not.toContain('>Request Quote</h2>');
   });
 
-  it('renders all 26 tags, each linking to its own archive', () => {
+  /* Capped on 2026-10-30 (SEO audit L1-L4): only tags with two or more
+     posts; a one-post tag's archive is that post again. */
+  it('renders the tags with two or more posts, each linking to its own archive', () => {
     const html = page();
-    for (const tag of tags) {
+    const shown = tags.filter((t) => t.count >= 2);
+    expect(shown.length).toBeGreaterThanOrEqual(5);
+    for (const tag of shown) {
       expect(html, tag.slug).toContain(`href="/tag/${tag.slug}/"`);
     }
-    expect(count(html, /href="\/tag\/[a-z0-9-]+\/"/g)).toBe(26);
+    expect(html).not.toContain('href="/tag/winter/"');
   });
 
   /* The original's 8pt-22pt range, mapped onto 12px-19px since 2026-10-29:
@@ -203,13 +207,15 @@ describe('the sidebar cloud', () => {
   it('keeps the original’s ranking, within a readable range', () => {
     const html = page();
     expect(html).toContain('href="/tag/commercial-cleaning/" style="font-size: 19.0px"');
-    expect(html).toContain('href="/tag/winter/" style="font-size: 12.0px"');
+    const smallest = tags.filter((t) => t.count >= 2).sort((a, b) => a.size - b.size)[0];
+    const px = (12 + ((Math.min(Math.max(smallest.size, 8), 22) - 8) / 14) * 7).toFixed(1);
+    expect(html).toContain(`href="/tag/${smallest.slug}/" style="font-size: ${px}px"`);
   });
 
   it('speaks the post count, because 8pt means nothing to a screen reader', () => {
     const html = page();
     expect(html).toContain('aria-label="commercial cleaning (29 items)"');
-    expect(html).toContain('aria-label="winter (1 item)"');
+    expect(html).toContain('aria-label="Covid-19 (2 items)"');
   });
 
   it('every link in the cloud resolves to a page that was built', () => {

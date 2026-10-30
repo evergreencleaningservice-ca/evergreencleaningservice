@@ -9,7 +9,7 @@ tags: ["commercial-cleaning", "coronavirus", "janitorial-services", "office"]
 
 This article offers guidance on how to clean and disinfect public settings, including workplaces, communal residences, public transit, museums, public libraries, universities, and schools.
 
-### Important things you need to know
+## Important things you need to know
 
 Surfaces that are touched with hands frequently are the most likely ones to be contaminated. They include electronics, countertops, tables, faucet handles, cabinet handles, light switches, elevator buttons, handrails, and doorknobs.
 
@@ -17,7 +17,7 @@ It is not known yet how long the virus that causes COVID-19 can live on a surfac
 
 ![Gloved hands wiping a door handle with disinfectant](/images/door-handle-disinfection-office.jpg)
 
-#### Select a product that cleans and also disinfects
+### Select a product that cleans and also disinfects
 
 Whenever you are cleaning public areas, select products that both clean and disinfect at the same time (e.g. when available, premixed store-bought disinfectant wipes and/or cleaning solutions).
 
@@ -29,7 +29,7 @@ Only use approved hard-surface disinfectant with a [DIN (Drug Identification Num
 
 ![Industrial scrubber cleaning an office corridor](/images/night-janitorial-crew-office-toronto.jpg)
 
-#### Developing a cleaning procedure
+### Developing a cleaning procedure
 
 Community setting operators need to review or develop procedures and protocols for cleaning public areas. That will help to determine where additional cleaning or improvements might be needed.
 
@@ -47,4 +47,6 @@ You should also clean shared areas like bathrooms and kitchens more frequently.
 
 For all of your commercial cleaning needs, [contact Evergreen Cleaning today](/contact-us/)!
 
-#### All of us can help to prevent the spread of COVID-19.
+### All of us can help to prevent the spread of COVID-19.
+
+If you would rather leave it to a professional crew, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) and [office cleaning](/services/office-cleaning/) services cover it for workplaces across Toronto and the GTA.

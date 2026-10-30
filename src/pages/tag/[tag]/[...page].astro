@@ -91,7 +91,7 @@ const archiveDescription = pageDescription(
     set:html={JSON.stringify(
       breadcrumbSchema([
         { name: site.name, url: '/' },
-        { name: 'News', url: '/insights/' },
+        { name: 'Insights', url: '/insights/' },
         { name: tag.name },
       ])
     )}
@@ -105,7 +105,7 @@ const archiveDescription = pageDescription(
     <div class="container">
       <h1 class="page-title entry-title">Tag: <span>{tag.name}</span></h1>
       <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="/">{site.name}</a> &gt; <a href="/insights/">News</a> &gt;{' '}
+        <a href="/">{site.name}</a> &gt; <a href="/insights/">Insights</a> &gt;{' '}
         <span aria-current="page">{tag.name}</span>
       </nav>
     </div>

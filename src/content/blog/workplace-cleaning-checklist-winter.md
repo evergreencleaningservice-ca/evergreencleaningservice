@@ -11,7 +11,7 @@ Many people take spring cleaning very seriously. While it makes perfect sense to
 
 ![Wet and muddy entrance mat in winter](/images/winter-entrance-floor-care-slush.jpg)
 
-### 1\. Prepare the Main Entrance
+## 1\. Prepare the Main Entrance
 
 Preparing the main entrance for snow, ice, and salt in advance will make cleaning the same much easier during winter. To do this, you will need:  
 
@@ -34,7 +34,7 @@ This part of the business will get lots of traffic hence should be actively moni
 
 All this might be too much for your employees to manage in addition to their regular duties. Having a cleaning company do this for you, either daily or weekly, would be a more practical way to manage your premises and keep everyone working on what they do best. As long as the entrance is clean, you can then be assured of minimal damage to your mats and floor in other parts of the office.
 
-### 2\. Learn to Remove Salt Deposits
+## 2\. Learn to Remove Salt Deposits
 
 You need to start dealing with the salt menace as soon as winter begins. Salt stains may/will start showing on the entryway mats and the floor. Left unchecked, the crust-like and hard salt particles will create unwanted friction on your carpets and floor, causing damage over time. Unless you are prepared to replace the carpets (or even the floor) after each winter, you should consider having the salt removed before it makes a mess.
 
@@ -42,7 +42,7 @@ Simply having the floor washed with water won’t clear up all the salt. A salt 
 
 ![Extendable duster cleaning a ceiling corner](/images/fall-high-dusting-office-ceiling.jpg)
 
-### 3\. The Air Quality
+## 3\. The Air Quality
 
 As mentioned before, winter causes the air around (including indoors) to dry up, resulting in all forms of irritation and allergies. The dry air can make staff members and even employees with asthma, allergies, and sinus conditions to have an awful and uncomfortable time while on the premise.
 
@@ -53,6 +53,8 @@ The degraded air quality increases the risk of everyone catching the flu. With j
 - Clean the air ducts: Dust and debris can build up in air ducts too. Have these cleaned regularly to prevent this.
 - Run a humidifier: Humidity levels can drop too low in the worst days. Running the humidifier, however, corrects this making air comfortable once again.
 
-### 4\. Hire A Professional Cleaning Expert
+## 4\. Hire A Professional Cleaning Expert
 
 Having the professionals handle all the cleaning makes the process a lot smoother and simpler. It is also a cost-effective way of ensuring all the said areas are thoroughly cleaned, hence a clean, healthy, and comfortable workplace. We at [Evergreen Cleaning Service](/about-us/) have the experience and expertise required to ensure your workplace is clean throughout the winter months and we have all the equipment needed to make it happen. We offer professional, affordable, and reliable office cleaning, janitorial and commercial cleaning services. We’ve been serving the Toronto GTA since 1989 and would be happy to give you a quote. [Contact us](/contact-us/) today!
+
+If you would rather leave it to a professional crew, Evergreen's [floor stripping and waxing](/services/floor-stripping-waxing/), [building maintenance and floor care](/services/building-maintenance/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

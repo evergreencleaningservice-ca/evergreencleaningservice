@@ -9,9 +9,16 @@ tags: ["commercial-office-cleaning", "dust", "dusting"]
 
 Dusting is one of those tasks that never seems to be completed. Once you have gone over the entire area, it seems you could sometimes begin again. The best way to approach the task of dusting is with a better understanding of the nature of the problem. This will allow you to properly train your staff in the fine art dust collection and removal.
 
+**At a glance:**
+
+- What is dust?
+- Cleaning Equipment You Will Need to Dust an Office Building
+- How often should you dust?
+- Proper Dusting Protocol
+
 Remember that total dust removal is essential to building a clean and hygienic work environment.
 
-### What is dust?
+## What is dust?
 
 Dust is composed of very tiny particles most of which can only be seen through a magnifying lens and easily travel through the air. Airborne dust particles can be lifted in the air, travel for a distance and then alight on desks, windowsills, shutters, blinds, and any other surface that could conceivably hold dust.
 
@@ -19,7 +26,7 @@ The most common constituents of dust include pollen, dirt, soil, soot, hair, fab
 
 ![dust on a desk](/images/dust-on-office-desk-detail.jpg)
 
-#### Dusting an office building is so important!
+### Dusting an office building is so important!
 
 Dusting must be carried out in every office building and in every work environment. Most importantly, a dusty environment looks sloppy and shabby.
 
@@ -27,7 +34,7 @@ It is also a risk for the health of those within the office building and can eff
 
 One of the most important reasons that keeping an office space regularly dusted is to improve environmental safety. Accumulated dust is easily transmitted to the fingers, hands, eyes and mouth and can lead to sickness and allergic reactions. In addition to soiling hands, accumulated dust can also soil clothing, important papers and begin to deteriorate costly electronic equipment. Airborne dust particles can also spread infection and disease.
 
-### Cleaning Equipment You Will Need to Dust an Office Building
+## Cleaning Equipment You Will Need to Dust an Office Building
 
 A proper dusting will need a wide assortment of cleaning items to address every inch and surface of the office building. Here is what we recommend:
 
@@ -49,7 +56,7 @@ Back Pack vacuum Cleaners – with the full set of attachments for cleaning all 
 
 Personal protection equipment – safety goggles, face-mask, gloves, etc.
 
-### How often should you dust?
+## How often should you dust?
 
 Dusting should be done as often as needed depending on the measure of dust that is brought into the environment. But you should dust no less than once a week. Sides of desks and cabinets as well as doors and some walls can be dusted bi-weekly.
 
@@ -57,7 +64,7 @@ Divide the room into 2 sections, everything that is above eye level or below kne
 
 ![Extendable duster cleaning a ceiling corner](/images/fall-high-dusting-office-ceiling.jpg)
 
-### Proper Dusting Protocol
+## Proper Dusting Protocol
 
 Effective dusting must be planned, programmed, and practiced with precision. Here are some steps to apply in your office dusting that apply to buildings, floors, and each individual room.
 
@@ -82,3 +89,5 @@ Make sure you dust any other places where you think that dust could possibly acc
 Proper dusting is important not only to keeping your employees healthy and inspired but making a good impression with your valued clients. Paying attention to your surroundings will help improve every aspect of your business and boost brand image.
 
 For all of your commercial cleaning needs, [contact](/contact-us/) the team at [Evergreen Commercial Cleaning & Janitorial](/about-us/) and we’ll be happy to get rid of your dust!
+
+If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [building maintenance and floor care](/services/building-maintenance/) services cover it for workplaces across Toronto and the GTA.

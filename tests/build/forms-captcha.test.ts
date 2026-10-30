@@ -161,8 +161,9 @@ describe('comments and testimonials are not leads', () => {
     /* 5 before 2026-10-15 (home, contact, quote page, two landing pages).
        Since then every service, industry and location page carries the short
        quote form beside its content, and two landing pages were added:
-       5 + 9 services + 2 industries + 7 locations + 2 landing pages. */
-    expect(leads).toHaveLength(25);
+       5 + 10 services + 2 industries + 7 locations + 2 landing pages
+       (the tenth service, floor stripping and waxing, since 2026-10-30). */
+    expect(leads).toHaveLength(26);
     for (const f of leads) expect(f.endpoint, f.page).toBe('/api/submit-lead');
   });
 });

@@ -11,6 +11,13 @@ tags: ["commercial-cleaning", "commercial-office-cleaning", "office"]
 
 Autumn office cleaning Is equally as important as a spring office cleaning but not everyone takes autumn cleaning as seriously as spring cleaning for some reason. It could be that spring brings a sense of renewal that autumn doesn’t bring. Also, with autumn comes harsh weather which can turn your attention to other things. However, you shouldn’t postpone your autumn seasonal office clean. It’s just as important as spring office cleaning.
 
+**At a glance:**
+
+- The Temperature Changes
+- The Windows Will Allow Less Light
+- Summertime Gets Messy
+- Pests Invade
+
 While it fall might not be near as fun of a time to start anew, it’s equally as important. In this article, you will learn exactly why autumn cleaning should be prioritized as much as spring cleaning.
 
 ![Cleaner washing office windows with a pole in Toronto](/images/office-window-cleaning-toronto.jpg)
@@ -38,3 +45,5 @@ As the weather takes a turn for the worse, you will notice that pests become muc
 When you require your autumn cleaning, you can count on Evergreen Cleaning to deliver. [Evergreen Cleaning](/about-us/) is one of Toronto’s best and longest-servicing office cleaning company. They have been serving clients within the region since 1989.
 
 [Contact us](/contact-us/) today to book your fall deep office clean!
+
+If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [building maintenance and floor care](/services/building-maintenance/) services cover it for workplaces across Toronto and the GTA.

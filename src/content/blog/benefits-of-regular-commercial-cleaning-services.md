@@ -11,6 +11,12 @@ tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitor
 
 Incomplete cleaning services and those that perform their duties semi-regularly simply don’t work. For a business to retain its cutting edge and remain competitive in this modern commercial world both the short- and long-term benefits of commercial cleaning services are undeniable.
 
+**At a glance:**
+
+- Impress Your Guests and Clients
+- Prevent the Spread of Viruses and Germs
+- Promote Employee Satisfaction and Productivity
+
 **Here is what you can expect from the reliable cleaning services from Evergreen Cleaning.** 
 
 ![Vacuum cleaner being used on an office floor](/images/office-backpack-vacuum-toronto.jpg)

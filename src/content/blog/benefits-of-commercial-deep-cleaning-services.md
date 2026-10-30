@@ -11,6 +11,14 @@ tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitor
 
 Studies show that having a healthy environment is crucial to not only the health and well-being of your employees but also their motivation and ultimately, productivity. A superficial tidy might seem acceptable here and there, but that’s not enough to achieve a degree of cleanliness that ascertains optimum operation. Ultimately, dust will gather, bacteria will multiply, and your workplace will become a demotivating space for your employees and unappealing for your clients and partners. In addition, you can only put off certain deep cleaning tasks for so long. Whether your premises is a warehouse, retail space, or office complex, commercial cleaning services are essential. If you are still on the fence or hesitant, here are some great benefits of hiring commercial cleaners.
 
+**At a glance:**
+
+- First Impressions are Important
+- Motivate Your Employees
+- Prevent Germs from Spreading
+- Access a Vast Array of Services
+- We Implement a Systematic Approach
+
 ![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### First Impressions are Important
@@ -52,3 +60,5 @@ Post-construction cleaning
 ### We Implement a Systematic Approach
 
 Our team knows just what should be cleaned and how to go about the process. We work in an efficient and effective manner so that you can focus on the primary aspects of your business. So, do not hesitate to seek our services today! [Contact us](/contact-us/) to schedule your cleaning!
+
+If you would rather leave it to a professional crew, Evergreen's [commercial cleaning](/services/commercial-cleaning/) and [building maintenance and floor care](/services/building-maintenance/) services cover it for workplaces across Toronto and the GTA.
