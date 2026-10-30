@@ -20,7 +20,9 @@ interface Props {
 }
 
 const { post, newer, older, noindex = false } = Astro.props;
-const { title, description, pubDate, image, imageAlt } = post.data;
+const { title, description, pubDate, updatedDate, image, imageAlt } = post.data;
+const longDate = (d: Date) =>
+  d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 /* The post's own topics, linked to their archives. The sidebar cloud shows
    only topics with two or more posts (SEO audit L1-L4), so this is where a
    one-post topic's archive is linked from. */
@@ -40,12 +42,13 @@ const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
   imageAlt={imageAlt}
   type="article"
   publishedTime={pubDate.toISOString()}
+  modifiedTime={updatedDate?.toISOString()}
   noindex={noindex}
 >
 <script
   slot="head"
   type="application/ld+json"
-  set:html={JSON.stringify(articleSchema({ title, description, pubDate, image, slug: post.id }))}
+  set:html={JSON.stringify(articleSchema({ title, description, pubDate, updatedDate, image, slug: post.id }))}
   is:inline
 />
 <script
@@ -76,8 +79,13 @@ const sibling = (ext: string) => image!.replace(/\.jpg$/, `.${ext}`);
       <header class="entry-header">
         <h1 class="entry-title">{title}</h1>
         <p class="post-date">
-          Published <time datetime={pubDate.toISOString().slice(0, 10)}>{pubDate.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</time>
+          Published <time datetime={pubDate.toISOString().slice(0, 10)}>{longDate(pubDate)}</time>
           {' '}by {site.name}
+          {updatedDate && (
+            <>
+              {' '}· Updated <time datetime={updatedDate.toISOString().slice(0, 10)}>{longDate(updatedDate)}</time>
+            </>
+          )}
         </p>
       </header>
       {

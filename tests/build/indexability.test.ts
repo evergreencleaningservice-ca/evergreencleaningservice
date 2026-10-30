@@ -226,10 +226,11 @@ describe('which pages are indexable', () => {
 
   it('every tag archive keeps follow, noindex too', () => {
     /* Asserted positively as well as excused above, so a tag page cannot
-       drift into being indexable without this failing. 26 archives plus the
-       8 pagination pages the five busiest tags need. */
+       drift into being indexable without this failing. 24 archives plus the
+       4 pagination pages the busiest tags need (28 since the blog
+       consolidation of 30 Oct 2026). */
     const archives = pages.filter(isTagArchive);
-    expect(archives).toHaveLength(34);
+    expect(archives).toHaveLength(28);
     for (const page of archives) expect(robotsMetaOf(read(page))).toBe('follow, noindex');
   });
 });

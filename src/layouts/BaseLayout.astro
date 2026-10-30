@@ -17,6 +17,7 @@ interface Props {
   imageAlt?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
+  modifiedTime?: string;
   noindex?: boolean;
 }
 
@@ -27,6 +28,7 @@ const {
   imageAlt,
   type = 'website',
   publishedTime,
+  modifiedTime,
   noindex = false,
 } = Astro.props;
 
@@ -80,6 +82,7 @@ import MobileActionBar from '../components/MobileActionBar.astro';
     <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content="en_CA" />
     {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />

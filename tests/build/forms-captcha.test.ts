@@ -141,7 +141,7 @@ describe('the two search forms', () => {
 describe('comments and testimonials are not leads', () => {
   it('post to /api/submit-post, never to the lead endpoint', () => {
     const posts = accepting().filter((f) => f.postKind);
-    expect(posts.length).toBeGreaterThanOrEqual(39);
+    expect(posts.length).toBeGreaterThanOrEqual(24);
     for (const f of posts) expect(f.endpoint, f.page).toBe('/api/submit-post');
   });
 
@@ -153,7 +153,8 @@ describe('comments and testimonials are not leads', () => {
 
   it('the comment form names the post it belongs to', () => {
     const comments = accepting().filter((f) => f.postKind === 'comment');
-    expect(comments).toHaveLength(38);
+    /* One per post: 23 since the consolidation of 30 Oct 2026 (SEO audit H7). */
+    expect(comments).toHaveLength(23);
   });
 
   it('the lead forms are untouched and still post to /api/submit-lead', () => {

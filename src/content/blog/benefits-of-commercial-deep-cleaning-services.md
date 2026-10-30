@@ -23,7 +23,7 @@ Studies show that having a healthy environment is crucial to not only the health
 
 ### First Impressions are Important
 
-No matter the industry, having a pristine space to welcome both clients and partners is vital for first impressions. This is especially the case following the [COVID 19 pandemic](/covid-19-commercial-cleaning-expectations-examined/). When you walk into business premises, you want to feel comfortable, safe, and welcomed. Also, cleanliness and organization show that you are serious with your operations and can be trusted. Availing of regular deep cleaning services goes a long way to make sure potential or returning clients feel a sense of security and know that they can rely on your business.
+No matter the industry, having a pristine space to welcome both clients and partners is vital for first impressions. When you walk into business premises, you want to feel comfortable, safe, and welcomed. Also, cleanliness and organization show that you are serious with your operations and can be trusted. Availing of regular deep cleaning services goes a long way to make sure potential or returning clients feel a sense of security and know that they can rely on your business.
 
 ### Motivate Your Employees
 

@@ -77,10 +77,12 @@ describe('every rendered tel: link', () => {
        building, which is exactly what this is here to catch. */
     /* 117 since 2026-10-15: +3 industry pages, /our-process/ and two
        data-driven landing pages. 118 since 2026-10-30: the floor stripping
-       and waxing page (SEO audit M5). */
-    expect(pageCount).toBe(118);
-    expect(new Set(links.map((l) => l.page)).size).toBe(118);
-    expect(links.length).toBeGreaterThanOrEqual(290);
+       and waxing page (SEO audit M5). 95 after the blog consolidation the
+       same day: 15 fewer posts, two emptied tag archives and six archive
+       pages the shorter lists no longer need (H7). */
+    expect(pageCount).toBe(95);
+    expect(new Set(links.map((l) => l.page)).size).toBe(95);
+    expect(links.length).toBeGreaterThanOrEqual(230);
   });
 
   it('dials the one canonical, normalised destination', () => {
@@ -114,9 +116,9 @@ describe('the locations the site actually uses', () => {
   const at = (loc: string) => links.filter((l) => l.location === loc);
 
   it('the site header carries one on every non-paid page', () => {
-    /* 113 = 118 pages less the five on the landing-page shell, which have
+    /* 90 = 95 pages less the five on the landing-page shell, which have
        their own header. */
-    expect(at('header')).toHaveLength(113);
+    expect(at('header')).toHaveLength(90);
   });
 
   it('the mobile drawer carries its own, separately reported link', () => {
@@ -124,7 +126,7 @@ describe('the locations the site actually uses', () => {
        menu at every width (`header`), and the open drawer lists the number
        again as its last item (`mobile_navigation`). Two elements, each with
        one fixed answer. */
-    expect(at('mobile_navigation')).toHaveLength(113);
+    expect(at('mobile_navigation')).toHaveLength(90);
   });
 
   it.each([
@@ -170,7 +172,7 @@ describe('the locations the site actually uses', () => {
   it('the site footer carries one on every non-paid page, the paid footer none', () => {
     /* Added deliberately on 2026-10-15 with the footer's contact block. The
        landing-page shell keeps its own minimal footer with no number. */
-    expect(at('footer')).toHaveLength(113);
+    expect(at('footer')).toHaveLength(90);
   });
 });
 

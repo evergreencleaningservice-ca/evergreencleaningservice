@@ -173,6 +173,7 @@ export const articleSchema = (post: {
   title: string;
   description?: string;
   pubDate: Date;
+  updatedDate?: Date;
   image?: string;
   slug: string;
 }) => ({
@@ -183,7 +184,7 @@ export const articleSchema = (post: {
   headline: post.title,
   ...(post.description ? { description: post.description } : {}),
   datePublished: post.pubDate.toISOString(),
-  dateModified: post.pubDate.toISOString(),
+  dateModified: (post.updatedDate ?? post.pubDate).toISOString(),
   ...(post.image ? { image: `${site.url}${post.image}` } : {}),
   author: ORG,
   publisher: ORG,

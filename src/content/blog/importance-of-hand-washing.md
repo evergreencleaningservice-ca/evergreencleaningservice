@@ -1,38 +1,51 @@
 ---
-title: "Importance Of Hand-washing"
-description: "How important is hand-washing? Here we discuss the importance of just that and how it impacts your office team."
+title: "Hand-washing and Hand Sanitizer in the Office"
+description: "Why hand-washing matters in a shared office, how to wash properly, when hand sanitizer is a good substitute, and why clean surfaces matter as much as clean hands."
 pubDate: 2022-08-02
+updatedDate: 2026-10-30
 image: "/images/blog-hand-washing-importance-feature.jpg"
 imageAlt: "Office worker thoroughly washing their hands with soap at a workplace sink"
-tags: ["commercial-cleaning", "janitorial-services", "office"]
+tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 
-## Washing Your Hands Properly
+## Why Hand-washing Matters at Work
 
-While you may recall being told to “wash your hands” before eating when you were little, it’s something you may forget when you get older. After all, you don’t have someone constantly reminding you to do it. However, washing your hands regularly is just as important when you get older. Washing your hands while in and out of the office is essential to curbing the spreading of bacteria, viruses, and germs. Understanding what makes hand washing so important, can help you stay healthier and keep everyone around you from getting sick.
+In an office you are constantly touching things other people have touched: door handles, the kettle, the printer, a shared keyboard. Germs move on contact, so every hand that is not washed passes them on. Washing your hands regularly is the simplest way to stop a cold going round the whole team.
 
-When you are at an office or any other shared space, you’re constantly touching things. You’re touching many surfaces that your coworkers are also touching. This means that you are leaving germs and bacteria on these surfaces. It doesn’t matter how short the period is, once you touch a surface, phone, chair, or keyboard – the germs transfer on contact.
+**At a glance:**
 
-Thus, to prevent spreading harmful bacteria, germs, and viruses, you’ll need to wash your hands often. This includes before and after you eat in the breakroom and especially when you come out of the bathroom. It’s equally as important to wash your hands after you sneeze or blow your nose in a tissue.
+- When to wash
+- How to wash properly
+- When hand sanitizer is enough
+- Reminders that work
+- Clean surfaces as well as clean hands
 
-A lot of people don’t realize how many germs can transfer after a firm handshake either.
+### When to Wash
+
+Before and after eating, after using the washroom, after sneezing, coughing or blowing your nose, and after handling anything shared by the public, such as transit, door handles or deliveries.
 
 ![handwashing](/images/commercial-handwashing-hygiene.jpg)
 
-### There’s A Right Way to Wash Your Hands
+### How to Wash Properly
 
-There are a bunch of differing opinions on how long you should wash your hands. The Mayo Clinic recommends that you wash your hands with soap and warm water. To effectively wash your hands, you need to scrub the entire surface from your wrists to the tips of your fingers. It’s important to get underneath the fingernails and in between your fingers too. That way everything gets cleaned. Once you wipe your hands dry, it’s best to avoid touching the faucet. Rather, you want to use either your elbow or a clean towel to shut the water off. Otherwise, you will only transfer more germs back to your hands after cleaning them.
+Use soap and warm water, and scrub every surface from the wrists to the fingertips, including between the fingers and under the nails, for at least 20 seconds. Dry your hands on a clean towel, then use the towel or your elbow to turn the tap off, so you do not pick up what you just washed away.
 
-### Some Further Precautions to Take When You Are Washing Your Hands
+### When Hand Sanitizer Is Enough
 
-There are numerous ways you can promote better hand washing techniques for improving office hygiene. A great way to do this is by making it a point in the office for everyone to clean their hands often. You can print out signs and post them near shared spaces and near the sinks in the bathrooms. These signs are always a good way to remind employees and staff that they need to wash their hands. You need to place them where they can see them. You can also send out informative newsletters to remind them why handwashing is so important. It helps them take things more seriously. This is especially important during flu season.
+Hand sanitizer is a good substitute when soap and water are not available: at a reception desk, beside an elevator, in a vehicle. An alcohol-based sanitizer works best on hands that are not visibly dirty. When hands are dirty or greasy, washing is better, because sanitizer cannot cut through grime.
 
-While handwashing is one of the most important things to keep people in an office from spreading germs, it’s just as important to clean the office. The office needs to be both cleaned and disinfected to keep the spread of germs minimal. You want to have all of the shared spaces cleaned as frequently as possible. It can dramatically reduce the risk of having germs spread between one another. Some of the more germ-ridden areas include keyboards, mice, phones, printers, and more.
+![Hands using an automatic sanitizer dispenser](/images/retail-hand-sanitizer-use.jpg)
+
+### Reminders That Work
+
+Make it easy and visible. Keep washrooms and kitchens stocked with soap and paper towels, put sanitizer dispensers where people enter and where they share equipment, and post short reminders near sinks and shared spaces. A reminder in a team email at the start of flu season helps too.
+
+### Clean Surfaces as Well as Clean Hands
+
+Clean hands only stay clean as long as the things they touch are. In a busy workplace, sanitizer alone is not enough: shared surfaces need regular cleaning and disinfecting. Keyboards, mice, phones, printers, kitchen counters and appliance handles, washroom fixtures and door handles carry the most germs, and they belong in every routine visit.
 
 ![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
-If you are looking to keep your office clean and everyone in it healthy, you can contract professional services from [Evergreen Cleaning](/about-us/). Evergreen Cleaning helps to keep your office free of germs and spotless. When you hire Evergreen, you are getting a company that prides itself on providing the highest level of service. We guarantee a comprehensive cleaning of everything from your lobbies to your washrooms. With regular cleaning, you can keep your office hygienic and keep your employees and customers healthy.
-
-[Contact us](/request-a-quote/) to get a free assessment of your office/workspace.
+If you are looking to keep your office clean and the people in it healthy, [Evergreen Cleaning](/about-us/) cleans everything from lobbies to washrooms on a schedule set for your building. [Contact us](/request-a-quote/) to book a free walkthrough.
 
 If you would rather leave it to a professional crew, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) and [office cleaning](/services/office-cleaning/) services cover it for workplaces across Toronto and the GTA.

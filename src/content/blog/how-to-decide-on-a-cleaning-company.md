@@ -1,45 +1,61 @@
 ---
 title: "How to Decide on a Cleaning Company"
-description: "You've looked at a few websites and now you're wondering which cleaning company to hire or even consider hiring? Here are some tips to help you decide."
+description: "How to choose a commercial cleaning company: comparing quotes on scope, WSIB and insurance, contract terms, experience, references, and what to look for in the crew."
 pubDate: 2019-12-07
+updatedDate: 2026-10-30
 image: "/images/blog-choosing-cleaning-company-feature.jpg"
 imageAlt: "Facility manager touring an office with a professional cleaning supervisor"
+tags: ["commercial-cleaning", "commercial-office-cleaning"]
 ---
 
-## Tips For Deciding On The Best Cleaning Service
+## Tips for Choosing a Commercial Cleaning Company
 
-You can’t run a successful business without having the proper cleaning strategy in place. And for the most part, companies are going to look at [professional cleaning services](/services/) as rather than hiring an in-house janitor. This is because a professional cleaning service won’t have a problem coming in after your staff has left, making it much easier to clean the entire space.
+Most businesses hire a [professional cleaning company](/services/) rather than an in-house janitor: the crew comes in after your staff leave, brings its own equipment and supplies, and covers absences itself. There are many companies to choose from, and the cheapest quote is rarely the best value. These are the things worth checking before you sign.
 
 **At a glance:**
 
-- Compare Cleaning Price Rates
-- Insured by WSIB
-- Read The Fine Print
-- Take Experience Into Account
-- Ask For References
+- Compare quotes on scope, not just price
+- Check WSIB coverage and insurance
+- Read the contract
+- Take experience into account
+- Ask for references
+- Look at the crew, not just the company
 
 ![Supervisor checking a cleaned office against a checklist](/images/cleaning-quality-inspection-clipboard.jpg)
 
-In most area’s there are a multitude of cleaning companies to choose from, it’s critical to choose one that’s right for your business.
+### Compare Quotes on Scope, Not Just Price
 
-**_In fact, don’t just settle for the cheapest one can find, because you usually get what you pay for._**
+Get two or three quotes, and make sure each one says exactly what is included: which rooms, which tasks, and how often. Vacuuming, mopping, dusting and washrooms are standard; carpet extraction, floor refinishing and window cleaning are often extra. A quote that looks cheaper may simply cover less. A company that walks your building before quoting will price it more accurately than one that quotes by square footage over the phone.
 
-### Compare Cleaning Price Rates
+### Check WSIB Coverage and Insurance
 
-Your first step is to get a few quotations from the various cleaning services in your area. And with this quote, you would like to see the exact services the cost is supposed to cover. Naturally, the basics like vacuuming, mopping, dusting, and sanitizing the bathroom will be included. However, some can offer extended services like carpet cleaning, although they can also cost extra.
+If a cleaner is hurt on your premises, or something is damaged, you want the cleaning company's coverage to respond, not yours. Ask for a current WSIB clearance certificate and proof of commercial liability insurance, and ask whether staff are bonded.
 
-### Insured by WSIB
+### Read the Contract
 
-Accidents happen, especially when you least expect it. And when an accident happens in your business, it becomes your problem. Unless, of course, the cleaning company has insurance that covers accidents. Then it means you won’t have to stress about something going wrong and end up paying for it.
-
-### Read The Fine Print
-
-Obviously, a cleaning company wants to lock you into a contract for as long as possible. In other words, go through the contract with a keen eye and caution. Because won’t it be better to get a company that allows for a trial basis? You might not be happy with their services, and the last thing you want is to be legally obligated to stick to the contract, regardless of how bad the service might be.
+Look at the term, the notice period to cancel, and what happens if you are not happy with the service. A company confident in its work does not need to lock you in for years; a reasonable notice period protects both sides.
 
 ### Take Experience Into Account
 
-There is no denying that a cleaning company that has been established for several years carries an advantage. It means they know how to keep their clients happy, which results in them keeping you happy as well. If possible, definitely go with experience.
+A company that has been cleaning commercial buildings for years has seen most of what can go wrong, and has kept clients long enough to know how to keep them. Ask how long it has been operating and what kinds of buildings it cleans now.
 
-### Ask For References
+### Ask for References
 
-Lastly, if the company is really established, it shouldn’t have any problem providing a list of current and previous clients. Then, go ahead and speak with the people on the list and get their honest opinion.
+An established company should be able to put you in touch with current clients in buildings like yours. Call them, and ask about consistency and how problems are handled, not just whether the place looks clean.
+
+### Look at the Crew, Not Just the Company
+
+The people who come into your building every night matter as much as the company's name on the contract. Ask:
+
+- **Will it be the same crew each visit?** A regular crew learns your building and your expectations.
+- **How are they trained and supervised?** Someone should be inspecting the work against the scope.
+- **How are keys and alarm codes handled?** Crews should be vetted before they hold access to your building.
+- **Who do you call?** One account contact who knows your site makes problems quicker to fix.
+
+Good cleaners are reliable, discreet in a space full of other people's work, and used to working as a team to finish a building on time. Those qualities show up in the results long after the contract is signed.
+
+![Commercial cleaning team checking equipment together before an office shift](/images/blog-top-cleaning-professional-qualities-feature.jpg)
+
+Evergreen Office Cleaning has cleaned commercial buildings in Toronto and the GTA since 1989, with the same crew at every visit and one account executive for each client. [Request a free walkthrough](/request-a-quote/) and we will quote your building in writing.
+
+If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

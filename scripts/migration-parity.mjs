@@ -78,7 +78,7 @@ const uploadRedirects = JSON.parse(
  * URL nobody has.
  */
 const STAND_IN = {
-  '/blog/*': 'workplace-cleaning-checklist-winter/',
+  '/blog/*': 'how-to-properly-dust-office-building/',
   /* /tag/ and /author/ collapse everything onto one page, so the value is
      genuinely arbitrary and any string exercises the rule. */
   '/tag/*': 'office-cleaning/',
@@ -237,7 +237,7 @@ for (const path of MUST_BE_DIRECT) {
  * regresses is caught as a regression rather than rediscovered as a finding.
  */
 const ONCE_DEAD = [
-  ['old /blog/<slug>/ permalinks', '/blog/workplace-cleaning-checklist-winter/'],
+  ['old /blog/<slug>/ permalinks', '/blog/how-to-properly-dust-office-building/'],
   ['WordPress feed', '/feed/'],
   ['blog feed', '/blog/feed/'],
   ['Rank Math sitemap', '/sitemap_index.xml'],

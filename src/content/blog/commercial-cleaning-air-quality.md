@@ -1,67 +1,65 @@
 ---
 title: "Commercial Cleaning and Air Quality"
-description: "Air quality in your office not at its best? Read on to discover how cleaning alone can improve the air quality in your commercial space."
+description: "How cleaning improves the air in an office or commercial building: what makes indoor air poor, how to reduce dust and allergens, and what to clean and how often."
 pubDate: 2020-08-31
+updatedDate: 2026-10-30
 image: "/images/blog-commercial-cleaning-air-quality-feature.jpg"
 imageAlt: "Cleaner replacing an office air filter while a second worker uses a sealed HEPA vacuum"
-tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
+tags: ["air-quality", "allergies", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 
-## Commercial Cleaning and Air Quality
+## Why Cleaning Affects the Air
 
-Your office, warehouse, or store is prone to suffering from poor air quality. Apart from foul smells and allergens, there are many other contaminants that can lead to poor air quality, each of which can significantly affect your business, customers, employees, and yourself. Fortunately, with proper cleaning techniques, you can improve the air quality of your commercial space and keep the negative effects at bay. The following are some important elements of poor air quality that you need to look out for and how to effectively deal with them.
+If you walk into your office and the air feels heavy, smells stale or sets off sneezing, something in the building is putting particles or odours into it. Much of what makes indoor air poor settles on surfaces first and is stirred back up later, which is why the way a building is cleaned has a direct effect on the air people breathe in it.
 
 **At a glance:**
 
-- Regular surface cleaning
-- Vacuum with HEPA filters
-- Removing dust
-- Air duct cleaning
+- Know what is making the air poor
+- Dust with microfibre, top to bottom
+- Vacuum with HEPA filtration
+- Deal with carpets, the biggest reservoir
+- Choose low-residue products
+- Keep the HVAC and filters maintained
 
 ![Worker on a lifting platform cleaning a ceiling](/images/high-dusting-warehouse-lift.jpg)
 
-### Elements of Poor Air Quality
+### What Makes Indoor Air Poor
 
-Whenever you enter your office or workplace after being away for some time, do you feel some sort of heaviness or stuffiness in the air? Maybe there is an unusual smell, or do you start sneezing or itching after you enter? To effectively deal with your poor air quality problems, you need to determine the exact cause of your air quality issues. Here are a few of the common elements of bad air quality:
+- **Dust.** You rarely see it in the air, but it collects on every surface and is breathed in whenever it is disturbed.
+- **Allergens.** Pollen, dust mites and the pet dander staff carry in on their clothes settle into carpets and soft furnishings.
+- **Mould.** Damp areas, kitchens and spaces with moisture problems grow it, and it irritates eyes and lungs.
+- **Odours.** Usually a sign of something not being cleaned: drains, bins, carpets, fridges. Some businesses also produce them as part of their work.
+- **Humidity.** Too much makes the air feel heavy and encourages mould; too little in a Toronto winter dries out eyes, throats and sinuses.
+- **Dirt and debris.** In warehouses and industrial spaces, dirt from production and loading areas is carried through the air into offices.
 
-_**Mold**_: When a building isn’t cleaned properly or regularly, it can promote mold growth. This is particularly so for buildings that used to prepare food and those that have moisture problems. Mold can not only damage your products, but it can also be irritating to people’s lungs and eyes.
+### Dust With Microfibre, Top to Bottom
 
-_**Smells**_: Strong smells are unappealing to both customers and employees. They can be caused by mold and lack of proper cleaning. They can also be a part of your business, for example, dry cleaning businesses or manufacturing companies that deal with goods that have a smell.
-
-_**Dust**_: Though it isn’t always easy to see the dust in your workplace, if it isn’t properly eliminated, you may be inhaling it. In addition, a workplace looks poorly maintained when dust accumulates.
-
-_**Germs**_: Whether or not you run a medical office, you can have germs in the air. But by cleaning the air, you will be able to protect the health of your employees and lower sick time.
-
-_**Humidity**_: In case you always get a general feeling of heaviness in your workplace whenever you walk in, then it is most probably humidity. High levels of humidity can lead to poor air quality. Seniors and people with various health complications can be affected by humid air. Additionally, excess moisture levels tend to promote mold growth.
-
-_**Dirt and debris**_: Dirt and debris in certain workplaces, more specifically the industrial sector, can spread through the air posing health risks to people.  But you can avoid this risk through professional cleaning services.
+Dusting with a feather duster or a dry cotton cloth moves dust into the air rather than removing it. Microfibre cloths trap it. Work from the top of the room down (high ledges, light fixtures and vents first, then desks, then floors) so anything that falls is picked up last. Colour-coding cloths by area also keeps dirt from washrooms out of kitchens and offices.
 
 ![Extendable duster cleaning a ceiling corner](/images/fall-high-dusting-office-ceiling.jpg)
 
-### How to Clean Up Your Air Quality
+### Vacuum With HEPA Filtration
 
-There are several ways to improve air quality. Many of these handle multiple forms of air contamination.
+Many vacuums blow the finest particles straight back out of the exhaust. A sealed vacuum with a [HEPA filter](https://www.webmd.com/allergies/hepa-filters-for-allergies) holds on to dust, pollen and mould spores instead. Vacuum after dusting, not before, so it collects what the cloths missed.
 
-#### Regular surface cleaning
+### Deal With Carpets
 
-Substances on your surfaces often find their way into the air. Thus, cleaning bathrooms, kitchens, offices, desks, kitchen, and other surfaces will help to improve your air quality. Through professional cleaning services, particularly those that consider the type of surface and debris to be cleaned when selecting the [cleaning product](/green-clean-products/), you will be able to fight off germs, smells, and mold.
+Carpet fibres trap dust, pollen and dander, and every footstep releases some of it again. Regular vacuuming keeps the surface down; periodic hot-water extraction removes what has worked into the pile. If staff have allergies, ask them which, and tell your cleaning company: it changes what they focus on.
 
-#### Vacuum with HEPA filters
+![Boardroom carpet being cleaned with an extraction wand](/images/carpet-extraction-boardroom-toronto.jpg)
 
-Many vacuum models send most of the dirt and debris that they collect back into the air via their exhaust. This is why we recommend using [HEPA filter](https://www.webmd.com/allergies/hepa-filters-for-allergies) vacuums that gather all particles that may escape the vacuum. This can significantly help your efforts to improve your air quality. HEPA filters collect dirt, dust, mold spores, germs, and other debris.
+### Choose Low-Residue Products
 
-#### Removing dust
+Some cleaning products leave fragrance and residue that are themselves irritants. Products chosen with indoor air in mind, used at the right dilution, clean without adding to the problem. Ask your cleaner which they use; ours are listed on our [green clean products](/green-clean-products/) page.
 
-We all know that getting rid of dust from surfaces helps to reduce the dust content in your air. But dusting can get frustrating since it often seems to put the dust back into the air, rather than removing it. The trick here is to utilize a microfiber cloth that traps dust and do the task from top to bottom in your space. Make sure that you complete your dusting before you start vacuuming. This way, the dust that isn’t collected by the microfiber cloth will be captured by your vacuum.
+### Keep the HVAC Maintained
 
-#### Air duct cleaning
+A dirty HVAC system recirculates dust through the whole building. Replace filters on schedule, have vents and return grilles cleaned as part of high dusting, and have ducts inspected and cleaned by an HVAC contractor when they need it. A portable air purifier with a HEPA filter can help in a room where people with allergies sit.
 
-If you fail to properly clean your HVAC system, you will end up sending dust and debris back into the air. Schedule regular commercial air duct, furnace, and other HVAC equipment cleaning to improve the quality of your air. Replacing filters on your unit is a crucial part of HVAC maintenance.
+### Why Bring in Professionals
 
-### Why Seek Professional Cleaning Services to Improve Your Air Quality?
+You can do much of this yourself, but a professional crew brings the equipment (HEPA backpack vacuums, extraction machines, lifts for high dusting) and works from a schedule, so the dusting, vacuuming and carpet work all happen in the right order, every time.
 
-While you can boost your air quality on your own, professionals will complete it much faster and do a much better and thorough job. We have the know-how and proper tools to effectively handle air quality issues, including dust, mold, germs, and debris. Leave the dusting, vacuuming, cleaning, and other niche cleaning tasks to us.
-
-[Contact us](/contact-us/) at [Evergreen Commercial Cleaning & Janitorial](/about-us/) to schedule a professional cleaning session for your property and improve your air quality.
+[Contact us](/contact-us/) to talk about the air in your building.
 
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [building maintenance and floor care](/services/building-maintenance/) services cover it for workplaces across Toronto and the GTA.

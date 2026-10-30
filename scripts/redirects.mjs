@@ -17,6 +17,9 @@ import {
   legacyRedirects,
   newsPageRedirects,
   emptyTagRedirects,
+  retiredPostRedirects,
+  retiredTagRedirects,
+  removedArchivePageRedirects,
   wildcardRedirects,
   bothSlashSpellings,
 } from '../src/data/redirects.ts';
@@ -62,6 +65,9 @@ section(
    Cloudflare reads this file before it looks for a matching asset — see
    `emptyTagRedirects` in src/data/redirects.ts. */
 section("Tags the original carries with no posts", bothSlashSpellings(emptyTagRedirects));
+section('Blog posts retired by the consolidation (SEO audit H7)', bothSlashSpellings(retiredPostRedirects));
+section('Tags the consolidation emptied', bothSlashSpellings(retiredTagRedirects));
+section('Archive pages the consolidation removed', bothSlashSpellings(removedArchivePageRedirects));
 /* The single sitemap was split by type on 30 Oct 2026 (SEO audit M2). Search
    Console had been reading sitemap-0.xml since 10 Oct, so it points at the
    pages sitemap rather than 404ing. */

@@ -53,6 +53,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import originalImages from '../../src/data/original-page-images.json' with { type: 'json' };
+import { retiredPostSlugs } from '../../src/data/redirects';
 import { bodyImages, isPaginatedArchive } from '../../src/lib/body-images';
 
 const repo = path.resolve(import.meta.dirname, '../..');
@@ -86,6 +87,8 @@ const REDIRECTED = new Set([
   '/services/disinfection-cleaning-service/',
   '/services/emergency-cleaning-services/',
   '/testimonials/',
+  /* Merged or retired by the blog consolidation of 30 Oct 2026 (SEO audit H7). */
+  ...retiredPostSlugs.map((slug) => `/${slug}/`),
 ]);
 
 /**
@@ -117,7 +120,10 @@ const NO_BODY_IMAGE = new Set<string>([]);
  * otherwise be invisible — a change that quietly strips images from many
  * pages at once, which is precisely how the original 28 went missing.
  */
-const TOTAL_BODY_IMAGES_FLOOR = 130;
+/* 96 since the blog consolidation of 30 Oct 2026 (SEO audit H7): the
+   retired posts' images went with them and the archive lists got shorter.
+   Every post that was kept has as many body images as before, or more. */
+const TOTAL_BODY_IMAGES_FLOOR = 96;
 
 const built = new Map<string, Set<string>>();
 

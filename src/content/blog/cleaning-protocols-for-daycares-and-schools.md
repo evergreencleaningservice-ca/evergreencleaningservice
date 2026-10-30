@@ -1,51 +1,67 @@
 ---
 title: "Commercial Cleaning Protocols for Daycares and Schools"
-description: "Wondering if your school or daycare is clean? By following these tips, it is possible to achieve disinfection and complete cleaning of a wide range of surfaces."
+description: "A cleaning and disinfection checklist for daycares and schools: classrooms, washrooms, kitchens, gyms, corridors and outdoor areas, and how often each needs attention."
 pubDate: 2020-09-29
+updatedDate: 2026-10-30
 image: "/images/blog-daycare-school-cleaning-feature.jpg"
 imageAlt: "Professional cleaner wiping child-height tables in a bright daycare classroom after hours"
 tags: ["commercial-cleaning", "daycares", "janitorial-services", "schools"]
 ---
 
-## Disinfection and Complete Cleaning
+## Cleaning and Disinfection for Schools and Daycares
 
-Now that the economy is beginning the reopening process, schools and daycare facilities have started to follow suit.
+Children touch everything, and they touch their faces far more often than adults do, so illnesses spread quickly through a classroom. Daily cleaning, with disinfection of the surfaces children and staff touch most, is the core of keeping a school or daycare healthy. Below is a checklist of the areas that need attention. Every building is different, so treat it as a starting point for your own scope.
 
-Below is a [commercial cleaning services](/) checklist for cleaning schools and similar facilities that can provide a comprehensive sanitation process. By following these tips, it is possible to achieve disinfection and complete cleaning of a range of surfaces.
+**At a glance:**
+
+- Classrooms and offices
+- Washrooms
+- Kitchens and cafeterias
+- Gyms and auditoriums
+- Lobbies and corridors
+- Outdoor areas
+- Building-wide touch points
 
 ![Cleaner disinfecting an office door handle](/images/touchpoint-disinfection-door-handle.jpg)
 
- 
-### When it comes to schools, daily cleaning is key.
+### Clean First, Then Disinfect
 
-This helps prevent students from spreading germs to each other and to teachers and staff. In the age of COVID-19, this requires the use of [CDC-recommended chemicals](https://www.cdc.gov/infectioncontrol/guidelines/disinfection/disinfection-methods/chemical.html) and equipment so that disinfection can happen indoors, as well as outdoor on surfaces likely to receive a great deal of contact.
+Disinfectant cannot work through dirt, so surfaces are cleaned with detergent first and then disinfected. In Canada, hard-surface disinfectants carry a Drug Identification Number (DIN) from Health Canada; use them at the dilution and contact time on the label. [Public Health Ontario's environmental cleaning guidance](https://www.publichealthontario.ca/en/Health-Topics/Infection-Prevention-Control/Environmental-Cleaning) is a good reference for what to clean and how often.
 
-We have included a checklist articulating the specific areas that ought to be addressed, and while these are among the areas our service will tackle, we are always willing to adjust the list to accommodate your specific preferences and needs.
+### Classrooms and Offices
 
-[Evergreen Cleaning](/services/disinfection-cleaning/) is committed to taking all necessary precautions during this pandemic, and we pledge to provide the most effective and efficient service possible.
+Chairs, desks and tables (at child height as well as adult), door handles, closets and cubbies, computer equipment and shared toys or supplies, filing cabinets, and floors.
 
-When it comes to the cleaning of offices and classrooms, focus should be placed on chairs, desks, doors handles, flooring, closets, computer equipment, filing cabinets, and more.
+### Washrooms
 
-In terms of outdoor cleaning services, tables, railings, benches, playground equipment and sports-related items need to be cleaned.
-
-Lobby cleaning should encompass surfaces such as entrance glass, door frames and handles, floor mats, stairways, and more.
-
-Bathrooms need a great deal of attention as well, which should include cleaning of garbage cans, walls, cubicle walls, toilets, soap dispensers, towel dispensers, floors, sinks, and more.
+Toilets, sinks, taps, soap and towel dispensers, cubicle walls and doors, garbage cans, walls around fixtures, and floors. Washrooms need cleaning every day and checking through the day.
 
 ![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
-Cafeteria cleaning should extend to coutertop disinfection, cupboards, stoves, refrigerators, seating, flooring, cashier stations, vending machines and all glassware and utensils.
+### Kitchens and Cafeterias
 
-Gyms and auditoriums should receive detailed attention that includes cleaning of all seating, flooring, equipment, lockers, storage cabinets, shower stalls, toilets, and the like.
+Countertops, cupboards, stoves, fridges, seating, cashier stations, vending machines and floors, with food-contact surfaces cleaned and sanitized with food-safe products.
 
-When it comes to corridors, all lockers should be cleaned if they are in use, as well as water fountains if in use, walls, doors and handles, and any other high-touch surfaces.
+### Gyms and Auditoriums
 
-The entire school should receive cleaning of vents and light switches on a daily basis. The HVAC system should also be cleaned on a regular schedule, according to your building preference.
+Seating, floors, equipment, lockers, storage cabinets, showers and change-room washrooms.
 
-By adhering to this commercial cleaning checklist, it is possible to rest assured that schools and daycare facilities are fully disinfected and as clean as they can be.
+### Lobbies and Corridors
 
-Evergreen Clean utilizes the latest non-toxic, environmentally sound cleaning products endorsed by the CDC. Because we understand the fact that children of all ages touch surfaces often and are prone to touching their mouths and faces far more frequently than adults, we strive to offer comprehensive cleaning services at every facility we serve.
+Entrance glass, door frames and handles, floor mats, stairways and handrails, lockers in use, water fountains, and walls at child height.
 
-The pandemic has truly brought into stark relief just how important regular cleaning and disinfection work is, particularly in buildings that serve young people. Parents need to be able to have confidence in the safety of the place they send their kids to learn and socialize each and every day. Because the health of everyone can be affected by an outbreak among children, this is an issue of critical importance for our entire society.
+### Outdoor Areas
 
-Therefore, in order to keep fighting against the spread of the coronavirus, our cleaning teams remain dedicated to ensuring that all surfaces with which others are likely to come into contact are treated with safe, yet effective chemicals designed to provide the disinfection results the public health crisis demands.
+Tables, railings, benches and the parts of playground and sports equipment that hands touch most.
+
+### Building-Wide Touch Points
+
+Light switches and vents throughout the building should be cleaned daily, and the HVAC system maintained and its filters changed on a regular schedule.
+
+### Choosing Products for Children's Spaces
+
+Children are closer to the floor and the furniture than adults, and more of what is on a surface ends up on their hands. Low-residue products, used at the right dilution and rinsed where the label says to, clean effectively without leaving more behind than necessary. Ask your cleaning company which products it uses and why; ours are on our [green clean products](/green-clean-products/) page.
+
+A written checklist like this one, agreed with the school or daycare and followed on every visit, is what lets staff and parents trust that the building is clean. [Contact us](/contact-us/) to set one up for yours.
+
+If you would rather leave it to a professional crew, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

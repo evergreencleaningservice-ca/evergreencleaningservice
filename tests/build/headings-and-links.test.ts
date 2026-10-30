@@ -18,6 +18,13 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import {
+  bothSlashSpellings,
+  removedArchivePageRedirects,
+  retiredPostRedirects,
+  retiredPostSlugs,
+  retiredTagRedirects,
+} from '../../src/data/redirects';
 import { isPrivatePage } from './private-pages';
 
 const repo = path.resolve(import.meta.dirname, '../..');
@@ -137,7 +144,6 @@ describe('every page has exactly one meaningful H1', () => {
       'insights/index.html',
       'insights/page/2/index.html',
       'insights/page/3/index.html',
-      'insights/page/4/index.html',
     ]) {
       expect(headings(read(page), 1)).toHaveLength(1);
     }
@@ -244,7 +250,8 @@ describe('internal links', () => {
        are the "Older posts" hops the five busiest tags need, which is why
        this counts the roots rather than every /tag/ href. */
     const roots = tagLinks.filter((href) => /^\/tag\/[^/]+\/$/.test(href));
-    expect(new Set(roots).size).toBe(26);
+    /* 24 since 30 Oct 2026: the consolidation emptied `coronavirus` and `covid-19`. */
+    expect(new Set(roots).size).toBe(24);
 
     for (const href of tagLinks) {
       expect(fs.existsSync(path.join(out, href.slice(1), 'index.html')), href).toBe(true);
@@ -273,8 +280,18 @@ describe('the legacy redirect map', () => {
        slash-less spelling of every built page (SEO audit M3), and the old
        single sitemap pointing at the pages sitemap (M2). */
     const pageSlash = redirects.filter((r) => r.to === `${r.from}/`);
-    const legacy = redirects.filter((r) => r.to !== `${r.from}/` && r.from !== '/sitemap-0.xml');
+    /* The blog consolidation of 30 Oct 2026 (SEO audit H7) added its own
+       sections: retired posts, emptied tags and removed archive pages. */
+    const consolidation = new Set(
+      bothSlashSpellings([...retiredPostRedirects, ...retiredTagRedirects, ...removedArchivePageRedirects]).map(
+        (r) => r.from
+      )
+    );
+    const legacy = redirects.filter(
+      (r) => r.to !== `${r.from}/` && r.from !== '/sitemap-0.xml' && !consolidation.has(r.from)
+    );
     expect(legacy.length).toBe(171);
+    expect(redirects.filter((r) => consolidation.has(r.from))).toHaveLength(consolidation.size);
     expect(redirects.some((r) => r.from === '/sitemap-0.xml' && r.to === '/sitemap-pages-0.xml')).toBe(true);
     for (const page of ['/about-us', '/insights', '/services/office-cleaning', '/locations/mississauga']) {
       expect(pageSlash.some((r) => r.from === page), page).toBe(true);
@@ -330,13 +347,14 @@ describe('the rest of the page is untouched', () => {
   /* 69 until 2026-10-15; +4 for /industries/, its two pages and /our-process/.
      Back to 69 on 2026-10-29: /search/ and /insights/page/2-4/ left the
      sitemap (SEO audit M1, M2). 70 since 2026-10-30: floor stripping and
-     waxing (M5). */
-  it('all 70 sitemap URLs were built', () => {
+     waxing (M5). 55 since the blog consolidation the same day: 16 posts
+     merged or retired, one seasonal checklist added (H7). */
+  it('all 55 sitemap URLs were built', () => {
     const locs = (xml: string) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const urls = locs(read('sitemap-index.xml')).flatMap((child) =>
       locs(read(path.basename(new URL(child).pathname)))
     );
-    expect(urls).toHaveLength(70);
+    expect(urls).toHaveLength(55);
     const missing = urls.filter((u) => !exists(new URL(u).pathname));
     expect(missing).toEqual([]);
   });
@@ -388,5 +406,35 @@ describe('location pages are each their own page', () => {
     });
     const failing = scores.filter(([, pct]) => pct < 60);
     expect(failing, JSON.stringify(scores)).toEqual([]);
+  });
+});
+
+describe('the blog consolidation (SEO audit H7, 30 Oct 2026)', () => {
+  it('builds none of the retired posts and sends each to a page that exists', () => {
+    for (const slug of retiredPostSlugs) {
+      expect(fs.existsSync(path.join(out, slug, 'index.html')), slug).toBe(false);
+      for (const from of [`/${slug}/`, `/${slug}`, `/blog/${slug}/`]) {
+        const to = redirectFor(from);
+        expect(to, from).not.toBeNull();
+        expect(exists(to!), `${from} -> ${to}`).toBe(true);
+      }
+    }
+  });
+
+  it('dates a merged post as updated, on the page and in its data', () => {
+    const html = read('commercial-cleaning-air-quality/index.html');
+    expect(html).toMatch(/Updated <time datetime="2026-10-30"/);
+    expect(html).toContain('"dateModified":"2026-10-30T00:00:00.000Z"');
+    expect(html).toContain('"datePublished":"2020-08-31T00:00:00.000Z"');
+    expect(html).toContain('<meta property="article:modified_time" content="2026-10-30T00:00:00.000Z">');
+    expect(read('sitemap-insights-0.xml')).toMatch(
+      /commercial-cleaning-air-quality\/<\/loc><lastmod>2026-10-30/
+    );
+  });
+
+  it('leaves a post that was not revised without an updated date', () => {
+    const html = read('how-to-properly-dust-office-building/index.html');
+    expect(html).not.toContain('Updated <time');
+    expect(html).not.toContain('article:modified_time');
   });
 });
