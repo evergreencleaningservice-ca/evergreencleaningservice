@@ -128,6 +128,19 @@ describe('the production build', () => {
     expect(robots).toContain(`Sitemap: ${ORIGIN}/sitemap-index.xml`);
   });
 
+  it('signals that search and AI tools may use the site (SEO audit Phase 4)', () => {
+    expect(read('robots.txt')).toMatch(/^Content-Signal: search=yes, ai-input=yes, ai-train=yes$/m);
+  });
+
+  it('ships an llms.txt whose every link is a page this build has', () => {
+    const llms = read('llms.txt');
+    expect(llms.startsWith('# Evergreen Office Cleaning')).toBe(true);
+    const links = [...llms.matchAll(/\]\((https:\/\/www\.evergreencleaningservice\.ca[^)]*)\)/g)].map((m) => m[1]);
+    expect(links.length).toBeGreaterThan(20);
+    const missing = links.filter((u) => !pages.includes(new URL(u).pathname.replace(/^\//, '') + 'index.html'));
+    expect(missing).toEqual([]);
+  });
+
   it('never uses Disallow: / as a noindex', () => {
     /* It blocks the crawl, so the noindex is never read, and the URL can
        still be indexed from an inbound link with no way to remove it. */
