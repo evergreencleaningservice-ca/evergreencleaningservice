@@ -4,7 +4,7 @@ description: "The office surfaces germs collect on, from the reception desk and 
 pubDate: 2021-10-28
 updatedDate: 2026-10-30
 image: "/images/blog-office-germ-hotspots-feature.jpg"
-imageAlt: "Gloved cleaner disinfecting a shared office keyboard and other high-touch equipment"
+imageAlt: "Hands spraying and wiping a computer keyboard"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "office"]
 ---
 
@@ -26,7 +26,7 @@ Germs spread in an office the same way people work in one: through the things ev
 
 Most of these are easy to miss in a routine clean, because they are small, they belong to everyone, or they sit out of the way.
 
-![Cleaner wiping office desks in a Toronto office](/images/spring-office-desk-cleaning-toronto.jpg)
+![Gloved hand wiping a desk beside a laptop](/images/spring-office-desk-cleaning-toronto.jpg)
 
 ### Reception and Lobby
 
@@ -48,7 +48,7 @@ Anything in the kitchen that serves food or drink is handled all day. Coffee-mak
 
 Washroom doors get attention; the rest often do not. Every door handle and push plate, keypads and fingerprint readers, and the handles on cupboards, drawers and closets are touched as often. The building's exterior handles are touched by visitors and delivery drivers as well.
 
-![Cleaner disinfecting an office door handle](/images/touchpoint-disinfection-door-handle.jpg)
+![Gloved hands wiping a door handle](/images/touchpoint-disinfection-door-handle.jpg)
 
 ### Boardrooms
 

@@ -3,7 +3,7 @@ title: "Keep Your Office at Home Clean"
 description: "Keeping a home office clean: cleaning products within reach, a filing system that keeps paper off the desk, and when to get help."
 pubDate: 2021-02-26
 image: "/images/blog-home-office-cleaning-feature.jpg"
-imageAlt: "Person cleaning an organized home-office desk in a bright Toronto condo"
+imageAlt: "Gloved hand wiping a laptop keyboard"
 tags: ["cleaning", "office"]
 ---
 
@@ -11,7 +11,7 @@ tags: ["cleaning", "office"]
 
 Working from home can be challenging, especially when you don’t have a clean and organized office to work in. With that said, maintaining your office isn’t always easy. There’s always work to be done, and sometimes, it feels like the paperwork doesn’t stop piling up. It doesn’t take long for an office to get messy. Furthermore, it’s easy for the surfaces in your office to become covered in dust. Below, we’ve put together some suggestions that will help you to stay on top of paperwork and keep your office neat and organized everyday!
 
-![Cleaner wiping office desks in a Toronto office](/images/spring-office-desk-cleaning-toronto.jpg)
+![Gloved hand wiping a desk beside a laptop](/images/spring-office-desk-cleaning-toronto.jpg)
 
 ### Make Sure Cleaning Products Are Easy to Access
 

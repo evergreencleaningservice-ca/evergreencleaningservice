@@ -4,7 +4,7 @@ description: "How to choose a commercial cleaning company: comparing quotes on s
 pubDate: 2019-12-07
 updatedDate: 2026-10-30
 image: "/images/blog-choosing-cleaning-company-feature.jpg"
-imageAlt: "Facility manager touring an office with a professional cleaning supervisor"
+imageAlt: "Cleaning checklist beside cleaning supplies"
 tags: ["commercial-cleaning", "commercial-office-cleaning"]
 ---
 
@@ -21,7 +21,7 @@ Most businesses hire a [professional cleaning company](/services/) rather than a
 - Ask for references
 - Look at the crew, not just the company
 
-![Supervisor checking a cleaned office against a checklist](/images/cleaning-quality-inspection-clipboard.jpg)
+![Gloved hands holding a clipboard beside cleaning supplies](/images/cleaning-quality-inspection-clipboard.jpg)
 
 ### Compare Quotes on Scope, Not Just Price
 
@@ -54,7 +54,7 @@ The people who come into your building every night matter as much as the company
 
 Good cleaners are reliable, discreet in a space full of other people's work, and used to working as a team to finish a building on time. Those qualities show up in the results long after the contract is signed.
 
-![Commercial cleaning team checking equipment together before an office shift](/images/blog-top-cleaning-professional-qualities-feature.jpg)
+![Cleaner holding a duster behind an office desk](/images/blog-top-cleaning-professional-qualities-feature.jpg)
 
 Evergreen Office Cleaning has cleaned commercial buildings in Toronto and the GTA since 1989, with the same crew at every visit and one account executive for each client. [Request a free walkthrough](/request-a-quote/) and we will quote your building in writing.
 

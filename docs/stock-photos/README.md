@@ -1,54 +1,55 @@
-# iStock photo replacements — partial preparation
+# Stock image replacements
 
-The user requested a distinct stock replacement for each of 89 photographic
-assets, with fewer visible faces. Logos, certification marks, functional
-graphics, video/poster content, unused legacy files and the unpublished project
-photo are outside this photo inventory.
+All 89 assets in the photographic inventory now have distinct downloaded stock
+selections: 37 from iStock and the remaining 52 from Magnific. The user authorized
+Magnific for the remainder on October 30, 2026, including illustration-style
+images. Logos, certification marks, functional graphics, video/poster content,
+unused legacy files and the unpublished project photo are outside this inventory.
 
-37 selected originals were downloaded using the existing iStock allowance.
-The subscription allowance then ran out. The user chose to keep 89 distinct
-photos instead of reusing these 37 across the other placements. The remaining
-52 entries in `manifest.json` are pending. No extra downloads were purchased.
-
-This branch prepares the 37 licensed selections and their responsive, thumbnail
-and social variants. Source alt text and the gallery's illustrative-stock label
-are updated alongside them. Existing image dimensions and paths are preserved.
-The other 52 photographic assets are unchanged and still require replacement.
-
-The user authorized deploying this partial set of 37 replacements on October 29,
-2026, and explicitly authorized updating the website repository with GitHub.
-This is a partial rollout: the remaining 52 photos are still pending.
-In particular, do not run `b2:sync` as a staging-only operation: that image host
-is shared with production, and overwriting these keys changes production images.
+The 52 Magnific selections replace the remaining AI assets and update matching
+source alt text. The isolated floor scrubber is illustration-style stock. Other
+selections depict cleaning equipment, hands, surfaces and interiors; crops avoid
+visible faces. Existing filenames and dimensions are retained across JPEG,
+WebP, AVIF, responsive, thumbnail and social renditions.
 
 ## Reproduce
 
-Keep licensed originals in private storage. This repository contains only
-the cropped and optimized website renditions, not the full-resolution originals.
-Provide JPEG working copies named `<stockId>.jpg` in a private directory.
-The current working copies were reduced to a maximum width of 2400 pixels;
-the original downloaded files remain on the user's device.
+Keep downloaded originals private. The repository contains optimized website
+renditions, not full-resolution originals. Provide JPEG working copies named
+`<stockId>.jpg` in a private directory. Working copies use a maximum width of
+2400 pixels; originals remain on the user's device. Source URLs and crop regions
+are recorded in `manifest.json`.
 
 ```sh
-node scripts/import-stock-photos.mjs --sources /private/web-sources
-node scripts/import-stock-photos.mjs --sources /private/web-sources --apply
+node scripts/import-stock-photos.mjs --sources /private/all-stock-sources --apply
+node scripts/import-stock-photos.mjs --sources /private/magnific-sources --provider Magnific --apply
 ```
 
-The first command renders and validates a temporary set. `--apply` also copies
-that complete validated set into the local website. Neither command uploads or
-deploys anything. `prepared.json` records the dimensions and sizes of the output.
+Omit `--apply` to prepare and validate without copying into the website. The
+provider filter allows a later batch to be rendered without changing earlier
+stock replacements. `prepared.json` records the current batch, output dimensions
+and byte sizes. Sources for both providers are needed when omitting the filter.
 
-For the remaining selections, obtain licensed originals, add their crop choices,
-mark only those actually licensed, and update their alt text before rendering.
-Maintain the distinct-photo requirement and the face-avoiding direction.
+## Publishing
 
-The complete interactive source/replacement selection map is maintained
-separately as `Evergreen-Stock-Photo-Replacement-Map.html`.
+The working-tree import does not upload or deploy images. The image host is
+shared with production: `b2:sync` immediately changes images at existing public
+URLs and must never be described as staging-only. After the reviewed changes
+reach main, run the normal deployment gates, sync the changed image keys, deploy
+the pages and explicitly purge changed image URLs from the CDN. Verify live
+images after the purge. Do not claim production changed merely because this
+repository contains prepared images.
 
-## Validation
+## Current batch validation
 
-- 117 tests passed across image, social-image, image-parity and landing-page checks.
-- The preview build completed with 124 pages; the canonical image-host check passed.
-- All 406 generated files were decoded and their dimensions validated before copying.
-- Desktop/mobile hero crops and face-avoiding crops were visually reviewed.
-- No deployment, CDN upload or live responsive-page verification was performed.
+- 52 distinct Magnific selections; 520 changed website renditions, all decoded
+  with expected dimensions and recorded byte sizes.
+- The preview build and canonical image-host check pass.
+- 28 image, social-image and image-parity tests pass.
+- Full suite: 865 passed, one environment failure because no Chromium executable
+  is installed. Browser installation was unavailable in this environment.
+- Source crops and generated JPEG renditions were visually reviewed.
+- Production publication must be verified separately after deployment.
+
+The hand-washing source and final hero were also inspected at full size after
+a review finding: the visible shapes are fingers around the soap, not a face.

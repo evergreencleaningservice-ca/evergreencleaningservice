@@ -3,7 +3,7 @@ title: "5 Commercial Cleaning Products You Should Have in Your Office"
 description: "Five cleaning products worth keeping in any office: glass cleaner, disinfecting wipes, a spot remover, white vinegar and an air freshener."
 pubDate: 2020-11-30
 image: "/images/blog-office-cleaning-products-feature.jpg"
-imageAlt: "Professional cleaner organizing essential unbranded cleaning supplies on a janitorial cart in a Toronto office"
+imageAlt: "Cleaning spray and pink microfibre cloth on a blue background"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
@@ -25,7 +25,7 @@ The following are five cleaning products that we recommend you keep handy in any
 
 Your office should always look presentable even if no clients are coming to your office. However, you can make a good impression by ensuring your front door and windows are presentable, especially if your clients come into your office regularly. It is also important to have a clean working environment even if your workers are the only ones who see the front doors and windows of your office. Having a clean working environment improves the happiness and productivity of your workers. Use a glass cleaner to clean up smudges between professional cleanings, so you do not have to wait for your professional cleaners to clean your glasses.
 
-![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
+![Gloved hand wiping a white surface with a green cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### Disinfecting Wipes
 
@@ -39,7 +39,7 @@ It is important to have spot removers, such as Shout, in your office. [Stain rem
 
 Use white vinegar to disinfect, shine your windows, and clean stubborn spots in your office. It is simple, cheap, and effective. Also, use white vinegar to clean your coffee machine. How? Run the white vinegar through one cycle. Then, use water to rinse your coffee machine on the next cycle. Keep a cheap bottle of white vinegar under the sink in your break room.
 
-![Labelled spray bottle and microfibre cloths used for surface cleaning](/images/eco-friendly-cleaning-spray-microfibre.jpg)
+![Cleaning spray bottle and folded microfibre cloths](/images/eco-friendly-cleaning-spray-microfibre.jpg)
 
 ### Air Freshener
 
