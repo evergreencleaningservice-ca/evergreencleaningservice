@@ -1,0 +1,103 @@
+---
+/**
+ * Call and quote, fixed to the bottom of a phone screen on every site page
+ * (SEO audit M12, 30 Oct 2026). The landing pages have had one since Phase 10
+ * (`.lpx-sticky`); this is the same idea for the rest of the site, where the
+ * number and the quote button sat only in the header, out of thumb's reach
+ * once the visitor scrolled.
+ *
+ * Phones only. Hidden on the quote page and the thank-you page, where it
+ * would point at the page itself, and slid away while a form field has
+ * focus, so it never sits over the keyboard or the field being typed in.
+ */
+import { nap } from '../data/site';
+
+const path = Astro.url.pathname;
+const hidden = path === '/request-a-quote/' || path === '/thank-you/';
+---
+
+{
+  !hidden && (
+    <nav class="mbar" aria-label="Call or get a quote">
+      <a class="mbar-call" href={nap.phoneHref} data-call-location="mobile_bar">
+        Call {nap.phoneDisplay}
+      </a>
+      <a class="mbar-quote" href="/request-a-quote/" data-quote-cta data-cta-location="mobile_bar">
+        Free quote
+      </a>
+    </nav>
+  )
+}
+
+<style>
+  .mbar {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .mbar {
+      position: fixed;
+      inset: auto 0 0;
+      z-index: 950;
+      display: flex;
+      gap: 1px;
+      background: var(--rule);
+      padding-bottom: env(safe-area-inset-bottom);
+      box-shadow: 0 -2px 10px rgba(15, 23, 42, 0.12);
+      transition: transform 0.2s ease, visibility 0s linear 0s;
+    }
+
+    .mbar a {
+      flex: 1 1 50%;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 10px;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 0.9375rem;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .mbar-call {
+      background: #fff;
+      color: var(--brand-dark);
+    }
+
+    .mbar-quote {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .mbar a:focus-visible {
+      outline: 3px solid var(--ink-heading);
+      outline-offset: -3px;
+    }
+
+    /* Out of the way while someone is typing into a form. */
+    :global(body:has(form :focus-within)) .mbar {
+      visibility: hidden;
+      transform: translateY(100%);
+      transition: transform 0.2s ease, visibility 0s linear 0.2s;
+    }
+
+    /* Room at the end of the page so the bar never covers the footer, and the
+       video bubble lifted clear of it. */
+    :global(body:has(.mbar)) {
+      padding-bottom: calc(52px + env(safe-area-inset-bottom));
+    }
+
+    :global(body:has(.mbar) .leadnet) {
+      bottom: calc(64px + env(safe-area-inset-bottom));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mbar,
+    :global(body:has(form :focus-within)) .mbar {
+      transition: none;
+    }
+  }
+</style>

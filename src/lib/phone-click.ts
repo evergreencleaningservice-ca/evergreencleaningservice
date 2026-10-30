@@ -54,6 +54,7 @@ export const LOCATIONS = [
   'quote_sidebar',
   'paid_header',
   'paid_sticky',
+  'mobile_bar',
   'paid_cta',
   'form_note',
   'footer',

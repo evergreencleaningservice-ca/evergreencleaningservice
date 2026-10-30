@@ -159,6 +159,9 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
 
   .list-article-meta a {
     color: var(--brand);
+    /* A 24px target for a one-word link (SEO audit M12). */
+    display: inline-block;
+    padding-block: 4px;
   }
 
   .entry-header {

@@ -127,8 +127,9 @@ describe('the locations the site actually uses', () => {
   });
 
   it.each([
-    /* home + 9 service pages + 2 industry pages */
-    ['hero', 12],
+    /* home + 9 service pages + 2 industry pages + 7 location pages (their
+       hero call button, SEO audit Phase 3) */
+    ['hero', 19],
     ['quote_sidebar', 1],
     ['paid_header', 5],
     ['paid_sticky', 4],
@@ -159,10 +160,10 @@ describe('the locations the site actually uses', () => {
   it('body prose is labelled content, including links from Markdown', () => {
     const content = at('content');
     expect(content.length).toBeGreaterThanOrEqual(29);
-    /* The service pages whose Markdown was not rewritten on 2026-10-15
-       (disinfection, emergency, industrial) still carry a bare "Call Now"
-       link. They have no component, so `normalizeBody` stamps them. */
-    expect(content.filter((l) => l.displayed === 'Call Now')).toHaveLength(3);
+    /* The last three bare "Call Now" links (disinfection, emergency,
+       industrial) went when those pages moved onto the office template in
+       Phase 3; the template's own call buttons carry their location. */
+    expect(content.filter((l) => l.displayed === 'Call Now')).toHaveLength(0);
   });
 
   it('the site footer carries one on every non-paid page, the paid footer none', () => {

@@ -52,7 +52,7 @@ Every event carries **no personal data**: no name, email, phone, message, addres
 | `form_start` *(new)* | First focus or keystroke inside a lead form, once per form per page view. Ignores the honeypot and non-lead forms. | `form_id` | The visitor started a form | Secondary, used for funnel diagnosis |
 | `lead_form_error` *(new)* | A lead form attempt did not become a lead. | `form_id`, `error_type` ∈ `validation` · `captcha` · `server` · `network` | A submission was lost or refused | Diagnostics only. **Never a conversion.** |
 | `email_click` *(new)* | A `mailto:` link was activated. | `page_path`, `link_location` | A tap on the email address | Secondary |
-| `quote_cta_click` *(new)* | A link to `/request-a-quote/`, or an in-page form anchor marked `data-quote-cta`, was activated. | `page_path`, `link_location` (`header`, `hero`, `content`, `sidebar`, `service_cta`, `footer`, `paid_header`, `paid_cta`, `paid_sticky`) | A navigation towards a form | Observation and CTA testing |
+| `quote_cta_click` *(new)* | A link to `/request-a-quote/`, or an in-page form anchor marked `data-quote-cta`, was activated. | `page_path`, `link_location` (`header`, `hero`, `content`, `sidebar`, `service_cta`, `footer`, `paid_header`, `paid_cta`, `paid_sticky`, `mobile_bar`) | A navigation towards a form | Observation and CTA testing |
 | `site_environment` | Pushed before `gtm.start` on every page. | `production` or `staging` | Lets the container exclude staging | Blocking trigger |
 
 **Form identities (`form_id`).**

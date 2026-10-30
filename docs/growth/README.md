@@ -38,6 +38,10 @@ The 15 Oct implementation record follows below; this section is the current stat
 - Google Ads: the lead and call conversion settings were reviewed (A1, A2). The three Secondary offline conversion actions were created (A3): `Evergreen - Qualified lead`, `Evergreen - Quote issued`, `Evergreen - Customer won`.
 - Staging: `stage.evergreencleaningservice.ca` was removed (no DNS record), which ends the staging hits to GA4 and Ads (A6). GA4 and Ads data from before 29 Oct includes some staging visits.
 
+**SEO audit Phase 3, batch 1 (30 Oct 2026):** the emergency, industrial, graffiti, pressure-washing and disinfection pages rebuilt on the office template, each with a definitional opening, the 10-city area and no unbacked claims (M8, H8, M14); a portfolio section on property management that hands periodic work to building maintenance (M10); a quote and call button in every location page's first screen; a phone pass: 16px body text, no tap target under 24px, a dimmed backdrop behind the open menu, and a call/quote bar at the bottom of every site page on phones (`mobile_bar` in GA4) (M12). `/locations/toronto-downtown/` keeps its URL: renaming it to `/locations/toronto/` would set it against the homepage for "commercial cleaning Toronto", the cannibalisation the audit flags as High.
+
+Lighthouse mobile, 30 Oct 2026, live site (median of 3; this container's network): home 68, office cleaning 81, Mississauga 74, `/lp/office-cleaning/` 78. With the GTM container blocked: 93, 99, 97, 96, and total blocking time from 633–820 ms to 0–5 ms. The container is the whole performance gap; H2 needs GTM access.
+
 **Client decisions, 30 Oct 2026:** the reply promise is "within 2 hours" everywhere, the site's forms as well as the ads; for the other Phase 2 calls, do what serves the site's SEO. So the quote form's checkboxes now use the service pages' names (M13), and the location pages carry the breadcrumb above the H1 (M9).
 
 **Still open:**

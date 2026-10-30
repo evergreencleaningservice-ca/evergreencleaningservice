@@ -48,6 +48,7 @@ export const CTA_LOCATIONS = [
   'paid_header',
   'paid_cta',
   'paid_sticky',
+  'mobile_bar',
 ] as const;
 export type CtaLocation = (typeof CTA_LOCATIONS)[number];
 
