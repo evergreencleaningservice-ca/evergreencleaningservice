@@ -64,7 +64,7 @@ Handrails and the push bars on stairwell doors take a lot of hands. Floors shoul
 
 ### Desks and Work Areas
 
-Keyboards, mice, phones and chair arms are touched constantly by the person at the desk, and by anyone who shares it. Encourage staff to keep desks clear so cleaners can reach the surface, give them somewhere other than their desk to eat lunch, and make sure your cleaning scope says whether desks are wiped and how often.
+Keyboards, mice, phones and chair arms are touched constantly by the person at the desk, and by anyone who shares it. Encourage staff to keep desks clear so cleaners can reach the surface, give them somewhere other than their desk to eat lunch, and make sure your cleaning scope says whether desks are wiped and how often. A few [cleaning products worth keeping in the office](/5-cleaning-products-you-should-have-in-your-office/) let staff wipe their own desks between visits.
 
 ![Industrial scrubber cleaning an office corridor](/images/night-janitorial-crew-office-toronto.jpg)
 

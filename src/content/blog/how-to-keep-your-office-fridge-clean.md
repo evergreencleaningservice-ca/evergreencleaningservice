@@ -1,6 +1,6 @@
 ---
 title: "How to Keep Your Office Fridge Clean"
-description: "Office fridge overflowing with leftovers and old employee lunch items? Read on to find out to avoid this issue and keep things clean."
+description: "How to keep a shared office fridge clean: warn staff before a clear-out, label food with names and dates, and move fresh food to the back."
 pubDate: 2022-02-25
 image: "/images/blog-office-fridge-cleaning-feature.jpg"
 imageAlt: "Gloved hands cleaning inside a refrigerator"
@@ -41,6 +41,6 @@ Consider asking your employees to be putting their fresh food at the back of the
 
 If you are concerned about the state of your office refrigerator, it is time to call in the professionals.
 
-At [Evergreen Cleaning](/about-us/), we offer quality janitorial services, and we are prepared to take care of all your commercial cleaning needs. [Contact us](/contact-us/) today!
+At [Evergreen Office Cleaning](/about-us/), we offer quality janitorial services, and we are prepared to take care of all your commercial cleaning needs. [Contact us](/contact-us/) today!
 
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

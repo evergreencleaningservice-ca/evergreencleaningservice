@@ -71,4 +71,4 @@ Building maintenance cleaning is the periodic work that routine cleaning does no
 
 At Evergreen Office Cleaning, we understand that maintaining a clean, functional and professional space is essential to your business's success — and to the tenants, customers and visitors who use it. Routine cleaning keeps a building tidy day to day; periodic maintenance is what stops floors dulling, carpets greying and entrances looking tired between them.
 
-A planned maintenance programme extends the life of floors and finishes. We use professional cleaning equipment and current techniques so the work lasts, and schedule it so it is done before it becomes a problem rather than after.
+A planned maintenance programme extends the life of floors and finishes. We use professional cleaning equipment and current techniques so the work lasts, and schedule it so it is done before it becomes a problem rather than after. Our guide to [dusting an office building properly](/how-to-properly-dust-office-building/) explains the top-to-bottom method behind high dusting.

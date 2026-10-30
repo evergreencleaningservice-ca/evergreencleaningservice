@@ -1,6 +1,6 @@
 ---
 title: "Ask the Office Cleaners: Cleaning Break Rooms"
-description: "Got a breakroom that needs cleaning? Here we discuss the most common messes we deal with in breakrooms and how to clean up!"
+description: "How office cleaners clean a break room: the sofa and upholstery, wooden benches, chairs and tables, and the carpet that takes the spills."
 pubDate: 2023-03-31
 image: "/images/blog-break-room-cleaning-feature.jpg"
 imageAlt: "Professional cleaner wiping a modern office break-room counter beside an organized refrigerator"
@@ -9,7 +9,7 @@ tags: ["breakroom", "cleaning", "commercial-cleaning", "commercial-office-cleani
 
 ## Cleaning Office Break Rooms
 
-Like many amazing employers, you’ve set up the best office break room you could possibly imagine. A fairly decent space for a quick snack, a much-needed lunch break, or just a place for your people to catch their breath in the course of their busy schedules. Break rooms are amazing. They’re extremely flexible and can be used for a wide range of purposes, from quiet solo work and informal meetings, to fun office gatherings and after-hours socials. However, being a multipurpose space, they tend to get untidy really quickly. Simple tasks like applying jam on toast lead to sticky spots and crumbs everywhere.  Pizza lovers leave greasy fingerprints on every surface they can find. Mind you – there is a limit to how many times you can flip those sofa cushions. At Evergreen Cleaning, we’ve seen some really messy and mucky spaces – so let’s ask a team of professional Toronto office cleaners how they go about cleaning office break rooms.
+Like many amazing employers, you’ve set up the best office break room you could possibly imagine. A fairly decent space for a quick snack, a much-needed lunch break, or just a place for your people to catch their breath in the course of their busy schedules. Break rooms are amazing. They’re extremely flexible and can be used for a wide range of purposes, from quiet solo work and informal meetings, to fun office gatherings and after-hours socials. However, being a multipurpose space, they tend to get untidy really quickly. Simple tasks like applying jam on toast lead to sticky spots and crumbs everywhere.  Pizza lovers leave greasy fingerprints on every surface they can find. Mind you – there is a limit to how many times you can flip those sofa cushions. At Evergreen Office Cleaning, we’ve seen some really messy and mucky spaces – so let’s ask a team of professional Toronto office cleaners how they go about cleaning office break rooms.
 
 ![Labelled spray bottle and microfibre cloths used for surface cleaning](/images/eco-friendly-cleaning-spray-microfibre.jpg)
 
@@ -33,6 +33,6 @@ We’ve also come across some really fancy office break rooms with table footbal
 
 ##### Your own team of professional office cleaners
 
-Need help getting all the cobwebs, crusts, and crumbs out of your break room? Evergreen Cleaning is an experienced team of expert office cleaners who know everything there is to know about the trade. Contact us today to learn more about how we can help make office cleaning easy and convenient, with minimal disruptions to your operations.
+Need help getting all the cobwebs, crusts, and crumbs out of your break room? Evergreen Office Cleaning is an experienced team of expert office cleaners who know everything there is to know about the trade. Contact us today to learn more about how we can help make office cleaning easy and convenient, with minimal disruptions to your operations.
 
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

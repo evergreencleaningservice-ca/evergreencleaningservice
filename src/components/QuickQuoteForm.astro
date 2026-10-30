@@ -13,7 +13,7 @@
  *                         code. Country is not asked: the email prints "CA".
  *   Email *
  *   Phone *
- *   I'm interested a quote for these services   checkboxes, not required
+ *   I'm interested in a quote for these services   checkboxes, not required
  *   Additional comments                          not required
  *
  * This replaces the short form (name, phone, email, one service select, an
@@ -105,7 +105,6 @@ const f = (name: string) => `${id}-${name}`;
       name="name"
       autocomplete="name"
       autocapitalize="words"
-      placeholder="Jane Doe"
       required
       aria-describedby={f('name-error')}
     />
@@ -234,7 +233,7 @@ const f = (name: string) => `${id}-${name}`;
   </div>
 
   <fieldset class="qq-field qq-group">
-    <legend class="qq-label">I'm interested a quote for these services</legend>
+    <legend class="qq-label">I'm interested in a quote for these services</legend>
     <ul class="qq-choices">
       {
         SERVICE_OPTIONS.map((service, i) => (
@@ -474,8 +473,13 @@ const f = (name: string) => `${id}-${name}`;
        rather than as a set of boxes to fill. The blue is doing structural
        work here, not brand work — it says "this is where you type" — and it
        sits under Evergreen's green without competing for it. The button
-       stays green; only the boxes are the reference's. */
-    border: 1px solid transparent;
+       stays green; only the boxes are the reference's.
+
+       A VISIBLE EDGE since 30 Oct 2026. The tint alone is about 1.1:1
+       against the white card, so on a phone several fields read as blank
+       bands (SEO audit; WCAG 1.4.11 asks 3:1 for an input's boundary).
+       #7f8a99 is 3.5:1 on white. */
+    border: 1px solid #7f8a99;
     border-radius: var(--radius);
     background: #ebf2fa;
     font-family: inherit;

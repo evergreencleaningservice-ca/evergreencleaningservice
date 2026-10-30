@@ -15,7 +15,7 @@ imageAlt: "Toronto skyline at sunset"
 
 Whether you need [office cleaning](/services/office-cleaning/), [commercial cleaning services](/), or [industrial cleaning](/services/industrial-cleaning/), our expertise, built since 1989, can help your business make a bold statement and that first impression.
 
-Give your customers, employees, and visitors the opportunity to enjoy the same pride in your space that you feel. Take advantage of our free estimate and consultation to introduce you to the Evergreen Cleaning way of completing your vision for your commercial, industrial, or office environment.
+Give your customers, employees, and visitors the opportunity to enjoy the same pride in your space that you feel. Take advantage of our free estimate and consultation to introduce you to the Evergreen way of completing your vision for your commercial, industrial, or office environment.
 
 Since 1989 we’ve been delivering professional cleaning services to a multitude of businesses in the Toronto and GTA area. From professional firms and private offices, health, dental and medical clinics, retail outlets, to industrial building and warehouses. We can handle any mess you throw at us, and if you’re ever in an emergency and need something cleaned in a pinch, we can get it done.
 

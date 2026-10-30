@@ -70,7 +70,7 @@ Disinfection cleaning is cleaning a workplace and then treating the surfaces peo
 
 ## Clean first, then disinfect
 
-Before we disinfect, every surface is cleaned with detergent to remove dirt and residue. Skip that step and the disinfectant cannot reach the surface, so it is not properly disinfected. Then the touch points are treated, using specialized products chosen with the air your staff breathe in mind.
+Before we disinfect, every surface is cleaned with detergent to remove dirt and residue. Skip that step and the disinfectant cannot reach the surface, so it is not properly disinfected. Then the touch points are treated, using specialized products chosen with the air your staff breathe in mind. Products are never mixed: some common combinations release toxic gases, as our guide to [cleaning products you should never mix](/6-common-cleaning-products-that-you-should-never-mix-together/) explains.
 
 ![Protected worker cleaning a doorknob](/images/commercial-disinfection-service.jpg)
 

@@ -2,7 +2,7 @@
 title: "Commercial Cleaning"
 h1: "Commercial Cleaning & Janitorial Services in Toronto and the GTA"
 seoTitle: "Commercial Cleaning & Janitorial Services in Toronto | Evergreen"
-description: "Commercial cleaning and janitorial services in Toronto and the GTA — retail, institutional and mixed-use buildings, recurring or one-off, after hours."
+description: "Commercial cleaning and janitorial services in Toronto and the GTA: retail, institutional and mixed-use buildings, after hours. We reply within 2 hours."
 summary: "Recurring and one-off cleaning for the commercial spaces your customers and visitors judge you by — scheduled around your opening hours and scoped on site, not over the phone."
 image: "/images/lobby-floor-scrubber-commercial.jpg"
 imageAlt: "Close-up of a floor machine cleaning a commercial lobby"

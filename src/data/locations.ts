@@ -111,7 +111,7 @@ export const locations: Location[] = [
       h1: 'Office & Commercial Cleaning in Mississauga',
       subtitle: 'Reliable, Professional Facility Maintenance for Mississauga Businesses',
       intro: [
-        'From corporate headquarters along the Hurontario corridor and the Airport Corporate Centre to high-traffic industrial complexes in Meadowvale, Evergreen Cleaning Service provides comprehensive commercial cleaning and janitorial solutions tailored to your operational schedule.',
+        'From corporate headquarters along the Hurontario corridor and the Airport Corporate Centre to high-traffic industrial complexes in Meadowvale, Evergreen Office Cleaning provides comprehensive commercial cleaning and janitorial solutions tailored to your operational schedule.',
         'Serving Peel Region and the GTA since 1989, our WSIB-covered, bonded and insured teams keep your facility clean and healthy for employees, clients and visitors.',
       ],
       servicesTitle: 'Mississauga Commercial Facilities We Service:',
@@ -195,7 +195,7 @@ export const locations: Location[] = [
       h1: 'Office & Commercial Cleaning in Vaughan and Concord',
       subtitle: 'Keep Your Vaughan Commercial Property Spotless, Professional, and Safe',
       intro: [
-        'As Vaughan continues rapid corporate expansion across the Vaughan Metropolitan Centre (VMC) and industrial sectors in Concord and Woodbridge, maintaining an exceptional physical workspace is critical. Evergreen Cleaning Service provides top-tier commercial office cleaning and building maintenance designed for modern businesses.',
+        'As Vaughan continues rapid corporate expansion across the Vaughan Metropolitan Centre (VMC) and industrial sectors in Concord and Woodbridge, maintaining an exceptional physical workspace is critical. Evergreen Office Cleaning provides top-tier commercial office cleaning and building maintenance designed for modern businesses.',
         'Whether you run a high-tech corporate office, a commercial showroom along Highway 7, or a high-capacity distribution warehouse near Highway 400, our dedicated cleaning teams deliver consistent, reliable service.',
       ],
       servicesTitle: 'Cleaning Services Tailored for Vaughan Enterprises:',

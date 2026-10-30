@@ -1,6 +1,6 @@
 ---
 title: "Keep Your Office at Home Clean"
-description: "Working from home wrecking havoc on your home office? Here we give you some tips on keeping your workspace spic and span."
+description: "Keeping a home office clean: cleaning products within reach, a filing system that keeps paper off the desk, and when to get help."
 pubDate: 2021-02-26
 image: "/images/blog-home-office-cleaning-feature.jpg"
 imageAlt: "Person cleaning an organized home-office desk in a bright Toronto condo"
@@ -25,6 +25,6 @@ It’s not necessary for an office to be cluttered with papers. Instead, you may
 
 If your schedule is jam-packed, you may not have any time left over for cleaning. If this is the case for you, it is a good idea to work with a cleaning service. You can schedule periodic cleanings so that your office stays tidy even when you can’t clean it yourself. You don’t necessarily have to hire cleaners year-round; you can opt to bring them in during your busy season and clean your office on your own the rest of the year. Working with a cleaning company will allow you to maintain your office even when you have deadlines to meet.
 
-_**If you are searching for dependable cleaners in the Toronto area, you may want to take a closer look at [Evergreen Cleaning](/about-us/). We have extensive experience with office cleaning. If you reach out to us, we will be happy to tell you more about our services. If you can’t keep up with your office on your own, hiring cleaners is the smartest thing that you can do.**_
+_**If you are searching for dependable cleaners in the Toronto area, you may want to take a closer look at [Evergreen Office Cleaning](/about-us/). We have extensive experience with office cleaning. If you reach out to us, we will be happy to tell you more about our services. If you can’t keep up with your office on your own, hiring cleaners is the smartest thing that you can do.**_
 
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

@@ -215,7 +215,7 @@ describe('every field is labelled', () => {
     ]) {
       expect(f, label).toContain(label);
     }
-    expect(f).toMatch(/I(?:'|&#39;)m interested a quote for these services/);
+    expect(f).toMatch(/I(?:'|&#39;)m interested in a quote for these services/);
   });
 });
 

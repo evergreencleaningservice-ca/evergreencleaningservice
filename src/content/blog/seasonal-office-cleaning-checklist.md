@@ -40,7 +40,7 @@ Salt left on a floor scratches and dulls the finish, and salt left in carpet wea
 
 ### Look after the air
 
-Heated air in winter is dry, and with windows shut and fewer people going out at lunch, colds spread more easily. Vacuum with HEPA filtration, wipe high and hard surfaces where dust collects (fan blades, window frames, vents), keep air filters changed, and run a humidifier when the air is very dry. Touch points such as door handles, switches, elevator buttons and washroom fixtures should be disinfected on every visit.
+Heated air in winter is dry, and with windows shut and fewer people going out at lunch, colds spread more easily. Vacuum with HEPA filtration, wipe high and hard surfaces where dust collects (fan blades, window frames, vents; see [how to dust an office properly](/how-to-properly-dust-office-building/)), keep air filters changed, and run a humidifier when the air is very dry. Touch points such as door handles, switches, elevator buttons and washroom fixtures should be disinfected on every visit.
 
 ## Spring: A Deep Clean and a Declutter
 
@@ -83,6 +83,6 @@ Fall is also the time to get the entrance ready for winter again.
 
 ## Let a Crew Plan It
 
-None of this has to depend on someone remembering it. A cleaning company can build the seasonal work into your routine scope, with the floor and carpet work planned through the year. Evergreen Office Cleaning has cleaned offices in Toronto and the GTA since 1989. [Contact us](/contact-us/) for a quote.
+None of this has to depend on someone remembering it, whether your office is cleaned [during the day or at night](/day-night-which-is-the-best-routine-for-your-office/). A cleaning company can build the seasonal work into your routine scope, with the floor and carpet work planned through the year. Evergreen Office Cleaning has cleaned offices in Toronto and the GTA since 1989. [Contact us](/contact-us/) for a quote.
 
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/), [building maintenance and floor care](/services/building-maintenance/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

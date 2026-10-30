@@ -127,7 +127,7 @@ export function quickQuoteMarkup({
       ${before.map(input).join('\n')}
 
       <fieldset>
-        <legend>I'm interested a quote for these services</legend>
+        <legend>I'm interested in a quote for these services</legend>
         <ul>
           ${SERVICE_OPTIONS.map(
             (s, i) =>

@@ -1,6 +1,6 @@
 ---
 title: "How to Properly Dust an Office Building"
-description: "Dust taking over at the office? Let us give you some tips from the experts who know how to take back your workspace."
+description: "How to dust an office building properly: what dust is, the equipment to use, how often to dust, and the top-to-bottom order that keeps it down."
 pubDate: 2020-10-31
 image: "/images/blog-office-dusting-method-feature.jpg"
 imageAlt: "Professional cleaner using a telescoping vacuum duster on high office surfaces"
@@ -88,6 +88,6 @@ Make sure you dust any other places where you think that dust could possibly acc
 
 Proper dusting is important not only to keeping your employees healthy and inspired but making a good impression with your valued clients. Paying attention to your surroundings will help improve every aspect of your business and boost brand image.
 
-For all of your commercial cleaning needs, [contact](/contact-us/) the team at [Evergreen Commercial Cleaning & Janitorial](/about-us/) and we’ll be happy to get rid of your dust!
+For all of your commercial cleaning needs, [contact](/contact-us/) the team at [Evergreen Office Cleaning](/about-us/) and we’ll be happy to get rid of your dust!
 
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [building maintenance and floor care](/services/building-maintenance/) services cover it for workplaces across Toronto and the GTA.

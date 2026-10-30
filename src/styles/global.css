@@ -591,6 +591,23 @@ img {
   text-align: left;
 }
 
+/* On a narrow phone a three-column table cannot shrink below its longest
+   words, and it pushed the commercial cleaning page to 348px at a 320px
+   viewport (SEO audit, 30 Oct 2026). Below 480px it scrolls sideways inside
+   its own box instead, with slightly tighter cells. */
+@media (max-width: 479px) {
+  .entry-content table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .entry-content th,
+  .entry-content td {
+    padding: 6px 8px;
+  }
+}
+
 /* ---------- utilities ---------- */
 
 .text-center {

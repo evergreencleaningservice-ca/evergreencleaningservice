@@ -73,9 +73,15 @@ const faqs = [
   ...(local?.faqs ?? []),
   {
     q: `Do you have an office in ${location.name}?`,
-    a: isToronto
-      ? `Yes, in the city: ${nap.addressLine}.`
-      : `No. Crews come to ${location.name} from our one office, at ${nap.streetAddress} in Toronto.`,
+    /* Etobicoke answered "Yes" here because it is in the City of Toronto,
+       which read as an Etobicoke office (SEO audit, 30 Oct 2026). Only the
+       downtown page can say yes. */
+    a:
+      location.slug === 'toronto-downtown'
+        ? `Yes: ${nap.addressLine}.`
+        : isToronto
+          ? `No. ${location.name} is in the City of Toronto, and crews come from our one office, at ${nap.streetAddress} downtown.`
+          : `No. Crews come to ${location.name} from our one office, at ${nap.streetAddress} in Toronto.`,
   },
   /* "How do I get a quote?" and "Can cleaning be done after hours?" were the
      same on all seven pages; the quote form beside the text and the local
@@ -271,7 +277,7 @@ const webPage = webPageSchema({
               id="offer-quote"
               formId={`location-${location.slug}`}
               heading={`Get a quote in ${location.name}`}
-              intro="A few details and we will arrange a walkthrough. No obligation."
+              intro="We reply within 2 hours, then arrange a free walkthrough when it suits you. No obligation."
             />
           </div>
         </aside>
