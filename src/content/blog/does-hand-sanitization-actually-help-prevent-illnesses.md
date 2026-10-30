@@ -38,5 +38,3 @@ Unfortunately, hand sanitization is not sufficient in commercial settings. That 
 When you use our service, you will not need to worry about how effective hand sanitizers are since everything gets cleaned at the source.  Our highly trained professionals will focus on everything. This includes keyboards, telephones, and even touchscreens when requested. All of your high traffic areas are given priority, including such areas as waiting areas, public washrooms, and employee kitchens, among others. The key to good health is good hygiene.
 
 [Contact us](/contact-us/) today so we can help you with all of your commercial and janitorial cleaning requirements.
-
-![Evergreen Office Cleaning logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

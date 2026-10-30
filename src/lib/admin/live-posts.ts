@@ -12,7 +12,7 @@
  * fonts and tags are the site's own. `fillShell` swaps the placeholders for
  * the post. The shell is never served at its own address.
  *
- * THE LISTS. /insights/ (page one), /sitemap-0.xml and /rss.xml get the live
+ * THE LISTS. /insights/ (page one), /sitemap-insights-0.xml and /rss.xml get the live
  * posts added ahead of the repo's. The list entries copy the page's own
  * scoped-style attribute, so they look exactly like the entries beside them.
  *
@@ -246,7 +246,7 @@ export interface ServeEnv {
 }
 
 /** The lists that carry live posts. They run the Worker first (wrangler.jsonc `run_worker_first`). */
-export const LIST_PATHS = new Set(['/insights/', '/sitemap-0.xml', '/rss.xml']);
+export const LIST_PATHS = new Set(['/insights/', '/sitemap-insights-0.xml', '/rss.xml']);
 
 /**
  * A response the Worker built from an asset: the asset's headers, minus the

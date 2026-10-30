@@ -48,5 +48,3 @@ You have probably heard of chloroform. It is the stuff used in movies by kidnapp
 _**Stay safe when you’re cleaning or stay super safe and leave the cleaning to the pros at Evergreen Commercial Cleaning.**_ 
 
 ##### [CONTACT US](/contact-us/) today for all of your cleaning needs!
-
-![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-torotno-site-logo-banner.jpg)

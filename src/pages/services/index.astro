@@ -48,6 +48,15 @@ const services = (await getCollection('services')).sort(
 
   <div class="section-padding">
     <div class="container">
+      {/* A hub intro (SEO audit M11): what the services have in common and
+          where to go next, so the page is more than a grid of cards. */}
+      <p class="svc-intro">
+        Evergreen Office Cleaning has cleaned offices, clinics, warehouses and managed buildings across
+        Toronto and the GTA since 1989. Most clients have a recurring after-hours contract; the specialty
+        services below are booked on their own or added to one. Each is scoped at a free walkthrough. See
+        {' '}<a href="/industries/">who we clean for</a>, the <a href="/locations/">areas we serve</a>, or
+        {' '}<a href="/request-a-quote/">request a quote</a>.
+      </p>
       <div class="svc-grid">
         {
           services.map((service, index) => (
@@ -60,6 +69,12 @@ const services = (await getCollection('services')).sort(
 </BaseLayout>
 
 <style>
+  .svc-intro {
+    max-width: 760px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+
   .page-header .section-subtitle {
     margin-bottom: 6px;
   }

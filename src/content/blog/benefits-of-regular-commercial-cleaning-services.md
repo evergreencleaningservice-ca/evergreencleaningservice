@@ -54,5 +54,3 @@ If you want your employees to look forward to their workday, they should arrive 
 Keeping a clean workplace involves picking up papers, keeping rooms free of clutter, cleaning bathrooms daily, and addressing the minutiae of other details that keep a work environment clean and operative.
 
 _**If you are interested in the types of benefits listed here, don’t delay! [Contact us](/contact-us/) and make arrangements with [Evergreen Cleaning](/services/) for regular cleaning services for your commercial location.**_
-
-![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

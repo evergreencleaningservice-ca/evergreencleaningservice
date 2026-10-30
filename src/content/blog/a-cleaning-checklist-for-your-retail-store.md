@@ -76,5 +76,3 @@ When you get [Evergreen Cleaning](/about-us/)‘s professional cleaning services
 As you can see, there is a lot that needs to get done when it comes to keeping a retail store clean. A lot of stores have even more that’s required. It depends on how much volume a store gets and the types of products they sell. You can call the professionals at Evergreen to ensure that you get all of the cleanings you need to do without allocating your valuable time to it. That way you can better focus your efforts on more important things that generate revenue for your business.
 
 ### In the GTA, [contact us](/contact-us/) today for all of your [commercial cleaning and janitorial needs](/services/)!
-
-![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

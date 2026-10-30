@@ -267,7 +267,16 @@ describe('the legacy redirect map', () => {
        is a link class going dark, which is what this test catches — so it is
        pinned rather than relaxed to a lower bound.
        `tests/build/redirect-variants.test.ts` owns the arithmetic. */
-    expect(redirects.length).toBe(171);
+    /* Two sections were added on 30 Oct 2026 and are counted apart: the
+       slash-less spelling of every built page (SEO audit M3), and the old
+       single sitemap pointing at the pages sitemap (M2). */
+    const pageSlash = redirects.filter((r) => r.to === `${r.from}/`);
+    const legacy = redirects.filter((r) => r.to !== `${r.from}/` && r.from !== '/sitemap-0.xml');
+    expect(legacy.length).toBe(171);
+    expect(redirects.some((r) => r.from === '/sitemap-0.xml' && r.to === '/sitemap-pages-0.xml')).toBe(true);
+    for (const page of ['/about-us', '/insights', '/services/office-cleaning', '/locations/mississauga']) {
+      expect(pageSlash.some((r) => r.from === page), page).toBe(true);
+    }
     expect(redirects.some((r) => r.from === '/tag/*')).toBe(false);
     expect(redirects.some((r) => r.from === '/tag/markup/')).toBe(true);
     expect(redirects.some((r) => r.from === '/author/*')).toBe(true);

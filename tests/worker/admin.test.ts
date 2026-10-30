@@ -50,7 +50,7 @@ const ASSETS = {
     assetCalls.push(pathname);
     if (pathname === '/eg-live-post-shell/') return new Response(SHELL_HTML, { headers: { 'content-type': 'text/html', etag: '"x"' } });
     if (pathname === '/insights/') return new Response(INSIGHTS_HTML, { headers: { 'content-type': 'text/html' } });
-    if (pathname === '/sitemap-0.xml') return new Response('<urlset><url><loc>a</loc></url></urlset>');
+    if (pathname === '/sitemap-insights-0.xml') return new Response('<urlset><url><loc>a</loc></url></urlset>');
     if (pathname === '/office-cleaning/' || pathname === '/services/') return new Response('page');
     if (pathname === '/data/blog-posts.json') return new Response(JSON.stringify([{ slug: 'old', title: 'Old', pub_date: '2020-01-01' }]));
     if (pathname.startsWith('/admin')) return new Response('<html>admin page</html>', { headers: { 'content-type': 'text/html' } });
@@ -625,7 +625,7 @@ describe('posts published from the admin, on the site', () => {
     expect(list.indexOf('clean-teeth')).toBeLessThan(list.indexOf('Old post'));
     expect(list).toContain('<article class="list-article" data-astro-cid-oxe>');
     expect(list).toContain('Clean &quot;teeth&quot; &amp; &lt;more&gt;');
-    const map = await (await site('/sitemap-0.xml')).text();
+    const map = await (await site('/sitemap-insights-0.xml')).text();
     expect(map).toContain('<loc>https://www.evergreencleaningservice.ca/clean-teeth/</loc>');
   });
 

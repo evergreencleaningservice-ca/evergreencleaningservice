@@ -17,7 +17,6 @@ While the job itself, like many others, can have its own inherent upsides and do
 
 Anyone who is looking to enter this industry must have it. Cleaning professionals understand the perspective many have on the industry and everyone who works in it. Those who work in this industry must be humble and the most highly trained professionals in the industry showcase extreme humility. It’s truly a virtue with it being one’s ability to set aside their pride in order to be able to do something greater than one’s self and to avoid basing your self-worth on factors that shouldn’t impact it.
 
-
 ### Cleaners With Immense Work Ethic
 
 No matter where you are in the industry, anyone in the cleaning industry is going to need to have a strong work ethic. It can take a lot of time to complete a single cleaning job and you generally have a variety of assignments to complete on any given day. Because of this, you need a strong work ethic showcased not only on a day by day basis but also as a whole. That way, you will be able to generate referrals, sustain good working relationships, and maintain a better reputation all-around.
@@ -29,5 +28,3 @@ As a professional working in the cleaning industry, you need to be able to work 
 Because of this, every cleaning professional must be effective at working together with other people. By maintaining relationships in the industry, you will be able to establish bonds and discuss stuff that only your colleagues would be able to relate to.
 
 As you can tell, the work of a cleaning professional isn’t always as it is perceived to be. The truth is, you need to be well-trained, humble, and you need to be an effective all-around team player in order to succeed. If you are looking to hire a [professional cleaner](/services/commercial-cleaning/) to maintain your commercial property, [contact us](/contact-us/) today and we can connect you with our highly trained staff.
-
-![Evergreen Office Cleaning logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

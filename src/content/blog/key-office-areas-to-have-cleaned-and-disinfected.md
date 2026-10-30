@@ -40,5 +40,3 @@ Kitchen area
 We understand that the health and safety of everyone who uses your office are among your top priorities. This is why we are fully prepared to help you with your office cleaning needs. From professional carpet cleaning to a thorough and deep office clean, the cleaning experts at [Evergreen Cleaning](/about-us/) have you covered.
 
 We are a local Canadian company that specializes in providing quality and eco-friendly office cleaning and disinfection services, and janitorial services to the GTA. [Contact us](/contact-us/) today for all of your cleaning needs!
-
-![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg)

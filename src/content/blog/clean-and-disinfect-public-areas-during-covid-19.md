@@ -48,5 +48,3 @@ You should also clean shared areas like bathrooms and kitchens more frequently.
 For all of your commercial cleaning needs, [contact Evergreen Cleaning today](/contact-us/)!
 
 #### All of us can help to prevent the spread of COVID-19.
-
-![Evergreen Office Cleaning logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

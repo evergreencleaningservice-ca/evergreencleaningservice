@@ -12,6 +12,19 @@ import { site, nap } from '../../data/site';
 import { pageTitle } from '../../lib/title';
 import { breadcrumbSchema } from '../../lib/schema';
 
+/* The coverage sentence with each area that has its own page linked to it
+   (SEO audit M11). "Toronto" goes to the downtown page, the only Toronto
+   page there is. */
+const AREA_LINKS: Record<string, string> = {
+  Toronto: '/locations/toronto-downtown/',
+  ...Object.fromEntries(locations.filter((l) => l.slug !== 'toronto-downtown').map((l) => [l.name, `/locations/${l.slug}/`])),
+};
+const escape = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const linkedCoverage = escape(COVERAGE_SENTENCE).replace(
+  new RegExp(`\\b(${Object.keys(AREA_LINKS).join('|')})\\b`, 'g'),
+  (name) => `<a href="${AREA_LINKS[name]}">${name}</a>`,
+);
+
 const description =
   'Commercial and office cleaning across the Greater Toronto Area — downtown Toronto, Mississauga, Etobicoke, Vaughan, Markham, Brampton and Oakville.';
 ---
@@ -36,7 +49,7 @@ const description =
     <div class="container">
       <p class="loc-lead">
         Evergreen Office Cleaning works across the Greater Toronto Area from one office, at
-        {' '}{nap.streetAddress}, {nap.addressLocality}: {COVERAGE_SENTENCE}. The areas below have a page
+        {' '}{nap.streetAddress}, {nap.addressLocality}: <Fragment set:html={linkedCoverage} />. The areas below have a page
         with local detail; the rest are covered in exactly the same way.
       </p>
 

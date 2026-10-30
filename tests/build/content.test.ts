@@ -158,9 +158,10 @@ describe('nothing was invented', () => {
       /* `lpx-` is the shared landing-component class from Phase 10, which
          replaced the two per-page copies (`lpq-review-stars` and the markup
          the other landing page wrote inline). The old name is still matched
-         so this test keeps its meaning if either page is ever reverted. */
+         so this test keeps its meaning if either page is ever reverted.
+         `rv-stars` is the per-review line on /reviews/ (SEO audit H4). */
       const withoutReviews = text.replace(
-        /<p class="lp[qx]-review-stars"[^>]*>[\s\S]*?<\/p>/g,
+        /<p class="(?:lp[qx]-review-stars|rv-stars)"[^>]*>[\s\S]*?<\/p>/g,
         ''
       );
       if (/[\u2605\u2606]{3,}|(&#9733;){3,}/.test(withoutReviews)) stray.push(page);

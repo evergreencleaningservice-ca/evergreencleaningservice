@@ -82,5 +82,3 @@ Make sure you dust any other places where you think that dust could possibly acc
 Proper dusting is important not only to keeping your employees healthy and inspired but making a good impression with your valued clients. Paying attention to your surroundings will help improve every aspect of your business and boost brand image.
 
 For all of your commercial cleaning needs, [contact](/contact-us/) the team at [Evergreen Commercial Cleaning & Janitorial](/about-us/) and we’ll be happy to get rid of your dust!
-
-![Evergreen Office Cleaning logo](/images/evergreen-cleaning-toronto-logo-banner.jpg)

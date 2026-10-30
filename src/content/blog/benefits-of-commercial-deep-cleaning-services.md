@@ -52,5 +52,3 @@ Post-construction cleaning
 ### We Implement a Systematic Approach
 
 Our team knows just what should be cleaned and how to go about the process. We work in an efficient and effective manner so that you can focus on the primary aspects of your business. So, do not hesitate to seek our services today! [Contact us](/contact-us/) to schedule your cleaning!
-
-![Evergreen Office Cleaning logo](/images/cropped-evergreen-cleaning-torotno-site-logo-banner.jpg)

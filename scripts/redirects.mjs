@@ -62,6 +62,37 @@ section(
    Cloudflare reads this file before it looks for a matching asset — see
    `emptyTagRedirects` in src/data/redirects.ts. */
 section("Tags the original carries with no posts", bothSlashSpellings(emptyTagRedirects));
+/* The single sitemap was split by type on 30 Oct 2026 (SEO audit M2). Search
+   Console had been reading sitemap-0.xml since 10 Oct, so it points at the
+   pages sitemap rather than 404ing. */
+section('Sitemap split', [{ from: '/sitemap-0.xml', to: '/sitemap-pages-0.xml' }]);
+
+/* Every page this build serves, spelled without its trailing slash. Without a
+   rule, Cloudflare's asset router answers `/about-us` with a 307 to
+   `/about-us/`: temporary, so links to the slash-less spelling pass no signal
+   (SEO audit M3, 28 Oct 2026). Exact rules, because a splat would also catch
+   the slashed spelling and loop. Sources that an earlier rule already
+   redirects elsewhere are skipped, so first-match order cannot change. */
+const taken = new Set(lines.filter((l) => l.endsWith(' 301')).map((l) => l.split(' ')[0]));
+const pagePaths = [];
+const walk = (dir) => {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const full = path.join(dir, entry.name);
+    if (fs.existsSync(path.join(full, 'index.html'))) {
+      pagePaths.push('/' + path.relative(dist, full).split(path.sep).join('/'));
+    }
+    walk(full);
+  }
+};
+walk(dist);
+section(
+  'Pages, slash-less spelling to the canonical one',
+  pagePaths
+    .filter((p) => !p.startsWith('/admin') && !taken.has(p))
+    .sort()
+    .map((p) => ({ from: p, to: `${p}/` }))
+);
 /* Wildcards are NOT expanded: a splat already matches both spellings, and a
    duplicated rule here would shadow the one below it. */
 section('Wildcards, last so the rules above win', wildcardRedirects);
