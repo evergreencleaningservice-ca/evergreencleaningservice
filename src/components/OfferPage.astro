@@ -320,10 +320,11 @@ const RELATED_TEXT: Record<string, string> = {
       align-items: start;
     }
   }
-  /* Sticky only where the whole form fits on screen (the card is about 875px
-     tall plus the 92px header): on a shorter laptop a pinned form left its
-     lower fields and submit button off-screen until the end of the page. */
-  @media (min-width: 992px) and (min-height: 1000px) {
+  /* Sticky only where the whole form fits on screen: the card is about 875px,
+     plus 78px once reCAPTCHA loads on the first focus, plus the 92px header.
+     On a shorter window a pinned form left its lower fields and submit
+     button off-screen until the end of the page. */
+  @media (min-width: 992px) and (min-height: 1080px) {
     .offer-aside {
       position: sticky;
       top: 92px;

@@ -348,10 +348,10 @@ const webPage = webPageSchema({
     }
   }
   /* The form stays in view beside the long text column, but only where the
-     whole form fits on screen (the card is about 840px plus the 92px
-     header). On a laptop a pinned form taller than the window hid its
-     submit button until the end of the page (Codex review on #64). */
-  @media screen and (min-width: 941px) and (min-height: 1000px) {
+     whole form fits on screen: the card is about 840px, plus 78px once
+     reCAPTCHA loads on the first focus, plus the 92px header. A pinned form
+     taller than the window hid its submit button (Codex reviews, #64, #67). */
+  @media screen and (min-width: 941px) and (min-height: 1080px) {
     .loc-aside {
       position: sticky;
       top: 92px;
