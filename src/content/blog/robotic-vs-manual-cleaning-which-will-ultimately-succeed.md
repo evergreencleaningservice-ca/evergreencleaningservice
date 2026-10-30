@@ -4,7 +4,7 @@ description: "How commercial cleaning methods have changed, from mops and cotton
 pubDate: 2023-01-31
 updatedDate: 2026-10-30
 image: "/images/blog-robotic-versus-manual-cleaning-feature.jpg"
-imageAlt: "Cleaner detailing floor edges while an autonomous scrubber handles an open lobby area"
+imageAlt: "Robot vacuum cleaning a wooden floor"
 tags: ["ai", "cleaning", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning", "manual-cleaning", "robotic"]
 ---
 
@@ -50,7 +50,7 @@ They can also run at hours when no one is in the building, and they log their ow
 
 The realistic future is not robots or people but both: machines for the repetitive floor work in large spaces, and trained crews for everything else, including supervising the machines. Better equipment lets a crew spend its time where it matters most.
 
-![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
+![Gloved hand wiping a white surface with a green cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 At [Evergreen](/about-us/), our crews use modern equipment (sealed HEPA vacuums, microfibre systems, auto-scrubbers) on a written scope set for your building. [Contact us](/contact-us/) to talk about yours.
 

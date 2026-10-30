@@ -3,7 +3,7 @@ title: "Commercial Cleaning Techniques To Avoid"
 description: "More cleaning product is not always better, and some popular cleaning tricks do more harm than good. Here are the cleaning techniques to avoid."
 pubDate: 2022-11-30
 image: "/images/blog-cleaning-techniques-to-avoid-feature.jpg"
-imageAlt: "Cleaning supervisor showing a trainee the correct cloth for a delicate stone surface"
+imageAlt: "Cleaning spray and cloth beside a sink"
 tags: ["cleaning", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning"]
 ---
 
@@ -25,7 +25,7 @@ Unfortunately, a lot of the cleaning tips and tricks out there aren’t practica
 
 This article will provide you with the top tips and cleaning techniques to avoid:
 
-![Labelled spray bottle and microfibre cloths used for surface cleaning](/images/eco-friendly-cleaning-spray-microfibre.jpg)
+![Cleaning spray bottle and folded microfibre cloths](/images/eco-friendly-cleaning-spray-microfibre.jpg)
 
 ### Use More Product
 
@@ -49,7 +49,7 @@ If you have anything silver, you’ve likely delved into random ideas on cleanin
 
 While using toothpaste on your silver is going to work, it’s also overly abrasive. Because of this, you could end up scratching the metal. Toothpaste is designed for brushing your teeth. Your teeth and enamel are stronger than silver. Silver is much more delicate, and you could end up irreparably damaging it. Stick to using toothpaste to clean your teeth. If you must, you can use it to clean silver that’s not too valuable for you.
 
-![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
+![Gloved hand wiping a white surface with a green cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### Clean Everything with Vinegar
 

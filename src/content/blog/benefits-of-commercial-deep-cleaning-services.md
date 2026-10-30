@@ -3,7 +3,7 @@ title: "Benefits of Commercial Deep Cleaning Services"
 description: "Work setting in need of a deep clean? Let the pros explain what this is and why it has its benefits to your commercial setting."
 pubDate: 2022-04-26
 image: "/images/blog-commercial-deep-cleaning-feature.jpg"
-imageAlt: "Commercial cleaning team deep cleaning office carpet and glass partitions after hours"
+imageAlt: "Gloved hands cleaning elevator buttons"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 ---
 
@@ -19,7 +19,7 @@ Studies show that having a healthy environment is crucial to not only the health
 - Access a Vast Array of Services
 - We Implement a Systematic Approach
 
-![Gloved cleaner wiping a counter with a green microfibre cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
+![Gloved hand wiping a white surface with a green cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
 ### First Impressions are Important
 

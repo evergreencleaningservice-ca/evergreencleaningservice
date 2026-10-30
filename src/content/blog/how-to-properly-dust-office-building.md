@@ -3,7 +3,7 @@ title: "How to Properly Dust an Office Building"
 description: "How to dust an office building properly: what dust is, the equipment to use, how often to dust, and the top-to-bottom order that keeps it down."
 pubDate: 2020-10-31
 image: "/images/blog-office-dusting-method-feature.jpg"
-imageAlt: "Professional cleaner using a telescoping vacuum duster on high office surfaces"
+imageAlt: "Duster cleaning a keyboard on a desk"
 tags: ["commercial-office-cleaning", "dust", "dusting"]
 ---
 
@@ -24,7 +24,7 @@ Dust is composed of very tiny particles most of which can only be seen through a
 
 The most common constituents of dust include pollen, dirt, soil, soot, hair, fabric fibres, microscopic decaying insects, plant materials and dead skin cells, called dander.
 
-![dust on a desk](/images/dust-on-office-desk-detail.jpg)
+![Duster beside a keyboard and office supplies](/images/dust-on-office-desk-detail.jpg)
 
 ### Dusting an office building is so important!
 

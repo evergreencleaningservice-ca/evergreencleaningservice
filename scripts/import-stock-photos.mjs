@@ -13,7 +13,11 @@ if(arg<0||!process.argv[arg+1])throw new Error('--sources must name the private 
 const sources=path.resolve(process.argv[arg+1]);
 const apply=process.argv.includes('--apply');
 const manifest=JSON.parse(await fs.readFile('docs/stock-photos/manifest.json','utf8'));
-const photos=manifest.photos.filter(p=>p.licensed);
+const providerArg=process.argv.indexOf('--provider');
+const provider=providerArg<0?null:process.argv[providerArg+1];
+if(providerArg>=0&&!provider)throw new Error('--provider requires a provider name');
+const photos=manifest.photos.filter(p=>p.licensed&&(!provider||p.provider===provider));
+if(!photos.length)throw new Error('No licensed photos match the requested provider');
 if(new Set(manifest.photos.map(p=>p.stockId)).size!==manifest.photos.length)throw new Error('Stock selections must remain distinct');
 const imageDir=path.resolve('public/images');
 const names=await fs.readdir(imageDir);
@@ -79,5 +83,5 @@ for(const item of stats){
  if(meta.width!==item.width||meta.height!==item.height)throw new Error(`Dimension mismatch: ${item.filename}`);
 }
 if(apply)for(const item of stats)await fs.copyFile(path.join(prepared,item.filename),path.join(imageDir,item.filename));
-await fs.writeFile('docs/stock-photos/prepared.json',JSON.stringify({licensedPhotos:photos.length,pendingPhotos:manifest.photos.length-photos.length,appliedToWorkingTree:apply,files:stats},null,2)+'\n');
-console.log(JSON.stringify({photos:photos.length,files:stats.length,pending:manifest.photos.length-photos.length,applied:apply,bytes:stats.reduce((n,s)=>n+s.bytes,0)}));
+await fs.writeFile('docs/stock-photos/prepared.json',JSON.stringify({licensedPhotos:manifest.photos.filter(p=>p.licensed).length,pendingPhotos:manifest.photos.filter(p=>!p.licensed).length,batchPhotos:photos.length,provider,appliedToWorkingTree:apply,files:stats},null,2)+'\n');
+console.log(JSON.stringify({photos:photos.length,files:stats.length,pending:manifest.photos.filter(p=>!p.licensed).length,applied:apply,bytes:stats.reduce((n,s)=>n+s.bytes,0)}));
