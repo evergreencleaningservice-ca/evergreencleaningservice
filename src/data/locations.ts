@@ -101,7 +101,7 @@ export const locations: Location[] = [
     mapQuery: 'Mississauga, Ontario, Canada',
     description:
       'Trusted commercial cleaning and office janitorial services in Mississauga and the Airport Corporate Centre. WSIB insured, bonded, and reliable. Request a quote.',
-    title: 'Commercial Cleaning & Office Janitorial Services Mississauga | Evergreen',
+    title: 'Commercial Cleaning & Janitorial Mississauga | Evergreen',
     detail: {
       h1: 'Commercial Cleaning & Office Janitorial Services in Mississauga',
       subtitle: 'Reliable, Professional Facility Maintenance for Mississauga Businesses',
@@ -180,7 +180,7 @@ export const locations: Location[] = [
     mapQuery: 'Vaughan, Ontario, Canada',
     description:
       'Professional commercial cleaning and janitorial services in Vaughan, Concord, and Woodbridge. Reliable, WSIB insured, and bonded. Get a quote today.',
-    title: 'Commercial Office Cleaning & Janitorial Vaughan & Concord | Evergreen',
+    title: 'Office Cleaning & Janitorial Vaughan & Concord | Evergreen',
     detail: {
       h1: 'Commercial Cleaning & Building Maintenance in Vaughan & Concord',
       subtitle: 'Keep Your Vaughan Commercial Property Spotless, Professional, and Safe',
