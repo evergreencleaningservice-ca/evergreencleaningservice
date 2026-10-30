@@ -148,7 +148,7 @@ Tell us when any of these change and the website's links and structured data wil
 | # | Source | How |
 |---|---|---|
 | 1 | The member directory of the BIA whose boundary contains the office at 243 Queen St W (confirm which on the City of Toronto's BIA map) | Members are the property owners and commercial tenants inside a BIA's boundary, so only that one BIA applies; serving an area does not qualify. Ask the BIA office. |
-| 2 | BSCA (Building Service Contractors Association) and ISSA | Trade-body member directories, if the listing is public and links to the website. |
+| 2 | BSCAI (Building Service Contractors Association International, bscai.org) and ISSA (issa.com) | Trade-body member directories, if the listing is public and links to the website. |
 | 3 | Property managers' approved-vendor pages | Ask current property-management clients. |
 | 4 | Client case studies or testimonials on clients' own sites | Offer a short write-up they can post with a link back. |
 | 5 | Suppliers' "partners" or "customers" pages | Ask the chemical and equipment suppliers. |
