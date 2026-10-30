@@ -5,9 +5,12 @@
 # site, AI tools may use it to answer questions and cite it, and models may
 # learn from it. A local business is better served by being known than by
 # being left out.
-Content-Signal: search=yes, ai-input=yes, ai-train=yes
+#
+# The Content-Signal line sits inside each group: a line above the first
+# User-agent belongs to no group, and strict parsers drop it.
 
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 
 # Named so a crawler that only reads its own block still finds an allow.
@@ -24,6 +27,7 @@ User-agent: Claude-User
 User-agent: Google-Extended
 User-agent: Applebot
 User-agent: Applebot-Extended
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 
 Sitemap: https://www.evergreencleaningservice.ca/sitemap-index.xml

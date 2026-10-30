@@ -42,11 +42,14 @@ repository contains prepared images.
 
 ## Current batch validation
 
-- 52 distinct Magnific selections; 400 changed website renditions, all decoded
+- 52 distinct Magnific selections; 520 changed website renditions, all decoded
   with expected dimensions and recorded byte sizes.
 - The preview build and canonical image-host check pass.
 - 28 image, social-image and image-parity tests pass.
-- Full suite: 864 passed, one environment failure because no Chromium executable
+- Full suite: 865 passed, one environment failure because no Chromium executable
   is installed. Browser installation was unavailable in this environment.
 - Source crops and generated JPEG renditions were visually reviewed.
 - Production publication must be verified separately after deployment.
+
+The hand-washing source and final hero were also inspected at full size after
+a review finding: the visible shapes are fingers around the soap, not a face.

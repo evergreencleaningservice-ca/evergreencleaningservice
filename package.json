@@ -22,6 +22,7 @@
     "preflight": "node --experimental-strip-types scripts/preflight.mjs",
     "fonts:fetch": "node --experimental-strip-types scripts/fonts-fetch.mjs",
     "images:variants": "node --experimental-strip-types scripts/hero-variants.mjs",
+    "images:feature-variants": "node --experimental-strip-types scripts/feature-variants.mjs",
     "measure": "node --experimental-strip-types scripts/measure.mjs",
     "captcha:check": "node --experimental-strip-types scripts/captcha-check.mjs",
     "secret:check": "node --experimental-strip-types scripts/secret-check.mjs",

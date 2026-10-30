@@ -208,6 +208,54 @@
     {
       "asset": "blog-cleaning-products-never-mix-feature",
       "stockId": "4205676",
+      "filename": "blog-cleaning-products-never-mix-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 6986
+    },
+    {
+      "asset": "blog-cleaning-products-never-mix-feature",
+      "stockId": "4205676",
+      "filename": "blog-cleaning-products-never-mix-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 18450
+    },
+    {
+      "asset": "blog-cleaning-products-never-mix-feature",
+      "stockId": "4205676",
+      "filename": "blog-cleaning-products-never-mix-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 12518
+    },
+    {
+      "asset": "blog-cleaning-products-never-mix-feature",
+      "stockId": "4205676",
+      "filename": "blog-cleaning-products-never-mix-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 15112
+    },
+    {
+      "asset": "blog-cleaning-products-never-mix-feature",
+      "stockId": "4205676",
+      "filename": "blog-cleaning-products-never-mix-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 39166
+    },
+    {
+      "asset": "blog-cleaning-products-never-mix-feature",
+      "stockId": "4205676",
+      "filename": "blog-cleaning-products-never-mix-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 28122
+    },
+    {
+      "asset": "blog-cleaning-products-never-mix-feature",
+      "stockId": "4205676",
       "filename": "blog-cleaning-products-never-mix-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -244,6 +292,54 @@
       "width": 300,
       "height": 150,
       "bytes": 12399
+    },
+    {
+      "asset": "blog-choosing-cleaning-company-feature",
+      "stockId": "81619496",
+      "filename": "blog-choosing-cleaning-company-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 10160
+    },
+    {
+      "asset": "blog-choosing-cleaning-company-feature",
+      "stockId": "81619496",
+      "filename": "blog-choosing-cleaning-company-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 26674
+    },
+    {
+      "asset": "blog-choosing-cleaning-company-feature",
+      "stockId": "81619496",
+      "filename": "blog-choosing-cleaning-company-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 20500
+    },
+    {
+      "asset": "blog-choosing-cleaning-company-feature",
+      "stockId": "81619496",
+      "filename": "blog-choosing-cleaning-company-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 19548
+    },
+    {
+      "asset": "blog-choosing-cleaning-company-feature",
+      "stockId": "81619496",
+      "filename": "blog-choosing-cleaning-company-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 53458
+    },
+    {
+      "asset": "blog-choosing-cleaning-company-feature",
+      "stockId": "81619496",
+      "filename": "blog-choosing-cleaning-company-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 40342
     },
     {
       "asset": "blog-choosing-cleaning-company-feature",
@@ -560,6 +656,54 @@
     {
       "asset": "blog-commercial-cleaning-air-quality-feature",
       "stockId": "37101068",
+      "filename": "blog-commercial-cleaning-air-quality-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 4512
+    },
+    {
+      "asset": "blog-commercial-cleaning-air-quality-feature",
+      "stockId": "37101068",
+      "filename": "blog-commercial-cleaning-air-quality-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 12093
+    },
+    {
+      "asset": "blog-commercial-cleaning-air-quality-feature",
+      "stockId": "37101068",
+      "filename": "blog-commercial-cleaning-air-quality-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 6630
+    },
+    {
+      "asset": "blog-commercial-cleaning-air-quality-feature",
+      "stockId": "37101068",
+      "filename": "blog-commercial-cleaning-air-quality-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 7218
+    },
+    {
+      "asset": "blog-commercial-cleaning-air-quality-feature",
+      "stockId": "37101068",
+      "filename": "blog-commercial-cleaning-air-quality-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 20921
+    },
+    {
+      "asset": "blog-commercial-cleaning-air-quality-feature",
+      "stockId": "37101068",
+      "filename": "blog-commercial-cleaning-air-quality-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 11152
+    },
+    {
+      "asset": "blog-commercial-cleaning-air-quality-feature",
+      "stockId": "37101068",
       "filename": "blog-commercial-cleaning-air-quality-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -596,6 +740,54 @@
       "width": 300,
       "height": 150,
       "bytes": 8177
+    },
+    {
+      "asset": "blog-office-germ-hotspots-feature",
+      "stockId": "26144485",
+      "filename": "blog-office-germ-hotspots-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 5748
+    },
+    {
+      "asset": "blog-office-germ-hotspots-feature",
+      "stockId": "26144485",
+      "filename": "blog-office-germ-hotspots-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 15632
+    },
+    {
+      "asset": "blog-office-germ-hotspots-feature",
+      "stockId": "26144485",
+      "filename": "blog-office-germ-hotspots-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 9214
+    },
+    {
+      "asset": "blog-office-germ-hotspots-feature",
+      "stockId": "26144485",
+      "filename": "blog-office-germ-hotspots-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 9631
+    },
+    {
+      "asset": "blog-office-germ-hotspots-feature",
+      "stockId": "26144485",
+      "filename": "blog-office-germ-hotspots-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 27941
+    },
+    {
+      "asset": "blog-office-germ-hotspots-feature",
+      "stockId": "26144485",
+      "filename": "blog-office-germ-hotspots-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 15244
     },
     {
       "asset": "blog-office-germ-hotspots-feature",
@@ -832,6 +1024,54 @@
     {
       "asset": "blog-commercial-deep-cleaning-feature",
       "stockId": "24492564",
+      "filename": "blog-commercial-deep-cleaning-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 6339
+    },
+    {
+      "asset": "blog-commercial-deep-cleaning-feature",
+      "stockId": "24492564",
+      "filename": "blog-commercial-deep-cleaning-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 15740
+    },
+    {
+      "asset": "blog-commercial-deep-cleaning-feature",
+      "stockId": "24492564",
+      "filename": "blog-commercial-deep-cleaning-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 9774
+    },
+    {
+      "asset": "blog-commercial-deep-cleaning-feature",
+      "stockId": "24492564",
+      "filename": "blog-commercial-deep-cleaning-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 10687
+    },
+    {
+      "asset": "blog-commercial-deep-cleaning-feature",
+      "stockId": "24492564",
+      "filename": "blog-commercial-deep-cleaning-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 28497
+    },
+    {
+      "asset": "blog-commercial-deep-cleaning-feature",
+      "stockId": "24492564",
+      "filename": "blog-commercial-deep-cleaning-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 16876
+    },
+    {
+      "asset": "blog-commercial-deep-cleaning-feature",
+      "stockId": "24492564",
       "filename": "blog-commercial-deep-cleaning-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -1008,6 +1248,54 @@
     {
       "asset": "blog-cleanable-office-layout-feature",
       "stockId": "20121779",
+      "filename": "blog-cleanable-office-layout-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 7296
+    },
+    {
+      "asset": "blog-cleanable-office-layout-feature",
+      "stockId": "20121779",
+      "filename": "blog-cleanable-office-layout-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 18854
+    },
+    {
+      "asset": "blog-cleanable-office-layout-feature",
+      "stockId": "20121779",
+      "filename": "blog-cleanable-office-layout-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 12128
+    },
+    {
+      "asset": "blog-cleanable-office-layout-feature",
+      "stockId": "20121779",
+      "filename": "blog-cleanable-office-layout-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 13115
+    },
+    {
+      "asset": "blog-cleanable-office-layout-feature",
+      "stockId": "20121779",
+      "filename": "blog-cleanable-office-layout-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 35755
+    },
+    {
+      "asset": "blog-cleanable-office-layout-feature",
+      "stockId": "20121779",
+      "filename": "blog-cleanable-office-layout-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 22044
+    },
+    {
+      "asset": "blog-cleanable-office-layout-feature",
+      "stockId": "20121779",
       "filename": "blog-cleanable-office-layout-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -1144,6 +1432,54 @@
     {
       "asset": "blog-cleaning-techniques-to-avoid-feature",
       "stockId": "3388005",
+      "filename": "blog-cleaning-techniques-to-avoid-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 1772
+    },
+    {
+      "asset": "blog-cleaning-techniques-to-avoid-feature",
+      "stockId": "3388005",
+      "filename": "blog-cleaning-techniques-to-avoid-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 4720
+    },
+    {
+      "asset": "blog-cleaning-techniques-to-avoid-feature",
+      "stockId": "3388005",
+      "filename": "blog-cleaning-techniques-to-avoid-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 1968
+    },
+    {
+      "asset": "blog-cleaning-techniques-to-avoid-feature",
+      "stockId": "3388005",
+      "filename": "blog-cleaning-techniques-to-avoid-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 2614
+    },
+    {
+      "asset": "blog-cleaning-techniques-to-avoid-feature",
+      "stockId": "3388005",
+      "filename": "blog-cleaning-techniques-to-avoid-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 8094
+    },
+    {
+      "asset": "blog-cleaning-techniques-to-avoid-feature",
+      "stockId": "3388005",
+      "filename": "blog-cleaning-techniques-to-avoid-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 3250
+    },
+    {
+      "asset": "blog-cleaning-techniques-to-avoid-feature",
+      "stockId": "3388005",
       "filename": "blog-cleaning-techniques-to-avoid-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -1184,6 +1520,54 @@
     {
       "asset": "blog-break-room-cleaning-feature",
       "stockId": "10525908",
+      "filename": "blog-break-room-cleaning-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 5193
+    },
+    {
+      "asset": "blog-break-room-cleaning-feature",
+      "stockId": "10525908",
+      "filename": "blog-break-room-cleaning-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 13244
+    },
+    {
+      "asset": "blog-break-room-cleaning-feature",
+      "stockId": "10525908",
+      "filename": "blog-break-room-cleaning-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 7136
+    },
+    {
+      "asset": "blog-break-room-cleaning-feature",
+      "stockId": "10525908",
+      "filename": "blog-break-room-cleaning-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 8461
+    },
+    {
+      "asset": "blog-break-room-cleaning-feature",
+      "stockId": "10525908",
+      "filename": "blog-break-room-cleaning-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 23669
+    },
+    {
+      "asset": "blog-break-room-cleaning-feature",
+      "stockId": "10525908",
+      "filename": "blog-break-room-cleaning-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 12730
+    },
+    {
+      "asset": "blog-break-room-cleaning-feature",
+      "stockId": "10525908",
       "filename": "blog-break-room-cleaning-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -1220,6 +1604,54 @@
       "width": 300,
       "height": 150,
       "bytes": 5653
+    },
+    {
+      "asset": "blog-hand-washing-importance-feature",
+      "stockId": "11303867",
+      "filename": "blog-hand-washing-importance-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 3360
+    },
+    {
+      "asset": "blog-hand-washing-importance-feature",
+      "stockId": "11303867",
+      "filename": "blog-hand-washing-importance-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 10250
+    },
+    {
+      "asset": "blog-hand-washing-importance-feature",
+      "stockId": "11303867",
+      "filename": "blog-hand-washing-importance-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 4912
+    },
+    {
+      "asset": "blog-hand-washing-importance-feature",
+      "stockId": "11303867",
+      "filename": "blog-hand-washing-importance-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 5359
+    },
+    {
+      "asset": "blog-hand-washing-importance-feature",
+      "stockId": "11303867",
+      "filename": "blog-hand-washing-importance-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 18215
+    },
+    {
+      "asset": "blog-hand-washing-importance-feature",
+      "stockId": "11303867",
+      "filename": "blog-hand-washing-importance-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 8182
     },
     {
       "asset": "blog-hand-washing-importance-feature",
@@ -1536,6 +1968,54 @@
     {
       "asset": "blog-office-dusting-method-feature",
       "stockId": "24481901",
+      "filename": "blog-office-dusting-method-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 3557
+    },
+    {
+      "asset": "blog-office-dusting-method-feature",
+      "stockId": "24481901",
+      "filename": "blog-office-dusting-method-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 8521
+    },
+    {
+      "asset": "blog-office-dusting-method-feature",
+      "stockId": "24481901",
+      "filename": "blog-office-dusting-method-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 5130
+    },
+    {
+      "asset": "blog-office-dusting-method-feature",
+      "stockId": "24481901",
+      "filename": "blog-office-dusting-method-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 6336
+    },
+    {
+      "asset": "blog-office-dusting-method-feature",
+      "stockId": "24481901",
+      "filename": "blog-office-dusting-method-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 16707
+    },
+    {
+      "asset": "blog-office-dusting-method-feature",
+      "stockId": "24481901",
+      "filename": "blog-office-dusting-method-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 10344
+    },
+    {
+      "asset": "blog-office-dusting-method-feature",
+      "stockId": "24481901",
       "filename": "blog-office-dusting-method-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -1672,6 +2152,54 @@
     {
       "asset": "blog-home-office-cleaning-feature",
       "stockId": "10525916",
+      "filename": "blog-home-office-cleaning-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 5808
+    },
+    {
+      "asset": "blog-home-office-cleaning-feature",
+      "stockId": "10525916",
+      "filename": "blog-home-office-cleaning-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 15013
+    },
+    {
+      "asset": "blog-home-office-cleaning-feature",
+      "stockId": "10525916",
+      "filename": "blog-home-office-cleaning-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 9528
+    },
+    {
+      "asset": "blog-home-office-cleaning-feature",
+      "stockId": "10525916",
+      "filename": "blog-home-office-cleaning-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 10089
+    },
+    {
+      "asset": "blog-home-office-cleaning-feature",
+      "stockId": "10525916",
+      "filename": "blog-home-office-cleaning-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 27508
+    },
+    {
+      "asset": "blog-home-office-cleaning-feature",
+      "stockId": "10525916",
+      "filename": "blog-home-office-cleaning-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 15968
+    },
+    {
+      "asset": "blog-home-office-cleaning-feature",
+      "stockId": "10525916",
       "filename": "blog-home-office-cleaning-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -1748,6 +2276,54 @@
       "width": 300,
       "height": 150,
       "bytes": 10496
+    },
+    {
+      "asset": "blog-office-relocation-cleaning-feature",
+      "stockId": "27410367",
+      "filename": "blog-office-relocation-cleaning-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 8829
+    },
+    {
+      "asset": "blog-office-relocation-cleaning-feature",
+      "stockId": "27410367",
+      "filename": "blog-office-relocation-cleaning-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 22368
+    },
+    {
+      "asset": "blog-office-relocation-cleaning-feature",
+      "stockId": "27410367",
+      "filename": "blog-office-relocation-cleaning-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 14928
+    },
+    {
+      "asset": "blog-office-relocation-cleaning-feature",
+      "stockId": "27410367",
+      "filename": "blog-office-relocation-cleaning-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 16060
+    },
+    {
+      "asset": "blog-office-relocation-cleaning-feature",
+      "stockId": "27410367",
+      "filename": "blog-office-relocation-cleaning-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 42818
+    },
+    {
+      "asset": "blog-office-relocation-cleaning-feature",
+      "stockId": "27410367",
+      "filename": "blog-office-relocation-cleaning-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 27098
     },
     {
       "asset": "blog-office-relocation-cleaning-feature",
@@ -1888,6 +2464,54 @@
     {
       "asset": "blog-commercial-floor-care-feature",
       "stockId": "11450721",
+      "filename": "blog-commercial-floor-care-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 5141
+    },
+    {
+      "asset": "blog-commercial-floor-care-feature",
+      "stockId": "11450721",
+      "filename": "blog-commercial-floor-care-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 13819
+    },
+    {
+      "asset": "blog-commercial-floor-care-feature",
+      "stockId": "11450721",
+      "filename": "blog-commercial-floor-care-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 7620
+    },
+    {
+      "asset": "blog-commercial-floor-care-feature",
+      "stockId": "11450721",
+      "filename": "blog-commercial-floor-care-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 8612
+    },
+    {
+      "asset": "blog-commercial-floor-care-feature",
+      "stockId": "11450721",
+      "filename": "blog-commercial-floor-care-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 25209
+    },
+    {
+      "asset": "blog-commercial-floor-care-feature",
+      "stockId": "11450721",
+      "filename": "blog-commercial-floor-care-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 12918
+    },
+    {
+      "asset": "blog-commercial-floor-care-feature",
+      "stockId": "11450721",
       "filename": "blog-commercial-floor-care-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -2020,6 +2644,54 @@
       "width": 300,
       "height": 150,
       "bytes": 5749
+    },
+    {
+      "asset": "blog-retail-store-cleaning-checklist-feature",
+      "stockId": "11450735",
+      "filename": "blog-retail-store-cleaning-checklist-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 4005
+    },
+    {
+      "asset": "blog-retail-store-cleaning-checklist-feature",
+      "stockId": "11450735",
+      "filename": "blog-retail-store-cleaning-checklist-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 11004
+    },
+    {
+      "asset": "blog-retail-store-cleaning-checklist-feature",
+      "stockId": "11450735",
+      "filename": "blog-retail-store-cleaning-checklist-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 5788
+    },
+    {
+      "asset": "blog-retail-store-cleaning-checklist-feature",
+      "stockId": "11450735",
+      "filename": "blog-retail-store-cleaning-checklist-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 6417
+    },
+    {
+      "asset": "blog-retail-store-cleaning-checklist-feature",
+      "stockId": "11450735",
+      "filename": "blog-retail-store-cleaning-checklist-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 20472
+    },
+    {
+      "asset": "blog-retail-store-cleaning-checklist-feature",
+      "stockId": "11450735",
+      "filename": "blog-retail-store-cleaning-checklist-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 10502
     },
     {
       "asset": "blog-retail-store-cleaning-checklist-feature",
@@ -2568,6 +3240,54 @@
     {
       "asset": "blog-daycare-school-cleaning-feature",
       "stockId": "8931422",
+      "filename": "blog-daycare-school-cleaning-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 5428
+    },
+    {
+      "asset": "blog-daycare-school-cleaning-feature",
+      "stockId": "8931422",
+      "filename": "blog-daycare-school-cleaning-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 14198
+    },
+    {
+      "asset": "blog-daycare-school-cleaning-feature",
+      "stockId": "8931422",
+      "filename": "blog-daycare-school-cleaning-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 8354
+    },
+    {
+      "asset": "blog-daycare-school-cleaning-feature",
+      "stockId": "8931422",
+      "filename": "blog-daycare-school-cleaning-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 10158
+    },
+    {
+      "asset": "blog-daycare-school-cleaning-feature",
+      "stockId": "8931422",
+      "filename": "blog-daycare-school-cleaning-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 27597
+    },
+    {
+      "asset": "blog-daycare-school-cleaning-feature",
+      "stockId": "8931422",
+      "filename": "blog-daycare-school-cleaning-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 16678
+    },
+    {
+      "asset": "blog-daycare-school-cleaning-feature",
+      "stockId": "8931422",
       "filename": "blog-daycare-school-cleaning-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -2784,6 +3504,54 @@
     {
       "asset": "blog-slip-trip-fall-prevention-feature",
       "stockId": "43700611",
+      "filename": "blog-slip-trip-fall-prevention-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 3146
+    },
+    {
+      "asset": "blog-slip-trip-fall-prevention-feature",
+      "stockId": "43700611",
+      "filename": "blog-slip-trip-fall-prevention-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 10760
+    },
+    {
+      "asset": "blog-slip-trip-fall-prevention-feature",
+      "stockId": "43700611",
+      "filename": "blog-slip-trip-fall-prevention-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 5502
+    },
+    {
+      "asset": "blog-slip-trip-fall-prevention-feature",
+      "stockId": "43700611",
+      "filename": "blog-slip-trip-fall-prevention-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 5191
+    },
+    {
+      "asset": "blog-slip-trip-fall-prevention-feature",
+      "stockId": "43700611",
+      "filename": "blog-slip-trip-fall-prevention-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 19117
+    },
+    {
+      "asset": "blog-slip-trip-fall-prevention-feature",
+      "stockId": "43700611",
+      "filename": "blog-slip-trip-fall-prevention-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 9004
+    },
+    {
+      "asset": "blog-slip-trip-fall-prevention-feature",
+      "stockId": "43700611",
       "filename": "blog-slip-trip-fall-prevention-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -2820,6 +3588,54 @@
       "width": 300,
       "height": 150,
       "bytes": 4220
+    },
+    {
+      "asset": "blog-office-cleaning-products-feature",
+      "stockId": "4195930",
+      "filename": "blog-office-cleaning-products-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 3183
+    },
+    {
+      "asset": "blog-office-cleaning-products-feature",
+      "stockId": "4195930",
+      "filename": "blog-office-cleaning-products-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 8677
+    },
+    {
+      "asset": "blog-office-cleaning-products-feature",
+      "stockId": "4195930",
+      "filename": "blog-office-cleaning-products-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 4802
+    },
+    {
+      "asset": "blog-office-cleaning-products-feature",
+      "stockId": "4195930",
+      "filename": "blog-office-cleaning-products-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 7319
+    },
+    {
+      "asset": "blog-office-cleaning-products-feature",
+      "stockId": "4195930",
+      "filename": "blog-office-cleaning-products-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 19082
+    },
+    {
+      "asset": "blog-office-cleaning-products-feature",
+      "stockId": "4195930",
+      "filename": "blog-office-cleaning-products-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 11628
     },
     {
       "asset": "blog-office-cleaning-products-feature",
@@ -2960,6 +3776,54 @@
     {
       "asset": "blog-spring-office-cleaning-feature",
       "stockId": "31622099",
+      "filename": "blog-spring-office-cleaning-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 5324
+    },
+    {
+      "asset": "blog-spring-office-cleaning-feature",
+      "stockId": "31622099",
+      "filename": "blog-spring-office-cleaning-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 13346
+    },
+    {
+      "asset": "blog-spring-office-cleaning-feature",
+      "stockId": "31622099",
+      "filename": "blog-spring-office-cleaning-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 8090
+    },
+    {
+      "asset": "blog-spring-office-cleaning-feature",
+      "stockId": "31622099",
+      "filename": "blog-spring-office-cleaning-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 9686
+    },
+    {
+      "asset": "blog-spring-office-cleaning-feature",
+      "stockId": "31622099",
+      "filename": "blog-spring-office-cleaning-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 25173
+    },
+    {
+      "asset": "blog-spring-office-cleaning-feature",
+      "stockId": "31622099",
+      "filename": "blog-spring-office-cleaning-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 15744
+    },
+    {
+      "asset": "blog-spring-office-cleaning-feature",
+      "stockId": "31622099",
       "filename": "blog-spring-office-cleaning-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -3000,6 +3864,54 @@
     {
       "asset": "blog-day-versus-night-cleaning-feature",
       "stockId": "2358249",
+      "filename": "blog-day-versus-night-cleaning-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 7154
+    },
+    {
+      "asset": "blog-day-versus-night-cleaning-feature",
+      "stockId": "2358249",
+      "filename": "blog-day-versus-night-cleaning-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 22854
+    },
+    {
+      "asset": "blog-day-versus-night-cleaning-feature",
+      "stockId": "2358249",
+      "filename": "blog-day-versus-night-cleaning-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 16574
+    },
+    {
+      "asset": "blog-day-versus-night-cleaning-feature",
+      "stockId": "2358249",
+      "filename": "blog-day-versus-night-cleaning-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 15689
+    },
+    {
+      "asset": "blog-day-versus-night-cleaning-feature",
+      "stockId": "2358249",
+      "filename": "blog-day-versus-night-cleaning-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 49629
+    },
+    {
+      "asset": "blog-day-versus-night-cleaning-feature",
+      "stockId": "2358249",
+      "filename": "blog-day-versus-night-cleaning-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 38526
+    },
+    {
+      "asset": "blog-day-versus-night-cleaning-feature",
+      "stockId": "2358249",
       "filename": "blog-day-versus-night-cleaning-feature-og.jpg",
       "width": 1200,
       "height": 630,
@@ -3036,6 +3948,54 @@
       "width": 300,
       "height": 150,
       "bytes": 7907
+    },
+    {
+      "asset": "blog-robotic-versus-manual-cleaning-feature",
+      "stockId": "16275417",
+      "filename": "blog-robotic-versus-manual-cleaning-feature-480.avif",
+      "width": 480,
+      "height": 240,
+      "bytes": 5256
+    },
+    {
+      "asset": "blog-robotic-versus-manual-cleaning-feature",
+      "stockId": "16275417",
+      "filename": "blog-robotic-versus-manual-cleaning-feature-480.jpg",
+      "width": 480,
+      "height": 240,
+      "bytes": 15201
+    },
+    {
+      "asset": "blog-robotic-versus-manual-cleaning-feature",
+      "stockId": "16275417",
+      "filename": "blog-robotic-versus-manual-cleaning-feature-480.webp",
+      "width": 480,
+      "height": 240,
+      "bytes": 8710
+    },
+    {
+      "asset": "blog-robotic-versus-manual-cleaning-feature",
+      "stockId": "16275417",
+      "filename": "blog-robotic-versus-manual-cleaning-feature-720.avif",
+      "width": 720,
+      "height": 360,
+      "bytes": 8881
+    },
+    {
+      "asset": "blog-robotic-versus-manual-cleaning-feature",
+      "stockId": "16275417",
+      "filename": "blog-robotic-versus-manual-cleaning-feature-720.jpg",
+      "width": 720,
+      "height": 360,
+      "bytes": 27403
+    },
+    {
+      "asset": "blog-robotic-versus-manual-cleaning-feature",
+      "stockId": "16275417",
+      "filename": "blog-robotic-versus-manual-cleaning-feature-720.webp",
+      "width": 720,
+      "height": 360,
+      "bytes": 15020
     },
     {
       "asset": "blog-robotic-versus-manual-cleaning-feature",
