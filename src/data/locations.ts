@@ -155,18 +155,23 @@ export const locations: Location[] = [
     slug: 'etobicoke',
     name: 'Etobicoke',
     region: 'Etobicoke',
-    focus: 'Commercial arteries, event centres, and industrial corridors.',
+    /* Rewritten 2026-10-30 to the facility types the client lists: the
+       earlier event centres, banquet halls and dealerships were unconfirmed. */
+    focus:
+      'Offices and clinics, retail plazas, condominium common areas and industrial buildings, from the lakeshore to the airport.',
     facilities: [
-      'Commercial arteries along The Queensway and Dundas West',
-      'Event centres and banquet halls',
-      'Industrial corridors off Kipling and Islington',
-      'Automotive dealerships and service centres',
-      'Medical and dental clinic buildings',
+      'Offices and multi-tenant business buildings',
+      'Medical and dental clinics',
+      'Retail stores and plazas',
+      'Condominium common areas',
+      'Industrial buildings and the offices attached to them',
     ],
-    landmarks: 'The Queensway, the Kipling and Islington industrial corridors, and the Humber Bay commercial strip',
+    landmarks: 'Islington–City Centre West, The Queensway, South Etobicoke and the airport area',
     mapQuery: 'Etobicoke, Toronto, Ontario, Canada',
     description:
-      'Commercial and office cleaning in Etobicoke — commercial arteries, event centres and industrial corridors, with turnaround cleans between bookings.',
+      'Office and commercial cleaning in Etobicoke: offices, clinics, plazas, condo common areas and industrial buildings, cleaned after hours. WSIB covered.',
+    title: 'Office & Commercial Cleaning in Etobicoke | Evergreen',
+    h1: 'Office & Commercial Cleaning in Etobicoke',
   },
   {
     slug: 'vaughan',
@@ -234,19 +239,22 @@ export const locations: Location[] = [
     slug: 'markham',
     name: 'Markham',
     region: 'Markham',
+    /* Rewritten 2026-10-30 to the facility types the client lists. */
     focus:
-      'Tech parks, multi-tenant corporate offices, and medical/dental clinic buildings.',
+      'Corporate and technology offices, multi-tenant buildings, clinics and business-park units with offices at the front.',
     facilities: [
-      'Tech park campuses',
-      'Multi-tenant corporate offices',
-      'Medical and dental clinic buildings',
-      'Data and server rooms requiring low-dust protocols',
-      'Training and conference facilities',
+      'Corporate and technology offices',
+      'Multi-tenant office buildings',
+      'Medical and dental clinics',
+      'Business-park units with office and warehouse space',
+      'Retail stores and showrooms',
     ],
-    landmarks: 'the Markham tech corridor along Highway 404, Unionville and the Woodbine–Steeles business area',
+    landmarks: 'Markham Centre, the Highway 404 and 407 corridor, Unionville and the Woodbine–Steeles business area',
     mapQuery: 'Markham, Ontario, Canada',
     description:
-      'Commercial and office cleaning in Markham — tech parks, multi-tenant corporate offices and clinic buildings, cleaned to protocols suited to each.',
+      'Office and commercial cleaning in Markham: corporate and tech offices, clinics and business-park units along Highway 7, 404 and 407. After hours, WSIB covered.',
+    title: 'Office & Commercial Cleaning in Markham | Evergreen',
+    h1: 'Office & Commercial Cleaning in Markham',
   },
   {
     slug: 'brampton',
@@ -288,7 +296,9 @@ export const locations: Location[] = [
     landmarks: 'the QEW corporate corridor, Winston Park, Bronte and the Kerr Street commercial area',
     mapQuery: 'Oakville, Ontario, Canada',
     description:
-      'Commercial and office cleaning in Oakville — professional offices, medical and dental clinics and client-facing space, cleaned to a standard clients see.',
+      'Office and commercial cleaning in Oakville: professional offices, clinics and business-park buildings, downtown to Winston Park. After hours, WSIB covered.',
+    title: 'Office & Commercial Cleaning in Oakville | Evergreen',
+    h1: 'Office & Commercial Cleaning in Oakville',
     needsClientReview: true,
   },
 ];
