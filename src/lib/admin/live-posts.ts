@@ -8,7 +8,7 @@
  *
  * THE PAGE. The build makes one real post page with placeholder content,
  * /eg-live-post-shell/ (src/pages/eg-live-post-shell.astro), from the same
- * PostLayout every repo post uses: the header, footer, sidebar, comments,
+ * PostLayout every repo post uses: the header, footer, sidebar,
  * fonts and tags are the site's own. `fillShell` swaps the placeholders for
  * the post. The shell is never served at its own address.
  *
@@ -220,7 +220,6 @@ export const shellProblems = (shell: string): string[] => {
   if (!/<article class="entry-content"/.test(shell)) problems.push('article.entry-content');
   if (!/<meta name="robots" content="noindex/.test(shell)) problems.push('the robots noindex');
   if (!shell.includes(SHELL.description)) problems.push('the description');
-  if (!shell.includes(`data-post-slug="${SHELL.slug}"`)) problems.push('the comment form slug');
   if (!/<meta property="og:image" content="/.test(shell)) problems.push('og:image');
   if (!/BreadcrumbList/.test(shell) || !/BlogPosting/.test(shell)) problems.push('the structured data');
   return problems;

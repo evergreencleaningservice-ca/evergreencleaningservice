@@ -31,3 +31,4 @@ pnpm-debug.log*
 
 # Temporary stock-photo rendering output; licensed originals stay outside the repo.
 .stock-photo-prepared/
+.astro-test-dist-office-cost/

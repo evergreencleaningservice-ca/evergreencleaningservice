@@ -17,6 +17,16 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
+    /** Opt-in editorial guide layout; legacy posts retain PostLayout. */
+    seoTitle: z.string().optional(),
+    guide: z.object({
+      category: z.string(),
+      breadcrumb: z.string(),
+      intro: z.string(),
+      imageCredit: z.object({ name: z.string(), url: z.string().url() }),
+      contents: z.array(z.object({ label: z.string(), id: z.string() })),
+      related: z.array(z.object({ slug: z.string(), label: z.string() })),
+    }).optional(),
     /**
      * Tag slugs, as the original's WordPress assigns them. Every slug must be
      * one of `src/data/tags.ts` — `tests/build/tags.test.ts` enforces that, so

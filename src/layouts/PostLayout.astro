@@ -2,8 +2,6 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import Sidebar from '../components/Sidebar.astro';
-import Comments from '../components/Comments.astro';
-import SubmissionRuntime from '../components/SubmissionRuntime.astro';
 import { site } from '../data/site';
 import { pageTitle } from '../lib/title';
 import { articleSchema, breadcrumbSchema } from '../lib/schema';
@@ -132,13 +130,6 @@ const SIZES = '(min-width: 992px) 720px, calc(100vw - 32px)';
         )
       }
 
-      {/* The original has no previous/next navigation on a post — the article
-          runs straight into the comment form. A pair of links here was an
-          addition, so it is gone; `newer` and `older` stay on the props in case
-          the client wants it back. */}
-
-      <Comments slug={post.id} />
-      <SubmissionRuntime />
       </div>
 
       <Sidebar />

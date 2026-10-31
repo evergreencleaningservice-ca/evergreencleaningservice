@@ -94,8 +94,8 @@ describe('every form that accepts a submission', () => {
   it('there are forms to check, on the pages expected', () => {
     /* A guard on the guard: a selector that silently matched nothing would
        make every assertion below vacuously true. */
-    expect(accepting().length).toBeGreaterThanOrEqual(44);
-    expect(new Set(accepting().map((f) => f.page)).size).toBeGreaterThanOrEqual(41);
+    expect(accepting()).toHaveLength(27);
+    expect(new Set(accepting().map((f) => f.page)).size).toBe(27);
   });
 
   it('carries a captcha', () => {
@@ -138,23 +138,22 @@ describe('the two search forms', () => {
   });
 });
 
-describe('comments and testimonials are not leads', () => {
+describe('testimonials are not leads and blog comments are disabled', () => {
   it('post to /api/submit-post, never to the lead endpoint', () => {
     const posts = accepting().filter((f) => f.postKind);
-    expect(posts.length).toBeGreaterThanOrEqual(24);
+    expect(posts).toHaveLength(1);
     for (const f of posts) expect(f.endpoint, f.page).toBe('/api/submit-post');
   });
 
   it('declares which kind it is, so the endpoint does not have to guess', () => {
     for (const f of accepting().filter((f) => f.postKind)) {
-      expect(['comment', 'review'], f.page).toContain(f.postKind);
+      expect(f.postKind, f.page).toBe('review');
     }
   });
 
-  it('the comment form names the post it belongs to', () => {
+  it('renders no comment submission forms', () => {
     const comments = accepting().filter((f) => f.postKind === 'comment');
-    /* One per post: 23 since the consolidation of 30 Oct 2026 (SEO audit H7). */
-    expect(comments).toHaveLength(23);
+    expect(comments).toHaveLength(0);
   });
 
   it('the lead forms are untouched and still post to /api/submit-lead', () => {
