@@ -48,22 +48,36 @@ beforeAll(() => {
 
 afterAll(() => fs.rmSync(out, { recursive: true, force: true }));
 
-const BASE = 'ride-on-floor-scrubber-corridor-hero';
-const WIDTHS = [480, 768, 1000, 1600];
-const SOURCE_WIDTH = 2000;
+/* The first of the rotating office slides (31 Oct 2026): the page's LCP. */
+const BASE = 'gallery-corporate-office-cleaning-hero';
+const WIDTHS = [480, 768, 1000, 1200];
+const SOURCE_WIDTH = 1200;
 
-/** The homepage hero <picture> blocks. There must be exactly one. */
+/** The homepage hero <picture> blocks: the first in the page, the rest in a <template>. */
 const heroes = () => [...home.matchAll(/<picture class="hero-slide[^"]*"[\s\S]*?<\/picture>/g)].map((m) => m[0]);
 const hero = () => heroes()[0];
+const template = () => home.match(/<template data-hero-more[^>]*>([\s\S]*?)<\/template>/)?.[1] ?? '';
 
-describe('the hero is one image element, not a background or a carousel', () => {
-  it('renders exactly one <picture>', () => {
-    expect(heroes()).toHaveLength(1);
+describe('the hero rotates without slowing the first paint', () => {
+  it('renders one <picture> in the page, and the other slides only in a <template>', () => {
+    const outside = home.replace(/<template data-hero-more[\s\S]*?<\/template>/, '');
+    expect([...outside.matchAll(/<picture class="hero-slide/g)]).toHaveLength(1);
+    expect([...template().matchAll(/<picture class="hero-slide/g)]).toHaveLength(2);
+  });
+
+  it('the first slide is the active one, so it shows without script', () => {
+    expect(hero()).toMatch(/^<picture class="hero-slide is-active"/);
+  });
+
+  it('the later slides are not high priority and carry no description', () => {
+    expect(template()).not.toContain('fetchpriority');
+    /* Astro renders alt="" as a bare `alt`: both are an empty description. */
+    for (const tag of template().matchAll(/<img\b[^>]*>/g)) expect(tag[0]).toMatch(/\salt(="")?[\s>]/);
   });
 
   it('is not a CSS background-image', () => {
     expect(home).not.toMatch(/hero-slide[^>]*style="background-image/);
-    expect(home).not.toMatch(/background-image:\s*url\(['"]?\/images\/ride-on-floor-scrubber-corridor-hero/);
+    expect(home).not.toMatch(new RegExp(String.raw`background-image:\s*url\(['"]?/images/${BASE}`));
   });
 });
 
@@ -78,12 +92,12 @@ describe('the hero is the LCP and is treated as one', () => {
     expect(hero()).not.toContain('loading="lazy"');
   });
 
-  it('declares the 1600x667 intrinsic size, so nothing reflows', () => {
-    expect(hero()).toMatch(/width="1600"/);
-    expect(hero()).toMatch(/height="667"/);
+  it('declares the 1200x500 intrinsic size, so nothing reflows', () => {
+    expect(hero()).toMatch(/width="1200"/);
+    expect(hero()).toMatch(/height="500"/);
   });
 
-  it('offers AVIF then WebP then JPEG, each with a 480/768/1000/1600 srcset', () => {
+  it('offers AVIF then WebP then JPEG, each with a 480/768/1000/1200 srcset', () => {
     const avif = hero().indexOf('<source type="image/avif"');
     const webp = hero().indexOf('<source type="image/webp"');
     const img = hero().indexOf('<img');
@@ -102,7 +116,8 @@ describe('the hero is the LCP and is treated as one', () => {
   });
 
   it('is the only fetchable hero image in the markup', () => {
-    const fetchable = [...home.matchAll(new RegExp(String.raw`<img\b[^>]*(?<![\w-])src="[^"]*${BASE}`, 'g'))];
+    const outside = home.replace(/<template data-hero-more[\s\S]*?<\/template>/, '');
+    const fetchable = [...outside.matchAll(/<img\b[^>]*(?<![\w-])src="[^"]*-hero-\d+\.jpg"/g)];
     expect(fetchable).toHaveLength(1);
     expect(home).not.toMatch(/business-team-\d+\.(avif|webp|jpg)/);
   });
@@ -130,12 +145,12 @@ describe('the generated variants are genuinely smaller', () => {
     expect(heavier).toEqual([]);
   });
 
-  it('the 1600px ceiling is used, and nothing was upscaled past the 2000px source', () => {
+  it('the 1200px ceiling is used, and nothing was upscaled past the 1200px source', () => {
     const widths = fs
       .readdirSync(publicImages)
       .filter((f) => f.startsWith(`${BASE}-`) && /-(\d+)\.(avif|webp|jpg)$/.test(f))
       .map((f) => Number(f.match(/-(\d+)\./)![1]));
-    expect(Math.max(...widths)).toBe(1600);
+    expect(Math.max(...widths)).toBe(1200);
     expect(widths.filter((w) => w > SOURCE_WIDTH)).toEqual([]);
   });
 });
