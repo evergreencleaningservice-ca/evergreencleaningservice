@@ -5,6 +5,8 @@ seoTitle: "Commercial Graffiti Removal in Toronto & the GTA | Evergreen"
 description: "Commercial graffiti removal in Toronto and the GTA — building exteriors, shutters, signage and glass, with the method matched to the surface."
 summary: "Graffiti removed from commercial property with a method chosen for the surface, quickly, because a tag left up attracts more."
 needsClientCopy: true
+image: "/images/graffiti-removal-pressure-washer.jpg"
+imageAlt: "Pressure washer spraying graffiti off a stone wall"
 fitHeading: "Who it is for"
 fit:
   - "Property managers and building owners"
