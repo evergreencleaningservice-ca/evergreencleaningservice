@@ -99,6 +99,48 @@ for (const { file: source, widths } of SOURCES) {
   }
 }
 
+/* The homepage's rotating office slides (31 Oct 2026, client: "use an
+   office", no people except the gloved hand). The sources are 1200x800
+   stock photographs, so each is cut to the hero's 2.4:1 at 1200 wide — no
+   1600, which would only be an upscale — and to a 640x800 phone crop.
+   `y` and `x` place each crop on the photo's subject, as fractions of the
+   spare height and width. */
+const OFFICE_SLIDES = [
+  { file: 'gallery-corporate-office-cleaning.jpg', y: 0.6, x: 0.62 },
+  { file: 'office-cleaning-cost-boardroom.jpg', y: 0.45, x: 0.55 },
+  { file: 'spring-office-desk-cleaning-toronto.jpg', y: 0.75, x: 0.85 },
+];
+const SLIDE_WIDTHS = [480, 768, 1000, 1200];
+
+for (const { file, y, x } of OFFICE_SLIDES) {
+  const input = path.join(dir, file);
+  const base = `${file.replace(/\.jpe?g$/i, '')}-hero`;
+  const { width: w, height: h } = await sharp(input).metadata();
+  const wide = { left: 0, top: Math.round((h - Math.round(w / 2.4)) * y), width: w, height: Math.round(w / 2.4) };
+  const tallW = Math.round(h * 0.8);
+  const tall = { left: Math.round((w - tallW) * x), top: 0, width: tallW, height: h };
+
+  const emit = async (name, pipeline) => {
+    const sizes = {};
+    for (const format of ['jpg', 'avif', 'webp']) {
+      const out = path.join(dir, `${name}.${format}`);
+      if (force || !fs.existsSync(out)) {
+        await pipeline()[format === 'jpg' ? 'jpeg' : format](
+          format === 'jpg' ? { quality: QUALITY.jpeg, mozjpeg: true } : { quality: QUALITY[format] },
+        ).toFile(out);
+        written++;
+      } else skipped++;
+      sizes[format] = fs.statSync(out).size;
+    }
+    for (const format of ['avif', 'webp'])
+      if (sizes[format] >= sizes.jpg) oversized.push({ name: `${name}.${format}`, bytes: sizes[format], jpegBytes: sizes.jpg });
+  };
+
+  for (const width of SLIDE_WIDTHS.filter((sw) => sw <= w))
+    await emit(`${base}-${width}`, () => sharp(input).extract(wide).resize({ width }));
+  await emit(`${base}-mobile-640x800`, () => sharp(input).extract(tall).resize({ width: 640, height: 800 }));
+}
+
 console.log(`\nhero-variants: ${written} written, ${skipped} already present.`);
 
 if (oversized.length) {
