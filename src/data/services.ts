@@ -47,3 +47,22 @@ export const SERVICE_OTHER = 'Other';
 export const SERVICE_OPTIONS = [...QUOTE_SERVICES, SERVICE_OTHER] as const;
 
 export type ServiceOption = (typeof SERVICE_OPTIONS)[number];
+
+/**
+ * What each box SAYS on screen (31 Oct 2026, "the forms are too long"). In a
+ * sidebar's two narrow columns the full names wrapped onto two to four lines
+ * each; under the legend "a quote for these services" the short form reads
+ * the same. Each must fit one line of the 318px service-page sidebar, about
+ * 130px of text at 14px, hence "Industrial" and "Maintenance". The box's
+ * value, and so the lead email and the database, keeps the full name above.
+ */
+export const SERVICE_LABELS: Record<ServiceOption, string> = {
+  'Office Cleaning': 'Office',
+  'Commercial Cleaning': 'Commercial',
+  'Janitorial Services': 'Janitorial',
+  'Industrial & Warehouse Cleaning': 'Industrial',
+  'Post-Construction Cleaning': 'Post-Construction',
+  'Property Management and Building Maintenance': 'Maintenance',
+  'Carpet & Floor Care': 'Carpet & Floor Care',
+  Other: 'Other',
+};
