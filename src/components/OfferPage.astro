@@ -320,13 +320,19 @@ const RELATED_TEXT: Record<string, string> = {
       align-items: start;
     }
   }
-  /* Sticky only where the whole form fits on screen (about 1,015px tall plus
-     the 92px header): on a 768-1080px tall laptop a pinned form left its
-     lower fields and submit button off-screen until the end of the page. */
-  @media (min-width: 992px) and (min-height: 1140px) {
+  /* Sticky only where the whole form fits on screen: the card is about 875px,
+     plus 78px once reCAPTCHA loads on the first focus, plus the 92px header.
+     On a shorter window a pinned form left its lower fields and submit
+     button off-screen until the end of the page. */
+  @media (min-width: 992px) and (min-height: 1080px) {
     .offer-aside {
       position: sticky;
       top: 92px;
+      /* Never taller than the window: if the form grows after it is pinned
+         (validation errors, a re-rendered CAPTCHA), it scrolls inside its
+         own box rather than hiding the submit button (Codex review, #67). */
+      max-height: calc(100vh - 108px);
+      overflow-y: auto;
     }
   }
   .offer-form-card {

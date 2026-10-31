@@ -348,14 +348,19 @@ const webPage = webPageSchema({
     }
   }
   /* The form stays in view beside the long text column, but only where the
-     whole form fits on screen (about 1,015px plus the 92px header). On a
-     laptop a pinned form taller than the window hid its submit button until
-     the end of the page (Codex review on #64, 30 Oct 2026). */
-  @media screen and (min-width: 941px) and (min-height: 1140px) {
+     whole form fits on screen: the card is about 840px, plus 78px once
+     reCAPTCHA loads on the first focus, plus the 92px header. A pinned form
+     taller than the window hid its submit button (Codex reviews, #64, #67). */
+  @media screen and (min-width: 941px) and (min-height: 1080px) {
     .loc-aside {
       position: sticky;
       top: 92px;
       align-self: start;
+      /* Never taller than the window: if the form grows after it is pinned
+         (validation errors, a re-rendered CAPTCHA), it scrolls inside its
+         own box rather than hiding the submit button (Codex review, #67). */
+      max-height: calc(100vh - 108px);
+      overflow-y: auto;
     }
   }
 
