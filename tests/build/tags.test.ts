@@ -94,9 +94,8 @@ describe('every post’s tags are real', () => {
   const dir = path.join(repo, 'src/content/blog');
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md'));
 
-  it('covers all 23 posts', () => {
-    /* 38 until the consolidation of 30 Oct 2026 (SEO audit H7). */
-    expect(files).toHaveLength(23);
+  it('covers all 24 posts, including the Toronto cost guide', () => {
+    expect(files).toHaveLength(24);
   });
 
   it('uses no tag slug that is not in the registry', () => {
@@ -216,7 +215,7 @@ describe('the sidebar cloud', () => {
 
   it('speaks the post count, because 8pt means nothing to a screen reader', () => {
     const html = page();
-    expect(html).toContain('aria-label="commercial cleaning (17 items)"');
+    expect(html).toContain('aria-label="commercial cleaning (18 items)"');
     expect(html).toContain('aria-label="cleaning products (4 items)"');
   });
 

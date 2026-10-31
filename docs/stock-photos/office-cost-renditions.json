@@ -1,0 +1,248 @@
+[
+  {
+    "stockId": 10810007,
+    "sourceDimensions": [
+      6000,
+      4000
+    ],
+    "sourceSha256": "9c6fa3c00798f23cc96d01a7fa02df57b3b93d3437a33e3a18bc3e5e6f70bb02",
+    "outputs": [
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide-480.avif",
+        "width": 480,
+        "height": 270,
+        "bytes": 11510
+      },
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 21552
+      },
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide-480.jpg",
+        "width": 480,
+        "height": 270,
+        "bytes": 31011
+      },
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide-768.avif",
+        "width": 768,
+        "height": 432,
+        "bytes": 27742
+      },
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide-768.webp",
+        "width": 768,
+        "height": 432,
+        "bytes": 53830
+      },
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide-768.jpg",
+        "width": 768,
+        "height": 432,
+        "bytes": 75590
+      },
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide-1200.avif",
+        "width": 1200,
+        "height": 675,
+        "bytes": 64632
+      },
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 127556
+      },
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide-1200.jpg",
+        "width": 1200,
+        "height": 675,
+        "bytes": 176974
+      },
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide.jpg",
+        "width": 1200,
+        "height": 675,
+        "bytes": 176974
+      },
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide-300x150.jpg",
+        "width": 300,
+        "height": 150,
+        "bytes": 12558
+      },
+      {
+        "filename": "blog-office-cleaning-cost-toronto-guide-og.jpg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 165035
+      }
+    ]
+  },
+  {
+    "stockId": 24747597,
+    "sourceDimensions": [
+      6554,
+      4369
+    ],
+    "sourceSha256": "063f38896a542bad4c13e3218e1bdf3c0bc695c5c9a640113df49da3f88427c5",
+    "outputs": [
+      {
+        "filename": "office-cleaning-cost-kitchen-480.avif",
+        "width": 480,
+        "height": 320,
+        "bytes": 6847
+      },
+      {
+        "filename": "office-cleaning-cost-kitchen-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 11236
+      },
+      {
+        "filename": "office-cleaning-cost-kitchen-480.jpg",
+        "width": 480,
+        "height": 320,
+        "bytes": 21785
+      },
+      {
+        "filename": "office-cleaning-cost-kitchen-768.avif",
+        "width": 768,
+        "height": 512,
+        "bytes": 12224
+      },
+      {
+        "filename": "office-cleaning-cost-kitchen-768.webp",
+        "width": 768,
+        "height": 512,
+        "bytes": 19252
+      },
+      {
+        "filename": "office-cleaning-cost-kitchen-768.jpg",
+        "width": 768,
+        "height": 512,
+        "bytes": 42413
+      },
+      {
+        "filename": "office-cleaning-cost-kitchen-1200.avif",
+        "width": 1200,
+        "height": 800,
+        "bytes": 20430
+      },
+      {
+        "filename": "office-cleaning-cost-kitchen-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 32036
+      },
+      {
+        "filename": "office-cleaning-cost-kitchen-1200.jpg",
+        "width": 1200,
+        "height": 800,
+        "bytes": 80470
+      },
+      {
+        "filename": "office-cleaning-cost-kitchen.jpg",
+        "width": 1200,
+        "height": 800,
+        "bytes": 80470
+      },
+      {
+        "filename": "office-cleaning-cost-kitchen-300x150.jpg",
+        "width": 300,
+        "height": 150,
+        "bytes": 9634
+      },
+      {
+        "filename": "office-cleaning-cost-kitchen-og.jpg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 68516
+      }
+    ]
+  },
+  {
+    "stockId": 12615858,
+    "sourceDimensions": [
+      5516,
+      3678
+    ],
+    "sourceSha256": "fff25c35c113837f2cd929e1f79e5d99d7ed390f02c0f8b62a40abc614b51478",
+    "outputs": [
+      {
+        "filename": "office-cleaning-cost-boardroom-480.avif",
+        "width": 480,
+        "height": 320,
+        "bytes": 8540
+      },
+      {
+        "filename": "office-cleaning-cost-boardroom-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 14696
+      },
+      {
+        "filename": "office-cleaning-cost-boardroom-480.jpg",
+        "width": 480,
+        "height": 320,
+        "bytes": 25057
+      },
+      {
+        "filename": "office-cleaning-cost-boardroom-768.avif",
+        "width": 768,
+        "height": 512,
+        "bytes": 18207
+      },
+      {
+        "filename": "office-cleaning-cost-boardroom-768.webp",
+        "width": 768,
+        "height": 512,
+        "bytes": 32188
+      },
+      {
+        "filename": "office-cleaning-cost-boardroom-768.jpg",
+        "width": 768,
+        "height": 512,
+        "bytes": 56589
+      },
+      {
+        "filename": "office-cleaning-cost-boardroom-1200.avif",
+        "width": 1200,
+        "height": 800,
+        "bytes": 37340
+      },
+      {
+        "filename": "office-cleaning-cost-boardroom-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 67828
+      },
+      {
+        "filename": "office-cleaning-cost-boardroom-1200.jpg",
+        "width": 1200,
+        "height": 800,
+        "bytes": 121652
+      },
+      {
+        "filename": "office-cleaning-cost-boardroom.jpg",
+        "width": 1200,
+        "height": 800,
+        "bytes": 121652
+      },
+      {
+        "filename": "office-cleaning-cost-boardroom-300x150.jpg",
+        "width": 300,
+        "height": 150,
+        "bytes": 8991
+      },
+      {
+        "filename": "office-cleaning-cost-boardroom-og.jpg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 93028
+      }
+    ]
+  }
+]

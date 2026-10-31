@@ -353,12 +353,12 @@ describe('the rest of the page is untouched', () => {
      sitemap (SEO audit M1, M2). 70 since 2026-10-30: floor stripping and
      waxing (M5). 55 since the blog consolidation the same day: 16 posts
      merged or retired, one seasonal checklist added (H7). */
-  it('all 55 sitemap URLs were built', () => {
+  it('all 56 sitemap URLs were built', () => {
     const locs = (xml: string) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const urls = locs(read('sitemap-index.xml')).flatMap((child) =>
       locs(read(path.basename(new URL(child).pathname)))
     );
-    expect(urls).toHaveLength(55);
+    expect(urls).toHaveLength(56);
     const missing = urls.filter((u) => !exists(new URL(u).pathname));
     expect(missing).toEqual([]);
   });

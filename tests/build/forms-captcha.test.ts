@@ -153,8 +153,8 @@ describe('comments and testimonials are not leads', () => {
 
   it('the comment form names the post it belongs to', () => {
     const comments = accepting().filter((f) => f.postKind === 'comment');
-    /* One per post: 23 since the consolidation of 30 Oct 2026 (SEO audit H7). */
-    expect(comments).toHaveLength(23);
+    /* One per post, including the Toronto cost guide. */
+    expect(comments).toHaveLength(24);
   });
 
   it('the lead forms are untouched and still post to /api/submit-lead', () => {

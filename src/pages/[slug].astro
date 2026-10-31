@@ -2,6 +2,7 @@
 import type { InferGetStaticPropsType } from 'astro';
 import { getCollection, render } from 'astro:content';
 import PostLayout from '../layouts/PostLayout.astro';
+import GuideLayout from '../layouts/GuideLayout.astro';
 import { normalizeBody } from '../lib/normalize-body';
 
 export async function getStaticPaths() {
@@ -22,6 +23,7 @@ export async function getStaticPaths() {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { post, newer, older } = Astro.props as Props;
+const Layout = post.data.guide ? GuideLayout : PostLayout;
 
 // `render()` is also what fills `post.rendered`, which is the HTML normalised
 // below. Keep the call even though `Content` is only the fallback.
@@ -31,6 +33,6 @@ const { Content } = await render(post);
 const body = post.rendered?.html ? normalizeBody(post.rendered.html) : null;
 ---
 
-<PostLayout post={post} newer={newer} older={older}>
+<Layout post={post} newer={newer} older={older}>
   {body ? <Fragment set:html={body} /> : <Content />}
-</PostLayout>
+</Layout>
