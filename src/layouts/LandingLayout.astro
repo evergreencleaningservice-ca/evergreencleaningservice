@@ -81,9 +81,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
         round trip on the single most important request on the page. */}
     <link rel="preconnect" href={images.host} />
 
-    {/* The two faces the first screen actually uses: Raleway for the headline
-        and the buttons, Open Sans for everything else. Both are same-origin
-        and, without this, are not discoverable until global.css has been
+    {/* The face the first screen actually uses: Open Sans, for the headline,
+        the buttons and everything else (Raleway, the headline face until
+        31 Oct 2026, is gone). It is same-origin and, without this, is not
+        discoverable until global.css has been
         fetched and parsed — so the headline paints in the fallback, the
         webfont lands, and the whole page reflows.
 
@@ -93,9 +94,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
         Phase 10 report; `font-display: swap` is kept, so a font that somehow
         does not arrive still shows text rather than nothing.
 
-        Only these two. The italic face is not used above the fold, and
+        Only this one. The italic face is not used above the fold, and
         preloading a font a page does not render is pure cost. */}
-    <link rel="preload" href="/fonts/raleway.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/open-sans.woff2" as="font" type="font/woff2" crossorigin />
 
     <Attribution />

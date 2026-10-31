@@ -1,5 +1,6 @@
 /**
- * The site's two typefaces, served from this origin.
+ * The site's typeface, Open Sans, served from this origin. Until 31 Oct 2026
+ * headings were Raleway; the client asked for Open Sans everywhere.
  *
  * WHY NOT GOOGLE FONTS. Measured on deployed staging, median of three mobile
  * runs, by blocking fonts.googleapis.com and fonts.gstatic.com: the pair cost
@@ -12,13 +13,12 @@
  * glyph is requested. Served from here they come down the connection the
  * document is already using.
  *
- * THREE FILES, NOT TEN. Google's CSS lists a separate @font-face per weight,
- * and it is easy to self-host that shape and ship ten files. They are not ten
- * files: each family+style is ONE variable font covering the whole weight
+ * TWO FILES, NOT SEVEN. Google's CSS lists a separate @font-face per weight,
+ * and it is easy to self-host that shape and ship seven files. They are not
+ * seven files: each style is ONE variable font covering the whole weight
  * axis, and the per-weight URLs return the same bytes. Checked by hashing
- * them — five identical Raleway, three identical Open Sans, two identical
- * Open Sans italic. Declared as ranges below, so 400 through 800 all come
- * from one download.
+ * them — five identical Open Sans, two identical Open Sans italic. Declared
+ * as ranges below, so 400 through 800 all come from one download.
  *
  * LATIN ONLY. Google splits each face into ten subsets — cyrillic, greek,
  * hebrew, vietnamese, math, symbols. An English-language Toronto cleaning
@@ -45,17 +45,8 @@
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url('/fonts/open-sans.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
   font-weight: 400 800;
   font-display: swap;
-  src: url('/fonts/raleway.woff2') format('woff2');
+  src: url('/fonts/open-sans.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }

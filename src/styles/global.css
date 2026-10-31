@@ -58,7 +58,9 @@ html {
   --footer-bg: #111111;
   --footer-ink: #bbbbbb;
 
-  --font-heading: 'Raleway', Helvetica, Arial, sans-serif;
+  /* One typeface for all text (client, 31 Oct 2026): headings were Raleway.
+     Headings keep their own weights, so what was bold stays bold. */
+  --font-heading: 'Open Sans', Helvetica, Arial, sans-serif;
   --font-body: 'Open Sans', Helvetica, Arial, sans-serif;
 
   --section-padding: 4.375rem; /* 70px at the 16px root */
