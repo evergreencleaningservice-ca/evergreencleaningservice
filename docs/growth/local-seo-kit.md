@@ -135,7 +135,33 @@ Tell us when any of these change and the website's links and structured data wil
 
 ---
 
-## 4. Still to confirm with the client
+## 4. Links from other sites
+
+**Where things stand (Moz, crawled 20 Oct 2026):** Domain Authority 52, 275 linking sites, spam score 1%. The 52 overstates it. 49 of the 50 strongest linking sites are Google redirect addresses (google.de, google.it and so on), which Google ignores, and 94% of anchors are the bare URL, the mark of scraper and "website worth" pages. Real sites that chose to link are probably in single digits to low tens. Measure progress by that count, not by DA.
+
+**What is already handled on the website:** every old address that may carry a link 301s to a live page: the bare domain and `http://`, the old `/blog/<slug>/` posts, `/feed/`, both WordPress sitemaps, the legacy service URLs, tags and `/wp-content/uploads/` images (spot-checked live, 30 Oct 2026). Nothing to do there.
+
+**Spam links:** a handful of scraper pages link with anchors like "high quality dofollow backlinks … pbn network service evergreencleaningservice.ca" and unrelated `.xyz` domain names. Evergreen did not cause these and Google ignores them. **Do not disavow** this handful. Disavow only if Search Console shows a manual action (Security & Manual actions > Manual actions), or if a considerable number of artificial links builds up that is likely to cause one, which is Google's own threshold.
+
+**Links worth earning, after the directories above.** Use the business name or "Evergreen Office Cleaning" as the link text, not keywords.
+
+| # | Source | How |
+|---|---|---|
+| 1 | The member directory of the BIA whose boundary contains the office at 243 Queen St W (confirm which on the City of Toronto's BIA map) | Members are the property owners and commercial tenants inside a BIA's boundary, so only that one BIA applies; serving an area does not qualify. Ask the BIA office. |
+| 2 | BSCAI (Building Service Contractors Association International, bscai.org) and ISSA (issa.com) | Trade-body member directories, if the listing is public and links to the website. |
+| 3 | Property managers' approved-vendor pages | Ask current property-management clients. |
+| 4 | Client case studies or testimonials on clients' own sites | Offer a short write-up they can post with a link back. |
+| 5 | Suppliers' "partners" or "customers" pages | Ask the chemical and equipment suppliers. |
+| 6 | Community sponsorships and charity cleanups | Sponsor pages and local news link to sponsors. |
+| 7 | Guest guides on Toronto property-management or facilities blogs | Office hygiene and seasonal checklists; the site's own posts are the starting point. |
+
+Before paying for any membership for the sake of a link, open its directory logged out and check the listing is visible and links to the website. **BOMA Toronto** fails that test: its member directory is behind a login, and the supplier tier is the $2,799 Allied membership (checked 30 Oct 2026). Join it for networking with property managers if that is worth the fee, not for a link.
+
+Do not buy links or join link schemes, whatever the offer.
+
+---
+
+## 5. Still to confirm with the client
 
 1. The line "Floor 1 · Green Offices Toronto Inc." under the address on the Google listing. Is 243 Queen St W a shared office? Google is strict about shared and virtual addresses, so the listing must reflect how the office is actually used.
 2. Whether customers ever visit the office (decides "hide address" above).
