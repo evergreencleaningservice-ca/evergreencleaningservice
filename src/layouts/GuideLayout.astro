@@ -1,8 +1,6 @@
 ---
 import { getEntry, type CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
-import Comments from '../components/Comments.astro';
-import SubmissionRuntime from '../components/SubmissionRuntime.astro';
 import { articleSchema, breadcrumbSchema } from '../lib/schema';
 import { responsiveSet } from '../lib/responsive-images.mjs';
 import { site } from '../data/site';
@@ -84,8 +82,6 @@ const related = await Promise.all(guide.related.map(async (item) => {
           </a>
         ))}</div>
       </aside>
-      <Comments slug={post.id} />
-      <SubmissionRuntime />
     </div>
   </div>
 </BaseLayout>
