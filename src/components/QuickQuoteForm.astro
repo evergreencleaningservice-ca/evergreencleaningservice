@@ -27,7 +27,7 @@
  * same inline error messages from `quick-quote.ts`.
  */
 import SpamGuard from './SpamGuard.astro';
-import { SERVICE_OPTIONS } from '../data/services';
+import { SERVICE_OPTIONS, SERVICE_LABELS } from '../data/services';
 import { REPLY_PROMISE } from '../data/landing';
 import { SERVICE_LOCATION_SUGGESTIONS } from '../data/coverage';
 
@@ -239,7 +239,7 @@ const f = (name: string) => `${id}-${name}`;
         SERVICE_OPTIONS.map((service, i) => (
           <li>
             <input type="checkbox" id={f(`service-${i}`)} name="services" value={service} />
-            <label for={f(`service-${i}`)}>{service}</label>
+            <label for={f(`service-${i}`)}>{SERVICE_LABELS[service]}</label>
           </li>
         ))
       }
@@ -379,7 +379,7 @@ const f = (name: string) => `${id}-${name}`;
      Never three. */
   .qq-choices {
     display: grid;
-    gap: 6px 12px;
+    gap: 5px 10px;
     margin: 2px 0 10px;
     padding: 0;
     list-style: none;
@@ -388,7 +388,7 @@ const f = (name: string) => `${id}-${name}`;
   .qq-choices li {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: 6px;
     font-size: 14px;
     line-height: 1.3;
   }
