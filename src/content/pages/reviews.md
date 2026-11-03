@@ -1,6 +1,6 @@
 ---
 title: "Client Reviews"
-description: "Google reviews of Evergreen Office Cleaning from offices, property managers and businesses across Toronto and the GTA, each with its date, plus a form to send your own."
+description: "Google reviews of Evergreen Office Cleaning from offices, property managers and businesses across Toronto and the GTA, each dated, plus a form to send your own."
 ---
 
 Thanks for leaving us a review / testimonial to use on our website.
