@@ -1,0 +1,333 @@
+{
+  "checkedAt": "2026-11-03T22:40:28.522Z",
+  "url": "https://www.evergreencleaningservice.ca/how-often-should-an-office-be-cleaned/",
+  "status": 200,
+  "title": "How Often Should an Office Be Cleaned? Toronto Guide",
+  "description": "Learn how often an office should be cleaned, with practical daily, weekly and monthly schedules for Toronto workplaces.",
+  "canonical": "https://www.evergreencleaningservice.ca/how-often-should-an-office-be-cleaned/",
+  "robotsHeader": null,
+  "h1": [
+    "How Often Should an Office Be Cleaned Professionally?"
+  ],
+  "faqCount": 7,
+  "faqWords": [
+    54,
+    52,
+    48,
+    51,
+    50,
+    47,
+    48
+  ],
+  "contentsTargets": true,
+  "schemaTypes": [
+    "Graph",
+    "BlogPosting",
+    "BreadcrumbList"
+  ],
+  "articleSchemaUrl": "https://www.evergreencleaningservice.ca/how-often-should-an-office-be-cleaned/",
+  "articleSchemaHeadline": "How Often Should an Office Be Cleaned Professionally?",
+  "ogImage": "https://img.evergreencleaningservice.ca/images/blog-office-cleaning-frequency-og.jpg",
+  "firstInsightsArticle": "/how-often-should-an-office-be-cleaned/",
+  "routes": [
+    {
+      "route": "/",
+      "status": 200,
+      "includesArticle": true
+    },
+    {
+      "route": "/insights/",
+      "status": 200,
+      "includesArticle": true
+    },
+    {
+      "route": "/services/office-cleaning/",
+      "status": 200
+    },
+    {
+      "route": "/request-a-quote/",
+      "status": 200
+    },
+    {
+      "route": "/seasonal-office-cleaning-checklist/",
+      "status": 200
+    },
+    {
+      "route": "/ask-the-office-cleaners-cleaning-break-rooms/",
+      "status": 200
+    },
+    {
+      "route": "/sitemap-insights-0.xml",
+      "status": 200,
+      "includesArticle": true
+    },
+    {
+      "route": "/rss.xml",
+      "status": 200,
+      "includesArticle": true
+    },
+    {
+      "route": "/office-cleaning-cost-toronto-guide/",
+      "status": 200
+    }
+  ],
+  "photos": [
+    {
+      "filename": "blog-office-cleaning-frequency-480.avif",
+      "status": 200,
+      "type": "image/avif",
+      "identical": true
+    },
+    {
+      "filename": "blog-office-cleaning-frequency-480.webp",
+      "status": 200,
+      "type": "image/webp",
+      "identical": true
+    },
+    {
+      "filename": "blog-office-cleaning-frequency-480.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "blog-office-cleaning-frequency-768.avif",
+      "status": 200,
+      "type": "image/avif",
+      "identical": true
+    },
+    {
+      "filename": "blog-office-cleaning-frequency-768.webp",
+      "status": 200,
+      "type": "image/webp",
+      "identical": true
+    },
+    {
+      "filename": "blog-office-cleaning-frequency-768.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "blog-office-cleaning-frequency-1200.avif",
+      "status": 200,
+      "type": "image/avif",
+      "identical": true
+    },
+    {
+      "filename": "blog-office-cleaning-frequency-1200.webp",
+      "status": 200,
+      "type": "image/webp",
+      "identical": true
+    },
+    {
+      "filename": "blog-office-cleaning-frequency-1200.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "blog-office-cleaning-frequency.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "blog-office-cleaning-frequency-300x150.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "blog-office-cleaning-frequency-og.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen-480.avif",
+      "status": 200,
+      "type": "image/avif",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen-480.webp",
+      "status": 200,
+      "type": "image/webp",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen-480.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen-768.avif",
+      "status": 200,
+      "type": "image/avif",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen-768.webp",
+      "status": 200,
+      "type": "image/webp",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen-768.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen-1200.avif",
+      "status": 200,
+      "type": "image/avif",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen-1200.webp",
+      "status": 200,
+      "type": "image/webp",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen-1200.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen-300x150.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-kitchen-og.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom-480.avif",
+      "status": 200,
+      "type": "image/avif",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom-480.webp",
+      "status": 200,
+      "type": "image/webp",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom-480.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom-768.avif",
+      "status": 200,
+      "type": "image/avif",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom-768.webp",
+      "status": 200,
+      "type": "image/webp",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom-768.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom-1200.avif",
+      "status": 200,
+      "type": "image/avif",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom-1200.webp",
+      "status": 200,
+      "type": "image/webp",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom-1200.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom-300x150.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    },
+    {
+      "filename": "office-cleaning-frequency-washroom-og.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "identical": true
+    }
+  ],
+  "passed": true,
+  "deployment": {
+    "id": "d5a4b888-5c70-4bc7-88bf-78291904fbb6",
+    "version": "d9bd9b36-9d32-441b-93ed-9dfe5cdbaa2f",
+    "percentage": 100,
+    "sourceCommit": "9696ded7ebd904671e61e289e767be26675d3ff0",
+    "pullRequest": "https://github.com/evergreencleaningservice-ca/evergreencleaningservice/pull/74"
+  },
+  "browserChecks": {
+    "checks": [
+      {
+        "width": 1440,
+        "faqKeyboard": true,
+        "noOverflow": true,
+        "images": true,
+        "tablesContained": true
+      },
+      {
+        "width": 768,
+        "faqKeyboard": true,
+        "noOverflow": true,
+        "images": true,
+        "tablesContained": true
+      },
+      {
+        "width": 390,
+        "faqKeyboard": true,
+        "noOverflow": true,
+        "images": true,
+        "tablesContained": true
+      },
+      {
+        "width": 320,
+        "faqKeyboard": true,
+        "noOverflow": true,
+        "images": true,
+        "tablesContained": true
+      }
+    ],
+    "pageErrors": []
+  }
+}

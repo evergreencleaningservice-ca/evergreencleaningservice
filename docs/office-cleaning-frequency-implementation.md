@@ -27,4 +27,8 @@ See office-cleaning-frequency-deliverables.md for five title options, five descr
 
 ## Release
 
-The established process is merge to GitHub main, then guarded npm run deploy using Wrangler and the existing Backblaze image sync. A push alone does not deploy this site. Production release and live verification must be recorded after completion.
+The established process is merge to GitHub main, then guarded npm run deploy using Wrangler and the existing Backblaze image sync. A push alone does not deploy this site. PR #74 was merged and source commit `9696ded7ebd904671e61e289e767be26675d3ff0` deployed successfully on 3 November 2026 at 22:39:49 UTC (5:39:49 p.m. EST, Toronto). Cloudflare version `d9bd9b36-9d32-441b-93ed-9dfe5cdbaa2f` is at 100%, deployment `d5a4b888-5c70-4bc7-88bf-78291904fbb6`. The guarded production process also passed all 876 tests, verified required secret names and the real captcha public key, and uploaded 36 new image renditions (1,220 unchanged; no pruning).
+
+Live verification at 22:40 UTC: the exact article returns HTTP 200; title, supplied description and canonical match; no noindex directive; one H1; seven accessible FAQs; BlogPosting and BreadcrumbList; all contents targets valid. Nine route/discovery probes pass, including homepage, Insights, sitemap, RSS and Week 1. The article is first in Insights. All 36 hosted image renditions return 200 and match local SHA-256 checksums.
+
+The published page was tested again at 1440px, 768px, 390px and 320px: all images load, no document overflow, tables remain within their containers, keyboard FAQ controls work and no page JavaScript errors occur. The deploy did not have a cache-purge token, so its optional purge was skipped; live probes nevertheless confirm the new page, listing and all current image bytes. No publishing issue remains. Evidence: `docs/evidence/week2-production-verification.json`. This post-release documentation commit does not change the deployed website.
