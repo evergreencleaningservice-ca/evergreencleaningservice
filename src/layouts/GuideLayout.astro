@@ -66,10 +66,11 @@ const related = await Promise.all(guide.related.map(async (item) => {
         </nav>
         <div class="entry-content guide-body"><slot /></div>
         <section class="guide-cta" id="requesting-a-cleaning-quote" aria-labelledby="quote-heading">
-          <h2 id="quote-heading">Get a Cleaning Quote for Your Office</h2>
-          <p>Every building is different. Schedule a free on-site walkthrough and receive a written cleaning scope tailored to your needs.</p>
+          <h2 id="quote-heading">{guide.ctaHeading ?? 'Get a Cleaning Quote for Your Office'}</h2>
+          <p>{guide.ctaText ?? 'Every building is different. Schedule a free on-site walkthrough and receive a written cleaning scope tailored to your needs.'}</p>
           <a class="btn btn-primary" href="/request-a-quote/">Request a Free Quote</a>
           <p class="guide-phone">Or call <a href="tel:+14168034880" data-call-location="content">+1 (416) 803-4880</a></p>
+          {guide.ctaResponse && <p>{guide.ctaResponse}</p>}
         </section>
       </article>
       <aside class="guide-related" aria-labelledby="related-heading">
@@ -125,6 +126,7 @@ const related = await Promise.all(guide.related.map(async (item) => {
   .guide-body :global(figure img) { width: 100%; height: auto; margin: 0; border-radius: var(--radius); }
   .guide-body :global(details) { border-bottom: 1px solid var(--rule); padding-block: 18px; }
   .guide-body :global(summary) { cursor: pointer; font-weight: 700; color: var(--ink-heading); padding-block: 6px; font-size: 1rem; }
+  .guide-body :global(summary h3) { display: inline; margin: 0; font-size: inherit; }
   .guide-body :global(details p) { margin: 14px 0 0; }
   .guide-cta { padding: clamp(24px, 5vw, 40px); border: 1px solid var(--brand); border-radius: var(--radius); margin: 44px 0; background: var(--surface-tint); }
   .guide-cta h2 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.3; }

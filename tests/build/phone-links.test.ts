@@ -79,9 +79,10 @@ describe('every rendered tel: link', () => {
        data-driven landing pages. 118 since 2026-10-30: the floor stripping
        and waxing page (SEO audit M5). 95 after the blog consolidation the
        same day: 15 fewer posts, two emptied tag archives and six archive
-       pages the shorter lists no longer need (H7). 96 with the Toronto cost guide. */
-    expect(pageCount).toBe(96);
-    expect(new Set(links.map((l) => l.page)).size).toBe(96);
+       pages the shorter lists no longer need (H7). 98 with both office
+       guides and the additional office-tag pagination page. */
+    expect(pageCount).toBe(98);
+    expect(new Set(links.map((l) => l.page)).size).toBe(98);
     expect(links.length).toBeGreaterThanOrEqual(230);
   });
 
@@ -117,7 +118,7 @@ describe('the locations the site actually uses', () => {
 
   it('the site header carries one on every non-paid page', () => {
     /* Non-paid pages, including the Toronto cost guide, share this header. */
-    expect(at('header')).toHaveLength(91);
+    expect(at('header')).toHaveLength(93);
   });
 
   it('the mobile drawer carries its own, separately reported link', () => {
@@ -125,7 +126,7 @@ describe('the locations the site actually uses', () => {
        menu at every width (`header`), and the open drawer lists the number
        again as its last item (`mobile_navigation`). Two elements, each with
        one fixed answer. */
-    expect(at('mobile_navigation')).toHaveLength(91);
+    expect(at('mobile_navigation')).toHaveLength(93);
   });
 
   it.each([
@@ -171,7 +172,7 @@ describe('the locations the site actually uses', () => {
   it('the site footer carries one on every non-paid page, the paid footer none', () => {
     /* Added deliberately on 2026-10-15 with the footer's contact block. The
        landing-page shell keeps its own minimal footer with no number. */
-    expect(at('footer')).toHaveLength(91);
+    expect(at('footer')).toHaveLength(93);
   });
 });
 
