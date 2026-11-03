@@ -94,8 +94,8 @@ describe('every post’s tags are real', () => {
   const dir = path.join(repo, 'src/content/blog');
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md'));
 
-  it('covers all 24 posts, including the Toronto cost guide', () => {
-    expect(files).toHaveLength(24);
+  it('covers all 25 posts, including both office cleaning guides', () => {
+    expect(files).toHaveLength(25);
   });
 
   it('uses no tag slug that is not in the registry', () => {
@@ -137,7 +137,7 @@ describe('the reconciliation — our counts equal the original’s', () => {
 
   it('pages at ten, like the original', () => {
     expect(count(read('tag', 'cleaning', 'index.html'), /<article/g)).toBe(10);
-    expect(count(read('tag', 'cleaning', 'page', '2', 'index.html'), /<article/g)).toBe(1);
+    expect(count(read('tag', 'cleaning', 'page', '2', 'index.html'), /<article/g)).toBe(2);
   });
 
   it('builds no archive for a tag with no posts', () => {
@@ -215,7 +215,7 @@ describe('the sidebar cloud', () => {
 
   it('speaks the post count, because 8pt means nothing to a screen reader', () => {
     const html = page();
-    expect(html).toContain('aria-label="commercial cleaning (18 items)"');
+    expect(html).toContain('aria-label="commercial cleaning (19 items)"');
     expect(html).toContain('aria-label="cleaning products (4 items)"');
   });
 

@@ -1,0 +1,248 @@
+[
+  {
+    "stockId": 7621152,
+    "sourceDimensions": [
+      4500,
+      3000
+    ],
+    "sourceSha256": "cf78bf1c2ca791f205bf079a3ead6c4dd4a9ddaa8d5018f70446c73448738aab",
+    "outputs": [
+      {
+        "filename": "blog-office-cleaning-frequency-480.avif",
+        "width": 480,
+        "height": 270,
+        "bytes": 8046
+      },
+      {
+        "filename": "blog-office-cleaning-frequency-480.webp",
+        "width": 480,
+        "height": 270,
+        "bytes": 12542
+      },
+      {
+        "filename": "blog-office-cleaning-frequency-480.jpg",
+        "width": 480,
+        "height": 270,
+        "bytes": 21141
+      },
+      {
+        "filename": "blog-office-cleaning-frequency-768.avif",
+        "width": 768,
+        "height": 432,
+        "bytes": 16938
+      },
+      {
+        "filename": "blog-office-cleaning-frequency-768.webp",
+        "width": 768,
+        "height": 432,
+        "bytes": 27108
+      },
+      {
+        "filename": "blog-office-cleaning-frequency-768.jpg",
+        "width": 768,
+        "height": 432,
+        "bytes": 46780
+      },
+      {
+        "filename": "blog-office-cleaning-frequency-1200.avif",
+        "width": 1200,
+        "height": 675,
+        "bytes": 35634
+      },
+      {
+        "filename": "blog-office-cleaning-frequency-1200.webp",
+        "width": 1200,
+        "height": 675,
+        "bytes": 58800
+      },
+      {
+        "filename": "blog-office-cleaning-frequency-1200.jpg",
+        "width": 1200,
+        "height": 675,
+        "bytes": 102254
+      },
+      {
+        "filename": "blog-office-cleaning-frequency.jpg",
+        "width": 1200,
+        "height": 675,
+        "bytes": 102254
+      },
+      {
+        "filename": "blog-office-cleaning-frequency-300x150.jpg",
+        "width": 300,
+        "height": 150,
+        "bytes": 9457
+      },
+      {
+        "filename": "blog-office-cleaning-frequency-og.jpg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 93780
+      }
+    ]
+  },
+  {
+    "stockId": 10612913,
+    "sourceDimensions": [
+      4200,
+      3011
+    ],
+    "sourceSha256": "40dd10d5260cee47df7ededd12ecba2bd3577546075fe0176110ed200e6bcc5a",
+    "outputs": [
+      {
+        "filename": "office-cleaning-frequency-kitchen-480.avif",
+        "width": 480,
+        "height": 320,
+        "bytes": 9669
+      },
+      {
+        "filename": "office-cleaning-frequency-kitchen-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 16074
+      },
+      {
+        "filename": "office-cleaning-frequency-kitchen-480.jpg",
+        "width": 480,
+        "height": 320,
+        "bytes": 26466
+      },
+      {
+        "filename": "office-cleaning-frequency-kitchen-768.avif",
+        "width": 768,
+        "height": 512,
+        "bytes": 20683
+      },
+      {
+        "filename": "office-cleaning-frequency-kitchen-768.webp",
+        "width": 768,
+        "height": 512,
+        "bytes": 34782
+      },
+      {
+        "filename": "office-cleaning-frequency-kitchen-768.jpg",
+        "width": 768,
+        "height": 512,
+        "bytes": 58990
+      },
+      {
+        "filename": "office-cleaning-frequency-kitchen-1200.avif",
+        "width": 1200,
+        "height": 800,
+        "bytes": 43234
+      },
+      {
+        "filename": "office-cleaning-frequency-kitchen-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 77384
+      },
+      {
+        "filename": "office-cleaning-frequency-kitchen-1200.jpg",
+        "width": 1200,
+        "height": 800,
+        "bytes": 132167
+      },
+      {
+        "filename": "office-cleaning-frequency-kitchen.jpg",
+        "width": 1200,
+        "height": 800,
+        "bytes": 132167
+      },
+      {
+        "filename": "office-cleaning-frequency-kitchen-300x150.jpg",
+        "width": 300,
+        "height": 150,
+        "bytes": 10732
+      },
+      {
+        "filename": "office-cleaning-frequency-kitchen-og.jpg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 117787
+      }
+    ]
+  },
+  {
+    "stockId": 21955870,
+    "sourceDimensions": [
+      6240,
+      4160
+    ],
+    "sourceSha256": "1b6c8ea59b73f30648154e0597c8740094a26a9c9728b2d83b043fa46c329f92",
+    "outputs": [
+      {
+        "filename": "office-cleaning-frequency-washroom-480.avif",
+        "width": 480,
+        "height": 320,
+        "bytes": 8304
+      },
+      {
+        "filename": "office-cleaning-frequency-washroom-480.webp",
+        "width": 480,
+        "height": 320,
+        "bytes": 12716
+      },
+      {
+        "filename": "office-cleaning-frequency-washroom-480.jpg",
+        "width": 480,
+        "height": 320,
+        "bytes": 23076
+      },
+      {
+        "filename": "office-cleaning-frequency-washroom-768.avif",
+        "width": 768,
+        "height": 512,
+        "bytes": 17329
+      },
+      {
+        "filename": "office-cleaning-frequency-washroom-768.webp",
+        "width": 768,
+        "height": 512,
+        "bytes": 28268
+      },
+      {
+        "filename": "office-cleaning-frequency-washroom-768.jpg",
+        "width": 768,
+        "height": 512,
+        "bytes": 52414
+      },
+      {
+        "filename": "office-cleaning-frequency-washroom-1200.avif",
+        "width": 1200,
+        "height": 800,
+        "bytes": 36240
+      },
+      {
+        "filename": "office-cleaning-frequency-washroom-1200.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 59720
+      },
+      {
+        "filename": "office-cleaning-frequency-washroom-1200.jpg",
+        "width": 1200,
+        "height": 800,
+        "bytes": 113736
+      },
+      {
+        "filename": "office-cleaning-frequency-washroom.jpg",
+        "width": 1200,
+        "height": 800,
+        "bytes": 113736
+      },
+      {
+        "filename": "office-cleaning-frequency-washroom-300x150.jpg",
+        "width": 300,
+        "height": 150,
+        "bytes": 8903
+      },
+      {
+        "filename": "office-cleaning-frequency-washroom-og.jpg",
+        "width": 1200,
+        "height": 630,
+        "bytes": 97826
+      }
+    ]
+  }
+]
