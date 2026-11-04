@@ -79,7 +79,7 @@ For kitchens, inspect after lunch and before closing. Address spills promptly an
 
 <figure>
 <img src="/images/office-cleaning-frequency-kitchen.jpg" alt="Empty shared office kitchen with a long dining table, chairs, sink and beverage station." width="1200" height="800" loading="lazy" decoding="async" />
-<figcaption>Shared kitchens need checks that follow meal times. Photo by <a href="https://www.magnific.com/free-photo/interior-kitchen-area-modern-office-with-long-wooden-table-chairs_10612913.htm">wirestock on Magnific</a>.</figcaption>
+<figcaption>Shared kitchens need checks that follow meal times.</figcaption>
 </figure>
 
 ### Routine cleaning, deep cleaning and disinfection
@@ -121,7 +121,7 @@ Use a checklist with the task, responsible person, planned frequency, completion
 
 <figure>
 <img src="/images/office-cleaning-frequency-washroom.jpg" alt="Empty commercial washroom with tiled walls, three basins, a long mirror and urinals." width="1200" height="800" loading="lazy" decoding="async" />
-<figcaption>Washroom inspections help identify when an extra visit is needed. Photo by <a href="https://www.magnific.com/premium-photo/contemporary-public-interior-bathroom-with-sink-basin-faucet-lined-up-with-big-mirror-public-toilet-urinals-modern-design_21955870.htm">user6393596 on Magnific</a>.</figcaption>
+<figcaption>Washroom inspections help identify when an extra visit is needed.</figcaption>
 </figure>
 
 <h2 id="common-scheduling-mistakes">Common Mistakes When Planning an Office Cleaning Schedule</h2>

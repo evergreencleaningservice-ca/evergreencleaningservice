@@ -18,7 +18,9 @@ The three exact selections were obtained through the connected Magnific stock-do
 - The kitchen asset's Premium designation and dated account download record were verified. Its **Download license** button did not produce a saved PDF in this browser session, including an explicit download-event check. The Premium designation and dated download record establish the verified account licence; no PDF certificate is claimed to have been saved for this asset. A further attempt at release also produced no download event.
 - Private originals and certificates are in the task workspace's sibling `.stock-originals` directory, outside this public repository. They contain account information and must not be committed or published. Signed download URLs are not retained in source.
 
-Visible author/source credits remain beside all three photos. The office and boardroom contain no people. The kitchen image shows hands/part of a torso, with no face. These illustrative stock photographs are not represented as Evergreen's premises or staff.
+Visible author/source credits were shown beside all three photos until 2026-11-04 (see below). The office and boardroom contain no people. The kitchen image shows hands/part of a torso, with no face. These illustrative stock photographs are not represented as Evergreen's premises or staff.
+
+**Credits removed 2026-11-04** at the client's request: the visible "Photo by … on Magnific" captions (featured and in-body) are no longer shown. The Premium licence does not require attribution; the source of each photo stays recorded in this file and in the post's `guide.imageCredit` front matter.
 
 The selected featured photograph shows glass partitions and seating rather than organized desks. Its alt text describes those visible features accurately; the selected asset itself has not been substituted.
 

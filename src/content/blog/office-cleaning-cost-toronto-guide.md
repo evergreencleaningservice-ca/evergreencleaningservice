@@ -96,7 +96,7 @@ At workstations, clarify whether desks need to be cleared and whether monitors, 
 
 <figure>
 <img src="/images/office-cleaning-cost-kitchen.jpg" width="1200" height="800" alt="Hands wiping a kitchen counter beside a sink with a cleaning cloth." />
-<figcaption>Kitchen surfaces need a clear cleaning scope. Photo by <a href="https://www.magnific.com/free-photo/side-view-hand-cleaning-kitchen_24747597.htm">Magnific</a>.</figcaption>
+<figcaption>Kitchen surfaces need a clear cleaning scope.</figcaption>
 </figure>
 
 The suggested frequencies below are starting points for a discussion, not a fixed Evergreen package. Adjust them for occupancy, food use, foot traffic and your building's requirements. A weekly contractor visit does not replace the day-to-day housekeeping a busy office may need between visits.
@@ -169,7 +169,7 @@ To control costs, keep desks clear, arrange storage so floors can be reached and
 
 <figure>
 <img src="/images/office-cleaning-cost-boardroom.jpg" width="1200" height="800" alt="Empty modern office boardroom with glass walls and a conference table." />
-<figcaption>Include meeting rooms and shared spaces in the written scope. Photo by <a href="https://www.magnific.com/free-photo/empty-boardroom-glass-wall-meeting-room-with-conference-table-shared-desk-team-workplaces-trading-graphs-monitor-office-interior-commercial-real-estate-concept_12615858.htm">pch.vector on Magnific</a>.</figcaption>
+<figcaption>Include meeting rooms and shared spaces in the written scope.</figcaption>
 </figure>
 
 <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>

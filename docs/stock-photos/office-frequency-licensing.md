@@ -14,7 +14,7 @@ All selected items were returned by Magnific stock search with AI-generated item
 
 The signed-in account reports Premium+. Each selected item was downloaded using stock_download and saved to the named project. Before local saving, creations_register_download with license=true returned a licensed original for each selected item and no refusal. Only those licensed original URLs were saved. No claim is made that separate PDF licence certificates were downloaded.
 
-Magnific licensing documentation permits commercial websites and modifications with Premium licensing; attribution is not required for Premium/Premium+ accounts. Visible author/source credits are nevertheless included beside each image. Original-file redistribution and sublicensing are prohibited. Terms checked: https://www.magnific.com/ai/docs/licenses-attribution and https://www.magnific.com/legal/terms-of-use (June 2026). Originals and signed URLs remain outside the public repository.
+Magnific licensing documentation permits commercial websites and modifications with Premium licensing; attribution is not required for Premium/Premium+ accounts. Visible author/source credits were included beside each image until 2026-11-04, when they were removed at the client's request; the sources stay recorded here and in the post's `guide.imageCredit` front matter. Original-file redistribution and sublicensing are prohibited. Terms checked: https://www.magnific.com/ai/docs/licenses-attribution and https://www.magnific.com/legal/terms-of-use (June 2026). Originals and signed URLs remain outside the public repository.
 
 ## Selection review and cost
 

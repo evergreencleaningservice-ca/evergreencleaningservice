@@ -26,7 +26,10 @@ const blog = defineCollection({
       ctaHeading: z.string().optional(),
       ctaText: z.string().optional(),
       ctaResponse: z.string().optional(),
-      imageCredit: z.object({ name: z.string(), url: z.string().url() }),
+      /** The featured photo's source, kept as a record; not shown on the page
+          (credits removed 2026-11-04; the Premium licence needs none —
+          docs/stock-photos/). */
+      imageCredit: z.object({ name: z.string(), url: z.string().url() }).optional(),
       contents: z.array(z.object({ label: z.string(), id: z.string() })),
       related: z.array(z.object({ slug: z.string(), label: z.string() })),
     }).optional(),
