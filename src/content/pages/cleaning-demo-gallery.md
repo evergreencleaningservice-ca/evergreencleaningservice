@@ -5,9 +5,6 @@ image: "/images/warehouse-floor-scrubber-industrial.jpg"
 imageAlt: "Floor scrubber in a warehouse aisle"
 ---
 
-These licensed stock photographs illustrate cleaning equipment, workspaces and cleaning methods. They do not depict Evergreen employees or completed client projects.
-
-
 ![Floor polishing machine in an industrial building](/images/gallery-industrial-cleaning-toronto.jpg)
 
 ![Close-up of a vacuum cleaning a carpet](/images/gallery-office-cleaning-services.jpg)
