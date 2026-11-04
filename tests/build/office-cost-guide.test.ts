@@ -71,7 +71,9 @@ describe('the Toronto office cleaning guide', () => {
       expect(img.getAttribute('srcset')).toContain('1200w');
       expect(img.getAttribute('alt')?.length).toBeGreaterThan(20);
     }
-    expect(document.querySelectorAll('figcaption a[href*="magnific.com"]')).toHaveLength(3);
+    // No photo credits (removed 2026-11-04; the Premium licence needs none).
+    expect(document.querySelectorAll('figcaption a[href*="magnific.com"]')).toHaveLength(0);
+    expect(document.body.textContent).not.toMatch(/Photo by|on Magnific/);
   });
 
   it('emits matching BlogPosting and breadcrumb structured data', () => {

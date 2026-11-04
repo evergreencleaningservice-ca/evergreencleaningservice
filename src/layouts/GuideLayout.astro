@@ -58,7 +58,6 @@ const related = await Promise.all(guide.related.map(async (item) => {
             <img src={image} srcset={featured?.jpg} sizes={featured ? sizes : undefined}
               alt={imageAlt ?? ''} width="1200" height="675" fetchpriority="high" decoding="async" />
           </picture>
-          <figcaption>Photo by <a href={guide.imageCredit.url}>{guide.imageCredit.name} on Magnific</a>.</figcaption>
         </figure>}
         <nav class="guide-toc" aria-labelledby="guide-toc-title">
           <h2 id="guide-toc-title">In this guide</h2>
