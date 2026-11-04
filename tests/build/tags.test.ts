@@ -182,48 +182,37 @@ describe('an archive page matches the original’s', () => {
   });
 });
 
-describe('the sidebar cloud', () => {
+/* The sidebar cloud was replaced on 2026-11-03 by a list of service pages:
+   six sitewide links to `noindex` archives, under the anchors the service
+   pages need, were spending every page's links on pages that cannot rank.
+   The archives stay, reached from each post's own tag list. */
+describe('the sidebar links services, not tag archives', () => {
   const page = () => read('about-us', 'index.html');
+  const sidebar = () => page().match(/<aside id="secondary"[\s\S]*?<\/aside>/)?.[0] ?? '';
 
-  it('replaces the invented Request Quote widget with Tags', () => {
-    expect(page()).toContain('>Tags</h2>');
-    expect(page(), 'the original has no Request Quote widget').not.toContain('>Request Quote</h2>');
+  it('has an Our Services widget and no tag cloud', () => {
+    expect(sidebar()).toContain('>Our Services</h2>');
+    expect(sidebar()).not.toContain('>Tags</h2>');
+    expect(sidebar(), 'the original has no Request Quote widget').not.toContain('>Request Quote</h2>');
   });
 
-  /* Capped on 2026-10-30 (SEO audit L1-L4): only tags with two or more
-     posts; a one-post tag's archive is that post again. */
-  it('renders the tags with two or more posts, each linking to its own archive', () => {
-    const html = page();
-    const shown = tags.filter((t) => t.count >= 2);
-    expect(shown.length).toBeGreaterThanOrEqual(5);
-    for (const tag of shown) {
-      expect(html, tag.slug).toContain(`href="/tag/${tag.slug}/"`);
-    }
-    expect(html).not.toContain('href="/tag/winter/"');
+  it('carries no /tag/ link', () => {
+    expect(sidebar()).not.toMatch(/href="\/tag\//);
   });
 
-  /* The original's 8pt-22pt range, mapped onto 12px-19px since 2026-10-29:
-     the ranking is the same, but the smallest tags are readable and the
-     largest no longer break over two lines of the sidebar. */
-  it('keeps the original’s ranking, within a readable range', () => {
-    const html = page();
-    expect(html).toContain('href="/tag/commercial-cleaning/" style="font-size: 19.0px"');
-    const smallest = tags.filter((t) => t.count >= 2).sort((a, b) => a.size - b.size)[0];
-    const px = (12 + ((Math.min(Math.max(smallest.size, 8), 22) - 8) / 14) * 7).toFixed(1);
-    expect(html).toContain(`href="/tag/${smallest.slug}/" style="font-size: ${px}px"`);
+  it('puts the search phrases on the pages that should rank for them', () => {
+    const html = sidebar();
+    expect(html).toMatch(/href="\/services\/office-cleaning\/"[^>]*>\s*Commercial office cleaning\s*</);
+    expect(html).toMatch(/href="\/services\/commercial-cleaning\/"[^>]*>\s*Commercial cleaning &amp; janitorial\s*</);
   });
 
-  it('speaks the post count, because 8pt means nothing to a screen reader', () => {
-    const html = page();
-    expect(html).toContain('aria-label="commercial cleaning (19 items)"');
-    expect(html).toContain('aria-label="cleaning products (4 items)"');
-  });
-
-  it('every link in the cloud resolves to a page that was built', () => {
-    const hrefs = [...page().matchAll(/href="(\/tag\/[a-z0-9-]+\/)"/g)].map((m) => m[1]);
+  it('every service link resolves to a page that was built', () => {
+    const hrefs = [...sidebar().matchAll(/href="(\/services\/[a-z0-9-]+\/)"/g)].map((m) => m[1]);
+    expect(hrefs.length).toBe(6);
     const missing = hrefs.filter((href) => !exists(href.slice(1), 'index.html'));
-    expect(missing, 'the cloud links somewhere that does not exist').toEqual([]);
+    expect(missing).toEqual([]);
   });
+
 });
 
 describe('no /tag/* wildcard, because it shadowed every archive', () => {

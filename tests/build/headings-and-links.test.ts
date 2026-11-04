@@ -238,7 +238,7 @@ describe('internal links', () => {
     expect(hrefs).toContain('/reviews/');
   });
 
-  it('the tag cloud is back, and every link in it leads somewhere different', () => {
+  it('every tag archive is still linked, and every link leads somewhere different', () => {
     /* THIS TEST USED TO ASSERT THE OPPOSITE, and the reason it did is worth
        keeping: the cloud was 26 links on 63 pages that all 301'd to the same
        archive, so it was 26 words for one destination. That was true, and it
@@ -250,7 +250,9 @@ describe('internal links', () => {
        that was actually broken: distinct destinations, each one real. */
     const tagLinks = [...internalLinks().keys()].filter((href) => href.startsWith('/tag/'));
 
-    /* The cloud's own 26 are the archive roots. The rest of the /tag/ links
+    /* Since 2026-11-03 the sidebar cloud is gone and the roots are reached
+       from each post's own tag list instead; the count must not move. The
+       rest of the /tag/ links
        are the "Older posts" hops the five busiest tags need, which is why
        this counts the roots rather than every /tag/ href. */
     const roots = tagLinks.filter((href) => /^\/tag\/[^/]+\/$/.test(href));
