@@ -1,0 +1,59 @@
+# Deploys staging (stage.evergreencleaningservice.ca) on every push to main.
+#
+# It runs `npm run deploy:preview`, the same command as a manual deploy:
+# deploy-guard, the test suite, the B2 image sync, the build, wrangler deploy and
+# the edge purge. A failure at any step stops the deploy.
+#
+# GO-LIVE: this is a *preview* deploy, and staging and production are one
+# Worker. Once www. or the apex is attached to the Worker, change the command to
+# `npm run deploy` (it adds the secret check and the production build gates) —
+# see HANDOFF.md section 4.
+#
+# Repository secrets it needs (Settings -> Secrets and variables -> Actions):
+#   CLOUDFLARE_API_TOKEN  Workers Scripts edit on the account, and Cache Purge
+#                         on the evergreencleaningservice.ca zone
+#   B2_KEY_ID             Backblaze key with write access to
+#   B2_APP_KEY            img-evergreencleaningservice
+name: Deploy staging
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One deploy at a time. A newer push cancels an older run still in progress,
+# and deploy-guard refuses any run whose commit is no longer main's head.
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: staging
+      url: https://stage.evergreencleaningservice.ca
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Deploy
+        run: npm run deploy:preview
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 47a82355b575e264047206a36c2cd05c
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+          B2_APP_KEY: ${{ secrets.B2_APP_KEY }}
+          # The client's reCAPTCHA v2 site key. Public — it is in every page's
+          # HTML — and it must match the RECAPTCHA_SECRET set on the Worker.
+          PUBLIC_RECAPTCHA_SITE_KEY: 6Lcy1lwaAAAAAL_5DO8SACXqh0NF_QdzhkrAh-3K

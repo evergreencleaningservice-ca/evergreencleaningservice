@@ -13,10 +13,15 @@
  *   - the checked-out branch is `main`
  *   - the working tree has no changes, staged or not (an uncommitted edit
  *     would ship without ever reaching the repository)
- *   - HEAD equals `origin/main` after a fetch (a stale or unpushed `main`
+ *   - HEAD equals `main` on origin right now (a stale or unpushed `main`
  *     would ship something nobody else can see)
  *
- * Runs first in `npm run deploy` and `npm run deploy:preview`.
+ * GitHub Actions checks out the pushed commit on a detached HEAD, so there the
+ * branch comes from GITHUB_REF instead. The last check still has to pass, which
+ * is what stops a run for an older push from deploying over a newer one.
+ *
+ * Runs first in `npm run deploy` and `npm run deploy:preview`, and so in
+ * .github/workflows/deploy-staging.yml.
  */
 import { execFileSync } from 'node:child_process';
 
@@ -27,19 +32,25 @@ const refuse = (why) => {
   process.exit(1);
 };
 
-const branch = git('rev-parse', '--abbrev-ref', 'HEAD');
+let branch = git('rev-parse', '--abbrev-ref', 'HEAD');
+if (branch === 'HEAD' && process.env.GITHUB_ACTIONS === 'true' && process.env.GITHUB_REF?.startsWith('refs/heads/')) {
+  branch = process.env.GITHUB_REF.slice('refs/heads/'.length);
+}
 if (branch !== 'main') refuse(`checked out on "${branch}", not main.`);
 
 if (git('status', '--porcelain') !== '') refuse('the working tree has uncommitted changes.');
 
+/* ls-remote rather than fetch + origin/main: a shallow CI checkout may not
+   track origin/main at all, and this asks the one question that matters. */
+let remote;
 try {
-  git('fetch', '--quiet', 'origin', 'main');
+  remote = git('ls-remote', 'origin', 'refs/heads/main').split(/\s/)[0];
 } catch {
-  refuse('could not fetch origin/main, so cannot prove this checkout matches it.');
+  refuse('could not reach origin, so cannot prove this checkout matches main.');
 }
+if (!remote) refuse('origin has no main branch.');
 
 const head = git('rev-parse', 'HEAD');
-const remote = git('rev-parse', 'origin/main');
 if (head !== remote) {
   refuse(`HEAD ${head.slice(0, 7)} is not origin/main ${remote.slice(0, 7)} — pull or push first.`);
 }
