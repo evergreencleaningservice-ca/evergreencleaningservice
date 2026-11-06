@@ -1,0 +1,21 @@
+HTTP/1.1 200 Connection Established
+
+HTTP/2 200 
+date: Fri, 06 Nov 2026 22:02:27 GMT
+content-type: text/html
+cf-cache-status: HIT
+cache-control: public, max-age=0, must-revalidate
+strict-transport-security: max-age=31536000
+content-security-policy: frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'
+content-security-policy-report-only: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://static.cloudflareinsights.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://www.gstatic.com; img-src 'self' data: blob: https://img.evergreencleaningservice.ca https://www.google.com https://www.google.ca https://www.gstatic.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://www.googletagmanager.com https://i.ytimg.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' https://img.evergreencleaningservice.ca; connect-src 'self' https://www.google.com https://www.google.ca https://www.googleadservices.com https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src https://www.google.com https://www.googletagmanager.com https://td.doubleclick.net https://www.youtube.com https://www.youtube-nocookie.com https://challenges.cloudflare.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; report-uri /api/csp-report; report-to csp
+permissions-policy: camera=(), microphone=(), geolocation=(), usb=(), payment=(), serial=(), bluetooth=(), hid=()
+referrer-policy: strict-origin-when-cross-origin
+reporting-endpoints: csp="/api/csp-report"
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=k6YLEXR8uk60k0QwlRljS%2FrhV6g0694uLYkMbbtDQS%2FgQae4Aufb1zMnicYkyL%2BabqAEk9leYyNOxi2xdUbIt58KxvFhamRUA9N7BQBPkW1%2FVD%2F%2BjFBzdnPs1FpVKLn%2BMko89Q%2BJw3APgxxn68xQwvVt"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: a56761f20db313f3-ORD
+alt-svc: h3=":443"; ma=86400
+
