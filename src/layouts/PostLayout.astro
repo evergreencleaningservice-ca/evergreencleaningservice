@@ -20,7 +20,10 @@ interface Props {
 }
 
 const { post, newer, older, noindex = false } = Astro.props;
-const { title, description, pubDate, updatedDate, image, imageAlt } = post.data;
+/* `seoTitle` is a shorter headline for the <title> only, set where the full
+   title would push the brand suffix past pageTitle's 60-character limit
+   (legacy blog pass, 6 Nov 2026). The H1, breadcrumb and schema keep `title`. */
+const { title, seoTitle, description, pubDate, updatedDate, image, imageAlt } = post.data;
 const longDate = (d: Date) =>
   d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 /* The post's own topics, linked to their archives. The sidebar cloud shows
@@ -42,7 +45,7 @@ const SIZES = '(min-width: 992px) 720px, calc(100vw - 32px)';
 ---
 
 <BaseLayout
-  title={pageTitle(`${title}`)}
+  title={pageTitle(seoTitle ?? title)}
   description={description}
   image={image}
   imageAlt={imageAlt}

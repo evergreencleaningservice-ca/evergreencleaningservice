@@ -250,12 +250,20 @@ const retiredPosts: Record<string, string> = {
   '5-tips-for-maintaining-clean-office-air': '/commercial-cleaning-air-quality/',
   'control-allergies-workplace-with-professional-janitorial-services': '/commercial-cleaning-air-quality/',
   'modern-vs-old-fashioned-cleaning-methods': '/robotic-vs-manual-cleaning-which-will-ultimately-succeed/',
-  'does-hand-sanitization-actually-help-prevent-illnesses': '/importance-of-hand-washing/',
+  /* Went to /importance-of-hand-washing/ until that post was itself merged
+     (below); one hop, straight to the merged post. */
+  'does-hand-sanitization-actually-help-prevent-illnesses': '/areas-in-your-office-where-germs-are-likely-hiding/',
   'qualities-top-cleaning-professionals': '/how-to-decide-on-a-cleaning-company/',
   'workplace-cleaning-checklist-winter': '/seasonal-office-cleaning-checklist/',
   'tips-tricks-for-spring-cleaning-your-office': '/seasonal-office-cleaning-checklist/',
   'end-of-summer-cleaning': '/seasonal-office-cleaning-checklist/',
   'office-cleaning-fall': '/seasonal-office-cleaning-checklist/',
+  /* The legacy blog pass of 6 Nov 2026 (SEO audit, cluster.md "Merge,
+     retitle"): hand-washing became a "Hand hygiene" section of the germ
+     hotspots post, and the plants post a "Plants and air quality" section of
+     the air-quality post. 23 posts now. */
+  'importance-of-hand-washing': '/areas-in-your-office-where-germs-are-likely-hiding/',
+  'how-to-take-care-of-plants-in-the-office': '/commercial-cleaning-air-quality/',
 };
 
 export const retiredPostSlugs = Object.keys(retiredPosts);
@@ -273,11 +281,16 @@ export const removedArchivePageRedirects: Redirect[] = [
   ['/tag/office/page/2/', '/tag/office/'],
 ].map(([from, to]) => ({ from, to }));
 
-/** The two tags the consolidation left with no posts. */
-export const retiredTagRedirects: Redirect[] = ['coronavirus', 'covid-19'].map((slug) => ({
-  from: `/tag/${slug}/`,
-  to: '/services/disinfection-cleaning/',
-}));
+/**
+ * Tags left with no posts: the two the consolidation emptied, and `plants`,
+ * whose only post was merged into the air-quality post on 6 Nov 2026. Each
+ * goes to the page that now covers the topic.
+ */
+export const retiredTagRedirects: Redirect[] = Object.entries({
+  coronavirus: '/services/disinfection-cleaning/',
+  'covid-19': '/services/disinfection-cleaning/',
+  plants: '/commercial-cleaning-air-quality/',
+}).map(([slug, to]) => ({ from: `/tag/${slug}/`, to }));
 
 export const retiredPostRedirects: Redirect[] = Object.entries(retiredPosts).flatMap(
   ([slug, to]) => [

@@ -1,6 +1,7 @@
 ---
-title: "5 Commercial Cleaning Products You Should Have in Your Office"
-description: "Five cleaning products worth keeping in any office: glass cleaner, disinfecting wipes, a spot remover, white vinegar and an air freshener."
+title: "Office Cleaning Supplies List: What to Keep On Hand"
+seoTitle: "Office Cleaning Supplies List"
+description: "The cleaning supplies worth keeping on hand in any office: glass cleaner, disinfecting wipes, a spot remover, white vinegar and an air freshener."
 pubDate: 2020-11-30
 image: "/images/blog-office-cleaning-products-feature.jpg"
 imageAlt: "Cleaning spray and pink microfibre cloth on a blue background"

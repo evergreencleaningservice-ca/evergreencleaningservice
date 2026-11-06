@@ -5,7 +5,7 @@ description: "A printable office cleaning checklist for Toronto workplaces: what
 pubDate: 2026-11-06
 image: "/images/blog-office-cleaning-checklist.jpg"
 imageAlt: "Gloved hands holding a clipboard checklist beside cleaning supplies."
-tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
+tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
 guide:
   category: "Office Cleaning Guide"
   breadcrumb: "Office Cleaning Checklist"

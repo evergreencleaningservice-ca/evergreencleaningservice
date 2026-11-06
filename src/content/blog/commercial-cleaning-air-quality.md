@@ -1,8 +1,8 @@
 ---
 title: "Commercial Cleaning and Air Quality"
-description: "How cleaning improves the air in an office: what makes indoor air poor, how to cut dust and allergens, and what to clean and how often."
+description: "How cleaning improves office air: what makes indoor air poor, how to cut dust and allergens, what to clean and how often, and where office plants fit in."
 pubDate: 2020-08-31
-updatedDate: 2026-10-30
+updatedDate: 2026-11-06
 image: "/images/blog-commercial-cleaning-air-quality-feature.jpg"
 imageAlt: "Gloved hands cleaning a wall-mounted air conditioner"
 tags: ["air-quality", "allergies", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
@@ -20,6 +20,7 @@ If you walk into your office and the air feels heavy, smells stale or sets off s
 - Deal with carpets, the biggest reservoir
 - Choose low-residue products
 - Keep the HVAC and filters maintained
+- Plants and air quality
 
 ![Worker on a lifting platform cleaning a ceiling](/images/high-dusting-warehouse-lift.jpg)
 
@@ -55,6 +56,18 @@ Some cleaning products leave fragrance and residue that are themselves irritants
 ### Keep the HVAC Maintained
 
 A dirty HVAC system recirculates dust through the whole building. Replace filters on schedule, have vents and return grilles cleaned as part of high dusting, and have ducts inspected and cleaned by an HVAC contractor when they need it. A portable air purifier with a HEPA filter can help in a room where people with allergies sit.
+
+### Plants and Air Quality
+
+Office plants make a workplace pleasanter, but a few pots do not stand in for ventilation, filters or cleaning, and a neglected plant works against the air: overwatered soil and a saucer of standing water grow mould, and dusty leaves are one more surface. A few habits keep them on the right side of it.
+
+- **Choose hardy plants.** The [ZZ plant](https://en.wikipedia.org/wiki/Zamioculcas), the [snake plant](https://en.wikipedia.org/wiki/Dracaena_trifasciata) and [Sedum morganianum](https://en.wikipedia.org/wiki/Sedum_morganianum) tolerate office light and irregular watering.
+- **Give each one a spot and leave it there.** Plants moved around keep wilting as they readjust; pick a place with the light the plant needs and let it settle.
+- **Water lightly and empty the saucer.** Most office plants die from too much water, not too little, and the standing water is what breeds mould and gnats.
+- **Wipe the leaves.** Dust settles on leaves as it does on a shelf. A damp microfibre cloth once a month keeps them clean.
+- **Put someone's name on it.** A plant that belongs to one person gets watered; a plant that belongs to everyone does not. If you would rather not, say so at the walkthrough: watering and leaf-dusting can be written into the cleaning scope.
+
+![Plants and a white vase on shelving against a brick wall](/images/office-plants-clean-workplace.jpg)
 
 ### Why Bring in Professionals
 
