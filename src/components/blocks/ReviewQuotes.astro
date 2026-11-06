@@ -16,7 +16,7 @@ const chosen = names ? reviews.filter((r) => names.includes(r.name)) : reviews;
 
 <section class="blk-reviews" aria-label={heading}>
   <h2 class="blk-title">{heading}</h2>
-  <div class="blk-review-grid">
+  <div class="blk-review-grid" data-reveal="stagger">
     {
       chosen.map((r) => (
         <figure class="blk-review">

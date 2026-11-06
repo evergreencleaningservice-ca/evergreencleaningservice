@@ -17,11 +17,11 @@ const cols = items.length === 4 ? 4 : Math.min(3, items.length);
   items.length > 0 && (
     <section class="blk-links" aria-label={heading ?? 'Related pages'}>
       {heading && <Tag class="blk-title">{heading}</Tag>}
-      <ul style={`--cols: ${cols}`}>
+      <ul style={`--cols: ${cols}`} data-reveal="stagger">
         {items.map((item) => (
           <li>
-            <a href={item.href}>
-              <strong>{item.title}</strong>
+            <a class="card-hover" href={item.href}>
+              <strong class="card-arrow">{item.title}</strong>
               {item.text && <span>{item.text}</span>}
             </a>
           </li>

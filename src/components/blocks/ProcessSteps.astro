@@ -20,7 +20,7 @@ const Tag = level;
 <section class="blk-process" aria-label={heading}>
   <Tag class="blk-title">{heading}</Tag>
   {intro && <p class="blk-intro">{intro}</p>}
-  <ol class="blk-steps">
+  <ol class="blk-steps" data-reveal="stagger">
     {
       PROCESS_STEPS.map((step) => (
         <li>

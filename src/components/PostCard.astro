@@ -68,18 +68,30 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
     border-radius: var(--radius);
     overflow: hidden;
     transition:
-      box-shadow 0.2s ease,
-      transform 0.2s ease;
+      border-color var(--motion-fast) ease,
+      box-shadow var(--motion-base) var(--ease-out),
+      transform var(--motion-base) var(--ease-out);
   }
 
+  /* As ServiceCard: brand border for everyone, lift and zoom for a pointer. */
   .post-card:hover,
   .post-card:focus-within {
-    box-shadow: 0 8px 20px rgba(50, 50, 50, 0.12);
-    transform: translateY(-2px);
+    border-color: var(--brand);
+  }
+
+  @media (hover: hover) {
+    .post-card:hover {
+      box-shadow: var(--shadow-lift);
+      transform: translateY(var(--lift));
+    }
+    .post-card:hover .post-card-thumb:not(.is-fallback) img {
+      transform: scale(1.04);
+    }
   }
 
   .post-card-thumb {
     display: block;
+    overflow: hidden;
     background: var(--surface-alt);
   }
 
@@ -88,6 +100,7 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
     height: auto;
     aspect-ratio: 2 / 1;
     object-fit: cover;
+    transition: transform 600ms var(--ease-out);
   }
 
   /* Logo fallback: hold the same 2:1 card shape, but letterbox the banner so
@@ -153,6 +166,15 @@ const dateLabel = new Intl.DateTimeFormat('en-CA', {
 
   .post-card-more::after {
     content: ' \2192';
+    position: relative;
+    left: 0;
+    transition: left var(--motion-base) var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .post-card:hover .post-card-more::after {
+      left: 4px;
+    }
   }
 
   .post-card a:focus-visible {

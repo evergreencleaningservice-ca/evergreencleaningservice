@@ -317,10 +317,20 @@ const f = (name: string) => `${id}-${name}`;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition:
+      background-color var(--motion-fast) ease,
+      transform var(--motion-base) var(--ease-out);
   }
 
-  .wpf-submit:hover {
-    background: var(--brand-hover, #3f7523);
+  /* The darker brand, not `--brand-hover`: that is the bright #69ed3d the
+     footer uses for green text on black, and white on it is 1.6:1. */
+  .wpf-submit:hover,
+  .wpf-submit:focus-visible {
+    background: var(--brand-dark);
+  }
+
+  .wpf-submit:active {
+    transform: translateY(1px);
+    transition-duration: 60ms;
   }
 </style>

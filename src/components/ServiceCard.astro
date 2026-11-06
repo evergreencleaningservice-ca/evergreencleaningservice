@@ -84,18 +84,32 @@ const SIZES = '(min-width: 992px) 300px, (min-width: 768px) 50vw, 100vw';
     border-radius: var(--radius);
     overflow: hidden;
     transition:
-      box-shadow 0.2s ease,
-      transform 0.2s ease;
+      border-color var(--motion-fast) ease,
+      box-shadow var(--motion-base) var(--ease-out),
+      transform var(--motion-base) var(--ease-out);
   }
 
+  /* The border takes the brand colour for everyone, including a keyboard
+     user tabbing through the card; the lift and the photo's slow zoom are
+     for a pointer only, where a hover can start and end. */
   .service-card:hover,
   .service-card:focus-within {
-    box-shadow: 0 8px 20px rgba(50, 50, 50, 0.12);
-    transform: translateY(-2px);
+    border-color: var(--brand);
+  }
+
+  @media (hover: hover) {
+    .service-card:hover {
+      box-shadow: var(--shadow-lift);
+      transform: translateY(var(--lift));
+    }
+    .service-card:hover .service-card-thumb img {
+      transform: scale(1.04);
+    }
   }
 
   .service-card-thumb {
     display: block;
+    overflow: hidden;
     background: var(--surface-alt);
   }
 
@@ -112,6 +126,7 @@ const SIZES = '(min-width: 992px) 300px, (min-width: 768px) 50vw, 100vw';
     height: auto;
     aspect-ratio: 8 / 5;
     object-fit: cover;
+    transition: transform 600ms var(--ease-out);
   }
 
   .service-card-body {
@@ -149,6 +164,15 @@ const SIZES = '(min-width: 992px) 300px, (min-width: 768px) 50vw, 100vw';
 
   .service-card-more::after {
     content: ' \2192';
+    position: relative;
+    left: 0;
+    transition: left var(--motion-base) var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .service-card:hover .service-card-more::after {
+      left: 4px;
+    }
   }
 
   .service-card a:focus-visible {

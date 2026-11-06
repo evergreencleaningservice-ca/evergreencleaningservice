@@ -140,10 +140,15 @@ const serviceLinks = [
     text-transform: uppercase;
     line-height: 1;
     cursor: pointer;
+    transition: background-color var(--motion-fast) ease;
   }
 
-  .search-submit:hover {
-    background: var(--brand-hover, #3f7523);
+  /* `--brand-hover` is the bright #69ed3d, meant for green text on the dark
+     footer; white text on it measures 1.6:1. The darker brand is the hover
+     for every other solid green button on the site. */
+  .search-submit:hover,
+  .search-submit:focus-visible {
+    background: var(--brand-dark);
   }
 
   .search-form input:focus-visible {
@@ -173,7 +178,8 @@ const serviceLinks = [
     color: var(--ink);
   }
 
-  .widget-recent a:hover {
+  .widget-recent a:hover,
+  .widget-recent a:focus-visible {
     color: var(--brand);
   }
 

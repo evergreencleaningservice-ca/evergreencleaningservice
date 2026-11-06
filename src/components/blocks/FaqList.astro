@@ -58,20 +58,39 @@ const json = {
     font-weight: 700;
     font-size: 1.05rem;
     color: var(--ink-heading);
+    transition: color var(--motion-fast) ease;
+  }
+  .blk-faq summary:hover {
+    color: var(--brand-dark);
   }
   .blk-faq summary::-webkit-details-marker {
     display: none;
   }
-  .blk-faq summary::after {
-    content: '+';
+  /* A plus that turns into a minus by rotating, rather than swapping
+     glyphs: the same mark, a quarter-turn, so the eye follows it. Drawn
+     with two bars rather than typed, so the two states are the same size
+     and sit on the same centre. */
+  .blk-faq summary::after,
+  .blk-faq summary::before {
+    content: '';
     position: absolute;
-    right: 4px;
-    top: 10px;
-    font-size: 1.5rem;
-    color: var(--brand);
+    right: 8px;
+    top: 50%;
+    width: 14px;
+    height: 2px;
+    margin-top: -1px;
+    background: var(--brand);
+    border-radius: 1px;
+    transition: transform var(--motion-base) var(--ease-out);
+  }
+  .blk-faq summary::before {
+    transform: rotate(90deg);
+  }
+  .blk-faq details[open] summary::before {
+    transform: rotate(0deg);
   }
   .blk-faq details[open] summary::after {
-    content: '−';
+    transform: rotate(180deg);
   }
   .blk-faq summary:focus-visible {
     outline: 2px solid var(--brand);

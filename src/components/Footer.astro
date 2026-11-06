@@ -230,6 +230,7 @@ const icons: Record<string, string> = {
     display: inline-block;
     min-height: 24px;
     padding: 2px 0;
+    transition: color var(--motion-fast) ease;
   }
 
   .site-footer .footer-areas a:hover {
@@ -273,6 +274,12 @@ const icons: Record<string, string> = {
     display: block;
     color: #fff;
     line-height: 1;
+    /* The 24px glyph sits in a 44px target; the padding is the target. */
+    padding: 10px;
+    margin: -10px;
+    transition:
+      color var(--motion-fast) ease,
+      transform var(--motion-base) var(--ease-out);
   }
 
   .footer-social svg {
@@ -283,6 +290,12 @@ const icons: Record<string, string> = {
 
   .site-footer .footer-social a:hover {
     color: var(--brand-hover);
+  }
+
+  @media (hover: hover) {
+    .site-footer .footer-social a:hover {
+      transform: translateY(-3px);
+    }
   }
 
   .footer-social a:focus-visible {
@@ -341,11 +354,25 @@ const icons: Record<string, string> = {
     line-height: 50px;
     text-align: center;
     transform: rotate(-45deg);
-    transition: all 0.2s linear 0s;
+    /* The original's `all … linear` also animated `top` and `right` when
+       the breakpoint moved the arrow; only the colour and the rise are
+       meant to move. */
+    transition:
+      color var(--motion-fast) ease,
+      transform var(--motion-base) var(--ease-out);
   }
 
   .site-footer .btt a:hover {
     color: var(--brand);
+  }
+
+  /* The peak rises 3px under the pointer. The lift is along the page's
+     y-axis, so it is applied after the rotation (right-to-left in CSS),
+     which is where the inner svg's counter-rotation makes it square too. */
+  @media (hover: hover) {
+    .site-footer .btt a:hover {
+      transform: translateY(-3px) rotate(-45deg);
+    }
   }
 
   .site-footer .btt a svg {
@@ -378,6 +405,7 @@ const icons: Record<string, string> = {
     color: var(--brand-hover);
     text-decoration: underline;
     text-underline-offset: 2px;
+    transition: color var(--motion-fast) ease;
   }
 
   .site-footer a:hover {
