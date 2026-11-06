@@ -146,6 +146,14 @@ const webPage = webPageSchema({
         <a class="btn btn-primary" href="#offer-quote" data-quote-cta data-cta-location="hero">Get a free quote</a>
         <a class="btn btn-ghost" href={nap.phoneHref} data-call-location="hero">Call {nap.phoneDisplay}</a>
       </p>
+      {/* The three facts the office-cleaning hero shows, in short form (SEO
+          audit Phase 2): the location hero had no trust signal at all. Kept
+          to a few words so it does not eat into each page's unique text. */}
+      <ul class="loc-trust" aria-label="Why Evergreen">
+        <li>Since 1989</li>
+        <li>WSIB covered, bonded and insured</li>
+        <li>We reply within 2 hours</li>
+      </ul>
     </div>
   </div>
 
@@ -482,5 +490,21 @@ const webPage = webPageSchema({
   .loc-nap p {
     margin: 0 0 10px;
     line-height: 1.6;
+  }
+  .loc-trust {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-size: 0.9375rem;
+    color: var(--ink);
+  }
+  .loc-trust li::before {
+    content: '✓';
+    color: var(--brand);
+    font-weight: 700;
+    margin-right: 6px;
   }
 </style>

@@ -1,6 +1,6 @@
 ---
 title: "Benefits of Commercial Deep Cleaning Services"
-description: "Work setting in need of a deep clean? Let the pros explain what this is and why it has its benefits to your commercial setting."
+description: "What a commercial deep clean adds to routine cleaning: better first impressions, a healthier team, fewer germs on shared surfaces and longer-lasting floors."
 pubDate: 2022-04-26
 image: "/images/blog-commercial-deep-cleaning-feature.jpg"
 imageAlt: "Gloved hands cleaning elevator buttons"

@@ -36,6 +36,8 @@ scope:
   - "This is workplace disinfection. Biohazard and hazardous-material clean-up is specialist work and is not part of this service."
 showProcess: true
 showPricing: true
+reviews:
+  - "Ping Lee"
 faqs:
   - q: "What is the difference between cleaning and disinfecting?"
     a: "Cleaning removes dirt and germs from a surface; disinfecting kills germs that remain on it. We always clean first, because a disinfectant cannot work through grime."

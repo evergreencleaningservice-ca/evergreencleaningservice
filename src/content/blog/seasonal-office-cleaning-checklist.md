@@ -1,6 +1,6 @@
 ---
 title: "Seasonal Office Cleaning Checklist for Toronto"
-description: "What to clean in an office each season in Toronto: winter salt and entrances, a spring deep clean and declutter, end-of-summer catch-up, and fall windows, air and pests."
+description: "What to clean in a Toronto office each season: winter salt and entrances, a spring deep clean, an end-of-summer catch-up, and fall windows, air and pests."
 pubDate: 2026-10-30
 image: "/images/blog-spring-office-cleaning-feature.jpg"
 imageAlt: "Gloved hand wiping a table beside a laptop"

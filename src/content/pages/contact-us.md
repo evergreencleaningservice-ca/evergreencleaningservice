@@ -1,6 +1,6 @@
 ---
 title: "Contact Us"
-description: "Contact us for more information or to request a free quote. We'd love to hear from you and look forward to any question you may have for us."
+description: "Contact Evergreen Office Cleaning in Toronto: (416) 803-4880, info@evergreencleaningservice.ca, 243 Queen St W. We reply within 2 hours."
 ---
 
 ## Evergreen Office Cleaning

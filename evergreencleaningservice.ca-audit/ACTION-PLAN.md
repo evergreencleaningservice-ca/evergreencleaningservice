@@ -1,5 +1,7 @@
 # Action Plan: www.evergreencleaningservice.ca
 
+**Status, 6 Nov 2026.** Phase 1: done and deployed (PR #78). Phase 2: the developer-only parts of items 14, 15 and 16, plus the persona-matched reviews from item 10 and the assistants fallback from item 12, are done on the working branch. Still open because they need the client: 8 (named people), 9 (insurance and WSIB proof), 10 (true Google review count; dating the three homepage testimonials), 11 (citations and social renames), 12 (form fields, decision D-A), 13 (Turnstile keys), and the office-hours qualifier on the 2-hour reply promise (a client-decided wording).
+
 Prioritised from the 6 November 2026 audit (SEO Health Score 76/100). Severity definitions: Critical blocks indexing or causes penalties; High significantly affects rankings or conversions; Medium is an optimisation; Low is backlog. Nothing Critical was found.
 
 "Client" items need facts or decisions only the business owner can supply; they are listed with the repo's existing decision labels (H5, H6, D-A, D-D, C6) where they match.

@@ -3,7 +3,7 @@ title: "Office Cleaning"
 h1: "Office Cleaning Services in Toronto and the GTA"
 seoTitle: "Office Cleaning Services in Toronto & the GTA | Evergreen"
 description: "Office cleaning services in Toronto and the GTA: nightly, a few evenings a week or weekly, by the same crew. Free walkthrough; we reply within 2 hours."
-summary: "Recurring janitorial cleaning for offices of every size, done after hours by a team assigned to your building — with one account executive to call when something needs to change."
+summary: "Office cleaning is the recurring cleaning of a workplace's desks, floors, washrooms, kitchens and shared areas, done after staff leave. Evergreen Office Cleaning has provided it to Toronto and GTA offices since 1989, by a team assigned to your building, with one account executive to call when something needs to change."
 image: "/images/office-backpack-vacuum-toronto.jpg"
 imageAlt: "Vacuum cleaner being used on an office floor"
 fitHeading: "Who it is for"
@@ -94,6 +94,8 @@ showAreas: true
 ctaHeading: "Book a free office walkthrough"
 ctaText: "Tell us about your office and we will arrange a time to walk it with you and send a written proposal. No obligation."
 ---
+
+## What office cleaning is
 
 Office cleaning is the recurring cleaning of a workplace's desks, floors, washrooms, kitchens and shared areas, usually done after staff leave. Evergreen Office Cleaning has done it for Toronto and GTA businesses since 1989, with a crew assigned to each building and one account executive per client.
 

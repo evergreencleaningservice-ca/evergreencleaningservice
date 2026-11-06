@@ -36,6 +36,17 @@
 - [All service areas](https://www.evergreencleaningservice.ca/locations/)
 - [Downtown Toronto](https://www.evergreencleaningservice.ca/locations/toronto-downtown/), [Etobicoke](https://www.evergreencleaningservice.ca/locations/etobicoke/), [Mississauga](https://www.evergreencleaningservice.ca/locations/mississauga/), [Brampton](https://www.evergreencleaningservice.ca/locations/brampton/), [Oakville](https://www.evergreencleaningservice.ca/locations/oakville/), [Vaughan and Concord](https://www.evergreencleaningservice.ca/locations/vaughan/), [Markham](https://www.evergreencleaningservice.ca/locations/markham/)
 
+## Guides
+
+- [How office cleaning is priced in Toronto](https://www.evergreencleaningservice.ca/office-cleaning-cost-toronto-guide/): what sets the rate, a worked monthly budget example (illustrative, not a quote), what a written quote should include, how to compare quotes.
+- [How often should an office be cleaned?](https://www.evergreencleaningservice.ca/how-often-should-an-office-be-cleaned/): starting schedules by office size and occupancy, which areas need daily versus weekly or periodic attention.
+- [Seasonal office cleaning checklist](https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/): the extra work each Toronto season adds (winter salt, spring deep clean, fall windows and air).
+
+## For assistants and agents
+
+- Quote requests: the form at /request-a-quote/ needs a name, a business name, a phone or email, and the services wanted; it is protected by a reCAPTCHA checkbox. The same details sent by email to info@evergreencleaningservice.ca, or given by phone at (416) 803-4880, are handled the same way: a reply within 2 hours, then a free on-site walkthrough and a written proposal.
+- Not offered: residential or house cleaning. The work is commercial only.
+
 ## Company
 
 - [How we work](https://www.evergreencleaningservice.ca/our-process/): walkthrough, written proposal, assigned crew, inspections.

@@ -36,6 +36,8 @@ scope:
   - "Any surface damage found during cleaning is reported to you rather than worked around."
 showProcess: false
 showPricing: false
+reviews:
+  - "Mark Post"
 faqs:
   - q: "When should we book the clean?"
     a: "As soon as you have a handover or opening date. Construction dust keeps settling for days after the trades leave, so the work is best planned in stages rather than left to the last day."

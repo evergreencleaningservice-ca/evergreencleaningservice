@@ -1,6 +1,6 @@
 ---
 title: "Robotic Vs. Manual Cleaning: Which Will Ultimately Succeed?"
-description: "How commercial cleaning methods have changed, from mops and cotton cloths to microfibre, HEPA vacuums and robotic scrubbers, and why trained people still do the cleaning."
+description: "How commercial cleaning has changed, from mops and cotton cloths to microfibre, HEPA vacuums and robotic scrubbers, and why trained people still do the work."
 pubDate: 2023-01-31
 updatedDate: 2026-10-30
 image: "/images/blog-robotic-versus-manual-cleaning-feature.jpg"

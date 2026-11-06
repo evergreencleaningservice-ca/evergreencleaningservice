@@ -1,6 +1,6 @@
 ---
 title: "A Cleaning Checklist For Your Retail Store"
-description: "Does your storefront need cleaning? Need to refresh your business? Here we discuss what areas of your store will benefit from a good clean!"
+description: "A retail store cleaning checklist: the storefront and sales floor, the back office, the break room, the bathrooms and the exterior, with the tasks for each."
 pubDate: 2022-10-27
 image: "/images/blog-retail-store-cleaning-checklist-feature.jpg"
 imageAlt: "Floor wiper cleaning tiled flooring"

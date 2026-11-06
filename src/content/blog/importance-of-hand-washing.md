@@ -1,6 +1,6 @@
 ---
 title: "Hand-washing and Hand Sanitizer in the Office"
-description: "Why hand-washing matters in a shared office, how to wash properly, when hand sanitizer is a good substitute, and why clean surfaces matter as much as clean hands."
+description: "Why hand-washing matters in a shared office, how to wash properly, when sanitizer will do, and why clean surfaces matter as much as clean hands."
 pubDate: 2022-08-02
 updatedDate: 2026-10-30
 image: "/images/blog-hand-washing-importance-feature.jpg"

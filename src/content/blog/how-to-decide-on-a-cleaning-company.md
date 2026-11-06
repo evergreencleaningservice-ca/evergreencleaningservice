@@ -1,6 +1,6 @@
 ---
 title: "How to Decide on a Cleaning Company"
-description: "How to choose a commercial cleaning company: comparing quotes on scope, WSIB and insurance, contract terms, experience, references, and what to look for in the crew."
+description: "How to choose a commercial cleaning company: compare quotes on scope, check WSIB and insurance, read the contract, ask for references and look at the crew."
 pubDate: 2019-12-07
 updatedDate: 2026-10-30
 image: "/images/blog-choosing-cleaning-company-feature.jpg"

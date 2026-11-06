@@ -1,6 +1,6 @@
 ---
 title: "Cleaning Check List for Dental Clinics"
-description: "Patients expect a neat and safe environment. So, you should definitely not make any compromises when it comes to your dental office's cleanliness."
+description: "A cleaning checklist for dental clinics: exterior, reception, treatment rooms, restrooms, the staff break room, and floors and carpets, and what each needs."
 pubDate: 2020-04-29
 image: "/images/blog-dental-clinic-cleaning-checklist-feature.jpg"
 imageAlt: "Close-up of cleaning a dental workspace"

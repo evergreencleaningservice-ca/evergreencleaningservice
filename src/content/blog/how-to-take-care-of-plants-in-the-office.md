@@ -1,6 +1,6 @@
 ---
 title: "How To Take Care of Plants in The Office"
-description: "Like the look of plants in the office? Here we discuss the benefits of having them and how to care for them."
+description: "Which plants suit an office, how much light and water each needs, and how to keep them healthy without making the cleaning harder."
 pubDate: 2021-06-30
 image: "/images/blog-office-plant-care-feature.jpg"
 imageAlt: "Hands watering a potted office plant"

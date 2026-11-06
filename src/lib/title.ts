@@ -21,10 +21,18 @@ import { site } from '../data/site';
 export const TITLE_LIMIT = 60;
 
 const SUFFIX = ` - ${site.name}`;
+/* The short form, for headlines the full name does not fit after (SEO audit
+   Phase 2, 6 Nov 2026). Before, 22 blog posts carried no brand at all: in a
+   blog result the title was the only line a reader had, and it never said
+   whose site it was. "Evergreen" alone fits after any headline up to 48
+   characters. */
+const SHORT_SUFFIX = ' - Evergreen';
 
 export function pageTitle(title: string): string {
   const full = `${title}${SUFFIX}`;
-  return full.length <= TITLE_LIMIT ? full : title;
+  if (full.length <= TITLE_LIMIT) return full;
+  const short = `${title}${SHORT_SUFFIX}`;
+  return short.length <= TITLE_LIMIT ? short : title;
 }
 
 /**

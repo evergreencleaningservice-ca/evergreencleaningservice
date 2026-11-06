@@ -1,6 +1,6 @@
 ---
 title: "Commercial Cleaning Protocols for Daycares and Schools"
-description: "A cleaning and disinfection checklist for daycares and schools: classrooms, washrooms, kitchens, gyms, corridors and outdoor areas, and how often each needs attention."
+description: "A cleaning and disinfection checklist for daycares and schools: classrooms, washrooms, kitchens, gyms, corridors and outdoor areas, with frequencies."
 pubDate: 2020-09-29
 updatedDate: 2026-10-30
 image: "/images/blog-daycare-school-cleaning-feature.jpg"
