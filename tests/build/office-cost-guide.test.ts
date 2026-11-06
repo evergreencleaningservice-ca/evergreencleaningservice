@@ -29,8 +29,11 @@ afterAll(async () => {
 
 describe('the Toronto office cleaning guide', () => {
   it('uses the requested title, description, canonical and social card', () => {
-    expect(document.querySelector('title')?.textContent).toBe('Office Cleaning Cost Toronto: 2026 Pricing Guide');
-    expect(document.querySelector('meta[name="description"]')?.getAttribute('content')).toBe('Office cleaning cost Toronto: compare pricing examples, understand monthly cleaning costs and learn what to ask before hiring.');
+    // Retitled in the SEO audit of 6 Nov 2026: the page explains how prices
+    // are built and gives only illustrative figures, so a title that promised
+    // a "pricing guide" with real prices did not match what it delivers.
+    expect(document.querySelector('title')?.textContent).toBe('How Office Cleaning Is Priced in Toronto | Evergreen');
+    expect(document.querySelector('meta[name="description"]')?.getAttribute('content')).toBe('How office cleaning is priced in Toronto: what sets the rate, how to build a monthly budget, what a quote should include and how to compare quotes.');
     expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(url);
     expect(document.querySelector('meta[property="og:image"]')?.getAttribute('content')).toContain('blog-office-cleaning-cost-toronto-guide-og.jpg');
     expect(document.querySelectorAll('h1')).toHaveLength(1);
@@ -80,17 +83,19 @@ describe('the Toronto office cleaning guide', () => {
     const schemas = [...document.querySelectorAll('script[type="application/ld+json"]')].map((el) => JSON.parse(el.textContent!));
     const article = schemas.find((schema) => schema['@type'] === 'BlogPosting');
     expect(article.mainEntityOfPage['@id']).toBe(url);
-    expect(article.headline).toBe('How Much Does Office Cleaning Cost in Toronto?');
+    expect(article.headline).toBe('How Office Cleaning Is Priced in Toronto');
     expect(article.author.name).toBe('Evergreen Office Cleaning');
     const breadcrumbs = schemas.find((schema) => schema['@type'] === 'BreadcrumbList');
     expect(breadcrumbs.itemListElement.map((item: { name: string }) => item.name)).toEqual(['Home', 'Insights', 'Office Cleaning']);
   });
 
-  it('links the quote CTA, phone and both existing related articles', () => {
+  it('links the quote CTA, phone and the three existing related articles', () => {
     expect(document.querySelector('.guide-cta .btn')?.getAttribute('href')).toBe('/request-a-quote/');
     expect(document.querySelector('.guide-cta a[href^="tel:"]')?.getAttribute('href')).toBe('tel:+14168034880');
     const links = [...document.querySelectorAll('.guide-related-card')].map((el) => el.getAttribute('href'));
-    expect(links).toEqual(['/ask-the-office-cleaners-cleaning-break-rooms/', '/how-to-decide-on-a-cleaning-company/']);
+    // The frequency guide was added 6 Nov 2026: the two guides answer halves
+    // of the same question and did not link to each other before.
+    expect(links).toEqual(['/how-often-should-an-office-be-cleaned/', '/ask-the-office-cleaners-cleaning-break-rooms/', '/how-to-decide-on-a-cleaning-company/']);
     for (const link of [...document.querySelectorAll('.guide a[href^="/"]')]) {
       const target = new URL(link.getAttribute('href')!, url).pathname;
       if (!path.extname(target)) expect(fs.existsSync(path.join(output, target, 'index.html')), target).toBe(true);

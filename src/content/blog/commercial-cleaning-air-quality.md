@@ -60,6 +60,8 @@ A dirty HVAC system recirculates dust through the whole building. Replace filter
 
 You can do much of this yourself, but a professional crew brings the equipment (HEPA backpack vacuums, extraction machines, lifts for high dusting) and works from a schedule, so the dusting, vacuuming and carpet work all happen in the right order, every time.
 
+Touch points are a separate job from the air: see [disinfection cleaning](/services/disinfection-cleaning/) for how they are handled.
+
 [Contact us](/contact-us/) to talk about the air in your building.
 
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [building maintenance and floor care](/services/building-maintenance/) services cover it for workplaces across Toronto and the GTA.

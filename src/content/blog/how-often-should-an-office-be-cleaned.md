@@ -25,6 +25,7 @@ guide:
     - { label: "Choosing a schedule in Toronto", id: "choosing-a-schedule" }
     - { label: "Frequently asked questions", id: "frequently-asked-questions" }
   related:
+    - { slug: "office-cleaning-cost-toronto-guide", label: "How Office Cleaning Is Priced in Toronto" }
     - { slug: "seasonal-office-cleaning-checklist", label: "Seasonal Office Cleaning Checklist" }
     - { slug: "ask-the-office-cleaners-cleaning-break-rooms", label: "Cleaning Office Break Rooms" }
 ---
@@ -48,7 +49,7 @@ The suggested starting points below are Evergreen's planning examples, not manda
 </table>
 </div>
 
-People and activity matter more than the size bracket. A compact client-facing office can need more frequent attention than a larger suite with mostly unused rooms.
+People and activity matter more than the size bracket. A compact client-facing office can need more frequent attention than a larger suite with mostly unused rooms. The schedule you land on is also the biggest single input to [what each schedule costs](/office-cleaning-cost-toronto-guide/), and for stores, clinics and mixed-use buildings the same thinking applies to [commercial cleaning and janitorial services](/services/commercial-cleaning/). Whether the visits happen [during the day or at night](/day-night-which-is-the-best-routine-for-your-office/) is a separate choice.
 
 <h2 id="daily-weekly-periodic-cleaning">Which Office Areas Need Daily, Weekly or Periodic Cleaning?</h2>
 

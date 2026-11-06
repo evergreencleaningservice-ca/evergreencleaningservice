@@ -297,7 +297,7 @@ describe('isolation from the rest of the site', () => {
     const h = html[name];
     const footer = h.slice(h.search(/<footer\b/i), h.search(/<\/footer>/i));
     expect(footer).toContain('Evergreen Office Cleaning');
-    expect(footer).toContain('243 Queen St W.');
+    expect(footer).toContain('243 Queen St W');
     expect(footer).toContain('/privacy/');
     expect([...footer.matchAll(/<a\b/g)]).toHaveLength(1);
   });

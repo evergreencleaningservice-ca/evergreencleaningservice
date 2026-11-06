@@ -48,6 +48,9 @@ faqs:
   - q: "Can you handle a one-off job at short notice?"
     a: "Yes. One-off work — a floor before an inspection, a unit before a new tenant, an entrance after a winter — can be booked on its own. Call (416) 803-4880 to check availability."
 related:
+  - title: "Keeping commercial floors clean"
+    href: "/5-easy-ways-to-keep-your-commercial-floor-clean/"
+    text: "Daily habits that protect a floor between periodic visits."
   - title: "Floor Stripping & Waxing"
     href: "/services/floor-stripping-waxing/"
     text: "Strip, seal, wax and burnish, in detail."

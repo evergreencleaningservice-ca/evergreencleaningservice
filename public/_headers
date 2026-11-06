@@ -65,7 +65,20 @@ https://:version.:subdomain.workers.dev/*
 #                    'unsafe-eval' stay until GTM's custom tags are audited
 #                    (H2): the site is static, so there is no nonce to issue.
 #                    After two clean weeks, rename the header to enforce it.
+#   Enforced CSP   (SEO audit Phase 1, 6 Nov 2026) the four directives that
+#                  need no script allowlist and work regardless of
+#                  'unsafe-inline': frame-ancestors, base-uri, form-action
+#                  and object-src. They are enforced now. The full policy
+#                  stays report-only below until the container audit (H2).
+#                  The quote forms post to /api/submit-lead on this origin
+#                  with JavaScript, so form-action 'self' blocks nothing
+#                  the site does.
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+
 /*
+  Content-Security-Policy: frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin

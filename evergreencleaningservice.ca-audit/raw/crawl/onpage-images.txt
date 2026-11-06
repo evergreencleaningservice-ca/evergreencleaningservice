@@ -1,0 +1,71 @@
+generic anchors: 0 []
+no geo in title: https://www.evergreencleaningservice.ca/request-a-quote/ | Request a Quote - Evergreen Office Cleaning
+no geo in title: https://www.evergreencleaningservice.ca/services/ | All Cleaning Services | Evergreen Office Cleaning
+no geo in title: https://www.evergreencleaningservice.ca/about-us/ | About Us - Evergreen Office Cleaning
+no geo in title: https://www.evergreencleaningservice.ca/our-process/ | How We Work: Walkthrough, Proposal & Quality | Evergreen
+no geo in title: https://www.evergreencleaningservice.ca/contact-us/ | Contact Us - Evergreen Office Cleaning
+no geo in title: https://www.evergreencleaningservice.ca/cleaning-demo-gallery/ | Cleaning Services Photo Gallery - Evergreen Office Cleaning
+no geo in title: https://www.evergreencleaningservice.ca/reviews/ | Client Reviews - Evergreen Office Cleaning
+no geo in title: https://www.evergreencleaningservice.ca/green-clean-products/ | Green Clean Products - Evergreen Office Cleaning
+no geo in title: https://www.evergreencleaningservice.ca/insights/ | Commercial Cleaning Insights - Evergreen Office Cleaning
+no geo in title: https://www.evergreencleaningservice.ca/privacy/ | Privacy Policy - Evergreen Office Cleaning
+no geo in title: https://www.evergreencleaningservice.ca/day-night-which-is-the-best-routine-for-your-office/ | Day Or Night â Which Is the Best Routine For Your Office?
+no geo in title: https://www.evergreencleaningservice.ca/cleaning-protocols-for-daycares-and-schools/ | Commercial Cleaning Protocols for Daycares and Schools
+no geo in title: https://www.evergreencleaningservice.ca/how-to-decide-on-a-cleaning-company/ | How to Decide on a Cleaning Company
+no geo in title: https://www.evergreencleaningservice.ca/a-cleaning-checklist-for-your-retail-store/ | A Cleaning Checklist For Your Retail Store
+no geo in title: https://www.evergreencleaningservice.ca/preventing-slips-trips-falls-in-your-workplace/ | Preventing Slips, Trips, and Falls in Your Workplace
+no geo in title: https://www.evergreencleaningservice.ca/cleaning-check-list-dental-clinics/ | Cleaning Check List for Dental Clinics
+no geo in title: https://www.evergreencleaningservice.ca/office-layout-tips-to-make-cleaning-easier-and-faster/ | Office Layout Tips to Make Cleaning Easier And Faster
+no geo in title: https://www.evergreencleaningservice.ca/6-common-cleaning-products-that-you-should-never-mix-together/ | 6 Common Cleaning Products That You Should Never Mix Together
+no geo in title: https://www.evergreencleaningservice.ca/how-to-properly-dust-office-building/ | How to Properly Dust an Office Building
+no geo in title: https://www.evergreencleaningservice.ca/ask-the-office-cleaners-cleaning-break-rooms/ | Ask the Office Cleaners: Cleaning Break Rooms
+no geo in title: https://www.evergreencleaningservice.ca/5-cleaning-tips-to-help-make-your-office-relocation-seamless/ | 5 Cleaning Tips to Help Make Your Office Relocation Seamless
+no geo in title: https://www.evergreencleaningservice.ca/commercial-cleaning-techniques-to-avoid/ | Commercial Cleaning Techniques To Avoid
+no geo in title: https://www.evergreencleaningservice.ca/robotic-vs-manual-cleaning-which-will-ultimately-succeed/ | Robotic Vs. Manual Cleaning: Which Will Ultimately Succeed?
+no geo in title: https://www.evergreencleaningservice.ca/5-cleaning-products-you-should-have-in-your-office/ | 5 Commercial Cleaning Products You Should Have in Your Office
+no geo in title: https://www.evergreencleaningservice.ca/importance-of-hand-washing/ | Hand-washing and Hand Sanitizer in the Office
+no geo in title: https://www.evergreencleaningservice.ca/5-easy-ways-to-keep-your-commercial-floor-clean/ | 5 Easy Ways to Keep Your Commercial Floor Clean
+no geo in title: https://www.evergreencleaningservice.ca/benefits-of-commercial-deep-cleaning-services/ | Benefits of Commercial Deep Cleaning Services
+no geo in title: https://www.evergreencleaningservice.ca/how-to-keep-your-office-fridge-clean/ | How to Keep Your Office Fridge Clean
+no geo in title: https://www.evergreencleaningservice.ca/areas-in-your-office-where-germs-are-likely-hiding/ | Areas In Your Office Where Germs Are Likely Hiding
+no geo in title: https://www.evergreencleaningservice.ca/how-to-take-care-of-plants-in-the-office/ | How To Take Care of Plants in The Office
+no geo in title: https://www.evergreencleaningservice.ca/keep-your-office-at-home-clean/ | Keep Your Office at Home Clean - Evergreen Office Cleaning
+no geo in title: https://www.evergreencleaningservice.ca/commercial-cleaning-air-quality/ | Commercial Cleaning and Air Quality
+title==h1: 28 / 59
+title suffix patterns: [('Evergreen', 22), ('Request a Quote - Evergreen Office Cleaning', 1), ('Evergreen Office Cleaning', 1), ('Service Areas Across the GTA - Evergreen Office Cleaning', 1)]
+
+ https://www.evergreencleaningservice.ca/ pictures: 10 imgs: 10
+   img: ca/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg alt= 'Evergreen Office Cleaning logo' w/h= 884 265 loading= eager fetchpriority= None sizes=  srcset= False sources= [('image/avif', 'https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-ban'), ('image/webp', 'https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-ban')]
+   img: ce.ca/images/gallery-corporate-office-cleaning-hero-1000.jpg alt= 'Clean, empty open-plan office with white' w/h= 1200 500 loading= eager fetchpriority= high sizes= 100vw srcset= True sources= [('image/avif', 'https://img.evergreencleaningservice.ca/images/gallery-corporate-office-cleaning-hero-mobi'), ('image/avif', 'https://img.evergreencleaningservice.ca/images/gallery-corporate-office-cleaning-hero-480.')]
+   img: rvice.ca/images/office-cleaning-cost-boardroom-hero-1000.jpg alt= '' w/h= 1200 500 loading= None fetchpriority= None sizes= 100vw srcset= True sources= [('image/avif', 'https://img.evergreencleaningservice.ca/images/office-cleaning-cost-boardroom-hero-mobile-'), ('image/avif', 'https://img.evergreencleaningservice.ca/images/office-cleaning-cost-boardroom-hero-480.avi')]
+   img: .ca/images/spring-office-desk-cleaning-toronto-hero-1000.jpg alt= '' w/h= 1200 500 loading= None fetchpriority= None sizes= 100vw srcset= True sources= [('image/avif', 'https://img.evergreencleaningservice.ca/images/spring-office-desk-cleaning-toronto-hero-mo'), ('image/avif', 'https://img.evergreencleaningservice.ca/images/spring-office-desk-cleaning-toronto-hero-48')]
+   img: ningservice.ca/images/office-backpack-vacuum-toronto-480.jpg alt= 'Vacuum cleaner being used on an office f' w/h= 480 320 loading= lazy fetchpriority= None sizes=  srcset= False sources= [('image/avif', 'https://img.evergreencleaningservice.ca/images/office-backpack-vacuum-toronto-480.avif 480'), ('image/webp', 'https://img.evergreencleaningservice.ca/images/office-backpack-vacuum-toronto-480.webp 480')]
+   img: ingservice.ca/images/lobby-floor-scrubber-commercial-480.jpg alt= 'Close-up of a floor machine cleaning a c' w/h= 480 320 loading= lazy fetchpriority= None sizes=  srcset= False sources= [('image/avif', 'https://img.evergreencleaningservice.ca/images/lobby-floor-scrubber-commercial-480.avif 48'), ('image/webp', 'https://img.evergreencleaningservice.ca/images/lobby-floor-scrubber-commercial-480.webp 48')]
+   preloads: [('font', '/fonts/open-sans.woff2', '')]
+
+ https://www.evergreencleaningservice.ca/cleaning-demo-gallery/ pictures: 1 imgs: 14
+   img: ca/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg alt= 'Evergreen Office Cleaning logo' w/h= 884 265 loading= eager fetchpriority= None sizes=  srcset= False sources= [('image/avif', 'https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-ban'), ('image/webp', 'https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-ban')]
+   img: ingservice.ca/images/gallery-industrial-cleaning-toronto.jpg alt= 'Floor polishing machine in an industrial' w/h= None None loading= lazy fetchpriority= None sizes=  srcset= False sources= []
+   img: eaningservice.ca/images/gallery-office-cleaning-services.jpg alt= 'Close-up of a vacuum cleaning a carpet' w/h= None None loading= lazy fetchpriority= None sizes=  srcset= False sources= []
+   img: aningservice.ca/images/gallery-toronto-office-janitorial.jpg alt= 'Close-up of a mop cleaning office floors' w/h= None None loading= lazy fetchpriority= None sizes=  srcset= False sources= []
+   img: ncleaningservice.ca/images/gallery-retail-store-cleaning.jpg alt= 'Floor scrubber cleaning a supermarket ai' w/h= None None loading= lazy fetchpriority= None sizes=  srcset= False sources= []
+   img: aningservice.ca/images/gallery-commercial-lobby-cleaning.jpg alt= 'Cleaning machine in a commercial corrido' w/h= None None loading= lazy fetchpriority= None sizes=  srcset= False sources= []
+   preloads: [('font', '/fonts/open-sans.woff2', '')]
+
+ https://www.evergreencleaningservice.ca/how-often-should-an-office-be-cleaned/ pictures: 4 imgs: 6
+   img: ca/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg alt= 'Evergreen Office Cleaning logo' w/h= 884 265 loading= eager fetchpriority= None sizes=  srcset= False sources= [('image/avif', 'https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-ban'), ('image/webp', 'https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-ban')]
+   img: cleaningservice.ca/images/blog-office-cleaning-frequency.jpg alt= 'Empty commercial office with organized d' w/h= 1200 675 loading= None fetchpriority= high sizes= (min-width: 912px) 880px, calc(100vw - 3 srcset= True sources= [('image/avif', 'https://img.evergreencleaningservice.ca/images/blog-office-cleaning-frequency-480.avif 480'), ('image/webp', 'https://img.evergreencleaningservice.ca/images/blog-office-cleaning-frequency-480.webp 480')]
+   img: gservice.ca/images/office-cleaning-frequency-kitchen-768.jpg alt= 'Empty shared office kitchen with a long ' w/h= 1200 800 loading= lazy fetchpriority= None sizes= (min-width: 1200px) 790px, (min-width: 9 srcset= True sources= [('image/avif', 'https://img.evergreencleaningservice.ca/images/office-cleaning-frequency-kitchen-480.avif '), ('image/webp', 'https://img.evergreencleaningservice.ca/images/office-cleaning-frequency-kitchen-480.webp ')]
+   img: service.ca/images/office-cleaning-frequency-washroom-768.jpg alt= 'Empty commercial washroom with tiled wal' w/h= 1200 800 loading= lazy fetchpriority= None sizes= (min-width: 1200px) 790px, (min-width: 9 srcset= True sources= [('image/avif', 'https://img.evergreencleaningservice.ca/images/office-cleaning-frequency-washroom-480.avif'), ('image/webp', 'https://img.evergreencleaningservice.ca/images/office-cleaning-frequency-washroom-480.webp')]
+   img: ce.ca/images/blog-spring-office-cleaning-feature-300x150.jpg alt= '' w/h= 300 150 loading= lazy fetchpriority= None sizes=  srcset= False sources= []
+   img: rvice.ca/images/blog-break-room-cleaning-feature-300x150.jpg alt= '' w/h= 300 150 loading= lazy fetchpriority= None sizes=  srcset= False sources= []
+   preloads: [('font', '/fonts/open-sans.woff2', '')]
+
+WP-size suffixes in img src: Counter({'300x150': 32, '270x270': 1, '324x92': 1, '450x450': 1})
+mississauga-mobile.json images: 3 bytes: 24415 total transfer: 506639 perf 83
+office-mobile.json images: 4 bytes: 38276 total transfer: 522409 perf 88
+post-mobile.json images: 4 bytes: 23426 total transfer: 499010 perf 86
+home-mobile.json images: 8 bytes: 111998 total transfer: 651567 perf 51
+home-desktop.json images: 9 bytes: 97486 total transfer: 637081 perf 97
+
+og:image distinct: 39 [('https://img.evergreencleaningservice.ca/images/evergreen-modern-commercial-cleaning-hero-og.jpg', 20), ('https://img.evergreencleaningservice.ca/images/warehouse-floor-scrubber-industrial-og.jpg', 2), ('https://img.evergreencleaningservice.ca/images/lobby-floor-scrubber-commercial-og.jpg', 1)]

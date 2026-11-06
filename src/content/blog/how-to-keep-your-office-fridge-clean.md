@@ -41,6 +41,6 @@ Consider asking your employees to be putting their fresh food at the back of the
 
 If you are concerned about the state of your office refrigerator, it is time to call in the professionals.
 
-At [Evergreen Office Cleaning](/about-us/), we offer quality janitorial services, and we are prepared to take care of all your commercial cleaning needs. [Contact us](/contact-us/) today!
+At [Evergreen Office Cleaning](/about-us/), we offer quality janitorial services, including [break room cleaning](/ask-the-office-cleaners-cleaning-break-rooms/), and we are prepared to take care of all your commercial cleaning needs. [Contact us](/contact-us/) today!
 
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

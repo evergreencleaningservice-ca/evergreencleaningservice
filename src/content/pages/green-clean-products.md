@@ -33,4 +33,4 @@ In April of 2013 changes occurred between Environment Canada and Ecologo. UL Env
 
 Illustrative stock photograph of a reusable spray bottle and cleaning cloth; not a photograph of the certified products described above.
 
-For staff who tidy up between our visits, see the [cleaning products worth keeping in the office](/5-cleaning-products-you-should-have-in-your-office/) and the [combinations you should never mix](/6-common-cleaning-products-that-you-should-never-mix-together/).
+For staff who tidy up between our visits, see the [cleaning products worth keeping in the office](/5-cleaning-products-you-should-have-in-your-office/) the [combinations you should never mix](/6-common-cleaning-products-that-you-should-never-mix-together/) and the [cleaning techniques to avoid](/commercial-cleaning-techniques-to-avoid/).

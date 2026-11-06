@@ -1,6 +1,8 @@
 ---
 import { getEntry, type CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
+/* The italic face, for blockquotes: posts are the only pages that use it. */
+import '../styles/fonts-italic.css';
 import { articleSchema, breadcrumbSchema } from '../lib/schema';
 import { responsiveSet } from '../lib/responsive-images.mjs';
 import { site } from '../data/site';

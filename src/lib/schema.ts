@@ -13,9 +13,13 @@
  *  - `sameAs` for the social profiles the site already links to. Rank Math was
  *    emitting these on the original; dropping them loses an entity signal for
  *    no reason.
- *  - `SearchAction`, which the original also carried.
  *
  * WHAT IS DELIBERATELY NOT HERE
+ *
+ *  `SearchAction`. The original carried one and so did this port until the
+ *  SEO audit of 6 Nov 2026. It pointed at /search/, which is noindex, needs
+ *  JavaScript and searches only the blog, and Google retired the sitelinks
+ *  search box it fed in November 2024. Dead weight on every page.
  *
  *  `aggregateRating`. The specification's landing-page mockup advertises a
  *  "4.9/5 Google Rating" and it would be easy to put that in the schema. There
@@ -129,14 +133,6 @@ export const organizationGraph = () => ({
       url: `${site.url}/`,
       name: nap.name,
       publisher: { '@id': ORG_ID },
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: {
-          '@type': 'EntryPoint',
-          urlTemplate: `${site.url}/search/?q={search_term_string}`,
-        },
-        'query-input': 'required name=search_term_string',
-      },
     },
   ],
 });

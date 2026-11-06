@@ -48,6 +48,12 @@ faqs:
   - q: "Which areas do you cover?"
     a: "Toronto (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa."
 related:
+  - title: "High-touch surfaces in an office"
+    href: "/areas-in-your-office-where-germs-are-likely-hiding/"
+    text: "Where germs collect in an office and how often each spot needs attention."
+  - title: "Daycare and school disinfection"
+    href: "/cleaning-protocols-for-daycares-and-schools/"
+    text: "Cleaning protocols for daycares and schools."
   - title: "Office Cleaning"
     href: "/services/office-cleaning/"
     text: "Recurring after-hours cleaning."

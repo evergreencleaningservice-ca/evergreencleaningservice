@@ -52,6 +52,6 @@ The realistic future is not robots or people but both: machines for the repetiti
 
 ![Gloved hand wiping a white surface with a green cloth](/images/eco-friendly-surface-cleaning-green-cloths.jpg)
 
-At [Evergreen](/about-us/), our crews use modern equipment (sealed HEPA vacuums, microfibre systems, auto-scrubbers) on a written scope set for your building. [Contact us](/contact-us/) to talk about yours.
+At [Evergreen](/about-us/), our crews use modern equipment (sealed HEPA vacuums, microfibre systems, [auto-scrubbers and burnishers](/services/floor-stripping-waxing/)) on a written scope set for your building. [Contact us](/contact-us/) to talk about yours.
 
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

@@ -85,4 +85,6 @@ Fall is also the time to get the entrance ready for winter again.
 
 None of this has to depend on someone remembering it, whether your office is cleaned [during the day or at night](/day-night-which-is-the-best-routine-for-your-office/). A cleaning company can build the seasonal work into your routine scope, with the floor and carpet work planned through the year. Evergreen Office Cleaning has cleaned offices in Toronto and the GTA since 1989. [Contact us](/contact-us/) for a quote.
 
+The seasonal work sits on top of the [daily, weekly and monthly tasks](/how-often-should-an-office-be-cleaned/) in a routine scope; it does not replace them.
+
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/), [building maintenance and floor care](/services/building-maintenance/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.
