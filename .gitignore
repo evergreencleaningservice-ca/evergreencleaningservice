@@ -32,3 +32,6 @@ pnpm-debug.log*
 # Temporary stock-photo rendering output; licensed originals stay outside the repo.
 .stock-photo-prepared/
 .astro-test-dist-office-cost/
+
+# Agent worktrees used during audits; never part of the site
+.claude/worktrees/

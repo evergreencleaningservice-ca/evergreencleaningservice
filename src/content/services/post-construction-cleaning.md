@@ -1,8 +1,8 @@
 ---
 title: "Post-Construction Cleaning"
-h1: "Post-Construction Cleaning for Commercial Buildouts in Toronto & the GTA"
-seoTitle: "Post-Construction Cleaning in Toronto & the GTA | Evergreen"
-description: "Post-construction cleaning for commercial spaces in Toronto and the GTA — dust, debris and detail cleaning before handover, around your trades."
+h1: "Commercial Post-Construction Cleaning in Toronto & the GTA"
+seoTitle: "Commercial Post-Construction Cleaning Toronto | Evergreen"
+description: "Commercial post-construction cleaning in Toronto and the GTA for contractors and property managers: a rough clean while trades finish, a final clean before handover."
 summary: "Clean-up after a renovation, fit-out or new build — from the first debris pass to a detailed final clean before the space is handed over or reopened."
 image: "/images/post-construction-cleanup-vacuum.jpg"
 imageAlt: "Construction vacuum in an unfinished room during renovation"
@@ -62,6 +62,10 @@ ctaText: "Tell us the size of the space and the date, and we will arrange a site
 ---
 
 Post-construction cleaning is the removal of debris and construction dust from a commercial space after a renovation, fit-out or new build, in stages, until it is ready to hand over or reopen.
+
+## How a post-construction clean is priced
+
+A post-construction clean is quoted per project, not per visit, after someone has seen the site. The things that move the figure are the ones a contractor or property manager can tell us on the phone: the floor area; which phases are needed (a rough clean while trades are still finishing, a final clean before handover, or both, and whether a touch-up visit after the last trade is likely); how much debris and dust is left behind, which depends on whether drywall, concrete or tile work was done; what has to be detailed (glass, light fixtures, ductwork grilles, inside cabinets and appliances); how many washrooms and kitchens there are; and access, including elevator bookings, loading docks, hours and any site safety requirements. The written quote names the phases and what each one includes, so it can be compared with another on the same scope.
 
 ## A finished build is not a finished space until the dust is gone
 

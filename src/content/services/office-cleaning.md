@@ -63,6 +63,9 @@ faqs:
   - q: "Which areas do you cover?"
     a: "Toronto (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa."
 related:
+  - title: "Office cleaning checklist"
+    href: "/office-cleaning-checklist/"
+    text: "Daily, weekly and monthly tasks, room by room, and who does each."
   - title: "How often should an office be cleaned?"
     href: "/how-often-should-an-office-be-cleaned/"
     text: "Office cleaning frequency by size and occupancy, with a task checklist."

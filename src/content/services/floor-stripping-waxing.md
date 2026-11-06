@@ -86,4 +86,16 @@ The cheapest floor to keep is one on a plan. A full strip and wax is the reset; 
 
 Winter matters here. Salt left on a finished floor etches it, so entrances and lobbies benefit from extra scrubbing through the winter and a refinish in the spring.
 
+## A sample year for a lobby floor
+
+As an illustration, this is the shape of a plan for a busy ground-floor lobby with a vinyl composition tile floor. The real cycle depends on the floor, its traffic and how much finish is on it, which is why we look at it before quoting.
+
+- **Spring:** a full strip and wax after the salt season, so the winter's etching and residue are removed rather than sealed in.
+- **Early summer:** machine scrubbing and burnishing on the routine visits to keep the shine; a scrub and recoat if the entrance lane is dulling.
+- **Autumn:** a scrub and recoat before the first salt, so the floor goes into winter with fresh finish on top.
+- **Winter:** extra scrubbing at the entrance and matting that is cleaned and changed through the season; no refinishing until the salt stops.
+- **Between visits:** entrance mats, prompt spill response and a neutral cleaner on the routine mop, which is what stretches the time to the next full strip. Our guide to [daily floor care between wax visits](/5-easy-ways-to-keep-your-commercial-floor-clean/) covers that side.
+
+A quieter back office on the same tile might need a full strip only every two or three years, with a recoat in between. A plan like this is written into the proposal as part of a [building maintenance](/services/building-maintenance/) programme, so the dates are set in advance and the floor is never rescued at the last minute.
+
 We are bonded, insured and WSIB covered. Call [(416) 803-4880](tel:+14168034880) or [request a walkthrough](/request-a-quote/).
