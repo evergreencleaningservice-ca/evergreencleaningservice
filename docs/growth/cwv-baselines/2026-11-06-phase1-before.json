@@ -2,9 +2,9 @@
   "source": "Cloudflare Web Analytics (real-user beacons)",
   "host": "www.evergreencleaningservice.ca",
   "window": {
-    "since": "2026-10-31T15:05:00Z",
+    "since": "2026-10-31T20:00:00Z",
     "until": "2026-11-06T15:05:00Z",
-    "days": 6
+    "days": 5.8
   },
   "traffic": "human",
   "units": {
@@ -27,65 +27,65 @@
     }
   },
   "beacons": {
-    "rows": 191,
-    "estimated": 191,
-    "botRowsExcluded": 36,
+    "rows": 122,
+    "estimated": 122,
+    "botRowsExcluded": 35,
     "rowsBySampleInterval": {
-      "1": 191
+      "1": 122
     }
   },
   "pageloads": {
-    "estimated": 361,
-    "visits": 272
+    "estimated": 282,
+    "visits": 248
   },
   "sitewide": {
-    "rows": 191,
-    "estimated": 191,
+    "rows": 122,
+    "estimated": 122,
     "metrics": {
       "LCP": {
-        "n": 171,
-        "nEst": 171,
-        "p75": 807,
+        "n": 107,
+        "nEst": 107,
+        "p75": 900,
         "rating": "good",
-        "good": 163,
+        "good": 99,
         "needsImprovement": 3,
         "poor": 5,
-        "goodShare": 0.953,
+        "goodShare": 0.925,
         "ci95": [
-          557,
-          936
+          717,
+          1153
         ],
         "ciMissing": null,
         "lowSample": false
       },
       "INP": {
-        "n": 111,
-        "nEst": 111,
-        "p75": 16,
+        "n": 69,
+        "nEst": 69,
+        "p75": 24,
         "rating": "good",
-        "good": 110,
+        "good": 68,
         "needsImprovement": 1,
         "poor": 0,
-        "goodShare": 0.991,
+        "goodShare": 0.986,
         "ci95": [
-          16,
-          40
+          8,
+          56
         ],
         "ciMissing": null,
         "lowSample": false
       },
       "CLS": {
-        "n": 159,
-        "nEst": 159,
-        "p75": 0,
+        "n": 90,
+        "nEst": 90,
+        "p75": 0.001,
         "rating": "good",
-        "good": 158,
+        "good": 89,
         "needsImprovement": 1,
         "poor": 0,
-        "goodShare": 0.994,
+        "goodShare": 0.989,
         "ci95": [
           0,
-          0.001
+          0.012
         ],
         "ciMissing": null,
         "lowSample": false
@@ -95,53 +95,53 @@
   "byDevice": [
     {
       "deviceType": "desktop",
-      "rows": 159,
-      "estimated": 159,
+      "rows": 91,
+      "estimated": 91,
       "metrics": {
         "LCP": {
-          "n": 139,
-          "nEst": 139,
-          "p75": 580,
+          "n": 76,
+          "nEst": 76,
+          "p75": 874,
           "rating": "good",
-          "good": 131,
+          "good": 68,
           "needsImprovement": 3,
           "poor": 5,
-          "goodShare": 0.942,
+          "goodShare": 0.895,
           "ci95": [
-            440,
-            921
+            552,
+            2148
           ],
           "ciMissing": null,
           "lowSample": false
         },
         "INP": {
-          "n": 93,
-          "nEst": 93,
-          "p75": 16,
+          "n": 51,
+          "nEst": 51,
+          "p75": 32,
           "rating": "good",
-          "good": 93,
+          "good": 51,
           "needsImprovement": 0,
           "poor": 0,
           "goodShare": 1,
           "ci95": [
-            16,
-            48
+            8,
+            64
           ],
           "ciMissing": null,
           "lowSample": false
         },
         "CLS": {
-          "n": 140,
-          "nEst": 140,
-          "p75": 0,
+          "n": 72,
+          "nEst": 72,
+          "p75": 0.003,
           "rating": "good",
-          "good": 139,
+          "good": 71,
           "needsImprovement": 1,
           "poor": 0,
-          "goodShare": 0.993,
+          "goodShare": 0.986,
           "ci95": [
             0,
-            0.001
+            0.018
           ],
           "ciMissing": null,
           "lowSample": false
@@ -150,21 +150,21 @@
     },
     {
       "deviceType": "mobile",
-      "rows": 32,
-      "estimated": 32,
+      "rows": 31,
+      "estimated": 31,
       "metrics": {
         "LCP": {
-          "n": 32,
-          "nEst": 32,
+          "n": 31,
+          "nEst": 31,
           "p75": 938,
           "rating": "good",
-          "good": 32,
+          "good": 31,
           "needsImprovement": 0,
           "poor": 0,
           "goodShare": 1,
           "ci95": [
-            807,
-            1153
+            717,
+            1101
           ],
           "ciMissing": null,
           "lowSample": false
@@ -186,17 +186,17 @@
           "lowSample": true
         },
         "CLS": {
-          "n": 19,
-          "nEst": 19,
+          "n": 18,
+          "nEst": 18,
           "p75": 0,
           "rating": "good",
-          "good": 19,
+          "good": 18,
           "needsImprovement": 0,
           "poor": 0,
           "goodShare": 1,
           "ci95": [
             0,
-            0.028
+            0
           ],
           "ciMissing": null,
           "lowSample": true
@@ -207,75 +207,75 @@
   "topPaths": [
     {
       "path": "/",
-      "rows": 61,
-      "estimated": 61,
+      "rows": 37,
+      "estimated": 37,
       "metrics": {
         "LCP": {
-          "n": 54,
-          "nEst": 54,
-          "p75": 676,
+          "n": 30,
+          "nEst": 30,
+          "p75": 972,
           "rating": "good",
-          "good": 51,
+          "good": 27,
           "needsImprovement": 0,
           "poor": 3,
-          "goodShare": 0.944,
+          "goodShare": 0.9,
           "ci95": [
-            324,
-            972
+            717,
+            4287
           ],
           "ciMissing": null,
           "lowSample": false
         },
         "INP": {
-          "n": 29,
-          "nEst": 29,
-          "p75": 16,
+          "n": 15,
+          "nEst": 15,
+          "p75": 32,
           "rating": "good",
-          "good": 29,
+          "good": 15,
           "needsImprovement": 0,
           "poor": 0,
           "goodShare": 1,
           "ci95": [
             16,
-            40
+            64
           ],
           "ciMissing": null,
           "lowSample": true
         },
         "CLS": {
-          "n": 47,
-          "nEst": 47,
-          "p75": 0,
+          "n": 23,
+          "nEst": 23,
+          "p75": 0.005,
           "rating": "good",
-          "good": 47,
+          "good": 23,
           "needsImprovement": 0,
           "poor": 0,
           "goodShare": 1,
           "ci95": [
             0,
-            0.005
+            0.018
           ],
           "ciMissing": null,
-          "lowSample": false
+          "lowSample": true
         }
       }
     },
     {
       "path": "/lp/commercial-cleaning-quote/",
-      "rows": 24,
-      "estimated": 24,
+      "rows": 23,
+      "estimated": 23,
       "metrics": {
         "LCP": {
-          "n": 19,
-          "nEst": 19,
+          "n": 18,
+          "nEst": 18,
           "p75": 1040,
           "rating": "good",
-          "good": 18,
+          "good": 17,
           "needsImprovement": 1,
           "poor": 0,
-          "goodShare": 0.947,
+          "goodShare": 0.944,
           "ci95": [
-            368,
+            440,
             3320
           ],
           "ciMissing": null,
@@ -295,16 +295,16 @@
           "lowSample": true
         },
         "CLS": {
-          "n": 15,
-          "nEst": 15,
+          "n": 14,
+          "nEst": 14,
           "p75": 0.038,
           "rating": "good",
-          "good": 14,
+          "good": 13,
           "needsImprovement": 1,
           "poor": 0,
-          "goodShare": 0.933,
+          "goodShare": 0.929,
           "ci95": [
-            0.021,
+            0.014,
             0.158
           ],
           "ciMissing": null,
@@ -314,28 +314,28 @@
     },
     {
       "path": "/contact-us/",
-      "rows": 14,
-      "estimated": 14,
+      "rows": 7,
+      "estimated": 7,
       "metrics": {
         "LCP": {
-          "n": 8,
-          "nEst": 8,
-          "p75": 2540,
+          "n": 5,
+          "nEst": 5,
+          "p75": 2544,
           "rating": "needs-improvement",
-          "good": 5,
+          "good": 2,
           "needsImprovement": 2,
           "poor": 1,
-          "goodShare": 0.625,
+          "goodShare": 0.4,
           "ci95": null,
           "ciMissing": "too-few-beacons",
           "lowSample": true
         },
         "INP": {
-          "n": 8,
-          "nEst": 8,
+          "n": 5,
+          "nEst": 5,
           "p75": 72,
           "rating": "good",
-          "good": 8,
+          "good": 5,
           "needsImprovement": 0,
           "poor": 0,
           "goodShare": 1,
@@ -344,161 +344,11 @@
           "lowSample": true
         },
         "CLS": {
-          "n": 12,
-          "nEst": 12,
-          "p75": 0,
+          "n": 5,
+          "nEst": 5,
+          "p75": 0.021,
           "rating": "good",
-          "good": 12,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": null,
-          "ciMissing": "too-few-beacons",
-          "lowSample": true
-        }
-      }
-    },
-    {
-      "path": "/insights/",
-      "rows": 14,
-      "estimated": 14,
-      "metrics": {
-        "LCP": {
-          "n": 13,
-          "nEst": 13,
-          "p75": 936,
-          "rating": "good",
-          "good": 13,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": [
-            408,
-            1416
-          ],
-          "ciMissing": null,
-          "lowSample": true
-        },
-        "INP": {
-          "n": 9,
-          "nEst": 9,
-          "p75": 16,
-          "rating": "good",
-          "good": 9,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": null,
-          "ciMissing": "too-few-beacons",
-          "lowSample": true
-        },
-        "CLS": {
-          "n": 14,
-          "nEst": 14,
-          "p75": 0,
-          "rating": "good",
-          "good": 14,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": [
-            0,
-            0
-          ],
-          "ciMissing": null,
-          "lowSample": true
-        }
-      }
-    },
-    {
-      "path": "/office-cleaning-cost-toronto-guide/",
-      "rows": 13,
-      "estimated": 13,
-      "metrics": {
-        "LCP": {
-          "n": 13,
-          "nEst": 13,
-          "p75": 260,
-          "rating": "good",
-          "good": 13,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": [
-            160,
-            1820
-          ],
-          "ciMissing": null,
-          "lowSample": true
-        },
-        "INP": {
-          "n": 7,
-          "nEst": 7,
-          "p75": 80,
-          "rating": "good",
-          "good": 7,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": null,
-          "ciMissing": "too-few-beacons",
-          "lowSample": true
-        },
-        "CLS": {
-          "n": 13,
-          "nEst": 13,
-          "p75": 0,
-          "rating": "good",
-          "good": 13,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": [
-            0,
-            0.001
-          ],
-          "ciMissing": null,
-          "lowSample": true
-        }
-      }
-    },
-    {
-      "path": "/services/office-cleaning/",
-      "rows": 8,
-      "estimated": 8,
-      "metrics": {
-        "LCP": {
-          "n": 8,
-          "nEst": 8,
-          "p75": 249,
-          "rating": "good",
-          "good": 8,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": null,
-          "ciMissing": "too-few-beacons",
-          "lowSample": true
-        },
-        "INP": {
-          "n": 4,
-          "nEst": 4,
-          "p75": 0,
-          "rating": "good",
-          "good": 4,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": null,
-          "ciMissing": "too-few-beacons",
-          "lowSample": true
-        },
-        "CLS": {
-          "n": 4,
-          "nEst": 4,
-          "p75": 0,
-          "rating": "good",
-          "good": 4,
+          "good": 5,
           "needsImprovement": 0,
           "poor": 0,
           "goodShare": 1,
@@ -555,6 +405,52 @@
       }
     },
     {
+      "path": "/services/office-cleaning/",
+      "rows": 6,
+      "estimated": 6,
+      "metrics": {
+        "LCP": {
+          "n": 6,
+          "nEst": 6,
+          "p75": 249,
+          "rating": "good",
+          "good": 6,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 8,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 0,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
       "path": "/locations/brampton/",
       "rows": 5,
       "estimated": 5,
@@ -578,52 +474,6 @@
           "p75": 0,
           "rating": "good",
           "good": 4,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": null,
-          "ciMissing": "too-few-beacons",
-          "lowSample": true
-        },
-        "CLS": {
-          "n": 4,
-          "nEst": 4,
-          "p75": 0,
-          "rating": "good",
-          "good": 4,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": null,
-          "ciMissing": "too-few-beacons",
-          "lowSample": true
-        }
-      }
-    },
-    {
-      "path": "/request-a-quote/",
-      "rows": 5,
-      "estimated": 5,
-      "metrics": {
-        "LCP": {
-          "n": 5,
-          "nEst": 5,
-          "p75": 168,
-          "rating": "good",
-          "good": 5,
-          "needsImprovement": 0,
-          "poor": 0,
-          "goodShare": 1,
-          "ci95": null,
-          "ciMissing": "too-few-beacons",
-          "lowSample": true
-        },
-        "INP": {
-          "n": 3,
-          "nEst": 3,
-          "p75": 56,
-          "rating": "good",
-          "good": 3,
           "needsImprovement": 0,
           "poor": 0,
           "goodShare": 1,
@@ -683,6 +533,144 @@
           "p75": 0,
           "rating": "good",
           "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/locations/toronto-downtown/",
+      "rows": 4,
+      "estimated": 4,
+      "metrics": {
+        "LCP": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 1101,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 8,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 0,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/request-a-quote/",
+      "rows": 4,
+      "estimated": 4,
+      "metrics": {
+        "LCP": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 168,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 56,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 0,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/services/disinfection-cleaning/",
+      "rows": 3,
+      "estimated": 3,
+      "metrics": {
+        "LCP": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 480,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 0,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 0,
+          "rating": "good",
+          "good": 3,
           "needsImprovement": 0,
           "poor": 0,
           "goodShare": 1,

@@ -547,15 +547,16 @@ describe('the command', () => {
 /* The saved Phase 1 baseline (docs/growth/performance.md section 8). It was
    measured on deploy day because the same window re-run a week later comes
    back as a 1-in-10 sample; these checks keep the file what the docs say it
-   is: unsampled, six days, ending at the deploy, with an interval on every
-   sitewide p75. */
+   is: unsampled, 5.8 days ending at the deploy, with an interval on every
+   sitewide p75. It starts at 20:00 UTC on 31 Oct, not 15:05, to leave out a
+   five-hour burst of what looks like the site's own testing (Phase 4 review). */
 describe('the saved Phase 1 baseline', () => {
   const baseline = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, '../../docs/growth/cwv-baselines/2026-11-06-phase1-before.json'), 'utf8'),
   );
 
-  it('is the unsampled six days before the deploy, human traffic only', () => {
-    expect(baseline.window).toEqual({ since: '2026-10-31T15:05:00Z', until: '2026-11-06T15:05:00Z', days: 6 });
+  it('is the unsampled 5.8 days before the deploy, human traffic only', () => {
+    expect(baseline.window).toEqual({ since: '2026-10-31T20:00:00Z', until: '2026-11-06T15:05:00Z', days: 5.8 });
     expect(baseline.traffic).toBe('human');
     expect(Object.keys(baseline.beacons.rowsBySampleInterval)).toEqual(['1']);
     expect(baseline.compare).toBeNull();
