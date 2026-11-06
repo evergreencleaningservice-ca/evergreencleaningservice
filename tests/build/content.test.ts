@@ -19,6 +19,7 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { reviewDate, reviews } from '../../src/data/reviews';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-content');
@@ -213,5 +214,83 @@ describe('nothing was invented', () => {
        would be invented. */
     expect(find(/\b(15|30|60)[- ]minute (response|callback)/i)).toEqual([]);
     expect(find(/\b24\/7\b/)).toEqual([]);
+  });
+});
+
+describe('review dates are months, not ages', () => {
+  /* SEO audit item 31 (2026-11-06). Cards said "N months ago", worked out
+     at build time, so every label was wrong a month after the last build and
+     understated how old the review was. They now say "May 2021" in a
+     <time datetime>, which stays right. The three kinds of card: the
+     homepage slider (`ti-card`), the quoted block on location, service and
+     process pages (`blk-review`), and /reviews/ (`rv-card`). The landing
+     pages' cards (`lpx-reviews`) carry no date at all, as the client's ads
+     copy has them. */
+  const CARD = [
+    /<article class="ti-card"[\s\S]*?<\/article>/g,
+    /<figure class="blk-review"[\s\S]*?<\/figure>/g,
+    /<li class="rv-card"[\s\S]*?<\/li>/g,
+  ];
+  const cards = () =>
+    pages.flatMap(({ page, text }) =>
+      CARD.flatMap((re) => [...text.matchAll(re)].map(([html]) => ({ page, html })))
+    );
+  const AGE = /\b(?:a|an|one|\d+)\s+(?:minute|hour|day|week|month|year)s?\s+ago\b/i;
+
+  it('finds the cards it is checking, on every kind of page that has them', () => {
+    const found = cards();
+    const on = (page: string) => found.filter((c) => c.page === page).length;
+    expect(on('index.html')).toBe(reviews.length);
+    expect(on('reviews/index.html')).toBe(reviews.length);
+    expect(found.some((c) => c.page.startsWith('locations/'))).toBe(true);
+    expect(on('our-process/index.html')).toBeGreaterThan(0);
+    /* Service and industry pages are OfferPage; at least one names reviews. */
+    expect(found.some((c) => !/^(index|reviews|our-process|locations)\b/.test(c.page))).toBe(
+      true
+    );
+  });
+
+  it('no review card shows an age', () => {
+    /* The quote itself is the reviewer's words and is left out of this. */
+    const aged = cards()
+      .filter(({ html }) => AGE.test(html.replace(/<blockquote>[\s\S]*?<\/blockquote>/, '')))
+      .map(({ page }) => page);
+    expect(aged).toEqual([]);
+  });
+
+  it('no page says "N months ago" next to "Google review"', () => {
+    expect(find(/Google review,?\s*(?:<[^>]+>\s*)*(?:a|an|\d+)\s+\w+\s+ago/i)).toEqual([]);
+  });
+
+  it('every card carries a <time datetime> that matches its reviewer', () => {
+    for (const { page, html } of cards()) {
+      const r = reviews.find((rev) => html.includes(rev.name));
+      expect(r, `${page}: a card names no reviewer on file`).toBeDefined();
+      const { datetime, label } = reviewDate(r!);
+      const time = html.match(/<time datetime="([^"]+)"[^>]*>([^<]*)<\/time>/);
+      expect(time, `${page}: ${r!.name}`).not.toBeNull();
+      expect(time![1], `${page}: ${r!.name}`).toBe(datetime);
+      expect(time![2].trim(), `${page}: ${r!.name}`).toBe(label);
+    }
+  });
+
+  it('a review Google dated only roughly says so', () => {
+    const list = pages.find((p) => p.page === 'reviews/index.html')!.text;
+    expect(list).toMatch(/<time datetime="2026-01"[^>]*>around January 2026<\/time>/);
+    expect(list).toMatch(/<time datetime="2025"[^>]*>around 2025<\/time>/);
+    /* Perera's "8 weeks ago" on 2026-10-29 could be late August, so neither
+       the day nor the month is printed as fact. */
+    expect(list).toMatch(/<time datetime="2026-09"[^>]*>around September 2026<\/time>/);
+    expect(list).not.toMatch(/datetime="2026-09-03"/);
+    expect(list).not.toMatch(/>September 2026</);
+    /* An exactly dated review still prints as a plain month. */
+    expect(list).toMatch(/<time datetime="2021-05-31"[^>]*>May 2021<\/time>/);
+  });
+
+  it('the quoted cards keep their "Google review" source label', () => {
+    for (const { page, html } of cards()) {
+      if (/class="ti-card"/.test(html)) continue; // the slider shows the Google mark instead
+      expect(html, page).toMatch(/Google review/);
+    }
   });
 });

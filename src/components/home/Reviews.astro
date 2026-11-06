@@ -32,10 +32,13 @@
  * an accessible responsive call-to-action linking to the business's Google
  * review page.
  */
-import { relativeAge, reviews } from '../../data/reviews';
+import { reviewDate, reviews } from '../../data/reviews';
 import GoogleReviewLink from '../GoogleReviewLink.astro';
 
-const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
+/* The widget wrote "5 years ago". Since 2026-11-06 the card shows the month
+   instead (SEO audit item 31): an age computed at build time goes stale
+   between builds, a month does not. */
+const cards = reviews.map((r) => ({ ...r, when: reviewDate(r) }));
 ---
 
 <section class="section-padding section-alt" id="reviews" aria-labelledby="reviews-title">
@@ -56,7 +59,7 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
                 <span class="ti-avatar" aria-hidden="true">{r.name.split(' ').map((w) => w[0]).join('')}</span>
                 <div class="ti-who">
                   <p class="ti-name">{r.name}</p>
-                  <p class="ti-age">{r.age}</p>
+                  <p class="ti-age"><time datetime={r.when.datetime}>{r.when.label}</time></p>
                 </div>
                 <svg class="ti-source" viewBox="0 0 24 24" aria-label="Google" role="img">
                   <path
