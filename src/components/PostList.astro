@@ -24,6 +24,10 @@
  * The thumbnail's FILE is no longer the original's 300x150 crop: it is the
  * featured image's 480/720 (or 768) AVIF/WebP/JPEG set (src/lib/thumb.ts),
  * drawn into the same 300x150 box.
+ *
+ * The meta line now reads the month the post was published, or last revised
+ * where it was (SEO audit, visual finding 5): "Blog" on every card of a
+ * blog said nothing. The month, not the day — the day is on the post itself.
  */
 import { excerpt } from '../lib/excerpt';
 import { intrinsic, thumbSet } from '../lib/thumb';
@@ -32,7 +36,23 @@ type Entry = {
   id?: string;
   slug?: string;
   body?: string;
-  data: { title: string; description?: string; pubDate: Date | string; image?: string; imageAlt?: string };
+  data: {
+    title: string;
+    description?: string;
+    pubDate: Date | string;
+    updatedDate?: Date | string;
+    image?: string;
+    imageAlt?: string;
+  };
+};
+
+/* `en-CA` with the long month: "November 2026". UTC, so a date written as a
+   day in front matter does not slip into the previous month in the build's
+   own time zone. */
+const monthLabel = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: 'long', timeZone: 'UTC' });
+const monthOf = (post: Entry) => {
+  const d = new Date(post.data.updatedDate ?? post.data.pubDate);
+  return { iso: d.toISOString().slice(0, 7), label: monthLabel.format(d) };
 };
 
 interface Props {
@@ -90,9 +110,10 @@ const SIZES = '(min-width: 941px) 300px, (min-width: 576px) 510px, calc(100vw - 
         )}
         <div class="list-article-content">
           <div class="list-article-meta">
-            <a href="/category/blog/" rel="category tag">
-              Blog
-            </a>
+            {(() => {
+              const m = monthOf(post);
+              return <time datetime={m.iso}>{m.label}</time>;
+            })()}
           </div>
           <header class="entry-header">
             <h2 class="entry-title">
@@ -163,13 +184,7 @@ const SIZES = '(min-width: 941px) 300px, (min-width: 576px) 510px, calc(100vw - 
     text-transform: uppercase;
     letter-spacing: 1.2px;
     margin-bottom: 10px;
-  }
-
-  .list-article-meta a {
     color: var(--brand);
-    /* A 24px target for a one-word link (SEO audit M12). */
-    display: inline-block;
-    padding-block: 4px;
   }
 
   .entry-header {

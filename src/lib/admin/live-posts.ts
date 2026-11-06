@@ -45,6 +45,10 @@ export const SHELL = {
 export const dateLabel = (d: Date) =>
   d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 
+/** The month on a list entry, worded as PostList words it: "November 2026". */
+export const monthLabel = (d: Date) =>
+  d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', timeZone: 'UTC' });
+
 export interface LivePost {
   slug: string;
   title: string;
@@ -239,7 +243,10 @@ export function injectList(html: string, posts: LiveSummary[]): string {
       const thumb = p.image
         ? `<div class="list-article-thumb"${c}><a href="${href}" tabindex="-1" aria-hidden="true"${c}><img src="${esc(p.image)}" alt="" width="300" height="150" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async"${c}></a></div>`
         : '';
-      return `<article class="list-article"${c}>${thumb}<div class="list-article-content"${c}><div class="list-article-meta"${c}><a href="/category/blog/" rel="category tag"${c}>Blog</a></div><header class="entry-header"${c}><h2 class="entry-title"${c}><a href="${href}" rel="bookmark"${c}>${esc(p.title)}</a></h2></header><div class="entry-excerpt"${c}><p${c}>${esc(p.excerpt)}</p></div></div></article>`;
+      /* The month published, as PostList shows it for the repo's posts. */
+      const at = new Date(p.published_at);
+      const meta = `<time datetime="${at.toISOString().slice(0, 7)}"${c}>${monthLabel(at)}</time>`;
+      return `<article class="list-article"${c}>${thumb}<div class="list-article-content"${c}><div class="list-article-meta"${c}>${meta}</div><header class="entry-header"${c}><h2 class="entry-title"${c}><a href="${href}" rel="bookmark"${c}>${esc(p.title)}</a></h2></header><div class="entry-excerpt"${c}><p${c}>${esc(p.excerpt)}</p></div></div></article>`;
     })
     .join('');
   return html.replace(first[0], `${items}${first[0]}`);
