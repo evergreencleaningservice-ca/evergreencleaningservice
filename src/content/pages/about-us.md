@@ -9,6 +9,17 @@ Evergreen Office Cleaning is a commercial cleaning company based in Toronto. Sin
 
 ![Janitorial cart beside a commercial entrance](/images/gallery-office-cleaning-team.jpg)
 
+## Evergreen Office Cleaning at a glance
+
+- **Founded:** 1989, in Toronto. Formerly Evergreen Cleaning Service; the same company under its current name.
+- **Office:** one, at 243 Queen St W, Toronto, ON M5V 1Z4. Crews travel from it to every client.
+- **Work:** commercial only. Offices, clinics, retail, managed buildings, institutional and industrial sites. No residential cleaning.
+- **Hours:** the office answers Monday to Friday, 7am to 6pm; cleaning is done after hours and at weekends.
+- **Coverage:** WSIB Ontario, liability insurance and bonding; cleaning staff are background-screened.
+- **Products:** Armstrong Manufacturing ProSeries Green, certified to UL Environment (ECOLOGO) standards.
+- **Service area:** Toronto, Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa.
+- **Response:** a reply to every quote request within 2 hours, then a free walkthrough and a written proposal.
+
 ## What we do
 
 - [Office cleaning](/services/office-cleaning/): recurring after-hours cleaning of desks, kitchens, washrooms, floors and the touch points everyone shares.

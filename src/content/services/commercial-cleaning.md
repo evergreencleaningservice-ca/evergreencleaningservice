@@ -181,13 +181,13 @@ Most commercial cleaning happens when the business is closed: before opening, af
 
 Our cleaning staff undergo background screening, and the business is bonded and covered by liability insurance and WSIB Ontario.
 
-## The products we use
+## What products does Evergreen use?
 
-We use Armstrong Manufacturing's ProSeries Green line, which is third-party certified to UL Environment (ECOLOGO) standards, fragrance-free and free of VOCs. Choosing products with indoor air in mind matters in a building people work in all day. More on our [green clean products](/green-clean-products/) page.
+Evergreen Office Cleaning uses Armstrong Manufacturing's ProSeries Green line on its commercial contracts: products third-party certified to UL Environment (ECOLOGO) standards, fragrance-free and free of VOCs. Choosing products with indoor air in mind matters in a building people work in all day. More on our [green clean products](/green-clean-products/) page.
 
-## Commercial cleaning across the GTA
+## Where does Evergreen clean commercial property?
 
-We clean commercial property across Toronto (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa. Each area has its own mix of buildings: office towers and street-level retail [downtown](/locations/toronto-downtown/), logistics and corporate parks in [Mississauga](/locations/mississauga/), warehouses and industrial buildings in [Brampton](/locations/brampton/) and [Vaughan](/locations/vaughan/), tech and professional offices in [Markham](/locations/markham/), and a mix of all of these in [Etobicoke](/locations/etobicoke/) and [Oakville](/locations/oakville/). The way the work is scoped, scheduled and checked is the same everywhere.
+Evergreen Office Cleaning cleans commercial premises across Toronto and ten GTA municipalities from one office at 243 Queen St W: Toronto itself (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa. Each area has its own mix of buildings: office towers and street-level retail [downtown](/locations/toronto-downtown/), logistics and corporate parks in [Mississauga](/locations/mississauga/), warehouses and industrial buildings in [Brampton](/locations/brampton/) and [Vaughan](/locations/vaughan/), tech and professional offices in [Markham](/locations/markham/), and a mix of all of these in [Etobicoke](/locations/etobicoke/) and [Oakville](/locations/oakville/). The way the work is scoped, scheduled and checked is the same everywhere.
 
 ## Choosing a commercial cleaning company
 
