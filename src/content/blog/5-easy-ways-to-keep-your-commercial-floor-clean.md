@@ -1,9 +1,11 @@
 ---
-title: "5 Easy Ways to Keep Your Commercial Floor Clean"
-description: "Five ways to keep a commercial floor clean: more bins, dirt-trapping mats, regular floor checks, a professional cleaner and a strip-and-wax cycle."
+title: "Commercial Floor Care: Daily Maintenance Between Strip-and-Wax Visits"
+seoTitle: "Commercial Floor Care: Daily Maintenance Tips"
+description: "How to keep a commercial floor clean between strip-and-wax visits: more bins, dirt-trapping mats, regular floor checks and a professional cleaner."
 pubDate: 2021-11-24
 image: "/images/blog-commercial-floor-care-feature.jpg"
 imageAlt: "Cleaner using a floor wiper on tiled flooring"
+tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
 ---
 
 ## Sparkling Clean Floors
@@ -20,7 +22,7 @@ Keeping your office building clean, tidy, and disinfected is a key component of 
 
 But as you already know, ensuring that your commercial floors remain sparkling clean and stain-free is no easy task. Given the amount of foot traffic that commercial buildings normally receive on any given day, it is easy for road grime and grease stain to build up on your floors leaving a bad impression. When this dirt isn’t properly addressed, it can become a permanent part of the floor ruining your flooring material and not to mention company reputation.
 
-To help you avoid this situation; we have provided our top three tips on how to keep your office building clean and tidy.
+To help you avoid this situation, here are our five tips on keeping commercial floors clean between professional visits.
 
 ![Close-up of a floor machine cleaning a commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
@@ -30,7 +32,7 @@ Commercial floors are constantly exposed to all kinds of dirt, debris, and grime
 
 ### Invest in dirt trapping rugs
 
-Most of the dirt found on commercial floors comes from the dirt collected at the bottom of the visitors’ shoes. But you can minimize the amount of road dirt and germs that foot traffic brings into the building by installing dirt trapping rugs at the entrance points and hallways. Microfiber rubs are the most effective when it comes to trapping dust particles.
+Most of the dirt found on commercial floors comes from the dirt collected at the bottom of the visitors’ shoes. But you can minimize the amount of road dirt and germs that foot traffic brings into the building by installing dirt trapping rugs at the entrance points and hallways. Microfibre rugs are the most effective when it comes to trapping dust particles.
 
 When choosing dirt trapping rugs, go for dry and easy-to-wash versions.
 

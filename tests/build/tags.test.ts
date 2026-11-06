@@ -56,9 +56,13 @@ beforeAll(() => {
 afterAll(() => fs.rmSync(out, { recursive: true, force: true }));
 
 describe('the tag registry matches the original', () => {
-  it('carries the 26 tags the original clouds, less the two the consolidation emptied', () => {
-    expect(tags).toHaveLength(24);
+  it('carries the 26 tags the original clouds, less the three that were emptied', () => {
+    /* 24 after the consolidation of 30 Oct 2026; 23 since the legacy blog
+       pass of 6 Nov 2026 merged the only `plants` post into the air-quality
+       post (its archive redirects there, see `retiredTagRedirects`). */
+    expect(tags).toHaveLength(23);
     expect(tags.map((t) => t.slug)).not.toContain('coronavirus');
+    expect(tags.map((t) => t.slug)).not.toContain('plants');
     for (const tag of tags) expect(tag.count, tag.slug).toBeGreaterThan(0);
   });
 
@@ -94,8 +98,11 @@ describe('every post’s tags are real', () => {
   const dir = path.join(repo, 'src/content/blog');
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md'));
 
-  it('covers all 25 posts, including both office cleaning guides', () => {
-    expect(files).toHaveLength(25);
+  it('covers all 23 posts, including both office cleaning guides', () => {
+    /* 25 until 6 Nov 2026, when the hand-washing and plants posts were
+       merged into the germ hotspots and air-quality posts (SEO audit,
+       cluster.md "Merge, retitle"). */
+    expect(files).toHaveLength(23);
   });
 
   it('uses no tag slug that is not in the registry', () => {
@@ -250,7 +257,7 @@ describe('no /tag/* wildcard, because it shadowed every archive', () => {
     expect(shadowed, 'this rule would hide a real archive').toEqual([]);
   });
 
-  it('leaves the 24 archives as plain assets', () => {
+  it('leaves the 23 archives as plain assets', () => {
     expect(exists('tag', 'cleaning', 'index.html')).toBe(true);
     expect(exists('tag', 'commercial-cleaning', 'page', '2', 'index.html')).toBe(true);
   });

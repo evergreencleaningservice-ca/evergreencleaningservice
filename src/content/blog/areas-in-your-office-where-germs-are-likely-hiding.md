@@ -1,8 +1,9 @@
 ---
-title: "Areas In Your Office Where Germs Are Likely Hiding"
-description: "The office surfaces germs collect on, from the reception desk and washrooms to printers, coffee makers and keypads, and how often each one should be cleaned."
+title: "Office Germ Hotspots and Hand Hygiene: What to Clean and How Often"
+seoTitle: "Office Germ Hotspots and Hand Hygiene"
+description: "Where germs collect in an office, from reception and washrooms to printers and keypads, how often to clean each surface, and how to keep hands clean."
 pubDate: 2021-10-28
-updatedDate: 2026-10-30
+updatedDate: 2026-11-06
 image: "/images/blog-office-germ-hotspots-feature.jpg"
 imageAlt: "Hands spraying and wiping a computer keyboard"
 tags: ["cleaning", "commercial-cleaning", "commercial-office-cleaning", "office"]
@@ -23,6 +24,7 @@ Germs spread in an office the same way people work in one: through the things ev
 - Blinds and windowsills
 - Hallways and stairways
 - Desks and work areas
+- Hand hygiene
 
 Most of these are easy to miss in a routine clean, because they are small, they belong to everyone, or they sit out of the way.
 
@@ -65,6 +67,19 @@ Handrails and the push bars on stairwell doors take a lot of hands. Floors shoul
 ### Desks and Work Areas
 
 Keyboards, mice, phones and chair arms are touched constantly by the person at the desk, and by anyone who shares it. Encourage staff to keep desks clear so cleaners can reach the surface, give them somewhere other than their desk to eat lunch, and make sure your cleaning scope says whether desks are wiped and how often. A few [cleaning products worth keeping in the office](/5-cleaning-products-you-should-have-in-your-office/) let staff wipe their own desks between visits.
+
+### Hand Hygiene
+
+Clean surfaces are half of it. Germs move from hand to surface to hand, so every hand that is not washed passes them on, and washing is the simplest way to stop a cold going round the whole team.
+
+- **When to wash.** Before and after eating, after using the washroom, after sneezing, coughing or blowing your nose, and after handling anything the public shares: transit, door handles, deliveries.
+- **How to wash.** Soap and warm water, scrubbing every surface from the wrists to the fingertips, between the fingers and under the nails, for at least 20 seconds. Dry on a clean towel, then use the towel or your elbow to turn the tap off, so you do not pick up what you just washed away.
+- **When sanitizer is enough.** An alcohol-based sanitizer is a good substitute where there is no sink, such as a reception desk, beside an elevator or in a vehicle, and works best on hands that are not visibly dirty. Grease and grime need soap and water.
+- **Make it easy.** Keep washrooms and kitchens stocked with soap and paper towels, put dispensers where people enter and where they share equipment, and post short reminders near sinks. A line in a team email at the start of flu season helps too.
+
+![Hands using a soap dispenser beside a sink](/images/commercial-handwashing-hygiene.jpg)
+
+Clean hands only stay clean as long as the things they touch are, which is why the surfaces above belong in every routine visit.
 
 ![Industrial scrubber cleaning an office corridor](/images/night-janitorial-crew-office-toronto.jpg)
 

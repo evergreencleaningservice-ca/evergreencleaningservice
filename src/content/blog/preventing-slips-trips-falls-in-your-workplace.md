@@ -9,7 +9,7 @@ tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services
 
 ## Preventing Slips, Trips, and Falls in Your Workplace
 
-According to statistics, most slips, trips, and falls occur on the same level compared to tripping from an elevated space. With the right measures, these incidences can be prevented. What’s important is putting in the effort for proper preparation and setting ground rules for total order on the floor. What matters is having policies and taking initiatives to maintain high-level safety and hygiene. This article highlights information on preventing slips and falls in your place of work.
+The Canadian Centre for Occupational Health and Safety reports that about two-thirds (67%) of falls happen on the same level, as a result of slips and trips, rather than from a height ([CCOHS, Prevention of Slips, Trips and Falls](https://www.ccohs.ca/oshanswers/safety_haz/falls.html)). With the right measures, these incidences can be prevented. What’s important is putting in the effort for proper preparation and setting ground rules for total order on the floor. What matters is having policies and taking initiatives to maintain high-level safety and hygiene. This article highlights information on preventing slips and falls in your place of work.
 
 **At a glance:**
 

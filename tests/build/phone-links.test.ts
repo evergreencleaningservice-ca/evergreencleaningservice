@@ -80,9 +80,12 @@ describe('every rendered tel: link', () => {
        and waxing page (SEO audit M5). 95 after the blog consolidation the
        same day: 15 fewer posts, two emptied tag archives and six archive
        pages the shorter lists no longer need (H7). 98 with both office
-       guides and the additional office-tag pagination page. */
-    expect(pageCount).toBe(98);
-    expect(new Set(links.map((l) => l.page)).size).toBe(98);
+       guides and the additional office-tag pagination page. 94 since the
+       legacy blog pass of 6 Nov 2026: the hand-washing and plants posts
+       merged into other posts, the emptied `plants` archive, and the office
+       tag back to ten posts and one page. */
+    expect(pageCount).toBe(94);
+    expect(new Set(links.map((l) => l.page)).size).toBe(94);
     expect(links.length).toBeGreaterThanOrEqual(230);
   });
 
@@ -117,8 +120,9 @@ describe('the locations the site actually uses', () => {
   const at = (loc: string) => links.filter((l) => l.location === loc);
 
   it('the site header carries one on every non-paid page', () => {
-    /* Non-paid pages, including the Toronto cost guide, share this header. */
-    expect(at('header')).toHaveLength(93);
+    /* Non-paid pages, including the Toronto cost guide, share this header.
+       89 since 6 Nov 2026: the 94 pages above less the five paid ones. */
+    expect(at('header')).toHaveLength(89);
   });
 
   it('the mobile drawer carries its own, separately reported link', () => {
@@ -126,7 +130,7 @@ describe('the locations the site actually uses', () => {
        menu at every width (`header`), and the open drawer lists the number
        again as its last item (`mobile_navigation`). Two elements, each with
        one fixed answer. */
-    expect(at('mobile_navigation')).toHaveLength(93);
+    expect(at('mobile_navigation')).toHaveLength(89);
   });
 
   it.each([
@@ -172,7 +176,7 @@ describe('the locations the site actually uses', () => {
   it('the site footer carries one on every non-paid page, the paid footer none', () => {
     /* Added deliberately on 2026-10-15 with the footer's contact block. The
        landing-page shell keeps its own minimal footer with no number. */
-    expect(at('footer')).toHaveLength(93);
+    expect(at('footer')).toHaveLength(89);
   });
 });
 

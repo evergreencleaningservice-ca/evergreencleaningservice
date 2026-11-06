@@ -27,6 +27,11 @@
  * gone; their archives redirect (`retiredTagRedirects` in
  * src/data/redirects.ts). The sizes are still the original's.
  *
+ * They changed again on 6 Nov 2026, when the hand-washing and plants posts
+ * were merged into the germ hotspots and air-quality posts and the floor
+ * post, which had no tags, was given four. `plants` was left with no posts
+ * and is gone the same way. 23 tags.
+ *
  * NINE TAGS ARE DELIBERATELY ABSENT. WordPress's theme-unit-test import left
  * `alignment`, `captions`, `content`, `css`, `image` and `markup` behind with
  * zero posts each. The original's own cloud excludes them, because an empty
@@ -83,11 +88,10 @@ export const tags: Tag[] = [
   { slug: 'dust', name: 'Dust', count: 1, size: 8 },
   { slug: 'dusting', name: 'Dusting', count: 1, size: 8 },
   { slug: 'entrance', name: 'entrance', count: 1, size: 8 },
-  { slug: 'janitorial-services', name: 'janitorial services', count: 15, size: 20.338983050847 },
+  { slug: 'janitorial-services', name: 'janitorial services', count: 14, size: 20.338983050847 },
   { slug: 'manual-cleaning', name: 'Manual cleaning', count: 1, size: 8 },
   { slug: 'moving', name: 'moving', count: 1, size: 8 },
-  { slug: 'office', name: 'office', count: 11, size: 18.440677966102 },
-  { slug: 'plants', name: 'plants', count: 1, size: 8 },
+  { slug: 'office', name: 'office', count: 10, size: 18.440677966102 },
   { slug: 'refrigerator', name: 'refrigerator', count: 1, size: 8 },
   { slug: 'relocating', name: 'relocating', count: 1, size: 8 },
   { slug: 'retail', name: 'retail', count: 1, size: 8 },
