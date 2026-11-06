@@ -4,7 +4,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 import SpamGuard from '../components/SpamGuard.astro';
 import SubmissionRuntime from '../components/SubmissionRuntime.astro';
 import GoogleReviewLink from '../components/GoogleReviewLink.astro';
-import { relativeAge, reviews } from '../data/reviews';
+import { reviewDate, reviews } from '../data/reviews';
 
 const entry = await getEntry('pages', 'reviews');
 if (!entry) throw new Error('Missing content entry: pages/reviews');
@@ -30,13 +30,17 @@ const introHtml = rawBody.slice(0, cutAt);
 
 /* SEO audit H4 (28 Oct 2026): the page promised reviews and showed only a
    form. It now leads with every Google review on file, newest first, each
-   with its date. The age is shown the way Google shows it ("2 months ago"),
-   because two of the newest dates are only known to the month; the exact
-   ISO date still goes in `datetime`. No aggregate rating or count is shown:
-   the content tests hold every page to that until the client confirms one. */
+   with its date. No aggregate rating or count is shown: the content tests
+   hold every page to that until the client confirms one.
+
+   The date was first shown the way Google shows it ("2 months ago"). Since
+   2026-11-06 it is the month ("September 2026"), because an age worked out
+   at build time goes stale between builds (SEO audit item 31). The two
+   reviews Google dated only roughly say "around ...", and their `datetime`
+   is no more precise than what is known. */
 const cards = [...reviews]
   .sort((a, b) => b.date.localeCompare(a.date))
-  .map((r) => ({ ...r, age: relativeAge(r.date) }));
+  .map((r) => ({ ...r, when: reviewDate(r) }));
 
 /*
  * TODO — the submit endpoint is not wired up yet.
@@ -73,7 +77,7 @@ const cards = [...reviews]
               <figcaption>
                 <span class="rv-name">{r.name}</span>
                 <span class="rv-meta">
-                  Google review, <time datetime={r.date}>{r.age}</time>
+                  Google review, <time datetime={r.when.datetime}>{r.when.label}</time>
                 </span>
               </figcaption>
             </figure>

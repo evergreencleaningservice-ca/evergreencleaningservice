@@ -15,8 +15,16 @@
  */
 export interface Review {
   name: string;
-  /** ISO date from the widget; the card shows this as "N years ago". */
+  /** ISO date. The card shows its month ("May 2021"), not an age; see
+      `reviewDate` below. Also the sort key on /reviews/. */
   date: string;
+  /**
+   * Set when Google gave only a relative age, so `date` is a reconstruction
+   * rather than the day the review was left. 'month' means the month is about
+   * right; 'year' means only the year is. The card then says "around ...",
+   * and `datetime` carries no more precision than is known.
+   */
+  approx?: 'month' | 'year';
   rating: number;
   /** Trustindex marks each of these as verified against Google. */
   verified: boolean;
@@ -27,8 +35,10 @@ export const reviews: Review[] = [
   /* Added 2026-10-29 from the Google Business Profile's own review list,
      newest first: the archive's four were all from 2020-2021. Text is
      verbatim. Google shows only a relative age ("8 weeks ago"), so the two
-     dates without an exact day are approximate and only feed the card's
-     "N months ago". */
+     dates without an exact day are approximate. On 2026-10-29 Google said
+     "9 months ago" for Andy Handy, which pins the month, and "a year ago"
+     for av-ev, which on Google covers anything from 12 to 23 months, so only
+     the year is claimed for that one (2026-11-06, SEO audit item 31). */
   {
     name: 'Christopher Perera',
     date: '2026-09-03',
@@ -39,6 +49,7 @@ export const reviews: Review[] = [
   {
     name: 'Andy Handy',
     date: '2026-01-15',
+    approx: 'month',
     rating: 5,
     verified: true,
     text: 'Excellent service at a very good price.',
@@ -46,6 +57,7 @@ export const reviews: Review[] = [
   {
     name: 'av-ev',
     date: '2025-07-04',
+    approx: 'year',
     rating: 5,
     verified: true,
     text: 'They do the regular maintenance of our office space. Great company, very professional and quality services. Highly recommend.',
@@ -80,20 +92,47 @@ export const reviews: Review[] = [
   },
 ];
 
-/**
- * "5 years ago", the way the widget writes it. Worked out at build time, so it
- * stays right as the site is rebuilt rather than freezing at whatever it said
- * when these were captured.
- */
-export function relativeAge(iso: string, now = new Date()): string {
-  const then = new Date(iso);
-  const months =
-    (now.getFullYear() - then.getFullYear()) * 12 +
-    (now.getMonth() - then.getMonth()) -
-    (now.getDate() < then.getDate() ? 1 : 0);
+const MONTHS = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
-  if (months < 1) return 'a month ago';
-  if (months < 12) return months === 1 ? 'a month ago' : `${months} months ago`;
-  const years = Math.floor(months / 12);
-  return years === 1 ? 'a year ago' : `${years} years ago`;
+export interface ReviewDate {
+  /** For `<time datetime>`: YYYY-MM-DD, or YYYY-MM / YYYY when approximate. */
+  datetime: string;
+  /** What the visitor reads: "May 2021", or "around January 2026". */
+  label: string;
+}
+
+/**
+ * The review's date as a month and year. This replaced a build-time
+ * "N months ago" on 2026-11-06 (SEO audit item 31): an age is only right on
+ * the day the site is built, and between builds it drifts and understates
+ * how old a review is. A month stays true.
+ *
+ * Read from the ISO string itself rather than through `Date`, so the month
+ * cannot shift with the build machine's time zone.
+ */
+export function reviewDate(review: Pick<Review, 'date' | 'approx'>): ReviewDate {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(review.date);
+  if (!m) throw new Error(`reviews: "${review.date}" is not a YYYY-MM-DD date`);
+  const [, year, month] = m;
+  const name = MONTHS[Number(month) - 1];
+  if (!name) throw new Error(`reviews: "${review.date}" has no month ${month}`);
+
+  if (review.approx === 'year') return { datetime: year, label: `around ${year}` };
+  if (review.approx === 'month') {
+    return { datetime: `${year}-${month}`, label: `around ${name} ${year}` };
+  }
+  return { datetime: review.date, label: `${name} ${year}` };
 }
