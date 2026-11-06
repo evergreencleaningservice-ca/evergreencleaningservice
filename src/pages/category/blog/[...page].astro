@@ -136,10 +136,13 @@ const archiveDescription = pageDescription(
 
   .nav-links a {
     color: var(--brand);
+    transition: color var(--motion-fast) ease;
   }
 
+  /* The darker brand: `--brand-hover` is the bright footer green, about
+     1.5:1 on this white page. The arrow in "Older posts" steps outward. */
   .nav-links a:hover,
   .nav-links a:focus-visible {
-    color: var(--brand-hover, #3f7523);
+    color: var(--brand-dark);
   }
 </style>

@@ -749,21 +749,21 @@ img {
    miss. The reveal is back as a progressive enhancement that keeps every
    one of those guarantees:
 
-     - Nothing is hidden by default. The resting rules below only apply
-       under `html.js`, a class a one-line inline script in BaseLayout adds
-       before the body parses. No JavaScript, no class, no hiding — the page
-       renders exactly as it did before.
-     - Nothing is hidden for anyone who asked for less motion: the whole
-       block sits inside `prefers-reduced-motion: no-preference`.
-     - It is opt-in, by `data-reveal` on a block; the observer in
-       src/scripts/reveal.ts adds `is-in` as the block approaches the
-       viewport, and reveals at once anything already above it (a restored
-       scroll position, an anchor jump) so nothing can be scrolled back to
-       and found missing.
+     - Nothing is hidden by default. A block is hidden only once
+       src/lib/reveal.ts has ARMED it (`data-reveal-armed`), and it arms only
+       blocks that start below the first screen. The hero, a post's featured
+       image and anything else the Largest Contentful Paint could be paint
+       at once; without JavaScript nothing is armed at all.
+     - Nothing is hidden for anyone who asked for less motion: the script
+       arms nothing, and the rules sit inside `no-preference` as well.
+     - It is opt-in, by `data-reveal` on a block, `="stagger"` for a row of
+       cards, or `="flow"` for running content, where each child reveals on
+       its own as it is reached. Anything already above the viewport (a
+       restored scroll position, an anchor jump) is shown at once.
      - It is a fade with a 16px rise — a nudge, not a slide — on transform
-       and opacity only, so it never causes layout work.
-     - A stagger (`data-reveal="stagger"`) delays each child by 60ms, capped
-       at the eighth: beyond that the last items feel late. */
+       and opacity only, so it never causes layout work or layout shift.
+     - A stagger delays each child by 60ms, capped at the eighth: beyond
+       that the last items feel late. */
 
 @keyframes reveal-in {
   from {
@@ -780,7 +780,7 @@ img {
   /* Waiting: hidden by opacity alone. No transform here, so a waiting
      block is never a containing block for a fixed descendant, and nothing
      inside an overflow container is pushed out of it. */
-  html.js [data-reveal]:not(.is-in) {
+  [data-reveal-armed]:not(.is-in) {
     opacity: 0;
   }
 
@@ -790,55 +790,55 @@ img {
      element would replace them for good. An animation runs once and lets
      go (`backwards`, not `both`), so when it ends the card's own hover
      rules are exactly as they were. */
-  html.js [data-reveal].is-in {
+  [data-reveal-armed].is-in {
     animation: reveal-in var(--motion-reveal) var(--ease-out) backwards;
   }
 
   /* A staggered block does not move as a whole; its children do, one after
      another, which is what makes a row of cards read as a set arriving. */
-  html.js [data-reveal='stagger']:not(.is-in) {
+  [data-reveal='stagger'][data-reveal-armed]:not(.is-in) {
     opacity: 1;
   }
 
-  html.js [data-reveal='stagger']:not(.is-in) > * {
+  [data-reveal='stagger'][data-reveal-armed]:not(.is-in) > * {
     opacity: 0;
   }
 
-  html.js [data-reveal='stagger'].is-in {
+  [data-reveal='stagger'][data-reveal-armed].is-in {
     animation: none;
   }
 
-  html.js [data-reveal='stagger'].is-in > * {
+  [data-reveal='stagger'][data-reveal-armed].is-in > * {
     animation: reveal-in var(--motion-reveal) var(--ease-out) backwards;
   }
 
-  html.js [data-reveal='stagger'].is-in > :nth-child(2) {
+  [data-reveal='stagger'].is-in > :nth-child(2) {
     animation-delay: 60ms;
   }
-  html.js [data-reveal='stagger'].is-in > :nth-child(3) {
+  [data-reveal='stagger'].is-in > :nth-child(3) {
     animation-delay: 120ms;
   }
-  html.js [data-reveal='stagger'].is-in > :nth-child(4) {
+  [data-reveal='stagger'].is-in > :nth-child(4) {
     animation-delay: 180ms;
   }
-  html.js [data-reveal='stagger'].is-in > :nth-child(5) {
+  [data-reveal='stagger'].is-in > :nth-child(5) {
     animation-delay: 240ms;
   }
-  html.js [data-reveal='stagger'].is-in > :nth-child(6) {
+  [data-reveal='stagger'].is-in > :nth-child(6) {
     animation-delay: 300ms;
   }
-  html.js [data-reveal='stagger'].is-in > :nth-child(7) {
+  [data-reveal='stagger'].is-in > :nth-child(7) {
     animation-delay: 360ms;
   }
-  html.js [data-reveal='stagger'].is-in > :nth-child(n + 8) {
+  [data-reveal='stagger'].is-in > :nth-child(n + 8) {
     animation-delay: 420ms;
   }
 }
 
 /* Print is a snapshot: everything visible, nothing waiting on an observer. */
 @media print {
-  html.js [data-reveal],
-  html.js [data-reveal] > * {
+  [data-reveal-armed],
+  [data-reveal-armed] > * {
     opacity: 1 !important;
     animation: none !important;
   }

@@ -149,7 +149,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
       </div>
     </header>
 
-    <main>
+    {/* Each section below the hero fades in as it is reached (lib/reveal.ts,
+        "flow"). The hero and its form are on the first screen, so they are
+        never hidden, even for a moment. */}
+    <main data-reveal="flow">
       <slot />
     </main>
 
@@ -176,6 +179,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
         CallTrackingMetrics and rewrites the number for paid arrivals. One
         delegated sitewide handler now reads both numbers at click time. */}
     <PhoneTracking />
+    <script>
+      import { wireReveal } from '../lib/reveal';
+      wireReveal(document);
+    </script>
   </body>
 </html>
 
