@@ -10,7 +10,9 @@
  *   a blog post      its `updatedDate`, or its `pubDate` if it has none
  *   /insights/       the newest of those
  *   a location page  its own `updated` field in src/data/locations.ts
- *   /locations/      the newest of those and of the hub's own page file
+ *   a section hub    its own date in src/data/hub-dates.ts, or the newest
+ *                    of that and its members' dates where it shows their
+ *                    content (/services/, /locations/; the rule is there)
  *   everything else  the last commit touching the page's own files: its
  *                    content file, or its page file where the page is
  *                    written there (`SOURCES` below)
@@ -22,6 +24,9 @@
  * and location pages one timestamp, and a change to one city re-dated every
  * city. A template edit that does change what a page says should go into
  * that page's own content file (or, for a location, its `updated` field).
+ * Nor do the hubs' page files: they hold markup and styles as well as words,
+ * and a styling commit (#81, 6 Nov) gave /locations/ and /industries/ one
+ * timestamp through them.
  *
  * The same date is the WebPage `dateModified` on the service, industry and
  * location pages (OfferPage.astro, locations/[slug].astro), so the schema and
@@ -39,9 +44,11 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { locations } from '../data/locations.ts';
+import { HUB_UPDATED } from '../data/hub-dates.ts';
 
 const ROOT = process.cwd();
 const BLOG = path.join(ROOT, 'src/content/blog');
+const SERVICES = path.join(ROOT, 'src/content/services');
 
 const git = (/** @type {string[]} */ args) => {
   try {
@@ -102,6 +109,15 @@ const locationDates = new Map(
   }),
 );
 
+/** Each hub's own date, checked the same way. */
+const hubDates = new Map(
+  Object.entries(HUB_UPDATED).map(([hub, date]) => {
+    const ms = Date.parse(date);
+    if (Number.isNaN(ms)) throw new Error(`src/data/hub-dates.ts: ${hub} has '${date}', which is not a date`);
+    return [hub, new Date(ms).toISOString()];
+  }),
+);
+
 /** The newest of `dates`, or undefined when any of them is unknowable. */
 const newest = (/** @type {(string | undefined)[]} */ dates) =>
   dates.every(Boolean)
@@ -117,14 +133,29 @@ export const SOURCES = (/** @type {string} */ p) => {
   const parts = p.split('/').filter(Boolean);
   if (!parts.length) return ['src/pages/index.astro', 'src/components/home'];
   const [first, slug] = parts;
-  if (first === 'services' || first === 'industries') {
-    return slug ? [`src/content/${first}/${slug}.md`] : [`src/pages/${first}/index.astro`, `src/content/${first}`];
-  }
-  /* A location page has no file of its own: its `updated` field dates it
-     (lastmodFor). */
-  if (first === 'locations') return slug ? [] : ['src/pages/locations/index.astro'];
+  /* A hub, and a location page, has no file of its own to date it by: a
+     date field does (lastmodFor). */
+  if (!slug && hubDates.has(p)) return [];
+  if (first === 'services' || first === 'industries') return [`src/content/${first}/${slug}.md`];
+  if (first === 'locations') return [];
   if (first === 'projects') return ['src/pages/projects', 'src/content/projects'];
   return [`src/pages/${first}.astro`, `src/content/pages/${first}.md`];
+};
+
+/**
+ * The pages whose dates a hub's date includes, because it shows their
+ * content (src/data/hub-dates.ts says why /industries/ has none). Exported
+ * for the build test.
+ */
+export const HUB_MEMBERS = (/** @type {string} */ hub) => {
+  if (hub === '/services/') {
+    return fs
+      .readdirSync(SERVICES)
+      .filter((f) => f.endsWith('.md'))
+      .map((f) => `/services/${f.replace(/\.md$/, '')}/`);
+  }
+  if (hub === '/locations/') return locations.map((l) => `/locations/${l.slug}/`);
+  return [];
 };
 
 /** The lastmod for a sitemap URL, or undefined to omit it. */
@@ -137,9 +168,8 @@ export function lastmodFor(/** @type {string} */ url) {
   /* The two data files' last commit is only the fallback for an entry
      without an `updated` field; it re-dates every location at once. */
   if (location) return locationDates.get(location) ?? lastCommit(['src/data/locations.ts', 'src/data/location-local.ts']);
-  /* The hub lists every location, so a change to one is a change to it. */
-  if (p === '/locations/') {
-    return newest([lastCommit(SOURCES(p)), ...locations.map((l) => lastmodFor(new URL(`${l.slug}/`, url).href))]);
+  if (hubDates.has(p)) {
+    return newest([hubDates.get(p), ...HUB_MEMBERS(p).map((m) => lastmodFor(new URL(m, url).href))]);
   }
   return lastCommit(SOURCES(p));
 }

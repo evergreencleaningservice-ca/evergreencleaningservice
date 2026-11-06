@@ -39,7 +39,8 @@ import {
 import { isPrivatePage } from './private-pages';
 import { shellProblems } from '../../src/lib/admin/live-posts';
 import { locations } from '../../src/data/locations';
-import { SOURCES } from '../../src/lib/sitemap-lastmod.mjs';
+import { HUB_MEMBERS, SOURCES } from '../../src/lib/sitemap-lastmod.mjs';
+import { HUB_UPDATED } from '../../src/data/hub-dates';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const ORIGIN = `https://${PRODUCTION_HOSTS[0]}`;
@@ -299,8 +300,11 @@ describe('the sitemap', () => {
  * and a location page together (the Phase 2 copy pass did), and that shared
  * date is honest. What is asserted is where each date comes from: a service
  * or industry page's date is its own content file's, a location's is its own
- * `updated` field, and no page's date sources include a template, a layout
- * or a shared data file. A template commit then has nothing to move.
+ * `updated` field, a hub's is its own date in src/data/hub-dates.ts and
+ * those of the members it shows, and no page's date sources include a
+ * template, a layout or a shared data file. A template commit then has
+ * nothing to move. The hubs were the last case: their page files carried
+ * the styling commit #81 (6 Nov, 17:29:27Z) to /locations/ and /industries/.
  *
  * A missing lastmod fails here on purpose: it is what a shallow clone does
  * (the date is left out rather than guessed), and the deploy scripts run
@@ -375,6 +379,37 @@ describe("the sitemap's dates", () => {
     const stamped = [...offerPages(), ...locationPages()].filter(
       (e) => time(e.lastmod) === Date.parse('2026-10-31T14:11:02Z')
     );
+    expect(stamped).toEqual([]);
+  });
+
+  it('dates each hub by its own date and the members it shows, never by its page file', () => {
+    const all = entries();
+    const lastmodOf = (p: string) => all.find((e) => e.path === p)?.lastmod;
+    const hubs = Object.keys(HUB_UPDATED) as (keyof typeof HUB_UPDATED)[];
+    expect(hubs.sort()).toEqual(['/industries/', '/locations/', '/services/']);
+    for (const hub of hubs) {
+      expect(SOURCES(hub), hub).toEqual([]);
+      const own = time(HUB_UPDATED[hub]);
+      expect(own, `${hub} in src/data/hub-dates.ts is not a date`).not.toBeNaN();
+      expect(own, `${hub} is dated in the future`).toBeLessThanOrEqual(Date.now() + 10 * 60_000);
+      const members = HUB_MEMBERS(hub).map((m: string) => {
+        const lastmod = lastmodOf(m);
+        expect(lastmod, `${hub} member ${m} is not in the sitemap`).toBeTruthy();
+        return time(lastmod);
+      });
+      expect(time(lastmodOf(hub)), hub).toBe(Math.max(own, ...members));
+    }
+    /* What each hub shows of its members: every service, every location,
+       and no industry page (its cards come from src/data/industries.ts). */
+    expect(HUB_MEMBERS('/services/').sort()).toEqual(offerPages().filter((e) => e.path.startsWith('/services/')).map((e) => e.path).sort());
+    expect(HUB_MEMBERS('/locations/')).toHaveLength(locations.length);
+    expect(HUB_MEMBERS('/industries/')).toEqual([]);
+  });
+
+  it('stamps the styling-only commit of 6 Nov (#81) on no page', () => {
+    /* "Polish hovers and bring back a safe scroll-in reveal" touched the
+       hubs' page files and many shared components, and no page's text. */
+    const stamped = entries().filter((e) => time(e.lastmod) === Date.parse('2026-11-06T17:29:27Z'));
     expect(stamped).toEqual([]);
   });
 
