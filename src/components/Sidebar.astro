@@ -37,7 +37,7 @@ const serviceLinks = [
 ] as const;
 ---
 
-<aside id="secondary" class="sidebar" aria-label="Sidebar">
+<aside id="secondary" class="sidebar" aria-label="Sidebar" data-reveal="flow">
   <section class="widget widget-search" aria-label="Search">
     <form class="search-form" role="search" action="/search/" method="get">
       <label class="screen-reader-text" for="sidebar-search">Search for:</label>
@@ -174,13 +174,27 @@ const serviceLinks = [
     border-bottom: 0;
   }
 
-  .widget-recent a {
+  /* Both link lists: the row's link slides 4px right under the pointer, so
+     a list of plain titles answers the mouse the way the cards do. */
+  .widget-recent a,
+  .widget-services a {
     color: var(--ink);
+    display: inline-block;
+    transition:
+      color var(--motion-fast) ease,
+      transform var(--motion-base) var(--ease-out);
   }
 
   .widget-recent a:hover,
   .widget-recent a:focus-visible {
     color: var(--brand);
+  }
+
+  @media (hover: hover) {
+    .widget-recent a:hover,
+    .widget-services a:hover {
+      transform: translateX(4px);
+    }
   }
 
   /* services: the Recent Posts list's own rows, so the two widgets match. */
@@ -199,10 +213,6 @@ const serviceLinks = [
 
   .widget-services li:last-child {
     border-bottom: 0;
-  }
-
-  .widget-services a {
-    color: var(--ink);
   }
 
   .widget-services a:hover,

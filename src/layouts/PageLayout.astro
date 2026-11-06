@@ -89,7 +89,9 @@ const body = contentHtml ? normalizeShared(normalizeBody(contentHtml)) : null;
 
   <div class="section-padding">
     <div class={`container content-grid${sidebar ? '' : ' is-full'}`}>
-      <article class="entry-content">
+      {/* The copy below the first screen fades in a block at a time as it is
+          reached (lib/reveal.ts, "flow"); a form the page adds is one block. */}
+      <article class="entry-content" data-reveal="flow">
         {body && <Fragment set:html={body} />}
         <slot />
       </article>

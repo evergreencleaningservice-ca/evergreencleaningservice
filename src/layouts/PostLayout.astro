@@ -118,7 +118,11 @@ const SIZES = '(min-width: 992px) 720px, calc(100vw - 32px)';
         )
       }
 
-      <article class="entry-content">
+      {/* Each paragraph, heading, list and image below the first screen
+          fades in as it is reached (lib/reveal.ts, "flow"). The title, date
+          and featured image above are never touched: the image is usually
+          this page's largest paint. */}
+      <article class="entry-content" data-reveal="flow">
         <slot />
       </article>
       {
@@ -151,6 +155,21 @@ const SIZES = '(min-width: 992px) 720px, calc(100vw - 32px)';
   .post-topics a {
     display: inline-block;
     padding-block: 2px;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    transition:
+      color var(--motion-fast) ease,
+      text-decoration-color var(--motion-fast) ease;
+  }
+
+  /* The underline fades in rather than switching on, and the darker brand
+     keeps the hover at full contrast (the global hover green is the bright
+     footer one, 1.5:1 on white). */
+  .post-topics a:hover,
+  .post-topics a:focus-visible {
+    color: var(--brand-dark);
+    text-decoration-color: currentColor;
   }
 
   .post-date {
