@@ -21,12 +21,27 @@ npm run preflight # refuses a production build that would ship a test captcha ke
 npm test        # the whole suite (see TESTING.md)
 npm run verify:indexing -- staging      # check a DEPLOYED origin's indexability
 npm run verify:indexing -- production   # the same, against the live site
+npm run cwv:field                       # field LCP / INP / CLS, last 28 days
+npm run cwv:field -- --since 2026-10-31 --compare-at 2026-11-06T15:05Z  # before/after a deploy
 ```
 
 `verify:indexing` is the go-live check that cannot be a unit test: it reads
 what an origin actually serves. Run it against **production immediately after
 the DNS cutover** — the one mistake that would cost most is production
 answering with a `noindex`, and it is invisible from the page.
+
+`cwv:field` (added 6 Nov 2026, audit ACTION-PLAN item 26) reports **field**
+Core Web Vitals: real visits, read from the Cloudflare Web Analytics beacon the
+zone injects at the edge, through the read-only GraphQL Analytics API. It needs
+`CF_API_TOKEN` with Account Analytics read. It prints the p75 LCP, INP and CLS
+sitewide and by device, with sample counts and the share in Google's "good"
+band, and the ten busiest paths; `--json` for machines, `--since`/`--until`
+for a fixed window, `--include-bots` to keep beacons Cloudflare flags as bots.
+It exits non-zero only when the API or the token fails, never because the
+vitals are poor. Beacons older than about seven days come back from Cloudflare
+as a 1-in-10 sample, so the newest week is the precise part of any window;
+the report says how much of it was sampled. Results so far are in
+[`docs/growth/performance.md`](docs/growth/performance.md#8-field-data-real-visitors).
 
 Staging and production are **one build on one Worker**. The staging noindex is
 a rule in `public/_headers` that names `stage.evergreencleaningservice.ca` (and

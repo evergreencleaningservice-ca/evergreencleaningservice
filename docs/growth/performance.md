@@ -69,7 +69,7 @@ Reports:
 | LCP ≤ 2.5 s | **Met on the service and location pages** (about 2.1 s). **Not met on the homepage** (about 4.1 s median, with runs spread between 2.9 and 4.2 s) or on the paid pages (about 3.2–3.3 s). |
 | Low TBT | Improved on every page that loaded reCAPTCHA (the paid page dropped 921 → 562 ms). It remains **about 400–600 ms** — see §5. |
 | CLS ≤ 0.1 | **Met: 0** on every page measured. |
-| Field Core Web Vitals (INP ≤ 200 ms at p75) | **Not measurable here.** The brief's PSI report showed no field data for this origin. Field data needs CrUX volume or Search Console access (intake D3). |
+| Field Core Web Vitals (INP ≤ 200 ms at p75) | **Measurable since 6 Nov 2026, and met** on the data there is: `npm run cwv:field` reads real visits from Cloudflare Web Analytics (see §8). The brief's PSI report showed no CrUX field data for this origin, and that is still true; Google's own assessment needs CrUX volume or Search Console access (intake D3). |
 
 ## 5. What is left, and why
 
@@ -128,3 +128,36 @@ LH_FORM=desktop node scripts/lh-masquerade.mjs /tmp/after after 3 /
 ```
 
 Page views from these runs reach the client's Google Ads tag, exactly as a PSI run does. No conversion fires.
+
+## 8. Field data (real visitors)
+
+Added 6 Nov 2026 (audit ACTION-PLAN item 26). Everything above is lab data. This section is what real visitors experienced.
+
+**Source.** The zone is proxied by Cloudflare, which injects its Web Analytics beacon at the edge. The beacon reports LCP, INP and CLS from real page views, in the browsers that support those measurements. `scripts/cwv-field.mjs` reads them through Cloudflare's read-only GraphQL Analytics API and computes the p75 itself, weighting each beacon by Cloudflare's sample interval.
+
+```bash
+npm run cwv:field                                          # last 28 days
+npm run cwv:field -- --days 6                              # the unsampled week
+npm run cwv:field -- --since 2026-10-31 --compare-at 2026-11-06T15:05Z   # before/after the Phase 1 deploy
+npm run cwv:field -- --json > cwv.json
+```
+
+**Read it with three caveats.**
+
+- **This is not Google's number.** Google's assessment uses CrUX, which had no data for this origin in the brief's PSI report. The thresholds are the same (p75 against LCP 2.5 s, INP 200 ms, CLS 0.1); the population is different.
+- **Older data is a 1-in-10 sample.** Cloudflare answers any window that starts more than about seven days back from a 1-in-10 sample. A 28-day report is therefore precise for the newest six days and an estimate for the rest. The report states the split.
+- **The volume is small.** About 120 human beacons in the six days to 6 Nov. A path with a handful of beacons is an anecdote. The 95% interval printed next to each p75 is the honest measure of what the number can say; it is shown only when every row has the same sample rate.
+
+**First reading: 31 Oct – 6 Nov 2026 (6 days to 19:58 UTC, unsampled, human traffic only).** 122 beacons; 60 more were flagged as bots by Cloudflare and excluded. All three metrics are in the good band, sitewide and on both device types:
+
+| | Beacons | LCP p75 (95% CI) | INP p75 (95% CI) | CLS p75 (95% CI) |
+|---|---|---|---|---|
+| Sitewide | 122 | **0.90 s** (0.72–1.15 s), 92.5% good | **24 ms** (8–56 ms), 98.6% good | **0.001** (0–0.012), 98.9% good |
+| Desktop | 91 | 0.87 s (0.55–2.15 s) | 32 ms (8–64 ms) | 0.003 |
+| Mobile | 31 | 0.94 s (0.72–1.10 s) | 24 ms (0–488 ms, 18 beacons) | 0.000 (18 beacons) |
+
+Of the 28 paths with beacons that week, one page had a p75 outside "good": `/contact-us/`, LCP 2.54 s from 5 beacons, too few to call. The only other was `/.well-known/sgcaptcha/` (2 beacons, LCP 6.7 s), SiteGround's challenge path (see `scripts/verify-indexing.mjs`), not a page of this site. Over the full 28 days to 6 Nov, with the older three weeks sampled, the sitewide p75s were LCP 0.67 s, INP 40 ms, CLS 0.000.
+
+**Why the field is so much better than the lab.** The lab profile in §2 is a throttled mid-range phone on a slow connection with a cold cache. Real visitors in that week were three-quarters desktop (91 of 122 beacons), on whatever devices and connections they actually have. Neither number is wrong; they answer different questions. The lab is the stricter test and the one to keep improving against.
+
+**The Phase 1 deploy (6 Nov 2026, about 15:05 UTC).** It deferred the Google Tag Manager loader and stopped loading the italic font on the homepage. When this was first run, at 19:58 UTC the same day, there were **no human beacons after the deploy yet** (only bot-flagged ones), so there is no field before/after. Re-run with `--since 2026-10-31 --compare-at 2026-11-06T15:05Z` once a week or two of visits has accumulated, and judge the change against the intervals, not the point values.
