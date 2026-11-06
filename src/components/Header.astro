@@ -170,6 +170,18 @@ const isCurrent = (href?: string) =>
     text-decoration: none;
   }
 
+  /* The handset tips towards the pointer, the small acknowledgement a phone
+     link needs since its colour change is subtle beside the green icon. */
+  .header-phone svg {
+    transition: transform var(--motion-base) var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    .header-phone:hover svg {
+      transform: rotate(-12deg) scale(1.1);
+    }
+  }
+
   .header-phone-short {
     display: none;
   }
@@ -259,6 +271,8 @@ const isCurrent = (href?: string) =>
     background: none;
     border: 0;
     cursor: pointer;
+    position: relative;
+    transition: color var(--motion-fast) ease;
   }
 
   .onepress-menu > li > a:hover,
@@ -267,6 +281,41 @@ const isCurrent = (href?: string) =>
   .submenu-toggle:hover {
     color: var(--brand);
     text-decoration: none;
+  }
+
+  /* A 2px brand rule under each desktop menu item that draws out from the
+     left on hover and stays drawn under the current page, so the menu says
+     where you are as well as where you can go. `::before`, because `::after`
+     is the dropdown caret. The rule sits 18px up from the bar's bottom edge,
+     level with the text's baseline area rather than on the edge itself. It
+     collapses to nothing when the menu becomes the phone drawer. */
+  .onepress-menu > li > a::before,
+  .submenu-toggle::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    right: 11px;
+    bottom: 18px;
+    height: 2px;
+    background: var(--brand);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--motion-base) var(--ease-out);
+  }
+
+  .onepress-menu > li > a:hover::before,
+  .onepress-menu > li > a:focus-visible::before,
+  .onepress-menu > li > a[aria-current='page']::before,
+  .submenu-toggle:hover::before,
+  .has-children:focus-within > .submenu-toggle::before {
+    transform: scaleX(1);
+  }
+
+  /* The rule retracts to the right, so leaving reads as the mirror of
+     arriving rather than the same wipe played again. */
+  .onepress-menu > li > a:not(:hover):not(:focus-visible):not([aria-current='page'])::before,
+  .submenu-toggle:not(:hover)::before {
+    transform-origin: right center;
   }
 
   .has-children > a::after,
@@ -308,6 +357,18 @@ const isCurrent = (href?: string) =>
     padding: 9px 18px;
     font-size: 0.9rem;
     color: var(--ink-heading);
+    transition:
+      color var(--motion-fast) ease,
+      background-color var(--motion-fast) ease,
+      padding-left var(--motion-fast) ease;
+  }
+
+  /* A dropdown item steps 4px right under the pointer; with the tint it
+     reads as a row being picked up rather than a colour flicker. */
+  @media (hover: hover) {
+    .sub-menu a:hover {
+      padding-left: 22px;
+    }
   }
 
   .sub-menu a:hover,
@@ -386,6 +447,17 @@ const isCurrent = (href?: string) =>
       width: 100%;
       text-align: left;
       font-size: 14px;
+    }
+
+    /* No underline rule in the drawer: a 2px line 18px up from the bottom
+       of a 44px row would cut through the text. */
+    .onepress-menu > li > a::before,
+    .submenu-toggle::before {
+      display: none;
+    }
+
+    .sub-menu a:hover {
+      padding-left: 32px;
     }
 
     .drawer-only {

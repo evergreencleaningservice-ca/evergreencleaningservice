@@ -64,7 +64,7 @@ const posts = entries
 
     {
       posts.length > 0 && (
-        <div class="blog-entry">
+        <div class="blog-entry" data-reveal>
           <PostList posts={posts} />
         </div>
       )
@@ -105,8 +105,10 @@ const posts = entries
     text-transform: uppercase;
     text-decoration: none;
     transition:
-      background 0.2s ease,
-      color 0.2s ease;
+      background-color var(--motion-fast) ease,
+      color var(--motion-fast) ease,
+      box-shadow var(--motion-base) var(--ease-out),
+      transform var(--motion-base) var(--ease-out);
   }
 
   .btn-outline:hover,
@@ -114,6 +116,20 @@ const posts = entries
     background: var(--brand);
     color: #fff;
     text-decoration: none;
+  }
+
+  /* The same rise-and-press as `.btn` in global.css. */
+  @media (hover: hover) {
+    .btn-outline:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-press);
+    }
+  }
+
+  .btn-outline:active {
+    transform: translateY(0);
+    box-shadow: none;
+    transition-duration: 60ms;
   }
 
   .btn-outline:focus-visible {

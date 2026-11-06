@@ -15,7 +15,7 @@ import { nap } from '../../data/site';
       Crews are dispatched across the Greater Toronto Area from our base at {nap.addressLine.split(',')[0]},
       Toronto.
     </p>
-    <div class="ar-grid">
+    <div class="ar-grid" data-reveal="stagger">
       {
         AREA_GROUPS.map((group) => (
           <div>
@@ -29,7 +29,7 @@ import { nap } from '../../data/site';
         ))
       }
     </div>
-    <p class="ar-all"><a href="/locations/">All service areas&nbsp;→</a></p>
+    <p class="ar-all"><a href="/locations/">All service areas<span class="link-arrow">&nbsp;→</span></a></p>
   </div>
 </section>
 

@@ -10,11 +10,11 @@ import { INDUSTRIES } from '../../data/industries';
       Professional offices, health, dental and medical clinics, managed buildings, retail, industrial
       buildings and warehouses across Toronto and the GTA.
     </p>
-    <ul class="ww-grid">
+    <ul class="ww-grid" data-reveal="stagger">
       {
         INDUSTRIES.map((ind) => (
           <li>
-            <a href={ind.href}>
+            <a class="card-hover" href={ind.href}>
               <strong>{ind.name}</strong>
               <span>{ind.summary}</span>
             </a>
@@ -22,7 +22,7 @@ import { INDUSTRIES } from '../../data/industries';
         ))
       }
     </ul>
-    <p class="ww-all"><a href="/industries/">All industries we serve&nbsp;→</a></p>
+    <p class="ww-all"><a href="/industries/">All industries we serve<span class="link-arrow">&nbsp;→</span></a></p>
   </div>
 </section>
 

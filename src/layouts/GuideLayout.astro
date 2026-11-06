@@ -83,7 +83,7 @@ const relatedSizes = '(min-width: 912px) 428px, (min-width: 561px) calc(50vw - 2
       </article>
       <aside class="guide-related" aria-labelledby="related-heading">
         <h2 id="related-heading">Related articles</h2>
-        <div class="guide-related-grid">{related.map(({ slug, label, image, set, size }) => (
+        <div class="guide-related-grid" data-reveal="stagger">{related.map(({ slug, label, image, set, size }) => (
           <a class="guide-related-card" href={`/${slug}/`}>
             {image && <picture>
               {set && <source type="image/avif" srcset={set.avif} sizes={relatedSizes} />}
@@ -147,10 +147,16 @@ const relatedSizes = '(min-width: 912px) 428px, (min-width: 561px) calc(50vw - 2
   .guide-related { margin-bottom: 48px; }
   .guide-related h2 { font-size: 1.5rem; }
   .guide-related-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  .guide-related-card { border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; }
-  .guide-related-card img { width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; }
-  .guide-related-card h3 { font-size: 1.125rem; line-height: 1.5; margin: 0; padding: 20px; }
-  .guide-related-card:hover h3 { color: var(--brand-dark); text-decoration: underline; }
+  /* The same lift as `.card-hover` in global.css, written out here: the build
+     test for these cards matches the anchor's exact class attribute. */
+  .guide-related-card { display: block; border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; transition: border-color var(--motion-fast) ease, box-shadow var(--motion-base) var(--ease-out), transform var(--motion-base) var(--ease-out); }
+  .guide-related-card:hover, .guide-related-card:focus-visible { border-color: var(--brand); }
+  @media (hover: hover) { .guide-related-card:hover { transform: translateY(var(--lift)); box-shadow: var(--shadow-lift); } }
+  .guide-related-card img { width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; transition: transform 600ms var(--ease-out); }
+  .guide-related-card h3 { font-size: 1.125rem; line-height: 1.5; margin: 0; padding: 20px; transition: color var(--motion-fast) ease; }
+  .guide-related-card:hover, .guide-related-card:focus-visible { text-decoration: none; }
+  .guide-related-card:hover h3, .guide-related-card:focus-visible h3 { color: var(--brand-dark); text-decoration: underline; }
+  @media (hover: hover) { .guide-related-card:hover img { transform: scale(1.04); } }
   @media (max-width: 560px) {
     .guide-body :global(.guide-factors), .guide-related-grid { grid-template-columns: 1fr; }
     .guide-toc { padding: 20px; }

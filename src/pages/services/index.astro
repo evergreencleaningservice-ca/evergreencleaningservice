@@ -57,7 +57,7 @@ const services = (await getCollection('services')).sort(
         {' '}<a href="/industries/">who we clean for</a>, the <a href="/locations/">areas we serve</a>, or
         {' '}<a href="/request-a-quote/">request a quote</a>.
       </p>
-      <div class="svc-grid">
+      <div class="svc-grid" data-reveal="stagger">
         {
           services.map((service, index) => (
             <ServiceCard service={service} loading={index < 3 ? 'eager' : 'lazy'} />

@@ -291,11 +291,33 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
     font-size: 0.9375rem;
     font-weight: 800;
     text-decoration: none;
+    transition:
+      background-color var(--motion-fast) ease,
+      transform var(--motion-base) var(--ease-out);
   }
 
-  .lp-header-quote:hover {
+  .lp-header-quote:hover,
+  .lp-header-quote:focus-visible {
     background: var(--brand-dark);
     color: #fff;
+  }
+
+  .lp-header-quote:active {
+    transform: translateY(1px);
+    transition-duration: 60ms;
+  }
+
+  .lp-call {
+    transition: color var(--motion-fast) ease;
+  }
+
+  .lp-call:hover .lp-call-number,
+  .lp-call:focus-visible .lp-call-number {
+    color: var(--brand-dark);
+  }
+
+  .lp-call-number {
+    transition: color var(--motion-fast) ease;
   }
 
   /* On a phone the sticky bar already carries both actions, and a second

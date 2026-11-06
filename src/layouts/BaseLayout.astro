@@ -55,6 +55,13 @@ import MobileActionBar from '../components/MobileActionBar.astro';
     {/* As high in the head as possible, per Google's install instructions —
         only the two metas the browser needs before anything else precede it. */}
     <GoogleTagManager />
+    {/* The scroll-in reveal (styles/global.css, lib/reveal.ts) hides a
+        block only under `html.js`, so a page without JavaScript — a
+        crawler's first fetch, a reader mode, a browser with scripts off —
+        renders every block visible. Set inline and this early so the class
+        is there before the first block is painted; as a bundled module it
+        would land after first paint, and the blocks would blink. */}
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <title>{title}</title>
     <meta name="description" content={description} />
     {/* A bare /favicon.ico request is made by every browser whether or not
@@ -146,5 +153,9 @@ import MobileActionBar from '../components/MobileActionBar.astro';
 
 
     <PhoneTracking />
+    <script>
+      import { wireReveal } from '../lib/reveal';
+      wireReveal(document);
+    </script>
   </body>
 </html>

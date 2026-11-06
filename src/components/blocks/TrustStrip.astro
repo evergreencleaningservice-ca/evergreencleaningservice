@@ -8,7 +8,7 @@ interface Props {
 const { tone = 'light' } = Astro.props;
 ---
 
-<ul class:list={['blk-trust', `is-${tone}`]}>
+<ul class:list={['blk-trust', `is-${tone}`]} data-reveal="stagger">
   {
     TRUST_FACTS.map((f) => (
       <li>

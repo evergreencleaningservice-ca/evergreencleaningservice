@@ -47,7 +47,7 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
       </div>
     </div>
 
-    <div class="ti" data-autoplay="6000">
+    <div class="ti" data-autoplay="6000" data-reveal>
       <div class="ti-track" role="group" aria-label="Google reviews">
         {
           cards.map((r) => (
@@ -199,6 +199,11 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
     background: #fff;
     color: var(--brand-dark);
     cursor: pointer;
+    transition:
+      border-color var(--motion-fast) ease,
+      color var(--motion-fast) ease,
+      background-color var(--motion-fast) ease,
+      transform var(--motion-base) var(--ease-out);
   }
 
   .ti-arrow svg {
@@ -210,6 +215,21 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
   .ti-arrow:focus-visible {
     border-color: var(--brand);
     color: var(--brand);
+  }
+
+  @media (hover: hover) {
+    .ti-arrow:hover:not(:disabled) {
+      transform: scale(1.08);
+    }
+  }
+
+  .ti-arrow:active:not(:disabled) {
+    transform: scale(0.96);
+    transition-duration: 60ms;
+  }
+
+  .ti-more {
+    transition: color var(--motion-fast) ease;
   }
 
   .ti-arrow:focus-visible {

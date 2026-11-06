@@ -23,6 +23,17 @@ html {
   box-sizing: border-box;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  /* The header is sticky and 72px tall (60 on a phone), so a smooth scroll
+     to an in-page anchor ("#janitorial-services…", the footer's back-to-top
+     link) used to stop with the heading hidden under it. The scroll now
+     lands with the target a line clear of the bar. */
+  scroll-padding-top: 88px;
+}
+
+@media (max-width: 1199px) {
+  html {
+    scroll-padding-top: 76px;
+  }
 }
 
 /* The root no longer steps down on smaller screens (2026-10-29). It went
@@ -67,6 +78,23 @@ html {
   --gutter: 15px;
   --radius: 2px;
   --shadow-header: 0 5px 10px rgba(50, 50, 50, 0.06);
+
+  /* ---------- motion tokens (6 Nov 2026) ----------
+     One scale for every transition on the site, so a hover on a card and a
+     hover on a button feel like the same product. Three speeds, by what is
+     moving: colour and underline feedback is quick, a card lifting is a
+     touch slower so the shadow reads, and a block arriving on scroll is
+     slower still so it reads as a fade rather than a snap. The two easings
+     are "arriving" (decelerate) and "leaving" (accelerate); nothing on the
+     site uses ease-in-out, which lingers at both ends. */
+  --motion-fast: 160ms;
+  --motion-base: 240ms;
+  --motion-reveal: 480ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --shadow-lift: 0 10px 24px rgba(50, 50, 50, 0.12);
+  --shadow-press: 0 2px 6px rgba(50, 50, 50, 0.1);
+  --lift: -3px;
 }
 
 *,
@@ -161,7 +189,7 @@ p {
 a {
   color: var(--brand);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color var(--motion-fast) ease;
 }
 
 a:hover,
@@ -403,7 +431,16 @@ img {
   border-radius: var(--radius);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.2s ease;
+  /* Named properties rather than `all`: `all` also animated the padding
+     and font size when a breakpoint changed, and ran the colour at the same
+     speed as the lift. Colour is the fast feedback; the lift and its shadow
+     take the base speed so the shadow has time to read. */
+  transition:
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    box-shadow var(--motion-base) var(--ease-out),
+    transform var(--motion-base) var(--ease-out);
   text-decoration: none;
   margin: 0.625rem 0 1.25rem;
 }
@@ -411,6 +448,24 @@ img {
 .btn:hover,
 .btn:focus-visible {
   text-decoration: none;
+}
+
+/* A button rises a pixel under a mouse and sits back down while pressed, so
+   a click has a beginning and an end. Pointer devices only: on a phone a
+   hover state sticks after the tap, and a button that stays "lifted" after
+   it was tapped reads as not having worked. The press itself is quicker
+   than the rise (exit faster than enter). */
+@media (hover: hover) {
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-press);
+  }
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+  transition-duration: 60ms;
 }
 
 .btn-primary {
@@ -492,8 +547,11 @@ img {
   color: var(--ink);
 }
 
-.breadcrumbs a:hover {
+.breadcrumbs a:hover,
+.breadcrumbs a:focus-visible {
   color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ---------- prose ---------- */
@@ -682,14 +740,157 @@ img {
   }
 }
 
-/* ---------- scroll-in animation: removed ----------
+/* ---------- scroll-in reveal (6 Nov 2026) ----------
 
    The original theme hid every `.wow` block (visibility: hidden) until a
-   scroll observer revealed it with a slide-in. Removed 2026-10-15: content
-   that is invisible until JavaScript runs is content a slow phone, a
-   full-page screenshot, a crawler snapshot or a fast anchor jump can miss,
-   and the observer plus the per-block animations added style and layout work
-   on every page. Everything now renders visible on first paint. */
+   scroll observer revealed it with a slide-in. That was removed on
+   2026-10-15 because content that is invisible until JavaScript runs is
+   content a slow phone, a crawler snapshot or a full-page screenshot can
+   miss. The reveal is back as a progressive enhancement that keeps every
+   one of those guarantees:
+
+     - Nothing is hidden by default. The resting rules below only apply
+       under `html.js`, a class a one-line inline script in BaseLayout adds
+       before the body parses. No JavaScript, no class, no hiding — the page
+       renders exactly as it did before.
+     - Nothing is hidden for anyone who asked for less motion: the whole
+       block sits inside `prefers-reduced-motion: no-preference`.
+     - It is opt-in, by `data-reveal` on a block; the observer in
+       src/scripts/reveal.ts adds `is-in` as the block approaches the
+       viewport, and reveals at once anything already above it (a restored
+       scroll position, an anchor jump) so nothing can be scrolled back to
+       and found missing.
+     - It is a fade with a 16px rise — a nudge, not a slide — on transform
+       and opacity only, so it never causes layout work.
+     - A stagger (`data-reveal="stagger"`) delays each child by 60ms, capped
+       at the eighth: beyond that the last items feel late. */
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Waiting: hidden by opacity alone. No transform here, so a waiting
+     block is never a containing block for a fixed descendant, and nothing
+     inside an overflow container is pushed out of it. */
+  html.js [data-reveal]:not(.is-in) {
+    opacity: 0;
+  }
+
+  /* Arrived: a keyframe animation rather than a transition, on purpose.
+     The service and post teasers and the linked cards carry their own
+     hover transitions, and a reveal written as `transition` on the same
+     element would replace them for good. An animation runs once and lets
+     go (`backwards`, not `both`), so when it ends the card's own hover
+     rules are exactly as they were. */
+  html.js [data-reveal].is-in {
+    animation: reveal-in var(--motion-reveal) var(--ease-out) backwards;
+  }
+
+  /* A staggered block does not move as a whole; its children do, one after
+     another, which is what makes a row of cards read as a set arriving. */
+  html.js [data-reveal='stagger']:not(.is-in) {
+    opacity: 1;
+  }
+
+  html.js [data-reveal='stagger']:not(.is-in) > * {
+    opacity: 0;
+  }
+
+  html.js [data-reveal='stagger'].is-in {
+    animation: none;
+  }
+
+  html.js [data-reveal='stagger'].is-in > * {
+    animation: reveal-in var(--motion-reveal) var(--ease-out) backwards;
+  }
+
+  html.js [data-reveal='stagger'].is-in > :nth-child(2) {
+    animation-delay: 60ms;
+  }
+  html.js [data-reveal='stagger'].is-in > :nth-child(3) {
+    animation-delay: 120ms;
+  }
+  html.js [data-reveal='stagger'].is-in > :nth-child(4) {
+    animation-delay: 180ms;
+  }
+  html.js [data-reveal='stagger'].is-in > :nth-child(5) {
+    animation-delay: 240ms;
+  }
+  html.js [data-reveal='stagger'].is-in > :nth-child(6) {
+    animation-delay: 300ms;
+  }
+  html.js [data-reveal='stagger'].is-in > :nth-child(7) {
+    animation-delay: 360ms;
+  }
+  html.js [data-reveal='stagger'].is-in > :nth-child(n + 8) {
+    animation-delay: 420ms;
+  }
+}
+
+/* Print is a snapshot: everything visible, nothing waiting on an observer. */
+@media print {
+  html.js [data-reveal],
+  html.js [data-reveal] > * {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
+/* ---------- card hover (6 Nov 2026) ----------
+   One treatment for every linked card on the site — the service and post
+   teasers, the homepage's service and industry tiles, the related-links
+   grids — so they all answer a pointer the same way: the border takes the
+   brand colour, the card lifts 3px on a soft shadow, and the arrow in its
+   title nudges right. Pointer devices only, for the reason given at `.btn`
+   above. The colour change stays for everyone, including keyboard focus,
+   because it is the feedback that does not depend on a mouse. */
+.card-hover {
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-base) var(--ease-out),
+    transform var(--motion-base) var(--ease-out);
+}
+
+.card-hover:hover,
+.card-hover:focus-visible,
+.card-hover:focus-within {
+  border-color: var(--brand);
+}
+
+@media (hover: hover) {
+  .card-hover:hover {
+    transform: translateY(var(--lift));
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* The arrow after a card title (`strong::after` in the tiles,
+   `.service-card-more::after` in the teasers) is an inline pseudo-element
+   whose content starts with a no-break space, which is what keeps it on the
+   same line as the last word. It stays inline — an inline-block would be a
+   line-break opportunity, and "Medical & Dental Clinics" put the arrow on
+   a line of its own — and moves by a relative offset, which an inline box
+   can take and which shifts nothing around it. */
+.card-arrow::after {
+  position: relative;
+  left: 0;
+  transition: left var(--motion-base) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .card-hover:hover .card-arrow::after,
+  .card-arrow:hover::after {
+    left: 4px;
+  }
+}
 
 
 /* ---------- shared content blocks (2026-10-15) ----------
@@ -705,6 +906,22 @@ img {
 .btn-ghost:focus-visible {
   background: var(--brand);
   color: #fff;
+}
+
+/* The arrow at the end of an "All industries →" line, wrapped so it can
+   move on its own: it steps right on hover, the same nudge as the arrow in
+   a card title. The no-break space inside keeps it attached to the last
+   word. */
+.link-arrow {
+  position: relative;
+  left: 0;
+  transition: left var(--motion-base) var(--ease-out);
+}
+
+@media (hover: hover) {
+  a:hover > .link-arrow {
+    left: 4px;
+  }
 }
 
 .blk-title {

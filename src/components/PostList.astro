@@ -160,6 +160,7 @@ const SIZES = '(min-width: 941px) 300px, (min-width: 576px) 510px, calc(100vw - 
 
   .list-article-thumb picture {
     display: block;
+    overflow: hidden;
   }
 
   .list-article-thumb img {
@@ -167,10 +168,22 @@ const SIZES = '(min-width: 941px) 300px, (min-width: 576px) 510px, calc(100vw - 
     width: 300px;
     height: 150px;
     object-fit: cover;
+    transition:
+      opacity var(--motion-fast) ease,
+      transform 600ms var(--ease-out);
   }
 
+  /* The thumbnail used to dim on hover and nothing else. It still dims,
+     and under a pointer it also eases a few percent larger inside its own
+     box, the same treatment as every other photo card on the site. */
   .list-article-thumb a:hover img {
-    opacity: 0.8;
+    opacity: 0.85;
+  }
+
+  @media (hover: hover) {
+    .list-article-thumb a:hover img {
+      transform: scale(1.04);
+    }
   }
 
   .list-article-content {

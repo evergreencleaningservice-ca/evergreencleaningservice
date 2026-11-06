@@ -62,18 +62,18 @@ const srcset = (image: string, ext: string) => CARD_WIDTHS.map((w) => `/images/$
       Regular janitorial contracts, periodic maintenance and one-off specialty work — scoped on site and
       scheduled around your business.
     </p>
-    <ul class="hs-primary">
+    <ul class="hs-primary" data-reveal="stagger">
       {
         PRIMARY.map((s) => (
           <li>
-            <a href={s.href}>
+            <a class="card-hover" href={s.href}>
               <picture>
                 <source type="image/avif" srcset={srcset(s.image, 'avif')} sizes={SIZES} />
                 <source type="image/webp" srcset={srcset(s.image, 'webp')} sizes={SIZES} />
                 <img src={`/images/${s.image}-480.jpg`} srcset={srcset(s.image, 'jpg')} sizes={SIZES} alt={s.alt} width="480" height="320" loading="lazy" decoding="async" />
               </picture>
               <span class="hs-body">
-                <strong>{s.title}</strong>
+                <strong class="card-arrow">{s.title}</strong>
                 <span>{s.text}</span>
               </span>
             </a>
@@ -81,12 +81,12 @@ const srcset = (image: string, ext: string) => CARD_WIDTHS.map((w) => `/images/$
         ))
       }
     </ul>
-    <ul class="hs-more">
+    <ul class="hs-more" data-reveal="stagger">
       {
         MORE.map((s) => (
           <li>
-            <a href={s.href}>
-              <strong>{s.title}</strong>
+            <a class="card-hover" href={s.href}>
+              <strong class="card-arrow">{s.title}</strong>
               <span>{s.text}</span>
             </a>
           </li>
@@ -160,12 +160,25 @@ const srcset = (image: string, ext: string) => CARD_WIDTHS.map((w) => `/images/$
     border-color: var(--brand);
     text-decoration: none;
   }
+  /* The photo eases in a few percent under a pointer, inside its own box so
+     it never spills over the card's border. Slower than the card's lift —
+     a picture that snaps larger reads as a glitch. */
+  .hs-primary picture {
+    display: block;
+    overflow: hidden;
+  }
   .hs-primary img {
     display: block;
     width: 100%;
     height: auto;
     aspect-ratio: 3 / 2;
     object-fit: cover;
+    transition: transform 600ms var(--ease-out);
+  }
+  @media (hover: hover) {
+    .hs-primary a:hover img {
+      transform: scale(1.04);
+    }
   }
   @media (max-width: 767px) {
     .hs-primary img {

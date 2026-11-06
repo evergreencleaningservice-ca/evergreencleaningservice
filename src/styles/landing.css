@@ -562,6 +562,27 @@
   font-size: 1rem;
   font-weight: 800;
   text-decoration: none;
+  transition:
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    box-shadow var(--motion-base) var(--ease-out),
+    transform var(--motion-base) var(--ease-out);
+}
+
+/* The same rise-and-press as the site's `.btn`: a pixel up under a mouse,
+   back down while pressed. Pointer devices only — on a phone the hover
+   state would stick after the tap. */
+@media (hover: hover) {
+  .lpx-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-press);
+  }
+}
+
+.lpx-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+  transition-duration: 60ms;
 }
 
 .lpx-btn-primary {
