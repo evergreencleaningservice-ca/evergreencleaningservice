@@ -1,0 +1,1658 @@
+[
+ {
+  "url": "https://www.evergreencleaningservice.ca/",
+  "viewport": "desktop",
+  "status": 200,
+  "loadMs": 3342,
+  "consoleErrors": [],
+  "failedRequests": [
+   "https://www.google.com/ccm/collect?rcb=11&frm=0&apvc=1&ae=g&auid=1031149032.1793975370&dt=Commercial%20Cleaning%20Company%20in%20Toronto%20Since%201989%20%7C%20Evergreen&en=page_view&dl=https%3A%2F%2F net::ERR_ABORTED",
+   "https://ad.doubleclick.net/ccm/s/collect?auid=1031149032.1793975370&gtm=45He6b41v9264463050za200zd9264463050xeaxf1&fmt=8 net::ERR_ABORTED",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C0JHHPLFPJ&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xf1&_p=1793975369142&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=1441841735.1793975370&frm=0&ng net::ERR_ABORTED",
+   "https://www.google.com/rmkt/collect/18472921801/?random=1793975370188&cv=11&fst=1793975370188&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xecxf1& net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=12&frm=0&apvc=0&auid=1031149032.1793975370&dt=Commercial%20Cleaning%20Company%20in%20Toronto%20Since%201989%20%7C%20Evergreen&tid=AW-18472921801&en=page_view&dl= net::ERR_ABORTED"
+  ],
+  "metrics": {
+   "ttfb": 588,
+   "domContentLoaded": 2131.5,
+   "load": 2173.7999999999884,
+   "transfer": 31281,
+   "encodedBody": 30981,
+   "resources": 31,
+   "byType": {
+    "link": {
+     "n": 1,
+     "bytes": 48620
+    },
+    "script": {
+     "n": 14,
+     "bytes": 13054
+    },
+    "img": {
+     "n": 8,
+     "bytes": 342
+    },
+    "css": {
+     "n": 1,
+     "bytes": 50516
+    },
+    "fetch": {
+     "n": 5,
+     "bytes": 0
+    },
+    "xmlhttprequest": {
+     "n": 2,
+     "bytes": 687
+    }
+   },
+   "lcp": null,
+   "cls": 0,
+   "fold": [
+    {
+     "tag": "A",
+     "text": "Skip to content",
+     "top": -1
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 6
+    },
+    {
+     "tag": "IMG",
+     "text": "Evergreen Office Cleaning logo",
+     "top": 6
+    },
+    {
+     "tag": "A",
+     "text": "(416) 803-4880",
+     "top": 14
+    },
+    {
+     "tag": "A",
+     "text": "GET A QUOTE",
+     "top": 14
+    },
+    {
+     "tag": "A",
+     "text": "SERVICES",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "INDUSTRIES",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "SERVICE AREAS",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "ABOUT",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "BLOG",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "CONTACT",
+     "top": 0
+    },
+    {
+     "tag": "IMG",
+     "text": "Clean, empty open-plan office with white desks and plants against a dark wall",
+     "top": 72
+    },
+    {
+     "tag": "IMG",
+     "text": "",
+     "top": 72
+    },
+    {
+     "tag": "IMG",
+     "text": "",
+     "top": 72
+    },
+    {
+     "tag": "P",
+     "text": "COMMERCIAL CLEANING SINCE 1989",
+     "top": 146
+    },
+    {
+     "tag": "H1",
+     "text": "Office & Commercial Cleaning in Toronto and the GTA",
+     "top": 178
+    },
+    {
+     "tag": "P",
+     "text": "Recurring janitorial cleaning, building maintenance and specialty cleaning for o",
+     "top": 304
+    },
+    {
+     "tag": "P",
+     "text": "GET A FREE QUOTE\nCALL (416) 803-4880",
+     "top": 420
+    },
+    {
+     "tag": "A",
+     "text": "GET A FREE QUOTE",
+     "top": 420
+    },
+    {
+     "tag": "A",
+     "text": "CALL (416) 803-4880",
+     "top": 420
+    },
+    {
+     "tag": "H2",
+     "text": "What we clean",
+     "top": 656
+    },
+    {
+     "tag": "P",
+     "text": "Regular janitorial contracts, periodic maintenance and one-off specialty work — ",
+     "top": 705
+    },
+    {
+     "tag": "BUTTON",
+     "text": "Click to open ->\nOpen the video message",
+     "top": 668
+    },
+    {
+     "tag": "BUTTON",
+     "text": "No thanks, hide this",
+     "top": 661
+    }
+   ],
+   "horizontalOverflow": false,
+   "docWidth": 1366,
+   "innerWidth": 1366,
+   "fontsLoaded": [
+    "Open Sans 400 700 loaded",
+    "Open Sans 400 800 loaded"
+   ],
+   "smallTapTargets": 8,
+   "title": "Commercial Cleaning Company in Toronto Since 1989 | Evergreen",
+   "h1": [
+    "Office & Commercial Cleaning in Toronto and the GTA"
+   ]
+  }
+ },
+ {
+  "url": "https://www.evergreencleaningservice.ca/",
+  "viewport": "mobile",
+  "status": 200,
+  "loadMs": 2834,
+  "consoleErrors": [],
+  "failedRequests": [
+   "https://ad.doubleclick.net/ccm/s/collect?auid=762374871.1793975375&gtm=45He6b50h2v9264463050za200zd9264463050xeaxf1&fmt=8 net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=17&frm=0&apvc=1&ae=g&auid=762374871.1793975375&dt=Commercial%20Cleaning%20Company%20in%20Toronto%20Since%201989%20%7C%20Evergreen&en=page_view&dl=https%3A%2F%2Fw net::ERR_ABORTED",
+   "https://www.google.com/rmkt/collect/18472921801/?random=1793975375407&cv=11&fst=1793975375407&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6b50h2v9265689990za20ozb9264463050zd9264463050xecxf net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=3&frm=0&apvc=0&auid=762374871.1793975375&dt=Commercial%20Cleaning%20Company%20in%20Toronto%20Since%201989%20%7C%20Evergreen&tid=AW-18472921801&en=page_view&dl=ht net::ERR_ABORTED",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C0JHHPLFPJ&gtm=45be6b50h2v9265689990za20ozb9264463050zd9264463050xf1&_p=1793975374487&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=1734277115.1793975375&frm=0& net::ERR_ABORTED"
+  ],
+  "metrics": {
+   "ttfb": 282.20000000001164,
+   "domContentLoaded": 1806.7999999999884,
+   "load": 1807.5,
+   "transfer": 31275,
+   "encodedBody": 30975,
+   "resources": 32,
+   "byType": {
+    "link": {
+     "n": 1,
+     "bytes": 48620
+    },
+    "script": {
+     "n": 14,
+     "bytes": 13063
+    },
+    "img": {
+     "n": 8,
+     "bytes": 342
+    },
+    "css": {
+     "n": 1,
+     "bytes": 50516
+    },
+    "fetch": {
+     "n": 5,
+     "bytes": 0
+    },
+    "xmlhttprequest": {
+     "n": 2,
+     "bytes": 687
+    },
+    "video": {
+     "n": 1,
+     "bytes": 18051
+    }
+   },
+   "lcp": null,
+   "cls": 0,
+   "fold": [
+    {
+     "tag": "A",
+     "text": "Skip to content",
+     "top": -1
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 11
+    },
+    {
+     "tag": "IMG",
+     "text": "Evergreen Office Cleaning logo",
+     "top": 11
+    },
+    {
+     "tag": "A",
+     "text": "Call",
+     "top": 8
+    },
+    {
+     "tag": "A",
+     "text": "GET A QUOTE",
+     "top": 8
+    },
+    {
+     "tag": "BUTTON",
+     "text": "Menu",
+     "top": 8
+    },
+    {
+     "tag": "IMG",
+     "text": "Clean, empty open-plan office with white desks and plants against a dark wall",
+     "top": 60
+    },
+    {
+     "tag": "IMG",
+     "text": "",
+     "top": 60
+    },
+    {
+     "tag": "IMG",
+     "text": "",
+     "top": 60
+    },
+    {
+     "tag": "P",
+     "text": "COMMERCIAL CLEANING SINCE 1989",
+     "top": 103
+    },
+    {
+     "tag": "H1",
+     "text": "Office & Commercial Cleaning in Toronto and the GTA",
+     "top": 135
+    },
+    {
+     "tag": "P",
+     "text": "Recurring janitorial cleaning, building maintenance and specialty cleaning for o",
+     "top": 261
+    },
+    {
+     "tag": "P",
+     "text": "GET A FREE QUOTE\nCALL (416) 803-4880",
+     "top": 394
+    },
+    {
+     "tag": "A",
+     "text": "GET A FREE QUOTE",
+     "top": 394
+    },
+    {
+     "tag": "A",
+     "text": "CALL (416) 803-4880",
+     "top": 453
+    },
+    {
+     "tag": "H2",
+     "text": "What we clean",
+     "top": 729
+    },
+    {
+     "tag": "P",
+     "text": "Regular janitorial contracts, periodic maintenance and one-off specialty work — ",
+     "top": 773
+    },
+    {
+     "tag": "BUTTON",
+     "text": "Open the video message",
+     "top": 723
+    },
+    {
+     "tag": "BUTTON",
+     "text": "No thanks, hide this",
+     "top": 716
+    },
+    {
+     "tag": "A",
+     "text": "Call (416) 803-4880",
+     "top": 787
+    },
+    {
+     "tag": "A",
+     "text": "Free quote",
+     "top": 787
+    }
+   ],
+   "horizontalOverflow": false,
+   "docWidth": 412,
+   "innerWidth": 412,
+   "fontsLoaded": [
+    "Open Sans 400 700 loaded",
+    "Open Sans 400 800 loaded"
+   ],
+   "smallTapTargets": 8,
+   "title": "Commercial Cleaning Company in Toronto Since 1989 | Evergreen",
+   "h1": [
+    "Office & Commercial Cleaning in Toronto and the GTA"
+   ]
+  }
+ },
+ {
+  "url": "https://www.evergreencleaningservice.ca/services/office-cleaning/",
+  "viewport": "desktop",
+  "status": 200,
+  "loadMs": 2336,
+  "consoleErrors": [],
+  "failedRequests": [
+   "https://www.google.com/ccm/collect?rcb=1&frm=0&apvc=1&ae=g&auid=1398596464.1793975383&dt=Office%20Cleaning%20Services%20in%20Toronto%20%26%20the%20GTA%20%7C%20Evergreen&en=page_view&dl=https%3A%2F%2Fw net::ERR_ABORTED",
+   "https://ad.doubleclick.net/ccm/s/collect?_gsid=8L6GSGwwGB4GGsOUVAFB8EluIqe35Sfgzg&auid=1398596464.1793975383&gtm=45He6b41h1v9264463050za200zd9264463050xeaxf1&fmt=8 net::ERR_ABORTED",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C0JHHPLFPJ&gtm=45be6b41h1v9265689990za20ozb9264463050zd9264463050xf1&_p=1793975382479&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=859771586.1793975383&frm=0&n net::ERR_ABORTED",
+   "https://www.google.com/rmkt/collect/18472921801/?random=1793975383459&cv=11&fst=1793975383459&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6b41h1v9265689990za20ozb9264463050zd9264463050xecxf net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=13&frm=0&apvc=0&auid=1398596464.1793975383&dt=Office%20Cleaning%20Services%20in%20Toronto%20%26%20the%20GTA%20%7C%20Evergreen&tid=AW-18472921801&en=page_view&dl= net::ERR_ABORTED"
+  ],
+  "metrics": {
+   "ttfb": 277.29999999998836,
+   "domContentLoaded": 1234.2999999999884,
+   "load": 1643.0999999999767,
+   "transfer": 27159,
+   "encodedBody": 26859,
+   "resources": 26,
+   "byType": {
+    "link": {
+     "n": 1,
+     "bytes": 48620
+    },
+    "script": {
+     "n": 14,
+     "bytes": 13078
+    },
+    "img": {
+     "n": 4,
+     "bytes": 342
+    },
+    "fetch": {
+     "n": 5,
+     "bytes": 0
+    },
+    "xmlhttprequest": {
+     "n": 2,
+     "bytes": 687
+    }
+   },
+   "lcp": null,
+   "cls": 0,
+   "fold": [
+    {
+     "tag": "A",
+     "text": "Skip to content",
+     "top": -1
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 6
+    },
+    {
+     "tag": "IMG",
+     "text": "Evergreen Office Cleaning logo",
+     "top": 6
+    },
+    {
+     "tag": "A",
+     "text": "(416) 803-4880",
+     "top": 14
+    },
+    {
+     "tag": "A",
+     "text": "GET A QUOTE",
+     "top": 14
+    },
+    {
+     "tag": "A",
+     "text": "SERVICES",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "INDUSTRIES",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "SERVICE AREAS",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "ABOUT",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "BLOG",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "CONTACT",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 110
+    },
+    {
+     "tag": "A",
+     "text": "Services",
+     "top": 110
+    },
+    {
+     "tag": "H1",
+     "text": "Office Cleaning Services in Toronto and the GTA",
+     "top": 140
+    },
+    {
+     "tag": "P",
+     "text": "Recurring janitorial cleaning for offices of every size, done after hours by a t",
+     "top": 244
+    },
+    {
+     "tag": "P",
+     "text": "GET A FREE QUOTE\nCALL (416) 803-4880",
+     "top": 323
+    },
+    {
+     "tag": "A",
+     "text": "GET A FREE QUOTE",
+     "top": 323
+    },
+    {
+     "tag": "A",
+     "text": "CALL (416) 803-4880",
+     "top": 323
+    },
+    {
+     "tag": "H2",
+     "text": "Who it is for",
+     "top": 600
+    },
+    {
+     "tag": "FORM",
+     "text": "Get a free quote\n\nWe reply within 2 hours, then arrange a free walkthrough when ",
+     "top": 624
+    },
+    {
+     "tag": "H2",
+     "text": "Get a free quote",
+     "top": 624
+    },
+    {
+     "tag": "P",
+     "text": "We reply within 2 hours, then arrange a free walkthrough when it suits you. No o",
+     "top": 660
+    }
+   ],
+   "horizontalOverflow": false,
+   "docWidth": 1366,
+   "innerWidth": 1366,
+   "fontsLoaded": [
+    "Open Sans 400 700 unloaded",
+    "Open Sans 400 800 loaded"
+   ],
+   "smallTapTargets": 7,
+   "title": "Office Cleaning Services in Toronto & the GTA | Evergreen",
+   "h1": [
+    "Office Cleaning Services in Toronto and the GTA"
+   ]
+  }
+ },
+ {
+  "url": "https://www.evergreencleaningservice.ca/services/office-cleaning/",
+  "viewport": "mobile",
+  "status": 200,
+  "loadMs": 2475,
+  "consoleErrors": [],
+  "failedRequests": [
+   "https://www.google.com/ccm/collect?rcb=8&frm=0&apvc=1&ae=g&auid=21921370.1793975387&dt=Office%20Cleaning%20Services%20in%20Toronto%20%26%20the%20GTA%20%7C%20Evergreen&en=page_view&dl=https%3A%2F%2Fwww net::ERR_ABORTED",
+   "https://www.google.com/rmkt/collect/18472921801/?random=1793975387059&cv=11&fst=1793975387059&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xecxf1& net::ERR_ABORTED",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C0JHHPLFPJ&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xf1&_p=1793975386153&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=599325903.1793975387&frm=0&ngs net::ERR_ABORTED",
+   "https://ad.doubleclick.net/ccm/s/collect?auid=21921370.1793975387&gtm=45He6b41v9264463050za200zd9264463050xeaxf1&fmt=8 net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=5&frm=0&apvc=0&auid=21921370.1793975387&dt=Office%20Cleaning%20Services%20in%20Toronto%20%26%20the%20GTA%20%7C%20Evergreen&tid=AW-18472921801&en=page_view&dl=htt net::ERR_ABORTED"
+  ],
+  "metrics": {
+   "ttfb": 382.5,
+   "domContentLoaded": 1383.6999999999534,
+   "load": 1704.7999999999884,
+   "transfer": 27163,
+   "encodedBody": 26863,
+   "resources": 27,
+   "byType": {
+    "link": {
+     "n": 1,
+     "bytes": 48620
+    },
+    "script": {
+     "n": 14,
+     "bytes": 13058
+    },
+    "img": {
+     "n": 4,
+     "bytes": 342
+    },
+    "fetch": {
+     "n": 5,
+     "bytes": 0
+    },
+    "xmlhttprequest": {
+     "n": 2,
+     "bytes": 687
+    },
+    "video": {
+     "n": 1,
+     "bytes": 18051
+    }
+   },
+   "lcp": null,
+   "cls": 0,
+   "fold": [
+    {
+     "tag": "A",
+     "text": "Skip to content",
+     "top": -1
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 11
+    },
+    {
+     "tag": "IMG",
+     "text": "Evergreen Office Cleaning logo",
+     "top": 11
+    },
+    {
+     "tag": "A",
+     "text": "Call",
+     "top": 8
+    },
+    {
+     "tag": "A",
+     "text": "GET A QUOTE",
+     "top": 8
+    },
+    {
+     "tag": "BUTTON",
+     "text": "Menu",
+     "top": 8
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 96
+    },
+    {
+     "tag": "A",
+     "text": "Services",
+     "top": 96
+    },
+    {
+     "tag": "H1",
+     "text": "Office Cleaning Services in Toronto and the GTA",
+     "top": 136
+    },
+    {
+     "tag": "P",
+     "text": "Recurring janitorial cleaning for offices of every size, done after hours by a t",
+     "top": 219
+    },
+    {
+     "tag": "P",
+     "text": "GET A FREE QUOTE\nCALL (416) 803-4880",
+     "top": 390
+    },
+    {
+     "tag": "A",
+     "text": "GET A FREE QUOTE",
+     "top": 390
+    },
+    {
+     "tag": "A",
+     "text": "CALL (416) 803-4880",
+     "top": 447
+    },
+    {
+     "tag": "BUTTON",
+     "text": "Open the video message",
+     "top": 723
+    },
+    {
+     "tag": "BUTTON",
+     "text": "No thanks, hide this",
+     "top": 716
+    },
+    {
+     "tag": "A",
+     "text": "Call (416) 803-4880",
+     "top": 787
+    },
+    {
+     "tag": "A",
+     "text": "Free quote",
+     "top": 787
+    }
+   ],
+   "horizontalOverflow": false,
+   "docWidth": 412,
+   "innerWidth": 412,
+   "fontsLoaded": [
+    "Open Sans 400 700 unloaded",
+    "Open Sans 400 800 loaded"
+   ],
+   "smallTapTargets": 4,
+   "title": "Office Cleaning Services in Toronto & the GTA | Evergreen",
+   "h1": [
+    "Office Cleaning Services in Toronto and the GTA"
+   ]
+  }
+ },
+ {
+  "url": "https://www.evergreencleaningservice.ca/locations/mississauga/",
+  "viewport": "desktop",
+  "status": 200,
+  "loadMs": 2210,
+  "consoleErrors": [],
+  "failedRequests": [
+   "https://www.google.com/ccm/collect?rcb=19&frm=0&apvc=1&ae=g&auid=646245861.1793975392&dt=Office%20%26%20Commercial%20Cleaning%20in%20Mississauga%20%7C%20Evergreen&en=page_view&dl=https%3A%2F%2Fwww.eve net::ERR_ABORTED",
+   "https://ad.doubleclick.net/ccm/s/collect?auid=646245861.1793975392&gtm=45He6b41v9264463050za200zd9264463050xeaxf1&fmt=8 net::ERR_ABORTED",
+   "https://www.google.com/rmkt/collect/18472921801/?random=1793975392305&cv=11&fst=1793975392305&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xecxf1& net::ERR_ABORTED",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C0JHHPLFPJ&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xf1&_p=1793975391623&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=1181359469.1793975392&frm=0&ng net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=15&frm=0&apvc=0&auid=646245861.1793975392&dt=Office%20%26%20Commercial%20Cleaning%20in%20Mississauga%20%7C%20Evergreen&tid=AW-18472921801&en=page_view&dl=https%3 net::ERR_ABORTED"
+  ],
+  "metrics": {
+   "ttfb": 215.70000000001164,
+   "domContentLoaded": 1447.5999999999767,
+   "load": 1448,
+   "transfer": 25795,
+   "encodedBody": 25495,
+   "resources": 25,
+   "byType": {
+    "link": {
+     "n": 1,
+     "bytes": 48620
+    },
+    "script": {
+     "n": 14,
+     "bytes": 13057
+    },
+    "img": {
+     "n": 3,
+     "bytes": 342
+    },
+    "fetch": {
+     "n": 5,
+     "bytes": 0
+    },
+    "xmlhttprequest": {
+     "n": 2,
+     "bytes": 687
+    }
+   },
+   "lcp": null,
+   "cls": 0,
+   "fold": [
+    {
+     "tag": "A",
+     "text": "Skip to content",
+     "top": -1
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 6
+    },
+    {
+     "tag": "IMG",
+     "text": "Evergreen Office Cleaning logo",
+     "top": 6
+    },
+    {
+     "tag": "A",
+     "text": "(416) 803-4880",
+     "top": 14
+    },
+    {
+     "tag": "A",
+     "text": "GET A QUOTE",
+     "top": 14
+    },
+    {
+     "tag": "A",
+     "text": "SERVICES",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "INDUSTRIES",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "SERVICE AREAS",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "ABOUT",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "BLOG",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "CONTACT",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 115
+    },
+    {
+     "tag": "A",
+     "text": "Service Areas",
+     "top": 115
+    },
+    {
+     "tag": "H1",
+     "text": "Office & Commercial Cleaning in Mississauga",
+     "top": 143
+    },
+    {
+     "tag": "P",
+     "text": "GET A FREE QUOTE\nCALL (416) 803-4880",
+     "top": 247
+    },
+    {
+     "tag": "A",
+     "text": "GET A FREE QUOTE",
+     "top": 247
+    },
+    {
+     "tag": "A",
+     "text": "CALL (416) 803-4880",
+     "top": 247
+    },
+    {
+     "tag": "IMG",
+     "text": "Worker on a lifting platform cleaning a ceiling",
+     "top": 402
+    },
+    {
+     "tag": "FORM",
+     "text": "Get a quote in Mississauga\n\nWe reply within 2 hours, then arrange a free walkthr",
+     "top": 426
+    },
+    {
+     "tag": "H2",
+     "text": "Get a quote in Mississauga",
+     "top": 426
+    },
+    {
+     "tag": "P",
+     "text": "We reply within 2 hours, then arrange a free walkthrough when it suits you. No o",
+     "top": 462
+    }
+   ],
+   "horizontalOverflow": false,
+   "docWidth": 1366,
+   "innerWidth": 1366,
+   "fontsLoaded": [
+    "Open Sans 400 700 unloaded",
+    "Open Sans 400 800 loaded"
+   ],
+   "smallTapTargets": 11,
+   "title": "Office & Commercial Cleaning in Mississauga | Evergreen",
+   "h1": [
+    "Office & Commercial Cleaning in Mississauga"
+   ]
+  }
+ },
+ {
+  "url": "https://www.evergreencleaningservice.ca/locations/mississauga/",
+  "viewport": "mobile",
+  "status": 200,
+  "loadMs": 2014,
+  "consoleErrors": [],
+  "failedRequests": [
+   "https://www.google.com/ccm/collect?rcb=0&frm=0&apvc=1&ae=g&auid=665348389.1793975395&dt=Office%20%26%20Commercial%20Cleaning%20in%20Mississauga%20%7C%20Evergreen&en=page_view&dl=https%3A%2F%2Fwww.ever net::ERR_ABORTED",
+   "https://ad.doubleclick.net/ccm/s/collect?auid=665348389.1793975395&gtm=45He6b41v9264463050za200zd9264463050xeaxf1&fmt=8 net::ERR_ABORTED",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C0JHHPLFPJ&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xf1&_p=1793975395143&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=1140939722.1793975396&frm=0&ng net::ERR_ABORTED",
+   "https://www.google.com/rmkt/collect/18472921801/?random=1793975395824&cv=11&fst=1793975395824&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xecxf1& net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=5&frm=0&apvc=0&auid=665348389.1793975395&dt=Office%20%26%20Commercial%20Cleaning%20in%20Mississauga%20%7C%20Evergreen&tid=AW-18472921801&en=page_view&dl=https%3A net::ERR_ABORTED"
+  ],
+  "metrics": {
+   "ttfb": 171.70000000001164,
+   "domContentLoaded": 1181.9000000000233,
+   "load": 1273,
+   "transfer": 25795,
+   "encodedBody": 25495,
+   "resources": 25,
+   "byType": {
+    "link": {
+     "n": 1,
+     "bytes": 48620
+    },
+    "script": {
+     "n": 14,
+     "bytes": 13067
+    },
+    "img": {
+     "n": 3,
+     "bytes": 342
+    },
+    "fetch": {
+     "n": 5,
+     "bytes": 0
+    },
+    "xmlhttprequest": {
+     "n": 2,
+     "bytes": 687
+    }
+   },
+   "lcp": null,
+   "cls": 0,
+   "fold": [
+    {
+     "tag": "A",
+     "text": "Skip to content",
+     "top": -1
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 11
+    },
+    {
+     "tag": "IMG",
+     "text": "Evergreen Office Cleaning logo",
+     "top": 11
+    },
+    {
+     "tag": "A",
+     "text": "Call",
+     "top": 8
+    },
+    {
+     "tag": "A",
+     "text": "GET A QUOTE",
+     "top": 8
+    },
+    {
+     "tag": "BUTTON",
+     "text": "Menu",
+     "top": 8
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 72
+    },
+    {
+     "tag": "A",
+     "text": "Service Areas",
+     "top": 72
+    },
+    {
+     "tag": "H1",
+     "text": "Office & Commercial Cleaning in Mississauga",
+     "top": 110
+    },
+    {
+     "tag": "P",
+     "text": "GET A FREE QUOTE\nCALL (416) 803-4880",
+     "top": 191
+    },
+    {
+     "tag": "A",
+     "text": "GET A FREE QUOTE",
+     "top": 191
+    },
+    {
+     "tag": "A",
+     "text": "CALL (416) 803-4880",
+     "top": 191
+    },
+    {
+     "tag": "IMG",
+     "text": "Worker on a lifting platform cleaning a ceiling",
+     "top": 317
+    },
+    {
+     "tag": "P",
+     "text": "Reliable, professional facility maintenance for Mississauga businesses",
+     "top": 600
+    },
+    {
+     "tag": "P",
+     "text": "From corporate headquarters along the Hurontario corridor and the Airport Corpor",
+     "top": 699
+    },
+    {
+     "tag": "BUTTON",
+     "text": "Open the video message",
+     "top": 723
+    },
+    {
+     "tag": "BUTTON",
+     "text": "No thanks, hide this",
+     "top": 716
+    },
+    {
+     "tag": "A",
+     "text": "Call (416) 803-4880",
+     "top": 787
+    },
+    {
+     "tag": "A",
+     "text": "Free quote",
+     "top": 787
+    }
+   ],
+   "horizontalOverflow": false,
+   "docWidth": 412,
+   "innerWidth": 412,
+   "fontsLoaded": [
+    "Open Sans 400 700 unloaded",
+    "Open Sans 400 800 loaded"
+   ],
+   "smallTapTargets": 8,
+   "title": "Office & Commercial Cleaning in Mississauga | Evergreen",
+   "h1": [
+    "Office & Commercial Cleaning in Mississauga"
+   ]
+  }
+ },
+ {
+  "url": "https://www.evergreencleaningservice.ca/insights/",
+  "viewport": "desktop",
+  "status": 200,
+  "loadMs": 3476,
+  "consoleErrors": [],
+  "failedRequests": [
+   "https://www.google.com/ccm/collect?rcb=15&frm=0&apvc=1&ae=g&auid=708419657.1793975401&dt=Commercial%20Cleaning%20Insights%20-%20Evergreen%20Office%20Cleaning&en=page_view&dl=https%3A%2F%2Fwww.evergree net::ERR_ABORTED",
+   "https://ad.doubleclick.net/ccm/s/collect?auid=708419657.1793975401&gtm=45He6b41v9264463050za200zd9264463050xeaxf1&fmt=8 net::ERR_ABORTED",
+   "https://www.google.com/rmkt/collect/18472921801/?random=1793975400897&cv=11&fst=1793975400897&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xecxf1& net::ERR_ABORTED",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C0JHHPLFPJ&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xf1&_p=1793975400068&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=1851782303.1793975401&frm=0&ng net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=9&frm=0&apvc=0&auid=708419657.1793975401&dt=Commercial%20Cleaning%20Insights%20-%20Evergreen%20Office%20Cleaning&tid=AW-18472921801&en=page_view&dl=https%3A%2F%2 net::ERR_ABORTED"
+  ],
+  "metrics": {
+   "ttfb": 368.69999999995343,
+   "domContentLoaded": 1747.6999999999534,
+   "load": 1748,
+   "transfer": 19138,
+   "encodedBody": 18838,
+   "resources": 31,
+   "byType": {
+    "link": {
+     "n": 1,
+     "bytes": 48620
+    },
+    "script": {
+     "n": 11,
+     "bytes": 8630
+    },
+    "img": {
+     "n": 12,
+     "bytes": 342
+    },
+    "fetch": {
+     "n": 5,
+     "bytes": 0
+    },
+    "xmlhttprequest": {
+     "n": 2,
+     "bytes": 687
+    }
+   },
+   "lcp": null,
+   "cls": 0,
+   "fold": [
+    {
+     "tag": "A",
+     "text": "Skip to content",
+     "top": -1
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 6
+    },
+    {
+     "tag": "IMG",
+     "text": "Evergreen Office Cleaning logo",
+     "top": 6
+    },
+    {
+     "tag": "A",
+     "text": "(416) 803-4880",
+     "top": 14
+    },
+    {
+     "tag": "A",
+     "text": "GET A QUOTE",
+     "top": 14
+    },
+    {
+     "tag": "A",
+     "text": "SERVICES",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "INDUSTRIES",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "SERVICE AREAS",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "ABOUT",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "BLOG",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "CONTACT",
+     "top": 0
+    },
+    {
+     "tag": "H1",
+     "text": "Commercial Cleaning Insights",
+     "top": 113
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 166
+    },
+    {
+     "tag": "A",
+     "text": "",
+     "top": 297
+    },
+    {
+     "tag": "IMG",
+     "text": "Empty commercial office with organized desks, computer monitors and black task c",
+     "top": 297
+    },
+    {
+     "tag": "A",
+     "text": "BLOG",
+     "top": 297
+    },
+    {
+     "tag": "H2",
+     "text": "How Often Should an Office Be Cleaned Professionally?",
+     "top": 336
+    },
+    {
+     "tag": "A",
+     "text": "How Often Should an Office Be Cleaned Professionally?",
+     "top": 334
+    },
+    {
+     "tag": "P",
+     "text": "How Often Should an Office Be Cleaned? An office used every weekday should gener",
+     "top": 397
+    },
+    {
+     "tag": "A",
+     "text": "",
+     "top": 550
+    },
+    {
+     "tag": "IMG",
+     "text": "Empty modern office interior with glass partitions, seating and natural light.",
+     "top": 550
+    },
+    {
+     "tag": "A",
+     "text": "BLOG",
+     "top": 550
+    },
+    {
+     "tag": "H2",
+     "text": "How Much Does Office Cleaning Cost in Toronto?",
+     "top": 590
+    },
+    {
+     "tag": "A",
+     "text": "How Much Does Office Cleaning Cost in Toronto?",
+     "top": 588
+    },
+    {
+     "tag": "P",
+     "text": "How Much Does Office Cleaning Cost in Toronto? There is no single price that fit",
+     "top": 650
+    },
+    {
+     "tag": "FORM",
+     "text": "Search for:",
+     "top": 297
+    },
+    {
+     "tag": "H2",
+     "text": "Recent Posts",
+     "top": 380
+    },
+    {
+     "tag": "A",
+     "text": "How Often Should an Office Be Cleaned Professionally?",
+     "top": 423
+    },
+    {
+     "tag": "A",
+     "text": "How Much Does Office Cleaning Cost in Toronto?",
+     "top": 485
+    },
+    {
+     "tag": "A",
+     "text": "Seasonal Office Cleaning Checklist for Toronto",
+     "top": 547
+    },
+    {
+     "tag": "A",
+     "text": "Ask the Office Cleaners: Cleaning Break Rooms",
+     "top": 609
+    },
+    {
+     "tag": "A",
+     "text": "Office Layout Tips to Make Cleaning Easier And Faster",
+     "top": 671
+    },
+    {
+     "tag": "H2",
+     "text": "Our Services",
+     "top": 763
+    }
+   ],
+   "horizontalOverflow": false,
+   "docWidth": 1366,
+   "innerWidth": 1366,
+   "fontsLoaded": [
+    "Open Sans 400 700 unloaded",
+    "Open Sans 400 800 loaded"
+   ],
+   "smallTapTargets": 12,
+   "title": "Commercial Cleaning Insights - Evergreen Office Cleaning",
+   "h1": [
+    "Commercial Cleaning Insights"
+   ]
+  }
+ },
+ {
+  "url": "https://www.evergreencleaningservice.ca/insights/",
+  "viewport": "mobile",
+  "status": 200,
+  "loadMs": 2288,
+  "consoleErrors": [],
+  "failedRequests": [
+   "https://www.google.com/ccm/collect?rcb=10&frm=0&apvc=1&ae=g&auid=1764705016.1793975405&dt=Commercial%20Cleaning%20Insights%20-%20Evergreen%20Office%20Cleaning&en=page_view&dl=https%3A%2F%2Fwww.evergre net::ERR_ABORTED",
+   "https://ad.doubleclick.net/ccm/s/collect?auid=1764705016.1793975405&gtm=45He6b41h1v9264463050za200zd9264463050xeaxf1&fmt=8 net::ERR_ABORTED",
+   "https://www.google.com/rmkt/collect/18472921801/?random=1793975405529&cv=11&fst=1793975405529&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6b41h1v9265689990za20ozb9264463050zd9264463050xecxf net::ERR_ABORTED",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C0JHHPLFPJ&gtm=45be6b41h1v9265689990za20ozb9264463050zd9264463050xf1&_p=1793975404795&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=1312872341.1793975406&frm=0& net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=2&frm=0&apvc=0&auid=1764705016.1793975405&dt=Commercial%20Cleaning%20Insights%20-%20Evergreen%20Office%20Cleaning&tid=AW-18472921801&en=page_view&dl=https%3A%2F% net::ERR_ABORTED"
+  ],
+  "metrics": {
+   "ttfb": 434.0999999999767,
+   "domContentLoaded": 1321.5,
+   "load": 1552.1999999999534,
+   "transfer": 19067,
+   "encodedBody": 18767,
+   "resources": 29,
+   "byType": {
+    "link": {
+     "n": 1,
+     "bytes": 48620
+    },
+    "script": {
+     "n": 11,
+     "bytes": 8638
+    },
+    "img": {
+     "n": 10,
+     "bytes": 342
+    },
+    "fetch": {
+     "n": 5,
+     "bytes": 0
+    },
+    "xmlhttprequest": {
+     "n": 2,
+     "bytes": 687
+    }
+   },
+   "lcp": null,
+   "cls": 0,
+   "fold": [
+    {
+     "tag": "A",
+     "text": "Skip to content",
+     "top": -1
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 11
+    },
+    {
+     "tag": "IMG",
+     "text": "Evergreen Office Cleaning logo",
+     "top": 11
+    },
+    {
+     "tag": "A",
+     "text": "Call",
+     "top": 8
+    },
+    {
+     "tag": "A",
+     "text": "GET A QUOTE",
+     "top": 8
+    },
+    {
+     "tag": "BUTTON",
+     "text": "Menu",
+     "top": 8
+    },
+    {
+     "tag": "H1",
+     "text": "Commercial Cleaning Insights",
+     "top": 72
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 143
+    },
+    {
+     "tag": "A",
+     "text": "",
+     "top": 255
+    },
+    {
+     "tag": "IMG",
+     "text": "Empty commercial office with organized desks, computer monitors and black task c",
+     "top": 255
+    },
+    {
+     "tag": "A",
+     "text": "BLOG",
+     "top": 476
+    },
+    {
+     "tag": "H2",
+     "text": "How Often Should an Office Be Cleaned Professionally?",
+     "top": 515
+    },
+    {
+     "tag": "A",
+     "text": "How Often Should an Office Be Cleaned Professionally?",
+     "top": 513
+    },
+    {
+     "tag": "P",
+     "text": "How Often Should an Office Be Cleaned? An office used every weekday should gener",
+     "top": 576
+    },
+    {
+     "tag": "A",
+     "text": "",
+     "top": 729
+    },
+    {
+     "tag": "IMG",
+     "text": "Empty modern office interior with glass partitions, seating and natural light.",
+     "top": 729
+    },
+    {
+     "tag": "BUTTON",
+     "text": "Open the video message",
+     "top": 723
+    },
+    {
+     "tag": "BUTTON",
+     "text": "No thanks, hide this",
+     "top": 716
+    },
+    {
+     "tag": "A",
+     "text": "Call (416) 803-4880",
+     "top": 787
+    },
+    {
+     "tag": "A",
+     "text": "Free quote",
+     "top": 787
+    }
+   ],
+   "horizontalOverflow": false,
+   "docWidth": 412,
+   "innerWidth": 412,
+   "fontsLoaded": [
+    "Open Sans 400 700 unloaded",
+    "Open Sans 400 800 loaded"
+   ],
+   "smallTapTargets": 15,
+   "title": "Commercial Cleaning Insights - Evergreen Office Cleaning",
+   "h1": [
+    "Commercial Cleaning Insights"
+   ]
+  }
+ },
+ {
+  "url": "https://www.evergreencleaningservice.ca/request-a-quote/",
+  "viewport": "desktop",
+  "status": 200,
+  "loadMs": 2242,
+  "consoleErrors": [],
+  "failedRequests": [
+   "https://ad.doubleclick.net/ccm/s/collect?auid=251296822.1793975410&gtm=45He6b50h2v9264463050za200zd9264463050xeaxf1&fmt=8 net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=15&frm=0&apvc=1&ae=g&auid=251296822.1793975410&dt=Request%20a%20Quote%20-%20Evergreen%20Office%20Cleaning&en=page_view&dl=https%3A%2F%2Fwww.evergreencleaningserv net::ERR_ABORTED",
+   "https://www.google.com/rmkt/collect/18472921801/?random=1793975410161&cv=11&fst=1793975410161&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6b50h2v9265689990za20ozb9264463050zd9264463050xecxf net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=16&frm=0&apvc=0&auid=251296822.1793975410&dt=Request%20a%20Quote%20-%20Evergreen%20Office%20Cleaning&tid=AW-18472921801&en=page_view&dl=https%3A%2F%2Fwww.evergre net::ERR_ABORTED",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C0JHHPLFPJ&gtm=45be6b50h2v9265689990za20ozb9264463050zd9264463050xf1&_p=1793975409336&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=1731168072.1793975410&frm=0& net::ERR_ABORTED"
+  ],
+  "metrics": {
+   "ttfb": 265.9000000000233,
+   "domContentLoaded": 1402.0999999999767,
+   "load": 1455.7999999999884,
+   "transfer": 21284,
+   "encodedBody": 20984,
+   "resources": 24,
+   "byType": {
+    "link": {
+     "n": 1,
+     "bytes": 48620
+    },
+    "script": {
+     "n": 14,
+     "bytes": 13047
+    },
+    "img": {
+     "n": 2,
+     "bytes": 342
+    },
+    "fetch": {
+     "n": 5,
+     "bytes": 0
+    },
+    "xmlhttprequest": {
+     "n": 2,
+     "bytes": 687
+    }
+   },
+   "lcp": null,
+   "cls": 0,
+   "fold": [
+    {
+     "tag": "A",
+     "text": "Skip to content",
+     "top": -1
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 6
+    },
+    {
+     "tag": "IMG",
+     "text": "Evergreen Office Cleaning logo",
+     "top": 6
+    },
+    {
+     "tag": "A",
+     "text": "(416) 803-4880",
+     "top": 14
+    },
+    {
+     "tag": "A",
+     "text": "GET A QUOTE",
+     "top": 14
+    },
+    {
+     "tag": "A",
+     "text": "SERVICES",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "INDUSTRIES",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "SERVICE AREAS",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "ABOUT",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "BLOG",
+     "top": 0
+    },
+    {
+     "tag": "A",
+     "text": "CONTACT",
+     "top": 0
+    },
+    {
+     "tag": "H1",
+     "text": "Request a Quote",
+     "top": 113
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 166
+    },
+    {
+     "tag": "FORM",
+     "text": "Tell us where to send it\n\nWe reply within 2 hours. A free walkthrough when you a",
+     "top": 297
+    },
+    {
+     "tag": "H2",
+     "text": "Tell us where to send it",
+     "top": 297
+    },
+    {
+     "tag": "P",
+     "text": "We reply within 2 hours. A free walkthrough when you are ready, then a written q",
+     "top": 333
+    },
+    {
+     "tag": "P",
+     "text": "Rather talk it through?",
+     "top": 318
+    },
+    {
+     "tag": "A",
+     "text": "(416) 803-4880",
+     "top": 345
+    },
+    {
+     "tag": "P",
+     "text": "Office hours: Monday to Friday 7am⁠–⁠6pm",
+     "top": 393
+    },
+    {
+     "tag": "P",
+     "text": "Evergreen Office Cleaning\n243 Queen St W., Toronto, ON M5V 1Z4, Canada",
+     "top": 750
+    }
+   ],
+   "horizontalOverflow": false,
+   "docWidth": 1366,
+   "innerWidth": 1366,
+   "fontsLoaded": [
+    "Open Sans 400 700 unloaded",
+    "Open Sans 400 800 loaded"
+   ],
+   "smallTapTargets": 5,
+   "title": "Request a Quote - Evergreen Office Cleaning",
+   "h1": [
+    "Request a Quote"
+   ]
+  }
+ },
+ {
+  "url": "https://www.evergreencleaningservice.ca/request-a-quote/",
+  "viewport": "mobile",
+  "status": 200,
+  "loadMs": 2781,
+  "consoleErrors": [],
+  "failedRequests": [
+   "https://ad.doubleclick.net/ccm/s/collect?_gsid=zmxowzUZh01egQCqvtkzRmcOX4V0TKBHLA&auid=712397802.1793975413&gtm=45He6b41v9264463050za200zd9264463050xeaxf1&fmt=8 net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=6&frm=0&apvc=1&ae=g&auid=712397802.1793975413&dt=Request%20a%20Quote%20-%20Evergreen%20Office%20Cleaning&en=page_view&dl=https%3A%2F%2Fwww.evergreencleaningservi net::ERR_ABORTED",
+   "https://www.google.com/rmkt/collect/18472921801/?random=1793975413351&cv=11&fst=1793975413351&fmt=8&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xecxf1& net::ERR_ABORTED",
+   "https://www.google-analytics.com/g/collect?v=2&tid=G-C0JHHPLFPJ&gtm=45be6b41v9265689990za20ozb9264463050zd9264463050xf1&_p=1793975412541&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=2050946355.1793975413&frm=0&ng net::ERR_ABORTED",
+   "https://www.google.com/ccm/collect?rcb=7&frm=0&apvc=0&auid=712397802.1793975413&dt=Request%20a%20Quote%20-%20Evergreen%20Office%20Cleaning&tid=AW-18472921801&en=page_view&dl=https%3A%2F%2Fwww.evergree net::ERR_ABORTED"
+  ],
+  "metrics": {
+   "ttfb": 205.5,
+   "domContentLoaded": 1102.7000000000116,
+   "load": 2007.7000000000116,
+   "transfer": 21284,
+   "encodedBody": 20984,
+   "resources": 24,
+   "byType": {
+    "link": {
+     "n": 1,
+     "bytes": 48620
+    },
+    "script": {
+     "n": 14,
+     "bytes": 13051
+    },
+    "img": {
+     "n": 2,
+     "bytes": 342
+    },
+    "fetch": {
+     "n": 5,
+     "bytes": 0
+    },
+    "xmlhttprequest": {
+     "n": 2,
+     "bytes": 687
+    }
+   },
+   "lcp": null,
+   "cls": 0,
+   "fold": [
+    {
+     "tag": "A",
+     "text": "Skip to content",
+     "top": -1
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 11
+    },
+    {
+     "tag": "IMG",
+     "text": "Evergreen Office Cleaning logo",
+     "top": 11
+    },
+    {
+     "tag": "A",
+     "text": "Call",
+     "top": 8
+    },
+    {
+     "tag": "A",
+     "text": "GET A QUOTE",
+     "top": 8
+    },
+    {
+     "tag": "BUTTON",
+     "text": "Menu",
+     "top": 8
+    },
+    {
+     "tag": "H1",
+     "text": "Request a Quote",
+     "top": 72
+    },
+    {
+     "tag": "A",
+     "text": "Evergreen Office Cleaning",
+     "top": 112
+    },
+    {
+     "tag": "FORM",
+     "text": "Tell us where to send it\n\nWe reply within 2 hours. A free walkthrough when you a",
+     "top": 224
+    },
+    {
+     "tag": "H2",
+     "text": "Tell us where to send it",
+     "top": 224
+    },
+    {
+     "tag": "P",
+     "text": "We reply within 2 hours. A free walkthrough when you are ready, then a written q",
+     "top": 260
+    }
+   ],
+   "horizontalOverflow": false,
+   "docWidth": 412,
+   "innerWidth": 412,
+   "fontsLoaded": [
+    "Open Sans 400 700 unloaded",
+    "Open Sans 400 800 loaded"
+   ],
+   "smallTapTargets": 4,
+   "title": "Request a Quote - Evergreen Office Cleaning",
+   "h1": [
+    "Request a Quote"
+   ]
+  }
+ }
+]

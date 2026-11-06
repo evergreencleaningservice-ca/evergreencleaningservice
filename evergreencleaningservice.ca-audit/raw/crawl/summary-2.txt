@@ -1,0 +1,271 @@
+pages by section: Counter({'services': 11, 'locations': 8, 'industries': 3, 'insights': 3, 'home': 2, 'request-a-quote': 1, 'about-us': 1, 'our-process': 1, 'contact-us': 1, 'cleaning-demo-gallery': 1, 'reviews': 1, 'green-clean-products': 1, 'how-often-should-an-office-be-cleaned': 1, 'privacy': 1, 'office-cleaning-cost-toronto-guide': 1, 'seasonal-office-cleaning-checklist': 1, 'day-night-which-is-the-best-routine-for-your-office': 1, 'cleaning-protocols-for-daycares-and-schools': 1, 'how-to-decide-on-a-cleaning-company': 1, 'a-cleaning-checklist-for-your-retail-store': 1, 'preventing-slips-trips-falls-in-your-workplace': 1, 'cleaning-check-list-dental-clinics': 1, 'office-layout-tips-to-make-cleaning-easier-and-faster': 1, '6-common-cleaning-products-that-you-should-never-mix-together': 1, 'how-to-properly-dust-office-building': 1, 'ask-the-office-cleaners-cleaning-break-rooms': 1, '5-cleaning-tips-to-help-make-your-office-relocation-seamless': 1, 'commercial-cleaning-techniques-to-avoid': 1, 'robotic-vs-manual-cleaning-which-will-ultimately-succeed': 1, '5-cleaning-products-you-should-have-in-your-office': 1, 'importance-of-hand-washing': 1, '5-easy-ways-to-keep-your-commercial-floor-clean': 1, 'benefits-of-commercial-deep-cleaning-services': 1, 'how-to-keep-your-office-fridge-clean': 1, 'areas-in-your-office-where-germs-are-likely-hiding': 1, 'how-to-take-care-of-plants-in-the-office': 1, 'keep-your-office-at-home-clean': 1, 'commercial-cleaning-air-quality': 1})
+empty anchors: 0 nofollow: 0
+ext scripts: [('/_astro/Attribution.astro_astro_type_script_index_0_lang.BDHORFIe.js', 60), ('/_astro/PhoneTracking.astro_astro_type_script_index_0_lang.CMrUATht.js', 60), ('/_astro/QuickQuoteForm.astro_astro_type_script_index_0_lang.D-kn11We.js', 22), ('/_astro/FormRuntime.astro_astro_type_script_index_0_lang.Bll-f2le.js', 1), ('/_astro/SubmissionRuntime.astro_astro_type_script_index_0_lang.B3SfcB6w.js', 1)]
+stylesheets: []
+avg inline style bytes: 38687 avg bytes: 93734 max: (159721, 'https://www.evergreencleaningservice.ca/')
+iframes: Counter({'https://www.googletagmanager.com/ns.html?id=GTM-5W69BTJQ': 60})
+breadcrumb nav: 58 skip link: 60
+headers sample: {'content-type': 'text/html', 'cf-cache-status': 'HIT', 'cache-control': 'public, max-age=0, must-revalidate', 'content-encoding': 'gzip'}
+elapsed: [0.09, 0.1, 0.1] [0.6, 0.62, 0.66]
+http link on https://www.evergreencleaningservice.ca/privacy/ -> http://www.evergreencleaningservice.ca 'www.evergreencleaningservice.ca'
+paginated indexable: https://www.evergreencleaningservice.ca/insights/page/2/ canonical https://www.evergreencleaningservice.ca/insights/page/2/ robots None
+paginated indexable: https://www.evergreencleaningservice.ca/insights/page/3/ canonical https://www.evergreencleaningservice.ca/insights/page/3/ robots None
+
+=== TITLES/H1 ===
+http://www.evergreencleaningservice.ca
+   T(61): Commercial Cleaning Company in Toronto Since 1989 | Evergreen
+   D(148): Office and commercial cleaning across Toronto and the GTA since 1989: the same crew every visit, after hours, WSIB covered. We reply within 2 hours.
+   H1: ['Office & Commercial Cleaning in Toronto and the GTA']  words=1466 imgs=8 h2=17 h3=18
+https://www.evergreencleaningservice.ca/
+   T(61): Commercial Cleaning Company in Toronto Since 1989 | Evergreen
+   D(148): Office and commercial cleaning across Toronto and the GTA since 1989: the same crew every visit, after hours, WSIB covered. We reply within 2 hours.
+   H1: ['Office & Commercial Cleaning in Toronto and the GTA']  words=1466 imgs=8 h2=17 h3=18
+https://www.evergreencleaningservice.ca/5-cleaning-products-you-should-have-in-your-office/
+   T(61): 5 Commercial Cleaning Products You Should Have in Your Office
+   D(138): Five cleaning products worth keeping in any office: glass cleaner, disinfecting wipes, a spot remover, white vinegar and an air freshener.
+   H1: ['5 Commercial Cleaning Products You Should Have in Your Office']  words=641 imgs=4 h2=8 h3=5
+https://www.evergreencleaningservice.ca/5-cleaning-tips-to-help-make-your-office-relocation-seamless/
+   T(60): 5 Cleaning Tips to Help Make Your Office Relocation Seamless
+   D(128): Relocating your offices turning into a nightmare? Here we discuss a few ideas to make moving the office as painless as possible.
+   H1: ['5 Cleaning Tips to Help Make Your Office Relocation Seamless']  words=935 imgs=4 h2=8 h3=6
+https://www.evergreencleaningservice.ca/5-easy-ways-to-keep-your-commercial-floor-clean/
+   T(47): 5 Easy Ways to Keep Your Commercial Floor Clean
+   D(117): Do your floors sparkle? Here we discuss the benefits of clean commercial floors and how to ensure they stay that way.
+   H1: ['5 Easy Ways to Keep Your Commercial Floor Clean']  words=802 imgs=4 h2=8 h3=6
+https://www.evergreencleaningservice.ca/6-common-cleaning-products-that-you-should-never-mix-together/
+   T(61): 6 Common Cleaning Products That You Should Never Mix Together
+   D(147): Six cleaning-product combinations never to mix, from bleach with vinegar, ammonia or rubbing alcohol to two drain cleaners, and why each is unsafe.
+   H1: ['6 Common Cleaning Products That You Should Never Mix Together']  words=730 imgs=4 h2=8 h3=6
+https://www.evergreencleaningservice.ca/a-cleaning-checklist-for-your-retail-store/
+   T(42): A Cleaning Checklist For Your Retail Store
+   D(139): Does your storefront need cleaning? Need to refresh your business? Here we discuss what areas of your store will benefit from a good clean!
+   H1: ['A Cleaning Checklist For Your Retail Store']  words=658 imgs=5 h2=13 h3=0
+https://www.evergreencleaningservice.ca/about-us/
+   T(36): About Us - Evergreen Office Cleaning
+   D(155): Evergreen Office Cleaning: commercial and office cleaning in Toronto and the GTA since 1989, from one Queen Street West office. Who we are and how we work.
+   H1: ['About Us']  words=468 imgs=2 h2=14 h3=0
+https://www.evergreencleaningservice.ca/areas-in-your-office-where-germs-are-likely-hiding/
+   T(50): Areas In Your Office Where Germs Are Likely Hiding
+   D(157): The office surfaces germs collect on, from the reception desk and washrooms to printers, coffee makers and keypads, and how often each one should be cleaned.
+   H1: ['Areas In Your Office Where Germs Are Likely Hiding']  words=748 imgs=5 h2=8 h3=10
+https://www.evergreencleaningservice.ca/ask-the-office-cleaners-cleaning-break-rooms/
+   T(45): Ask the Office Cleaners: Cleaning Break Rooms
+   D(137): How office cleaners clean a break room: the sofa and upholstery, wooden benches, chairs and tables, and the carpet that takes the spills.
+   H1: ['Ask the Office Cleaners: Cleaning Break Rooms']  words=1086 imgs=3 h2=9 h3=1
+https://www.evergreencleaningservice.ca/benefits-of-commercial-deep-cleaning-services/
+   T(45): Benefits of Commercial Deep Cleaning Services
+   D(127): Work setting in need of a deep clean? Let the pros explain what this is and why it has its benefits to your commercial setting.
+   H1: ['Benefits of Commercial Deep Cleaning Services']  words=657 imgs=4 h2=8 h3=5
+https://www.evergreencleaningservice.ca/cleaning-check-list-dental-clinics/
+   T(38): Cleaning Check List for Dental Clinics
+   D(146): Patients expect a neat and safe environment. So, you should definitely not make any compromises when it comes to your dental office's cleanliness.
+   H1: ['Cleaning Check List for Dental Clinics']  words=1039 imgs=4 h2=13 h3=0
+https://www.evergreencleaningservice.ca/cleaning-demo-gallery/
+   T(59): Cleaning Services Photo Gallery - Evergreen Office Cleaning
+   D(91): Illustrative photographs of commercial cleaning equipment, workspaces and cleaning methods.
+   H1: ['Cleaning Services Photo Gallery']  words=71 imgs=14 h2=7 h3=0
+https://www.evergreencleaningservice.ca/cleaning-protocols-for-daycares-and-schools/
+   T(54): Commercial Cleaning Protocols for Daycares and Schools
+   D(167): A cleaning and disinfection checklist for daycares and schools: classrooms, washrooms, kitchens, gyms, corridors and outdoor areas, and how often each needs attention.
+   H1: ['Commercial Cleaning Protocols for Daycares and Schools']  words=553 imgs=4 h2=8 h3=9
+https://www.evergreencleaningservice.ca/commercial-cleaning-air-quality/
+   T(35): Commercial Cleaning and Air Quality
+   D(161): How cleaning improves the air in an office or commercial building: what makes indoor air poor, how to reduce dust and allergens, and what to clean and how often.
+   H1: ['Commercial Cleaning and Air Quality']  words=717 imgs=5 h2=8 h3=7
+https://www.evergreencleaningservice.ca/commercial-cleaning-techniques-to-avoid/
+   T(39): Commercial Cleaning Techniques To Avoid
+   D(143): More cleaning product is not always better, and some popular cleaning tricks do more harm than good. Here are the cleaning techniques to avoid.
+   H1: ['Commercial Cleaning Techniques To Avoid']  words=1270 imgs=5 h2=8 h3=7
+https://www.evergreencleaningservice.ca/contact-us/
+   T(38): Contact Us - Evergreen Office Cleaning
+   D(140): Contact us for more information or to request a free quote. We'd love to hear from you and look forward to any question you may have for us.
+   H1: ['Contact Us']  words=122 imgs=1 h2=8 h3=1
+https://www.evergreencleaningservice.ca/day-night-which-is-the-best-routine-for-your-office/
+   T(59): Day Or Night â Which Is the Best Routine For Your Office?
+   D(141): Day or night office cleaning? The benefits of each, from faster response during the day to fewer disruptions after hours, to help you choose.
+   H1: ['Day Or Night â\x80\x93 Which Is the Best Routine For Your Office?']  words=943 imgs=3 h2=11 h3=5
+https://www.evergreencleaningservice.ca/green-clean-products/
+   T(48): Green Clean Products - Evergreen Office Cleaning
+   D(140): Evergreen uses an approved line of professional green cleaning products that meet or exceed industry standards. Here is what we use and why.
+   H1: ['Green Clean Products']  words=304 imgs=5 h2=9 h3=0
+https://www.evergreencleaningservice.ca/how-often-should-an-office-be-cleaned/
+   T(52): How Often Should an Office Be Cleaned? Toronto Guide
+   D(119): Learn how often an office should be cleaned, with practical daily, weekly and monthly schedules for Toronto workplaces.
+   H1: ['How Often Should an Office Be Cleaned Professionally?']  words=1957 imgs=6 h2=15 h3=12
+https://www.evergreencleaningservice.ca/how-to-decide-on-a-cleaning-company/
+   T(35): How to Decide on a Cleaning Company
+   D(165): How to choose a commercial cleaning company: comparing quotes on scope, WSIB and insurance, contract terms, experience, references, and what to look for in the crew.
+   H1: ['How to Decide on a Cleaning Company']  words=650 imgs=4 h2=8 h3=6
+https://www.evergreencleaningservice.ca/how-to-keep-your-office-fridge-clean/
+   T(36): How to Keep Your Office Fridge Clean
+   D(138): How to keep a shared office fridge clean: warn staff before a clear-out, label food with names and dates, and move fresh food to the back.
+   H1: ['How to Keep Your Office Fridge Clean']  words=632 imgs=4 h2=9 h3=4
+https://www.evergreencleaningservice.ca/how-to-properly-dust-office-building/
+   T(39): How to Properly Dust an Office Building
+   D(143): How to dust an office building properly: what dust is, the equipment to use, how often to dust, and the top-to-bottom order that keeps it down.
+   H1: ['How to Properly Dust an Office Building']  words=1159 imgs=4 h2=11 h3=1
+https://www.evergreencleaningservice.ca/how-to-take-care-of-plants-in-the-office/
+   T(40): How To Take Care of Plants in The Office
+   D(108): Like the look of plants in the office? Here we discuss the benefits of having them and how to care for them.
+   H1: ['How To Take Care of Plants in The Office']  words=591 imgs=4 h2=8 h3=1
+https://www.evergreencleaningservice.ca/importance-of-hand-washing/
+   T(45): Hand-washing and Hand Sanitizer in the Office
+   D(162): Why hand-washing matters in a shared office, how to wash properly, when hand sanitizer is a good substitute, and why clean surfaces matter as much as clean hands.
+   H1: ['Hand-washing and Hand Sanitizer in the Office']  words=513 imgs=5 h2=8 h3=5
+https://www.evergreencleaningservice.ca/industries/
+   T(56): Industries We Clean For in Toronto & the GTA | Evergreen
+   D(145): Commercial cleaning for offices, clinics, property managers and condos, industrial sites, retail and public buildings across Toronto and the GTA.
+   H1: ['Who we clean for']  words=322 imgs=1 h2=13 h3=0
+https://www.evergreencleaningservice.ca/industries/medical-dental-clinics/
+   T(55): Medical & Dental Clinic Cleaning in Toronto | Evergreen
+   D(150): After-hours cleaning for medical and dental clinics in Toronto and the GTA â waiting rooms, treatment areas and washrooms, to your clinic protocols.
+   H1: ['Cleaning for Medical and Dental Clinics in Toronto and the GTA']  words=1233 imgs=2 h2=18 h3=11
+https://www.evergreencleaningservice.ca/industries/property-management/
+   T(59): Property Management & Condo Cleaning in Toronto | Evergreen
+   D(139): Cleaning for property managers and condos in Toronto and the GTA â common areas, lobbies, tenant spaces and one-off work at short notice.
+   H1: ['Cleaning for Property Managers, Condos and Commercial Buildings']  words=1146 imgs=2 h2=19 h3=11
+https://www.evergreencleaningservice.ca/insights/
+   T(56): Commercial Cleaning Insights - Evergreen Office Cleaning
+   D(134): News and advice from Evergreen Office Cleaning on commercial cleaning, office hygiene and facility maintenance in Toronto and the GTA.
+   H1: ['Commercial Cleaning Insights']  words=466 imgs=11 h2=18 h3=0
+https://www.evergreencleaningservice.ca/insights/page/2/
+   T(42): Commercial Cleaning Insights - Page 2 of 3
+   D(147): News and advice from Evergreen Office Cleaning on commercial cleaning, office hygiene and facility maintenance in Toronto and the GTA. Page 2 of 3.
+   H1: ['Commercial Cleaning Insights']  words=479 imgs=11 h2=18 h3=0
+https://www.evergreencleaningservice.ca/insights/page/3/
+   T(42): Commercial Cleaning Insights - Page 3 of 3
+   D(147): News and advice from Evergreen Office Cleaning on commercial cleaning, office hygiene and facility maintenance in Toronto and the GTA. Page 3 of 3.
+   H1: ['Commercial Cleaning Insights']  words=263 imgs=6 h2=13 h3=0
+https://www.evergreencleaningservice.ca/keep-your-office-at-home-clean/
+   T(58): Keep Your Office at Home Clean - Evergreen Office Cleaning
+   D(129): Keeping a home office clean: cleaning products within reach, a filing system that keeps paper off the desk, and when to get help.
+   H1: ['Keep Your Office at Home Clean']  words=612 imgs=3 h2=8 h3=3
+https://www.evergreencleaningservice.ca/locations/
+   T(56): Service Areas Across the GTA - Evergreen Office Cleaning
+   D(149): Commercial and office cleaning across the Greater Toronto Area â downtown Toronto, Mississauga, Etobicoke, Vaughan, Markham, Brampton and Oakville.
+   H1: ['Service Areas']  words=229 imgs=1 h2=12 h3=0
+https://www.evergreencleaningservice.ca/locations/brampton/
+   T(52): Office & Commercial Cleaning in Brampton | Evergreen
+   D(150): Office and commercial cleaning in Brampton: offices, clinics, warehouses and industrial buildings, cleaned after hours or around shifts. WSIB covered.
+   H1: ['Office & Commercial Cleaning in Brampton']  words=789 imgs=2 h2=15 h3=3
+https://www.evergreencleaningservice.ca/locations/etobicoke/
+   T(53): Office & Commercial Cleaning in Etobicoke | Evergreen
+   D(150): Office and commercial cleaning in Etobicoke: offices, clinics, plazas, condo common areas and industrial buildings, cleaned after hours. WSIB covered.
+   H1: ['Office & Commercial Cleaning in Etobicoke']  words=807 imgs=2 h2=15 h3=3
+https://www.evergreencleaningservice.ca/locations/markham/
+   T(51): Office & Commercial Cleaning in Markham | Evergreen
+   D(159): Office and commercial cleaning in Markham: corporate and tech offices, clinics and business-park units along Highway 7, 404 and 407. After hours, WSIB covered.
+   H1: ['Office & Commercial Cleaning in Markham']  words=771 imgs=2 h2=15 h3=3
+https://www.evergreencleaningservice.ca/locations/mississauga/
+   T(55): Office & Commercial Cleaning in Mississauga | Evergreen
+   D(140): Office and commercial cleaning in Mississauga: Meadowvale, Lisgar, East Credit, City Centre and the airport area. After hours, WSIB covered.
+   H1: ['Office & Commercial Cleaning in Mississauga']  words=1091 imgs=2 h2=16 h3=2
+https://www.evergreencleaningservice.ca/locations/oakville/
+   T(52): Office & Commercial Cleaning in Oakville | Evergreen
+   D(155): Office and commercial cleaning in Oakville: professional offices, clinics and business-park buildings, downtown to Winston Park. After hours, WSIB covered.
+   H1: ['Office & Commercial Cleaning in Oakville']  words=752 imgs=2 h2=15 h3=3
+https://www.evergreencleaningservice.ca/locations/toronto-downtown/
+   T(60): Office & Commercial Cleaning in Downtown Toronto | Evergreen
+   D(139): Office and commercial cleaning in downtown Toronto: offices, multi-tenant buildings, clinics and retail, cleaned after hours. WSIB covered.
+   H1: ['Office & Commercial Cleaning in Downtown Toronto']  words=842 imgs=2 h2=15 h3=3
+https://www.evergreencleaningservice.ca/locations/vaughan/
+   T(61): Office & Commercial Cleaning in Vaughan & Concord | Evergreen
+   D(152): Office and commercial cleaning in Vaughan: the VMC, Concord, Woodbridge and Maple. Offices, showrooms and warehouses, cleaned after hours. WSIB covered.
+   H1: ['Office & Commercial Cleaning in Vaughan and Concord']  words=875 imgs=2 h2=16 h3=2
+https://www.evergreencleaningservice.ca/office-cleaning-cost-toronto-guide/
+   T(48): Office Cleaning Cost Toronto: 2026 Pricing Guide
+   D(126): Office cleaning cost Toronto: compare pricing examples, understand monthly cleaning costs and learn what to ask before hiring.
+   H1: ['How Much Does Office Cleaning Cost in Toronto?']  words=2004 imgs=6 h2=14 h3=13
+https://www.evergreencleaningservice.ca/office-layout-tips-to-make-cleaning-easier-and-faster/
+   T(53): Office Layout Tips to Make Cleaning Easier And Faster
+   D(140): Ever considered if your office layout impacts cleaning it? Here are a few things to consider, especially if you are looking at layout plans.
+   H1: ['Office Layout Tips to Make Cleaning Easier And Faster']  words=1342 imgs=4 h2=8 h3=5
+https://www.evergreencleaningservice.ca/our-process/
+   T(56): How We Work: Walkthrough, Proposal & Quality | Evergreen
+   D(134): How Evergreen works: a free walkthrough, a written proposal, a consistent crew, and inspections coordinated by your account executive.
+   H1: ['How we work']  words=780 imgs=1 h2=12 h3=10
+https://www.evergreencleaningservice.ca/preventing-slips-trips-falls-in-your-workplace/
+   T(52): Preventing Slips, Trips, and Falls in Your Workplace
+   D(137): The main causes of slips, trips and falls at work, and how to prevent them with warning signs, lighting, handrails and dry, clean floors.
+   H1: ['Preventing Slips, Trips, and Falls in Your Workplace']  words=713 imgs=4 h2=8 h3=6
+https://www.evergreencleaningservice.ca/privacy/
+   T(42): Privacy Policy - Evergreen Office Cleaning
+   D(116): How Evergreen Office Cleaning collects, uses and protects the personal information you give us through this website.
+   H1: ['Privacy Policy']  words=759 imgs=1 h2=14 h3=5
+https://www.evergreencleaningservice.ca/request-a-quote/
+   T(43): Request a Quote - Evergreen Office Cleaning
+   D(148): Request a free commercial cleaning quote in Toronto and the GTA. Tell us about your building and we will arrange a walkthrough and written proposal.
+   H1: ['Request a Quote']  words=158 imgs=1 h2=6 h3=0
+https://www.evergreencleaningservice.ca/reviews/
+   T(42): Client Reviews - Evergreen Office Cleaning
+   D(168): Google reviews of Evergreen Office Cleaning from offices, property managers and businesses across Toronto and the GTA, each with its date, plus a form to send your own.
+   H1: ['Client Reviews']  words=433 imgs=1 h2=9 h3=0
+https://www.evergreencleaningservice.ca/robotic-vs-manual-cleaning-which-will-ultimately-succeed/
+   T(59): Robotic Vs. Manual Cleaning: Which Will Ultimately Succeed?
+   D(170): How commercial cleaning methods have changed, from mops and cotton cloths to microfibre, HEPA vacuums and robotic scrubbers, and why trained people still do the cleaning.
+   H1: ['Robotic Vs. Manual Cleaning: Which Will Ultimately Succeed?']  words=707 imgs=5 h2=8 h3=4
+https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/
+   T(46): Seasonal Office Cleaning Checklist for Toronto
+   D(169): What to clean in an office each season in Toronto: winter salt and entrances, a spring deep clean and declutter, end-of-summer catch-up, and fall windows, air and pests.
+   H1: ['Seasonal Office Cleaning Checklist for Toronto']  words=893 imgs=6 h2=13 h3=3
+https://www.evergreencleaningservice.ca/services/
+   T(49): All Cleaning Services | Evergreen Office Cleaning
+   D(159): Office, commercial, industrial, post-construction, disinfection and emergency cleaning, building maintenance, pressure washing and graffiti removal in the GTA.
+   H1: ['All Our Cleaning Services']  words=386 imgs=11 h2=15 h3=0
+https://www.evergreencleaningservice.ca/services/building-maintenance/
+   T(56): Building Maintenance & Floor Care in Toronto | Evergreen
+   D(150): Building maintenance cleaning for GTA properties â strip and wax, carpet extraction, high dusting, interior windows and pressure washing, on a plan.
+   H1: ['Building Maintenance and Floor Care for GTA Properties']  words=1152 imgs=2 h2=18 h3=11
+https://www.evergreencleaningservice.ca/services/commercial-cleaning/
+   T(64): Commercial Cleaning & Janitorial Services in Toronto | Evergreen
+   D(152): Commercial cleaning and janitorial services in Toronto and the GTA: retail, institutional and mixed-use buildings, after hours. We reply within 2 hours.
+   H1: ['Commercial Cleaning & Janitorial Services in Toronto and the GTA']  words=2513 imgs=2 h2=28 h3=11
+https://www.evergreencleaningservice.ca/services/disinfection-cleaning/
+   T(53): Disinfection Cleaning Services in Toronto | Evergreen
+   D(142): Disinfection cleaning for Toronto and GTA workplaces â surfaces cleaned first, then high-touch points disinfected, one-off or on a schedule.
+   H1: ['Touch-Point Disinfection Cleaning in Toronto and the GTA']  words=1060 imgs=3 h2=19 h3=11
+https://www.evergreencleaningservice.ca/services/emergency-cleaning/
+   T(52): Emergency Commercial Cleaning in Toronto | Evergreen
+   D(155): Emergency commercial cleaning in Toronto and the GTA â clean-up after flooding and water damage, post-event and tenant-ready cleans. Call (416) 803-4880.
+   H1: ['Emergency Commercial Cleaning in Toronto and the GTA']  words=997 imgs=2 h2=17 h3=6
+https://www.evergreencleaningservice.ca/services/floor-stripping-waxing/
+   T(57): Floor Stripping & Waxing in Toronto & the GTA | Evergreen
+   D(153): Commercial floor stripping and waxing in Toronto and the GTA â strip, seal and wax, burnishing and auto-scrubbing for VCT and hard floors, after hours.
+   H1: ['Commercial Floor Stripping and Waxing in Toronto and the GTA']  words=1222 imgs=2 h2=18 h3=11
+https://www.evergreencleaningservice.ca/services/graffiti-removal/
+   T(60): Commercial Graffiti Removal in Toronto & the GTA | Evergreen
+   D(143): Commercial graffiti removal in Toronto and the GTA â building exteriors, shutters, signage and glass, with the method matched to the surface.
+   H1: ['Commercial Graffiti Removal in Toronto and the GTA']  words=769 imgs=2 h2=17 h3=6
+https://www.evergreencleaningservice.ca/services/industrial-cleaning/
+   T(54): Industrial & Warehouse Cleaning in Toronto | Evergreen
+   D(156): Industrial and warehouse cleaning in Toronto and the GTA â floor scrubbing, strip and wax, high dusting and staff areas, with a free on-site consultation.
+   H1: ['Industrial and Warehouse Cleaning in Toronto and the GTA']  words=974 imgs=3 h2=17 h3=11
+https://www.evergreencleaningservice.ca/services/office-cleaning/
+   T(57): Office Cleaning Services in Toronto & the GTA | Evergreen
+   D(151): Office cleaning services in Toronto and the GTA: nightly, a few evenings a week or weekly, by the same crew. Free walkthrough; we reply within 2 hours.
+   H1: ['Office Cleaning Services in Toronto and the GTA']  words=1425 imgs=3 h2=19 h3=11
+https://www.evergreencleaningservice.ca/services/post-construction-cleaning/
+   T(59): Post-Construction Cleaning in Toronto & the GTA | Evergreen
+   D(145): Post-construction cleaning for commercial spaces in Toronto and the GTA â dust, debris and detail cleaning before handover, around your trades.
+   H1: ['Post-Construction Cleaning for Commercial Buildouts in Toronto & the GTA']  words=757 imgs=2 h2=15 h3=6
+https://www.evergreencleaningservice.ca/services/pressure-washing/
+   T(60): Commercial Pressure Washing in Toronto & the GTA | Evergreen
+   D(166): Commercial pressure washing in Toronto and the GTA â building exteriors, walkways, loading docks and parking structures, cleaned on a schedule that suits your site.
+   H1: ['Commercial Pressure Washing in Toronto and the GTA']  words=745 imgs=2 h2=17 h3=5
+
+=== SCHEMA SAMPLES ===
+https://www.evergreencleaningservice.ca/
+[{"@context": "https://schema.org", "@graph": [{"@type": "ProfessionalService", "@id": "https://www.evergreencleaningservice.ca/#organization", "name": "Evergreen Office Cleaning", "alternateName": ["Evergreen Cleaning Service", "Evergreen Cleaning Services"], "foundingDate": "1989", "url": "https://www.evergreencleaningservice.ca/", "logo": "https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg", "image": "https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg", "telephone": "+1-416-803-4880", "email": "info@evergreencleaningservice.ca", "address": {"@type": "PostalAddress", "streetAddress": "243 Queen St W.", "addressLocality": "Toronto", "addressRegion": "ON", "postalCode": "M5V 1Z4", "addressCountry": "CA"}, "geo": {"@type": "GeoCoordinates", "latitude": 43.65019, "longitude": -79.38856}, "hasMap": "https://maps.google.com/?cid=15602716773318351983", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "18:00"}], "areaServed": [{"@type": "City", "name": "Toronto"}, {"@type": "City", "name": "Mississauga"}, {"@type": "City", "name": "Brampton"}, {"@type": "City", "name": "Oakville"}, {"@type": "City", "name": "Vaughan"}, {"@type": "City", "name": "Markham"}, {"@type": "City", "name": "Richmond Hill"}, {"@type": "City", "name": "Pickering"}, {"@type": "City", "name": "Ajax"}, {"@type": "City", "name": "Oshawa"}], "sameAs": ["https://maps.google.com/?cid=15602716773318351983", "https://www.facebook.com/Evergreen-Cleaning-Service-104007224426820", "https://x.com/EvergreenClean8", "https://www.linkedin.com/company/evergreen-cleaning-service-toronto/"], "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "telephone": "+1-416-803-4880", "email": "info@evergreencleaningservice.ca", "url": "https://www.evergreencleaningservice.ca/request-a-quote/", "areaServed": "CA-ON", "availableLanguage": "English"}, "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Commercial Cleaning Services", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/office-cleaning/#service", "name": "Office Cleaning", "url": "https://www.evergreencleaningservice.ca/services/office-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/#service", "name": "Commercial Cleaning", "url": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/industrial-cleaning/#service", "name": "Industrial & Warehouse Cleaning", "url": "https://www.evergreencleaningservice.ca/services/industrial-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/post-construction-cleaning/#service", "name": "Post-Construction Cleaning", "url": "https://www.evergreencleaningservice.ca/services/post-construction-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/building-maintenance/#service", "name": "Building Maintenance", "url": "https://www.evergreencleaningservice.ca/services/building-maintenance/"}}, {"@type": "Offer", "itemOffered": {"@type": "
+
+https://www.evergreencleaningservice.ca/services/office-cleaning/
+[{"@context": "https://schema.org", "@graph": [{"@type": "ProfessionalService", "@id": "https://www.evergreencleaningservice.ca/#organization", "name": "Evergreen Office Cleaning", "alternateName": ["Evergreen Cleaning Service", "Evergreen Cleaning Services"], "foundingDate": "1989", "url": "https://www.evergreencleaningservice.ca/", "logo": "https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg", "image": "https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg", "telephone": "+1-416-803-4880", "email": "info@evergreencleaningservice.ca", "address": {"@type": "PostalAddress", "streetAddress": "243 Queen St W.", "addressLocality": "Toronto", "addressRegion": "ON", "postalCode": "M5V 1Z4", "addressCountry": "CA"}, "geo": {"@type": "GeoCoordinates", "latitude": 43.65019, "longitude": -79.38856}, "hasMap": "https://maps.google.com/?cid=15602716773318351983", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "18:00"}], "areaServed": [{"@type": "City", "name": "Toronto"}, {"@type": "City", "name": "Mississauga"}, {"@type": "City", "name": "Brampton"}, {"@type": "City", "name": "Oakville"}, {"@type": "City", "name": "Vaughan"}, {"@type": "City", "name": "Markham"}, {"@type": "City", "name": "Richmond Hill"}, {"@type": "City", "name": "Pickering"}, {"@type": "City", "name": "Ajax"}, {"@type": "City", "name": "Oshawa"}], "sameAs": ["https://maps.google.com/?cid=15602716773318351983", "https://www.facebook.com/Evergreen-Cleaning-Service-104007224426820", "https://x.com/EvergreenClean8", "https://www.linkedin.com/company/evergreen-cleaning-service-toronto/"], "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "telephone": "+1-416-803-4880", "email": "info@evergreencleaningservice.ca", "url": "https://www.evergreencleaningservice.ca/request-a-quote/", "areaServed": "CA-ON", "availableLanguage": "English"}, "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Commercial Cleaning Services", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/office-cleaning/#service", "name": "Office Cleaning", "url": "https://www.evergreencleaningservice.ca/services/office-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/#service", "name": "Commercial Cleaning", "url": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/industrial-cleaning/#service", "name": "Industrial & Warehouse Cleaning", "url": "https://www.evergreencleaningservice.ca/services/industrial-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/post-construction-cleaning/#service", "name": "Post-Construction Cleaning", "url": "https://www.evergreencleaningservice.ca/services/post-construction-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/building-maintenance/#service", "name": "Building Maintenance", "url": "https://www.evergreencleaningservice.ca/services/building-maintenance/"}}, {"@type": "Offer", "itemOffered": {"@type": "
+
+https://www.evergreencleaningservice.ca/locations/mississauga/
+[{"@context": "https://schema.org", "@graph": [{"@type": "ProfessionalService", "@id": "https://www.evergreencleaningservice.ca/#organization", "name": "Evergreen Office Cleaning", "alternateName": ["Evergreen Cleaning Service", "Evergreen Cleaning Services"], "foundingDate": "1989", "url": "https://www.evergreencleaningservice.ca/", "logo": "https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg", "image": "https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg", "telephone": "+1-416-803-4880", "email": "info@evergreencleaningservice.ca", "address": {"@type": "PostalAddress", "streetAddress": "243 Queen St W.", "addressLocality": "Toronto", "addressRegion": "ON", "postalCode": "M5V 1Z4", "addressCountry": "CA"}, "geo": {"@type": "GeoCoordinates", "latitude": 43.65019, "longitude": -79.38856}, "hasMap": "https://maps.google.com/?cid=15602716773318351983", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "18:00"}], "areaServed": [{"@type": "City", "name": "Toronto"}, {"@type": "City", "name": "Mississauga"}, {"@type": "City", "name": "Brampton"}, {"@type": "City", "name": "Oakville"}, {"@type": "City", "name": "Vaughan"}, {"@type": "City", "name": "Markham"}, {"@type": "City", "name": "Richmond Hill"}, {"@type": "City", "name": "Pickering"}, {"@type": "City", "name": "Ajax"}, {"@type": "City", "name": "Oshawa"}], "sameAs": ["https://maps.google.com/?cid=15602716773318351983", "https://www.facebook.com/Evergreen-Cleaning-Service-104007224426820", "https://x.com/EvergreenClean8", "https://www.linkedin.com/company/evergreen-cleaning-service-toronto/"], "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "telephone": "+1-416-803-4880", "email": "info@evergreencleaningservice.ca", "url": "https://www.evergreencleaningservice.ca/request-a-quote/", "areaServed": "CA-ON", "availableLanguage": "English"}, "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Commercial Cleaning Services", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/office-cleaning/#service", "name": "Office Cleaning", "url": "https://www.evergreencleaningservice.ca/services/office-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/#service", "name": "Commercial Cleaning", "url": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/industrial-cleaning/#service", "name": "Industrial & Warehouse Cleaning", "url": "https://www.evergreencleaningservice.ca/services/industrial-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/post-construction-cleaning/#service", "name": "Post-Construction Cleaning", "url": "https://www.evergreencleaningservice.ca/services/post-construction-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/building-maintenance/#service", "name": "Building Maintenance", "url": "https://www.evergreencleaningservice.ca/services/building-maintenance/"}}, {"@type": "Offer", "itemOffered": {"@type": "
+
+https://www.evergreencleaningservice.ca/reviews/
+[{"@context": "https://schema.org", "@graph": [{"@type": "ProfessionalService", "@id": "https://www.evergreencleaningservice.ca/#organization", "name": "Evergreen Office Cleaning", "alternateName": ["Evergreen Cleaning Service", "Evergreen Cleaning Services"], "foundingDate": "1989", "url": "https://www.evergreencleaningservice.ca/", "logo": "https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg", "image": "https://img.evergreencleaningservice.ca/images/cropped-evergreen-cleaning-toronto-logo-banner.jpg", "telephone": "+1-416-803-4880", "email": "info@evergreencleaningservice.ca", "address": {"@type": "PostalAddress", "streetAddress": "243 Queen St W.", "addressLocality": "Toronto", "addressRegion": "ON", "postalCode": "M5V 1Z4", "addressCountry": "CA"}, "geo": {"@type": "GeoCoordinates", "latitude": 43.65019, "longitude": -79.38856}, "hasMap": "https://maps.google.com/?cid=15602716773318351983", "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "07:00", "closes": "18:00"}], "areaServed": [{"@type": "City", "name": "Toronto"}, {"@type": "City", "name": "Mississauga"}, {"@type": "City", "name": "Brampton"}, {"@type": "City", "name": "Oakville"}, {"@type": "City", "name": "Vaughan"}, {"@type": "City", "name": "Markham"}, {"@type": "City", "name": "Richmond Hill"}, {"@type": "City", "name": "Pickering"}, {"@type": "City", "name": "Ajax"}, {"@type": "City", "name": "Oshawa"}], "sameAs": ["https://maps.google.com/?cid=15602716773318351983", "https://www.facebook.com/Evergreen-Cleaning-Service-104007224426820", "https://x.com/EvergreenClean8", "https://www.linkedin.com/company/evergreen-cleaning-service-toronto/"], "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "telephone": "+1-416-803-4880", "email": "info@evergreencleaningservice.ca", "url": "https://www.evergreencleaningservice.ca/request-a-quote/", "areaServed": "CA-ON", "availableLanguage": "English"}, "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Commercial Cleaning Services", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/office-cleaning/#service", "name": "Office Cleaning", "url": "https://www.evergreencleaningservice.ca/services/office-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/#service", "name": "Commercial Cleaning", "url": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/industrial-cleaning/#service", "name": "Industrial & Warehouse Cleaning", "url": "https://www.evergreencleaningservice.ca/services/industrial-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/post-construction-cleaning/#service", "name": "Post-Construction Cleaning", "url": "https://www.evergreencleaningservice.ca/services/post-construction-cleaning/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "@id": "https://www.evergreencleaningservice.ca/services/building-maintenance/#service", "name": "Building Maintenance", "url": "https://www.evergreencleaningservice.ca/services/building-maintenance/"}}, {"@type": "Offer", "itemOffered": {"@type": "
+
+img formats: Counter({'jpg': 230, 'png': 2, 'webp': 1}) hosts: Counter({'img.evergreencleaningservice.ca': 233}) loading: Counter({'lazy': 130, 'eager': 78, None: 25})
+empty-alt imgs: [('https://www.evergreencleaningservice.ca/how-often-should-an-office-be-cleaned/', 'https://img.evergreencleaningservice.ca/images/blog-spring-office-cleaning-feature-300x150.jpg'), ('https://www.evergreencleaningservice.ca/how-often-should-an-office-be-cleaned/', 'https://img.evergreencleaningservice.ca/images/blog-break-room-cleaning-feature-300x150.jpg'), ('https://www.evergreencleaningservice.ca/office-cleaning-cost-toronto-guide/', 'https://img.evergreencleaningservice.ca/images/blog-break-room-cleaning-feature-300x150.jpg'), ('https://www.evergreencleaningservice.ca/office-cleaning-cost-toronto-guide/', 'https://img.evergreencleaningservice.ca/images/blog-choosing-cleaning-company-feature-300x150.jpg')]
+no-dim imgs: [('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-industrial-cleaning-toronto.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-office-cleaning-services.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-toronto-office-janitorial.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-retail-store-cleaning.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-commercial-lobby-cleaning.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-office-cleaning-team.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-corporate-office-cleaning.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-lobby-floor-care.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-dental-clinic-cleaning.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-office-detail-cleaning.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-medical-clinic-cleaning.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-large-warehouse-clean-wax.jpg'), ('https://www.evergreencleaningservice.ca/cleaning-demo-gallery/', 'https://img.evergreencleaningservice.ca/images/gallery-condo-lobby-maintenance.jpg')]
