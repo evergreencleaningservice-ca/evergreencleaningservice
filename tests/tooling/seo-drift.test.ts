@@ -24,6 +24,7 @@ import {
   exitCode,
   extractSeo,
   formatReport,
+  hostWideNoindex,
   isChallenge,
   isNoindex,
   pageRecord,
@@ -395,6 +396,75 @@ describe('compareSnapshots', () => {
     expect(report).toContain('WARNING (0)');
     expect(report).toContain('INFO (1)\n  /b/  [new-url] new URL in the sitemap (HTTP 200)');
     expect(report).toMatch(/1 critical, 0 warning, 1 info, 0 unverified\n$/);
+  });
+});
+
+/* --- another host against the production baseline ------------------------ */
+
+describe('checking staging against the production baseline', () => {
+  /* public/_headers noindexes the staging host on every response, by
+     hostname. The same build is served there, so a staging check that
+     matches production must come back clean, not as one noindex-appeared
+     CRITICAL per indexable page (review finding, 2026-11-06). */
+  const STAGE_ORIGIN = 'https://stage.evergreencleaningservice.ca';
+  const HOST_TAG = 'noindex, nofollow, noarchive';
+  const onStage = (pages: Record<string, ReturnType<typeof page>>) => snapshot(pages, { origin: STAGE_ORIGIN });
+  const tagged = (p: ReturnType<typeof page>) => ({ ...p, xRobotsTag: HOST_TAG });
+
+  it('reports the host-wide header once, as INFO, and nothing else when staging matches production', () => {
+    const current = onStage({ [P]: tagged(page()), [T]: tagged(noindexPage()) });
+    expect(hostWideNoindex(base, current)).toBe(HOST_TAG);
+    const findings = compareSnapshots(base, current);
+    expect(rules(findings)).toEqual(['INFO (host) host-noindex']);
+    expect(findings[0].message).toContain(`every page on ${STAGE_ORIGIN} sends X-Robots-Tag "${HOST_TAG}"`);
+    expect(exitCode(findings, current)).toBe(0);
+    expect(formatReport(findings, base, current)).toContain('0 critical, 0 warning, 1 info');
+  });
+
+  it('still catches a noindex the page itself says, under the host header', () => {
+    const current = onStage({ [P]: tagged(page({ metaRobots: 'noindex' })), [T]: tagged(noindexPage()) });
+    expect(rules(compareSnapshots(base, current))).toEqual([`CRITICAL ${P} noindex-appeared`, 'INFO (host) host-noindex']);
+  });
+
+  it('still catches a must-stay-noindex page that lost its own noindex, which the host header would hide', () => {
+    const current = onStage({ [P]: tagged(page()), [T]: tagged(noindexPage({ metaRobots: 'index, follow' })) });
+    expect(rules(compareSnapshots(base, current))).toEqual([
+      `CRITICAL ${T} must-stay-noindex-indexable`,
+      'INFO (host) host-noindex',
+    ]);
+  });
+
+  it('treats a page with a different X-Robots-Tag from the host rule as that page saying noindex', () => {
+    const current = onStage({ [P]: page({ xRobotsTag: 'noindex' }), [T]: tagged(noindexPage()), '/a/': tagged(page()) });
+    expect(hostWideNoindex(base, current)).toBe(HOST_TAG);
+    expect(rules(compareSnapshots(base, current))).toContain(`CRITICAL ${P} noindex-appeared`);
+  });
+
+  it('comes back clean for the committed production baseline served as-is on staging', () => {
+    const committed = JSON.parse(
+      fs.readFileSync(path.join(__dirname, '../../evergreencleaningservice.ca-audit/baseline/seo-baseline.json'), 'utf8')
+    );
+    const pages = Object.fromEntries(
+      Object.entries(committed.pages as Record<string, ReturnType<typeof page>>).map(([p, rec]) => [p, tagged(rec)])
+    );
+    const current = { ...committed, origin: STAGE_ORIGIN, pages, sitemapUnverified: false, unverified: {} };
+    const findings = compareSnapshots(committed, current);
+    expect(rules(findings)).toEqual(['INFO (host) host-noindex']);
+    expect(exitCode(findings, current)).toBe(0);
+  });
+
+  it('does not apply when some page on the other host is indexable: then the header is per page', () => {
+    const current = onStage({ [P]: tagged(page()), [T]: noindexPage(), '/a/': page() });
+    expect(hostWideNoindex(base, current)).toBeNull();
+    expect(rules(compareSnapshots(base, current))).toContain(`CRITICAL ${P} noindex-appeared`);
+  });
+
+  it('never applies against the baseline\'s own origin: a site-wide noindex on production is CRITICAL on every page', () => {
+    const current = snapshot({ [P]: tagged(page()), [T]: tagged(noindexPage()) });
+    expect(hostWideNoindex(base, current)).toBeNull();
+    const findings = compareSnapshots(base, current);
+    expect(rules(findings)).toEqual([`CRITICAL ${P} noindex-appeared`, `INFO ${T} x-robots-tag`]);
+    expect(exitCode(findings, current)).toBe(1);
   });
 });
 

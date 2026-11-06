@@ -371,6 +371,37 @@ const sameList = (a = [], b = []) => a.length === b.length && a.every((x, i) => 
 const show = (v) => (v === null || v === undefined || v === '' ? '(none)' : JSON.stringify(v));
 
 /**
+ * The X-Robots-Tag a non-production host puts on every page, or null.
+ *
+ * One build is served on every host, and `public/_headers` noindexes the
+ * staging and workers.dev hosts with a header on every response (by hostname,
+ * never by path). Checking staging against the production baseline is the
+ * useful pre-promotion run, but read page by page that header is "noindex
+ * appeared" on every indexable page: 60 false CRITICALs against the first
+ * baseline, and exit 1 even when staging matches production exactly (review
+ * finding, 2026-11-06).
+ *
+ * So when the check origin is not the baseline's and every page that answered
+ * 200 carries a noindex X-Robots-Tag, the most common value is taken to be the
+ * host's rule. `compareSnapshots` reports it once and judges each page's own
+ * indexability without it: the robots and googlebot metas still count, and so
+ * does any X-Robots-Tag value other than the host's. Against the baseline's
+ * own origin this never applies; a site-wide noindex on production is exactly
+ * what the per-page rule is there to catch. Whether staging SHOULD carry the
+ * header is `scripts/verify-indexing.mjs`'s check, not this one.
+ */
+export const hostWideNoindex = (baseline, current) => {
+  if (!baseline.origin || baseline.origin === current.origin) return null;
+  const tags = Object.values(current.pages)
+    .filter((p) => p.status === 200)
+    .map((p) => p.xRobotsTag ?? '');
+  if (!tags.length || !tags.every((t) => NOINDEX.test(t))) return null;
+  const counts = new Map();
+  for (const t of tags) counts.set(t, (counts.get(t) ?? 0) + 1);
+  return [...counts].sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0]))[0][0];
+};
+
+/**
  * Compares a fresh snapshot with the baseline and classifies every difference.
  *
  *   CRITICAL  something that costs rankings on its own: a page that answered
@@ -382,7 +413,8 @@ const show = (v) => (v === null || v === undefined || v === '' ? '(none)' : JSON
  *             schema types removed or JSON-LD stopped parsing, main text down
  *             by more than 30%, a canonical removed, a redirect retargeted.
  *   INFO      expected churn: the main text changed, new URLs, H2 count,
- *             og:image, schema types added.
+ *             og:image, schema types added; on another host, that host's
+ *             blanket noindex header (once; see `hostWideNoindex`).
  */
 export const compareSnapshots = (baseline, current) => {
   const findings = [];
@@ -407,11 +439,24 @@ export const compareSnapshots = (baseline, current) => {
     );
   }
 
+  const hostTag = hostWideNoindex(baseline, current);
+  if (hostTag !== null) {
+    add(
+      'INFO',
+      '(host)',
+      'host-noindex',
+      `every page on ${current.origin} sends X-Robots-Tag ${show(hostTag)}, expected for a non-production host; ` +
+        'each page is judged below without it'
+    );
+  }
+
   const paths = [...new Set([...Object.keys(baseline.pages), ...Object.keys(current.pages)])].sort();
   for (const path of paths) {
     const b = baseline.pages[path];
-    const c = current.pages[path];
-    if (!c) continue; /* unverified this run; listed separately */
+    const read = current.pages[path];
+    if (!read) continue; /* unverified this run; listed separately */
+    /* the page as it would be without the host's blanket header */
+    const c = hostTag !== null && read.xRobotsTag === hostTag ? { ...read, xRobotsTag: null } : read;
 
     if (!b) {
       if (c.inSitemap) {

@@ -41,7 +41,12 @@ removed, `<main>` text down more than 30%) and **INFO** (text changed, new
 URLs). It exits 1 on any CRITICAL, and 3 if part of the site could not be read
 (a challenge, a rate limit, a network error), so an incomplete run is never
 reported as a clean one. Both are read-only GETs, one every 300 ms; `--origin`
-points them at another host. Run `seo:drift` after each deploy; when a change
+points them at another host. `npm run seo:drift -- --origin
+https://stage.evergreencleaningservice.ca` compares staging with the production
+baseline, page by page: staging's blanket `X-Robots-Tag: noindex` (set by
+hostname in `public/_headers`) is reported once as expected for that host and
+left out of the per-page noindex rules, so a staging build that matches
+production comes back clean. Run `seo:drift` after each deploy; when a change
 it reports was intended, re-run `seo:baseline` and commit the JSON with the
 change.
 

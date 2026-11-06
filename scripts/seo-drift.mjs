@@ -15,7 +15,10 @@
  *
  * `check` reads the same pages again and classifies every difference as
  * CRITICAL, WARNING or INFO (the rules are written out above
- * `compareSnapshots`). Exit codes: 0 nothing critical; 1 at least one
+ * `compareSnapshots`). With `--origin` at staging it compares staging with the
+ * production baseline by path; staging's blanket noindex header (by hostname,
+ * `public/_headers`) is reported once and not counted against each page, so a
+ * staging build that matches production comes back clean (`hostWideNoindex`). Exit codes: 0 nothing critical; 1 at least one
  * CRITICAL; 3 nothing critical but some page could not be read (a challenge,
  * a rate limit, a network error), so the run is incomplete rather than clean;
  * 2 usage or a missing baseline.
