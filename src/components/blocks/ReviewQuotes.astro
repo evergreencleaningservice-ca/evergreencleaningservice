@@ -4,7 +4,7 @@
  * chosen per page for relevance — never re-attributed to a city or industry
  * the reviewer did not mention, and never summarised into a rating.
  */
-import { reviews, relativeAge } from '../../data/reviews';
+import { reviews, reviewDate } from '../../data/reviews';
 
 interface Props {
   names?: string[];
@@ -18,16 +18,21 @@ const chosen = names ? reviews.filter((r) => names.includes(r.name)) : reviews;
   <h2 class="blk-title">{heading}</h2>
   <div class="blk-review-grid" data-reveal="stagger">
     {
-      chosen.map((r) => (
-        <figure class="blk-review">
-          <blockquote>
-            <p>“{r.text}”</p>
-          </blockquote>
-          <figcaption>
-            <strong>{r.name}</strong>, Google review, {relativeAge(r.date)}
-          </figcaption>
-        </figure>
-      ))
+      chosen.map((r) => {
+        /* A month, not "N months ago", which went stale between builds
+           (2026-11-06, SEO audit item 31). */
+        const when = reviewDate(r);
+        return (
+          <figure class="blk-review">
+            <blockquote>
+              <p>“{r.text}”</p>
+            </blockquote>
+            <figcaption>
+              <strong>{r.name}</strong>, Google review, <time datetime={when.datetime}>{when.label}</time>
+            </figcaption>
+          </figure>
+        );
+      })
     }
   </div>
 </section>

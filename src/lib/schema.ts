@@ -198,10 +198,12 @@ export const articleSchema = (post: {
 /**
  * The page a Service or location sits on (SEO audit H12, 28 Oct 2026).
  *
- * `dateModified` is the last commit to the files the page is built from, the
- * same date the sitemap's lastmod uses (src/lib/sitemap-lastmod.mjs). It is
- * left out when it cannot be known, rather than set to the build time, which
- * would claim every page changed on every deploy.
+ * `dateModified` is the date the page's own content last changed, the same
+ * date the sitemap's lastmod uses (src/lib/sitemap-lastmod.mjs): a service
+ * or industry page's content file, a location's `updated` field. Since 6 Nov
+ * 2026 (SEO audit item 29) a commit to the shared template no longer counts.
+ * It is left out when it cannot be known, rather than set to the build time,
+ * which would claim every page changed on every deploy.
  */
 export const webPageSchema = (opts: {
   name: string;

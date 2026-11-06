@@ -29,6 +29,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { PREVIEW_HOST, PRODUCTION_HOSTS } from '../../src/data/site';
+import { INDEXNOW_KEY } from '../../src/data/indexnow';
 import {
   hostMatches,
   noindexProblems,
@@ -38,6 +39,9 @@ import {
 } from '../../src/lib/noindex-rules';
 import { isPrivatePage } from './private-pages';
 import { shellProblems } from '../../src/lib/admin/live-posts';
+import { locations } from '../../src/data/locations';
+import { HUB_MEMBERS, SOURCES } from '../../src/lib/sitemap-lastmod.mjs';
+import { HUB_UPDATED } from '../../src/data/hub-dates';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const ORIGIN = `https://${PRODUCTION_HOSTS[0]}`;
@@ -145,6 +149,28 @@ describe('the production build', () => {
     /* It blocks the crawl, so the noindex is never read, and the URL can
        still be indexed from an inbound link with no way to remove it. */
     expect(read('robots.txt')).not.toMatch(/Disallow:\s*\/\s*$/m);
+  });
+
+  it('ships the IndexNow key file at the root, holding exactly the key (ACTION-PLAN 28)', () => {
+    /* The engines fetch /<key>.txt to verify a submission. tests/indexnow.test.ts
+       checks public/ and the routing; this checks the file survived the build. */
+    expect(read(`${INDEXNOW_KEY}.txt`)).toBe(INDEXNOW_KEY);
+  });
+
+  it('npm run indexnow reads these sitemaps: a dry run over this build lists every sitemapped URL', () => {
+    /* --dry-run, so nothing is sent. --all, because which URLs fall in the
+       default three-day window depends on the git history at the time. */
+    const result = spawnSync(
+      'node',
+      ['--experimental-strip-types', path.join(repo, 'scripts/indexnow.mjs'), '--dry-run', '--all', '--dist', out],
+      { cwd: repo, encoding: 'utf8' },
+    );
+    expect(result.status).toBe(0);
+    const json = JSON.parse(result.stdout.slice(result.stdout.indexOf('{'), result.stdout.lastIndexOf('}') + 1));
+    const locs = (xml: string) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    const sitemapped = [...locs(read('sitemap-pages-0.xml')), ...locs(read('sitemap-insights-0.xml'))];
+    expect(json.host).toBe(PRODUCTION_HOSTS[0]);
+    expect([...json.urlList].sort()).toEqual([...new Set(sitemapped)].sort());
   });
 });
 
@@ -279,6 +305,145 @@ describe('the sitemap', () => {
     for (const url of urls()) {
       const rel = new URL(url).pathname.replace(/^\//, '') + 'index.html';
       expect(pages).toContain(rel === 'index.html' ? 'index.html' : rel);
+    }
+  });
+});
+
+/**
+ * The sitemap's dates (6 Nov 2026, SEO audit item 29; findings/sitemap.md 1
+ * and 3).
+ *
+ * The audit found 16 service, industry and location pages carrying one
+ * timestamp, 2026-10-31T14:11:02Z: the commit "Shrink the quote forms",
+ * which changed the shared templates and none of the pages' text. A page is
+ * now dated by its own content only (src/lib/sitemap-lastmod.mjs).
+ *
+ * "No two sections share a date because of a template commit" is not
+ * asserted by counting shared dates. One real edit can change a service page
+ * and a location page together (the Phase 2 copy pass did), and that shared
+ * date is honest. What is asserted is where each date comes from: a service
+ * or industry page's date is its own content file's, a location's is its own
+ * `updated` field, a hub's is its own date in src/data/hub-dates.ts and
+ * those of the members it shows, and no page's date sources include a
+ * template, a layout or a shared data file. A template commit then has
+ * nothing to move. The hubs were the last case: their page files carried
+ * the styling commit #81 (6 Nov, 17:29:27Z) to /locations/ and /industries/.
+ *
+ * A missing lastmod fails here on purpose: it is what a shallow clone does
+ * (the date is left out rather than guessed), and the deploy scripts run
+ * this suite first. `git fetch --unshallow` fixes it.
+ */
+describe("the sitemap's dates", () => {
+  const entries = () =>
+    ['sitemap-pages-0.xml', 'sitemap-insights-0.xml'].flatMap((file) =>
+      [...read(file).matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => ({
+        file,
+        path: new URL(m[1].match(/<loc>([^<]+)<\/loc>/)?.[1] ?? '').pathname,
+        lastmod: m[1].match(/<lastmod>([^<]+)<\/lastmod>/)?.[1],
+      }))
+    );
+  const time = (date: string | undefined) => (date ? Date.parse(date) : NaN);
+  const offerPages = () => entries().filter((e) => /^\/(services|industries)\/[^/]+\/$/.test(e.path));
+  const locationPages = () => entries().filter((e) => /^\/locations\/[^/]+\/$/.test(e.path));
+
+  /** The committer date of the last commit to `file`, as git reports it. */
+  const committed = (file: string) =>
+    spawnSync('git', ['log', '-1', '--format=%cI', '--', file], { cwd: repo, encoding: 'utf8' }).stdout.trim();
+
+  it('gives every URL in both sitemaps a lastmod that is a date', () => {
+    const all = entries();
+    expect(all.filter((e) => e.file === 'sitemap-pages-0.xml').length).toBeGreaterThan(30);
+    expect(all.filter((e) => e.file === 'sitemap-insights-0.xml').length).toBeGreaterThan(10);
+    const undated = all.filter((e) => Number.isNaN(time(e.lastmod))).map((e) => e.path);
+    expect(undated, 'no lastmod: is this a shallow clone? git fetch --unshallow').toEqual([]);
+  });
+
+  it('dates nothing in the future', () => {
+    /* Ten minutes for a committer clock that runs a little fast. */
+    const now = Date.now() + 10 * 60_000;
+    expect(entries().filter((e) => time(e.lastmod) > now)).toEqual([]);
+  });
+
+  it("dates each location page by its own `updated` field, and the eleven are not one date", () => {
+    const pagesFound = locationPages();
+    expect(pagesFound).toHaveLength(locations.length);
+    expect(pagesFound.length).toBeGreaterThanOrEqual(11);
+    for (const location of locations) {
+      expect(location.updated, `${location.slug} has no updated field`).toBeTruthy();
+      const entry = pagesFound.find((e) => e.path === `/locations/${location.slug}/`);
+      expect(time(entry?.lastmod), location.slug).toBe(time(location.updated));
+    }
+    expect(new Set(pagesFound.map((e) => time(e.lastmod))).size).toBeGreaterThan(1);
+  });
+
+  it('dates each service and industry page by its own content file alone', () => {
+    const offers = offerPages();
+    expect(offers.length).toBeGreaterThanOrEqual(11);
+    for (const { path: p, lastmod } of offers) {
+      const file = `src/content${p.replace(/\/$/, '')}.md`;
+      expect(fs.existsSync(path.join(repo, file)), file).toBe(true);
+      expect(time(lastmod), p).toBe(time(committed(file)));
+    }
+  });
+
+  it('takes no page date from a template, a layout or a shared data file', () => {
+    const shared = (file: string) =>
+      /\[.+\]/.test(file) || // a route that builds many pages
+      file.startsWith('src/layouts/') ||
+      file.startsWith('src/data/') ||
+      (file.startsWith('src/components/') && !file.startsWith('src/components/home'));
+    const offenders = entries()
+      .filter((e) => e.file === 'sitemap-pages-0.xml')
+      .flatMap((e) => SOURCES(e.path).filter(shared).map((file) => `${e.path} <- ${file}`));
+    expect(offenders).toEqual([]);
+  });
+
+  it('no longer stamps the template-only commit of 31 Oct on any offer or location page', () => {
+    const stamped = [...offerPages(), ...locationPages()].filter(
+      (e) => time(e.lastmod) === Date.parse('2026-10-31T14:11:02Z')
+    );
+    expect(stamped).toEqual([]);
+  });
+
+  it('dates each hub by its own date and the members it shows, never by its page file', () => {
+    const all = entries();
+    const lastmodOf = (p: string) => all.find((e) => e.path === p)?.lastmod;
+    const hubs = Object.keys(HUB_UPDATED) as (keyof typeof HUB_UPDATED)[];
+    expect(hubs.sort()).toEqual(['/industries/', '/locations/', '/services/']);
+    for (const hub of hubs) {
+      expect(SOURCES(hub), hub).toEqual([]);
+      const own = time(HUB_UPDATED[hub]);
+      expect(own, `${hub} in src/data/hub-dates.ts is not a date`).not.toBeNaN();
+      expect(own, `${hub} is dated in the future`).toBeLessThanOrEqual(Date.now() + 10 * 60_000);
+      const members = HUB_MEMBERS(hub).map((m: string) => {
+        const lastmod = lastmodOf(m);
+        expect(lastmod, `${hub} member ${m} is not in the sitemap`).toBeTruthy();
+        return time(lastmod);
+      });
+      expect(time(lastmodOf(hub)), hub).toBe(Math.max(own, ...members));
+    }
+    /* What each hub shows of its members: every service, every location,
+       and no industry page (its cards come from src/data/industries.ts). */
+    expect(HUB_MEMBERS('/services/').sort()).toEqual(offerPages().filter((e) => e.path.startsWith('/services/')).map((e) => e.path).sort());
+    expect(HUB_MEMBERS('/locations/')).toHaveLength(locations.length);
+    expect(HUB_MEMBERS('/industries/')).toEqual([]);
+  });
+
+  it('stamps the styling-only commit of 6 Nov (#81) on no page', () => {
+    /* "Polish hovers and bring back a safe scroll-in reveal" touched the
+       hubs' page files and many shared components, and no page's text. */
+    const stamped = entries().filter((e) => time(e.lastmod) === Date.parse('2026-11-06T17:29:27Z'));
+    expect(stamped).toEqual([]);
+  });
+
+  it("puts the same date in each offer and location page's WebPage dateModified", () => {
+    for (const { path: p, lastmod } of [...offerPages(), ...locationPages()]) {
+      const html = read(`${p.slice(1)}index.html`);
+      const webPage = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+        .map((m) => JSON.parse(m[1]))
+        .find((node) => node['@type'] === 'WebPage');
+      expect(webPage, p).toBeTruthy();
+      expect(time(webPage.dateModified), p).toBe(time(lastmod));
     }
   });
 });

@@ -1,0 +1,686 @@
+{
+  "source": "Cloudflare Web Analytics (real-user beacons)",
+  "host": "www.evergreencleaningservice.ca",
+  "window": {
+    "since": "2026-10-31T20:00:00Z",
+    "until": "2026-11-06T15:05:00Z",
+    "days": 5.8
+  },
+  "traffic": "human",
+  "units": {
+    "LCP": "ms",
+    "INP": "ms",
+    "CLS": "unitless"
+  },
+  "thresholds": {
+    "LCP": {
+      "good": 2500,
+      "poor": 4000
+    },
+    "INP": {
+      "good": 200,
+      "poor": 500
+    },
+    "CLS": {
+      "good": 0.1,
+      "poor": 0.25
+    }
+  },
+  "beacons": {
+    "rows": 122,
+    "estimated": 122,
+    "botRowsExcluded": 35,
+    "rowsBySampleInterval": {
+      "1": 122
+    }
+  },
+  "pageloads": {
+    "estimated": 282,
+    "visits": 248
+  },
+  "sitewide": {
+    "rows": 122,
+    "estimated": 122,
+    "metrics": {
+      "LCP": {
+        "n": 107,
+        "nEst": 107,
+        "p75": 900,
+        "rating": "good",
+        "good": 99,
+        "needsImprovement": 3,
+        "poor": 5,
+        "goodShare": 0.925,
+        "ci95": [
+          717,
+          1153
+        ],
+        "ciMissing": null,
+        "lowSample": false
+      },
+      "INP": {
+        "n": 69,
+        "nEst": 69,
+        "p75": 24,
+        "rating": "good",
+        "good": 68,
+        "needsImprovement": 1,
+        "poor": 0,
+        "goodShare": 0.986,
+        "ci95": [
+          8,
+          56
+        ],
+        "ciMissing": null,
+        "lowSample": false
+      },
+      "CLS": {
+        "n": 90,
+        "nEst": 90,
+        "p75": 0.001,
+        "rating": "good",
+        "good": 89,
+        "needsImprovement": 1,
+        "poor": 0,
+        "goodShare": 0.989,
+        "ci95": [
+          0,
+          0.012
+        ],
+        "ciMissing": null,
+        "lowSample": false
+      }
+    }
+  },
+  "byDevice": [
+    {
+      "deviceType": "desktop",
+      "rows": 91,
+      "estimated": 91,
+      "metrics": {
+        "LCP": {
+          "n": 76,
+          "nEst": 76,
+          "p75": 874,
+          "rating": "good",
+          "good": 68,
+          "needsImprovement": 3,
+          "poor": 5,
+          "goodShare": 0.895,
+          "ci95": [
+            552,
+            2148
+          ],
+          "ciMissing": null,
+          "lowSample": false
+        },
+        "INP": {
+          "n": 51,
+          "nEst": 51,
+          "p75": 32,
+          "rating": "good",
+          "good": 51,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": [
+            8,
+            64
+          ],
+          "ciMissing": null,
+          "lowSample": false
+        },
+        "CLS": {
+          "n": 72,
+          "nEst": 72,
+          "p75": 0.003,
+          "rating": "good",
+          "good": 71,
+          "needsImprovement": 1,
+          "poor": 0,
+          "goodShare": 0.986,
+          "ci95": [
+            0,
+            0.018
+          ],
+          "ciMissing": null,
+          "lowSample": false
+        }
+      }
+    },
+    {
+      "deviceType": "mobile",
+      "rows": 31,
+      "estimated": 31,
+      "metrics": {
+        "LCP": {
+          "n": 31,
+          "nEst": 31,
+          "p75": 938,
+          "rating": "good",
+          "good": 31,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": [
+            717,
+            1101
+          ],
+          "ciMissing": null,
+          "lowSample": false
+        },
+        "INP": {
+          "n": 18,
+          "nEst": 18,
+          "p75": 24,
+          "rating": "good",
+          "good": 17,
+          "needsImprovement": 1,
+          "poor": 0,
+          "goodShare": 0.944,
+          "ci95": [
+            0,
+            488
+          ],
+          "ciMissing": null,
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 18,
+          "nEst": 18,
+          "p75": 0,
+          "rating": "good",
+          "good": 18,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": [
+            0,
+            0
+          ],
+          "ciMissing": null,
+          "lowSample": true
+        }
+      }
+    }
+  ],
+  "topPaths": [
+    {
+      "path": "/",
+      "rows": 37,
+      "estimated": 37,
+      "metrics": {
+        "LCP": {
+          "n": 30,
+          "nEst": 30,
+          "p75": 972,
+          "rating": "good",
+          "good": 27,
+          "needsImprovement": 0,
+          "poor": 3,
+          "goodShare": 0.9,
+          "ci95": [
+            717,
+            4287
+          ],
+          "ciMissing": null,
+          "lowSample": false
+        },
+        "INP": {
+          "n": 15,
+          "nEst": 15,
+          "p75": 32,
+          "rating": "good",
+          "good": 15,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": [
+            16,
+            64
+          ],
+          "ciMissing": null,
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 23,
+          "nEst": 23,
+          "p75": 0.005,
+          "rating": "good",
+          "good": 23,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": [
+            0,
+            0.018
+          ],
+          "ciMissing": null,
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/lp/commercial-cleaning-quote/",
+      "rows": 23,
+      "estimated": 23,
+      "metrics": {
+        "LCP": {
+          "n": 18,
+          "nEst": 18,
+          "p75": 1040,
+          "rating": "good",
+          "good": 17,
+          "needsImprovement": 1,
+          "poor": 0,
+          "goodShare": 0.944,
+          "ci95": [
+            440,
+            3320
+          ],
+          "ciMissing": null,
+          "lowSample": true
+        },
+        "INP": {
+          "n": 8,
+          "nEst": 8,
+          "p75": 48,
+          "rating": "good",
+          "good": 7,
+          "needsImprovement": 1,
+          "poor": 0,
+          "goodShare": 0.875,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 14,
+          "nEst": 14,
+          "p75": 0.038,
+          "rating": "good",
+          "good": 13,
+          "needsImprovement": 1,
+          "poor": 0,
+          "goodShare": 0.929,
+          "ci95": [
+            0.014,
+            0.158
+          ],
+          "ciMissing": null,
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/contact-us/",
+      "rows": 7,
+      "estimated": 7,
+      "metrics": {
+        "LCP": {
+          "n": 5,
+          "nEst": 5,
+          "p75": 2544,
+          "rating": "needs-improvement",
+          "good": 2,
+          "needsImprovement": 2,
+          "poor": 1,
+          "goodShare": 0.4,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 5,
+          "nEst": 5,
+          "p75": 72,
+          "rating": "good",
+          "good": 5,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 5,
+          "nEst": 5,
+          "p75": 0.021,
+          "rating": "good",
+          "good": 5,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/locations/vaughan/",
+      "rows": 6,
+      "estimated": 6,
+      "metrics": {
+        "LCP": {
+          "n": 6,
+          "nEst": 6,
+          "p75": 714,
+          "rating": "good",
+          "good": 6,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 6,
+          "nEst": 6,
+          "p75": 0,
+          "rating": "good",
+          "good": 6,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 6,
+          "nEst": 6,
+          "p75": 0,
+          "rating": "good",
+          "good": 6,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/services/office-cleaning/",
+      "rows": 6,
+      "estimated": 6,
+      "metrics": {
+        "LCP": {
+          "n": 6,
+          "nEst": 6,
+          "p75": 249,
+          "rating": "good",
+          "good": 6,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 8,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 0,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/locations/brampton/",
+      "rows": 5,
+      "estimated": 5,
+      "metrics": {
+        "LCP": {
+          "n": 5,
+          "nEst": 5,
+          "p75": 807,
+          "rating": "good",
+          "good": 5,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 0,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 0,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/locations/etobicoke/",
+      "rows": 4,
+      "estimated": 4,
+      "metrics": {
+        "LCP": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 758,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 0,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 0,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/locations/toronto-downtown/",
+      "rows": 4,
+      "estimated": 4,
+      "metrics": {
+        "LCP": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 1101,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 8,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 0,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/request-a-quote/",
+      "rows": 4,
+      "estimated": 4,
+      "metrics": {
+        "LCP": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 168,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 56,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 0,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/services/disinfection-cleaning/",
+      "rows": 3,
+      "estimated": 3,
+      "metrics": {
+        "LCP": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 480,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 0,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 0,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    }
+  ],
+  "compare": null,
+  "notes": []
+}

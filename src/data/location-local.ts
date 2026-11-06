@@ -24,6 +24,11 @@
  *     scope, one account executive.
  *
  * No testimonials, client names, building names, counts or prices.
+ *
+ * DATES. An edit to an entry here changes what that one page says, so set
+ * the same location's `updated` in locations.ts to the time of the edit. The
+ * sitemap and the page's dateModified read that field, not this file's
+ * commit date (6 Nov 2026, SEO audit item 29).
  */
 
 export type LocationLocal = {

@@ -1,0 +1,22 @@
+{
+  "data": {
+    "viewer": {
+      "accounts": [
+        {
+          "events": [
+            { "datetime": "2026-11-01T10:00:00Z", "sampleInterval": 1, "bot": 0, "deviceType": "desktop", "requestPath": "/", "largestContentfulPaint": 1000000, "interactionToNextPaint": 40000, "cumulativeLayoutShift": 0 },
+            { "datetime": "2026-11-02T10:00:00Z", "sampleInterval": 1, "bot": 0, "deviceType": "desktop", "requestPath": "/", "largestContentfulPaint": 2000000, "interactionToNextPaint": -1, "cumulativeLayoutShift": 0.05 },
+            { "datetime": "2026-11-03T10:00:00Z", "sampleInterval": 1, "bot": 0, "deviceType": "mobile", "requestPath": "/", "largestContentfulPaint": 3000000, "interactionToNextPaint": 250000, "cumulativeLayoutShift": 0.2 },
+            { "datetime": "2026-11-04T10:00:00Z", "sampleInterval": 1, "bot": 0, "deviceType": "mobile", "requestPath": "/contact-us/", "largestContentfulPaint": 5000000, "interactionToNextPaint": 600000, "cumulativeLayoutShift": 0.3 },
+            { "datetime": "2026-11-05T10:00:00Z", "sampleInterval": 1, "bot": 0, "deviceType": "desktop", "requestPath": "/contact-us/", "largestContentfulPaint": -1, "interactionToNextPaint": 0, "cumulativeLayoutShift": -1 },
+            { "datetime": "2026-11-06T10:00:00Z", "sampleInterval": 1, "bot": 0, "deviceType": "desktop", "requestPath": "/services/", "largestContentfulPaint": 800000, "interactionToNextPaint": 16000, "cumulativeLayoutShift": 0 },
+            { "datetime": "2026-11-06T11:00:00Z", "sampleInterval": 1, "bot": 1, "deviceType": "desktop", "requestPath": "/", "largestContentfulPaint": 9000000, "interactionToNextPaint": 900000, "cumulativeLayoutShift": 0.9 }
+          ],
+          "vitalsTotal": [{ "count": 7 }],
+          "pageloads": [{ "count": 20, "sum": { "visits": 12 } }]
+        }
+      ]
+    }
+  },
+  "errors": null
+}

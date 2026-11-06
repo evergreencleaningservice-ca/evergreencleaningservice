@@ -13,9 +13,10 @@
     "test:watch": "vitest",
     "check": "astro check",
     "deploy:preview": "npm run deploy:guard && npm test && npm run b2:sync && npm run build:preview && wrangler deploy && npm run purge",
-    "deploy": "npm run deploy:guard && npm test && npm run secret:check && npm run b2:sync && npm run build && wrangler deploy && npm run purge",
+    "deploy": "npm run deploy:guard && npm test && npm run secret:check && npm run b2:sync && npm run build && wrangler deploy && npm run purge && npm run indexnow",
     "deploy:guard": "node scripts/deploy-guard.mjs",
     "purge": "node --experimental-strip-types scripts/purge.mjs",
+    "indexnow": "node --experimental-strip-types scripts/indexnow.mjs",
     "redirects": "node --experimental-strip-types scripts/redirects.mjs",
     "images": "node --experimental-strip-types scripts/images.mjs",
     "b2:sync": "node --experimental-strip-types scripts/b2-sync.mjs",
@@ -38,7 +39,10 @@
     "lp:census": "node scripts/lp-census.mjs",
     "lp:sticky": "node scripts/sticky-clearance.mjs",
     "tel:inventory": "node scripts/tel-inventory.mjs",
-    "image:parity": "node --experimental-strip-types scripts/image-parity.mjs"
+    "image:parity": "node --experimental-strip-types scripts/image-parity.mjs",
+    "seo:baseline": "node scripts/seo-drift.mjs baseline",
+    "seo:drift": "node scripts/seo-drift.mjs check",
+    "cwv:field": "node scripts/cwv-field.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
