@@ -69,12 +69,23 @@ describe('the reviews on file', () => {
     }
   });
 
-  it('only the two Google dated roughly are marked approximate', () => {
-    /* Andy Handy ("9 months ago" on 2026-10-29) and av-ev ("a year ago").
-       Marking more would hide a known date; fewer would print a guessed one
-       as fact. */
+  it('the three Google dated only by age are marked approximate, and no others', () => {
+    /* On 2026-10-29 Google gave Christopher Perera "8 weeks ago", Andy Handy
+       "9 months ago" and av-ev "a year ago"; the archive's four carry real
+       dates. Marking more would hide a known date; fewer would print a
+       worked-back one as fact. */
     expect(
       Object.fromEntries(reviews.filter((r) => r.approx).map((r) => [r.name, r.approx]))
-    ).toEqual({ 'Andy Handy': 'month', 'av-ev': 'year' });
+    ).toEqual({ 'Christopher Perera': 'month', 'Andy Handy': 'month', 'av-ev': 'year' });
+  });
+
+  it('Perera is not shown as a known day or a certain month', () => {
+    /* "8 weeks ago" on 2026-10-29 is 2026-08-28 to 2026-09-03, so it may be
+       August; the card hedges and the datetime stops at the month. */
+    const perera = reviews.find((r) => r.name === 'Christopher Perera')!;
+    expect(reviewDate(perera)).toEqual({
+      datetime: '2026-09',
+      label: 'around September 2026',
+    });
   });
 });

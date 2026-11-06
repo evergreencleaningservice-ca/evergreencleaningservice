@@ -34,14 +34,19 @@ export interface Review {
 export const reviews: Review[] = [
   /* Added 2026-10-29 from the Google Business Profile's own review list,
      newest first: the archive's four were all from 2020-2021. Text is
-     verbatim. Google shows only a relative age ("8 weeks ago"), so the two
-     dates without an exact day are approximate. On 2026-10-29 Google said
-     "9 months ago" for Andy Handy, which pins the month, and "a year ago"
-     for av-ev, which on Google covers anything from 12 to 23 months, so only
-     the year is claimed for that one (2026-11-06, SEO audit item 31). */
+     verbatim. Google shows these three only as a relative age, so none of
+     their dates is a known day; each `date` was worked back from the age
+     Google gave on 2026-10-29 and is marked approximate (2026-11-06, SEO
+     audit item 31). Christopher Perera: "8 weeks ago", which covers 56 to 62
+     days, so 2026-08-28 to 2026-09-03; `date` is the last day of that window,
+     the card says "around September 2026", and it may be late August. Andy
+     Handy: "9 months ago", which pins the month only roughly. av-ev: "a year
+     ago", which on Google covers anything from 12 to 23 months, so only the
+     year is claimed. */
   {
     name: 'Christopher Perera',
     date: '2026-09-03',
+    approx: 'month',
     rating: 5,
     verified: true,
     text: 'Very reliable. Great service',

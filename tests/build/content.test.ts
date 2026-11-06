@@ -220,7 +220,7 @@ describe('nothing was invented', () => {
 describe('review dates are months, not ages', () => {
   /* SEO audit item 31 (2026-11-06). Cards said "N months ago", worked out
      at build time, so every label was wrong a month after the last build and
-     understated how old the review was. They now say "September 2026" in a
+     understated how old the review was. They now say "May 2021" in a
      <time datetime>, which stays right. The three kinds of card: the
      homepage slider (`ti-card`), the quoted block on location, service and
      process pages (`blk-review`), and /reviews/ (`rv-card`). The landing
@@ -278,7 +278,13 @@ describe('review dates are months, not ages', () => {
     const list = pages.find((p) => p.page === 'reviews/index.html')!.text;
     expect(list).toMatch(/<time datetime="2026-01"[^>]*>around January 2026<\/time>/);
     expect(list).toMatch(/<time datetime="2025"[^>]*>around 2025<\/time>/);
-    expect(list).toMatch(/<time datetime="2026-09-03"[^>]*>September 2026<\/time>/);
+    /* Perera's "8 weeks ago" on 2026-10-29 could be late August, so neither
+       the day nor the month is printed as fact. */
+    expect(list).toMatch(/<time datetime="2026-09"[^>]*>around September 2026<\/time>/);
+    expect(list).not.toMatch(/datetime="2026-09-03"/);
+    expect(list).not.toMatch(/>September 2026</);
+    /* An exactly dated review still prints as a plain month. */
+    expect(list).toMatch(/<time datetime="2021-05-31"[^>]*>May 2021<\/time>/);
   });
 
   it('the quoted cards keep their "Google review" source label', () => {

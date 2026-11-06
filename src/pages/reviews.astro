@@ -34,9 +34,9 @@ const introHtml = rawBody.slice(0, cutAt);
    hold every page to that until the client confirms one.
 
    The date was first shown the way Google shows it ("2 months ago"). Since
-   2026-11-06 it is the month ("September 2026"), because an age worked out
-   at build time goes stale between builds (SEO audit item 31). The two
-   reviews Google dated only roughly say "around ...", and their `datetime`
+   2026-11-06 it is the month ("May 2021"), because an age worked out at
+   build time goes stale between builds (SEO audit item 31). The three
+   reviews Google dated only by age say "around ...", and their `datetime`
    is no more precise than what is known. */
 const cards = [...reviews]
   .sort((a, b) => b.date.localeCompare(a.date))
