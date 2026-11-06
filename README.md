@@ -21,7 +21,29 @@ npm run preflight # refuses a production build that would ship a test captcha ke
 npm test        # the whole suite (see TESTING.md)
 npm run verify:indexing -- staging      # check a DEPLOYED origin's indexability
 npm run verify:indexing -- production   # the same, against the live site
+npm run seo:baseline   # record what search engines read from every live page
+npm run seo:drift      # compare the live site with that record; exit 1 on a CRITICAL
 ```
+
+`seo:baseline` and `seo:drift` are the SEO drift monitor (audit ACTION-PLAN
+item 32, `scripts/seo-drift.mjs`). The baseline reads every URL in the live
+sitemaps plus four pages that must stay noindex (`/thank-you/`, `/search/`,
+`/lp/commercial-cleaning/`, `/tag/cleaning/`) and records status, redirect,
+title, description, robots meta, `X-Robots-Tag`, canonical, H1s, H2 count,
+JSON-LD types, og:image, and the word count and a hash of `<main>`, into
+`evergreencleaningservice.ca-audit/baseline/seo-baseline.json`. The first one
+was captured from production on 2026-11-06, after the Phase 1–3 deploys.
+`seo:drift` re-reads the site and sorts every difference into **CRITICAL** (a
+200 that no longer is, noindex on an indexable page, a canonical pointing
+elsewhere, a page gone from the sitemap, a must-stay-noindex page that became
+indexable), **WARNING** (title, description or H1 changed, schema types
+removed, `<main>` text down more than 30%) and **INFO** (text changed, new
+URLs). It exits 1 on any CRITICAL, and 3 if part of the site could not be read
+(a challenge, a rate limit, a network error), so an incomplete run is never
+reported as a clean one. Both are read-only GETs, one every 300 ms; `--origin`
+points them at another host. Run `seo:drift` after each deploy; when a change
+it reports was intended, re-run `seo:baseline` and commit the JSON with the
+change.
 
 `verify:indexing` is the go-live check that cannot be a unit test: it reads
 what an origin actually serves. Run it against **production immediately after
