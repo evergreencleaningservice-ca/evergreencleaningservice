@@ -20,9 +20,13 @@
  *            reading just "Blog"
  *   title    22px, weight 500, #333
  *   excerpt  15px, #777 — WordPress's first 30 words, not the description
+ *
+ * The thumbnail's FILE is no longer the original's 300x150 crop: it is the
+ * featured image's 480/720 (or 768) AVIF/WebP/JPEG set (src/lib/thumb.ts),
+ * drawn into the same 300x150 box.
  */
 import { excerpt } from '../lib/excerpt';
-import { thumb, thumbSet } from '../lib/thumb';
+import { intrinsic, thumbSet } from '../lib/thumb';
 
 type Entry = {
   id?: string;
@@ -45,6 +49,11 @@ interface Props {
 
 const { posts, eager = 0, flush = false } = Astro.props;
 const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '');
+
+/* 300px beside the text above 940px (hidden between 721 and 940); the full
+   column below that: 510px inside the 540px container from 576px, and the
+   viewport less the two 15px gutters on a phone. */
+const SIZES = '(min-width: 941px) 300px, (min-width: 576px) 510px, calc(100vw - 30px)';
 ---
 
 <div class:list={['post-list', flush && 'is-flush']}>
@@ -55,22 +64,21 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
           <div class="list-article-thumb">
             <a href={`/${toSlug(post)}/`} tabindex="-1" aria-hidden="true">
               {(() => {
-                /* 300px wide beside the text from 768px; the full column width
-                   (about 3.6x the crop) on a phone, where the 960px feature
-                   image is offered instead (src/lib/thumb.ts). */
+                /* The featured image's 480/720 AVIF/WebP/JPEG set, or, for an
+                   image with none, the file itself at its own size. */
                 const set = thumbSet(post.data.image);
-                const sizes = '(min-width: 768px) 300px, 100vw';
+                const size = set ?? intrinsic(post.data.image);
                 return (
                   <picture>
-                    {set && <source type="image/avif" srcset={set.avif} sizes={sizes} />}
-                    {set && <source type="image/webp" srcset={set.webp} sizes={sizes} />}
+                    {set && <source type="image/avif" srcset={set.avif} sizes={SIZES} />}
+                    {set && <source type="image/webp" srcset={set.webp} sizes={SIZES} />}
                     <img
-                      src={thumb(post.data.image)}
+                      src={set?.src ?? post.data.image}
                       srcset={set?.jpg}
-                      sizes={set ? sizes : undefined}
+                      sizes={set ? SIZES : undefined}
                       alt={post.data.imageAlt ?? post.data.title}
-                      width="300"
-                      height="150"
+                      width={size?.width}
+                      height={size?.height}
                       loading={i < eager ? 'eager' : 'lazy'}
                       decoding="async"
                     />
@@ -208,9 +216,11 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
       margin-bottom: 30px;
     }
 
+    /* Full width, still the list's 2:1 shape: the guides' images are 16:9. */
     .list-article-thumb img {
       width: 100%;
       height: auto;
+      aspect-ratio: 2 / 1;
     }
   }
 </style>
