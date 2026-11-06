@@ -100,9 +100,23 @@ const gtmId = site.gtmId;
    conversion event) is queued and processed when it does. The hostname guard
    and the staging/production variable are as before.
 
-   The trade-off is a measurement one, agreed in the audit: a page_view can
-   arrive a few seconds later, and a bounce in under 4 s with no interaction
-   is not recorded. Watch Ads and GA4 for a week after this ships. */
+   The trade-off is a measurement one, agreed in the audit: page_view arrives
+   a little later, and a visitor who leaves before the page has finished
+   loading, without touching it, is not recorded. Watch Ads and GA4 for a
+   week after this ships.
+
+   WHAT IT ACTUALLY DOES, MEASURED (Phase 4, 6 Nov 2026; 25 Lighthouse runs,
+   raw data summarised in evergreencleaningservice.ca-audit/PHASE-4-MONITORING.md).
+   requestIdleCallback fires within milliseconds of `load` on an idle page,
+   so the 4 s ceiling is never reached: gtm.js was requested 4-27 ms after the
+   load event in every run (0.85-1.7 s into the visit on the lab profile),
+   instead of at 0.49 s as before. That keeps the first second free for the
+   hero image and fonts, which is where the lab gain came from (mobile home
+   51 to 87, simulated LCP 6.8 s to 2.4 s). It does not remove the tags' own
+   400-600 ms of main-thread work; that still happens, just after load. A
+   longer fixed delay would remove more of it from the lab figure and lose
+   more short visits from the analytics: a decision for whoever owns the Ads
+   and GA4 numbers, not a code fix. */
 const loader = `
 (function (w, d, s, l, i, hosts, production) {
   w[l] = w[l] || [];
