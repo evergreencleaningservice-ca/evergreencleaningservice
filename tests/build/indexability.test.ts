@@ -29,6 +29,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { PREVIEW_HOST, PRODUCTION_HOSTS } from '../../src/data/site';
+import { INDEXNOW_KEY } from '../../src/data/indexnow';
 import {
   hostMatches,
   noindexProblems,
@@ -148,6 +149,28 @@ describe('the production build', () => {
     /* It blocks the crawl, so the noindex is never read, and the URL can
        still be indexed from an inbound link with no way to remove it. */
     expect(read('robots.txt')).not.toMatch(/Disallow:\s*\/\s*$/m);
+  });
+
+  it('ships the IndexNow key file at the root, holding exactly the key (ACTION-PLAN 28)', () => {
+    /* The engines fetch /<key>.txt to verify a submission. tests/indexnow.test.ts
+       checks public/ and the routing; this checks the file survived the build. */
+    expect(read(`${INDEXNOW_KEY}.txt`)).toBe(INDEXNOW_KEY);
+  });
+
+  it('npm run indexnow reads these sitemaps: a dry run over this build lists every sitemapped URL', () => {
+    /* --dry-run, so nothing is sent. --all, because which URLs fall in the
+       default three-day window depends on the git history at the time. */
+    const result = spawnSync(
+      'node',
+      ['--experimental-strip-types', path.join(repo, 'scripts/indexnow.mjs'), '--dry-run', '--all', '--dist', out],
+      { cwd: repo, encoding: 'utf8' },
+    );
+    expect(result.status).toBe(0);
+    const json = JSON.parse(result.stdout.slice(result.stdout.indexOf('{'), result.stdout.lastIndexOf('}') + 1));
+    const locs = (xml: string) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    const sitemapped = [...locs(read('sitemap-pages-0.xml')), ...locs(read('sitemap-insights-0.xml'))];
+    expect(json.host).toBe(PRODUCTION_HOSTS[0]);
+    expect([...json.urlList].sort()).toEqual([...new Set(sitemapped)].sort());
   });
 });
 
