@@ -37,6 +37,12 @@ and nothing to remove at go-live.
 Both deploy scripts run `npm run deploy:guard` first, which refuses unless the
 checkout is a clean `main` matching `origin/main`. Merge first, then deploy.
 
+`npm run deploy` ends with `npm run indexnow` (not `deploy:preview`): it sends
+the sitemap URLs whose `<lastmod>` is in the last 3 days to IndexNow (Bing,
+Yandex and the others that share submissions), verified by the key file
+`public/<key>.txt` (key in `src/data/indexnow.ts`). It never fails a deploy;
+`npm run indexnow -- --dry-run [--days N | --all]` shows what it would send.
+
 Going live needs **both** halves of the captcha pair, in two different places:
 
 The site runs on a **reCAPTCHA v2** checkbox key issued for it on 2026-09-30 (`captcha.provider` in
