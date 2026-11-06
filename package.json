@@ -41,7 +41,8 @@
     "tel:inventory": "node scripts/tel-inventory.mjs",
     "image:parity": "node --experimental-strip-types scripts/image-parity.mjs",
     "seo:baseline": "node scripts/seo-drift.mjs baseline",
-    "seo:drift": "node scripts/seo-drift.mjs check"
+    "seo:drift": "node scripts/seo-drift.mjs check",
+    "cwv:field": "node scripts/cwv-field.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
