@@ -122,7 +122,10 @@ export const USAGE = `usage: npm run cwv:field -- [options]
   --days N             window of the last N days (default 28)
   --since ISO          window start (date or date-time, UTC)
   --until ISO          window end (default: now)
-  --compare-at ISO     also split the window before/after this moment
+  --compare-at ISO     also split the window before/after this moment; the
+                       change can be judged only while both sides are
+                       unsampled (the last six days), so keep a --json
+                       baseline before it ages (docs/growth/performance.md 8)
   --top N              how many paths to list (default 10)
   --include-bots       keep beacons Cloudflare flags as bots (default: human only)
   --json               machine-readable output
@@ -455,6 +458,7 @@ export function summarise(rows) {
     }
     const p75 = weightedQuantile(pairs);
     const uniform = new Set(pairs.map(([, w]) => w)).size <= 1;
+    const ci95 = uniform && pairs.length ? p75Interval(pairs.map(([v]) => v)) : null;
     out.metrics[m] = {
       n: pairs.length,
       nEst,
@@ -464,7 +468,10 @@ export function summarise(rows) {
       needsImprovement: ni,
       poor,
       goodShare: nEst ? round(good / nEst, 3) : null,
-      ci95: uniform && pairs.length ? p75Interval(pairs.map(([v]) => v)) : null,
+      ci95,
+      /* Why there is no interval, when there is none, so the output can say
+         so instead of leaving a bare "n/a" for the reader to interpret. */
+      ciMissing: ci95 ? null : !pairs.length ? 'no-data' : !uniform ? 'mixed-sample-rates' : 'too-few-beacons',
       lowSample: pairs.length < MIN_SAMPLES,
     };
   }
@@ -507,12 +514,32 @@ export function buildReport(rawEvents, { since, until, compareAt = null, include
     const at = iso(compareAt);
     /* Compared as instants, not strings: the API writes whole seconds, but a
        row's datetime and the cut point need not share a spelling. */
-    const before = section(rows.filter((r) => Date.parse(r.datetime) < compareAt));
-    const after = section(rows.filter((r) => Date.parse(r.datetime) >= compareAt));
+    const beforeRows = rows.filter((r) => Date.parse(r.datetime) < compareAt);
+    const afterRows = rows.filter((r) => Date.parse(r.datetime) >= compareAt);
+    const before = section(beforeRows);
+    const after = section(afterRows);
+    /* A metric's change can be judged only when both sides have an interval.
+       Review of 6 Nov 2026: a before/after run made a week or two after a
+       deploy finds the "before" side aged into Cloudflare's 1-in-10 sample
+       (a dozen rows, too few for an interval) and the "after" side mixed
+       1-in-1 and 1-in-10 (no honest interval), and the report used to say
+       "judge against the intervals" with none printed. */
+    const judgeable = Object.fromEntries(
+      METRICS.map((m) => [m, Boolean(before.sitewide.metrics[m].ci95 && after.sitewide.metrics[m].ci95)]),
+    );
+    for (const [label, rs] of [['before', beforeRows], ['after', afterRows]]) {
+      if (rs.some((r) => r.weight > 1)) {
+        notes.push(
+          `The ${label} side of the comparison is ${rs.every((r) => r.weight > 1) ? 'a' : 'partly a'} 1-in-10 sample. ` +
+            'For a before/after judgement, measure each side as its own window of six days or less while it is still in the last week (unsampled), and keep the earlier one with --json; see docs/growth/performance.md section 8.',
+        );
+      }
+    }
     compare = {
       at,
       before: { since: iso(since), until: at, ...before },
       after: { since: at, until: iso(until), ...after },
+      judgeable,
       delta: Object.fromEntries(
         METRICS.map((m) => {
           const b = before.sitewide.metrics[m].p75;
@@ -565,7 +592,7 @@ function metricTable(summary, indent = '  ') {
   const lines = [`${indent}${pad('', 5)}${lpad('p75', 9)}  ${pad('rating', 12)}${lpad('good', 7)}  ${lpad('n', 5)}  ${pad('est.', 6)}  95% CI of p75`];
   for (const m of METRICS) {
     const x = summary.metrics[m];
-    const ci = x.ci95 ? `${formatValue(m, x.ci95[0])} to ${formatValue(m, x.ci95[1])}` : x.n ? 'n/a' : '';
+    const ci = x.ci95 ? `${formatValue(m, x.ci95[0])} to ${formatValue(m, x.ci95[1])}` : x.n ? `none (${CI_MISSING[x.ciMissing]})` : '';
     lines.push(
       `${indent}${pad(m, 5)}${lpad(formatValue(m, x.p75), 9)}  ${pad(x.rating ? RATING[x.rating] : '—', 12)}${lpad(pct(x.goodShare), 7)}  ${lpad(x.n, 5)}  ${pad(x.nEst, 6)}  ${ci}${x.n && x.lowSample ? '  (few samples: indicative)' : ''}`,
     );
@@ -580,6 +607,39 @@ function deviceLines(byDevice) {
     lines.push(...metricTable(d, '    '));
   }
   return lines.length ? lines : ['  (none)'];
+}
+
+const CI_MISSING = {
+  'no-data': 'no beacons reported it',
+  'mixed-sample-rates': 'sampled and unsampled beacons are mixed',
+  'too-few-beacons': 'too few beacons',
+};
+
+/**
+ * The closing advice on a before/after split. It points at the intervals only
+ * for metrics where both sides have one; for the rest it says plainly that
+ * this run cannot judge the change, and why.
+ */
+function judgementLines(c) {
+  const ok = METRICS.filter((m) => c.judgeable[m]);
+  const missing = METRICS.filter((m) => !c.judgeable[m]);
+  const lines = [];
+  if (ok.length) {
+    lines.push(
+      `  ${ok.length === METRICS.length ? 'A' : `${ok.join(', ')}: a`} change smaller than the 95% intervals above is not evidence of an effect.`,
+    );
+  }
+  for (const m of missing) {
+    const why = ['before', 'after']
+      .filter((side) => !c[side].sitewide.metrics[m].ci95)
+      .map((side) => `${side}: ${CI_MISSING[c[side].sitewide.metrics[m].ciMissing] ?? 'none'}`)
+      .join('; ');
+    lines.push(`  ${m}: no 95% interval (${why}), so this run cannot say whether ${m} changed.`);
+  }
+  if (missing.length) {
+    lines.push('  Compare unsampled windows instead: a saved baseline against a window of six days or less in the last week.');
+  }
+  return lines;
 }
 
 export function formatText(r) {
@@ -635,7 +695,7 @@ export function formatText(r) {
     }
     const sign = (m, v) => (v === null ? '—' : `${v > 0 ? '+' : v < 0 ? '-' : '±'}${formatValue(m, Math.abs(v))}`);
     out.push(`  change in sitewide p75: ${METRICS.map((m) => `${m} ${sign(m, c.delta[m])}`).join(', ')}`);
-    out.push('  A change smaller than the 95% intervals above is not evidence of an effect.');
+    out.push(...judgementLines(c));
   }
   if (r.notes.length) {
     out.push('');

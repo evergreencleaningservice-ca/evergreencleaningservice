@@ -407,6 +407,57 @@ describe('the report', () => {
     expect(r.compare.before.until).toBe('2026-11-04T00:00:00Z');
   });
 
+  /* Review of 6 Nov 2026: a before/after run made a week or two after a
+     deploy has a sampled "before" side and a mixed "after" side, so neither
+     has an interval, and the report used to tell the reader to judge the
+     change against intervals it had not printed. */
+  describe('judging a before/after change', () => {
+    const at = T('2026-11-04T00:00:00Z');
+    const many = (n: number, over: Record<string, unknown>) =>
+      Array.from({ length: n }, (_, i) => row({ largestContentfulPaint: (1000 + i * 10) * 1000, ...over }));
+
+    it('points at the intervals when both sides have one', () => {
+      const rows = [...many(40, { datetime: '2026-11-02T12:00:00Z' }), ...many(40, { datetime: '2026-11-05T12:00:00Z' })];
+      const r = buildReport(rows, { ...opts, compareAt: at });
+      expect(r.compare.judgeable).toEqual({ LCP: true, INP: true, CLS: true });
+      const text = formatText(r);
+      expect(text).toContain('A change smaller than the 95% intervals above is not evidence of an effect.');
+      expect(text).not.toMatch(/cannot say whether/);
+    });
+
+    it('says the change cannot be judged when the before side is a small 1-in-10 sample and the after side is mixed', () => {
+      const rows = [
+        ...many(12, { datetime: '2026-11-02T12:00:00Z', sampleInterval: 10 }),
+        ...many(20, { datetime: '2026-11-05T12:00:00Z', sampleInterval: 10 }),
+        ...many(20, { datetime: '2026-11-06T12:00:00Z' }),
+      ];
+      const r = buildReport(rows, { ...opts, compareAt: at });
+      expect(r.compare.before.sitewide.metrics.LCP).toMatchObject({ ci95: null, ciMissing: 'too-few-beacons' });
+      expect(r.compare.after.sitewide.metrics.LCP).toMatchObject({ ci95: null, ciMissing: 'mixed-sample-rates' });
+      expect(r.compare.judgeable).toEqual({ LCP: false, INP: false, CLS: false });
+      const text = formatText(r);
+      expect(text).not.toContain('A change smaller than the 95% intervals');
+      expect(text).toContain(
+        'LCP: no 95% interval (before: too few beacons; after: sampled and unsampled beacons are mixed), so this run cannot say whether LCP changed.',
+      );
+      expect(text).toMatch(/none \(sampled and unsampled beacons are mixed\)/);
+      expect(r.notes.join(' ')).toMatch(/before side of the comparison is a 1-in-10 sample/);
+      expect(r.notes.join(' ')).toMatch(/after side of the comparison is partly a 1-in-10 sample/);
+    });
+
+    it('names only the metrics that can be judged when some can and some cannot', () => {
+      const rows = [
+        ...many(40, { datetime: '2026-11-02T12:00:00Z' }),
+        ...many(40, { datetime: '2026-11-05T12:00:00Z', interactionToNextPaint: -1 }),
+      ];
+      const r = buildReport(rows, { ...opts, compareAt: at });
+      expect(r.compare.judgeable).toEqual({ LCP: true, INP: false, CLS: true });
+      const text = formatText(r);
+      expect(text).toContain('LCP, CLS: a change smaller than the 95% intervals above is not evidence of an effect.');
+      expect(text).toContain('INP: no 95% interval (after: no beacons reported it), so this run cannot say whether INP changed.');
+    });
+  });
+
   it('says when part of the window is a 1-in-10 sample', () => {
     const r = buildReport([row(), row({ sampleInterval: 10 })], opts);
     expect(r.beacons.rowsBySampleInterval).toEqual({ 1: 1, 10: 1 });
@@ -490,5 +541,32 @@ describe('the command', () => {
     expect(r.code).toBe(0);
     expect(r.out).toMatch(/--compare-at ISO/);
     expect(r.calls).toHaveLength(0);
+  });
+});
+
+/* The saved Phase 1 baseline (docs/growth/performance.md section 8). It was
+   measured on deploy day because the same window re-run a week later comes
+   back as a 1-in-10 sample; these checks keep the file what the docs say it
+   is: unsampled, six days, ending at the deploy, with an interval on every
+   sitewide p75. */
+describe('the saved Phase 1 baseline', () => {
+  const baseline = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, '../../docs/growth/cwv-baselines/2026-11-06-phase1-before.json'), 'utf8'),
+  );
+
+  it('is the unsampled six days before the deploy, human traffic only', () => {
+    expect(baseline.window).toEqual({ since: '2026-10-31T15:05:00Z', until: '2026-11-06T15:05:00Z', days: 6 });
+    expect(baseline.traffic).toBe('human');
+    expect(Object.keys(baseline.beacons.rowsBySampleInterval)).toEqual(['1']);
+    expect(baseline.compare).toBeNull();
+  });
+
+  it('has a 95% interval on every sitewide p75, which is what a later window is compared with', () => {
+    for (const m of ['LCP', 'INP', 'CLS']) {
+      const x = baseline.sitewide.metrics[m];
+      expect(x.ci95).toHaveLength(2);
+      expect(x.ci95[0]).toBeLessThanOrEqual(x.p75);
+      expect(x.p75).toBeLessThanOrEqual(x.ci95[1]);
+    }
   });
 });

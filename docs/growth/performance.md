@@ -138,7 +138,7 @@ Added 6 Nov 2026 (audit ACTION-PLAN item 26). Everything above is lab data. This
 ```bash
 npm run cwv:field                                          # last 28 days
 npm run cwv:field -- --days 6                              # the unsampled week
-npm run cwv:field -- --since 2026-10-31 --compare-at 2026-11-06T15:05Z   # before/after the Phase 1 deploy
+npm run cwv:field -- --since 2026-11-06T15:05Z --json > after.json  # after the Phase 1 deploy, by 12 Nov
 npm run cwv:field -- --json > cwv.json
 ```
 
@@ -146,7 +146,7 @@ npm run cwv:field -- --json > cwv.json
 
 - **This is not Google's number.** Google's assessment uses CrUX, which had no data for this origin in the brief's PSI report. The thresholds are the same (p75 against LCP 2.5 s, INP 200 ms, CLS 0.1); the population is different.
 - **Older data is a 1-in-10 sample.** Cloudflare answers any window that starts more than about seven days back from a 1-in-10 sample. A 28-day report is therefore precise for the newest six days and an estimate for the rest. The report states the split.
-- **The volume is small.** About 120 human beacons in the six days to 6 Nov. A path with a handful of beacons is an anecdote. The 95% interval printed next to each p75 is the honest measure of what the number can say; it is shown only when every row has the same sample rate.
+- **The volume is small.** About 120 human beacons in the six days to 6 Nov. A path with a handful of beacons is an anecdote. The 95% interval printed next to each p75 is the honest measure of what the number can say; it is shown only when every row has the same sample rate and there are enough beacons for one; otherwise the report says which of those is missing.
 
 **First reading: 31 Oct – 6 Nov 2026 (6 days to 19:58 UTC, unsampled, human traffic only).** 122 beacons; 60 more were flagged as bots by Cloudflare and excluded. All three metrics are in the good band, sitewide and on both device types:
 
@@ -160,4 +160,12 @@ Of the 28 paths with beacons that week, one page had a p75 outside "good": `/con
 
 **Why the field is so much better than the lab.** The lab profile in §2 is a throttled mid-range phone on a slow connection with a cold cache. Real visitors in that week were three-quarters desktop (91 of 122 beacons), on whatever devices and connections they actually have. Neither number is wrong; they answer different questions. The lab is the stricter test and the one to keep improving against.
 
-**The Phase 1 deploy (6 Nov 2026, about 15:05 UTC).** It deferred the Google Tag Manager loader and stopped loading the italic font on the homepage. When this was first run, at 19:58 UTC the same day, there were **no human beacons after the deploy yet** (only bot-flagged ones), so there is no field before/after. Re-run with `--since 2026-10-31 --compare-at 2026-11-06T15:05Z` once a week or two of visits has accumulated, and judge the change against the intervals, not the point values.
+**The Phase 1 deploy (6 Nov 2026, about 15:05 UTC).** It deferred the Google Tag Manager loader and stopped loading the italic font on the homepage. When this was first run, at 19:58 UTC the same day, there were **no human beacons after the deploy yet** (only bot-flagged ones), so there is no field before/after yet.
+
+**How to judge it, and any later deploy.** Only an unsampled window gives a 95% interval worth comparing, and Cloudflare keeps a window unsampled only while it starts inside the last week or so. A `--compare-at` split over a range that reaches further back gets a "before" side that has aged into the 1-in-10 sample (a dozen rows, too few for an interval) and an "after" side of mixed sample rates (no honest interval at all); the report now says so rather than pointing at intervals it cannot print. So the comparison is two separate windows, each measured while it is fresh:
+
+1. **Before: saved.** The six days before the deploy, measured at 20:10 UTC on deploy day, unsampled, are in [`cwv-baselines/2026-11-06-phase1-before.json`](cwv-baselines/2026-11-06-phase1-before.json) (`--since 2026-10-31T15:05Z --until 2026-11-06T15:05Z --json`). 191 human beacons, 36 bot rows excluded. Sitewide p75: **LCP 0.81 s (0.56–0.94 s), INP 16 ms (16–40 ms), CLS 0.000 (0.000–0.001)**. It is a slightly different window from the first reading above (which ran to 19:58 UTC); the extra five hours on 31 Oct held 69 human beacons. This file is the baseline; re-running the same command later returns a 1-in-10 sample of it, not the same numbers.
+2. **After: measure by about 12 Nov.** `npm run cwv:field -- --since 2026-11-06T15:05Z --json > after.json` while that start is still within six days, or `--days 6` on any later date for a window that is wholly after the deploy. Check the `Beacons:` line says every row is at 1-in-1.
+3. **Compare the intervals, not the point values.** A sitewide p75 whose interval overlaps the baseline's is not evidence of a change. With a hundred or so beacons a week, an improvement this site's lab numbers would notice may well not show here at all; that is a limit of the volume, not a result.
+
+For a future deploy, run step 1 (`--days 6 --json`) before deploying.

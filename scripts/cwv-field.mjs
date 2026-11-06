@@ -5,7 +5,7 @@
  *   npm run cwv:field                                   # last 28 days
  *   npm run cwv:field -- --days 7
  *   npm run cwv:field -- --since 2026-10-31 --until 2026-11-06T15:05Z
- *   npm run cwv:field -- --since 2026-10-31 --compare-at 2026-11-06T15:05Z
+ *   npm run cwv:field -- --days 6 --compare-at 2026-11-06T15:05Z  # only while unsampled
  *   npm run cwv:field -- --json > cwv.json
  *
  * WHY. ACTION-PLAN item 26 (6 Nov 2026 audit) asked for field LCP, INP and
