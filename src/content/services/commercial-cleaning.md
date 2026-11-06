@@ -1,9 +1,9 @@
 ---
 title: "Commercial Cleaning"
 h1: "Commercial Cleaning & Janitorial Services in Toronto and the GTA"
-seoTitle: "Commercial Cleaning & Janitorial Services in Toronto | Evergreen"
+seoTitle: "Commercial Cleaning & Janitorial in Toronto | Evergreen"
 description: "Commercial cleaning and janitorial services in Toronto and the GTA: retail, institutional and mixed-use buildings, after hours. We reply within 2 hours."
-summary: "Recurring and one-off cleaning for the commercial spaces your customers and visitors judge you by — scheduled around your opening hours and scoped on site, not over the phone."
+summary: "Commercial cleaning is the cleaning of business premises, and janitorial services are the scheduled part of it: washrooms, kitchens, floors, trash and touch points, kept up the same way every visit. Evergreen Office Cleaning has provided both across Toronto and the GTA since 1989, scheduled around your opening hours and scoped on site, not over the phone."
 image: "/images/lobby-floor-scrubber-commercial.jpg"
 imageAlt: "Close-up of a floor machine cleaning a commercial lobby"
 fitHeading: "Commercial spaces we clean"

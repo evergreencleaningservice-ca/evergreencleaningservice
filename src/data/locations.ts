@@ -111,10 +111,10 @@ export const locations: Location[] = [
     title: 'Office & Commercial Cleaning in Mississauga | Evergreen',
     detail: {
       h1: 'Office & Commercial Cleaning in Mississauga',
-      subtitle: 'Reliable, professional facility maintenance for Mississauga businesses',
+      subtitle: 'Office and commercial cleaning for Mississauga businesses, after hours, by the same crew each visit',
       intro: [
-        'From corporate headquarters along the Hurontario corridor and the Airport Corporate Centre to high-traffic industrial complexes in Meadowvale, Evergreen Office Cleaning provides comprehensive commercial cleaning and janitorial solutions tailored to your operational schedule.',
-        'Serving Peel Region and the GTA since 1989, our WSIB-covered, bonded and insured teams keep your facility clean and healthy for employees, clients and visitors.',
+        'Mississauga’s workplaces run from head offices along Hurontario and the Airport Corporate Centre to the plants and warehouses of Meadowvale. Evergreen Office Cleaning cleans them after hours, on a schedule set at a free walkthrough and written into a proposal, so the work fits the hours your building keeps',
+        'We have cleaned in Peel Region and across the GTA since 1989. Our crews are WSIB covered, bonded and insured, and the same people come back each visit, so they know your building',
       ],
       servicesTitle: 'Commercial facilities we clean in Mississauga',
       services: [
@@ -138,16 +138,16 @@ export const locations: Location[] = [
       reasonsTitle: 'Why Mississauga property managers choose Evergreen',
       reasons: [
         {
-          label: 'Flexible Scheduling (Zero Disruption)',
-          body: 'Complete after-hours and weekend coverage scheduled around your operational shifts.',
+          label: 'Cleaning around your hours',
+          body: 'Evenings, overnight or weekends, scheduled around your shifts so nobody is cleaning while you work.',
         },
         {
-          label: 'Direct Account Management',
-          body: 'You receive direct access to an account executive who coordinates your site walkthroughs, inspections, and adjustments.',
+          label: 'One person to call',
+          body: 'An account executive arranges the walkthrough, checks the work and changes the scope when your needs change.',
         },
         {
-          label: 'Fully Insured & Background-Checked',
-          body: 'All cleaning personnel undergo background screening and are covered under full liability insurance and WSIB Ontario.',
+          label: 'Insured and screened staff',
+          body: 'Cleaning staff are background screened and covered by liability insurance and WSIB Ontario.',
         },
       ],
       ctaLabel: 'Request a Free Mississauga Walkthrough & Proposal',
@@ -195,10 +195,10 @@ export const locations: Location[] = [
     title: 'Office & Commercial Cleaning in Vaughan & Concord | Evergreen',
     detail: {
       h1: 'Office & Commercial Cleaning in Vaughan and Concord',
-      subtitle: 'Keep your Vaughan commercial property spotless, professional and safe',
+      subtitle: 'After-hours office and commercial cleaning for Vaughan and Concord, by a crew that knows your building',
       intro: [
-        'As Vaughan continues rapid corporate expansion across the Vaughan Metropolitan Centre (VMC) and industrial sectors in Concord and Woodbridge, maintaining an exceptional physical workspace is critical. Evergreen Office Cleaning provides top-tier commercial office cleaning and building maintenance designed for modern businesses.',
-        'Whether you run a high-tech corporate office, a commercial showroom along Highway 7, or a high-capacity distribution warehouse near Highway 400, our dedicated cleaning teams deliver consistent, reliable service.',
+        'Vaughan’s business space is spread between the office towers of the Vaughan Metropolitan Centre, the showrooms along Highway 7 and the warehouses and plants of Concord and Woodbridge. Evergreen Office Cleaning cleans all three kinds after hours, from a written scope agreed at a free walkthrough',
+        'Each building gets the same crew every visit and one account executive to call. We have done this work across Toronto and the GTA since 1989, and our staff are WSIB covered, bonded and insured',
       ],
       servicesTitle: 'Cleaning services for Vaughan businesses',
       services: [
@@ -222,16 +222,16 @@ export const locations: Location[] = [
       reasonsTitle: 'Why Vaughan facilities choose Evergreen',
       reasons: [
         {
-          label: 'Consistent Teams',
-          body: 'You receive dedicated cleaners assigned to your specific property for consistent quality and site familiarity.',
+          label: 'The same crew every visit',
+          body: 'Cleaners are assigned to your building and stay on it, so they learn its rooms, its access rules and what you notice.',
         },
         {
-          label: 'WSIB Ontario Registered & Bonded',
-          body: 'Total peace of mind for property managers and building owners.',
+          label: 'WSIB covered, bonded and insured',
+          body: 'Coverage that a property manager or building owner can ask us to show before work starts.',
         },
         {
-          label: 'Eco-Friendly Solutions',
-          body: 'Green cleaning products that protect indoor air quality without sacrificing disinfectant power.',
+          label: 'Products chosen for indoor air',
+          body: 'We use Armstrong ProSeries Green products, certified to UL ECOLOGO standards, which clean and disinfect without leaving a heavy fragrance behind.',
         },
       ],
       ctaLabel: 'Schedule an On-Site Vaughan Consultation',

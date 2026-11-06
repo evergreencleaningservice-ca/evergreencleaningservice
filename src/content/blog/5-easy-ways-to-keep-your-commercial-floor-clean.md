@@ -1,6 +1,6 @@
 ---
 title: "5 Easy Ways to Keep Your Commercial Floor Clean"
-description: "Do your floors sparkle? Here we discuss the benefits of clean commercial floors and how to ensure they stay that way."
+description: "Five ways to keep a commercial floor clean: more bins, dirt-trapping mats, regular floor checks, a professional cleaner and a strip-and-wax cycle."
 pubDate: 2021-11-24
 image: "/images/blog-commercial-floor-care-feature.jpg"
 imageAlt: "Cleaner using a floor wiper on tiled flooring"

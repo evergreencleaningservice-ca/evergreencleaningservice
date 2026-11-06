@@ -38,6 +38,8 @@ scope:
   - "Natural stone, hardwood and other specialty floors need their own methods; ask at the walkthrough."
 showProcess: true
 showPricing: true
+reviews:
+  - "Michael Katchen"
 faqs:
   - q: "How often should a commercial floor be stripped and waxed?"
     a: "It depends on the floor and the traffic it takes. Busy entrances, corridors and sales floors need it more often than back offices, and regular scrubbing and burnishing between cycles stretches the time between full strips. We recommend a cycle after seeing the floor."

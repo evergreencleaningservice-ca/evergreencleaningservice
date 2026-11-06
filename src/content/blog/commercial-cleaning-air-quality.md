@@ -1,6 +1,6 @@
 ---
 title: "Commercial Cleaning and Air Quality"
-description: "How cleaning improves the air in an office or commercial building: what makes indoor air poor, how to reduce dust and allergens, and what to clean and how often."
+description: "How cleaning improves the air in an office: what makes indoor air poor, how to cut dust and allergens, and what to clean and how often."
 pubDate: 2020-08-31
 updatedDate: 2026-10-30
 image: "/images/blog-commercial-cleaning-air-quality-feature.jpg"

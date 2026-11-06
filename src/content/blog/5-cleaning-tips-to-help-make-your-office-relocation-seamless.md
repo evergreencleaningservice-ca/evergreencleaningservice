@@ -1,6 +1,6 @@
 ---
 title: "5 Cleaning Tips to Help Make Your Office Relocation Seamless"
-description: "Relocating your offices turning into a nightmare? Here we discuss a few ideas to make moving the office as painless as possible."
+description: "Five cleaning tips for an office move: pack first, keep boxes in one spot, clean top to bottom, do the windows, and leave bathrooms and the kitchen until last."
 pubDate: 2022-06-29
 image: "/images/blog-office-relocation-cleaning-feature.jpg"
 imageAlt: "Moving boxes beside wrapped furniture"

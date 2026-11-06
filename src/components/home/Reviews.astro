@@ -88,9 +88,12 @@ const cards = reviews.map((r) => ({ ...r, age: relativeAge(r.date) }));
                     />
                   </svg>
                 ))}
+                {/* The verified icon carries its name as aria-label rather
+                    than a <title> element: the sentence was extracted as body
+                    text once per review, seven times on the page (SEO audit
+                    Phase 2). */}
                 {r.verified && (
-                  <svg class="ti-verified" viewBox="0 0 24 24" role="img">
-                    <title>Trustindex verifies that the original source of the review is Google.</title>
+                  <svg class="ti-verified" viewBox="0 0 24 24" role="img" aria-label="Verified Google review">
                     <path
                       fill="#4285F4"
                       d="M12 1.2l2.2 1.7 2.8-.2.9 2.6 2.4 1.4-.8 2.7.8 2.7-2.4 1.4-.9 2.6-2.8-.2L12 17.6l-2.2-1.7-2.8.2-.9-2.6-2.4-1.4.8-2.7-.8-2.7 2.4-1.4.9-2.6 2.8.2z"
