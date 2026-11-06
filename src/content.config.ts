@@ -51,6 +51,11 @@ const pages = defineCollection({
     description: z.string().optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
+    /** A captioned photo grid, rendered by the page after its body. Only
+        /cleaning-demo-gallery/ carries one. */
+    photos: z
+      .array(z.object({ src: z.string(), alt: z.string(), caption: z.string() }))
+      .default([]),
   }),
 });
 

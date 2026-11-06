@@ -41,6 +41,18 @@ const MORE = [
   { title: 'Floor Stripping & Waxing', href: '/services/floor-stripping-waxing/', text: 'Hard floors stripped, sealed and refinished after hours.' },
   { title: 'Graffiti Removal', href: '/services/graffiti-removal/', text: 'Removal matched to the surface it is on.' },
 ];
+
+/* The card's real width at each container step, not the viewport's: three
+   across inside the 1320/1140/960/720px containers with 18px gaps (418, 358,
+   298 and 218px), then one across — 510px inside the 540px container from
+   576px and the viewport less the two 15px gutters on a phone. `100vw` on a
+   phone made a 1.75x screen fetch the 768 for a 380px card (SEO audit,
+   performance finding 7); the 640 sits between the 480 and the 768 for
+   exactly that case (scripts/content-variants.mjs). */
+const SIZES =
+  '(min-width: 1400px) 418px, (min-width: 1200px) 358px, (min-width: 992px) 298px, (min-width: 768px) 218px, (min-width: 576px) 510px, calc(100vw - 30px)';
+const CARD_WIDTHS = [480, 640, 768];
+const srcset = (image: string, ext: string) => CARD_WIDTHS.map((w) => `/images/${image}-${w}.${ext} ${w}w`).join(', ');
 ---
 
 <section class="section-padding home-services" id="services" aria-labelledby="services-title">
@@ -56,9 +68,9 @@ const MORE = [
           <li>
             <a href={s.href}>
               <picture>
-                <source type="image/avif" srcset={`/images/${s.image}-480.avif 480w, /images/${s.image}-768.avif 768w`} sizes="(min-width: 992px) 360px, 100vw" />
-                <source type="image/webp" srcset={`/images/${s.image}-480.webp 480w, /images/${s.image}-768.webp 768w`} sizes="(min-width: 992px) 360px, 100vw" />
-                <img src={`/images/${s.image}-480.jpg`} alt={s.alt} width="480" height="320" loading="lazy" decoding="async" />
+                <source type="image/avif" srcset={srcset(s.image, 'avif')} sizes={SIZES} />
+                <source type="image/webp" srcset={srcset(s.image, 'webp')} sizes={SIZES} />
+                <img src={`/images/${s.image}-480.jpg`} srcset={srcset(s.image, 'jpg')} sizes={SIZES} alt={s.alt} width="480" height="320" loading="lazy" decoding="async" />
               </picture>
               <span class="hs-body">
                 <strong>{s.title}</strong>

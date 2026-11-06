@@ -5,6 +5,7 @@ import BaseLayout from './BaseLayout.astro';
 import '../styles/fonts-italic.css';
 import { articleSchema, breadcrumbSchema } from '../lib/schema';
 import { responsiveSet } from '../lib/responsive-images.mjs';
+import { intrinsic, thumbSet } from '../lib/thumb';
 import { site } from '../data/site';
 
 interface Props {
@@ -24,8 +25,14 @@ const sizes = '(min-width: 912px) 880px, calc(100vw - 32px)';
 const related = await Promise.all(guide.related.map(async (item) => {
   const entry = await getEntry('blog', item.slug);
   if (!entry) throw new Error(`Unknown related article: ${item.slug}`);
-  return { ...item, entry };
+  /* The card's picture: the related post's featured image at 480/720 (or
+     768) in AVIF, WebP and JPEG (src/lib/thumb.ts), not the WordPress
+     300x150 crop it drew until 6 Nov 2026. */
+  const image = entry.data.image;
+  return { ...item, entry, image, set: thumbSet(image), size: intrinsic(image) };
 }));
+/* Half of the 880px column less the 24px gap, two up from 561px, one up below. */
+const relatedSizes = '(min-width: 912px) 428px, (min-width: 561px) calc(50vw - 28px), calc(100vw - 32px)';
 ---
 
 <BaseLayout title={seoTitle ?? title} description={description} image={image} imageAlt={imageAlt}
@@ -76,10 +83,14 @@ const related = await Promise.all(guide.related.map(async (item) => {
       </article>
       <aside class="guide-related" aria-labelledby="related-heading">
         <h2 id="related-heading">Related articles</h2>
-        <div class="guide-related-grid">{related.map(({ slug, label, entry }) => (
+        <div class="guide-related-grid">{related.map(({ slug, label, image, set, size }) => (
           <a class="guide-related-card" href={`/${slug}/`}>
-            {entry.data.image && <img src={entry.data.image.replace(/\.jpg$/, '-300x150.jpg')}
-              alt="" width="300" height="150" loading="lazy" decoding="async" />}
+            {image && <picture>
+              {set && <source type="image/avif" srcset={set.avif} sizes={relatedSizes} />}
+              {set && <source type="image/webp" srcset={set.webp} sizes={relatedSizes} />}
+              <img src={set?.src ?? image} srcset={set?.jpg} sizes={set ? relatedSizes : undefined}
+                alt="" width={(set ?? size)?.width} height={(set ?? size)?.height} loading="lazy" decoding="async" />
+            </picture>}
             <h3>{label}</h3>
           </a>
         ))}</div>
