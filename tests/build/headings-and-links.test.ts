@@ -355,13 +355,14 @@ describe('the rest of the page is untouched', () => {
      sitemap (SEO audit M1, M2). 70 since 2026-10-30: floor stripping and
      waxing (M5). 55 since the blog consolidation the same day: 16 posts
      merged or retired, one seasonal checklist added (H7). */
-  // 58 since 6 Nov 2026: the office cleaning checklist guide.
-  it('all 58 sitemap URLs were built', () => {
+  // 62 since 6 Nov 2026: the office cleaning checklist guide and four
+  // location pages (North York, Scarborough, Richmond Hill, Durham).
+  it('all 62 sitemap URLs were built', () => {
     const locs = (xml: string) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const urls = locs(read('sitemap-index.xml')).flatMap((child) =>
       locs(read(path.basename(new URL(child).pathname)))
     );
-    expect(urls).toHaveLength(58);
+    expect(urls).toHaveLength(62);
     const missing = urls.filter((u) => !exists(new URL(u).pathname));
     expect(missing).toEqual([]);
   });
@@ -382,6 +383,9 @@ describe('location pages are each their own page', () => {
   const CITY: Record<string, string[]> = {
     'toronto-downtown': ['downtown toronto', 'toronto downtown'],
     'vaughan': ['vaughan & concord', 'vaughan and concord', 'vaughan'],
+    'north-york': ['north york'],
+    'richmond-hill': ['richmond hill'],
+    'durham-region': ['pickering, ajax and oshawa', 'pickering, ajax & oshawa', 'durham region', 'pickering', 'ajax', 'oshawa'],
   };
 
   const words = (slug: string): string[] => {
@@ -458,6 +462,10 @@ describe('the location pages people search as "office cleaning <city>"', () => {
     ['markham', 'Markham'],
     ['oakville', 'Oakville'],
     ['toronto-downtown', 'Downtown Toronto'],
+    ['north-york', 'North York'],
+    ['scarborough', 'Scarborough'],
+    ['richmond-hill', 'Richmond Hill'],
+    ['durham-region', 'Pickering, Ajax and Oshawa'],
   ])('%s leads with office cleaning in its title, H1 and an office section', (slug, place) => {
     const html = read(`locations/${slug}/index.html`);
     expect(html).toMatch(/<title>Office &amp; Commercial Cleaning in /);
@@ -495,6 +503,9 @@ describe('the audit fixes of 30 Oct 2026', () => {
 
   it('only the downtown page says the office is in its area', () => {
     expect(read('locations/etobicoke/index.html')).toContain('No. Etobicoke is in the City of Toronto');
+    expect(read('locations/north-york/index.html')).toContain('No. North York is in the City of Toronto');
+    expect(read('locations/scarborough/index.html')).toContain('No. Scarborough is in the City of Toronto');
+    expect(read('locations/durham-region/index.html')).toContain('No. Crews come to Durham Region from our one office');
     expect(read('locations/toronto-downtown/index.html')).toMatch(/Do you have an office in Downtown Toronto\?<\/summary><p[^>]*>Yes: /);
   });
 });

@@ -33,19 +33,24 @@ export interface Area {
 export const AREAS: Area[] = [
   { name: 'Downtown Toronto', href: '/locations/toronto-downtown/', group: 'Toronto' },
   { name: 'Etobicoke', href: '/locations/etobicoke/', group: 'Toronto' },
-  { name: 'North York', group: 'Toronto' },
-  { name: 'Scarborough', group: 'Toronto' },
-  { name: 'East York', group: 'Toronto' },
-  { name: 'York', group: 'Toronto' },
+  { name: 'North York', href: '/locations/north-york/', group: 'Toronto' },
+  { name: 'Scarborough', href: '/locations/scarborough/', group: 'Toronto' },
+  /* East York and York are covered on the downtown page (its "Working in
+     Downtown Toronto" section names their business areas): neither has
+     enough distinct commercial geography for a page of its own. */
+  { name: 'East York', href: '/locations/toronto-downtown/', group: 'Toronto' },
+  { name: 'York', href: '/locations/toronto-downtown/', group: 'Toronto' },
   { name: 'Mississauga', href: '/locations/mississauga/', group: 'Peel & Halton' },
   { name: 'Brampton', href: '/locations/brampton/', group: 'Peel & Halton' },
   { name: 'Oakville', href: '/locations/oakville/', group: 'Peel & Halton' },
   { name: 'Vaughan & Concord', href: '/locations/vaughan/', group: 'York Region' },
   { name: 'Markham', href: '/locations/markham/', group: 'York Region' },
-  { name: 'Richmond Hill', group: 'York Region' },
-  { name: 'Pickering', group: 'Durham' },
-  { name: 'Ajax', group: 'Durham' },
-  { name: 'Oshawa', group: 'Durham' },
+  { name: 'Richmond Hill', href: '/locations/richmond-hill/', group: 'York Region' },
+  /* One page for the three Durham towns: they share the 401 corridor and the
+     drive from Toronto, and none has enough on its own for a separate page. */
+  { name: 'Pickering', href: '/locations/durham-region/', group: 'Durham' },
+  { name: 'Ajax', href: '/locations/durham-region/', group: 'Durham' },
+  { name: 'Oshawa', href: '/locations/durham-region/', group: 'Durham' },
 ];
 
 export const AREA_GROUPS = ['Toronto', 'Peel & Halton', 'York Region', 'Durham'] as const;

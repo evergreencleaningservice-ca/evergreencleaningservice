@@ -303,6 +303,95 @@ export const locations: Location[] = [
     h1: 'Office & Commercial Cleaning in Oakville',
     needsClientReview: true,
   },
+  /* Four pages added 6 Nov 2026 (SEO audit, Phase 3). The areas were already
+     claimed sitewide (coverage.ts); what is new is a page each with its own
+     geography, written from public knowledge of the districts, not from
+     client-supplied facts. No clients, buildings or counts are named. */
+  {
+    slug: 'north-york',
+    name: 'North York',
+    region: 'North York',
+    focus:
+      'Office towers around North York Centre, the business parks off Highway 401 and 404, clinics near the hospitals and the industrial units along Steeles and Finch.',
+    facilities: [
+      'Office towers and multi-tenant buildings around Yonge and Sheppard',
+      'Business-park offices off Highway 401 and 404',
+      'Medical and dental clinics and professional suites',
+      'Industrial units with offices at the front',
+      'Retail plazas and showrooms',
+    ],
+    landmarks: 'North York Centre, the Consumers Road business park, Don Mills and the Steeles–Finch industrial belt',
+    mapQuery: 'North York, Toronto, Ontario, Canada',
+    description:
+      'Office and commercial cleaning in North York: Yonge–Sheppard towers, business parks off the 401 and 404, clinics and industrial units. After hours, WSIB covered.',
+    title: 'Office & Commercial Cleaning in North York | Evergreen',
+    h1: 'Office & Commercial Cleaning in North York',
+    needsClientReview: true,
+  },
+  {
+    slug: 'scarborough',
+    name: 'Scarborough',
+    region: 'Scarborough',
+    focus:
+      'Offices around Scarborough Centre, the Progress and Milliken business areas, clinics in the plazas and the warehouses and plants along Highway 401.',
+    facilities: [
+      'Office buildings around Scarborough Centre and Consilium Place',
+      'Warehouses and plants along Highway 401 and in Milliken',
+      'Medical and dental clinics in plazas and medical buildings',
+      'Retail stores, showrooms and the Golden Mile',
+      'Multi-tenant and institutional buildings',
+    ],
+    landmarks: 'Scarborough Centre, the Progress Avenue business area, the Golden Mile, Agincourt and Milliken',
+    mapQuery: 'Scarborough, Toronto, Ontario, Canada',
+    description:
+      'Office and commercial cleaning in Scarborough: Scarborough Centre offices, Progress and Milliken business areas, clinics and 401 warehouses. After hours, WSIB covered.',
+    title: 'Office & Commercial Cleaning in Scarborough | Evergreen',
+    h1: 'Office & Commercial Cleaning in Scarborough',
+    needsClientReview: true,
+  },
+  {
+    slug: 'richmond-hill',
+    name: 'Richmond Hill',
+    region: 'Richmond Hill',
+    focus:
+      'Business-park offices in Beaver Creek and Headford, clinics and professional suites along Yonge Street, the buildings near Richmond Hill Centre, and the industrial units north of Elgin Mills.',
+    facilities: [
+      'Business-park offices in Beaver Creek and Headford',
+      'Professional and medical suites along Yonge Street',
+      'Multi-tenant office buildings near Richmond Hill Centre',
+      'Industrial units with offices in the Newkirk and Elgin Mills areas',
+      'Retail plazas and showrooms',
+    ],
+    landmarks: 'the Beaver Creek business park, Highway 7 and Highway 404, Richmond Hill Centre and the Yonge Street corridor',
+    mapQuery: 'Richmond Hill, Ontario, Canada',
+    description:
+      'Office and commercial cleaning in Richmond Hill: Beaver Creek and Headford business parks, Yonge Street suites and Richmond Hill Centre. After hours, WSIB covered.',
+    title: 'Office & Commercial Cleaning in Richmond Hill | Evergreen',
+    h1: 'Office & Commercial Cleaning in Richmond Hill',
+    needsClientReview: true,
+  },
+  {
+    slug: 'durham-region',
+    name: 'Durham Region',
+    region: 'Pickering, Ajax and Oshawa',
+    focus:
+      'Offices, clinics, plants and distribution buildings along the Highway 401 corridor through Pickering, Ajax and Oshawa, cleaned on fixed evenings planned around the drive from Toronto.',
+    facilities: [
+      'Offices and professional suites in Pickering, Ajax and Oshawa',
+      'Warehouses, plants and distribution buildings along Highway 401',
+      'Medical and dental clinics',
+      'Retail plazas and showrooms',
+      'Multi-tenant buildings and institutional space',
+    ],
+    landmarks: 'the Brock Road and Highway 401 business area in Pickering, the Salem and Harwood areas of Ajax, and downtown Oshawa and the Stevenson Road industrial belt',
+    mapQuery: 'Oshawa, Ontario, Canada',
+    description:
+      'Office and commercial cleaning in Pickering, Ajax and Oshawa: offices, clinics, plants and distribution buildings along the 401, on fixed evenings. WSIB covered.',
+    title: 'Office & Commercial Cleaning in Pickering, Ajax & Oshawa | Evergreen',
+    h1: 'Office & Commercial Cleaning in Pickering, Ajax and Oshawa',
+    needsClientReview: true,
+  },
 ];
+
 
 export const locationBySlug = (slug: string) => locations.find((l) => l.slug === slug);
