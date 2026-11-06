@@ -347,40 +347,46 @@ const orbIsCropped = orbSrc !== src;
     transform: none;
   }
 
-  /* Sits over the orb's upper-left corner, 6px left and 4px above it.
-     26px rather than the 20px it was: a 20x20 target fails WCAG 2.2's 24x24
-     minimum, and a dismiss control that is hard to hit is the one control on
-     the widget a person is most likely to be trying to hit. */
+  /* The badge sits over the orb's upper-left corner, 6px left and 4px above
+     it, and is drawn at 26px (the 20px it was fails WCAG 2.2's 24x24
+     minimum). THE BUTTON IS 44x44 and the badge is its `::before`: the
+     button itself is the hit area, so what a finger can land on and what a
+     tool measures are the same box. An earlier pass widened the target with
+     an invisible `::after` outside a 26px button, which worked for a finger
+     but measured 26px in the SEO audit's tap-target sweep (visual finding
+     2), and a dismiss control is the one the visitor is most likely to be
+     trying to hit. The offsets put the badge's centre where it was. */
   .leadnet-dismiss {
     position: absolute;
-    top: -7px;
-    right: 63px;
-    width: 26px;
-    height: 26px;
+    top: -16px;
+    right: 54px;
+    width: 44px;
+    height: 44px;
     display: grid;
     place-items: center;
     padding: 0;
     border: 0;
     border-radius: 50%;
-    background: #868686;
+    background: none;
     color: #fff;
     cursor: pointer;
   }
 
+  .leadnet-dismiss::before {
+    content: '';
+    position: absolute;
+    inset: 9px;
+    border-radius: 50%;
+    background: #868686;
+  }
+
   .leadnet-dismiss svg {
+    position: relative;
     width: 11px;
     height: 11px;
   }
 
-  /* The visible badge stays 26px; this widens what a finger can hit to 44px
-     (SEO audit, 30 Oct 2026: the 26px target was easy to miss on a phone). */
-  .leadnet-dismiss::after {
-    content: '';
-    position: absolute;
-    inset: -9px;
-  }
-
-  .leadnet-dismiss:hover {
+  .leadnet-dismiss:hover::before {
     background: #6f6f6f;
   }
 
@@ -584,8 +590,10 @@ const orbIsCropped = orbSrc !== src;
       height: 52px;
     }
 
+    /* The same badge position over the smaller orb (its centre 47px in from
+       the orb's right edge), with the 44px button centred on it. */
     .leadnet-dismiss {
-      right: 34px;
+      right: 25px;
     }
   }
 </style>
@@ -764,6 +772,15 @@ const orbIsCropped = orbSrc !== src;
     // the first screen needs. The countdown starts after the page has
     // finished loading, and the loop is fetched only when the bubble actually
     // appears (`nudge` asks it to play). The full clip waits for a click.
+    //
+    // ON A NARROW PHONE, ON THE HOMEPAGE, it waits for the hero as well. At
+    // 360px the bubble came up about 2.5s after load over the right end of
+    // "WSIB covered, bonded and insured", the hero's trust line, and beside
+    // the sticky call/quote bar that already carries its actions (SEO audit,
+    // visual finding 2). So under 480px the countdown starts only once the
+    // hero has scrolled out of view — out from under the sticky bar too,
+    // hence the bottom margin — and a visitor who never scrolls never sees
+    // it there. Other pages and wider screens are unchanged.
     if (!dismissed) {
       const delay = Number(panel.dataset.delay ?? 0);
       const reveal = () =>
@@ -777,8 +794,22 @@ const orbIsCropped = orbSrc !== src;
           },
           Number.isFinite(delay) ? delay : 0
         );
-      if (document.readyState === 'complete') reveal();
-      else window.addEventListener('load', reveal, { once: true });
+      const hero = document.getElementById('hero');
+      const narrow = window.matchMedia('(max-width: 479px)').matches;
+      const afterHero = () => {
+        if (!hero || !narrow || !('IntersectionObserver' in window)) return reveal();
+        const watch = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) return;
+            watch.disconnect();
+            reveal();
+          },
+          { rootMargin: '0px 0px -68px 0px' }
+        );
+        watch.observe(hero);
+      };
+      if (document.readyState === 'complete') afterHero();
+      else window.addEventListener('load', afterHero, { once: true });
     }
 
     // --- stepping aside ---

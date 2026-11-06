@@ -129,12 +129,18 @@ const f = (name: string) => `${id}-${name}`;
 
   {/* The address is four boxes on screen and one thing in the email: street,
       "city, province", postal code, then "CA", each on its own line, the
-      way the original's notification printed it. Composed in `quick-quote.ts`. */}
+      way the original's notification printed it. Composed in `quick-quote.ts`.
+
+      Each of the four boxes carries its own asterisk as well as the group's:
+      all four are `required`, and with only the group marked it was unclear
+      whether city, province and postal code were (SEO audit, visual
+      finding 6). The marking follows the validation; nothing became
+      required that was not. */}
   <fieldset class="qq-field qq-group">
     <legend class="qq-label">Address <span class="qq-req">*</span></legend>
 
     <div class="qq-field">
-      <label class="qq-sublabel" for={f('address1')}>Street address &amp; unit #</label>
+      <label class="qq-sublabel" for={f('address1')}>Street address &amp; unit # <span class="qq-req">*</span></label>
       <input
         type="text"
         id={f('address1')}
@@ -148,7 +154,7 @@ const f = (name: string) => `${id}-${name}`;
 
     <div class="qq-row qq-row-3">
       <div class="qq-field">
-        <label class="qq-sublabel" for={f('city')}>City</label>
+        <label class="qq-sublabel" for={f('city')}>City <span class="qq-req">*</span></label>
         <input
           type="text"
           id={f('city')}
@@ -165,7 +171,7 @@ const f = (name: string) => `${id}-${name}`;
       </div>
 
       <div class="qq-field">
-        <label class="qq-sublabel" for={f('province')}>Province</label>
+        <label class="qq-sublabel" for={f('province')}>Province <span class="qq-req">*</span></label>
         <input
           type="text"
           id={f('province')}
@@ -179,7 +185,7 @@ const f = (name: string) => `${id}-${name}`;
       </div>
 
       <div class="qq-field">
-        <label class="qq-sublabel" for={f('postal')}>Postal code</label>
+        <label class="qq-sublabel" for={f('postal')}>Postal code <span class="qq-req">*</span></label>
         <input
           type="text"
           id={f('postal')}
@@ -262,6 +268,14 @@ const f = (name: string) => `${id}-${name}`;
 
   <button class="qq-submit" type="submit">{submitLabel}</button>
 
+  {/* One line of reassurance beside the button itself: the reply promise and
+      what the details are for (SEO audit, visual finding 6: both sat above
+      the form only). The wording follows /privacy/, which says the form's
+      details are used to reply, arrange a walkthrough and prepare a quote. */}
+  <p class="qq-note">
+    We reply {replyPromise}. Your details are used only to reply to you and prepare your quote
+    (<a href="/privacy/">privacy policy</a>).
+  </p>
 </form>
 
 <script>
@@ -387,22 +401,29 @@ const f = (name: string) => `${id}-${name}`;
 
   .qq-choices li {
     display: flex;
-    align-items: flex-start;
-    gap: 6px;
+    align-items: center;
+    gap: 8px;
     font-size: 14px;
     line-height: 1.3;
   }
 
-  /* 18px boxes in the brand green; the label is part of the target too. */
+  /* 24px boxes in the brand green (18px until the SEO audit's visual
+     review, finding 1), and the label fills the rest of the row at 32px
+     tall, so the whole row toggles the box rather than the glyph and the
+     words alone. */
   .qq-choices input {
     flex: none;
-    width: 18px;
-    height: 18px;
-    margin: 1px 0 0;
+    width: 24px;
+    height: 24px;
+    margin: 0;
     accent-color: var(--brand);
   }
 
   .qq-choices label {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    min-height: 32px;
     color: var(--ink-heading);
     cursor: pointer;
   }
@@ -590,6 +611,18 @@ const f = (name: string) => `${id}-${name}`;
   .qq-submit:disabled {
     opacity: 0.75;
     cursor: progress;
+  }
+
+  .qq-note {
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .qq-note a {
+    color: var(--brand-dark);
+    text-decoration: underline;
   }
 
   @media (min-width: 560px) {
