@@ -98,11 +98,15 @@ ctaHeading: "Book a free office walkthrough"
 ctaText: "Tell us about your office and we will arrange a time to walk it with you and send a written proposal. No obligation."
 ---
 
-## What office cleaning is
+## What is office cleaning?
 
 Office cleaning is the recurring cleaning of a workplace's desks, floors, washrooms, kitchens and shared areas, usually done after staff leave. Evergreen Office Cleaning has done it for Toronto and GTA businesses since 1989, with a crew assigned to each building and one account executive per client.
 
-## A clean office does two jobs
+## How often should an office be cleaned?
+
+An office used every weekday needs its washrooms, kitchen, bins and busy touch points attended on each occupied day, with the rest of the space vacuumed, mopped and dusted on a weekly rotation and periodic work (carpet extraction, floor refinishing, high dusting) on dated visits through the year. Small or lightly used suites can run on one or two visits a week if someone handles the daily essentials in between. The [office cleaning frequency guide](/how-often-should-an-office-be-cleaned/) gives starting schedules by size and occupancy, and the [office cleaning checklist](/office-cleaning-checklist/) lists the tasks by day, week and month.
+
+## Why does office cleaning matter for a business?
 
 For your employees, a clean office is a healthier, more comfortable place to work — one that supports productivity and keeps absenteeism down. For clients and visitors, it is the first impression: a clean space is like a friendly handshake that tells people this is a business that has its house in order.
 
@@ -110,9 +114,9 @@ For your employees, a clean office is a healthier, more comfortable place to wor
 
 Evergreen has been cleaning offices in Toronto since 1989, providing the kind of detailed, floor-to-ceiling clean that the people you want to attract — staff, customers and clients — notice.
 
-## Your equipment and your privacy are respected
+## Who cleans the office, and are they screened?
 
-Offices hold valuable equipment and confidential material. Our office cleaning staff are trained to respect both your organisation's privacy and its cleanliness, and the team that holds your keys is the same team every visit. We clean a wide range of offices, from medical and professional suites to multi-tenant office buildings.
+The same assigned crew cleans your office at every visit, and every member of it is background-screened before holding a key to anyone's building; the crews are covered by WSIB Ontario and liability insurance, and the company is bonded. Offices hold valuable equipment and confidential material. Our office cleaning staff are trained to respect both your organisation's privacy and its cleanliness, and the team that holds your keys is the same team every visit. We clean a wide range of offices, from medical and professional suites to multi-tenant office buildings.
 
 Not sure whether daytime or after-hours cleaning suits your office? Our guide to [day or night office cleaning](/day-night-which-is-the-best-routine-for-your-office/) sets out the trade-offs, and [how to properly dust an office building](/how-to-properly-dust-office-building/) explains the top-to-bottom routine our crews follow.
 
