@@ -300,6 +300,14 @@ const RELATED_TEXT: Record<string, string> = {
   .offer-actions .btn {
     margin: 0;
   }
+  /* Full width on a narrow phone, as the homepage hero's buttons are: left-
+     aligned at their own widths the two measured 260 and 272px and read as
+     misaligned (SEO audit, visual finding 9). */
+  @media (max-width: 479px) {
+    .offer-actions .btn {
+      flex: 1 1 100%;
+    }
+  }
   .offer-trust {
     padding-top: 24px;
   }

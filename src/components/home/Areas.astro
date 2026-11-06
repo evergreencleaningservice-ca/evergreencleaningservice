@@ -51,4 +51,12 @@ import { nap } from '../../data/site';
     margin: 18px 0 0;
     font-weight: 600;
   }
+  /* A 44px tap target on a 22px line (SEO audit, visual finding 1). The
+     margin pulls the extra height back so the section's spacing stands. */
+  .ar-all a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-block: -11px;
+  }
 </style>

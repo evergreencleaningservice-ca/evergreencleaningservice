@@ -193,6 +193,108 @@ describe('alt attributes', () => {
   });
 });
 
+/* SEO audit of 6 Nov 2026, images finding 1: the gallery drew thirteen full
+   1200px JPEGs (1.1 MB) with no dimensions and no caption. */
+describe('the gallery serves its photographs like the rest of the site', () => {
+  const page = () => read('cleaning-demo-gallery/index.html');
+  const figures = () => [...page().matchAll(/<figure\b[\s\S]*?<\/figure>/g)].map((m) => m[0]);
+
+  it('offers each of the thirteen as AVIF, WebP then JPEG at 480 and 768, sized, lazy and captioned', () => {
+    expect(figures()).toHaveLength(13);
+    for (const figure of figures()) {
+      const avif = figure.indexOf('<source type="image/avif"');
+      const webp = figure.indexOf('<source type="image/webp"');
+      const img = figure.indexOf('<img');
+      expect(avif).toBeGreaterThan(-1);
+      expect(webp).toBeGreaterThan(avif);
+      expect(img).toBeGreaterThan(webp);
+      for (const ext of ['avif', 'webp', 'jpg'])
+        expect(figure).toMatch(new RegExp(String.raw`srcset="[^"]*gallery-[a-z-]+-480\.${ext} 480w, [^"]*gallery-[a-z-]+-768\.${ext} 768w"`));
+      expect(figure).toMatch(/<img\b[^>]*\swidth="768"[^>]*\sheight="512"/);
+      expect(figure).toMatch(/<img\b[^>]*\sloading="lazy"/);
+      expect(figure).toMatch(/<figcaption[^>]*>[^<]{12,}<\/figcaption>/);
+      /* Not the 1200px master: the srcset, the fallback and nothing else. */
+      expect(figure).not.toMatch(/gallery-[a-z-]+\.jpg/);
+    }
+  });
+
+  it('captions name the service illustrated, not a job or a place', () => {
+    for (const m of page().matchAll(/<figcaption[^>]*>([^<]*)<\/figcaption>/g)) {
+      expect(m[1]).toMatch(/^[A-Z][a-z ]+( cleaning| service| care| maintenance): /);
+      expect(m[1]).not.toMatch(/Toronto|Evergreen|our (crew|team)|client/i);
+    }
+  });
+
+  it('keeps one H1 and introduces the photos with links to the services and the quote page', () => {
+    expect([...page().matchAll(/<h1\b/g)]).toHaveLength(1);
+    const intro = page().match(/<article class="entry-content"[^>]*>\s*<p>([\s\S]*?)<\/p>/)?.[1] ?? '';
+    expect(intro).toMatch(/illustrate/);
+    expect(intro).toContain('href="/services/"');
+    expect(intro).toContain('href="/request-a-quote/"');
+  });
+});
+
+/* Images finding 4: thirty-two `-300x150.jpg` WordPress crops on the
+   post lists and related cards, JPEG only, stretched to 380px on a phone. */
+describe('the list thumbnails are the featured images’ own variants', () => {
+  it('no page references a WordPress 300x150 crop any more', () => {
+    const crops = pages.filter((p) => /-300x150\./.test(read(p)));
+    expect(crops).toEqual([]);
+  });
+
+  const thumbs = (html: string) =>
+    [...html.matchAll(/<div class="list-article-thumb"[\s\S]*?<\/picture>/g)].map((m) => m[0]);
+
+  it('every post-list thumbnail offers a 480 and a 720 or 768 in all three formats, with sizes', () => {
+    const list = thumbs(read('insights/index.html'));
+    expect(list.length).toBeGreaterThanOrEqual(10);
+    for (const thumb of [...list, ...thumbs(home)]) {
+      for (const ext of ['avif', 'webp', 'jpg'])
+        expect(thumb).toMatch(new RegExp(String.raw`srcset="[^"]*-480\.${ext} 480w, [^"]*-7(20|68)\.${ext} 7(20|68)w`));
+      expect(thumb).toMatch(/<img\b[^>]*\ssrc="[^"]*-480\.jpg"/);
+      expect(thumb).toMatch(/<img\b[^>]*\swidth="480"[^>]*\sheight="2(40|70)"/);
+      expect(thumb).toMatch(/sizes="\(min-width: 941px\) 300px/);
+    }
+  });
+
+  it('the guides’ related cards do the same, and stay lazy', () => {
+    const cards = [...read('office-cleaning-cost-toronto-guide/index.html').matchAll(/<a class="guide-related-card"[\s\S]*?<\/picture>/g)].map((m) => m[0]);
+    expect(cards).toHaveLength(3);
+    for (const card of cards) {
+      expect(card).toMatch(/<source type="image\/avif" srcset="[^"]*-480\.avif 480w, [^"]*-7(20|68)\.avif/);
+      expect(card).toMatch(/<img\b[^>]*\swidth="480"[^>]*\sheight="2(40|70)"[^>]*\sloading="lazy"/);
+    }
+  });
+});
+
+/* Performance finding 7: `100vw` on a phone picked the 768 for a 380px card. */
+describe('the homepage service cards are sized to the card, not the viewport', () => {
+  const cards = () => [...home.matchAll(/<ul class="hs-primary"[\s\S]*?<\/ul>/g)].flatMap((m) => [...m[0].matchAll(/<picture[\s\S]*?<\/picture>/g)].map((p) => p[0]));
+
+  it('offer 480, 640 and 768 candidates in every format', () => {
+    expect(cards()).toHaveLength(3);
+    for (const card of cards())
+      for (const ext of ['avif', 'webp', 'jpg'])
+        expect(card).toMatch(new RegExp(String.raw`-480\.${ext} 480w, [^"]*-640\.${ext} 640w, [^"]*-768\.${ext} 768w`));
+  });
+
+  it('with a sizes hint that never claims the whole viewport', () => {
+    for (const card of cards()) {
+      /* A bare `100vw` fallback, not the gutter-aware `calc(100vw - 30px)`. */
+      expect(card).not.toMatch(/[ ,"]100vw[,"]/);
+      expect(card).toMatch(/sizes="\(min-width: 1400px\) 418px, [^"]*calc\(100vw - 30px\)"/);
+    }
+  });
+
+  it('and the 640 variants are real downscales that beat their JPEG', () => {
+    for (const base of ['office-backpack-vacuum-toronto', 'lobby-floor-scrubber-commercial', 'warehouse-floor-scrubber-industrial']) {
+      const jpeg = fs.statSync(path.join(publicImages, `${base}-640.jpg`)).size;
+      for (const ext of ['avif', 'webp'])
+        expect(fs.statSync(path.join(publicImages, `${base}-640.${ext}`)).size, `${base}-640.${ext}`).toBeLessThan(jpeg);
+    }
+  });
+});
+
 describe('the console 404 is gone', () => {
   it('a favicon exists at the path every browser asks for unprompted', () => {
     expect(fs.existsSync(path.join(out, 'favicon.ico'))).toBe(true);

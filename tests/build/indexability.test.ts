@@ -228,9 +228,11 @@ describe('which pages are indexable', () => {
     /* Asserted positively as well as excused above, so a tag page cannot
        drift into being indexable without this failing. 24 archives plus the
        5 pagination pages the busiest tags need after Week 2 adds the
-       eleventh office-tagged post. */
+       eleventh office-tagged post. 27 since 6 Nov 2026: 23 archives, the
+       only `plants` post having been merged into the air-quality post, plus
+       4 pagination pages, the office tag being back to ten posts. */
     const archives = pages.filter(isTagArchive);
-    expect(archives).toHaveLength(29);
+    expect(archives).toHaveLength(27);
     for (const page of archives) expect(robotsMetaOf(read(page))).toBe('follow, noindex');
   });
 });

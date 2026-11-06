@@ -18,6 +18,13 @@ import { breadcrumbSchema } from '../../lib/schema';
 const AREA_LINKS: Record<string, string> = {
   Toronto: '/locations/toronto-downtown/',
   ...Object.fromEntries(locations.filter((l) => l.slug !== 'toronto-downtown').map((l) => [l.name, `/locations/${l.slug}/`])),
+  /* The three Durham towns share one page, and the two small Toronto
+     districts are covered on the downtown page (src/data/coverage.ts). */
+  Pickering: '/locations/durham-region/',
+  Ajax: '/locations/durham-region/',
+  Oshawa: '/locations/durham-region/',
+  'East York': '/locations/toronto-downtown/',
+  York: '/locations/toronto-downtown/',
 };
 const escape = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const linkedCoverage = escape(COVERAGE_SENTENCE).replace(
@@ -26,7 +33,7 @@ const linkedCoverage = escape(COVERAGE_SENTENCE).replace(
 );
 
 const description =
-  'Commercial and office cleaning across the Greater Toronto Area — downtown Toronto, Mississauga, Etobicoke, Vaughan, Markham, Brampton and Oakville.';
+  'Commercial and office cleaning across the Greater Toronto Area: Toronto, North York, Scarborough, Etobicoke, Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill and Durham.';
 ---
 
 <BaseLayout title={pageTitle(`Service Areas Across the GTA`)} description={description}>

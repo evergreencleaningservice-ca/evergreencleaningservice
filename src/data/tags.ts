@@ -27,6 +27,11 @@
  * gone; their archives redirect (`retiredTagRedirects` in
  * src/data/redirects.ts). The sizes are still the original's.
  *
+ * They changed again on 6 Nov 2026, when the hand-washing and plants posts
+ * were merged into the germ hotspots and air-quality posts and the floor
+ * post, which had no tags, was given four. `plants` was left with no posts
+ * and is gone the same way. 23 tags.
+ *
  * NINE TAGS ARE DELIBERATELY ABSENT. WordPress's theme-unit-test import left
  * `alignment`, `captions`, `content`, `css`, `image` and `markup` behind with
  * zero posts each. The original's own cloud excludes them, because an empty
@@ -69,13 +74,13 @@ export const tags: Tag[] = [
   { slug: 'air-quality', name: 'air quality', count: 1, size: 8 },
   { slug: 'allergies', name: 'allergies', count: 1, size: 8 },
   { slug: 'breakroom', name: 'breakroom', count: 1, size: 8 },
-  { slug: 'cleaning', name: 'cleaning', count: 12, size: 18.440677966102 },
+  { slug: 'cleaning', name: 'cleaning', count: 13, size: 18.440677966102 },
   { slug: 'cleaning-products', name: 'cleaning products', count: 4, size: 12.745762711864 },
-  { slug: 'commercial-cleaning', name: 'commercial cleaning', count: 19, size: 22 },
+  { slug: 'commercial-cleaning', name: 'commercial cleaning', count: 20, size: 22 },
   {
     slug: 'commercial-office-cleaning',
     name: 'Commercial office cleaning',
-    count: 19,
+    count: 20,
     size: 21.169491525424,
   },
   { slug: 'daycares', name: 'daycares', count: 1, size: 8 },
@@ -86,8 +91,7 @@ export const tags: Tag[] = [
   { slug: 'janitorial-services', name: 'janitorial services', count: 15, size: 20.338983050847 },
   { slug: 'manual-cleaning', name: 'Manual cleaning', count: 1, size: 8 },
   { slug: 'moving', name: 'moving', count: 1, size: 8 },
-  { slug: 'office', name: 'office', count: 11, size: 18.440677966102 },
-  { slug: 'plants', name: 'plants', count: 1, size: 8 },
+  { slug: 'office', name: 'office', count: 10, size: 18.440677966102 },
   { slug: 'refrigerator', name: 'refrigerator', count: 1, size: 8 },
   { slug: 'relocating', name: 'relocating', count: 1, size: 8 },
   { slug: 'retail', name: 'retail', count: 1, size: 8 },

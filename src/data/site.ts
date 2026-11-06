@@ -282,14 +282,16 @@ export const social = [
  */
 export const footerAreas: readonly { label: string; href?: string }[] = [
   { label: 'Downtown Toronto', href: '/locations/toronto-downtown/' },
-  { label: 'Mississauga', href: '/locations/mississauga/' },
+  { label: 'North York', href: '/locations/north-york/' },
+  { label: 'Scarborough', href: '/locations/scarborough/' },
   { label: 'Etobicoke', href: '/locations/etobicoke/' },
-  { label: 'Markham', href: '/locations/markham/' },
-  { label: 'Vaughan / Concord', href: '/locations/vaughan/' },
+  { label: 'Mississauga', href: '/locations/mississauga/' },
   { label: 'Brampton', href: '/locations/brampton/' },
   { label: 'Oakville', href: '/locations/oakville/' },
-  { label: 'Richmond Hill' },
-  { label: 'Scarborough' },
+  { label: 'Vaughan / Concord', href: '/locations/vaughan/' },
+  { label: 'Markham', href: '/locations/markham/' },
+  { label: 'Richmond Hill', href: '/locations/richmond-hill/' },
+  { label: 'Pickering, Ajax & Oshawa', href: '/locations/durham-region/' },
   { label: 'All service areas', href: '/locations/' },
 ];
 
@@ -355,12 +357,16 @@ export const nav: NavItem[] = [
     href: '/locations/',
     children: [
       { label: 'Downtown Toronto', href: '/locations/toronto-downtown/' },
+      { label: 'North York', href: '/locations/north-york/' },
+      { label: 'Scarborough', href: '/locations/scarborough/' },
       { label: 'Etobicoke', href: '/locations/etobicoke/' },
       { label: 'Mississauga', href: '/locations/mississauga/' },
       { label: 'Brampton', href: '/locations/brampton/' },
       { label: 'Oakville', href: '/locations/oakville/' },
       { label: 'Vaughan & Concord', href: '/locations/vaughan/' },
       { label: 'Markham', href: '/locations/markham/' },
+      { label: 'Richmond Hill', href: '/locations/richmond-hill/' },
+      { label: 'Pickering, Ajax & Oshawa', href: '/locations/durham-region/' },
       { label: 'All service areas', href: '/locations/' },
     ],
   },

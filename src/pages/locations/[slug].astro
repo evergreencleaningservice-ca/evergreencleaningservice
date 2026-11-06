@@ -48,7 +48,7 @@ const h1 = location.detail?.h1 ?? location.h1 ?? `Commercial Cleaning in ${locat
    a Toronto street address read as a Mississauga office, which this business
    does not have; it also loaded a Google Maps iframe on every location page.
    The page now says plainly where the crews come from. */
-const isToronto = location.slug === 'toronto-downtown' || location.slug === 'etobicoke';
+const isToronto = ['toronto-downtown', 'etobicoke', 'north-york', 'scarborough'].includes(location.slug);
 const baseNote = isToronto
   ? `Our office is at ${nap.streetAddress}, ${nap.addressLocality}.`
   : `We do not have an office in ${location.name}: crews travel from our Toronto base at ${nap.streetAddress} in Toronto.`;

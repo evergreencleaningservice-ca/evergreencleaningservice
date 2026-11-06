@@ -159,7 +159,8 @@ describe('every page has exactly one meaningful H1', () => {
 
   it('a blog post\'s H1 is its title, and its body headings start at H2', () => {
     const html = read('a-cleaning-checklist-for-your-retail-store/index.html');
-    expect(headings(html, 1)).toEqual(['A Cleaning Checklist For Your Retail Store']);
+    /* Retitled in place on 6 Nov 2026 (SEO audit, cluster.md "Retitle in place"). */
+    expect(headings(html, 1)).toEqual(['Retail Store Cleaning Checklist']);
     expect(headings(html, 2)).toContain('Retail Store Cleaning');
   });
 });
@@ -256,8 +257,10 @@ describe('internal links', () => {
        are the "Older posts" hops the five busiest tags need, which is why
        this counts the roots rather than every /tag/ href. */
     const roots = tagLinks.filter((href) => /^\/tag\/[^/]+\/$/.test(href));
-    /* 24 since 30 Oct 2026: the consolidation emptied `coronavirus` and `covid-19`. */
-    expect(new Set(roots).size).toBe(24);
+    /* 24 since 30 Oct 2026: the consolidation emptied `coronavirus` and
+       `covid-19`. 23 since 6 Nov 2026: the plants post, the only one tagged
+       `plants`, was merged into the air-quality post. */
+    expect(new Set(roots).size).toBe(23);
 
     for (const href of tagLinks) {
       expect(fs.existsSync(path.join(out, href.slice(1), 'index.html')), href).toBe(true);
@@ -355,12 +358,14 @@ describe('the rest of the page is untouched', () => {
      sitemap (SEO audit M1, M2). 70 since 2026-10-30: floor stripping and
      waxing (M5). 55 since the blog consolidation the same day: 16 posts
      merged or retired, one seasonal checklist added (H7). */
-  it('all 57 sitemap URLs were built', () => {
+  // 60 since 6 Nov 2026: 57, plus the office cleaning checklist guide and
+  // four location pages, less the two posts merged into other posts.
+  it('all 60 sitemap URLs were built', () => {
     const locs = (xml: string) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const urls = locs(read('sitemap-index.xml')).flatMap((child) =>
       locs(read(path.basename(new URL(child).pathname)))
     );
-    expect(urls).toHaveLength(57);
+    expect(urls).toHaveLength(60);
     const missing = urls.filter((u) => !exists(new URL(u).pathname));
     expect(missing).toEqual([]);
   });
@@ -381,6 +386,9 @@ describe('location pages are each their own page', () => {
   const CITY: Record<string, string[]> = {
     'toronto-downtown': ['downtown toronto', 'toronto downtown'],
     'vaughan': ['vaughan & concord', 'vaughan and concord', 'vaughan'],
+    'north-york': ['north york'],
+    'richmond-hill': ['richmond hill'],
+    'durham-region': ['pickering, ajax and oshawa', 'pickering, ajax & oshawa', 'durham region', 'pickering', 'ajax', 'oshawa'],
   };
 
   const words = (slug: string): string[] => {
@@ -428,13 +436,15 @@ describe('the blog consolidation (SEO audit H7, 30 Oct 2026)', () => {
   });
 
   it('dates a merged post as updated, on the page and in its data', () => {
+    /* 2026-10-30 from the consolidation; 2026-11-06 since the plants post
+       was merged into it as well (legacy blog pass). */
     const html = read('commercial-cleaning-air-quality/index.html');
-    expect(html).toMatch(/Updated <time datetime="2026-10-30"/);
-    expect(html).toContain('"dateModified":"2026-10-30T00:00:00.000Z"');
+    expect(html).toMatch(/Updated <time datetime="2026-11-06"/);
+    expect(html).toContain('"dateModified":"2026-11-06T00:00:00.000Z"');
     expect(html).toContain('"datePublished":"2020-08-31T00:00:00.000Z"');
-    expect(html).toContain('<meta property="article:modified_time" content="2026-10-30T00:00:00.000Z">');
+    expect(html).toContain('<meta property="article:modified_time" content="2026-11-06T00:00:00.000Z">');
     expect(read('sitemap-insights-0.xml')).toMatch(
-      /commercial-cleaning-air-quality\/<\/loc><lastmod>2026-10-30/
+      /commercial-cleaning-air-quality\/<\/loc><lastmod>2026-11-06/
     );
   });
 
@@ -457,6 +467,10 @@ describe('the location pages people search as "office cleaning <city>"', () => {
     ['markham', 'Markham'],
     ['oakville', 'Oakville'],
     ['toronto-downtown', 'Downtown Toronto'],
+    ['north-york', 'North York'],
+    ['scarborough', 'Scarborough'],
+    ['richmond-hill', 'Richmond Hill'],
+    ['durham-region', 'Pickering, Ajax and Oshawa'],
   ])('%s leads with office cleaning in its title, H1 and an office section', (slug, place) => {
     const html = read(`locations/${slug}/index.html`);
     expect(html).toMatch(/<title>Office &amp; Commercial Cleaning in /);
@@ -494,6 +508,9 @@ describe('the audit fixes of 30 Oct 2026', () => {
 
   it('only the downtown page says the office is in its area', () => {
     expect(read('locations/etobicoke/index.html')).toContain('No. Etobicoke is in the City of Toronto');
+    expect(read('locations/north-york/index.html')).toContain('No. North York is in the City of Toronto');
+    expect(read('locations/scarborough/index.html')).toContain('No. Scarborough is in the City of Toronto');
+    expect(read('locations/durham-region/index.html')).toContain('No. Crews come to Durham Region from our one office');
     expect(read('locations/toronto-downtown/index.html')).toMatch(/Do you have an office in Downtown Toronto\?<\/summary><p[^>]*>Yes: /);
   });
 });

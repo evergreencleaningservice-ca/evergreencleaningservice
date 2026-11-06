@@ -1,21 +1,59 @@
 ---
-import { getEntry, render } from 'astro:content';
+import { getEntry } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
 import PageLayout from '../layouts/PageLayout.astro';
+import { jpegSize } from '../lib/responsive-images.mjs';
 
 const entry = await getEntry('pages', 'cleaning-demo-gallery');
 if (!entry) throw new Error('Missing content entry: pages/cleaning-demo-gallery');
 
-const { Content } = await render(entry);
+/**
+ * The page is a short intro (the Markdown body, handed to PageLayout as
+ * every other page's is) and a captioned grid of the thirteen photographs
+ * listed in the entry's `photos` frontmatter.
+ *
+ * Each photo is a <picture> offering the 480 and 768 AVIF/WebP/JPEG variants
+ * scripts/content-variants.mjs makes (SEO audit, images finding 1, 6 Nov
+ * 2026): until then the grid drew the full 1200px JPEGs — 1.1 MB for the
+ * page, with no width or height, so every photo shifted the page as it
+ * loaded. The 768 JPEG is the fallback `src` and supplies the declared size.
+ * None of them is above the fold, so the lot is lazy.
+ *
+ * A photo whose variants are missing fails the build here rather than
+ * shipping a broken <source>: run `npm run images:content-variants`.
+ */
+const IMAGES = path.join(process.cwd(), 'public', 'images');
+const WIDTHS = [480, 768];
+const FALLBACK = 768;
+/* The grid's columns at each step: three in the 790px content column beside
+   the sidebar (250px; 205px in the 960px container), one at 941-991px where
+   the column is under 480px, then three/two/one across the full container
+   below 941px (217, 245, and the viewport less the two 15px gutters). */
+const SIZES =
+  '(min-width: 1200px) 250px, (min-width: 992px) 205px, (min-width: 941px) 477px, (min-width: 768px) 217px, (min-width: 576px) 245px, calc(100vw - 30px)';
 
-// The body is nothing but thirteen photographs, one per paragraph. Lay them out
-// as a grid rather than a single stacked column, and lazy-load the lot — none of
-// them is above the fold, and at full size they are several megabytes together.
-// This page takes the HTML into its own wrapper (instead of handing it to
-// PageLayout) so the grid rules below can reach the markup with `:global()`.
-const galleryHtml = (entry.rendered?.html ?? '').replace(
-  /<img(?![^>]*\sloading=)\s/g,
-  '<img loading="lazy" decoding="async" ',
-);
+const photos = entry.data.photos.map((photo) => {
+  const m = photo.src.match(/^\/images\/([^/?#]+)\.jpe?g$/i);
+  if (!m) throw new Error(`cleaning-demo-gallery: ${photo.src} is not a /images/*.jpg photo`);
+  const base = m[1];
+  for (const w of WIDTHS)
+    for (const ext of ['avif', 'webp', 'jpg'])
+      if (!fs.existsSync(path.join(IMAGES, `${base}-${w}.${ext}`)))
+        throw new Error(`cleaning-demo-gallery: ${base}-${w}.${ext} is missing — run npm run images:content-variants`);
+  const size = jpegSize(path.join(IMAGES, `${base}-${FALLBACK}.jpg`));
+  if (!size) throw new Error(`cleaning-demo-gallery: cannot read the size of ${base}-${FALLBACK}.jpg`);
+  const set = (ext: string) => WIDTHS.map((w) => `/images/${base}-${w}.${ext} ${w}w`).join(', ');
+  return {
+    ...photo,
+    fallback: `/images/${base}-${FALLBACK}.jpg`,
+    width: size.width,
+    height: size.height,
+    avif: set('avif'),
+    webp: set('webp'),
+    jpg: set('jpg'),
+  };
+});
 ---
 
 <PageLayout
@@ -23,14 +61,31 @@ const galleryHtml = (entry.rendered?.html ?? '').replace(
   description={entry.data.description}
   image={entry.data.image}
   imageAlt={entry.data.imageAlt}
+  contentHtml={entry.rendered?.html}
 >
-  {
-    galleryHtml ? (
-      <div class="gallery-grid" set:html={galleryHtml} />
-    ) : (
-      <Content />
-    )
-  }
+  <div class="gallery-grid">
+    {
+      photos.map((photo) => (
+        <figure>
+          <picture>
+            <source type="image/avif" srcset={photo.avif} sizes={SIZES} />
+            <source type="image/webp" srcset={photo.webp} sizes={SIZES} />
+            <img
+              src={photo.fallback}
+              srcset={photo.jpg}
+              sizes={SIZES}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <figcaption>{photo.caption}</figcaption>
+        </figure>
+      ))
+    }
+  </div>
 </PageLayout>
 
 <style>
@@ -41,29 +96,30 @@ const galleryHtml = (entry.rendered?.html ?? '').replace(
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+    margin-top: 24px;
     container-type: inline-size;
   }
 
-  /* The photographs arrive wrapped in paragraphs from Markdown. */
-  .gallery-grid :global(p) {
+  .gallery-grid figure {
     margin: 0;
     flex: 0 0 100%;
     min-width: 0;
   }
 
   @container (min-width: 480px) {
-    .gallery-grid :global(p) {
+    .gallery-grid figure {
       flex-basis: calc((100% - 20px) / 2);
     }
   }
 
   @container (min-width: 720px) {
-    .gallery-grid :global(p) {
+    .gallery-grid figure {
       flex-basis: calc((100% - 2 * 20px) / 3);
     }
   }
 
-  .gallery-grid :global(img) {
+  .gallery-grid img {
+    display: block;
     width: 100%;
     height: auto;
     aspect-ratio: 3 / 2;
@@ -71,5 +127,12 @@ const galleryHtml = (entry.rendered?.html ?? '').replace(
     margin: 0;
     border-radius: var(--radius);
     background: var(--surface-alt);
+  }
+
+  .gallery-grid figcaption {
+    margin-top: 8px;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--ink-muted);
   }
 </style>

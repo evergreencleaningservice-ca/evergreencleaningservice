@@ -20,15 +20,39 @@
  *            reading just "Blog"
  *   title    22px, weight 500, #333
  *   excerpt  15px, #777 — WordPress's first 30 words, not the description
+ *
+ * The thumbnail's FILE is no longer the original's 300x150 crop: it is the
+ * featured image's 480/720 (or 768) AVIF/WebP/JPEG set (src/lib/thumb.ts),
+ * drawn into the same 300x150 box.
+ *
+ * The meta line now reads the month the post was published, or last revised
+ * where it was (SEO audit, visual finding 5): "Blog" on every card of a
+ * blog said nothing. The month, not the day — the day is on the post itself.
  */
 import { excerpt } from '../lib/excerpt';
-import { thumb, thumbSet } from '../lib/thumb';
+import { intrinsic, thumbSet } from '../lib/thumb';
 
 type Entry = {
   id?: string;
   slug?: string;
   body?: string;
-  data: { title: string; description?: string; pubDate: Date | string; image?: string; imageAlt?: string };
+  data: {
+    title: string;
+    description?: string;
+    pubDate: Date | string;
+    updatedDate?: Date | string;
+    image?: string;
+    imageAlt?: string;
+  };
+};
+
+/* `en-CA` with the long month: "November 2026". UTC, so a date written as a
+   day in front matter does not slip into the previous month in the build's
+   own time zone. */
+const monthLabel = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: 'long', timeZone: 'UTC' });
+const monthOf = (post: Entry) => {
+  const d = new Date(post.data.updatedDate ?? post.data.pubDate);
+  return { iso: d.toISOString().slice(0, 7), label: monthLabel.format(d) };
 };
 
 interface Props {
@@ -45,6 +69,11 @@ interface Props {
 
 const { posts, eager = 0, flush = false } = Astro.props;
 const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '');
+
+/* 300px beside the text above 940px (hidden between 721 and 940); the full
+   column below that: 510px inside the 540px container from 576px, and the
+   viewport less the two 15px gutters on a phone. */
+const SIZES = '(min-width: 941px) 300px, (min-width: 576px) 510px, calc(100vw - 30px)';
 ---
 
 <div class:list={['post-list', flush && 'is-flush']}>
@@ -55,22 +84,21 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
           <div class="list-article-thumb">
             <a href={`/${toSlug(post)}/`} tabindex="-1" aria-hidden="true">
               {(() => {
-                /* 300px wide beside the text from 768px; the full column width
-                   (about 3.6x the crop) on a phone, where the 960px feature
-                   image is offered instead (src/lib/thumb.ts). */
+                /* The featured image's 480/720 AVIF/WebP/JPEG set, or, for an
+                   image with none, the file itself at its own size. */
                 const set = thumbSet(post.data.image);
-                const sizes = '(min-width: 768px) 300px, 100vw';
+                const size = set ?? intrinsic(post.data.image);
                 return (
                   <picture>
-                    {set && <source type="image/avif" srcset={set.avif} sizes={sizes} />}
-                    {set && <source type="image/webp" srcset={set.webp} sizes={sizes} />}
+                    {set && <source type="image/avif" srcset={set.avif} sizes={SIZES} />}
+                    {set && <source type="image/webp" srcset={set.webp} sizes={SIZES} />}
                     <img
-                      src={thumb(post.data.image)}
+                      src={set?.src ?? post.data.image}
                       srcset={set?.jpg}
-                      sizes={set ? sizes : undefined}
+                      sizes={set ? SIZES : undefined}
                       alt={post.data.imageAlt ?? post.data.title}
-                      width="300"
-                      height="150"
+                      width={size?.width}
+                      height={size?.height}
                       loading={i < eager ? 'eager' : 'lazy'}
                       decoding="async"
                     />
@@ -82,9 +110,10 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
         )}
         <div class="list-article-content">
           <div class="list-article-meta">
-            <a href="/category/blog/" rel="category tag">
-              Blog
-            </a>
+            {(() => {
+              const m = monthOf(post);
+              return <time datetime={m.iso}>{m.label}</time>;
+            })()}
           </div>
           <header class="entry-header">
             <h2 class="entry-title">
@@ -155,13 +184,7 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
     text-transform: uppercase;
     letter-spacing: 1.2px;
     margin-bottom: 10px;
-  }
-
-  .list-article-meta a {
     color: var(--brand);
-    /* A 24px target for a one-word link (SEO audit M12). */
-    display: inline-block;
-    padding-block: 4px;
   }
 
   .entry-header {
@@ -208,9 +231,11 @@ const toSlug = (p: Entry) => String(p.slug ?? p.id ?? '').replace(/\.mdx?$/, '')
       margin-bottom: 30px;
     }
 
+    /* Full width, still the list's 2:1 shape: the guides' images are 16:9. */
     .list-article-thumb img {
       width: 100%;
       height: auto;
+      aspect-ratio: 2 / 1;
     }
   }
 </style>

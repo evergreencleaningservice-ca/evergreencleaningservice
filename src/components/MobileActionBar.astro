@@ -84,13 +84,14 @@ const hidden = path === '/request-a-quote/' || path === '/thank-you/';
     }
 
     /* Room at the end of the page so the bar never covers the footer, and the
-       video bubble lifted clear of it. */
+       video bubble lifted clear of it: 16px above the 52px bar (12px until
+       the SEO audit's visual review, which found it sitting right on it). */
     :global(body:has(.mbar)) {
       padding-bottom: calc(52px + env(safe-area-inset-bottom));
     }
 
     :global(body:has(.mbar) .leadnet) {
-      bottom: calc(64px + env(safe-area-inset-bottom));
+      bottom: calc(68px + env(safe-area-inset-bottom));
     }
   }
 

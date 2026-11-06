@@ -179,6 +179,13 @@ const icons: Record<string, string> = {
 
   .site-footer .footer-nap a {
     color: var(--brand-dark);
+    /* The phone and email are stacked one line apart, so each is a 44px
+       row (SEO audit, visual finding 1: 19–22px high, 24–30px apart). The
+       line-height of the surrounding text is unchanged; only these two lines
+       grow. */
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 
   .footer-col-contact .btn {
@@ -286,6 +293,17 @@ const icons: Record<string, string> = {
   /* --- copyright band --- */
   .site-info .nowrap {
     white-space: nowrap;
+  }
+
+  /* A 44px target on the one link in the copyright line, without making the
+     line taller: the extra height is pulled back with a negative margin, so
+     the band's measured 2.1875rem padding stands. Nothing else is tappable
+     within 20px of it. */
+  .site-info p a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-block: -12px;
   }
 
   .site-info {

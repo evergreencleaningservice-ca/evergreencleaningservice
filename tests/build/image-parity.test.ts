@@ -122,8 +122,11 @@ const NO_BODY_IMAGE = new Set<string>([]);
  */
 /* 96 since the blog consolidation of 30 Oct 2026 (SEO audit H7): the
    retired posts' images went with them and the archive lists got shorter.
-   Every post that was kept has as many body images as before, or more. */
-const TOTAL_BODY_IMAGES_FLOOR = 96;
+   Every post that was kept has as many body images as before, or more.
+   94 since 6 Nov 2026: the hand-washing post (3 body images) and the plants
+   post (2) were merged away, and the sections that replaced them carry one
+   image each, in the germ hotspots and air-quality posts. */
+const TOTAL_BODY_IMAGES_FLOOR = 94;
 
 const built = new Map<string, Set<string>>();
 

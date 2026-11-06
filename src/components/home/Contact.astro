@@ -144,6 +144,14 @@ import { site, serviceAreas, nap } from '../../data/site';
   }
 
   .contact-line {
-    margin: 0 0 4px;
+    margin: 0;
+  }
+
+  /* The phone and email are stacked, so each is a 44px row rather than a
+     19px line 4px from the next (SEO audit, visual finding 1). */
+  .contact-line a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 </style>

@@ -81,8 +81,11 @@ describe('every rendered tel: link', () => {
        same day: 15 fewer posts, two emptied tag archives and six archive
        pages the shorter lists no longer need (H7). 98 with both office
        guides and the additional office-tag pagination page. */
-    expect(pageCount).toBe(98);
-    expect(new Set(links.map((l) => l.page)).size).toBe(98);
+    // 99 since 6 Nov 2026: 98, plus the office cleaning checklist guide and
+    // four location pages, less the two merged posts, the emptied plants
+    // archive and the office tag's second page.
+    expect(pageCount).toBe(99);
+    expect(new Set(links.map((l) => l.page)).size).toBe(99);
     expect(links.length).toBeGreaterThanOrEqual(230);
   });
 
@@ -118,7 +121,7 @@ describe('the locations the site actually uses', () => {
 
   it('the site header carries one on every non-paid page', () => {
     /* Non-paid pages, including the Toronto cost guide, share this header. */
-    expect(at('header')).toHaveLength(93);
+    expect(at('header')).toHaveLength(94);
   });
 
   it('the mobile drawer carries its own, separately reported link', () => {
@@ -126,13 +129,14 @@ describe('the locations the site actually uses', () => {
        menu at every width (`header`), and the open drawer lists the number
        again as its last item (`mobile_navigation`). Two elements, each with
        one fixed answer. */
-    expect(at('mobile_navigation')).toHaveLength(93);
+    expect(at('mobile_navigation')).toHaveLength(94);
   });
 
   it.each([
-    /* home + 10 service pages + 2 industry pages + 7 location pages (their
-       hero call button, SEO audit Phase 3) */
-    ['hero', 20],
+    /* home + 10 service pages + 2 industry pages + 11 location pages (their
+       hero call button, SEO audit Phase 3; four location pages added
+       6 Nov 2026) */
+    ['hero', 24],
     ['quote_sidebar', 1],
     ['paid_header', 5],
     ['paid_sticky', 4],
@@ -172,7 +176,7 @@ describe('the locations the site actually uses', () => {
   it('the site footer carries one on every non-paid page, the paid footer none', () => {
     /* Added deliberately on 2026-10-15 with the footer's contact block. The
        landing-page shell keeps its own minimal footer with no number. */
-    expect(at('footer')).toHaveLength(93);
+    expect(at('footer')).toHaveLength(94);
   });
 });
 

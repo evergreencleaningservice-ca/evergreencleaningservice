@@ -54,13 +54,15 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
       'Two guides help with the planning before a walkthrough: <a href="/office-cleaning-cost-toronto-guide/">how office cleaning is priced in Toronto</a>, and <a href="/how-often-should-an-office-be-cleaned/">how often an office should be cleaned</a>, which matters most for towers with long hours.',
     ],
     areasIntro:
-      'Downtown is where our office is. We cover the core from the waterfront to Bloor Street and from Bathurst to the Don Valley, including:',
+      'Downtown is where our office is. We cover the core from the waterfront to Bloor Street and from Bathurst to the Don Valley, and the older neighbourhoods just beyond it in East York and York, including:',
     areas: [
       'The Financial District and South Core',
       'The Entertainment District, King West and Queen West',
       'Liberty Village and the Fashion District',
       'Yonge–Dundas and the Discovery District along University Avenue',
       'St. Lawrence, the Distillery District and Corktown',
+      'East York: the Danforth, Pape and Donlands, Thorncliffe Park and the Leaside business park along Laird Drive',
+      'York: Eglinton West, Weston Road and Keele, the St. Clair West strip and the Junction',
     ],
     buildings: [
       {
@@ -79,6 +81,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
         title: 'Professional and medical suites',
         body: 'Law, accounting and design offices and clinics in older mid-rise buildings, often without a loading dock, where crews and equipment come in through the front door after hours.',
       },
+      {
+        title: 'East York and York: Leaside and the Junction',
+        body: 'The Leaside and Thorncliffe business park mixes offices with light industrial units, and the Junction and Weston Road have converted industrial buildings with offices in them. Both get the same split as a business park: janitorial for the office side, floor scrubbing for the shop floor, scheduled together.',
+      },
     ],
     access: [
       'Our office at 243 Queen St W is a few minutes from most of downtown, so a downtown building is not a highway drive away. Adding a visit, covering an event night or sending someone back to fix a missed item is quick to arrange.',
@@ -92,6 +98,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
       {
         q: 'We share a floor with other tenants. Can you clean just our suite?',
         a: 'Yes. The written scope covers your space. Common areas stay with the building’s own contract unless you and the property manager want them included.',
+      },
+      {
+        q: 'Do you cover East York and York, or only the core?',
+        a: 'Both. Leaside, Thorncliffe Park, the Danforth, St. Clair West, the Junction and Weston Road are inside the City of Toronto and a short drive from our office, so they are scheduled the same way as downtown.',
       },
     ],
   },
@@ -371,6 +381,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
       'Oakville’s offices range from law, financial and medical offices in downtown storefronts along Lakeshore Road to head offices in Winston Park and the business parks along the QEW and Highway 403, and the offices in front of the units on Speers Road. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
       'A routine visit covers reception, boardrooms and workstations, kitchens, washrooms, floors, glass and the shared touch points, every night, a few evenings a week or weekly. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
       'Before the walkthrough it helps to read <a href="/how-often-should-an-office-be-cleaned/">which office areas need daily cleaning</a> and <a href="/office-cleaning-cost-toronto-guide/">how a monthly cleaning budget is built</a>, so the proposal can be compared on the same scope.',
+      'Oakville’s business parks along the QEW, from Bronte Road to Winston Churchill Boulevard, are mostly two- and three-storey buildings with their own parking, so there is no dock or freight elevator to book and the crew can start as soon as the last person has left for the evening.',
     ],
     areasIntro:
       'Oakville’s commercial space is split between its historic downtown, a modern uptown and business parks along the highways. We cover:',
@@ -411,6 +422,216 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
       {
         q: 'Do you cover both downtown Oakville and the business parks?',
         a: 'Yes, both. The service area takes in every part of Oakville, from Lakeshore Road up to the Highway 403 corridor.',
+      },
+    ],
+  },
+  'north-york': {
+    review: 'Edward Sherman',
+    photo: { src: '/images/office-backpack-vacuum-toronto.jpg', alt: 'Vacuum cleaner being used on an office floor' },
+    office: [
+      'North York’s office space is concentrated in the towers around North York Centre, where Yonge Street runs from Sheppard to Finch over the subway, and in the low-rise business parks off Highway 401 and Highway 404 around Consumers Road and Don Mills. Further west, along Dufferin, Keele and Steeles, offices sit at the front of industrial units. We look after all three kinds in the evening, working to a task list we write down after walking the building with you.',
+      'On a regular visit the crew works through the desks, the kitchen, the boardrooms, the washrooms and the glass, plus the handles and switches everybody touches; that can be nightly, on a few set evenings, or once a week. North York is inside the City of Toronto and a short drive up the Allen or the Don Valley from our office, so adding a visit or a one-off clean is easy to arrange. The full task list is on the <a href="/services/office-cleaning/">office cleaning</a> page.',
+      'A tower floor and a business-park unit are priced differently because the access and the floor areas differ. Two guides are worth ten minutes before you ask for a quote: one on <a href="/office-cleaning-cost-toronto-guide/">what goes into a Toronto office cleaning price</a>, and one on <a href="/how-often-should-an-office-be-cleaned/">picking the number of visits</a>.',
+    ],
+    areasIntro:
+      'Between Highway 401 and Steeles, and from the Humber to the Don Valley, these are the North York business areas we serve:',
+    areas: [
+      'North York Centre along Yonge Street from Sheppard to Finch',
+      'The Consumers Road and Victoria Park business park at Highway 401 and 404',
+      'Don Mills, Lesmill and the Leslie Street corridor',
+      'York Mills and the Highway 401 office belt at Yonge',
+      'Downsview, Dufferin and Keele, and the Steeles and Finch industrial units',
+      'The Yorkdale and Lawrence Avenue West area',
+    ],
+    buildings: [
+      {
+        title: 'Office towers at North York Centre',
+        body: 'Towers along Yonge where a property manager sets the rules: who signs crews in, which hours the freight elevator can be booked, and which corridors are the landlord’s to clean. Each tenant suite gets its own task list and the work starts once the last tenant has gone home.',
+      },
+      {
+        title: 'Business-park offices',
+        body: 'Two- and three-storey buildings around Consumers Road and Don Mills with open floors, a kitchen on each level and surface parking, which makes evening access simple. Carpet extraction and floor care are planned through the year.',
+      },
+      {
+        title: 'Clinics near the hospitals',
+        body: 'Medical and dental suites in the medical buildings and plazas near North York General, Sunnybrook and Humber River, done in the evening so each operatory and the waiting room are ready when the clinic unlocks in the morning.',
+      },
+      {
+        title: 'Industrial units along Steeles and Finch',
+        body: 'Units with a small office ahead of a shop or a warehouse. The office is kept up on a regular round and the floor behind it is machine-scrubbed on dates set in advance, under one agreement.',
+      },
+    ],
+    access: [
+      'North York is 15 to 25 km from our office at Queen Street West: up the Allen Road and Highway 401 for the west side, the DVP and the 404 for the east, or straight up Yonge Street for the centre. Expect 25 to 45 minutes in the evening.',
+      'Because it is inside Toronto, North York visits are scheduled like downtown ones: fixed evenings, with extra visits and one-off cleans fitted in around them.',
+    ],
+    faqs: [
+      {
+        q: 'Do you clean offices in the towers at Yonge and Sheppard?',
+        a: 'Yes. North York Centre is covered. Tower work is booked around the landlord’s sign-in and freight-elevator rules, which we go through when we walk the floor with you.',
+      },
+      {
+        q: 'Our clinic is in a medical building near the hospital. Can you clean it after hours?',
+        a: 'Yes. We come in once the clinic has closed, and the rooms, surfaces and tasks that are ours versus your staff’s are settled around your infection-prevention rules before the first visit.',
+      },
+      {
+        q: 'We have an office at the front of a unit on Steeles. Do you do the warehouse too?',
+        a: 'Yes. The office round and the warehouse floor work are planned together under one agreement, each on its own dates.',
+      },
+    ],
+  },
+  scarborough: {
+    review: 'Michael Katchen',
+    photo: { src: '/images/carpet-extraction-boardroom-toronto.jpg', alt: 'Carpet cleaning tool being used on a carpet' },
+    office: [
+      'Scarborough’s offices are grouped in a few clusters: the towers and multi-tenant buildings around Scarborough Centre and Consilium Place by Highway 401 and McCowan, the business area along Progress Avenue, the professional and medical suites in the plazas on Sheppard, Kennedy and Lawrence, and the offices attached to the warehouses and plants in Milliken and along the 401. We take them on in the evening with a crew that stays on the building, to a task list fixed when we walk it with you.',
+      'Each visit takes in the desks and the open floor, the kitchen, the washrooms, the floors, the glass and the shared handles and switches; the rhythm can be nightly, several evenings a week or weekly, with carpet extraction and floor refinishing booked for set dates in the year. Everything a visit includes is listed under <a href="/services/office-cleaning/">office cleaning</a>.',
+      'For a plaza suite or a plant office, the guide on <a href="/how-often-should-an-office-be-cleaned/">daily versus weekly office tasks</a> helps decide the visits, and the one on <a href="/office-cleaning-cost-toronto-guide/">building a monthly cleaning budget</a> shows how to line up two proposals on the same scope.',
+    ],
+    areasIntro:
+      'Scarborough stretches from Victoria Park to the Rouge and from the lake to Steeles. We cover:',
+    areas: [
+      'Scarborough Centre, Consilium Place and the McCowan and Highway 401 area',
+      'The Progress Avenue and Kennedy Road business area',
+      'Agincourt and the Sheppard Avenue East corridor',
+      'Milliken and the Steeles and Kennedy industrial area',
+      'The Golden Mile along Eglinton Avenue East and Warden',
+      'Kingston Road, Cliffside and West Hill',
+    ],
+    buildings: [
+      {
+        title: 'Offices at Scarborough Centre',
+        body: 'The towers and public-sector offices around the town centre have a security desk, a dock and a freight elevator, and those three things decide when the crew can start and how it gets in. We fit the schedule to them.',
+      },
+      {
+        title: 'Warehouses and plants along the 401',
+        body: 'Distribution buildings and manufacturing plants with an office in the front corner. The office is done nightly or on set evenings; the production floor is machine-scrubbed in the gaps between shifts.',
+      },
+      {
+        title: 'Plaza clinics and professional suites',
+        body: 'Dental, medical and professional offices in plazas and small medical buildings along Sheppard, Kennedy, Lawrence and Kingston Road, where the crew comes in by the front door after the last appointment because there is no dock.',
+      },
+      {
+        title: 'Retail along the Golden Mile',
+        body: 'Big-box and showroom floors on Eglinton East where glass, entrances and hard floors take the most wear, and the salt tracked in from large parking lots has to be dealt with every winter visit.',
+      },
+    ],
+    access: [
+      'Scarborough is 20 to 35 km from Queen Street West: the Don Valley Parkway and Highway 401 for the north and centre, the Gardiner and Kingston Road for the lakeshore, about half an hour to fifty minutes once the rush hour has thinned.',
+      'Scarborough is inside the City of Toronto, so visits are scheduled on fixed evenings like the rest of the city, with the plant side and the office side of an industrial building planned apart when that suits the shifts.',
+    ],
+    faqs: [
+      {
+        q: 'Do you clean offices near Scarborough Town Centre?',
+        a: 'Yes. Scarborough Centre, Consilium Place and the Progress Avenue business area are all covered, and the work there runs in the evening around whatever rules the building sets.',
+      },
+      {
+        q: 'We run shifts in a plant in Milliken. When would you clean the office?',
+        a: 'Around the shifts. At the walkthrough we agree the window when the office and washrooms are free, and the floor scrubbing is scheduled when the shop floor is clear.',
+      },
+      {
+        q: 'Can you handle a retail store on Eglinton East with a big parking lot?',
+        a: 'Yes. Entrances, glass and floors are on every visit, and in winter the salt is dealt with each visit rather than once a week.',
+      },
+    ],
+  },
+  'richmond-hill': {
+    review: 'Andy Handy',
+    photo: { src: '/images/dust-on-office-desk-detail.jpg', alt: 'Duster beside a keyboard and office supplies' },
+    office: [
+      'Most of Richmond Hill’s office stock is in the parks along Highway 7 and Highway 404: Beaver Creek around Leslie Street and East Beaver Creek Road, Headford to the east, and the multi-tenant buildings near Richmond Hill Centre at Yonge and Highway 7. Along Yonge Street itself, professional and medical suites sit above and beside the plazas from Highway 7 north to Elgin Mills. We handle them in the evening, on terms set out in writing after a walkthrough.',
+      'The regular round covers desks, the kitchen, meeting rooms, washrooms and glass, and the switches, handles and rails that get touched all day, on whatever rhythm the office needs: nightly, a few set evenings, or weekly. Richmond Hill contracts run on fixed evenings, with carpet and floor refinishing booked for dates in the year. What a visit includes is spelled out on the <a href="/services/office-cleaning/">office cleaning</a> page.',
+      'A technology office that keeps long hours usually wants more visits than its floor area would suggest. The guide to <a href="/how-often-should-an-office-be-cleaned/">setting an office cleaning schedule</a> explains why, and the guide to <a href="/office-cleaning-cost-toronto-guide/">Toronto office cleaning prices</a> shows the effect on the monthly figure.',
+    ],
+    areasIntro:
+      'Richmond Hill’s business areas are strung along Highway 7, Highway 404 and Yonge Street:',
+    areas: [
+      'Beaver Creek and East Beaver Creek, around Leslie Street and Highway 7',
+      'Headford and the Highway 404 corridor',
+      'Richmond Hill Centre at Yonge and Highway 7',
+      'The Yonge Street corridor from Highway 7 to Elgin Mills, including the medical buildings near Mackenzie Health',
+      'The Newkirk Road and Elgin Mills industrial area',
+      'Oak Ridges along Yonge Street north',
+    ],
+    buildings: [
+      {
+        title: 'Beaver Creek technology offices',
+        body: 'Low-rise office buildings where the open floor, the kitchen and the meeting rooms are ours and the server room is not, with surface parking that makes evening access straightforward.',
+      },
+      {
+        title: 'Professional and medical suites along Yonge',
+        body: 'Dental, medical and professional offices in small buildings and plazas, done once the last patient has left, so the operatories, the waiting room and the washrooms are ready before the first appointment.',
+      },
+      {
+        title: 'Industrial units north of Elgin Mills',
+        body: 'Units with an office in front of a shop or warehouse. The office is kept up on a regular round and the floor behind it gets machine scrubbing on dates fixed in advance, under one agreement.',
+      },
+    ],
+    access: [
+      'Richmond Hill is 30 to 40 km north of our office at Queen Street West: up the DVP to the 404 and off at Highway 7, or further to Elgin Mills for the north end. Allow 40 to 55 minutes in the evening.',
+      'Visits fall on set evenings chosen when we walk the building; because of the drive, one-off work is grouped with the regular visits where possible.',
+    ],
+    faqs: [
+      {
+        q: 'Do you clean offices in the Beaver Creek business park?',
+        a: 'Yes. Beaver Creek, Headford and the rest of the Highway 7 and 404 corridor are covered, and the work there is done on fixed evenings.',
+      },
+      {
+        q: 'Our dental office is on Yonge Street. Can you clean after the last patient?',
+        a: 'Yes. We come in after closing, with the rooms, surfaces and tasks that are ours settled at the walkthrough and the clinical procedures left with your staff.',
+      },
+      {
+        q: 'Do you cover Oak Ridges and the north end of Richmond Hill?',
+        a: 'Yes. Oak Ridges and the Elgin Mills area are inside the service area; the drive is a little longer, so visits there are planned on fixed evenings.',
+      },
+    ],
+  },
+  'durham-region': {
+    review: 'Edward Sherman',
+    photo: { src: '/images/commercial-disinfection-service.jpg', alt: 'Protected worker cleaning a doorknob' },
+    office: [
+      'Across Pickering, Ajax and Oshawa, offices are found in the business areas beside Highway 401: around Brock Road and the Pickering city centre, the Salem Road and Harwood Avenue areas of Ajax, and in downtown Oshawa and the office and industrial belt along Stevenson Road and Taunton Road. Many are offices at the front of a plant or distribution building. We take them on in the evening, under a task list we write down after walking the building with you.',
+      'Every visit takes care of the desks, the kitchen, the washrooms, the floors, the glass and the handles and switches everyone uses, nightly, on fixed evenings or weekly. Because crews travel out from Toronto, Durham visits are planned so that one trip covers the evening’s work. The <a href="/services/office-cleaning/">office cleaning</a> page lists everything a visit includes.',
+      'For an office attached to a plant, the guide on <a href="/how-often-should-an-office-be-cleaned/">visits per week for an office</a> and the one on <a href="/office-cleaning-cost-toronto-guide/">the parts of an office cleaning price</a> help get the office and the floor quoted together.',
+    ],
+    areasIntro:
+      'The business areas of Durham Region sit beside Highway 401, from the Rouge to Oshawa:',
+    areas: [
+      'Pickering: the Brock Road and Highway 401 business area, the city centre and Bayly Street',
+      'Ajax: Salem Road, Harwood Avenue and the Westney Road industrial area',
+      'Oshawa: downtown, the Stevenson Road and Highway 401 industrial belt, and the Taunton Road offices',
+      'The Highway 401 corridor between them, including Whitby when a building is on the way',
+    ],
+    buildings: [
+      {
+        title: 'Offices attached to plants and distribution buildings',
+        body: 'Much of Durham’s office space is the front corner of a larger industrial building. The office is cleaned on a recurring schedule; the plant or warehouse floor is scrubbed on a schedule set around the shifts.',
+      },
+      {
+        title: 'Professional suites and clinics',
+        body: 'Dental, medical and professional offices in strip plazas and low-rise buildings on the main roads, visited after the day’s last appointment.',
+      },
+      {
+        title: 'Downtown Oshawa offices',
+        body: 'Older multi-storey buildings and converted ground floors in the core, where the crew carries its equipment in through the front door once the street has gone quiet.',
+      },
+    ],
+    access: [
+      'Pickering is about 35 km from our office at Queen Street West, Ajax about 45 km and Oshawa about 60 km, all by the Don Valley Parkway and Highway 401. Expect 45 to 70 minutes in the evening, depending on the town.',
+      'Because of the drive, Durham work is booked on set evenings chosen when we walk the building, and one-off jobs are grouped with the regular visits whenever that works. Daily service is possible where the building needs it.',
+    ],
+    faqs: [
+      {
+        q: 'Do you really travel to Oshawa from Toronto?',
+        a: 'Yes. Pickering, Ajax and Oshawa are in our service area. Crews come out on fixed evenings and the schedule is written so one trip covers the evening’s work.',
+      },
+      {
+        q: 'Can you clean the office and the warehouse of our building in Ajax?',
+        a: 'Yes. The office round and the warehouse floor are written up together, each with its own dates, so one evening trip covers both.',
+      },
+      {
+        q: 'Is Whitby covered?',
+        a: 'Whitby is not listed as a service area on its own. If a building is between Ajax and Oshawa on the route the crew already takes, ask at the walkthrough and we will tell you plainly whether it can be scheduled.',
       },
     ],
   },

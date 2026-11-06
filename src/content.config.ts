@@ -17,8 +17,10 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
-    /** Opt-in editorial guide layout; legacy posts retain PostLayout. */
+    /** A shorter headline for the <title> only, when `title` would push the
+        brand suffix past 60 characters. Both layouts honour it. */
     seoTitle: z.string().optional(),
+    /** Opt-in editorial guide layout; legacy posts retain PostLayout. */
     guide: z.object({
       category: z.string(),
       breadcrumb: z.string(),
@@ -51,6 +53,11 @@ const pages = defineCollection({
     description: z.string().optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
+    /** A captioned photo grid, rendered by the page after its body. Only
+        /cleaning-demo-gallery/ carries one. */
+    photos: z
+      .array(z.object({ src: z.string(), alt: z.string(), caption: z.string() }))
+      .default([]),
   }),
 });
 

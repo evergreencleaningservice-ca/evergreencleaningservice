@@ -1,6 +1,7 @@
 ---
-title: "Cleaning Check List for Dental Clinics"
-description: "A cleaning checklist for dental clinics: exterior, reception, treatment rooms, restrooms, the staff break room, and floors and carpets, and what each needs."
+title: "Dental Office Cleaning Checklist for Ontario Clinics"
+seoTitle: "Dental Office Cleaning Checklist"
+description: "A dental office cleaning checklist for Ontario clinics: exterior, reception, treatment rooms, washrooms, the staff break room, and floors and carpets."
 pubDate: 2020-04-29
 image: "/images/blog-dental-clinic-cleaning-checklist-feature.jpg"
 imageAlt: "Close-up of cleaning a dental workspace"
@@ -18,7 +19,9 @@ Successful dental offices must look presentable and professional. The premises n
 - Clean Your Employee Breakroom
 - Clean Your Floors and Carpets
 
-There are several important dental clinic cleaning chores that must be performed regularly. How can you ensure that you remember everything? How frequently do various sections of your dental clinic need to be cleaned? If you are searching for guidance, our cleaning checklist for dental clinics can provide you with the following guidelines:
+There are several important dental clinic cleaning chores that must be performed regularly. How can you ensure that you remember everything? How frequently do various sections of your dental clinic need to be cleaned? If you are searching for guidance, our cleaning checklist for dental clinics can provide you with the following guidelines.
+
+One boundary first. In an Ontario clinic, instrument reprocessing and the disinfection of operatory equipment between patients are clinical work, done by your own staff under your college's infection prevention and control requirements. A cleaning crew covers the rest of the building: the surfaces, floors, washrooms and public areas below.
 
 ## Clean the Exterior of Your Clinic
 
