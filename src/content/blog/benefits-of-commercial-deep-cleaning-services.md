@@ -31,7 +31,7 @@ Ever had a dirty or cluttered living room or bedroom and just couldn’t relax? 
 
 ### Prevent Germs from Spreading
 
-Certain bacteria and viruses can thrive on surfaces like tables, doorknobs, light switches, countertops, etc, resulting in the spread of diseases. To keep your team members healthy and productive, reduce the number of sick days and protect your clients and partners from diseases, it is important to ensure the workplace is clean and disinfected. The only way to ensure this is through [regular cleaning](/), and this is where seasoned commercial cleaners come in handy.
+Certain bacteria and viruses can thrive on surfaces like tables, doorknobs, light switches, countertops, etc, resulting in the spread of diseases. To keep your team members healthy and productive, reduce the number of sick days and protect your clients and partners from diseases, it is important to ensure the workplace is clean and disinfected. The only way to ensure this is through [regular cleaning](/services/office-cleaning/) and [periodic deep cleaning](/services/building-maintenance/), and this is where seasoned commercial cleaners come in handy.
 
 ### Access a Vast Array of Services
 
@@ -59,6 +59,6 @@ Post-construction cleaning
 
 ### We Implement a Systematic Approach
 
-Our team knows just what should be cleaned and how to go about the process. We work in an efficient and effective manner so that you can focus on the primary aspects of your business. So, do not hesitate to seek our services today! [Contact us](/contact-us/) to schedule your cleaning!
+Our team knows just what should be cleaned and how to go about the process. We work in an efficient and effective manner so that you can focus on the primary aspects of your business. So, do not hesitate to seek our services today! [Request a walkthrough](/request-a-quote/) to schedule your cleaning!
 
 If you would rather leave it to a professional crew, Evergreen's [commercial cleaning](/services/commercial-cleaning/) and [building maintenance and floor care](/services/building-maintenance/) services cover it for workplaces across Toronto and the GTA.

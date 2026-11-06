@@ -72,7 +72,7 @@ Most slip, trip, and fall accidents will occur on walking surfaces in workplaces
 • Parking lots  
 • Floors
 
-Changes in weather can also change the traction on outdoor surfaces significantly. This could, in turn, affect indoor surfaces as pedestrian traffic tends to track in the moisture. This makes it important to take care of parking lot and sidewalk hygiene, as well as repairs. This could be possible with a standard, comprehensive [commercial cleaning](/) checklist. Additionally, the following measures could also come in handy in your workplace safety efforts:  
+Changes in weather can also change the traction on outdoor surfaces significantly. This could, in turn, affect indoor surfaces as pedestrian traffic tends to track in the moisture. This makes it important to take care of parking lot and sidewalk hygiene, as well as repairs. This is where a [floor care and entrance matting](/services/building-maintenance/) programme and a comprehensive [commercial cleaning](/services/commercial-cleaning/) checklist come in. Additionally, the following measures could also come in handy in your workplace safety efforts:  
 • Clean surfaces to eliminate spills.  
 • Go for moisture-absorbent mats with slanted edges in entrances.  
 • Go for appropriate mats or rugs in kitchen areas

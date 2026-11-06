@@ -140,8 +140,11 @@ const testimonials = [
     text-align: center;
   }
 
-  /* A <cite>, so italic without asking. */
+  /* A <cite>, which browsers italicise by default. Upright on purpose: the
+     italic face is only declared on post pages (see styles/fonts.css), and
+     this element was the one thing making every homepage visit download it. */
   .tes-name {
+    font-style: normal;
     float: left;
     margin-top: 10px;
     font-size: 16px;

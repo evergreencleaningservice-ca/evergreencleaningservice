@@ -72,6 +72,8 @@ Keyboards, mice, phones and chair arms are touched constantly by the person at t
 
 None of this needs to happen all at once. The high-touch points above belong in every routine visit; floors, blinds and a deep clean of washrooms and kitchens can be planned through the year. A quieter week, such as the end of summer or the holidays, is a good time for the deeper work, because there are fewer people in the way.
 
+Surfaces are only half of it: dust and a neglected HVAC system affect [indoor air quality](/commercial-cleaning-air-quality/) across the whole office.
+
 A professional crew works from a written scope, so nothing on the list depends on someone remembering it. [Contact us](/contact-us/) to talk about yours.
 
 If you would rather leave it to a professional crew, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) and [office cleaning](/services/office-cleaning/) services cover it for workplaces across Toronto and the GTA.

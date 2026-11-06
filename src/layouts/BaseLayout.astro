@@ -108,9 +108,10 @@ import MobileActionBar from '../components/MobileActionBar.astro';
     {/*
       Weights chosen by measuring which faces actually compute on the original,
       not by reading its @font-face list. Open Sans 800 carries the hero heading
-      and every section title, and Open Sans italic carries the hero sub-line —
-      without them the browser synthesises fake bold and fake oblique, which
-      looks close in a computed-style dump and wrong on screen.
+      and every section title; without it the browser synthesises fake bold,
+      which looks close in a computed-style dump and wrong on screen. The
+      italic face is declared only on post pages (styles/fonts-italic.css):
+      nothing above the fold uses it anywhere.
     */}
 
     {/* Section 2.4: the organisation graph, on every page. */}

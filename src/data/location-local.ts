@@ -51,6 +51,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     office: [
       'Downtown office space runs from single floors in the Financial District towers to professional offices in King West and the converted warehouses around the Entertainment District. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough, and coordinate with building management on access and security.',
       'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly. Our office is downtown, so extra visits are easy to arrange. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'Two guides help with the planning before a walkthrough: <a href="/office-cleaning-cost-toronto-guide/">how office cleaning is priced in Toronto</a>, and <a href="/how-often-should-an-office-be-cleaned/">how often an office should be cleaned</a>, which matters most for towers with long hours.',
     ],
     areasIntro:
       'Downtown is where our office is. We cover the core from the waterfront to Bloor Street and from Bathurst to the Don Valley, including:',
@@ -80,7 +81,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
       },
     ],
     access: [
-      'Our office at 243 Queen St W. is a few minutes from most of downtown, so a downtown building is not a highway drive away. Adding a visit, covering an event night or sending someone back to fix a missed item is quick to arrange.',
+      'Our office at 243 Queen St W is a few minutes from most of downtown, so a downtown building is not a highway drive away. Adding a visit, covering an event night or sending someone back to fix a missed item is quick to arrange.',
       'Downtown work runs after tenants leave and is booked around the building: dock and freight-elevator times, security desk hours and, in buildings with residents above, the noise rules that apply to vacuuming and floor machines.',
     ],
     faqs: [
@@ -101,6 +102,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     office: [
       'Etobicoke’s offices range from the buildings around Islington and Kipling stations to professional offices and clinics in the plazas along The Queensway, Bloor and Dixon, and the offices attached to industrial units in the south and north ends. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
       'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly. Etobicoke is close to our Queen Street West office, so an extra visit is easy to arrange. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'If you are still working out the budget, read <a href="/office-cleaning-cost-toronto-guide/">what sets the price of office cleaning</a> and <a href="/how-often-should-an-office-be-cleaned/">how many visits a week an office needs</a> before you call.',
     ],
     areasIntro:
       'Etobicoke runs from the lake to the airport, and its business areas are very different from one end to the other. We cover:',
@@ -155,6 +157,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     office: [
       'Mississauga’s office space runs from head offices in the business parks and single floors in the City Centre towers to the professional and medical suites in its neighbourhood plazas. Whichever yours is, we clean it the same way: after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
       'A routine visit covers desks and workstations, kitchens and break rooms, washrooms, floors and glass, and the touch points everyone shares: door handles, light switches, elevator buttons. It can run every night, a few evenings a week or weekly. Carpet extraction, floor refinishing and window cleaning are planned through the year on the same contract. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'For a first budget figure, our guide to <a href="/office-cleaning-cost-toronto-guide/">office cleaning costs in the GTA</a> walks through a worked example, and <a href="/how-often-should-an-office-be-cleaned/">this schedule guide</a> explains which rooms need attention every day.',
     ],
     areasIntro: 'We clean offices and commercial buildings across Mississauga, including:',
     areas: [
@@ -214,6 +217,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     office: [
       'Brampton’s offices range from professional offices and clinics in downtown Brampton and the plazas along Queen Street and Bovaird Drive to the business parks in the south end and the offices attached to its plants and warehouses. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
       'A routine visit covers desks, kitchens and lunchrooms, washrooms, floors and the shared touch points, every night, a few evenings a week or weekly. Where an office sits in front of a warehouse, the two go on one contract with their own schedules. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'Plants and warehouses with office space attached usually need a different schedule for each part of the building; <a href="/how-often-should-an-office-be-cleaned/">our frequency guide</a> explains how to set it, and <a href="/office-cleaning-cost-toronto-guide/">the pricing guide</a> shows what changes the monthly figure.',
     ],
     areasIntro:
       'Brampton’s commercial space is mostly industrial and logistics, with offices and retail in its older centres. We cover:',
@@ -264,6 +268,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     office: [
       'Vaughan’s office space is a mix of new towers in the Vaughan Metropolitan Centre, head offices in the business parks along Highway 400 and Highway 7, and offices at the front of industrial units in Concord and Woodbridge. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
       'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly, with carpet and hard-floor care planned through the year. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'Newer buildings with long occupancy hours tend to need more frequent visits than their size suggests: see <a href="/how-often-should-an-office-be-cleaned/">how often to clean an office</a>, then <a href="/office-cleaning-cost-toronto-guide/">what that schedule means for the price</a>.',
     ],
     areasIntro:
       'Vaughan combines a new downtown with one of the GTA’s largest industrial areas. We cover:',
@@ -314,6 +319,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     office: [
       'Markham’s offices range from corporate and technology offices along Highway 7 and the 404 and 407 corridor to multi-tenant buildings in Markham Centre, clinics and professional suites in the plazas, and offices at the front of business-park units. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
       'A routine visit covers open-plan floors and workstations, kitchens, meeting rooms, washrooms, glass and the touch points everyone shares, every night, a few evenings a week or weekly, with carpet and floor care planned through the year. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'A campus or a multi-tenant floor can be priced per tenant or as one scope; <a href="/office-cleaning-cost-toronto-guide/">the pricing guide</a> covers both, and <a href="/how-often-should-an-office-be-cleaned/">the frequency guide</a> helps split daily from weekly work.',
     ],
     areasIntro:
       'Markham’s commercial space runs along Highway 7 and the Highway 404 and 407 corridors. We cover:',
@@ -364,6 +370,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     office: [
       'Oakville’s offices range from law, financial and medical offices in downtown storefronts along Lakeshore Road to head offices in Winston Park and the business parks along the QEW and Highway 403, and the offices in front of the units on Speers Road. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
       'A routine visit covers reception, boardrooms and workstations, kitchens, washrooms, floors, glass and the shared touch points, every night, a few evenings a week or weekly. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'Before the walkthrough it helps to read <a href="/how-often-should-an-office-be-cleaned/">which office areas need daily cleaning</a> and <a href="/office-cleaning-cost-toronto-guide/">how a monthly cleaning budget is built</a>, so the proposal can be compared on the same scope.',
     ],
     areasIntro:
       'Oakville’s commercial space is split between its historic downtown, a modern uptown and business parks along the highways. We cover:',

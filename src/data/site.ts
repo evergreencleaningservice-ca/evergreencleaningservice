@@ -192,14 +192,16 @@ export const images = {
  */
 export const nap = {
   name: 'Evergreen Office Cleaning',
-  streetAddress: '243 Queen St W.',
+  /* No period after "W": the Google Business Profile writes the address
+     without one, and the string should match it character for character. */
+  streetAddress: '243 Queen St W',
   addressLocality: 'Toronto',
   addressRegion: 'ON',
   postalCode: 'M5V 1Z4',
   addressCountry: 'CA',
   addressCountryName: 'Canada',
   /** One line, for places that cannot take the structured form. */
-  addressLine: '243 Queen St W., Toronto, ON M5V 1Z4, Canada',
+  addressLine: '243 Queen St W, Toronto, ON M5V 1Z4, Canada',
   phoneDisplay: '(416) 803-4880',
   /** The spec's anchor format, which is also the correct E.164 form. */
   phoneHref: 'tel:+14168034880',
@@ -267,18 +269,29 @@ export const social = [
  * claimed service area to tidy a list would be a change to what the business
  * says it covers, which is not a developer's call.
  */
-export const footerAreas = [
-  { label: 'Toronto', href: '/locations/toronto-downtown/' },
-  { label: 'Toronto & GTA', href: '/services/commercial-cleaning/' },
+/**
+ * The service-area list in the footer, on every page.
+ *
+ * Anchors name the page they go to (SEO audit Phase 1, 6 Nov 2026). Before,
+ * "Toronto" went to the downtown page and "Toronto & GTA" to the commercial
+ * cleaning pillar, so three URLs (those two and the homepage) collected the
+ * same "commercial cleaning Toronto" signal from sixty pages, and "Richmond
+ * Hill" and "Scarborough" went to the bare /locations/ hub, which has nothing
+ * about either. Cities without a page of their own are listed as text; the
+ * hub link at the end covers them. Add an `href` when a city page exists.
+ */
+export const footerAreas: readonly { label: string; href?: string }[] = [
+  { label: 'Downtown Toronto', href: '/locations/toronto-downtown/' },
   { label: 'Mississauga', href: '/locations/mississauga/' },
   { label: 'Etobicoke', href: '/locations/etobicoke/' },
-  { label: 'Richmond Hill', href: '/locations/' },
   { label: 'Markham', href: '/locations/markham/' },
   { label: 'Vaughan / Concord', href: '/locations/vaughan/' },
-  { label: 'Scarborough', href: '/locations/' },
   { label: 'Brampton', href: '/locations/brampton/' },
   { label: 'Oakville', href: '/locations/oakville/' },
-] as const;
+  { label: 'Richmond Hill' },
+  { label: 'Scarborough' },
+  { label: 'All service areas', href: '/locations/' },
+];
 
 /**
  * The longer service-area line in the contact section. The original writes the

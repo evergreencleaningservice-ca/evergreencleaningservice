@@ -56,6 +56,6 @@ Good cleaners are reliable, discreet in a space full of other people's work, and
 
 ![Cleaner holding a duster behind an office desk](/images/blog-top-cleaning-professional-qualities-feature.jpg)
 
-Evergreen Office Cleaning has cleaned commercial buildings in Toronto and the GTA since 1989, with the same crew at every visit and one account executive for each client. [Request a free walkthrough](/request-a-quote/) and we will quote your building in writing.
+Evergreen Office Cleaning has cleaned commercial buildings in Toronto and the GTA since 1989, with the same crew at every visit and one account executive for each client. [Request a free walkthrough](/request-a-quote/) and we will quote your building in writing. Our guide to how office cleaning is priced in Toronto shows how to [compare cleaning quotes](/office-cleaning-cost-toronto-guide/) on the same scope.
 
 If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.

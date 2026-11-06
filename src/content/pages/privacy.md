@@ -5,11 +5,11 @@ description: "How Evergreen Office Cleaning collects, uses and protects the pers
 
 _Last updated: October 29, 2026_
 
-This policy explains what personal information Evergreen Office Cleaning collects through www.evergreencleaningservice.ca, why we collect it, and what you can ask us to do with it. It applies to this website only.
+This policy explains what personal information Evergreen Office Cleaning collects through [www.evergreencleaningservice.ca](https://www.evergreencleaningservice.ca/), why we collect it, and what you can ask us to do with it. It applies to this website only.
 
 ## Who we are
 
-Evergreen Office Cleaning, 243 Queen St W., Toronto, ON M5V 1Z4. You can reach us about anything in this policy at [info@evergreencleaningservice.ca](mailto:info@evergreencleaningservice.ca) or (416) 803-4880.
+Evergreen Office Cleaning, 243 Queen St W, Toronto, ON M5V 1Z4. You can reach us about anything in this policy at [info@evergreencleaningservice.ca](mailto:info@evergreencleaningservice.ca) or (416) 803-4880.
 
 ## What we collect and why
 

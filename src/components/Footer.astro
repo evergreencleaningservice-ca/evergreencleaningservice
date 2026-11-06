@@ -76,9 +76,7 @@ const icons: Record<string, string> = {
         <ul class="footer-areas">
           {
             footerAreas.map((area) => (
-              <li>
-                <a href={area.href}>{area.label}</a>
-              </li>
+              <li>{area.href ? <a href={area.href}>{area.label}</a> : <span>{area.label}</span>}</li>
             ))
           }
         </ul>

@@ -9,7 +9,7 @@ Formerly Evergreen Cleaning Service.
 
 ### Address:
 
-[243 Queen St W., Toronto, ON M5V 1Z4](https://maps.google.com/?cid=15602716773318351983)
+[243 Queen St W, Toronto, ON M5V 1Z4](https://maps.google.com/?cid=15602716773318351983)
 
 ### Phone:
 

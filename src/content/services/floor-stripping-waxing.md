@@ -50,6 +50,9 @@ faqs:
   - q: "Which areas do you cover?"
     a: "Toronto (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa."
 related:
+  - title: "Daily floor care between wax visits"
+    href: "/5-easy-ways-to-keep-your-commercial-floor-clean/"
+    text: "Five habits that stretch the time between full strips."
   - title: "Building Maintenance & Floor Care"
     href: "/services/building-maintenance/"
     text: "Carpets, high dusting, glass and exteriors too."
