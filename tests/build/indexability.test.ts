@@ -38,6 +38,8 @@ import {
 } from '../../src/lib/noindex-rules';
 import { isPrivatePage } from './private-pages';
 import { shellProblems } from '../../src/lib/admin/live-posts';
+import { locations } from '../../src/data/locations';
+import { SOURCES } from '../../src/lib/sitemap-lastmod.mjs';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const ORIGIN = `https://${PRODUCTION_HOSTS[0]}`;
@@ -279,6 +281,111 @@ describe('the sitemap', () => {
     for (const url of urls()) {
       const rel = new URL(url).pathname.replace(/^\//, '') + 'index.html';
       expect(pages).toContain(rel === 'index.html' ? 'index.html' : rel);
+    }
+  });
+});
+
+/**
+ * The sitemap's dates (6 Nov 2026, SEO audit item 29; findings/sitemap.md 1
+ * and 3).
+ *
+ * The audit found 16 service, industry and location pages carrying one
+ * timestamp, 2026-10-31T14:11:02Z: the commit "Shrink the quote forms",
+ * which changed the shared templates and none of the pages' text. A page is
+ * now dated by its own content only (src/lib/sitemap-lastmod.mjs).
+ *
+ * "No two sections share a date because of a template commit" is not
+ * asserted by counting shared dates. One real edit can change a service page
+ * and a location page together (the Phase 2 copy pass did), and that shared
+ * date is honest. What is asserted is where each date comes from: a service
+ * or industry page's date is its own content file's, a location's is its own
+ * `updated` field, and no page's date sources include a template, a layout
+ * or a shared data file. A template commit then has nothing to move.
+ *
+ * A missing lastmod fails here on purpose: it is what a shallow clone does
+ * (the date is left out rather than guessed), and the deploy scripts run
+ * this suite first. `git fetch --unshallow` fixes it.
+ */
+describe("the sitemap's dates", () => {
+  const entries = () =>
+    ['sitemap-pages-0.xml', 'sitemap-insights-0.xml'].flatMap((file) =>
+      [...read(file).matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => ({
+        file,
+        path: new URL(m[1].match(/<loc>([^<]+)<\/loc>/)?.[1] ?? '').pathname,
+        lastmod: m[1].match(/<lastmod>([^<]+)<\/lastmod>/)?.[1],
+      }))
+    );
+  const time = (date: string | undefined) => (date ? Date.parse(date) : NaN);
+  const offerPages = () => entries().filter((e) => /^\/(services|industries)\/[^/]+\/$/.test(e.path));
+  const locationPages = () => entries().filter((e) => /^\/locations\/[^/]+\/$/.test(e.path));
+
+  /** The committer date of the last commit to `file`, as git reports it. */
+  const committed = (file: string) =>
+    spawnSync('git', ['log', '-1', '--format=%cI', '--', file], { cwd: repo, encoding: 'utf8' }).stdout.trim();
+
+  it('gives every URL in both sitemaps a lastmod that is a date', () => {
+    const all = entries();
+    expect(all.filter((e) => e.file === 'sitemap-pages-0.xml').length).toBeGreaterThan(30);
+    expect(all.filter((e) => e.file === 'sitemap-insights-0.xml').length).toBeGreaterThan(10);
+    const undated = all.filter((e) => Number.isNaN(time(e.lastmod))).map((e) => e.path);
+    expect(undated, 'no lastmod: is this a shallow clone? git fetch --unshallow').toEqual([]);
+  });
+
+  it('dates nothing in the future', () => {
+    /* Ten minutes for a committer clock that runs a little fast. */
+    const now = Date.now() + 10 * 60_000;
+    expect(entries().filter((e) => time(e.lastmod) > now)).toEqual([]);
+  });
+
+  it("dates each location page by its own `updated` field, and the eleven are not one date", () => {
+    const pagesFound = locationPages();
+    expect(pagesFound).toHaveLength(locations.length);
+    expect(pagesFound.length).toBeGreaterThanOrEqual(11);
+    for (const location of locations) {
+      expect(location.updated, `${location.slug} has no updated field`).toBeTruthy();
+      const entry = pagesFound.find((e) => e.path === `/locations/${location.slug}/`);
+      expect(time(entry?.lastmod), location.slug).toBe(time(location.updated));
+    }
+    expect(new Set(pagesFound.map((e) => time(e.lastmod))).size).toBeGreaterThan(1);
+  });
+
+  it('dates each service and industry page by its own content file alone', () => {
+    const offers = offerPages();
+    expect(offers.length).toBeGreaterThanOrEqual(11);
+    for (const { path: p, lastmod } of offers) {
+      const file = `src/content${p.replace(/\/$/, '')}.md`;
+      expect(fs.existsSync(path.join(repo, file)), file).toBe(true);
+      expect(time(lastmod), p).toBe(time(committed(file)));
+    }
+  });
+
+  it('takes no page date from a template, a layout or a shared data file', () => {
+    const shared = (file: string) =>
+      /\[.+\]/.test(file) || // a route that builds many pages
+      file.startsWith('src/layouts/') ||
+      file.startsWith('src/data/') ||
+      (file.startsWith('src/components/') && !file.startsWith('src/components/home'));
+    const offenders = entries()
+      .filter((e) => e.file === 'sitemap-pages-0.xml')
+      .flatMap((e) => SOURCES(e.path).filter(shared).map((file) => `${e.path} <- ${file}`));
+    expect(offenders).toEqual([]);
+  });
+
+  it('no longer stamps the template-only commit of 31 Oct on any offer or location page', () => {
+    const stamped = [...offerPages(), ...locationPages()].filter(
+      (e) => time(e.lastmod) === Date.parse('2026-10-31T14:11:02Z')
+    );
+    expect(stamped).toEqual([]);
+  });
+
+  it("puts the same date in each offer and location page's WebPage dateModified", () => {
+    for (const { path: p, lastmod } of [...offerPages(), ...locationPages()]) {
+      const html = read(`${p.slice(1)}index.html`);
+      const webPage = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+        .map((m) => JSON.parse(m[1]))
+        .find((node) => node['@type'] === 'WebPage');
+      expect(webPage, p).toBeTruthy();
+      expect(time(webPage.dateModified), p).toBe(time(lastmod));
     }
   });
 });

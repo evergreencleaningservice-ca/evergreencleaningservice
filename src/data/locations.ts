@@ -23,6 +23,26 @@
 export type Location = {
   /** URL slug under /locations/ */
   slug: string;
+  /**
+   * When this page's own text last changed: the sitemap's <lastmod> and the
+   * WebPage `dateModified` for the page (src/lib/sitemap-lastmod.mjs). Added
+   * 6 Nov 2026, SEO audit item 29: the date used to be the last commit to
+   * this file and to location-local.ts, so an edit to one city re-dated all
+   * of them, and a commit to the shared page template did the same.
+   *
+   * THE RULE. Change it, to the date and time of the edit (ISO 8601, UTC),
+   * when an edit changes what this location's page says: its entry here or
+   * its entry in location-local.ts. Leave it alone for everything else,
+   * including the shared template (src/pages/locations/[slug].astro), the
+   * reviews, the footer and the coverage list, which every location page
+   * shows alike. Never set it ahead of the edit or back past one.
+   *
+   * The first values are the committer times of the last commit that changed
+   * each entry in either file, found with `git log -L` on the entry.
+   * Without the field the page falls back to the last commit to the two
+   * files.
+   */
+  updated?: string;
   /** Display name used in the H1 and copy */
   name: string;
   /** Longer form for prose where "Toronto Downtown" would read oddly */
@@ -66,6 +86,7 @@ export type LocationDetail = {
 export const locations: Location[] = [
   {
     slug: 'toronto-downtown',
+    updated: '2026-11-06T16:12:26Z', // East York and York added to the areas, a building type and an FAQ
     name: 'Downtown Toronto',
     region: 'downtown Toronto',
     /* Rewritten 2026-10-15: the earlier focus and facility list named
@@ -90,6 +111,7 @@ export const locations: Location[] = [
   },
   {
     slug: 'mississauga',
+    updated: '2026-11-06T15:15:07Z', // intro and reasons rewritten (audit Phase 2)
     name: 'Mississauga',
     region: 'Mississauga',
     focus:
@@ -155,6 +177,7 @@ export const locations: Location[] = [
   },
   {
     slug: 'etobicoke',
+    updated: '2026-11-06T14:57:18Z', // the paragraph linking the two planning guides (audit Phase 1)
     name: 'Etobicoke',
     region: 'Etobicoke',
     /* Rewritten 2026-10-30 to the facility types the client lists: the
@@ -177,6 +200,7 @@ export const locations: Location[] = [
   },
   {
     slug: 'vaughan',
+    updated: '2026-11-06T15:15:07Z', // intro and reasons rewritten (audit Phase 2)
     name: 'Vaughan',
     region: 'Vaughan',
     focus:
@@ -239,6 +263,7 @@ export const locations: Location[] = [
   },
   {
     slug: 'markham',
+    updated: '2026-11-06T14:57:18Z', // the paragraph linking the two planning guides (audit Phase 1)
     name: 'Markham',
     region: 'Markham',
     /* Rewritten 2026-10-30 to the facility types the client lists. */
@@ -260,6 +285,7 @@ export const locations: Location[] = [
   },
   {
     slug: 'brampton',
+    updated: '2026-11-06T14:57:18Z', // the paragraph linking the two planning guides (audit Phase 1)
     name: 'Brampton',
     region: 'Brampton',
     /* Rewritten 2026-10-15 to the client's own facility list; the earlier
@@ -283,6 +309,7 @@ export const locations: Location[] = [
   },
   {
     slug: 'oakville',
+    updated: '2026-11-06T16:12:26Z', // the QEW business-parks paragraph
     name: 'Oakville',
     region: 'Oakville',
     /* Rewritten 2026-10-15 to the client's own facility list. */
@@ -309,6 +336,7 @@ export const locations: Location[] = [
      client-supplied facts. No clients, buildings or counts are named. */
   {
     slug: 'north-york',
+    updated: '2026-11-06T16:12:26Z', // page added
     name: 'North York',
     region: 'North York',
     focus:
@@ -330,6 +358,7 @@ export const locations: Location[] = [
   },
   {
     slug: 'scarborough',
+    updated: '2026-11-06T16:12:26Z', // page added
     name: 'Scarborough',
     region: 'Scarborough',
     focus:
@@ -351,6 +380,7 @@ export const locations: Location[] = [
   },
   {
     slug: 'richmond-hill',
+    updated: '2026-11-06T16:12:26Z', // page added
     name: 'Richmond Hill',
     region: 'Richmond Hill',
     focus:
@@ -372,6 +402,7 @@ export const locations: Location[] = [
   },
   {
     slug: 'durham-region',
+    updated: '2026-11-06T16:12:26Z', // page added
     name: 'Durham Region',
     region: 'Pickering, Ajax and Oshawa',
     focus:

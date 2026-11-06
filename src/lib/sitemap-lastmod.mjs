@@ -9,19 +9,36 @@
  *
  *   a blog post      its `updatedDate`, or its `pubDate` if it has none
  *   /insights/       the newest of those
- *   everything else  the last commit touching the files the page is made
- *                    from — its content file, its page template, or the
- *                    data file it reads (`SOURCES` below)
+ *   a location page  its own `updated` field in src/data/locations.ts
+ *   /locations/      the newest of those and of the hub's own page file
+ *   everything else  the last commit touching the page's own files: its
+ *                    content file, or its page file where the page is
+ *                    written there (`SOURCES` below)
+ *
+ * WHAT DOES NOT COUNT (6 Nov 2026, SEO audit item 29). Shared templates and
+ * shared data: OfferPage.astro and the [slug].astro routes, the layouts, and
+ * locations.ts and location-local.ts as whole files. They used to be in the
+ * sources, so "Shrink the quote forms" on 31 Oct gave 16 service, industry
+ * and location pages one timestamp, and a change to one city re-dated every
+ * city. A template edit that does change what a page says should go into
+ * that page's own content file (or, for a location, its `updated` field).
+ *
+ * The same date is the WebPage `dateModified` on the service, industry and
+ * location pages (OfferPage.astro, locations/[slug].astro), so the schema and
+ * the sitemap cannot disagree.
  *
  * A date that cannot be known is LEFT OUT rather than guessed. That happens in
  * a shallow clone: a file last changed before the clone's history begins
  * reports the boundary commit's date, which is a date the file did not change
  * on. Those URLs simply have no lastmod; `git fetch --unshallow` before a
- * deploy gives every URL its date.
+ * deploy gives every URL its date. Since 6 Nov 2026 the build test
+ * (tests/build/indexability.test.ts) fails when any URL has no lastmod, and
+ * the deploy scripts run the tests first.
  */
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
+import { locations } from '../data/locations.ts';
 
 const ROOT = process.cwd();
 const BLOG = path.join(ROOT, 'src/content/blog');
@@ -71,21 +88,41 @@ const postDates = new Map(
 
 const newestPost = [...postDates.values()].filter(Boolean).sort().at(-1);
 
-/** The files a non-post page is made from, by path. */
-const SOURCES = (/** @type {string} */ p) => {
+/**
+ * Each location's `updated` field, keyed by slug. A value that is not a date
+ * stops the build: a typo here would otherwise drop or garble the page's date
+ * without anyone seeing it.
+ */
+const locationDates = new Map(
+  locations.map((l) => {
+    if (l.updated === undefined) return [l.slug, undefined];
+    const ms = Date.parse(l.updated);
+    if (Number.isNaN(ms)) throw new Error(`src/data/locations.ts: ${l.slug} has updated '${l.updated}', which is not a date`);
+    return [l.slug, new Date(ms).toISOString()];
+  }),
+);
+
+/** The newest of `dates`, or undefined when any of them is unknowable. */
+const newest = (/** @type {(string | undefined)[]} */ dates) =>
+  dates.every(Boolean)
+    ? /** @type {string[]} */ (dates).reduce((a, b) => (Date.parse(a) >= Date.parse(b) ? a : b))
+    : undefined;
+
+/**
+ * The files whose last commit dates a page, by path: the page's own files
+ * and nothing it shares with other pages. Exported for the build test, which
+ * holds it to that.
+ */
+export const SOURCES = (/** @type {string} */ p) => {
   const parts = p.split('/').filter(Boolean);
   if (!parts.length) return ['src/pages/index.astro', 'src/components/home'];
   const [first, slug] = parts;
   if (first === 'services' || first === 'industries') {
-    return slug
-      ? [`src/content/${first}/${slug}.md`, `src/pages/${first}/[slug].astro`, 'src/components/OfferPage.astro']
-      : [`src/pages/${first}/index.astro`, `src/content/${first}`];
+    return slug ? [`src/content/${first}/${slug}.md`] : [`src/pages/${first}/index.astro`, `src/content/${first}`];
   }
-  if (first === 'locations') {
-    return slug
-      ? ['src/data/locations.ts', 'src/pages/locations/[slug].astro']
-      : ['src/pages/locations/index.astro', 'src/data/locations.ts'];
-  }
+  /* A location page has no file of its own: its `updated` field dates it
+     (lastmodFor). */
+  if (first === 'locations') return slug ? [] : ['src/pages/locations/index.astro'];
   if (first === 'projects') return ['src/pages/projects', 'src/content/projects'];
   return [`src/pages/${first}.astro`, `src/content/pages/${first}.md`];
 };
@@ -96,6 +133,14 @@ export function lastmodFor(/** @type {string} */ url) {
   const slug = p.replace(/^\/|\/$/g, '');
   if (postDates.has(slug)) return postDates.get(slug);
   if (p === '/insights/') return newestPost;
+  const location = p.match(/^\/locations\/([^/]+)\/$/)?.[1];
+  /* The two data files' last commit is only the fallback for an entry
+     without an `updated` field; it re-dates every location at once. */
+  if (location) return locationDates.get(location) ?? lastCommit(['src/data/locations.ts', 'src/data/location-local.ts']);
+  /* The hub lists every location, so a change to one is a change to it. */
+  if (p === '/locations/') {
+    return newest([lastCommit(SOURCES(p)), ...locations.map((l) => lastmodFor(new URL(`${l.slug}/`, url).href))]);
+  }
   return lastCommit(SOURCES(p));
 }
 
