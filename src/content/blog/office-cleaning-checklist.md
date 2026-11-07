@@ -18,7 +18,7 @@ guide:
     url: "https://www.magnific.com/"
   ctaHeading: "Turn the Checklist Into a Written Scope"
   ctaText: "Evergreen Office Cleaning has cleaned Toronto and GTA offices since 1989. Tell us about your office and we will walk it with you, agree which tasks belong on which visit, and send a written proposal that lists them."
-  ctaResponse: "We reply within 2 hours. A free walkthrough when you are ready, then a written quote. No obligation."
+  ctaResponse: "We reply within 2 hours during office hours (Mon–Fri 7am–6pm). A free walkthrough when you are ready, then a written quote. No obligation."
   contents:
     - { label: "How to use this checklist", id: "how-to-use-this-checklist" }
     - { label: "Daily office cleaning tasks", id: "daily-office-cleaning-tasks" }

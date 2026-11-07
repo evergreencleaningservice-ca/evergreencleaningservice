@@ -1,5 +1,6 @@
 ---
 import { nap } from '../../data/site';
+import { REPLY_PROMISE_SHORT } from '../../data/landing';
 
 /**
  * The hero visual ROTATES through three office photographs (31 Oct 2026,
@@ -107,9 +108,9 @@ const [first, ...rest] = SLIDES;
       <li>Free on-site walkthrough</li>
       <li>WSIB covered, bonded and insured</li>
       {/* Qualified with the office hours (SEO re-audit, 7 Nov 2026, GEO N2):
-          the 2-hour reply holds Monday to Friday 7am–6pm, `hours` in
-          src/data/site.ts. tests/build/claims-copy.test.ts checks the wording. */}
-      <li>A reply within 2 hours, Mon–Fri 7am–6pm</li>
+          the 2-hour reply holds Monday to Friday 7am–6pm; the wording comes
+          from REPLY_PROMISE_SHORT in src/data/landing.ts. tests/build/claims-copy.test.ts checks the wording. */}
+      <li>A reply {REPLY_PROMISE_SHORT}</li>
     </ul>
   </div>
 </section>

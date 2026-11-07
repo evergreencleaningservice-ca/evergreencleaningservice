@@ -250,6 +250,12 @@ export const hours = [
 /** The same hours, for a human, beside the click-to-call. */
 export const hoursNote = 'Office hours: Monday to Friday 7am–6pm';
 
+/** The same hours in the short form the reply promise carries ("within 2
+    hours during office hours (Mon–Fri 7am–6pm)"). Kept here, beside `hours`,
+    so the promise cannot drift from them; tests/reply-promise.test.ts checks
+    the three against each other. */
+export const officeHoursShort = 'Mon–Fri 7am–6pm';
+
 export const social = [
   { name: 'Facebook', href: 'https://www.facebook.com/Evergreen-Cleaning-Service-104007224426820' },
   { name: 'Twitter', href: 'https://x.com/EvergreenClean8' },

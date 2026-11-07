@@ -18,7 +18,7 @@ Evergreen Office Cleaning is a commercial cleaning company based in Toronto. Sin
 - **Coverage:** WSIB Ontario, liability insurance and bonding; cleaning staff are background-screened.
 - **Products:** Armstrong Manufacturing ProSeries Green, certified to UL Environment (ECOLOGO) standards.
 - **Service area:** Toronto, Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa.
-- **Response:** a reply to every quote request within 2 hours, then a free walkthrough and a written proposal.
+- **Response:** a reply to every quote request within 2 hours during office hours (Mon–Fri 7am–6pm), then a free walkthrough and a written proposal.
 
 ## What we do
 
@@ -34,7 +34,7 @@ Offices and professional firms, [medical and dental clinics](/industries/medical
 
 ## How we work
 
-- **A reply within 2 hours.** Send the quote form or call, and an account executive gets back to you, not an auto-responder.
+- **A reply within 2 hours during office hours.** Send the quote form or call, and an account executive gets back to you, not an auto-responder.
 - **A free walkthrough.** When you are ready, we walk the building with you rather than pricing it over the phone.
 - **A written scope.** The proposal sets out what is cleaned, how often and when, so nothing depends on someone remembering it.
 - **The same crew every visit,** who learn your building and its rules.

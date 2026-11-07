@@ -32,6 +32,7 @@
  */
 
 import { fieldValue, wireLeadForm } from './lead-submit';
+import { REPLY_PROMISE } from '../data/landing';
 
 /**
  * Errors are written into `[data-qq-error="<the field's own name>"]`.
@@ -235,7 +236,7 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
   /* Read before the form is replaced, and from the markup rather than typed
      here, so a page that promises a specific time says the same thing after
      submission as it did before. */
-  const promise = form.dataset.replyPromise || 'within 2 hours';
+  const promise = form.dataset.replyPromise || REPLY_PROMISE;
 
   const confirm = (f: HTMLFormElement) => {
     const box = document.createElement('div');

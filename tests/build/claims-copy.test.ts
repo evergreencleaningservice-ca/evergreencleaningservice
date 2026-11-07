@@ -15,7 +15,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { AREAS } from '../../src/data/coverage';
-import { nap } from '../../src/data/site';
+import { hours, hoursNote, nap, officeHoursShort } from '../../src/data/site';
+import { REPLY_PROMISE, REPLY_PROMISE_SHORT } from '../../src/data/landing';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-claims');
@@ -133,5 +134,50 @@ describe('the quote page fallback is made of real links', () => {
       .filter((f) => f.endsWith('.js'))
       .map((f) => fs.readFileSync(path.join(out, '_astro', f), 'utf8'));
     expect(bundles.some((js) => js.includes('If the check will not work for you'))).toBe(true);
+  });
+});
+
+describe('every 2-hour reply promise says when it applies', () => {
+  /* 7 Nov 2026, at the owner's request after the re-audit: the promise was
+     qualified on the homepage first (GEO N2), then everywhere. "Within 2
+     hours" on its own reads as round the clock. Every built page, its text
+     and its meta description, must follow the number with the office hours. */
+  const pages = (dir: string): string[] =>
+    fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) return pages(p);
+      return e.name.endsWith('.html') ? [p] : [];
+    });
+  const QUALIFIED = /^(?:,? Mon–Fri 7am–6pm| during office hours)/;
+
+  it('no page states "within/in 2 hours" without the office hours', () => {
+    const bare: string[] = [];
+    for (const file of pages(out)) {
+      const html = fs.readFileSync(file, 'utf8');
+      const meta = [...html.matchAll(/<meta\s+(?:name|property)="(?:description|og:description|twitter:description)"\s+content="([^"]*)"/g)].map((m) => m[1]);
+      for (const chunk of [text(html), ...meta]) {
+        for (const m of chunk.matchAll(/\b(?:within|in) (?:2|two) hours/gi)) {
+          const after = chunk.slice(m.index! + m[0].length, m.index! + m[0].length + 25);
+          if (!QUALIFIED.test(after)) bare.push(`${path.relative(out, file)}: …${chunk.slice(Math.max(0, m.index! - 30), m.index! + m[0].length + 25)}…`);
+        }
+      }
+    }
+    expect(bare).toEqual([]);
+  });
+
+  it('the short office hours agree with the structured hours', () => {
+    /* `officeHoursShort` and `hoursNote` are written by hand next to `hours`;
+       a change to one that misses the others would make the promise wrong. */
+    expect(hours).toHaveLength(1);
+    const [h] = hours;
+    expect(h.days).toEqual(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']);
+    const ampm = (t: string) => {
+      const hr = Number(t.slice(0, 2));
+      return `${hr % 12 || 12}${hr < 12 ? 'am' : 'pm'}`;
+    };
+    expect(officeHoursShort).toBe(`Mon–Fri ${ampm(h.opens)}–${ampm(h.closes)}`);
+    expect(hoursNote).toBe(`Office hours: Monday to Friday ${ampm(h.opens)}–${ampm(h.closes)}`);
+    expect(REPLY_PROMISE).toContain(`(${officeHoursShort})`);
+    expect(REPLY_PROMISE_SHORT).toContain(officeHoursShort);
   });
 });

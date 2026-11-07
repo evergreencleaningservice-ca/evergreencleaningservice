@@ -25,6 +25,7 @@ import TrustStrip from './blocks/TrustStrip.astro';
 import { AREAS, AREA_GROUPS } from '../data/coverage';
 import { PRICING_FACTORS } from '../data/process';
 import { nap, site } from '../data/site';
+import { REPLY_PROMISE } from '../data/landing';
 import { pageTitle } from '../lib/title';
 import { breadcrumbSchema, serviceSchema, webPageSchema } from '../lib/schema';
 import { lastmodFor } from '../lib/sitemap-lastmod.mjs';
@@ -256,7 +257,7 @@ const RELATED_TEXT: Record<string, string> = {
           id="offer-quote"
           formId={formId}
           heading="Get a free quote"
-          intro="We reply within 2 hours, then arrange a free walkthrough when it suits you. No obligation."
+          intro={`We reply ${REPLY_PROMISE}, then arrange a free walkthrough when it suits you. No obligation.`}
         />
       </div>
     </aside>
