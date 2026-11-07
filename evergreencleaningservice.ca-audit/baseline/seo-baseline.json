@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-11-07T18:21:17.906Z",
+  "capturedAt": "2026-11-07T21:24:03.016Z",
   "mustStayNoindex": [
     "/lp/commercial-cleaning/",
     "/search/",
@@ -10,14 +10,14 @@
   "pages": {
     "/": {
       "canonical": "https://www.evergreencleaningservice.ca/",
-      "description": "Office and commercial cleaning across Toronto and the GTA since 1989: the same crew every visit, after hours, WSIB covered. We reply within 2 hours.",
+      "description": "Office and commercial cleaning in Toronto and the GTA since 1989: the same crew every visit, after hours, WSIB covered. Reply in 2 hours, Mon–Fri 7am–6pm.",
       "h1": [
         "Office & Commercial Cleaning in Toronto and the GTA"
       ],
       "h2Count": 12,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:17fcc1d3658e5574",
+      "mainHash": "sha256:85b98e014bc372e4",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -37,7 +37,7 @@
       ],
       "status": 200,
       "title": "Commercial Cleaning Company in Toronto Since 1989 | Evergreen",
-      "wordCount": 1393,
+      "wordCount": 1410,
       "xRobotsTag": null
     },
     "/5-cleaning-products-you-should-have-in-your-office/": {
@@ -239,7 +239,7 @@
       "h2Count": 10,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:2ffdea225cf90ca4",
+      "mainHash": "sha256:c6a28254b75e310a",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -261,7 +261,7 @@
       ],
       "status": 200,
       "title": "About Us - Evergreen Office Cleaning",
-      "wordCount": 576,
+      "wordCount": 584,
       "xRobotsTag": null
     },
     "/areas-in-your-office-where-germs-are-likely-hiding/": {
@@ -566,14 +566,14 @@
     },
     "/contact-us/": {
       "canonical": "https://www.evergreencleaningservice.ca/contact-us/",
-      "description": "Contact Evergreen Office Cleaning in Toronto: (416) 803-4880, info@evergreencleaningservice.ca, 243 Queen St W. We reply within 2 hours.",
+      "description": "Contact Evergreen Office Cleaning in Toronto: (416) 803-4880, info@evergreencleaningservice.ca, 243 Queen St W. We reply within 2 hours, Mon–Fri 7am–6pm.",
       "h1": [
         "Contact Us"
       ],
       "h2Count": 3,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:eaee71951ed72367",
+      "mainHash": "sha256:98a7355d29fd2ef8",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -595,7 +595,7 @@
       ],
       "status": 200,
       "title": "Contact Us - Evergreen Office Cleaning",
-      "wordCount": 126,
+      "wordCount": 131,
       "xRobotsTag": null
     },
     "/day-night-which-is-the-best-routine-for-your-office/": {
@@ -831,7 +831,7 @@
       "h2Count": 8,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:651e3aa19c52a2e7",
+      "mainHash": "sha256:972d2c3987783b51",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -854,7 +854,7 @@
       ],
       "status": 200,
       "title": "Industries We Clean For in Toronto & the GTA | Evergreen",
-      "wordCount": 313,
+      "wordCount": 315,
       "xRobotsTag": null
     },
     "/industries/medical-dental-clinics/": {
@@ -866,7 +866,7 @@
       "h2Count": 13,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:b923498b17f14f45",
+      "mainHash": "sha256:3486f6a4de2f5e56",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -895,7 +895,7 @@
       ],
       "status": 200,
       "title": "Medical & Dental Clinic Cleaning in Toronto | Evergreen",
-      "wordCount": 1238,
+      "wordCount": 1255,
       "xRobotsTag": null
     },
     "/industries/property-management/": {
@@ -907,7 +907,7 @@
       "h2Count": 14,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:1f7790b1b0bcb3c6",
+      "mainHash": "sha256:5b2021a61843f3fd",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -936,7 +936,7 @@
       ],
       "status": 200,
       "title": "Property Management & Condo Cleaning in Toronto | Evergreen",
-      "wordCount": 1129,
+      "wordCount": 1146,
       "xRobotsTag": null
     },
     "/insights/": {
@@ -1055,7 +1055,7 @@
       "h2Count": 10,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:1204913af75365e4",
+      "mainHash": "sha256:3ea81f4f87f50b79",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1082,7 +1082,7 @@
       ],
       "status": 200,
       "title": "Office & Commercial Cleaning in Brampton | Evergreen",
-      "wordCount": 853,
+      "wordCount": 865,
       "xRobotsTag": null
     },
     "/locations/durham-region/": {
@@ -1094,7 +1094,7 @@
       "h2Count": 9,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:a28e89522c2e95dd",
+      "mainHash": "sha256:d4b2c06a37b04688",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1122,7 +1122,7 @@
       ],
       "status": 200,
       "title": "Office & Commercial Cleaning in Pickering, Ajax & Oshawa",
-      "wordCount": 875,
+      "wordCount": 887,
       "xRobotsTag": null
     },
     "/locations/etobicoke/": {
@@ -1134,7 +1134,7 @@
       "h2Count": 10,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:e4297c31e21a16f0",
+      "mainHash": "sha256:1dfec934dc64b98a",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1161,7 +1161,7 @@
       ],
       "status": 200,
       "title": "Office & Commercial Cleaning in Etobicoke | Evergreen",
-      "wordCount": 864,
+      "wordCount": 876,
       "xRobotsTag": null
     },
     "/locations/markham/": {
@@ -1173,7 +1173,7 @@
       "h2Count": 10,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:c873508eeb20a7cc",
+      "mainHash": "sha256:d5899c5e1bb77f1b",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1200,7 +1200,7 @@
       ],
       "status": 200,
       "title": "Office & Commercial Cleaning in Markham | Evergreen",
-      "wordCount": 829,
+      "wordCount": 841,
       "xRobotsTag": null
     },
     "/locations/mississauga/": {
@@ -1212,7 +1212,7 @@
       "h2Count": 11,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:3030aa51b4d7e5e1",
+      "mainHash": "sha256:52e07add4222085e",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1239,7 +1239,7 @@
       ],
       "status": 200,
       "title": "Office & Commercial Cleaning in Mississauga | Evergreen",
-      "wordCount": 1181,
+      "wordCount": 1193,
       "xRobotsTag": null
     },
     "/locations/north-york/": {
@@ -1251,7 +1251,7 @@
       "h2Count": 9,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:5fe5be045cc48163",
+      "mainHash": "sha256:49eea1d39635cc02",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1278,7 +1278,7 @@
       ],
       "status": 200,
       "title": "Office & Commercial Cleaning in North York | Evergreen",
-      "wordCount": 1066,
+      "wordCount": 1078,
       "xRobotsTag": null
     },
     "/locations/oakville/": {
@@ -1290,7 +1290,7 @@
       "h2Count": 10,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:0e6a9d81fb76e1d8",
+      "mainHash": "sha256:8875384ac8e35f97",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1317,7 +1317,7 @@
       ],
       "status": 200,
       "title": "Office & Commercial Cleaning in Oakville | Evergreen",
-      "wordCount": 860,
+      "wordCount": 872,
       "xRobotsTag": null
     },
     "/locations/richmond-hill/": {
@@ -1329,7 +1329,7 @@
       "h2Count": 9,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:39668fa3aa3984cb",
+      "mainHash": "sha256:0c630ef7cdc6c88e",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1356,7 +1356,7 @@
       ],
       "status": 200,
       "title": "Office & Commercial Cleaning in Richmond Hill | Evergreen",
-      "wordCount": 942,
+      "wordCount": 954,
       "xRobotsTag": null
     },
     "/locations/scarborough/": {
@@ -1368,7 +1368,7 @@
       "h2Count": 9,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:67cd18c549bd5cad",
+      "mainHash": "sha256:50ce47f6e034691a",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1395,7 +1395,7 @@
       ],
       "status": 200,
       "title": "Office & Commercial Cleaning in Scarborough | Evergreen",
-      "wordCount": 981,
+      "wordCount": 993,
       "xRobotsTag": null
     },
     "/locations/toronto-downtown/": {
@@ -1407,7 +1407,7 @@
       "h2Count": 10,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:064417d058a53171",
+      "mainHash": "sha256:c83609f0ceff4d42",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1434,7 +1434,7 @@
       ],
       "status": 200,
       "title": "Office & Commercial Cleaning in Downtown Toronto | Evergreen",
-      "wordCount": 1049,
+      "wordCount": 1061,
       "xRobotsTag": null
     },
     "/locations/vaughan/": {
@@ -1446,7 +1446,7 @@
       "h2Count": 11,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:2327309335db4459",
+      "mainHash": "sha256:2451a1bc88298173",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1473,19 +1473,19 @@
       ],
       "status": 200,
       "title": "Office & Commercial Cleaning in Vaughan & Concord",
-      "wordCount": 981,
+      "wordCount": 993,
       "xRobotsTag": null
     },
     "/lp/commercial-cleaning/": {
       "canonical": "https://www.evergreencleaningservice.ca/lp/commercial-cleaning/",
-      "description": "Commercial and office cleaning across Toronto, Mississauga, Vaughan and the GTA. WSIB covered, bonded and insured. Free on-site walkthrough and a reply within 2 hours.",
+      "description": "Commercial and office cleaning in Toronto, Mississauga, Vaughan and the GTA. WSIB covered and bonded. Free walkthrough; reply in 2 hours, Mon–Fri 7am–6pm.",
       "h1": [
         "Commercial cleaning in Toronto you can count on, every night."
       ],
       "h2Count": 5,
       "inSitemap": false,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:3aa28deb45b757f9",
+      "mainHash": "sha256:8621eb78a4e7e6ae",
       "metaGooglebot": null,
       "metaRobots": "noindex, nofollow",
       "mustStayNoindex": true,
@@ -1505,7 +1505,7 @@
       ],
       "status": 200,
       "title": "Commercial & Office Cleaning in Toronto and the GTA | Evergreen",
-      "wordCount": 541,
+      "wordCount": 553,
       "xRobotsTag": null
     },
     "/office-cleaning-checklist/": {
@@ -1517,7 +1517,7 @@
       "h2Count": 9,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:9409abc3659e6744",
+      "mainHash": "sha256:976adcd5cb24de68",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1543,7 +1543,7 @@
       ],
       "status": 200,
       "title": "Office Cleaning Checklist: Daily, Weekly & Monthly Tasks",
-      "wordCount": 2093,
+      "wordCount": 2098,
       "xRobotsTag": null
     },
     "/office-cleaning-cost-toronto-guide/": {
@@ -1631,7 +1631,7 @@
       "h2Count": 7,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:543a5785a49d0fe8",
+      "mainHash": "sha256:1c609d5d8bc8405a",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1656,7 +1656,7 @@
       ],
       "status": 200,
       "title": "How We Work: Walkthrough, Proposal & Quality | Evergreen",
-      "wordCount": 758,
+      "wordCount": 765,
       "xRobotsTag": null
     },
     "/preventing-slips-trips-falls-in-your-workplace/": {
@@ -1740,7 +1740,7 @@
       "h2Count": 1,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:e8b2077708b7ea99",
+      "mainHash": "sha256:0127b923c430f593",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1762,7 +1762,7 @@
       ],
       "status": 200,
       "title": "Request a Quote - Evergreen Office Cleaning",
-      "wordCount": 185,
+      "wordCount": 197,
       "xRobotsTag": null
     },
     "/reviews/": {
@@ -1918,7 +1918,7 @@
       "h2Count": 10,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:3528d6891357813e",
+      "mainHash": "sha256:06004cfdad9553af",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1940,7 +1940,7 @@
       ],
       "status": 200,
       "title": "All Cleaning Services | Evergreen Office Cleaning",
-      "wordCount": 373,
+      "wordCount": 374,
       "xRobotsTag": null
     },
     "/services/building-maintenance/": {
@@ -1952,7 +1952,7 @@
       "h2Count": 13,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:9ce80425d7fcdad4",
+      "mainHash": "sha256:f785a7bc0be4d584",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1981,19 +1981,19 @@
       ],
       "status": 200,
       "title": "Building Maintenance & Floor Care in Toronto | Evergreen",
-      "wordCount": 1144,
+      "wordCount": 1161,
       "xRobotsTag": null
     },
     "/services/commercial-cleaning/": {
       "canonical": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
-      "description": "Commercial cleaning and janitorial services in Toronto and the GTA: retail, institutional and mixed-use buildings, after hours. We reply within 2 hours.",
+      "description": "Commercial cleaning and janitorial in Toronto and the GTA: retail, institutional and mixed-use buildings, after hours. Reply in 2 hours, Mon–Fri 7am–6pm.",
       "h1": [
         "Commercial Cleaning & Janitorial Services in Toronto and the GTA"
       ],
       "h2Count": 23,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:37049ac5f509b025",
+      "mainHash": "sha256:dfef8ace0a328c73",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2022,7 +2022,7 @@
       ],
       "status": 200,
       "title": "Commercial Cleaning & Janitorial in Toronto | Evergreen",
-      "wordCount": 2606,
+      "wordCount": 2623,
       "xRobotsTag": null
     },
     "/services/disinfection-cleaning/": {
@@ -2034,7 +2034,7 @@
       "h2Count": 15,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:0cb4842e3f203aa1",
+      "mainHash": "sha256:63451d7ffd17c44f",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2063,7 +2063,7 @@
       ],
       "status": 200,
       "title": "Disinfection Cleaning Services in Toronto | Evergreen",
-      "wordCount": 1132,
+      "wordCount": 1149,
       "xRobotsTag": null
     },
     "/services/emergency-cleaning/": {
@@ -2075,7 +2075,7 @@
       "h2Count": 12,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:2a6fdd533014f196",
+      "mainHash": "sha256:d8363a0eef12adb8",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2104,7 +2104,7 @@
       ],
       "status": 200,
       "title": "Emergency Commercial Cleaning in Toronto | Evergreen",
-      "wordCount": 985,
+      "wordCount": 997,
       "xRobotsTag": null
     },
     "/services/floor-stripping-waxing/": {
@@ -2116,7 +2116,7 @@
       "h2Count": 15,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:814ff78ec0db88b8",
+      "mainHash": "sha256:ab5467869c6e31c7",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2145,7 +2145,7 @@
       ],
       "status": 200,
       "title": "Floor Stripping & Waxing in Toronto & the GTA | Evergreen",
-      "wordCount": 1528,
+      "wordCount": 1545,
       "xRobotsTag": null
     },
     "/services/graffiti-removal/": {
@@ -2157,7 +2157,7 @@
       "h2Count": 12,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:ce33f6d682cac559",
+      "mainHash": "sha256:883e66ed15959f2d",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2186,7 +2186,7 @@
       ],
       "status": 200,
       "title": "Commercial Graffiti Removal in Toronto & the GTA | Evergreen",
-      "wordCount": 759,
+      "wordCount": 771,
       "xRobotsTag": null
     },
     "/services/industrial-cleaning/": {
@@ -2198,7 +2198,7 @@
       "h2Count": 12,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:3e61d9428a1ba922",
+      "mainHash": "sha256:9693dcabc59cb04a",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2227,19 +2227,19 @@
       ],
       "status": 200,
       "title": "Industrial & Warehouse Cleaning in Toronto | Evergreen",
-      "wordCount": 1001,
+      "wordCount": 1018,
       "xRobotsTag": null
     },
     "/services/office-cleaning/": {
       "canonical": "https://www.evergreencleaningservice.ca/services/office-cleaning/",
-      "description": "Office cleaning services in Toronto and the GTA: nightly, a few evenings a week or weekly, by the same crew. Free walkthrough; we reply within 2 hours.",
+      "description": "Office cleaning in Toronto and the GTA: nightly, a few evenings a week or weekly, by the same crew. Free walkthrough; we reply in 2 hours, Mon–Fri 7am–6pm.",
       "h1": [
         "Office Cleaning Services in Toronto and the GTA"
       ],
       "h2Count": 16,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:b30977aadc67a176",
+      "mainHash": "sha256:b47370d0bf3a5905",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2268,7 +2268,7 @@
       ],
       "status": 200,
       "title": "Office Cleaning Services in Toronto & the GTA | Evergreen",
-      "wordCount": 1623,
+      "wordCount": 1640,
       "xRobotsTag": null
     },
     "/services/post-construction-cleaning/": {
@@ -2280,7 +2280,7 @@
       "h2Count": 12,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:88ceea8ee98b4b53",
+      "mainHash": "sha256:db2d0977835df6cc",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2309,7 +2309,7 @@
       ],
       "status": 200,
       "title": "Commercial Post-Construction Cleaning Toronto | Evergreen",
-      "wordCount": 964,
+      "wordCount": 976,
       "xRobotsTag": null
     },
     "/services/pressure-washing/": {
@@ -2321,7 +2321,7 @@
       "h2Count": 12,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:24ca4686e0ed2baa",
+      "mainHash": "sha256:92bf752d4aa62c18",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2350,7 +2350,7 @@
       ],
       "status": 200,
       "title": "Commercial Pressure Washing in Toronto & the GTA | Evergreen",
-      "wordCount": 735,
+      "wordCount": 747,
       "xRobotsTag": null
     },
     "/tag/cleaning/": {
@@ -2397,7 +2397,7 @@
       "h2Count": 0,
       "inSitemap": false,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:0218a93fcceebff2",
+      "mainHash": "sha256:ddf86add44005142",
       "metaGooglebot": null,
       "metaRobots": "noindex, nofollow",
       "mustStayNoindex": true,
@@ -2417,7 +2417,7 @@
       ],
       "status": 200,
       "title": "Thank You | Evergreen Office Cleaning",
-      "wordCount": 41,
+      "wordCount": 46,
       "xRobotsTag": null
     }
   },
