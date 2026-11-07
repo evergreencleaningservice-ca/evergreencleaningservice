@@ -55,7 +55,9 @@ function run(
      inserted before the first script element, so one must exist. */
   doc.head.innerHTML = '<script id="gtm-inline"></script>';
   doc.body.innerHTML = '<a id="tel" href="tel:+14168034880">(416) 803-4880</a><p id="text">Text</p>';
-  if (opts.cookie) doc.cookie = opts.cookie;
+  /* happy-dom's cookie setter, like a browser's, takes one cookie per
+     assignment: split on '; ' so multi-cookie cases really set them all. */
+  if (opts.cookie) for (const c of opts.cookie.split('; ')) doc.cookie = c;
   Object.defineProperty(doc, 'readyState', { value: opts.readyState ?? 'loading', configurable: true });
 
   const idle: Array<() => void> = [];
@@ -131,8 +133,10 @@ describe('every other visit keeps the deferral', () => {
     ['a utm-only Google link', `${PROD}/?utm_source=google&utm_medium=organic`],
     ['a parameter that merely contains a click-id name', `${PROD}/?notgclid=1&xgad_source=2`],
     ['a path containing /lp/ further down', `${PROD}/blog/lp/`],
-  ])('%s, with only non-Ads Google cookies: nothing until load + idle', (_name, url) => {
-    const r = run(url, { cookie: '_ga=GA1.1.123.456; _gcl_au=1.1.789.012' });
+  ])('%s, with only non-Ads Google cookies (and one whose name merely ends in _gcl_aw): nothing until load + idle', (_name, url) => {
+    const r = run(url, { cookie: '_ga=GA1.1.123.456; _gcl_au=1.1.789.012; x_gcl_aw=1' });
+    expect(r.win.document.cookie).toContain('_gcl_au=');
+    expect(r.win.document.cookie).toContain('x_gcl_aw=');
     expect(r.gtmScripts()).toBe(0);
     expect(r.dataLayer()).toEqual([{ site_environment: 'production' }]);
 
