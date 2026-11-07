@@ -1,6 +1,6 @@
 ---
 title: "Contact Us"
-description: "Contact Evergreen Office Cleaning in Toronto: (416) 803-4880, info@evergreencleaningservice.ca, 243 Queen St W. We reply within 2 hours."
+description: "Contact Evergreen Office Cleaning in Toronto: (416) 803-4880, info@evergreencleaningservice.ca, 243 Queen St W. We reply within 2 hours, Mon–Fri 7am–6pm."
 ---
 
 ## Evergreen Office Cleaning

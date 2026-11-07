@@ -29,6 +29,7 @@
  * the client intake list (docs/growth/client-intake.md); add it here when it
  * is confirmed and every page that uses this file picks it up.
  */
+import { REPLY_PROMISE, REPLY_PROMISE_SHORT } from './landing';
 
 export interface Step {
   title: string;
@@ -39,7 +40,7 @@ export interface Step {
 export const PROCESS_STEPS: Step[] = [
   {
     title: 'Tell us about the space',
-    body: 'Call (416) 803-4880 or send the short quote form, and we reply within 2 hours. We ask what kind of building it is, where it is and what you need cleaned.',
+    body: `Call (416) 803-4880 or send the short quote form, and we reply ${REPLY_PROMISE}. We ask what kind of building it is, where it is and what you need cleaned.`,
   },
   {
     title: 'Free on\u2011site walkthrough', // non-breaking hyphen: never "on-" / "site"
@@ -63,7 +64,7 @@ export const PROCESS_STEPS: Step[] = [
 export const TRUST_FACTS = [
   { title: 'Serving Toronto since 1989', body: 'Commercial cleaning in Toronto and the GTA for more than three decades.' },
   { title: 'WSIB covered, bonded and insured', body: 'Background-screened staff, covered by liability insurance and WSIB Ontario.' },
-  { title: 'A reply within 2 hours', body: 'From your account executive, who then coordinates the walkthrough, inspections and changes.' },
+  { title: `A reply ${REPLY_PROMISE_SHORT}`, body: 'From your account executive, who then coordinates the walkthrough, inspections and changes.' },
   { title: 'After hours and weekends', body: 'Cleaning scheduled around your business, not the other way round.' },
 ] as const;
 

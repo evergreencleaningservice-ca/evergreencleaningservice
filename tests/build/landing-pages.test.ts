@@ -326,7 +326,7 @@ describe('both pages match the ads', () => {
 
   it.each(PAGES)('$name closes with the two-hour reply', ({ name }) => {
     expect(text(html[name])).toContain(
-      'We reply within 2 hours — no obligation, and no visit until you ask for one.',
+      'We reply within 2 hours during office hours (Mon–Fri 7am–6pm) — no obligation, and no visit until you ask for one.',
     );
   });
 
@@ -403,14 +403,15 @@ describe('claims', () => {
     expect(h).not.toMatch(/business hours/i);
   });
 
-  it.each(PAGES)('$name states exactly one reply promise: within 2 hours', ({ name }) => {
+  it.each(PAGES)('$name states exactly one reply promise: within 2 hours, in office hours', ({ name }) => {
     /* The Google Ads quote "within 2 hours" and Google checks the page
        against them, so "as soon as possible" must not survive anywhere on
        either page, including the success message the form carries in its
-       markup. */
+       markup. Since 7 Nov 2026 the page also says when the 2 hours apply
+       (office hours), which narrows the ad's promise without contradicting it. */
     expect(html[name]).not.toMatch(/as soon as possible/i);
-    expect(html[name]).toContain('We reply within 2 hours');
-    expect(leadForm(name)).toContain('data-reply-promise="within 2 hours"');
+    expect(html[name]).toContain('We reply within 2 hours during office hours (Mon–Fri 7am–6pm)');
+    expect(leadForm(name)).toContain('data-reply-promise="within 2 hours during office hours (Mon–Fri 7am–6pm)"');
   });
 
   it.each(PAGES)('$name states the founding year rather than a computed duration', ({ name }) => {

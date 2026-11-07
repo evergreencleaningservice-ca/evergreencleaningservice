@@ -33,6 +33,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 import QuickQuoteForm from '../components/QuickQuoteForm.astro';
 import QuoteAside from '../components/QuoteAside.astro';
 import { nap } from '../data/site';
+import { REPLY_PROMISE } from '../data/landing';
 
 const entry = await getEntry('pages', 'request-a-quote');
 if (!entry) throw new Error('Missing content entry: pages/request-a-quote');
@@ -52,7 +53,7 @@ if (!entry) throw new Error('Missing content entry: pages/request-a-quote');
           address and number out of a sentence. Both come from `nap`. */}
       <QuickQuoteForm id="quote" heading="Tell us where to send it">
         <Fragment slot="intro">
-          We reply within 2 hours. A free walkthrough when you are ready, then a written quote. No
+          We reply {REPLY_PROMISE}. A free walkthrough when you are ready, then a written quote. No
           obligation. Prefer not to use the form? Email the same details to <a
             href={`mailto:${nap.email}`}
             data-cta-location="content">{nap.email}</a

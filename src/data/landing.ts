@@ -43,10 +43,13 @@
  *   when the client asked for no time to be named; then "within 2 hours" the
  *   same day, from the Google Ads copy document below. On 30 Oct 2026 the
  *   client made "within 2 hours" the promise everywhere: the site's own
- *   quote page and every form, not just the landing pages. "Same-day walkthrough" —
- *   which the quote page's submit button used to promise — is gone, because
- *   nobody has committed to it.
+ *   quote page and every form, not just the landing pages. On 7 Nov 2026
+ *   it was qualified with the office hours everywhere (see REPLY_PROMISE).
+ *   "Same-day walkthrough" — which the quote page's submit button used to
+ *   promise — is gone, because nobody has committed to it.
  */
+
+import { officeHoursShort } from './site';
 
 /** The reasons to choose this business, as the site states them. */
 export const BENEFITS = [
@@ -84,8 +87,19 @@ export const FACILITY_TYPES = [
   { title: 'Building maintenance', body: 'Carpet, hard floors, pressure washing and periodic work.', image: 'gallery-office-cleaning-services' },
 ] as const;
 
-/** The reply promise, written once. */
-export const REPLY_PROMISE = 'within 2 hours';
+/**
+ * The reply promise, written once.
+ *
+ * Qualified with the office hours on 7 Nov 2026 (SEO re-audit, GEO N2, at the
+ * owner's request): "within 2 hours" on its own reads as round the clock, and
+ * nobody answers a 3am enquiry in two hours. The Google Ads copy still says
+ * "within 2 hours"; the page now says when that applies, which narrows the
+ * ad's promise rather than contradicting it, so the ad and page still agree.
+ * `REPLY_PROMISE` completes a sentence ("We reply …"); `REPLY_PROMISE_SHORT`
+ * is for bullets, trust rows and meta descriptions, where space is short.
+ */
+export const REPLY_PROMISE = `within 2 hours during office hours (${officeHoursShort})`;
+export const REPLY_PROMISE_SHORT = `within 2 hours, ${officeHoursShort}`;
 
 /**
  * The trust line: four points, each verifiable, then the offer the Google
@@ -94,7 +108,7 @@ export const REPLY_PROMISE = 'within 2 hours';
 export const TRUST_POINTS = [
   'Serving Toronto since 1989',
   'WSIB covered and bonded',
-  `We reply ${REPLY_PROMISE}`,
+  `We reply ${REPLY_PROMISE_SHORT}`,
   'No obligation quote',
   'First month free on a signed recurring contract',
   'From $30/hr, supplies and equipment included',

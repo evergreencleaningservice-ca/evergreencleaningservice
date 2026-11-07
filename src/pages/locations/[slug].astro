@@ -27,6 +27,7 @@ import { LOCATION_LOCAL } from '../../data/location-local';
 import PagePhoto from '../../components/blocks/PagePhoto.astro';
 import { AREAS } from '../../data/coverage';
 import { site, nap } from '../../data/site';
+import { REPLY_PROMISE, REPLY_PROMISE_SHORT } from '../../data/landing';
 import { pageTitle } from '../../lib/title';
 import { breadcrumbSchema, webPageSchema } from '../../lib/schema';
 import { lastmodFor } from '../../lib/sitemap-lastmod.mjs';
@@ -168,7 +169,7 @@ const webPage = webPageSchema({
       <ul class="loc-trust" aria-label="Why Evergreen">
         <li>Since 1989</li>
         <li>WSIB covered, bonded and insured</li>
-        <li>We reply within 2 hours</li>
+        <li>We reply {REPLY_PROMISE_SHORT}</li>
       </ul>
     </div>
   </div>
@@ -301,7 +302,7 @@ const webPage = webPageSchema({
               id="offer-quote"
               formId={`location-${location.slug}`}
               heading={`Get a quote in ${location.name}`}
-              intro="We reply within 2 hours, then arrange a free walkthrough when it suits you. No obligation."
+              intro={`We reply ${REPLY_PROMISE}, then arrange a free walkthrough when it suits you. No obligation.`}
             />
           </div>
         </aside>

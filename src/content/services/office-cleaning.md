@@ -2,7 +2,7 @@
 title: "Office Cleaning"
 h1: "Office Cleaning Services in Toronto and the GTA"
 seoTitle: "Office Cleaning Services in Toronto & the GTA | Evergreen"
-description: "Office cleaning services in Toronto and the GTA: nightly, a few evenings a week or weekly, by the same crew. Free walkthrough; we reply within 2 hours."
+description: "Office cleaning in Toronto and the GTA: nightly, a few evenings a week or weekly, by the same crew. Free walkthrough; we reply in 2 hours, Mon–Fri 7am–6pm."
 # The definition lives only under "What is office cleaning?" below; the
 # summary repeated it almost word for word (SEO re-audit, 7 Nov 2026, GEO N4),
 # so it is now the offer in one line.
