@@ -7,7 +7,7 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { locations } from '../../data/locations';
-import { COVERAGE_SENTENCE } from '../../data/coverage';
+import { AREAS, AREA_GROUPS, COVERAGE_SENTENCE } from '../../data/coverage';
 import { site, nap } from '../../data/site';
 import { pageTitle } from '../../lib/title';
 import { breadcrumbSchema } from '../../lib/schema';
@@ -18,13 +18,12 @@ import { breadcrumbSchema } from '../../lib/schema';
 const AREA_LINKS: Record<string, string> = {
   Toronto: '/locations/toronto-downtown/',
   ...Object.fromEntries(locations.filter((l) => l.slug !== 'toronto-downtown').map((l) => [l.name, `/locations/${l.slug}/`])),
-  /* The three Durham towns share one page, and the two small Toronto
-     districts are covered on the downtown page (src/data/coverage.ts). */
+  /* The three Durham towns share one page. East York and York have no page
+     and stay plain text (7 Nov 2026, SEO re-audit content N4): linked, they
+     pointed at the page that targets downtown Toronto. */
   Pickering: '/locations/durham-region/',
   Ajax: '/locations/durham-region/',
   Oshawa: '/locations/durham-region/',
-  'East York': '/locations/toronto-downtown/',
-  York: '/locations/toronto-downtown/',
 };
 const escape = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const linkedCoverage = escape(COVERAGE_SENTENCE).replace(
@@ -32,8 +31,24 @@ const linkedCoverage = escape(COVERAGE_SENTENCE).replace(
   (name) => `<a href="${AREA_LINKS[name]}">${name}</a>`,
 );
 
+/* 185 characters until 7 Nov 2026 (SEO re-audit onpage N1): the regions
+   rather than eleven place names. */
 const description =
-  'Commercial and office cleaning across the Greater Toronto Area: Toronto, North York, Scarborough, Etobicoke, Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill and Durham.';
+  'Office and commercial cleaning across the GTA from one Toronto office, with local pages for Toronto, Peel, Halton, York Region and Durham.';
+
+/* The cards grouped by region (7 Nov 2026, SEO re-audit local N4), in the
+   groups the homepage and service pages already use (src/data/coverage.ts).
+   A location with no group stops the build rather than going missing. */
+const groupOf = (slug: string) => {
+  const area = AREAS.find((a) => a.href === `/locations/${slug}/`);
+  if (!area) throw new Error(`locations/index.astro: /locations/${slug}/ has no group in src/data/coverage.ts`);
+  return area.group;
+};
+const grouped = AREA_GROUPS.map((group) => ({
+  group,
+  id: `loc-group-${group.replace(/\W+/g, '-').toLowerCase()}`,
+  items: locations.filter((l) => groupOf(l.slug) === group),
+})).filter((g) => g.items.length > 0);
 ---
 
 <BaseLayout title={pageTitle(`Service Areas Across the GTA`)} description={description}>
@@ -57,22 +72,36 @@ const description =
       <p class="loc-lead">
         Evergreen Office Cleaning works across the Greater Toronto Area from one office, at
         {' '}{nap.streetAddress}, {nap.addressLocality}: <Fragment set:html={linkedCoverage} />. The areas below have a page
-        with local detail; the rest are covered in exactly the same way.
+        with local detail; East York and York are part of the City of Toronto and are named on the downtown page.
+      </p>
+      {/* Was "the rest are covered in exactly the same way", which read as a
+          promise for every place without a page (7 Nov 2026, SEO re-audit
+          local N4). Only the places in coverage.ts are claimed; for anywhere
+          else the honest answer is "ask us". */}
+      <p class="loc-ask">
+        Somewhere not listed, such as Whitby, Newmarket, Aurora, Burlington or Milton? <a href="/contact-us/">Ask us</a> or
+        call <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a>, and we will tell you plainly whether we
+        can schedule your building.
       </p>
 
-      <ul class="loc-list" data-reveal="stagger">
-        {
-          locations.map((location) => (
-            <li>
-              <a class="card-hover" href={`/locations/${location.slug}/`}>
-                <h2>{location.name}</h2>
-                <p>{location.focus}</p>
-                <span class="loc-more">Commercial cleaning in {location.name}&nbsp;&rarr;</span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      {
+        grouped.map(({ group, id, items }) => (
+          <section class="loc-group" aria-labelledby={id}>
+            <h2 class="loc-group-title" id={id}>{group}</h2>
+            <ul class="loc-list" data-reveal="stagger">
+              {items.map((location) => (
+                <li>
+                  <a class="card-hover" href={`/locations/${location.slug}/`}>
+                    <h3>{location.name}</h3>
+                    <p>{location.focus}</p>
+                    <span class="loc-more">Commercial cleaning in {location.name}&nbsp;&rarr;</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
     </div>
   </div>
 </BaseLayout>
@@ -82,7 +111,22 @@ const description =
     font-size: 1.125rem;
     line-height: 1.6;
     max-width: 780px;
+    margin: 0 0 16px;
+  }
+
+  .loc-ask {
+    max-width: 780px;
+    line-height: 1.6;
     margin: 0 0 36px;
+  }
+
+  .loc-group + .loc-group {
+    margin-top: 40px;
+  }
+
+  .loc-group-title {
+    font-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
+    margin: 0 0 18px;
   }
 
   /* Flex rather than grid, so a last row that is not full is centred
@@ -141,7 +185,7 @@ const description =
     }
   }
 
-  .loc-list h2 {
+  .loc-list h3 {
     font-size: 1.25rem;
     margin: 0 0 10px;
   }

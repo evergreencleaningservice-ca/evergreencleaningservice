@@ -62,10 +62,17 @@ const services = [
   { title: `Medical & dental clinics`, href: '/industries/medical-dental-clinics/', text: 'Clinic cleaning after hours.' },
 ];
 
-const nearby = AREAS.filter((a) => a.href && a.href !== `/locations/${location.slug}/`).map((a) => ({
-  title: a.name,
-  href: a.href!,
-}));
+/* One card per page: Pickering, Ajax and Oshawa share the Durham page, so
+   they are one card, "Pickering, Ajax & Oshawa", not three cards to the same
+   address (7 Nov 2026, SEO re-audit). */
+const nearbyByHref = new Map<string, string[]>();
+for (const a of AREAS) {
+  if (!a.href || a.href === `/locations/${location.slug}/`) continue;
+  nearbyByHref.set(a.href, [...(nearbyByHref.get(a.href) ?? []), a.name]);
+}
+const joinNames = (names: string[]) =>
+  names.length > 1 ? `${names.slice(0, -1).join(', ')} & ${names.at(-1)}` : names[0];
+const nearby = [...nearbyByHref].map(([href, names]) => ({ title: joinNames(names), href }));
 
 const faqs = [
   /* The local questions first: they are what this page answers that the
@@ -96,8 +103,17 @@ const schema = {
   '@type': 'Service',
   serviceType: 'Commercial Cleaning',
   provider: { '@id': `${site.url}/#organization` },
-  areaServed: { '@type': 'City', name: location.name },
-  name: `Commercial Cleaning in ${location.name}`,
+  /* Durham Region is not a city: the page targets Pickering, Ajax and
+     Oshawa, so those are the City nodes, each inside the region (7 Nov 2026,
+     SEO re-audit schema N2). */
+  areaServed: location.cities
+    ? location.cities.map((name) => ({
+        '@type': 'City',
+        name,
+        containedInPlace: { '@type': 'AdministrativeArea', name: location.name },
+      }))
+    : { '@type': 'City', name: location.name },
+  name: `Commercial Cleaning in ${location.cities ? location.region : location.name}`,
   description: location.description,
   url: `${site.url}/locations/${location.slug}/`,
   '@id': `${site.url}/locations/${location.slug}/#service`,
@@ -303,10 +319,17 @@ const webPage = webPageSchema({
       Every contract starts with a free walkthrough and a written scope.{' '}
       <a href="/our-process/">See how we work, step by step&nbsp;→</a>
     </p>
-    {/* One review per page, a different one on each (location-local.ts), so
-        the seven pages do not repeat the same three. Not a review from this
-        city: the site does not attribute reviews to places. */}
-    <ReviewQuotes heading="What a client says" names={local ? [local.review] : ['Edward Sherman', 'Michael Katchen', 'Ping Lee']} />
+    {/* At most one review per page, and never the same one on two location
+        pages (location-local.ts). It is framed as one of our Google reviews,
+        not as "what a client says" here: reviews.ts records no reviewer's
+        location, and under that heading one review on three city pages read
+        as a local client in each (7 Nov 2026, SEO re-audit C3). Pages with no
+        review of their own link to the full list instead. */}
+    {local?.review && <ReviewQuotes heading="From our Google reviews" names={[local.review]} />}
+    <p class="loc-reviews-link">
+      {local?.review ? 'More from our clients across the GTA: ' : 'What our clients across the GTA say: '}
+      <a href="/reviews/">read our Google reviews&nbsp;→</a>
+    </p>
     <FaqList faqs={faqs} />
     <LinkCards heading="Other service areas" items={nearby} />
     <QuoteBand location="content" />
@@ -425,7 +448,8 @@ const webPage = webPageSchema({
     margin-bottom: 6px;
   }
 
-  .loc-process-link {
+  .loc-process-link,
+  .loc-reviews-link {
     font-size: 1.0625rem;
   }
 
