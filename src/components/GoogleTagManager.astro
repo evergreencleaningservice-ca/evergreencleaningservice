@@ -43,10 +43,25 @@
  *
  * Staging IS tagged, deliberately, and that has a cost worth knowing: its
  * pageviews land in the live GA4 property and its visitors enter the live
- * remarketing lists. Conversions do not follow from merely loading — they fire
- * on `lead_form_submission` and `click_to_call` — so testing the staging form
+ * remarketing lists. Conversions do not follow from merely loading. Form
+ * conversions fire on `lead_form_submission`, so testing the staging form
  * WILL register a conversion in the client's live Google Ads account. Don't,
  * unless that is the thing being tested.
+ *
+ * Phone conversions are a different mechanism (corrected in the SEO re-audit,
+ * 7 Nov 2026; this comment used to say they fired on `click_to_call`). The
+ * site does push `click_to_call` on every tel: tap (src/lib/phone-click.ts,
+ * and LandingLayout.astro on the landing pages), but the live container, as
+ * read on 7 Nov 2026, has no trigger on it: its only triggers are `gtm.init`,
+ * `gtm.js` and `lead_form_submission`. Until the agency adds one, that event
+ * records nothing. What records calls is the Google Ads "calls from website"
+ * tag (`__awcc`, set up for "(416) 803-4880"): it swaps a Google forwarding
+ * number into the page, and Ads counts calls made to that number. A tel: tap
+ * made before the swap dials the real number and is never counted — which is
+ * why paid visits load the container at once (WHEN IT LOADS, below). Staging
+ * follows the same rule, so its /lp/ pages and any staging URL carrying a
+ * click id load the container at once too; treat any number swapped in there
+ * as live.
  *
  * `site_environment` is `production` on a PRODUCTION_HOSTS hostname and
  * `staging` on anything else the allowlist lets through. It used to test for
@@ -60,6 +75,7 @@
  * change here.
  */
 import { PRODUCTION_HOSTS, site } from '../data/site';
+import { gtmLoaderScript } from '../lib/gtm-loader';
 
 interface Props {
   /** Emits the `<noscript>` iframe half instead of the head loader. Goes
@@ -76,7 +92,8 @@ const gtmId = site.gtmId;
    backticks were published verbatim and the loader sat inside a template
    literal, on 76 pages, doing nothing. Anything that hides the emitted text
    behind a templating rule is a place that bug can come back. */
-/* WHEN IT LOADS (SEO audit Phase 1, 6 Nov 2026)
+/* WHEN IT LOADS (SEO audit Phase 1, 6 Nov 2026; paid visits added in the
+   SEO re-audit, 7 Nov 2026)
 
    The container is no longer fetched the moment the page starts. On the
    mobile homepage gtm.js (157 KB) and the gtag.js it pulls in (194 KB)
@@ -85,20 +102,41 @@ const gtmId = site.gtmId;
    site's own scripts are about 9 KB. Deferring the loader is the single
    largest performance change available without touching the container.
 
-   The container now loads on whichever comes first:
+   On a paid visit it still is (see PAID VISITS, below). On every other
+   visit the container now loads on whichever comes first:
      - the visitor's first pointerdown, keydown, touchstart or scroll, or any
        focus inside a form (someone about to fill the quote form);
-     - a tap on any tel: link, which loads it immediately: the call-tracking
-       number swap and the click_to_call event depend on the container, and a
-       caller who goes straight from the hero to the phone must not be lost;
+     - a tap on any tel: link, which loads it immediately so the queued
+       click_to_call push reaches the container. It does NOT save the call
+       for Ads: the dialler opens on that same tap, before any number swap
+       could happen (see PAID VISITS);
      - the window load event plus a short idle wait (requestIdleCallback with
        a 4 s ceiling, or a 4 s timer where it is not supported), so a visitor
        who reads without interacting is still measured.
 
+   PAID VISITS (SEO re-audit, 7 Nov 2026). The deferral cost Google Ads its
+   phone conversions. Calls are counted by the container's "calls from
+   website" tag (`__awcc`), which swaps a Google forwarding number in for
+   (416) 803-4880 only once gtm.js and gtag.js have loaded: 0.85-1.7 s into
+   the visit in the Phase 4 lab runs, and later on a slow phone. A paid
+   visitor who taps the header, hero or sticky-bar number before then dials
+   the real number, and Ads never sees the call. So the container loads at
+   parse time, exactly as the original snippet did, when the visit is paid:
+     - the URL carries gclid, gbraid, wbraid or gad_source (an ad click);
+     - the path starts with /lp/ (the landing pages exist for paid traffic);
+     - a Google Ads click cookie is already set (`_gcl_aw`, `_gcl_gb` or
+       `_gcl_ag`). The conversion linker writes these on the paid landing, so
+       the second and third pages of the same paid visit, which have no click
+       id in the URL, still get the swap before anyone can tap.
+   Organic and direct visitors keep the deferral above, which is where the
+   Lighthouse gain was measured; paid visitors pay the old cost so that
+   their calls are counted.
+
    What is unchanged: `dataLayer` exists from the first byte, so every push
    the page makes before gtm.js arrives (site_environment, form events, the
    conversion event) is queued and processed when it does. The hostname guard
-   and the staging/production variable are as before.
+   and the staging/production variable are as before, and both run before
+   either branch, so a paid-looking URL on localhost still loads nothing.
 
    The trade-off is a measurement one, agreed in the audit: page_view arrives
    a little later, and a visitor who leaves before the page has finished
@@ -116,45 +154,15 @@ const gtmId = site.gtmId;
    400-600 ms of main-thread work; that still happens, just after load. A
    longer fixed delay would remove more of it from the lab figure and lose
    more short visits from the analytics: a decision for whoever owns the Ads
-   and GA4 numbers, not a code fix. */
-const loader = `
-(function (w, d, s, l, i, hosts, production) {
-  w[l] = w[l] || [];
-  if (hosts.indexOf(d.location.hostname) === -1) {
-    if (w.console && console.info) console.info('analytics: suppressed on ' + d.location.hostname);
-    return;
-  }
-  w[l].push({ site_environment: production.indexOf(d.location.hostname) === -1 ? 'staging' : 'production' });
-  var loaded = false;
-  function load() {
-    if (loaded) return;
-    loaded = true;
-    w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-    var f = d.getElementsByTagName(s)[0],
-      j = d.createElement(s),
-      dl = l != 'dataLayer' ? '&l=' + l : '';
-    j.async = true;
-    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-    f.parentNode.insertBefore(j, f);
-  }
-  var events = ['pointerdown', 'keydown', 'touchstart', 'scroll', 'focusin'];
-  function onFirstInteraction() {
-    for (var k = 0; k < events.length; k++) d.removeEventListener(events[k], onFirstInteraction, true);
-    load();
-  }
-  for (var n = 0; n < events.length; n++) d.addEventListener(events[n], onFirstInteraction, { capture: true, passive: true });
-  d.addEventListener('pointerdown', function (e) {
-    var a = e.target && e.target.closest ? e.target.closest('a[href^="tel:"]') : null;
-    if (a) load();
-  }, { capture: true, passive: true });
-  function afterLoad() {
-    if (w.requestIdleCallback) w.requestIdleCallback(load, { timeout: 4000 });
-    else w.setTimeout(load, 4000);
-  }
-  if (d.readyState === 'complete') afterLoad();
-  else w.addEventListener('load', afterLoad);
-})(window, document, 'script', 'dataLayer', ${JSON.stringify(gtmId)}, ${JSON.stringify(site.analyticsHosts)}, ${JSON.stringify(PRODUCTION_HOSTS)});
-`.trim();
+   and GA4 numbers, not a code fix. Those figures hold for unpaid visits only:
+   a lab run of an /lp/ page, or of any URL with a click id, now takes the
+   paid branch and will look like the pre-Phase-1 numbers again. That is
+   expected, not a regression.
+
+   The loader text is built in src/lib/gtm-loader.ts (moved there in the SEO
+   re-audit, 7 Nov 2026) so that tests/gtm-loader.test.ts can run the exact
+   bytes this component writes in a DOM. */
+const loader = gtmLoaderScript(gtmId, site.analyticsHosts, PRODUCTION_HOSTS);
 ---
 
 {
