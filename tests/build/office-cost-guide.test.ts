@@ -86,7 +86,7 @@ describe('the Toronto office cleaning guide', () => {
     expect(article.headline).toBe('How Office Cleaning Is Priced in Toronto');
     expect(article.author.name).toBe('Evergreen Office Cleaning');
     const breadcrumbs = schemas.find((schema) => schema['@type'] === 'BreadcrumbList');
-    expect(breadcrumbs.itemListElement.map((item: { name: string }) => item.name)).toEqual(['Home', 'Insights', 'Office Cleaning']);
+    expect(breadcrumbs.itemListElement.map((item: { name: string }) => item.name)).toEqual(['Evergreen Office Cleaning', 'Insights', 'Office Cleaning']);
   });
 
   it('links the quote CTA, phone and the three existing related articles', () => {

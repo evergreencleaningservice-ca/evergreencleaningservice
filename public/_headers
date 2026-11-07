@@ -77,6 +77,40 @@ https://:version.:subdomain.workers.dev/*
 /llms.txt
   Content-Type: text/plain; charset=utf-8
 
+# The IndexNow key file, like /llms.txt (SEO re-audit, 7 Nov 2026,
+# technical N3). Its body is ASCII hex, so this changes nothing a reader
+# sees; it only makes the two plain-text files say the same thing.
+/05031d78747205e65eb1ec4a04cc568d.txt
+  Content-Type: text/plain; charset=utf-8
+
+# HTML names its charset in the header (SEO re-audit, 7 Nov 2026, item 11).
+# The pages already say <meta charset="utf-8">, but the asset layer sent a
+# bare `text/html`, so a crawler had to read into the body to learn it.
+#
+# A `/*` rule cannot do this: it matches every file, and a Content-Type set
+# here REPLACES the one the asset layer chose from the file's extension, so
+# the stylesheets, scripts, images, fonts and XML would all be called HTML.
+# These two rules match only page addresses instead. The site is built with
+# trailingSlash 'always' and format 'directory' (astro.config.mjs), so every
+# page is `/` or ends in `/`, and no other file does: a CSS, JS, image, font,
+# video, XML or TXT path always ends in its extension. `*` may stand mid-path
+# (Workers static assets turns it into `.*`), so `/*/` is "any path ending
+# in a slash". A slash-less page address (`/about-us`) is answered with a
+# redirect to its slashed form, which this rule then serves. A _redirects
+# rule whose source ends in a slash gets the header on its 301 as well,
+# which is harmless: the redirect has no body.
+#
+# Each path is matched by exactly one Content-Type rule; a second match would
+# append the value rather than replace it. tests/build/schema-layout.test.ts
+# checks every file in the build against these rules.
+#
+# The Worker's own HTML (the live posts, the admin) sets the charset itself.
+/
+  Content-Type: text/html; charset=utf-8
+
+/*/
+  Content-Type: text/html; charset=utf-8
+
 /*
   Content-Security-Policy: frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'
   Strict-Transport-Security: max-age=31536000

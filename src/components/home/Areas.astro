@@ -22,7 +22,7 @@ import { nap } from '../../data/site';
             <h3>{group}</h3>
             <ul>
               {AREAS.filter((a) => a.group === group).map((a) => (
-                <li>{a.href ? <a href={a.href}>{a.name}</a> : a.name}</li>
+                <li>{a.href ? <a href={a.href}>{a.name}</a> : <span>{a.name}</span>}</li>
               ))}
             </ul>
           </div>
@@ -58,5 +58,17 @@ import { nap } from '../../data/site';
     align-items: center;
     min-height: 44px;
     margin-block: -11px;
+  }
+  /* The area links get 44px rows on a phone or any touch screen (SEO
+     re-audit, 7 Nov 2026, visual N2: 24px high at 360px wide). A desktop
+     with a mouse keeps the compact list. A place named without a link gets
+     the same row, so the column keeps one rhythm. */
+  @media (max-width: 767px), (pointer: coarse) {
+    .ar-grid li > a,
+    .ar-grid li > span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
   }
 </style>
