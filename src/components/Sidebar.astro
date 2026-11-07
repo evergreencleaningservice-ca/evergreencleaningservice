@@ -219,4 +219,24 @@ const serviceLinks = [
   .widget-services a:focus-visible {
     color: var(--brand);
   }
+
+  /* On a phone or any touch screen the whole row is the link, at least 44px
+     tall (SEO re-audit, 7 Nov 2026, visual N2: the links measured 23px in
+     39px rows). The row's 8px padding moves from the item onto the link, so
+     a two-line post title is exactly as tall as before; a one-line row grows
+     from 39px to 45px with its border. A desktop with a mouse is unchanged. */
+  @media (max-width: 767px), (pointer: coarse) {
+    .widget-recent li,
+    .widget-services li {
+      padding-block: 0;
+    }
+
+    .widget-recent a,
+    .widget-services a {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding-block: 8px;
+    }
+  }
 </style>
