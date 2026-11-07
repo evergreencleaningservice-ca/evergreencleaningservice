@@ -36,7 +36,11 @@ interface Props {
   id?: string;
   /** Heading rendered above the fields. Omit to render none. */
   heading?: string;
-  /** Small line under the heading. */
+  /**
+   * Small line under the heading, as plain text. A page whose line needs
+   * links passes it in the `intro` slot instead, which wins when both are
+   * given (the quote page's email and phone fallback, 7 Nov 2026).
+   */
   intro?: string;
   /**
    * The REPORTING identity — what lands in `form_id` on the conversion event
@@ -89,7 +93,15 @@ const f = (name: string) => `${id}-${name}`;
   aria-label={heading ? undefined : 'Request a quote'}
 >
   {heading && <h2 class="qq-heading" id={f('heading')}>{heading}</h2>}
-  {intro && <p class="qq-intro">{intro}</p>}
+  {
+    Astro.slots.has('intro') ? (
+      <p class="qq-intro">
+        <slot name="intro" />
+      </p>
+    ) : (
+      intro && <p class="qq-intro">{intro}</p>
+    )
+  }
 
   {/* The error summary. Always in the DOM with a reserved height, so showing
       it moves nothing — an error that shifts the layout moves the field the
@@ -285,10 +297,16 @@ const f = (name: string) => `${id}-${name}`;
      skips it, because `wireLeadForm` refuses a form it has already bound and
      this script runs first. */
   import { wireQuickQuote } from '../lib/quick-quote';
+  import { wireCaptchaFallback } from '../lib/captcha-fallback';
 
-  document
-    .querySelectorAll<HTMLFormElement>('form[data-quick-quote]')
-    .forEach((form) => wireQuickQuote(form));
+  /* The CAPTCHA fallback (SEO re-audit, 7 Nov 2026): when the summary says
+     the check failed, it also gives the email and phone, as links, so a
+     person or an assistant the CAPTCHA blocks is told the way round at that
+     moment. See src/lib/captcha-fallback.ts. */
+  document.querySelectorAll<HTMLFormElement>('form[data-quick-quote]').forEach((form) => {
+    wireQuickQuote(form);
+    wireCaptchaFallback(form);
+  });
 </script>
 
 <style>

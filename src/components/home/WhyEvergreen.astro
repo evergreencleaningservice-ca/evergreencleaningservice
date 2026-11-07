@@ -7,6 +7,11 @@
  */
 import TrustStrip from '../blocks/TrustStrip.astro';
 import ProcessSteps from '../blocks/ProcessSteps.astro';
+import { hoursNote } from '../../data/site';
+
+/* "Monday to Friday 7am–6pm", read from the one place the hours are kept, so
+   the reply promise below cannot drift from the hours the site publishes. */
+const officeHours = hoursNote.replace(/^Office hours:\s*/, '');
 
 const OFFERS = [
   {
@@ -28,11 +33,17 @@ const OFFERS = [
   <div class="container stack">
     <div>
       <h2 class="blk-title" id="why-title">Why Toronto businesses choose Evergreen</h2>
+      {/* SEO re-audit, 7 Nov 2026 (GEO N2): this said "Four things, each
+          written into every contract since 1989", which nothing evidences,
+          and a reply time cannot be a contract term. It is now stated as
+          what it is, a commitment, and the 2-hour reply is qualified with
+          the office hours, as the how-often guide already does. */}
       <p class="blk-intro">
-        Four things, each written into every contract since 1989: the same crew at every visit, a scope
-        agreed at a free walkthrough and set out in writing, cleaning done after hours so nobody works
-        around us, and a reply to every enquiry within 2 hours. Professional firms, clinics, retail
-        outlets, industrial buildings and warehouses across Toronto and the GTA run on that.
+        Four commitments we make to every client: the same crew at every visit, a scope agreed at a
+        free walkthrough and set out in writing, cleaning done after hours so nobody works around us,
+        and a reply to every enquiry within 2 hours during office hours ({officeHours}). Professional
+        firms, clinics, retail outlets, industrial buildings and warehouses across Toronto and the GTA
+        run on that.
       </p>
       <div class="why-grid" data-reveal="stagger">
         {

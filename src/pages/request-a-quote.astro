@@ -32,6 +32,7 @@ import { getEntry } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
 import QuickQuoteForm from '../components/QuickQuoteForm.astro';
 import QuoteAside from '../components/QuoteAside.astro';
+import { nap } from '../data/site';
 
 const entry = await getEntry('pages', 'request-a-quote');
 if (!entry) throw new Error('Missing content entry: pages/request-a-quote');
@@ -46,11 +47,19 @@ if (!entry) throw new Error('Missing content entry: pages/request-a-quote');
 >
   <div class="rq">
     <div class="rq-form">
-      <QuickQuoteForm
-        id="quote"
-        heading="Tell us where to send it"
-        intro="We reply within 2 hours. A free walkthrough when you are ready, then a written quote. No obligation. Prefer not to use the form? Email the same details to info@evergreencleaningservice.ca or call (416) 803-4880 and we reply the same way."
-      />
+      {/* The no-form route as real links (SEO re-audit, 7 Nov 2026, agentic
+          finding 1): it was plain text, so an assistant had to parse the
+          address and number out of a sentence. Both come from `nap`. */}
+      <QuickQuoteForm id="quote" heading="Tell us where to send it">
+        <Fragment slot="intro">
+          We reply within 2 hours. A free walkthrough when you are ready, then a written quote. No
+          obligation. Prefer not to use the form? Email the same details to <a
+            href={`mailto:${nap.email}`}
+            data-cta-location="content">{nap.email}</a
+          > or call <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a> and we
+          reply the same way.
+        </Fragment>
+      </QuickQuoteForm>
     </div>
     <QuoteAside />
   </div>
