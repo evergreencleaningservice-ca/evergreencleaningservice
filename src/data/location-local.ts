@@ -32,8 +32,21 @@
  */
 
 export type LocationLocal = {
-  /** The one real Google review quoted on this page, by name (src/data/reviews.ts). It is not a review from this city; reviews are not attributed to places. */
-  review: string;
+  /**
+   * The one real Google review quoted on this page, by name
+   * (src/data/reviews.ts). It is not a review from this city: reviews.ts
+   * records no reviewer's location, so the page frames it as one of our
+   * Google reviews, never as a local client's.
+   *
+   * Each review appears on one location page at most (7 Nov 2026, SEO
+   * re-audit C3 and content 5c): the four pages added on 6 Nov reused
+   * reviews already shown on other city pages, which read as the same
+   * "client" in three cities. There are seven reviews for eleven pages, so
+   * the four newest pages show none and link to /reviews/ instead. Add one
+   * here only for a review not already used on another location page; a
+   * build test holds that.
+   */
+  review?: string;
   /** A stock photo for the page (SEO audit H6). The alt describes the picture and never claims it was taken in this city; outside Toronto, none shows the Toronto skyline. */
   photo: { src: string; alt: string };
   areasIntro: string;
@@ -430,8 +443,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
       },
     ],
   },
+  /* The four pages below show no review: the ones they had (Edward Sherman,
+     Michael Katchen, Andy Handy) were already on other city pages (7 Nov
+     2026, SEO re-audit C3). */
   'north-york': {
-    review: 'Edward Sherman',
     photo: { src: '/images/office-backpack-vacuum-toronto.jpg', alt: 'Vacuum cleaner being used on an office floor' },
     office: [
       'North York’s office space is concentrated in the towers around North York Centre, where Yonge Street runs from Sheppard to Finch over the subway, and in the low-rise business parks off Highway 401 and Highway 404 around Consumers Road and Don Mills. Further west, along Dufferin, Keele and Steeles, offices sit at the front of industrial units. We look after all three kinds in the evening, working to a task list we write down after walking the building with you.',
@@ -468,7 +483,9 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     ],
     access: [
       'North York is 15 to 25 km from our office at Queen Street West: up the Allen Road and Highway 401 for the west side, the DVP and the 404 for the east, or straight up Yonge Street for the centre. Expect 25 to 45 minutes in the evening.',
-      'Because it is inside Toronto, North York visits are scheduled like downtown ones: fixed evenings, with extra visits and one-off cleans fitted in around them.',
+      /* "Scheduled like downtown ones: fixed evenings" stated a practice the
+         client has not confirmed for this page (7 Nov 2026, SEO re-audit C3). */
+      'Which evenings the crew comes is settled when we walk the building with you, and an extra visit or a one-off clean can be asked for on top of them.',
     ],
     faqs: [
       {
@@ -486,7 +503,6 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     ],
   },
   scarborough: {
-    review: 'Michael Katchen',
     photo: { src: '/images/carpet-extraction-boardroom-toronto.jpg', alt: 'Carpet cleaning tool being used on a carpet' },
     office: [
       'Scarborough’s offices are grouped in a few clusters: the towers and multi-tenant buildings around Scarborough Centre and Consilium Place by Highway 401 and McCowan, the business area along Progress Avenue, the professional and medical suites in the plazas on Sheppard, Kennedy and Lawrence, and the offices attached to the warehouses and plants in Milliken and along the 401. We take them on in the evening with a crew that stays on the building, to a task list fixed when we walk it with you.',
@@ -523,7 +539,9 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     ],
     access: [
       'Scarborough is 20 to 35 km from Queen Street West: the Don Valley Parkway and Highway 401 for the north and centre, the Gardiner and Kingston Road for the lakeshore, about half an hour to fifty minutes once the rush hour has thinned.',
-      'Scarborough is inside the City of Toronto, so visits are scheduled on fixed evenings like the rest of the city, with the plant side and the office side of an industrial building planned apart when that suits the shifts.',
+      /* Was "scheduled on fixed evenings like the rest of the city", a
+         practice nobody has confirmed (7 Nov 2026, SEO re-audit C3). */
+      'The visit days are worked out with you at the walkthrough, with the plant side and the office side of an industrial building planned apart when that suits the shifts.',
     ],
     faqs: [
       {
@@ -541,11 +559,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     ],
   },
   'richmond-hill': {
-    review: 'Andy Handy',
     photo: { src: '/images/dust-on-office-desk-detail.jpg', alt: 'Duster beside a keyboard and office supplies' },
     office: [
       'Most of Richmond Hill’s office stock is in the parks along Highway 7 and Highway 404: Beaver Creek around Leslie Street and East Beaver Creek Road, Headford to the east, and the multi-tenant buildings near Richmond Hill Centre at Yonge and Highway 7. Along Yonge Street itself, professional and medical suites sit above and beside the plazas from Highway 7 north to Elgin Mills. We handle them in the evening, on terms set out in writing after a walkthrough.',
-      'The regular round covers desks, the kitchen, meeting rooms, washrooms and glass, and the switches, handles and rails that get touched all day, on whatever rhythm the office needs: nightly, a few set evenings, or weekly. Richmond Hill contracts run on fixed evenings, with carpet and floor refinishing booked for dates in the year. What a visit includes is spelled out on the <a href="/services/office-cleaning/">office cleaning</a> page.',
+      'The regular round covers desks, the kitchen, meeting rooms, washrooms and glass, and the switches, handles and rails that get touched all day, on whatever rhythm the office needs: nightly, a few set evenings, or weekly, with carpet and floor refinishing booked for dates in the year. What a visit includes is spelled out on the <a href="/services/office-cleaning/">office cleaning</a> page.',
       'A technology office that keeps long hours usually wants more visits than its floor area would suggest. The guide to <a href="/how-often-should-an-office-be-cleaned/">setting an office cleaning schedule</a> explains why, and the guide to <a href="/office-cleaning-cost-toronto-guide/">Toronto office cleaning prices</a> shows the effect on the monthly figure.',
     ],
     areasIntro:
@@ -574,12 +591,15 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     ],
     access: [
       'Richmond Hill is 30 to 40 km north of our office at Queen Street West: up the DVP to the 404 and off at Highway 7, or further to Elgin Mills for the north end. Allow 40 to 55 minutes in the evening.',
-      'Visits fall on set evenings chosen when we walk the building; because of the drive, one-off work is grouped with the regular visits where possible.',
+      /* "Contracts run on fixed evenings" and "one-off work is grouped with
+         the regular visits" were removed here and below: practices stated as
+         fact without the client's confirmation (7 Nov 2026, SEO re-audit C3). */
+      'The evenings for your visits are chosen when we walk the building.',
     ],
     faqs: [
       {
         q: 'Do you clean offices in the Beaver Creek business park?',
-        a: 'Yes. Beaver Creek, Headford and the rest of the Highway 7 and 404 corridor are covered, and the work there is done on fixed evenings.',
+        a: 'Yes. Beaver Creek, Headford and the rest of the Highway 7 and 404 corridor are covered, and the work there is done after hours.',
       },
       {
         q: 'Our dental office is on Yonge Street. Can you clean after the last patient?',
@@ -587,16 +607,23 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
       },
       {
         q: 'Do you cover Oak Ridges and the north end of Richmond Hill?',
-        a: 'Yes. Oak Ridges and the Elgin Mills area are inside the service area; the drive is a little longer, so visits there are planned on fixed evenings.',
+        a: 'Yes. Oak Ridges and the Elgin Mills area are inside the service area. The drive is a little longer, and the timing of visits there is agreed at the walkthrough.',
       },
     ],
   },
   'durham-region': {
-    review: 'Edward Sherman',
     photo: { src: '/images/commercial-disinfection-service.jpg', alt: 'Protected worker cleaning a doorknob' },
     office: [
       'Across Pickering, Ajax and Oshawa, offices are found in the business areas beside Highway 401: around Brock Road and the Pickering city centre, the Salem Road and Harwood Avenue areas of Ajax, and in downtown Oshawa and the office and industrial belt along Stevenson Road and Taunton Road. Many are offices at the front of a plant or distribution building. We take them on in the evening, under a task list we write down after walking the building with you.',
-      'Every visit takes care of the desks, the kitchen, the washrooms, the floors, the glass and the handles and switches everyone uses, nightly, on fixed evenings or weekly. Because crews travel out from Toronto, Durham visits are planned so that one trip covers the evening’s work. The <a href="/services/office-cleaning/">office cleaning</a> page lists everything a visit includes.',
+      /* DURHAM: WHAT IS AND IS NOT SAID (7 Nov 2026, SEO re-audit C3). That
+         Pickering, Ajax and Oshawa are in the service area rests on the
+         client's own Google Ads copy (src/data/coverage.ts). How crews get
+         there and on which evenings does not: the client has not confirmed
+         travel to Durham, so "fixed evenings" and "one trip covers the
+         evening's work" came out of this paragraph, the access notes and the
+         FAQ. Scheduling is described as agreed at the walkthrough, which is
+         what every contract starts with. */
+      'Every visit takes care of the desks, the kitchen, the washrooms, the floors, the glass and the handles and switches everyone uses, nightly, a few evenings a week or weekly, as agreed when we walk the building. The <a href="/services/office-cleaning/">office cleaning</a> page lists everything a visit includes.',
       'For an office attached to a plant, the guide on <a href="/how-often-should-an-office-be-cleaned/">visits per week for an office</a> and the one on <a href="/office-cleaning-cost-toronto-guide/">the parts of an office cleaning price</a> help get the office and the floor quoted together.',
     ],
     areasIntro:
@@ -605,7 +632,10 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
       'Pickering: the Brock Road and Highway 401 business area, the city centre and Bayly Street',
       'Ajax: Salem Road, Harwood Avenue and the Westney Road industrial area',
       'Oshawa: downtown, the Stevenson Road and Highway 401 industrial belt, and the Taunton Road offices',
-      'The Highway 401 corridor between them, including Whitby when a building is on the way',
+      /* Whitby is not in the service area (coverage.ts), so it is no longer
+         listed here as covered "when a building is on the way"; the FAQ
+         below tells a Whitby building to ask. */
+      'The Highway 401 corridor that links the three',
     ],
     buildings: [
       {
@@ -623,20 +653,20 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     ],
     access: [
       'Pickering is about 35 km from our office at Queen Street West, Ajax about 45 km and Oshawa about 60 km, all by the Don Valley Parkway and Highway 401. Expect 45 to 70 minutes in the evening, depending on the town.',
-      'Because of the drive, Durham work is booked on set evenings chosen when we walk the building, and one-off jobs are grouped with the regular visits whenever that works. Daily service is possible where the building needs it.',
+      'How often a Durham building is visited, and on which days, is worked out with you at the walkthrough and written into the scope.',
     ],
     faqs: [
       {
-        q: 'Do you really travel to Oshawa from Toronto?',
-        a: 'Yes. Pickering, Ajax and Oshawa are in our service area. Crews come out on fixed evenings and the schedule is written so one trip covers the evening’s work.',
+        q: 'Are Pickering, Ajax and Oshawa in your service area?',
+        a: 'Yes, all three are. The days and times of the visits are agreed at the walkthrough, once we have seen the building.',
       },
       {
         q: 'Can you clean the office and the warehouse of our building in Ajax?',
-        a: 'Yes. The office round and the warehouse floor are written up together, each with its own dates, so one evening trip covers both.',
+        a: 'Yes. The office round and the warehouse floor are written up together in one scope, each with its own dates.',
       },
       {
         q: 'Is Whitby covered?',
-        a: 'Whitby is not listed as a service area on its own. If a building is between Ajax and Oshawa on the route the crew already takes, ask at the walkthrough and we will tell you plainly whether it can be scheduled.',
+        a: 'Whitby is not listed as a service area on its own. Ask us about your building and we will tell you plainly whether it can be scheduled.',
       },
     ],
   },

@@ -55,6 +55,13 @@ export type Location = {
   landmarks: string;
   /** Google Maps embed query, centred on the municipal zone */
   mapQuery: string;
+  /**
+   * The cities the page targets, where `name` is not itself a city (Durham
+   * Region is a regional municipality). The Service schema's `areaServed`
+   * lists these as City nodes, each `containedInPlace` the AdministrativeArea
+   * named by `name`; without it, `name` is the one City.
+   */
+  cities?: string[];
   /** Meta description */
   description: string;
   /** true where the copy was written here rather than supplied */
@@ -200,7 +207,7 @@ export const locations: Location[] = [
   },
   {
     slug: 'vaughan',
-    updated: '2026-11-06T15:15:07Z', // intro and reasons rewritten (audit Phase 2)
+    updated: '2026-11-07T17:56:48Z', // title cut to 60 characters (SEO re-audit, 7 Nov 2026)
     name: 'Vaughan',
     region: 'Vaughan',
     focus:
@@ -216,7 +223,10 @@ export const locations: Location[] = [
     mapQuery: 'Vaughan, Ontario, Canada',
     description:
       'Office and commercial cleaning in Vaughan: the VMC, Concord, Woodbridge and Maple. Offices, showrooms and warehouses, cleaned after hours. WSIB covered.',
-    title: 'Office & Commercial Cleaning in Vaughan & Concord | Evergreen',
+    /* 61 characters with " | Evergreen" until 7 Nov 2026 (SEO re-audit
+       onpage item 1). The brand goes, as pageTitle() drops it when it does
+       not fit: both place names and "office" first matter more here. */
+    title: 'Office & Commercial Cleaning in Vaughan & Concord',
     detail: {
       h1: 'Office & Commercial Cleaning in Vaughan and Concord',
       subtitle: 'After-hours office and commercial cleaning for Vaughan and Concord, by a crew that knows your building',
@@ -336,7 +346,7 @@ export const locations: Location[] = [
      client-supplied facts. No clients, buildings or counts are named. */
   {
     slug: 'north-york',
-    updated: '2026-11-06T16:12:26Z', // page added
+    updated: '2026-11-07T17:56:48Z', // review removed, scheduling and description softened (SEO re-audit, 7 Nov 2026)
     name: 'North York',
     region: 'North York',
     focus:
@@ -351,14 +361,14 @@ export const locations: Location[] = [
     landmarks: 'North York Centre, the Consumers Road business park, Don Mills and the Steeles–Finch industrial belt',
     mapQuery: 'North York, Toronto, Ontario, Canada',
     description:
-      'Office and commercial cleaning in North York: Yonge–Sheppard towers, business parks off the 401 and 404, clinics and industrial units. After hours, WSIB covered.',
+      'Office and commercial cleaning in North York: Yonge–Sheppard towers, business parks off the 401 and 404, and clinics. After hours, WSIB covered.',
     title: 'Office & Commercial Cleaning in North York | Evergreen',
     h1: 'Office & Commercial Cleaning in North York',
     needsClientReview: true,
   },
   {
     slug: 'scarborough',
-    updated: '2026-11-06T16:12:26Z', // page added
+    updated: '2026-11-07T17:56:48Z', // review removed, scheduling and description softened (SEO re-audit, 7 Nov 2026)
     name: 'Scarborough',
     region: 'Scarborough',
     focus:
@@ -373,14 +383,14 @@ export const locations: Location[] = [
     landmarks: 'Scarborough Centre, the Progress Avenue business area, the Golden Mile, Agincourt and Milliken',
     mapQuery: 'Scarborough, Toronto, Ontario, Canada',
     description:
-      'Office and commercial cleaning in Scarborough: Scarborough Centre offices, Progress and Milliken business areas, clinics and 401 warehouses. After hours, WSIB covered.',
+      'Office and commercial cleaning in Scarborough: Scarborough Centre offices, Progress and Milliken business areas, 401 warehouses. After hours, WSIB covered.',
     title: 'Office & Commercial Cleaning in Scarborough | Evergreen',
     h1: 'Office & Commercial Cleaning in Scarborough',
     needsClientReview: true,
   },
   {
     slug: 'richmond-hill',
-    updated: '2026-11-06T16:12:26Z', // page added
+    updated: '2026-11-07T17:56:48Z', // review removed, scheduling and description softened (SEO re-audit, 7 Nov 2026)
     name: 'Richmond Hill',
     region: 'Richmond Hill',
     focus:
@@ -395,18 +405,18 @@ export const locations: Location[] = [
     landmarks: 'the Beaver Creek business park, Highway 7 and Highway 404, Richmond Hill Centre and the Yonge Street corridor',
     mapQuery: 'Richmond Hill, Ontario, Canada',
     description:
-      'Office and commercial cleaning in Richmond Hill: Beaver Creek and Headford business parks, Yonge Street suites and Richmond Hill Centre. After hours, WSIB covered.',
+      'Office and commercial cleaning in Richmond Hill: Beaver Creek and Headford business parks and Yonge Street suites. After hours, WSIB covered.',
     title: 'Office & Commercial Cleaning in Richmond Hill | Evergreen',
     h1: 'Office & Commercial Cleaning in Richmond Hill',
     needsClientReview: true,
   },
   {
     slug: 'durham-region',
-    updated: '2026-11-06T16:12:26Z', // page added
+    updated: '2026-11-07T17:56:48Z', // unconfirmed scheduling claims out, review removed, title and description cut (SEO re-audit, 7 Nov 2026)
     name: 'Durham Region',
     region: 'Pickering, Ajax and Oshawa',
     focus:
-      'Offices, clinics, plants and distribution buildings along the Highway 401 corridor through Pickering, Ajax and Oshawa, cleaned on fixed evenings planned around the drive from Toronto.',
+      'Offices, clinics, plants and distribution buildings along the Highway 401 corridor through Pickering, Ajax and Oshawa.',
     facilities: [
       'Offices and professional suites in Pickering, Ajax and Oshawa',
       'Warehouses, plants and distribution buildings along Highway 401',
@@ -416,9 +426,17 @@ export const locations: Location[] = [
     ],
     landmarks: 'the Brock Road and Highway 401 business area in Pickering, the Salem and Harwood areas of Ajax, and downtown Oshawa and the Stevenson Road industrial belt',
     mapQuery: 'Oshawa, Ontario, Canada',
+    /* The page targets the three towns, not the region as a whole, so the
+       Service schema names them (7 Nov 2026, SEO re-audit schema N2: it
+       said City "Durham Region"). */
+    cities: ['Pickering', 'Ajax', 'Oshawa'],
     description:
-      'Office and commercial cleaning in Pickering, Ajax and Oshawa: offices, clinics, plants and distribution buildings along the 401, on fixed evenings. WSIB covered.',
-    title: 'Office & Commercial Cleaning in Pickering, Ajax & Oshawa | Evergreen',
+      'Office and commercial cleaning in Pickering, Ajax and Oshawa: offices, clinics, plants and distribution buildings along the 401. After hours, WSIB covered.',
+    /* 68 characters until 7 Nov 2026 (SEO re-audit onpage N2); 56 now. The
+       brand goes rather than "Office", which leads every location title
+       because "office cleaning" is what searchers type (headings-and-links
+       test); tests/build/locations.test.ts holds every title to 60. */
+    title: 'Office & Commercial Cleaning in Pickering, Ajax & Oshawa',
     h1: 'Office & Commercial Cleaning in Pickering, Ajax and Oshawa',
     needsClientReview: true,
   },
