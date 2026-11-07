@@ -36,7 +36,11 @@ interface Props {
   id?: string;
   /** Heading rendered above the fields. Omit to render none. */
   heading?: string;
-  /** Small line under the heading. */
+  /**
+   * Small line under the heading, as plain text. A page whose line needs
+   * links passes it in the `intro` slot instead, which wins when both are
+   * given (the quote page's email and phone fallback, 7 Nov 2026).
+   */
   intro?: string;
   /**
    * The REPORTING identity — what lands in `form_id` on the conversion event
@@ -89,7 +93,15 @@ const f = (name: string) => `${id}-${name}`;
   aria-label={heading ? undefined : 'Request a quote'}
 >
   {heading && <h2 class="qq-heading" id={f('heading')}>{heading}</h2>}
-  {intro && <p class="qq-intro">{intro}</p>}
+  {
+    Astro.slots.has('intro') ? (
+      <p class="qq-intro">
+        <slot name="intro" />
+      </p>
+    ) : (
+      intro && <p class="qq-intro">{intro}</p>
+    )
+  }
 
   {/* The error summary. Always in the DOM with a reserved height, so showing
       it moves nothing — an error that shifts the layout moves the field the
@@ -285,10 +297,86 @@ const f = (name: string) => `${id}-${name}`;
      skips it, because `wireLeadForm` refuses a form it has already bound and
      this script runs first. */
   import { wireQuickQuote } from '../lib/quick-quote';
+  import { MESSAGES } from '../lib/lead-submit';
+  import { nap } from '../data/site';
 
-  document
-    .querySelectorAll<HTMLFormElement>('form[data-quick-quote]')
-    .forEach((form) => wireQuickQuote(form));
+  /* THE CAPTCHA FALLBACK (SEO re-audit, 7 Nov 2026, agentic findings 1 and
+     2, action plan item 12). The quote page says above the form that the
+     same details can be emailed or phoned in, but a person whose checkbox
+     will not tick, or an assistant filling the form for someone, meets the
+     refusal in the error summary, not in the intro. So when the summary is
+     reporting a CAPTCHA failure, the email and phone from `nap` are added to
+     it as real `mailto:` and `tel:` links.
+
+     The CAPTCHA fails two ways, both read from state the pipeline already
+     keeps rather than from a message's wording:
+       before sending  the reCAPTCHA token field (`g-recaptcha-hidden`,
+                       `required`) is still invalid, so `quick-quote.ts`
+                       put "Please tick "I'm not a robot"" in the summary;
+       after sending   the Worker answered 403 and `lead-submit.ts` wrote
+                       `MESSAGES.captcha` (Turnstile only fails this way).
+     Every other error is left alone: those already say what to do, and the
+     server and network ones already give the phone number.
+
+     Built here in the browser, not shipped in the markup: a `tel:` link in
+     a `<template>` would sit in the HTML of every page carrying the sidebar
+     form, where the build tests count telephone links as page content.
+
+     A MutationObserver on the summary rather than a hook in the pipeline:
+     two modules write the summary on three paths, and each new attempt
+     clears it (`textContent = ''`), which removes the sentence with it.
+     Kept in this component rather than a module of its own because the
+     form is its only user; tests/captcha-fallback.test.ts runs this very
+     script. */
+  const FALLBACK_ATTR = 'data-qq-fallback';
+
+  function isCaptchaFailure(form: HTMLFormElement, summary: HTMLElement): boolean {
+    const text = summary.textContent ?? '';
+    if (!text) return false;
+    if (text.startsWith(MESSAGES.captcha)) return true;
+    const token = form.querySelector<HTMLInputElement>('input[name="g-recaptcha-hidden"]');
+    return !!token && token.required && !token.validity.valid;
+  }
+
+  function appendFallback(summary: HTMLElement): void {
+    if (summary.querySelector(`[${FALLBACK_ATTR}]`)) return;
+    const doc = summary.ownerDocument;
+
+    const mail = doc.createElement('a');
+    mail.href = `mailto:${nap.email}`;
+    mail.textContent = nap.email;
+    mail.setAttribute('data-cta-location', 'content');
+
+    const tel = doc.createElement('a');
+    tel.href = nap.phoneHref;
+    tel.textContent = nap.phoneDisplay;
+    tel.setAttribute('data-call-location', 'content');
+
+    const note = doc.createElement('span');
+    note.setAttribute(FALLBACK_ATTR, '');
+    note.append(
+      ' If the check will not work for you, email the same details to ',
+      mail,
+      ' or call ',
+      tel,
+      ' and we reply the same way.'
+    );
+    summary.append(note);
+  }
+
+  function wireCaptchaFallback(form: HTMLFormElement): void {
+    const summary = form.querySelector<HTMLElement>('[data-qq-summary]');
+    if (!summary || summary.dataset.fallbackWired === 'true') return;
+    summary.dataset.fallbackWired = 'true';
+    new MutationObserver(() => {
+      if (isCaptchaFailure(form, summary)) appendFallback(summary);
+    }).observe(summary, { childList: true, characterData: true, subtree: true });
+  }
+
+  document.querySelectorAll<HTMLFormElement>('form[data-quick-quote]').forEach((form) => {
+    wireQuickQuote(form);
+    wireCaptchaFallback(form);
+  });
 </script>
 
 <style>

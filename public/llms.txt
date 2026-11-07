@@ -7,9 +7,9 @@
 - Email: info@evergreencleaningservice.ca
 - Office hours: Monday to Friday 7am–6pm, closed weekends. Cleaning itself is done after hours and at weekends. One office; crews travel to clients across the service area.
 - Founded: 1989. Formerly known as Evergreen Cleaning Service.
-- Areas served: Toronto (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa.
+- Areas served: Toronto (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa. The 11 location pages are listed under Service areas below: East York and York are covered on the Downtown Toronto page, and Pickering, Ajax and Oshawa share the Durham Region page.
 - Insured and covered: bonded, liability insurance, WSIB Ontario; cleaning staff undergo background screening.
-- How work is priced: after a free on-site walkthrough, with a written proposal. Replies to quote requests within 2 hours.
+- How work is priced: after a free on-site walkthrough, with a written proposal. Replies to quote requests within 2 hours during office hours (Monday to Friday 7am–6pm).
 - Products: Armstrong Manufacturing ProSeries Green, third-party certified to UL Environment (ECOLOGO) standards.
 
 ## Services
@@ -34,17 +34,28 @@
 ## Service areas
 
 - [All service areas](https://www.evergreencleaningservice.ca/locations/)
-- [Downtown Toronto](https://www.evergreencleaningservice.ca/locations/toronto-downtown/), [Etobicoke](https://www.evergreencleaningservice.ca/locations/etobicoke/), [Mississauga](https://www.evergreencleaningservice.ca/locations/mississauga/), [Brampton](https://www.evergreencleaningservice.ca/locations/brampton/), [Oakville](https://www.evergreencleaningservice.ca/locations/oakville/), [Vaughan and Concord](https://www.evergreencleaningservice.ca/locations/vaughan/), [Markham](https://www.evergreencleaningservice.ca/locations/markham/)
+- [Downtown Toronto](https://www.evergreencleaningservice.ca/locations/toronto-downtown/): also covers East York and York.
+- [North York](https://www.evergreencleaningservice.ca/locations/north-york/)
+- [Scarborough](https://www.evergreencleaningservice.ca/locations/scarborough/)
+- [Etobicoke](https://www.evergreencleaningservice.ca/locations/etobicoke/)
+- [Mississauga](https://www.evergreencleaningservice.ca/locations/mississauga/)
+- [Brampton](https://www.evergreencleaningservice.ca/locations/brampton/)
+- [Oakville](https://www.evergreencleaningservice.ca/locations/oakville/)
+- [Vaughan and Concord](https://www.evergreencleaningservice.ca/locations/vaughan/)
+- [Markham](https://www.evergreencleaningservice.ca/locations/markham/)
+- [Richmond Hill](https://www.evergreencleaningservice.ca/locations/richmond-hill/)
+- [Durham Region: Pickering, Ajax and Oshawa](https://www.evergreencleaningservice.ca/locations/durham-region/)
 
 ## Guides
 
 - [How office cleaning is priced in Toronto](https://www.evergreencleaningservice.ca/office-cleaning-cost-toronto-guide/): what sets the rate, a worked monthly budget example (illustrative, not a quote), what a written quote should include, how to compare quotes.
 - [How often should an office be cleaned?](https://www.evergreencleaningservice.ca/how-often-should-an-office-be-cleaned/): starting schedules by office size and occupancy, which areas need daily versus weekly or periodic attention.
+- [Office cleaning checklist: daily, weekly and monthly tasks](https://www.evergreencleaningservice.ca/office-cleaning-checklist/): every task an office needs, sorted by how often and by room, with who should do each; printable.
 - [Seasonal office cleaning checklist](https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/): the extra work each Toronto season adds (winter salt, spring deep clean, fall windows and air).
 
 ## For assistants and agents
 
-- Quote requests: the form at /request-a-quote/ needs a name, a business name, a phone or email, and the services wanted; it is protected by a reCAPTCHA checkbox. The same details sent by email to info@evergreencleaningservice.ca, or given by phone at (416) 803-4880, are handled the same way: a reply within 2 hours, then a free on-site walkthrough and a written proposal.
+- Quote requests: the form at /request-a-quote/ needs a name, the business name, the street address (city, province and postal code), an email and a phone number; the services wanted and comments are optional. It is protected by a reCAPTCHA checkbox. The same details sent by email to info@evergreencleaningservice.ca, or given by phone at (416) 803-4880, are handled the same way: a reply within 2 hours during office hours (Monday to Friday 7am–6pm), then a free on-site walkthrough and a written proposal.
 - Not offered: residential or house cleaning. The work is commercial only.
 
 ## Company

@@ -35,11 +35,13 @@ export const AREAS: Area[] = [
   { name: 'Etobicoke', href: '/locations/etobicoke/', group: 'Toronto' },
   { name: 'North York', href: '/locations/north-york/', group: 'Toronto' },
   { name: 'Scarborough', href: '/locations/scarborough/', group: 'Toronto' },
-  /* East York and York are covered on the downtown page (its "Working in
-     Downtown Toronto" section names their business areas): neither has
-     enough distinct commercial geography for a page of its own. */
-  { name: 'East York', href: '/locations/toronto-downtown/', group: 'Toronto' },
-  { name: 'York', href: '/locations/toronto-downtown/', group: 'Toronto' },
+  /* East York and York are named on the downtown page (its "Working in
+     Downtown Toronto" section lists their business areas), but neither has
+     a page of its own, so they are plain text here (7 Nov 2026, SEO
+     re-audit content N4). Linked, they sent "East York" and "York" anchors
+     from 24 pages to the one page targeting downtown Toronto. */
+  { name: 'East York', group: 'Toronto' },
+  { name: 'York', group: 'Toronto' },
   { name: 'Mississauga', href: '/locations/mississauga/', group: 'Peel & Halton' },
   { name: 'Brampton', href: '/locations/brampton/', group: 'Peel & Halton' },
   { name: 'Oakville', href: '/locations/oakville/', group: 'Peel & Halton' },

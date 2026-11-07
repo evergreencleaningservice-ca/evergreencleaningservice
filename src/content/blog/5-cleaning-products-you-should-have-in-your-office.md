@@ -46,8 +46,8 @@ Use white vinegar to disinfect, shine your windows, and clean stubborn spots in 
 
 Your office environment should be inviting, no matter the type of business you are in. Stinky smells in your office can make your office environment uninviting. Use a bottle of air freshener to freshen up your office and to fight stinky smells. Do not worry if you hate “canned smells”. Use the unscented options on the market to disinfect and get rid of smells in your office.
 
-It is important to have some of the essentials cleaning products in your office whether you hire [professional cleaning](/about-us/) staff to come in regularly or not. The cleaning products will come in handy during everyday emergencies. Don’t get caught unprepared!
+It is important to have some of the essentials cleaning products in your office whether you hire [professional cleaning](/services/commercial-cleaning/) staff to come in regularly or not. The cleaning products will come in handy during everyday emergencies. Don’t get caught unprepared!
 
 Hiring professional [commercial cleaning services](/) is one of the best ways for keeping your office looking great at all times. Call us today to learn how we can help improve the cleanliness of your office space.
 
-If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.
+Keep these on hand for the spills between visits; Evergreen's [office cleaning](/services/office-cleaning/) crews take care of the rest, in workplaces across Toronto and the GTA.

@@ -1,11 +1,13 @@
 ---
 title: "Cleaning Services Photo Gallery"
-description: "Illustrative photographs of commercial cleaning equipment, workspaces and cleaning methods."
+description: "Illustrative stock photographs of commercial cleaning equipment, workspaces and cleaning methods, captioned with the service each one shows."
 image: "/images/warehouse-floor-scrubber-industrial.jpg"
 imageAlt: "Floor scrubber in a warehouse aisle"
 # Each photo is captioned with the service it illustrates. The photographs
-# are illustrative (see `description`), so a caption names the kind of work
-# and never a job of Evergreen's or a Toronto site.
+# are licensed stock (docs/stock-photos/manifest.json), so a caption names the
+# kind of work and never a job of Evergreen's or a Toronto site. The intro and
+# `description` say "stock" in so many words (SEO re-audit, 7 Nov 2026, critic
+# C4): "illustrative" alone still read as the company's own work.
 photos:
   - src: "/images/gallery-industrial-cleaning-toronto.jpg"
     alt: "Floor polishing machine in an industrial building"
@@ -48,4 +50,4 @@ photos:
     caption: "Building maintenance: a glazed common-area corridor"
 ---
 
-The photographs on this page illustrate the kinds of work Evergreen Office Cleaning takes on: office and janitorial rounds, hard-floor care, retail and warehouse scrubbing, and clinic disinfection. Each one is captioned with the service it shows. See the full list on our [services](/services/) page, or [request a quote](/request-a-quote/) for your building.
+The photographs on this page are illustrative stock photographs, not pictures of Evergreen Office Cleaning's own crews or of clients' buildings. They illustrate the kinds of work Evergreen takes on: office and janitorial rounds, hard-floor care, retail and warehouse scrubbing, and clinic disinfection. Each one is captioned with the service it shows. See the full list on our [services](/services/) page, or [request a quote](/request-a-quote/) for your building.

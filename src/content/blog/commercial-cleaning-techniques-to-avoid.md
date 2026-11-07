@@ -39,7 +39,7 @@ For better cleaning results, you want to follow the instructions provided by the
 
 The sponge that you use to wash dishes can end up being a breeding ground for bacteria. After all, you are always using it to clean food off your plates, surfaces, and more. In addition, it’s always left damp. Bacteria thrive in moist and damp environments. As a result, it can cause you to look for solutions to want to free your sponge of harmful bacteria. This is why a lot of people look to microwave their sponges to kill off the bacteria.
 
-While your microwave can certainly kill off microbes on your sponge, there is research that shows that microwaving a sponge doesn’t kill off all bacteria on it. In the research, they still found bacteria and pathogens on it that could cause food-borne diseases.
+Microwaving can kill some of the microbes on a sponge, but it does not leave the sponge clean. A 2017 study of used kitchen sponges found that sponges their owners regularly sanitized, by microwaving or rinsing in hot, soapy water, held no fewer bacteria than sponges that were never sanitized ([Cardinale et al., Scientific Reports, 2017](https://www.nature.com/articles/s41598-017-06055-9)).
 
 A good way to avoid getting your sponge too dirty is to simply not use it to clean anything but your dishes. Also, you’ll want to disinfect it after using it and replace it weekly.
 
@@ -73,4 +73,4 @@ To get a better effect, you’ll want to clean the wooden surfaces with regular 
 
 The cleanliness of your home or office can impact the quality of life of everyone that uses it. Cleaning is a serious task. It can dictate the overall health and wellness of all occupants. Don’t go for the first cleaning method you hear on the internet or from word of mouth. Stick to using tried and true cleaning methods from professionals. It’s always a good idea to hand the reigns off to [professional cleaners](/contact-us/) that know what they are doing, and to know which [products you should never mix](/6-common-cleaning-products-that-you-should-never-mix-together/).
 
-If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.
+Evergreen's [commercial cleaning](/services/commercial-cleaning/) crews match the method and the product to the surface, so shortcuts like these stay out of your building.

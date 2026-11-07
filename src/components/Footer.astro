@@ -36,7 +36,7 @@ const icons: Record<string, string> = {
           the address and the main pages, and it had none of the three. The
           address is the business's one office; nothing here implies another. */}
       <div class="footer-col footer-col-contact">
-        <h2 class="footer-areas-title">{nap.name}</h2>
+        <p class="footer-areas-title">{nap.name}</p>
         <p class="footer-nap">
           {nap.streetAddress}<br />
           {nap.addressLocality}, {nap.addressRegion} {nap.postalCode}
@@ -52,7 +52,7 @@ const icons: Record<string, string> = {
       </div>
 
       <div class="footer-col footer-col-areas">
-        <h2 class="footer-areas-title">Services</h2>
+        <p class="footer-areas-title">Services</p>
         <ul class="footer-areas">
           <li><a href="/services/office-cleaning/">Office Cleaning</a></li>
           <li><a href="/services/commercial-cleaning/">Commercial Cleaning</a></li>
@@ -64,15 +64,15 @@ const icons: Record<string, string> = {
         </ul>
       </div>
 
-      {/* A heading like its neighbours', so the badge lines up with their
-          lists instead of floating level with their headings. */}
+      {/* A title like its neighbours', so the badge lines up with their
+          lists instead of floating level with their titles. */}
       <div class="footer-col footer-col-review">
-        <h2 class="footer-areas-title">Reviews</h2>
+        <p class="footer-areas-title">Reviews</p>
         <GoogleReviewLink />
       </div>
 
       <div class="footer-col footer-col-areas footer-service-areas">
-        <h2 class="footer-areas-title">Service Areas</h2>
+        <p class="footer-areas-title">Service Areas</p>
         <ul class="footer-areas">
           {
             footerAreas.map((area) => (
@@ -86,7 +86,7 @@ const icons: Record<string, string> = {
 
   <div class="footer-connect">
     <div class="container">
-      <h2 class="footer-connect-title">Follow us on Social Media</h2>
+      <p class="footer-connect-title">Follow us on Social Media</p>
       <ul class="footer-social">
         {
           social.map((item) => (
@@ -131,12 +131,16 @@ const icons: Record<string, string> = {
 </footer>
 
 <style>
-  /* The two footer section titles are h2, not h4.
-     The footer is the last landmark on every page, and the heading before it
-     varies — h2 on the homepage, h3 inside a blog post. An h4 there skipped a
-     level on every page and failed heading-order; an h2 is valid after
-     anything, because going back UP the outline is allowed and only skipping
-     DOWN is not. They are styled by class, so nothing moved a pixel. */
+  /* The footer's titles are paragraphs, not headings (SEO re-audit,
+     7 Nov 2026, item 14). They were h4 until the heading-order fix, then h2,
+     which put the same five H2s ("Evergreen Office Cleaning", "Services",
+     "Reviews", "Service Areas", "Follow us on Social Media") at the end of
+     every page's outline, so each page's real sections shared their level
+     with boilerplate. The footer is still a landmark (`contentinfo`), which
+     is how assistive technology finds it. Each class below carries what the
+     global h2 rule gave them (line-height 1.2 and balanced wrapping; the
+     face, weight, colour and margin were already set here), so nothing
+     moved a pixel. */
   .site-footer {
     background: var(--footer-bg);
     color: var(--footer-ink);
@@ -201,6 +205,8 @@ const icons: Record<string, string> = {
 
   .footer-areas-title {
     margin: 0 0 12px;
+    line-height: 1.2;
+    text-wrap: balance;
     font-family: var(--font-heading);
     font-size: 0.8125rem;
     font-weight: 700;
@@ -238,6 +244,27 @@ const icons: Record<string, string> = {
     text-decoration: underline;
   }
 
+  /* 44px rows on a phone or any touch screen (SEO re-audit, 7 Nov 2026,
+     visual N2: these rows measured 28px at 360px wide, "All service areas"
+     included). The row is the target: the 8px gap between rows goes into
+     it, so the list grows by 8px a row on a phone and not at all with a
+     mouse on a desktop. A plain-text area gets the same row, so the list
+     keeps one rhythm. */
+  @media (max-width: 767px), (pointer: coarse) {
+    .footer-areas li {
+      display: flex;
+      margin-bottom: 0;
+    }
+
+    .site-footer .footer-areas a,
+    .footer-areas li > span {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding-block: 0;
+    }
+  }
+
   /* On a phone the columns stack and stay left-aligned. The lists used to be
      centred under left-aligned headings, which looked like two layouts. */
 
@@ -248,6 +275,8 @@ const icons: Record<string, string> = {
   }
 
   .footer-connect-title {
+    line-height: 1.2;
+    text-wrap: balance;
     font-family: var(--font-heading);
     font-size: 15px;
     font-weight: 700;

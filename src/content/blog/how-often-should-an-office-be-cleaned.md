@@ -26,7 +26,7 @@ guide:
     - { label: "Frequently asked questions", id: "frequently-asked-questions" }
   related:
     - { slug: "office-cleaning-checklist", label: "Office Cleaning Checklist: Daily, Weekly and Monthly" }
-    - { slug: "office-cleaning-cost-toronto-guide", label: "How Office Cleaning Is Priced in Toronto" }
+    - { slug: "office-cleaning-cost-toronto-guide", label: "What Drives Office Cleaning Costs in Toronto" }
     - { slug: "seasonal-office-cleaning-checklist", label: "Seasonal Office Cleaning Checklist" }
     - { slug: "ask-the-office-cleaners-cleaning-break-rooms", label: "Cleaning Office Break Rooms" }
 ---

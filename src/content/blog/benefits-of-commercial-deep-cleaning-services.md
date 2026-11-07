@@ -67,4 +67,4 @@ Routine cleaning keeps a building presentable; a deep clean resets it. The usual
 
 Our team knows just what should be cleaned and how to go about the process. We work in an efficient and effective manner so that you can focus on the primary aspects of your business. So, do not hesitate to seek our services today! [Request a walkthrough](/request-a-quote/) to schedule your cleaning!
 
-If you would rather leave it to a professional crew, Evergreen's [commercial cleaning](/services/commercial-cleaning/) and [building maintenance and floor care](/services/building-maintenance/) services cover it for workplaces across Toronto and the GTA.
+A deep clean resets the building; routine [commercial cleaning](/services/commercial-cleaning/) and periodic [building maintenance and floor care](/services/building-maintenance/) are what keep it that way.

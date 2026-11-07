@@ -379,6 +379,19 @@ const cards = reviews.map((r) => ({ ...r, when: reviewDate(r) }));
     color: #111;
   }
 
+  /* A 44px-tall target on a phone or any touch screen (SEO re-audit, 7 Nov
+     2026, visual N2: the button measured 77x24 at 360px wide). The padding
+     is the target and the negative margins hand the space back, so the
+     label sits where it did and the card is no taller: the 10px below and
+     8px to each side come out of the card's own 20px padding. */
+  @media (max-width: 767px), (pointer: coarse) {
+    .ti-more {
+      min-height: 44px;
+      padding: 10px 8px;
+      margin: -4px -8px -10px;
+    }
+  }
+
   /* A review short enough not to be clipped still keeps this line, invisible
      and unclickable, so every card in a row is the same height. That is what
      the widget does — it replaces the label with a non-breaking space and

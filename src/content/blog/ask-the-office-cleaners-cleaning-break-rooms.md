@@ -25,14 +25,14 @@ A common trend we observe in office break rooms now is wooden furniture, benches
 
 #### Cleaning Carpets – in the office break room
 
-It may seem wiser to have hard floor in a busy office break room, but carpets offer much more comfort. Carpets provide insulation, absorb noise and generally feel more comfy underfoot. The only issue is getting trampled-in foods and spills out of carpets!
+It may seem wiser to have hard floor in a busy office break room, but carpets offer much more comfort. Carpets provide insulation, absorb noise and generally feel more comfy underfoot. The only issue is getting trampled-in foods and spills out of carpets! If you are planning or refitting the room, our [office layout tips](/office-layout-tips-to-make-cleaning-easier-and-faster/) weigh carpet against hard floors and suggest furniture that is easy to clean around.
 
 For light patches and spills, you can use the baking soda trick mentioned above. Sprinkle baking soda on the blemished spots and give it some time to work, before getting it out using a vacuum cleaner. Oftentimes, however, the baking soda trick may not be effective on trodden in and old stains. The type of carpet you have will definitely influence how well this trick works. Luckily, we are always there to help. Our office carpet cleaners use high-tech equipment that ensures your carpets are spotless clean, even if they’ve suffered their far share of dirt and debris.
 
-We’ve also come across some really fancy office break rooms with table football, ping pong, and other amazing recreational equipment. All these items gather dust, and get greasy and sticky when they’re used around food. You can bet there will also be no shortage of greasy fingers on TV remotes, blind controls, and light switches – so make sure to have these cleaned as well. Not forgetting these tiny details – such as dusting off the light shades and cleaning the cobwebs in the ceiling corners – adds up to a clean office break room that your staff will enjoy spending time in.
+We’ve also come across some really fancy office break rooms with table football, ping pong, and other amazing recreational equipment. All these items gather dust, and get greasy and sticky when they’re used around food. You can bet there will also be no shortage of greasy fingers on TV remotes, blind controls, and light switches – so make sure to have these cleaned as well. Not forgetting these tiny details – such as dusting off the light shades and cleaning the cobwebs in the ceiling corners – adds up to a clean office break room that your staff will enjoy spending time in. The shared fridge needs a routine of its own: see [how to keep the office fridge clean](/how-to-keep-your-office-fridge-clean/).
 
 ##### Your own team of professional office cleaners
 
 Need help getting all the cobwebs, crusts, and crumbs out of your break room? Evergreen Office Cleaning is an experienced team of expert office cleaners who know everything there is to know about the trade. Contact us today to learn more about how we can help make office cleaning easy and convenient, with minimal disruptions to your operations.
 
-If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.
+Kitchens and break rooms are part of Evergreen's [office cleaning](/services/office-cleaning/) service, with counters, sinks and floors done on the schedule agreed for your office.

@@ -28,21 +28,28 @@
  *  and a factual claim the client cannot support. It goes in when someone
  *  supplies the real figure from the Google Business Profile.
  */
+import { SERVICE_LOCATION_SUGGESTIONS } from '../data/coverage';
 import { hours, nap, site, social } from '../data/site';
 
-/** Cities named in `areaServed`. Matches src/data/coverage.ts at city level. */
-const SERVICE_AREA_NAMES = [
-  'Toronto',
-  'Mississauga',
-  'Brampton',
-  'Oakville',
-  'Vaughan',
-  'Markham',
-  'Richmond Hill',
-  'Pickering',
-  'Ajax',
-  'Oshawa',
-];
+/**
+ * Places named in `areaServed`, on the organisation and on every Service node.
+ *
+ * Read from src/data/coverage.ts rather than written out here (SEO re-audit,
+ * 7 Nov 2026, item 9). The hand-kept list named ten cities and had drifted:
+ * it left out North York and Scarborough, which have their own location
+ * pages, and Etobicoke, East York and York, which the site says it covers.
+ * The quote form's city suggestions are the coverage list at city level, so
+ * the schema now names exactly what the form offers and cannot claim a place
+ * the site does not, or miss one it does.
+ *
+ * All are typed `City`. North York, Scarborough, Etobicoke, East York and
+ * York are former municipalities merged into Toronto in 1998, still the
+ * names people search by; `City` is the closest schema.org type for them.
+ * (Durham Region, a regional municipality, is typed on its own location
+ * page, not here.)
+ */
+const SERVICE_AREA_NAMES: readonly string[] = SERVICE_LOCATION_SUGGESTIONS;
+const SERVICE_AREAS = () => SERVICE_AREA_NAMES.map((name) => ({ '@type': 'City', name }));
 
 /** The service pages, for the organisation's catalog. */
 const CATALOG = [
@@ -99,7 +106,7 @@ export const organizationGraph = () => ({
         opens: h.opens,
         closes: h.closes,
       })),
-      areaServed: SERVICE_AREA_NAMES.map((name) => ({ '@type': 'City', name })),
+      areaServed: SERVICE_AREAS(),
       /* The Google Business Profile first, then the social profiles. */
       sameAs: [nap.mapUrl, ...social.map((s) => s.href)],
       contactPoint: {
@@ -260,7 +267,7 @@ export const serviceSchema = (opts: { name: string; description?: string; url: s
     ...(opts.description ? { description: opts.description } : {}),
     url,
     provider: ORG,
-    areaServed: SERVICE_AREA_NAMES.map((name) => ({ '@type': 'City', name })),
+    areaServed: SERVICE_AREAS(),
     /* Who it is for and how to ask for it (SEO audit H12 and M13). */
     audience: { '@type': 'BusinessAudience', audienceType: 'Businesses and property managers' },
     availableChannel: {

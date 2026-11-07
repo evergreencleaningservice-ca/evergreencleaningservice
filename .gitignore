@@ -36,3 +36,7 @@ pnpm-debug.log*
 
 # Agent worktrees used during audits; never part of the site
 .claude/worktrees/
+
+# Temporary script folders written by tests/captcha-fallback.test.ts; removed
+# in afterAll, but a crashed run can leave one behind
+tests/.qq-script-*/

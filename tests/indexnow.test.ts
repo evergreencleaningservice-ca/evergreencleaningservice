@@ -119,12 +119,16 @@ describe('the key', () => {
     expect(patterns.filter((p) => matches(p, `/${INDEXNOW_KEY}.txt`))).toEqual([]);
   });
 
-  it('gets no _headers rule of its own, and no robots header on production', () => {
-    /* Only the sitewide security headers apply. A noindex on www. would not
-       stop verification, but nothing should be attached to the file that
-       could make it anything other than plain text. */
+  it('gets only a plain-text charset rule of its own, and no robots header on production', () => {
+    /* Only the sitewide security headers apply, plus (since the SEO re-audit
+       of 7 Nov 2026, technical N3) the same `text/plain; charset=utf-8` as
+       /llms.txt. A noindex on www. would not stop verification, but nothing
+       should be attached to the file that could make it anything other than
+       plain text. */
     const rules = parseHeaders(fs.readFileSync(path.join(repo, 'public', '_headers'), 'utf8'));
-    expect(rules.filter((r) => r.url.includes(INDEXNOW_KEY))).toEqual([]);
+    expect(rules.filter((r) => r.url.includes(INDEXNOW_KEY))).toEqual([
+      { url: `/${INDEXNOW_KEY}.txt`, headers: { 'content-type': 'text/plain; charset=utf-8' } },
+    ]);
     const pathOnly = rules.filter((r) => r.url.startsWith('/'));
     for (const rule of pathOnly) expect(rule.headers['x-robots-tag']).toBeUndefined();
     expect(pathOnly.filter((r) => r.url === '/*' && r.headers['content-type'])).toEqual([]);

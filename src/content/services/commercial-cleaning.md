@@ -144,7 +144,7 @@ Routine cleaning keeps a space clean; periodic work keeps it looking cared for. 
 - High dusting of vents, ledges, fixtures and ceilings
 - Interior window and glass cleaning
 - Data room and raised-floor specialty cleaning
-- Deep cleans before a move, an inspection or a new tenant
+- Deep cleans before a move, an inspection or a new tenant (our post on [what a commercial deep clean includes](/benefits-of-commercial-deep-cleaning-services/) explains when one is worth booking)
 
 They can be built into a recurring contract and planned through the year, or booked one at a time. Our [building maintenance and floor care](/services/building-maintenance/) page covers them in detail.
 
@@ -187,7 +187,7 @@ Evergreen Office Cleaning uses Armstrong Manufacturing's ProSeries Green line on
 
 ## Where does Evergreen clean commercial property?
 
-Evergreen Office Cleaning cleans commercial premises across Toronto and ten GTA municipalities from one office at 243 Queen St W: Toronto itself (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa. Each area has its own mix of buildings: office towers and street-level retail [downtown](/locations/toronto-downtown/), logistics and corporate parks in [Mississauga](/locations/mississauga/), warehouses and industrial buildings in [Brampton](/locations/brampton/) and [Vaughan](/locations/vaughan/), tech and professional offices in [Markham](/locations/markham/), and a mix of all of these in [Etobicoke](/locations/etobicoke/) and [Oakville](/locations/oakville/). The way the work is scoped, scheduled and checked is the same everywhere.
+Evergreen Office Cleaning cleans commercial premises across Toronto and nine other GTA municipalities from one office at 243 Queen St W: Toronto itself (including [North York](/locations/north-york/), [Scarborough](/locations/scarborough/), Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, [Richmond Hill](/locations/richmond-hill/), and [Pickering, Ajax and Oshawa](/locations/durham-region/) in Durham Region. Each area has its own mix of buildings: office towers and street-level retail [downtown](/locations/toronto-downtown/), logistics and corporate parks in [Mississauga](/locations/mississauga/), warehouses and industrial buildings in [Brampton](/locations/brampton/) and [Vaughan](/locations/vaughan/), tech and professional offices in [Markham](/locations/markham/), and a mix of all of these in [Etobicoke](/locations/etobicoke/) and [Oakville](/locations/oakville/). The way the work is scoped, scheduled and checked is the same everywhere.
 
 ## Choosing a commercial cleaning company
 

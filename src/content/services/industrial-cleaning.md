@@ -2,7 +2,7 @@
 seoTitle: "Industrial & Warehouse Cleaning in Toronto | Evergreen"
 title: "Industrial Cleaning"
 h1: "Industrial and Warehouse Cleaning in Toronto and the GTA"
-description: "Industrial and warehouse cleaning in Toronto and the GTA — floor scrubbing, strip and wax, high dusting and staff areas, with a free on-site consultation."
+description: "Industrial and warehouse cleaning in Toronto and the GTA: floor scrubbing, strip and wax, high dusting and staff areas, with a free on-site consultation."
 summary: "Cleaning for plants, factories, warehouses and industrial buildings — floors, high surfaces, staff facilities and the offices beside them, scheduled around your shifts."
 image: "/images/warehouse-floor-scrubber-industrial.jpg"
 imageAlt: "Floor scrubber in a warehouse aisle"
@@ -74,6 +74,6 @@ Industrial cleaning is the cleaning of plants, factories, warehouses and other i
 
 ![Floor scrubber in a warehouse aisle](/images/warehouse-floor-scrubber-industrial.jpg)
 
-A clean, regularly maintained facility helps worker safety, and it tells customers and partners that the operation is run well. Whether the site is large or small, the cleaning is set to what it needs, and equipment is worked around with care.
+A clean, regularly maintained facility helps worker safety, and it tells customers and partners that the operation is run well. Whether the site is large or small, the cleaning is set to what it needs, and equipment is worked around with care. On a long warehouse aisle a machine can do much of the floor work, but not the edges, the clutter or anything off the floor; our comparison of [robotic floor scrubbers and manual cleaning](/robotic-vs-manual-cleaning-which-will-ultimately-succeed/) explains where each fits.
 
 ![Worker on a lifting platform cleaning a ceiling](/images/high-dusting-warehouse-lift.jpg)

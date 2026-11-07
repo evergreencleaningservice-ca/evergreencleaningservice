@@ -1,5 +1,8 @@
 ---
 title: "6 Common Cleaning Products That You Should Never Mix Together"
+# SEO re-audit, 7 Nov 2026: the title alone is 61 characters, over the
+# 60-character limit, so the <title> uses this shorter form (52 with brand).
+seoTitle: "6 Cleaning Products You Should Never Mix"
 description: "Six cleaning-product combinations never to mix, from bleach with vinegar, ammonia or rubbing alcohol to two drain cleaners, and why each is unsafe."
 pubDate: 2021-07-30
 image: "/images/blog-cleaning-products-never-mix-feature.jpg"
@@ -48,14 +51,14 @@ Never mix two drain cleaners, or use one straight after another. They are strong
 
 ### Vinegar + Hydrogen Peroxide
 
-You might have heard that countertops or fruits should be sprayed with alternating mists of vinegar and hydrogen peroxide, and in between sprays wiping the surface down. According to experts, this is a safe method. However, the two products should not be mixed together in the same container. When they are combined, it creates peracetic acid. This can be potentially toxic and may irritate the respiratory system, eyes, and skin.
+You might have heard that countertops or fruits should be sprayed with alternating mists of vinegar and hydrogen peroxide, and in between sprays wiping the surface down. Whatever you make of that advice, the two products should never be mixed together in the same container. When they are combined, it creates peracetic acid. This can be potentially toxic and may irritate the respiratory system, eyes, and skin.
 
 ### Rubbing Alcohol + Bleach
 
-Mixed together, they can produce chloroform and other toxic compounds that irritate the eyes, nose and lungs. Bleach should never be mixed with anything other than plain water. Other products like toilet bowl cleaners and window cleaners can contain ingredients like ammonia or acids and should never be combined with bleach.
+Mixed together, they can produce chloroform and other toxic compounds that irritate the eyes, nose and lungs. Bleach should never be mixed with anything other than plain water. Other products like toilet bowl cleaners and window cleaners can contain ingredients like ammonia or acids and should never be combined with bleach. The Canadian Centre for Occupational Health and Safety says the same: do not use bleach with other disinfectants, toilet bowl cleaners, rust removers, acids (including vinegar) or products containing ammonia ([CCOHS, Bleach (Household chlorine) - Working Safely](https://www.ccohs.ca/oshanswers/chemicals/bleach.html)).
 
 _**Stay safe when you’re cleaning or stay super safe and leave the cleaning to the pros at Evergreen Office Cleaning.**_ 
 
 #### [CONTACT US](/contact-us/) today for all of your cleaning needs!
 
-If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.
+If you would rather not handle the chemicals at all, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) crews clean your workplace's touch points first, then disinfect them, and never mix products.

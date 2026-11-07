@@ -1,0 +1,379 @@
+{
+ "site": "https://www.evergreencleaningservice.ca/",
+ "domain": "www.evergreencleaningservice.ca",
+ "audit_date": "2026-11-06",
+ "summary": {
+  "health_score": 82,
+  "previous_health_score": 76,
+  "business_type": "Local Service (hybrid): commercial and office cleaning company, one office at 243 Queen St W, Toronto, serving Toronto and 9 GTA municipalities through 11 location pages",
+  "pages_crawled": 89,
+  "indexable_pages": 62,
+  "sitemap_urls": 60,
+  "data_limits": [
+   "No Search Console, GA4, Google Ads, Google Business Profile, CrUX or backlink access",
+   "Field CWV from Cloudflare Web Analytics: 106 human beacons in 6 days, 18-28 on mobile",
+   "Lighthouse 12.8.2 median-of-5 from 19:30 UTC, after the last performance-relevant change",
+   "SERP checks used a non-Google index: no local pack, PAA or AI Overview"
+  ],
+  "top_findings": [
+   "No named person anywhere: no owner, account executive, author or reviewer, and no Person schema",
+   "The cost guide gives no real price; the title is now honest but the searcher's question is unanswered",
+   "Third-party proof is thin: 7 Google reviews, no rating shown, no case study, stock imagery, no citations under the current name",
+   "Introduced today: the deferred tag loader hides calls from paid visits in Google Ads",
+   "Introduced today: 'ten GTA municipalities' lists nine; homepage 'every contract since 1989' claim; location pages reuse the same reviews as 'a client'"
+  ],
+  "quick_wins": [
+   "Load GTM at once on /lp/* and gclid/gbraid/wbraid visits (src/components/GoogleTagManager.astro)",
+   "Fix 'ten' -> 'nine other GTA municipalities' and link the four new location pages (commercial-cleaning.md line 190)",
+   "Reword the homepage contract claim and qualify the 2-hour reply (WhyEvergreen.astro, Hero.astro, llms.txt)",
+   "Put 'cost' back in the cost guide title; trim six descriptions and two titles",
+   "areaServed, Durham typing, breadcrumb root, llms.txt, charset header"
+  ]
+ },
+ "categories": [
+  {
+   "name": "Technical SEO",
+   "weight": 0.22,
+   "score": 91,
+   "previous_score": 86,
+   "components": {
+    "technical": 90,
+    "sitemap": 94
+   },
+   "what_works": [
+    "All 89 crawled URLs return 200; 0 broken or http:// internal links; 0 canonical mismatches; 0 duplicate titles or descriptions",
+    "60 sitemap URLs all indexable and self-canonical, each dated from its own content; 27 noindex URLs correctly excluded",
+    "Merged posts, /tag/plants/, /insights/page/4/ and /tag/office/page/2/ 301 in one hop; real 404",
+    "Enforced frame-ancestors/base-uri/form-action/object-src CSP plus full report-only policy; HSTS, nosniff, XFO, Referrer-Policy, Permissions-Policy",
+    "verify:indexing 24/24 passed; seo:drift 0 critical; IndexNow live (32 URLs, HTTP 202)"
+   ],
+   "findings": [
+    {
+     "title": "HTML served without charset",
+     "severity": "Low",
+     "description": "content-type: text/html on every HTML route; meta charset present so browsers are unaffected",
+     "recommendation": "Add Content-Type: text/html; charset=utf-8 in public/_headers"
+    },
+    {
+     "title": "Report-only CSP lacks hosts the Ads container uses",
+     "severity": "Info",
+     "description": "pagead2.googlesyndication.com, adservice.google.com and cct.google missing; enforcing as written would break parts of the Ads tags",
+     "recommendation": "Read /api/csp-report and add the hosts before enforcing (~12 Nov)"
+    },
+    {
+     "title": "Content-Signal lines flagged by Lighthouse",
+     "severity": "Low",
+     "description": "SEO 92 instead of 100",
+     "recommendation": "Owner decision: keep and document, or remove"
+    },
+    {
+     "title": "Two-hop http/apex redirect without trailing slash",
+     "severity": "Low",
+     "description": "http://evergreencleaningservice.ca/about-us -> https://www/about-us -> /about-us/",
+     "recommendation": "Add the slash in the Cloudflare host redirect, or accept"
+    }
+   ]
+  },
+  {
+   "name": "Content Quality",
+   "weight": 0.23,
+   "score": 72,
+   "previous_score": 68,
+   "components": {
+    "content": 72,
+    "sxo_gap": 62
+   },
+   "what_works": [
+    "Blog pass live: seven retitles, two merges with 301s, named unsourced statistics removed or cited",
+    "Four new location pages with real corridors, building types, drive times and honest 'no office here' lines; 64-69% unique text",
+    "New 2,040-word office cleaning checklist with a definitional opener: the strongest content on the site",
+    "Footer anchors fixed; Mississauga and Vaughan generic copy replaced with local facts; About facts block"
+   ],
+   "findings": [
+    {
+     "title": "No named owner, account executive, author or reviewer",
+     "severity": "High",
+     "description": "0 Person nodes, no founder/employee/reviewedBy; all bylines 'By Evergreen Office Cleaning'",
+     "recommendation": "Client supplies names, roles, years, photos; Person schema and reviewer line on guides"
+    },
+    {
+     "title": "Cost guide gives no real price",
+     "severity": "Medium",
+     "description": "All figures labelled hypothetical; title now honest",
+     "recommendation": "Client: price bands by office size and frequency"
+    },
+    {
+     "title": "Location pages reuse reviews as 'What a client says'; Durham states unconfirmed operations",
+     "severity": "Medium",
+     "description": "Edward Sherman (May 2021) on Downtown, North York and Durham; Katchen on two; Handy on two. needsClientReview flags still set",
+     "recommendation": "Show a review only where the reviewer is; neutral strip otherwise; confirm Durham or noindex"
+    },
+    {
+     "title": "Homepage 'written into every contract since 1989' claim (introduced today)",
+     "severity": "Medium",
+     "description": "Includes a 2-hour reply, which cannot be a contract term; unqualified vs 'during office hours' elsewhere",
+     "recommendation": "'Four commitments we make to every client'; qualify the reply time"
+    },
+    {
+     "title": "Stock-only imagery, no case studies; gallery does not say the photos are stock",
+     "severity": "Medium",
+     "description": "Gallery 'illustrates the kinds of work'; projects collection still draft",
+     "recommendation": "Label as illustrative stock now; photoshoot and 2-3 case studies"
+    },
+    {
+     "title": "Two leftover unsourced claims",
+     "severity": "Low",
+     "description": "Dust-mite figure and typo in day/night post; 'According to experts' in products-not-to-mix post",
+     "recommendation": "Cite or delete"
+    }
+   ]
+  },
+  {
+   "name": "On-Page SEO",
+   "weight": 0.2,
+   "score": 86,
+   "previous_score": 82,
+   "components": {
+    "onpage": 88,
+    "cluster_adjustment": -2
+   },
+   "what_works": [
+    "One H1 everywhere; unique titles and descriptions",
+    "34 of 36 internal-link matrix rows live; zero-inlink posts 13 -> 5",
+    "18 of 24 post titles carry the brand; eight over-length descriptions fixed; /privacy/ http link gone"
+   ],
+   "findings": [
+    {
+     "title": "Cost guide title and H1 lost the word 'cost'",
+     "severity": "Medium",
+     "description": "'How Office Cleaning Is Priced in Toronto'",
+     "recommendation": "'Office Cleaning Costs in Toronto: How Pricing Works'"
+    },
+    {
+     "title": "Five posts have no contextual inlink",
+     "severity": "Medium",
+     "description": "Relocation, fridge, home office, office layout, robotic",
+     "recommendation": "Reverse links from related service pages; cluster-based sidebar"
+    },
+    {
+     "title": "New over-length metadata",
+     "severity": "Low",
+     "description": "Six descriptions over 160 (4 new locations, /locations/ 185, post-construction); Durham title 68, checklist 62",
+     "recommendation": "Trim"
+    }
+   ]
+  },
+  {
+   "name": "Schema / Structured Data",
+   "weight": 0.1,
+   "score": 86,
+   "previous_score": 82,
+   "components": {
+    "schema": 86
+   },
+   "what_works": [
+    "All JSON-LD valid by hand-check; SearchAction removed; streetAddress fixed",
+    "New location pages and checklist carry complete Service/WebPage/FAQPage and BlogPosting",
+    "WebPage dateModified equals sitemap lastmod on 23 of 23 pages"
+   ],
+   "findings": [
+    {
+     "title": "Organisation areaServed omits North York and Scarborough; Durham typed as City",
+     "severity": "Low",
+     "description": "10 City entries; Durham is a regional municipality",
+     "recommendation": "Add them; AdministrativeArea for Durham"
+    },
+    {
+     "title": "Breadcrumb root 'Home' on three guides",
+     "severity": "Low",
+     "description": "Now includes /office-cleaning-checklist/",
+     "recommendation": "Use the site name"
+    },
+    {
+     "title": "logo and image are the same banner",
+     "severity": "Low",
+     "description": "884x265 banner",
+     "recommendation": "Square logo and real photos"
+    }
+   ]
+  },
+  {
+   "name": "Performance (CWV)",
+   "weight": 0.1,
+   "score": 80,
+   "previous_score": 62,
+   "components": {
+    "performance": 80
+   },
+   "what_works": [
+    "Mobile home Lighthouse 51 -> 87, simulated LCP 6.85 s -> 2.43 s (median of 5)",
+    "Real visitors pass all CWV: p75 LCP 0.98 s, INP 32 ms, CLS 0.002 (106 beacons)",
+    "Italic font removed from home (-50.6 KB); reveal and hover changes cost no LCP or CLS"
+   ],
+   "findings": [
+    {
+     "title": "Home field LCP p75 2.24 s, near the line",
+     "severity": "Medium",
+     "description": "28 beacons; sitewide figure hides it",
+     "recommendation": "Re-check at 14 days; mobile hero preload if above 2.0 s"
+    },
+    {
+     "title": "Google tags still block the main thread 530-610 ms per page",
+     "severity": "Medium",
+     "description": "Caps lab scores at 85-89; field INP fine",
+     "recommendation": "Container hygiene; longer delay only with the Ads owner"
+    },
+    {
+     "title": "Desktop home CLS 0.014 from font swap",
+     "severity": "Low",
+     "description": "section#services, 4 of 5 desktop runs",
+     "recommendation": "Metric-matched font fallback"
+    }
+   ]
+  },
+  {
+   "name": "AI Search Readiness",
+   "weight": 0.1,
+   "score": 74,
+   "previous_score": 68,
+   "components": {
+    "geo": 72,
+    "agentic": 77
+   },
+   "what_works": [
+    "Every search and AI crawler user agent gets the full page; identical with JavaScript off",
+    "Homepage definitional opener; question-led H2s on both pillars; About fact block",
+    "Documented email/phone path for agents blocked by reCAPTCHA; llms.txt with Guides and For assistants sections"
+   ],
+   "findings": [
+    {
+     "title": "Deferred tag loader hides calls from paid visits (introduced today)",
+     "severity": "Medium",
+     "description": "Call-number swap (__awcc, 416-803-4880) runs only after tags load; container has no click_to_call trigger",
+     "recommendation": "Load GTM at once on /lp/* and gclid/gbraid/wbraid URLs; Ads owner compares call conversions"
+    },
+    {
+     "title": "'Toronto and ten GTA municipalities' lists nine (introduced today)",
+     "severity": "Medium",
+     "description": "/services/commercial-cleaning/, a sentence written for AI extraction",
+     "recommendation": "'nine other'; link the four new location pages"
+    },
+    {
+     "title": "Weak off-site entity; profiles under the old name",
+     "severity": "High",
+     "description": "No Wikipedia/Wikidata; Facebook, LinkedIn, X slugs carry the old name",
+     "recommendation": "Client renames; directory listings"
+    },
+    {
+     "title": "llms.txt omits the checklist and 4 new location pages",
+     "severity": "Low",
+     "description": "Service areas lists 7 of 11",
+     "recommendation": "Add them with a sync test"
+    }
+   ]
+  },
+  {
+   "name": "Images",
+   "weight": 0.05,
+   "score": 90,
+   "previous_score": 82,
+   "components": {
+    "images": 90
+   },
+   "what_works": [
+    "212 of 219 images in <picture> with AVIF and WebP; 0 missing alt; 0 without dimensions",
+    "Gallery rebuilt with captions; 640w card variants; legacy 300x150 thumbnails gone"
+   ],
+   "findings": [
+    {
+     "title": "22 pages share one OG image",
+     "severity": "Low",
+     "description": "Including the 4 new location pages",
+     "recommendation": "Per-page OG after the photoshoot"
+    },
+    {
+     "title": "Hero slides 2 and 3 have no loading attribute",
+     "severity": "Low",
+     "description": "Fetched after load in the lab trace",
+     "recommendation": "loading=lazy"
+    }
+   ]
+  }
+ ],
+ "supplementary_scores": {
+  "local_seo": {
+   "score": 61,
+   "previous_score": 56,
+   "note": "See findings/local.md"
+  },
+  "search_experience_sxo": {
+   "score": 62,
+   "previous_score": 58,
+   "note": "Persona average; see findings/sxo.md"
+  },
+  "visual_mobile": {
+   "score": 87,
+   "previous_score": 80,
+   "note": "See findings/visual.md"
+  },
+  "agent_readiness": {
+   "score": 77,
+   "previous_score": 72,
+   "note": "See findings/agentic.md"
+  }
+ },
+ "action_plan": {
+  "phases": [
+   {
+    "name": "Phase A: developer, now",
+    "timeframe": "About a day",
+    "items": [
+     "Paid-visit GTM loading and click_to_call comment",
+     "'nine other GTA municipalities' plus links",
+     "Homepage contract claim and 2-hour qualifier",
+     "Location-page review framing; Durham operational line",
+     "Gallery stock label; two unsourced claims",
+     "Cost guide title; metadata lengths",
+     "areaServed, Durham typing, breadcrumb root, llms.txt, charset",
+     "Internal links to five orphan posts; anchors; footer H2s; tap targets"
+    ]
+   },
+   {
+    "name": "Phase B: around 12 November",
+    "timeframe": "Week 2",
+    "items": [
+     "Field CWV before/after",
+     "CSP report review and host allowlist before enforcing",
+     "Ads and GA4 week-on-week with the Ads owner"
+    ]
+   },
+   {
+    "name": "Phase C: client input",
+    "timeframe": "As supplied",
+    "items": [
+     "Named people and Person schema",
+     "Real price bands",
+     "Photoshoot and 2-3 case studies",
+     "Durham confirmation and local facts",
+     "Reviews, rating and months",
+     "Insurance/WSIB evidence; testimonials; clinic IPAC",
+     "Social renames and directory listings"
+    ]
+   },
+   {
+    "name": "Phase D: account owners",
+    "timeframe": "Ongoing",
+    "items": [
+     "Search Console checks",
+     "Bing Webmaster Tools and IndexNow key",
+     "Cloudflare bot settings"
+    ]
+   }
+  ]
+ },
+ "artifacts": {
+  "findings_dir": "findings/",
+  "screenshots_dir": "screenshots/",
+  "raw_dir": "raw/ (crawl index, sitemaps, headers, field data; HTML kept locally only)"
+ }
+}

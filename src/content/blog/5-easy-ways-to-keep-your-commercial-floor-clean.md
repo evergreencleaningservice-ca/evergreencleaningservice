@@ -54,7 +54,7 @@ Besides ensuring the best results, hiring a commercial cleaning company that spe
 
 Floor stripping and waxing is recommended every four to six months. While how frequent you should do this will depend on your business’s foot traffic. Stripping and waxing helps to make your floors look glossy, polished, and most importantly, professional.
 
-[Evergreen Office Cleaning](/services/floor-stripping-waxing/) specializes in providing the highest-quality commercial [floor stripping and waxing](/services/floor-stripping-waxing/), and buffing services. This involves thoroughly cleaning the floor followed by stripping the existing wax with the help of a floor scrubbing machine. We then apply a fresh coat of high-quality wax to ensure a glossy shine. The floor is then treated with a fine quality wax. Finally, we conduct detailed floor buffing to get rid of any dust particles. This will not only help to ensure that your floors are thoroughly clean, but it will also leave your floors looking elegant and luxurious.
+Evergreen Office Cleaning specializes in providing the highest-quality commercial [floor stripping and waxing](/services/floor-stripping-waxing/), and buffing services. This involves thoroughly cleaning the floor followed by stripping the existing wax with the help of a floor scrubbing machine. We then apply a fresh coat of high-quality wax to ensure a glossy shine. The floor is then treated with a fine quality wax. Finally, we conduct detailed floor buffing to get rid of any dust particles. This will not only help to ensure that your floors are thoroughly clean, but it will also leave your floors looking elegant and luxurious.
 
 ### About Evergreen Office Cleaning
 

@@ -87,4 +87,4 @@ None of this has to depend on someone remembering it, whether your office is cle
 
 The seasonal work sits on top of the [daily, weekly and monthly tasks](/office-cleaning-checklist/) in a routine scope; it does not replace them. [How often an office should be cleaned](/how-often-should-an-office-be-cleaned/) depends on how it is used.
 
-If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/), [building maintenance and floor care](/services/building-maintenance/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.
+The carpet extraction, high dusting and floor refinishing on this list are the periodic work Evergreen plans through the year under [building maintenance and floor care](/services/building-maintenance/).
