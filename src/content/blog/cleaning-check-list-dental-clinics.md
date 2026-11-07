@@ -71,4 +71,4 @@ _**If you are searching for a [dental clinic cleaning service in Toronto](/indus
 
 _**We would love to help!**_
 
-If you would rather leave it to a professional crew, Evergreen's [medical and dental clinic cleaning](/industries/medical-dental-clinics/) and [disinfection cleaning](/services/disinfection-cleaning/) services cover it for workplaces across Toronto and the GTA.
+Between patients, disinfecting the operatory stays with your team; after hours, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) covers the reception, washrooms and other shared touch points.

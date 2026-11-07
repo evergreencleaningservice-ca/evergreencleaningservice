@@ -32,8 +32,12 @@ describe('the Toronto office cleaning guide', () => {
     // Retitled in the SEO audit of 6 Nov 2026: the page explains how prices
     // are built and gives only illustrative figures, so a title that promised
     // a "pricing guide" with real prices did not match what it delivers.
-    expect(document.querySelector('title')?.textContent).toBe('How Office Cleaning Is Priced in Toronto | Evergreen');
-    expect(document.querySelector('meta[name="description"]')?.getAttribute('content')).toBe('How office cleaning is priced in Toronto: what sets the rate, how to build a monthly budget, what a quote should include and how to compare quotes.');
+    // SEO re-audit, 7 Nov 2026: "cost" is back (the search term), still
+    // without promising a price list, and the description leads with the
+    // answer instead of echoing the title.
+    expect(document.querySelector('title')?.textContent).toBe('Office Cleaning Costs in Toronto: How Pricing Works');
+    expect(document.querySelector('meta[name="description"]')?.getAttribute('content')).toBe('Toronto office cleaning prices depend on floor area, washrooms, visit frequency and scope. Build a monthly budget, read a quote and compare like for like.');
+    expect(document.querySelector('h1')?.textContent?.trim()).toBe('What Drives Office Cleaning Costs in Toronto');
     expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(url);
     expect(document.querySelector('meta[property="og:image"]')?.getAttribute('content')).toContain('blog-office-cleaning-cost-toronto-guide-og.jpg');
     expect(document.querySelectorAll('h1')).toHaveLength(1);
@@ -83,7 +87,7 @@ describe('the Toronto office cleaning guide', () => {
     const schemas = [...document.querySelectorAll('script[type="application/ld+json"]')].map((el) => JSON.parse(el.textContent!));
     const article = schemas.find((schema) => schema['@type'] === 'BlogPosting');
     expect(article.mainEntityOfPage['@id']).toBe(url);
-    expect(article.headline).toBe('How Office Cleaning Is Priced in Toronto');
+    expect(article.headline).toBe('What Drives Office Cleaning Costs in Toronto');
     expect(article.author.name).toBe('Evergreen Office Cleaning');
     const breadcrumbs = schemas.find((schema) => schema['@type'] === 'BreadcrumbList');
     expect(breadcrumbs.itemListElement.map((item: { name: string }) => item.name)).toEqual(['Home', 'Insights', 'Office Cleaning']);

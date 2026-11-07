@@ -15,7 +15,7 @@ Working from home can be challenging, especially when you don’t have a clean a
 
 ### Make Sure Cleaning Products Are Easy to Access
 
-It’s likely that you’ll use [commercial cleaning](/) products more regularly if they are in your line of sight. For example, if you have cleaning wipes on your desk, you will find yourself using them to wipe down your computer screen and other surfaces when you have a few minutes. This can help prevent too much dust from building up. If you need a moment to recharge during your workday, you might want to take a quick break and tidy up your office.
+It’s likely that you’ll use [cleaning products](/5-cleaning-products-you-should-have-in-your-office/) more regularly if they are in your line of sight. For example, if you have cleaning wipes on your desk, you will find yourself using them to wipe down your computer screen and other surfaces when you have a few minutes. This can help prevent too much dust from building up. If you need a moment to recharge during your workday, you might want to take a quick break and tidy up your office.
 
 ### Have A System for Filing Your Papers
 
@@ -27,4 +27,4 @@ If your schedule is jam-packed, you may not have any time left over for cleaning
 
 _**If you are searching for dependable cleaners in the Toronto area, you may want to take a closer look at [Evergreen Office Cleaning](/about-us/). We have extensive experience with office cleaning. If you reach out to us, we will be happy to tell you more about our services. If you can’t keep up with your office on your own, hiring cleaners is the smartest thing that you can do.**_
 
-If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.
+When the business outgrows the spare room and moves into an office, Evergreen's [office cleaning](/services/office-cleaning/) service covers workplaces across Toronto and the GTA.

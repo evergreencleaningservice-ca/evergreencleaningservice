@@ -43,4 +43,4 @@ If you are concerned about the state of your office refrigerator, it is time to 
 
 At [Evergreen Office Cleaning](/about-us/), we offer quality janitorial services, including [break room cleaning](/ask-the-office-cleaners-cleaning-break-rooms/), and we are prepared to take care of all your commercial cleaning needs. [Contact us](/contact-us/) today!
 
-If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.
+If you want the fridge on a cleaning schedule, ask for it to be written into the scope of Evergreen's [office cleaning](/services/office-cleaning/) service.

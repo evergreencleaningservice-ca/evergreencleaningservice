@@ -1,6 +1,6 @@
 ---
 title: "5 Cleaning Tips to Help Make Your Office Relocation Seamless"
-description: "Five cleaning tips for an office move: pack first, keep boxes in one spot, clean top to bottom, do the windows, and leave bathrooms and the kitchen until last."
+description: "Five cleaning tips for an office move: pack first, keep boxes in one spot, clean top to bottom, do the windows, and leave washrooms and the kitchen last."
 pubDate: 2022-06-29
 image: "/images/blog-office-relocation-cleaning-feature.jpg"
 imageAlt: "Moving boxes beside wrapped furniture"
@@ -67,4 +67,4 @@ You can handle the cleaning when moving out of your current commercial space or 
 
 At [Evergreen Office Cleaning](/about-us/), we are the [pros to call](/reviews/) when you need your commercial spaces spruced up when moving in or out, including [move-in cleaning after a fit-out](/services/post-construction-cleaning/). We are here to help make the relocation process as seamless as possible. [Contact us](/contact-us/) today for a free quote and to know more about our services.
 
-If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [emergency cleaning](/services/emergency-cleaning/) services cover it for workplaces across Toronto and the GTA.
+If the move leaves little time, Evergreen's [emergency cleaning](/services/emergency-cleaning/) service handles tenant-ready cleans, and [commercial cleaning](/services/commercial-cleaning/) can take over once you have moved in.

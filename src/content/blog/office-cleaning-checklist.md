@@ -1,7 +1,10 @@
 ---
 title: "Office Cleaning Checklist: Daily, Weekly and Monthly Tasks"
-seoTitle: "Office Cleaning Checklist: Daily, Weekly & Monthly | Evergreen"
-description: "A printable office cleaning checklist for Toronto workplaces: what to clean every day, every week and every month, room by room, and who should do each task."
+# SEO re-audit, 7 Nov 2026: the <title> was 62 characters (GuideLayout uses
+# seoTitle as written), and "printable" promised a print version the page
+# does not have (no print stylesheet or PDF), so both were reworded.
+seoTitle: "Office Cleaning Checklist: Daily, Weekly & Monthly Tasks"
+description: "What to clean in a Toronto office every day, week and month, room by room, with which tasks belong to the cleaning crew and which to your own staff."
 pubDate: 2026-11-06
 image: "/images/blog-office-cleaning-checklist.jpg"
 imageAlt: "Gloved hands holding a clipboard checklist beside cleaning supplies."
@@ -27,7 +30,7 @@ guide:
   related:
     - { slug: "how-often-should-an-office-be-cleaned", label: "How Often Should an Office Be Cleaned?" }
     - { slug: "seasonal-office-cleaning-checklist", label: "Seasonal Office Cleaning Checklist" }
-    - { slug: "office-cleaning-cost-toronto-guide", label: "How Office Cleaning Is Priced in Toronto" }
+    - { slug: "office-cleaning-cost-toronto-guide", label: "What Drives Office Cleaning Costs in Toronto" }
 ---
 
 <h2 id="how-to-use-this-checklist">How to Use This Office Cleaning Checklist</h2>

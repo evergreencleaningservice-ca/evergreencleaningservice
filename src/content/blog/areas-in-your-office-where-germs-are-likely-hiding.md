@@ -91,4 +91,4 @@ Surfaces are only half of it: dust and a neglected HVAC system affect [indoor ai
 
 A professional crew works from a written scope, so nothing on the list depends on someone remembering it. [Contact us](/contact-us/) to talk about yours.
 
-If you would rather leave it to a professional crew, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) and [office cleaning](/services/office-cleaning/) services cover it for workplaces across Toronto and the GTA.
+Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) cleans these hotspots first and then disinfects them, as a one-off or on a schedule, for workplaces across Toronto and the GTA.

@@ -1,6 +1,6 @@
 ---
 title: "Office Layout Tips to Make Cleaning Easier And Faster"
-description: "Office layouts that make cleaning faster: an open plan, a circular layout, furniture that moves easily, no carpet, and storage that keeps clutter out of sight."
+description: "Office layouts that make cleaning faster: an open plan, a circular layout, furniture that moves easily, no carpet, and storage that keeps clutter hidden."
 pubDate: 2023-02-07
 image: "/images/blog-cleanable-office-layout-feature.jpg"
 imageAlt: "Bright meeting room with a table, chairs and plants"
@@ -59,7 +59,7 @@ Putting up a clean desk policy in your office may help make things much easier t
 
 You have to invest in high-quality storage solutions for this to happen. You ideally want solutions that take the clutter and get it out of sight. Try finding closable cabinets and drawers that you can add to your office space to keep everything more organized.
 
- It’s also wise to convert much of the paperwork into digital files. This is a great option when it comes to minimizing clutter and getting the space to look cleaner much more quickly. Go paperless and see yourself saving a lot of storage space and making everything a lot easier to maintain and keep clean.
+ It’s also wise to convert much of the paperwork into digital files. This is a great option when it comes to minimizing clutter and getting the space to look cleaner much more quickly. Go paperless and see yourself saving a lot of storage space and making everything a lot easier to maintain and keep clean. The same habits work at home: our tips to [keep a home office clean](/keep-your-office-at-home-clean/) cover filing and scanning on a smaller scale.
 
 Changing the office layout might make the office a lot easier to keep clean and maintain. Use the tips outlined above and you could change the layout of your office to make the cleaning tasks a lot easier. It also helps to improve the productivity of your employees across the board.
 
@@ -67,4 +67,4 @@ The kitchen is the room that gets dirty fastest whatever the layout; see our gui
 
 _**If you’re looking for a reliable commercial cleaning service in the GTA, [get in touch](/contact-us/) with [Evergreen Office Cleaning](/about-us/) today!**_
 
-If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.
+Hard floors are the easiest to keep clean, and Evergreen's [floor stripping and waxing](/services/floor-stripping-waxing/) keeps their finish protected between routine [office cleaning](/services/office-cleaning/) visits.

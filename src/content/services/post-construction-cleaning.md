@@ -2,7 +2,8 @@
 title: "Post-Construction Cleaning"
 h1: "Commercial Post-Construction Cleaning in Toronto & the GTA"
 seoTitle: "Commercial Post-Construction Cleaning Toronto | Evergreen"
-description: "Commercial post-construction cleaning in Toronto and the GTA for contractors and property managers: a rough clean while trades finish, a final clean before handover."
+# SEO re-audit, 7 Nov 2026: description cut from 165 to 152 characters.
+description: "Post-construction cleaning for Toronto and GTA contractors and property managers: a rough clean while trades finish, then a final clean before handover."
 summary: "Clean-up after a renovation, fit-out or new build — from the first debris pass to a detailed final clean before the space is handed over or reopened."
 image: "/images/post-construction-cleanup-vacuum.jpg"
 imageAlt: "Construction vacuum in an unfinished room during renovation"
@@ -71,4 +72,4 @@ A post-construction clean is quoted per project, not per visit, after someone ha
 
 Construction dust settles for days after the trades leave. It works into carpet, sits on ledges and light fixtures, and comes back after the first clean. Getting a commercial space ready for handover takes more than a sweep — it takes a sequence, planned around the build.
 
-Evergreen has been cleaning commercial spaces in Toronto since 1989. Post-construction clean-up is part of our commercial and industrial cleaning work, for offices, retail units, clinics, industrial space and the common areas of renovated buildings.
+Evergreen has been cleaning commercial spaces in Toronto since 1989. Post-construction clean-up is part of our commercial and industrial cleaning work, for offices, retail units, clinics, industrial space and the common areas of renovated buildings. When the fit-out is for a business moving in, the space it is leaving needs a clean too; our [cleaning tips for an office relocation](/5-cleaning-tips-to-help-make-your-office-relocation-seamless/) cover that side of the move.
