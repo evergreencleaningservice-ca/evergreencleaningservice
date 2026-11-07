@@ -55,4 +55,4 @@ The realistic future is not robots or people but both: machines for the repetiti
 
 At [Evergreen](/about-us/), our crews use modern equipment (sealed HEPA vacuums, microfibre systems, [auto-scrubbers and burnishers](/services/floor-stripping-waxing/)) on a written scope set for your building. [Contact us](/contact-us/) to talk about yours.
 
-If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [commercial cleaning](/services/commercial-cleaning/) services cover it for workplaces across Toronto and the GTA.
+For warehouses and other large floors, Evergreen's [industrial cleaning](/services/industrial-cleaning/) combines machine scrubbing with a crew for the edges and everything else.

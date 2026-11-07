@@ -77,4 +77,4 @@ Touch points are a separate job from the air: see [disinfection cleaning](/servi
 
 [Contact us](/contact-us/) to talk about the air in your building.
 
-If you would rather leave it to a professional crew, Evergreen's [office cleaning](/services/office-cleaning/) and [building maintenance and floor care](/services/building-maintenance/) services cover it for workplaces across Toronto and the GTA.
+Day to day, the dusting and vacuuming that keep the air clearer are part of Evergreen's [office cleaning](/services/office-cleaning/); high dusting and carpet extraction come under [building maintenance and floor care](/services/building-maintenance/).

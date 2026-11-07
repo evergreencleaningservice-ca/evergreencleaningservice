@@ -1,7 +1,11 @@
 ---
-title: "How Office Cleaning Is Priced in Toronto"
-seoTitle: "How Office Cleaning Is Priced in Toronto | Evergreen"
-description: "How office cleaning is priced in Toronto: what sets the rate, how to build a monthly budget, what a quote should include and how to compare quotes."
+# SEO re-audit, 7 Nov 2026: "cost" is back in the title and H1, because
+# people search "office cleaning cost Toronto". The wording still promises
+# only how prices are built, not a price list: the figures below are
+# illustrative. The <title> is used as written (no brand suffix; 51 chars).
+title: "What Drives Office Cleaning Costs in Toronto"
+seoTitle: "Office Cleaning Costs in Toronto: How Pricing Works"
+description: "Toronto office cleaning prices depend on floor area, washrooms, visit frequency and scope. Build a monthly budget, read a quote and compare like for like."
 pubDate: 2026-10-31
 image: "/images/blog-office-cleaning-cost-toronto-guide.jpg"
 imageAlt: "Empty modern office interior with glass partitions, seating and natural light."
