@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page {
+    size: A4;
+    margin: 22mm 18mm 25mm 18mm;
+    @bottom-center {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 9pt;
+      color: #6b7280;
+      font-family: 'DejaVu Serif', 'Times New Roman', Georgia, serif;
+    }
+    @bottom-left {
+      content: "Confidential";
+      font-size: 7pt;
+      color: #d6d3cc;
+      font-family: 'DejaVu Serif', 'Times New Roman', Georgia, serif;
+    }
+    @bottom-right {
+      content: "www.evergreencleaningservice.ca Google SEO Report";
+      font-size: 8pt;
+      color: #cbd5e1;
+      font-family: 'DejaVu Serif', 'Times New Roman', Georgia, serif;
+    }
+  }
+
+  @page :first {
+    margin: 0;
+    @bottom-left { content: none; }
+    @bottom-center { content: none; }
+    @bottom-right { content: none; }
+  }
+
+  @page toc {
+    @bottom-center {
+      content: counter(page);
+      font-size: 9pt;
+      color: #6b7280;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Times New Roman', 'DejaVu Serif', Georgia, serif;
+    font-size: 10pt;
+    line-height: 1.55;
+    color: #1e293b;
+    background: white;
+  }
+
+  /* ─── Title Page (Clean White) ─── */
+  .title-page {
+    page: first;
+    width: 210mm;
+    height: 297mm;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #1a1a2e;
+    position: relative;
+    padding: 50mm 30mm 40mm 30mm;
+    border-top: 6mm solid #1e3a5f;
+  }
+
+  .title-page .badge {
+    background: #f7f6f3;
+    border: 1px solid #d6d3cc;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 9pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15mm;
+    color: #1e3a5f;
+  }
+
+  .title-page h1 {
+    font-size: 28pt;
+    font-weight: bold;
+    margin-bottom: 5mm;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    color: #1a1a2e;
+  }
+
+  .title-page .subtitle {
+    font-size: 13pt;
+    color: #6b7280;
+    margin-bottom: 12mm;
+    font-weight: 300;
+  }
+
+  .title-page .url {
+    font-size: 12pt;
+    color: #1e3a5f;
+    margin-bottom: 15mm;
+    padding: 4mm 8mm;
+    border: 1px solid #d6d3cc;
+    border-radius: 6px;
+    background: #faf9f7;
+  }
+
+  .title-page .score-box {
+    background: #faf9f7;
+    border: 2px solid #d6d3cc;
+    border-radius: 12px;
+    padding: 6mm 12mm;
+    margin-bottom: 15mm;
+  }
+
+  .title-page .score-number {
+    font-size: 42pt;
+    font-weight: bold;
+    color: #1e3a5f;
+    line-height: 1;
+  }
+
+  .title-page .score-label {
+    font-size: 10pt;
+    color: #6b7280;
+    margin-top: 2mm;
+  }
+
+  .title-page .meta {
+    font-size: 9pt;
+    color: #6b7280;
+    margin-top: 8mm;
+    padding-top: 5mm;
+    border-top: 1px solid #d6d3cc;
+  }
+
+  .title-page .meta span {
+    margin: 0 8px;
+  }
+
+  /* ─── Table of Contents ─── */
+  .toc-page {
+    page: toc;
+    page-break-before: always;
+  }
+
+  .toc-page h2 {
+    font-size: 18pt;
+    color: #1e3a5f;
+    margin-bottom: 8mm;
+    padding-bottom: 3mm;
+    border-bottom: 2px solid #1e3a5f;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .toc-list li {
+    padding: 2mm 0;
+    border-bottom: 1px solid #f1f5f9;
+    overflow: hidden;
+  }
+
+  .toc-list li.toc-section {
+    font-weight: bold;
+    font-size: 11pt;
+    padding-top: 4mm;
+    color: #0f172a;
+  }
+
+  .toc-list li.toc-sub {
+    padding-left: 8mm;
+    font-size: 9.5pt;
+    color: #475569;
+  }
+
+  .toc-score {
+    display: inline-block;
+    float: right;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 9pt;
+    font-weight: bold;
+    color: white;
+  }
+
+  .score-good { background: #2d6a4f; }
+  .score-warn { background: #d4740e; }
+  .score-bad { background: #c53030; }
+
+  /* ─── Section Styles ─── */
+  div.section {
+    page-break-before: always;
+  }
+
+  .section-header {
+    background: #faf9f7;
+    border-left: 4px solid #1e3a5f;
+    padding: 5mm 6mm;
+    margin-bottom: 6mm;
+    page-break-after: avoid;
+  }
+
+  .section-header h2 {
+    font-size: 16pt;
+    color: #0f172a;
+    margin-bottom: 1mm;
+  }
+
+  .section-header .section-score {
+    font-size: 12pt;
+    font-weight: bold;
+    float: right;
+    margin-top: -6mm;
+  }
+
+  h3 {
+    font-size: 12pt;
+    color: #1e3a5f;
+    margin-top: 6mm;
+    margin-bottom: 3mm;
+    padding-bottom: 1.5mm;
+    border-bottom: 1px solid #d6d3cc;
+    page-break-after: avoid;
+  }
+
+  h4 {
+    font-size: 10.5pt;
+    color: #334155;
+    margin-top: 4mm;
+    margin-bottom: 2mm;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-bottom: 3mm;
+    color: #334155;
+  }
+
+  .highlight {
+    background: #fef3c7;
+    border-left: 3px solid #d4740e;
+    padding: 3mm 4mm;
+    margin: 4mm 0;
+    font-size: 9.5pt;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  .critical-box {
+    background: #fef2f2;
+    border-left: 3px solid #c53030;
+    padding: 3mm 4mm;
+    margin: 4mm 0;
+    font-size: 9.5pt;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  .success-box {
+    background: #f0fdf4;
+    border-left: 3px solid #2d6a4f;
+    padding: 3mm 4mm;
+    margin: 4mm 0;
+    font-size: 9.5pt;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  /* ─── Tables ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4mm 0 6mm 0;
+    font-size: 9pt;
+  }
+
+  thead th {
+    background: #f7f6f3;
+    color: #0f172a;
+    font-weight: bold;
+    padding: 3mm 4mm;
+    text-align: left;
+    border-bottom: 2px solid #d6d3cc;
+    font-size: 9pt;
+  }
+
+  tbody td {
+    padding: 2.5mm 3mm;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #fdfcfa;
+  }
+
+  .status-pass {
+    color: #2d6a4f;
+    font-weight: bold;
+  }
+
+  .status-fail {
+    color: #c53030;
+    font-weight: bold;
+  }
+
+  .status-warn {
+    color: #d4740e;
+    font-weight: bold;
+  }
+
+  .status-partial {
+    color: #4a5568;
+    font-weight: bold;
+  }
+
+  /* ─── Charts ─── */
+  .chart-container {
+    text-align: center;
+    margin: 4mm 0;
+  }
+
+  .chart-container img {
+    max-width: 100%;
+    max-height: 120mm;
+    height: auto;
+  }
+
+  .chart-caption {
+    font-size: 8.5pt;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 2mm;
+    text-align: center;
+  }
+
+  .chart-half {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+    text-align: center;
+    margin: 2mm 0;
+  }
+
+  .chart-half img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ─── Two column layout ─── */
+  .two-col {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin: 3mm 0;
+  }
+
+  .two-col .col {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0 2mm;
+  }
+
+  .four-col {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    margin: 3mm 0;
+  }
+
+  .four-col .col {
+    display: table-cell;
+    vertical-align: top;
+    padding: 0 1.5mm;
+  }
+
+  /* ─── Metric Cards ─── */
+  .metric-card {
+    background: #faf9f7;
+    border: 1px solid #d6d3cc;
+    border-radius: 6px;
+    padding: 2.5mm 3mm;
+    text-align: center;
+    margin: 2mm 0;
+  }
+
+  .metric-card .value {
+    font-size: 14pt;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+
+  .metric-card .label {
+    font-size: 7.5pt;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 1mm;
+  }
+
+  /* ─── Action Plan ─── */
+  .action-item {
+    background: #faf9f7;
+    border-radius: 4px;
+    padding: 3mm 4mm;
+    margin: 3mm 0;
+    border-left: 3px solid #cbd5e1;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  .action-item.critical {
+    border-left-color: #c53030;
+    background: #fdf2f2;
+  }
+
+  .action-item.high {
+    border-left-color: #d4740e;
+    background: #fdf8ef;
+  }
+
+  .action-item.medium {
+    border-left-color: #1e3a5f;
+    background: #f0f4f8;
+  }
+
+  .action-item.low {
+    border-left-color: #94a3b8;
+  }
+
+  .action-item h4 {
+    margin-top: 0;
+    margin-bottom: 1.5mm;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .action-item .effort {
+    font-size: 8.5pt;
+    color: #64748b;
+    float: right;
+  }
+
+  .priority-tag {
+    display: inline-block;
+    padding: 0.5mm 3mm;
+    border-radius: 3px;
+    font-size: 8pt;
+    font-weight: bold;
+    color: white;
+    margin-right: 2mm;
+    vertical-align: middle;
+  }
+
+  .priority-critical { background: #c53030; }
+  .priority-high { background: #d4740e; }
+  .priority-medium { background: #1e3a5f; }
+  .priority-low { background: #94a3b8; }
+
+  /* ─── Code blocks ─── */
+  .code-block {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 3mm 4mm;
+    border-radius: 4px;
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 8pt;
+    line-height: 1.6;
+    margin: 3mm 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  /* ─── Divider ─── */
+  .divider {
+    border: none;
+    border-top: 1px solid #d6d3cc;
+    margin: 5mm 0;
+  }
+
+  /* ─── Roadmap ─── */
+  .roadmap-phase {
+    background: #faf9f7;
+    border-radius: 6px;
+    padding: 4mm 5mm;
+    margin: 4mm 0;
+    border: 1px solid #d6d3cc;
+    /* allow page breaks to prevent white gaps */
+  }
+
+  .roadmap-phase h4 {
+    margin-top: 0;
+    border-bottom: none;
+    color: #1e3a5f;
+  }
+
+  .roadmap-phase ul {
+    margin: 2mm 0 0 5mm;
+    padding: 0;
+  }
+
+  .roadmap-phase li {
+    margin-bottom: 1.5mm;
+    font-size: 9.5pt;
+    color: #334155;
+  }
+
+  /* ─── Lists ─── */
+  ul {
+    margin-left: 5mm;
+    margin-bottom: 3mm;
+  }
+
+  li {
+    margin-bottom: 1.5mm;
+  }
+
+  /* ─── Data freshness ─── */
+  .data-freshness {
+    font-size: 8pt;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 4mm;
+    padding-top: 2mm;
+    border-top: 1px solid #d6d3cc;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ======================================================= TITLE PAGE === -->
+<div class="title-page">
+  <div class="badge">Full SEO Audit Report</div>
+  <h1>www.evergreencleaningservice.ca</h1>
+  <div class="subtitle">Prepared by Claude SEO</div>
+  <div class="score-box">
+    <div class="score-number">82<span style="font-size: 20pt; color: #94a3b8;">/100</span></div>
+    <div class="score-label">SEO Health Score</div>
+  </div>
+  <div class="meta">
+    <span>November 07, 2026</span>
+    <span>Full Audit</span>
+  </div>
+</div>
+
+
+<!-- ======================================================= TABLE OF CONTENTS === -->
+<div class="toc-page">
+  <h2>Table of Contents</h2>
+  <ul class="toc-list">
+    <li class="toc-section"><span>1. Executive Summary</span></li>
+    <li class="toc-sub"><span>Key Metrics, Critical Issues &amp; Quick Wins</span></li>
+    <li class="toc-section"><span>2. Audit Categories</span></li>
+    <li class="toc-sub"><span>What Works</span></li>
+    <li class="toc-sub"><span>Findings by Severity</span></li>
+    <li class="toc-section"><span>3. Action Plan</span></li>
+    <li class="toc-sub"><span>Phased Roadmap</span></li>
+    <li class="toc-section"><span>4. Data Sources &amp; Methodology</span></li>
+  </ul>
+</div>
+
+
+<!-- ======================================================= 1. EXECUTIVE SUMMARY === -->
+<div class="section">
+  <div class="section-header">
+    <h2>1. Executive Summary</h2>
+  </div>
+
+  <p>This report presents a comprehensive SEO audit of <strong>www.evergreencleaningservice.ca</strong> for a <strong>Local Service (hybrid): commercial and office cleaning company, one office at 243 Queen St W, Toronto, serving Toronto and 9 GTA municipalities through 11 location pages</strong> site, generated on November 07, 2026. Findings combine technical, content, schema, performance, visual, and search-readiness evidence as available.</p>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="metric-card">
+        <div class="value" style="color: #d4740e;">82/100</div>
+        <div class="label">SEO Health Score</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="critical-box">
+    <strong>Critical Issues Found:</strong>
+    <ol>
+      <li>No named person anywhere: no owner, account executive, author or reviewer, and no Person schema</li>
+      <li>The cost guide gives no real price; the title is now honest but the searcher&#x27;s question is unanswered</li>
+      <li>Third-party proof is thin: 7 Google reviews, no rating shown, no case study, stock imagery, no citations under the current name</li>
+      <li>Introduced today: the deferred tag loader hides calls from paid visits in Google Ads</li>
+      <li>Introduced today: &#x27;ten GTA municipalities&#x27; lists nine; homepage &#x27;every contract since 1989&#x27; claim; location pages reuse the same reviews as &#x27;a client&#x27;</li>
+    </ol>
+  </div>
+
+  <div class="success-box">
+    <strong>Quick Wins:</strong>
+    <ol>
+      <li>Load GTM at once on /lp/* and gclid/gbraid/wbraid visits (src/components/GoogleTagManager.astro)</li>
+      <li>Fix &#x27;ten&#x27; -&gt; &#x27;nine other GTA municipalities&#x27; and link the four new location pages (commercial-cleaning.md line 190)</li>
+      <li>Reword the homepage contract claim and qualify the 2-hour reply (WhyEvergreen.astro, Hero.astro, llms.txt)</li>
+      <li>Put &#x27;cost&#x27; back in the cost guide title; trim six descriptions and two titles</li>
+      <li>areaServed, Durham typing, breadcrumb root, llms.txt, charset header</li>
+    </ol>
+  </div>
+
+</div>
+
+<!-- ======================================================= 2. AUDIT CATEGORIES === -->
+<div class="section">
+  <div class="section-header">
+    <h2>2. Audit Categories</h2>
+  </div>
+
+  <h3>2.1 Technical SEO</h3>
+  <p><strong>Score:</strong> <span class="status-pass">91/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>All 89 crawled URLs return 200; 0 broken or http:// internal links; 0 canonical mismatches; 0 duplicate titles or descriptions</li>
+    <li>60 sitemap URLs all indexable and self-canonical, each dated from its own content; 27 noindex URLs correctly excluded</li>
+    <li>Merged posts, /tag/plants/, /insights/page/4/ and /tag/office/page/2/ 301 in one hop; real 404</li>
+    <li>Enforced frame-ancestors/base-uri/form-action/object-src CSP plus full report-only policy; HSTS, nosniff, XFO, Referrer-Policy, Permissions-Policy</li>
+    <li>verify:indexing 24/24 passed; seo:drift 0 critical; IndexNow live (32 URLs, HTTP 202)</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>HTML served without charset <span class="status-warn">Low</span></h4>
+    <p>content-type: text/html on every HTML route; meta charset present so browsers are unaffected</p>
+    <p><strong>Recommendation:</strong> Add Content-Type: text/html; charset=utf-8 in public/_headers</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Report-only CSP lacks hosts the Ads container uses <span class="status-warn">Info</span></h4>
+    <p>pagead2.googlesyndication.com, adservice.google.com and cct.google missing; enforcing as written would break parts of the Ads tags</p>
+    <p><strong>Recommendation:</strong> Read /api/csp-report and add the hosts before enforcing (~12 Nov)</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Content-Signal lines flagged by Lighthouse <span class="status-warn">Low</span></h4>
+    <p>SEO 92 instead of 100</p>
+    <p><strong>Recommendation:</strong> Owner decision: keep and document, or remove</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Two-hop http/apex redirect without trailing slash <span class="status-warn">Low</span></h4>
+    <p>http://evergreencleaningservice.ca/about-us -&gt; https://www/about-us -&gt; /about-us/</p>
+    <p><strong>Recommendation:</strong> Add the slash in the Cloudflare host redirect, or accept</p>
+  </div>
+  <hr class="divider">
+  <h3>2.2 Content Quality</h3>
+  <p><strong>Score:</strong> <span class="status-warn">72/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>Blog pass live: seven retitles, two merges with 301s, named unsourced statistics removed or cited</li>
+    <li>Four new location pages with real corridors, building types, drive times and honest &#x27;no office here&#x27; lines; 64-69% unique text</li>
+    <li>New 2,040-word office cleaning checklist with a definitional opener: the strongest content on the site</li>
+    <li>Footer anchors fixed; Mississauga and Vaughan generic copy replaced with local facts; About facts block</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>No named owner, account executive, author or reviewer <span class="status-warn">High</span></h4>
+    <p>0 Person nodes, no founder/employee/reviewedBy; all bylines &#x27;By Evergreen Office Cleaning&#x27;</p>
+    <p><strong>Recommendation:</strong> Client supplies names, roles, years, photos; Person schema and reviewer line on guides</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Cost guide gives no real price <span class="status-warn">Medium</span></h4>
+    <p>All figures labelled hypothetical; title now honest</p>
+    <p><strong>Recommendation:</strong> Client: price bands by office size and frequency</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Location pages reuse reviews as &#x27;What a client says&#x27;; Durham states unconfirmed operations <span class="status-warn">Medium</span></h4>
+    <p>Edward Sherman (May 2021) on Downtown, North York and Durham; Katchen on two; Handy on two. needsClientReview flags still set</p>
+    <p><strong>Recommendation:</strong> Show a review only where the reviewer is; neutral strip otherwise; confirm Durham or noindex</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Homepage &#x27;written into every contract since 1989&#x27; claim (introduced today) <span class="status-warn">Medium</span></h4>
+    <p>Includes a 2-hour reply, which cannot be a contract term; unqualified vs &#x27;during office hours&#x27; elsewhere</p>
+    <p><strong>Recommendation:</strong> &#x27;Four commitments we make to every client&#x27;; qualify the reply time</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Stock-only imagery, no case studies; gallery does not say the photos are stock <span class="status-warn">Medium</span></h4>
+    <p>Gallery &#x27;illustrates the kinds of work&#x27;; projects collection still draft</p>
+    <p><strong>Recommendation:</strong> Label as illustrative stock now; photoshoot and 2-3 case studies</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Two leftover unsourced claims <span class="status-warn">Low</span></h4>
+    <p>Dust-mite figure and typo in day/night post; &#x27;According to experts&#x27; in products-not-to-mix post</p>
+    <p><strong>Recommendation:</strong> Cite or delete</p>
+  </div>
+  <hr class="divider">
+  <h3>2.3 On-Page SEO</h3>
+  <p><strong>Score:</strong> <span class="status-pass">86/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>One H1 everywhere; unique titles and descriptions</li>
+    <li>34 of 36 internal-link matrix rows live; zero-inlink posts 13 -&gt; 5</li>
+    <li>18 of 24 post titles carry the brand; eight over-length descriptions fixed; /privacy/ http link gone</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Cost guide title and H1 lost the word &#x27;cost&#x27; <span class="status-warn">Medium</span></h4>
+    <p>&#x27;How Office Cleaning Is Priced in Toronto&#x27;</p>
+    <p><strong>Recommendation:</strong> &#x27;Office Cleaning Costs in Toronto: How Pricing Works&#x27;</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Five posts have no contextual inlink <span class="status-warn">Medium</span></h4>
+    <p>Relocation, fridge, home office, office layout, robotic</p>
+    <p><strong>Recommendation:</strong> Reverse links from related service pages; cluster-based sidebar</p>
+  </div>
+  <div class="action-item medium">
+    <h4>New over-length metadata <span class="status-warn">Low</span></h4>
+    <p>Six descriptions over 160 (4 new locations, /locations/ 185, post-construction); Durham title 68, checklist 62</p>
+    <p><strong>Recommendation:</strong> Trim</p>
+  </div>
+  <hr class="divider">
+  <h3>2.4 Schema / Structured Data</h3>
+  <p><strong>Score:</strong> <span class="status-pass">86/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>All JSON-LD valid by hand-check; SearchAction removed; streetAddress fixed</li>
+    <li>New location pages and checklist carry complete Service/WebPage/FAQPage and BlogPosting</li>
+    <li>WebPage dateModified equals sitemap lastmod on 23 of 23 pages</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Organisation areaServed omits North York and Scarborough; Durham typed as City <span class="status-warn">Low</span></h4>
+    <p>10 City entries; Durham is a regional municipality</p>
+    <p><strong>Recommendation:</strong> Add them; AdministrativeArea for Durham</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Breadcrumb root &#x27;Home&#x27; on three guides <span class="status-warn">Low</span></h4>
+    <p>Now includes /office-cleaning-checklist/</p>
+    <p><strong>Recommendation:</strong> Use the site name</p>
+  </div>
+  <div class="action-item medium">
+    <h4>logo and image are the same banner <span class="status-warn">Low</span></h4>
+    <p>884x265 banner</p>
+    <p><strong>Recommendation:</strong> Square logo and real photos</p>
+  </div>
+  <hr class="divider">
+  <h3>2.5 Performance (CWV)</h3>
+  <p><strong>Score:</strong> <span class="status-pass">80/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>Mobile home Lighthouse 51 -&gt; 87, simulated LCP 6.85 s -&gt; 2.43 s (median of 5)</li>
+    <li>Real visitors pass all CWV: p75 LCP 0.98 s, INP 32 ms, CLS 0.002 (106 beacons)</li>
+    <li>Italic font removed from home (-50.6 KB); reveal and hover changes cost no LCP or CLS</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Home field LCP p75 2.24 s, near the line <span class="status-warn">Medium</span></h4>
+    <p>28 beacons; sitewide figure hides it</p>
+    <p><strong>Recommendation:</strong> Re-check at 14 days; mobile hero preload if above 2.0 s</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Google tags still block the main thread 530-610 ms per page <span class="status-warn">Medium</span></h4>
+    <p>Caps lab scores at 85-89; field INP fine</p>
+    <p><strong>Recommendation:</strong> Container hygiene; longer delay only with the Ads owner</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Desktop home CLS 0.014 from font swap <span class="status-warn">Low</span></h4>
+    <p>section#services, 4 of 5 desktop runs</p>
+    <p><strong>Recommendation:</strong> Metric-matched font fallback</p>
+  </div>
+  <hr class="divider">
+  <h3>2.6 AI Search Readiness</h3>
+  <p><strong>Score:</strong> <span class="status-warn">74/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>Every search and AI crawler user agent gets the full page; identical with JavaScript off</li>
+    <li>Homepage definitional opener; question-led H2s on both pillars; About fact block</li>
+    <li>Documented email/phone path for agents blocked by reCAPTCHA; llms.txt with Guides and For assistants sections</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>Deferred tag loader hides calls from paid visits (introduced today) <span class="status-warn">Medium</span></h4>
+    <p>Call-number swap (__awcc, 416-803-4880) runs only after tags load; container has no click_to_call trigger</p>
+    <p><strong>Recommendation:</strong> Load GTM at once on /lp/* and gclid/gbraid/wbraid URLs; Ads owner compares call conversions</p>
+  </div>
+  <div class="action-item medium">
+    <h4>&#x27;Toronto and ten GTA municipalities&#x27; lists nine (introduced today) <span class="status-warn">Medium</span></h4>
+    <p>/services/commercial-cleaning/, a sentence written for AI extraction</p>
+    <p><strong>Recommendation:</strong> &#x27;nine other&#x27;; link the four new location pages</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Weak off-site entity; profiles under the old name <span class="status-warn">High</span></h4>
+    <p>No Wikipedia/Wikidata; Facebook, LinkedIn, X slugs carry the old name</p>
+    <p><strong>Recommendation:</strong> Client renames; directory listings</p>
+  </div>
+  <div class="action-item medium">
+    <h4>llms.txt omits the checklist and 4 new location pages <span class="status-warn">Low</span></h4>
+    <p>Service areas lists 7 of 11</p>
+    <p><strong>Recommendation:</strong> Add them with a sync test</p>
+  </div>
+  <hr class="divider">
+  <h3>2.7 Images</h3>
+  <p><strong>Score:</strong> <span class="status-pass">90/100</span></p>
+  <h4>What Works</h4>
+  <ul>
+    <li>212 of 219 images in &lt;picture&gt; with AVIF and WebP; 0 missing alt; 0 without dimensions</li>
+    <li>Gallery rebuilt with captions; 640w card variants; legacy 300x150 thumbnails gone</li>
+  </ul>
+  <h4>Findings</h4>
+  <div class="action-item medium">
+    <h4>22 pages share one OG image <span class="status-warn">Low</span></h4>
+    <p>Including the 4 new location pages</p>
+    <p><strong>Recommendation:</strong> Per-page OG after the photoshoot</p>
+  </div>
+  <div class="action-item medium">
+    <h4>Hero slides 2 and 3 have no loading attribute <span class="status-warn">Low</span></h4>
+    <p>Fetched after load in the lab trace</p>
+    <p><strong>Recommendation:</strong> loading=lazy</p>
+  </div>
+  <hr class="divider">
+</div>
+
+<!-- ======================================================= 3. ACTION PLAN === -->
+<div class="section">
+  <div class="section-header">
+    <h2>3. Action Plan</h2>
+  </div>
+
+  <div class="roadmap-phase">
+    <h4>Phase A: developer, now <span class="effort">About a day</span></h4>
+    <ul>
+      <li>Paid-visit GTM loading and click_to_call comment</li>
+      <li>&#x27;nine other GTA municipalities&#x27; plus links</li>
+      <li>Homepage contract claim and 2-hour qualifier</li>
+      <li>Location-page review framing; Durham operational line</li>
+      <li>Gallery stock label; two unsourced claims</li>
+      <li>Cost guide title; metadata lengths</li>
+      <li>areaServed, Durham typing, breadcrumb root, llms.txt, charset</li>
+      <li>Internal links to five orphan posts; anchors; footer H2s; tap targets</li>
+    </ul>
+  </div>
+  <div class="roadmap-phase">
+    <h4>Phase B: around 12 November <span class="effort">Week 2</span></h4>
+    <ul>
+      <li>Field CWV before/after</li>
+      <li>CSP report review and host allowlist before enforcing</li>
+      <li>Ads and GA4 week-on-week with the Ads owner</li>
+    </ul>
+  </div>
+  <div class="roadmap-phase">
+    <h4>Phase C: client input <span class="effort">As supplied</span></h4>
+    <ul>
+      <li>Named people and Person schema</li>
+      <li>Real price bands</li>
+      <li>Photoshoot and 2-3 case studies</li>
+      <li>Durham confirmation and local facts</li>
+      <li>Reviews, rating and months</li>
+      <li>Insurance/WSIB evidence; testimonials; clinic IPAC</li>
+      <li>Social renames and directory listings</li>
+    </ul>
+  </div>
+  <div class="roadmap-phase">
+    <h4>Phase D: account owners <span class="effort">Ongoing</span></h4>
+    <ul>
+      <li>Search Console checks</li>
+      <li>Bing Webmaster Tools and IndexNow key</li>
+      <li>Cloudflare bot settings</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ======================================================= DATA SOURCES & METHODOLOGY === -->
+<div class="section" style="text-align: center; padding-top: 15mm;">
+  <hr class="divider">
+  <h3 style="text-align: left;">Data Sources &amp; Methodology</h3>
+  <table>
+    <thead>
+      <tr><th>Source</th><th>Description</th><th>Update Frequency</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>PageSpeed Insights API</td>
+          <td>Lighthouse lab audit (mobile emulation, Moto G Power, slow 4G)</td>
+          <td>Real-time</td></tr>
+      <tr><td>Chrome UX Report (CrUX)</td>
+          <td>28-day rolling field data from real Chrome users</td>
+          <td>Daily ~04:00 UTC</td></tr>
+      <tr><td>CrUX History API</td>
+          <td>25-week p75 trend data per metric</td>
+          <td>Weekly</td></tr>
+      <tr><td>Google Search Console</td>
+          <td>Search Analytics (clicks, impressions, CTR, position)</td>
+          <td>2-3 day lag</td></tr>
+      <tr><td>URL Inspection API</td>
+          <td>Per-URL index status, coverage state, crawl info</td>
+          <td>Real-time (2,000/day)</td></tr>
+    </tbody>
+  </table>
+  <p style="color: #94a3b8; font-size: 9pt; margin-top: 5mm;">
+    Report generated by Claude SEO (Google SEO Intelligence Skill), November 07, 2026<br>
+    Methodology based on Google Web Vitals thresholds, Search Console documentation, and Lighthouse scoring algorithms.
+  </p>
+</div>
+
+</body>
+</html>
