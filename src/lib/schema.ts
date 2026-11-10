@@ -55,6 +55,7 @@ const SERVICE_AREAS = () => SERVICE_AREA_NAMES.map((name) => ({ '@type': 'City',
 const CATALOG = [
   { name: 'Office Cleaning', path: '/services/office-cleaning/' },
   { name: 'Commercial Cleaning', path: '/services/commercial-cleaning/' },
+  { name: 'Janitorial Services', path: '/services/janitorial-services/' },
   { name: 'Industrial & Warehouse Cleaning', path: '/services/industrial-cleaning/' },
   { name: 'Post-Construction Cleaning', path: '/services/post-construction-cleaning/' },
   { name: 'Building Maintenance', path: '/services/building-maintenance/' },

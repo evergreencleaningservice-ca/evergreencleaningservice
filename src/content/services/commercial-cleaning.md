@@ -1,8 +1,8 @@
 ---
 title: "Commercial Cleaning"
-h1: "Commercial Cleaning & Janitorial Services in Toronto and the GTA"
-seoTitle: "Commercial Cleaning & Janitorial in Toronto | Evergreen"
-description: "Commercial cleaning and janitorial in Toronto and the GTA: retail, institutional and mixed-use buildings, after hours. Reply in 2 hours, Mon–Fri 7am–6pm."
+h1: "Commercial Cleaning Services in Toronto and the GTA"
+seoTitle: "Commercial Cleaning Services in Toronto | Evergreen"
+description: "Commercial cleaning services in Toronto and the GTA: routine, periodic and one-off cleaning for retail, institutional and mixed-use buildings, after hours."
 summary: "Commercial cleaning is the cleaning of business premises, and janitorial services are the scheduled part of it: washrooms, kitchens, floors, trash and touch points, kept up the same way every visit. Evergreen Office Cleaning has provided both across Toronto and the GTA since 1989, scheduled around your opening hours and scoped on site, not over the phone."
 image: "/images/lobby-floor-scrubber-commercial.jpg"
 imageAlt: "Close-up of a floor machine cleaning a commercial lobby"
@@ -75,6 +75,9 @@ related:
   - title: "Seasonal office cleaning checklist"
     href: "/seasonal-office-cleaning-checklist/"
     text: "Salt, pollen, open windows: the extra work each Toronto season brings."
+  - title: "Janitorial Services"
+    href: "/services/janitorial-services/"
+    text: "The scheduled, day-to-day upkeep, visit by visit."
   - title: "Office Cleaning"
     href: "/services/office-cleaning/"
     text: "Recurring janitorial service for offices."
@@ -112,18 +115,9 @@ We know that our crew becomes part of your customer's experience even when nobod
 
 ## Janitorial services: the daily upkeep
 
-Janitorial work is what keeps a building usable from one day to the next. On a recurring contract it typically covers:
+Janitorial work is what keeps a building usable from one day to the next: trash and recycling, washrooms and their consumables, kitchens and break rooms, floors and entrance mats, and the touch points everyone shares. How often each task is done depends on how the space is used: a busy store's washrooms and entrance need attention every day it is open, a back office may need it a few evenings a week. The frequency for each task is set at the walkthrough and written into the proposal.
 
-- Trash and recycling emptied and liners replaced
-- Washrooms cleaned and sanitized, and consumables restocked
-- Staff kitchens and break rooms, including counters, sinks and tables
-- Floors vacuumed, swept and mopped; entrance mats cleaned
-- Touch points disinfected: door handles, switches, railings and shared equipment
-- Reception areas, conference rooms and interior glass kept presentable
-
-How often each task is done depends on how the space is used. A busy store's washrooms and entrance need attention every day it is open; a back office may need it a few evenings a week. The frequency for each task is set at the walkthrough and written into the proposal, so both sides know what a visit includes.
-
-For offices specifically, our [office cleaning](/services/office-cleaning/) page sets out the routine in more detail.
+Our [janitorial services](/services/janitorial-services/) page sets out the full routine, the usual frequency for each kind of building and how a contract starts. For offices, the [office cleaning](/services/office-cleaning/) page goes into the office routine in detail.
 
 ## Commercial cleaning, janitorial or office cleaning?
 
