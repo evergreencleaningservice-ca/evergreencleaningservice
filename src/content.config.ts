@@ -28,6 +28,8 @@ const blog = defineCollection({
       ctaHeading: z.string().optional(),
       ctaText: z.string().optional(),
       ctaResponse: z.string().optional(),
+      /** An article may place its own CTA before a closing FAQ section. */
+      showCta: z.boolean().default(true),
       /** The featured photo's source, kept as a record; not shown on the page
           (credits removed 2026-11-04; the Premium licence needs none —
           docs/stock-photos/). */

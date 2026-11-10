@@ -80,13 +80,13 @@ const relatedSizes = '(min-width: 912px) 428px, (min-width: 561px) calc(50vw - 2
           <ol>{guide.contents.map((item) => <li><a href={`#${item.id}`}>{item.label}</a></li>)}</ol>
         </nav>
         <div class="entry-content guide-body"><slot /></div>
-        <section class="guide-cta" id="requesting-a-cleaning-quote" aria-labelledby="quote-heading">
+        {guide.showCta && <section class="guide-cta" id="requesting-a-cleaning-quote" aria-labelledby="quote-heading">
           <h2 id="quote-heading">{guide.ctaHeading ?? 'Get a Cleaning Quote for Your Office'}</h2>
           <p>{guide.ctaText ?? 'Every building is different. Schedule a free on-site walkthrough and receive a written cleaning scope tailored to your needs.'}</p>
           <a class="btn btn-primary" href="/request-a-quote/">Request a Free Quote</a>
           <p class="guide-phone">Or call <a href="tel:+14168034880" data-call-location="content">+1 (416) 803-4880</a></p>
           {guide.ctaResponse && <p>{guide.ctaResponse}</p>}
-        </section>
+        </section>}
       </article>
       <aside class="guide-related" aria-labelledby="related-heading">
         <h2 id="related-heading">Related articles</h2>
