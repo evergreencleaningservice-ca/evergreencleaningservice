@@ -1,0 +1,171 @@
+{
+  "checkedAt": "2026-11-10T22:19:57.250Z",
+  "url": "https://www.evergreencleaningservice.ca/commercial-cleaning-quote-checklist/",
+  "status": 200,
+  "title": "Commercial Cleaning Quote Checklist: What to Include",
+  "description": "Use this commercial cleaning quote checklist to check tasks, schedules, supplies and exclusions before signing a Toronto cleaning agreement.",
+  "canonical": "https://www.evergreencleaningservice.ca/commercial-cleaning-quote-checklist/",
+  "robots": " ",
+  "h1": [
+    "Commercial Cleaning Quote Checklist: What to Include"
+  ],
+  "faqs": 6,
+  "faqWords": [
+    46,
+    51,
+    50,
+    52,
+    50,
+    51
+  ],
+  "contentsTargets": true,
+  "schemaTypes": [
+    "ProfessionalService",
+    "WebSite",
+    "BlogPosting",
+    "BreadcrumbList"
+  ],
+  "articleSchemaUrl": "https://www.evergreencleaningservice.ca/commercial-cleaning-quote-checklist/",
+  "ogImage": "https://img.evergreencleaningservice.ca/images/blog-commercial-cleaning-quote-og.jpg",
+  "checks": [
+    {
+      "route": "/",
+      "status": 200,
+      "includesArticle": true
+    },
+    {
+      "route": "/insights/",
+      "status": 200,
+      "includesArticle": true
+    },
+    {
+      "route": "/services/office-cleaning/",
+      "status": 200
+    },
+    {
+      "route": "/services/building-maintenance/",
+      "status": 200
+    },
+    {
+      "route": "/green-clean-products/",
+      "status": 200
+    },
+    {
+      "route": "/request-a-quote/",
+      "status": 200
+    },
+    {
+      "route": "/office-cleaning-cost-toronto-guide/",
+      "status": 200
+    },
+    {
+      "route": "/how-often-should-an-office-be-cleaned/",
+      "status": 200
+    },
+    {
+      "route": "/sitemap-insights-0.xml",
+      "status": 200,
+      "includesArticle": true
+    },
+    {
+      "route": "/rss.xml",
+      "status": 200,
+      "includesArticle": true
+    },
+    {
+      "route": "/llms.txt",
+      "status": 200,
+      "includesArticle": true
+    }
+  ],
+  "images": [
+    {
+      "url": "https://img.evergreencleaningservice.ca/images/blog-commercial-cleaning-quote.jpg",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "url": "https://img.evergreencleaningservice.ca/images/office-cleaning-frequency-kitchen-1200.jpg",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "url": "https://img.evergreencleaningservice.ca/images/office-cleaning-frequency-washroom-1200.jpg",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "url": "https://img.evergreencleaningservice.ca/images/blog-office-cleaning-cost-toronto-guide-480.jpg",
+      "status": 200,
+      "type": "image/jpeg"
+    },
+    {
+      "url": "https://img.evergreencleaningservice.ca/images/blog-office-cleaning-frequency-480.jpg",
+      "status": 200,
+      "type": "image/jpeg"
+    }
+  ],
+  "passed": true,
+  "imageVariants": [
+    {
+      "filename": "blog-commercial-cleaning-quote-1200.avif",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "filename": "blog-commercial-cleaning-quote-1200.jpg",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "filename": "blog-commercial-cleaning-quote-1200.webp",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "filename": "blog-commercial-cleaning-quote-300x150.jpg",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "filename": "blog-commercial-cleaning-quote-480.avif",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "filename": "blog-commercial-cleaning-quote-480.jpg",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "filename": "blog-commercial-cleaning-quote-480.webp",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "filename": "blog-commercial-cleaning-quote-768.avif",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "filename": "blog-commercial-cleaning-quote-768.jpg",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "filename": "blog-commercial-cleaning-quote-768.webp",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "filename": "blog-commercial-cleaning-quote-og.jpg",
+      "status": 200,
+      "identical": true
+    },
+    {
+      "filename": "blog-commercial-cleaning-quote.jpg",
+      "status": 200,
+      "identical": true
+    }
+  ]
+}
