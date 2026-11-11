@@ -1,0 +1,665 @@
+{
+  "source": "Cloudflare Web Analytics (real-user beacons)",
+  "host": "www.evergreencleaningservice.ca",
+  "window": {
+    "since": "2026-11-06T15:05:00Z",
+    "until": "2026-11-11T20:26:00Z",
+    "days": 5.22
+  },
+  "traffic": "human",
+  "units": {
+    "LCP": "ms",
+    "INP": "ms",
+    "CLS": "unitless"
+  },
+  "thresholds": {
+    "LCP": {
+      "good": 2500,
+      "poor": 4000
+    },
+    "INP": {
+      "good": 200,
+      "poor": 500
+    },
+    "CLS": {
+      "good": 0.1,
+      "poor": 0.25
+    }
+  },
+  "beacons": {
+    "rows": 47,
+    "estimated": 47,
+    "botRowsExcluded": 107,
+    "rowsBySampleInterval": {
+      "1": 47
+    }
+  },
+  "pageloads": {
+    "estimated": 458,
+    "visits": 437
+  },
+  "sitewide": {
+    "rows": 47,
+    "estimated": 47,
+    "metrics": {
+      "LCP": {
+        "n": 39,
+        "nEst": 39,
+        "p75": 708,
+        "rating": "good",
+        "good": 39,
+        "needsImprovement": 0,
+        "poor": 0,
+        "goodShare": 1,
+        "ci95": [
+          384,
+          952
+        ],
+        "ciMissing": null,
+        "lowSample": false
+      },
+      "INP": {
+        "n": 26,
+        "nEst": 26,
+        "p75": 40,
+        "rating": "good",
+        "good": 26,
+        "needsImprovement": 0,
+        "poor": 0,
+        "goodShare": 1,
+        "ci95": [
+          16,
+          80
+        ],
+        "ciMissing": null,
+        "lowSample": true
+      },
+      "CLS": {
+        "n": 32,
+        "nEst": 32,
+        "p75": 0,
+        "rating": "good",
+        "good": 32,
+        "needsImprovement": 0,
+        "poor": 0,
+        "goodShare": 1,
+        "ci95": [
+          0,
+          0.018
+        ],
+        "ciMissing": null,
+        "lowSample": false
+      }
+    }
+  },
+  "byDevice": [
+    {
+      "deviceType": "desktop",
+      "rows": 34,
+      "estimated": 34,
+      "metrics": {
+        "LCP": {
+          "n": 29,
+          "nEst": 29,
+          "p75": 536,
+          "rating": "good",
+          "good": 29,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": [
+            316,
+            1512
+          ],
+          "ciMissing": null,
+          "lowSample": true
+        },
+        "INP": {
+          "n": 24,
+          "nEst": 24,
+          "p75": 32,
+          "rating": "good",
+          "good": 24,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": [
+            16,
+            72
+          ],
+          "ciMissing": null,
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 29,
+          "nEst": 29,
+          "p75": 0,
+          "rating": "good",
+          "good": 29,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": [
+            0,
+            0.018
+          ],
+          "ciMissing": null,
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "deviceType": "mobile",
+      "rows": 13,
+      "estimated": 13,
+      "metrics": {
+        "LCP": {
+          "n": 10,
+          "nEst": 10,
+          "p75": 796,
+          "rating": "good",
+          "good": 10,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 80,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 0,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    }
+  ],
+  "topPaths": [
+    {
+      "path": "/",
+      "rows": 15,
+      "estimated": 15,
+      "metrics": {
+        "LCP": {
+          "n": 13,
+          "nEst": 13,
+          "p75": 260,
+          "rating": "good",
+          "good": 13,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": [
+            140,
+            2412
+          ],
+          "ciMissing": null,
+          "lowSample": true
+        },
+        "INP": {
+          "n": 8,
+          "nEst": 8,
+          "p75": 16,
+          "rating": "good",
+          "good": 8,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 11,
+          "nEst": 11,
+          "p75": 0,
+          "rating": "good",
+          "good": 11,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/lp/commercial-cleaning-quote/",
+      "rows": 9,
+      "estimated": 9,
+      "metrics": {
+        "LCP": {
+          "n": 6,
+          "nEst": 6,
+          "p75": 796,
+          "rating": "good",
+          "good": 6,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 80,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 0.018,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/contact-us/",
+      "rows": 4,
+      "estimated": 4,
+      "metrics": {
+        "LCP": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 952,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 4,
+          "nEst": 4,
+          "p75": 72,
+          "rating": "good",
+          "good": 4,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 3,
+          "nEst": 3,
+          "p75": 0.037,
+          "rating": "good",
+          "good": 3,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/insights/",
+      "rows": 2,
+      "estimated": 2,
+      "metrics": {
+        "LCP": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 1512,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 16,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 0,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/services/office-cleaning/",
+      "rows": 2,
+      "estimated": 2,
+      "metrics": {
+        "LCP": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 120,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 1,
+          "nEst": 1,
+          "p75": 8,
+          "rating": "good",
+          "good": 1,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 2,
+          "nEst": 2,
+          "p75": 0,
+          "rating": "good",
+          "good": 2,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/.well-known/sgcaptcha/",
+      "rows": 1,
+      "estimated": 1,
+      "metrics": {
+        "LCP": {
+          "n": 1,
+          "nEst": 1,
+          "p75": 1620,
+          "rating": "good",
+          "good": 1,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 0,
+          "nEst": 0,
+          "p75": null,
+          "rating": null,
+          "good": 0,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": null,
+          "ci95": null,
+          "ciMissing": "no-data",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 1,
+          "nEst": 1,
+          "p75": 0.002,
+          "rating": "good",
+          "good": 1,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/about-us/",
+      "rows": 1,
+      "estimated": 1,
+      "metrics": {
+        "LCP": {
+          "n": 1,
+          "nEst": 1,
+          "p75": 316,
+          "rating": "good",
+          "good": 1,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 0,
+          "nEst": 0,
+          "p75": null,
+          "rating": null,
+          "good": 0,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": null,
+          "ci95": null,
+          "ciMissing": "no-data",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 1,
+          "nEst": 1,
+          "p75": 0,
+          "rating": "good",
+          "good": 1,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/cleaning-demo-gallery/",
+      "rows": 1,
+      "estimated": 1,
+      "metrics": {
+        "LCP": {
+          "n": 1,
+          "nEst": 1,
+          "p75": 137,
+          "rating": "good",
+          "good": 1,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 0,
+          "nEst": 0,
+          "p75": null,
+          "rating": null,
+          "good": 0,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": null,
+          "ci95": null,
+          "ciMissing": "no-data",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 0,
+          "nEst": 0,
+          "p75": null,
+          "rating": null,
+          "good": 0,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": null,
+          "ci95": null,
+          "ciMissing": "no-data",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/industries/medical-dental-clinics/",
+      "rows": 1,
+      "estimated": 1,
+      "metrics": {
+        "LCP": {
+          "n": 0,
+          "nEst": 0,
+          "p75": null,
+          "rating": null,
+          "good": 0,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": null,
+          "ci95": null,
+          "ciMissing": "no-data",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 1,
+          "nEst": 1,
+          "p75": 48,
+          "rating": "good",
+          "good": 1,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 0,
+          "nEst": 0,
+          "p75": null,
+          "rating": null,
+          "good": 0,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": null,
+          "ci95": null,
+          "ciMissing": "no-data",
+          "lowSample": true
+        }
+      }
+    },
+    {
+      "path": "/locations/",
+      "rows": 1,
+      "estimated": 1,
+      "metrics": {
+        "LCP": {
+          "n": 1,
+          "nEst": 1,
+          "p75": 88,
+          "rating": "good",
+          "good": 1,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "INP": {
+          "n": 1,
+          "nEst": 1,
+          "p75": 0,
+          "rating": "good",
+          "good": 1,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        },
+        "CLS": {
+          "n": 1,
+          "nEst": 1,
+          "p75": 0,
+          "rating": "good",
+          "good": 1,
+          "needsImprovement": 0,
+          "poor": 0,
+          "goodShare": 1,
+          "ci95": null,
+          "ciMissing": "too-few-beacons",
+          "lowSample": true
+        }
+      }
+    }
+  ],
+  "compare": null,
+  "notes": []
+}

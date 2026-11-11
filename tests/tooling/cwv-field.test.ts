@@ -571,3 +571,30 @@ describe('the saved Phase 1 baseline', () => {
     }
   });
 });
+
+/* The saved Phase 1 after window (docs/growth/performance.md section 8),
+   measured on 11 Nov 2026 while it was still unsampled. Like the baseline, it
+   is kept because re-running the same window after about a week returns a
+   1-in-10 sample of it, not the same numbers. */
+describe('the saved Phase 1 after window', () => {
+  const after = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, '../../docs/growth/cwv-baselines/2026-11-11-phase1-after.json'), 'utf8'),
+  );
+
+  it('starts at the deploy, is unsampled and human traffic only', () => {
+    expect(after.window.since).toBe('2026-11-06T15:05:00Z');
+    expect(after.window.until).toBe('2026-11-11T20:26:00Z');
+    expect(after.traffic).toBe('human');
+    expect(Object.keys(after.beacons.rowsBySampleInterval)).toEqual(['1']);
+    expect(after.compare).toBeNull();
+  });
+
+  it('has a 95% interval on every sitewide p75, so it can be read against the baseline', () => {
+    for (const m of ['LCP', 'INP', 'CLS']) {
+      const x = after.sitewide.metrics[m];
+      expect(x.ci95).toHaveLength(2);
+      expect(x.ci95[0]).toBeLessThanOrEqual(x.p75);
+      expect(x.p75).toBeLessThanOrEqual(x.ci95[1]);
+    }
+  });
+});
