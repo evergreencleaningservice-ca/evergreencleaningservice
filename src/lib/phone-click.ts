@@ -13,13 +13,20 @@
  *   2. Per-anchor listeners mean a second initialisation binds a second
  *      listener to every link, and one tap then reports two calls.
  *   3. **The hardcoded number is wrong for exactly the visitors who matter.**
- *      The GTM container loads CallTrackingMetrics (account 535014, served
- *      from 535014.tctm.co), which rewrites both the displayed text and the
- *      `tel:` href when a visitor arrives from Google Ads, Performance Max or
- *      Bing Paid — three rules, three distinct tracking numbers, read out of
- *      the live script. A paid visitor taps a tracking number and the event
- *      reports the canonical one, so the report cannot be reconciled against
- *      the call-tracking account it is supposed to match.
+ *      A dynamic-number system rewrites the displayed text and the `tel:`
+ *      href for paid visitors, so a paid visitor taps a tracking number and
+ *      the event reports the canonical one, which cannot be reconciled
+ *      against the call-tracking account it is supposed to match.
+ *
+ *      Which system that is has changed. When this was written, the old
+ *      container (GTM-5PRC4HBV) loaded CallTrackingMetrics (account 535014,
+ *      served from 535014.tctm.co), with three rules and three tracking
+ *      numbers for Google Ads, Performance Max and Bing Paid. The current
+ *      container, GTM-5W69BTJQ, does not: read on 11 Nov 2026 it has no
+ *      tctm.co loader, no account 535014 and no `__ctm`. Its phone tracking is
+ *      the Google Ads "calls from website" tag (`__awcc`), which swaps a
+ *      Google forwarding number in for ad visitors (see `trackingProvider`).
+ *      The reasoning is the same either way: read the number at click time.
  *
  * So this reads the number **at click time, off the element the visitor
  * actually activated**, and reports both halves separately: what was on
@@ -140,11 +147,15 @@ export function destinationNumber(anchor: HTMLAnchorElement): string {
 /**
  * Which dynamic-number provider is present.
  *
- * Positive detection only. CallTrackingMetrics announces itself as
- * `window.__ctm` and is the provider this container actually loads. Anything
- * else reports `unknown` — NOT `none`: this code cannot prove the absence of
- * a provider it has never heard of, and a confident "none" beside a number
- * that was in fact swapped would be worse than admitting the limit.
+ * Positive detection only. Two providers are recognised:
+ *   - Google Ads "calls from website", the one the live container
+ *     (GTM-5W69BTJQ) uses, as read on 11 Nov 2026;
+ *   - CallTrackingMetrics, which announces itself as `window.__ctm`. The old
+ *     container loaded it; the current one does not. The check stays so the
+ *     report names it correctly if the agency ever adds it back.
+ * Anything else reports `unknown` — NOT `none`: this code cannot prove the
+ * absence of a provider it has never heard of, and a confident "none" beside
+ * a number that was in fact swapped would be worse than admitting the limit.
  */
 export function trackingProvider(win: Window = window): string {
   const w = win as Window & { __ctm?: unknown; _googWcmGet?: unknown };
@@ -198,9 +209,9 @@ type WiredDocument = Document & {
  * Bind the one delegated listener.
  *
  * DELEGATED, not per-anchor, and that is the whole design. A tracking script
- * that rewrites a number replaces the anchor's contents — and CallTrackingMetrics
- * replaces `innerHTML` — so a listener bound to a child would be discarded
- * with it. Delegation also means links added after load are covered, and one
+ * that rewrites a number may replace the anchor's contents (CallTrackingMetrics
+ * replaced `innerHTML`; Google's forwarding-number script rewrites the text
+ * too), so a listener bound to a child would be discarded with it. Delegation also means links added after load are covered, and one
  * listener cannot be bound twice to the same link.
  *
  * Idempotent: the guard is on the document, so importing this module twice, or
