@@ -1,0 +1,10 @@
+# Bulky raw evidence kept locally only
+raw/crawl/html/
+raw/lighthouse/
+raw/psi-*.json
+raw/homepage-render.*
+raw/ai.txt
+raw/humans.txt
+raw/.well-known_security.txt
+raw/sitemap.xml
+screenshots/*-full*.png
