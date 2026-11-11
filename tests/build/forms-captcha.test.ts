@@ -94,8 +94,8 @@ describe('every form that accepts a submission', () => {
   it('there are forms to check, on the pages expected', () => {
     /* A guard on the guard: a selector that silently matched nothing would
        make every assertion below vacuously true. */
-    expect(accepting()).toHaveLength(31);
-    expect(new Set(accepting().map((f) => f.page)).size).toBe(31);
+    expect(accepting()).toHaveLength(32);
+    expect(new Set(accepting().map((f) => f.page)).size).toBe(32);
   });
 
   it('carries a captcha', () => {
@@ -165,7 +165,7 @@ describe('testimonials are not leads and blog comments are disabled', () => {
        (the tenth service, floor stripping and waxing, since 2026-10-30; the
        North York, Scarborough, Richmond Hill and Durham pages since
        2026-11-06). */
-    expect(leads).toHaveLength(30);
+    expect(leads).toHaveLength(31);
     for (const f of leads) expect(f.endpoint, f.page).toBe('/api/submit-lead');
   });
 });
