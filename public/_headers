@@ -65,6 +65,19 @@ https://:version.:subdomain.workers.dev/*
 #                    'unsafe-eval' stay until GTM's custom tags are audited
 #                    (H2): the site is static, so there is no nonce to issue.
 #                    After two clean weeks, rename the header to enforce it.
+#                    CSP review, 11 Nov 2026: the live pages were loaded with
+#                    the container and its Ads conversion and paid-visit
+#                    paths firing (every hit blocked, so nothing was
+#                    recorded). The only would-be violation was img-src for
+#                    www.googleadservices.com: the Ads form-conversion pixel
+#                    (/ccm/conversion/) and the paid-visit cookie pixel. It
+#                    is added. Enforcing without it would have stopped Ads
+#                    counting form leads. tests/csp-policy.test.ts keeps the
+#                    observed hosts in the policy. Not yet enforced: the
+#                    stored Worker-log reports could not be read (the API
+#                    token lacks Workers Observability read), and redirect
+#                    targets behind the first hop of each hit were not
+#                    exercised.
 #   Enforced CSP   (SEO audit Phase 1, 6 Nov 2026) the four directives that
 #                  need no script allowlist and work regardless of
 #                  'unsafe-inline': frame-ancestors, base-uri, form-action
@@ -119,4 +132,4 @@ https://:version.:subdomain.workers.dev/*
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: camera=(), microphone=(), geolocation=(), usb=(), payment=(), serial=(), bluetooth=(), hid=()
   Reporting-Endpoints: csp="/api/csp-report"
-  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://static.cloudflareinsights.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://www.gstatic.com; img-src 'self' data: blob: https://img.evergreencleaningservice.ca https://www.google.com https://www.google.ca https://www.gstatic.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://www.googletagmanager.com https://i.ytimg.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' https://img.evergreencleaningservice.ca; connect-src 'self' https://www.google.com https://www.google.ca https://www.googleadservices.com https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src https://www.google.com https://www.googletagmanager.com https://td.doubleclick.net https://www.youtube.com https://www.youtube-nocookie.com https://challenges.cloudflare.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; report-uri /api/csp-report; report-to csp
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://googleads.g.doubleclick.net https://www.googleadservices.com https://static.cloudflareinsights.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://www.gstatic.com; img-src 'self' data: blob: https://img.evergreencleaningservice.ca https://www.google.com https://www.google.ca https://www.gstatic.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://www.googletagmanager.com https://i.ytimg.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' https://img.evergreencleaningservice.ca; connect-src 'self' https://www.google.com https://www.google.ca https://www.googleadservices.com https://ad.doubleclick.net https://googleads.g.doubleclick.net https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://cloudflareinsights.com https://static.cloudflareinsights.com; frame-src https://www.google.com https://www.googletagmanager.com https://td.doubleclick.net https://www.youtube.com https://www.youtube-nocookie.com https://challenges.cloudflare.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'; report-uri /api/csp-report; report-to csp
