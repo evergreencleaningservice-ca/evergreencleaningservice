@@ -41,6 +41,7 @@ Verify after the deploy: `npm test`, `npm run seo:drift` (record a new baseline 
 
 16. **Field vitals:** run `npm run cwv:field -- --since 2026-11-06T15:05Z --json` and compare with the saved baseline. If home p75 LCP stays above 2.0 s, test the mobile hero preload.
 17. **CSP:** read `/api/csp-report` and add the hosts the container uses (`pagead2.googlesyndication.com`, `adservice.google.com`, `cct.google`, and any others the reports show) before switching the full policy from report-only to enforced.
+    - **Done 11 Nov 2026 (partly).** The live pages were loaded with the container's conversion and paid-visit paths firing, with every hit blocked. One gap: `img-src` lacked `www.googleadservices.com`, the Ads form-conversion pixel, so enforcing would have stopped Ads counting form leads. It is added, and `tests/csp-policy.test.ts` locks the observed hosts. The three hosts guessed above were never requested. Still report-only: the stored reports need Workers Logs access (dashboard, or a token with Workers Observability read), and redirect targets behind each hit were not exercised.
 18. **Ads and GA4:** with the Ads owner, compare call and form conversions and GA4 page views for the week before and after 6 Nov 15:05 UTC.
 
 ## Phase C: client input (the remaining score is mostly here)
