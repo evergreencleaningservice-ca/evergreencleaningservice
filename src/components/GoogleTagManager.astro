@@ -49,12 +49,14 @@
  * unless that is the thing being tested.
  *
  * Phone conversions are a different mechanism (corrected in the SEO re-audit,
- * 7 Nov 2026; this comment used to say they fired on `click_to_call`). The
- * site does push `click_to_call` on every tel: tap (src/lib/phone-click.ts,
- * and LandingLayout.astro on the landing pages), but the live container, as
- * read on 7 Nov 2026, has no trigger on it: its only triggers are `gtm.init`,
- * `gtm.js` and `lead_form_submission`. Until the agency adds one, that event
- * records nothing. What records calls is the Google Ads "calls from website"
+ * 7 Nov 2026; this comment used to say they fired on `click_to_call`, an
+ * event the site stopped pushing in Phase 11). The site pushes `phone_click`
+ * on every tel: tap (src/lib/phone-click.ts, sitewide, landing pages
+ * included), but the live container, as read on 7 and again on 11 Nov 2026,
+ * has no trigger on it: its only custom triggers are `gtm.init`, `gtm.js` and
+ * `lead_form_submission`. Until the agency adds one, that event records
+ * nothing in Ads. It does reach GA4 in production: src/lib/ga4.ts also
+ * sends it as a gtag event, which the Google tag the container loads picks up. What records calls is the Google Ads "calls from website"
  * tag (`__awcc`, set up for "(416) 803-4880"): it swaps a Google forwarding
  * number into the page, and Ads counts calls made to that number. A tel: tap
  * made before the swap dials the real number and is never counted — which is
@@ -107,7 +109,7 @@ const gtmId = site.gtmId;
      - the visitor's first pointerdown, keydown, touchstart or scroll, or any
        focus inside a form (someone about to fill the quote form);
      - a tap on any tel: link, which loads it immediately so the queued
-       click_to_call push reaches the container. It does NOT save the call
+       phone_click push reaches the container. It does NOT save the call
        for Ads: the dialler opens on that same tap, before any number swap
        could happen (see PAID VISITS);
      - the window load event plus a short idle wait (requestIdleCallback with

@@ -175,9 +175,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 
     {/* REPLACED in Phase 11. This used to bind a listener to every `tel:`
         anchor and push `click_to_call` with the number HARDCODED — which was
-        wrong for precisely the visitors who matter, since the container loads
-        CallTrackingMetrics and rewrites the number for paid arrivals. One
-        delegated sitewide handler now reads both numbers at click time. */}
+        wrong for precisely the visitors who matter, since paid arrivals see a
+        rewritten tracking number (CallTrackingMetrics in the old container;
+        the Google Ads forwarding number in GTM-5W69BTJQ, as read on 11 Nov
+        2026). One delegated sitewide handler (src/lib/phone-click.ts) now
+        reads both numbers at click time and pushes `phone_click`. */}
     <PhoneTracking />
     <script>
       import { wireReveal } from '../lib/reveal';
