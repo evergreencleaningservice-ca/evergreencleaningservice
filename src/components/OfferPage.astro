@@ -30,6 +30,7 @@ import { pageTitle } from '../lib/title';
 import { breadcrumbSchema, serviceSchema, webPageSchema } from '../lib/schema';
 import { lastmodFor } from '../lib/sitemap-lastmod.mjs';
 import PagePhoto from './blocks/PagePhoto.astro';
+import { responsiveSet } from '../lib/responsive-images.mjs';
 
 interface Offer {
   title: string;
@@ -87,6 +88,29 @@ const RELATED_TEXT: Record<string, string> = {
   '/industries/': 'Offices, clinics, warehouses, retail and more.',
   '/green-clean-products/': 'The approved green cleaning products our crews use.',
 };
+
+/* The page's photo as its hero (11 Nov 2026, "each service page should have
+   a hero image"). Until then the hero was a plain tinted band and the photo
+   sat below it, at the top of the main column. It is now the first thing on
+   the page and its Largest Contentful Paint, so it is eager and high
+   priority, from the same AVIF/WebP/JPEG set the body photos use. The body
+   copy of the photo is dropped when the hero carries it. */
+const heroSet = data.image ? responsiveSet(data.image) : null;
+const HERO_SIZES = '100vw';
+
+/* Eight bodies open with the same photo; with it in the hero that showed it
+   twice, a screen apart. The body's copy (its <picture>, or a bare <img>,
+   with the paragraph around it) is removed when the hero carries it. */
+const escape = (v: string) => v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const bodyHtml =
+  heroSet && body
+    ? body.replace(
+        new RegExp(
+          String.raw`(?:<p>\s*)?(?:<picture>(?:(?!</picture>)[\s\S])*?/images/${escape(heroSet.base)}[-.](?:(?!</picture>)[\s\S])*?</picture>|<img\b[^>]*/images/${escape(heroSet.base)}[-.][^>]*>)(?:\s*</p>)?`,
+        ),
+        '',
+      )
+    : body;
 ---
 
 <BaseLayout title={title} description={data.description} image={data.image} imageAlt={data.imageAlt}>
@@ -124,7 +148,26 @@ const RELATED_TEXT: Record<string, string> = {
     is:inline
   />
 
-  <section class="offer-hero">
+  <section class={heroSet ? 'offer-hero has-image' : 'offer-hero'}>
+    {
+      heroSet && (
+        <picture class="offer-hero-media">
+          <source type="image/avif" srcset={heroSet.avif} sizes={HERO_SIZES} />
+          <source type="image/webp" srcset={heroSet.webp} sizes={HERO_SIZES} />
+          <img
+            src={`/images/${heroSet.base}-${heroSet.widths.includes(768) ? 768 : heroSet.widths.at(-1)}.jpg`}
+            srcset={heroSet.jpg}
+            sizes={HERO_SIZES}
+            alt={data.imageAlt ?? ''}
+            width="1200"
+            height="800"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
+      )
+    }
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <a href="/">{site.name}</a> &gt; <a href={parent.url}>{parent.name}</a> &gt;{' '}
@@ -147,7 +190,7 @@ const RELATED_TEXT: Record<string, string> = {
     <div class="offer-main stack">
       {/* The page's own photo (its social-sharing image), when the body has
           none of its own: these pages showed no photograph at all (SEO audit H6). */}
-      {data.image && !(body ?? '').includes('<img') && (
+      {data.image && !heroSet && !(body ?? '').includes('<img') && (
         <PagePhoto src={data.image} alt={data.imageAlt ?? data.title} />
       )}
       {
@@ -161,7 +204,7 @@ const RELATED_TEXT: Record<string, string> = {
         )
       }
 
-      {body && <div class="entry-content offer-body" set:html={body} />}
+      {bodyHtml && <div class="entry-content offer-body" set:html={bodyHtml} />}
 
       {
         data.included.length > 0 && (
@@ -274,6 +317,58 @@ const RELATED_TEXT: Record<string, string> = {
     background: var(--surface-tint);
     border-bottom: 1px solid var(--rule);
     padding: 28px 0 30px;
+  }
+  /* With a photo: full-bleed, darkened toward the text so white type clears
+     4.5:1 over the brightest part of any of the photos, as on the homepage. */
+  .offer-hero.has-image {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--surface-dark);
+    border-bottom: 0;
+    color: #fff;
+    padding: 56px 0 60px;
+  }
+  .offer-hero-media,
+  .offer-hero.has-image::after {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  .offer-hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .offer-hero.has-image::after {
+    content: '';
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.62) 55%, rgba(0, 0, 0, 0.4) 100%);
+  }
+  .offer-hero.has-image h1,
+  .offer-hero.has-image .offer-summary,
+  .offer-hero.has-image .breadcrumbs,
+  .offer-hero.has-image .breadcrumbs a {
+    color: #fff;
+  }
+  .offer-hero.has-image .btn-ghost {
+    border-color: #fff;
+    color: #fff;
+  }
+  .offer-hero.has-image .btn-ghost:hover,
+  .offer-hero.has-image .btn-ghost:focus-visible {
+    background: #fff;
+    color: var(--brand-dark);
+  }
+  @media (max-width: 767px) {
+    .offer-hero.has-image {
+      padding: 36px 0 40px;
+    }
+    /* Text runs the full width on a phone, so darken evenly. */
+    .offer-hero.has-image::after {
+      background: rgba(0, 0, 0, 0.66);
+    }
   }
   .offer-hero h1 {
     font-size: 2.4rem;
