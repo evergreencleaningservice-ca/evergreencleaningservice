@@ -1,5 +1,5 @@
 {
-  "capturedAt": "2026-11-11T20:44:15.030Z",
+  "capturedAt": "2026-11-12T19:28:15.508Z",
   "mustStayNoindex": [
     "/lp/commercial-cleaning/",
     "/search/",
@@ -17,7 +17,7 @@
       "h2Count": 12,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:0cadb33ac7402f0e",
+      "mainHash": "sha256:95966174489b1110",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -535,7 +535,7 @@
       "h2Count": 8,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:db0755494ec35ec6",
+      "mainHash": "sha256:3f2c78e4bf799e80",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -561,7 +561,7 @@
       ],
       "status": 200,
       "title": "Commercial Cleaning Quote Checklist: What to Include",
-      "wordCount": 1730,
+      "wordCount": 1720,
       "xRobotsTag": null
     },
     "/commercial-cleaning-techniques-to-avoid/": {
@@ -755,7 +755,7 @@
       "h2Count": 3,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:bf6efdebd7c5fcc9",
+      "mainHash": "sha256:6a716bbbb7d02c6b",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -781,7 +781,7 @@
       ],
       "status": 200,
       "title": "How to Decide on a Cleaning Company - Evergreen",
-      "wordCount": 667,
+      "wordCount": 692,
       "xRobotsTag": null
     },
     "/how-to-keep-your-office-fridge-clean/": {
@@ -945,7 +945,7 @@
       "h2Count": 14,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:5b2021a61843f3fd",
+      "mainHash": "sha256:8eceab13b01c01d1",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -974,7 +974,7 @@
       ],
       "status": 200,
       "title": "Property Management & Condo Cleaning in Toronto | Evergreen",
-      "wordCount": 1146,
+      "wordCount": 1165,
       "xRobotsTag": null
     },
     "/insights/": {
@@ -986,7 +986,7 @@
       "h2Count": 13,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:b56102785302ec23",
+      "mainHash": "sha256:9461b7ad8aec6f29",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1593,7 +1593,7 @@
       "h2Count": 8,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:042da9412121f20a",
+      "mainHash": "sha256:8c5177d304d9c760",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1619,7 +1619,7 @@
       ],
       "status": 200,
       "title": "Office Cleaning Costs in Toronto: How Pricing Works",
-      "wordCount": 2029,
+      "wordCount": 2056,
       "xRobotsTag": null
     },
     "/office-layout-tips-to-make-cleaning-easier-and-faster/": {
@@ -1956,7 +1956,7 @@
       "h2Count": 11,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:6589aad723cdc237",
+      "mainHash": "sha256:fd92dce9768a9a6e",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -1978,7 +1978,7 @@
       ],
       "status": 200,
       "title": "All Cleaning Services | Evergreen Office Cleaning",
-      "wordCount": 404,
+      "wordCount": 400,
       "xRobotsTag": null
     },
     "/services/building-maintenance/": {
@@ -2024,14 +2024,14 @@
     },
     "/services/commercial-cleaning/": {
       "canonical": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
-      "description": "Commercial cleaning services in Toronto and the GTA: routine, periodic and one-off cleaning for retail, institutional and mixed-use buildings, after hours.",
+      "description": "Routine, periodic and one-off cleaning for retail, institutional and mixed-use buildings in Toronto and the GTA, after hours.",
       "h1": [
         "Commercial Cleaning Services in Toronto and the GTA"
       ],
       "h2Count": 23,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:015911fb93cc1b06",
+      "mainHash": "sha256:05230d06e005bd4c",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2060,7 +2060,7 @@
       ],
       "status": 200,
       "title": "Commercial Cleaning Services in Toronto | Evergreen",
-      "wordCount": 2606,
+      "wordCount": 2509,
       "xRobotsTag": null
     },
     "/services/disinfection-cleaning/": {
@@ -2270,14 +2270,14 @@
     },
     "/services/janitorial-services/": {
       "canonical": "https://www.evergreencleaningservice.ca/services/janitorial-services/",
-      "description": "Janitorial services in Toronto and the GTA: washrooms, kitchens, floors, trash and touch points on a fixed schedule, after hours, by the same crew.",
+      "description": "Washrooms, kitchens, floors, trash and touch points cleaned on a fixed schedule in Toronto and the GTA, after hours, by the same crew.",
       "h1": [
         "Janitorial Services in Toronto and the GTA"
       ],
-      "h2Count": 17,
+      "h2Count": 15,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:40b0f0e2c4bde6a0",
+      "mainHash": "sha256:6800dd9553435ab3",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2306,7 +2306,7 @@
       ],
       "status": 200,
       "title": "Janitorial Services in Toronto & the GTA | Evergreen",
-      "wordCount": 1780,
+      "wordCount": 1620,
       "xRobotsTag": null
     },
     "/services/office-cleaning/": {
@@ -2318,7 +2318,7 @@
       "h2Count": 16,
       "inSitemap": true,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:b47370d0bf3a5905",
+      "mainHash": "sha256:79634b88fe4aa93a",
       "metaGooglebot": null,
       "metaRobots": null,
       "mustStayNoindex": false,
@@ -2347,7 +2347,7 @@
       ],
       "status": 200,
       "title": "Office Cleaning Services in Toronto & the GTA | Evergreen",
-      "wordCount": 1640,
+      "wordCount": 1654,
       "xRobotsTag": null
     },
     "/services/post-construction-cleaning/": {
@@ -2441,7 +2441,7 @@
       "h2Count": 13,
       "inSitemap": false,
       "jsonLdInvalid": 0,
-      "mainHash": "sha256:442f01f1fefb1128",
+      "mainHash": "sha256:5311e9ba93b8cfa9",
       "metaGooglebot": null,
       "metaRobots": "follow, noindex",
       "mustStayNoindex": true,
