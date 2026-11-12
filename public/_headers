@@ -70,6 +70,14 @@ https://:version.:subdomain.workers.dev/*
 #                    adservice.google.com, cct.google). 'unsafe-inline' and
 #                    'unsafe-eval' stay until GTM's custom tags are audited
 #                    (H2): the site is static, so there is no nonce to issue.
+#                    A second review on 11 Nov 2026 (the container's Ads
+#                    conversion and paid-visit paths firing, every hit
+#                    blocked so nothing was recorded) found the Ads
+#                    form-conversion pixel needs img-src
+#                    www.googleadservices.com; it is in. It did not see the
+#                    three hosts above requested, so they are allowances,
+#                    not observations. tests/csp-policy.test.ts keeps the
+#                    observed hosts in the policy.
 #                    Violations still go to /api/csp-report and the Worker
 #                    log (src/lib/csp-report.ts); now each one is something
 #                    a visitor's browser actually blocked. The quote forms

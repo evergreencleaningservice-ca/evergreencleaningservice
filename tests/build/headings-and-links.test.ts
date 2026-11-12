@@ -360,12 +360,12 @@ describe('the rest of the page is untouched', () => {
      merged or retired, one seasonal checklist added (H7). */
   // 60 since 6 Nov 2026: 57, plus the office cleaning checklist guide and
   // four location pages, less the two posts merged into other posts.
-  it('all 60 sitemap URLs were built', () => {
+  it('all 62 sitemap URLs were built', () => {
     const locs = (xml: string) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     const urls = locs(read('sitemap-index.xml')).flatMap((child) =>
       locs(read(path.basename(new URL(child).pathname)))
     );
-    expect(urls).toHaveLength(60);
+    expect(urls).toHaveLength(62);
     const missing = urls.filter((u) => !exists(new URL(u).pathname));
     expect(missing).toEqual([]);
   });

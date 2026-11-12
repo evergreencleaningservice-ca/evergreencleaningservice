@@ -168,4 +168,18 @@ Of the 28 paths with beacons that week, one page had a p75 outside "good": `/con
 2. **After: measure by about 12 Nov.** `npm run cwv:field -- --since 2026-11-06T15:05Z --json > after.json` while that start is still within six days, or `--days 6` on any later date for a window that is wholly after the deploy. Check the `Beacons:` line says every row is at 1-in-1.
 3. **Compare the intervals, not the point values.** A sitewide p75 whose interval overlaps the baseline's is not evidence of a change. With a hundred or so beacons a week, an improvement this site's lab numbers would notice may well not show here at all; that is a limit of the volume, not a result.
 
+**Result, measured 11 Nov 2026 at 20:26 UTC.** The after window is saved in [`cwv-baselines/2026-11-11-phase1-after.json`](cwv-baselines/2026-11-11-phase1-after.json) (`--since 2026-11-06T15:05Z --until 2026-11-11T20:26Z --json`): 5.22 days, every row at 1-in-1, 47 human beacons, 107 bot rows excluded.
+
+| Sitewide p75 (95% CI) | Before (122 beacons) | After (47 beacons) | Overlap |
+|---|---|---|---|
+| LCP | 0.90 s (0.72–1.15 s), 92.5% good | 0.71 s (0.38–0.95 s), 100% good | yes |
+| INP | 24 ms (8–56 ms), 98.6% good | 40 ms (16–80 ms), 100% good, 26 beacons | yes |
+| CLS | 0.001 (0.000–0.012) | 0.000 (0.000–0.018) | yes |
+
+Every interval overlaps the baseline's, so by the rule above **this shows no change, better or worse**. Real visitors passed all three Core Web Vitals before the Phase 1 deploy and still pass them after it. Mobile had 13 beacons, too few for an interval. By page, the homepage LCP p75 was 0.26 s from 13 beacons (0.97 s from 30 before) and the paid landing page 0.80 s from 6 (1.04 s from 18): anecdotes at these counts, not results. The paid page now loads the tag container at parse time (7 Nov, `src/lib/gtm-loader.ts`) and shows no sign of a cost from it.
+
+**Volume, which matters more than the vitals here.** Human beacons fell from about 21 a day to about 9, while bot rows rose from 35 to 107. A breakdown by browser shows all 107 bot rows are headless Chrome on Linux from the US, the signature of the audit's own Lighthouse and Playwright runs on 6 and 7 Nov, so the filter is excluding the right rows. The fall in human beacons is not explained by anything in this data; the Web Analytics beacon is independent of the tag-loading change. Check visits for the same two windows in GA4 before reading anything into it.
+
+**Next:** a second after window at about 28 days (`--days 6 --json` around 4 Dec, saved the same day), which may have enough beacons for the intervals to separate.
+
 For a future deploy, run step 1 (`--days 6 --json`) before deploying.

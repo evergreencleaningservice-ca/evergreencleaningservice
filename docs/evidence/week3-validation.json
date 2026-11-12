@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-11-10T22:16:53Z",
+  "article": "/commercial-cleaning-quote-checklist/",
+  "suite": {
+    "files": 52,
+    "tests": 1178,
+    "passed": 1177,
+    "failed": 1,
+    "failure": "Pinned sitemap census expected 60 URLs; the new article correctly produces 61."
+  },
+  "resolution": {
+    "change": "Updated the existing sitemap URL census from 60 to 61.",
+    "affectedSuite": "tests/build/headings-and-links.test.ts",
+    "passed": 41,
+    "failed": 0
+  },
+  "preview": {
+    "viewports": [
+      "default desktop (2034 px)",
+      "390 px",
+      "320 px"
+    ],
+    "documentOverflow": false,
+    "tableScrollsWithinContainer": true,
+    "faqKeyboardEnterOpens": true,
+    "faqCount": 6,
+    "articleH2Count": 7
+  },
+  "editorial": {
+    "approximateWords": 1670,
+    "faqWords": [
+      46,
+      51,
+      50,
+      52,
+      50,
+      51
+    ],
+    "metaTitleLengths": [
+      52,
+      47,
+      51,
+      53,
+      55
+    ],
+    "metaDescriptionLengths": [
+      140,
+      131,
+      124,
+      134,
+      123
+    ]
+  },
+  "notes": [
+    "Linux validation uses a local Git clone with full available history and LF files, needed by sitemap dates and source-pattern fixtures.",
+    "No quote form was submitted for this article-only release.",
+    "Browser connection was lost after preview checks; production will be verified with HTTP and rendered-HTML checks."
+  ]
+}

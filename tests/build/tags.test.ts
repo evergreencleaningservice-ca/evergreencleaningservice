@@ -98,8 +98,8 @@ describe('every post’s tags are real', () => {
   const dir = path.join(repo, 'src/content/blog');
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md'));
 
-  it('covers all 24 posts, including the three office cleaning guides (25 until 6 Nov 2026: plus the checklist guide, less the two merged posts)', () => {
-    expect(files).toHaveLength(24);
+  it('covers all 25 posts, including the Week 3 quote checklist', () => {
+    expect(files).toHaveLength(25);
   });
 
   it('uses no tag slug that is not in the registry', () => {
@@ -142,7 +142,7 @@ describe('the reconciliation — our counts equal the original’s', () => {
   it('pages at ten, like the original', () => {
     expect(count(read('tag', 'cleaning', 'index.html'), /<article/g)).toBe(10);
     // 3 since 6 Nov 2026: the office cleaning checklist guide carries the tag.
-    expect(count(read('tag', 'cleaning', 'page', '2', 'index.html'), /<article/g)).toBe(3);
+    expect(count(read('tag', 'cleaning', 'page', '2', 'index.html'), /<article/g)).toBe(4);
   });
 
   it('builds no archive for a tag with no posts', () => {
@@ -208,12 +208,13 @@ describe('the sidebar links services, not tag archives', () => {
   it('puts the search phrases on the pages that should rank for them', () => {
     const html = sidebar();
     expect(html).toMatch(/href="\/services\/office-cleaning\/"[^>]*>\s*Commercial office cleaning\s*</);
-    expect(html).toMatch(/href="\/services\/commercial-cleaning\/"[^>]*>\s*Commercial cleaning &amp; janitorial\s*</);
+    expect(html).toMatch(/href="\/services\/commercial-cleaning\/"[^>]*>\s*Commercial cleaning\s*</);
+    expect(html).toMatch(/href="\/services\/janitorial-services\/"[^>]*>\s*Janitorial services\s*</);
   });
 
   it('every service link resolves to a page that was built', () => {
     const hrefs = [...sidebar().matchAll(/href="(\/services\/[a-z0-9-]+\/)"/g)].map((m) => m[1]);
-    expect(hrefs.length).toBe(6);
+    expect(hrefs.length).toBe(7);
     const missing = hrefs.filter((href) => !exists(href.slice(1), 'index.html'));
     expect(missing).toEqual([]);
   });

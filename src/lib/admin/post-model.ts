@@ -41,7 +41,7 @@ export interface Service {
 export const SERVICES: Service[] = [
   { id: 'office', label: 'Office cleaning', noun: 'office cleaning', href: '/services/office-cleaning/', tags: ['commercial-office-cleaning', 'office', 'commercial-cleaning'] },
   { id: 'commercial', label: 'Commercial cleaning', noun: 'commercial cleaning', href: '/services/commercial-cleaning/', tags: ['commercial-cleaning', 'cleaning'] },
-  { id: 'janitorial', label: 'Janitorial services', noun: 'janitorial services', href: '/services/commercial-cleaning/', tags: ['janitorial-services', 'commercial-cleaning'] },
+  { id: 'janitorial', label: 'Janitorial services', noun: 'janitorial services', href: '/services/janitorial-services/', tags: ['janitorial-services', 'commercial-cleaning'] },
   { id: 'industrial', label: 'Industrial cleaning', noun: 'industrial cleaning', href: '/services/industrial-cleaning/', tags: ['commercial-cleaning', 'cleaning'] },
   { id: 'warehouse', label: 'Warehouse cleaning', noun: 'warehouse cleaning', href: '/services/industrial-cleaning/', tags: ['commercial-cleaning', 'cleaning'] },
   { id: 'disinfection', label: 'Disinfection cleaning', noun: 'disinfection cleaning', href: '/services/disinfection-cleaning/', tags: ['cleaning', 'commercial-cleaning'] },

@@ -336,6 +336,7 @@ export const nav: NavItem[] = [
     children: [
       { label: 'Office Cleaning', href: '/services/office-cleaning/' },
       { label: 'Commercial Cleaning', href: '/services/commercial-cleaning/' },
+      { label: 'Janitorial Services', href: '/services/janitorial-services/' },
       { label: 'Post-Construction Cleaning', href: '/services/post-construction-cleaning/' },
       { label: 'Building Maintenance & Floor Care', href: '/services/building-maintenance/' },
       { label: 'Floor Stripping & Waxing', href: '/services/floor-stripping-waxing/' },

@@ -258,7 +258,7 @@ describe('which pages are indexable', () => {
        only `plants` post having been merged into the air-quality post, plus
        4 pagination pages, the office tag being back to ten posts. */
     const archives = pages.filter(isTagArchive);
-    expect(archives).toHaveLength(27);
+    expect(archives).toHaveLength(30);
     for (const page of archives) expect(robotsMetaOf(read(page))).toBe('follow, noindex');
   });
 });
