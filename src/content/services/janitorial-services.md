@@ -2,8 +2,14 @@
 seoTitle: "Janitorial Services in Toronto & the GTA | Evergreen"
 title: "Janitorial Services"
 h1: "Janitorial Services in Toronto and the GTA"
-description: "Janitorial services in Toronto and the GTA: washrooms, kitchens, floors, trash and touch points on a fixed schedule, after hours, by the same crew."
-summary: "Janitorial services are the scheduled upkeep of a building: washrooms, kitchens, floors, trash and the surfaces everyone touches, done the same way every visit. Evergreen Office Cleaning has provided them across Toronto and the GTA since 1989, after hours, by a crew that comes back to the same building."
+# 12 Nov 2026, SEO audit 11 Nov (content N-B, N-D; onpage N1): the body's
+# "What janitorial services are" restated this summary, so its few new facts
+# (the office address, the ready-each-morning point) moved up here and the
+# section went. "How a janitorial contract starts" went too: the shared
+# "How it works" block further down lists the same steps. The description
+# leads with the work instead of repeating the title's words.
+description: "Washrooms, kitchens, floors, trash and touch points cleaned on a fixed schedule in Toronto and the GTA, after hours, by the same crew."
+summary: "Janitorial services are the scheduled upkeep of a building: washrooms, kitchens, floors, trash and the surfaces everyone touches, done the same way every visit, so the space is ready each morning without anyone having to ask. Evergreen Office Cleaning has provided them across Toronto and the GTA since 1989, from one office at 243 Queen St W, after hours or at weekends, by a crew that comes back to the same building."
 image: "/images/janitorial-cart-preparation-supplies.jpg"
 imageAlt: "Janitorial cart stocked with cleaning supplies"
 fitHeading: "Buildings we provide janitorial services for"
@@ -69,16 +75,13 @@ related:
   - title: "Property Managers & Condos"
     href: "/industries/property-management/"
     text: "Common areas, lobbies and amenity rooms."
+  - title: "Commercial cleaning quote checklist"
+    href: "/commercial-cleaning-quote-checklist/"
+    text: "Tasks, schedules, supplies and exclusions to check before you sign."
 showAreas: true
 ctaHeading: "Get a janitorial service quote"
 ctaText: "Tell us about the building and how it is used. We will walk it with you and send a written scope and schedule. No obligation."
 ---
-
-## What janitorial services are
-
-Janitorial services are the scheduled, routine cleaning that keeps a building usable from one day to the next: emptying the trash, cleaning and restocking the washrooms, wiping down kitchens, cleaning the floors and disinfecting the surfaces people touch. The work is the same every visit, and that consistency is the point: the space is ready each morning without anyone having to ask.
-
-Evergreen Office Cleaning has provided janitorial services in Toronto and the GTA since 1989, from one office at 243 Queen St W. Crews work after hours or at weekends, so staff, customers and patients never have to work around them.
 
 ![Janitorial cart stocked with cleaning supplies](/images/janitorial-cart-preparation-supplies.jpg)
 
@@ -94,7 +97,7 @@ There is no single right frequency. It depends on how many people use the space,
 | Small or quiet offices | Two or three evenings a week | Less traffic; washrooms and kitchens still need regular attention |
 | Condo and multi-tenant common areas | Several times a week, or daily for lobbies | Entrances and elevators carry the whole building's traffic |
 
-Frequency is set task by task, not as one number. A small office might have its washrooms and kitchen done three times a week and its glass every second week. Whatever is agreed at the walkthrough is written into the proposal, so both sides know what each visit includes.
+Frequency is set task by task, not as one number. A small office might have its washrooms and kitchen done three times a week and its glass every second week. Whatever is agreed at the walkthrough is written into the proposal, so both sides know what each visit includes, and the same crew works to it from the first visit. The steps from first call to first visit are set out on [how we work](/our-process/).
 
 ## Janitorial services for different buildings
 
@@ -111,15 +114,6 @@ Frequency is set task by task, not as one number. A small office might have its 
 ## Janitorial services or commercial cleaning?
 
 The two terms overlap. Janitorial services are the recurring upkeep. [Commercial cleaning](/services/commercial-cleaning/) is the wider term: it includes janitorial work and also the periodic and one-off jobs routine cleaning does not cover, such as stripping and waxing floors, carpet extraction, deep cleans and post-construction clean-up. Most buildings need both, and most of our contracts include both: janitorial service on a fixed schedule, with periodic work planned through the year.
-
-## How a janitorial contract starts
-
-1. **You get in touch.** Send the quote form or call (416) 803-4880. We reply within 2 hours during office hours, Monday to Friday, 7am to 6pm.
-2. **A free walkthrough.** We walk the building with you rather than pricing it over the phone: the size, the washrooms and kitchens, the floors, the hours and any access rules.
-3. **A written scope.** The proposal lists each task, how often it is done and when, so nothing depends on someone remembering it.
-4. **The same crew from the first visit.** Your crew learns the building, and one account executive handles inspections, changes and extra work.
-
-The steps are set out in full on [how we work](/our-process/).
 
 ## Products and safety
 

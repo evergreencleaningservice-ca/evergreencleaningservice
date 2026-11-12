@@ -5,7 +5,9 @@ seoTitle: "Building Maintenance & Floor Care in Toronto | Evergreen"
 description: "Building maintenance cleaning for GTA properties — strip and wax, carpet extraction, high dusting, interior windows and pressure washing, on a plan."
 summary: "The periodic work that keeps a building looking maintained between routine cleans — floors, carpets, high surfaces, glass and exteriors — planned as a programme or booked when you need it."
 image: "/images/gta-office-building-exterior-plaza.jpg"
-imageAlt: "Office skyscrapers in downtown Toronto"
+# 12 Nov 2026, SEO audit 11 Nov (images N9): the alt ties the stock photo to
+# the service ("the kind of buildings") without claiming them as clients.
+imageAlt: "Glass office towers in Toronto's Financial District, the kind of buildings that need periodic maintenance cleaning"
 fitHeading: "Who it is for"
 fit:
   - "Property managers responsible for one building or a portfolio"
