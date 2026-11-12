@@ -291,10 +291,13 @@ describe('the legacy redirect map', () => {
     const pageSlash = redirects.filter((r) => r.to === `${r.from}/`);
     /* The blog consolidation of 30 Oct 2026 (SEO audit H7) added its own
        sections: retired posts, emptied tags and removed archive pages. */
+    /* An archive page that new posts have refilled is built again, and its
+       rule is skipped (scripts/redirects.mjs), so only the unbuilt ones count. */
+    const stillRemoved = removedArchivePageRedirects.filter(
+      ({ from }) => !fs.existsSync(path.join(out, from, 'index.html'))
+    );
     const consolidation = new Set(
-      bothSlashSpellings([...retiredPostRedirects, ...retiredTagRedirects, ...removedArchivePageRedirects]).map(
-        (r) => r.from
-      )
+      bothSlashSpellings([...retiredPostRedirects, ...retiredTagRedirects, ...stillRemoved]).map((r) => r.from)
     );
     const legacy = redirects.filter(
       (r) => r.to !== `${r.from}/` && r.from !== '/sitemap-0.xml' && !consolidation.has(r.from)
@@ -308,6 +311,19 @@ describe('the legacy redirect map', () => {
     expect(redirects.some((r) => r.from === '/tag/*')).toBe(false);
     expect(redirects.some((r) => r.from === '/tag/markup/')).toBe(true);
     expect(redirects.some((r) => r.from === '/author/*')).toBe(true);
+  });
+
+  it('never redirects a page the build serves', () => {
+    /* Cloudflare reads `_redirects` before it looks for an asset, so a rule
+       whose source is a built page hides that page behind a 301. On 12 Nov
+       2026 three tag archive pages refilled by new posts each redirected back
+       to page 1 while page 1 linked to them as "Older posts". The slash-less
+       rules point at the page itself and are not shadowing. */
+    const shadowed = redirects
+      .filter((r) => r.from.endsWith('/') && !r.from.includes('*'))
+      .filter((r) => fs.existsSync(path.join(out, r.from, 'index.html')))
+      .map((r) => `${r.from} -> ${r.to}`);
+    expect(shadowed).toEqual([]);
   });
 
   it('keeps the rules whose links this phase rewrote', () => {
