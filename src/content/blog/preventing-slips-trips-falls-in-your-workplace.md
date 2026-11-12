@@ -40,7 +40,7 @@ In most cases, slip and trip accidents happen due to the loss of grip between th
 
 ### Preventing Slip, Trip, and Fall
 
-The best way to deal with a challenge is to eliminate that which causes the problem. Ensuring proper arrangement and [seeking janitorial services](/services/commercial-cleaning/) can be a good starting point in preventing slip, trip, and fall accidents.
+The best way to deal with a challenge is to eliminate that which causes the problem. Ensuring proper arrangement and [seeking janitorial services](/services/janitorial-services/) can be a good starting point in preventing slip, trip, and fall accidents.
 
 Below are some detailed courses of action that will help you put an end to slips, trips, and falls at your workplace.
 

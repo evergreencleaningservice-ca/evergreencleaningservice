@@ -33,7 +33,7 @@ If a cleaner is hurt on your premises, or something is damaged, you want the cle
 
 ### Read the Contract
 
-Look at the term, the notice period to cancel, and what happens if you are not happy with the service. A company confident in its work does not need to lock you in for years; a reasonable notice period protects both sides.
+Look at the term, the notice period to cancel, and what happens if you are not happy with the service. A company confident in its work does not need to lock you in for years; a reasonable notice period protects both sides. Before you sign, check the quote and the agreement against our [commercial cleaning quote checklist](/commercial-cleaning-quote-checklist/), so both describe the same tasks, schedule, supplies and exclusions.
 
 ### Take Experience Into Account
 

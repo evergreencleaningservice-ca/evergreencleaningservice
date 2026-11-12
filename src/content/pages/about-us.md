@@ -23,7 +23,7 @@ Evergreen Office Cleaning is a commercial cleaning company based in Toronto. Sin
 ## What we do
 
 - [Office cleaning](/services/office-cleaning/): recurring after-hours cleaning of desks, kitchens, washrooms, floors and the touch points everyone shares.
-- [Commercial cleaning and janitorial services](/services/commercial-cleaning/) for retail, institutional and mixed-use buildings.
+- [Commercial cleaning](/services/commercial-cleaning/) and [janitorial services](/services/janitorial-services/) for retail, institutional and mixed-use buildings.
 - [Building maintenance and floor care](/services/building-maintenance/): [floor stripping and waxing](/services/floor-stripping-waxing/), carpet extraction, high dusting, glass and pressure washing.
 - [Industrial and warehouse cleaning](/services/industrial-cleaning/), scheduled around shifts.
 - [Post-construction cleaning](/services/post-construction-cleaning/), [disinfection cleaning](/services/disinfection-cleaning/) and [emergency clean-ups](/services/emergency-cleaning/).
