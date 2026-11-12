@@ -96,7 +96,17 @@ const RELATED_TEXT: Record<string, string> = {
    priority, from the same AVIF/WebP/JPEG set the body photos use. The body
    copy of the photo is dropped when the hero carries it. */
 const heroSet = data.image ? responsiveSet(data.image) : null;
-const HERO_SIZES = '100vw';
+
+/* A photo with no 1200w variant is not stretched across a desktop (12 Nov
+   2026, SEO audit 11 Nov, images N7). The graffiti removal photo's source is
+   only 645px wide, so its largest honest file is the 768w one, and at
+   `100vw` that was blown up to the full width of a 1920px screen. Such a
+   hero keeps the photo full-bleed on a phone, where 768 is enough, and from
+   768px up holds it to the right-hand half at no more than 645px, fading
+   into the dark band the text sits on. `sizes` follows, so the browser picks
+   the file for the box it will really fill. */
+const heroCompact = heroSet ? !heroSet.widths.includes(1200) : false;
+const HERO_SIZES = heroCompact ? '(min-width: 1290px) 645px, (min-width: 768px) 50vw, 100vw' : '100vw';
 
 /* Eight bodies open with the same photo; with it in the hero that showed it
    twice, a screen apart. The body's copy (its <picture>, or a bare <img>,
@@ -147,13 +157,42 @@ const bodyHtml =
     )}
     is:inline
   />
+  {/* The hero photo, preloaded (12 Nov 2026, SEO audit 11 Nov, performance
+      P1 and images N11). It is the LCP element on every service and industry
+      page, and without this its request waited for the parser to reach the
+      <picture>: 0.5 to 1.0 s of load delay in the lab. The AVIF set only,
+      with the same URLs and sizes as the <picture>'s AVIF source, so the
+      preloaded file is the one the <picture> then uses: every browser that
+      honours `imagesrcset` also decodes AVIF. Pages without a hero emit
+      nothing. */}
+  {
+    heroSet && (
+      <link
+        slot="head"
+        rel="preload"
+        as="image"
+        type="image/avif"
+        imagesrcset={heroSet.avif}
+        imagesizes={HERO_SIZES}
+        fetchpriority="high"
+      />
+    )
+  }
 
-  <section class={heroSet ? 'offer-hero has-image' : 'offer-hero'}>
+  {/* `data-leadnet-gate` on the hero and the trust list below it: on a phone
+      the video bubble waits until both have scrolled past (LeadVideo.astro). */}
+  <section
+    class:list={['offer-hero', heroSet && 'has-image', heroCompact && 'is-compact']}
+    data-leadnet-gate={heroSet ? '' : undefined}
+  >
     {
       heroSet && (
         <picture class="offer-hero-media">
           <source type="image/avif" srcset={heroSet.avif} sizes={HERO_SIZES} />
           <source type="image/webp" srcset={heroSet.webp} sizes={HERO_SIZES} />
+          {/* No `decoding="async"` (12 Nov 2026, SEO audit 11 Nov, P1): this
+              is the LCP element, and async decoding lets the browser paint
+              the rest of the frame first. */}
           <img
             src={`/images/${heroSet.base}-${heroSet.widths.includes(768) ? 768 : heroSet.widths.at(-1)}.jpg`}
             srcset={heroSet.jpg}
@@ -163,7 +202,6 @@ const bodyHtml =
             height="800"
             loading="eager"
             fetchpriority="high"
-            decoding="async"
           />
         </picture>
       )
@@ -182,7 +220,7 @@ const bodyHtml =
     </div>
   </section>
 
-  <div class="container offer-trust">
+  <div class="container offer-trust" data-leadnet-gate={heroSet ? '' : undefined}>
     <TrustStrip />
   </div>
 
@@ -360,6 +398,17 @@ const bodyHtml =
   .offer-hero.has-image .btn-ghost:focus-visible {
     background: #fff;
     color: var(--brand-dark);
+  }
+  /* A hero with no 1200w file (see `heroCompact`): from 768px up the photo
+     takes the right-hand half, never wider than its 645px source, and fades
+     in from the left so there is no hard edge against the dark band. */
+  @media (min-width: 768px) {
+    .offer-hero.is-compact .offer-hero-media {
+      left: auto;
+      width: min(50%, 645px);
+      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 35%);
+      mask-image: linear-gradient(90deg, transparent 0, #000 35%);
+    }
   }
   @media (max-width: 767px) {
     .offer-hero.has-image {

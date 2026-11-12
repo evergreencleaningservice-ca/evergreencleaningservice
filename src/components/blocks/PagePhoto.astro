@@ -21,9 +21,15 @@ interface Props {
   alt: string;
   /** Below-the-fold photos are lazy; the first thing on a page is not. */
   eager?: boolean;
+  /** The page's LCP element: fetched at high priority and decoded in step
+   *  with the frame. Only for the first photo on a page. */
+  priority?: boolean;
 }
 
-const { src, alt, eager = false } = Astro.props;
+/* `priority` (12 Nov 2026, SEO audit 11 Nov, performance P2): the location
+   pages' photo is their LCP element, and Lighthouse flagged it as eager but
+   without `fetchpriority="high"`, unlike every other page's LCP image. */
+const { src, alt, eager = false, priority = false } = Astro.props;
 const set = responsiveSet(src);
 const size = jpegSize(path.join(process.cwd(), 'public', src)) ?? { width: 1200, height: 800 };
 const SIZES = '(min-width: 1200px) 730px, (min-width: 992px) 560px, 100vw';
@@ -40,8 +46,9 @@ const SIZES = '(min-width: 1200px) 730px, (min-width: 992px) 560px, 100vw';
       alt={alt}
       width={size.width}
       height={size.height}
-      loading={eager ? 'eager' : 'lazy'}
-      decoding="async"
+      loading={eager || priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : undefined}
+      decoding={priority ? undefined : 'async'}
     />
   </picture>
 </figure>

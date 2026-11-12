@@ -5,6 +5,10 @@ seoTitle: "Commercial Graffiti Removal in Toronto & the GTA | Evergreen"
 description: "Commercial graffiti removal in Toronto and the GTA — building exteriors, shutters, signage and glass, with the method matched to the surface."
 summary: "Graffiti removed from commercial property with a method chosen for the surface, quickly, because a tag left up attracts more."
 needsClientCopy: true
+# Kept on purpose (12 Nov 2026, SEO audit 11 Nov, images N7): the only photo
+# that shows graffiti being removed. Its source is 645px wide, so it has no
+# 1200w file, and OfferPage holds it to half the hero on a wide screen rather
+# than stretching it. Replace it only with a real photo at least 1200px wide.
 image: "/images/graffiti-removal-pressure-washer.jpg"
 imageAlt: "Pressure washer spraying graffiti off a stone wall"
 fitHeading: "Who it is for"
