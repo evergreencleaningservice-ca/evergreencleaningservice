@@ -118,7 +118,7 @@ We know that our crew becomes part of your customer's experience even when nobod
 
 ## Routine upkeep between periodic work
 
-Between the periodic jobs, trash, washrooms and their consumables, kitchens, floors and touch points are kept up on a fixed schedule, with the frequency of each task set at the walkthrough and written into the proposal. That routine is our [janitorial services](/services/janitorial-services/), whose page sets out the tasks and the usual frequency for each kind of building; for offices, the [office cleaning](/services/office-cleaning/) page goes into the office routine in detail.
+Between the periodic jobs, trash, washrooms and their consumables, kitchens, floors and touch points are kept up on a fixed schedule, with the frequency of each task set at the walkthrough and written into the proposal. That routine is what our [janitorial service](/services/janitorial-services/) covers; its page sets out the tasks and the usual frequency for each kind of building, and for offices the [office cleaning](/services/office-cleaning/) page goes into the routine in detail.
 
 ## Commercial cleaning, janitorial or office cleaning?
 
