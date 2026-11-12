@@ -2,8 +2,13 @@
 title: "Commercial Cleaning"
 h1: "Commercial Cleaning Services in Toronto and the GTA"
 seoTitle: "Commercial Cleaning Services in Toronto | Evergreen"
-description: "Commercial cleaning services in Toronto and the GTA: routine, periodic and one-off cleaning for retail, institutional and mixed-use buildings, after hours."
-summary: "Commercial cleaning is the cleaning of business premises, and janitorial services are the scheduled part of it: washrooms, kitchens, floors, trash and touch points, kept up the same way every visit. Evergreen Office Cleaning has provided both across Toronto and the GTA since 1989, scheduled around your opening hours and scoped on site, not over the phone."
+# 12 Nov 2026, SEO audit 11 Nov (content N-A, N-D; onpage N3): this page now
+# defines commercial cleaning only. /services/janitorial-services/ is the one
+# page that defines janitorial service and carries the "difference" FAQ, so
+# the two pages stop answering the same question. The description leads with
+# the answer instead of repeating the title's words.
+description: "Routine, periodic and one-off cleaning for retail, institutional and mixed-use buildings in Toronto and the GTA, after hours."
+summary: "Commercial cleaning is the routine, periodic and one-off cleaning of business premises: stores, banks, schools, clinics, public buildings and mixed-use buildings. Evergreen Office Cleaning has provided it across Toronto and the GTA since 1989, scheduled around your opening hours and scoped on site, not over the phone."
 image: "/images/lobby-floor-scrubber-commercial.jpg"
 imageAlt: "Close-up of a floor machine cleaning a commercial lobby"
 fitHeading: "Commercial spaces we clean"
@@ -55,8 +60,6 @@ faqs:
     a: "Yes. Strip and wax, commercial carpet cleaning and other periodic floor care are part of what we do, and can be added to a recurring contract or booked on their own."
   - q: "Are you insured?"
     a: "Yes. The business is bonded and covered by liability insurance and WSIB Ontario, and our cleaning staff undergo background screening."
-  - q: "What is the difference between commercial cleaning and janitorial services?"
-    a: "Janitorial services are the routine, day-to-day upkeep of a building: trash, washrooms, kitchens, floors and touch points, on a fixed schedule. Commercial cleaning is the wider term, and also covers periodic and one-off work such as strip and wax, carpet extraction, deep cleans and post-construction clean-up. Most of our contracts are both."
   - q: "How often should a commercial space be cleaned?"
     a: "It depends on how many people use it and how. Customer-facing spaces and busy washrooms are usually cleaned every day they are open; quieter areas a few times a week. We recommend a frequency at the walkthrough and put it in writing."
   - q: "Who supplies washroom paper and soap?"
@@ -69,7 +72,7 @@ related:
   - title: "How often should a commercial space be cleaned?"
     href: "/how-often-should-an-office-be-cleaned/"
     text: "Starting schedules by size and use, and what needs daily attention."
-  - title: "How office cleaning is priced in Toronto"
+  - title: "What drives office cleaning costs in Toronto"
     href: "/office-cleaning-cost-toronto-guide/"
     text: "What sets the rate and how to compare quotes on the same scope."
   - title: "Seasonal office cleaning checklist"
@@ -101,9 +104,9 @@ related:
 showAreas: true
 ---
 
-## What commercial cleaning and janitorial services are
+## What commercial cleaning covers
 
-Commercial cleaning is the cleaning of business premises: stores, branch offices, schools, clinics, public buildings and the shared areas of multi-tenant buildings. Janitorial services are the part of it that happens on a schedule: the routine upkeep of washrooms, kitchens, floors, trash and touch points, done the same way every visit. Evergreen Office Cleaning has provided both in Toronto and the GTA since 1989, from one office at 243 Queen St W.
+Commercial cleaning is the cleaning of business premises: stores, branch offices, schools, clinics, public buildings and the shared areas of multi-tenant buildings. It takes in the routine cleaning done on every visit, the periodic work done every few weeks or months, such as floor care and carpet extraction, and one-off jobs such as deep cleans and post-construction clean-up. Evergreen Office Cleaning has provided it in Toronto and the GTA since 1989, from one office at 243 Queen St W.
 
 ![Close-up of a floor machine cleaning a commercial lobby](/images/lobby-floor-scrubber-commercial.jpg)
 
@@ -113,11 +116,9 @@ Customers and clients form an opinion of a business the moment they walk in, and
 
 We know that our crew becomes part of your customer's experience even when nobody is talking to them, and that your products, fixtures and equipment were arranged on purpose. Our staff are trained to work around both, efficiently and without leaving the space looking rearranged.
 
-## Janitorial services: the daily upkeep
+## Routine upkeep between periodic work
 
-Janitorial work is what keeps a building usable from one day to the next: trash and recycling, washrooms and their consumables, kitchens and break rooms, floors and entrance mats, and the touch points everyone shares. How often each task is done depends on how the space is used: a busy store's washrooms and entrance need attention every day it is open, a back office may need it a few evenings a week. The frequency for each task is set at the walkthrough and written into the proposal.
-
-Our [janitorial services](/services/janitorial-services/) page sets out the full routine, the usual frequency for each kind of building and how a contract starts. For offices, the [office cleaning](/services/office-cleaning/) page goes into the office routine in detail.
+Between the periodic jobs, trash, washrooms and their consumables, kitchens, floors and touch points are kept up on a fixed schedule, with the frequency of each task set at the walkthrough and written into the proposal. That routine is what our [janitorial service](/services/janitorial-services/) covers; its page sets out the tasks and the usual frequency for each kind of building, and for offices the [office cleaning](/services/office-cleaning/) page goes into the routine in detail.
 
 ## Commercial cleaning, janitorial or office cleaning?
 
@@ -193,6 +194,6 @@ Whoever you choose, ask for these before you sign:
 4. **Screened staff and a consistent crew.** The same people on your building, not whoever is free.
 5. **One person to call.** An account executive who can change the scope or fix a problem without a ticket queue.
 
-Our post [how to decide on a cleaning company](/how-to-decide-on-a-cleaning-company/) covers the questions in more depth.
+Our post [how to decide on a cleaning company](/how-to-decide-on-a-cleaning-company/) covers the questions in more depth, and the [commercial cleaning quote checklist](/commercial-cleaning-quote-checklist/) lists the tasks, schedules, supplies and exclusions to check in a quote before you sign.
 
 No matter the size, shape or complexity of your commercial space, ask us about a free consultation and estimate.

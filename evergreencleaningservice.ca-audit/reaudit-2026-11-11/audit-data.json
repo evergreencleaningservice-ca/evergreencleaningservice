@@ -1,0 +1,300 @@
+{
+ "site": "https://www.evergreencleaningservice.ca/",
+ "domain": "www.evergreencleaningservice.ca",
+ "audit_date": "2026-11-12",
+ "summary": {
+  "health_score": 84,
+  "previous_health_score": 82,
+  "business_type": "Local Service (hybrid): commercial and office cleaning company, one office at 243 Queen St W, Toronto, serving Toronto and 9 GTA municipalities through 11 location pages",
+  "pages_crawled": 94,
+  "indexable_pages": 64,
+  "sitemap_urls": 62,
+  "data_limits": [
+   "No Search Console, GA4, Google Ads, GBP or CrUX access",
+   "Field data thin: about 9 human beacons a day",
+   "Lighthouse runs blocked analytics and Ads hits; best-practices 100 is an artefact",
+   "Paid landing pages not crawled or lab-tested"
+  ],
+  "top_findings": [
+   "Cost guide gives no Evergreen price while the Ads pages state 'From $30/hr' (client decision)",
+   "No case studies or own-work photos; all imagery stock",
+   "Thin third-party proof: 7 Google reviews, newest around September",
+   "Commercial and janitorial pages define the same thing and compete (fix in progress)",
+   "Quote checklist and janitorial page thinly linked (fix in progress)"
+  ],
+  "quick_wins": [
+   "Hero image preload on service pages (in progress)",
+   "Links into the quote checklist and janitorial page (in progress)",
+   "Cost guide updatedDate; llms.txt test coverage (round 2)",
+   "Janitorial page question H2s and reviews block (round 2)",
+   "44 px area links on service pages (round 2)"
+  ]
+ },
+ "categories": [
+  {
+   "name": "Technical SEO",
+   "weight": 0.22,
+   "score": 92,
+   "previous_score": 91,
+   "components": {
+    "technical": 92,
+    "sitemap": 93
+   },
+   "what_works": [
+    "All 94 URLs return 200; no broken or http:// internal links; no canonical mismatches",
+    "62 sitemap URLs indexable, self-canonical, honest lastmod (new janitorial page and quote checklist included)",
+    "HTML charset on every page; JS, fonts and XML unaffected; enforced CSP subset on every route",
+    "verify:indexing 24/24; seo:drift 0 changes"
+   ],
+   "findings": [
+    {
+     "title": "Service-page area links and breadcrumbs under 44 px",
+     "severity": "Low",
+     "description": "24-30 px on offer pages; the Phase A pass missed them",
+     "recommendation": "Round 2"
+    },
+    {
+     "title": "CSP still report-only",
+     "severity": "Info",
+     "description": "Stored reports unreadable with this token",
+     "recommendation": "Read a week of Workers Logs, then enforce"
+    }
+   ]
+  },
+  {
+   "name": "Content Quality",
+   "weight": 0.23,
+   "score": 74,
+   "previous_score": 72,
+   "components": {
+    "content": 74,
+    "sxo_gap": 63
+   },
+   "what_works": [
+    "Phase A copy fixes all observed live",
+    "New quote checklist is distinct and well sourced",
+    "Location review framing honest; Durham 'fixed evenings' removed"
+   ],
+   "findings": [
+    {
+     "title": "Cost guide gives no Evergreen price",
+     "severity": "High",
+     "description": "Ads pages state 'From $30/hr'; organic pages give none",
+     "recommendation": "Client decision"
+    },
+    {
+     "title": "No case studies or own-work photos",
+     "severity": "High",
+     "description": "All imagery stock (now labelled on the gallery)",
+     "recommendation": "Photoshoot and case studies"
+    },
+    {
+     "title": "Commercial and janitorial pages overlap",
+     "severity": "Medium",
+     "description": "Same definition and 'difference' explainer on both",
+     "recommendation": "In progress"
+    },
+    {
+     "title": "No named people",
+     "severity": "Medium",
+     "description": "No owner, author or reviewer",
+     "recommendation": "Client"
+    }
+   ]
+  },
+  {
+   "name": "On-Page SEO",
+   "weight": 0.2,
+   "score": 88,
+   "previous_score": 86,
+   "components": {
+    "onpage": 90,
+    "cluster_adjustment": -2
+   },
+   "what_works": [
+    "All descriptions 155 chars or fewer",
+    "Cost guide title has 'cost' again",
+    "25 distinct post closers; former orphans linked"
+   ],
+   "findings": [
+    {
+     "title": "Quote checklist has no in-body inlink",
+     "severity": "Medium",
+     "description": "Only template links",
+     "recommendation": "In progress"
+    },
+    {
+     "title": "Janitorial page thinly linked; 5 'janitorial services' anchors point at the commercial page",
+     "severity": "Medium",
+     "description": "Body links from 3 pages",
+     "recommendation": "In progress"
+    }
+   ]
+  },
+  {
+   "name": "Schema / Structured Data",
+   "weight": 0.1,
+   "score": 89,
+   "previous_score": 86,
+   "components": {
+    "schema": 89
+   },
+   "what_works": [
+    "areaServed derived from coverage.ts",
+    "Durham as three City nodes in Durham Region",
+    "One breadcrumb root"
+   ],
+   "findings": [
+    {
+     "title": "East York and York typed City",
+     "severity": "Low",
+     "description": "Former municipalities inside Toronto",
+     "recommendation": "Round 2"
+    }
+   ]
+  },
+  {
+   "name": "Performance (CWV)",
+   "weight": 0.1,
+   "score": 82,
+   "previous_score": 80,
+   "components": {
+    "performance": 82
+   },
+   "what_works": [
+    "Field p75 LCP 0.80 s, INP 48 ms, CLS 0.000",
+    "Home mobile lab 90"
+   ],
+   "findings": [
+    {
+     "title": "Photo heroes made LCP a late image on service pages",
+     "severity": "Medium",
+     "description": "Office lab LCP 1.56 -> 2.38 s; no preload",
+     "recommendation": "In progress: AVIF imagesrcset preload"
+    },
+    {
+     "title": "Location LCP photo lacks fetchpriority",
+     "severity": "Low",
+     "description": "Mississauga",
+     "recommendation": "In progress"
+    }
+   ]
+  },
+  {
+   "name": "AI Search Readiness",
+   "weight": 0.1,
+   "score": 75,
+   "previous_score": 74,
+   "components": {
+    "geo": 73,
+    "agentic": 80
+   },
+   "what_works": [
+    "All crawlers get full pages",
+    "llms.txt lists 11 locations and both guides",
+    "CAPTCHA error now points to email/phone"
+   ],
+   "findings": [
+    {
+     "title": "llms.txt test misses services and industries",
+     "severity": "Low",
+     "description": "Janitorial added by hand",
+     "recommendation": "Round 2"
+    },
+    {
+     "title": "Cost guide dateModified stale",
+     "severity": "Low",
+     "description": "Edited 7 Nov, reports 31 Oct",
+     "recommendation": "Round 2"
+    }
+   ]
+  },
+  {
+   "name": "Images",
+   "weight": 0.05,
+   "score": 89,
+   "previous_score": 90,
+   "components": {
+    "images": 89
+   },
+   "what_works": [
+    "0 images without dimensions or alt",
+    "Heroes in AVIF/WebP/JPG 480/768/1200"
+   ],
+   "findings": [
+    {
+     "title": "Graffiti hero stretched from a 645 px source",
+     "severity": "Medium",
+     "description": "No 1200w variant",
+     "recommendation": "In progress"
+    }
+   ]
+  }
+ ],
+ "supplementary_scores": {
+  "local_seo": {
+   "score": 64,
+   "previous_score": 61,
+   "note": "findings/local.md"
+  },
+  "search_experience_sxo": {
+   "score": 63,
+   "previous_score": 62,
+   "note": "findings/sxo.md"
+  },
+  "visual_mobile": {
+   "score": 86,
+   "previous_score": 87,
+   "note": "findings/visual.md"
+  },
+  "agent_readiness": {
+   "score": 80,
+   "previous_score": 77,
+   "note": "findings/agentic.md"
+  }
+ },
+ "action_plan": {
+  "phases": [
+   {
+    "name": "Round 1: developer, in progress",
+    "timeframe": "12 Nov",
+    "items": [
+     "Service copy: commercial vs janitorial, links, alts",
+     "Blog links: quote checklist, janitorial anchors",
+     "Heroes and UI: preload, fetchpriority, video bubble, graffiti hero, fallback links"
+    ]
+   },
+   {
+    "name": "Round 2: developer",
+    "timeframe": "Next",
+    "items": [
+     "llms.txt test coverage",
+     "Cost guide updatedDate",
+     "Janitorial page H2s, products, reviews",
+     "East York/York typing",
+     "Service-page 44 px area links",
+     "Title rule",
+     "Paid landing page lab test"
+    ]
+   },
+   {
+    "name": "Client and account owners",
+    "timeframe": "As supplied",
+    "items": [
+     "Pricing or 'from $30/hr' permission",
+     "Named people, photos, case studies",
+     "Durham confirmation",
+     "Reviews",
+     "Ads text and container hygiene",
+     "CSP logs",
+     "Search Console"
+    ]
+   }
+  ]
+ },
+ "artifacts": {
+  "findings_dir": "findings/",
+  "screenshots_dir": "screenshots/",
+  "raw_dir": "raw/"
+ }
+}

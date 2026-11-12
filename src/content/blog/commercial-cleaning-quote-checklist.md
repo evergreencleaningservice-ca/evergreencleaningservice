@@ -14,7 +14,7 @@ guide:
   imageCredit:
     name: "ArthurHidden"
     url: "https://www.magnific.com/free-photo/modern-office-space-interior_7621152.htm"
-  ctaHeading: "Put Your Commercial Cleaning Quote Checklist to Work"
+  ctaHeading: "Put Your Quote Checklist to Work"
   ctaText: "Book a free on-site walkthrough with Evergreen. We assess your building before pricing and provide a written scope covering what is cleaned, how often and when."
   ctaResponse: "An account executive replies within 2 hours during office hours, Mon–Fri, 7 a.m.–6 p.m."
   contents:
@@ -23,20 +23,20 @@ guide:
     - { label: "Price, exclusions and extra work", id: "price-exclusions" }
     - { label: "Example: a 6,000 sq ft office", id: "sample-office-scope" }
     - { label: "Questions before signing", id: "before-signing" }
-    - { label: "Review your quote with Evergreen", id: "review-your-quote" }
+    - { label: "Getting a quote from Evergreen", id: "review-your-quote" }
     - { label: "Frequently asked questions", id: "frequently-asked-questions" }
   related:
     - { slug: "office-cleaning-cost-toronto-guide", label: "What Drives Office Cleaning Costs in Toronto" }
     - { slug: "how-often-should-an-office-be-cleaned", label: "How Often Should an Office Be Cleaned?" }
 ---
 
-<h2 id="quote-checklist">What Should a Commercial Cleaning Quote Checklist Cover?</h2>
+<h2 id="quote-checklist">What should a cleaning quote cover?</h2>
 
-A complete quote should identify the premises, tasks, frequency, service hours, supplies, price, exclusions and responsibilities on both sides. A monthly total beside “general cleaning” leaves too much open to interpretation.
+A complete [commercial cleaning](/services/commercial-cleaning/) quote should identify the premises, tasks, frequency, service hours, supplies, price, exclusions and responsibilities on both sides. A monthly total beside “general cleaning” leaves too much open to interpretation.
 
 Start with the building address, the areas included and the person authorized to approve work. For [recurring office cleaning](/services/office-cleaning/), ask for a room-by-room task schedule rather than a promise to keep everything clean.
 
-Use the following commercial cleaning quote checklist when reviewing a written proposal. Each item should have a clear answer in the quote or an attached scope that the agreement references.
+Use the following checklist when reviewing a written proposal. Each item should have a clear answer in the quote or an attached scope that the agreement references.
 
 <div class="guide-table guide-scope" role="region" aria-label="Commercial cleaning quote review checklist" tabindex="0">
 <table>
@@ -56,7 +56,7 @@ Use the following commercial cleaning quote checklist when reviewing a written p
 
 Keep the final scope with the signed agreement. If an important detail exists only in an email, ask for it to be carried into the final documents.
 
-<h2 id="tasks-frequency-supplies">How Detailed Should Tasks, Frequency and Supplies Be?</h2>
+<h2 id="tasks-frequency-supplies">How detailed should tasks, frequency and supplies be?</h2>
 
 The commercial cleaning scope of work should say what happens in each area and on which visits. It should also distinguish cleaning labour from the products and consumables needed to complete it.
 
@@ -83,7 +83,7 @@ If product selection matters to your facility, review our [Green Clean Products 
 <figcaption>Specify counters, sinks, floors and appliance interiors separately in a kitchen scope. Illustrative stock photograph.</figcaption>
 </figure>
 
-<h2 id="price-exclusions">How Should Price, Exclusions and Extra Work Be Presented?</h2>
+<h2 id="price-exclusions">How should price, exclusions and extra work be presented?</h2>
 
 The price should be tied to the written scope, with routine charges, exclusions and separately approved work easy to identify. Ask whether the amount is per visit or per month, stated in CAD, and before or after HST.
 
@@ -101,7 +101,7 @@ Ask who can approve additional work and how that approval is recorded. The comme
 
 At Evergreen, every quote follows a free on-site walkthrough. We assess the actual building rather than price it over the phone.
 
-<h2 id="sample-office-scope">What Would a Quote for a 6,000 sq ft Office Look Like?</h2>
+<h2 id="sample-office-scope">What would a quote for a 6,000 sq ft office look like?</h2>
 
 A quote for a 6,000 sq ft office should describe its actual rooms and usage, not simply multiply its area by a rate. This illustrative planning example assumes two washrooms, one kitchen and service five nights a week; it is not a client story or a price estimate.
 
@@ -122,7 +122,7 @@ Compare two proposals against those same assumptions. One may include kitchen ap
 <figcaption>Washroom fixtures, replenishment and visit frequency each need a clear responsibility. Illustrative stock photograph.</figcaption>
 </figure>
 
-<h2 id="before-signing">What Should You Ask Before Signing a Cleaning Agreement?</h2>
+<h2 id="before-signing">What should you ask before signing a cleaning agreement?</h2>
 
 Ask who will attend the building, who manages the account, how concerns are handled and how changes are agreed. Then check that the written answers match the proposal and agreement.
 
@@ -140,13 +140,13 @@ Common mistakes include assuming “deep cleaning” covers every surface, leavi
 
 Evergreen uses the same crew every visit and one account executive for inspections, changes and extra work. We carry WSIB Ontario coverage and liability insurance, with bonded, background-screened staff; after-hours and weekend scheduling is available.
 
-<h2 id="review-your-quote">Use Your Commercial Cleaning Quote Checklist With Evergreen</h2>
+<h2 id="review-your-quote">Getting a quote from Evergreen</h2>
 
-Use your commercial cleaning quote checklist to turn a proposal into a clear agreement about the work your building needs. A written commercial cleaning scope of work gives both your team and the cleaning crew something concrete to follow.
+A checklist like this one turns a proposal into a clear agreement about the work your building needs. A written scope of work gives both your team and the cleaning crew something concrete to follow.
 
 For a Toronto or GTA property, call <a href="tel:+14168034880" data-call-location="content">+1 (416) 803-4880</a> or [request a free walkthrough through our quote form](/request-a-quote/). An account executive replies within 2 hours during office hours, Mon–Fri, 7 a.m.–6 p.m.
 
-<h2 id="frequently-asked-questions">Frequently Asked Questions About Commercial Cleaning Quotes</h2>
+<h2 id="frequently-asked-questions">Frequently asked questions about commercial cleaning quotes</h2>
 
 <details><summary><h3>Should a commercial cleaning quote include supplies?</h3></summary>
 <p>A commercial cleaning quote should state who supplies products, equipment and consumables, even when some are billed separately. Ask specifically about soap, paper towels, toilet tissue and bin liners. Confirm who orders them, where stock is kept and whether replenishment labour is included in regular visits.</p>

@@ -178,7 +178,9 @@ const webPage = webPageSchema({
     <div class="container">
       <div class="loc-grid location-page">
         <div class="loc-main">
-          {local && <PagePhoto src={local.photo.src} alt={local.photo.alt} eager />}
+          {/* The page's first photo and its LCP element, so high priority
+              (12 Nov 2026, SEO audit 11 Nov, performance P2). */}
+          {local && <PagePhoto src={local.photo.src} alt={local.photo.alt} priority />}
           {
             location.detail ? (
               <Fragment>

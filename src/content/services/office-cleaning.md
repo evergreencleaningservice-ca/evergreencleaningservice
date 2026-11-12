@@ -72,7 +72,9 @@ related:
   - title: "How often should an office be cleaned?"
     href: "/how-often-should-an-office-be-cleaned/"
     text: "Office cleaning frequency by size and occupancy, with a task checklist."
-  - title: "How office cleaning is priced in Toronto"
+  # 12 Nov 2026, SEO audit 11 Nov (onpage N5): matches the cost guide's H1,
+  # so the strongest service pages send it an anchor that says "costs".
+  - title: "What drives office cleaning costs in Toronto"
     href: "/office-cleaning-cost-toronto-guide/"
     text: "Office cleaning cost in Toronto: the factors, a worked budget and how to compare quotes."
   - title: "Seasonal office cleaning checklist"
@@ -103,7 +105,7 @@ ctaText: "Tell us about your office and we will arrange a time to walk it with y
 
 ## What is office cleaning?
 
-Office cleaning is the recurring cleaning of a workplace's desks, floors, washrooms, kitchens and shared areas, usually done after staff leave. Evergreen Office Cleaning has done it for Toronto and GTA businesses since 1989, with a crew assigned to each building and one account executive per client.
+Office cleaning is the recurring cleaning of a workplace's desks, floors, washrooms, kitchens and shared areas, usually done after staff leave. It is the office form of [janitorial services](/services/janitorial-services/), the scheduled upkeep any building needs. Evergreen Office Cleaning has done it for Toronto and GTA businesses since 1989, with a crew assigned to each building and one account executive per client.
 
 ## How often should an office be cleaned?
 

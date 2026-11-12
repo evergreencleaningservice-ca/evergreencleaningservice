@@ -5,7 +5,9 @@ seoTitle: "Property Management & Condo Cleaning in Toronto | Evergreen"
 description: "Cleaning for property managers and condos in Toronto and the GTA — common areas, lobbies, tenant spaces and one-off work at short notice."
 summary: "Recurring common-area cleaning, periodic floor and building maintenance, and one-off work at short notice — coordinated through one account executive who knows your buildings."
 image: "/images/gallery-condo-lobby-maintenance.jpg"
-imageAlt: "Empty corridor in a modern building"
+# 12 Nov 2026, SEO audit 11 Nov (images N9): the alt names what the stock
+# photo shows and why it is here, without presenting it as our own job.
+imageAlt: "Polished hard floor in a glass-walled common-area corridor of a commercial building"
 fitHeading: "Buildings we look after"
 fit:
   - "Condominium common areas — lobbies, corridors, amenity rooms and elevators"
@@ -64,7 +66,7 @@ Property management cleaning is the recurring cleaning of a managed building's c
 
 ## Buildings do not wait for a convenient time
 
-Property managers work to deadlines set by tenants, boards and inspections, and the cleaning has to fit around them. Evergreen looks after common areas and tenant spaces on a recurring schedule, and handles the one-off jobs — a suite before a move-in, a lobby before an inspection — when they come up.
+Property managers work to deadlines set by tenants, boards and inspections, and the cleaning has to fit around them. Evergreen looks after common areas and tenant spaces on a recurring schedule, and handles the one-off jobs — a suite before a move-in, a lobby before an inspection — when they come up. The recurring part is [janitorial service](/services/janitorial-services/): lobbies, corridors, elevators, washrooms and garbage rooms kept up on a fixed schedule.
 
 Having one person to call matters as much as the cleaning. Every building we look after has an account executive who is your direct contact for walkthroughs, inspections and changes to the scope.
 
