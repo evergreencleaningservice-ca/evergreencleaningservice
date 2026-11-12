@@ -1,0 +1,20 @@
+Lighthouse 12.8.2, median of 5, 11 Nov 2026 ~22:00 UTC, mobile unless noted; GA4/Ads/RUM hits blocked
+page            perf  LCP s  TBT ms    CLS  FCP s  SEO A11y   BP  LCP element
+home              90   2.46     328  0.000   1.34   92  100  100  <img src="https://img.evergreencleaningservice.ca/images/gallery-corporate-office-cl…" src
+                perf runs: [90, 89, 89, 90, 91]  LCP runs: [2.6, 2.46, 2.4, 2.56, 2.28]
+home-desktop      96   1.36      30  0.000   0.71   92  100  100  <img src="https://img.evergreencleaningservice.ca/images/gallery-corporate-office-cl…" src
+                perf runs: [96, 96, 95, 94, 99]  LCP runs: [1.36, 1.32, 1.49, 1.57, 0.96]
+office            91   2.38     313  0.000   1.27   92  100  100  <img src="https://img.evergreencleaningservice.ca/images/office-backpack-vacuum-toro…" src
+                perf runs: [86, 86, 91, 91, 94]  LCP runs: [2.63, 2.38, 2.51, 2.36, 2.06]
+janitorial        89   2.33     357  0.000   1.20   92  100  100  <img src="https://img.evergreencleaningservice.ca/images/janitorial-cart-preparation…" src
+                perf runs: [89, 89, 87, 93, 90]  LCP runs: [2.62, 2.33, 2.72, 2.08, 2.18]
+mississauga       89   2.34     332  0.000   1.18   92  100  100  <img src="https://img.evergreencleaningservice.ca/images/high-dusting-warehouse-lift…" src
+                perf runs: [93, 89, 88, 92, 88]  LCP runs: [2.24, 2.34, 2.82, 2.15, 2.52]
+post              91   1.70     346  0.000   1.32   92  100  100  <p class="guide-intro" data-astro-cid-m45rcmyc="">
+                perf runs: [91, 91, 95, 85, 92]  LCP runs: [1.7, 1.63, 1.27, 2.31, 1.79]
+
+Comparison notes (read before comparing with PHASE-4-MONITORING.md section 2, 6 Nov 19:30 UTC, same Lighthouse version):
+- Best practices 100 here vs 79 then is an ARTEFACT: the Ads/GA hits were blocked in these runs, which also removed the DoubleClick third-party cookie that cost the 21 points. It is not a site change.
+- 6 Nov medians: home 87 / LCP 2.43 s / TBT 425; home desktop 99 / 0.89 s; office 88 / 1.56 s / 450; post 89 / 1.41 s / 431; Mississauga 85 / 2.20 s / 522.
+- /services/office-cleaning/ now has a photo hero (#93); its LCP element is the hero image and simulated LCP moved 1.56 s -> 2.38 s (runs 2.06-2.63 s).
+- TBT is lower on every page (313-357 ms vs 425-522 ms). Part of that may be the blocked hit requests; treat it as not established.

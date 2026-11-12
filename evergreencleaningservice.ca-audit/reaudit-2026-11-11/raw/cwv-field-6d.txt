@@ -1,0 +1,39 @@
+Field Core Web Vitals: www.evergreencleaningservice.ca
+Source:  Cloudflare Web Analytics (real-user beacons), human traffic only
+Window:  2026-11-05T21:56:03Z to 2026-11-11T21:56:03Z (6 days)
+Beacons: 55 rows (55 at 1-in-1); 115 bot rows excluded
+Page loads seen by the beacon: est. 502 (bots included), 479 visits
+Thresholds (Google, at p75): LCP good <= 2.5 s, poor > 4 s; INP good <= 200 ms, poor > 500 ms; CLS good <= 0.1, poor > 0.25
+"good" column = share of page views in the good band; n = beacons reporting that metric; est. = weighted by sample interval.
+
+SITEWIDE
+             p75  rating         good      n  est.    95% CI of p75
+  LCP     0.80 s  good          95.3%     43  43      0.40 s to 1.51 s
+  INP      48 ms  good         100.0%     30  30      16 ms to 72 ms
+  CLS      0.000  good         100.0%     35  35      0.000 to 0.018
+
+BY DEVICE
+  desktop  (41 beacons)
+               p75  rating         good      n  est.    95% CI of p75
+    LCP     0.63 s  good          93.8%     32  32      0.32 s to 2.41 s
+    INP      40 ms  good         100.0%     28  28      16 ms to 72 ms  (few samples: indicative)
+    CLS      0.000  good         100.0%     32  32      0.000 to 0.021
+  mobile  (14 beacons)
+               p75  rating         good      n  est.    95% CI of p75
+    LCP     0.80 s  good         100.0%     11  11      none (too few beacons)  (few samples: indicative)
+    INP      80 ms  good         100.0%      2  2       none (too few beacons)  (few samples: indicative)
+    CLS      0.000  good         100.0%      3  3       none (too few beacons)  (few samples: indicative)
+
+TOP 10 PATHS BY BEACONS
+  path                                     n    LCP p75   INP p75  CLS p75
+  /                                       18    0.26 s     16 ms    0.000 
+  /lp/commercial-cleaning-quote/           9    0.80 s     80 ms    0.018 
+  /contact-us/                             7    2.54 s~    72 ms    0.037 
+  /insights/                               2    1.51 s     16 ms    0.000 
+  /services/office-cleaning/               2    0.12 s      8 ms    0.000 
+  /.well-known/sgcaptcha/                  1    1.62 s         —    0.002 
+  /about-us/                               1    0.32 s         —    0.000 
+  /cleaning-demo-gallery/                  1    0.14 s         —        — 
+  /industries/medical-dental-clinics/      1         —     48 ms        — 
+  /industries/property-management/         1    0.21 s         —    0.000 
+  (n = est. beacons; ~ needs improvement, ! poor; a path with few beacons is anecdote, not a p75)

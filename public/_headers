@@ -96,6 +96,12 @@ https://:version.:subdomain.workers.dev/*
 /05031d78747205e65eb1ec4a04cc568d.txt
   Content-Type: text/plain; charset=utf-8
 
+# robots.txt the same way (SEO audit, 11 Nov 2026, technical N7). It is
+# ASCII and parsers default to UTF-8, so nothing a crawler reads changes;
+# it only makes every plain-text file the site serves name its charset.
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+
 # HTML names its charset in the header (SEO re-audit, 7 Nov 2026, item 11).
 # The pages already say <meta charset="utf-8">, but the asset layer sent a
 # bare `text/html`, so a crawler had to read into the body to learn it.
