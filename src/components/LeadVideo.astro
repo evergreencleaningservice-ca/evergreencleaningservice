@@ -781,6 +781,14 @@ const orbIsCropped = orbSrc !== src;
     // hero has scrolled out of view — out from under the sticky bar too,
     // hence the bottom margin — and a visitor who never scrolls never sees
     // it there. Other pages and wider screens are unchanged.
+    //
+    // THE SERVICE AND INDUSTRY PAGES' PHOTO HERO (12 Nov 2026, SEO audit 11
+    // Nov, visual V2). Those pages had no `#hero`, so the bubble came up on
+    // the timer alone, and once the taller photo hero arrived it sat over
+    // the trust list just below it ("Background-screened staff...") at
+    // 412px. OfferPage now marks the hero and that trust list with
+    // `data-leadnet-gate`, and the bubble waits until none of the gated
+    // elements is on screen, exactly as the homepage hero is waited for.
     if (!dismissed) {
       const delay = Number(panel.dataset.delay ?? 0);
       const reveal = () =>
@@ -794,19 +802,23 @@ const orbIsCropped = orbSrc !== src;
           },
           Number.isFinite(delay) ? delay : 0
         );
-      const hero = document.getElementById('hero');
+      const gates = [...document.querySelectorAll<HTMLElement>('#hero, [data-leadnet-gate]')];
       const narrow = window.matchMedia('(max-width: 479px)').matches;
       const afterHero = () => {
-        if (!hero || !narrow || !('IntersectionObserver' in window)) return reveal();
+        if (!gates.length || !narrow || !('IntersectionObserver' in window)) return reveal();
+        // Each callback reports only the elements that changed, so the
+        // latest state of every gate is kept here.
+        const showing = new Map<Element, boolean>();
         const watch = new IntersectionObserver(
           (entries) => {
-            if (entries.some((e) => e.isIntersecting)) return;
+            for (const e of entries) showing.set(e.target, e.isIntersecting);
+            if (showing.size < gates.length || [...showing.values()].some(Boolean)) return;
             watch.disconnect();
             reveal();
           },
           { rootMargin: '0px 0px -68px 0px' }
         );
-        watch.observe(hero);
+        gates.forEach((g) => watch.observe(g));
       };
       if (document.readyState === 'complete') afterHero();
       else window.addEventListener('load', afterHero, { once: true });

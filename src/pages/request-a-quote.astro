@@ -56,8 +56,11 @@ if (!entry) throw new Error('Missing content entry: pages/request-a-quote');
           We reply {REPLY_PROMISE}. A free walkthrough when you are ready, then a written quote. No
           obligation. Prefer not to use the form? Email the same details to <a
             href={`mailto:${nap.email}`}
+            class="rq-fallback"
             data-cta-location="content">{nap.email}</a
-          > or call <a href={nap.phoneHref} data-call-location="content">{nap.phoneDisplay}</a> and we
+          > or call <a href={nap.phoneHref} data-call-location="content" class="rq-fallback"
+            >{nap.phoneDisplay}</a
+          > and we
           reply the same way.
         </Fragment>
       </QuickQuoteForm>
@@ -86,5 +89,18 @@ if (!entry) throw new Error('Missing content entry: pages/request-a-quote');
 
   .rq-form {
     min-width: 0;
+  }
+
+  /* The email and phone fallbacks as touch targets (12 Nov 2026, SEO audit
+     11 Nov, visual V3): inline in the sentence they measured 22px tall at
+     360px, and the phone number is the fallback that matters most. Vertical
+     padding on an inline link grows the box a finger can land on to 44px
+     without moving a line of the paragraph, so the sentence reads as before.
+     Touch screens only: a mouse needs no help, and the padding would
+     otherwise widen the hover area over the lines above and below. */
+  @media (pointer: coarse) {
+    .rq-fallback {
+      padding-block: 11px;
+    }
   }
 </style>
