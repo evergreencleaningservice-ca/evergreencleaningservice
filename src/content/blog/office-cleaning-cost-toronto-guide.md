@@ -33,7 +33,7 @@ guide:
 
 <h2 id="office-cleaning-pricing">Why There Is No Single Office Cleaning Price</h2>
 
-There is no single price that fits every Toronto office. Two buildings with the same floor area can require different amounts of work: one may have open workstations and a small kitchenette, while the other has several washrooms, meeting rooms and a busy reception area. A useful quote starts with those details, and with [how often your office needs cleaning](/how-often-should-an-office-be-cleaned/). Stores, clinics and multi-tenant buildings are priced the same way under [janitorial services](/services/commercial-cleaning/); a [one-off deep clean](/benefits-of-commercial-deep-cleaning-services/) before a contract starts is quoted separately.
+There is no single price that fits every Toronto office. Two buildings with the same floor area can require different amounts of work: one may have open workstations and a small kitchenette, while the other has several washrooms, meeting rooms and a busy reception area. A useful quote starts with those details, and with [how often your office needs cleaning](/how-often-should-an-office-be-cleaned/). Stores, clinics and multi-tenant buildings are priced the same way under [janitorial services](/services/janitorial-services/); a [one-off deep clean](/benefits-of-commercial-deep-cleaning-services/) before a contract starts is quoted separately.
 
 For an early budget, multiply an assumed cost per visit by the number of visits in a month. The table below demonstrates that calculation. **These are hypothetical CAD calculations before HST, not Evergreen quotes or verified GTA market averages.** The assumed $100–$300 per visit is an arithmetic input, not a statement of what your office should cost.
 
@@ -144,11 +144,11 @@ Using 52 ÷ 12 rather than four weeks avoids leaving four weeks of service out o
 
 <h2 id="comparing-cleaning-quotes">How Can You Compare Office Cleaning Quotes and Control Costs?</h2>
 
-The most useful comparison is between written scopes with the same rooms, tasks and schedule. A lower monthly amount may cover fewer visits, leave out supplies or omit periodic work. Ask each provider to price the same requirements so that the differences are visible.
+The most useful comparison is between written scopes with the same rooms, tasks and schedule. A lower monthly amount may cover fewer visits, leave out supplies or omit periodic work. Ask each provider to price the same requirements so that the differences are visible. The points below are a summary; our [commercial cleaning quote checklist](/commercial-cleaning-quote-checklist/) is the detailed version, item by item, with a sample scope to check a proposal against.
 
 ### Compare written scopes of work
 
-List every room and the tasks expected there. Record the frequency, the service window, any exclusions and how additional work is authorized. Ask whether the quoted amount includes equipment and cleaning products, and whether an initial clean is separate. Avoid agreeing to extra work without a written price or approval process.
+List every room and the tasks expected there, with the frequency, the service window, any exclusions and how additional work is authorized. Ask whether the quoted amount includes equipment and cleaning products, and whether an initial clean is separate. Avoid agreeing to extra work without a written price or approval process.
 
 ### Check insurance, bonding and WSIB
 
