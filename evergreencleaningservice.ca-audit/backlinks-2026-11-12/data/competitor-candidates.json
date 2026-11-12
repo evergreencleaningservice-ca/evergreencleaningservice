@@ -1,0 +1,50 @@
+{
+  "generated": "2026-11-12",
+  "method": "8 WebSearch queries (US-based engine, not google.ca); company domains resolved and verified with read-only curl (HTTP status, <title>, canonical). Moz url_metrics attempted once for 16 targets and once for 1 target; both refused.",
+  "queries": [
+    "office cleaning Toronto",
+    "commercial cleaning Toronto",
+    "janitorial services Toronto",
+    "commercial cleaning company Toronto",
+    "office cleaning Mississauga",
+    "commercial cleaning Vaughan",
+    "office cleaning North York",
+    "office cleaning company Toronto GTA janitorial contract"
+  ],
+  "moz": {
+    "usage_before": 75,
+    "usage_after": 127,
+    "url_metrics_status": 403,
+    "url_metrics_error": "The account does not have enough quota remaining for current period. (issue: insufficient-quota)",
+    "note": "No DA, linking root domains or spam score could be collected. The usage counter rose from 75 to 127 between my first and last check, but both of my url_metrics calls were refused, so those rows were most likely consumed by other parallel steps of this analysis. No metrics below are invented: all metric fields are null.",
+    "targets_attempted": ["evergreencleaningservice.ca","coverall.com","stratusclean.com","enviro-master.com","novabuildingmaintenance.com","wecleanit.ca","swiftjanitorial.ca","titanedgecleaning.com","hestiaco.ca","masterbuildingservices.ca","cancore.com","generationscleaning.ca","mcagroup.ca","auraclean.ca","hellamaid.ca","cleanspaceco.com"]
+  },
+  "candidates": [
+    {"domain":"coverall.com","name":"Coverall (Toronto support center)","type":"national franchise","appearances":6,"how_it_appeared":"own domain: Toronto/GTA location article","site_title":null,"domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":true},
+    {"domain":"stratusclean.com","name":"Stratus Building Solutions (Toronto Central / Toronto North / Mississauga)","type":"national franchise","appearances":5,"how_it_appeared":"own domain: location and service-area pages (4 linked results + 1 summary mention)","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":true},
+    {"domain":"titanedgecleaning.com","name":"TitanEdge Commercial Cleaning","type":"local GTA commercial cleaner","appearances":5,"how_it_appeared":"Cloudflare Pages mirror titanedge-cleaning.pages.dev (canonical points to titanedgecleaning.com): services, city pages (Mississauga, Vaughan) and blog","site_title":"Toronto's #1 Commercial Cleaning Service | TitanEdge Commercial Cleaning","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":true},
+    {"domain":"enviro-master.com","name":"Enviro-Master (Peel / Halton / Mississauga)","type":"national franchise (hygiene and disinfection led)","appearances":4,"how_it_appeared":"own domain: Peel and Mississauga location pages","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":false},
+    {"domain":"novabuildingmaintenance.com","name":"Nova Building Maintenance","type":"local GTA commercial cleaner","appearances":4,"how_it_appeared":"never its own domain: self-published Notion (shared-clef-a3a.notion.site) and Google Sites pages that link back to novabuildingmaintenance.com","site_title":"Nova Building Maintenance | Commercial Office Cleaning | Janitorial | GTA","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":true},
+    {"domain":"wecleanit.ca","name":"We Clean It","type":"local Toronto commercial cleaner (20+ years claimed)","appearances":4,"how_it_appeared":"via a business-directory profile (blocal.dev4.xi-digital.com)","site_title":"Commercial Office Cleaning Services Toronto | We Clean It","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":true},
+    {"domain":"swiftjanitorial.ca","name":"Swift Janitorial Cleaning Services","type":"local GTA commercial cleaner (Markham)","appearances":4,"how_it_appeared":"via websites.ca directory listing","site_title":"Commercial Janitorial Cleaning Specialists in Markham, Toronto and GTA","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":false},
+    {"domain":"cleanspaceco.com","name":"CleanSpace Co.","type":"Toronto cleaner, home cleaning led","appearances":4,"how_it_appeared":"via a self-made Squarespace satellite site (sunfish-mango-r25y.squarespace.com/north-york) that links only to cleanspaceco.com","site_title":"Toronto Home Cleaning Services - CleanSpace Co","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":false},
+    {"domain":"cancore.com","name":"Cancore Building Services","type":"local Toronto/Etobicoke commercial cleaner (since 1984)","appearances":3,"how_it_appeared":"via its CareerPlug careers microsite, which links to www.cancore.com","site_title":"Commercial Property Maintenance Toronto and Etobicoke | Cancore","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":true},
+    {"domain":"hellamaid.ca","name":"Hellamaid","type":"Canadian cleaning platform, residential led","appearances":3,"how_it_appeared":"own domain: commercial-cleaning Toronto page, Vaughan house-cleaning page","site_title":"Canada Cleaning Services | Hellamaid | Book in 60 Seconds","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":false},
+    {"domain":null,"name":"Gemini Janitorial Service (Ajax)","type":"local GTA janitorial","appearances":3,"how_it_appeared":"Yellow Pages listing only; own domain not resolved","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":false},
+    {"domain":"generationscleaning.ca","name":"Generations Cleaning","type":"GTA commercial cleaner (100-500 employees per listing)","appearances":2,"how_it_appeared":"via greenbuildingcanada.ca directory listing; also named in Vaughan results","site_title":"Commercial Cleaning Company GTA | Generations Cleaning","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":false},
+    {"domain":"hestiaco.ca","name":"Hestia Co.","type":"local GTA commercial cleaner (since 2016)","appearances":2,"how_it_appeared":"Cloudflare Pages mirror hestia-co.pages.dev (canonical hestiaco.ca)","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":false},
+    {"domain":"masterbuildingservices.ca","name":"Master Building Services","type":"local GTA building services","appearances":2,"how_it_appeared":"Cloudflare Pages mirror masterbuildingservices.pages.dev (redirects to masterbuildingservices.ca)","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":false},
+    {"domain":"mcagroup.ca","name":"MCA Group","type":"local Toronto commercial cleaner","appearances":1,"how_it_appeared":"named in a search summary only","site_title":"Best Commercial Cleaning Services Toronto | Trusted Experts","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":false},
+    {"domain":"auraclean.ca","name":"Auraclean","type":"local Toronto office cleaner","appearances":1,"how_it_appeared":"named in a search summary only","domain_authority":null,"linking_root_domains":null,"spam_score":null,"selected":false}
+  ],
+  "excluded": [
+    {"name":"HomeStars, Clutch, RenovationFind, Yellow Pages, Bark, websites.ca, blocal, Yabsta","reason":"directories"},
+    {"name":"CleanLink, Green Building Canada, Job Bank, Indeed, Talent.com, neighbourhoodguide.com","reason":"content, trade-press or job sites"},
+    {"name":"rbmservicesinc.com (Blogspot satellite)","reason":"US company with a Toronto doorway page; links from rmbservicesinc.blogspot.com point to Atlanta, San Antonio and Gainesville pages"},
+    {"name":"impactcommercialcleaning.ca","reason":"Vancouver based"},
+    {"name":"bluesevencleaning.com, maidpro.com, meninkilts.com","reason":"residential or window/exterior services, not office cleaning"},
+    {"name":"GitBook / Yolasite pages with phone +1-437-660-3439 or (647) 689-7522","reason":"spam doorway pages with no identifiable company"}
+  ],
+  "selected_six": ["coverall.com","stratusclean.com","titanedgecleaning.com","novabuildingmaintenance.com","cancore.com","wecleanit.ca"],
+  "alternates": ["swiftjanitorial.ca","generationscleaning.ca","enviro-master.com","hestiaco.ca"]
+}

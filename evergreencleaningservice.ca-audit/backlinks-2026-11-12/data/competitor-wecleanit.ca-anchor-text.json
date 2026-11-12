@@ -1,0 +1,24 @@
+{
+ "source": "Moz API v2 /v2/anchor_text",
+ "pulled": "2026-11-12",
+ "target": "wecleanit.ca",
+ "request_body": {
+  "target": "wecleanit.ca/",
+  "scope": "root_domain",
+  "limit": 25
+ },
+ "call_made": true,
+ "response_status": 403,
+ "response_error": "HTTP 403: The account does not have enough quota remaining for current period. (issue: insufficient-quota)",
+ "rows_charged": 0,
+ "note": "One probe made; refused for quota. Not retried.",
+ "moz_usage": {
+  "before": {
+   "rows_consumed": 127
+  },
+  "after": {
+   "rows_consumed": 127
+  }
+ },
+ "results": []
+}

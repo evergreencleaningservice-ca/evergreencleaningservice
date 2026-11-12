@@ -1,0 +1,1004 @@
+{
+ "method": "curl -L, 1 request per second, 2026-11-12, against https://www.evergreencleaningservice.ca. Substitute for Moz top_pages (quota exhausted): every legacy path in the repo research (Wayback-derived) and redirects.ts, plus common WordPress guesses and slashless spellings. The CDX API itself was unreachable from this network.",
+ "results": [
+  {
+   "path": "http://www.evergreencleaningservice.ca/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/",
+   "final_title": "Commercial Cleaning Company in Toronto Since 1989 | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "https://evergreencleaningservice.ca/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/",
+   "final_title": "Commercial Cleaning Company in Toronto Since 1989 | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "http://evergreencleaningservice.ca/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/",
+   "final_title": "Commercial Cleaning Company in Toronto Since 1989 | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/5-cleaning-products-you-should-have-in-your-office/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/5-cleaning-products-you-should-have-in-your-office/",
+   "final_title": "Office Cleaning Supplies List - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/5-cleaning-tips-to-help-make-your-office-relocation-seamless/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/5-cleaning-tips-to-help-make-your-office-relocation-seamless/",
+   "final_title": "5 Cleaning Tips to Help Make Your Office Relocation Seamless",
+   "soft_404": false
+  },
+  {
+   "path": "/5-easy-ways-to-keep-your-commercial-floor-clean/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/5-easy-ways-to-keep-your-commercial-floor-clean/",
+   "final_title": "Commercial Floor Care: Daily Maintenance Tips - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/5-tips-for-maintaining-clean-office-air/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/commercial-cleaning-air-quality/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/commercial-cleaning-air-quality/",
+   "final_title": "Commercial Cleaning and Air Quality - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/6-common-cleaning-products-that-you-should-never-mix-together/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/6-common-cleaning-products-that-you-should-never-mix-together/",
+   "final_title": "6 Cleaning Products You Should Never Mix - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/a-cleaning-checklist-for-your-retail-store/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/a-cleaning-checklist-for-your-retail-store/",
+   "final_title": "Retail Store Cleaning Checklist - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/about-us/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/about-us/",
+   "final_title": "About Us - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/areas-in-your-office-where-germs-are-likely-hiding/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/areas-in-your-office-where-germs-are-likely-hiding/",
+   "final_title": "Office Germ Hotspots and Hand Hygiene - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/ask-the-office-cleaners-cleaning-break-rooms/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/ask-the-office-cleaners-cleaning-break-rooms/",
+   "final_title": "Ask the Office Cleaners: Cleaning Break Rooms - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/author/webmaster/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/category/blog/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/category/blog/",
+   "final_title": "Blog Archives - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/be-safe-from-coronavirus-work/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_title": "Disinfection Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/benefits-of-commercial-deep-cleaning-services/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/benefits-of-commercial-deep-cleaning-services/",
+   "final_title": "Commercial Deep Cleaning: What&#39;s Included - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/benefits-of-regular-commercial-cleaning-services/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
+   "final_title": "Commercial Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/blog/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/insights/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/insights/",
+   "final_title": "Commercial Cleaning Insights - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/blog/be-safe-from-coronavirus-work/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_title": "Disinfection Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/blog/clean-and-disinfect-public-areas-during-covid-19/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_title": "Disinfection Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/blog/control-allergies-workplace-with-professional-janitorial-services/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/commercial-cleaning-air-quality/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/commercial-cleaning-air-quality/",
+   "final_title": "Commercial Cleaning and Air Quality - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/blog/feed/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/rss.xml",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/rss.xml",
+   "final_title": "Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/blog/page/2/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/insights/page/2/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/insights/page/2/",
+   "final_title": "Commercial Cleaning Insights - Page 2 of 3 - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/blog/page/3/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/insights/page/3/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/insights/page/3/",
+   "final_title": "Commercial Cleaning Insights - Page 3 of 3 - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/blog/page/4/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/insights/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/insights/",
+   "final_title": "Commercial Cleaning Insights - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/blog/workplace-cleaning-checklist-winter/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/",
+   "final_title": "Seasonal Office Cleaning Checklist for Toronto - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/category/blog/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/category/blog/",
+   "final_title": "Blog Archives - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/category/blog/page/2/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/category/blog/page/2/",
+   "final_title": "Blog Archives - Page 2 of 3 - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/category/blog/page/3/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/category/blog/page/3/",
+   "final_title": "Blog Archives - Page 3 of 3 - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/category/blog/page/4/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/category/blog/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/category/blog/",
+   "final_title": "Blog Archives - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/clean-and-disinfect-public-areas-during-covid-19/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_title": "Disinfection Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/cleaning-check-list-dental-clinics/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/cleaning-check-list-dental-clinics/",
+   "final_title": "Dental Office Cleaning Checklist - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/cleaning-demo-gallery/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/cleaning-demo-gallery/",
+   "final_title": "Cleaning Services Photo Gallery - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/cleaning-protocols-for-daycares-and-schools/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/cleaning-protocols-for-daycares-and-schools/",
+   "final_title": "Daycare and School Cleaning Checklist - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/comments/feed/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/rss.xml",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/rss.xml",
+   "final_title": "Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/commercial-cleaning-air-quality/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/commercial-cleaning-air-quality/",
+   "final_title": "Commercial Cleaning and Air Quality - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/commercial-cleaning-techniques-to-avoid/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/commercial-cleaning-techniques-to-avoid/",
+   "final_title": "Commercial Cleaning Techniques To Avoid - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/commercial-cleaning/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
+   "final_title": "Commercial Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/contact-us/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/contact-us/",
+   "final_title": "Contact Us - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/control-allergies-workplace-with-professional-janitorial-services/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/commercial-cleaning-air-quality/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/commercial-cleaning-air-quality/",
+   "final_title": "Commercial Cleaning and Air Quality - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/coronavirus-bringing-more-urgency-cleaning/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_title": "Disinfection Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/covid-19-commercial-cleaning-expectations-examined/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_title": "Disinfection Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/day-night-which-is-the-best-routine-for-your-office/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/day-night-which-is-the-best-routine-for-your-office/",
+   "final_title": "Day Or Night \u2013 Which Is the Best Routine For Your Office?",
+   "soft_404": false
+  },
+  {
+   "path": "/does-hand-sanitization-actually-help-prevent-illnesses/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/areas-in-your-office-where-germs-are-likely-hiding/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/areas-in-your-office-where-germs-are-likely-hiding/",
+   "final_title": "Office Germ Hotspots and Hand Hygiene - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/emergency-service/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/emergency-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/emergency-cleaning/",
+   "final_title": "Emergency Commercial Cleaning in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/end-of-summer-cleaning/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/",
+   "final_title": "Seasonal Office Cleaning Checklist for Toronto - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/feed/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/rss.xml",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/rss.xml",
+   "final_title": "Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/green-clean-products/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/green-clean-products/",
+   "final_title": "Green Clean Products - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/how-to-decide-on-a-cleaning-company/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/how-to-decide-on-a-cleaning-company/",
+   "final_title": "How to Decide on a Cleaning Company - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/how-to-keep-your-office-fridge-clean/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/how-to-keep-your-office-fridge-clean/",
+   "final_title": "How to Keep Your Office Fridge Clean - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/how-to-properly-dust-office-building/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/how-to-properly-dust-office-building/",
+   "final_title": "How to Properly Dust an Office Building - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/how-to-take-care-of-plants-in-the-office/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/commercial-cleaning-air-quality/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/commercial-cleaning-air-quality/",
+   "final_title": "Commercial Cleaning and Air Quality - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/importance-of-hand-washing/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/areas-in-your-office-where-germs-are-likely-hiding/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/areas-in-your-office-where-germs-are-likely-hiding/",
+   "final_title": "Office Germ Hotspots and Hand Hygiene - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/industrial-cleaning/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/industrial-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/industrial-cleaning/",
+   "final_title": "Industrial &amp; Warehouse Cleaning in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/keep-your-office-at-home-clean/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/keep-your-office-at-home-clean/",
+   "final_title": "Keep Your Office at Home Clean - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/key-office-areas-to-have-cleaned-and-disinfected/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/areas-in-your-office-where-germs-are-likely-hiding/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/areas-in-your-office-where-germs-are-likely-hiding/",
+   "final_title": "Office Germ Hotspots and Hand Hygiene - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/modern-vs-old-fashioned-cleaning-methods/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/robotic-vs-manual-cleaning-which-will-ultimately-succeed/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/robotic-vs-manual-cleaning-which-will-ultimately-succeed/",
+   "final_title": "Robotic Floor Scrubbers vs Manual Cleaning - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/office-cleaning-fall/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/",
+   "final_title": "Seasonal Office Cleaning Checklist for Toronto - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/office-cleaning/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/office-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/office-cleaning/",
+   "final_title": "Office Cleaning Services in Toronto &amp; the GTA | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/office-layout-tips-to-make-cleaning-easier-and-faster/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/office-layout-tips-to-make-cleaning-easier-and-faster/",
+   "final_title": "Office Layout Tips to Make Cleaning Easier And Faster",
+   "soft_404": false
+  },
+  {
+   "path": "/portfolio/project-title-sixth/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/cleaning-demo-gallery/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/cleaning-demo-gallery/",
+   "final_title": "Cleaning Services Photo Gallery - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/preventing-slips-trips-falls-in-your-workplace/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/preventing-slips-trips-falls-in-your-workplace/",
+   "final_title": "Preventing Slips, Trips, and Falls in Your Workplace",
+   "soft_404": false
+  },
+  {
+   "path": "/privacy/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/privacy/",
+   "final_title": "Privacy Policy - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/qualities-top-cleaning-professionals/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/how-to-decide-on-a-cleaning-company/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/how-to-decide-on-a-cleaning-company/",
+   "final_title": "How to Decide on a Cleaning Company - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/request-a-quote/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/request-a-quote/",
+   "final_title": "Request a Quote - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/reviews/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/reviews/",
+   "final_title": "Client Reviews - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/robotic-vs-manual-cleaning-which-will-ultimately-succeed/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/robotic-vs-manual-cleaning-which-will-ultimately-succeed/",
+   "final_title": "Robotic Floor Scrubbers vs Manual Cleaning - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/services/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/services/",
+   "final_title": "All Cleaning Services | Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/services/disinfection-cleaning-service/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_title": "Disinfection Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/services/emergency-cleaning-services/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/emergency-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/emergency-cleaning/",
+   "final_title": "Emergency Commercial Cleaning in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/testimonial/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/reviews/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/reviews/",
+   "final_title": "Client Reviews - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/testimonials/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/reviews/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/reviews/",
+   "final_title": "Client Reviews - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/the-return-of-employees-post-covid-19-is-your-office-ready/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_title": "Disinfection Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/tips-tricks-for-spring-cleaning-your-office/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/",
+   "final_title": "Seasonal Office Cleaning Checklist for Toronto - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/workplace-cleaning-checklist-winter/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/seasonal-office-cleaning-checklist/",
+   "final_title": "Seasonal Office Cleaning Checklist for Toronto - Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/commercial-cleaning-toronto-gta/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
+   "final_title": "Commercial Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/office-cleaning-and-janitorial-toronto/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/office-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/office-cleaning/",
+   "final_title": "Office Cleaning Services in Toronto &amp; the GTA | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/property-management-and-building-maintenance/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/building-maintenance/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/building-maintenance/",
+   "final_title": "Building Maintenance &amp; Floor Care in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/disinfection-cleaning/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/disinfection-cleaning/",
+   "final_title": "Disinfection Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/pressure-washing-services/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/pressure-washing/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/pressure-washing/",
+   "final_title": "Commercial Pressure Washing in Toronto &amp; the GTA | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/graffiti-removal-services/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/graffiti-removal/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/graffiti-removal/",
+   "final_title": "Commercial Graffiti Removal in Toronto &amp; the GTA | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/emergency-cleaning/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/emergency-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/emergency-cleaning/",
+   "final_title": "Emergency Commercial Cleaning in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/submit-your-testimonial/",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/reviews/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/reviews/",
+   "final_title": "Client Reviews - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/sitemap.xml",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/sitemap-index.xml",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/sitemap-index.xml",
+   "final_title": "",
+   "soft_404": false
+  },
+  {
+   "path": "/sitemap_index.xml",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/sitemap-index.xml",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/sitemap-index.xml",
+   "final_title": "",
+   "soft_404": false
+  },
+  {
+   "path": "/wp-login.php",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/wp-login.php",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/about/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/about/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/contact/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/contact/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/careers/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/careers/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/privacy-policy/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/privacy-policy/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/get-a-quote/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/get-a-quote/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/free-quote/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/free-quote/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/quote/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/quote/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/locations/",
+   "first_hop": "200 ",
+   "final_status": "200",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/locations/",
+   "final_title": "Service Areas Across the GTA - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/faq/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/faq/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/home/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/home/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/our-services/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/our-services/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/janitorial-services/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/janitorial-services/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/office-cleaning-toronto/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/office-cleaning-toronto/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/commercial-cleaning-toronto/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/commercial-cleaning-toronto/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/portfolio/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/portfolio/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/team/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/team/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/our-team/",
+   "first_hop": "404 ",
+   "final_status": "404",
+   "redirects": 0,
+   "final_url": "https://www.evergreencleaningservice.ca/our-team/",
+   "final_title": "Page Not Found - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/about-us",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/about-us/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/about-us/",
+   "final_title": "About Us - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/contact-us",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/contact-us/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/contact-us/",
+   "final_title": "Contact Us - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/request-a-quote",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/request-a-quote/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/request-a-quote/",
+   "final_title": "Request a Quote - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/office-cleaning",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/office-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/office-cleaning/",
+   "final_title": "Office Cleaning Services in Toronto &amp; the GTA | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/commercial-cleaning",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
+   "final_title": "Commercial Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/reviews",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/reviews/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/reviews/",
+   "final_title": "Client Reviews - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/testimonials",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/reviews/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/reviews/",
+   "final_title": "Client Reviews - Evergreen Office Cleaning",
+   "soft_404": false
+  },
+  {
+   "path": "/commercial-cleaning-toronto-gta",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/commercial-cleaning/",
+   "final_title": "Commercial Cleaning Services in Toronto | Evergreen",
+   "soft_404": false
+  },
+  {
+   "path": "/office-cleaning-and-janitorial-toronto",
+   "first_hop": "301 https://www.evergreencleaningservice.ca/services/office-cleaning/",
+   "final_status": "200",
+   "redirects": 1,
+   "final_url": "https://www.evergreencleaningservice.ca/services/office-cleaning/",
+   "final_title": "Office Cleaning Services in Toronto &amp; the GTA | Evergreen",
+   "soft_404": false
+  }
+ ]
+}

@@ -1,0 +1,58 @@
+{
+ "domain": "cancore.com",
+ "checked": "2026-11-12",
+ "method": "read-only curl of public pages",
+ "pages_fetched": [
+  "/",
+  "/robots.txt",
+  "/sitemap.xml",
+  "/our-clients.php",
+  "/lpsea.php",
+  "/leed.php",
+  "/blogs.php",
+  "/cancores-management-team-and-founder.php",
+  "/property-maintenance-markham.php",
+  "/property-maintenance-oakville.php",
+  "/window-cleaning-vaughan.php",
+  "/window-cleaning-brampton.php"
+ ],
+ "title": "Commercial Property Maintenance Toronto and Etobicoke | Cancore",
+ "platform": "hand-built PHP site",
+ "sitemap_urls": 53,
+ "claims": [
+  "40 years of experience",
+  "100+ employees"
+ ],
+ "services_focus": "exterior and building services: window and high-rise window cleaning, snow removal, pressure washing, graffiti removal, landscaping, caulking, contracting; green cleaning and LEED pages",
+ "city_pages": {
+  "count": 21,
+  "pattern": "3 services (property maintenance, window cleaning, pressure washing and graffiti removal) x 7 cities (Mississauga, Brampton, Markham, Vaughan, Scarborough, Oakville, Etobicoke)",
+  "words_each": "about 290-320",
+  "word_sequence_similarity_city_name_removed": {
+   "property-maintenance markham vs oakville": 0.5,
+   "window-cleaning vaughan vs brampton": 0.6
+  }
+ },
+ "faq_style_pages": 9,
+ "trust_signals_on_site": [
+  "Certified through the Smart About Salt Winter Salt Management Program",
+  "Member in good standing of Landscape Ontario Horticultural Trades Association",
+  "Green Seal / Environmental Choice product standards named on /leed.php",
+  "Client list of 25 named firms (major landlords, hotels, a museum, a parking authority) with no outbound links"
+ ],
+ "blog": "single /blogs.php page, about 7,600 words, long property-manager guides (for example roof snow and ice removal)",
+ "outbound_links_home": [
+  "facebook.com",
+  "instagram.com",
+  "linkedin.com",
+  "google.com (map)"
+ ],
+ "footer_agency_credit": false,
+ "careers_microsite": {
+  "url": "https://cancore.careerplug.com/",
+  "status_today": "HTTP 202, redirects to app.careerplug.com sign-in, so a link to cancore.com could not be confirmed"
+ },
+ "manipulative_patterns_seen": [
+  "none confirmed on-site; city-by-service pages are short and partly templated (50-60% alike) but not city-swap copies"
+ ]
+}

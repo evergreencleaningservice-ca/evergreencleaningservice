@@ -1,0 +1,35 @@
+{
+ "source": "Moz API v2 (read-only)",
+ "pulled": "2026-11-12",
+ "target": "stratusclean.com",
+ "usage_before": {
+  "rows_consumed": 127
+ },
+ "usage_after": {
+  "rows_consumed": 127
+ },
+ "rows_charged": 0,
+ "calls": [
+  {
+   "endpoint": "/v2/url_metrics",
+   "body": {
+    "targets": [
+     "coverall.com",
+     "stratusclean.com"
+    ]
+   },
+   "status": 403,
+   "error": "The account does not have enough quota remaining for current period.",
+   "issue": "insufficient-quota"
+  },
+  {
+   "endpoint": "/v2/linking_root_domains, /v2/anchor_text, /v2/top_pages",
+   "status": "not called",
+   "reason": "quota exhausted; a 1-row probe on coverall.com was refused, so further calls would only repeat the 403"
+  }
+ ],
+ "linking_root_domains": [],
+ "anchor_text": [],
+ "top_pages": [],
+ "note": "No Moz rows were returned. Empty arrays mean 'not retrieved', not 'none exist'. Re-run when the quota period resets: linking_root_domains limit 100 sorted by source_domain_authority, anchor_text limit 25, top_pages limit 25 (about 150 rows)."
+}

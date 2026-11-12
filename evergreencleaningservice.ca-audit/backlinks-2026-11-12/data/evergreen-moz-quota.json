@@ -1,0 +1,28 @@
+{
+ "source": "Moz API v2",
+ "calls": [
+  {
+   "endpoint": "/v2/linking_root_domains page 2",
+   "status": 403
+  },
+  {
+   "endpoint": "/v2/anchor_text limit 50",
+   "status": 403
+  },
+  {
+   "endpoint": "/v2/top_pages limit 50",
+   "status": 403
+  },
+  {
+   "endpoint": "/v2/anchor_text limit 5 (single probe)",
+   "status": 403
+  }
+ ],
+ "error": "The account does not have enough quota remaining for current period. (issue: insufficient-quota)",
+ "usage_before": {
+  "rows_consumed": 75
+ },
+ "usage_after": {
+  "rows_consumed": 127
+ }
+}

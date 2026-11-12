@@ -1,0 +1,25 @@
+{
+ "source": "Moz API v2 /v2/linking_root_domains",
+ "pulled": "2026-11-12",
+ "target": "cancore.com",
+ "request_body": {
+  "target": "cancore.com/",
+  "target_scope": "root_domain",
+  "limit": 50,
+  "sort": "source_domain_authority"
+ },
+ "call_made": true,
+ "response_status": 403,
+ "response_error": "HTTP 403: The account does not have enough quota remaining for current period. (issue: insufficient-quota)",
+ "rows_charged": 0,
+ "note": "One probe made; refused for quota. Not retried. Paging: then one next_token page for up to 100 rows",
+ "moz_usage": {
+  "before": {
+   "rows_consumed": 127
+  },
+  "after": {
+   "rows_consumed": 127
+  }
+ },
+ "results": []
+}
