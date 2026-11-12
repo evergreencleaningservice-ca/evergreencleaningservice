@@ -186,8 +186,8 @@ describe('_headers: Content-Type', () => {
     }
   });
 
-  it('gives no other file a Content-Type, except the two plain-text files that name their charset', () => {
-    const plain = new Set(['llms.txt', `${INDEXNOW_KEY}.txt`]);
+  it('gives no other file a Content-Type, except the plain-text files that name their charset', () => {
+    const plain = new Set(['llms.txt', `${INDEXNOW_KEY}.txt`, 'robots.txt']);
     const others = files.filter((f) => !f.endsWith('.html') && f !== '_headers');
     expect(others.some((f) => f.endsWith('.css') || f.startsWith('_astro/'))).toBe(true);
     for (const host of hosts) {
@@ -199,9 +199,14 @@ describe('_headers: Content-Type', () => {
   });
 
   it('leaves a slash-less address (answered by a redirect) and the API alone', () => {
-    for (const pathname of ['/about-us', '/api/submit-lead', '/sitemap-index.xml', '/robots.txt']) {
+    for (const pathname of ['/about-us', '/api/submit-lead', '/sitemap-index.xml']) {
       expect(typeRules('www.evergreencleaningservice.ca', pathname), pathname).toEqual([]);
     }
+    /* robots.txt has its own plain-text rule since 11 Nov 2026 (technical
+       N7); the HTML rules must still never reach it. */
+    expect(typeRules('www.evergreencleaningservice.ca', '/robots.txt').map((r) => r.headers['content-type'])).toEqual([
+      'text/plain; charset=utf-8',
+    ]);
   });
 });
 
