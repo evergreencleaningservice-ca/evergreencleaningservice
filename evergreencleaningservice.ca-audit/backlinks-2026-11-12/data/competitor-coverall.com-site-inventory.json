@@ -1,0 +1,52 @@
+{
+ "source": "public sitemaps and pages fetched read-only with curl, 2026-11-12",
+ "domain": "coverall.com",
+ "not_moz_data": true,
+ "sitemap_url_counts": {
+  "post-sitemap.xml": 281,
+  "page-sitemap.xml": 62,
+  "locations-sitemap.xml": 95,
+  "statecountry-sitemap.xml": 44
+ },
+ "canada_location_pages": [
+  "https://www.coverall.com/locations/canada/toronto-commercial-janitorial-cleaning/",
+  "https://www.coverall.com/locations/canada/edmonton-commercial-janitorial-cleaning/",
+  "https://www.coverall.com/locations/canada/calgary-commercial-janitorial-cleaning/",
+  "https://www.coverall.com/locations/canada/langley-commercial-janitorial-cleaning/",
+  "https://www.coverall.com/locations/canada/winnipeg-commercial-janitorial-cleaning/"
+ ],
+ "toronto_page": {
+  "url": "https://www.coverall.com/locations/canada/toronto-commercial-janitorial-cleaning/",
+  "status": 200,
+  "title": "Toronto, Ontario Commercial Cleaning & Janitorial Services",
+  "nap": "2969 Sheppard Avenue East, Toronto, ON M1T 3J5; 416.431.7911",
+  "service_areas_listed": "about 45 GTA place names in one list",
+  "has_leave_a_review_link_to": "search.google.com"
+ },
+ "linkable_assets": [
+  "/commercial-cleaning-services/ultimate-guide/",
+  "/franchise-opportunities/franchise-ownership-guide/",
+  "/faqs/ (3 FAQ hubs)",
+  "/in-the-news/",
+  "/franchise-opportunities/opportunities-for-veterans/",
+  "/franchise-opportunities/opportunities-for-women/",
+  "/national-accounts/"
+ ],
+ "press_items_seen_on_home_and_news": [
+  "Named in Entrepreneur's 2026 Top Franchises Under $50K (No. 74) and Top Global Franchises (No. 74), 28 Oct 2026",
+  "Ranked No. 124 on the 2026 Franchise Times Top 400, 24 Oct 2026"
+ ],
+ "scholarship_page": {
+  "url": "https://www.coverall.com/franchise-opportunities/college-scholarship-program/",
+  "status": 200,
+  "title_served": "Franchise Ownership Guide | Coverall",
+  "observation": "URL is still in the page sitemap but serves the franchise ownership guide; the scholarship content appears retired"
+ },
+ "entrepreneur_listing": {
+  "url": "https://www.entrepreneur.com/franchises/coverall/282233",
+  "status": 200,
+  "plain_href_to_coverall_com_found": false,
+  "note": "may link via script; not verified"
+ },
+ "association_badges_found_in_html": []
+}

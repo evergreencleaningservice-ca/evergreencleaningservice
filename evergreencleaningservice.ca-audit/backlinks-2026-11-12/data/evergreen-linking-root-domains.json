@@ -1,0 +1,409 @@
+{
+ "source": "Moz API v2 /v2/linking_root_domains, target evergreencleaningservice.ca/, target_scope root_domain, sort source_domain_authority, limit 50",
+ "pulled": "2026-11-12",
+ "rows_charged": 50,
+ "note": "Only page 1 of ~6 retrieved; Moz returned 403 insufficient-quota on page 2. Moz reports 274 linking root domains in total.",
+ "next_token_unused": "EnKk4wkCC7hQrHfJKgT73EmpAJbFqt4cp0Pr",
+ "results": [
+  {
+   "root_domain": "maps.google.com",
+   "domain_authority": 97,
+   "spam_score": -1,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.es",
+   "domain_authority": 95,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "myspace.com",
+   "domain_authority": 95,
+   "spam_score": 8,
+   "linking_pages": 1,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.de",
+   "domain_authority": 95,
+   "spam_score": 8,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.it",
+   "domain_authority": 94,
+   "spam_score": 8,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.co.jp",
+   "domain_authority": 94,
+   "spam_score": 7,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.fr",
+   "domain_authority": 94,
+   "spam_score": 8,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.ru",
+   "domain_authority": 93,
+   "spam_score": 9,
+   "linking_pages": 2,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.pl",
+   "domain_authority": 93,
+   "spam_score": 9,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.nl",
+   "domain_authority": 93,
+   "spam_score": 9,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.ca",
+   "domain_authority": 93,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.ar",
+   "domain_authority": 92,
+   "spam_score": 8,
+   "linking_pages": 2,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.cz",
+   "domain_authority": 92,
+   "spam_score": 8,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.co.in",
+   "domain_authority": 92,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.mx",
+   "domain_authority": 92,
+   "spam_score": 6,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.co.id",
+   "domain_authority": 92,
+   "spam_score": 7,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.tw",
+   "domain_authority": 92,
+   "spam_score": 6,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.hu",
+   "domain_authority": 91,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.be",
+   "domain_authority": 91,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.ua",
+   "domain_authority": 91,
+   "spam_score": 8,
+   "linking_pages": 2,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.pt",
+   "domain_authority": 91,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.co.th",
+   "domain_authority": 91,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.au",
+   "domain_authority": 91,
+   "spam_score": 6,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.gr",
+   "domain_authority": 90,
+   "spam_score": 9,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.se",
+   "domain_authority": 90,
+   "spam_score": 8,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.ch",
+   "domain_authority": 90,
+   "spam_score": 8,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.co",
+   "domain_authority": 90,
+   "spam_score": 6,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.dk",
+   "domain_authority": 89,
+   "spam_score": 9,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.cl",
+   "domain_authority": 89,
+   "spam_score": 9,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.ro",
+   "domain_authority": 89,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.fi",
+   "domain_authority": 88,
+   "spam_score": 8,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.pe",
+   "domain_authority": 88,
+   "spam_score": 6,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.no",
+   "domain_authority": 88,
+   "spam_score": 9,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.co.il",
+   "domain_authority": 88,
+   "spam_score": 7,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.tr",
+   "domain_authority": 87,
+   "spam_score": 6,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.sg",
+   "domain_authority": 87,
+   "spam_score": 6,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.co.za",
+   "domain_authority": 87,
+   "spam_score": 7,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.ie",
+   "domain_authority": 87,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.my",
+   "domain_authority": 87,
+   "spam_score": 6,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.at",
+   "domain_authority": 87,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.vn",
+   "domain_authority": 87,
+   "spam_score": 6,
+   "linking_pages": 2,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.ph",
+   "domain_authority": 87,
+   "spam_score": 8,
+   "linking_pages": 2,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.co.ve",
+   "domain_authority": 86,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.eg",
+   "domain_authority": 86,
+   "spam_score": 6,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.co.nz",
+   "domain_authority": 86,
+   "spam_score": 7,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.sk",
+   "domain_authority": 85,
+   "spam_score": 9,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.bg",
+   "domain_authority": 85,
+   "spam_score": 8,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.sa",
+   "domain_authority": 83,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.si",
+   "domain_authority": 83,
+   "spam_score": 9,
+   "linking_pages": 6,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  },
+  {
+   "root_domain": "google.com.hk",
+   "domain_authority": 83,
+   "spam_score": 8,
+   "linking_pages": 4,
+   "nofollow_pages": 0,
+   "deleted_pages": 0
+  }
+ ]
+}

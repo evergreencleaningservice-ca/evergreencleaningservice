@@ -1,0 +1,86 @@
+{
+ "domain": "wecleanit.ca",
+ "checked": "2026-11-12",
+ "method": "read-only curl of public pages",
+ "pages_fetched": [
+  "/",
+  "/robots.txt",
+  "/sitemap.xml",
+  "/clients",
+  "/franchise",
+  "/about",
+  "/mississauga/office-cleaning-services-mississauga",
+  "/vaughan/office-cleaning-services",
+  "/etobicoke/office-cleaning-services",
+  "/page/commercial-cleaning-richmond-hill",
+  "/blog/what-affects-professional-commercial-cleaning-costs-toronto/"
+ ],
+ "title": "Commercial Office Cleaning Services Toronto | We Clean It",
+ "sitemap_urls": 247,
+ "sitemap_breakdown": {
+  "blog_posts": 206,
+  "service_pages": 13,
+  "city_hubs": 4,
+  "city_service_pages": 11,
+  "page_landing_pages": 6,
+  "other": 7
+ },
+ "claims": [
+  "more than 20 years",
+  "franchise organisation"
+ ],
+ "city_pages": {
+  "cities": [
+   "Toronto",
+   "Etobicoke",
+   "Mississauga",
+   "Vaughan"
+  ],
+  "extra_landing_pages": [
+   "Richmond Hill",
+   "Scarborough",
+   "Toronto East"
+  ],
+  "word_sequence_similarity_city_name_removed": {
+   "office-cleaning mississauga vs vaughan": 0.36,
+   "office-cleaning etobicoke vs vaughan": 0.24
+  }
+ },
+ "blog_sample": {
+  "url": "/blog/what-affects-professional-commercial-cleaning-costs-toronto/",
+  "posted": "2023-05-05",
+  "words": 1003,
+  "notes": "generic; no prices or first-hand data"
+ },
+ "outbound_links_clients_page": [
+  "mcmaster.ca",
+  "haltonhealthcare.on.ca",
+  "hrh.ca",
+  "sja.ca",
+  "genomic.ca",
+  "storage-mart.com",
+  "lhmdentallab.com",
+  "smilebaydental.com",
+  "thefooddudes.com",
+  "mctamneys.com",
+  "thinkfitnessstudios.com"
+ ],
+ "footer_agency_credit": {
+  "text": "Web Development by Xi Digital",
+  "href": "https://www.xi-digital.com",
+  "sitewide": true,
+  "direction": "outbound"
+ },
+ "agency_directory": {
+  "host": "blocal.dev4.xi-digital.com",
+  "where_seen": "competitor-selection step: a business-directory profile for We Clean It",
+  "status_today": "TLS certificate does not match the host (HTTPS) and HTTP redirects to HTTPS, so not verified",
+  "note": "Host is a dev subdomain of the web agency's own domain. In Moz it would roll up under root domain xi-digital.com."
+ },
+ "associations_press_sponsorships_seen": [],
+ "manipulative_patterns_seen": [
+  "possible agency-run directory listing (unverified)",
+  "high-volume generic blog (206 posts) built for keywords, not links",
+  "sitewide footer credit is outbound only"
+ ]
+}

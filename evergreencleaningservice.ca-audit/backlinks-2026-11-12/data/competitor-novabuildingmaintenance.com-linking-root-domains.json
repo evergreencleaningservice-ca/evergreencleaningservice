@@ -1,0 +1,24 @@
+{
+ "source": "Moz API v2 /v2/linking_root_domains",
+ "pulled": "2026-11-12",
+ "target": "novabuildingmaintenance.com",
+ "request_body": {
+  "target": "novabuildingmaintenance.com/",
+  "target_scope": "root_domain",
+  "limit": 50,
+  "sort": "source_domain_authority"
+ },
+ "call_made": false,
+ "response": null,
+ "rows_charged": 0,
+ "note": "Not called: the account's quota was already exhausted (two probes this step, both 403; usage_data flat at 127). Body kept so the call can be run once the period resets.",
+ "moz_usage": {
+  "before": {
+   "rows_consumed": 127
+  },
+  "after": {
+   "rows_consumed": 127
+  }
+ },
+ "results": []
+}

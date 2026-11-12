@@ -1,0 +1,59 @@
+{
+ "fetched": "2026-11-12",
+ "method": "read-only curl of public pages",
+ "homepage_title": "Toronto's #1 Commercial Cleaning Service | TitanEdge Commercial Cleaning",
+ "platform": "static .html site; full copy at titanedge-cleaning.pages.dev with canonical -> titanedgecleaning.com, robots index,follow",
+ "sitemap_urls": 92,
+ "page_types": {
+  "toronto_service_pages": 6,
+  "city_service_pages": 55,
+  "city_list": [
+   "Mississauga",
+   "Brampton",
+   "North York",
+   "Scarborough",
+   "Etobicoke",
+   "Markham",
+   "Vaughan",
+   "Richmond Hill",
+   "Oakville",
+   "Burlington",
+   "Ajax"
+  ],
+  "city_services": [
+   "commercial-cleaning",
+   "office-cleaning",
+   "janitorial-services",
+   "medical-dental-cleaning",
+   "commercial-deep-cleaning"
+  ],
+  "blog_posts": 21
+ },
+ "city_page_similarity": {
+  "pair": "office-cleaning-mississauga vs office-cleaning-markham",
+  "words": [
+   1055,
+   1091
+  ],
+  "word_sequence_similarity_after_city_swap": 0.28,
+  "verdict": "localised copy, not a simple swap"
+ },
+ "notable_blog_posts": [
+  "/blog/commercial-cleaning-cost-toronto.html",
+  "/blog/commercial-cleaning-checklist-toronto-businesses.html",
+  "/blog/how-to-choose-commercial-cleaning-company-toronto.html",
+  "/blog/commercial-cleaning-contracts-explained.html",
+  "/blog/how-to-switch-commercial-cleaning-providers.html",
+  "/blog/medical-office-cleaning-standards-ontario.html"
+ ],
+ "outbound_external_links_homepage": [
+  "g.page review link (x2)",
+  "googletagmanager"
+ ],
+ "trust_claims": [
+  "4+ years experience",
+  "background-checked staff",
+  "5-star Google rated"
+ ],
+ "associations_press_sponsorships_seen": []
+}

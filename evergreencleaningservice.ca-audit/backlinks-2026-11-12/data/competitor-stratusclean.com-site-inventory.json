@@ -1,0 +1,84 @@
+{
+ "source": "public sitemaps and pages fetched read-only with curl, 2026-11-12",
+ "domain": "stratusclean.com",
+ "not_moz_data": true,
+ "sitemap_files": {
+  "post": 41,
+  "service-location": 13,
+  "location": 1,
+  "press": 1,
+  "franchise": 1,
+  "page": 1
+ },
+ "sitemap_url_counts_measured": {
+  "post-sitemap.xml": 1001,
+  "post-sitemap41.xml": 208,
+  "location-sitemap.xml": 2716,
+  "service-location-sitemap.xml": 1000,
+  "service-location-sitemap13.xml": 918,
+  "press-sitemap.xml": 311,
+  "franchise-sitemap.xml": 98,
+  "page-sitemap.xml": 74
+ },
+ "estimates_not_counts": {
+  "blog_posts": "about 40,200 if files 2-40 hold about 1,000 each like file 1 (only files 1 and 41 counted)",
+  "service_location_pages": "about 12,900 if files 2-12 hold about 1,000 each (only files 1 and 13 counted)"
+ },
+ "city_swap_posts": {
+  "in_files_1_and_41": 1003,
+  "of_urls": 1209,
+  "patterns": [
+   "/blog/cleaning-company-in-<city>-<prov>/",
+   "/blog/post-construction-cleanup-in-<city>-on/"
+  ],
+  "author_shown": "cmstartsingle",
+  "date_shown": "November 12, 2026",
+  "sample_word_counts": [
+   965,
+   878,
+   1012,
+   870
+  ],
+  "text_similarity_after_removing_city_name": [
+   0.237,
+   0.207
+  ],
+  "samples": [
+   "https://www.stratusclean.com/blog/post-construction-cleanup-in-scarborough-on/",
+   "https://www.stratusclean.com/blog/post-construction-cleanup-in-oshawa-on/",
+   "https://www.stratusclean.com/blog/cleaning-company-in-beaumont-ab/"
+  ]
+ },
+ "gta_location_pages": [
+  "https://www.stratusclean.com/locations/toronto-central/",
+  "https://www.stratusclean.com/locations/toronto-east/",
+  "https://www.stratusclean.com/locations/toronto-north/",
+  "https://www.stratusclean.com/locations/mississauga/"
+ ],
+ "toronto_central_page": {
+  "status": 200,
+  "phone": "(647) 946-2335",
+  "claims": "Green Seal Certified (GS-37) proprietary product line"
+ },
+ "press": {
+  "items": 311,
+  "franchise_award_growth_keyword_matches": 120,
+  "sample": "https://www.stratusclean.com/press/stratus-building-solutions-achieves-remarkable-growth-2024/",
+  "outbound_hosts_on_sample": [
+   "prnewswire.com",
+   "finance.yahoo.com",
+   "fox16.com",
+   "wate.com",
+   "wric.com",
+   "openpr.com",
+   "contentmassive.com"
+  ]
+ },
+ "franchise_landers": [
+  "/master-opportunity/ifa/",
+  "/master-opportunity/ent/",
+  "/master-opportunity/toronoto/ (sic)",
+  "/master-opportunity/canada/"
+ ],
+ "award_post": "https://www.stratusclean.com/blog/stratus-nashville-honored-ifa-franchisee-year-award/"
+}

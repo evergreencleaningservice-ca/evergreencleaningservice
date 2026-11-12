@@ -1,0 +1,25 @@
+{
+ "source": "Moz API v2 /v2/linking_root_domains",
+ "pulled": "2026-11-12",
+ "target": "wecleanit.ca",
+ "request_body": {
+  "target": "wecleanit.ca/",
+  "target_scope": "root_domain",
+  "limit": 50,
+  "sort": "source_domain_authority"
+ },
+ "call_made": false,
+ "response_status": null,
+ "response_error": null,
+ "rows_charged": 0,
+ "note": "Not called: the account quota was already exhausted (see the probe in the sibling file for this domain). Body kept to run once the period resets. Paging: then one next_token page for up to 100 rows",
+ "moz_usage": {
+  "before": {
+   "rows_consumed": 127
+  },
+  "after": {
+   "rows_consumed": 127
+  }
+ },
+ "results": []
+}

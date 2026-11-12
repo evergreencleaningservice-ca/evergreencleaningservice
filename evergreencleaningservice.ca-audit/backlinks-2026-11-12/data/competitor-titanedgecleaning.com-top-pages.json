@@ -1,0 +1,23 @@
+{
+ "source": "Moz API v2 /v2/top_pages",
+ "pulled": "2026-11-12",
+ "target": "titanedgecleaning.com",
+ "request_body": {
+  "target": "titanedgecleaning.com/",
+  "scope": "root_domain",
+  "limit": 25
+ },
+ "call_made": false,
+ "response": null,
+ "rows_charged": 0,
+ "note": "Not called: the account's quota was already exhausted (two probes this step, both 403; usage_data flat at 127). Body kept so the call can be run once the period resets.",
+ "moz_usage": {
+  "before": {
+   "rows_consumed": 127
+  },
+  "after": {
+   "rows_consumed": 127
+  }
+ },
+ "results": []
+}

@@ -1,0 +1,50 @@
+{
+ "fetched": "2026-11-12",
+ "method": "read-only curl of public pages",
+ "homepage_title": "Nova Building Maintenance | Commercial Office Cleaning | Janitorial | GTA",
+ "platform": "WordPress (Avada theme, Yoast SEO); office 2275 Upper Middle Rd E, Oakville",
+ "sitemap_counts": {
+  "posts": 19,
+  "pages": 129
+ },
+ "page_types": {
+  "city_pages": "~30 'commercial-office-cleaning-services-in-<city>' pages incl. Winnipeg, Regina, Calgary, Edmonton, Halifax, Ottawa, Vancouver, Niagara Falls",
+  "subcontractor_profile_pages": "~80 (e.g. /dcd-cleaning/, /eco-clean-pros/, /peachy-clean/)",
+  "contractor_business_pages": [
+   "/cleaning-contracts-for-sale/",
+   "/subcontractor-application/",
+   "/subcontractor-agreement/",
+   "/network-contractor-terms-conditions/"
+  ]
+ },
+ "city_page_similarity": {
+  "pair": "calgary vs halifax",
+  "words": [
+   1227,
+   1227
+  ],
+  "word_sequence_similarity_after_city_swap": 1.0,
+  "verdict": "identical template with city name swapped (doorway pattern)"
+ },
+ "subcontractor_profile_outbound": "profile pages link only to Nova's own pages; no link out to the subcontractor (checked /dcd-cleaning/)",
+ "blog_audience": "mostly other cleaning businesses (how to secure contracts, liability insurance, 'cleaning training' series, strip and wax guide), plus 2025-2026 city cost/checklist posts",
+ "owned_or_related_sites": {
+  "novabuildingsupply.com": "sister Shopify supply store; Nova links to it sitewide (top bar + nav). Its homepage does not link back.",
+  "cleaningcontractornetwork.com": "US-focused contractor directory (WordPress/Elementor) with a Nova profile; profile page had no link to novabuildingmaintenance.com when fetched; Nova links to it from its homepage"
+ },
+ "social_profiles": [
+  "facebook",
+  "instagram",
+  "tiktok",
+  "twitter",
+  "youtube"
+ ],
+ "footer_credit_outbound": "7venology.com (web agency credit, sitewide)",
+ "self_published_satellites": "Notion (shared-clef-a3a.notion.site) and Google Sites pages linking to the domain, found by the competitor-selection step; exact URLs not recorded",
+ "trust_claims": [
+  "20+ years experience",
+  "insured & bonded",
+  "WSIB covered (CCN profile)"
+ ],
+ "associations_press_sponsorships_seen": []
+}

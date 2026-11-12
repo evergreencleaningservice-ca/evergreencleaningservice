@@ -1,0 +1,24 @@
+{
+ "source": "Moz API v2 /v2/top_pages",
+ "pulled": "2026-11-12",
+ "target": "cancore.com",
+ "request_body": {
+  "target": "cancore.com/",
+  "scope": "root_domain",
+  "limit": 25
+ },
+ "call_made": false,
+ "response_status": null,
+ "response_error": null,
+ "rows_charged": 0,
+ "note": "Not called: the account quota was already exhausted (see the probe in the sibling file for this domain). Body kept to run once the period resets.",
+ "moz_usage": {
+  "before": {
+   "rows_consumed": 127
+  },
+  "after": {
+   "rows_consumed": 127
+  }
+ },
+ "results": []
+}
