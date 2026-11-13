@@ -1,0 +1,74 @@
+---
+/**
+ * A slim strip above the header with the Google Business Profile's rating.
+ *
+ * 13 Nov 2026 (comparison with impact.ca, report items 1 and 7): the
+ * competitor carries its Google review count on every desktop page. Ours is
+ * gated on `googleProfile` in src/data/reviews.ts, which is `undefined` until
+ * the real figures are copied from the profile, so today this renders
+ * nothing at all: no wrapper, no reserved height, nothing to shift.
+ *
+ * Desktop only (from 1200px, where the header stops being a drawer): on a
+ * phone the first screen is already the header and the hero, and the hero's
+ * proof row carries the same figure. No phone number here: the header
+ * directly below already shows it at every width, and a second tel: link
+ * stacked on the first would only split the call measurement.
+ *
+ * Rendered in the markup at build time, not by a script, so when it is on it
+ * is part of the first paint and the header below never moves.
+ */
+import { googleProfile, googleRatingDisplay } from '../data/reviews';
+
+const rating = googleRatingDisplay(googleProfile);
+---
+
+{
+  rating && (
+    <div class="rating-strip" data-google-rating-strip>
+      <div class="container rating-strip-inner">
+        <a href={rating.href} target="_blank" rel="noopener noreferrer">
+          <span aria-hidden="true">★</span>&nbsp;{rating.text}
+          <span class="screen-reader-text">(opens in a new tab)</span>
+        </a>
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .rating-strip {
+    display: none;
+    background: var(--surface-dark);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  @media (min-width: 1200px) {
+    .rating-strip {
+      display: block;
+    }
+  }
+
+  .rating-strip-inner {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .rating-strip a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .rating-strip a:hover {
+    text-decoration: underline;
+  }
+
+  .rating-strip a:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+</style>
