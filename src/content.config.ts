@@ -18,7 +18,8 @@ const blog = defineCollection({
     image: z.string().optional(),
     imageAlt: z.string().optional(),
     /** A shorter headline for the <title> only, when `title` would push the
-        brand suffix past 60 characters. Both layouts honour it. */
+        brand suffix past 60 characters. Both layouts honour it and pass it
+        through pageTitle(). */
     seoTitle: z.string().optional(),
     /** Opt-in editorial guide layout; legacy posts retain PostLayout. */
     guide: z.object({
@@ -76,7 +77,9 @@ const pages = defineCollection({
 const offerFields = {
   /** Visible H1, when it should differ from the short `title`. */
   h1: z.string().optional(),
-  /** The <title>, when the default would be weak or too long. */
+  /** The <title> text, when the default would be weak or too long. Written
+      without the brand: pageTitle() adds " | Evergreen" when it fits
+      (13 Nov 2026, SEO audit 11 Nov N4). */
   seoTitle: z.string().optional(),
   /** One or two sentences under the H1. */
   summary: z.string().optional(),

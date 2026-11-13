@@ -1,7 +1,7 @@
 ---
 title: "Floor Stripping & Waxing"
 h1: "Commercial Floor Stripping and Waxing in Toronto and the GTA"
-seoTitle: "Floor Stripping & Waxing in Toronto & the GTA | Evergreen"
+seoTitle: "Floor Stripping & Waxing in Toronto & the GTA"
 description: "Commercial floor stripping and waxing in Toronto and the GTA — strip, seal and wax, burnishing and auto-scrubbing for VCT and hard floors, after hours."
 summary: "Hard floors stripped back, sealed and refinished, then kept up with scrubbing and burnishing between cycles — scheduled after hours so nobody walks on wet wax."
 image: "/images/gallery-lobby-floor-care.jpg"

@@ -1,5 +1,5 @@
 ---
-seoTitle: "Janitorial Services in Toronto & the GTA | Evergreen"
+seoTitle: "Janitorial Services in Toronto & the GTA"
 title: "Janitorial Services"
 h1: "Janitorial Services in Toronto and the GTA"
 # 12 Nov 2026, SEO audit 11 Nov (content N-B, N-D; onpage N1): the body's

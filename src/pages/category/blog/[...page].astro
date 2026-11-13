@@ -27,9 +27,9 @@ const { page } = Astro.props as Props;
 const base = '/category/blog/';
 const hrefFor = (n: number) => (n === 1 ? base : `${base}page/${n}/`);
 
-// Copied from the archived <title>s. The original is inconsistent on purpose or
-// by accident, but it is what the source serves: page one ends "- Evergreen
-// Office Cleaning", the paged archives end "- Evergreen Cleaning Service".
+// The wording is the archived original's. Its suffix ("- Evergreen Office
+// Cleaning" on page one, "- Evergreen Cleaning Service" on the rest) gave way
+// to the site's one rule in pageTitle() (13 Nov 2026, SEO audit 11 Nov N4).
 const archiveTitle = pageTitle(
   page.currentPage > 1
     ? `Blog Archives - Page ${page.currentPage} of ${page.lastPage}`

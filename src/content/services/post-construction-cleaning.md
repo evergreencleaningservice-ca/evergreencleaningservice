@@ -1,7 +1,7 @@
 ---
 title: "Post-Construction Cleaning"
 h1: "Commercial Post-Construction Cleaning in Toronto & the GTA"
-seoTitle: "Commercial Post-Construction Cleaning Toronto | Evergreen"
+seoTitle: "Commercial Post-Construction Cleaning Toronto"
 # SEO re-audit, 7 Nov 2026: description cut from 165 to 152 characters.
 description: "Post-construction cleaning for Toronto and GTA contractors and property managers: a rough clean while trades finish, then a final clean before handover."
 summary: "Clean-up after a renovation, fit-out or new build — from the first debris pass to a detailed final clean before the space is handed over or reopened."

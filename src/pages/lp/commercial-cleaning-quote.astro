@@ -69,6 +69,7 @@ import LpFinalCta from '../../components/lp/LpFinalCta.astro';
 import LpSticky from '../../components/lp/LpSticky.astro';
 import LpFormNote from '../../components/lp/LpFormNote.astro';
 import { FINE_PRINT, REPLY_PROMISE } from '../../data/landing';
+import { pageTitle } from '../../lib/title';
 
 /** The DOM id and anchor target — unchanged, so `#lpq-form` still resolves. */
 const FORM_ANCHOR = 'lpq-form';
@@ -94,7 +95,7 @@ const EYEBROW = 'Commercial cleaning — Toronto & the GTA';
 ---
 
 <LandingLayout
-  title="Commercial Cleaning Quote — Toronto & GTA | Evergreen Office Cleaning"
+  title={pageTitle('Commercial Cleaning Quote — Toronto & GTA')}
   description="Free commercial cleaning quotes for Toronto and GTA buildings: on-site walkthrough, written scope, WSIB covered crews, reply in 2 hours, Mon–Fri 7am–6pm."
   callNote="Talk to an account executive"
   quoteAnchor={FORM_ANCHOR}

@@ -1,7 +1,7 @@
 ---
 title: "Property Management and Building Maintenance"
 h1: "Building Maintenance and Floor Care for GTA Properties"
-seoTitle: "Building Maintenance & Floor Care in Toronto | Evergreen"
+seoTitle: "Building Maintenance & Floor Care in Toronto"
 description: "Building maintenance cleaning for GTA properties — strip and wax, carpet extraction, high dusting, interior windows and pressure washing, on a plan."
 summary: "The periodic work that keeps a building looking maintained between routine cleans — floors, carpets, high surfaces, glass and exteriors — planned as a programme or booked when you need it."
 image: "/images/gta-office-building-exterior-plaza.jpg"

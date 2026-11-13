@@ -66,7 +66,10 @@ interface Props {
 
 const { data, body, parent, formId } = Astro.props;
 const h1 = data.h1 ?? data.title;
-const title = data.seoTitle ?? pageTitle(data.title);
+/* seoTitle replaces the headline but not the rule: it used to be emitted as
+   written, with " | Evergreen" typed into each one (13 Nov 2026, SEO audit
+   11 Nov N4). */
+const title = pageTitle(data.seoTitle ?? data.title);
 const path = Astro.url.pathname;
 
 /* A line for every related link that does not bring its own. Mixed cards,

@@ -1,7 +1,7 @@
 ---
 title: "Graffiti Removal"
 h1: "Commercial Graffiti Removal in Toronto and the GTA"
-seoTitle: "Commercial Graffiti Removal in Toronto & the GTA | Evergreen"
+seoTitle: "Commercial Graffiti Removal in Toronto & the GTA"
 description: "Commercial graffiti removal in Toronto and the GTA — building exteriors, shutters, signage and glass, with the method matched to the surface."
 summary: "Graffiti removed from commercial property with a method chosen for the surface, quickly, because a tag left up attracts more."
 needsClientCopy: true

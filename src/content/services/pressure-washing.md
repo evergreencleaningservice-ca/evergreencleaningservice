@@ -1,7 +1,7 @@
 ---
 title: "Pressure Washing"
 h1: "Commercial Pressure Washing in Toronto and the GTA"
-seoTitle: "Commercial Pressure Washing in Toronto & the GTA | Evergreen"
+seoTitle: "Commercial Pressure Washing in Toronto & the GTA"
 description: "Commercial pressure washing in Toronto and the GTA: building exteriors, walkways, loading docks and parking structures, on a schedule that suits your site."
 summary: "Exteriors, entrances, walkways and loading areas washed after hours or at weekends, with the pressure and method set for each surface."
 needsClientCopy: true
