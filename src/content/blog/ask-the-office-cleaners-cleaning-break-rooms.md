@@ -35,4 +35,4 @@ We’ve also come across some really fancy office break rooms with table footbal
 
 Need help getting all the cobwebs, crusts, and crumbs out of your break room? Evergreen Office Cleaning is an experienced team of expert office cleaners who know everything there is to know about the trade. Contact us today to learn more about how we can help make office cleaning easy and convenient, with minimal disruptions to your operations.
 
-Kitchens and break rooms are part of Evergreen's [office cleaning](/services/office-cleaning/) service, with counters, sinks and floors done on the schedule agreed for your office.
+Kitchens and break rooms are part of Evergreen's [office cleaning](/office-cleaning/) service, with counters, sinks and floors done on the schedule agreed for your office.

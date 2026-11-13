@@ -15,6 +15,7 @@ import path from 'node:path';
 import {
   specRedirects,
   legacyRedirects,
+  movedOfferRedirects,
   newsPageRedirects,
   emptyTagRedirects,
   retiredPostRedirects,
@@ -51,6 +52,12 @@ section('Section 2.1 of the overhaul specification', bothSlashSpellings(specRedi
 section(
   'Legacy addresses the archive shows this site actually served',
   bothSlashSpellings(legacyRedirects)
+);
+/* URL move, owner decision (13 Nov 2026): the service and industry pages'
+   old addresses, each straight to its new one at the root. */
+section(
+  'Service and industry pages moved to the root (13 Nov 2026)',
+  bothSlashSpellings(movedOfferRedirects)
 );
 section(
   'Image addresses — explicit, because a splat cannot take just the basename',
@@ -92,6 +99,22 @@ const walk = (dir) => {
   }
 };
 walk(dist);
+
+/* A rule whose source is a built root-level page would shadow it: the asset
+   router reads this file before it looks for a file, so the page could never
+   be served, or would loop onto itself. The URL move of 13 Nov 2026 turned
+   five legacy sources into live pages (/office-cleaning/ and four more), and
+   the root is shared by posts, pages and the service and industry pages, so
+   this stops the build on the next one rather than shipping it. Root level
+   only for now: three /tag/<tag>/page/N/ rules already shadow archive pages
+   that came back, which is a separate fix. */
+const shadowed = pagePaths
+  .filter((p) => p.split('/').length === 2 && taken.has(`${p}/`))
+  .map((p) => `${p}/`);
+if (shadowed.length) {
+  console.error(`redirects: these sources are built pages, so their rules would shadow them:\n  ${shadowed.join('\n  ')}`);
+  process.exit(1);
+}
 section(
   'Pages, slash-less spelling to the canonical one',
   pagePaths

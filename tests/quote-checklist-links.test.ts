@@ -7,9 +7,9 @@
  *   quote-comparison section and how-to-decide's "Read the Contract" now
  *   point at it as the detailed version, so it is the one page for
  *   "cleaning quote checklist" intent.
- * - "janitorial services" anchors went to /services/commercial-cleaning/,
+ * - "janitorial services" anchors went to /commercial-cleaning/,
  *   which left the janitorial page with three contextual inlinks. They now go
- *   to /services/janitorial-services/; combined anchors are split so each
+ *   to /janitorial-services/; combined anchors are split so each
  *   term links its own page.
  * - The checklist post repeated its keyword six times and used Title Case
  *   question H2s. It now keeps the phrase in the title, description and
@@ -80,17 +80,17 @@ describe('"janitorial services" anchors link the janitorial page (onpage N2)', (
   };
 
   for (const [file, expected] of Object.entries(files)) {
-    it(`${file}: every janitorial anchor goes to /services/janitorial-services/`, () => {
+    it(`${file}: every janitorial anchor goes to /janitorial-services/`, () => {
       const found = links(parse(file).body).filter(([anchor]) => /janitorial/i.test(anchor));
       expect(found.length).toBeGreaterThanOrEqual(expected);
-      for (const [anchor, href] of found) expect(href, anchor).toBe('/services/janitorial-services/');
+      for (const [anchor, href] of found) expect(href, anchor).toBe('/janitorial-services/');
     });
   }
 
   it('splits the combined anchors so "commercial cleaning" keeps the commercial page', () => {
     for (const file of ['blog/how-often-should-an-office-be-cleaned.md', 'pages/about-us.md']) {
       const found = links(parse(file).body);
-      expect(found.some(([a, h]) => /^commercial cleaning$/i.test(a) && h === '/services/commercial-cleaning/'), file).toBe(true);
+      expect(found.some(([a, h]) => /^commercial cleaning$/i.test(a) && h === '/commercial-cleaning/'), file).toBe(true);
       expect(found.some(([a]) => /commercial cleaning and janitorial/i.test(a)), file).toBe(false);
     }
   });
@@ -131,7 +131,7 @@ describe('the quote-checklist post reads less like it was written for a keyword 
   });
 
   it('links "commercial cleaning" to the commercial cleaning service in the body', () => {
-    expect(links(checklist.body).some(([a, h]) => a === 'commercial cleaning' && h === '/services/commercial-cleaning/')).toBe(true);
+    expect(links(checklist.body).some(([a, h]) => a === 'commercial cleaning' && h === '/commercial-cleaning/')).toBe(true);
   });
 
   it('keeps its sources and the illustrative labelling', () => {

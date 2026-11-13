@@ -39,7 +39,7 @@ const LH_PATH = '/';
 const SHOTS = [
   ['home', '/'],
   ['quote', '/request-a-quote/'],
-  ['service', '/services/office-cleaning/'],
+  ['service', '/office-cleaning/'],
   ['location', '/locations/mississauga/'],
 ];
 

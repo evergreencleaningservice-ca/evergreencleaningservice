@@ -54,6 +54,12 @@ import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import originalImages from '../../src/data/original-page-images.json' with { type: 'json' };
 import { retiredPostSlugs } from '../../src/data/redirects';
+import { MOVED_OFFER_PATHS } from '../../src/data/offer-pages';
+
+/* The original's /services/<slug>/ pages are built at /<slug>/ since the URL
+   move of 13 Nov 2026 (owner decision). Keyed by the original's route, read
+   from where the page is built now. */
+const builtAt = (route: string) => MOVED_OFFER_PATHS.find((m) => m.from === route)?.to ?? route;
 import { bodyImages, isPaginatedArchive } from '../../src/lib/body-images';
 
 const repo = path.resolve(import.meta.dirname, '../..');
@@ -142,7 +148,7 @@ beforeAll(() => {
   for (const slug of Object.keys(originalImages)) {
     const route = slug === 'index' || slug === 'home' ? '/' : `/${slug}/`;
     const file =
-      route === '/' ? path.join(out, 'index.html') : path.join(out, route, 'index.html');
+      route === '/' ? path.join(out, 'index.html') : path.join(out, builtAt(route), 'index.html');
     if (!fs.existsSync(file)) continue;
     built.set(route, bodyImages(fs.readFileSync(file, 'utf8')));
   }

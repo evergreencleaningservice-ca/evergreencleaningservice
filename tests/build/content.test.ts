@@ -103,8 +103,8 @@ describe('every duration claim reads from the founding year', () => {
     for (const page of [
       'index.html',
       'about-us/index.html',
-      'services/office-cleaning/index.html',
-      'services/emergency-cleaning/index.html',
+      'office-cleaning/index.html',
+      'emergency-cleaning/index.html',
       'lp/commercial-cleaning/index.html',
       'lp/commercial-cleaning-quote/index.html',
     ]) {

@@ -19,6 +19,7 @@ import { INDEXNOW_KEY } from '../../src/data/indexnow';
 import { PREVIEW_HOST, PRODUCTION_HOSTS, site } from '../../src/data/site';
 import { parseHeaders, type HeaderRule } from '../../src/lib/noindex-rules';
 import { isPrivatePage } from './private-pages';
+import { offerHub } from '../../src/data/offer-pages';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-schema-layout');
@@ -112,7 +113,7 @@ describe('areaServed', () => {
     for (const page of pages) {
       for (const node of nodesOf(read(page))) {
         if (node['@type'] === 'ProfessionalService') expect(node.areaServed, page).toEqual(orgAreas);
-        if (node['@type'] === 'Service' && /\/services\/[^/]+\/#service$/.test(node['@id'] ?? '')) {
+        if (node['@type'] === 'Service' && /#service$/.test(node['@id'] ?? '') && offerHub(new URL(node['@id'], site.url).pathname) === '/services/') {
           services++;
           expect(node.areaServed, page).toEqual(orgAreas);
         }

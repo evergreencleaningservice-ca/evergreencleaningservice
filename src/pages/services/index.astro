@@ -14,7 +14,7 @@ import { pageTitle } from '../../lib/title';
  */
 const navServices = nav.find((item) => item.label === 'Services')?.children ?? [];
 const navOrder = navServices.map((child) =>
-  (child.href ?? '').replace(/^\/services\//, '').replace(/\/$/, ''),
+  (child.href ?? '').replace(/^\/|\/$/g, ''),
 );
 
 const rank = (id: string) => {

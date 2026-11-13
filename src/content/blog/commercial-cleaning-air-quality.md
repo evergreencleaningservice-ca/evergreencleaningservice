@@ -73,8 +73,8 @@ Office plants make a workplace pleasanter, but a few pots do not stand in for ve
 
 You can do much of this yourself, but a professional crew brings the equipment (HEPA backpack vacuums, extraction machines, lifts for high dusting) and works from a schedule, so the dusting, vacuuming and carpet work all happen in the right order, every time.
 
-Touch points are a separate job from the air: see [disinfection cleaning](/services/disinfection-cleaning/) for how they are handled.
+Touch points are a separate job from the air: see [disinfection cleaning](/disinfection-cleaning/) for how they are handled.
 
 [Contact us](/contact-us/) to talk about the air in your building.
 
-Day to day, the dusting and vacuuming that keep the air clearer are part of Evergreen's [office cleaning](/services/office-cleaning/); high dusting and carpet extraction come under [building maintenance and floor care](/services/building-maintenance/).
+Day to day, the dusting and vacuuming that keep the air clearer are part of Evergreen's [office cleaning](/office-cleaning/); high dusting and carpet extraction come under [building maintenance and floor care](/building-maintenance/).

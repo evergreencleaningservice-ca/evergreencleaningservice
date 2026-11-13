@@ -3,7 +3,7 @@ title: "Commercial Cleaning"
 h1: "Commercial Cleaning Services in Toronto and the GTA"
 seoTitle: "Commercial Cleaning Services in Toronto"
 # 12 Nov 2026, SEO audit 11 Nov (content N-A, N-D; onpage N3): this page now
-# defines commercial cleaning only. /services/janitorial-services/ is the one
+# defines commercial cleaning only. /janitorial-services/ is the one
 # page that defines janitorial service and carries the "difference" FAQ, so
 # the two pages stop answering the same question. The description leads with
 # the answer instead of repeating the title's words.
@@ -79,25 +79,25 @@ related:
     href: "/seasonal-office-cleaning-checklist/"
     text: "Salt, pollen, open windows: the extra work each Toronto season brings."
   - title: "Janitorial Services"
-    href: "/services/janitorial-services/"
+    href: "/janitorial-services/"
     text: "The scheduled, day-to-day upkeep, visit by visit."
   - title: "Office Cleaning"
-    href: "/services/office-cleaning/"
+    href: "/office-cleaning/"
     text: "Recurring janitorial service for offices."
   - title: "Building Maintenance & Floor Care"
-    href: "/services/building-maintenance/"
+    href: "/building-maintenance/"
     text: "Strip and wax, carpet extraction, high dusting."
   - title: "Post-Construction Cleaning"
-    href: "/services/post-construction-cleaning/"
+    href: "/post-construction-cleaning/"
     text: "Clean-up after a renovation or fit-out."
   - title: "Industrial & Warehouse Cleaning"
-    href: "/services/industrial-cleaning/"
+    href: "/industrial-cleaning/"
     text: "Plants, warehouses and distribution."
   - title: "Medical & Dental Clinics"
-    href: "/industries/medical-dental-clinics/"
+    href: "/medical-dental-clinics/"
     text: "What changes when the space is a clinic."
   - title: "Property Managers & Condos"
-    href: "/industries/property-management/"
+    href: "/property-management/"
     text: "One contact across your buildings."
   - title: "All industries we serve"
     href: "/industries/"
@@ -118,7 +118,7 @@ We know that our crew becomes part of your customer's experience even when nobod
 
 ## Routine upkeep between periodic work
 
-Between the periodic jobs, trash, washrooms and their consumables, kitchens, floors and touch points are kept up on a fixed schedule, with the frequency of each task set at the walkthrough and written into the proposal. That routine is what our [janitorial service](/services/janitorial-services/) covers; its page sets out the tasks and the usual frequency for each kind of building, and for offices the [office cleaning](/services/office-cleaning/) page goes into the routine in detail.
+Between the periodic jobs, trash, washrooms and their consumables, kitchens, floors and touch points are kept up on a fixed schedule, with the frequency of each task set at the walkthrough and written into the proposal. That routine is what our [janitorial service](/janitorial-services/) covers; its page sets out the tasks and the usual frequency for each kind of building, and for offices the [office cleaning](/office-cleaning/) page goes into the routine in detail.
 
 ## Commercial cleaning, janitorial or office cleaning?
 
@@ -141,7 +141,7 @@ Routine cleaning keeps a space clean; periodic work keeps it looking cared for. 
 - Data room and raised-floor specialty cleaning
 - Deep cleans before a move, an inspection or a new tenant (our post on [what a commercial deep clean includes](/benefits-of-commercial-deep-cleaning-services/) explains when one is worth booking)
 
-They can be built into a recurring contract and planned through the year, or booked one at a time. Our [building maintenance and floor care](/services/building-maintenance/) page covers them in detail.
+They can be built into a recurring contract and planned through the year, or booked one at a time. Our [building maintenance and floor care](/building-maintenance/) page covers them in detail.
 
 ## Cleaning for different kinds of commercial space
 
@@ -153,18 +153,18 @@ Every space is scoped on its own, but some needs come up again and again by type
 
 **Schools and daycares.** Low tables, toys, washrooms and shared surfaces need cleaning that suits the people who use them. See [cleaning protocols for daycares and schools](/cleaning-protocols-for-daycares-and-schools/).
 
-**Clinics.** Waiting rooms, treatment rooms and washrooms are cleaned with care to avoid cross-contamination between rooms. Our [medical and dental clinic](/industries/medical-dental-clinics/) page explains what changes.
+**Clinics.** Waiting rooms, treatment rooms and washrooms are cleaned with care to avoid cross-contamination between rooms. Our [medical and dental clinic](/medical-dental-clinics/) page explains what changes.
 
 **Public and institutional buildings.** Libraries, court houses, municipal offices and places of worship have public areas, staff areas and their own rules about access and hours; the schedule is built around them.
 
-**Multi-tenant and mixed-use buildings.** Common areas, lobbies and tenant suites are often cleaned under separate scopes. For property managers, see [cleaning for property managers and condos](/industries/property-management/).
+**Multi-tenant and mixed-use buildings.** Common areas, lobbies and tenant suites are often cleaned under separate scopes. For property managers, see [cleaning for property managers and condos](/property-management/).
 
 ## Cleaning through a Toronto year
 
 The work changes with the seasons here, and a good schedule changes with it.
 
 - **Winter.** Salt and slush come in on every pair of boots. Entrance mats, lobby floors and the first metres of hallway need attention on every visit, not once a week, or the salt etches hard floors and stains carpet. Our post on [preventing slips, trips and falls](/preventing-slips-trips-falls-in-your-workplace/) covers the entrance side of it.
-- **Spring.** The time to undo the winter: hard floors stripped and refinished where salt has dulled them, carpets extracted, and entrances and walkways [pressure washed](/services/pressure-washing/).
+- **Spring.** The time to undo the winter: hard floors stripped and refinished where salt has dulled them, carpets extracted, and entrances and walkways [pressure washed](/pressure-washing/).
 - **Summer.** Quieter offices and school breaks make it the easiest time for deep cleans, floor cycles and window work that would otherwise disrupt people.
 - **Fall.** Leaves and grit at the door again, and a good moment for high dusting and vent cleaning before the heating runs all winter.
 

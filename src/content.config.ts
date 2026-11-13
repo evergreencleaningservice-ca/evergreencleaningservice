@@ -105,7 +105,7 @@ const offerFields = {
   ctaText: z.string().optional(),
 };
 
-/** Service pages, served under /services/<slug>/. */
+/** Service pages, served at /<slug>/ since 13 Nov 2026 (URL move, owner decision: src/data/offer-pages.ts). */
 const services = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/services' }),
   schema: z.object({
@@ -125,7 +125,7 @@ const services = defineCollection({
   }),
 });
 
-/** Industry pages, served under /industries/<slug>/. Same template fields. */
+/** Industry pages, served at /<slug>/ like the services. Same template fields. */
 const industries = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/industries' }),
   schema: z.object({

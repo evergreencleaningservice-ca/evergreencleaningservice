@@ -34,6 +34,7 @@ import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { tags, emptyTagSlugs } from '../../src/data/tags';
 import { emptyTagRedirects, wildcardRedirects } from '../../src/data/redirects';
+import { offerHub } from '../../src/data/offer-pages';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-tags');
@@ -208,13 +209,13 @@ describe('the sidebar links services, not tag archives', () => {
 
   it('puts the search phrases on the pages that should rank for them', () => {
     const html = sidebar();
-    expect(html).toMatch(/href="\/services\/office-cleaning\/"[^>]*>\s*Commercial office cleaning\s*</);
-    expect(html).toMatch(/href="\/services\/commercial-cleaning\/"[^>]*>\s*Commercial cleaning\s*</);
-    expect(html).toMatch(/href="\/services\/janitorial-services\/"[^>]*>\s*Janitorial services\s*</);
+    expect(html).toMatch(/href="\/office-cleaning\/"[^>]*>\s*Commercial office cleaning\s*</);
+    expect(html).toMatch(/href="\/commercial-cleaning\/"[^>]*>\s*Commercial cleaning\s*</);
+    expect(html).toMatch(/href="\/janitorial-services\/"[^>]*>\s*Janitorial services\s*</);
   });
 
   it('every service link resolves to a page that was built', () => {
-    const hrefs = [...sidebar().matchAll(/href="(\/services\/[a-z0-9-]+\/)"/g)].map((m) => m[1]);
+    const hrefs = [...sidebar().matchAll(/href="(\/[a-z0-9-]+\/)"/g)].map((m) => m[1]).filter((href) => offerHub(href));
     expect(hrefs.length).toBe(7);
     const missing = hrefs.filter((href) => !exists(href.slice(1), 'index.html'));
     expect(missing).toEqual([]);

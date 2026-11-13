@@ -300,7 +300,7 @@ export function mountBlocks(root: HTMLElement, initial: Block[], opts: BlocksOpt
     if (mark === 'bold') out = `**${sel || 'bold'}**`;
     else if (mark === 'italic') out = `_${sel || 'italic'}_`;
     else if (mark === 'link') {
-      const href = prompt('Link to (an https address, or a page on this site like /services/office-cleaning/)', 'https://');
+      const href = prompt('Link to (an https address, or a page on this site like /office-cleaning/)', 'https://');
       if (!href) return;
       out = `[${sel || 'words'}](${href.trim()})`;
     } else if (mark === 'ul' || mark === 'ol') {

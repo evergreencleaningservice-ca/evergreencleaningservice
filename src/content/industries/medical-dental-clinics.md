@@ -45,10 +45,10 @@ faqs:
     a: "Yes. Our cleaning staff undergo background screening, and the business is bonded and covered by liability insurance and WSIB Ontario."
 related:
   - title: "Disinfection Cleaning"
-    href: "/services/disinfection-cleaning/"
+    href: "/disinfection-cleaning/"
     text: "Targeted disinfection of high-touch surfaces."
   - title: "Office Cleaning"
-    href: "/services/office-cleaning/"
+    href: "/office-cleaning/"
   - title: "Cleaning checklist for dental clinics"
     href: "/cleaning-check-list-dental-clinics/"
     text: "Our guide to what needs cleaning, and how often."

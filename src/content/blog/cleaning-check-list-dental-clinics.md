@@ -68,8 +68,8 @@ All of your hardwood, ceramic or tile floors need to be swept, mopped, and also 
 
 Hopefully, this cleaning checklist will help you keep your dental clinic neat and clean for your patients and staff.
 
-_**If you are searching for a [dental clinic cleaning service in Toronto](/industries/medical-dental-clinics/) in the GTA to handle these tasks for you don’t hesitate to [contact us](/contact-us/) at Evergreen Office Cleaning.**_ 
+_**If you are searching for a [dental clinic cleaning service in Toronto](/medical-dental-clinics/) in the GTA to handle these tasks for you don’t hesitate to [contact us](/contact-us/) at Evergreen Office Cleaning.**_ 
 
 _**We would love to help!**_
 
-Between patients, disinfecting the operatory stays with your team; after hours, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) covers the reception, washrooms and other shared touch points.
+Between patients, disinfecting the operatory stays with your team; after hours, Evergreen's [disinfection cleaning](/disinfection-cleaning/) covers the reception, washrooms and other shared touch points.

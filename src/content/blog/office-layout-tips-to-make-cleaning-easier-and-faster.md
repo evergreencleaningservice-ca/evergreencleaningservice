@@ -67,4 +67,4 @@ The kitchen is the room that gets dirty fastest whatever the layout; see our gui
 
 _**If you’re looking for a reliable commercial cleaning service in the GTA, [get in touch](/contact-us/) with [Evergreen Office Cleaning](/about-us/) today!**_
 
-Hard floors are the easiest to keep clean, and Evergreen's [floor stripping and waxing](/services/floor-stripping-waxing/) keeps their finish protected between routine [office cleaning](/services/office-cleaning/) visits.
+Hard floors are the easiest to keep clean, and Evergreen's [floor stripping and waxing](/floor-stripping-waxing/) keeps their finish protected between routine [office cleaning](/office-cleaning/) visits.

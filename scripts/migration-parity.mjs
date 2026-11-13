@@ -204,8 +204,8 @@ const MUST_BE_DIRECT = [
   '/about-us/',
   '/contact-us/',
   '/services/',
-  '/services/office-cleaning/',
-  '/services/commercial-cleaning/',
+  '/office-cleaning/',
+  '/commercial-cleaning/',
   '/request-a-quote/',
   '/insights/',
   /* `/reviews/`, NOT `/testimonials/`. The old address is a legacy one and is

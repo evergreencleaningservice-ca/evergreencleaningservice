@@ -56,16 +56,16 @@ related:
     href: "/5-easy-ways-to-keep-your-commercial-floor-clean/"
     text: "Five habits that stretch the time between full strips."
   - title: "Building Maintenance & Floor Care"
-    href: "/services/building-maintenance/"
+    href: "/building-maintenance/"
     text: "Carpets, high dusting, glass and exteriors too."
   - title: "Commercial Cleaning"
-    href: "/services/commercial-cleaning/"
+    href: "/commercial-cleaning/"
     text: "Routine cleaning between floor cycles."
   - title: "Industrial & Warehouse Cleaning"
-    href: "/services/industrial-cleaning/"
+    href: "/industrial-cleaning/"
     text: "Concrete floors, scrubbing and sealing."
   - title: "Property Managers & Condos"
-    href: "/industries/property-management/"
+    href: "/property-management/"
     text: "Floor care planned across a portfolio."
 showAreas: true
 ctaHeading: "Get a floor looked at"
@@ -82,7 +82,7 @@ Floor finish is a sacrificial layer: it takes the wear so the floor underneath d
 
 ## A cycle, not a one-off
 
-The cheapest floor to keep is one on a plan. A full strip and wax is the reset; machine scrubbing and burnishing between visits keep the shine and stretch the time to the next full strip; a scrub and recoat in between can put off a full strip again. Planned through the year as part of a [building maintenance](/services/building-maintenance/) programme, floor care happens before a floor needs rescuing rather than after.
+The cheapest floor to keep is one on a plan. A full strip and wax is the reset; machine scrubbing and burnishing between visits keep the shine and stretch the time to the next full strip; a scrub and recoat in between can put off a full strip again. Planned through the year as part of a [building maintenance](/building-maintenance/) programme, floor care happens before a floor needs rescuing rather than after.
 
 Winter matters here. Salt left on a finished floor etches it, so entrances and lobbies benefit from extra scrubbing through the winter and a refinish in the spring.
 
@@ -96,6 +96,6 @@ As an illustration, this is the shape of a plan for a busy ground-floor lobby wi
 - **Winter:** extra scrubbing at the entrance and matting that is cleaned and changed through the season; no refinishing until the salt stops.
 - **Between visits:** entrance mats, prompt spill response and a neutral cleaner on the routine mop, which is what stretches the time to the next full strip. Our guide to [daily floor care between wax visits](/5-easy-ways-to-keep-your-commercial-floor-clean/) covers that side.
 
-A quieter back office on the same tile might need a full strip only every two or three years, with a recoat in between. A plan like this is written into the proposal as part of a [building maintenance](/services/building-maintenance/) programme, so the dates are set in advance and the floor is never rescued at the last minute.
+A quieter back office on the same tile might need a full strip only every two or three years, with a recoat in between. A plan like this is written into the proposal as part of a [building maintenance](/building-maintenance/) programme, so the dates are set in advance and the floor is never rescued at the last minute.
 
 We are bonded, insured and WSIB covered. Call [(416) 803-4880](tel:+14168034880) or [request a walkthrough](/request-a-quote/).

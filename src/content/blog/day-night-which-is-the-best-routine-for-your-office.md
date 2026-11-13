@@ -54,4 +54,4 @@ Cleaning teams will have all of the necessary protection needed for all situatio
 
 Whether you are searching for night or day office cleaning in Toronto, a tailored cleaning plan can be created by [Evergreen Office Cleaning](/about-us/) that works the best for your business, with the [office cleaning schedule](/how-often-should-an-office-be-cleaned/) set by how the space is used. We provide high-quality cleaning services with our training regimes, technology, and our cleaning equipment. We have the necessary experience to clean all sizes of commercial buildings. Our past work has provided us with the reputation of being one of Toronto’s top office cleaning companies. [Contact us](/contact-us/) today about all of your office cleaning requirements.
 
-Whichever you choose, Evergreen's [office cleaning](/services/office-cleaning/) service is planned around the hours your building is in use.
+Whichever you choose, Evergreen's [office cleaning](/office-cleaning/) service is planned around the hours your building is in use.

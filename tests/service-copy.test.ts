@@ -56,7 +56,7 @@ describe('one page defines janitorial service (content N-A, onpage N3)', () => {
     const section = body.split('## Routine upkeep between periodic work')[1].split('\n## ')[0].trim();
     expect(section.split(/\n\n/)).toHaveLength(1);
     expect(section.replace(/\([^)]*\)/g, '').match(/[.!?](\s|$)/g)).toHaveLength(2);
-    expect(section).toContain('](/services/janitorial-services/)');
+    expect(section).toContain('](/janitorial-services/)');
   });
 
   it('the "difference" FAQ lives on the janitorial page only', () => {
@@ -119,7 +119,7 @@ describe('internal links (onpage N1, N2, N5)', () => {
     ['office cleaning', office],
     ['property management', property],
   ])('%s links the janitorial page in its body', (_name, get) => {
-    expect(get().body).toContain('](/services/janitorial-services/)');
+    expect(get().body).toContain('](/janitorial-services/)');
   });
 
   it.each([

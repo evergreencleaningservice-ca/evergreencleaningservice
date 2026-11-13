@@ -43,7 +43,7 @@ const text = (html: string) =>
     .replace(/\s+/g, ' ');
 
 describe('the commercial cleaning page counts and links its service area', () => {
-  const html = () => read('services/commercial-cleaning/index.html');
+  const html = () => read('commercial-cleaning/index.html');
   const paragraph = () =>
     html().match(/<p>Evergreen Office Cleaning cleans commercial premises across[\s\S]*?<\/p>/)?.[0] ?? '';
 
@@ -91,7 +91,7 @@ describe('the homepage states commitments, not contract history', () => {
 
 describe('the office cleaning page defines office cleaning once', () => {
   it('keeps the definition under its H2 and not in the summary (GEO N4)', () => {
-    const html = read('services/office-cleaning/index.html');
+    const html = read('office-cleaning/index.html');
     expect(text(html).match(/Office cleaning is the recurring cleaning of a workplace/g)).toHaveLength(1);
     const summary = html.match(/<p class="offer-summary"[^>]*>([\s\S]*?)<\/p>/)?.[1] ?? '';
     expect(summary.length).toBeGreaterThan(40);
@@ -187,7 +187,7 @@ describe('the janitorial page opens "What is included" with a sentence', () => {
      page's front matter but the offer schema dropped the unknown key, so the
      built page showed a bare list. This reads the built HTML, not the file. */
   it('renders includedLead before the lists', () => {
-    const html = read('services/janitorial-services/index.html');
+    const html = read('janitorial-services/index.html');
     const section = html.match(/<section aria-label="What is included"[^>]*>[\s\S]*?<\/section>/)?.[0] ?? '';
     expect(section).toMatch(/<p class="offer-included-lead"[^>]*>A janitorial visit from Evergreen covers/);
     expect(section.indexOf('offer-included-lead')).toBeLessThan(section.indexOf('class="offer-included"'));

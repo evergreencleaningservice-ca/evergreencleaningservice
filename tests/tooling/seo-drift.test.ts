@@ -90,7 +90,7 @@ describe('extractSeo on fixture HTML', () => {
   it('reads robots, canonical and og:image', () => {
     expect(page.metaRobots).toBe('index, follow, max-image-preview:large');
     expect(page.metaGooglebot).toBeNull();
-    expect(page.canonical).toBe('https://www.evergreencleaningservice.ca/services/office-cleaning/');
+    expect(page.canonical).toBe('https://www.evergreencleaningservice.ca/office-cleaning/');
     expect(page.ogImage).toBe('https://img.evergreencleaningservice.ca/images/office-og.jpg');
   });
 
@@ -185,7 +185,7 @@ const page = (over: Record<string, unknown> = {}) => ({
   description: 'Nightly office cleaning.',
   metaRobots: 'index, follow',
   metaGooglebot: null,
-  canonical: `${ORIGIN}/services/office-cleaning/`,
+  canonical: `${ORIGIN}/office-cleaning/`,
   h1: ['Office Cleaning'],
   h2Count: 5,
   schemaTypes: ['BreadcrumbList', 'Service'],
@@ -218,7 +218,7 @@ const snapshot = (pages: Record<string, ReturnType<typeof page>>, over: Record<s
   ...over,
 });
 
-const P = '/services/office-cleaning/';
+const P = '/office-cleaning/';
 const T = '/thank-you/';
 const base = snapshot({ [P]: page(), [T]: noindexPage() });
 const run = (pages: Record<string, ReturnType<typeof page>>, over: Record<string, unknown> = {}) =>
@@ -392,7 +392,7 @@ describe('compareSnapshots', () => {
   it('prints a report with every section and a summary line', () => {
     const current = snapshot({ [P]: page({ status: 404 }), [T]: noindexPage(), '/b/': page() });
     const report = formatReport(compareSnapshots(base, current), base, current);
-    expect(report).toContain('CRITICAL (1)\n  /services/office-cleaning/  [status] HTTP 200 → 404');
+    expect(report).toContain('CRITICAL (1)\n  /office-cleaning/  [status] HTTP 200 → 404');
     expect(report).toContain('WARNING (0)');
     expect(report).toContain('INFO (1)\n  /b/  [new-url] new URL in the sitemap (HTTP 200)');
     expect(report).toMatch(/1 critical, 0 warning, 1 info, 0 unverified\n$/);
@@ -522,7 +522,7 @@ describe('capture', () => {
     expect(snap.origin).toBe(STAGE);
     expect(snap.capturedAt).toBe('2026-11-06T20:00:00.000Z');
     expect(snap.sitemap).toMatchObject({ ok: true, urlCount: 2 });
-    expect(Object.keys(snap.pages)).toEqual(['/lp/commercial-cleaning/', '/old/', '/search/', P, '/thank-you/']);
+    expect(Object.keys(snap.pages)).toEqual(['/lp/commercial-cleaning/', P, '/old/', '/search/', '/thank-you/']);
     expect(snap.pages[P]).toMatchObject({ status: 200, inSitemap: true, mustStayNoindex: false, wordCount: 30 });
     expect(snap.pages['/old/']).toMatchObject({ status: 301, redirect: `${STAGE}/services/`, inSitemap: true });
     expect(snap.pages['/thank-you/']).toMatchObject({ inSitemap: false, mustStayNoindex: true });

@@ -10,7 +10,7 @@ tags: ["commercial-cleaning", "commercial-office-cleaning"]
 
 ## Tips for Choosing a Commercial Cleaning Company
 
-Most businesses hire a [professional cleaning company](/services/commercial-cleaning/) rather than an in-house janitor: the crew comes in after your staff leave, brings its own equipment and supplies, and covers absences itself. There are many companies to choose from, and the cheapest quote is rarely the best value. These are the things worth checking before you sign.
+Most businesses hire a [professional cleaning company](/commercial-cleaning/) rather than an in-house janitor: the crew comes in after your staff leave, brings its own equipment and supplies, and covers absences itself. There are many companies to choose from, and the cheapest quote is rarely the best value. These are the things worth checking before you sign.
 
 **At a glance:**
 
@@ -58,4 +58,4 @@ Good cleaners are reliable, discreet in a space full of other people's work, and
 
 Evergreen Office Cleaning has cleaned commercial buildings in Toronto and the GTA since 1989, with the same crew at every visit and one account executive for each client. [Request a free walkthrough](/request-a-quote/) and we will quote your building in writing. Our guide to how office cleaning is priced in Toronto shows how to [compare cleaning quotes](/office-cleaning-cost-toronto-guide/) on the same scope.
 
-If Evergreen is on your list, our [office cleaning](/services/office-cleaning/) page sets out what a routine visit includes, so you can hold us to the same checks as everyone else.
+If Evergreen is on your list, our [office cleaning](/office-cleaning/) page sets out what a routine visit includes, so you can hold us to the same checks as everyone else.

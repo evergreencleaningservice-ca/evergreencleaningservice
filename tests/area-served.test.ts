@@ -15,7 +15,7 @@ import { organizationGraph, serviceSchema } from '../src/lib/schema';
 type Node = Record<string, any>;
 
 const org = (organizationGraph() as Node)['@graph'].find((n: Node) => n['@type'] === 'ProfessionalService') as Node;
-const service = serviceSchema({ name: 'Office Cleaning', url: '/services/office-cleaning/' }) as Node;
+const service = serviceSchema({ name: 'Office Cleaning', url: '/office-cleaning/' }) as Node;
 
 describe('areaServed typing', () => {
   it('lists only East York and York as places within Toronto', () => {

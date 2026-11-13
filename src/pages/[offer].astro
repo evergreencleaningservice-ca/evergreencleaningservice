@@ -1,0 +1,86 @@
+---
+/**
+ * /<slug>/ — every service and industry page, through the shared OfferPage
+ * template, since 13 Nov 2026 (URL move, owner decision: they were at
+ * /services/<slug>/ and /industries/<slug>/; src/data/offer-pages.ts). The
+ * parent and the form identity are the ones those two routes passed, so
+ * only the URL changed.
+ *
+ * WHY A SECOND ROOT ROUTE, BESIDE [slug].astro. Astro serves two dynamic
+ * routes at one level in a static build: each route's getStaticPaths lists
+ * its own pages. Folding these pages into [slug].astro was the other way,
+ * and was built and measured: a route's CSS is inlined into every page it
+ * builds, so every blog post took on the template's styles (+17KB a post)
+ * and every service page the post layouts' (+11KB). Two routes keep each
+ * page's HTML what it was.
+ *
+ * WHAT SHARING THE ROOT COSTS, AND THE GUARD. When two routes list one
+ * path, Astro only warns and builds one of them. So this route stops the
+ * build if a blog post, a service or industry page, a page file in
+ * src/pages or a file in public would claim the same slug
+ * (rootSlugCollisions), and if the slug lists in src/data/offer-pages.ts
+ * and the content folders disagree: a page they do not know would be served
+ * with no redirect from its old address and no sitemap date.
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+import type { InferGetStaticPropsType } from 'astro';
+import { getCollection, render } from 'astro:content';
+import OfferPage from '../components/OfferPage.astro';
+import { normalizeBody } from '../lib/normalize-body';
+import { INDUSTRY_SLUGS, SERVICE_SLUGS, rootSlugCollisions } from '../data/offer-pages';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  const industries = await getCollection('industries');
+  const posts = await getCollection('blog');
+
+  /* Defined in here: Astro runs getStaticPaths apart from the rest of the
+     front matter. */
+  const listed = (ids: string[], list: readonly string[], collection: string, name: string) => {
+    const held = [...ids].sort().join(', ');
+    const known = [...list].sort().join(', ');
+    if (held !== known) {
+      throw new Error(`src/data/offer-pages.ts: ${name} is [${known}], but src/content/${collection}/ holds [${held}]`);
+    }
+  };
+  listed(services.map((s) => s.id), SERVICE_SLUGS, 'services', 'SERVICE_SLUGS');
+  listed(industries.map((s) => s.id), INDUSTRY_SLUGS, 'industries', 'INDUSTRY_SLUGS');
+
+  /* The first path segments the files in `dir` answer. A dynamic route,
+     such as this one, claims no name of its own. */
+  const rootNames = (dir: string) =>
+    fs
+      .readdirSync(path.join(process.cwd(), dir), { withFileTypes: true })
+      .map((e) => (e.isDirectory() ? e.name : e.name.replace(/\.(astro|ts|js|md)$/, '')))
+      .filter((name) => !name.startsWith('.') && !name.startsWith('['));
+  const collisions = rootSlugCollisions({
+    'a blog post': posts.map((p) => p.id),
+    'a service page': services.map((s) => s.id),
+    'an industry page': industries.map((s) => s.id),
+    'a file in src/pages': rootNames('src/pages'),
+    'a file in public': rootNames('public'),
+  });
+  if (collisions.length) throw new Error(`Root URL collision:\n  ${collisions.join('\n  ')}`);
+
+  return [
+    ...services.map((entry) => ({
+      params: { offer: entry.id },
+      props: { entry, parent: { name: 'Services', url: '/services/' }, formId: `service-${entry.id}` },
+    })),
+    ...industries.map((entry) => ({
+      params: { offer: entry.id },
+      props: { entry, parent: { name: 'Industries', url: '/industries/' }, formId: `industry-${entry.id}` },
+    })),
+  ];
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { entry, parent, formId } = Astro.props as Props;
+
+// `render()` is also what fills `entry.rendered`, which is normalised below.
+await render(entry);
+const body = entry.rendered?.html ? normalizeBody(entry.rendered.html) : null;
+---
+
+<OfferPage data={entry.data} body={body} parent={parent} formId={formId} />

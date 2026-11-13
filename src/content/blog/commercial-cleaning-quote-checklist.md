@@ -32,9 +32,9 @@ guide:
 
 <h2 id="quote-checklist">What should a cleaning quote cover?</h2>
 
-A complete [commercial cleaning](/services/commercial-cleaning/) quote should identify the premises, tasks, frequency, service hours, supplies, price, exclusions and responsibilities on both sides. A monthly total beside “general cleaning” leaves too much open to interpretation.
+A complete [commercial cleaning](/commercial-cleaning/) quote should identify the premises, tasks, frequency, service hours, supplies, price, exclusions and responsibilities on both sides. A monthly total beside “general cleaning” leaves too much open to interpretation.
 
-Start with the building address, the areas included and the person authorized to approve work. For [recurring office cleaning](/services/office-cleaning/), ask for a room-by-room task schedule rather than a promise to keep everything clean.
+Start with the building address, the areas included and the person authorized to approve work. For [recurring office cleaning](/office-cleaning/), ask for a room-by-room task schedule rather than a promise to keep everything clean.
 
 Use the following checklist when reviewing a written proposal. Each item should have a clear answer in the quote or an attached scope that the agreement references.
 
@@ -64,7 +64,7 @@ The commercial cleaning scope of work should say what happens in each area and o
 
 List washroom fixtures, kitchen counters, waste collection, accessible desks, shared touch points and floors separately. State whether glass means entrance doors, interior partitions or exterior windows, and identify any height or access limits.
 
-Put carpet extraction, high dusting and floor finish work on their own schedule or mark them as separately quoted. Evergreen's [building maintenance and floor care](/services/building-maintenance/) page describes services to discuss during a walkthrough; their availability does not mean they are included in every recurring agreement.
+Put carpet extraction, high dusting and floor finish work on their own schedule or mark them as separately quoted. Evergreen's [building maintenance and floor care](/building-maintenance/) page describes services to discuss during a walkthrough; their availability does not mean they are included in every recurring agreement.
 
 ### Assign responsibility for products and stock
 

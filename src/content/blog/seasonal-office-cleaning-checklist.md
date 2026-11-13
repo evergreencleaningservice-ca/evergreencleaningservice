@@ -36,7 +36,7 @@ Then keep a routine: mats dry before people arrive, the floor mopped dry through
 
 ### Remove salt before it does damage
 
-Salt left on a floor scratches and dulls the finish, and salt left in carpet wears the fibres. Water alone will not lift it. A neutralizing floor cleaner, diluted as the manufacturer directs, dissolves salt residue and the grime with it. Entrances and lobbies need extra scrubbing through the winter, and a scrub and recoat or a full [strip and wax](/services/floor-stripping-waxing/) in the spring.
+Salt left on a floor scratches and dulls the finish, and salt left in carpet wears the fibres. Water alone will not lift it. A neutralizing floor cleaner, diluted as the manufacturer directs, dissolves salt residue and the grime with it. Entrances and lobbies need extra scrubbing through the winter, and a scrub and recoat or a full [strip and wax](/floor-stripping-waxing/) in the spring.
 
 ### Look after the air
 
@@ -87,4 +87,4 @@ None of this has to depend on someone remembering it, whether your office is cle
 
 The seasonal work sits on top of the [daily, weekly and monthly tasks](/office-cleaning-checklist/) in a routine scope; it does not replace them. [How often an office should be cleaned](/how-often-should-an-office-be-cleaned/) depends on how it is used.
 
-The carpet extraction, high dusting and floor refinishing on this list are the periodic work Evergreen plans through the year under [building maintenance and floor care](/services/building-maintenance/).
+The carpet extraction, high dusting and floor refinishing on this list are the periodic work Evergreen plans through the year under [building maintenance and floor care](/building-maintenance/).
