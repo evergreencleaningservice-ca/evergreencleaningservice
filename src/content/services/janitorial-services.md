@@ -9,7 +9,11 @@ h1: "Janitorial Services in Toronto and the GTA"
 # "How it works" block further down lists the same steps. The description
 # leads with the work instead of repeating the title's words.
 description: "Washrooms, kitchens, floors, trash and touch points cleaned on a fixed schedule in Toronto and the GTA, after hours, by the same crew."
-summary: "Janitorial services are the scheduled upkeep of a building: washrooms, kitchens, floors, trash and the surfaces everyone touches, done the same way every visit, so the space is ready each morning without anyone having to ask. Evergreen Office Cleaning has provided them across Toronto and the GTA since 1989, from one office at 243 Queen St W, after hours or at weekends, by a crew that comes back to the same building."
+# 13 Nov 2026, SEO audit 11 Nov (geo N9, sxo S1): the opener had grown to
+# 419 characters. It keeps the definition, the morning result, the years and
+# the hours; the office address, the same-crew point and "without anyone
+# having to ask" moved to "Who does the work, and when?" in the body.
+summary: "Janitorial services are the scheduled upkeep of a building: washrooms, kitchens, floors, trash and the surfaces everyone touches, done the same way every visit, so the space is ready each morning. Evergreen has provided them across Toronto and the GTA since 1989, after hours or at weekends."
 image: "/images/janitorial-cart-preparation-supplies.jpg"
 imageAlt: "Janitorial cart stocked with cleaning supplies"
 fitHeading: "Buildings we provide janitorial services for"
@@ -20,6 +24,10 @@ fit:
   - "Multi-tenant buildings and condominium common areas"
   - "Schools, daycares and training centres"
   - "The washrooms, lunchrooms and offices of industrial buildings"
+# 13 Nov 2026, SEO audit 11 Nov (geo N9): one sentence to introduce the list,
+# so the block does not open on bare bullets. OfferPage.astro does not render
+# this field yet (it needs a schema field and a <p> under the heading).
+includedLead: "A janitorial visit from Evergreen covers the routine work below every time, and the rest on a set rotation agreed at the walkthrough."
 included:
   - heading: "Every visit"
     items:
@@ -47,6 +55,14 @@ scope:
   - "If a task needs a specialist trade rather than a cleaner, we will tell you before work starts."
 showProcess: true
 showPricing: true
+# 13 Nov 2026, SEO audit 11 Nov (sxo S1): the page had no client proof. Both
+# reviews are about recurring upkeep of an office ("the regular maintenance
+# of our office space"; a team "cleaning our offices for the past 3 years"),
+# which is what this page sells. Neither names a city or this service, and
+# the block shows them as written, with no attribution added.
+reviews:
+  - "av-ev"
+  - "Edward Sherman"
 faqs:
   - q: "What do janitorial services include?"
     a: "The routine upkeep of a building on a fixed schedule: trash and recycling, washrooms and consumables, kitchens and break rooms, floors and entrance mats, and disinfecting the surfaces people touch. Glass, dusting and high surfaces are done on a rotation. The exact list for your building is written into the proposal."
@@ -85,7 +101,7 @@ ctaText: "Tell us about the building and how it is used. We will walk it with yo
 
 ![Janitorial cart stocked with cleaning supplies](/images/janitorial-cart-preparation-supplies.jpg)
 
-## How often janitorial service should visit
+## How often should janitorial service visit?
 
 There is no single right frequency. It depends on how many people use the space, how many washrooms and kitchens there are, and whether the public comes in. A rough guide:
 
@@ -99,7 +115,7 @@ There is no single right frequency. It depends on how many people use the space,
 
 Frequency is set task by task, not as one number. A small office might have its washrooms and kitchen done three times a week and its glass every second week. Whatever is agreed at the walkthrough is written into the proposal, so both sides know what each visit includes, and the same crew works to it from the first visit. The steps from first call to first visit are set out on [how we work](/our-process/).
 
-## Janitorial services for different buildings
+## How do janitorial services differ by building?
 
 **Offices.** Desks, kitchens, washrooms and meeting rooms, done after staff leave. Our [office cleaning](/services/office-cleaning/) page sets out the office routine in detail.
 
@@ -115,6 +131,10 @@ Frequency is set task by task, not as one number. A small office might have its 
 
 The two terms overlap. Janitorial services are the recurring upkeep. [Commercial cleaning](/services/commercial-cleaning/) is the wider term: it includes janitorial work and also the periodic and one-off jobs routine cleaning does not cover, such as stripping and waxing floors, carpet extraction, deep cleans and post-construction clean-up. Most buildings need both, and most of our contracts include both: janitorial service on a fixed schedule, with periodic work planned through the year.
 
-## Products and safety
+## Who does the work, and when?
 
-We clean with an approved line of professional [green cleaning products](/green-clean-products/), chosen so they do not leave residue in the air your staff breathe. Our crews are covered by WSIB Ontario and by liability insurance, the company is bonded, and staff are background-screened before they hold a key to anyone's building.
+Evergreen Office Cleaning works from one office, at 243 Queen St W in Toronto, and its crews travel to clients across Toronto and the GTA. Visits happen after hours or at weekends, and the same crew comes back to the same building every time, so the space is ready each morning without anyone having to ask. One account executive is your contact for changes, inspections and extra work. Our crews are covered by WSIB Ontario and by liability insurance, the company is bonded, and staff are background-screened before they hold a key to anyone's building.
+
+## Which cleaning products does Evergreen use?
+
+Evergreen Office Cleaning uses Armstrong Manufacturing's ProSeries Green line: products third-party certified to UL Environment (ECOLOGO) standards, fragrance-free and free of VOCs, chosen so they do not leave residue in the air your staff breathe. More on our [green cleaning products](/green-clean-products/) page.

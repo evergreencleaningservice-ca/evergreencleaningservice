@@ -5,6 +5,7 @@ title: "6 Common Cleaning Products That You Should Never Mix Together"
 seoTitle: "6 Cleaning Products You Should Never Mix"
 description: "Six cleaning-product combinations never to mix, from bleach with vinegar, ammonia or rubbing alcohol to two drain cleaners, and why each is unsafe."
 pubDate: 2021-07-30
+updatedDate: 2026-11-07
 image: "/images/blog-cleaning-products-never-mix-feature.jpg"
 imageAlt: "Cleaning spray, gloves, cloth and window squeegee"
 tags: ["cleaning-products", "commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]

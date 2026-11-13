@@ -2,6 +2,7 @@
 title: "Commercial Cleaning Techniques To Avoid"
 description: "More cleaning product is not always better, and some popular cleaning tricks do more harm than good. Here are the cleaning techniques to avoid."
 pubDate: 2022-11-30
+updatedDate: 2026-11-07
 image: "/images/blog-cleaning-techniques-to-avoid-feature.jpg"
 imageAlt: "Cleaning spray and cloth beside a sink"
 tags: ["cleaning", "cleaning-products", "commercial-cleaning", "commercial-office-cleaning"]

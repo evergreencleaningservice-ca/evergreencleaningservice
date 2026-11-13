@@ -146,13 +146,18 @@ describe('link-only edits leave the dates alone', () => {
   // The repo bumps updatedDate only for merges and material revisions (see the
   // 7 Nov commit "Blog and service copy: ..."); these are link and copy edits.
   it('adds no updatedDate and keeps the existing one', () => {
+    /* 13 Nov 2026, SEO audit 11 Nov (geo N8): the cost guide and the slips
+       post now carry an updatedDate, for their retitle (7 Nov) and CCOHS
+       source (6 Nov). What this test guards is that the 12 Nov link edits did
+       not set one, so any date must come before 12 Nov. */
     for (const file of [
       'blog/commercial-cleaning-quote-checklist.md',
       'blog/office-cleaning-cost-toronto-guide.md',
       'blog/preventing-slips-trips-falls-in-your-workplace.md',
       'blog/how-often-should-an-office-be-cleaned.md',
     ]) {
-      expect(parse(file).front, file).not.toMatch(/^updatedDate:/m);
+      const date = parse(file).front.match(/^updatedDate: (\S+)$/m)?.[1];
+      if (date) expect(date < '2026-11-12', file).toBe(true);
     }
     expect(howToDecide.front).toMatch(/^updatedDate: 2026-10-30$/m);
   });
