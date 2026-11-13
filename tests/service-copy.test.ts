@@ -75,8 +75,12 @@ describe('the janitorial page does not repeat itself (content N-B)', () => {
   it('keeps the facts of the removed definition in the opener', () => {
     const summary = janitorial().field('summary');
     expect(summary).toMatch(/^Janitorial services are the scheduled upkeep of a building/);
-    for (const fact of ['since 1989', '243 Queen St W', 'after hours or at weekends', 'ready each morning'])
+    for (const fact of ['since 1989', 'after hours or at weekends', 'ready each morning'])
       expect(summary).toContain(fact);
+    /* 13 Nov 2026, SEO audit 11 Nov (geo N9): the opener was trimmed to under
+       300 characters and the office address moved to the body's "Who does
+       the work, and when?". It must still be on the page. */
+    expect(janitorial().body).toContain('243 Queen St W');
   });
 
   it('leaves the contract steps to the shared "How it works" block', () => {

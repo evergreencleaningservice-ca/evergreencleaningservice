@@ -18,8 +18,10 @@ import ReviewQuotes from '../components/blocks/ReviewQuotes.astro';
 import { PRICING_FACTORS } from '../data/process';
 import { site } from '../data/site';
 import { breadcrumbSchema } from '../lib/schema';
+import { pageTitle } from '../lib/title';
 
-const title = 'How We Work: Walkthrough, Proposal & Quality | Evergreen';
+/* Through pageTitle(), which adds the brand (13 Nov 2026, SEO audit 11 Nov N4). */
+const title = pageTitle('How We Work: Walkthrough, Proposal & Quality');
 const description =
   'How Evergreen works: a free walkthrough, a written proposal, a consistent crew, and inspections coordinated by your account executive.';
 

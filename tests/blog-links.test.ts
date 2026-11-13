@@ -49,7 +49,7 @@ describe('the cost guide keeps "cost" without promising a price list', () => {
   const guide = post('office-cleaning-cost-toronto-guide');
 
   it('puts "cost" back in the <title> and the H1, inside 60 characters', () => {
-    // GuideLayout uses seoTitle as the <title> exactly as written.
+    // Both layouts pass seoTitle through pageTitle(), which adds the brand when it fits.
     const title = guide.field('seoTitle')!;
     expect(title).toBe('Office Cleaning Costs in Toronto: How Pricing Works');
     expect(title.length).toBeLessThanOrEqual(TITLE_LIMIT);
@@ -80,9 +80,9 @@ describe('titles and descriptions fit', () => {
 
   it('every post title, as the layouts emit it, is 60 characters or fewer', () => {
     for (const p of blog) {
-      // GuideLayout emits seoTitle as written; PostLayout runs it through pageTitle().
+      // Both layouts run seoTitle through pageTitle() (13 Nov 2026, SEO audit 11 Nov N4).
       const headline = p.field('seoTitle') ?? p.field('title')!;
-      const shown = /^guide:/m.test(p.front) ? headline : pageTitle(headline);
+      const shown = pageTitle(headline);
       expect(shown.length, `${p.slug}: ${shown}`).toBeLessThanOrEqual(TITLE_LIMIT);
     }
   });

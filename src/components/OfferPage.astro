@@ -42,6 +42,7 @@ interface Offer {
   fitHeading?: string;
   fit: string[];
   included: { heading: string; items: string[] }[];
+  includedLead?: string;
   scope: string[];
   scheduling: string[];
   showProcess: boolean;
@@ -66,7 +67,10 @@ interface Props {
 
 const { data, body, parent, formId } = Astro.props;
 const h1 = data.h1 ?? data.title;
-const title = data.seoTitle ?? pageTitle(data.title);
+/* seoTitle replaces the headline but not the rule: it used to be emitted as
+   written, with " | Evergreen" typed into each one (13 Nov 2026, SEO audit
+   11 Nov N4). */
+const title = pageTitle(data.seoTitle ?? data.title);
 const path = Astro.url.pathname;
 
 /* A line for every related link that does not bring its own. Mixed cards,
@@ -248,6 +252,7 @@ const bodyHtml =
         data.included.length > 0 && (
           <section aria-label="What is included">
             <h2 class="blk-title">What is included</h2>
+            {data.includedLead && <p class="offer-included-lead">{data.includedLead}</p>}
             <div class="offer-included">
               {data.included.map((group) => (
                 <div>
@@ -529,6 +534,30 @@ const bodyHtml =
   .offer-areas ul {
     margin: 0;
     padding-left: 18px;
+  }
+  /* 44px targets on a phone or any touch screen (13 Nov 2026, SEO audit
+     11 Nov, critic R4): at 360px the area links measured 24px and the
+     breadcrumb links 30px, missed by the 7 Nov pass over the footer, the
+     homepage areas and the sidebar. Each area row becomes 44px, plain-text
+     areas included so the list keeps one rhythm, and the breadcrumb's line
+     grows to fit; with a mouse on a desktop nothing changes. */
+  @media (max-width: 767px), (pointer: coarse) {
+    .offer-areas li {
+      line-height: 44px;
+      padding-block: 0;
+    }
+
+    .offer-areas li > a {
+      min-height: 44px;
+      line-height: 44px;
+    }
+
+    .offer-hero .breadcrumbs a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding-block: 0;
+    }
   }
   .offer-band {
     padding-bottom: 56px;

@@ -3,6 +3,7 @@ title: "Dental Office Cleaning Checklist for Ontario Clinics"
 seoTitle: "Dental Office Cleaning Checklist"
 description: "A dental office cleaning checklist for Ontario clinics: exterior, reception, treatment rooms, washrooms, the staff break room, and floors and carpets."
 pubDate: 2020-04-29
+updatedDate: 2026-11-06
 image: "/images/blog-dental-clinic-cleaning-checklist-feature.jpg"
 imageAlt: "Close-up of cleaning a dental workspace"
 tags: ["commercial-cleaning", "dental-office"]

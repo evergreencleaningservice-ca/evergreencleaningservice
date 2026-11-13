@@ -66,7 +66,11 @@ export type Location = {
   description: string;
   /** true where the copy was written here rather than supplied */
   needsClientReview?: boolean;
-  /** Explicit title tag, where the client has specified one */
+  /** The title text, where the client has specified one. Stored without the
+      brand: the page passes it through pageTitle(), which adds " | Evergreen"
+      when it fits in 60 characters (13 Nov 2026, SEO audit 11 Nov N4). Vaughan
+      and Durham do not fit it and stand unbranded; the place names come
+      first. */
   title?: string;
   /** Overrides the template's generated H1 on a page with no `detail` */
   h1?: string;
@@ -112,7 +116,7 @@ export const locations: Location[] = [
     mapQuery: 'Downtown Toronto, Ontario, Canada',
     description:
       'Office and commercial cleaning in downtown Toronto: offices, multi-tenant buildings, clinics and retail, cleaned after hours. WSIB covered.',
-    title: 'Office & Commercial Cleaning in Downtown Toronto | Evergreen',
+    title: 'Office & Commercial Cleaning in Downtown Toronto',
     h1: 'Office & Commercial Cleaning in Downtown Toronto',
     needsClientReview: true,
   },
@@ -137,7 +141,7 @@ export const locations: Location[] = [
        searchers name Meadowvale, Lisgar and East Credit. */
     description:
       'Office and commercial cleaning in Mississauga: Meadowvale, Lisgar, East Credit, City Centre and the airport area. After hours, WSIB covered.',
-    title: 'Office & Commercial Cleaning in Mississauga | Evergreen',
+    title: 'Office & Commercial Cleaning in Mississauga',
     detail: {
       h1: 'Office & Commercial Cleaning in Mississauga',
       subtitle: 'Office and commercial cleaning for Mississauga businesses, after hours, by the same crew each visit',
@@ -202,7 +206,7 @@ export const locations: Location[] = [
     mapQuery: 'Etobicoke, Toronto, Ontario, Canada',
     description:
       'Office and commercial cleaning in Etobicoke: offices, clinics, plazas, condo common areas and industrial buildings, cleaned after hours. WSIB covered.',
-    title: 'Office & Commercial Cleaning in Etobicoke | Evergreen',
+    title: 'Office & Commercial Cleaning in Etobicoke',
     h1: 'Office & Commercial Cleaning in Etobicoke',
   },
   {
@@ -290,7 +294,7 @@ export const locations: Location[] = [
     mapQuery: 'Markham, Ontario, Canada',
     description:
       'Office and commercial cleaning in Markham: corporate and tech offices, clinics and business-park units along Highway 7, 404 and 407. After hours, WSIB covered.',
-    title: 'Office & Commercial Cleaning in Markham | Evergreen',
+    title: 'Office & Commercial Cleaning in Markham',
     h1: 'Office & Commercial Cleaning in Markham',
   },
   {
@@ -313,7 +317,7 @@ export const locations: Location[] = [
     mapQuery: 'Brampton, Ontario, Canada',
     description:
       'Office and commercial cleaning in Brampton: offices, clinics, warehouses and industrial buildings, cleaned after hours or around shifts. WSIB covered.',
-    title: 'Office & Commercial Cleaning in Brampton | Evergreen',
+    title: 'Office & Commercial Cleaning in Brampton',
     h1: 'Office & Commercial Cleaning in Brampton',
     needsClientReview: true,
   },
@@ -336,7 +340,7 @@ export const locations: Location[] = [
     mapQuery: 'Oakville, Ontario, Canada',
     description:
       'Office and commercial cleaning in Oakville: professional offices, clinics and business-park buildings, downtown to Winston Park. After hours, WSIB covered.',
-    title: 'Office & Commercial Cleaning in Oakville | Evergreen',
+    title: 'Office & Commercial Cleaning in Oakville',
     h1: 'Office & Commercial Cleaning in Oakville',
     needsClientReview: true,
   },
@@ -362,7 +366,7 @@ export const locations: Location[] = [
     mapQuery: 'North York, Toronto, Ontario, Canada',
     description:
       'Office and commercial cleaning in North York: Yonge–Sheppard towers, business parks off the 401 and 404, and clinics. After hours, WSIB covered.',
-    title: 'Office & Commercial Cleaning in North York | Evergreen',
+    title: 'Office & Commercial Cleaning in North York',
     h1: 'Office & Commercial Cleaning in North York',
     needsClientReview: true,
   },
@@ -384,7 +388,7 @@ export const locations: Location[] = [
     mapQuery: 'Scarborough, Toronto, Ontario, Canada',
     description:
       'Office and commercial cleaning in Scarborough: Scarborough Centre offices, Progress and Milliken business areas, 401 warehouses. After hours, WSIB covered.',
-    title: 'Office & Commercial Cleaning in Scarborough | Evergreen',
+    title: 'Office & Commercial Cleaning in Scarborough',
     h1: 'Office & Commercial Cleaning in Scarborough',
     needsClientReview: true,
   },
@@ -406,7 +410,7 @@ export const locations: Location[] = [
     mapQuery: 'Richmond Hill, Ontario, Canada',
     description:
       'Office and commercial cleaning in Richmond Hill: Beaver Creek and Headford business parks and Yonge Street suites. After hours, WSIB covered.',
-    title: 'Office & Commercial Cleaning in Richmond Hill | Evergreen',
+    title: 'Office & Commercial Cleaning in Richmond Hill',
     h1: 'Office & Commercial Cleaning in Richmond Hill',
     needsClientReview: true,
   },

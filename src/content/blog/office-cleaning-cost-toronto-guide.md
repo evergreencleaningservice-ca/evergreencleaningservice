@@ -7,6 +7,7 @@ title: "What Drives Office Cleaning Costs in Toronto"
 seoTitle: "Office Cleaning Costs in Toronto: How Pricing Works"
 description: "Toronto office cleaning prices depend on floor area, washrooms, visit frequency and scope. Build a monthly budget, read a quote and compare like for like."
 pubDate: 2026-10-31
+updatedDate: 2026-11-07
 image: "/images/blog-office-cleaning-cost-toronto-guide.jpg"
 imageAlt: "Empty modern office interior with glass partitions, seating and natural light."
 tags: ["commercial-cleaning", "commercial-office-cleaning", "office"]

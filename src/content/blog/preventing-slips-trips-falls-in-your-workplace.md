@@ -2,6 +2,7 @@
 title: "Preventing Slips, Trips, and Falls in Your Workplace"
 description: "The main causes of slips, trips and falls at work, and how to prevent them with warning signs, lighting, handrails and dry, clean floors."
 pubDate: 2021-03-31
+updatedDate: 2026-11-06
 image: "/images/blog-slip-trip-fall-prevention-feature.jpg"
 imageAlt: "Yellow wet floor warning sign"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services"]
