@@ -17,6 +17,7 @@
 import LandingLayout from '../layouts/LandingLayout.astro';
 import { nap } from '../data/site';
 import { REPLY_PROMISE } from '../data/landing';
+import { pageTitle } from '../lib/title';
 
 /* Both landing pages promise the same response, `REPLY_PROMISE`, so the
    `?t=` switch that rendered one of two numbers is gone — one promise, stated
@@ -36,7 +37,7 @@ import { REPLY_PROMISE } from '../data/landing';
 ---
 
 <LandingLayout
-  title="Thank You | Evergreen Office Cleaning"
+  title={pageTitle('Thank You')}
   description="Your quote request has been received. Our account executive will be in touch shortly."
 >
   <section class="ty">

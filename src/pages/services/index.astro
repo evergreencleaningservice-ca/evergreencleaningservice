@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import { site, nav } from '../../data/site';
 import { breadcrumbSchema } from '../../lib/schema';
+import { pageTitle } from '../../lib/title';
 
 /*
  * The original /services/ URL was an empty WordPress page archive (no content of
@@ -27,7 +28,7 @@ const services = (await getCollection('services')).sort(
 ---
 
 <BaseLayout
-  title="All Cleaning Services | Evergreen Office Cleaning"
+  title={pageTitle('All Cleaning Services')}
   description="Office, commercial, industrial, post-construction, disinfection and emergency cleaning, building maintenance, pressure washing and graffiti removal in the GTA."
 >
   <script

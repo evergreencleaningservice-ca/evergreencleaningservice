@@ -156,7 +156,8 @@ describe('an archive page matches the original’s', () => {
   /* Measured on https://evergreencleaningservice.ca/tag/cleaning/. */
   it('uses the original’s title, heading and breadcrumb', () => {
     const html = read('tag', 'cleaning', 'index.html');
-    expect(html).toContain('<title>cleaning Archives - Evergreen Office Cleaning</title>');
+    /* The suffix follows the site's one rule, not the original's (13 Nov 2026, SEO audit 11 Nov N4). */
+    expect(html).toContain('<title>cleaning Archives | Evergreen</title>');
     expect(html).toMatch(/<h1[^>]*>Tag: <span[^>]*>cleaning<\/span><\/h1>/);
     expect(html).toContain('>Insights</a>');
   });

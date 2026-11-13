@@ -12,27 +12,27 @@
  * yet. Nothing is truncated — a title cut mid-word reads worse than a long one,
  * and Google does its own truncating anyway.
  *
- * Money pages keep the brand because their titles are short enough to. Long
- * blog-post headlines lose it, which is the right way round.
+ * One suffix, one rule (13 Nov 2026, SEO audit 11 Nov, onpage.md N4). Until
+ * then four forms were live at once: " - Evergreen Office Cleaning" and
+ * " - Evergreen" from this function, " | Evergreen" hard-coded into the money
+ * pages' stored titles, and nothing at all on hand-set titles that bypassed
+ * it. Every <title> now comes through here and ends " | Evergreen" when that
+ * fits in 60 characters. The full company name is no longer appended: it is
+ * in the logo, the schema and og:site_name, which is where Google takes the
+ * site name it shows above the result. Stored titles must not carry the
+ * suffix themselves, or it would be doubled; tests/build/titles.test.ts
+ * checks the built pages for that.
  */
-import { site } from '../data/site';
 
 /** What Google gives a title before it starts cutting. */
 export const TITLE_LIMIT = 60;
 
-const SUFFIX = ` - ${site.name}`;
-/* The short form, for headlines the full name does not fit after (SEO audit
-   Phase 2, 6 Nov 2026). Before, 22 blog posts carried no brand at all: in a
-   blog result the title was the only line a reader had, and it never said
-   whose site it was. "Evergreen" alone fits after any headline up to 48
-   characters. */
-const SHORT_SUFFIX = ' - Evergreen';
+/** The one brand suffix every title uses when it fits. */
+export const TITLE_SUFFIX = ' | Evergreen';
 
 export function pageTitle(title: string): string {
-  const full = `${title}${SUFFIX}`;
-  if (full.length <= TITLE_LIMIT) return full;
-  const short = `${title}${SHORT_SUFFIX}`;
-  return short.length <= TITLE_LIMIT ? short : title;
+  const branded = `${title}${TITLE_SUFFIX}`;
+  return branded.length <= TITLE_LIMIT ? branded : title;
 }
 
 /**

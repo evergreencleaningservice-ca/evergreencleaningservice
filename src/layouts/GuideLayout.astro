@@ -1,6 +1,7 @@
 ---
 import { getEntry, type CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
+import { pageTitle } from '../lib/title';
 /* The italic face, for blockquotes: posts are the only pages that use it. */
 import '../styles/fonts-italic.css';
 import { articleSchema, breadcrumbSchema } from '../lib/schema';
@@ -35,7 +36,9 @@ const related = await Promise.all(guide.related.map(async (item) => {
 const relatedSizes = '(min-width: 912px) 428px, (min-width: 561px) calc(50vw - 28px), calc(100vw - 32px)';
 ---
 
-<BaseLayout title={seoTitle ?? title} description={description} image={image} imageAlt={imageAlt}
+{/* Through pageTitle() like every other page (13 Nov 2026, SEO audit 11 Nov
+   N4): the guides' seoTitles were emitted as written and carried no brand. */}
+<BaseLayout title={pageTitle(seoTitle ?? title)} description={description} image={image} imageAlt={imageAlt}
   type="article" publishedTime={pubDate.toISOString()} modifiedTime={updatedDate?.toISOString()}>
   <script slot="head" type="application/ld+json" is:inline
     set:html={JSON.stringify(articleSchema({ title, description, pubDate, updatedDate, image, slug: post.id }))} />

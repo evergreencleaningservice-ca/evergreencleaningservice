@@ -1,7 +1,7 @@
 ---
 title: "Commercial Cleaning"
 h1: "Commercial Cleaning Services in Toronto and the GTA"
-seoTitle: "Commercial Cleaning Services in Toronto | Evergreen"
+seoTitle: "Commercial Cleaning Services in Toronto"
 # 12 Nov 2026, SEO audit 11 Nov (content N-A, N-D; onpage N3): this page now
 # defines commercial cleaning only. /services/janitorial-services/ is the one
 # page that defines janitorial service and carries the "difference" FAQ, so

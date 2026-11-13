@@ -48,6 +48,7 @@ import LpFinalCta from '../../components/lp/LpFinalCta.astro';
 import LpSticky from '../../components/lp/LpSticky.astro';
 import LpFormNote from '../../components/lp/LpFormNote.astro';
 import { FINE_PRINT, REPLY_PROMISE } from '../../data/landing';
+import { pageTitle } from '../../lib/title';
 
 /** The DOM id and anchor target. Unchanged, so existing #links still work. */
 const FORM_ANCHOR = 'ppc-lead-form';
@@ -72,7 +73,7 @@ const CALL_NOTE = 'Free walkthrough • No obligation';
 ---
 
 <LandingLayout
-  title="Commercial & Office Cleaning in Toronto and the GTA | Evergreen"
+  title={pageTitle('Commercial & Office Cleaning in Toronto and the GTA')}
   description="Commercial and office cleaning in Toronto, Mississauga, Vaughan and the GTA. WSIB covered and bonded. Free walkthrough; reply in 2 hours, Mon–Fri 7am–6pm."
   callNote={CALL_NOTE}
   quoteAnchor={FORM_ANCHOR}

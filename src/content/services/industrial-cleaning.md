@@ -1,5 +1,5 @@
 ---
-seoTitle: "Industrial & Warehouse Cleaning in Toronto | Evergreen"
+seoTitle: "Industrial & Warehouse Cleaning in Toronto"
 title: "Industrial Cleaning"
 h1: "Industrial and Warehouse Cleaning in Toronto and the GTA"
 description: "Industrial and warehouse cleaning in Toronto and the GTA: floor scrubbing, strip and wax, high dusting and staff areas, with a free on-site consultation."

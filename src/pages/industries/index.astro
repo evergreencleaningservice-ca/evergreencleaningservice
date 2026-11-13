@@ -12,8 +12,10 @@ import TrustStrip from '../../components/blocks/TrustStrip.astro';
 import { INDUSTRIES } from '../../data/industries';
 import { site } from '../../data/site';
 import { breadcrumbSchema, collectionSchema } from '../../lib/schema';
+import { pageTitle } from '../../lib/title';
 
-const title = 'Industries We Clean For in Toronto & the GTA | Evergreen';
+/* Through pageTitle(), which adds the brand (13 Nov 2026, SEO audit 11 Nov N4). */
+const title = pageTitle('Industries We Clean For in Toronto & the GTA');
 const description =
   'Commercial cleaning for offices, clinics, property managers and condos, industrial sites, retail and public buildings across Toronto and the GTA.';
 ---

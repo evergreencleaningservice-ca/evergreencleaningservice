@@ -1,5 +1,5 @@
 ---
-seoTitle: "Emergency Commercial Cleaning in Toronto | Evergreen"
+seoTitle: "Emergency Commercial Cleaning in Toronto"
 title: "Emergency Cleaning Services"
 h1: "Emergency Commercial Cleaning in Toronto and the GTA"
 description: "Emergency commercial cleaning in Toronto and the GTA — clean-up after flooding and water damage, post-event and tenant-ready cleans. Call (416) 803-4880."

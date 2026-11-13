@@ -8,6 +8,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import LinkCards from '../../components/blocks/LinkCards.astro';
 import { publishedProjects } from '../../lib/projects';
 import { site } from '../../data/site';
+import { pageTitle } from '../../lib/title';
 
 export async function getStaticPaths() {
   const projects = await publishedProjects();
@@ -18,7 +19,7 @@ const { projects } = Astro.props as { projects: Awaited<ReturnType<typeof publis
 ---
 
 <BaseLayout
-  title="Cleaning Projects in Toronto & the GTA | Evergreen"
+  title={pageTitle('Cleaning Projects in Toronto & the GTA')}
   description="Examples of commercial cleaning work Evergreen has completed for businesses across Toronto and the GTA."
 >
   <div class="container section-padding">

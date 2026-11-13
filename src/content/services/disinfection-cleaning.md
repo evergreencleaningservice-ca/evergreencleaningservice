@@ -1,5 +1,5 @@
 ---
-seoTitle: "Disinfection Cleaning Services in Toronto | Evergreen"
+seoTitle: "Disinfection Cleaning Services in Toronto"
 title: "Disinfection Cleaning"
 h1: "Touch-Point Disinfection Cleaning in Toronto and the GTA"
 description: "Disinfection cleaning for Toronto and GTA workplaces — surfaces cleaned first, then high-touch points disinfected, one-off or on a schedule."
