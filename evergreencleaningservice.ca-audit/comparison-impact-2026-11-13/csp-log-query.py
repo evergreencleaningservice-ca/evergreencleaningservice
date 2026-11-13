@@ -6,11 +6,11 @@ it changes nothing. The token needs Workers Observability read access, which
 the token used on 13 Nov lacked (403). Retries on 429 because other sessions
 share the token's rate limit.
 
-Usage: python3 csp-log-query.py [days=7] [view=events] [needle=csp-violation]
+Usage: CF_ACCOUNT_ID=<id> python3 csp-log-query.py [days=7] [view=events] [needle=csp-violation]
 """
 import json, os, sys, time, urllib.request
 
-ACC = "47a82355b575e264047206a36c2cd05c"
+ACC = os.environ["CF_ACCOUNT_ID"]  # the Cloudflare account id; GET /client/v4/accounts lists it
 URL = f"https://api.cloudflare.com/client/v4/accounts/{ACC}/workers/observability/telemetry/query"
 now = int(time.time() * 1000)
 days = float(sys.argv[1]) if len(sys.argv) > 1 else 7

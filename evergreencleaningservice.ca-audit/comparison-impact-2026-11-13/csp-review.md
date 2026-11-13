@@ -96,7 +96,7 @@ Checked live on 13 Nov 2026 with `curl -sI`:
 
 | URL | Worker ran first? | `Content-Security-Policy` | `Content-Security-Policy-Report-Only` |
 |---|---|---|---|
-| `/insights/` | yes: in `run_worker_first`, and it carries `rebuilt()`'s `cache-control: public, max-age=0, must-revalidate` | the four-directive baseline | the full policy |
+| `/insights/` | yes: it is listed in `run_worker_first` (wrangler.jsonc). Its cache-control matches the static-asset default, so it is not evidence either way | the four-directive baseline | the full policy |
 | `/admin/sign-in/` | yes: `cache-control: no-store` from the admin headers | the four-directive baseline | the full policy |
 
 A live post at `/<slug>/` uses the same `rebuilt()` path as `/insights/`. It was not curled, because none could be picked out from outside without the database. So the change above reaches these pages without any Worker change.
