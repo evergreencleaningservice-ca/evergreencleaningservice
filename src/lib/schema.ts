@@ -28,7 +28,7 @@
  *  and a factual claim the client cannot support. It goes in when someone
  *  supplies the real figure from the Google Business Profile.
  */
-import { SERVICE_LOCATION_SUGGESTIONS } from '../data/coverage';
+import { PLACES_WITHIN_TORONTO, SERVICE_LOCATION_SUGGESTIONS } from '../data/coverage';
 import { hours, nap, site, social } from '../data/site';
 
 /**
@@ -42,14 +42,22 @@ import { hours, nap, site, social } from '../data/site';
  * the schema now names exactly what the form offers and cannot claim a place
  * the site does not, or miss one it does.
  *
- * All are typed `City`. North York, Scarborough, Etobicoke, East York and
- * York are former municipalities merged into Toronto in 1998, still the
- * names people search by; `City` is the closest schema.org type for them.
+ * Most are typed `City`. North York, Scarborough and Etobicoke are former
+ * municipalities merged into Toronto in 1998, still the names people search
+ * by, and each has its own location page; `City` is the closest schema.org
+ * type for them. East York and York have no page and are a Place inside
+ * Toronto instead (13 Nov 2026, SEO audit 11 Nov, local L2 / schema N7), the
+ * same `containedInPlace` shape the Durham page uses for its three towns.
  * (Durham Region, a regional municipality, is typed on its own location
  * page, not here.)
  */
 const SERVICE_AREA_NAMES: readonly string[] = SERVICE_LOCATION_SUGGESTIONS;
-const SERVICE_AREAS = () => SERVICE_AREA_NAMES.map((name) => ({ '@type': 'City', name }));
+const SERVICE_AREAS = () =>
+  SERVICE_AREA_NAMES.map((name) =>
+    PLACES_WITHIN_TORONTO.includes(name)
+      ? { '@type': 'Place', name, containedInPlace: { '@type': 'City', name: 'Toronto' } }
+      : { '@type': 'City', name },
+  );
 
 /** The service pages, for the organisation's catalog. */
 const CATALOG = [

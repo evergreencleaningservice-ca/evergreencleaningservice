@@ -530,6 +530,30 @@ const bodyHtml =
     margin: 0;
     padding-left: 18px;
   }
+  /* 44px targets on a phone or any touch screen (13 Nov 2026, SEO audit
+     11 Nov, critic R4): at 360px the area links measured 24px and the
+     breadcrumb links 30px, missed by the 7 Nov pass over the footer, the
+     homepage areas and the sidebar. Each area row becomes 44px, plain-text
+     areas included so the list keeps one rhythm, and the breadcrumb's line
+     grows to fit; with a mouse on a desktop nothing changes. */
+  @media (max-width: 767px), (pointer: coarse) {
+    .offer-areas li {
+      line-height: 44px;
+      padding-block: 0;
+    }
+
+    .offer-areas li > a {
+      min-height: 44px;
+      line-height: 44px;
+    }
+
+    .offer-hero .breadcrumbs a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding-block: 0;
+    }
+  }
   .offer-band {
     padding-bottom: 56px;
   }
