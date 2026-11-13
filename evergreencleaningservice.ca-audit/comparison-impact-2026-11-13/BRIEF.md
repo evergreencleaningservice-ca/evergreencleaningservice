@@ -32,8 +32,8 @@ Base: `/tmp/claude-0/-home-user-evergreencleaningservice/692c77ca-669b-54d4-b608
 | `impact/sitemap-urls.txt` | All 293 sitemap URLs |
 | `impact/home.html` | impact.ca home page |
 | `evergreen/crawl/pages.json`, `evergreen/crawl/html/` | Fresh crawl of our site, after today's URL move |
-| `lab/<site>-<page>-<n>.json` | Lighthouse 12.8.2, median of 3, mobile unless the name says desktop, analytics and ad hits blocked on both sites. Medians in `lab/medians.txt` |
-| `screenshots/` | Desktop 1366 and Pixel 7 fold shots of the same page pairs, plus `visual-data.json` |
+| `lab/<site>-<page>-<n>.json` | Lighthouse 12.8.2, median of 3, mobile unless the name says desktop, analytics and ad hits blocked on both sites. Medians in `lab/medians.txt`. impact-office has 2 valid runs (1 failed) |
+| `screenshots/evergreen/`, `screenshots/impact/` | Desktop 1366 and Pixel 7, fold and full, of the same 4 page pairs, with `visual-data.json` in each folder |
 
 Page pairs:
 
