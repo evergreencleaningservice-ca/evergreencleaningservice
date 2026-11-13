@@ -67,7 +67,20 @@ section(
 section("Tags the original carries with no posts", bothSlashSpellings(emptyTagRedirects));
 section('Blog posts retired by the consolidation (SEO audit H7)', bothSlashSpellings(retiredPostRedirects));
 section('Tags the consolidation emptied', bothSlashSpellings(retiredTagRedirects));
-section('Archive pages the consolidation removed', bothSlashSpellings(removedArchivePageRedirects));
+/* An archive page is only "removed" while the posts it held are gone. New
+   posts refill the lists: by 12 Nov 2026, with 25 posts, /tag/office/page/2/
+   and page 3 of two other tags were being built again, and the rule here
+   answered 301 back to page 1 for each one, because Cloudflare reads this file
+   before it looks for an asset. Their "Older posts" links led in a circle and
+   the oldest posts in those tags were unreachable from the archive. A rule
+   whose page this build serves is skipped, so it comes back by itself if the
+   page goes away again. */
+const isBuiltPage = (from) => fs.existsSync(path.join(dist, from, 'index.html'));
+const removedArchivePages = removedArchivePageRedirects.filter(({ from }) => !isBuiltPage(from));
+for (const { from } of removedArchivePageRedirects) {
+  if (isBuiltPage(from)) console.log(`redirects: ${from} is built again, so its archive redirect is skipped.`);
+}
+section('Archive pages the consolidation removed', bothSlashSpellings(removedArchivePages));
 /* The single sitemap was split by type on 30 Oct 2026 (SEO audit M2). Search
    Console had been reading sitemap-0.xml since 10 Oct, so it points at the
    pages sitemap rather than 404ing. */
