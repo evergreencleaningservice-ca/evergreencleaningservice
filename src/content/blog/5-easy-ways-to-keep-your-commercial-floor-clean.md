@@ -3,6 +3,7 @@ title: "Commercial Floor Care: Daily Maintenance Between Strip-and-Wax Visits"
 seoTitle: "Commercial Floor Care: Daily Maintenance Tips"
 description: "How to keep a commercial floor clean between strip-and-wax visits: more bins, dirt-trapping mats, regular floor checks and a professional cleaner."
 pubDate: 2021-11-24
+updatedDate: 2026-11-06
 image: "/images/blog-commercial-floor-care-feature.jpg"
 imageAlt: "Cleaner using a floor wiper on tiled flooring"
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]

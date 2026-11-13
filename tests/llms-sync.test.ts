@@ -11,7 +11,10 @@
  *   src/data/locations.ts   every location page must be linked under
  *                           "## Service areas", and nothing else may be;
  *   src/content/blog/       every guide (front matter `guide:`) published in
- *                           2026 must be linked under "## Guides".
+ *                           2026 must be linked under "## Guides";
+ *   src/content/services/   every service page under "## Services", and
+ *   src/content/industries/ every industry page under "## Who we clean
+ *                           for" (added 13 Nov 2026, SEO audit 11 Nov, N7).
  *
  * And the facts it repeats must match the ones the pages use: the coverage
  * sentence from src/data/coverage.ts, and the 2-hour reply always qualified
@@ -87,6 +90,41 @@ describe('llms.txt lists every 2026 guide', () => {
 
   it.each(list.map((g) => [g.slug]))('links /%s/ under "## Guides"', (slug) => {
     expect(linksIn(section('Guides'))).toContain(`${site.url}/${slug}/`);
+  });
+});
+
+/* 13 Nov 2026, SEO audit 11 Nov (geo N7): the services and industries were
+   checked by nobody. /services/janitorial-services/ is in llms.txt only
+   because someone added it by hand; the next new page could be missed the
+   way seven location pages were (GEO N3). Each content file is a page, so
+   each one must be linked under its section, and nothing there may point at
+   a page that does not exist. */
+function slugsIn(collection: string): string[] {
+  return fs
+    .readdirSync(path.join(repo, 'src', 'content', collection))
+    .filter((f) => f.endsWith('.md'))
+    .map((f) => f.replace(/\.md$/, ''))
+    .sort();
+}
+
+describe.each([
+  ['services', 'Services'],
+  ['industries', 'Who we clean for'],
+])('llms.txt lists every page in src/content/%s/', (collection, title) => {
+  const slugs = slugsIn(collection);
+  const pageLinks = () => linksIn(section(title)).filter((u) => new RegExp(`/${collection}/[^/]+/$`).test(u));
+
+  it('finds the pages it is checking', () => {
+    // 11 services and 2 industries on 13 Nov 2026; a count of 0 means the folder moved.
+    expect(slugs.length).toBeGreaterThan(collection === 'services' ? 10 : 1);
+  });
+
+  it.each(slugs.map((s) => [s]))(`links /${collection}/%s/ under "## ${title}"`, (slug) => {
+    expect(linksIn(section(title))).toContain(`${site.url}/${collection}/${slug}/`);
+  });
+
+  it(`links no /${collection}/ page that does not exist`, () => {
+    expect(pageLinks().sort()).toEqual(slugs.map((s) => `${site.url}/${collection}/${s}/`));
   });
 });
 
