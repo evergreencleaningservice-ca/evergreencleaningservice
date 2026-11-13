@@ -78,6 +78,19 @@ https://:version.:subdomain.workers.dev/*
 #                    token lacks Workers Observability read), and redirect
 #                    targets behind the first hop of each hit were not
 #                    exercised.
+#                    Still report-only on 13 Nov 2026 (comparison with
+#                    impact.ca, item 10): the reports could still not be read
+#                    (same token gap), and zone analytics shows 41 of them
+#                    arriving in the week to 13 Nov, including after the
+#                    11 Nov change went live, so "clean" cannot be claimed.
+#                    A browser run with this policy ENFORCED found no
+#                    violations on seven pages. The ready-to-apply switch is
+#                    in evergreencleaningservice.ca-audit/comparison-impact-
+#                    2026-11-13/csp-review.md. When enforcing, delete the
+#                    baseline Content-Security-Policy line in the /* rule
+#                    and rename the Report-Only line to it: two
+#                    Content-Security-Policy values on one path are joined
+#                    with a comma, and browsers enforce both.
 #   Enforced CSP   (SEO audit Phase 1, 6 Nov 2026) the four directives that
 #                  need no script allowlist and work regardless of
 #                  'unsafe-inline': frame-ancestors, base-uri, form-action
