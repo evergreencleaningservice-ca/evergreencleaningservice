@@ -112,9 +112,10 @@ const gtmId = site.gtmId;
        phone_click push reaches the container. It does NOT save the call
        for Ads: the dialler opens on that same tap, before any number swap
        could happen (see PAID VISITS);
-     - the window load event plus a short idle wait (requestIdleCallback with
-       a 4 s ceiling, or a 4 s timer where it is not supported), so a visitor
-       who reads without interacting is still measured.
+     - 15 s after the window load event (GTM_FALLBACK_MS in
+       src/lib/gtm-loader.ts), so a visitor who reads without interacting is
+       still measured. Until 13 Nov 2026 this was the load event plus an idle
+       callback; see WHAT IT ACTUALLY DOES, below, for why it changed.
 
    PAID VISITS (SEO re-audit, 7 Nov 2026). The deferral cost Google Ads its
    phone conversions. Calls are counted by the container's "calls from
@@ -141,9 +142,11 @@ const gtmId = site.gtmId;
    either branch, so a paid-looking URL on localhost still loads nothing.
 
    The trade-off is a measurement one, agreed in the audit: page_view arrives
-   a little later, and a visitor who leaves before the page has finished
-   loading, without touching it, is not recorded. Watch Ads and GA4 for a
-   week after this ships.
+   later, and an unpaid visitor who leaves within 15 s of the page loading,
+   without scrolling, tapping, typing or focusing anything, is not recorded
+   in GA4 (before 13 Nov 2026 the cut-off was the load event itself). Paid
+   visits are unaffected. Watch GA4 sessions and engagement for a week after
+   each change.
 
    WHAT IT ACTUALLY DOES, MEASURED (Phase 4, 6 Nov 2026; 25 Lighthouse runs,
    raw data summarised in evergreencleaningservice.ca-audit/PHASE-4-MONITORING.md).
@@ -156,7 +159,14 @@ const gtmId = site.gtmId;
    400-600 ms of main-thread work; that still happens, just after load. A
    longer fixed delay would remove more of it from the lab figure and lose
    more short visits from the analytics: a decision for whoever owns the Ads
-   and GA4 numbers, not a code fix. Those figures hold for unpaid visits only:
+   and GA4 numbers, not a code fix.
+
+   That decision was taken on 13 Nov 2026 (comparison with impact.ca, item
+   1). The lab still showed the tags as the largest cost on every mobile page
+   measured: GTM 0.67-0.91 s of blocking and gtag.js 0.53-0.71 s of bootup,
+   TBT 480-633 ms, against 56-100 ms on impact.ca, which delays its tags until
+   interaction. The idle callback became a fixed 15 s timer, which lands after
+   a lab run has settled; any interaction still loads the container at once. Those figures hold for unpaid visits only:
    a lab run of an /lp/ page, or of any URL with a click id, now takes the
    paid branch and will look like the pre-Phase-1 numbers again. That is
    expected, not a regression.

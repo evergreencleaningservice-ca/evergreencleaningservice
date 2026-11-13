@@ -8,6 +8,7 @@ import { site } from '../data/site';
 import { pageTitle } from '../lib/title';
 import { articleSchema, breadcrumbSchema } from '../lib/schema';
 import { tags as TAGS } from '../data/tags';
+import { resolveAuthor } from '../data/people';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -24,6 +25,9 @@ const { post, newer, older, noindex = false } = Astro.props;
    title would push the brand suffix past pageTitle's 60-character limit
    (legacy blog pass, 6 Nov 2026). The H1, breadcrumb and schema keep `title`. */
 const { title, seoTitle, description, pubDate, updatedDate, image, imageAlt } = post.data;
+/* A named author, when the post's front matter sets one (13 Nov 2026); else
+   the company, as before. The byline and the schema use the same person. */
+const author = resolveAuthor(post.data.author);
 const longDate = (d: Date) =>
   d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 /* The post's own topics, linked to their archives. The sidebar cloud shows
@@ -57,7 +61,7 @@ const SIZES = '(min-width: 992px) 720px, calc(100vw - 32px)';
 <script
   slot="head"
   type="application/ld+json"
-  set:html={JSON.stringify(articleSchema({ title, description, pubDate, updatedDate, image, slug: post.id }))}
+  set:html={JSON.stringify(articleSchema({ title, description, pubDate, updatedDate, image, slug: post.id, author }))}
   is:inline
 />
 <script
@@ -89,7 +93,7 @@ const SIZES = '(min-width: 992px) 720px, calc(100vw - 32px)';
         <h1 class="entry-title">{title}</h1>
         <p class="post-date">
           Published <time datetime={pubDate.toISOString().slice(0, 10)}>{longDate(pubDate)}</time>
-          {' '}by {site.name}
+          {' '}by {author ? `${author.name}, ${author.jobTitle}` : site.name}
           {updatedDate && (
             <>
               {' '}· Updated <time datetime={updatedDate.toISOString().slice(0, 10)}>{longDate(updatedDate)}</time>

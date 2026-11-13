@@ -8,6 +8,7 @@ import { articleSchema, breadcrumbSchema } from '../lib/schema';
 import { responsiveSet } from '../lib/responsive-images.mjs';
 import { intrinsic, thumbSet } from '../lib/thumb';
 import { site } from '../data/site';
+import { resolveAuthor } from '../data/people';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -16,6 +17,9 @@ interface Props {
 }
 const { post } = Astro.props;
 const { title, seoTitle, description, pubDate, updatedDate, image, imageAlt, guide } = post.data;
+/* A named author, when the post's front matter sets one (13 Nov 2026); else
+   the company, as before. The byline and the schema use the same person. */
+const author = resolveAuthor(post.data.author);
 if (!guide) throw new Error(`GuideLayout requires guide metadata: ${post.id}`);
 const readingMinutes = Math.max(1, Math.ceil((post.body ?? '').replace(/<[^>]*>/g, ' ').split(/\s+/).length / 220));
 const longDate = pubDate.toLocaleDateString('en-CA', {
@@ -41,7 +45,7 @@ const relatedSizes = '(min-width: 912px) 428px, (min-width: 561px) calc(50vw - 2
 <BaseLayout title={pageTitle(seoTitle ?? title)} description={description} image={image} imageAlt={imageAlt}
   type="article" publishedTime={pubDate.toISOString()} modifiedTime={updatedDate?.toISOString()}>
   <script slot="head" type="application/ld+json" is:inline
-    set:html={JSON.stringify(articleSchema({ title, description, pubDate, updatedDate, image, slug: post.id }))} />
+    set:html={JSON.stringify(articleSchema({ title, description, pubDate, updatedDate, image, slug: post.id, author }))} />
   {/* The root is the site's name, as on every other page's BreadcrumbList.
       It said "Home" on the three guides only (SEO re-audit, 7 Nov 2026,
       schema N1/S10); the visible trail below still reads "Home". */}
@@ -63,7 +67,7 @@ const relatedSizes = '(min-width: 912px) 428px, (min-width: 561px) calc(50vw - 2
           <h1 id="guide-title">{title}</h1>
           <p class="guide-meta">Published <time datetime={pubDate.toISOString().slice(0, 10)}>{longDate}</time>
             <span aria-hidden="true"> · </span> {readingMinutes} min read
-            <span aria-hidden="true"> · </span> By {site.name}</p>
+            <span aria-hidden="true"> · </span> By {author ? `${author.name}, ${author.jobTitle}` : site.name}</p>
           <p class="guide-intro">{guide.intro}</p>
         </header>
         {image && <figure class="guide-featured">
