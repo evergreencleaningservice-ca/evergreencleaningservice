@@ -181,3 +181,15 @@ describe('every 2-hour reply promise says when it applies', () => {
     expect(REPLY_PROMISE_SHORT).toContain(officeHoursShort);
   });
 });
+
+describe('the janitorial page opens "What is included" with a sentence', () => {
+  /* SEO audit 11 Nov, geo N9 (13 Nov 2026). The lead was first written to the
+     page's front matter but the offer schema dropped the unknown key, so the
+     built page showed a bare list. This reads the built HTML, not the file. */
+  it('renders includedLead before the lists', () => {
+    const html = read('services/janitorial-services/index.html');
+    const section = html.match(/<section aria-label="What is included"[^>]*>[\s\S]*?<\/section>/)?.[0] ?? '';
+    expect(section).toMatch(/<p class="offer-included-lead"[^>]*>A janitorial visit from Evergreen covers/);
+    expect(section.indexOf('offer-included-lead')).toBeLessThan(section.indexOf('class="offer-included"'));
+  });
+});

@@ -42,6 +42,7 @@ interface Offer {
   fitHeading?: string;
   fit: string[];
   included: { heading: string; items: string[] }[];
+  includedLead?: string;
   scope: string[];
   scheduling: string[];
   showProcess: boolean;
@@ -251,6 +252,7 @@ const bodyHtml =
         data.included.length > 0 && (
           <section aria-label="What is included">
             <h2 class="blk-title">What is included</h2>
+            {data.includedLead && <p class="offer-included-lead">{data.includedLead}</p>}
             <div class="offer-included">
               {data.included.map((group) => (
                 <div>

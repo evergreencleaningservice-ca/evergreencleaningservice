@@ -86,6 +86,10 @@ const offerFields = {
   fitHeading: z.string().optional(),
   fit: z.array(z.string()).default([]),
   included: z.array(z.object({ heading: z.string(), items: z.array(z.string()) })).default([]),
+  /** One sentence before the "What is included" lists, so the section opens
+      with a statement an engine can quote rather than a bare list (SEO audit
+      11 Nov, geo N9; 13 Nov 2026). Optional: pages without it are unchanged. */
+  includedLead: z.string().optional(),
   /** Scope limits and what is confirmed at the walkthrough. */
   scope: z.array(z.string()).default([]),
   scheduling: z.array(z.string()).default([]),
