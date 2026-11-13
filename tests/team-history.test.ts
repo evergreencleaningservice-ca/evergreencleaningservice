@@ -9,7 +9,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { people, type Person } from '../src/data/people';
+import { people, TEAM_UPDATED, type Person } from '../src/data/people';
+import { lastmodFor } from '../src/lib/sitemap-lastmod.mjs';
 import { history, timeline, TIMELINE_MIN, type Milestone } from '../src/data/history';
 import { hasTeam, personPageUrl, teamModel, teamUrl, TEAM_PATH } from '../src/lib/team';
 import { organizationGraph, personNode } from '../src/lib/schema';
@@ -42,6 +43,24 @@ describe('the team page, with src/data/people.ts empty as shipped', () => {
 
   it('is not in llms.txt', () => {
     expect(fs.readFileSync(path.join(repo, 'public/llms.txt'), 'utf8')).not.toContain('/team/');
+  });
+});
+
+describe('the team page sitemap date', () => {
+  /* Without a date, the first real person would build /team/ with no
+     <lastmod> and fail the sitemap test with a misleading "shallow clone"
+     message. This says what to do instead (13 Nov 2026). */
+  it('TEAM_UPDATED is set, as a valid date, whenever people has entries', () => {
+    if (!people.length) {
+      expect(TEAM_UPDATED).toBeUndefined();
+      return;
+    }
+    expect(TEAM_UPDATED, 'people has entries: set TEAM_UPDATED in src/data/people.ts to the time of the edit').toBeTruthy();
+    expect(Number.isNaN(Date.parse(TEAM_UPDATED!))).toBe(false);
+  });
+
+  it('the sitemap dates /team/ by TEAM_UPDATED', () => {
+    expect(lastmodFor(`${site.url}/team/`)).toBe(TEAM_UPDATED);
   });
 });
 

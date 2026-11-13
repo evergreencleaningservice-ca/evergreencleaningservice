@@ -57,6 +57,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { locations } from '../data/locations.ts';
 import { HUB_UPDATED } from '../data/hub-dates.ts';
+import { TEAM_UPDATED } from '../data/people.ts';
 import { OFFER_URLS_MOVED, offerCollection, offerPath } from '../data/offer-pages.ts';
 
 const ROOT = process.cwd();
@@ -182,6 +183,9 @@ export const SOURCES = (/** @type {string} */ p) => {
   if (collection) return [`src/content/${collection}/${first}.md`];
   if (first === 'locations') return [];
   if (first === 'projects') return ['src/pages/projects', 'src/content/projects'];
+  /* The team page is dated by TEAM_UPDATED in src/data/people.ts, not by a
+     file: its words are the people list (13 Nov 2026). */
+  if (first === 'team') return [];
   return [`src/pages/${first}.astro`, `src/content/pages/${first}.md`];
 };
 
@@ -215,6 +219,7 @@ export function lastmodFor(/** @type {string} */ url) {
   if (hubDates.has(p)) {
     return newest([hubDates.get(p), ...HUB_MEMBERS(p).map((m) => lastmodFor(new URL(m, url).href))]);
   }
+  if (p === '/team/') return TEAM_UPDATED;
   if (pageDates.has(slug)) return pageDates.get(slug);
   return lastCommit(SOURCES(p));
 }

@@ -1,5 +1,9 @@
 ---
 title: "Keep Your Office at Home Clean"
+# 13 Nov 2026 (comparison with impact.ca): blog title/H1 split. The H1 is
+# reader-phrased and stays; the <title> leads with the search query instead:
+# people search "home office cleaning"; the H1 puts "at home" last.
+seoTitle: "Home Office Cleaning: 3 Simple Tips"
 description: "Keeping a home office clean: cleaning products within reach, a filing system that keeps paper off the desk, and when to get help."
 pubDate: 2021-02-26
 image: "/images/blog-home-office-cleaning-feature.jpg"
