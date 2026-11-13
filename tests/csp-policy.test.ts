@@ -1,6 +1,7 @@
 /**
- * The report-only Content-Security-Policy in public/_headers must allow what
- * the live pages actually load, or enforcing it would break them.
+ * The Content-Security-Policy in public/_headers must allow what the live
+ * pages actually load: since 12 Nov 2026 it is enforced, so a host missing
+ * here is a request a visitor's browser blocks.
  *
  * CSP review, 11 Nov 2026: the live pages were loaded in a browser with the
  * Tag Manager container running, its Google Ads conversion (the
@@ -17,9 +18,9 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 const headers = fs.readFileSync(path.resolve(import.meta.dirname, '../public/_headers'), 'utf8');
-const reportOnly = headers.match(/^\s*Content-Security-Policy-Report-Only:\s*(.+)$/m)?.[1] ?? '';
+const policy = headers.match(/^\s*Content-Security-Policy:\s*(.+)$/m)?.[1] ?? '';
 const directives = Object.fromEntries(
-  reportOnly
+  policy
     .split(';')
     .map((d) => d.trim().split(/\s+/))
     .filter((parts) => parts[0])
@@ -36,9 +37,10 @@ const OBSERVED: Record<string, string[]> = {
   'font-src': ['https://fonts.gstatic.com'],
 };
 
-describe('the report-only CSP allows what the live pages load', () => {
-  it('is present and reports to the Worker', () => {
-    expect(reportOnly).not.toBe('');
+describe('the enforced CSP allows what the live pages load', () => {
+  it('is present, enforced, and still reports to the Worker', () => {
+    expect(policy).not.toBe('');
+    expect(headers).not.toMatch(/^\s*Content-Security-Policy-Report-Only:/m);
     expect(directives['report-uri']).toEqual(['/api/csp-report']);
   });
 
