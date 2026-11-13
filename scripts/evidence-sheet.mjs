@@ -36,7 +36,7 @@ const PAGES = [
   ['quote', 'Request a quote', '/request-a-quote/'],
   ['lp-commercial-cleaning', 'Paid — commercial cleaning', '/lp/commercial-cleaning/'],
   ['lp-commercial-cleaning-quote', 'Paid — quote', '/lp/commercial-cleaning-quote/'],
-  ['service', 'Service page', '/services/office-cleaning/'],
+  ['service', 'Service page', '/office-cleaning/'],
   ['location', 'Location page', '/locations/mississauga/'],
   ['blog-archive', 'Blog archive', '/insights/'],
   ['thank-you', 'Thank you', '/thank-you/'],

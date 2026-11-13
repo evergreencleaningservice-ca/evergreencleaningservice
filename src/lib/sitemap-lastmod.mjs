@@ -8,6 +8,8 @@
  * gets the date its content last changed:
  *
  *   a blog post      its `updatedDate`, or its `pubDate` if it has none
+ *   a service or     the newer of its content file's last commit and the
+ *   industry page    date it moved to the root (below)
  *   /insights/       the newest of those
  *   a location page  its own `updated` field in src/data/locations.ts
  *   a section hub    its own date in src/data/hub-dates.ts, or the newest
@@ -32,6 +34,14 @@
  * location pages (OfferPage.astro, locations/[slug].astro), so the schema and
  * the sitemap cannot disagree.
  *
+ * THE URL MOVE (13 Nov 2026, owner decision). The 13 service and industry
+ * pages moved from /services/<slug>/ and /industries/<slug>/ to /<slug>/.
+ * A page at a new address is a changed page to a crawler, so each one's
+ * lastmod is at least the move's own date, OFFER_URLS_MOVED in
+ * src/data/offer-pages.ts: one dated field, as a hub has, rather than an
+ * edit to 13 content files made only to move their commit dates. A later
+ * edit to a page's own content file dates it as before.
+ *
  * A date that cannot be known is LEFT OUT rather than guessed. That happens in
  * a shallow clone: a file last changed before the clone's history begins
  * reports the boundary commit's date, which is a date the file did not change
@@ -45,6 +55,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { locations } from '../data/locations.ts';
 import { HUB_UPDATED } from '../data/hub-dates.ts';
+import { OFFER_URLS_MOVED, offerCollection, offerPath } from '../data/offer-pages.ts';
 
 const ROOT = process.cwd();
 const BLOG = path.join(ROOT, 'src/content/blog');
@@ -118,6 +129,13 @@ const hubDates = new Map(
   }),
 );
 
+/** The URL move's date, checked the same way. */
+const movedDate = (() => {
+  const ms = Date.parse(OFFER_URLS_MOVED);
+  if (Number.isNaN(ms)) throw new Error(`src/data/offer-pages.ts: OFFER_URLS_MOVED is '${OFFER_URLS_MOVED}', which is not a date`);
+  return new Date(ms).toISOString();
+})();
+
 /** The newest of `dates`, or undefined when any of them is unknowable. */
 const newest = (/** @type {(string | undefined)[]} */ dates) =>
   dates.every(Boolean)
@@ -136,7 +154,9 @@ export const SOURCES = (/** @type {string} */ p) => {
   /* A hub, and a location page, has no file of its own to date it by: a
      date field does (lastmodFor). */
   if (!slug && hubDates.has(p)) return [];
-  if (first === 'services' || first === 'industries') return [`src/content/${first}/${slug}.md`];
+  /* A service or industry page, at the root since 13 Nov 2026. */
+  const collection = slug ? undefined : offerCollection(first);
+  if (collection) return [`src/content/${collection}/${first}.md`];
   if (first === 'locations') return [];
   if (first === 'projects') return ['src/pages/projects', 'src/content/projects'];
   return [`src/pages/${first}.astro`, `src/content/pages/${first}.md`];
@@ -152,7 +172,7 @@ export const HUB_MEMBERS = (/** @type {string} */ hub) => {
     return fs
       .readdirSync(SERVICES)
       .filter((f) => f.endsWith('.md'))
-      .map((f) => `/services/${f.replace(/\.md$/, '')}/`);
+      .map((f) => offerPath(f.replace(/\.md$/, '')));
   }
   if (hub === '/locations/') return locations.map((l) => `/locations/${l.slug}/`);
   return [];
@@ -168,6 +188,7 @@ export function lastmodFor(/** @type {string} */ url) {
   /* The two data files' last commit is only the fallback for an entry
      without an `updated` field; it re-dates every location at once. */
   if (location) return locationDates.get(location) ?? lastCommit(['src/data/locations.ts', 'src/data/location-local.ts']);
+  if (offerCollection(slug)) return newest([lastCommit(SOURCES(p)), movedDate]);
   if (hubDates.has(p)) {
     return newest([hubDates.get(p), ...HUB_MEMBERS(p).map((m) => lastmodFor(new URL(m, url).href))]);
   }

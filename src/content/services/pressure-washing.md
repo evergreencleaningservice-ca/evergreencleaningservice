@@ -39,13 +39,13 @@ faqs:
     a: "Toronto (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa."
 related:
   - title: "Graffiti Removal"
-    href: "/services/graffiti-removal/"
+    href: "/graffiti-removal/"
     text: "Tags removed with a method for the surface."
   - title: "Building Maintenance & Floor Care"
-    href: "/services/building-maintenance/"
+    href: "/building-maintenance/"
     text: "Periodic work, planned through the year."
   - title: "Property Managers & Condos"
-    href: "/industries/property-management/"
+    href: "/property-management/"
     text: "One contact across your buildings."
 showAreas: true
 ctaHeading: "Book a walkthrough"

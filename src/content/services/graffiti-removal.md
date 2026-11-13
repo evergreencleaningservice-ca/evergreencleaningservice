@@ -48,13 +48,13 @@ faqs:
     a: "Toronto (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa."
 related:
   - title: "Pressure Washing"
-    href: "/services/pressure-washing/"
+    href: "/pressure-washing/"
     text: "Entrances, walkways and exteriors."
   - title: "Building Maintenance & Floor Care"
-    href: "/services/building-maintenance/"
+    href: "/building-maintenance/"
     text: "Periodic work, planned through the year."
   - title: "Property Managers & Condos"
-    href: "/industries/property-management/"
+    href: "/property-management/"
     text: "One contact across your buildings."
 showAreas: true
 ctaHeading: "Get a tag removed"

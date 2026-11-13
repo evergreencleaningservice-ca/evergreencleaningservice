@@ -89,7 +89,7 @@ export const LANDING_PAGES: LandingPage[] = [
       { q: 'Which areas do you cover?', a: 'Toronto, North York, Scarborough, Etobicoke, East York and York, plus Mississauga, Vaughan, Markham, Brampton, Richmond Hill, Oakville, Pickering, Ajax and Oshawa.' },
     ],
     finalHeading: 'Get your office cleaning quote',
-    organicPage: '/services/office-cleaning/',
+    organicPage: '/office-cleaning/',
   },
   {
     slug: 'post-construction-cleaning',
@@ -136,6 +136,6 @@ export const LANDING_PAGES: LandingPage[] = [
       { q: 'Can this lead into regular cleaning?', a: 'Yes. Once the space is open we can quote recurring office or commercial cleaning for it.' },
     ],
     finalHeading: 'Get your post-construction quote',
-    organicPage: '/services/post-construction-cleaning/',
+    organicPage: '/post-construction-cleaning/',
   },
 ];

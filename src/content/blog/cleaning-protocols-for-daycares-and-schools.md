@@ -64,4 +64,4 @@ Children are closer to the floor and the furniture than adults, and more of what
 
 A written checklist like this one, agreed with the school or daycare and followed on every visit, is what lets staff and parents trust that the building is clean. [Contact us](/contact-us/) to set one up for yours.
 
-Schools are among the buildings Evergreen's [commercial cleaning](/services/commercial-cleaning/) covers in Toronto and the GTA, and touch-point [disinfection cleaning](/services/disinfection-cleaning/) can be booked as a one-off or on a schedule.
+Schools are among the buildings Evergreen's [commercial cleaning](/commercial-cleaning/) covers in Toronto and the GTA, and touch-point [disinfection cleaning](/disinfection-cleaning/) can be booked as a one-off or on a schedule.

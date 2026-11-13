@@ -6,6 +6,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
+import { offerPath } from '../data/offer-pages';
 
 interface Props {
   service: CollectionEntry<'services'>;
@@ -16,7 +17,7 @@ interface Props {
 const { service, loading = 'lazy' } = Astro.props;
 const { title, description, image, imageAlt } = service.data;
 
-const href = `/services/${service.id}/`;
+const href = offerPath(service.id);
 
 /* A photo with -480/-768 siblings in public/images is served responsively;
    the full 1200x800 JPEG was being sent to a 360px-wide card. */

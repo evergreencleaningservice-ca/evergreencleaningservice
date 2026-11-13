@@ -32,7 +32,7 @@ const PAGES = [
   ['quote', '/request-a-quote/'],
   ['lp-commercial-cleaning', '/lp/commercial-cleaning/'],
   ['lp-commercial-cleaning-quote', '/lp/commercial-cleaning-quote/'],
-  ['service', '/services/office-cleaning/'],
+  ['service', '/office-cleaning/'],
   ['location', '/locations/mississauga/'],
   ['blog-archive', '/insights/'],
   ['thank-you', '/thank-you/'],

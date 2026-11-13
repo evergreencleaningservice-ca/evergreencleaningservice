@@ -30,6 +30,7 @@
  */
 import { PLACES_WITHIN_TORONTO, SERVICE_LOCATION_SUGGESTIONS } from '../data/coverage';
 import { hours, nap, site, social } from '../data/site';
+import { offerPath } from '../data/offer-pages';
 
 /**
  * Places named in `areaServed`, on the organisation and on every Service node.
@@ -61,17 +62,17 @@ const SERVICE_AREAS = () =>
 
 /** The service pages, for the organisation's catalog. */
 const CATALOG = [
-  { name: 'Office Cleaning', path: '/services/office-cleaning/' },
-  { name: 'Commercial Cleaning', path: '/services/commercial-cleaning/' },
-  { name: 'Janitorial Services', path: '/services/janitorial-services/' },
-  { name: 'Industrial & Warehouse Cleaning', path: '/services/industrial-cleaning/' },
-  { name: 'Post-Construction Cleaning', path: '/services/post-construction-cleaning/' },
-  { name: 'Building Maintenance', path: '/services/building-maintenance/' },
-  { name: 'Floor Stripping & Waxing', path: '/services/floor-stripping-waxing/' },
-  { name: 'Disinfection Cleaning', path: '/services/disinfection-cleaning/' },
-  { name: 'Emergency Cleaning', path: '/services/emergency-cleaning/' },
-  { name: 'Pressure Washing', path: '/services/pressure-washing/' },
-  { name: 'Graffiti Removal', path: '/services/graffiti-removal/' },
+  { name: 'Office Cleaning', path: offerPath('office-cleaning') },
+  { name: 'Commercial Cleaning', path: offerPath('commercial-cleaning') },
+  { name: 'Janitorial Services', path: offerPath('janitorial-services') },
+  { name: 'Industrial & Warehouse Cleaning', path: offerPath('industrial-cleaning') },
+  { name: 'Post-Construction Cleaning', path: offerPath('post-construction-cleaning') },
+  { name: 'Building Maintenance', path: offerPath('building-maintenance') },
+  { name: 'Floor Stripping & Waxing', path: offerPath('floor-stripping-waxing') },
+  { name: 'Disinfection Cleaning', path: offerPath('disinfection-cleaning') },
+  { name: 'Emergency Cleaning', path: offerPath('emergency-cleaning') },
+  { name: 'Pressure Washing', path: offerPath('pressure-washing') },
+  { name: 'Graffiti Removal', path: offerPath('graffiti-removal') },
 ];
 
 const ORG_ID = `${site.url}/#organization`;

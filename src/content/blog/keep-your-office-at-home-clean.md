@@ -27,4 +27,4 @@ If your schedule is jam-packed, you may not have any time left over for cleaning
 
 _**If you are searching for dependable cleaners in the Toronto area, you may want to take a closer look at [Evergreen Office Cleaning](/about-us/). We have extensive experience with office cleaning. If you reach out to us, we will be happy to tell you more about our services. If you can’t keep up with your office on your own, hiring cleaners is the smartest thing that you can do.**_
 
-When the business outgrows the spare room and moves into an office, Evergreen's [office cleaning](/services/office-cleaning/) service covers workplaces across Toronto and the GTA.
+When the business outgrows the spare room and moves into an office, Evergreen's [office cleaning](/office-cleaning/) service covers workplaces across Toronto and the GTA.

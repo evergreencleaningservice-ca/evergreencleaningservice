@@ -41,7 +41,7 @@ In most cases, slip and trip accidents happen due to the loss of grip between th
 
 ### Preventing Slip, Trip, and Fall
 
-The best way to deal with a challenge is to eliminate that which causes the problem. Ensuring proper arrangement and [seeking janitorial services](/services/janitorial-services/) can be a good starting point in preventing slip, trip, and fall accidents.
+The best way to deal with a challenge is to eliminate that which causes the problem. Ensuring proper arrangement and [seeking janitorial services](/janitorial-services/) can be a good starting point in preventing slip, trip, and fall accidents.
 
 Below are some detailed courses of action that will help you put an end to slips, trips, and falls at your workplace.
 
@@ -73,7 +73,7 @@ Most slip, trip, and fall accidents will occur on walking surfaces in workplaces
 • Parking lots  
 • Floors
 
-Changes in weather can also change the traction on outdoor surfaces significantly. This could, in turn, affect indoor surfaces as pedestrian traffic tends to track in the moisture. This makes it important to take care of parking lot and sidewalk hygiene, as well as repairs. This is where a [floor care and entrance matting](/services/building-maintenance/) programme and a comprehensive [commercial cleaning](/services/commercial-cleaning/) checklist come in. Additionally, the following measures could also come in handy in your workplace safety efforts:  
+Changes in weather can also change the traction on outdoor surfaces significantly. This could, in turn, affect indoor surfaces as pedestrian traffic tends to track in the moisture. This makes it important to take care of parking lot and sidewalk hygiene, as well as repairs. This is where a [floor care and entrance matting](/building-maintenance/) programme and a comprehensive [commercial cleaning](/commercial-cleaning/) checklist come in. Additionally, the following measures could also come in handy in your workplace safety efforts:  
 • Clean surfaces to eliminate spills.  
 • Go for moisture-absorbent mats with slanted edges in entrances.  
 • Go for appropriate mats or rugs in kitchen areas

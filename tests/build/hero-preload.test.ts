@@ -58,12 +58,12 @@ beforeAll(() => {
 
 afterAll(() => fs.rmSync(out, { recursive: true, force: true }));
 
-const OFFICE = 'services/office-cleaning/index.html';
-const JANITORIAL = 'services/janitorial-services/index.html';
-const GRAFFITI = 'services/graffiti-removal/index.html';
+const OFFICE = 'office-cleaning/index.html';
+const JANITORIAL = 'janitorial-services/index.html';
+const GRAFFITI = 'graffiti-removal/index.html';
 
 describe('hero preload on offer pages', () => {
-  it.each([OFFICE, JANITORIAL, GRAFFITI, 'industries/medical-dental-clinics/index.html'])(
+  it.each([OFFICE, JANITORIAL, GRAFFITI, 'medical-dental-clinics/index.html'])(
     '%s preloads exactly the hero picture’s AVIF set',
     (rel) => {
       const d = doc(rel);

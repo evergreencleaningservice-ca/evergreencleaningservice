@@ -50,13 +50,13 @@ faqs:
     a: "Per project, after a site visit. Call (416) 803-4880 or request a quote and tell us the size of the space and your date."
 related:
   - title: "Commercial Cleaning"
-    href: "/services/commercial-cleaning/"
+    href: "/commercial-cleaning/"
   - title: "Office Cleaning"
-    href: "/services/office-cleaning/"
+    href: "/office-cleaning/"
   - title: "Building Maintenance & Floor Care"
-    href: "/services/building-maintenance/"
+    href: "/building-maintenance/"
   - title: "Property Managers & Condos"
-    href: "/industries/property-management/"
+    href: "/property-management/"
 showAreas: true
 ctaHeading: "Have a handover date?"
 ctaText: "Tell us the size of the space and the date, and we will arrange a site visit and a written quote."

@@ -63,8 +63,8 @@ describe('the touch parsed off a URL', () => {
   });
 
   it('records the landing page and referrer for a direct or organic arrival', () => {
-    const touch = readTouch(`${SITE}/services/office-cleaning/`, 'https://duckduckgo.com/', T0);
-    expect(touch.landing_page).toBe('/services/office-cleaning/');
+    const touch = readTouch(`${SITE}/office-cleaning/`, 'https://duckduckgo.com/', T0);
+    expect(touch.landing_page).toBe('/office-cleaning/');
     expect(touch.referrer).toBe('https://duckduckgo.com/');
     expect(isCampaignTouch(touch)).toBe(false);
   });
@@ -90,8 +90,8 @@ describe('attribution survives internal navigation', () => {
 
     /* Three internal pages, each with an internal referrer and no params. */
     recordTouch(`${SITE}/services/`, `${SITE}/lp/commercial-cleaning/`, plusDays(0));
-    recordTouch(`${SITE}/services/office-cleaning/`, `${SITE}/services/`, plusDays(0));
-    recordTouch(`${SITE}/contact-us/`, `${SITE}/services/office-cleaning/`, plusDays(0));
+    recordTouch(`${SITE}/office-cleaning/`, `${SITE}/services/`, plusDays(0));
+    recordTouch(`${SITE}/contact-us/`, `${SITE}/office-cleaning/`, plusDays(0));
 
     const payload = attributionPayload(plusDays(0));
     expect(payload.gclid).toBe('EAIaIQ1');

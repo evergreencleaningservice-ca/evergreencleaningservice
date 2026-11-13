@@ -187,7 +187,7 @@ describe('the sitewide handler', () => {
   const read = (rel: string) => fs.readFileSync(path.join(out, rel), 'utf8');
 
   it.each([
-    ['a standard page', 'services/office-cleaning/index.html'],
+    ['a standard page', 'office-cleaning/index.html'],
     ['the homepage', 'index.html'],
     ['the quote page', 'request-a-quote/index.html'],
     ['a landing page', 'lp/commercial-cleaning/index.html'],

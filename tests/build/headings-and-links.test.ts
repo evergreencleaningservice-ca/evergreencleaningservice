@@ -204,11 +204,11 @@ describe('the homepage heading outline', () => {
   });
 
   it('keeps the local-intent wording in the title tag, and leaves "office cleaning services" to the service page', () => {
-    /* 30 Oct 2026: the homepage was outranking /services/office-cleaning/
+    /* 30 Oct 2026: the homepage was outranking /office-cleaning/
        for that page's own queries (SEO audit). */
     expect(home()).toMatch(/<title>Commercial Cleaning Company in Toronto Since 1989/);
     expect(home()).not.toMatch(/<title>[^<]*Office Cleaning Services/);
-    expect(read('services/office-cleaning/index.html')).toMatch(/<title>Office Cleaning Services in Toronto/);
+    expect(read('office-cleaning/index.html')).toMatch(/<title>Office Cleaning Services in Toronto/);
   });
 });
 
@@ -234,8 +234,8 @@ describe('internal links', () => {
     expect(hrefs).not.toContain('/services/disinfection-cleaning-service/');
     expect(hrefs).not.toContain('/services/emergency-cleaning-services/');
     expect(hrefs).not.toContain('/testimonials/');
-    expect(hrefs).toContain('/services/disinfection-cleaning/');
-    expect(hrefs).toContain('/services/emergency-cleaning/');
+    expect(hrefs).toContain('/disinfection-cleaning/');
+    expect(hrefs).toContain('/emergency-cleaning/');
     expect(hrefs).toContain('/reviews/');
   });
 
@@ -299,10 +299,13 @@ describe('the legacy redirect map', () => {
     const legacy = redirects.filter(
       (r) => r.to !== `${r.from}/` && r.from !== '/sitemap-0.xml' && !consolidation.has(r.from)
     );
-    expect(legacy.length).toBe(171);
+    /* 171 until the URL move of 13 Nov 2026 (owner decision): +26 for the
+       13 old /services/ and /industries/ addresses in both spellings, -10
+       for the five rules whose source is now a live page. */
+    expect(legacy.length).toBe(187);
     expect(redirects.filter((r) => consolidation.has(r.from))).toHaveLength(consolidation.size);
     expect(redirects.some((r) => r.from === '/sitemap-0.xml' && r.to === '/sitemap-pages-0.xml')).toBe(true);
-    for (const page of ['/about-us', '/insights', '/services/office-cleaning', '/locations/mississauga']) {
+    for (const page of ['/about-us', '/insights', '/office-cleaning', '/locations/mississauga']) {
       expect(pageSlash.some((r) => r.from === page), page).toBe(true);
     }
     expect(redirects.some((r) => r.from === '/tag/*')).toBe(false);
@@ -476,7 +479,7 @@ describe('the location pages people search as "office cleaning <city>"', () => {
     expect(html).toMatch(/<title>Office &amp; Commercial Cleaning in /);
     expect(headings(html, 1)).toEqual([`Office &amp; Commercial Cleaning in ${place}`]);
     expect(html).toMatch(/<h2 id="loc-office-h"[^>]*>Office cleaning in /);
-    expect(html).toContain('href="/services/office-cleaning/">office cleaning</a>');
+    expect(html).toContain('href="/office-cleaning/">office cleaning</a>');
   });
 
   it('names the Mississauga neighbourhoods searchers use', () => {
@@ -500,7 +503,7 @@ describe('the audit fixes of 30 Oct 2026', () => {
   });
 
   it('says the reply promise where people land, and never "no site visit"', () => {
-    for (const page of ['index.html', 'services/office-cleaning/index.html', 'locations/mississauga/index.html']) {
+    for (const page of ['index.html', 'office-cleaning/index.html', 'locations/mississauga/index.html']) {
       expect(read(page), page).toMatch(/reply within 2 hours/i);
     }
     for (const page of pages) expect(read(page), page).not.toContain('No site visit');

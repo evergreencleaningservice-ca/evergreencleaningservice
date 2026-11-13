@@ -26,6 +26,7 @@ import { describe, expect, it } from 'vitest';
 import { locations } from '../src/data/locations';
 import { COVERAGE_SENTENCE } from '../src/data/coverage';
 import { hours, site } from '../src/data/site';
+import { offerPath } from '../src/data/offer-pages';
 
 const repo = path.resolve(import.meta.dirname, '..');
 const llms = fs.readFileSync(path.join(repo, 'public', 'llms.txt'), 'utf8');
@@ -94,7 +95,7 @@ describe('llms.txt lists every 2026 guide', () => {
 });
 
 /* 13 Nov 2026, SEO audit 11 Nov (geo N7): the services and industries were
-   checked by nobody. /services/janitorial-services/ is in llms.txt only
+   checked by nobody. /janitorial-services/ is in llms.txt only
    because someone added it by hand; the next new page could be missed the
    way seven location pages were (GEO N3). Each content file is a page, so
    each one must be linked under its section, and nothing there may point at
@@ -112,19 +113,25 @@ describe.each([
   ['industries', 'Who we clean for'],
 ])('llms.txt lists every page in src/content/%s/', (collection, title) => {
   const slugs = slugsIn(collection);
-  const pageLinks = () => linksIn(section(title)).filter((u) => new RegExp(`/${collection}/[^/]+/$`).test(u));
+  /* At the root since 13 Nov 2026 (URL move, owner decision), so a page link
+     is any one-segment address in the section other than the hub. */
+  const pageLinks = () =>
+    linksIn(section(title)).filter((u) => {
+      const p = new URL(u).pathname;
+      return /^\/[^/]+\/$/.test(p) && p !== `/${collection}/`;
+    });
 
   it('finds the pages it is checking', () => {
     // 11 services and 2 industries on 13 Nov 2026; a count of 0 means the folder moved.
     expect(slugs.length).toBeGreaterThan(collection === 'services' ? 10 : 1);
   });
 
-  it.each(slugs.map((s) => [s]))(`links /${collection}/%s/ under "## ${title}"`, (slug) => {
-    expect(linksIn(section(title))).toContain(`${site.url}/${collection}/${slug}/`);
+  it.each(slugs.map((s) => [s]))(`links /%s/ under "## ${title}"`, (slug) => {
+    expect(linksIn(section(title))).toContain(`${site.url}${offerPath(slug)}`);
   });
 
-  it(`links no /${collection}/ page that does not exist`, () => {
-    expect(pageLinks().sort()).toEqual(slugs.map((s) => `${site.url}/${collection}/${s}/`));
+  it(`links no ${collection} page that does not exist`, () => {
+    expect(pageLinks().sort()).toEqual(slugs.map((s) => `${site.url}${offerPath(s)}`));
   });
 });
 

@@ -351,10 +351,10 @@ describe('the event carries six fields and no visitor information', () => {
        second dimension only creates a high-cardinality field that can carry
        whatever someone typed into the address bar. */
     const win = {
-      location: { pathname: '/services/office-cleaning/', search: '?gclid=SECRET&utm_term=x' },
+      location: { pathname: '/office-cleaning/', search: '?gclid=SECRET&utm_term=x' },
     } as unknown as Window;
     const event = phoneClickEvent(el('hero'), win);
-    expect(event.page_path).toBe('/services/office-cleaning/');
+    expect(event.page_path).toBe('/office-cleaning/');
     expect(JSON.stringify(event)).not.toContain('gclid');
   });
 

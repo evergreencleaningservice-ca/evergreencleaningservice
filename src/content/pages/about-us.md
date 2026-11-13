@@ -22,15 +22,15 @@ Evergreen Office Cleaning is a commercial cleaning company based in Toronto. Sin
 
 ## What we do
 
-- [Office cleaning](/services/office-cleaning/): recurring after-hours cleaning of desks, kitchens, washrooms, floors and the touch points everyone shares.
-- [Commercial cleaning](/services/commercial-cleaning/) and [janitorial services](/services/janitorial-services/) for retail, institutional and mixed-use buildings.
-- [Building maintenance and floor care](/services/building-maintenance/): [floor stripping and waxing](/services/floor-stripping-waxing/), carpet extraction, high dusting, glass and pressure washing.
-- [Industrial and warehouse cleaning](/services/industrial-cleaning/), scheduled around shifts.
-- [Post-construction cleaning](/services/post-construction-cleaning/), [disinfection cleaning](/services/disinfection-cleaning/) and [emergency clean-ups](/services/emergency-cleaning/).
+- [Office cleaning](/office-cleaning/): recurring after-hours cleaning of desks, kitchens, washrooms, floors and the touch points everyone shares.
+- [Commercial cleaning](/commercial-cleaning/) and [janitorial services](/janitorial-services/) for retail, institutional and mixed-use buildings.
+- [Building maintenance and floor care](/building-maintenance/): [floor stripping and waxing](/floor-stripping-waxing/), carpet extraction, high dusting, glass and pressure washing.
+- [Industrial and warehouse cleaning](/industrial-cleaning/), scheduled around shifts.
+- [Post-construction cleaning](/post-construction-cleaning/), [disinfection cleaning](/disinfection-cleaning/) and [emergency clean-ups](/emergency-cleaning/).
 
 ## Who we clean for
 
-Offices and professional firms, [medical and dental clinics](/industries/medical-dental-clinics/), [property managers and condominium buildings](/industries/property-management/), retail stores and showrooms, institutional and public buildings, and industrial buildings and warehouses.
+Offices and professional firms, [medical and dental clinics](/medical-dental-clinics/), [property managers and condominium buildings](/property-management/), retail stores and showrooms, institutional and public buildings, and industrial buildings and warehouses.
 
 ## How we work
 

@@ -39,18 +39,18 @@ export interface Service {
 
 /** The services a job can be, following the site's service pages. */
 export const SERVICES: Service[] = [
-  { id: 'office', label: 'Office cleaning', noun: 'office cleaning', href: '/services/office-cleaning/', tags: ['commercial-office-cleaning', 'office', 'commercial-cleaning'] },
-  { id: 'commercial', label: 'Commercial cleaning', noun: 'commercial cleaning', href: '/services/commercial-cleaning/', tags: ['commercial-cleaning', 'cleaning'] },
-  { id: 'janitorial', label: 'Janitorial services', noun: 'janitorial services', href: '/services/janitorial-services/', tags: ['janitorial-services', 'commercial-cleaning'] },
-  { id: 'industrial', label: 'Industrial cleaning', noun: 'industrial cleaning', href: '/services/industrial-cleaning/', tags: ['commercial-cleaning', 'cleaning'] },
-  { id: 'warehouse', label: 'Warehouse cleaning', noun: 'warehouse cleaning', href: '/services/industrial-cleaning/', tags: ['commercial-cleaning', 'cleaning'] },
-  { id: 'disinfection', label: 'Disinfection cleaning', noun: 'disinfection cleaning', href: '/services/disinfection-cleaning/', tags: ['cleaning', 'commercial-cleaning'] },
-  { id: 'post-construction', label: 'Post-construction cleaning', noun: 'post-construction cleaning', href: '/services/post-construction-cleaning/', tags: ['cleaning', 'commercial-cleaning'] },
-  { id: 'building-maintenance', label: 'Building maintenance', noun: 'building maintenance', href: '/services/building-maintenance/', tags: ['commercial-cleaning', 'janitorial-services'] },
-  { id: 'condo', label: 'Condo common area cleaning', noun: 'common area cleaning', href: '/industries/property-management/', tags: ['commercial-cleaning', 'janitorial-services'] },
-  { id: 'emergency', label: 'Emergency cleaning', noun: 'emergency cleaning', href: '/services/emergency-cleaning/', tags: ['cleaning', 'commercial-cleaning'] },
-  { id: 'pressure-washing', label: 'Pressure washing', noun: 'pressure washing', href: '/services/pressure-washing/', tags: ['cleaning', 'entrance'] },
-  { id: 'graffiti', label: 'Graffiti removal', noun: 'graffiti removal', href: '/services/graffiti-removal/', tags: ['cleaning'] },
+  { id: 'office', label: 'Office cleaning', noun: 'office cleaning', href: '/office-cleaning/', tags: ['commercial-office-cleaning', 'office', 'commercial-cleaning'] },
+  { id: 'commercial', label: 'Commercial cleaning', noun: 'commercial cleaning', href: '/commercial-cleaning/', tags: ['commercial-cleaning', 'cleaning'] },
+  { id: 'janitorial', label: 'Janitorial services', noun: 'janitorial services', href: '/janitorial-services/', tags: ['janitorial-services', 'commercial-cleaning'] },
+  { id: 'industrial', label: 'Industrial cleaning', noun: 'industrial cleaning', href: '/industrial-cleaning/', tags: ['commercial-cleaning', 'cleaning'] },
+  { id: 'warehouse', label: 'Warehouse cleaning', noun: 'warehouse cleaning', href: '/industrial-cleaning/', tags: ['commercial-cleaning', 'cleaning'] },
+  { id: 'disinfection', label: 'Disinfection cleaning', noun: 'disinfection cleaning', href: '/disinfection-cleaning/', tags: ['cleaning', 'commercial-cleaning'] },
+  { id: 'post-construction', label: 'Post-construction cleaning', noun: 'post-construction cleaning', href: '/post-construction-cleaning/', tags: ['cleaning', 'commercial-cleaning'] },
+  { id: 'building-maintenance', label: 'Building maintenance', noun: 'building maintenance', href: '/building-maintenance/', tags: ['commercial-cleaning', 'janitorial-services'] },
+  { id: 'condo', label: 'Condo common area cleaning', noun: 'common area cleaning', href: '/property-management/', tags: ['commercial-cleaning', 'janitorial-services'] },
+  { id: 'emergency', label: 'Emergency cleaning', noun: 'emergency cleaning', href: '/emergency-cleaning/', tags: ['cleaning', 'commercial-cleaning'] },
+  { id: 'pressure-washing', label: 'Pressure washing', noun: 'pressure washing', href: '/pressure-washing/', tags: ['cleaning', 'entrance'] },
+  { id: 'graffiti', label: 'Graffiti removal', noun: 'graffiti removal', href: '/graffiti-removal/', tags: ['cleaning'] },
 ];
 
 export interface Facility {
