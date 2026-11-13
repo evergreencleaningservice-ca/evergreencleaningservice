@@ -1,5 +1,9 @@
 ---
 title: "How to Decide on a Cleaning Company"
+# 13 Nov 2026 (comparison with impact.ca): blog title/H1 split. The H1 is
+# reader-phrased and stays; the <title> leads with the search query instead:
+# people search "how to choose a commercial cleaning company", the phrase the description and first heading already use.
+seoTitle: "How to Choose a Commercial Cleaning Company"
 description: "How to choose a commercial cleaning company: compare quotes on scope, check WSIB and insurance, read the contract, ask for references and look at the crew."
 pubDate: 2019-12-07
 updatedDate: 2026-10-30

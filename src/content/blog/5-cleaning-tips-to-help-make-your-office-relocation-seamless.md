@@ -1,5 +1,9 @@
 ---
 title: "5 Cleaning Tips to Help Make Your Office Relocation Seamless"
+# 13 Nov 2026 (comparison with impact.ca): blog title/H1 split. The H1 is
+# reader-phrased and stays; the <title> leads with the search query instead:
+# people search "office move-out cleaning"; the post is about cleaning the old space before hand-back.
+seoTitle: "Office Move-Out Cleaning: 5 Tips for Relocating"
 description: "Five cleaning tips for an office move: pack first, keep boxes in one spot, clean top to bottom, do the windows, and leave washrooms and the kitchen last."
 pubDate: 2022-06-29
 image: "/images/blog-office-relocation-cleaning-feature.jpg"

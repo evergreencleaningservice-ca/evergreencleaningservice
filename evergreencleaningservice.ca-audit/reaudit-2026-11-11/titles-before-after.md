@@ -104,3 +104,45 @@ titles live in `src/data/landing-pages.ts`, outside this change.
 | /tag/schools/ | schools Archives - Evergreen Office Cleaning (44) | schools Archives \| Evergreen (28) |
 | /tag/winter/ | winter Archives - Evergreen Office Cleaning (43) | winter Archives \| Evergreen (27) |
 | /thank-you/ | Thank You \| Evergreen Office Cleaning (37) | Thank You \| Evergreen (21) |
+
+## 13 Nov 2026: blog title/H1 split
+
+Source: the comparison with impact.ca, 13 Nov
+(`comparison-impact-2026-11-13/onpage-schema.md`, recommendation 1). Impact's
+matched post gives its `<title>` to the search query and keeps a question as
+its H1. We copied the pattern, not the wording. Five posts get a `seoTitle`.
+Each one had an H1 written for readers (a question, a list hook, a series
+line) while people search other words. Only the `<title>` changes. The H1,
+description, body, slug and BlogPosting headline stay as they were. No
+`updatedDate` moves, because nothing a reader sees has changed. Lengths
+include the suffix where `pageTitle()` adds it.
+
+| Post | H1 (unchanged) | Old `<title>` | New `<title>` | Reason (target query) |
+| --- | --- | --- | --- | --- |
+| /5-cleaning-tips-to-help-make-your-office-relocation-seamless/ | 5 Cleaning Tips to Help Make Your Office Relocation Seamless | 5 Cleaning Tips to Help Make Your Office Relocation Seamless (60, no brand) | Office Move-Out Cleaning: 5 Tips for Relocating \| Evergreen (59) | "office move-out cleaning". The post covers cleaning the space you are leaving so it is ready for the landlord and the next tenant. The list hook buried that query at the end. |
+| /day-night-which-is-the-best-routine-for-your-office/ | Day Or Night – Which Is the Best Routine For Your Office? | Day Or Night – Which Is the Best Routine For Your Office? (57, no brand) | Day vs Night Office Cleaning: Benefits of Each \| Evergreen (58) | "day vs night office cleaning". The H1 asks the question. The post sets out the benefits of each. |
+| /keep-your-office-at-home-clean/ | Keep Your Office at Home Clean | Keep Your Office at Home Clean \| Evergreen (42) | Home Office Cleaning: 3 Simple Tips \| Evergreen (47) | "home office cleaning". The H1 puts "at home" last. The post gives three tips: products within reach, a filing system, and getting help. |
+| /how-to-decide-on-a-cleaning-company/ | How to Decide on a Cleaning Company | How to Decide on a Cleaning Company \| Evergreen (47) | How to Choose a Commercial Cleaning Company \| Evergreen (55) | "how to choose a commercial cleaning company". The post's description and first heading already use that phrase. The H1 says "decide" and leaves out "commercial". |
+| /ask-the-office-cleaners-cleaning-break-rooms/ | Ask the Office Cleaners: Cleaning Break Rooms | Ask the Office Cleaners: Cleaning Break Rooms \| Evergreen (57) | Office Break Room Cleaning: Furniture and Carpet \| Evergreen (60) | "office break room cleaning". "Ask the Office Cleaners" is a series line, not a query. The post covers the sofa and upholstery, benches, chairs and tables, and the carpet. |
+
+Considered and left as they are. Either the title already leads with the
+query, or it was set on 6-7 Nov and there was no clear reason to change it:
+
+- /how-often-should-an-office-be-cleaned/: this is the post matched with
+  Impact's. Its title, "How Often Should an Office Be Cleaned? Toronto Guide",
+  is the question people actually type. A keyword-led rewrite of it comes out
+  too close to Impact's own title.
+- /office-cleaning-cost-toronto-guide/: already split on 7 Nov. The H1 is
+  "What Drives Office Cleaning Costs in Toronto" and the title leads with
+  "Office Cleaning Costs in Toronto".
+- The checklist posts (office, seasonal, retail, dental, daycare and school,
+  quote), the floor, supplies, mixing, germs, deep-clean and robotic posts:
+  their H1 or 6 Nov seoTitle already leads with the query.
+- The fridge, dusting, air-quality, techniques, office-layout and slips posts:
+  each H1 is already the phrase people search, so a second title would only
+  reword it.
+
+`tests/build/titles.test.ts` pins the five titles. It also checks three things
+on every post: the `<title>` and H1 differ only where a `seoTitle` is set, the
+H1 and BlogPosting headline stay the post's `title`, and no two built pages
+share a `<title>`.

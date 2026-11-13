@@ -17,9 +17,12 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
-    /** A shorter headline for the <title> only, when `title` would push the
-        brand suffix past 60 characters. Both layouts honour it and pass it
-        through pageTitle(). */
+    /** A different headline for the <title> only, when `title` would push the
+        brand suffix past 60 characters, or (13 Nov 2026, comparison with
+        impact.ca) when the H1 is phrased for readers (a question, a hook, a
+        series line) and people search other words. Then it leads with the
+        query. Both layouts honour it and pass it through pageTitle(); the H1,
+        breadcrumb and schema headline keep `title`. */
     seoTitle: z.string().optional(),
     /** The id of a person in src/data/people.ts who wrote the post (13 Nov
         2026). Omitted, the company is the author. An id that is not in that

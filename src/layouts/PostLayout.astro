@@ -23,7 +23,9 @@ interface Props {
 const { post, newer, older, noindex = false } = Astro.props;
 /* `seoTitle` is a shorter headline for the <title> only, set where the full
    title would push the brand suffix past pageTitle's 60-character limit
-   (legacy blog pass, 6 Nov 2026). The H1, breadcrumb and schema keep `title`. */
+   (legacy blog pass, 6 Nov 2026), or where the H1 is reader-phrased and the
+   search query is different (13 Nov 2026, comparison with impact.ca). The H1,
+   breadcrumb and schema keep `title`. */
 const { title, seoTitle, description, pubDate, updatedDate, image, imageAlt } = post.data;
 /* A named author, when the post's front matter sets one (13 Nov 2026); else
    the company, as before. The byline and the schema use the same person. */
