@@ -83,9 +83,31 @@ Also update in the same change:
 
 The test added today, "exactly one enforced CSP line", already guards against the double-header mistake.
 
-### Not covered by `_headers` either way
+### Worker-served pages get the same headers
 
-HTML the Worker renders itself (live posts at `/<slug>/`, `/insights/`, the admin) gets no `_headers` rules. It is sent with no CSP, not even the baseline. Covering it means setting the header in `src/worker.ts`. That is a separate change, not made here.
+Corrected 13 Nov 2026 (comparison with impact.ca). An earlier draft of this section said the HTML the Worker renders gets no `_headers` rules and is sent with no CSP. That was wrong, and no `src/worker.ts` change is needed. Adding one would send a second `Content-Security-Policy`, which the browser would intersect with the first.
+
+The Worker builds these pages from `env.ASSETS.fetch()`, and that response already carries the `_headers` rules for its path:
+
+- **The `/insights/` list and the live-post shell** go through `rebuilt()` in `src/lib/admin/live-posts.ts`. It copies the asset's headers. It drops `content-length`, `etag`, `last-modified` and `content-encoding`, and sets `content-type`, `cache-control` and, off production, `x-robots-tag`. The CSP headers pass through unchanged.
+- **The admin sign-in and admin pages** go through `withHeaders()` in `src/lib/admin/api.ts`, which keeps the asset's headers and adds the admin security headers.
+
+Checked live on 13 Nov 2026 with `curl -sI`:
+
+| URL | Worker ran first? | `Content-Security-Policy` | `Content-Security-Policy-Report-Only` |
+|---|---|---|---|
+| `/insights/` | yes: in `run_worker_first`, and it carries `rebuilt()`'s `cache-control: public, max-age=0, must-revalidate` | the four-directive baseline | the full policy |
+| `/admin/sign-in/` | yes: `cache-control: no-store` from the admin headers | the four-directive baseline | the full policy |
+
+A live post at `/<slug>/` uses the same `rebuilt()` path as `/insights/`. It was not curled, because none could be picked out from outside without the database. So the change above reaches these pages without any Worker change.
+
+**What was not checked.** A few Worker responses are built from scratch with `new Response()` and carry no CSP:
+
+- `deniedPage()` in `src/lib/admin/api.ts`: the small admin HTML page for 401, 403 and 503. It loads no scripts, uses inline styles only, and already sends `x-frame-options: DENY`. It shows only when the admin is not set up or the account may not open it, so it was not triggered here.
+- The admin JSON and CSV responses and the sign-in redirect (`302`), also in `src/lib/admin/api.ts`. They are not rendered as pages.
+- The `/api/csp-report` replies (`204`, `405`) in `src/lib/csp-report.ts`. They have no body.
+
+Only `deniedPage()` is HTML. Giving it the baseline `frame-ancestors`, `base-uri`, `form-action` and `object-src` would be a small hardening step, separate from item 10. It is optional, and it does not block enforcement.
 
 ## 3. Browser check (`csp-browser-check.js`)
 
