@@ -31,6 +31,14 @@
 import { PLACES_WITHIN_TORONTO, SERVICE_LOCATION_SUGGESTIONS } from '../data/coverage';
 import { hours, nap, site, social } from '../data/site';
 import { offerPath } from '../data/offer-pages';
+import {
+  credentials as CREDENTIALS,
+  memberships as MEMBERSHIPS,
+  people as PEOPLE,
+  type Credential,
+  type Membership,
+  type Person,
+} from '../data/people';
 
 /**
  * Places named in `areaServed`, on the organisation and on every Service node.
@@ -78,7 +86,64 @@ const CATALOG = [
 const ORG_ID = `${site.url}/#organization`;
 const SITE_ID = `${site.url}/#website`;
 
-export const organizationGraph = () => ({
+const credentialNode = (c: Credential) => ({
+  '@type': 'EducationalOccupationalCredential',
+  name: c.name,
+  credentialCategory: c.credentialCategory,
+  ...(c.recognizedBy
+    ? { recognizedBy: { '@type': 'Organization', name: c.recognizedBy.name, ...(c.recognizedBy.url ? { url: c.recognizedBy.url } : {}) } }
+    : {}),
+  ...(c.url ? { url: c.url } : {}),
+});
+
+/**
+ * A person from src/data/people.ts (13 Nov 2026, comparison with impact.ca,
+ * item 2). The same node, with the same `@id`, is used on the organisation
+ * and as a post's author, so the two are one entity. Only fields the client
+ * supplied are emitted.
+ */
+export const personNode = (p: Person) => ({
+  '@type': 'Person',
+  '@id': `${site.url}/about-us/#person-${p.id}`,
+  name: p.name,
+  jobTitle: p.jobTitle,
+  worksFor: { '@id': ORG_ID },
+  ...(p.description ? { description: p.description } : {}),
+  ...(p.image ? { image: p.image.startsWith('http') ? p.image : `${site.url}${p.image}` } : {}),
+  ...(p.sameAs?.length ? { sameAs: [...p.sameAs] } : {}),
+  ...(p.knowsAbout?.length ? { knowsAbout: [...p.knowsAbout] } : {}),
+  ...(p.credentials?.length ? { hasCredential: p.credentials.map(credentialNode) } : {}),
+});
+
+/**
+ * People, credentials and memberships for the organisation node. Each key is
+ * present only when its list has entries, so with today's empty lists the
+ * graph is exactly what it was before 13 Nov 2026.
+ */
+const organisationPeople = (d: {
+  people: readonly Person[];
+  credentials: readonly Credential[];
+  memberships: readonly Membership[];
+}) => {
+  const founders = d.people.filter((p) => p.role === 'founder').map(personNode);
+  const staff = d.people.filter((p) => p.role !== 'founder').map(personNode);
+  return {
+    ...(founders.length ? { founder: founders } : {}),
+    ...(staff.length ? { employee: staff } : {}),
+    ...(d.credentials.length ? { hasCredential: d.credentials.map(credentialNode) } : {}),
+    ...(d.memberships.length
+      ? { memberOf: d.memberships.map((m) => ({ '@type': 'Organization', name: m.name, ...(m.url ? { url: m.url } : {}) })) }
+      : {}),
+  };
+};
+
+export const organizationGraph = (
+  data: {
+    people: readonly Person[];
+    credentials: readonly Credential[];
+    memberships: readonly Membership[];
+  } = { people: PEOPLE, credentials: CREDENTIALS, memberships: MEMBERSHIPS },
+) => ({
   '@context': 'https://schema.org',
   '@graph': [
     {
@@ -117,6 +182,12 @@ export const organizationGraph = () => ({
         closes: h.closes,
       })),
       areaServed: SERVICE_AREAS(),
+      /* What the company does, named from the service catalog below (13 Nov
+         2026, comparison with impact.ca, item 2): the same eleven services
+         the site has pages for, so it claims no expertise the site does not
+         describe. */
+      knowsAbout: CATALOG.map((s) => s.name),
+      ...organisationPeople(data),
       /* The Google Business Profile first, then the social profiles. */
       sameAs: [nap.mapUrl, ...social.map((s) => s.href)],
       contactPoint: {
@@ -194,6 +265,8 @@ export const articleSchema = (post: {
   updatedDate?: Date;
   image?: string;
   slug: string;
+  /** A person from src/data/people.ts, when the post's front matter names one. */
+  author?: Person;
 }) => ({
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -206,8 +279,10 @@ export const articleSchema = (post: {
   ...(post.image ? { image: `${site.url}${post.image}` } : {}),
   /* Name, URL and logo written out as well as the @id (SEO audit, 30 Oct
      2026): Google's article guidance reads `author.name` and the publisher's
-     logo from the article itself rather than following the reference. */
-  author: ORG_INLINE,
+     logo from the article itself rather than following the reference.
+     A post that names its author in front matter (13 Nov 2026) is credited
+     to that Person, with the same @id as on the organisation. */
+  author: post.author ? personNode(post.author) : ORG_INLINE,
   publisher: { ...ORG_INLINE, logo: { '@type': 'ImageObject', url: `${site.url}${site.logo}` } },
   isPartOf: { '@id': SITE_ID },
 });

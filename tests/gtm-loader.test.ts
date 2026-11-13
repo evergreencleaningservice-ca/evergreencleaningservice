@@ -1,8 +1,10 @@
 /**
- * The GTM loader's two speeds (SEO re-audit, 7 Nov 2026).
+ * The GTM loader's two speeds (SEO re-audit, 7 Nov 2026; fallback changed
+ * 13 Nov 2026).
  *
- * Since Phase 1 (6 Nov 2026) the container waits for the load event plus an
- * idle callback, or the first interaction. That cost Google Ads its phone
+ * Since Phase 1 (6 Nov 2026) unpaid visits wait for the first interaction or
+ * a fallback after the load event: an idle callback until 13 Nov 2026, a
+ * fixed GTM_FALLBACK_MS timer since (comparison with impact.ca, item 1). That cost Google Ads its phone
  * conversions: the "calls from website" tag swaps in a forwarding number only
  * once gtm.js has loaded, and a paid visitor who taps the number before that
  * dials the real one, uncounted. So paid visits (a click id in the URL, an
@@ -16,7 +18,7 @@
  */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Window } from 'happy-dom';
-import { gtmLoaderScript } from '../src/lib/gtm-loader';
+import { GTM_FALLBACK_MS, gtmLoaderScript } from '../src/lib/gtm-loader';
 import { PRODUCTION_HOSTS, site } from '../src/data/site';
 
 const GTM_SRC = `https://www.googletagmanager.com/gtm.js?id=${site.gtmId}`;
@@ -25,15 +27,17 @@ const STAGING = 'https://stage.evergreencleaningservice.ca';
 
 interface Run {
   win: Window;
-  /** Idle callbacks the loader queued, so a test can fire them on cue. */
-  idle: Array<() => void>;
+  /** Timers the loader set, so a test can fire them on cue. */
+  timers: Array<{ ms: number; fn: () => void }>;
   gtmScripts: () => number;
   dataLayer: () => Array<Record<string, unknown>>;
 }
 
 const windows: Window[] = [];
+const idleQueues: Array<Array<() => void>> = [];
 
 afterEach(async () => {
+  for (const q of idleQueues.splice(0)) expect(q).toHaveLength(0);
   while (windows.length) await windows.pop()!.happyDOM.close();
 });
 
@@ -60,11 +64,19 @@ function run(
   if (opts.cookie) for (const c of opts.cookie.split('; ')) doc.cookie = c;
   Object.defineProperty(doc, 'readyState', { value: opts.readyState ?? 'loading', configurable: true });
 
+  const timers: Array<{ ms: number; fn: () => void }> = [];
+  (win as unknown as { setTimeout: unknown }).setTimeout = (fn: () => void, ms: number) => {
+    timers.push({ fn, ms });
+    return timers.length;
+  };
+  /* An idle callback must play no part any more: one that fired straight
+     after load is what put the tags inside every lab trace. */
   const idle: Array<() => void> = [];
   (win as unknown as { requestIdleCallback: unknown }).requestIdleCallback = (cb: () => void) => {
     idle.push(cb);
     return idle.length;
   };
+  idleQueues.push(idle);
 
   const script = gtmLoaderScript(site.gtmId, site.analyticsHosts, PRODUCTION_HOSTS);
   // eslint-disable-next-line no-new-func
@@ -72,7 +84,7 @@ function run(
 
   return {
     win,
-    idle,
+    timers,
     gtmScripts: () =>
       Array.from(doc.querySelectorAll('script')).filter((s) => s.getAttribute('src') === GTM_SRC).length,
     dataLayer: () => (win as unknown as { dataLayer?: Array<Record<string, unknown>> }).dataLayer ?? [],
@@ -88,7 +100,7 @@ describe('paid visits load the container at parse time', () => {
   ])('a %s in the URL', (_name, url) => {
     const r = run(url);
     expect(r.gtmScripts()).toBe(1);
-    expect(r.idle).toHaveLength(0);
+    expect(r.timers).toHaveLength(0);
   });
 
   it('an /lp/ landing page, with no click id', () => {
@@ -111,11 +123,11 @@ describe('paid visits load the container at parse time', () => {
     expect(events[1]).toMatchObject({ event: 'gtm.js' });
   });
 
-  it('loads once: later interaction and idle do not add a second gtm.js', () => {
+  it('loads once: later interaction and load do not add a second gtm.js', () => {
     const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { readyState: 'complete' });
     r.win.document.getElementById('tel')!.dispatchEvent(new r.win.Event('pointerdown', { bubbles: true }));
     r.win.dispatchEvent(new r.win.Event('load'));
-    r.idle.forEach((cb) => cb());
+    expect(r.timers).toHaveLength(0);
     expect(r.gtmScripts()).toBe(1);
     expect(r.dataLayer().filter((e) => e.event === 'gtm.js')).toHaveLength(1);
   });
@@ -133,59 +145,64 @@ describe('every other visit keeps the deferral', () => {
     ['a utm-only Google link', `${PROD}/?utm_source=google&utm_medium=organic`],
     ['a parameter that merely contains a click-id name', `${PROD}/?notgclid=1&xgad_source=2`],
     ['a path containing /lp/ further down', `${PROD}/blog/lp/`],
-  ])('%s, with only non-Ads Google cookies (and one whose name merely ends in _gcl_aw): nothing until load + idle', (_name, url) => {
+  ])('%s, with only non-Ads Google cookies (and one whose name merely ends in _gcl_aw): nothing until load + the fallback timer', (_name, url) => {
     const r = run(url, { cookie: '_ga=GA1.1.123.456; _gcl_au=1.1.789.012; x_gcl_aw=1' });
     expect(r.win.document.cookie).toContain('_gcl_au=');
     expect(r.win.document.cookie).toContain('x_gcl_aw=');
     expect(r.gtmScripts()).toBe(0);
     expect(r.dataLayer()).toEqual([{ site_environment: 'production' }]);
 
+    expect(r.timers).toHaveLength(0);
     r.win.dispatchEvent(new r.win.Event('load'));
     expect(r.gtmScripts()).toBe(0);
-    expect(r.idle).toHaveLength(1);
-    r.idle[0]();
+    expect(r.timers.map((t) => t.ms)).toEqual([GTM_FALLBACK_MS]);
+    r.timers[0].fn();
     expect(r.gtmScripts()).toBe(1);
   });
 
-  it('a page already loaded queues the idle wait straight away', () => {
+  it('the fallback is 15 s: long enough to stay out of a lab trace', () => {
+    expect(GTM_FALLBACK_MS).toBe(15000);
+  });
+
+  it('a page already loaded starts the fallback timer straight away', () => {
     const r = run(`${PROD}/`, { readyState: 'complete' });
     expect(r.gtmScripts()).toBe(0);
-    expect(r.idle).toHaveLength(1);
-    r.idle[0]();
+    expect(r.timers.map((t) => t.ms)).toEqual([GTM_FALLBACK_MS]);
+    r.timers[0].fn();
+    expect(r.gtmScripts()).toBe(1);
+  });
+
+  it('a scroll inside an element (the reviews carousel on its timer) does not count', () => {
+    const r = run(`${PROD}/`, { readyState: 'complete' });
+    r.win.document.body.insertAdjacentHTML('beforeend', '<div class="ti-track" id="track"></div>');
+    r.win.document.getElementById('track')!.dispatchEvent(new r.win.Event('scroll'));
+    expect(r.gtmScripts()).toBe(0);
+    r.win.document.dispatchEvent(new r.win.Event('scroll'));
+    expect(r.gtmScripts()).toBe(1);
+  });
+
+  it('interaction before the fallback loads it once; the timer firing later adds nothing', () => {
+    const r = run(`${PROD}/`, { readyState: 'complete' });
+    r.win.document.dispatchEvent(new r.win.Event('scroll'));
+    expect(r.gtmScripts()).toBe(1);
+    r.timers.forEach((t) => t.fn());
+    expect(r.gtmScripts()).toBe(1);
+    expect(r.dataLayer().filter((e) => e.event === 'gtm.js')).toHaveLength(1);
+  });
+
+  it('a tap on a tel: link loads it at once', () => {
+    const r = run(`${PROD}/`);
+    r.win.document.getElementById('tel')!.dispatchEvent(new r.win.Event('pointerdown', { bubbles: true }));
     expect(r.gtmScripts()).toBe(1);
   });
 
   it.each(['pointerdown', 'keydown', 'touchstart', 'scroll', 'focusin'])('the first %s loads it', (type) => {
     const r = run(`${PROD}/`);
     expect(r.gtmScripts()).toBe(0);
-    r.win.document.getElementById('text')!.dispatchEvent(new r.win.Event(type, { bubbles: true }));
+    /* A page scroll is dispatched at the document; the others at an element. */
+    const target = type === 'scroll' ? r.win.document : r.win.document.getElementById('text')!;
+    target.dispatchEvent(new r.win.Event(type, { bubbles: true }));
     expect(r.gtmScripts()).toBe(1);
-  });
-
-  it('falls back to a 4 s timer where requestIdleCallback is missing', () => {
-    {
-      const win = new Window({
-        url: `${PROD}/`,
-        settings: { disableJavaScriptFileLoading: true, handleDisabledFileLoadingAsSuccess: true },
-      });
-      windows.push(win);
-      win.document.head.innerHTML = '<script></script>';
-      Object.defineProperty(win.document, 'readyState', { value: 'complete', configurable: true });
-      (win as unknown as { requestIdleCallback: unknown }).requestIdleCallback = undefined;
-      const timers: Array<{ ms: number; fn: () => void }> = [];
-      (win as unknown as { setTimeout: unknown }).setTimeout = (fn: () => void, ms: number) => {
-        timers.push({ fn, ms });
-        return timers.length;
-      };
-      new Function('window', 'document', gtmLoaderScript(site.gtmId, site.analyticsHosts, PRODUCTION_HOSTS))(
-        win,
-        win.document,
-      );
-      expect(win.document.querySelectorAll('script[src]').length).toBe(0);
-      expect(timers.map((t) => t.ms)).toEqual([4000]);
-      timers[0].fn();
-      expect(win.document.querySelectorAll('script[src]').length).toBe(1);
-    }
   });
 });
 
@@ -198,7 +215,7 @@ describe('hostname guard comes first', () => {
     const r = run(url, { cookie: '_gcl_aw=GCL.1762500000.abc123', readyState: 'complete' });
     expect(r.gtmScripts()).toBe(0);
     expect(r.dataLayer()).toEqual([]);
-    expect(r.idle).toHaveLength(0);
+    expect(r.timers).toHaveLength(0);
 
     r.win.document.getElementById('tel')!.dispatchEvent(new r.win.Event('pointerdown', { bubbles: true }));
     r.win.dispatchEvent(new r.win.Event('load'));

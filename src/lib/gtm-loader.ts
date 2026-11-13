@@ -11,6 +11,18 @@
  * inline script, so `\s` here would reach the page as `s`. The cookie test
  * uses indexOf for that reason.
  */
+/**
+ * How long after the load event an unpaid visit that has not interacted
+ * waits before the container loads anyway (13 Nov 2026, comparison with
+ * impact.ca, item 1). It was "load plus an idle callback", which fired within
+ * milliseconds of load and so put gtm.js and gtag.js (about 0.5-0.9 s of
+ * main-thread work) inside every lab trace: TBT 480-633 ms on the mobile
+ * pages measured that day. Fifteen seconds is past the point where a lab run
+ * has settled, and short enough that a visitor who reads for a while without
+ * scrolling is still recorded. Any interaction loads it sooner.
+ */
+export const GTM_FALLBACK_MS = 15000;
+
 export function gtmLoaderScript(
   gtmId: string,
   hosts: readonly string[],
@@ -50,7 +62,13 @@ export function gtmLoaderScript(
     return;
   }
   var events = ['pointerdown', 'keydown', 'touchstart', 'scroll', 'focusin'];
-  function onFirstInteraction() {
+  function onFirstInteraction(e) {
+    /* Only a scroll of the page itself counts. The capture listener also
+       hears scrolls inside elements, and the reviews carousel scrolls its own
+       track on a timer: that loaded the container about 6 s in with nobody
+       touching the page (13 Nov 2026). A visitor swiping the carousel still
+       counts, through touchstart or pointerdown. */
+    if (e && e.type === 'scroll' && e.target !== d && e.target !== d.documentElement && e.target !== d.body) return;
     for (var k = 0; k < events.length; k++) d.removeEventListener(events[k], onFirstInteraction, true);
     load();
   }
@@ -60,8 +78,7 @@ export function gtmLoaderScript(
     if (a) load();
   }, { capture: true, passive: true });
   function afterLoad() {
-    if (w.requestIdleCallback) w.requestIdleCallback(load, { timeout: 4000 });
-    else w.setTimeout(load, 4000);
+    w.setTimeout(load, ${GTM_FALLBACK_MS});
   }
   if (d.readyState === 'complete') afterLoad();
   else w.addEventListener('load', afterLoad);
