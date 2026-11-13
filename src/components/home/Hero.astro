@@ -1,6 +1,9 @@
 ---
 import { nap } from '../../data/site';
 import { REPLY_PROMISE_SHORT } from '../../data/landing';
+import { googleProfile, googleRatingDisplay } from '../../data/reviews';
+
+const rating = googleRatingDisplay(googleProfile);
 
 /**
  * The hero visual ROTATES through three office photographs (31 Oct 2026,
@@ -111,6 +114,19 @@ const [first, ...rest] = SLIDES;
           the 2-hour reply holds Monday to Friday 7am–6pm; the wording comes
           from REPLY_PROMISE_SHORT in src/data/landing.ts. tests/build/claims-copy.test.ts checks the wording. */}
       <li>A reply {REPLY_PROMISE_SHORT}</li>
+      {/* 13 Nov 2026 (comparison with impact.ca, report item 7): the Google
+          Business Profile's rating joins this row only once its real figures
+          are in src/data/reviews.ts; until then there is no item at all. */}
+      {
+        rating && (
+          <li class="hero-rating">
+            <a href={rating.href} target="_blank" rel="noopener noreferrer">
+              <span aria-hidden="true">★</span> {rating.text}{' '}
+              <span class="screen-reader-text">(opens in a new tab)</span>
+            </a>
+          </li>
+        )
+      }
     </ul>
   </div>
 </section>
@@ -241,6 +257,27 @@ const [first, ...rest] = SLIDES;
   .hero-points li::before {
     content: '✓ ';
     color: #9fdc7c;
+  }
+
+  /* The rating carries its own star, so no tick in front of it. */
+  .hero-points .hero-rating::before {
+    content: none;
+  }
+
+  /* A 44px-high tap target, with the extra height taken back by the margin
+     so the row's spacing is the same as for the other points. */
+  .hero-rating a {
+    display: inline-block;
+    padding: 12px 0;
+    margin: -12px 0;
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .hero-rating a:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
   }
 
   @media (max-width: 767px) {

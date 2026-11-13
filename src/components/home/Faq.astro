@@ -1,0 +1,124 @@
+---
+/**
+ * The homepage FAQ. 13 Nov 2026 (comparison with impact.ca, report item 8).
+ * The questions and answers are in src/data/home-faq.ts, with the source of
+ * each answer.
+ *
+ * The same <details>/<summary> pattern and look as the service pages'
+ * FaqList, which is keyboard-operable and announced correctly without any
+ * script. It is not FaqList itself, for two reasons: FaqList's answers are
+ * plain text, and each answer here ends with a link; and FaqList emits
+ * FAQPage JSON-LD, which the homepage deliberately does not carry.
+ *
+ * Each question is a 44px-high tap target at least.
+ */
+import { HOME_FAQS } from '../../data/home-faq';
+---
+
+<section class="section-padding" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <h2 class="blk-title" id="faq-title">Questions we are often asked</h2>
+    <div class="home-faq">
+      {
+        HOME_FAQS.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+            <p class="home-faq-more">
+              <a href={f.more.href}>{f.more.label}</a>
+            </p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-faq {
+    max-width: 80ch;
+  }
+
+  .home-faq details {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .home-faq summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 12px 32px 12px 0;
+    position: relative;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ink-heading);
+    transition: color var(--motion-fast) ease;
+  }
+
+  .home-faq summary:hover {
+    color: var(--brand-dark);
+  }
+
+  .home-faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* The plus that turns into a minus, as on the service pages. */
+  .home-faq summary::after,
+  .home-faq summary::before {
+    content: '';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    width: 14px;
+    height: 2px;
+    margin-top: -1px;
+    background: var(--brand);
+    border-radius: 1px;
+    transition: transform var(--motion-base) var(--ease-out);
+  }
+
+  .home-faq summary::before {
+    transform: rotate(90deg);
+  }
+
+  .home-faq details[open] summary::before {
+    transform: rotate(0deg);
+  }
+
+  .home-faq details[open] summary::after {
+    transform: rotate(180deg);
+  }
+
+  .home-faq summary:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .home-faq details p {
+    margin: 0 0 12px;
+  }
+
+  /* The link is a tap target too: 44px high, without padding the text. */
+  .home-faq-more a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+  }
+
+  .home-faq details .home-faq-more {
+    margin: -8px 0 8px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-faq summary,
+    .home-faq summary::after,
+    .home-faq summary::before {
+      transition: none;
+    }
+  }
+</style>

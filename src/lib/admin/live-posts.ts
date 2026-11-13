@@ -265,9 +265,12 @@ export const LIST_PATHS = new Set(['/insights/', '/sitemap-insights-0.xml', '/rs
 
 /**
  * A response the Worker built from an asset: the asset's headers, minus the
- * ones that described the old body. `_headers` rules apply only to files the
- * asset router serves itself, so a non-production host's noindex is set here
- * too, as public/_headers sets it there.
+ * ones that described the old body. The env.ASSETS.fetch() response already
+ * carries the `_headers` rules (CSP and the rest), and copying its headers
+ * keeps them: checked live on /insights/ and /admin/sign-in/, 13 Nov 2026,
+ * evergreencleaningservice.ca-audit/comparison-impact-2026-11-13/csp-review.md.
+ * A non-production host's noindex is still set here as well, explicitly, so
+ * it never depends on how host-specific `_headers` rules reach this path.
  */
 function rebuilt(body: string, from: Response, host: string, production: boolean, type?: string): Response {
   const headers = new Headers(from.headers);

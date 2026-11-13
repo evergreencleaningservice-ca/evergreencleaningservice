@@ -141,3 +141,77 @@ export function reviewDate(review: Pick<Review, 'date' | 'approx'>): ReviewDate 
   }
   return { datetime: review.date, label: `${name} ${year}` };
 }
+
+/**
+ * The Google Business Profile's own star rating and review count, for the
+ * rating strip at the top of every page and the home hero's proof row.
+ *
+ * 13 Nov 2026 (comparison with impact.ca, report items 1 and 7): a
+ * competitor shows its Google review count on every page. We show ours only
+ * as Google shows it, and we have not yet copied it from the profile, so the
+ * record is `undefined` and nothing renders: no strip, no hero item, no
+ * empty wrapper. The seven reviews above are not a substitute: they are the
+ * ones the old widget carried plus three added by hand, not the profile's
+ * full count, and an average of them would be a number Google never showed.
+ *
+ * THE RULE. Copy `rating` and `count` from the Google Business Profile
+ * itself (the listing at `nap.mapUrl` in src/data/site.ts), exactly as it
+ * shows them on the day, and set `checkedAt` to that day. `url` is the
+ * profile a visitor should land on; `nap.mapUrl` is the listing. Re-check
+ * and update all four together: a rating with an old `checkedAt` is a
+ * stale claim.
+ *
+ * Never turn this into `aggregateRating` JSON-LD: Google ignores
+ * self-serving ratings of a business on its own site and treats invented
+ * ones as spam. tests/build/home-proof-faq.test.ts fails on any
+ * `aggregateRating` in the build.
+ */
+export interface GoogleProfileRating {
+  /** The star average as the profile shows it, e.g. 4.9. */
+  rating: number;
+  /** The number of reviews the profile shows. */
+  count: number;
+  /** ISO date (YYYY-MM-DD) the two figures were copied from the profile. */
+  checkedAt: string;
+  /** The Google Business Profile URL the strip links to. */
+  url: string;
+}
+
+export const googleProfile: GoogleProfileRating | undefined = undefined;
+
+export interface GoogleRatingDisplay {
+  /** What the visitor reads: "★ 4.9 on Google · 12 reviews". */
+  label: string;
+  /** The same without the star, which the components print aria-hidden so
+      the link's accessible name is the visible words (WCAG 2.5.3). */
+  text: string;
+  href: string;
+  checkedAt: string;
+}
+
+/**
+ * The rating as the strip and the hero print it, or `undefined` when there
+ * is no record, which is the gate both components check. A pure function so
+ * the gate can be tested both ways with a fictional fixture without setting
+ * a real figure. A malformed record throws, so the build fails rather than
+ * printing a wrong number.
+ */
+export function googleRatingDisplay(
+  profile: GoogleProfileRating | undefined
+): GoogleRatingDisplay | undefined {
+  if (!profile) return undefined;
+  const { rating, count, checkedAt, url } = profile;
+  if (!(rating >= 1 && rating <= 5)) throw new Error(`reviews: Google rating ${rating} is not 1–5`);
+  if (!Number.isInteger(count) || count < 1) throw new Error(`reviews: Google review count ${count} is not a positive whole number`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(checkedAt)) throw new Error(`reviews: checkedAt "${checkedAt}" is not YYYY-MM-DD`);
+  if (!/^https:\/\//.test(url)) throw new Error(`reviews: Google profile URL "${url}" is not https`);
+  const stars = rating.toFixed(1);
+  const reviewsWord = count === 1 ? 'review' : 'reviews';
+  const text = `${stars} on Google · ${count} ${reviewsWord}`;
+  return {
+    label: `★ ${text}`,
+    text,
+    href: url,
+    checkedAt,
+  };
+}
