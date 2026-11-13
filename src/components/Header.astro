@@ -1,9 +1,13 @@
 ---
 import { nap, nav, site } from '../data/site';
+import { offerHub } from '../data/offer-pages';
 
 const { pathname } = Astro.url;
+/* A service or industry page is at the root since 13 Nov 2026 (URL move,
+   owner decision), so it no longer sits under its menu item's path; it still
+   marks that item, as it did from /services/<slug>/ and /industries/<slug>/. */
 const isCurrent = (href?: string) =>
-  !!href && href !== '/' && pathname.startsWith(href);
+  !!href && href !== '/' && (pathname.startsWith(href) || offerHub(pathname) === href);
 ---
 
 <header class="site-header" id="site-header">

@@ -80,16 +80,16 @@ faqs:
     a: "Toronto (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa."
 related:
   - title: "Commercial Cleaning"
-    href: "/services/commercial-cleaning/"
+    href: "/commercial-cleaning/"
     text: "Routine, periodic and one-off cleaning for any business premises."
   - title: "Office Cleaning"
-    href: "/services/office-cleaning/"
+    href: "/office-cleaning/"
     text: "Janitorial service for offices, after staff leave."
   - title: "Building Maintenance & Floor Care"
-    href: "/services/building-maintenance/"
+    href: "/building-maintenance/"
     text: "Strip and wax, carpet extraction, high dusting."
   - title: "Property Managers & Condos"
-    href: "/industries/property-management/"
+    href: "/property-management/"
     text: "Common areas, lobbies and amenity rooms."
   - title: "Commercial cleaning quote checklist"
     href: "/commercial-cleaning-quote-checklist/"
@@ -117,19 +117,19 @@ Frequency is set task by task, not as one number. A small office might have its 
 
 ## How do janitorial services differ by building?
 
-**Offices.** Desks, kitchens, washrooms and meeting rooms, done after staff leave. Our [office cleaning](/services/office-cleaning/) page sets out the office routine in detail.
+**Offices.** Desks, kitchens, washrooms and meeting rooms, done after staff leave. Our [office cleaning](/office-cleaning/) page sets out the office routine in detail.
 
 **Retail stores and showrooms.** Entrances and sales floors first, because that is what customers see. Crews are trained to work around displays and stock without rearranging them.
 
-**Medical and dental clinics.** Waiting rooms, treatment areas and washrooms cleaned after the last patient, with attention to cross-contamination. Our page on [medical and dental clinic cleaning](/industries/medical-dental-clinics/) explains what changes.
+**Medical and dental clinics.** Waiting rooms, treatment areas and washrooms cleaned after the last patient, with attention to cross-contamination. Our page on [medical and dental clinic cleaning](/medical-dental-clinics/) explains what changes.
 
-**Condominiums and multi-tenant buildings.** Lobbies, corridors, elevators, amenity rooms and garbage rooms on a schedule agreed with the property manager. See [property management and condo cleaning](/industries/property-management/).
+**Condominiums and multi-tenant buildings.** Lobbies, corridors, elevators, amenity rooms and garbage rooms on a schedule agreed with the property manager. See [property management and condo cleaning](/property-management/).
 
-**Industrial buildings.** The washrooms, lunchrooms, locker rooms and offices attached to a plant or warehouse, on the same contract as the floor work. See [industrial and warehouse cleaning](/services/industrial-cleaning/).
+**Industrial buildings.** The washrooms, lunchrooms, locker rooms and offices attached to a plant or warehouse, on the same contract as the floor work. See [industrial and warehouse cleaning](/industrial-cleaning/).
 
 ## Janitorial services or commercial cleaning?
 
-The two terms overlap. Janitorial services are the recurring upkeep. [Commercial cleaning](/services/commercial-cleaning/) is the wider term: it includes janitorial work and also the periodic and one-off jobs routine cleaning does not cover, such as stripping and waxing floors, carpet extraction, deep cleans and post-construction clean-up. Most buildings need both, and most of our contracts include both: janitorial service on a fixed schedule, with periodic work planned through the year.
+The two terms overlap. Janitorial services are the recurring upkeep. [Commercial cleaning](/commercial-cleaning/) is the wider term: it includes janitorial work and also the periodic and one-off jobs routine cleaning does not cover, such as stripping and waxing floors, carpet extraction, deep cleans and post-construction clean-up. Most buildings need both, and most of our contracts include both: janitorial service on a fixed schedule, with periodic work planned through the year.
 
 ## Who does the work, and when?
 

@@ -51,7 +51,7 @@ const PUBLIC_PAGES = [
   '/about-us/',
   '/contact-us/',
   '/services/',
-  '/services/office-cleaning/',
+  '/office-cleaning/',
   '/request-a-quote/',
 ];
 

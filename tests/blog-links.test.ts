@@ -13,6 +13,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { pageTitle, TITLE_LIMIT } from '../src/lib/title';
+import { offerHub } from '../src/data/offer-pages';
 
 const repo = path.resolve(import.meta.dirname, '..');
 const dir = (name: string) => path.join(repo, 'src/content', name);
@@ -145,7 +146,7 @@ describe('internal links', () => {
   it('sends service-intent anchors to a service, and the brand name nowhere but About', () => {
     for (const p of owned) {
       for (const [anchor, href] of links(p.body)) {
-        if (/^professional cleaning/i.test(anchor)) expect(href, `${p.slug}: ${anchor}`).toMatch(/^\/services\/[^/]+\/$/);
+        if (/^professional cleaning/i.test(anchor)) expect(offerHub(href), `${p.slug}: ${anchor} -> ${href}`).toBe('/services/');
         if (/^Evergreen( Office Cleaning)?$/.test(anchor)) expect(href, `${p.slug}: ${anchor}`).toBe('/about-us/');
       }
     }
@@ -184,7 +185,7 @@ describe('internal links', () => {
     for (const slug of rewritten) {
       const line = post(slug).body.trim().split('\n').filter(Boolean).pop()!;
       const found = links(line);
-      expect(found.some(([, href]) => /^\/(services|industries)\/[^/]+\/$/.test(href)), slug).toBe(true);
+      expect(found.some(([, href]) => offerHub(href)), slug).toBe(true);
       for (const [, href] of found) targets.add(href);
       expect(found.length, slug).toBeLessThanOrEqual(2);
     }

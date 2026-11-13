@@ -27,10 +27,11 @@
  *
  * READ-ONLY. It reads two directories and prints a diff.
  *
- * Usage: node scripts/image-parity.mjs <refDir> <distDir> [--json <file>]
+ * Usage: node --experimental-strip-types scripts/image-parity.mjs <refDir> <distDir> [--json <file>]
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { MOVED_OFFER_PATHS } from '../src/data/offer-pages.ts';
 
 const args = process.argv.slice(2);
 const jsonAt = args.indexOf('--json');
@@ -110,9 +111,12 @@ for (const file of refFiles) {
   const slug = file.replace(/\.html$/, '');
   const refHtml = readIf(path.join(refDir, file));
   /* The archive flattens a path into a filename with `__` for `/`, so
-     `services__office-cleaning.html` is `/services/office-cleaning/`. Without
-     this the seven service pages look like they have no built counterpart. */
-  const route = slug.replace(/__/g, '/');
+     `services__office-cleaning.html` is the original's /services/office-cleaning/.
+     Without this the seven service pages look like they have no built
+     counterpart. That page is built at /office-cleaning/ since the URL move
+     of 13 Nov 2026 (owner decision), so a moved route is read from there. */
+  const original = `/${slug.replace(/__/g, '/')}/`;
+  const route = (MOVED_OFFER_PATHS.find((m) => m.from === original)?.to ?? original).replace(/^\/|\/$/g, '');
   const builtPath =
     route === 'index' || route === 'home'
       ? path.join(distDir, 'index.html')

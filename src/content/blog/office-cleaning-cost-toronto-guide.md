@@ -34,7 +34,7 @@ guide:
 
 <h2 id="office-cleaning-pricing">Why There Is No Single Office Cleaning Price</h2>
 
-There is no single price that fits every Toronto office. Two buildings with the same floor area can require different amounts of work: one may have open workstations and a small kitchenette, while the other has several washrooms, meeting rooms and a busy reception area. A useful quote starts with those details, and with [how often your office needs cleaning](/how-often-should-an-office-be-cleaned/). Stores, clinics and multi-tenant buildings are priced the same way under [janitorial services](/services/janitorial-services/); a [one-off deep clean](/benefits-of-commercial-deep-cleaning-services/) before a contract starts is quoted separately.
+There is no single price that fits every Toronto office. Two buildings with the same floor area can require different amounts of work: one may have open workstations and a small kitchenette, while the other has several washrooms, meeting rooms and a busy reception area. A useful quote starts with those details, and with [how often your office needs cleaning](/how-often-should-an-office-be-cleaned/). Stores, clinics and multi-tenant buildings are priced the same way under [janitorial services](/janitorial-services/); a [one-off deep clean](/benefits-of-commercial-deep-cleaning-services/) before a contract starts is quoted separately.
 
 For an early budget, multiply an assumed cost per visit by the number of visits in a month. The table below demonstrates that calculation. **These are hypothetical CAD calculations before HST, not Evergreen quotes or verified GTA market averages.** The assumed $100–$300 per visit is an arithmetic input, not a statement of what your office should cost.
 
@@ -96,7 +96,7 @@ Tell the provider about sensitive equipment, restricted rooms and areas that sta
 
 <h2 id="whats-included-in-office-cleaning">What's Included in Office Cleaning?</h2>
 
-Routine [office cleaning](/services/office-cleaning/) can cover accessible workstation surfaces, kitchens, washrooms, floors and shared spaces. The contract should specify the tasks for your building rather than relying on the phrase “general cleaning.” A written schedule also distinguishes work done every visit from tasks done periodically.
+Routine [office cleaning](/office-cleaning/) can cover accessible workstation surfaces, kitchens, washrooms, floors and shared spaces. The contract should specify the tasks for your building rather than relying on the phrase “general cleaning.” A written schedule also distinguishes work done every visit from tasks done periodically.
 
 At workstations, clarify whether desks need to be cleared and whether monitors, keyboards or other equipment are excluded. In kitchens, identify accessible counters, sinks, tables and appliance exteriors. Interior fridge and oven cleaning should be discussed separately. In washrooms, specify fixtures, touchpoints, floors, bins and the arrangement for refilling dispensers.
 
@@ -121,7 +121,7 @@ The suggested frequencies below are starting points for a discussion, not a fixe
 </table>
 </div>
 
-Ask about periodic work before you sign. Carpet extraction, interior glass, high-level dusting and [floor stripping and waxing](/services/floor-stripping-waxing/) should have their own agreed scope and frequency when required. An initial deep clean may also be needed before a maintenance schedule begins.
+Ask about periodic work before you sign. Carpet extraction, interior glass, high-level dusting and [floor stripping and waxing](/floor-stripping-waxing/) should have their own agreed scope and frequency when required. An initial deep clean may also be needed before a maintenance schedule begins.
 
 <h2 id="worked-example">Worked Example: Cleaning a 6,000-Square-Foot Toronto Office</h2>
 

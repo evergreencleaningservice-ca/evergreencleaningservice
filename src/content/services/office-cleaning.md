@@ -81,19 +81,19 @@ related:
     href: "/seasonal-office-cleaning-checklist/"
     text: "The extra work each Toronto season adds to a routine scope."
   - title: "Commercial Cleaning"
-    href: "/services/commercial-cleaning/"
+    href: "/commercial-cleaning/"
     text: "Retail, institutional and mixed-use premises."
   - title: "Building Maintenance & Floor Care"
-    href: "/services/building-maintenance/"
+    href: "/building-maintenance/"
     text: "Carpet extraction, strip and wax, high dusting and more."
   - title: "Disinfection Cleaning"
-    href: "/services/disinfection-cleaning/"
+    href: "/disinfection-cleaning/"
     text: "Targeted disinfection of high-touch areas."
   - title: "Medical & Dental Clinics"
-    href: "/industries/medical-dental-clinics/"
+    href: "/medical-dental-clinics/"
     text: "What changes when the office is a clinic."
   - title: "Property Managers & Condos"
-    href: "/industries/property-management/"
+    href: "/property-management/"
     text: "Multi-tenant buildings and common areas."
   - title: "How We Work"
     href: "/our-process/"
@@ -105,7 +105,7 @@ ctaText: "Tell us about your office and we will arrange a time to walk it with y
 
 ## What is office cleaning?
 
-Office cleaning is the recurring cleaning of a workplace's desks, floors, washrooms, kitchens and shared areas, usually done after staff leave. It is the office form of [janitorial services](/services/janitorial-services/), the scheduled upkeep any building needs. Evergreen Office Cleaning has done it for Toronto and GTA businesses since 1989, with a crew assigned to each building and one account executive per client.
+Office cleaning is the recurring cleaning of a workplace's desks, floors, washrooms, kitchens and shared areas, usually done after staff leave. It is the office form of [janitorial services](/janitorial-services/), the scheduled upkeep any building needs. Evergreen Office Cleaning has done it for Toronto and GTA businesses since 1989, with a crew assigned to each building and one account executive per client.
 
 ## How often should an office be cleaned?
 

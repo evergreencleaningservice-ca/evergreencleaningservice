@@ -68,7 +68,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     photo: { src: '/images/night-janitorial-crew-office-toronto.jpg', alt: 'Industrial scrubber cleaning an office corridor' },
     office: [
       'Downtown office space runs from single floors in the Financial District towers to professional offices in King West and the converted warehouses around the Entertainment District. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough, and coordinate with building management on access and security.',
-      'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly. Our office is downtown, so extra visits are easy to arrange. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly. Our office is downtown, so extra visits are easy to arrange. See <a href="/office-cleaning/">office cleaning</a> for the full scope.',
       'Two guides help with the planning before a walkthrough: <a href="/office-cleaning-cost-toronto-guide/">how office cleaning is priced in Toronto</a>, and <a href="/how-often-should-an-office-be-cleaned/">how often an office should be cleaned</a>, which matters most for towers with long hours.',
     ],
     areasIntro:
@@ -129,7 +129,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     photo: { src: '/images/gallery-industrial-cleaning-toronto.jpg', alt: 'Floor polishing machine in an industrial building' },
     office: [
       'Etobicoke’s offices range from the buildings around Islington and Kipling stations to professional offices and clinics in the plazas along The Queensway, Bloor and Dixon, and the offices attached to industrial units in the south and north ends. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
-      'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly. Etobicoke is close to our Queen Street West office, so an extra visit is easy to arrange. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly. Etobicoke is close to our Queen Street West office, so an extra visit is easy to arrange. See <a href="/office-cleaning/">office cleaning</a> for the full scope.',
       'If you are still working out the budget, read <a href="/office-cleaning-cost-toronto-guide/">what sets the price of office cleaning</a> and <a href="/how-often-should-an-office-be-cleaned/">how many visits a week an office needs</a> before you call.',
     ],
     areasIntro:
@@ -184,7 +184,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     photo: { src: '/images/high-dusting-warehouse-lift.jpg', alt: 'Worker on a lifting platform cleaning a ceiling' },
     office: [
       'Mississauga’s office space runs from head offices in the business parks and single floors in the City Centre towers to the professional and medical suites in its neighbourhood plazas. Whichever yours is, we clean it the same way: after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
-      'A routine visit covers desks and workstations, kitchens and break rooms, washrooms, floors and glass, and the touch points everyone shares: door handles, light switches, elevator buttons. It can run every night, a few evenings a week or weekly. Carpet extraction, floor refinishing and window cleaning are planned through the year on the same contract. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'A routine visit covers desks and workstations, kitchens and break rooms, washrooms, floors and glass, and the touch points everyone shares: door handles, light switches, elevator buttons. It can run every night, a few evenings a week or weekly. Carpet extraction, floor refinishing and window cleaning are planned through the year on the same contract. See <a href="/office-cleaning/">office cleaning</a> for the full scope.',
       'For a first budget figure, our guide to <a href="/office-cleaning-cost-toronto-guide/">office cleaning costs in the GTA</a> walks through a worked example, and <a href="/how-often-should-an-office-be-cleaned/">this schedule guide</a> explains which rooms need attention every day.',
     ],
     areasIntro: 'We clean offices and commercial buildings across Mississauga, including:',
@@ -244,7 +244,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     photo: { src: '/images/lobby-floor-scrubber-commercial.jpg', alt: 'Close-up of a floor machine cleaning a commercial lobby' },
     office: [
       'Brampton’s offices range from professional offices and clinics in downtown Brampton and the plazas along Queen Street and Bovaird Drive to the business parks in the south end and the offices attached to its plants and warehouses. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
-      'A routine visit covers desks, kitchens and lunchrooms, washrooms, floors and the shared touch points, every night, a few evenings a week or weekly. Where an office sits in front of a warehouse, the two go on one contract with their own schedules. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'A routine visit covers desks, kitchens and lunchrooms, washrooms, floors and the shared touch points, every night, a few evenings a week or weekly. Where an office sits in front of a warehouse, the two go on one contract with their own schedules. See <a href="/office-cleaning/">office cleaning</a> for the full scope.',
       'Plants and warehouses with office space attached usually need a different schedule for each part of the building; <a href="/how-often-should-an-office-be-cleaned/">our frequency guide</a> explains how to set it, and <a href="/office-cleaning-cost-toronto-guide/">the pricing guide</a> shows what changes the monthly figure.',
     ],
     areasIntro:
@@ -295,7 +295,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     photo: { src: '/images/warehouse-floor-scrubber-industrial.jpg', alt: 'Floor scrubber in a warehouse aisle' },
     office: [
       'Vaughan’s office space is a mix of new towers in the Vaughan Metropolitan Centre, head offices in the business parks along Highway 400 and Highway 7, and offices at the front of industrial units in Concord and Woodbridge. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
-      'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly, with carpet and hard-floor care planned through the year. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'A routine visit covers workstations, kitchens, washrooms, floors, glass and the touch points everyone shares, every night, a few evenings a week or weekly, with carpet and hard-floor care planned through the year. See <a href="/office-cleaning/">office cleaning</a> for the full scope.',
       'Newer buildings with long occupancy hours tend to need more frequent visits than their size suggests: see <a href="/how-often-should-an-office-be-cleaned/">how often to clean an office</a>, then <a href="/office-cleaning-cost-toronto-guide/">what that schedule means for the price</a>.',
     ],
     areasIntro:
@@ -346,7 +346,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     photo: { src: '/images/janitorial-cart-preparation-supplies.jpg', alt: 'Janitorial cart with mop bucket and warning sign' },
     office: [
       'Markham’s offices range from corporate and technology offices along Highway 7 and the 404 and 407 corridor to multi-tenant buildings in Markham Centre, clinics and professional suites in the plazas, and offices at the front of business-park units. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
-      'A routine visit covers open-plan floors and workstations, kitchens, meeting rooms, washrooms, glass and the touch points everyone shares, every night, a few evenings a week or weekly, with carpet and floor care planned through the year. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'A routine visit covers open-plan floors and workstations, kitchens, meeting rooms, washrooms, glass and the touch points everyone shares, every night, a few evenings a week or weekly, with carpet and floor care planned through the year. See <a href="/office-cleaning/">office cleaning</a> for the full scope.',
       'A campus or a multi-tenant floor can be priced per tenant or as one scope; <a href="/office-cleaning-cost-toronto-guide/">the pricing guide</a> covers both, and <a href="/how-often-should-an-office-be-cleaned/">the frequency guide</a> helps split daily from weekly work.',
     ],
     areasIntro:
@@ -397,7 +397,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     photo: { src: '/images/eco-friendly-cleaning-spray-microfibre.jpg', alt: 'Spray bottle and microfibre cloths used for surface cleaning' },
     office: [
       'Oakville’s offices range from law, financial and medical offices in downtown storefronts along Lakeshore Road to head offices in Winston Park and the business parks along the QEW and Highway 403, and the offices in front of the units on Speers Road. Whichever yours is, we clean it after hours, by the same crew each visit, from a written scope agreed at a free walkthrough.',
-      'A routine visit covers reception, boardrooms and workstations, kitchens, washrooms, floors, glass and the shared touch points, every night, a few evenings a week or weekly. See <a href="/services/office-cleaning/">office cleaning</a> for the full scope.',
+      'A routine visit covers reception, boardrooms and workstations, kitchens, washrooms, floors, glass and the shared touch points, every night, a few evenings a week or weekly. See <a href="/office-cleaning/">office cleaning</a> for the full scope.',
       'Before the walkthrough it helps to read <a href="/how-often-should-an-office-be-cleaned/">which office areas need daily cleaning</a> and <a href="/office-cleaning-cost-toronto-guide/">how a monthly cleaning budget is built</a>, so the proposal can be compared on the same scope.',
       'Oakville’s business parks along the QEW, from Bronte Road to Winston Churchill Boulevard, are mostly two- and three-storey buildings with their own parking, so there is no dock or freight elevator to book and the crew can start as soon as the last person has left for the evening.',
     ],
@@ -450,7 +450,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     photo: { src: '/images/office-backpack-vacuum-toronto.jpg', alt: 'Vacuum cleaner being used on an office floor' },
     office: [
       'North York’s office space is concentrated in the towers around North York Centre, where Yonge Street runs from Sheppard to Finch over the subway, and in the low-rise business parks off Highway 401 and Highway 404 around Consumers Road and Don Mills. Further west, along Dufferin, Keele and Steeles, offices sit at the front of industrial units. We look after all three kinds in the evening, working to a task list we write down after walking the building with you.',
-      'On a regular visit the crew works through the desks, the kitchen, the boardrooms, the washrooms and the glass, plus the handles and switches everybody touches; that can be nightly, on a few set evenings, or once a week. North York is inside the City of Toronto and a short drive up the Allen or the Don Valley from our office, so adding a visit or a one-off clean is easy to arrange. The full task list is on the <a href="/services/office-cleaning/">office cleaning</a> page.',
+      'On a regular visit the crew works through the desks, the kitchen, the boardrooms, the washrooms and the glass, plus the handles and switches everybody touches; that can be nightly, on a few set evenings, or once a week. North York is inside the City of Toronto and a short drive up the Allen or the Don Valley from our office, so adding a visit or a one-off clean is easy to arrange. The full task list is on the <a href="/office-cleaning/">office cleaning</a> page.',
       'A tower floor and a business-park unit are priced differently because the access and the floor areas differ. Two guides are worth ten minutes before you ask for a quote: one on <a href="/office-cleaning-cost-toronto-guide/">what goes into a Toronto office cleaning price</a>, and one on <a href="/how-often-should-an-office-be-cleaned/">picking the number of visits</a>.',
     ],
     areasIntro:
@@ -506,7 +506,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     photo: { src: '/images/carpet-extraction-boardroom-toronto.jpg', alt: 'Carpet cleaning tool being used on a carpet' },
     office: [
       'Scarborough’s offices are grouped in a few clusters: the towers and multi-tenant buildings around Scarborough Centre and Consilium Place by Highway 401 and McCowan, the business area along Progress Avenue, the professional and medical suites in the plazas on Sheppard, Kennedy and Lawrence, and the offices attached to the warehouses and plants in Milliken and along the 401. We take them on in the evening with a crew that stays on the building, to a task list fixed when we walk it with you.',
-      'Each visit takes in the desks and the open floor, the kitchen, the washrooms, the floors, the glass and the shared handles and switches; the rhythm can be nightly, several evenings a week or weekly, with carpet extraction and floor refinishing booked for set dates in the year. Everything a visit includes is listed under <a href="/services/office-cleaning/">office cleaning</a>.',
+      'Each visit takes in the desks and the open floor, the kitchen, the washrooms, the floors, the glass and the shared handles and switches; the rhythm can be nightly, several evenings a week or weekly, with carpet extraction and floor refinishing booked for set dates in the year. Everything a visit includes is listed under <a href="/office-cleaning/">office cleaning</a>.',
       'For a plaza suite or a plant office, the guide on <a href="/how-often-should-an-office-be-cleaned/">daily versus weekly office tasks</a> helps decide the visits, and the one on <a href="/office-cleaning-cost-toronto-guide/">building a monthly cleaning budget</a> shows how to line up two proposals on the same scope.',
     ],
     areasIntro:
@@ -562,7 +562,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
     photo: { src: '/images/dust-on-office-desk-detail.jpg', alt: 'Duster beside a keyboard and office supplies' },
     office: [
       'Most of Richmond Hill’s office stock is in the parks along Highway 7 and Highway 404: Beaver Creek around Leslie Street and East Beaver Creek Road, Headford to the east, and the multi-tenant buildings near Richmond Hill Centre at Yonge and Highway 7. Along Yonge Street itself, professional and medical suites sit above and beside the plazas from Highway 7 north to Elgin Mills. We handle them in the evening, on terms set out in writing after a walkthrough.',
-      'The regular round covers desks, the kitchen, meeting rooms, washrooms and glass, and the switches, handles and rails that get touched all day, on whatever rhythm the office needs: nightly, a few set evenings, or weekly, with carpet and floor refinishing booked for dates in the year. What a visit includes is spelled out on the <a href="/services/office-cleaning/">office cleaning</a> page.',
+      'The regular round covers desks, the kitchen, meeting rooms, washrooms and glass, and the switches, handles and rails that get touched all day, on whatever rhythm the office needs: nightly, a few set evenings, or weekly, with carpet and floor refinishing booked for dates in the year. What a visit includes is spelled out on the <a href="/office-cleaning/">office cleaning</a> page.',
       'A technology office that keeps long hours usually wants more visits than its floor area would suggest. The guide to <a href="/how-often-should-an-office-be-cleaned/">setting an office cleaning schedule</a> explains why, and the guide to <a href="/office-cleaning-cost-toronto-guide/">Toronto office cleaning prices</a> shows the effect on the monthly figure.',
     ],
     areasIntro:
@@ -623,7 +623,7 @@ export const LOCATION_LOCAL: Record<string, LocationLocal> = {
          evening's work" came out of this paragraph, the access notes and the
          FAQ. Scheduling is described as agreed at the walkthrough, which is
          what every contract starts with. */
-      'Every visit takes care of the desks, the kitchen, the washrooms, the floors, the glass and the handles and switches everyone uses, nightly, a few evenings a week or weekly, as agreed when we walk the building. The <a href="/services/office-cleaning/">office cleaning</a> page lists everything a visit includes.',
+      'Every visit takes care of the desks, the kitchen, the washrooms, the floors, the glass and the handles and switches everyone uses, nightly, a few evenings a week or weekly, as agreed when we walk the building. The <a href="/office-cleaning/">office cleaning</a> page lists everything a visit includes.',
       'For an office attached to a plant, the guide on <a href="/how-often-should-an-office-be-cleaned/">visits per week for an office</a> and the one on <a href="/office-cleaning-cost-toronto-guide/">the parts of an office cleaning price</a> help get the office and the floor quoted together.',
     ],
     areasIntro:

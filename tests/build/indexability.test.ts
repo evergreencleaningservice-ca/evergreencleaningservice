@@ -42,6 +42,7 @@ import { shellProblems } from '../../src/lib/admin/live-posts';
 import { locations } from '../../src/data/locations';
 import { HUB_MEMBERS, SOURCES } from '../../src/lib/sitemap-lastmod.mjs';
 import { HUB_UPDATED } from '../../src/data/hub-dates';
+import { INDUSTRY_SLUGS, MOVED_OFFER_PATHS, OFFER_URLS_MOVED, SERVICE_SLUGS, offerHub } from '../../src/data/offer-pages';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const ORIGIN = `https://${PRODUCTION_HOSTS[0]}`;
@@ -188,7 +189,7 @@ describe('canonicals', () => {
   });
 
   it('the canonical matches the page it is on', () => {
-    for (const page of ['index.html', 'about-us/index.html', 'services/office-cleaning/index.html']) {
+    for (const page of ['index.html', 'about-us/index.html', 'office-cleaning/index.html']) {
       const expected = `${ORIGIN}/${page.replace(/index\.html$/, '')}`;
       expect(canonicalOf(read(page))).toBe(expected);
     }
@@ -285,9 +286,20 @@ describe('the sitemap', () => {
 
   it('includes the pages that carry the business', () => {
     const all = urls();
-    for (const path of ['/', '/about-us/', '/contact-us/', '/services/office-cleaning/']) {
+    for (const path of ['/', '/about-us/', '/contact-us/', '/office-cleaning/']) {
       expect(all).toContain(`${ORIGIN}${path}`);
     }
+  });
+
+  /* URL move, owner decision (13 Nov 2026): src/data/offer-pages.ts. */
+  it('lists the 13 service and industry pages at the root, and none at the old addresses', () => {
+    const all = urls();
+    expect(MOVED_OFFER_PATHS).toHaveLength(13);
+    for (const { from, to } of MOVED_OFFER_PATHS) {
+      expect(all).toContain(`${ORIGIN}${to}`);
+      expect(all).not.toContain(`${ORIGIN}${from}`);
+    }
+    expect(all.filter((u) => /\/(services|industries)\/[^/]+\//.test(u))).toEqual([]);
   });
 
   it('is split by type: posts and /insights/ apart from every other page (M2)', () => {
@@ -343,7 +355,7 @@ describe("the sitemap's dates", () => {
       }))
     );
   const time = (date: string | undefined) => (date ? Date.parse(date) : NaN);
-  const offerPages = () => entries().filter((e) => /^\/(services|industries)\/[^/]+\/$/.test(e.path));
+  const offerPages = () => entries().filter((e) => offerHub(e.path));
   const locationPages = () => entries().filter((e) => /^\/locations\/[^/]+\/$/.test(e.path));
 
   /** The committer date of the last commit to `file`, as git reports it. */
@@ -376,13 +388,19 @@ describe("the sitemap's dates", () => {
     expect(new Set(pagesFound.map((e) => time(e.lastmod))).size).toBeGreaterThan(1);
   });
 
-  it('dates each service and industry page by its own content file alone', () => {
+  /* And, since the URL move of 13 Nov 2026 (owner decision), by the move's
+     own date where that is newer: src/lib/sitemap-lastmod.mjs says why. */
+  it('dates each service and industry page by its own content file and the URL move', () => {
     const offers = offerPages();
-    expect(offers.length).toBeGreaterThanOrEqual(11);
+    expect(offers).toHaveLength(SERVICE_SLUGS.length + INDUSTRY_SLUGS.length);
+    const moved = time(OFFER_URLS_MOVED);
+    expect(moved).not.toBeNaN();
+    expect(moved, 'OFFER_URLS_MOVED is in the future').toBeLessThanOrEqual(Date.now() + 10 * 60_000);
     for (const { path: p, lastmod } of offers) {
-      const file = `src/content${p.replace(/\/$/, '')}.md`;
+      const file = `src/content${offerHub(p)}${p.replace(/^\/|\/$/g, '')}.md`;
       expect(fs.existsSync(path.join(repo, file)), file).toBe(true);
-      expect(time(lastmod), p).toBe(time(committed(file)));
+      expect(time(lastmod), p).toBe(Math.max(time(committed(file)), moved));
+      expect(time(lastmod), `${p} is dated before its URL moved`).toBeGreaterThanOrEqual(moved);
     }
   });
 
@@ -424,7 +442,7 @@ describe("the sitemap's dates", () => {
     }
     /* What each hub shows of its members: every service, every location,
        and no industry page (its cards come from src/data/industries.ts). */
-    expect(HUB_MEMBERS('/services/').sort()).toEqual(offerPages().filter((e) => e.path.startsWith('/services/')).map((e) => e.path).sort());
+    expect(HUB_MEMBERS('/services/').sort()).toEqual(offerPages().filter((e) => offerHub(e.path) === '/services/').map((e) => e.path).sort());
     expect(HUB_MEMBERS('/locations/')).toHaveLength(locations.length);
     expect(HUB_MEMBERS('/industries/')).toEqual([]);
   });

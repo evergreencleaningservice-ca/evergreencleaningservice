@@ -57,10 +57,10 @@ related:
     href: "/cleaning-protocols-for-daycares-and-schools/"
     text: "Cleaning protocols for daycares and schools."
   - title: "Office Cleaning"
-    href: "/services/office-cleaning/"
+    href: "/office-cleaning/"
     text: "Recurring after-hours cleaning."
   - title: "Medical & Dental Clinics"
-    href: "/industries/medical-dental-clinics/"
+    href: "/medical-dental-clinics/"
     text: "What changes when the office is a clinic."
   - title: "Green Clean Products"
     href: "/green-clean-products/"
@@ -84,4 +84,4 @@ Before we disinfect, every surface is cleaned with detergent to remove dirt and 
 
 ## Routine or one-off
 
-Touch-point disinfection is part of our routine [office cleaning](/services/office-cleaning/). A one-off disinfection can be booked on its own: after an illness has gone through the team, before people return to an empty office, or when a busy reception or shared space needs it.
+Touch-point disinfection is part of our routine [office cleaning](/office-cleaning/). A one-off disinfection can be booked on its own: after an illness has gone through the team, before people return to an empty office, or when a busy reception or shared space needs it.

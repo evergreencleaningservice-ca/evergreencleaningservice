@@ -35,7 +35,7 @@ guide:
 
 An office used every weekday should generally receive cleaning on each occupied day in its busiest shared areas. Professional whole-office visits can range from once or twice weekly in a lightly used suite to five nights a week in a busy workplace. Daily upkeep still needs an assigned person when the cleaning crew is absent.
 
-The suggested starting points below are Evergreen's planning examples, not mandatory standards or staffing formulas. Review the space with your [office cleaning provider](/services/office-cleaning/) before deciding which tasks require each visit.
+The suggested starting points below are Evergreen's planning examples, not mandatory standards or staffing formulas. Review the space with your [office cleaning provider](/office-cleaning/) before deciding which tasks require each visit.
 
 <div class="guide-table guide-scope" role="region" aria-label="Suggested cleaning frequencies by office size and occupancy" tabindex="0">
 <table>
@@ -50,7 +50,7 @@ The suggested starting points below are Evergreen's planning examples, not manda
 </table>
 </div>
 
-People and activity matter more than the size bracket. A compact client-facing office can need more frequent attention than a larger suite with mostly unused rooms. The schedule you land on is also the biggest single input to [what each schedule costs](/office-cleaning-cost-toronto-guide/), and for stores, clinics and mixed-use buildings the same thinking applies to [commercial cleaning](/services/commercial-cleaning/) and [janitorial services](/services/janitorial-services/). Whether the visits happen [during the day or at night](/day-night-which-is-the-best-routine-for-your-office/) is a separate choice.
+People and activity matter more than the size bracket. A compact client-facing office can need more frequent attention than a larger suite with mostly unused rooms. The schedule you land on is also the biggest single input to [what each schedule costs](/office-cleaning-cost-toronto-guide/), and for stores, clinics and mixed-use buildings the same thinking applies to [commercial cleaning](/commercial-cleaning/) and [janitorial services](/janitorial-services/). Whether the visits happen [during the day or at night](/day-night-which-is-the-best-routine-for-your-office/) is a separate choice.
 
 <h2 id="daily-weekly-periodic-cleaning">Which Office Areas Need Daily, Weekly or Periodic Cleaning?</h2>
 

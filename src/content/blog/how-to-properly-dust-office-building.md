@@ -90,4 +90,4 @@ Proper dusting is important not only to keeping your employees healthy and inspi
 
 For all of your commercial cleaning needs, [contact](/contact-us/) the team at [Evergreen Office Cleaning](/about-us/) and we’ll be happy to get rid of your dust!
 
-High dusting of ledges, vents, light fixtures and ceilings is part of Evergreen's [building maintenance and floor care](/services/building-maintenance/) service for buildings across Toronto and the GTA.
+High dusting of ledges, vents, light fixtures and ceilings is part of Evergreen's [building maintenance and floor care](/building-maintenance/) service for buildings across Toronto and the GTA.

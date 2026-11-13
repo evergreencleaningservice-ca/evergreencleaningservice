@@ -22,16 +22,24 @@
  *
  * Every target in the map is now a page that exists. Three were created and
  * two renamed to match the service tree in Section 2.2:
- *   /services/disinfection-cleaning-service/ -> /services/disinfection-cleaning/
- *   /services/emergency-cleaning-services/   -> /services/emergency-cleaning/
- *   /services/pressure-washing/, /services/post-construction-cleaning/,
- *   /services/graffiti-removal/              -> new, copy marked needsClientCopy
+ *   /services/disinfection-cleaning-service/ -> /disinfection-cleaning/
+ *   /services/emergency-cleaning-services/   -> /emergency-cleaning/
+ *   /pressure-washing/, /post-construction-cleaning/,
+ *   /graffiti-removal/                       -> new, copy marked needsClientCopy
+ *
+ * THE URL MOVE (13 Nov 2026, owner decision). The service and industry pages
+ * moved from /services/<slug>/ and /industries/<slug>/ to /<slug>/
+ * (src/data/offer-pages.ts). Every rule that pointed at an old address now
+ * points straight at the new one, so nothing takes two hops; the old
+ * addresses themselves 301 in `movedOfferRedirects`; and the rules whose
+ * source is now a live page were deleted.
  */
 
 /* Extension included deliberately: scripts/redirects.mjs loads this file with
    node's bare type-stripping, which does not resolve extensionless specifiers.
    Every script→src import in this repo is written the same way. */
 import { emptyTagSlugs } from './tags.ts';
+import { MOVED_OFFER_PATHS } from './offer-pages.ts';
 
 export type Redirect = { from: string; to: string };
 
@@ -52,7 +60,7 @@ export type Redirect = { from: string; to: string };
  *
  * ONE HOP, NOT TWO. The slashless variant is mapped straight to the same
  * final target, never to the slashed source. Chaining
- * `/office-cleaning` → `/office-cleaning/` → `/services/office-cleaning/`
+ * `/emergency-service` → `/emergency-service/` → `/emergency-cleaning/`
  * would work in a browser and is still worse: it doubles the latency on a
  * cold connection and spends redirect budget for nothing.
  *
@@ -114,14 +122,16 @@ export function bothSlashSpellings(rules: Redirect[]): Redirect[] {
 
 /** Section 2.1, as specified — with targets corrected to pages that exist. */
 export const specRedirects: Redirect[] = [
-  { from: '/commercial-cleaning-toronto-gta/', to: '/services/commercial-cleaning/' },
-  { from: '/office-cleaning-and-janitorial-toronto/', to: '/services/office-cleaning/' },
-  { from: '/industrial-cleaning/', to: '/services/industrial-cleaning/' },
-  { from: '/property-management-and-building-maintenance/', to: '/services/building-maintenance/' },
-  { from: '/disinfection-cleaning/', to: '/services/disinfection-cleaning/' },
-  { from: '/pressure-washing-services/', to: '/services/pressure-washing/' },
-  { from: '/graffiti-removal-services/', to: '/services/graffiti-removal/' },
-  { from: '/emergency-cleaning/', to: '/services/emergency-cleaning/' },
+  { from: '/commercial-cleaning-toronto-gta/', to: '/commercial-cleaning/' },
+  { from: '/office-cleaning-and-janitorial-toronto/', to: '/office-cleaning/' },
+  { from: '/property-management-and-building-maintenance/', to: '/building-maintenance/' },
+  { from: '/pressure-washing-services/', to: '/pressure-washing/' },
+  { from: '/graffiti-removal-services/', to: '/graffiti-removal/' },
+  /* /industrial-cleaning/, /disinfection-cleaning/ and /emergency-cleaning/
+     were here, pointing at /services/<slug>/. Since the URL move (13 Nov
+     2026, owner decision) they are the pages themselves, and the asset
+     router reads this map before it looks for a file, so a rule would
+     shadow the page or loop onto it. */
   { from: '/blog/', to: '/insights/' },
   { from: '/submit-your-testimonial/', to: '/reviews/' },
 ];
@@ -131,14 +141,14 @@ export const specRedirects: Redirect[] = [
  * ones carrying real inbound links; see _research/url-preservation.md.
  */
 export const legacyRedirects: Redirect[] = [
-  // the 2019 service URLs the /services/ tree replaced
-  { from: '/office-cleaning/', to: '/services/office-cleaning/' },
-  { from: '/commercial-cleaning/', to: '/services/commercial-cleaning/' },
-  { from: '/emergency-service/', to: '/services/emergency-cleaning/' },
+  // the 2019 service URLs the /services/ tree replaced. /office-cleaning/ and
+  // /commercial-cleaning/ were here too; they are live pages again since the
+  // URL move of 13 Nov 2026 (owner decision), so their rules are gone.
+  { from: '/emergency-service/', to: '/emergency-cleaning/' },
 
   // the two service pages this overhaul renamed, so their old paths keep working
-  { from: '/services/disinfection-cleaning-service/', to: '/services/disinfection-cleaning/' },
-  { from: '/services/emergency-cleaning-services/', to: '/services/emergency-cleaning/' },
+  { from: '/services/disinfection-cleaning-service/', to: '/disinfection-cleaning/' },
+  { from: '/services/emergency-cleaning-services/', to: '/emergency-cleaning/' },
 
   // WordPress pages that moved
   { from: '/testimonial/', to: '/reviews/' },
@@ -152,6 +162,14 @@ export const legacyRedirects: Redirect[] = [
   { from: '/sitemap.xml', to: '/sitemap-index.xml' },
   { from: '/sitemap_index.xml', to: '/sitemap-index.xml' },
 ];
+
+/**
+ * The 13 service and industry pages' addresses from 15 Oct to 13 Nov 2026,
+ * each to its new one at the root (URL move, owner decision). Google had
+ * the old ones for about four weeks, and the slashless spelling is added by
+ * `bothSlashSpellings` like every other exact rule.
+ */
+export const movedOfferRedirects: Redirect[] = MOVED_OFFER_PATHS.map(({ from, to }) => ({ from, to }));
 
 /**
  * The paginated news archive, one rule per page rather than a wildcard.
@@ -240,12 +258,12 @@ export const emptyTagRedirects: Redirect[] = emptyTagSlugs.map((slug) => ({
  * rather than through the `/blog/*` wildcard and a second hop.
  */
 const retiredPosts: Record<string, string> = {
-  'be-safe-from-coronavirus-work': '/services/disinfection-cleaning/',
-  'clean-and-disinfect-public-areas-during-covid-19': '/services/disinfection-cleaning/',
-  'coronavirus-bringing-more-urgency-cleaning': '/services/disinfection-cleaning/',
-  'the-return-of-employees-post-covid-19-is-your-office-ready': '/services/disinfection-cleaning/',
-  'covid-19-commercial-cleaning-expectations-examined': '/services/disinfection-cleaning/',
-  'benefits-of-regular-commercial-cleaning-services': '/services/commercial-cleaning/',
+  'be-safe-from-coronavirus-work': '/disinfection-cleaning/',
+  'clean-and-disinfect-public-areas-during-covid-19': '/disinfection-cleaning/',
+  'coronavirus-bringing-more-urgency-cleaning': '/disinfection-cleaning/',
+  'the-return-of-employees-post-covid-19-is-your-office-ready': '/disinfection-cleaning/',
+  'covid-19-commercial-cleaning-expectations-examined': '/disinfection-cleaning/',
+  'benefits-of-regular-commercial-cleaning-services': '/commercial-cleaning/',
   'key-office-areas-to-have-cleaned-and-disinfected': '/areas-in-your-office-where-germs-are-likely-hiding/',
   '5-tips-for-maintaining-clean-office-air': '/commercial-cleaning-air-quality/',
   'control-allergies-workplace-with-professional-janitorial-services': '/commercial-cleaning-air-quality/',
@@ -287,8 +305,8 @@ export const removedArchivePageRedirects: Redirect[] = [
  * goes to the page that now covers the topic.
  */
 export const retiredTagRedirects: Redirect[] = Object.entries({
-  coronavirus: '/services/disinfection-cleaning/',
-  'covid-19': '/services/disinfection-cleaning/',
+  coronavirus: '/disinfection-cleaning/',
+  'covid-19': '/disinfection-cleaning/',
   plants: '/commercial-cleaning-air-quality/',
 }).map(([slug, to]) => ({ from: `/tag/${slug}/`, to }));
 

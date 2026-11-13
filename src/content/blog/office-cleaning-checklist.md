@@ -95,7 +95,7 @@ These tasks are easy to lose, which is why they belong in a written scope with a
 <tr><th scope="row">Machine-scrub and burnish hard floors</th><td>Monthly to quarterly</td><td>Keeps the finish between full refinishing; busy entrances more often.</td></tr>
 <tr><th scope="row">Clean the inside of windows</th><td>Quarterly</td><td>Exterior glass is usually a separate trade or a building-wide contract.</td></tr>
 <tr><th scope="row">Carpet extraction (hot water)</th><td>Twice a year to annually</td><td>Entrances and corridors first; more often where there is winter salt.</td></tr>
-<tr><th scope="row">Strip and refinish hard floors</th><td>Annually, or as the floor needs it</td><td>Typically after the salt season. See <a href="/services/floor-stripping-waxing/">floor stripping and waxing</a>.</td></tr>
+<tr><th scope="row">Strip and refinish hard floors</th><td>Annually, or as the floor needs it</td><td>Typically after the salt season. See <a href="/floor-stripping-waxing/">floor stripping and waxing</a>.</td></tr>
 <tr><th scope="row">Deep clean of kitchen and washrooms</th><td>Quarterly</td><td>Grout, behind and under fixtures, inside the fridge and cabinets, tile walls.</td></tr>
 <tr><th scope="row">Wipe light switches, thermostats and door hardware throughout</th><td>Monthly</td><td>Beyond the daily touch points in busy areas.</td></tr>
 <tr><th scope="row">Replace or wash entrance mats</th><td>Seasonally</td><td>More often in winter.</td></tr>

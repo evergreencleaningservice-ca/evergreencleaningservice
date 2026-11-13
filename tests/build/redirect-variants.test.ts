@@ -33,9 +33,11 @@ import {
   bothSlashSpellings,
   specRedirects,
   legacyRedirects,
+  movedOfferRedirects,
   newsPageRedirects,
   wildcardRedirects,
 } from '../../src/data/redirects';
+import { INDUSTRY_SLUGS, SERVICE_SLUGS } from '../../src/data/offer-pages';
 
 const repo = path.resolve(import.meta.dirname, '../..');
 const out = path.join(repo, '.astro-test-dist-redirects');
@@ -88,9 +90,9 @@ afterAll(() => fs.rmSync(out, { recursive: true, force: true }));
 
 describe('bothSlashSpellings', () => {
   it('emits both spellings of a directory-style source', () => {
-    expect(bothSlashSpellings([{ from: '/office-cleaning/', to: '/services/office-cleaning/' }])).toEqual([
-      { from: '/office-cleaning/', to: '/services/office-cleaning/' },
-      { from: '/office-cleaning', to: '/services/office-cleaning/' },
+    expect(bothSlashSpellings([{ from: '/emergency-service/', to: '/emergency-cleaning/' }])).toEqual([
+      { from: '/emergency-service/', to: '/emergency-cleaning/' },
+      { from: '/emergency-service', to: '/emergency-cleaning/' },
     ]);
   });
 
@@ -153,16 +155,21 @@ describe('the emitted _redirects', () => {
     expect(missing).toEqual([]);
   });
 
-  it('covers 48 variants of the 24 directory-style rules, plus 2 file addresses', () => {
+  it('covers 38 variants of the 19 directory-style rules, plus 2 file addresses', () => {
     /**
      * THE ARITHMETIC, stated exactly, because the closeout is measured
      * against it and a round number that is slightly wrong is worse than an
      * awkward one that is right.
      *
-     * There are 26 exact-match rules. Twenty-four are directory-style and
-     * take both spellings — the 48 variants B4 is about. The other two,
+     * There were 26 exact-match rules. Twenty-four were directory-style and
+     * took both spellings — the 48 variants B4 is about. The other two,
      * `/sitemap.xml` and `/sitemap_index.xml`, are file addresses with one
      * legitimate spelling each. 48 + 2 = 50 emitted sources.
+     *
+     * The URL move of 13 Nov 2026 (owner decision) deleted five, whose
+     * sources are now the pages themselves: /office-cleaning/,
+     * /commercial-cleaning/, /industrial-cleaning/, /disinfection-cleaning/
+     * and /emergency-cleaning/. 21 rules, 19 directory-style, 38 + 2 = 40.
      *
      * The "24" in the original finding came from a measurement that filtered
      * on a trailing slash, so it counted the directory-style rules only. That
@@ -171,13 +178,13 @@ describe('the emitted _redirects', () => {
     const isFile = (from: string) =>
       /\.[a-z0-9]{2,5}$/i.test(from.replace(/\/$/, '').split('/').pop() ?? '');
 
-    expect(EXACT).toHaveLength(26);
-    expect(EXACT.filter((r) => !isFile(r.from))).toHaveLength(24);
+    expect(EXACT).toHaveLength(21);
+    expect(EXACT.filter((r) => !isFile(r.from))).toHaveLength(19);
     expect(EXACT.filter((r) => isFile(r.from)).map((r) => r.from)).toEqual([
       '/sitemap.xml',
       '/sitemap_index.xml',
     ]);
-    expect(bothSlashSpellings(EXACT)).toHaveLength(50);
+    expect(bothSlashSpellings(EXACT)).toHaveLength(40);
   });
 
   it('sends every variant to a 301, not a 302 or a meta refresh', () => {
@@ -213,5 +220,64 @@ describe('the emitted _redirects', () => {
 
   it('stays far below the edge rule limit', () => {
     expect(rules.length).toBeLessThan(2000);
+  });
+});
+
+/* --- the URL move of 13 Nov 2026 (owner decision) ------------------------- */
+
+describe('the service and industry pages moved to the root', () => {
+  const SLUGS = [
+    ...SERVICE_SLUGS.map((slug) => ({ slug, old: `/services/${slug}/` })),
+    ...INDUSTRY_SLUGS.map((slug) => ({ slug, old: `/industries/${slug}/` })),
+  ];
+  /** Every page the build wrote, as its canonical path. */
+  const builtPages = () => {
+    const found = new Set<string>();
+    const walk = (dir: string) => {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        if (!entry.isDirectory()) continue;
+        const full = path.join(dir, entry.name);
+        if (fs.existsSync(path.join(full, 'index.html'))) found.add(`/${path.relative(out, full).split(path.sep).join('/')}/`);
+        walk(full);
+      }
+    };
+    walk(out);
+    return found;
+  };
+
+  it('has all 13', () => {
+    expect(SLUGS).toHaveLength(13);
+    expect(movedOfferRedirects).toHaveLength(13);
+  });
+
+  it.each(SLUGS)('301s $old, in both spellings, to /$slug/ in one hop', ({ slug, old }) => {
+    for (const from of [old, old.replace(/\/$/, '')]) {
+      expect(byFrom.get(from), from).toEqual({ from, to: `/${slug}/`, code: '301' });
+    }
+    expect(byFrom.has(`/${slug}/`), `/${slug}/ must not itself redirect`).toBe(false);
+    expect(builtPages().has(`/${slug}/`), `/${slug}/ was not built`).toBe(true);
+    expect(builtPages().has(old), `${old} is still built`).toBe(false);
+  });
+
+  it('sends every rule that used to end on an old address straight to the new one', () => {
+    const stale = rules.filter((r) => /^\/(services|industries)\/[^/]+\/$/.test(r.to));
+    expect(stale.map((r) => `${r.from} -> ${r.to}`)).toEqual([]);
+  });
+
+  it('has no rule whose source is a built root-level page', () => {
+    /* The asset router reads _redirects before it looks for a file, so such
+       a rule would shadow the page. The root is where the move put the 13
+       pages, beside the posts and the other pages. (Deeper down, three
+       /tag/<tag>/page/N/ rules shadow archive pages that came back: a
+       separate fix, not this move's.) */
+    const pages = [...builtPages()].filter((p) => p.split('/').length === 3);
+    expect(pages.length).toBeGreaterThan(40);
+    const shadowing = rules.filter((r) => pages.includes(r.from));
+    expect(shadowing.map((r) => `${r.from} -> ${r.to}`)).toEqual([]);
+  });
+
+  it('has no rule whose target is itself redirected', () => {
+    const chained = rules.filter((r) => !r.from.includes('*') && byFrom.has(r.to));
+    expect(chained.map((r) => `${r.from} -> ${r.to} -> ${byFrom.get(r.to)!.to}`)).toEqual([]);
   });
 });

@@ -97,7 +97,7 @@ describe('paid visits load the container at parse time', () => {
   });
 
   it.each(['_gcl_aw', '_gcl_gb', '_gcl_ag'])('a %s cookie on a later page of the visit', (name) => {
-    const r = run(`${PROD}/services/office-cleaning/`, { cookie: `${name}=GCL.1762500000.abc123` });
+    const r = run(`${PROD}/office-cleaning/`, { cookie: `${name}=GCL.1762500000.abc123` });
     expect(r.gtmScripts()).toBe(1);
   });
 

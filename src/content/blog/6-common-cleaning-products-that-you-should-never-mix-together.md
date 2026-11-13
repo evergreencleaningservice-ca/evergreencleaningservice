@@ -62,4 +62,4 @@ _**Stay safe when you’re cleaning or stay super safe and leave the cleaning to
 
 #### [CONTACT US](/contact-us/) today for all of your cleaning needs!
 
-If you would rather not handle the chemicals at all, Evergreen's [disinfection cleaning](/services/disinfection-cleaning/) crews clean your workplace's touch points first, then disinfect them, and never mix products.
+If you would rather not handle the chemicals at all, Evergreen's [disinfection cleaning](/disinfection-cleaning/) crews clean your workplace's touch points first, then disinfect them, and never mix products.

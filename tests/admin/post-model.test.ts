@@ -56,7 +56,7 @@ describe('what a job becomes', () => {
     const r = render(job({ green: true, afterHours: true, notes: 'The team loved it.' }));
     const heads = r.blocks.filter((b) => b.t === 'h2').map((b) => (b as { text: string }).text);
     expect(heads).toEqual(['The facility', 'The cleaning', 'The result', 'Need a cleaning team for your dental office?']);
-    expect(r.body).toContain('[office cleaning](/services/office-cleaning/)');
+    expect(r.body).toContain('[office cleaning](/office-cleaning/)');
     expect(r.body).toContain('[Mississauga](/locations/mississauga/)');
     expect(r.body).toContain('[Green Clean products](/green-clean-products/)');
     expect(r.body).toContain('after hours');
