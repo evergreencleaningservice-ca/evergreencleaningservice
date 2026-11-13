@@ -1,0 +1,73 @@
+---
+/**
+ * /team/ — the people behind the company (13 Nov 2026, comparison with
+ * impact.ca). Built ONLY when src/data/people.ts names at least one person,
+ * as /projects/ is built only when a case study is published: until then
+ * there is no page, no link to it and nothing in the sitemap, rather than an
+ * empty page. Gate and model: src/lib/team.ts.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { teamModel, type TeamModel } from '../../lib/team';
+import { site } from '../../data/site';
+import { pageTitle } from '../../lib/title';
+
+export async function getStaticPaths() {
+  const team = teamModel();
+  return team ? [{ params: { index: undefined }, props: { team } }] : [];
+}
+
+const { team } = Astro.props as { team: TeamModel };
+---
+
+<BaseLayout
+  title={pageTitle('Our Office Cleaning Team in Toronto')}
+  description={`The people at ${site.name}, the Toronto commercial cleaning company, and what each of them does.`}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(team.schema)} is:inline />
+  <div class="container section-padding">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">{site.name}</a> &gt; <span aria-current="page">Our team</span>
+    </nav>
+    <h1>Our team</h1>
+    <ul class="team">
+      {team.members.map((m) => (
+        <li class="team-member" id={m.id}>
+          {m.image && <img src={m.image} alt={m.imageAlt} width="240" height="240" loading="lazy" decoding="async" />}
+          <h2>{m.name}</h2>
+          <p class="team-role">{m.jobTitle}</p>
+          {m.description && <p>{m.description}</p>}
+          {m.credentials.length > 0 && (
+            <ul class="team-credentials" aria-label={`${m.name}'s credentials`}>
+              {m.credentials.map((c) => (
+                <li>
+                  {c.url ? <a href={c.url}>{c.name}</a> : c.name}
+                  {c.recognizedBy && <>, {c.recognizedBy.name}</>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .team {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  }
+  .team-member img {
+    display: block;
+    width: 100%;
+    max-width: 15rem;
+    height: auto;
+    border-radius: 0.5rem;
+  }
+  .team-role {
+    font-weight: 600;
+  }
+</style>

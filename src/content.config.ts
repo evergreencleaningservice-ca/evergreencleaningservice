@@ -17,9 +17,12 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
-    /** A shorter headline for the <title> only, when `title` would push the
-        brand suffix past 60 characters. Both layouts honour it and pass it
-        through pageTitle(). */
+    /** A different headline for the <title> only, when `title` would push the
+        brand suffix past 60 characters, or (13 Nov 2026, comparison with
+        impact.ca) when the H1 is phrased for readers (a question, a hook, a
+        series line) and people search other words. Then it leads with the
+        query. Both layouts honour it and pass it through pageTitle(); the H1,
+        breadcrumb and schema headline keep `title`. */
     seoTitle: z.string().optional(),
     /** The id of a person in src/data/people.ts who wrote the post (13 Nov
         2026). Omitted, the company is the author. An id that is not in that
@@ -60,6 +63,16 @@ const pages = defineCollection({
     description: z.string().optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
+    /** The <title> text, when `title` (which is also the H1 and the
+        breadcrumb) is too generic to say what the page is about in a result
+        (13 Nov 2026, comparison with impact.ca). Written without the brand:
+        pageTitle() adds " | Evergreen" when it fits. As the blog's seoTitle. */
+    seoTitle: z.string().optional(),
+    /** When the page was last materially revised, shown as "Last updated"
+        and used as the sitemap lastmod (src/lib/sitemap-lastmod.mjs), so the
+        two agree (13 Nov 2026, comparison with impact.ca). Omitted, nothing
+        is shown and the lastmod is the content file's last commit. */
+    updatedDate: z.coerce.date().optional(),
     /** A captioned photo grid, rendered by the page after its body. Only
         /cleaning-demo-gallery/ carries one. */
     photos: z

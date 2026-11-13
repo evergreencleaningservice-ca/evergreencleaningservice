@@ -246,3 +246,43 @@ describe('44px tap targets on touch screens (visual N2)', () => {
     });
   }
 });
+
+/* --- gated pages and the quotable About page (13 Nov 2026) ----------------- */
+
+/* Comparison with impact.ca: /team/ and the About timeline wait for real
+   data (src/lib/team.ts, src/data/history.ts; tests/team-history.test.ts
+   proves both gates with fixtures). This checks the built site, as shipped. */
+describe('the team page and timeline stay unbuilt until there is data', () => {
+  it('builds no /team/, links to it from nowhere and leaves it out of the sitemap', () => {
+    expect(files.filter((f) => f.startsWith('team/'))).toEqual([]);
+    expect(pages.filter((f) => /href="\/team\//.test(read(f)))).toEqual([]);
+    const sitemaps = files.filter((f) => /^sitemap.*\.xml$/.test(f)).map(read).join('\n');
+    expect(sitemaps).toContain('/about-us/');
+    expect(sitemaps).not.toContain('/team/');
+    expect(read('llms.txt')).not.toContain('/team/');
+  });
+
+  it('draws no timeline on /about-us/ with one milestone', () => {
+    expect(read('about-us/index.html')).not.toContain('about-timeline');
+  });
+});
+
+describe('/about-us/ is dated and asks the questions it answers', () => {
+  const html = () => read('about-us/index.html');
+
+  it('shows "Last updated", and the sitemap gives the same date', () => {
+    expect(html()).toMatch(/Last updated <time datetime="2026-11-13"[^>]*>November 13, 2026<\/time>/);
+    const lastmod = read('sitemap-pages-0.xml').match(/<loc>[^<]*\/about-us\/<\/loc><lastmod>([^<]+)<\/lastmod>/)?.[1];
+    expect(lastmod?.slice(0, 10)).toBe('2026-11-13');
+  });
+
+  it('prints no "Last updated" on a page that sets no date', () => {
+    expect(read('contact-us/index.html')).not.toContain('Last updated');
+  });
+
+  it('keeps its facts block and its H1', () => {
+    expect(html()).toMatch(/<h2[^>]*>Evergreen Office Cleaning at a glance<\/h2>/);
+    expect(html()).toMatch(/<h1 class="entry-title"[^>]*>About Us<\/h1>/);
+    expect(html()).toMatch(/<h2[^>]*>Is Evergreen insured and bonded\?<\/h2>/);
+  });
+});

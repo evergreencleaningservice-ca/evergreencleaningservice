@@ -1,5 +1,9 @@
 ---
 title: "Ask the Office Cleaners: Cleaning Break Rooms"
+# 13 Nov 2026 (comparison with impact.ca): blog title/H1 split. The H1 is
+# reader-phrased and stays; the <title> leads with the search query instead:
+# people search "office break room cleaning"; "Ask the Office Cleaners" is a series line, not a query.
+seoTitle: "Office Break Room Cleaning: Furniture and Carpet"
 description: "How office cleaners clean a break room: the sofa and upholstery, wooden benches, chairs and tables, and the carpet that takes the spills."
 pubDate: 2023-03-31
 image: "/images/blog-break-room-cleaning-feature.jpg"

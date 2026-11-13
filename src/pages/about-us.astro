@@ -1,6 +1,8 @@
 ---
 import { getEntry, render } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
+import { timeline } from '../data/history';
+import { teamUrl } from '../lib/team';
 
 const entry = await getEntry('pages', 'about-us');
 if (!entry) throw new Error('Missing content entry: pages/about-us');
@@ -8,14 +10,42 @@ if (!entry) throw new Error('Missing content entry: pages/about-us');
 // `render()` is what fills `entry.rendered`; the layout takes the HTML so it
 // can fix the WordPress-era links and lazy-load the images.
 const { Content } = await render(entry);
+
+/* Both gated on real data (13 Nov 2026, comparison with impact.ca). The
+   timeline needs three dated, sourced milestones in src/data/history.ts;
+   with today's one (1989) it is not drawn. The team link appears with the
+   team page, i.e. once src/data/people.ts names someone (src/lib/team.ts). */
+const milestones = timeline();
+const team = teamUrl();
+const monthName = (m: number) =>
+  new Date(Date.UTC(2000, m - 1, 1)).toLocaleDateString('en-CA', { month: 'long', timeZone: 'UTC' });
 ---
 
 <PageLayout
   title={entry.data.title}
+  seoTitle={entry.data.seoTitle}
+  updatedDate={entry.data.updatedDate}
   description={entry.data.description}
   image={entry.data.image}
   imageAlt={entry.data.imageAlt}
   contentHtml={entry.rendered?.html}
 >
   {!entry.rendered?.html && <Content />}
+  {milestones.length > 0 && (
+    <section class="about-timeline" aria-labelledby="about-timeline-title">
+      <h2 id="about-timeline-title">Evergreen's history, year by year</h2>
+      <ol>
+        {milestones.map((m) => (
+          <li>
+            <strong>{m.month ? `${monthName(m.month)} ${m.year}` : m.year}:</strong> {m.text}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+  {team && (
+    <p class="about-team">
+      <a href={team}>Meet the team</a> behind Evergreen Office Cleaning.
+    </p>
+  )}
 </PageLayout>

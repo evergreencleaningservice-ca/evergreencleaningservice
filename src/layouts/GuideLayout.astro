@@ -9,6 +9,7 @@ import { responsiveSet } from '../lib/responsive-images.mjs';
 import { intrinsic, thumbSet } from '../lib/thumb';
 import { site } from '../data/site';
 import { resolveAuthor } from '../data/people';
+import { personPageUrl } from '../lib/team';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -20,6 +21,10 @@ const { title, seoTitle, description, pubDate, updatedDate, image, imageAlt, gui
 /* A named author, when the post's front matter sets one (13 Nov 2026); else
    the company, as before. The byline and the schema use the same person. */
 const author = resolveAuthor(post.data.author);
+/* The author's name links to their entry on /team/ (13 Nov 2026, comparison
+   with impact.ca). A named author is always on that page, since both come
+   from src/data/people.ts. */
+const authorUrl = author ? personPageUrl(author) : undefined;
 if (!guide) throw new Error(`GuideLayout requires guide metadata: ${post.id}`);
 const readingMinutes = Math.max(1, Math.ceil((post.body ?? '').replace(/<[^>]*>/g, ' ').split(/\s+/).length / 220));
 const longDate = pubDate.toLocaleDateString('en-CA', {
@@ -67,7 +72,7 @@ const relatedSizes = '(min-width: 912px) 428px, (min-width: 561px) calc(50vw - 2
           <h1 id="guide-title">{title}</h1>
           <p class="guide-meta">Published <time datetime={pubDate.toISOString().slice(0, 10)}>{longDate}</time>
             <span aria-hidden="true"> · </span> {readingMinutes} min read
-            <span aria-hidden="true"> · </span> By {author ? `${author.name}, ${author.jobTitle}` : site.name}</p>
+            <span aria-hidden="true"> · </span> By {author ? <>{authorUrl ? <a href={authorUrl}>{author.name}</a> : author.name}, {author.jobTitle}</> : site.name}</p>
           <p class="guide-intro">{guide.intro}</p>
         </header>
         {image && <figure class="guide-featured">

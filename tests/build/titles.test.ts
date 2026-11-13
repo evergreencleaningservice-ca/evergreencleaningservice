@@ -34,7 +34,45 @@ interface Page {
   url: string;
   title: string;
   indexable: boolean;
+  /** The page's first <h1>, tags stripped and decoded. */
+  h1: string;
+  /** The BlogPosting headline, on posts. */
+  headline?: string;
 }
+
+/** A blog post's front matter as the title rule sees it. */
+interface Post {
+  slug: string;
+  title: string;
+  seoTitle?: string;
+}
+const blogDir = path.join(root, 'src/content/blog');
+/* Every title and seoTitle is a double-quoted YAML string, which JSON reads the same way. */
+const posts: Post[] = fs
+  .readdirSync(blogDir)
+  .filter((f) => f.endsWith('.md'))
+  .map((f) => {
+    const fm = fs.readFileSync(path.join(blogDir, f), 'utf8').match(/^---\n([\s\S]*?)\n---/)![1];
+    const field = (name: string) => {
+      const raw = fm.match(new RegExp(`^${name}:\\s*(".*")\\s*$`, 'm'))?.[1];
+      return raw === undefined ? undefined : (JSON.parse(raw) as string);
+    };
+    return { slug: f.replace(/\.md$/, ''), title: field('title')!, seoTitle: field('seoTitle') };
+  });
+
+/**
+ * The 13 Nov 2026 title/H1 split (comparison with impact.ca): posts whose H1 is
+ * phrased for readers while people search other words. Pinned so a later pass
+ * changes them on purpose. The reasons are in
+ * evergreencleaningservice.ca-audit/reaudit-2026-11-11/titles-before-after.md.
+ */
+const SPLIT_13_NOV: Record<string, string> = {
+  '/5-cleaning-tips-to-help-make-your-office-relocation-seamless/': 'Office Move-Out Cleaning: 5 Tips for Relocating | Evergreen',
+  '/day-night-which-is-the-best-routine-for-your-office/': 'Day vs Night Office Cleaning: Benefits of Each | Evergreen',
+  '/keep-your-office-at-home-clean/': 'Home Office Cleaning: 3 Simple Tips | Evergreen',
+  '/how-to-decide-on-a-cleaning-company/': 'How to Choose a Commercial Cleaning Company | Evergreen',
+  '/ask-the-office-cleaners-cleaning-break-rooms/': 'Office Break Room Cleaning: Furniture and Carpet | Evergreen',
+};
 let pages: Page[] = [];
 
 function walk(dir: string): string[] {
@@ -57,7 +95,24 @@ beforeAll(() => {
       const html = fs.readFileSync(file, 'utf8');
       const url = '/' + path.relative(out, file).split(path.sep).join('/').replace(/index\.html$/, '');
       const robots = html.match(/<meta name="robots" content="([^"]*)"/)?.[1] ?? '';
-      return { url, title: decode(html.match(/<title>([^<]*)<\/title>/)?.[1] ?? ''), indexable: !/noindex/.test(robots) };
+      const h1 = decode((html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? '').replace(/<[^>]+>/g, '')).trim();
+      const headline = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+        .flatMap((m) => {
+          try {
+            const data = JSON.parse(m[1]);
+            return Array.isArray(data) ? data : data['@graph'] ?? [data];
+          } catch {
+            return [];
+          }
+        })
+        .find((node) => node?.['@type'] === 'BlogPosting')?.headline as string | undefined;
+      return {
+        url,
+        title: decode(html.match(/<title>([^<]*)<\/title>/)?.[1] ?? ''),
+        indexable: !/noindex/.test(robots),
+        h1,
+        headline,
+      };
     });
 }, 180_000);
 
@@ -118,11 +173,80 @@ describe('every built page title', () => {
     expect(problems).toEqual([]);
   });
 
+  it('names the service and Toronto on the four utility pages, and keeps their H1s', () => {
+    /* 13 Nov 2026 (comparison with impact.ca): "About Us | Evergreen" and
+       its three siblings said nothing a searcher looks for. Each now has a
+       seoTitle in src/content/pages; the visible H1 is unchanged. */
+    const expected: Record<string, [title: string, h1: string]> = {
+      '/about-us/': ['About Us: Office Cleaners in Toronto Since 1989 | Evergreen', 'About Us'],
+      '/contact-us/': ['Contact Us: Office Cleaning in Toronto | Evergreen', 'Contact Us'],
+      '/reviews/': ['Commercial Cleaning Reviews: Toronto & the GTA | Evergreen', 'Client Reviews'],
+      '/green-clean-products/': ['Green Office Cleaning Products We Use in Toronto | Evergreen', 'Green Clean Products'],
+    };
+    for (const [url, [title, h1]] of Object.entries(expected)) {
+      expect(pages.find((p) => p.url === url)?.title, url).toBe(title);
+      const html = fs.readFileSync(path.join(out, url, 'index.html'), 'utf8');
+      expect(decode(html.match(/<h1[^>]*>([^<]*)<\/h1>/)?.[1] ?? ''), url).toBe(h1);
+    }
+  });
+
+  it('gives no two indexable pages the same title', () => {
+    const seen = new Map<string, string[]>();
+    for (const { url, title, indexable } of pages) if (indexable) seen.set(title, [...(seen.get(title) ?? []), url]);
+    expect([...seen].filter(([, urls]) => urls.length > 1)).toEqual([]);
+  });
+
   it('brands the location pages where the rule fits, never shortening a place name', () => {
     const locations = pages.filter((p) => /^\/locations\/[^/]+\/$/.test(p.url));
     expect(locations.length).toBe(11);
     for (const { url, title } of locations) expect(title, url).toMatch(/^Office & Commercial Cleaning in /);
     const unbranded = locations.filter((p) => !p.title.endsWith(TITLE_SUFFIX)).map((p) => p.url).sort();
     expect(unbranded).toEqual(['/locations/durham-region/', '/locations/vaughan/']);
+  });
+});
+
+/*
+ * 13 Nov 2026 (comparison with impact.ca): a post's <title> may lead with the
+ * search query while its H1 stays phrased for readers. That split is made only
+ * through seoTitle, so a post without one shows its H1 as its title, and the
+ * H1 and the BlogPosting headline never move with the <title>.
+ */
+describe('blog post titles and H1s', () => {
+  const page = (slug: string) => pages.find((p) => p.url === `/${slug}/`);
+
+  it('finds every post in the build', () => {
+    expect(posts.length).toBeGreaterThan(20);
+    expect(posts.filter((p) => !page(p.slug)).map((p) => p.slug)).toEqual([]);
+  });
+
+  it('differ only where a seoTitle is set; the H1 and schema headline stay the post title', () => {
+    const problems: string[] = [];
+    for (const post of posts) {
+      const built = page(post.slug);
+      if (!built) continue;
+      if (built.h1 !== post.title) problems.push(`${post.slug}: H1 "${built.h1}" is not the title "${post.title}"`);
+      if (built.headline !== post.title) problems.push(`${post.slug}: headline "${built.headline}" is not the title`);
+      const expected = pageTitle(post.seoTitle ?? post.title);
+      if (built.title !== expected) problems.push(`${post.slug}: <title> "${built.title}", expected "${expected}"`);
+      if (post.seoTitle && built.title === pageTitle(post.title) && post.seoTitle !== post.title) {
+        problems.push(`${post.slug}: seoTitle set but the <title> is the H1's`);
+      }
+    }
+    expect(problems).toEqual([]);
+  });
+
+  it('keeps the 13 Nov split titles as written', () => {
+    for (const [url, title] of Object.entries(SPLIT_13_NOV)) {
+      expect(pages.find((p) => p.url === url)?.title, url).toBe(title);
+    }
+  });
+});
+
+describe('titles across the site', () => {
+  it('are unique: no two built pages share a <title>', () => {
+    const seen = new Map<string, string[]>();
+    for (const { url, title } of pages) seen.set(title, [...(seen.get(title) ?? []), url]);
+    const dupes = [...seen].filter(([, urls]) => urls.length > 1).map(([title, urls]) => `${title}: ${urls.join(', ')}`);
+    expect(dupes).toEqual([]);
   });
 });

@@ -1,5 +1,7 @@
 ---
 title: "Contact Us"
+# The <title> only; the H1 stays "Contact Us" (13 Nov 2026, comparison with impact.ca).
+seoTitle: "Contact Us: Office Cleaning in Toronto"
 description: "Contact Evergreen Office Cleaning in Toronto: (416) 803-4880, info@evergreencleaningservice.ca, 243 Queen St W. We reply within 2 hours, Mon–Fri 7am–6pm."
 ---
 

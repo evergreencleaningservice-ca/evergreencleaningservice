@@ -25,9 +25,18 @@ interface Props {
    * below the copy that came from the archive.
    */
   contentHtml?: string;
+  /** The <title> text when it should say more than the H1 (the pages
+      collection's `seoTitle`, 13 Nov 2026). The H1 and breadcrumb keep
+      `title`. */
+  seoTitle?: string;
+  /** Shown as "Last updated" above the copy, only when set (13 Nov 2026,
+      comparison with impact.ca: a dated page is easier to quote). */
+  updatedDate?: Date;
 }
 
-const { title, description, image, imageAlt, contentHtml, sidebar = true } = Astro.props;
+const { title, description, image, imageAlt, contentHtml, seoTitle, updatedDate, sidebar = true } = Astro.props;
+const longDate = (d: Date) =>
+  d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 
 /**
  * The page bodies are Markdown generated from the archived WordPress HTML, so
@@ -65,7 +74,7 @@ const body = contentHtml ? normalizeShared(normalizeBody(contentHtml)) : null;
 ---
 
 <BaseLayout
-  title={pageTitle(`${title}`)}
+  title={pageTitle(seoTitle ?? title)}
   description={description || undefined}
   image={image}
   imageAlt={imageAlt}
@@ -92,6 +101,11 @@ const body = contentHtml ? normalizeShared(normalizeBody(contentHtml)) : null;
       {/* The copy below the first screen fades in a block at a time as it is
           reached (lib/reveal.ts, "flow"); a form the page adds is one block. */}
       <article class="entry-content" data-reveal="flow">
+        {updatedDate && (
+          <p class="page-updated">
+            Last updated <time datetime={updatedDate.toISOString().slice(0, 10)}>{longDate(updatedDate)}</time>
+          </p>
+        )}
         {body && <Fragment set:html={body} />}
         <slot />
       </article>
@@ -101,7 +115,10 @@ const body = contentHtml ? normalizeShared(normalizeBody(contentHtml)) : null;
 </BaseLayout>
 
 <style>
-
+  .page-updated {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+  }
 
   .breadcrumbs a:focus-visible {
     outline: 2px solid var(--brand);

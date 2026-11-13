@@ -1,5 +1,9 @@
 ---
 title: "Day Or Night – Which Is the Best Routine For Your Office?"
+# 13 Nov 2026 (comparison with impact.ca): blog title/H1 split. The H1 is
+# reader-phrased and stays; the <title> leads with the search query instead:
+# people search "day vs night office cleaning"; the H1 asks it as a question.
+seoTitle: "Day vs Night Office Cleaning: Benefits of Each"
 description: "Day or night office cleaning? The benefits of each, from faster response during the day to fewer disruptions after hours, to help you choose."
 pubDate: 2021-05-31
 updatedDate: 2026-11-07

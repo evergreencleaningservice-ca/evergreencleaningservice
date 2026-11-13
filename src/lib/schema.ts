@@ -98,13 +98,18 @@ const credentialNode = (c: Credential) => ({
 
 /**
  * A person from src/data/people.ts (13 Nov 2026, comparison with impact.ca,
- * item 2). The same node, with the same `@id`, is used on the organisation
- * and as a post's author, so the two are one entity. Only fields the client
- * supplied are emitted.
+ * item 2). The same node, with the same `@id`, is used on the organisation,
+ * as a post's author and on /team/, so the three are one entity. Only fields
+ * the client supplied are emitted.
+ *
+ * The `@id` lives under /team/ since 13 Nov 2026 (comparison with impact.ca):
+ * the team page is where a person is described, so it is their home. It was
+ * /about-us/#person-<id> before; nobody was published, so nothing pointed at
+ * the old one.
  */
 export const personNode = (p: Person) => ({
   '@type': 'Person',
-  '@id': `${site.url}/about-us/#person-${p.id}`,
+  '@id': `${site.url}/team/#person-${p.id}`,
   name: p.name,
   jobTitle: p.jobTitle,
   worksFor: { '@id': ORG_ID },

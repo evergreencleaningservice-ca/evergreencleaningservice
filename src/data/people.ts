@@ -67,6 +67,18 @@ export const credentials: readonly Credential[] = [];
 
 export const memberships: readonly Membership[] = [];
 
+/**
+ * When the team page's content last changed: its sitemap <lastmod>
+ * (src/lib/sitemap-lastmod.mjs), as a location's `updated` field dates a
+ * location page. 13 Nov 2026 (comparison with impact.ca).
+ *
+ * THE RULE. Set it to the date and time of the edit (ISO 8601, UTC) whenever
+ * an edit adds, removes or changes a person in `people`. Leave it undefined
+ * while `people` is empty: there is no /team/ page to date.
+ * tests/team-history.test.ts fails if people has entries and this is unset.
+ */
+export const TEAM_UPDATED: string | undefined = undefined;
+
 export const personById = (id: string, list: readonly Person[] = people): Person | undefined =>
   list.find((p) => p.id === id);
 
