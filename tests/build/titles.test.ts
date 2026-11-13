@@ -118,6 +118,29 @@ describe('every built page title', () => {
     expect(problems).toEqual([]);
   });
 
+  it('names the service and Toronto on the four utility pages, and keeps their H1s', () => {
+    /* 13 Nov 2026 (comparison with impact.ca): "About Us | Evergreen" and
+       its three siblings said nothing a searcher looks for. Each now has a
+       seoTitle in src/content/pages; the visible H1 is unchanged. */
+    const expected: Record<string, [title: string, h1: string]> = {
+      '/about-us/': ['About Us: Office Cleaners in Toronto Since 1989 | Evergreen', 'About Us'],
+      '/contact-us/': ['Contact Us: Office Cleaning in Toronto | Evergreen', 'Contact Us'],
+      '/reviews/': ['Commercial Cleaning Reviews: Toronto & the GTA | Evergreen', 'Client Reviews'],
+      '/green-clean-products/': ['Green Office Cleaning Products We Use in Toronto | Evergreen', 'Green Clean Products'],
+    };
+    for (const [url, [title, h1]] of Object.entries(expected)) {
+      expect(pages.find((p) => p.url === url)?.title, url).toBe(title);
+      const html = fs.readFileSync(path.join(out, url, 'index.html'), 'utf8');
+      expect(decode(html.match(/<h1[^>]*>([^<]*)<\/h1>/)?.[1] ?? ''), url).toBe(h1);
+    }
+  });
+
+  it('gives no two indexable pages the same title', () => {
+    const seen = new Map<string, string[]>();
+    for (const { url, title, indexable } of pages) if (indexable) seen.set(title, [...(seen.get(title) ?? []), url]);
+    expect([...seen].filter(([, urls]) => urls.length > 1)).toEqual([]);
+  });
+
   it('brands the location pages where the rule fits, never shortening a place name', () => {
     const locations = pages.filter((p) => /^\/locations\/[^/]+\/$/.test(p.url));
     expect(locations.length).toBe(11);

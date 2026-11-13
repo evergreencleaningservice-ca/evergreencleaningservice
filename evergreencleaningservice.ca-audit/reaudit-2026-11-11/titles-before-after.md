@@ -104,3 +104,26 @@ titles live in `src/data/landing-pages.ts`, outside this change.
 | /tag/schools/ | schools Archives - Evergreen Office Cleaning (44) | schools Archives \| Evergreen (28) |
 | /tag/winter/ | winter Archives - Evergreen Office Cleaning (43) | winter Archives \| Evergreen (27) |
 | /thank-you/ | Thank You \| Evergreen Office Cleaning (37) | Thank You \| Evergreen (21) |
+
+## 13 Nov 2026: the four utility pages name the service and Toronto
+
+Source: the comparison with impact.ca
+(`evergreencleaningservice.ca-audit/comparison-impact-2026-11-13/COMPARISON-REPORT.md`).
+After the one-suffix rule, four indexable pages still had titles that said
+nothing a searcher types: "About Us | Evergreen" and its siblings. The pages
+collection now has an optional `seoTitle` (as the blog and offer collections
+do), used for the `<title>` only and passed through `pageTitle()`. The H1,
+the breadcrumb and the page copy are unchanged. Each title says only what the
+site already states: founded in Toronto in 1989 (`site.since`), commercial and
+office cleaning, clients across Toronto and the GTA, and the ProSeries Green
+line used on its contracts. All four fit the brand within 60 characters.
+
+| URL | Before | After | H1 (unchanged) |
+|---|---|---|---|
+| /about-us/ | About Us \| Evergreen (20) | About Us: Office Cleaners in Toronto Since 1989 \| Evergreen (59) | About Us |
+| /contact-us/ | Contact Us \| Evergreen (22) | Contact Us: Office Cleaning in Toronto \| Evergreen (50) | Contact Us |
+| /reviews/ | Client Reviews \| Evergreen (26) | Commercial Cleaning Reviews: Toronto & the GTA \| Evergreen (58) | Client Reviews |
+| /green-clean-products/ | Green Clean Products \| Evergreen (32) | Green Office Cleaning Products We Use in Toronto \| Evergreen (60) | Green Clean Products |
+
+`tests/build/titles.test.ts` pins these four titles and their H1s, and now
+also fails if any two indexable pages share a title.

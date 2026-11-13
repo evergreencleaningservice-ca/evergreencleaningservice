@@ -77,7 +77,7 @@ describe('with people supplied (fictional fixture)', () => {
   it('each person works for the organisation and has a stable @id', () => {
     expect(org.founder[0]).toMatchObject({
       '@type': 'Person',
-      '@id': `${site.url}/about-us/#person-test-founder`,
+      '@id': `${site.url}/team/#person-test-founder`,
       jobTitle: 'Founder',
       worksFor: { '@id': `${site.url}/#organization` },
       sameAs: ['https://example.com/test-founder'],

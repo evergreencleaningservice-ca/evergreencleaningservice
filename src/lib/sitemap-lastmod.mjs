@@ -15,6 +15,8 @@
  *   a section hub    its own date in src/data/hub-dates.ts, or the newest
  *                    of that and its members' dates where it shows their
  *                    content (/services/, /locations/; the rule is there)
+ *   a standalone     its `updatedDate` in src/content/pages, when set, so
+ *   page             the sitemap agrees with its visible "Last updated"
  *   everything else  the last commit touching the page's own files: its
  *                    content file, or its page file where the page is
  *                    written there (`SOURCES` below)
@@ -107,6 +109,27 @@ const postDates = new Map(
 const newestPost = [...postDates.values()].filter(Boolean).sort().at(-1);
 
 /**
+ * A standalone page's `updatedDate`, keyed by slug (13 Nov 2026, comparison
+ * with impact.ca). /about-us/ now prints "Last updated"; the lastmod reads
+ * the same field so the two cannot disagree, as a post's updatedDate does.
+ * A page without the field keeps its last commit.
+ */
+const PAGES = path.join(ROOT, 'src/content/pages');
+const pageDates = new Map(
+  fs
+    .readdirSync(PAGES)
+    .filter((f) => f.endsWith('.md'))
+    .flatMap((f) => {
+      const front = fs.readFileSync(path.join(PAGES, f), 'utf8').split('\n---')[0];
+      const m = front.match(/^updatedDate:\s*['"]?([\d-]+(?:T[\d:.]+Z?)?)/m);
+      if (!m) return [];
+      const ms = Date.parse(m[1]);
+      if (Number.isNaN(ms)) throw new Error(`src/content/pages/${f}: updatedDate '${m[1]}' is not a date`);
+      return [[f.replace(/\.md$/, ''), new Date(ms).toISOString()]];
+    }),
+);
+
+/**
  * Each location's `updated` field, keyed by slug. A value that is not a date
  * stops the build: a typo here would otherwise drop or garble the page's date
  * without anyone seeing it.
@@ -192,6 +215,7 @@ export function lastmodFor(/** @type {string} */ url) {
   if (hubDates.has(p)) {
     return newest([hubDates.get(p), ...HUB_MEMBERS(p).map((m) => lastmodFor(new URL(m, url).href))]);
   }
+  if (pageDates.has(slug)) return pageDates.get(slug);
   return lastCommit(SOURCES(p));
 }
 

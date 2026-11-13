@@ -1,5 +1,7 @@
 ---
 title: "Client Reviews"
+# The <title> only; the H1 stays "Client Reviews" (13 Nov 2026, comparison with impact.ca).
+seoTitle: "Commercial Cleaning Reviews: Toronto & the GTA"
 description: "Google reviews of Evergreen Office Cleaning from offices, property managers and businesses across Toronto and the GTA, each with its date."
 ---
 

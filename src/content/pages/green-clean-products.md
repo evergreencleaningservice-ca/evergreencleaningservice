@@ -1,5 +1,7 @@
 ---
 title: "Green Clean Products"
+# The <title> only; the H1 stays "Green Clean Products" (13 Nov 2026, comparison with impact.ca).
+seoTitle: "Green Office Cleaning Products We Use in Toronto"
 description: "Evergreen uses an approved line of professional green cleaning products that meet or exceed industry standards. Here is what we use and why."
 ---
 

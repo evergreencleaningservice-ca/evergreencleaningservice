@@ -60,6 +60,16 @@ const pages = defineCollection({
     description: z.string().optional(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
+    /** The <title> text, when `title` (which is also the H1 and the
+        breadcrumb) is too generic to say what the page is about in a result
+        (13 Nov 2026, comparison with impact.ca). Written without the brand:
+        pageTitle() adds " | Evergreen" when it fits. As the blog's seoTitle. */
+    seoTitle: z.string().optional(),
+    /** When the page was last materially revised, shown as "Last updated"
+        and used as the sitemap lastmod (src/lib/sitemap-lastmod.mjs), so the
+        two agree (13 Nov 2026, comparison with impact.ca). Omitted, nothing
+        is shown and the lastmod is the content file's last commit. */
+    updatedDate: z.coerce.date().optional(),
     /** A captioned photo grid, rendered by the page after its body. Only
         /cleaning-demo-gallery/ carries one. */
     photos: z

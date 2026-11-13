@@ -1,5 +1,8 @@
 ---
 title: "About Us"
+# The <title> only; the H1 stays "About Us" (13 Nov 2026, comparison with impact.ca).
+seoTitle: "About Us: Office Cleaners in Toronto Since 1989"
+updatedDate: 2026-11-13
 description: "Evergreen Office Cleaning: commercial and office cleaning in Toronto and the GTA since 1989, from one Queen Street West office. Who we are and how we work."
 image: "/images/toronto-skyline-modern.jpg"
 imageAlt: "Toronto skyline at sunset"
@@ -20,7 +23,7 @@ Evergreen Office Cleaning is a commercial cleaning company based in Toronto. Sin
 - **Service area:** Toronto, Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa.
 - **Response:** a reply to every quote request within 2 hours during office hours (Mon–Fri 7am–6pm), then a free walkthrough and a written proposal.
 
-## What we do
+## What does Evergreen clean?
 
 - [Office cleaning](/office-cleaning/): recurring after-hours cleaning of desks, kitchens, washrooms, floors and the touch points everyone shares.
 - [Commercial cleaning](/commercial-cleaning/) and [janitorial services](/janitorial-services/) for retail, institutional and mixed-use buildings.
@@ -28,11 +31,11 @@ Evergreen Office Cleaning is a commercial cleaning company based in Toronto. Sin
 - [Industrial and warehouse cleaning](/industrial-cleaning/), scheduled around shifts.
 - [Post-construction cleaning](/post-construction-cleaning/), [disinfection cleaning](/disinfection-cleaning/) and [emergency clean-ups](/emergency-cleaning/).
 
-## Who we clean for
+## Who does Evergreen clean for?
 
 Offices and professional firms, [medical and dental clinics](/medical-dental-clinics/), [property managers and condominium buildings](/property-management/), retail stores and showrooms, institutional and public buildings, and industrial buildings and warehouses.
 
-## How we work
+## How does Evergreen work with a new client?
 
 - **A reply within 2 hours during office hours.** Send the quote form or call, and an account executive gets back to you, not an auto-responder.
 - **A free walkthrough.** When you are ready, we walk the building with you rather than pricing it over the phone.
@@ -43,15 +46,15 @@ Offices and professional firms, [medical and dental clinics](/medical-dental-cli
 
 The steps are set out in full on [how we work](/our-process/).
 
-## Insured, covered and screened
+## Is Evergreen insured and bonded?
 
-Our crews are covered by WSIB Ontario and by liability insurance, the company is bonded, and staff are background-screened before they hold a key to anyone's building.
+Yes. Our crews are covered by WSIB Ontario and by liability insurance, the company is bonded, and staff are background-screened before they hold a key to anyone's building.
 
-## Products
+## What cleaning products does Evergreen use?
 
 We clean with an approved line of professional [green cleaning products](/green-clean-products/), chosen so they do not leave residue in the air your staff breathe.
 
-## Where we work
+## Which areas does Evergreen serve?
 
 Toronto, including North York, Scarborough, Etobicoke, East York and York, and [across the GTA](/locations/): Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa. We have one office, downtown; crews travel to you.
 
