@@ -61,6 +61,19 @@ export const AREA_GROUPS = ['Toronto', 'Peel & Halton', 'York Region', 'Durham']
 export const COVERAGE_SENTENCE =
   'Toronto (including North York, Scarborough, Etobicoke, East York and York), Mississauga, Brampton, Oakville, Vaughan, Markham, Richmond Hill, Pickering, Ajax and Oshawa';
 
+/**
+ * Places in the coverage list that are neighbourhoods of the City of Toronto
+ * rather than cities, for the schema's `areaServed` (13 Nov 2026, SEO audit
+ * 11 Nov, local L2 / schema N7). East York and York were boroughs merged into
+ * Toronto in 1998; typed `City` beside Toronto they read as separate cities.
+ * The schema now gives each as a Place inside Toronto, the way the Durham
+ * page puts Pickering, Ajax and Oshawa inside Durham Region.
+ *
+ * Only these two: North York, Scarborough and Etobicoke have location pages
+ * targeting them as places in their own right, so they stay as they were.
+ */
+export const PLACES_WITHIN_TORONTO: readonly string[] = ['East York', 'York'];
+
 /** The quote form's suggestions for "city or area". Free text is still allowed. */
 export const SERVICE_LOCATION_SUGGESTIONS = [
   'Toronto',

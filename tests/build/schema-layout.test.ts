@@ -14,7 +14,7 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { SERVICE_LOCATION_SUGGESTIONS } from '../../src/data/coverage';
+import { PLACES_WITHIN_TORONTO, SERVICE_LOCATION_SUGGESTIONS } from '../../src/data/coverage';
 import { INDEXNOW_KEY } from '../../src/data/indexnow';
 import { PREVIEW_HOST, PRODUCTION_HOSTS, site } from '../../src/data/site';
 import { parseHeaders, type HeaderRule } from '../../src/lib/noindex-rules';
@@ -83,10 +83,18 @@ const servedAt = (file: string) =>
 describe('areaServed', () => {
   const places = [...SERVICE_LOCATION_SUGGESTIONS];
 
-  it('names every place in src/data/coverage.ts on the organisation, typed City', () => {
+  /* East York and York are a Place inside Toronto, the rest City (13 Nov
+     2026, SEO audit 11 Nov, local L2). */
+  it('names every place in src/data/coverage.ts on the organisation, typed City or Place in Toronto', () => {
     const org = nodesOf(read('index.html')).find((n) => n['@type'] === 'ProfessionalService')!;
     expect(placeNames(org.areaServed)).toEqual(places);
-    for (const area of org.areaServed) expect(area['@type']).toBe('City');
+    for (const area of org.areaServed) {
+      if (PLACES_WITHIN_TORONTO.includes(area.name)) {
+        expect(area).toEqual({ '@type': 'Place', name: area.name, containedInPlace: { '@type': 'City', name: 'Toronto' } });
+      } else {
+        expect(area).toEqual({ '@type': 'City', name: area.name });
+      }
+    }
   });
 
   it('now includes North York, Scarborough, East York and York', () => {
@@ -97,13 +105,16 @@ describe('areaServed', () => {
   });
 
   it('is the same list on the organisation on every page and on every service page Service', () => {
+    /* The whole nodes, types included, so a Service cannot drift back to
+       typing East York as a City while the names still match. */
+    const orgAreas = nodesOf(read('index.html')).find((n) => n['@type'] === 'ProfessionalService')!.areaServed;
     let services = 0;
     for (const page of pages) {
       for (const node of nodesOf(read(page))) {
-        if (node['@type'] === 'ProfessionalService') expect(placeNames(node.areaServed), page).toEqual(places);
+        if (node['@type'] === 'ProfessionalService') expect(node.areaServed, page).toEqual(orgAreas);
         if (node['@type'] === 'Service' && /\/services\/[^/]+\/#service$/.test(node['@id'] ?? '')) {
           services++;
-          expect(placeNames(node.areaServed), page).toEqual(places);
+          expect(node.areaServed, page).toEqual(orgAreas);
         }
       }
     }
@@ -221,6 +232,10 @@ describe('44px tap targets on touch screens (visual N2)', () => {
     ['src/components/home/Areas.astro', '.ar-grid li > a'],
     ['src/components/Sidebar.astro', '.widget-services a'],
     ['src/components/home/Reviews.astro', '.ti-more'],
+    /* Service and industry pages: the "Where we work" list and the
+       breadcrumb (13 Nov 2026, SEO audit 11 Nov, critic R4). */
+    ['src/components/OfferPage.astro', '.offer-areas li > a'],
+    ['src/components/OfferPage.astro', '.offer-hero .breadcrumbs a'],
   ] as const) {
     it(`${file}: ${selector}`, () => {
       const block = fs.readFileSync(path.join(repo, file), 'utf8').match(touch)?.[1];
