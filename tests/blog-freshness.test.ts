@@ -16,10 +16,12 @@
  *                    "three tips" corrected to five in the floor post.
  *   6f4f4de (7 Nov)  the cost guide's title, H1 and description; the mixing
  *                    post's CCOHS bleach source; the sponge claim in the
- *                    techniques post replaced by a cited 2017 study.
+ *                    techniques post replaced by a cited 2017 study; the
+ *                    unsourced "20 million allergic to dust mites" figure
+ *                    removed from the day-night post (corrected in review).
  *
- * Left alone: everything else those commits touched was a link or a closing
- * sentence; 5eba139 (7 Nov) only qualified the reply promise; 3b249ba (12 Nov)
+ * Left alone: the rest of what those commits touched was links, closing
+ * sentences or rewording with no change of fact; 5eba139 (7 Nov) only qualified the reply promise; 3b249ba (12 Nov)
  * added links and re-cased headings, and the cost guide's 12 Nov sentence is
  * a pointer to the quote checklist, not a new fact. The office checklist (6
  * Nov) and quote checklist (10 Nov) are newer than any later change of
@@ -37,6 +39,7 @@ const dated: [string, string][] = [
   ['office-cleaning-cost-toronto-guide', '2026-11-07'],
   ['6-common-cleaning-products-that-you-should-never-mix-together', '2026-11-07'],
   ['commercial-cleaning-techniques-to-avoid', '2026-11-07'],
+  ['day-night-which-is-the-best-routine-for-your-office', '2026-11-07'],
   ['5-cleaning-products-you-should-have-in-your-office', '2026-11-06'],
   ['5-easy-ways-to-keep-your-commercial-floor-clean', '2026-11-06'],
   ['a-cleaning-checklist-for-your-retail-store', '2026-11-06'],
@@ -79,7 +82,6 @@ describe('link-only and wording-only edits set no date (geo N8)', () => {
     'commercial-cleaning-quote-checklist',
     'how-often-should-an-office-be-cleaned',
     'seasonal-office-cleaning-checklist',
-    'day-night-which-is-the-best-routine-for-your-office',
     'ask-the-office-cleaners-cleaning-break-rooms',
     'how-to-keep-your-office-fridge-clean',
   ])('%s has no updatedDate', (slug) => {
