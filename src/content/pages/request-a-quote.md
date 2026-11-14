@@ -1,5 +1,8 @@
 ---
 title: "Request a Quote"
+# The <title> only; the H1 stays "Request a Quote" (SEO run 14 Nov 2026: the
+# paid-traffic landing page's title named neither the service nor the city).
+seoTitle: "Free Commercial Cleaning Quote in Toronto & GTA"
 description: "Request a free commercial cleaning quote in Toronto and the GTA. Tell us about your building and we will arrange a walkthrough and written proposal."
 ---
 

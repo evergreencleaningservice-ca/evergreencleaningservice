@@ -1,5 +1,8 @@
 ---
 title: "Privacy Policy"
+# The <title> only; the H1 stays "Privacy Policy" (SEO run 14 Nov 2026: the
+# branded title was 26 characters and said nothing about the business).
+seoTitle: "Privacy Policy: Evergreen Office Cleaning Toronto"
 description: "How Evergreen Office Cleaning collects, uses and protects the personal information you give us through this website."
 ---
 
