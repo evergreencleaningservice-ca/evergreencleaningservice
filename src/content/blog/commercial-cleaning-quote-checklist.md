@@ -80,7 +80,7 @@ If product selection matters to your facility, review our [Green Clean Products 
 <source type="image/webp" srcset="/images/office-cleaning-frequency-kitchen-480.webp 480w, /images/office-cleaning-frequency-kitchen-768.webp 768w, /images/office-cleaning-frequency-kitchen-1200.webp 1200w" sizes="(min-width: 912px) 880px, calc(100vw - 32px)" />
 <img src="/images/office-cleaning-frequency-kitchen-1200.jpg" alt="Shared office kitchen with a long table, chairs, sink and beverage station." width="1200" height="800" loading="lazy" decoding="async" />
 </picture>
-<figcaption>Specify counters, sinks, floors and appliance interiors separately in a kitchen scope. Illustrative stock photograph.</figcaption>
+<figcaption>Specify counters, sinks, floors and appliance interiors separately in a kitchen scope.</figcaption>
 </figure>
 
 <h2 id="price-exclusions">How should price, exclusions and extra work be presented?</h2>
@@ -119,7 +119,7 @@ Compare two proposals against those same assumptions. One may include kitchen ap
 <source type="image/webp" srcset="/images/office-cleaning-frequency-washroom-480.webp 480w, /images/office-cleaning-frequency-washroom-768.webp 768w, /images/office-cleaning-frequency-washroom-1200.webp 1200w" sizes="(min-width: 912px) 880px, calc(100vw - 32px)" />
 <img src="/images/office-cleaning-frequency-washroom-1200.jpg" alt="Commercial washroom with tiled walls, several basins and a long mirror." width="1200" height="800" loading="lazy" decoding="async" />
 </picture>
-<figcaption>Washroom fixtures, replenishment and visit frequency each need a clear responsibility. Illustrative stock photograph.</figcaption>
+<figcaption>Washroom fixtures, replenishment and visit frequency each need a clear responsibility.</figcaption>
 </figure>
 
 <h2 id="before-signing">What should you ask before signing a cleaning agreement?</h2>

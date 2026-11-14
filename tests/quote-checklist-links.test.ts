@@ -134,11 +134,11 @@ describe('the quote-checklist post reads less like it was written for a keyword 
     expect(links(checklist.body).some(([a, h]) => a === 'commercial cleaning' && h === '/commercial-cleaning/')).toBe(true);
   });
 
-  it('keeps its sources and the illustrative labelling', () => {
+  it('keeps its sources and the example label without stock photo notices', () => {
     expect(checklist.body).toContain('](https://www.ccohs.ca/oshanswers/chemicals/cleaning-products-working-safely.html)');
     expect(checklist.body).toContain('](https://www.wsib.ca/en/businesses/premiums-and-payment/clearances)');
     expect(checklist.body).toContain('it is not a client story or a price estimate');
-    expect(checklist.body.match(/Illustrative stock photograph\./g)?.length).toBe(2);
+    expect(checklist.body).not.toMatch(/illustrative stock photograph\./i);
   });
 });
 
