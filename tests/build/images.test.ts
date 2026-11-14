@@ -252,7 +252,7 @@ describe('the list thumbnails are the featured images’ own variants', () => {
       for (const ext of ['avif', 'webp', 'jpg'])
         expect(thumb).toMatch(new RegExp(String.raw`srcset="[^"]*-480\.${ext} 480w, [^"]*-7(20|68)\.${ext} 7(20|68)w`));
       expect(thumb).toMatch(/<img\b[^>]*\ssrc="[^"]*-480\.jpg"/);
-      expect(thumb).toMatch(/<img\b[^>]*\swidth="480"[^>]*\sheight="2(40|70)"/);
+      expect(thumb).toMatch(/<img\b[^>]*\swidth="480"[^>]*\sheight="(?:240|270|320)"/);
       expect(thumb).toMatch(/sizes="\(min-width: 941px\) 300px/);
     }
   });

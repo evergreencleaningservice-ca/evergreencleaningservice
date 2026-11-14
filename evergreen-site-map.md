@@ -4,7 +4,7 @@ Updated 10 November 2026 from the current repository routes and checked against 
 
 | Page | Approved URL |
 | --- | --- |
-| Office cleaning | https://www.evergreencleaningservice.ca/services/office-cleaning/ |
+| Office cleaning | https://www.evergreencleaningservice.ca/office-cleaning/ |
 | Building maintenance and floor care | https://www.evergreencleaningservice.ca/services/building-maintenance/ |
 | Green Clean Products | https://www.evergreencleaningservice.ca/green-clean-products/ |
 | Office cleaning cost guide | https://www.evergreencleaningservice.ca/office-cleaning-cost-toronto-guide/ |

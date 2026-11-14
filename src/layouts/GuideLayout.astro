@@ -178,6 +178,12 @@ const relatedSizes = '(min-width: 912px) 428px, (min-width: 561px) calc(50vw - 2
   .guide-related-card:hover, .guide-related-card:focus-visible { text-decoration: none; }
   .guide-related-card:hover h3, .guide-related-card:focus-visible h3 { color: var(--brand-dark); text-decoration: underline; }
   @media (hover: hover) { .guide-related-card:hover img { transform: scale(1.04); } }
+  @media (max-width: 400px) {
+    .guide-body :global(.guide-handover table) { table-layout: fixed; }
+    .guide-body :global(.guide-handover th:first-child) { width: 44%; }
+    .guide-body :global(.guide-handover th),
+    .guide-body :global(.guide-handover td) { padding: 10px 7px; overflow-wrap: anywhere; }
+  }
   @media (max-width: 560px) {
     .guide-body :global(.guide-factors), .guide-related-grid { grid-template-columns: 1fr; }
     .guide-toc { padding: 20px; }
