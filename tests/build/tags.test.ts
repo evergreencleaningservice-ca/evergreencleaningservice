@@ -99,8 +99,8 @@ describe('every post’s tags are real', () => {
   const dir = path.join(repo, 'src/content/blog');
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md'));
 
-  it('covers all 26 posts, including the Week 4 handover guide', () => {
-    expect(files).toHaveLength(26);
+  it('covers all 27 posts, including the Week 5 walkthrough guide', () => {
+    expect(files).toHaveLength(27);
   });
 
   it('uses no tag slug that is not in the registry', () => {
