@@ -9,7 +9,9 @@
  * once gtm.js has loaded, and a paid visitor who taps the number before that
  * dials the real one, uncounted. So paid visits (a click id in the URL, an
  * /lp/ page, or a Google Ads click cookie) load the container at parse time,
- * as the original snippet did, and everyone else keeps the deferral.
+ * as the original snippet did, and everyone else keeps the deferral. Since
+ * 17 Nov 2026 paid visits wait for the hero image to paint first (or a tap,
+ * or the load event), so the tags no longer delay the page's main image.
  *
  * These tests run the exact string the component writes into the page, in a
  * fresh happy-dom window per case so the URL, cookies and readyState can be
@@ -43,7 +45,7 @@ afterEach(async () => {
 
 function run(
   url: string,
-  opts: { cookie?: string; readyState?: 'loading' | 'complete' } = {},
+  opts: { cookie?: string; readyState?: 'loading' | 'complete'; hero?: boolean } = {},
 ): Run {
   const win = new Window({
     url,
@@ -58,7 +60,10 @@ function run(
   /* The real page has the loader's own inline <script> in the head; gtm.js is
      inserted before the first script element, so one must exist. */
   doc.head.innerHTML = '<script id="gtm-inline"></script>';
-  doc.body.innerHTML = '<a id="tel" href="tel:+14168034880">(416) 803-4880</a><p id="text">Text</p>';
+  doc.body.innerHTML =
+    (opts.hero ? '<img id="hero" fetchpriority="high" src="/images/hero.jpg" alt="">' : '') +
+    '<a id="tel" href="tel:+14168034880">(416) 803-4880</a><p id="text">Text</p>';
+  if (opts.hero) Object.defineProperty(doc.getElementById('hero'), 'complete', { value: false, configurable: true });
   /* happy-dom's cookie setter, like a browser's, takes one cookie per
      assignment: split on '; ' so multi-cookie cases really set them all. */
   if (opts.cookie) for (const c of opts.cookie.split('; ')) doc.cookie = c;
@@ -77,6 +82,12 @@ function run(
     return idle.length;
   };
   idleQueues.push(idle);
+  /* Paid visits wait one frame after the hero image before loading; the
+     frame callback is queued with the timers so a test can fire it. */
+  (win as unknown as { requestAnimationFrame: unknown }).requestAnimationFrame = (fn: () => void) => {
+    timers.push({ fn, ms: -1 });
+    return timers.length;
+  };
 
   const script = gtmLoaderScript(site.gtmId, site.analyticsHosts, PRODUCTION_HOSTS);
   // eslint-disable-next-line no-new-func
@@ -91,30 +102,90 @@ function run(
   };
 }
 
-describe('paid visits load the container at parse time', () => {
+/** Run every queued frame and timer, as the browser would once it paints. */
+const flush = (r: Run) => {
+  while (r.timers.length) r.timers.shift()!.fn();
+};
+
+describe('paid visits load the container once the hero has painted (17 Nov 2026)', () => {
   it.each([
     ['gclid', `${PROD}/?gclid=abc123`],
     ['gbraid', `${PROD}/services/?gbraid=abc123`],
     ['wbraid', `${PROD}/?utm_source=google&wbraid=abc123`],
     ['gad_source', `${PROD}/?gad_source=1`],
-  ])('a %s in the URL', (_name, url) => {
+  ])('a %s in the URL: nothing at parse time, loaded after the next frame', (_name, url) => {
     const r = run(url);
+    expect(r.gtmScripts()).toBe(0);
+    r.win.document.dispatchEvent(new r.win.Event('DOMContentLoaded'));
+    flush(r);
     expect(r.gtmScripts()).toBe(1);
-    expect(r.timers).toHaveLength(0);
   });
 
   it('an /lp/ landing page, with no click id', () => {
-    const r = run(`${PROD}/lp/commercial-cleaning-quote/`);
+    const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { readyState: 'complete' });
+    flush(r);
     expect(r.gtmScripts()).toBe(1);
   });
 
   it.each(['_gcl_aw', '_gcl_gb', '_gcl_ag'])('a %s cookie on a later page of the visit', (name) => {
-    const r = run(`${PROD}/office-cleaning/`, { cookie: `${name}=GCL.1762500000.abc123` });
+    const r = run(`${PROD}/office-cleaning/`, { cookie: `${name}=GCL.1762500000.abc123`, readyState: 'complete' });
+    flush(r);
     expect(r.gtmScripts()).toBe(1);
   });
 
+  it('waits for the hero image, not just the DOM', () => {
+    const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { hero: true });
+    r.win.document.dispatchEvent(new r.win.Event('DOMContentLoaded'));
+    flush(r);
+    expect(r.gtmScripts()).toBe(0);
+    r.win.document.getElementById('hero')!.dispatchEvent(new r.win.Event('load'));
+    flush(r);
+    expect(r.gtmScripts()).toBe(1);
+  });
+
+  it('a tap before the hero has painted loads it at once', () => {
+    const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { hero: true });
+    r.win.document.getElementById('tel')!.dispatchEvent(new r.win.Event('pointerdown', { bubbles: true }));
+    expect(r.gtmScripts()).toBe(1);
+  });
+
+  it('the page taking focus as it loads is not a visitor: only a form field counts', () => {
+    const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { hero: true });
+    const doc = r.win.document;
+    doc.body.dispatchEvent(new r.win.Event('focusin', { bubbles: true }));
+    expect(r.gtmScripts()).toBe(0);
+    doc.body.insertAdjacentHTML('beforeend', '<input id="name">');
+    doc.getElementById('name')!.dispatchEvent(new r.win.Event('focusin', { bubbles: true }));
+    expect(r.gtmScripts()).toBe(1);
+  });
+
+  it('an image that reports complete with no pixels yet is still waited for', () => {
+    const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { hero: true });
+    const hero = r.win.document.getElementById('hero')!;
+    Object.defineProperty(hero, 'complete', { value: true, configurable: true });
+    Object.defineProperty(hero, 'naturalWidth', { value: 0, configurable: true });
+    r.win.document.dispatchEvent(new r.win.Event('DOMContentLoaded'));
+    flush(r);
+    expect(r.gtmScripts()).toBe(0);
+    hero.dispatchEvent(new r.win.Event('load'));
+    flush(r);
+    expect(r.gtmScripts()).toBe(1);
+  });
+
+  it('the load event is the backstop if the hero never reports', () => {
+    const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { hero: true });
+    r.win.dispatchEvent(new r.win.Event('load'));
+    expect(r.gtmScripts()).toBe(1);
+  });
+
+  it('does not wait for the unpaid 15 s fallback', () => {
+    const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { readyState: 'complete' });
+    expect(r.timers.some((t) => t.ms === GTM_FALLBACK_MS)).toBe(false);
+  });
+
   it('inserts gtm.js before the first script, pushing site_environment before gtm.start', () => {
-    const r = run(`${PROD}/?gclid=abc123`);
+    const r = run(`${PROD}/?gclid=abc123`, { readyState: 'complete' });
+    flush(r);
     const first = r.win.document.getElementsByTagName('script')[0];
     expect(first.getAttribute('src')).toBe(GTM_SRC);
     expect((first as unknown as { async: boolean }).async).toBe(true);
@@ -123,17 +194,18 @@ describe('paid visits load the container at parse time', () => {
     expect(events[1]).toMatchObject({ event: 'gtm.js' });
   });
 
-  it('loads once: later interaction and load do not add a second gtm.js', () => {
+  it('loads once: the frame, a tap and the load event add no second gtm.js', () => {
     const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { readyState: 'complete' });
+    flush(r);
     r.win.document.getElementById('tel')!.dispatchEvent(new r.win.Event('pointerdown', { bubbles: true }));
     r.win.dispatchEvent(new r.win.Event('load'));
-    expect(r.timers).toHaveLength(0);
     expect(r.gtmScripts()).toBe(1);
     expect(r.dataLayer().filter((e) => e.event === 'gtm.js')).toHaveLength(1);
   });
 
   it('staging follows the same rule, marked as staging', () => {
-    const r = run(`${STAGING}/lp/commercial-cleaning-quote/`);
+    const r = run(`${STAGING}/lp/commercial-cleaning-quote/`, { readyState: 'complete' });
+    flush(r);
     expect(r.gtmScripts()).toBe(1);
     expect(r.dataLayer()[0]).toEqual({ site_environment: 'staging' });
   });

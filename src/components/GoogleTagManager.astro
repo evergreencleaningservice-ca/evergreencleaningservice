@@ -135,6 +135,17 @@ const gtmId = site.gtmId;
    Lighthouse gain was measured; paid visitors pay the old cost so that
    their calls are counted.
 
+   PAID VISITS, REVISED (17 Nov 2026). "At parse time" put gtm.js (154 KB)
+   and gtag.js (190 KB) beside the hero image in the first second: the
+   weekly check measured /lp/office-cleaning/ at Lighthouse mobile 60,
+   simulated LCP 6.9 s, against 98 and 2.2 s with the tags blocked. Paid
+   visits now load the container one frame after the hero image (the page's
+   `img[fetchpriority="high"]`) has loaded, or at the first tap, key or
+   focus if that is sooner, and never later than the load event. The number
+   swap moves back by the hero image's own load time, a few hundred ms on a
+   phone; a visitor who taps the number in that window dials the real
+   number, as one who taps before the swap always has.
+
    What is unchanged: `dataLayer` exists from the first byte, so every push
    the page makes before gtm.js arrives (site_environment, form events, the
    conversion event) is queued and processed when it does. The hostname guard

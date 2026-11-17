@@ -58,7 +58,38 @@ export function gtmLoaderScript(
     return false;
   }
   if (paidVisit()) {
-    load();
+    /* Paid visits (17 Nov 2026): not at parse time any more, but as soon as
+       the page's main image has painted, or at the first tap, key or focus
+       if that comes first, and never later than the load event. At parse
+       time gtm.js (154 KB) and gtag.js (190 KB) downloaded and ran beside
+       the hero image: Lighthouse mobile on /lp/office-cleaning/ fell to 60,
+       simulated LCP 6.9 s against 2.2 s with the tags blocked. The call
+       tracking swap still lands well inside the first seconds. */
+    var early = ['pointerdown', 'keydown', 'touchstart', 'focusin'];
+    function onEarly(e) {
+      /* Focus counts only on a form field (someone starting the quote form).
+         The page itself takes focus as it loads, which fired this at once
+         in the lab and undid the wait. */
+      if (e && e.type === 'focusin' && !(e.target && e.target.matches && e.target.matches('input, textarea, select'))) return;
+      for (var q = 0; q < early.length; q++) d.removeEventListener(early[q], onEarly, true);
+      load();
+    }
+    for (var p = 0; p < early.length; p++) d.addEventListener(early[p], onEarly, { capture: true, passive: true });
+    function afterPaint() {
+      var next = w.requestAnimationFrame ? function (f) { w.requestAnimationFrame(f); } : function (f) { w.setTimeout(f, 16); };
+      next(function () { w.setTimeout(load, 0); });
+    }
+    function watchHero() {
+      var img = d.querySelector('img[fetchpriority="high"]');
+      /* complete alone is not enough: Chrome reports it true for an image
+         whose request has not started, so it also needs real pixels. */
+      if (!img || (img.complete && img.naturalWidth > 0)) { afterPaint(); return; }
+      img.addEventListener('load', afterPaint);
+      img.addEventListener('error', afterPaint);
+    }
+    if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', watchHero);
+    else watchHero();
+    w.addEventListener('load', load);
     return;
   }
   var events = ['pointerdown', 'keydown', 'touchstart', 'scroll', 'focusin'];
