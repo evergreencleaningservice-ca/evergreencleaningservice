@@ -83,6 +83,28 @@ const json = (body: unknown, status = 200) =>
   });
 
 /**
+ * What may be logged about a failure. Error messages from the database driver
+ * and Resend can echo submitted values (an email address, a name) or a
+ * connection string, and observability retains logs, so only the error class
+ * and a bounded code are written — never `message`, the body or the object.
+ */
+function errorCode(err: unknown): string {
+  const e = err as { name?: unknown; code?: unknown } | null;
+  const clean = (v: unknown) => (typeof v === 'string' ? v.replace(/[^\w.-]/g, '').slice(0, 40) : '');
+  return [clean(e?.name) || 'Error', clean(e?.code)].filter(Boolean).join(':');
+}
+
+/** Resend's error `name` (e.g. validation_error); its message can quote the address. */
+async function resendErrorName(res: Response): Promise<string> {
+  try {
+    const { name } = (await res.json()) as { name?: unknown };
+    return typeof name === 'string' ? name.replace(/[^\w.-]/g, '').slice(0, 40) : '';
+  } catch {
+    return '';
+  }
+}
+
+/**
  * Email the lead to the client.
  *
  * A failure here must not fail the submission — the lead is already stored and
@@ -123,12 +145,12 @@ async function notify(env: Env, lead: Record<string, string>, host: string) {
     if (!res.ok) {
       // the body carries Resend's reason — an invalid key, an unverified
       // sender — and without it this is undiagnosable from the outside
-      console.error('notify: resend rejected the send', res.status, await res.text());
+      console.error('notify: resend rejected the send', res.status, await resendErrorName(res));
       return;
     }
     console.log('notify: sent', (await res.json<{ id?: string }>()).id ?? '');
   } catch (err) {
-    console.error('notify: request to resend failed', err);
+    console.error('notify: request to resend failed', errorCode(err));
   }
 }
 
@@ -301,7 +323,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
     /* No database configured for this host. Say so loudly rather than
        returning 200 and losing the enquiry — a form that reports success and
        drops the lead is the failure this endpoint exists to end. */
-    console.error(`submit-lead: no ${databaseSecretFor(host)} for ${host}; lead not stored`, lead.work_email);
+    console.error(`submit-lead: no ${databaseSecretFor(host)} for ${host}; lead not stored`);
     return json({ error: 'lead storage unavailable' }, 503);
   }
 
@@ -336,7 +358,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
          ${str(request.headers.get('user-agent'), 300)})
     `;
   } catch (err) {
-    console.error('submit-lead: insert failed', err);
+    console.error('submit-lead: insert failed', errorCode(err));
     return json({ error: 'lead storage failed' }, 500);
   }
 
@@ -389,7 +411,7 @@ async function submitPost(request: Request, env: Env): Promise<Response> {
        reports success and discards the submission is the exact bug these two
        forms had for the whole port, and it is not worth re-creating one layer
        further down. */
-    console.error(`submit-post: no ${databaseSecretFor(host)} for ${host}; submission not stored`, submission.kind);
+    console.error(`submit-post: no ${databaseSecretFor(host)} for ${host}; submission not stored`);
     return json({ error: 'submission storage unavailable' }, 503);
   }
 
@@ -408,7 +430,7 @@ async function submitPost(request: Request, env: Env): Promise<Response> {
          ${str(request.headers.get('user-agent'), 300)})
     `;
   } catch (err) {
-    console.error('submit-post: insert failed', err);
+    console.error('submit-post: insert failed', errorCode(err));
     return json({ error: 'submission storage failed' }, 500);
   }
 
@@ -444,7 +466,7 @@ export async function syncBlogPosts(env: Env): Promise<void> {
       const result = await syncPosts(neon(url) as unknown as Sql, posts);
       console.log(`posts-sync: ${branch}`, JSON.stringify(result));
     } catch (err) {
-      console.error(`posts-sync: ${branch} failed`, err);
+      console.error(`posts-sync: ${branch} failed`, errorCode(err));
       failures.push(branch);
     }
   }
