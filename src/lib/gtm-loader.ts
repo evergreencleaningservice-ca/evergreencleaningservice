@@ -87,6 +87,32 @@ export function gtmLoaderScript(
       img.addEventListener('load', afterPaint);
       img.addEventListener('error', afterPaint);
     }
+    /* Where the browser reports its Largest Contentful Paint (Chrome,
+       Edge, Android), wait for the hero to be reported as painted, not
+       just downloaded: on a fast connection the image can arrive before
+       the page's first paint, and loading the tags then still delayed it
+       (live check, 17 Nov 2026: 2 of 5 runs). The load event plus 3 s is
+       the backstop there. Elsewhere (Safari), the image's own load event,
+       with the load event as the backstop, as before. */
+    var types = w.PerformanceObserver && w.PerformanceObserver.supportedEntryTypes;
+    if (types && types.indexOf('largest-contentful-paint') !== -1) {
+      try {
+        var po = new w.PerformanceObserver(function (list) {
+          var entries = list.getEntries();
+          for (var k = 0; k < entries.length; k++) {
+            var el = entries[k].element;
+            if (el && el.getAttribute && el.getAttribute('fetchpriority') === 'high') {
+              po.disconnect();
+              afterPaint();
+              return;
+            }
+          }
+        });
+        po.observe({ type: 'largest-contentful-paint', buffered: true });
+        w.addEventListener('load', function () { w.setTimeout(load, 3000); });
+        return;
+      } catch (e) {}
+    }
     if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', watchHero);
     else watchHero();
     w.addEventListener('load', load);
