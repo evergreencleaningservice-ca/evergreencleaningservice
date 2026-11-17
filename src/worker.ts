@@ -82,6 +82,46 @@ const json = (body: unknown, status = 200) =>
     headers: { 'content-type': 'application/json; charset=utf-8' },
   });
 
+const LOGGABLE_ERROR_NAMES = new Set([
+  'Error', 'TypeError', 'RangeError', 'SyntaxError', 'AbortError', 'TimeoutError',
+  'NeonDbError', 'DatabaseError', 'NeonDbConnectionError',
+]);
+/* Resend's documented error names. Anything else is logged as `unknown`. */
+const LOGGABLE_RESEND_NAMES = new Set([
+  'validation_error', 'missing_required_field', 'invalid_parameter', 'invalid_access', 'invalid_api_Key',
+  'invalid_from_address', 'invalid_to_address', 'missing_api_key', 'restricted_api_key', 'not_found',
+  'method_not_allowed', 'rate_limit_exceeded', 'daily_quota_exceeded', 'monthly_quota_exceeded',
+  'security_error', 'application_error', 'internal_server_error', 'concurrent_idempotent_requests',
+  'invalid_idempotent_request', 'invalid_idempotency_key', 'invalid_attachment', 'invalid_scope',
+]);
+/* A Postgres SQLSTATE (five characters, digit first) or a Node/network errno. */
+const LOGGABLE_CODE = /^(?:[0-9][0-9A-Z]{4}|E[A-Z]{3,14})$/;
+
+/**
+ * What may be logged about a failure. Error messages from the database driver
+ * and Resend can echo submitted values (an email address, a name) or a
+ * connection string, and observability retains logs, so only an allowlisted
+ * error class and a strictly shaped code are written. Anything outside the
+ * allowlists is dropped, never truncated, so provider-controlled text cannot
+ * reach the log � never `message`, the body or the object.
+ */
+function errorCode(err: unknown): string {
+  const e = err as { name?: unknown; code?: unknown } | null;
+  const name = typeof e?.name === 'string' && LOGGABLE_ERROR_NAMES.has(e.name) ? e.name : 'Error';
+  const code = typeof e?.code === 'string' && LOGGABLE_CODE.test(e.code) ? e.code : '';
+  return code ? `${name}:${code}` : name;
+}
+
+/** Resend's error `name` (e.g. validation_error); its message can quote the address. */
+async function resendErrorName(res: Response): Promise<string> {
+  try {
+    const { name } = (await res.json()) as { name?: unknown };
+    return typeof name === 'string' && LOGGABLE_RESEND_NAMES.has(name) ? name : 'unknown';
+  } catch {
+    return 'unknown';
+  }
+}
+
 /**
  * Email the lead to the client.
  *
@@ -123,12 +163,12 @@ async function notify(env: Env, lead: Record<string, string>, host: string) {
     if (!res.ok) {
       // the body carries Resend's reason — an invalid key, an unverified
       // sender — and without it this is undiagnosable from the outside
-      console.error('notify: resend rejected the send', res.status, await res.text());
+      console.error('notify: resend rejected the send', res.status, await resendErrorName(res));
       return;
     }
     console.log('notify: sent', (await res.json<{ id?: string }>()).id ?? '');
   } catch (err) {
-    console.error('notify: request to resend failed', err);
+    console.error('notify: request to resend failed', errorCode(err));
   }
 }
 
@@ -183,7 +223,7 @@ async function verifyCaptcha(
   } catch (err) {
     /* Provider unreachable. Reject rather than fail open: an outage that turns
        the captcha off is exactly when the form gets hammered. */
-    return { ok: false, reason: `siteverify unreachable: ${String(err)}`, hostname: '' };
+    return { ok: false, reason: `siteverify unreachable: ${errorCode(err)}`, hostname: '' };
   }
 }
 
@@ -301,7 +341,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
     /* No database configured for this host. Say so loudly rather than
        returning 200 and losing the enquiry — a form that reports success and
        drops the lead is the failure this endpoint exists to end. */
-    console.error(`submit-lead: no ${databaseSecretFor(host)} for ${host}; lead not stored`, lead.work_email);
+    console.error(`submit-lead: no ${databaseSecretFor(host)} for ${host}; lead not stored`);
     return json({ error: 'lead storage unavailable' }, 503);
   }
 
@@ -336,7 +376,7 @@ async function submitLead(request: Request, env: Env): Promise<Response> {
          ${str(request.headers.get('user-agent'), 300)})
     `;
   } catch (err) {
-    console.error('submit-lead: insert failed', err);
+    console.error('submit-lead: insert failed', errorCode(err));
     return json({ error: 'lead storage failed' }, 500);
   }
 
@@ -389,7 +429,7 @@ async function submitPost(request: Request, env: Env): Promise<Response> {
        reports success and discards the submission is the exact bug these two
        forms had for the whole port, and it is not worth re-creating one layer
        further down. */
-    console.error(`submit-post: no ${databaseSecretFor(host)} for ${host}; submission not stored`, submission.kind);
+    console.error(`submit-post: no ${databaseSecretFor(host)} for ${host}; submission not stored`);
     return json({ error: 'submission storage unavailable' }, 503);
   }
 
@@ -408,7 +448,7 @@ async function submitPost(request: Request, env: Env): Promise<Response> {
          ${str(request.headers.get('user-agent'), 300)})
     `;
   } catch (err) {
-    console.error('submit-post: insert failed', err);
+    console.error('submit-post: insert failed', errorCode(err));
     return json({ error: 'submission storage failed' }, 500);
   }
 
@@ -444,7 +484,7 @@ export async function syncBlogPosts(env: Env): Promise<void> {
       const result = await syncPosts(neon(url) as unknown as Sql, posts);
       console.log(`posts-sync: ${branch}`, JSON.stringify(result));
     } catch (err) {
-      console.error(`posts-sync: ${branch} failed`, err);
+      console.error(`posts-sync: ${branch} failed`, errorCode(err));
       failures.push(branch);
     }
   }
