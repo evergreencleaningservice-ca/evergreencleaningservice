@@ -130,3 +130,29 @@ describe('submit-post failure logs', () => {
     expectClean();
   });
 });
+
+describe('allowlists do not echo provider-controlled name or code', () => {
+  it('hostile error name/code (even short, punctuation-free) never reach the log', async () => {
+    verifyOk();
+    insertError = Object.assign(new Error('x'), { name: 'pii.person.synthetic.test', code: 'Synthetic Person' });
+    expect((await post('/api/submit-lead', env())).status).toBe(500);
+    insertError = Object.assign(new Error('x'), { name: 'SyntheticPerson', code: 'pii4160123' });
+    expect((await post('/api/submit-post', env())).status).toBe(500);
+    const out = logged(spies);
+    for (const v of ['synthetic', 'Synthetic', 'pii', '4160123']) expect(out).not.toContain(v);
+    expect(out).toContain('insert failed","Error"');
+    expectClean();
+  });
+
+  it('hostile Resend error name is replaced, response unchanged', async () => {
+    verifyOk(() => Response.json({ name: 'pii.person@synthetic.test', message: 'm' }, { status: 422 }));
+    const res = await post(
+      '/api/submit-lead',
+      env({ RESEND_API_KEY: RESEND_SECRET, LEAD_NOTIFY_FROM: 'a@b.test', STAGING_LEAD_NOTIFY_TO: 'c@d.test', LEAD_NOTIFY_TO: 'c@d.test' })
+    );
+    expect(res.status).toBe(200);
+    expect(logged(spies)).toContain('unknown');
+    expectClean();
+    expect(logged(spies)).not.toContain('synthetic');
+  });
+});

@@ -82,25 +82,43 @@ const json = (body: unknown, status = 200) =>
     headers: { 'content-type': 'application/json; charset=utf-8' },
   });
 
+const LOGGABLE_ERROR_NAMES = new Set([
+  'Error', 'TypeError', 'RangeError', 'SyntaxError', 'AbortError', 'TimeoutError',
+  'NeonDbError', 'DatabaseError', 'NeonDbConnectionError',
+]);
+/* Resend's documented error names. Anything else is logged as `unknown`. */
+const LOGGABLE_RESEND_NAMES = new Set([
+  'validation_error', 'missing_required_field', 'invalid_parameter', 'invalid_access', 'invalid_api_Key',
+  'invalid_from_address', 'invalid_to_address', 'missing_api_key', 'restricted_api_key', 'not_found',
+  'method_not_allowed', 'rate_limit_exceeded', 'daily_quota_exceeded', 'monthly_quota_exceeded',
+  'security_error', 'application_error', 'internal_server_error', 'concurrent_idempotent_requests',
+  'invalid_idempotent_request', 'invalid_idempotency_key', 'invalid_attachment', 'invalid_scope',
+]);
+/* A Postgres SQLSTATE (five characters, digit first) or a Node/network errno. */
+const LOGGABLE_CODE = /^(?:[0-9][0-9A-Z]{4}|E[A-Z]{3,14})$/;
+
 /**
  * What may be logged about a failure. Error messages from the database driver
  * and Resend can echo submitted values (an email address, a name) or a
- * connection string, and observability retains logs, so only the error class
- * and a bounded code are written â€” never `message`, the body or the object.
+ * connection string, and observability retains logs, so only an allowlisted
+ * error class and a strictly shaped code are written. Anything outside the
+ * allowlists is dropped, never truncated, so provider-controlled text cannot
+ * reach the log — never `message`, the body or the object.
  */
 function errorCode(err: unknown): string {
   const e = err as { name?: unknown; code?: unknown } | null;
-  const clean = (v: unknown) => (typeof v === 'string' ? v.replace(/[^\w.-]/g, '').slice(0, 40) : '');
-  return [clean(e?.name) || 'Error', clean(e?.code)].filter(Boolean).join(':');
+  const name = typeof e?.name === 'string' && LOGGABLE_ERROR_NAMES.has(e.name) ? e.name : 'Error';
+  const code = typeof e?.code === 'string' && LOGGABLE_CODE.test(e.code) ? e.code : '';
+  return code ? `${name}:${code}` : name;
 }
 
 /** Resend's error `name` (e.g. validation_error); its message can quote the address. */
 async function resendErrorName(res: Response): Promise<string> {
   try {
     const { name } = (await res.json()) as { name?: unknown };
-    return typeof name === 'string' ? name.replace(/[^\w.-]/g, '').slice(0, 40) : '';
+    return typeof name === 'string' && LOGGABLE_RESEND_NAMES.has(name) ? name : 'unknown';
   } catch {
-    return '';
+    return 'unknown';
   }
 }
 
@@ -205,7 +223,7 @@ async function verifyCaptcha(
   } catch (err) {
     /* Provider unreachable. Reject rather than fail open: an outage that turns
        the captcha off is exactly when the form gets hammered. */
-    return { ok: false, reason: `siteverify unreachable: ${String(err)}`, hostname: '' };
+    return { ok: false, reason: `siteverify unreachable: ${errorCode(err)}`, hostname: '' };
   }
 }
 
