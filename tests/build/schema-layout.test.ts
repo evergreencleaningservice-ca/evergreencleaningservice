@@ -81,6 +81,36 @@ const servedAt = (file: string) =>
 
 /* --- schema --------------------------------------------------------------- */
 
+describe('organisation node size (SEO check, 20 Nov 2026)', () => {
+  const orgOn = (page: string) => nodesOf(read(page)).find((n) => n['@type'] === 'ProfessionalService')!;
+
+  it('is published in full on the home, About and Contact pages', () => {
+    for (const page of ['index.html', 'about-us/index.html', 'contact-us/index.html']) {
+      const org = orgOn(page);
+      expect(org.hasOfferCatalog, page).toBeDefined();
+      expect(org.areaServed, page).toBeDefined();
+      expect(org.openingHoursSpecification, page).toBeDefined();
+    }
+  });
+
+  it('is the short node, with the same @id and the full NAP, everywhere else', () => {
+    const full = orgOn('index.html');
+    let short = 0;
+    for (const page of pages) {
+      if (['index.html', 'about-us/index.html', 'contact-us/index.html'].includes(page)) continue;
+      const org = orgOn(page);
+      if (!org) continue;
+      short++;
+      expect(org['@id'], page).toBe(full['@id']);
+      for (const key of ['name', 'telephone', 'address', 'url', 'sameAs']) expect(org[key], `${page} ${key}`).toEqual(full[key]);
+      for (const key of ['hasOfferCatalog', 'areaServed', 'openingHoursSpecification', 'knowsAbout']) {
+        expect(org, `${page} ${key}`).not.toHaveProperty(key);
+      }
+    }
+    expect(short).toBeGreaterThan(30);
+  });
+});
+
 describe('areaServed', () => {
   const places = [...SERVICE_LOCATION_SUGGESTIONS];
 
@@ -112,7 +142,9 @@ describe('areaServed', () => {
     let services = 0;
     for (const page of pages) {
       for (const node of nodesOf(read(page))) {
-        if (node['@type'] === 'ProfessionalService') expect(node.areaServed, page).toEqual(orgAreas);
+        /* The short organisation node (every page but the business's own)
+           carries no areaServed; where one is present it is the whole list. */
+        if (node['@type'] === 'ProfessionalService' && 'areaServed' in node) expect(node.areaServed, page).toEqual(orgAreas);
         if (node['@type'] === 'Service' && /#service$/.test(node['@id'] ?? '') && offerHub(new URL(node['@id'], site.url).pathname) === '/services/') {
           services++;
           expect(node.areaServed, page).toEqual(orgAreas);

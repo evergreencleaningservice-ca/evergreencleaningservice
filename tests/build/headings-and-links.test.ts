@@ -296,8 +296,12 @@ describe('the legacy redirect map', () => {
         (r) => r.from
       )
     );
+    /* The index.html spelling of every built page (SEO check, 20 Nov 2026),
+       counted apart like the slash-less one. */
+    const indexHtml = redirects.filter((r) => r.from.endsWith('/index.html') && r.from === `${r.to}index.html`);
     const legacy = redirects.filter(
-      (r) => r.to !== `${r.from}/` && r.from !== '/sitemap-0.xml' && !consolidation.has(r.from)
+      (r) =>
+        r.to !== `${r.from}/` && r.from !== '/sitemap-0.xml' && !consolidation.has(r.from) && !indexHtml.includes(r)
     );
     /* 171 until the URL move of 13 Nov 2026 (owner decision): +26 for the
        13 old /services/ and /industries/ addresses in both spellings, -10
@@ -307,6 +311,9 @@ describe('the legacy redirect map', () => {
     expect(redirects.some((r) => r.from === '/sitemap-0.xml' && r.to === '/sitemap-pages-0.xml')).toBe(true);
     for (const page of ['/about-us', '/insights', '/office-cleaning', '/locations/mississauga']) {
       expect(pageSlash.some((r) => r.from === page), page).toBe(true);
+    }
+    for (const page of ['/', '/about-us/', '/office-cleaning/', '/locations/mississauga/']) {
+      expect(indexHtml.some((r) => r.to === page), page).toBe(true);
     }
     expect(redirects.some((r) => r.from === '/tag/*')).toBe(false);
     expect(redirects.some((r) => r.from === '/tag/markup/')).toBe(true);

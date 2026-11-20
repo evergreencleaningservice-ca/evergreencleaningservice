@@ -17,7 +17,7 @@
  * the index at all.
  */
 import { images, nap, site } from '../data/site';
-import { organizationGraph } from '../lib/schema';
+import { organizationRefGraph } from '../lib/schema';
 import GoogleTagManager from '../components/GoogleTagManager.astro';
 import Attribution from '../components/Attribution.astro';
 import PhoneTracking from '../components/PhoneTracking.astro';
@@ -100,7 +100,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 
     <Attribution />
 
-    <script type="application/ld+json" set:html={JSON.stringify(organizationGraph())} is:inline />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationRefGraph())} is:inline />
   </head>
 
   <body class="lp">

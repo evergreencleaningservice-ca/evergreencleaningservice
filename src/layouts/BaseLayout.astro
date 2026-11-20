@@ -7,7 +7,7 @@ import GoogleTagManager from '../components/GoogleTagManager.astro';
 import Attribution from '../components/Attribution.astro';
 import PhoneTracking from '../components/PhoneTracking.astro';
 import { images, site } from '../data/site';
-import { organizationGraph } from '../lib/schema';
+import { organizationGraphFor } from '../lib/schema';
 import '../styles/global.css';
 
 interface Props {
@@ -115,8 +115,9 @@ import MobileActionBar from '../components/MobileActionBar.astro';
       nothing above the fold uses it anywhere.
     */}
 
-    {/* Section 2.4: the organisation graph, on every page. */}
-    <script type="application/ld+json" set:html={JSON.stringify(organizationGraph())} is:inline />
+    {/* Section 2.4: the organisation graph, on every page; the full node on the
+        business's own pages, a short one elsewhere (src/lib/schema.ts). */}
+    <script type="application/ld+json" set:html={JSON.stringify(organizationGraphFor(Astro.url.pathname))} is:inline />
 
     <Attribution />
 
