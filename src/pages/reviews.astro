@@ -43,15 +43,20 @@ const cards = [...reviews]
   .map((r) => ({ ...r, when: reviewDate(r) }));
 
 /*
- * TODO — the submit endpoint is not wired up yet.
+ * THE TESTIMONIAL FORM IS WIRED UP (comment corrected 20 Nov 2026; it said
+ * the form went nowhere, which stopped being true when SubmissionRuntime
+ * landed).
  *
- * The original form posted back to WordPress and was protected by reCAPTCHA
- * v2, neither of which survives a static build, so the markup below is a plain
- * HTML form with `action="#"`: it validates in the browser and then goes
- * nowhere. Before launch, point `action` at a real handler and re-add spam
- * protection there — the honeypot below is only half the job. Submitted
- * testimonials were moderated before publication, so the handler needs to hold
- * them for review rather than post them straight to the site.
+ * `SubmissionRuntime.astro` takes the submit (the form opts in with
+ * `data-post-kind="review"`) and posts it to /api/submit-post in
+ * src/worker.ts. `SpamGuard.astro` adds the honeypot and the reCAPTCHA, and
+ * the Worker checks both. A testimonial is stored in the `submissions` table
+ * as `pending`: nothing is published by storing it, because submitted
+ * testimonials were moderated before publication on the original site too.
+ * It is not a lead, so it never reaches `leads`, the conversion tag or the
+ * lead notification email. Nobody is emailed about it; whoever moderates has
+ * to look in `submissions`. `action="#"` below means nothing is sent
+ * without JavaScript: the runtime is the only route to the endpoint.
  */
 ---
 
@@ -96,7 +101,8 @@ const cards = [...reviews]
 
   <p class="form-note">Fields marked <span class="req">*</span> are required.</p>
 
-  {/* See the TODO in this file's frontmatter: action="#" is a placeholder. */}
+  {/* Submitted by SubmissionRuntime to /api/submit-post; see the frontmatter
+      comment. Without JavaScript, action="#" sends nothing. */}
   <form
     class="site-form"
     method="post"
