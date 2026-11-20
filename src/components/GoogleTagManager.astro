@@ -144,7 +144,11 @@ const gtmId = site.gtmId;
    focus if that is sooner, and never later than the load event. The number
    swap moves back by the hero image's own load time, a few hundred ms on a
    phone; a visitor who taps the number in that window dials the real
-   number, as one who taps before the swap always has.
+   number, as one who taps before the swap always has. Where the browser
+   reports Largest Contentful Paint, it waits for the hero to be reported
+   as painted rather than downloaded (same day: on the live site the image
+   sometimes arrived before the first paint, and 2 of 5 runs still lost
+   the race).
 
    What is unchanged: `dataLayer` exists from the first byte, so every push
    the page makes before gtm.js arrives (site_environment, form events, the

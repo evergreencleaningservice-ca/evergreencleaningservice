@@ -29,6 +29,8 @@ const STAGING = 'https://stage.evergreencleaningservice.ca';
 
 interface Run {
   win: Window;
+  /** Report a Largest Contentful Paint entry for this element (lcp runs only). */
+  reportLcp: (element: Element) => void;
   /** Timers the loader set, so a test can fire them on cue. */
   timers: Array<{ ms: number; fn: () => void }>;
   gtmScripts: () => number;
@@ -45,7 +47,7 @@ afterEach(async () => {
 
 function run(
   url: string,
-  opts: { cookie?: string; readyState?: 'loading' | 'complete'; hero?: boolean } = {},
+  opts: { cookie?: string; readyState?: 'loading' | 'complete'; hero?: boolean; lcp?: boolean } = {},
 ): Run {
   const win = new Window({
     url,
@@ -89,6 +91,23 @@ function run(
     return timers.length;
   };
 
+  /* A browser that reports Largest Contentful Paint: the observer's
+     callback is kept so a test can report an entry. */
+  let report: ((element: Element) => void) | undefined;
+  if (opts.lcp) {
+    class FakeObserver {
+      static supportedEntryTypes = ['largest-contentful-paint', 'paint'];
+      constructor(private cb: (list: { getEntries: () => Array<{ element: Element }> }) => void) {}
+      observe() {
+        report = (element) => this.cb({ getEntries: () => [{ element }] });
+      }
+      disconnect() {
+        report = undefined;
+      }
+    }
+    (win as unknown as { PerformanceObserver: unknown }).PerformanceObserver = FakeObserver;
+  }
+
   const script = gtmLoaderScript(site.gtmId, site.analyticsHosts, PRODUCTION_HOSTS);
   // eslint-disable-next-line no-new-func
   new Function('window', 'document', script)(win, doc);
@@ -96,6 +115,7 @@ function run(
   return {
     win,
     timers,
+    reportLcp: (element: Element) => report?.(element),
     gtmScripts: () =>
       Array.from(doc.querySelectorAll('script')).filter((s) => s.getAttribute('src') === GTM_SRC).length,
     dataLayer: () => (win as unknown as { dataLayer?: Array<Record<string, unknown>> }).dataLayer ?? [],
@@ -170,6 +190,41 @@ describe('paid visits load the container once the hero has painted (17 Nov 2026)
     hero.dispatchEvent(new r.win.Event('load'));
     flush(r);
     expect(r.gtmScripts()).toBe(1);
+  });
+
+  describe('where the browser reports Largest Contentful Paint', () => {
+    it('waits for the hero to be reported as painted, not just loaded', () => {
+      const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { hero: true, lcp: true });
+      const hero = r.win.document.getElementById('hero')!;
+      hero.dispatchEvent(new r.win.Event('load'));
+      flush(r);
+      expect(r.gtmScripts()).toBe(0);
+      r.reportLcp(hero);
+      flush(r);
+      expect(r.gtmScripts()).toBe(1);
+    });
+
+    it('a paint of something else is not the hero', () => {
+      const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { hero: true, lcp: true });
+      r.reportLcp(r.win.document.getElementById('text')!);
+      flush(r);
+      expect(r.gtmScripts()).toBe(0);
+    });
+
+    it('falls back to 3 s after the load event', () => {
+      const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { hero: true, lcp: true });
+      r.win.dispatchEvent(new r.win.Event('load'));
+      expect(r.gtmScripts()).toBe(0);
+      expect(r.timers.map((t) => t.ms)).toContain(3000);
+      flush(r);
+      expect(r.gtmScripts()).toBe(1);
+    });
+
+    it('a tap still loads it at once', () => {
+      const r = run(`${PROD}/lp/commercial-cleaning-quote/`, { hero: true, lcp: true });
+      r.win.document.getElementById('tel')!.dispatchEvent(new r.win.Event('pointerdown', { bubbles: true }));
+      expect(r.gtmScripts()).toBe(1);
+    });
   });
 
   it('the load event is the backstop if the hero never reports', () => {
