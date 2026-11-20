@@ -122,6 +122,21 @@ section(
     .sort()
     .map((p) => ({ from: p, to: `${p}/` }))
 );
+/* Every page spelled with its file name, `/about-us/index.html` and the
+   homepage's `/index.html`. Without a rule the asset router answers with a
+   307 to the directory: temporary, so a link written that way passes no
+   signal (SEO check, 20 Nov 2026). The rule matches the requested path only,
+   so serving `/` from dist/index.html does not trip it. Pages that a rule
+   above already sends elsewhere are skipped, so nothing takes two hops. */
+section(
+  'Pages, index.html spelling to the canonical one',
+  [{ from: '/index.html', to: '/' }].concat(
+    pagePaths
+      .filter((p) => !p.startsWith('/admin') && !p.startsWith('/eg-live-post-shell') && !taken.has(`${p}/index.html`) && !taken.has(`${p}/`))
+      .sort()
+      .map((p) => ({ from: `${p}/index.html`, to: `${p}/` })),
+  )
+);
 /* Wildcards are NOT expanded: a splat already matches both spellings, and a
    duplicated rule here would shadow the one below it. */
 section('Wildcards, last so the rules above win', wildcardRedirects);

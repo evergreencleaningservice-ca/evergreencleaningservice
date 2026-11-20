@@ -230,6 +230,37 @@ export const organizationGraph = (
   ],
 });
 
+/**
+ * Pages where the full organisation node is published: the homepage, the
+ * About page and the Contact page, the pages that are about the business.
+ */
+export const FULL_ORG_PATHS: readonly string[] = ['/', '/about-us/', '/contact-us/'];
+
+/**
+ * The organisation graph for every other page (SEO check, 20 Nov 2026).
+ *
+ * The full node, with 18 areaServed places, the 11-service catalog, hours,
+ * people and contact point, came to about 10 KB of JSON-LD on each of the
+ * 65 pages. Every page still names the business with the same `@id`, its
+ * name, address, phone, logo and profiles, so the NAP signal is unchanged
+ * sitewide, and each page's Service node keeps its own areaServed. The
+ * catalog, hours, coverage and people live on the pages listed in
+ * FULL_ORG_PATHS, which carry the same `@id`.
+ */
+export const organizationRefGraph = () => {
+  const full = organizationGraph()['@graph'];
+  const org = full[0] as Record<string, unknown>;
+  const keep = ['@type', '@id', 'name', 'alternateName', 'url', 'logo', 'image', 'telephone', 'email', 'address', 'sameAs'];
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [Object.fromEntries(keep.filter((k) => k in org).map((k) => [k, org[k]])), full[1]],
+  };
+};
+
+/** The full graph on the business's own pages, the short one elsewhere. */
+export const organizationGraphFor = (pathname: string) =>
+  FULL_ORG_PATHS.includes(pathname) ? organizationGraph() : organizationRefGraph();
+
 const ORG = { '@id': ORG_ID };
 const ORG_INLINE = { '@type': 'Organization', '@id': ORG_ID, name: nap.name, url: `${site.url}/` };
 
