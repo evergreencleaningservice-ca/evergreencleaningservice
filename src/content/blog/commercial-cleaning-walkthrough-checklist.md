@@ -3,7 +3,7 @@ title: "How to Prepare for a Commercial Cleaning Walkthrough"
 seoTitle: "How to Prepare for a Commercial Cleaning Walkthrough"
 description: "Learn how to prepare for a commercial cleaning walkthrough, from marking cleanable rooms to confirming access, supplies and scope."
 pubDate: "2026-11-14T12:41:07-05:00"
-updatedDate: "2026-11-21"
+updatedDate: 2026-11-21
 image: "/images/gallery-lobby-floor-care.jpg"
 imageAlt: "Commercial lobby with polished tile and floor-to-ceiling windows."
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
