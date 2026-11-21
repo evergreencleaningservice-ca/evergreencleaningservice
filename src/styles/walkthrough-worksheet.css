@@ -1,0 +1,64 @@
+/* The blank decision record stays usable on a phone and grows with typed notes. */
+.guide-body .walkthrough-record { margin-block: 28px; }
+.guide-body .walkthrough-record .worksheet-table-wrap { margin-block: 20px; }
+.guide-body .walkthrough-record .worksheet-table {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.guide-body .walkthrough-record .worksheet-table th,
+.guide-body .walkthrough-record .worksheet-table td {
+  border: 1px solid var(--rule);
+  padding: 10px;
+  overflow-wrap: anywhere;
+}
+.guide-body .walkthrough-record .worksheet-field {
+  min-height: 4rem;
+  width: 100%;
+  padding: 6px;
+  font: inherit;
+  font-size: 1rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  cursor: text;
+}
+.guide-body .walkthrough-record .worksheet-field:focus-visible {
+  outline: 3px solid var(--brand-dark);
+  outline-offset: 2px;
+}
+.guide-body .walkthrough-record .worksheet-label { display: none; }
+@media screen and (max-width: 700px) {
+  .guide-body .walkthrough-record .worksheet-table,
+  .guide-body .walkthrough-record .worksheet-table tbody { display: block; }
+  .guide-body .walkthrough-record .worksheet-table caption { display: block; }
+  .guide-body .walkthrough-record .worksheet-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .guide-body .walkthrough-record .worksheet-table tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 16px;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+  .guide-body .walkthrough-record .worksheet-table td { min-width: 0; border: 0; }
+  .guide-body .walkthrough-record .worksheet-label {
+    display: block;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+}
+@media print {
+  .guide-body .walkthrough-record { break-before: page; }
+  .guide-body .walkthrough-record .worksheet-table tr { break-inside: avoid; }
+  .guide-body .walkthrough-record .worksheet-field { min-height: 3rem; border: 0; }
+}

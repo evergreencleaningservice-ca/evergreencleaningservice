@@ -3,6 +3,7 @@ title: "How to Prepare for a Commercial Cleaning Walkthrough"
 seoTitle: "How to Prepare for a Commercial Cleaning Walkthrough"
 description: "Learn how to prepare for a commercial cleaning walkthrough, from marking cleanable rooms to confirming access, supplies and scope."
 pubDate: "2026-11-14T12:41:07-05:00"
+updatedDate: "2026-11-21"
 image: "/images/gallery-lobby-floor-care.jpg"
 imageAlt: "Commercial lobby with polished tile and floor-to-ceiling windows."
 tags: ["commercial-cleaning", "commercial-office-cleaning", "janitorial-services", "office"]
@@ -14,6 +15,7 @@ guide:
   contents:
     - { label: "What to bring and who should attend", id: "prepare-for-the-visit" }
     - { label: "The site visit checklist", id: "site-visit-checklist" }
+    - { label: "Record your walkthrough decisions", id: "walkthrough-decision-record" }
     - { label: "What to show room by room", id: "walk-the-site" }
     - { label: "Example of a two-floor Toronto office", id: "two-floor-office-example" }
     - { label: "What to confirm before the provider leaves", id: "confirm-the-scope" }
@@ -50,6 +52,35 @@ Use the checklist to match each item you bring to the person who can verify it. 
 </tbody>
 </table>
 </div>
+
+<section class="walkthrough-record" aria-labelledby="walkthrough-decision-record">
+<h3 id="walkthrough-decision-record">Record the decisions while you walk</h3>
+<p>Use one row for each area or task. Note the service window, frequency and agreed responsibility. Type in the cells, then print or copy your notes before leaving this page; they are not saved.</p>
+<div class="worksheet-table-wrap" role="region" aria-label="Walkthrough decisions" tabindex="0">
+<table class="worksheet-table">
+<caption>Walkthrough decisions</caption>
+<thead><tr><th scope="col">Area or room</th><th scope="col">Task and boundary</th><th scope="col">Frequency</th><th scope="col">Service window</th><th scope="col">Agreed responsibility</th><th scope="col">Open item reference</th></tr></thead>
+<tbody>
+<tr><td><span class="worksheet-label" aria-hidden="true">Area or room</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Area or room, row 1" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Task and boundary</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Task and boundary, row 1" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Frequency</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Frequency, row 1" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Service window</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Service window, row 1" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Agreed responsibility</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Agreed responsibility, row 1" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Open item reference</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Open item reference, row 1" tabindex="0"></div></td></tr>
+<tr><td><span class="worksheet-label" aria-hidden="true">Area or room</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Area or room, row 2" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Task and boundary</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Task and boundary, row 2" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Frequency</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Frequency, row 2" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Service window</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Service window, row 2" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Agreed responsibility</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Agreed responsibility, row 2" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Open item reference</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Open item reference, row 2" tabindex="0"></div></td></tr>
+<tr><td><span class="worksheet-label" aria-hidden="true">Area or room</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Area or room, row 3" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Task and boundary</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Task and boundary, row 3" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Frequency</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Frequency, row 3" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Service window</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Service window, row 3" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Agreed responsibility</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Agreed responsibility, row 3" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Open item reference</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Open item reference, row 3" tabindex="0"></div></td></tr>
+</tbody>
+</table>
+</div>
+<p>Keep unresolved items in a short follow-up record so they can be confirmed before the written scope is approved.</p>
+<div class="worksheet-table-wrap" role="region" aria-label="Open items and follow-up" tabindex="0">
+<table class="worksheet-table">
+<caption>Open items and follow-up</caption>
+<thead><tr><th scope="col">Reference</th><th scope="col">Question or decision needed</th><th scope="col">Person confirming</th><th scope="col">Due date</th><th scope="col">Outcome</th></tr></thead>
+<tbody>
+<tr><td><span class="worksheet-label" aria-hidden="true">Reference</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Follow-up: Reference, row 1" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Question or decision needed</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Follow-up: Question or decision needed, row 1" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Person confirming</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Follow-up: Person confirming, row 1" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Due date</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Follow-up: Due date, row 1" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Outcome</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Follow-up: Outcome, row 1" tabindex="0"></div></td></tr>
+<tr><td><span class="worksheet-label" aria-hidden="true">Reference</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Follow-up: Reference, row 2" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Question or decision needed</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Follow-up: Question or decision needed, row 2" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Person confirming</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Follow-up: Person confirming, row 2" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Due date</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Follow-up: Due date, row 2" tabindex="0"></div></td><td><span class="worksheet-label" aria-hidden="true">Outcome</span><div class="worksheet-field" contenteditable="plaintext-only" role="textbox" aria-multiline="true" aria-label="Follow-up: Outcome, row 2" tabindex="0"></div></td></tr>
+</tbody>
+</table>
+</div>
+<p>Compare these notes with the provider's written proposal. Keep passwords and alarm codes in the building's approved access system, not in this worksheet.</p>
+</section>
+
 
 <h2 id="walk-the-site">What to Show Room by Room</h2>
 
@@ -90,6 +121,8 @@ Read back the included areas, exclusions, service window and any task still awai
 - **Agree on what comes back.** Ask when the written scope will arrive, who should receive it and whether any startup or periodic work will appear as a separate item.
 
 Common mistakes include listing “all floors” without naming rooms, overlooking who handles an inside doorway, and assuming the crew can reach the waste room at the end of the shift. Use your commercial cleaning site visit checklist to catch those assumptions while the right people are still on site.
+
+When the proposal arrives, use the [commercial cleaning quote checklist](/commercial-cleaning-quote-checklist/) to compare its tasks, visit days, supplies and exclusions with your walkthrough notes.
 
 <h2 id="arrange-a-walkthrough">How to Prepare for a Commercial Cleaning Walkthrough With Evergreen</h2>
 

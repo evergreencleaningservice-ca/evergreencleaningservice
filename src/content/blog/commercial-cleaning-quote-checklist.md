@@ -101,6 +101,8 @@ Ask who can approve additional work and how that approval is recorded. The comme
 
 At Evergreen, every quote follows a free on-site walkthrough. We assess the actual building rather than price it over the phone.
 
+Before comparing proposals, [prepare for a commercial cleaning walkthrough](/commercial-cleaning-walkthrough-checklist/) so each provider sees the same rooms, exclusions and access conditions.
+
 <h2 id="sample-office-scope">What would a quote for a 6,000 sq ft office look like?</h2>
 
 A quote for a 6,000 sq ft office should describe its actual rooms and usage, not simply multiply its area by a rate. This illustrative planning example assumes two washrooms, one kitchen and service five nights a week; it is not a client story or a price estimate.

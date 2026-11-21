@@ -11,9 +11,11 @@ interface Props {
   intro?: string;
   /** Heading level of the section title. */
   level?: 'h2' | 'h3';
+  /** Optional reader resources for particular steps on the calling page. */
+  resources?: Partial<Record<number, { before: string; href: string; label: string; after: string }>>;
 }
 
-const { heading = 'How it works', intro, level = 'h2' } = Astro.props;
+const { heading = 'How it works', intro, level = 'h2', resources = {} } = Astro.props;
 const Tag = level;
 ---
 
@@ -22,10 +24,15 @@ const Tag = level;
   {intro && <p class="blk-intro">{intro}</p>}
   <ol class="blk-steps" data-reveal="stagger">
     {
-      PROCESS_STEPS.map((step) => (
+      PROCESS_STEPS.map((step, index) => (
         <li>
           <h3>{step.title}</h3>
           <p>{step.body}</p>
+          {resources[index] && (
+            <p class="step-resource">
+              {resources[index].before}<a href={resources[index].href}>{resources[index].label}</a>{resources[index].after}
+            </p>
+          )}
         </li>
       ))
     }
@@ -91,4 +98,5 @@ const Tag = level;
     margin: 0;
     font-size: 0.9375rem;
   }
+  .blk-steps .step-resource { margin-top: 12px; }
 </style>
