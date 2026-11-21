@@ -267,14 +267,18 @@ describe('body images carried over from the original', () => {
        the mark means. Asserted on the emitted order. */
     const html = fs.readFileSync(path.join(out, 'green-clean-products', 'index.html'), 'utf8');
     const at = (needle: string) => html.indexOf(needle);
-    expect(at('armstrong-logo')).toBeLessThan(at('For more information visit Armstrong'));
-    expect(at('ECOLOGO')).toBeLessThan(at('In April of 2013'));
+    const manufacturerText = at('More product information:');
+    const certificationText = at('Learn about the');
+    expect(manufacturerText).toBeGreaterThan(0);
+    expect(certificationText).toBeGreaterThan(0);
+    expect(at('armstrong-logo')).toBeLessThan(manufacturerText);
+    expect(at('ECOLOGO')).toBeLessThan(certificationText);
     /* The product photograph, whatever it is currently called, sits after
        the ECOLOGO paragraph. Located by elimination rather than by filename,
        so the imagery refresh does not have to be re-encoded here. */
     const photo = [...built.get('/green-clean-products/')!].find(
       (s) => !['armstrong-logo', 'ecologo', 'proseriesgreen-logo'].includes(s)
     )!;
-    expect(html.toLowerCase().indexOf(photo)).toBeGreaterThan(at('In April of 2013'));
+    expect(html.toLowerCase().indexOf(photo)).toBeGreaterThan(certificationText);
   });
 });

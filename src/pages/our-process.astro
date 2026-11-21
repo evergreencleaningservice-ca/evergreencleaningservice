@@ -70,7 +70,20 @@ const faqs = [
   </section>
 
   <div class="container section-padding stack">
-    <ProcessSteps heading="From first call to a regular schedule" />
+    <ProcessSteps heading="From first call to a regular schedule" resources={{
+      1: {
+        before: 'Before the visit, use our ',
+        href: '/commercial-cleaning-walkthrough-checklist/',
+        label: 'commercial cleaning walkthrough checklist',
+        after: ' to prepare room lists, access questions and shared-area responsibilities.',
+      },
+      3: {
+        before: 'If you are replacing an existing provider, use the ',
+        href: '/switch-office-cleaning-companies/',
+        label: 'office cleaning handover checklist',
+        after: ' to confirm the final visit, first visit and access handover.',
+      },
+    }} />
 
     <section aria-label="Quality">
       <h2 class="blk-title">How quality is kept</h2>

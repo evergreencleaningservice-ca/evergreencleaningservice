@@ -264,14 +264,18 @@ describe('the service and industry pages moved to the root', () => {
     expect(stale.map((r) => `${r.from} -> ${r.to}`)).toEqual([]);
   });
 
-  it('has no rule whose source is a built root-level page', () => {
+  it('has no rule whose source is a built page, including restored tag pagination', () => {
     /* The asset router reads _redirects before it looks for a file, so such
-       a rule would shadow the page. The root is where the move put the 13
-       pages, beside the posts and the other pages. (Deeper down, three
-       /tag/<tag>/page/N/ rules shadow archive pages that came back: a
-       separate fix, not this move's.) */
-    const pages = [...builtPages()].filter((p) => p.split('/').length === 3);
+       a rule would shadow the page even when the target asset exists.
+       Include nested pages so new posts cannot restore an archive that
+       remains hidden behind an old retirement redirect. */
+    const pages = [...builtPages()];
     expect(pages.length).toBeGreaterThan(40);
+    for (const restored of [
+      '/tag/office/page/2/',
+      '/tag/commercial-cleaning/page/3/',
+      '/tag/commercial-office-cleaning/page/3/',
+    ]) expect(pages).toContain(restored);
     const shadowing = rules.filter((r) => pages.includes(r.from));
     expect(shadowing.map((r) => `${r.from} -> ${r.to}`)).toEqual([]);
   });

@@ -2,37 +2,39 @@
 title: "Green Clean Products"
 # The <title> only; the H1 stays "Green Clean Products" (13 Nov 2026, comparison with impact.ca).
 seoTitle: "Green Office Cleaning Products We Use in Toronto"
-description: "Evergreen uses an approved line of professional green cleaning products that meet or exceed industry standards. Here is what we use and why."
+description: "Explore Evergreen's green office cleaning products and the labels, safety data sheets and building requirements to discuss at your free walkthrough."
 ---
 
-## Concerned about green cleaning and interested in the use of eco-friendly products? So are we.
+## Green office cleaning products for your building
 
 <img src="/images/ProSeriesGreen-Logo-270x270.png" alt="ProSeries Green product logo" width="150" height="150" loading="lazy" decoding="async" />
 
-## That’s why we use Armstrong Manufacturing Pro Series Green Products.
+Evergreen uses Armstrong Manufacturing’s ProSeries Green line for its commercial cleaning work. Armstrong publishes the line’s product information and describes its environmental certification and formulation features. You can review the [manufacturer’s product range](https://armstrongmanufacturing.com/product-category/proseries-green/) before your walkthrough.
 
-Armstrong Manufacturing have been a leading chemical manufacturer for 46 years and have grown with the ever changing world when it comes to chemicals and cleaning. The **ProSeries Green™ line** offers you an easy and economical way to use “GREEN” products that help you support and reach your sustainability goals:
+What matters for your building is the product proposed for each task. Bring any requirements about fragrances, floor finishes, approved products or storage. Ask the provider to identify the product, the surface it is intended for, its current label and safety data sheet, and any applicable certification record.
 
--   Third-party tested and certified to UL Environment standards
--   Concentrated formulas to help reduce carbon foot print
--   Fragrance free formulas help alleviate personnel or client allergies and sensitivities
--   Free of VOC’s (Volatile Organic Compounds) for reduced environmental impacts
--   Surveillance Audit of Quality Management Systems performed
--   Private label opportunities available
--   Recycled packaging for reduced landfill impact
+### Questions to settle at the walkthrough
 
-ProSeries Green™ — it’s your ideal choice for going “GREEN”.
+| Item to confirm | What to record |
+| --- | --- |
+| Product and task | Exact product name and the room or surface where it will be used |
+| Building restrictions | Approved-product list and fragrance or finish restrictions |
+| Supporting documents | Current label, safety data sheet and relevant certification reference |
+| Preparation and storage | Who prepares the product and the approved storage location |
+| Responsibility | Who approves the product list and how changes will be agreed |
+
+Record the agreed products beside the cleaning scope. This makes it easier to check that later substitutions still suit the building’s requirements.
+
+Before you choose a provider, read [what to ask about green office cleaning](/what-to-ask-about-green-office-cleaning/) and bring your building’s product restrictions to the walkthrough. To discuss cleaning for a Toronto or GTA workplace, [request a free walkthrough](/request-a-quote/).
 
 <img src="/images/armstrong-logo-324x92.png" alt="Armstrong Manufacturing Inc. logo" width="300" height="85" loading="lazy" decoding="async" />
 
-For more information visit Armstrong Manufacturing   armstrongmanufacturing.com
+More product information: [Armstrong Manufacturing](https://armstrongmanufacturing.com/product-category/proseries-green/).
 
 <img src="/images/ECOLOGO-450x450.webp" alt="UL ECOLOGO certification mark" width="150" height="150" loading="lazy" decoding="async" />
 
-In April of 2013 changes occurred between Environment Canada and Ecologo. UL Environment is now handling the certification of sustainable products. Green Certified Products will now display the newly updated ECOLOGO symbol. This is your reassurance of a truly sustainable, “GREEN” product!
+Learn about the [UL ECOLOGO certification program](https://www.ul.com/resources/ecologo-certification-program). Check the certification record for the specific product proposed for your building.
 
 ![Reusable spray bottle and cleaning cloth](/images/green-cleaning-products-unlabeled.jpg)
-
-Illustrative stock photograph of a reusable spray bottle and cleaning cloth; not a photograph of the certified products described above.
 
 For staff who tidy up between our visits, see the [cleaning products worth keeping in the office](/5-cleaning-products-you-should-have-in-your-office/) the [combinations you should never mix](/6-common-cleaning-products-that-you-should-never-mix-together/) and the [cleaning techniques to avoid](/commercial-cleaning-techniques-to-avoid/).

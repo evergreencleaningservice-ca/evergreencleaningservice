@@ -65,13 +65,14 @@ describe('posts changed in substance carry the date of that change (geo N8)', ()
   });
 
   it('every updatedDate comes after its pubDate and is not in the future', () => {
+    const today = new Date().toISOString().slice(0, 10);
     for (const f of fs.readdirSync(dir).filter((n) => n.endsWith('.md'))) {
       const slug = f.replace(/\.md$/, '');
       const u = updated(slug);
       if (!u) continue;
       const pub = front(slug).match(/^pubDate:\s*["']?([\d-]{10})/m)![1];
       expect(u > pub, slug).toBe(true);
-      expect(u <= '2026-11-13', slug).toBe(true);
+      expect(u <= today, slug).toBe(true);
     }
   });
 });

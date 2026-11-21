@@ -287,16 +287,14 @@ const retiredPosts: Record<string, string> = {
 export const retiredPostSlugs = Object.keys(retiredPosts);
 
 /**
- * Archive pages the consolidation removed: with 23 posts instead of 38, the
- * last page of these lists no longer exists. Each goes to its first page.
+ * Archive pages that still do not exist after the consolidation. Later posts
+ * restored office page 2 and both commercial-cleaning page 3 archives; those
+ * live pages must not be intercepted by their former retirement redirects.
  */
 export const removedArchivePageRedirects: Redirect[] = [
   ['/insights/page/4/', '/insights/'],
   ['/category/blog/page/4/', '/category/blog/'],
-  ['/tag/commercial-cleaning/page/3/', '/tag/commercial-cleaning/'],
-  ['/tag/commercial-office-cleaning/page/3/', '/tag/commercial-office-cleaning/'],
   ['/tag/janitorial-services/page/3/', '/tag/janitorial-services/'],
-  ['/tag/office/page/2/', '/tag/office/'],
 ].map(([from, to]) => ({ from, to }));
 
 /**

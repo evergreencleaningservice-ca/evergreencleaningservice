@@ -290,7 +290,14 @@ const bodyHtml =
         )
       }
 
-      {data.showProcess && <ProcessSteps heading="How it works" />}
+      {data.showProcess && <ProcessSteps heading="How it works" resources={path === '/office-cleaning/' ? {
+        1: {
+          before: 'To ',
+          href: '/commercial-cleaning-walkthrough-checklist/',
+          label: 'prepare for your office cleaning walkthrough',
+          after: ', bring a room list and note which areas your staff or building management already maintain.',
+        },
+      } : undefined} />}
 
       {
         data.showPricing && (

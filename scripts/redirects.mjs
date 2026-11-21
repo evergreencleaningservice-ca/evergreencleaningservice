@@ -100,16 +100,15 @@ const walk = (dir) => {
 };
 walk(dist);
 
-/* A rule whose source is a built root-level page would shadow it: the asset
+/* A rule whose source is a built page would shadow it: the asset
    router reads this file before it looks for a file, so the page could never
    be served, or would loop onto itself. The URL move of 13 Nov 2026 turned
    five legacy sources into live pages (/office-cleaning/ and four more), and
    the root is shared by posts, pages and the service and industry pages, so
-   this stops the build on the next one rather than shipping it. Root level
-   only for now: three /tag/<tag>/page/N/ rules already shadow archive pages
-   that came back, which is a separate fix. */
+   this stops the build on the next one rather than shipping it. Include
+   nested archives too: a retired tag page can return as new posts are added. */
 const shadowed = pagePaths
-  .filter((p) => p.split('/').length === 2 && taken.has(`${p}/`))
+  .filter((p) => taken.has(`${p}/`))
   .map((p) => `${p}/`);
 if (shadowed.length) {
   console.error(`redirects: these sources are built pages, so their rules would shadow them:\n  ${shadowed.join('\n  ')}`);
