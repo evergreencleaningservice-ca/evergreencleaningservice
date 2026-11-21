@@ -85,8 +85,9 @@ describe('every rendered tel: link', () => {
     // four location pages, less the two merged posts, the emptied plants
     // archive and the office tag's second page. 104 with the janitorial
     // services page (10 Nov 2026).
-    expect(pageCount).toBe(107);
-    expect(new Set(links.map((l) => l.page)).size).toBe(107);
+    // Week 7 adds one guide without adding another archive pagination page.
+    expect(pageCount).toBe(108);
+    expect(new Set(links.map((l) => l.page)).size).toBe(108);
     expect(links.length).toBeGreaterThanOrEqual(230);
   });
 
@@ -122,7 +123,7 @@ describe('the locations the site actually uses', () => {
 
   it('the site header carries one on every non-paid page', () => {
     /* Non-paid pages, including the Toronto cost guide, share this header. */
-    expect(at('header')).toHaveLength(102);
+    expect(at('header')).toHaveLength(103);
   });
 
   it('the mobile drawer carries its own, separately reported link', () => {
@@ -130,7 +131,7 @@ describe('the locations the site actually uses', () => {
        menu at every width (`header`), and the open drawer lists the number
        again as its last item (`mobile_navigation`). Two elements, each with
        one fixed answer. */
-    expect(at('mobile_navigation')).toHaveLength(102);
+    expect(at('mobile_navigation')).toHaveLength(103);
   });
 
   it.each([
@@ -177,7 +178,7 @@ describe('the locations the site actually uses', () => {
   it('the site footer carries one on every non-paid page, the paid footer none', () => {
     /* Added deliberately on 2026-10-15 with the footer's contact block. The
        landing-page shell keeps its own minimal footer with no number. */
-    expect(at('footer')).toHaveLength(102);
+    expect(at('footer')).toHaveLength(103);
   });
 });
 
