@@ -13,3 +13,9 @@ Browser review: 1440, 768, 390 and 320 px widths showed no document overflow. Th
 Repository suite limitation: the selected existing suites produced 15 passing tests across two files and six blocked suite files. The Windows harness calls npx without a shell in five suites; titles parsing expects LF while existing checkout Markdown uses CRLF. These are documented environment/harness limitations, not reported as passes. A direct Astro build and rendered-content validation completed successfully without changing unrelated tests.
 
 Before requested deployment: rebase if main changed; confirm actual publication date in frontmatter; run required production build and deployment gates in the supported environment; upload the new, unique image keys and verify CDN renditions, canonical, social image, archive inclusion and the published route. No promise of a correction deadline or invented inspection interval was added to Evergreen practice.
+
+## Production publication — 21 November 2026
+
+Published through PR #118, release commit `d7afafa01901a1ebf2c3b197a197096490827ff3`, Worker version `4b589337-46ac-4b8c-b48f-0ef067a8c7fa`. All 1,394 tests across 66 files passed in the clean Linux checkout. Production build, secret-name gate, image-host gate, captcha gate and deployment dry run passed. The production purge cleared 240 page/discovery URLs, and IndexNow accepted six URLs.
+
+The live article returns HTTP 200 with the expected canonical, BlogPosting metadata, one H1, seven H2s and six FAQs. All 31 new CDN image renditions match source hashes. Five contextual internal links and the homepage, insights, sitemap, RSS and guide-index listings were verified. At 390 px, the live page has no horizontal document overflow; the checklist scrolls within its region and the FAQ opens. Evidence: `docs/evidence/week7-production-verification.json`. The staging-only notes above describe the earlier review state.

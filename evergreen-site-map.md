@@ -27,4 +27,4 @@ Week 3: commercial cleaning quote checklist — inclusions, exclusions, supplies
 | How We Work | https://www.evergreencleaningservice.ca/our-process/ |
 | Provider handover | https://www.evergreencleaningservice.ca/switch-office-cleaning-companies/ |
 
-Week 7 draft: `/office-cleaning-inspection-checklist/` focuses on completed work during an ongoing agreement, due dates, issue records and rechecks. It remains staged until deployment is requested. The existing checklist plans tasks; the frequency guide plans visits; the handover article covers switching providers and first-week checks.
+Week 7 draft: `/office-cleaning-inspection-checklist/` focuses on completed work during an ongoing agreement, due dates, issue records and rechecks. Published 21 November 2026 after the owner requested deployment. The existing checklist plans tasks; the frequency guide plans visits; the handover article covers switching providers and first-week checks.
