@@ -242,6 +242,15 @@ describe('which pages are indexable', () => {
     expect(robotsMetaOf(read('404.html'))).toMatch(/noindex/);
   });
 
+  it('404 names no canonical and no og:url', () => {
+    /* Cloudflare serves 404.html at every unknown path, so a canonical (or
+       og:url) built from its own path would claim each missing URL's address
+       is /404/ — which is itself a redirect, not a page. */
+    const html = read('404.html');
+    expect(html).not.toMatch(/rel="canonical"/);
+    expect(html).not.toMatch(/property="og:url"/);
+  });
+
   it('every page of the blog archive keeps follow, noindex', () => {
     /* The original's own choice. `noindex, nofollow` here would also cut the
        only crawl path to every post, which is not the same decision — so the

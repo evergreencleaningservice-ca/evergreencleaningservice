@@ -20,6 +20,13 @@ interface Props {
   publishedTime?: string;
   modifiedTime?: string;
   noindex?: boolean;
+  /**
+   * Leaves out `rel="canonical"` and `og:url`. Only for the 404 page: Cloudflare
+   * serves it (not_found_handling: 404-page) at EVERY unknown path, so a
+   * canonical built from its own path told search engines that each missing
+   * URL's canonical was /404/ — a URL that is itself a 307, not a page.
+   */
+  noCanonical?: boolean;
 }
 
 const {
@@ -31,6 +38,7 @@ const {
   publishedTime,
   modifiedTime,
   noindex = false,
+  noCanonical = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
@@ -69,13 +77,13 @@ import MobileActionBar from '../components/MobileActionBar.astro';
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-512.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="canonical" href={canonical} />
+    {!noCanonical && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    {!noCanonical && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />

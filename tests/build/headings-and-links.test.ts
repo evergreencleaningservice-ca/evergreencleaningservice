@@ -358,7 +358,9 @@ describe('the rest of the page is untouched', () => {
       const html = read(page);
       expect(html).toMatch(/<title>.+?<\/title>/s);
       expect(html).toMatch(/<meta name="description" content=".+?"/s);
-      expect(html).toMatch(/<link rel="canonical"/);
+      /* 404.html alone names no canonical (since 2026-11-22): it is served at
+         every unknown path. tests/build/indexability.test.ts asserts that. */
+      if (page !== '404.html') expect(html).toMatch(/<link rel="canonical"/);
       expect(html).toMatch(/application\/ld\+json/);
     }
   });
