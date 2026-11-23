@@ -1,5 +1,6 @@
 ---
 title: "Request a Quote"
+seoTitle: "Commercial Cleaning Quote in Toronto"
 description: "Request a free commercial cleaning quote in Toronto and the GTA. Tell us about your building and we will arrange a walkthrough and written proposal."
 ---
 
