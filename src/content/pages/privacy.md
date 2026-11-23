@@ -1,5 +1,6 @@
 ---
 title: "Privacy Policy"
+seoTitle: "Website Privacy Policy"
 description: "How Evergreen Office Cleaning collects, uses and protects the personal information you give us through this website."
 ---
 
