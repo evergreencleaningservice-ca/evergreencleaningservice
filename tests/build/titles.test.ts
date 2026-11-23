@@ -182,12 +182,25 @@ describe('every built page title', () => {
       '/contact-us/': ['Contact Us: Office Cleaning in Toronto | Evergreen', 'Contact Us'],
       '/reviews/': ['Commercial Cleaning Reviews: Toronto & the GTA | Evergreen', 'Client Reviews'],
       '/green-clean-products/': ['Green Office Cleaning Products We Use in Toronto | Evergreen', 'Green Clean Products'],
+      /* 23 Nov 2026: both were under 30 characters ("Request a Quote | Evergreen",
+         "Privacy Policy | Evergreen"). */
+      '/request-a-quote/': ['Free Commercial Cleaning Quote in Toronto | Evergreen', 'Request a Quote'],
+      '/privacy/': ['Website Privacy Policy | Evergreen', 'Privacy Policy'],
     };
     for (const [url, [title, h1]] of Object.entries(expected)) {
       expect(pages.find((p) => p.url === url)?.title, url).toBe(title);
       const html = fs.readFileSync(path.join(out, url, 'index.html'), 'utf8');
       expect(decode(html.match(/<h1[^>]*>([^<]*)<\/h1>/)?.[1] ?? ''), url).toBe(h1);
     }
+  });
+
+  it('is at least 30 characters on every indexable page', () => {
+    /* 23 Nov 2026: a title under 30 characters says little more than the page
+       type; Search Console and most audit tools flag it. */
+    const short = pages
+      .filter((p) => p.indexable && p.title.length < 30)
+      .map(({ url, title }) => `${url} is ${title.length}: ${title}`);
+    expect(short).toEqual([]);
   });
 
   it('gives no two indexable pages the same title', () => {
