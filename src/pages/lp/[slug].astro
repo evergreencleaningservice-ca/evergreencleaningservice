@@ -24,6 +24,7 @@ import LpFormNote from '../../components/lp/LpFormNote.astro';
 import LpProcess from '../../components/lp/LpProcess.astro';
 import LpFaq from '../../components/lp/LpFaq.astro';
 import { LANDING_PAGES, type LandingPage } from '../../data/landing-pages';
+import { pageTitle } from '../../lib/title';
 
 export function getStaticPaths() {
   return LANDING_PAGES.map((page) => ({ params: { slug: page.slug }, props: { page } }));
@@ -34,7 +35,7 @@ const anchor = `${page.slug}-form`;
 ---
 
 <LandingLayout
-  title={page.title}
+  title={pageTitle(page.title)}
   description={page.description}
   callNote="Talk to an account executive"
   quoteAnchor={anchor}

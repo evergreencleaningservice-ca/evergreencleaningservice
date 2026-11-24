@@ -157,13 +157,10 @@ describe('every built page title', () => {
   });
 
   it('uses no other suffix form and never doubles the brand, on any page', () => {
-    /* The two data-driven landing pages (noindex, paid traffic) take their
-       titles from src/data/landing-pages.ts, which still types in "| Evergreen
-       Office Cleaning". Left for that file's owner; remove these entries when
-       lp/[slug].astro passes its titles through pageTitle(). */
-    const pending = new Set(['/lp/office-cleaning/', '/lp/post-construction-cleaning/']);
+    /* Every page, the noindex landing pages included: lp/[slug].astro passes
+       the titles in src/data/landing-pages.ts through pageTitle() (24 Nov
+       2026), so they carry the one suffix like every other page. */
     const problems = pages
-      .filter(({ url }) => !pending.has(url))
       .filter(({ title }) =>
         / [-–—] Evergreen/.test(title) ||
         /\| Evergreen Office Cleaning/.test(title) ||
@@ -171,6 +168,13 @@ describe('every built page title', () => {
       )
       .map(({ url, title }) => `${url}: ${title}`);
     expect(problems).toEqual([]);
+  });
+
+  it('brands the data-driven landing pages with the one suffix, without doubling it', () => {
+    expect(pages.find((p) => p.url === '/lp/office-cleaning/')?.title).toBe('Office Cleaning — Toronto & GTA | Evergreen');
+    expect(pages.find((p) => p.url === '/lp/post-construction-cleaning/')?.title).toBe(
+      'Post-Construction Cleaning — Toronto & GTA | Evergreen'
+    );
   });
 
   it('names the service and Toronto on the four utility pages, and keeps their H1s', () => {
