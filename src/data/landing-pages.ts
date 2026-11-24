@@ -51,7 +51,7 @@ export const LANDING_PAGES: LandingPage[] = [
   {
     slug: 'office-cleaning',
     formId: 'lp-office-cleaning',
-    title: 'Office Cleaning — Toronto & GTA | Evergreen Office Cleaning',
+    title: 'Office Cleaning — Toronto & GTA',
     description:
       'Recurring after-hours office cleaning in Toronto and the GTA. Free walkthrough, written scope, WSIB covered and bonded crews.',
     eyebrow: 'Office cleaning — Toronto & the GTA',
@@ -94,7 +94,7 @@ export const LANDING_PAGES: LandingPage[] = [
   {
     slug: 'post-construction-cleaning',
     formId: 'lp-post-construction',
-    title: 'Post-Construction Cleaning — Toronto & GTA | Evergreen Office Cleaning',
+    title: 'Post-Construction Cleaning — Toronto & GTA',
     description:
       'Commercial post-construction and renovation clean-up in Toronto and the GTA, scheduled around your trades and handover date. WSIB covered and bonded.',
     eyebrow: 'Post-construction cleaning — Toronto & the GTA',
