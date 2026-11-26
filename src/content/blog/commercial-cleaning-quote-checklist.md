@@ -1,7 +1,7 @@
 ---
 title: "Commercial Cleaning Quote Checklist: What to Include"
 seoTitle: "Commercial Cleaning Quote Checklist: What to Include"
-description: "Use this commercial cleaning quote checklist to check tasks, schedules, supplies and exclusions before signing a Toronto cleaning agreement."
+description: "What a commercial cleaning quote should include: tasks by area, visit days, supplies and exclusions, so you can compare Toronto proposals before signing."
 pubDate: 2026-11-10
 image: "/images/blog-commercial-cleaning-quote.jpg"
 imageAlt: "Empty commercial office with organized desks, computer monitors and black task chairs."

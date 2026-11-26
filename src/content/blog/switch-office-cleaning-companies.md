@@ -1,7 +1,7 @@
 ---
 title: "How to Switch Office Cleaning Companies Without Missing a Visit"
 seoTitle: "How to Switch Office Cleaning Companies in Toronto"
-description: "Learn how to switch office cleaning companies, confirm both visit dates, and hand over keys, alarm access and supplies without a gap."
+description: "Switch office cleaning companies without a missed visit: confirm the last and first cleans in writing, test keys and alarm access, and check supplies."
 pubDate: 2026-11-14
 image: "/images/janitorial-cart-preparation-supplies.jpg"
 imageAlt: "Janitorial cart with a yellow mop bucket, wet-floor sign and broom beside a glass railing."
