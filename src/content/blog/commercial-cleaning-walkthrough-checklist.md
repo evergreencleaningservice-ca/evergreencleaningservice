@@ -1,7 +1,7 @@
 ---
 title: "How to Prepare for a Commercial Cleaning Walkthrough"
 seoTitle: "How to Prepare for a Commercial Cleaning Walkthrough"
-description: "Learn how to prepare for a commercial cleaning walkthrough, from marking cleanable rooms to confirming access, supplies and scope."
+description: "Prepare for a commercial cleaning walkthrough: bring a marked floor plan, walk every room in scope, and settle access, supplies and who cleans what."
 pubDate: "2026-11-14T12:41:07-05:00"
 updatedDate: 2026-11-21
 image: "/images/gallery-lobby-floor-care.jpg"

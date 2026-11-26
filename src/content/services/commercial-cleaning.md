@@ -7,7 +7,7 @@ seoTitle: "Commercial Cleaning Services in Toronto"
 # page that defines janitorial service and carries the "difference" FAQ, so
 # the two pages stop answering the same question. The description leads with
 # the answer instead of repeating the title's words.
-description: "Routine, periodic and one-off cleaning for retail, institutional and mixed-use buildings in Toronto and the GTA, after hours."
+description: "Routine, periodic and one-off commercial cleaning for retail, institutional and mixed-use buildings in Toronto and the GTA, done after hours."
 summary: "Commercial cleaning is the routine, periodic and one-off cleaning of business premises: stores, banks, schools, clinics, public buildings and mixed-use buildings. Evergreen Office Cleaning has provided it across Toronto and the GTA since 1989, scheduled around your opening hours and scoped on site, not over the phone."
 image: "/images/lobby-floor-scrubber-commercial.jpg"
 imageAlt: "Close-up of a floor machine cleaning a commercial lobby"

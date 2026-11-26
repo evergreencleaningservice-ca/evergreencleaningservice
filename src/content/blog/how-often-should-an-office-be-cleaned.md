@@ -1,7 +1,7 @@
 ---
 title: "How Often Should an Office Be Cleaned Professionally?"
 seoTitle: "How Often Should an Office Be Cleaned? Toronto Guide"
-description: "Learn how often an office should be cleaned, with practical daily, weekly and monthly schedules for Toronto workplaces."
+description: "How often to clean an office: in a five-day workplace, washrooms, kitchens, bins and busy floors daily, quieter areas less. Toronto schedules inside."
 pubDate: 2026-11-03
 image: "/images/blog-office-cleaning-frequency.jpg"
 imageAlt: "Empty commercial office with organized desks, computer monitors and black task chairs."

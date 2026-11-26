@@ -1,7 +1,7 @@
 ---
 title: "What to Ask About Green Office Cleaning Before You Hire"
 seoTitle: "What to Ask About Green Office Cleaning Before You Hire"
-description: "Know what to ask about green office cleaning. Verify product labels, fragrance preferences and substitutions before you sign."
+description: "Before hiring a green office cleaner, ask for the product for each task, its label and safety data sheet, fragrance limits and who approves swaps."
 pubDate: "2026-11-14T13:00:49-05:00"
 image: "/images/eco-friendly-cleaning-spray-microfibre.jpg"
 imageAlt: "Pink spray bottle on folded pink and yellow microfibre cloths."

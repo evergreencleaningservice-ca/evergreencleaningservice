@@ -293,7 +293,7 @@ export const locations: Location[] = [
     landmarks: 'Markham Centre, the Highway 404 and 407 corridor, Unionville and the Woodbine–Steeles business area',
     mapQuery: 'Markham, Ontario, Canada',
     description:
-      'Office and commercial cleaning in Markham: corporate and tech offices, clinics and business-park units along Highway 7, 404 and 407. After hours, WSIB covered.',
+      'Office and commercial cleaning in Markham: tech and corporate offices, clinics and business parks in the 404 and 407 corridor. After hours, WSIB covered.',
     title: 'Office & Commercial Cleaning in Markham',
     h1: 'Office & Commercial Cleaning in Markham',
   },

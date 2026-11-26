@@ -1,5 +1,5 @@
 ---
-title: "Day Or Night – Which Is the Best Routine For Your Office?"
+title: "Day or Night – Which Is the Best Routine for Your Office?"
 # 13 Nov 2026 (comparison with impact.ca): blog title/H1 split. The H1 is
 # reader-phrased and stays; the <title> leads with the search query instead:
 # people search "day vs night office cleaning"; the H1 asks it as a question.

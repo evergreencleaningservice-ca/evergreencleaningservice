@@ -8,7 +8,7 @@ h1: "Janitorial Services in Toronto and the GTA"
 # section went. "How a janitorial contract starts" went too: the shared
 # "How it works" block further down lists the same steps. The description
 # leads with the work instead of repeating the title's words.
-description: "Washrooms, kitchens, floors, trash and touch points cleaned on a fixed schedule in Toronto and the GTA, after hours, by the same crew."
+description: "Scheduled janitorial services in Toronto and the GTA: washrooms, kitchens, floors, trash and touch points cleaned after hours by the same crew."
 # 13 Nov 2026, SEO audit 11 Nov (geo N9, sxo S1): the opener had grown to
 # 419 characters. It keeps the definition, the morning result, the years and
 # the hours; the office address, the same-crew point and "without anyone

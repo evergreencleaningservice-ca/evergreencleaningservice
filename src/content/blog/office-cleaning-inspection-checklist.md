@@ -1,7 +1,7 @@
 ---
 title: "Office Cleaning Inspection Checklist: How to Check the Results"
 seoTitle: "Office Cleaning Inspection Checklist: Check Results"
-description: "Use an office cleaning inspection checklist to check completed work, record missed tasks and confirm corrections in your Toronto office."
+description: "Check office cleaning against your agreement: inspect the last visit’s tasks area by area, record what was missed and confirm corrections."
 pubDate: "2026-11-21"
 image: "/images/office-inspection-meeting-room.jpg"
 imageAlt: "Empty meeting room with a white table, black chairs, glass partitions and carpeted floor."

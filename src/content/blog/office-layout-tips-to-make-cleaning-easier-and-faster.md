@@ -1,5 +1,5 @@
 ---
-title: "Office Layout Tips to Make Cleaning Easier And Faster"
+title: "Office Layout Tips to Make Cleaning Easier and Faster"
 description: "Office layouts that make cleaning faster: an open plan, a circular layout, furniture that moves easily, no carpet, and storage that keeps clutter hidden."
 pubDate: 2023-02-07
 image: "/images/blog-cleanable-office-layout-feature.jpg"
