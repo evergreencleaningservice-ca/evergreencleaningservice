@@ -45,6 +45,14 @@ interface Props {
 
 const { title, description, callNote, quoteAnchor, finePrint } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+/* Social card. These pages are the paid-ad destinations, and a link to one
+   pasted into a social ad, a message or an email draws its preview from
+   og:/twitter: tags — without them the platform guesses from the page and
+   usually shows no image. Same default card and alt as BaseLayout. The
+   post-build image step moves /images/ URLs to the image host, as it does
+   for every other page. */
+const ogImage = new URL('/images/evergreen-modern-commercial-cleaning-hero-og.jpg', Astro.site ?? site.url).href;
+const ogAlt = 'Cleaners in green uniforms vacuuming and wiping desks in an open-plan Toronto office';
 ---
 
 <!doctype html>
@@ -73,6 +81,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
         the thank-you page. Applied here so all three pages on this shell agree
         rather than one of them drifting. */}
     <meta name="robots" content="noindex, nofollow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_CA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogAlt} />
 
     {/* The hero image — this page's LCP — is served from the image bucket,
         a different origin from the document. Without this the browser cannot

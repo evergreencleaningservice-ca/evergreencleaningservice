@@ -463,6 +463,20 @@ describe('indexing', () => {
     expect(linking.map((f) => path.relative(out, f))).toEqual([]);
   });
 
+  it.each(PAGES)('$name carries a social card that matches the page', ({ name, url }) => {
+    /* An ad link pasted into a social platform or message builds its preview
+       from these. They must name this page and repeat its own title. */
+    const h = html[name];
+    const title = h.match(/<title>([^<]*)<\/title>/)?.[1];
+    expect(title).toBeTruthy();
+    expect(h).toContain(`<meta property="og:url" content="https://www.evergreencleaningservice.ca${url}">`);
+    expect(h).toContain(`<meta property="og:title" content="${title}">`);
+    expect(h).toContain(`<meta name="twitter:title" content="${title}">`);
+    expect(h).toMatch(/<meta property="og:description" content="[^"]{70,}">/);
+    expect(h).toMatch(/<meta property="og:image" content="https:\/\/[^"]+-og\.jpg">/);
+    expect(h).toContain('<meta name="twitter:card" content="summary_large_image">');
+  });
+
   it('the URLs themselves are unchanged, so advertising links keep working', () => {
     for (const p of PAGES) expect(fs.existsSync(path.join(out, p.file))).toBe(true);
   });
