@@ -205,16 +205,16 @@ describe('the quote form', () => {
     expect(forms).toHaveLength(1);
   });
 
-  it.each(PAGES)('$name asks the original form\'s eight required questions', ({ name }) => {
+  it.each(PAGES)('$name asks the four required questions', ({ name }) => {
     const form = leadForm(name);
     for (const spec of FIELDS) {
       const tag = control(form, spec.name);
       expect(tag, `${name}: missing ${spec.name}`).not.toBeNull();
       expect(new RegExp(`\\brequired(?=[\\s/>=])`, 'i').test(tag!)).toBe(spec.required);
     }
-    /* Eight since 2026-10-22, when the client asked for the original site's
-       form back: name, business, four address boxes, email and phone. */
-    expect(questionRequiredCount(form)).toBe(8);
+    /* Four since 27 Nov 2026 (client): name, business, email and city. It
+       was eight from 22 Oct, with a four-box address and a required phone. */
+    expect(questionRequiredCount(form)).toBe(4);
   });
 
   it.each(PAGES)('$name asks for none of the fields nothing on this site asks for', ({ name }) => {
@@ -225,17 +225,13 @@ describe('the quote form', () => {
     }
   });
 
-  it.each(PAGES)('$name requires BOTH a phone and an email, each with its own error', ({ name }) => {
-    /* THIS ASSERTED THE OPPOSITE until the reference field set was adopted:
-       "phone OR email, one is enough", sharing a single error slot keyed
-       `contact` because the rule had no field of its own. Both are required
-       now, so each needs somewhere separate to say what is wrong with it —
-       one slot for two required fields shows one message and hides the
-       other. */
+  it.each(PAGES)('$name requires an email, leaves the phone optional, and gives each its own error', ({ name }) => {
+    /* Phone has been optional since 27 Nov 2026 (client); email is the one
+       required way to reply. Each keeps its own error slot: a phone number
+       typed in can still be wrong. */
     const form = leadForm(name);
-    for (const field of ['phone', 'email']) {
-      expect(/\brequired(?=[\s/>=])/i.test(control(form, field)!)).toBe(true);
-    }
+    expect(/\brequired(?=[\s/>=])/i.test(control(form, 'email')!)).toBe(true);
+    expect(/\brequired(?=[\s/>=])/i.test(control(form, 'phone')!)).toBe(false);
     expect(form).not.toContain('data-qq-error="contact"');
     expect(form).toContain('data-qq-error="phone"');
     expect(form).toContain('data-qq-error="email"');

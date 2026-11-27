@@ -188,7 +188,9 @@ describe('the emitted _redirects', () => {
   });
 
   it('sends every variant to a 301, not a 302 or a meta refresh', () => {
-    const notPermanent = rules.filter((r) => r.code !== '301');
+    /* One deliberate exception: the /review/ shortcut to Google's review box
+       is a 302 (27 Nov 2026), asserted on its own below. */
+    const notPermanent = rules.filter((r) => r.code !== '301' && !['/review/', '/review'].includes(r.from));
     expect(notPermanent).toEqual([]);
   });
 
@@ -283,5 +285,18 @@ describe('the service and industry pages moved to the root', () => {
   it('has no rule whose target is itself redirected', () => {
     const chained = rules.filter((r) => !r.from.includes('*') && byFrom.has(r.to));
     expect(chained.map((r) => `${r.from} -> ${r.to} -> ${byFrom.get(r.to)!.to}`)).toEqual([]);
+  });
+});
+
+/* --- the review shortcut (27 Nov 2026) -------------------------------------- */
+
+describe('/review/ opens the Google "write a review" box', () => {
+  it('both spellings 302 to the listing\'s review URL, and /reviews/ is untouched', async () => {
+    const { nap } = await import('../../src/data/site');
+    expect(nap.reviewUrl).toMatch(/^https:\/\/search\.google\.com\/local\/writereview\?placeid=ChIJ[\w-]+$/);
+    for (const from of ['/review/', '/review']) {
+      expect(byFrom.get(from), from).toEqual({ from, to: nap.reviewUrl, code: '302' });
+    }
+    expect(byFrom.has('/reviews/')).toBe(false);
   });
 });

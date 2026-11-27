@@ -25,7 +25,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { LEAD_EVENT } from '../src/lib/lead-submit';
 import { wireQuickQuote } from '../src/lib/quick-quote';
 import { recordTouch } from '../src/lib/attribution';
-import { VALID_LEAD, fill, quickQuoteMarkup, tick } from './fixtures/quick-quote';
+import { VALID_LEAD, choose, fill, quickQuoteMarkup } from './fixtures/quick-quote';
 import { SERVICE_OPTIONS } from '../src/data/services';
 
 /* ---------- harness ------------------------------------------------------ */
@@ -72,11 +72,10 @@ beforeEach(() => {
 
 /* ---------- 1. one contact method is enough ------------------------------ */
 
-describe('every field the form asks for is required', () => {
+describe('the required fields', () => {
   /**
-   * The original site's form 1381, back at the client's request: name,
-   * business, a four-box address, email and phone are all required; the
-   * services checklist and the comments are not.
+   * Since 27 Nov 2026 (client): name, business, email and city are required;
+   * phone, the service dropdown and the comments are not.
    */
   it('accepts a complete submission', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
@@ -97,7 +96,7 @@ describe('every field the form asks for is required', () => {
     expect(confirmation()).not.toBeNull();
   });
 
-  it.each(['name', 'business-name', 'address1', 'city', 'province', 'postal', 'email', 'phone'])(
+  it.each(['name', 'business-name', 'email', 'city'])(
     'marks %s required in the markup',
     (name) => {
       const form = mount();
@@ -107,23 +106,46 @@ describe('every field the form asks for is required', () => {
     }
   );
 
-  it('asks for eight required fields', () => {
+  it('asks for four required fields', () => {
     const form = mount();
     const required = Array.from(form.elements).filter(
       (el) => (el as HTMLInputElement).required
     ).length;
-    expect(required).toBe(8);
+    expect(required).toBe(4);
   });
 
-  it('starts the province at Ontario, as the original did', () => {
+  it.each(['phone', 'services', 'message'])('leaves %s optional', (name) => {
     const form = mount();
-    expect((form.elements.namedItem('province') as HTMLInputElement).value).toBe('Ontario');
+    const el = form.elements.namedItem(name) as HTMLInputElement;
+    expect(el, `no field named ${name}`).toBeTruthy();
+    expect(el.required).toBe(false);
+  });
+
+  it('refuses a phone number too short to call, and says so on the phone field', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
+    const form = ready({ ...VALID_LEAD, phone: '555-01' });
+
+    await submit(form);
+
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(errorFor('phone')).toContain('looks incomplete');
+  });
+
+  it('accepts a submission with no phone number', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
+    const form = ready({ ...VALID_LEAD, phone: '' });
+
+    await submit(form);
+
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(sentBody(fetchSpy).phone).toBe('');
+    expect(leadEvents()).toHaveLength(1);
   });
 
   it('gives every required field its own error slot', () => {
     mount();
     expect(document.querySelector('[data-qq-error="contact"]')).toBeNull();
-    for (const key of ['name', 'business-name', 'address1', 'city', 'province', 'postal', 'email', 'phone']) {
+    for (const key of ['name', 'business-name', 'email', 'phone', 'city']) {
       expect(document.querySelector(`[data-qq-error="${key}"]`), key).not.toBeNull();
     }
   });
@@ -161,34 +183,35 @@ describe('a field that is filled in badly', () => {
 /* ---------- 3. what the form asks for now -------------------------------- */
 
 describe('the field set, as it reaches the endpoint', () => {
-  it('sends the address the way the email prints it', async () => {
+  it('sends the city as the address, and no province', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
     const form = ready(VALID_LEAD);
 
     await submit(form);
 
     const body = sentBody(fetchSpy);
-    /* Street, then "city, province", then the postal code, one per line and
-       the postal code upper-cased. The email adds "CA" under it. */
-    expect(body.address).toBe('716 Gordon Baker Rd., Ste. 201\nNorth York, Ontario\nM2H 3B4');
-    expect(body.province).toBe('Ontario');
+    /* The street, province and postal code boxes went on 27 Nov 2026; the
+       email adds "CA" under the city. */
+    expect(body.address).toBe('North York');
+    expect(body).not.toHaveProperty('province');
   });
 
-  it('sends every ticked service, in the form\'s order, and the comments', async () => {
+  it('sends the chosen service and the comments', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
     const form = ready({ ...VALID_LEAD, message: 'Kitchen: sweep & mop.\nSecond floor.' });
-    tick(form, ['Carpet & Floor Care', 'Office Cleaning']);
+    choose(form, 'Office Cleaning');
 
     await submit(form);
 
     const body = sentBody(fetchSpy);
-    expect(body.services).toBe('Office Cleaning, Carpet & Floor Care');
+    expect(body.services).toBe('Office Cleaning');
     expect(body.message).toBe('Kitchen: sweep & mop.\nSecond floor.');
   });
 
-  it('no longer has the single service select, the city box or first/last name', async () => {
+  it('has no street address, province, postal code, checkboxes or first/last name', async () => {
     const form = mount();
-    for (const name of ['service', 'location', 'first-name', 'last-name']) {
+    expect(form.querySelectorAll('input[type="checkbox"]')).toHaveLength(0);
+    for (const name of ['address1', 'province', 'postal', 'location', 'first-name', 'last-name']) {
       expect(form.elements.namedItem(name), `${name} should not be on the form`).toBeNull();
     }
   });
@@ -399,7 +422,7 @@ describe('errors are announced, not just coloured', () => {
       ...VALID_LEAD,
       name: '',
       'business-name': '',
-      postal: '',
+      city: '',
       phone: '',
       email: '',
     });
@@ -408,10 +431,11 @@ describe('errors are announced, not just coloured', () => {
 
     expect(errorFor('name')).toContain('name');
     expect(errorFor('business-name')).toContain('business');
-    expect(errorFor('postal')).toContain('postal code');
-    expect(errorFor('phone')).toContain('phone');
+    expect(errorFor('city')).toContain('city');
     expect(errorFor('email')).toContain('email');
-    expect(summary()).toContain('5 things need a moment');
+    /* Phone is optional since 27 Nov 2026: empty is not an error. */
+    expect(errorFor('phone')).toBe('');
+    expect(summary()).toContain('4 things need a moment');
     /* A count, not a list: each message is already under its own box. */
     expect(summary()).not.toContain('Please add');
   });
@@ -483,15 +507,12 @@ describe('errors are announced, not just coloured', () => {
     expect(nameBox.hasAttribute('aria-invalid')).toBe(false);
   });
 
-  it('clears the contact error when either phone or email is touched', async () => {
+  it('touching one field clears its own message and leaves the others', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    /* Phone and email each own their slot now — they shared one keyed
-       `contact` while the rule was "either is enough". Touching one must
-       clear ITS message and leave the other's standing. */
-    const form = ready({ ...VALID_LEAD, phone: '', email: '' });
+    const form = ready({ ...VALID_LEAD, city: '', email: '' });
     await submit(form);
     expect(summary()).not.toBe('');
-    expect(errorFor('phone')).not.toBe('');
+    expect(errorFor('city')).not.toBe('');
     expect(errorFor('email')).not.toBe('');
 
     const email = form.elements.namedItem('email') as HTMLInputElement;
@@ -499,12 +520,12 @@ describe('errors are announced, not just coloured', () => {
     email.dispatchEvent(new Event('input', { bubbles: true }));
 
     expect(errorFor('email')).toBe('');
-    expect(errorFor('phone'), 'the phone message must survive').not.toBe('');
+    expect(errorFor('city'), 'the city message must survive').not.toBe('');
   });
 
   it('a stale error does not survive the next attempt', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(ok());
-    const form = ready({ ...VALID_LEAD, name: '', phone: '' });
+    const form = ready({ ...VALID_LEAD, name: '', city: '' });
     await submit(form);
     expect(summary()).toContain('2 things');
 
@@ -512,7 +533,7 @@ describe('errors are announced, not just coloured', () => {
     await submit(form);
 
     expect(errorFor('name')).toBe('');
-    expect(summary()).toContain('phone');
+    expect(summary()).toContain('city');
     expect(summary()).not.toContain('2 things');
   });
 });
@@ -621,14 +642,16 @@ describe('the submit button', () => {
   });
 });
 
-/* ---------- 10. the services checklist ---------------------------------- */
+/* ---------- 10. the service dropdown ----------------------------------- */
 
-describe('the services checklist', () => {
-  it("offers the original site's eight, in its order", () => {
+describe('the service dropdown', () => {
+  it("offers the original site's eight, in its order, after an empty choice", () => {
     const form = mount();
-    const values = Array.from(
-      form.querySelectorAll<HTMLInputElement>('input[name="services"]')
-    ).map((box) => box.value);
+    const options = Array.from(
+      form.querySelectorAll<HTMLOptionElement>('select[name="services"] option')
+    );
+    expect(options[0].value).toBe('');
+    const values = options.slice(1).map((o) => o.value);
     expect(values).toEqual([...SERVICE_OPTIONS]);
     expect(values).toHaveLength(8);
     expect(values[0]).toBe('Office Cleaning');

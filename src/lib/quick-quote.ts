@@ -71,14 +71,8 @@ function messageFor(name: string, el: HTMLInputElement | HTMLSelectElement): str
         return 'Please add an email address.';
       case 'business-name':
         return 'Please add the name of the business.';
-      case 'address1':
-        return 'Please add the street address.';
       case 'city':
         return 'Please add the city.';
-      case 'province':
-        return 'Please add the province.';
-      case 'postal':
-        return 'Please add the postal code.';
       case 'g-recaptcha-hidden':
         /* The reCAPTCHA checkbox's token field, empty until it is ticked.
            Without this case the visitor read "This one is needed." about a
@@ -94,6 +88,8 @@ function messageFor(name: string, el: HTMLInputElement | HTMLSelectElement): str
   }
   if (el.validity.typeMismatch && name === 'email')
     return 'That email address does not look complete.';
+  if (el.validity.patternMismatch && name === 'phone')
+    return 'That phone number looks incomplete. Add the area code, or leave it blank.';
   return 'Please check this one.';
 }
 
@@ -173,24 +169,17 @@ export function reportInvalidFields(form: HTMLFormElement): void {
    would reasonably assume the site still accepts one or the other. */
 
 /**
- * The address as the notification email prints it: street, then
- * "city, province", then the postal code, one per line. Stored the same way,
- * so the admin and the email show one thing.
+ * The address the lead carries: the city alone since 27 Nov 2026, when the
+ * street, province and postal code boxes were removed at the client's
+ * request. Kept as a function so the notification email and the admin still
+ * read one `address` field; the email adds "CA" under it.
  */
 export function composeAddress(form: HTMLFormElement): string {
-  const cityLine = [fieldValue(form, 'city'), fieldValue(form, 'province')]
-    .filter(Boolean)
-    .join(', ');
-  return [fieldValue(form, 'address1'), cityLine, fieldValue(form, 'postal').toUpperCase()]
-    .filter(Boolean)
-    .join('\n');
+  return fieldValue(form, 'city');
 }
 
-/** Every ticked service, in the form's order, joined with ", ". */
-export const checkedServices = (form: HTMLFormElement): string =>
-  Array.from(form.querySelectorAll<HTMLInputElement>('input[name="services"]:checked'))
-    .map((el) => el.value)
-    .join(', ');
+/** The service chosen in the dropdown, or '' when none was (it is optional). */
+export const checkedServices = (form: HTMLFormElement): string => fieldValue(form, 'services');
 
 export interface QuickQuoteOptions {
   /** Small numbers in tests; the real one is the module default. */
@@ -281,11 +270,10 @@ export function wireQuickQuote(form: HTMLFormElement, options: QuickQuoteOptions
       name: fieldValue(f, 'name'),
       business_name: fieldValue(f, 'business-name'),
       address: composeAddress(f),
-      province: fieldValue(f, 'province'),
       email: fieldValue(f, 'email'),
       phone: fieldValue(f, 'phone'),
-      /* The ticked boxes, joined — the shape the `services` column held
-         when the original site's form was a checklist. */
+      /* The one service chosen, or ''. The column also holds older leads'
+         ticked boxes, joined with ", ". */
       services: checkedServices(f),
       message: fieldValue(f, 'message'),
       page_url: location.href,

@@ -301,7 +301,13 @@ describe('the legacy redirect map', () => {
     const indexHtml = redirects.filter((r) => r.from.endsWith('/index.html') && r.from === `${r.to}index.html`);
     const legacy = redirects.filter(
       (r) =>
-        r.to !== `${r.from}/` && r.from !== '/sitemap-0.xml' && !consolidation.has(r.from) && !indexHtml.includes(r)
+        r.to !== `${r.from}/` &&
+        r.from !== '/sitemap-0.xml' &&
+        !consolidation.has(r.from) &&
+        !indexHtml.includes(r) &&
+        /* The review shortcut (27 Nov 2026) is a pointer out, not a legacy
+           address, and is asserted in redirect-variants.test.ts. */
+        !r.to.startsWith('https://search.google.com/')
     );
     /* 171 until the URL move of 13 Nov 2026 (owner decision): +26 for the
        13 old /services/ and /industries/ addresses in both spellings, -10

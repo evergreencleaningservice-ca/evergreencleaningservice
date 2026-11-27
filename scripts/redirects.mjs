@@ -24,6 +24,7 @@ import {
   wildcardRedirects,
   bothSlashSpellings,
 } from '../src/data/redirects.ts';
+import { nap } from '../src/data/site.ts';
 
 const uploadRedirects = JSON.parse(
   fs.readFileSync(path.resolve('src/data/upload-redirects.json'), 'utf8')
@@ -79,6 +80,15 @@ section('Archive pages the consolidation removed', bothSlashSpellings(removedArc
    Console had been reading sitemap-0.xml since 10 Oct, so it points at the
    pages sitemap rather than 404ing. */
 section('Sitemap split', [{ from: '/sitemap-0.xml', to: '/sitemap-pages-0.xml' }]);
+
+/* The review shortcut (27 Nov 2026): /review/ opens Google's "write a review"
+   box for the business listing, so a review request can carry one short,
+   memorable address. A 302, not a 301: it is a pointer to an outside page
+   that may change (a new Place ID, another review site), and a permanent
+   redirect would be cached by browsers. /reviews/ (the page) is unaffected. */
+lines.push('# Review shortcut, to the Google Business Profile');
+for (const from of ['/review/', '/review']) lines.push(`${from} ${nap.reviewUrl} 302`);
+lines.push('');
 
 /* Every page this build serves, spelled without its trailing slash. Without a
    rule, Cloudflare's asset router answers `/about-us` with a 307 to

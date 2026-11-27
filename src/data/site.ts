@@ -210,6 +210,13 @@ export const nap = {
   latitude: 43.65019,
   longitude: -79.38856,
   mapUrl: 'https://maps.google.com/?cid=15602716773318351983',
+  /* The same listing's "write a review" box, by its Place ID (27 Nov 2026).
+     ChIJ-1EamtnN1IkRb1yrFD38h9g was read from the Maps page that mapUrl
+     opens; its feature id 0x...:0xd887fc3d14ab5c6f is cid 15602716773318351983,
+     so the two point at one listing. /review/ redirects here
+     (scripts/redirects.mjs), so the short address can go in emails and on
+     invoices and still be repointed later. */
+  reviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJ-1EamtnN1IkRb1yrFD38h9g',
   /**
    * Other names the business is known by. The site, the schema and the
    * Google listing say "Evergreen Office Cleaning"; the domain, the old logo,

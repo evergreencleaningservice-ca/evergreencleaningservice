@@ -123,31 +123,32 @@ describe('the rendered form matches the contract the unit suite tests', () => {
     }
   });
 
-  it('asks eight required questions', () => {
-    /* The original site's form 1381: name, business, four address boxes,
-       email and phone. Pinned rather than loosened: a field quietly
-       becoming required is a conversion cost somebody should have to state
-       out loud. */
+  it('asks four required questions', () => {
+    /* Since 27 Nov 2026 (client): name, business, email and city. Pinned
+       rather than loosened: a field quietly becoming required is a
+       conversion cost somebody should have to state out loud. */
     const required = questionRequiredCount(form());
     expect(required).toBe(REQUIRED_COUNT);
-    expect(required).toBe(8);
+    expect(required).toBe(4);
   });
 
   it.each(BANNED_FIELDS)('does not ask for %s', (name) => {
     expect(control(quote, name)).toBeNull();
   });
 
-  it('asks exactly the contract fields, the services checklist, and nothing else', () => {
-    /* The only extra controls are the honeypot, the captcha token and the
-       eight service checkboxes, which share one name. */
+  it('asks exactly the contract fields and nothing else', () => {
+    /* The only extra controls are the honeypot and the captcha token. The
+       services are one dropdown (27 Nov 2026), so one control. */
     const named = [...form().matchAll(/<(?:input|select|textarea)\b[^>]*\bname="([^"]+)"/g)].map(
       (m) => m[1]
     );
-    const EXTRAS = ['company-website', CAPTCHA_FIELD, 'services'];
+    const EXTRAS = ['company-website', CAPTCHA_FIELD];
     expect(named.filter((n) => !EXTRAS.includes(n)).sort()).toEqual(
       FIELDS.map((f) => f.name).sort()
     );
-    expect(named.filter((n) => n === 'services')).toHaveLength(SERVICE_OPTIONS.length);
+    expect(named.filter((n) => n === 'services')).toHaveLength(1);
+    expect(form()).not.toMatch(/type="checkbox"[^>]*name="services"/);
+    for (const service of SERVICE_OPTIONS) expect(form()).toContain(`<option value="${service.replace(/&/g, '&amp;')}"`);
   });
 });
 
@@ -203,19 +204,13 @@ describe('every field is labelled', () => {
     }
   });
 
-  it("uses the original form's labels", () => {
+  it('uses the agreed labels', () => {
     const f = quickQuoteForm();
-    for (const label of [
-      'Name',
-      'Name of Business',
-      'Address',
-      'Email',
-      'Phone',
-      'Additional comments',
-    ]) {
+    for (const label of ['Name', 'Name of Business', 'Email', 'Phone', 'City', 'Service needed', 'Additional comments']) {
       expect(f, label).toContain(label);
     }
-    expect(f).toMatch(/I(?:'|&#39;)m interested in a quote for these services/);
+    expect(f).toContain('(optional)');
+    expect(f).not.toMatch(/Street address|Postal code|Province/);
   });
 });
 

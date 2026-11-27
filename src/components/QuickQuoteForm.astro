@@ -3,23 +3,22 @@
  * The quote form — every quote form on the site, the landing pages and the
  * homepage included.
  *
- * WHAT IT ASKS (2026-10-22). The client asked for the form to look and work
- * exactly like the original site's WPForms form **1381**, the one whose
- * notification email they read every lead in. Its fields, in its order:
+ * WHAT IT ASKS (since 27 Nov 2026). Shortened at the client's request:
  *
  *   Name *                one box; the email shows the whole name on one line
  *   Name of Business *
- *   Address *             street & unit #, city, province (Ontario), postal
- *                         code. Country is not asked: the email prints "CA".
- *   Email *
- *   Phone *
- *   I'm interested in a quote for these services   checkboxes, not required
- *   Additional comments                          not required
+ *   Email *               the one required way to reply
+ *   Phone                 optional
+ *   City *                with the service-area places suggested
+ *   Service needed        one dropdown, optional
+ *   Additional comments   optional
  *
- * This replaces the short form (name, phone, email, one service select, an
- * optional city). It asks more and will convert somewhat worse; the client
- * chose a lead that arrives with its address and business over a shorter
- * form.
+ * From 22 Oct to 27 Nov 2026 it copied the original site's WPForms form 1381
+ * (a four-box street address, required phone, an eight-box service
+ * checklist), which the client chose then over a shorter form. On 27 Nov the
+ * client asked for the street address, province and postal code to go, the
+ * checklist to become a dropdown and the phone to be optional. The address is
+ * taken at the walkthrough instead.
  *
  * Everything behind the form is unchanged: the same endpoint, the same
  * honeypot, the same captcha, the same single `lead_form_submission` after a
@@ -139,80 +138,6 @@ const f = (name: string) => `${id}-${name}`;
   </div>
   </div>
 
-  {/* The address is four boxes on screen and one thing in the email: street,
-      "city, province", postal code, then "CA", each on its own line, the
-      way the original's notification printed it. Composed in `quick-quote.ts`.
-
-      Each of the four boxes carries its own asterisk as well as the group's:
-      all four are `required`, and with only the group marked it was unclear
-      whether city, province and postal code were (SEO audit, visual
-      finding 6). The marking follows the validation; nothing became
-      required that was not. */}
-  <fieldset class="qq-field qq-group">
-    <legend class="qq-label">Address <span class="qq-req">*</span></legend>
-
-    <div class="qq-field">
-      <label class="qq-sublabel" for={f('address1')}>Street address &amp; unit # <span class="qq-req">*</span></label>
-      <input
-        type="text"
-        id={f('address1')}
-        name="address1"
-        autocomplete="address-line1"
-        required
-        aria-describedby={f('address1-error')}
-      />
-      <p class="qq-error" id={f('address1-error')} data-qq-error="address1"></p>
-    </div>
-
-    <div class="qq-row qq-row-3">
-      <div class="qq-field">
-        <label class="qq-sublabel" for={f('city')}>City <span class="qq-req">*</span></label>
-        <input
-          type="text"
-          id={f('city')}
-          name="city"
-          autocomplete="address-level2"
-          list={f('city-list')}
-          required
-          aria-describedby={f('city-error')}
-        />
-        <datalist id={f('city-list')}>
-          {SERVICE_LOCATION_SUGGESTIONS.map((place) => <option value={place} />)}
-        </datalist>
-        <p class="qq-error" id={f('city-error')} data-qq-error="city"></p>
-      </div>
-
-      <div class="qq-field">
-        <label class="qq-sublabel" for={f('province')}>Province <span class="qq-req">*</span></label>
-        <input
-          type="text"
-          id={f('province')}
-          name="province"
-          value="Ontario"
-          autocomplete="address-level1"
-          required
-          aria-describedby={f('province-error')}
-        />
-        <p class="qq-error" id={f('province-error')} data-qq-error="province"></p>
-      </div>
-
-      <div class="qq-field">
-        <label class="qq-sublabel" for={f('postal')}>Postal code <span class="qq-req">*</span></label>
-        <input
-          type="text"
-          id={f('postal')}
-          name="postal"
-          autocomplete="postal-code"
-          autocapitalize="characters"
-          maxlength="10"
-          required
-          aria-describedby={f('postal-error')}
-        />
-        <p class="qq-error" id={f('postal-error')} data-qq-error="postal"></p>
-      </div>
-    </div>
-  </fieldset>
-
   <div class="qq-row">
   <div class="qq-field">
     <label class="qq-label" for={f('email')}>Email <span class="qq-req">*</span></label>
@@ -229,8 +154,13 @@ const f = (name: string) => `${id}-${name}`;
     <p class="qq-error" id={f('email-error')} data-qq-error="email"></p>
   </div>
 
+  {/* Optional since 27 Nov 2026 (client): email is the one required way to
+      reply. A number typed in must still have at least seven digits, the
+      same rule the Worker applies (looksLikePhone in lib/lead-fields.ts);
+      without this check a short number would be refused by the server with
+      a generic error and the whole enquiry lost. */}
   <div class="qq-field">
-    <label class="qq-label" for={f('phone')}>Phone <span class="qq-req">*</span></label>
+    <label class="qq-label" for={f('phone')}>Phone <span class="qq-optional">(optional)</span></label>
     <input
       type="tel"
       id={f('phone')}
@@ -243,26 +173,46 @@ const f = (name: string) => `${id}-${name}`;
           one, so a second set of digits on screen is a number a visitor
           could read as the client's. */}
       placeholder="(XXX) XXX-XXXX"
-      required
+      pattern="(?:\D*\d){7,}\D*"
       aria-describedby={f('phone-error')}
     />
     <p class="qq-error" id={f('phone-error')} data-qq-error="phone"></p>
   </div>
   </div>
 
-  <fieldset class="qq-field qq-group">
-    <legend class="qq-label">I'm interested in a quote for these services</legend>
-    <ul class="qq-choices">
-      {
-        SERVICE_OPTIONS.map((service, i) => (
-          <li>
-            <input type="checkbox" id={f(`service-${i}`)} name="services" value={service} />
-            <label for={f(`service-${i}`)}>{SERVICE_LABELS[service]}</label>
-          </li>
-        ))
-      }
-    </ul>
-  </fieldset>
+  {/* The street address, province and postal code were removed on 27 Nov
+      2026 (client): the walkthrough collects the address, and every extra
+      required box costs enquiries. The city stays, required, because it is
+      what says whether the building is in the service area. */}
+  <div class="qq-row">
+  <div class="qq-field">
+    <label class="qq-label" for={f('city')}>City <span class="qq-req">*</span></label>
+    <input
+      type="text"
+      id={f('city')}
+      name="city"
+      autocomplete="address-level2"
+      list={f('city-list')}
+      required
+      aria-describedby={f('city-error')}
+    />
+    <datalist id={f('city-list')}>
+      {SERVICE_LOCATION_SUGGESTIONS.map((place) => <option value={place} />)}
+    </datalist>
+    <p class="qq-error" id={f('city-error')} data-qq-error="city"></p>
+  </div>
+
+  {/* One dropdown, not eight checkboxes (27 Nov 2026, client): shorter on a
+      phone, and the walkthrough settles the full scope anyway. Optional, as
+      the checklist was. */}
+  <div class="qq-field">
+    <label class="qq-label" for={f('services')}>Service needed <span class="qq-optional">(optional)</span></label>
+    <select id={f('services')} name="services">
+      <option value="">Choose one</option>
+      {SERVICE_OPTIONS.map((service) => <option value={service}>{SERVICE_LABELS[service]}</option>)}
+    </select>
+  </div>
+  </div>
 
   <div class="qq-field">
     <label class="qq-label" for={f('message')}>Additional comments</label>
@@ -425,11 +375,9 @@ const f = (name: string) => `${id}-${name}`;
     outline-offset: 2px;
   }
 
-  /* Related fields share a line — name and business, city/province/postal,
-     email and phone — which is most of what keeps an eight-question form
-     short on screen, a phone included. They stack below 260px. Between 260
-     and 400px — any phone — the address row puts the city on a line of
-     its own, with province and postal code paired under it. */
+  /* Related fields share a line (name and business, email and phone, city
+     and service), which keeps the form short on screen, a phone included.
+     They stack below 260px. */
   .qq-row {
     display: grid;
     gap: 0 12px;
@@ -439,30 +387,6 @@ const f = (name: string) => `${id}-${name}`;
     .qq-row {
       grid-template-columns: 1fr 1fr;
     }
-
-    .qq-row-3 > :first-child {
-      grid-column: 1 / -1;
-    }
-  }
-
-  /* City, province and postal code on one line from 300px (30 Oct 2026,
-     "the forms are too long"): in the service pages' 318px sidebar form the
-     postal code box is about 87px, enough for "M5V 1Z4". It was 400px, which
-     put the city on a line of its own in every sidebar form. */
-  @container (min-width: 300px) {
-    .qq-row-3 {
-      grid-template-columns: 1.25fr 1fr 0.95fr;
-    }
-
-    .qq-row-3 > :first-child {
-      grid-column: auto;
-    }
-
-    /* Two columns of services from 300px too: eight one-line rows were the
-       tallest part of the form. */
-    .qq-choices {
-      grid-template-columns: 1fr 1fr;
-    }
   }
 
   .qq-field {
@@ -470,51 +394,6 @@ const f = (name: string) => `${id}-${name}`;
     min-width: 0;
   }
 
-  .qq-group {
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
-  /* One column, two from 400px (in the container query above): on a phone
-     two columns wrap most names onto two or three lines and save nothing.
-     Never three. */
-  .qq-choices {
-    display: grid;
-    gap: 5px 10px;
-    margin: 2px 0 10px;
-    padding: 0;
-    list-style: none;
-  }
-
-  .qq-choices li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    line-height: 1.3;
-  }
-
-  /* 24px boxes in the brand green (18px until the SEO audit's visual
-     review, finding 1), and the label fills the rest of the row at 32px
-     tall, so the whole row toggles the box rather than the glyph and the
-     words alone. */
-  .qq-choices input {
-    flex: none;
-    width: 24px;
-    height: 24px;
-    margin: 0;
-    accent-color: var(--brand);
-  }
-
-  .qq-choices label {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    min-height: 32px;
-    color: var(--ink-heading);
-    cursor: pointer;
-  }
 
   .qq-label {
     display: block;
@@ -527,13 +406,6 @@ const f = (name: string) => `${id}-${name}`;
     color: var(--ink-heading);
   }
 
-  .qq-sublabel {
-    display: block;
-    margin: 0 0 3px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--ink);
-  }
 
   .qq-hint {
     display: block;
@@ -543,6 +415,12 @@ const f = (name: string) => `${id}-${name}`;
     font-weight: 400;
     letter-spacing: 0;
     color: var(--ink);
+  }
+
+  /* "(optional)" beside a label: quieter than the label itself. */
+  .qq-optional {
+    font-weight: 400;
+    color: var(--ink-muted);
   }
 
   .qq-req {

@@ -78,7 +78,7 @@ describe('the CAPTCHA fallback', () => {
   it('is offered when the CAPTCHA is one of several problems', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(status(200));
     const form = await mount({ recaptcha: true });
-    fill(form, { ...VALID_LEAD, name: '', phone: '' });
+    fill(form, { ...VALID_LEAD, name: '', city: '' });
 
     await submit(form);
 
