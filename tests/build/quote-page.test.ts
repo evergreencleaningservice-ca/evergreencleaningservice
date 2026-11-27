@@ -209,7 +209,9 @@ describe('every field is labelled', () => {
     for (const label of ['Name', 'Name of Business', 'Email', 'Phone', 'City', 'Service needed', 'Additional comments']) {
       expect(f, label).toContain(label);
     }
-    expect(f).toContain('(optional)');
+    /* No "(optional)" text (client, 27 Nov 2026): the asterisks on the four
+       required boxes are the only marking. */
+    expect(f).not.toContain('(optional)');
     expect(f).not.toMatch(/Street address|Postal code|Province/);
   });
 });
