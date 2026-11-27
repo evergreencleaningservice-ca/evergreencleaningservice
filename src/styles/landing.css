@@ -318,21 +318,8 @@
     margin: 0 0 8px;
   }
 
-  .lpx-hero .lpx-form-card .qq-group {
-    margin: 0;
-  }
-
   .lpx-hero .lpx-form-card .qq-label {
     margin: 0 0 3px;
-  }
-
-  .lpx-hero .lpx-form-card .qq-choices {
-    gap: 4px 12px;
-    margin: 2px 0 8px;
-  }
-
-  .lpx-hero .lpx-form-card .qq .qq-choices li {
-    font-size: 14px;
   }
 
   .lpx-hero .lpx-form-card .qq-submit {
