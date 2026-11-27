@@ -160,7 +160,7 @@ const f = (name: string) => `${id}-${name}`;
       without this check a short number would be refused by the server with
       a generic error and the whole enquiry lost. */}
   <div class="qq-field">
-    <label class="qq-label" for={f('phone')}>Phone <span class="qq-optional">(optional)</span></label>
+    <label class="qq-label" for={f('phone')}>Phone</label>
     <input
       type="tel"
       id={f('phone')}
@@ -206,7 +206,7 @@ const f = (name: string) => `${id}-${name}`;
       phone, and the walkthrough settles the full scope anyway. Optional, as
       the checklist was. */}
   <div class="qq-field">
-    <label class="qq-label" for={f('services')}>Service needed <span class="qq-optional">(optional)</span></label>
+    <label class="qq-label" for={f('services')}>Service needed</label>
     <select id={f('services')} name="services">
       <option value="">Choose one</option>
       {SERVICE_OPTIONS.map((service) => <option value={service}>{SERVICE_LABELS[service]}</option>)}
@@ -417,20 +417,8 @@ const f = (name: string) => `${id}-${name}`;
     color: var(--ink);
   }
 
-  /* "(optional)" beside a label: quieter than the label itself. */
-  .qq-optional {
-    font-weight: 400;
-    color: var(--ink-muted);
-  }
-
   .qq-req {
     color: #c0392b;
-  }
-
-  .qq-optional {
-    font-weight: 400;
-    font-size: 12.5px;
-    color: var(--ink);
   }
 
   .qq input[type='text'],
